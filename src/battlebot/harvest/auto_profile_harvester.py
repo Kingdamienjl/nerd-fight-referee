@@ -30,6 +30,18 @@ IGDB_TOKEN_URL = "https://id.twitch.tv/oauth2/token"
 IGDB_CHARACTER_URL = "https://api.igdb.com/v4/characters"
 
 CORE_FIELDS = ("attack_potency", "speed", "durability", "powers_and_abilities")
+POWER_SCALE_FIELDS = (
+    "tier",
+    "attack_potency",
+    "speed",
+    "lifting_strength",
+    "striking_strength",
+    "durability",
+    "stamina",
+    "range",
+    "intelligence",
+)
+REQUIRED_POWER_FIELDS = ("attack_potency", "speed", "durability")
 
 FIELD_ALIASES = {
     "tier": "tier",
@@ -473,21 +485,55 @@ def build_profile(
     extracted = wiki_source.get("fields", {}) if wiki_source else {}
     tags, scopes, dependencies = enrich_metadata(extracted)
     sources = build_sources(anilist_identity, igdb_identity, wiki_source)
+    mediawiki_source_ids = [
+        source["id"] for source in sources if source.get("source_type") == "mediawiki"
+    ]
     claims = build_claims(extracted, sources)
-    core_count = sum(1 for field_name in CORE_FIELDS if extracted.get(field_name))
-    confidence = compute_confidence(core_count=core_count, has_revision=has_revision(wiki_source))
+    abilities = list_items_from_text(
+        "powers_and_abilities",
+        extracted.get("powers_and_abilities"),
+        source_ids=mediawiki_source_ids,
+        inherited_tags=tags,
+        inherited_dependencies=dependencies,
+        inherited_scope_limitations=scopes.get("scope_limitations", []),
+    )
+    equipment = list_items_from_text(
+        "standard_equipment",
+        extracted.get("standard_equipment"),
+        source_ids=mediawiki_source_ids,
+        inherited_tags=tags,
+        inherited_dependencies=dependencies,
+        inherited_scope_limitations=scopes.get("scope_limitations", []),
+    )
+    weaknesses = list_items_from_text(
+        "weaknesses",
+        extracted.get("weaknesses"),
+        source_ids=mediawiki_source_ids,
+        inherited_tags=tags,
+        inherited_dependencies=dependencies,
+        inherited_scope_limitations=scopes.get("scope_limitations", []),
+    )
+    required_power_count = sum(1 for field_name in REQUIRED_POWER_FIELDS if extracted.get(field_name))
+    confidence = compute_confidence(
+        required_power_count=required_power_count,
+        has_abilities=bool(abilities),
+        has_revision=has_revision(wiki_source),
+    )
     ineligible_reasons = []
     if not has_revision(wiki_source):
         ineligible_reasons.append("missing_source_revision_metadata")
-    if core_count < 3:
-        ineligible_reasons.append("fewer_than_three_core_combat_fields")
+    for field_name in REQUIRED_POWER_FIELDS:
+        if not extracted.get(field_name):
+            ineligible_reasons.append(f"missing_{field_name}")
+    if not abilities:
+        ineligible_reasons.append("missing_powers_and_abilities")
     if confidence < 0.55:
         ineligible_reasons.append("confidence_below_0_55")
 
     battle_eligible = not ineligible_reasons
     now = now_iso()
     profile = {
-        "schema_version": 1,
+        "schema_version": "1",
         "id": slugify(f"{row.category}-{row.franchise}-{row.name}"),
         "name": row.name,
         "franchise": row.franchise,
@@ -515,29 +561,24 @@ def build_profile(
         },
         "forms": build_forms(extracted),
         "sources": sources,
-        "power_scale": {
-            "tier": extracted.get("tier"),
-            "attack_potency": extracted.get("attack_potency"),
-            "speed": extracted.get("speed"),
-            "lifting_strength": extracted.get("lifting_strength"),
-            "striking_strength": extracted.get("striking_strength"),
-            "durability": extracted.get("durability"),
-            "stamina": extracted.get("stamina"),
-            "range": extracted.get("range"),
-            "intelligence": extracted.get("intelligence"),
-        },
+        "power_scale": build_power_scale(extracted, mediawiki_source_ids, confidence),
         "claims": claims,
-        "abilities": list_items_from_text("powers_and_abilities", extracted.get("powers_and_abilities")),
-        "equipment": list_items_from_text("standard_equipment", extracted.get("standard_equipment")),
+        "abilities": abilities,
+        "equipment": equipment,
         "summons": [],
         "resistances": [],
-        "weaknesses": list_items_from_text("weaknesses", extracted.get("weaknesses")),
+        "weaknesses": weaknesses,
         "win_conditions": [],
         "loss_conditions": [],
         "battlefield_dependencies": scopes.get("battlefield_dependencies", []),
         "interaction_tags": tags,
         "resource_dependencies": dependencies,
-        "scope_limitations": scopes.get("scope_limitations", []),
+        "scope_limitations": {
+            "items": scopes.get("scope_limitations", []),
+            "native_realm_only": "native_realm_only" in scopes.get("scope_limitations", []),
+            "dimensional_scope": "dimensional_scope" in scopes.get("scope_limitations", []),
+            "range_limit": "range_limit" in scopes.get("scope_limitations", []),
+        },
         "review": {
             "ineligible_reasons": ineligible_reasons,
             "source_errors": errors,
@@ -546,6 +587,21 @@ def build_profile(
         "profile_hash": "",
     }
     return profile
+
+
+def build_power_scale(
+    extracted: dict[str, str],
+    source_ids: list[str],
+    profile_confidence: float,
+) -> dict[str, dict[str, Any]]:
+    return {
+        field_name: {
+            "text": extracted.get(field_name) or None,
+            "source_ids": source_ids if extracted.get(field_name) else [],
+            "confidence": profile_confidence if extracted.get(field_name) else 0.0,
+        }
+        for field_name in POWER_SCALE_FIELDS
+    }
 
 
 def build_sources(
@@ -867,7 +923,15 @@ def normalize_extracted_value(value: str) -> str:
     return value[:5000].strip()
 
 
-def list_items_from_text(kind: str, text: str | None) -> list[dict[str, Any]]:
+def list_items_from_text(
+    kind: str,
+    text: str | None,
+    *,
+    source_ids: list[str],
+    inherited_tags: list[str],
+    inherited_dependencies: list[str],
+    inherited_scope_limitations: list[str],
+) -> list[dict[str, Any]]:
     if not text:
         return []
     pieces = split_listish(text)
@@ -876,8 +940,19 @@ def list_items_from_text(kind: str, text: str | None) -> list[dict[str, Any]]:
             "id": slugify(f"{kind}-{piece}")[:80],
             "name": piece[:120],
             "description": piece,
+            "source_ids": source_ids,
             "source_claim_ids": [],
-            "tags": [],
+            "confidence": 0.85 if source_ids else 0.5,
+            "tags": tags_for_text(piece, inherited_tags),
+            "targets": [],
+            "activation_requirements": [],
+            "counters": [],
+            "resource_dependencies": dependencies_for_text(piece, inherited_dependencies),
+            "scope_limitations": scope_limitations_for_text(piece, inherited_scope_limitations),
+            "enrichment": {
+                "method": "deterministic_keyword_rules",
+                "metadata_only": True,
+            },
         }
         for piece in pieces[:40]
     ]
@@ -890,7 +965,44 @@ def split_listish(text: str | None) -> list[str]:
     return [normalize_text(part) for part in parts if normalize_text(part)]
 
 
-def compute_confidence(*, core_count: int, has_revision: bool) -> float:
+def tags_for_text(text: str, inherited_tags: list[str]) -> list[str]:
+    lowered = text.lower()
+    local_tags = [
+        tag
+        for tag, keywords in KEYWORD_RULES.items()
+        if any(keyword in lowered for keyword in keywords)
+    ]
+    return sorted(set(local_tags) | set(inherited_tags))
+
+
+def dependencies_for_text(text: str, inherited_dependencies: list[str]) -> list[str]:
+    lowered = text.lower()
+    local_dependencies = [
+        dependency
+        for dependency, keywords in SCOPE_DEPENDENCY_RULES.items()
+        if dependency.startswith("requires_") and any(keyword in lowered for keyword in keywords)
+    ]
+    return sorted(set(local_dependencies) | set(inherited_dependencies))
+
+
+def scope_limitations_for_text(text: str, inherited_scope_limitations: list[str]) -> list[str]:
+    lowered = text.lower()
+    local_scopes = [
+        scope
+        for scope, keywords in SCOPE_DEPENDENCY_RULES.items()
+        if scope in {"native_realm_only", "dimensional_scope", "range_limit"}
+        and any(keyword in lowered for keyword in keywords)
+    ]
+    return sorted(set(local_scopes) | set(inherited_scope_limitations))
+
+
+def compute_confidence(
+    *,
+    required_power_count: int,
+    has_abilities: bool,
+    has_revision: bool,
+) -> float:
+    core_count = required_power_count + int(has_abilities)
     score = 0.1 + (0.15 * core_count)
     if has_revision:
         score += 0.25
