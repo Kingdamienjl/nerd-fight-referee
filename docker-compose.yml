@@ -1,0 +1,123 @@
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-battlebot}
+      POSTGRES_USER: ${POSTGRES_USER:-battlebot}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./src/battlebot/db/schema.sql:/docker-entrypoint-initdb.d/001_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-battlebot} -d $${POSTGRES_DB:-battlebot}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+      - ./models:/models:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  litellm:
+    image: docker.litellm.ai/berriai/litellm:main-latest
+    restart: unless-stopped
+    depends_on:
+      ollama:
+        condition: service_started
+    ports:
+      - "127.0.0.1:4000:4000"
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_API_KEY:-sk-local-dev}
+    volumes:
+      - ./config/litellm_config.yaml:/app/config.yaml:ro
+    command: ["--config", "/app/config.yaml", "--port", "4000", "--host", "0.0.0.0"]
+
+  bot:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN:-}
+      DISCORD_APPLICATION_ID: ${DISCORD_APPLICATION_ID:-}
+      DISCORD_GUILD_SYNC_ID: ${DISCORD_GUILD_SYNC_ID:-}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      LITELLM_BASE_URL: ${LITELLM_BASE_URL:-http://litellm:4000}
+      LITELLM_API_KEY: ${LITELLM_API_KEY:-sk-local-dev}
+      REFEREE_MODEL: ${REFEREE_MODEL:-referee-default}
+    secrets:
+      - discord_token
+    command: ["python", "-m", "battlebot.bot.main"]
+
+  worker:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      litellm:
+        condition: service_started
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      LITELLM_BASE_URL: ${LITELLM_BASE_URL:-http://litellm:4000}
+      LITELLM_API_KEY: ${LITELLM_API_KEY:-sk-local-dev}
+      REFEREE_MODEL: ${REFEREE_MODEL:-referee-default}
+    command: ["python", "-m", "battlebot.worker.main"]
+
+  harvester:
+    build: .
+    profiles: ["harvest"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      IGDB_CLIENT_ID: ${IGDB_CLIENT_ID:-}
+      IGDB_CLIENT_SECRET: ${IGDB_CLIENT_SECRET:-}
+      HARVEST_USER_AGENT: ${HARVEST_USER_AGENT:-ai-nerd-fight-bot/0.1}
+      HARVEST_MIN_INTERVAL_SECONDS: ${HARVEST_MIN_INTERVAL_SECONDS:-2}
+    command: ["python", "-m", "battlebot.harvest.auto_profile_harvester"]
+
+volumes:
+  pgdata:
+  redisdata:
+  ollama:
+
+secrets:
+  discord_token:
+    file: ./secrets/discord_token.txt

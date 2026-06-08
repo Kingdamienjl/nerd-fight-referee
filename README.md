@@ -1,12 +1,26 @@
 # AI Nerd Fight Decision Bot Discord
 
-Dockerized Discord bot for evidence-bound anime/video game character battle arbitration.
+Phase 1 scaffold for a Dockerized Python Discord battle bot.
 
-Core stack:
-- Discord slash commands
-- Python
+This phase only establishes the project structure, Docker Compose services, package metadata,
+configuration placeholders, profile directories, and empty Python entrypoints. The actual bot,
+worker, profile harvester, database schema, cache, and LLM referee logic are intentionally left
+for later phases.
+
+## Stack Targets
+
+- Python 3.12
+- Discord slash commands only
 - Postgres
 - Redis
 - Ollama
 - LiteLLM
-- Local LLM referee worker
+- Local worker and harvester processes
+
+## Phase 1 Check
+
+```bash
+docker compose config
+```
+
+The command should render a valid Compose configuration without starting services.
