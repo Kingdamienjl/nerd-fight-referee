@@ -27,6 +27,27 @@ def human_summary(packet: dict[str, Any]) -> str:
                     f"  candidate: {candidate['canonical_name']} "
                     f"({candidate['franchise']}, {candidate['category']})"
                 )
+            diagnostics = error.get("diagnostics") or {}
+            if diagnostics:
+                lines.append("  not found in DB")
+                generated_paths = diagnostics.get("generated_paths") or []
+                needs_review_paths = diagnostics.get("needs_review_paths") or []
+                closest = diagnostics.get("db_matches") or []
+                if generated_paths:
+                    lines.append("  found in generated:")
+                    for path in generated_paths[:3]:
+                        lines.append(f"    {path}")
+                if needs_review_paths:
+                    lines.append("  found in needs_review:")
+                    for path in needs_review_paths[:3]:
+                        lines.append(f"    {path}")
+                if closest:
+                    lines.append("  closest DB names:")
+                    for match in closest[:5]:
+                        lines.append(
+                            f"    {match['canonical_name']} "
+                            f"({match['franchise']}, {match['category']})"
+                        )
         return "\n".join(lines)
 
     lines = [
@@ -47,6 +68,12 @@ def human_summary(packet: dict[str, Any]) -> str:
                 f"durability: {truncate(power.get('durability'))}",
             ]
         )
+        warnings = contender.get("warnings") or []
+        if warnings:
+            lines.append(
+                "warnings: "
+                + ", ".join(str(warning.get("flag")) for warning in warnings[:5])
+            )
     return "\n".join(lines)
 
 
@@ -62,7 +89,7 @@ async def async_main(args: argparse.Namespace) -> int:
         print(human_summary(packet))
     else:
         print(json.dumps(packet, indent=2, sort_keys=True, default=str))
-    return 1 if packet.get("errors") else 0
+    return 0
 
 
 def build_arg_parser() -> argparse.ArgumentParser:

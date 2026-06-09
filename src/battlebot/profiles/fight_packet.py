@@ -5,6 +5,8 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Any
 
+from battlebot.profiles.locate import locate_character
+from battlebot.profiles.quality import profile_warning_flags
 from battlebot.profiles.store import resolve_character
 
 
@@ -81,6 +83,7 @@ def compact_profile(
         "weakness_count": len(weaknesses),
         "sources": [compact_source(source) for source in sources[:source_limit]],
         "source_count": len(sources),
+        "warnings": profile_warning_flags(profile),
     }
 
 
@@ -88,7 +91,11 @@ def ordered_pair_key(character_a_id: str, character_b_id: str) -> str:
     return "::".join(sorted([character_a_id, character_b_id]))
 
 
-def resolution_error(label: str, resolution: dict[str, Any]) -> dict[str, Any]:
+async def resolution_error(
+    connection: Any,
+    label: str,
+    resolution: dict[str, Any],
+) -> dict[str, Any]:
     error = {
         "contender": label,
         "status": resolution["status"],
@@ -96,6 +103,8 @@ def resolution_error(label: str, resolution: dict[str, Any]) -> dict[str, Any]:
     }
     if resolution["status"] == "ambiguous":
         error["candidates"] = resolution.get("candidates", [])
+    if resolution["status"] == "not_found":
+        error["diagnostics"] = await locate_character(resolution["query"], connection=connection)
     return error
 
 
@@ -109,9 +118,9 @@ async def build_fight_packet(
     resolution_b = await resolve_character(connection, contender_b)
     errors = []
     if resolution_a["status"] != "resolved":
-        errors.append(resolution_error("contender_a", resolution_a))
+        errors.append(await resolution_error(connection, "contender_a", resolution_a))
     if resolution_b["status"] != "resolved":
-        errors.append(resolution_error("contender_b", resolution_b))
+        errors.append(await resolution_error(connection, "contender_b", resolution_b))
 
     packet: dict[str, Any] = {
         "created_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
@@ -134,4 +143,11 @@ async def build_fight_packet(
         compact_a["character_id"],
         compact_b["character_id"],
     )
+    packet["warnings"] = [
+        {"contender": "contender_a", **warning}
+        for warning in compact_a.get("warnings", [])
+    ] + [
+        {"contender": "contender_b", **warning}
+        for warning in compact_b.get("warnings", [])
+    ]
     return packet

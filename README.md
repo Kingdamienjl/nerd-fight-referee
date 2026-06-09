@@ -56,6 +56,16 @@ DBURL="postgresql://battlebot:change_me@127.0.0.1:55432/battlebot"
 The Discord `/fight` command currently uses the same resolver and packet builder, but only returns
 debug profile summaries. It does not call an LLM or use the battle result cache yet.
 
+Audit imported profile quality and locate missing characters across local files:
+
+```bash
+.venv/bin/python -m battlebot.profiles.audit --database-url "$DBURL" --character "Son Goku"
+.venv/bin/python -m battlebot.profiles.locate "Batman"
+```
+
+Preferred profile quality overrides live in `profiles/overrides/preferred_profiles.yaml`. These
+overrides currently add warnings to fight packets instead of blocking resolution.
+
 If an existing local Postgres volume was initialized with the old placeholder schema, reset it
 before importing:
 
