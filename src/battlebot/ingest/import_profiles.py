@@ -234,10 +234,10 @@ def compile_items(
     id_column: str,
 ) -> list[dict[str, Any]]:
     rows = []
-    seen_ids: dict[str, int] = {}
+    used_ids: set[str] = set()
     for item in items:
         data = item.model_dump(mode="json")
-        item_id = unique_row_id(data["id"], seen_ids)
+        item_id = unique_row_id(data.get("id") or id_column, used_ids)
         rows.append(
             {
                 id_column: item_id,
@@ -527,13 +527,20 @@ def normalize_alias(value: str) -> str:
     return re.sub(r"\s+", " ", value.strip().casefold())
 
 
-def unique_row_id(value: str, seen_ids: dict[str, int]) -> str:
-    base = value or "item"
-    count = seen_ids.get(base, 0)
-    seen_ids[base] = count + 1
-    if count == 0:
-        return base
-    return f"{base}-{count + 1}"
+def normalize_compiled_row_id(value: str) -> str:
+    normalized = re.sub(r"[^a-z0-9]+", "-", value.strip().lower())
+    return normalized.strip("-") or "item"
+
+
+def unique_row_id(value: str, used_ids: set[str]) -> str:
+    base = normalize_compiled_row_id(value or "item")
+    candidate = base
+    counter = 2
+    while candidate in used_ids:
+        candidate = f"{base}-{counter}"
+        counter += 1
+    used_ids.add(candidate)
+    return candidate
 
 
 def parse_timestamp(value: Any) -> datetime | None:

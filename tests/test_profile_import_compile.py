@@ -9,6 +9,7 @@ import yaml
 from battlebot.ingest.import_profiles import (
     ImportOptions,
     build_import_plan,
+    compile_items,
     compile_profile,
     find_profile_paths,
     profile_file_fingerprint,
@@ -21,6 +22,27 @@ from battlebot.ingest.import_profiles import (
 GENERATED_DIR = Path("profiles/generated")
 GOKU_PATH = Path("profiles/generated/anime/dragon-ball/son-goku.yaml")
 NARUTO_PATH = Path("profiles/generated/anime/naruto/naruto-uzumaki.yaml")
+
+
+class FakeCompiledItem:
+    def __init__(self, item_id: str) -> None:
+        self.item_id = item_id
+
+    def model_dump(self, mode: str = "json"):
+        return {
+            "id": self.item_id,
+            "name": self.item_id,
+            "description": self.item_id,
+            "source_ids": [],
+            "tags": [],
+            "targets": [],
+            "activation_requirements": [],
+            "counters": [],
+            "resource_dependencies": [],
+            "scope_limitations": [],
+            "enrichment": {},
+            "confidence": 0,
+        }
 
 
 class ProfileImportCompileTests(unittest.TestCase):
@@ -63,6 +85,37 @@ class ProfileImportCompileTests(unittest.TestCase):
         for axis in ("attack_potency", "speed", "durability"):
             self.assertIn(axis, axes)
             self.assertTrue(axes[axis]["text"])
+
+    def test_compile_items_uniquifies_duplicate_ids(self):
+        rows = compile_items(
+            [
+                FakeCompiledItem("powers-and-abilities"),
+                FakeCompiledItem("powers-and-abilities"),
+            ],
+            "profile-id",
+            "ability_id",
+        )
+
+        self.assertEqual(
+            [row["ability_id"] for row in rows],
+            ["powers-and-abilities", "powers-and-abilities-2"],
+        )
+
+    def test_compile_items_avoids_collision_with_existing_suffixed_id(self):
+        rows = compile_items(
+            [
+                FakeCompiledItem("powers-and-abilities"),
+                FakeCompiledItem("powers-and-abilities-2"),
+                FakeCompiledItem("powers-and-abilities"),
+            ],
+            "profile-id",
+            "ability_id",
+        )
+
+        self.assertEqual(
+            [row["ability_id"] for row in rows],
+            ["powers-and-abilities", "powers-and-abilities-2", "powers-and-abilities-3"],
+        )
 
     def test_invalid_profile_is_skipped_unless_fail_fast(self):
         with tempfile.TemporaryDirectory() as tmpdir:
