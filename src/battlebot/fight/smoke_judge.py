@@ -50,6 +50,24 @@ SPEED_PHRASES: tuple[tuple[str, int], ...] = (
     ("human", 10),
 )
 
+CONFIDENCE_CAPPING_FLAGS = {
+    "needs_manual_review",
+    "suspicious_low_power_for_known_high_tier",
+    "preferred_profile_blocked_phrase",
+    "missing_attack",
+    "missing_attack_potency",
+    "missing_speed",
+    "missing_durability",
+}
+MATCHUP_CAPPING_FLAGS = {
+    "suspicious_low_power_for_known_high_tier",
+    "preferred_profile_blocked_phrase",
+    "missing_attack",
+    "missing_attack_potency",
+    "missing_speed",
+    "missing_durability",
+}
+
 
 def text_rank(value: str | None, *, speed: bool = False) -> int | None:
     if not value:
@@ -79,6 +97,32 @@ def quality_notes(packet: dict[str, Any]) -> list[str]:
         if flag:
             notes.append(f"{contender}: {flag}")
     return notes
+
+
+def warning_contender_matches(warning: dict[str, Any], contender: dict[str, Any], label: str) -> bool:
+    target = str(warning.get("contender") or "")
+    return target in {
+        label,
+        str(contender.get("character_id") or ""),
+        str(contender.get("canonical_name") or ""),
+    }
+
+
+def winner_capping_warnings(packet: dict[str, Any], winner: dict[str, Any], winner_label: str) -> list[str]:
+    flags = []
+    for warning in packet.get("warnings") or []:
+        flag = str(warning.get("flag") or "")
+        if flag in CONFIDENCE_CAPPING_FLAGS and warning_contender_matches(warning, winner, winner_label):
+            flags.append(flag)
+    return flags
+
+
+def matchup_capping_warnings(packet: dict[str, Any]) -> list[str]:
+    return [
+        str(warning.get("flag") or "")
+        for warning in packet.get("warnings") or []
+        if str(warning.get("flag") or "") in MATCHUP_CAPPING_FLAGS
+    ]
 
 
 def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
@@ -123,11 +167,14 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
             "warnings": ["tier parsing was insufficient for a deterministic smoke winner"],
             "profile_quality_notes": notes,
         }
+    winner_label = "contender_a" if score_total > 0 else "contender_b"
     winner = a if score_total > 0 else b
-    confidence = "medium" if abs(score_total) >= 2 else "low"
+    axis_leads = abs(score_total)
+    confidence = "strong" if parsed == 3 and axis_leads == 3 else "medium" if axis_leads >= 2 else "low"
     warnings = []
-    if notes:
-        confidence = "low_to_medium" if confidence == "medium" else "low"
+    capping_warnings = winner_capping_warnings(packet, winner, winner_label) or matchup_capping_warnings(packet)
+    if capping_warnings:
+        confidence = "low_to_medium" if confidence in {"strong", "medium"} else "low"
         warnings.append("profile quality warnings lowered confidence")
     return {
         "label": "Smoke Test Decision - deterministic pre-LLM result",
