@@ -132,6 +132,16 @@ services:
       - ./data:/app/data:ro
     command: ["python", "-m", "battlebot.ingest.import_profiles", "profiles/generated"]
 
+  review-ui:
+    build: .
+    profiles: ["review"]
+    ports:
+      - "127.0.0.1:8090:8090"
+    volumes:
+      - ./profiles:/app/profiles
+      - ./data:/app/data:ro
+    command: ["python", "-m", "battlebot.review.app", "--host", "0.0.0.0", "--port", "8090"]
+
 volumes:
   pgdata:
   redisdata:

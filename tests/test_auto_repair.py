@@ -1,0 +1,405 @@
+import unittest
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
+
+import yaml
+
+from battlebot.review import auto_repair, service
+
+
+FIXTURE = Path("tests/fixtures/review_repair/batman_table.wikitext")
+PARSE_FIXTURE = Path("tests/fixtures/review_repair/mediawiki_parse_superman.json")
+SEARCH_FIXTURE = Path("tests/fixtures/review_repair/mediawiki_search_superman.json")
+NO_FIELDS_FIXTURE = Path("tests/fixtures/review_repair/fetched_no_fields.html")
+
+
+def profile_data(*, missing_core=True):
+    text = None if missing_core else "Existing attack"
+    return {
+        "name": "Batman",
+        "franchise": "DC",
+        "category": "comic",
+        "profile_type": "needs_review",
+        "status": "needs_review",
+        "battle_eligible": False,
+        "generation": {"confidence": 0.35, "ineligible_reasons": ["needs_review"]},
+        "power_scale": {
+            "tier": {"text": None, "source_ids": [], "confidence": 0.0},
+            "attack_potency": {"text": text, "source_ids": ["source-1"] if text else [], "confidence": 0.8},
+            "speed": {"text": None, "source_ids": [], "confidence": 0.0},
+            "durability": {"text": None, "source_ids": [], "confidence": 0.0},
+        },
+        "abilities": [],
+        "equipment": [],
+        "weaknesses": [],
+        "sources": [
+            {
+                "id": "source-1",
+                "title": "Batman",
+                "url": "https://vsbattles.fandom.com/wiki/Batman",
+                "source_type": "mediawiki",
+                "revision_id": "9348088",
+            }
+        ],
+        "review": {},
+    }
+
+
+def write_profile(path: Path, data: dict):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
+
+
+async def fake_fetch_source_fields(source):
+    return auto_repair.parse_source_content(FIXTURE.read_text(encoding="utf-8")), {
+        "title": source.get("title") or "Batman",
+        "url": source.get("url"),
+        "revision_id": "9348088",
+        "revision_timestamp": "2026-01-01T00:00:00Z",
+        "source_type": "mediawiki",
+        "note": "ok",
+    }
+
+
+async def fake_fetch_no_fields(source):
+    content = NO_FIELDS_FIXTURE.read_text(encoding="utf-8")
+    return {}, {
+        "title": source.get("title") or "Batman",
+        "url": source.get("url"),
+        "revision_id": "1",
+        "source_type": "mediawiki",
+        "note": "fetched_but_no_fields",
+        "fetch_status": "fetched",
+        "http_status": 200,
+        "content_length": len(content),
+        "content_kind": "html",
+        "headings_detected": auto_repair.detected_headings(content),
+        "stat_labels_detected": auto_repair.detected_stat_labels(content),
+    }
+
+
+class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
+    def test_repair_detects_missing_core_fields(self):
+        profile = profile_data(missing_core=True)
+
+        self.assertEqual(
+            auto_repair.missing_targets(profile),
+            ["attack_potency", "speed", "durability", "abilities"],
+        )
+
+    def test_mediawiki_parser_extracts_core_fields_from_fixture(self):
+        fields = auto_repair.parse_source_content(FIXTURE.read_text(encoding="utf-8"))
+
+        self.assertEqual(fields["attack_potency"], "Building level with standard equipment")
+        self.assertEqual(fields["speed"], "Peak Human combat speed")
+        self.assertEqual(fields["durability"], "Wall level physically, higher with armor")
+
+    async def test_existing_values_are_not_overwritten_by_default(self):
+        with TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=False))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_source_fields):
+                await auto_repair.repair_profile(path, notes_path=Path(temp_dir) / "notes.yaml")
+            repaired = service.load_yaml(path)
+
+        self.assertEqual(repaired["power_scale"]["attack_potency"]["text"], "Existing attack")
+        self.assertEqual(repaired["power_scale"]["speed"]["text"], "Peak Human combat speed")
+
+    async def test_overwrite_replaces_values(self):
+        with TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=False))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_source_fields):
+                await auto_repair.repair_profile(
+                    path,
+                    overwrite=True,
+                    notes_path=Path(temp_dir) / "notes.yaml",
+                )
+            repaired = service.load_yaml(path)
+
+        self.assertEqual(
+            repaired["power_scale"]["attack_potency"]["text"],
+            "Building level with standard equipment",
+        )
+
+    async def test_extracted_ability_has_valid_schema_shape(self):
+        with TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_source_fields):
+                await auto_repair.repair_profile(path, notes_path=Path(temp_dir) / "notes.yaml")
+            ability = service.load_yaml(path)["abilities"][0]
+
+        self.assertIn("id", ability)
+        self.assertIn("description", ability)
+        self.assertEqual(ability["source_ids"], ["source-1"])
+        self.assertEqual(ability["activation_requirements"], [])
+
+    async def test_review_notes_are_appended(self):
+        with TemporaryDirectory() as temp_dir:
+            notes = Path(temp_dir) / "review_notes.yaml"
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_source_fields):
+                await auto_repair.repair_profile(path, notes_path=notes)
+            data = yaml.safe_load(notes.read_text(encoding="utf-8"))
+
+        self.assertEqual(data["notes"][0]["issue_type"], "auto_repair")
+        self.assertEqual(data["notes"][0]["source_id"], "source-1")
+
+    async def test_promote_if_valid_copies_to_generated_when_blockers_are_gone(self):
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "profiles"
+            needs_review = root / "needs_review"
+            generated = root / "generated"
+            path = needs_review / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_source_fields):
+                result = await auto_repair.repair_profile(
+                    path,
+                    promote_if_valid=True,
+                    needs_review_dir=needs_review,
+                    generated_dir=generated,
+                    notes_path=root / "review_notes.yaml",
+                    max_source_candidates=1,
+                )
+            generated_exists = (generated / "comic" / "dc" / "batman.yaml").exists()
+
+        self.assertTrue(result.promoted)
+        self.assertTrue(generated_exists)
+
+    async def test_invalid_repaired_profile_remains_in_needs_review(self):
+        async def no_fields(source):
+            return {}, {"note": "no_fields"}
+
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "profiles"
+            needs_review = root / "needs_review"
+            generated = root / "generated"
+            path = needs_review / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", no_fields):
+                result = await auto_repair.repair_profile(
+                    path,
+                    promote_if_valid=True,
+                    needs_review_dir=needs_review,
+                    generated_dir=generated,
+                    notes_path=root / "review_notes.yaml",
+                )
+            needs_review_exists = path.exists()
+            generated_exists = (generated / "comic" / "dc" / "batman.yaml").exists()
+
+        self.assertFalse(result.promoted)
+        self.assertTrue(needs_review_exists)
+        self.assertFalse(generated_exists)
+
+    async def test_dry_run_writes_nothing(self):
+        with TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+            before = path.read_text(encoding="utf-8")
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_source_fields):
+                result = await auto_repair.repair_profile(
+                    path,
+                    dry_run=True,
+                    notes_path=Path(temp_dir) / "notes.yaml",
+                )
+            after = path.read_text(encoding="utf-8")
+
+        self.assertTrue(result.changed)
+        self.assertEqual(before, after)
+
+    async def test_repair_report_json_is_written(self):
+        with TemporaryDirectory() as temp_dir:
+            debug_dir = Path(temp_dir) / "debug"
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_source_fields):
+                await auto_repair.repair_profile(path, debug_dir=debug_dir, notes_path=Path(temp_dir) / "notes.yaml")
+            report = json.loads((debug_dir / "batman.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(report["profile_path"], str(path))
+        self.assertIn("source_attempts", report)
+
+    async def test_report_records_fetched_but_no_fields_case(self):
+        with TemporaryDirectory() as temp_dir:
+            debug_dir = Path(temp_dir) / "debug"
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_no_fields):
+                await auto_repair.repair_profile(path, debug_dir=debug_dir, notes_path=Path(temp_dir) / "notes.yaml")
+            report = json.loads((debug_dir / "batman.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(report["source_attempts"][0]["extraction_failure_reason"], "fetched_but_no_fields")
+        self.assertEqual(report["source_attempts"][0]["content_kind"], "html")
+
+    def test_mediawiki_api_parse_fixture_extracts_core_fields(self):
+        body = json.loads(PARSE_FIXTURE.read_text(encoding="utf-8"))
+        rendered = auto_repair.rendered_text_from_parse(body)
+        wikitext = body["parse"]["wikitext"]["*"]
+        fields = auto_repair.parse_source_content(rendered)
+        fields.update({k: v for k, v in auto_repair.parse_source_content(wikitext).items() if k not in fields})
+
+        self.assertEqual(fields["attack_potency"], "Solar System level")
+        self.assertEqual(fields["speed"], "Massively FTL+")
+        self.assertEqual(fields["durability"], "Solar System level")
+
+    def test_mediawiki_search_fixture_creates_multiple_candidate_titles(self):
+        body = json.loads(SEARCH_FIXTURE.read_text(encoding="utf-8"))
+
+        self.assertEqual(
+            auto_repair.mediawiki_search_titles_from_body(body),
+            ["Superman", "Superman (Post-Crisis)", "Superman (Post-Flashpoint)"],
+        )
+
+    def test_source_candidate_overrides_prioritize_batman_variants(self):
+        candidates = auto_repair.profile_source_candidates(profile_data(missing_core=True), Path("missing"))
+        titles = [candidate.get("title") for candidate in candidates[:4]]
+
+        self.assertIn("Batman (Post-Crisis)", titles)
+        self.assertIn("Batman (Post-Flashpoint)", titles)
+
+    async def test_ambiguous_candidates_do_not_auto_promote(self):
+        async def variant_fetch(source):
+            return await fake_fetch_source_fields(source)
+
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "profiles"
+            needs_review = root / "needs_review"
+            generated = root / "generated"
+            path = needs_review / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", variant_fetch):
+                result = await auto_repair.repair_profile(
+                    path,
+                    promote_if_valid=True,
+                    needs_review_dir=needs_review,
+                    generated_dir=generated,
+                    debug_dir=Path(temp_dir) / "debug",
+                    notes_path=root / "review_notes.yaml",
+                    max_source_candidates=3,
+                )
+            generated_exists = (generated / "comic" / "dc" / "batman.yaml").exists()
+
+        self.assertTrue(result.needs_human_source_choice)
+        self.assertFalse(result.promoted)
+        self.assertFalse(generated_exists)
+
+    async def test_chosen_source_bypasses_ambiguity_when_valid(self):
+        async def variant_fetch(source):
+            return await fake_fetch_source_fields(source)
+
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "profiles"
+            needs_review = root / "needs_review"
+            generated = root / "generated"
+            path = needs_review / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", variant_fetch):
+                result = await auto_repair.repair_profile(
+                    path,
+                    choose_source_id="source-1",
+                    promote_if_valid=True,
+                    needs_review_dir=needs_review,
+                    generated_dir=generated,
+                    debug_dir=Path(temp_dir) / "debug",
+                    notes_path=root / "review_notes.yaml",
+                    max_source_candidates=3,
+                )
+            generated_exists = (generated / "comic" / "dc" / "batman.yaml").exists()
+
+        self.assertFalse(result.needs_human_source_choice)
+        self.assertTrue(result.promoted)
+        self.assertTrue(generated_exists)
+
+    async def test_chosen_source_not_found_returns_clear_error(self):
+        with TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            result = await auto_repair.repair_profile(
+                path,
+                choose_source_id="missing-source",
+                debug_dir=Path(temp_dir) / "debug",
+                notes_path=Path(temp_dir) / "notes.yaml",
+            )
+
+        self.assertIn("choose_source_id_not_found: missing-source", result.errors)
+        self.assertFalse(result.promoted)
+
+    async def test_chosen_source_with_missing_fields_does_not_promote(self):
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "profiles"
+            needs_review = root / "needs_review"
+            generated = root / "generated"
+            path = needs_review / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_no_fields):
+                result = await auto_repair.repair_profile(
+                    path,
+                    choose_source_id="source-1",
+                    promote_if_valid=True,
+                    needs_review_dir=needs_review,
+                    generated_dir=generated,
+                    debug_dir=Path(temp_dir) / "debug",
+                    notes_path=root / "review_notes.yaml",
+                )
+
+        self.assertFalse(result.promoted)
+        self.assertTrue(any(error.startswith("chosen_source_missing_required_fields") for error in result.errors))
+
+    def test_list_candidates_reads_debug_report(self):
+        with TemporaryDirectory() as temp_dir:
+            debug_dir = Path(temp_dir) / "debug"
+            debug_dir.mkdir()
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+            report = {
+                "candidate_sources": [
+                    {
+                        "source_id": "vsbattles-batman-post-crisis",
+                        "title": "Batman (Post-Crisis)",
+                        "url": "https://vsbattles.fandom.com/wiki/Batman_(Post-Crisis)",
+                        "rank": 50,
+                        "extracted_fields": ["attack_potency", "speed", "durability"],
+                    }
+                ]
+            }
+            (debug_dir / "batman.json").write_text(json.dumps(report), encoding="utf-8")
+
+            rows = auto_repair.candidate_rows_from_report(auto_repair.load_debug_report(path, debug_dir))
+
+        self.assertEqual(rows[0]["source_id"], "vsbattles-batman-post-crisis")
+        self.assertIn("speed", rows[0]["extracted_fields"])
+
+    async def test_debug_report_appears_in_review_service_inspection(self):
+        with TemporaryDirectory() as temp_dir:
+            debug_dir = Path(temp_dir) / "data" / "repair_debug"
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_no_fields):
+                await auto_repair.repair_profile(path, debug_dir=debug_dir, notes_path=Path(temp_dir) / "notes.yaml")
+            with patch("battlebot.review.service.DEFAULT_REPAIR_DEBUG_DIR", debug_dir):
+                inspection = service.inspect_profile(path)
+
+        self.assertTrue(inspection["repair_debug"])
+        self.assertEqual(inspection["repair_attempts"][0]["extraction_failure_reason"], "fetched_but_no_fields")
+
+
+if __name__ == "__main__":
+    unittest.main()

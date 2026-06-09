@@ -1,0 +1,102 @@
+providers:
+  vsbattles:
+    enabled: true
+    authority: high
+    parser: mediawiki_battle_stats
+    domains:
+      - vsbattles.fandom.com
+    allowed_fields:
+      - tier
+      - attack_potency
+      - speed
+      - durability
+      - range
+      - stamina
+      - intelligence
+      - abilities
+      - equipment
+      - weaknesses
+    promotion_allowed: true
+
+  character_stats_profiles:
+    enabled: true
+    authority: high
+    parser: mediawiki_battle_stats
+    domains:
+      - character-stats-and-profiles.fandom.com
+    allowed_fields:
+      - tier
+      - attack_potency
+      - speed
+      - durability
+      - abilities
+      - weaknesses
+    promotion_allowed: true
+
+  superherodb:
+    enabled: true
+    authority: medium
+    parser: superherodb_html
+    domains:
+      - superherodb.com
+    allowed_fields:
+      - abilities
+      - strength
+      - speed
+      - durability
+      - power_score
+    promotion_allowed: false
+    notes: Use for cross-checking and discovery unless another high-authority source supports battle fields.
+
+  kaggle_superherodb:
+    enabled: false
+    authority: medium
+    parser: local_csv_dataset
+    local_path: data/external/superherodb
+    allowed_fields:
+      - aliases
+      - abilities
+      - power_scores
+    promotion_allowed: false
+    notes: Offline dataset must be user-provided and may be stale.
+
+  comicvine:
+    enabled: false
+    authority: medium
+    parser: comicvine_api
+    requires_api_key_env: COMICVINE_API_KEY
+    allowed_fields:
+      - aliases
+      - publisher
+      - description
+      - issue_metadata
+    promotion_allowed: false
+
+  powerlisting:
+    enabled: true
+    authority: low
+    parser: mediawiki_ability_taxonomy
+    domains:
+      - powerlisting.fandom.com
+    allowed_fields:
+      - ability_definitions
+    promotion_allowed: false
+    notes: Use to define abilities, not to prove a character has them.
+
+  animated_character_database:
+    enabled: true
+    authority: low
+    parser: mediawiki_power_levels
+    domains:
+      - animated-character-database.fandom.com
+    allowed_fields: []
+    promotion_allowed: false
+
+  databasecomics:
+    enabled: true
+    authority: medium
+    parser: databasecomics_html
+    domains:
+      - databasecomics.com
+    allowed_fields: []
+    promotion_allowed: false

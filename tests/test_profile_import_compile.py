@@ -130,6 +130,24 @@ class ProfileImportCompileTests(unittest.TestCase):
             with self.assertRaises(Exception):
                 build_import_plan(Path(tmpdir), ImportOptions(fail_fast=True))
 
+    def test_importer_validation_accepts_approved_profile_without_repair_metadata(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "superman.yaml"
+            data = yaml.safe_load(GOKU_PATH.read_text(encoding="utf-8"))
+            data["id"] = "comic-dc-superman"
+            data["name"] = "Superman"
+            data["franchise"] = "DC"
+            data["category"] = "comic"
+            data["profile_type"] = "approved_override"
+            data["status"] = "approved_override"
+            data.pop("repair", None)
+            path.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
+
+            profile = validate_profile_path(path)
+
+        self.assertEqual(profile.name, "Superman")
+        self.assertTrue(profile.battle_eligible)
+
     def test_changed_only_importer_imports_new_files(self):
         state = {"profiles": {}}
 

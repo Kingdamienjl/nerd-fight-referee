@@ -110,7 +110,10 @@ class CharacterProfile(BaseModel):
         reasons = self.generation.ineligible_reasons
         if self.battle_eligible:
             missing = []
-            if self.profile_type != ProfileType.AUTO_EVIDENCE_PROFILE:
+            if self.profile_type not in {
+                ProfileType.AUTO_EVIDENCE_PROFILE,
+                ProfileType.APPROVED_OVERRIDE,
+            }:
                 missing.append("battle_eligible_requires_auto_evidence_profile")
             if not self._has_revision_metadata():
                 missing.append("missing_source_revision_metadata")

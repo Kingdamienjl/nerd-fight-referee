@@ -66,6 +66,49 @@ Audit imported profile quality and locate missing characters across local files:
 Preferred profile quality overrides live in `profiles/overrides/preferred_profiles.yaml`. These
 overrides currently add warnings to fight packets instead of blocking resolution.
 
+## Local Profile Review UI
+
+Run the local review UI separately from the Discord bot:
+
+```bash
+.venv/bin/python -m battlebot.review.app --host 127.0.0.1 --port 8090
+```
+
+Then open `http://127.0.0.1:8090` and filter to `needs_review`. Batman and Superman can be
+inspected from `profiles/needs_review/comic/dc/`, annotated with review notes, approved into
+`profiles/generated`, rejected into `profiles/rejected`, or requeued with fix notes.
+
+CLI helpers are available for the same file-backed workflow:
+
+```bash
+.venv/bin/python -m battlebot.review.service list --limit 5
+.venv/bin/python -m battlebot.review.service inspect profiles/needs_review/comic/dc/batman.yaml
+.venv/bin/python -m battlebot.review.service approve profiles/needs_review/comic/dc/batman.yaml
+.venv/bin/python -m battlebot.review.service reject profiles/needs_review/comic/dc/batman.yaml --note "wrong page"
+```
+
+Practical Batman/Superman repair flow:
+
+```bash
+.venv/bin/python -m battlebot.review.service inspect profiles/needs_review/comic/dc/batman.yaml
+.venv/bin/python -m battlebot.review.service add-source profiles/needs_review/comic/dc/batman.yaml --title "Batman" --url "https://vsbattles.fandom.com/wiki/Batman" --source-type mediawiki --revision-id "9348088"
+.venv/bin/python -m battlebot.review.service set-core profiles/needs_review/comic/dc/batman.yaml --field attack_potency --text "Manual source-backed value" --source-id "batman" --confidence 0.75 --note "Manual review repair"
+.venv/bin/python -m battlebot.review.service set-core profiles/needs_review/comic/dc/batman.yaml --field speed --text "Manual source-backed value" --source-id "batman" --confidence 0.75 --note "Manual review repair"
+.venv/bin/python -m battlebot.review.service set-core profiles/needs_review/comic/dc/batman.yaml --field durability --text "Manual source-backed value" --source-id "batman" --confidence 0.75 --note "Manual review repair"
+.venv/bin/python -m battlebot.review.service add-ability profiles/needs_review/comic/dc/batman.yaml --name "Manual source-backed ability" --description "Describe only what the cited source supports." --source-id "batman" --confidence 0.75
+.venv/bin/python -m battlebot.review.service approve profiles/needs_review/comic/dc/batman.yaml
+```
+
+Use the source panel in the UI to confirm the source ID and whether each source is used by core
+fields, abilities, equipment, or weaknesses before approving.
+
+After approving profiles, import changed generated YAML into Postgres:
+
+```bash
+DBURL="postgresql://battlebot:change_me@127.0.0.1:55432/battlebot"
+.venv/bin/python -m battlebot.ingest.import_profiles profiles/generated --database-url "$DBURL" --changed-only --import-state-file data/import_state.json
+```
+
 If an existing local Postgres volume was initialized with the old placeholder schema, reset it
 before importing:
 
