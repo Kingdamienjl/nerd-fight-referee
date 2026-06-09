@@ -18,12 +18,9 @@ from battlebot.harvest.auto_profile_harvester import (
     FIELD_ALIASES,
     extract_vsbattles_fields,
     list_items_from_text,
-    mediawiki_api_from_url,
-    merge_extracted_fields,
-    rendered_text_from_parse,
-    revision_content,
     title_from_wiki_url,
 )
+from battlebot.review.providers import comicvine, kaggle_superherodb, mediawiki, powerlisting
 from battlebot.review import service, source_registry
 
 
@@ -71,6 +68,7 @@ class SourceAttempt:
     authority: str = ""
     promotion_allowed: bool = False
     allowed_fields: list[str] = field(default_factory=list)
+    field_candidates: list[dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -321,7 +319,16 @@ def roster_source_rows(profile: dict[str, Any], roster_dir: Path) -> list[dict[s
 
 async def fetch_source_fields(source: dict[str, Any]) -> tuple[dict[str, str], dict[str, Any]]:
     parser = str(source.get("parser") or "")
-    if parser and parser not in {"mediawiki_battle_stats", "mediawiki_ability_taxonomy"}:
+    if parser == "comicvine_api":
+        return comicvine.missing_api_key_metadata(str(source.get("requires_api_key_env") or "COMICVINE_API_KEY"))
+    if parser == "local_csv_dataset":
+        root = Path(str(source.get("local_path") or "data/external/superherodb"))
+        return kaggle_superherodb.load_local_fields(str(source.get("title") or ""), root)
+    if parser == "superherodb_html":
+        return {}, {"note": "superherodb_live_fetch_not_implemented", "fetch_status": "skipped"}
+    if parser == "databasecomics_html":
+        return {}, {"note": "databasecomics_live_fetch_not_implemented", "fetch_status": "skipped"}
+    if parser and parser not in {"mediawiki_battle_stats", "mediawiki_ability_taxonomy", "mediawiki_power_levels"}:
         return {}, {
             "note": f"provider_parser_not_implemented: {parser}",
             "provider_id": source.get("provider_id") or "",
@@ -336,78 +343,21 @@ async def fetch_source_fields(source: dict[str, Any]) -> tuple[dict[str, str], d
     if "fandom.com" not in parsed.netloc and "wiki" not in parsed.path.casefold():
         return {}, {"note": "unsupported_source_url"}
 
-    api_url = mediawiki_api_from_url(url) or f"{parsed.scheme}://{parsed.netloc}/api.php"
     title = title_from_wiki_url(url) or source.get("title")
     if not title:
         return {}, {"note": "missing_mediawiki_title"}
-
-    import aiohttp
-
-    timeout = aiohttp.ClientTimeout(total=10, connect=3, sock_connect=3, sock_read=6)
-    query_params = {
-        "action": "query",
-        "format": "json",
-        "formatversion": "2",
-        "prop": "revisions|info",
-        "inprop": "url",
-        "rvprop": "ids|timestamp|content",
-        "rvslots": "main",
-        "titles": title,
-        "redirects": "1",
-    }
-    async with aiohttp.ClientSession(timeout=timeout, headers={"User-Agent": "battlebot-review-repair/0.1"}) as session:
-        async with session.get(api_url, params=query_params) as response:
-            query_status = response.status
-            body = await response.json(content_type=None)
-        pages = body.get("query", {}).get("pages", [])
-        if not pages:
-            return {}, {
-                "note": "mediawiki_no_pages",
-                "fetch_status": "fetched",
-                "http_status": query_status,
-                "content_kind": "api_json",
-                "content_length": len(str(body)),
-            }
-        page = pages[0]
-        revision = (page.get("revisions") or [{}])[0]
-        content = revision_content(revision)
-        fields = parse_source_content(content)
-        parse_body: dict[str, Any] = {}
-        parse_status = None
-        if len([key for key in ("attack_potency", "speed", "durability") if fields.get(key)]) < 3:
-            parse_params = {
-                "action": "parse",
-                "page": page.get("title") or title,
-                "prop": "text|sections|wikitext",
-                "format": "json",
-                "formatversion": "2",
-            }
-            async with session.get(api_url, params=parse_params) as parse_response:
-                parse_status = parse_response.status
-                parse_body = await parse_response.json(content_type=None)
-            rendered = rendered_text_from_parse(parse_body)
-            wikitext = (((parse_body.get("parse") or {}).get("wikitext") or {}).get("*") or "")
-            fields = merge_extracted_fields(fields, parse_source_content(rendered))
-            fields = merge_extracted_fields(fields, parse_source_content(str(wikitext)))
-        metadata = {
-            "title": page.get("title") or title,
-            "url": page.get("fullurl") or url,
-            "revision_id": str(revision.get("revid") or source.get("revision_id") or ""),
-            "revision_timestamp": revision.get("timestamp"),
-            "source_type": "mediawiki",
-            "note": "ok" if fields else "fetched_but_no_fields",
-            "fetch_status": "fetched",
-            "http_status": parse_status or query_status,
-            "content_length": len(content) + len(str(parse_body)),
-            "content_kind": "api_json",
-            "headings_detected": detected_headings(content),
-            "stat_labels_detected": detected_stat_labels(content),
-            "provider_id": source.get("provider_id") or "",
-            "authority": source.get("authority") or "",
-            "promotion_allowed": bool(source.get("promotion_allowed", False)),
-            "allowed_fields": source.get("allowed_fields") or [],
-        }
-        return fields, metadata
+    if parser == "mediawiki_ability_taxonomy":
+        fields, metadata = await mediawiki.fetch_mediawiki_fields(source, powerlisting.parse_ability_taxonomy)
+    else:
+        fields, metadata = await mediawiki.fetch_mediawiki_fields(source, parse_source_content)
+    raw_content = str(metadata.pop("raw_content", ""))
+    metadata.setdefault("headings_detected", detected_headings(raw_content))
+    metadata.setdefault("stat_labels_detected", detected_stat_labels(raw_content))
+    metadata.setdefault("provider_id", source.get("provider_id") or "")
+    metadata.setdefault("authority", source.get("authority") or "")
+    metadata.setdefault("promotion_allowed", bool(source.get("promotion_allowed", False)))
+    metadata.setdefault("allowed_fields", source.get("allowed_fields") or [])
+    return fields, metadata
 
 
 def mediawiki_search_titles_from_body(body: dict[str, Any]) -> list[str]:
@@ -490,27 +440,29 @@ def apply_extracted_fields(
     overwrite: bool,
     dry_run: bool,
     notes_path: Path,
+    allow_power_fields: bool = True,
 ) -> list[str]:
     repaired = []
-    for field_name in POWER_FIELDS:
-        value = fields.get(field_name)
-        if value and set_power_field(
-            profile,
-            field_name,
-            value,
-            source_id=source_id,
-            confidence=confidence,
-            overwrite=overwrite,
-        ):
-            repaired.append(field_name)
-            append_auto_note(
-                profile_path,
-                field_path=f"power_scale.{field_name}.text",
-                suggested_value=value,
+    if allow_power_fields:
+        for field_name in POWER_FIELDS:
+            value = fields.get(field_name)
+            if value and set_power_field(
+                profile,
+                field_name,
+                value,
                 source_id=source_id,
-                dry_run=dry_run,
-                notes_path=notes_path,
-            )
+                confidence=confidence,
+                overwrite=overwrite,
+            ):
+                repaired.append(field_name)
+                append_auto_note(
+                    profile_path,
+                    field_path=f"power_scale.{field_name}.text",
+                    suggested_value=value,
+                    source_id=source_id,
+                    dry_run=dry_run,
+                    notes_path=notes_path,
+                )
 
     if fields.get("powers_and_abilities") and (overwrite or not profile.get("abilities")):
         abilities = list_items_from_text(
@@ -558,6 +510,45 @@ def high_authority_core_attempts(attempts: list[SourceAttempt]) -> list[SourceAt
     ]
 
 
+def high_authority_core_disagreements(attempts: list[SourceAttempt]) -> list[str]:
+    disagreements = []
+    for field_name in ("attack_potency", "speed", "durability"):
+        values = {
+            str(candidate.get("value") or "").strip().casefold()
+            for attempt in attempts
+            if attempt.authority == "high" and attempt.promotion_allowed
+            for candidate in attempt.field_candidates
+            if candidate.get("field") == field_name and candidate.get("value")
+        }
+        if len(values) > 1:
+            disagreements.append(field_name)
+    return disagreements
+
+
+def boost_confidence_from_cross_checks(profile: dict[str, Any], attempts: list[SourceAttempt]) -> None:
+    high_values = {
+        (candidate["field"], str(candidate["value"]).strip().casefold())
+        for attempt in attempts
+        if attempt.authority == "high"
+        for candidate in attempt.field_candidates
+        if candidate.get("field") in {"attack_potency", "speed", "durability"} and candidate.get("value")
+    }
+    if not high_values:
+        return
+    supported_fields = {
+        str(candidate["field"])
+        for attempt in attempts
+        if attempt.authority in {"medium", "low"}
+        for candidate in attempt.field_candidates
+        if (candidate.get("field"), str(candidate.get("value") or "").strip().casefold()) in high_values
+    }
+    power_scale = profile.get("power_scale") or {}
+    for field_name in supported_fields:
+        entry = power_scale.get(field_name)
+        if isinstance(entry, dict):
+            entry["confidence"] = min(float(entry.get("confidence") or 0) + 0.05, 0.85)
+
+
 def update_repair_metadata(
     profile: dict[str, Any],
     *,
@@ -594,6 +585,7 @@ def update_repair_metadata(
                 "authority": attempt.authority,
                 "promotion_allowed": attempt.promotion_allowed,
                 "allowed_fields": attempt.allowed_fields,
+                "field_candidates": attempt.field_candidates,
             }
             for attempt in attempts
         ],
@@ -633,8 +625,11 @@ def attempt_from_result(
     ok: bool,
     note: str,
 ) -> SourceAttempt:
+    source_id = source_id_for(source, profile.get("name") or "source")
+    authority = str(metadata.get("authority") or source.get("authority") or "")
+    confidence = 0.75 if metadata.get("revision_id") else 0.5
     attempt = SourceAttempt(
-        source_id_for(source, profile.get("name") or "source"),
+        source_id,
         str(source.get("url") or metadata.get("url") or ""),
         ok,
         note,
@@ -653,6 +648,17 @@ def attempt_from_result(
         authority=str(metadata.get("authority") or source.get("authority") or ""),
         promotion_allowed=bool(metadata.get("promotion_allowed", source.get("promotion_allowed", False))),
         allowed_fields=list(metadata.get("allowed_fields") or source.get("allowed_fields") or []),
+        field_candidates=[
+            {
+                "field": field_name,
+                "value": value,
+                "source_id": source_id,
+                "provider_id": str(metadata.get("provider_id") or source.get("provider_id") or ""),
+                "authority": authority,
+                "confidence": confidence,
+            }
+            for field_name, value in fields.items()
+        ],
     )
     attempt.rank = rank_attempt(profile, attempt)
     return attempt
@@ -885,6 +891,7 @@ async def repair_profile(
                 overwrite=overwrite,
                 dry_run=dry_run,
                 notes_path=notes_path,
+                allow_power_fields=attempt.authority == "high" and attempt.promotion_allowed,
             )
         )
         if not promote_if_valid and not missing_targets(profile):
@@ -900,6 +907,11 @@ async def repair_profile(
     ]
     needs_human_source_choice = False if choose_source_id else len(viable) > 1
     has_promotion_source = bool(high_authority_core_attempts(attempts))
+    disagreements = high_authority_core_disagreements(attempts)
+    if disagreements:
+        needs_human_source_choice = True
+        errors.append(f"high_authority_core_disagreement: {', '.join(disagreements)}")
+    boost_confidence_from_cross_checks(profile, attempts)
     candidate_sources = sorted(
         [candidate_row_from_attempt(attempt) for attempt in attempts if attempt.extracted_fields],
         key=lambda item: item["rank"],

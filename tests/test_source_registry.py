@@ -6,7 +6,11 @@ from unittest.mock import patch
 import yaml
 
 from battlebot.review import auto_repair, source_registry
+from battlebot.review.providers import comicvine, kaggle_superherodb, powerlisting, superherodb
 from tests.test_auto_repair import fake_fetch_source_fields, profile_data, write_profile
+
+
+FIXTURE_DIR = Path("tests/fixtures/providers")
 
 
 class SourceRegistryTests(unittest.IsolatedAsyncioTestCase):
@@ -95,6 +99,51 @@ class SourceRegistryTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(candidates)
         self.assertEqual(candidates[0]["provider_id"], "character_stats_profiles")
         self.assertIn("character-stats-and-profiles.fandom.com", candidates[0]["url"])
+
+    def test_character_stats_profile_sample_uses_battle_stat_parser(self):
+        fields = auto_repair.parse_source_content((FIXTURE_DIR / "character_stats_profile_sample.wikitext").read_text())
+
+        self.assertEqual(fields["attack_potency"], "Solar System level")
+        self.assertEqual(fields["speed"], "Massively FTL+")
+        self.assertEqual(fields["durability"], "Solar System level")
+
+    def test_powerlisting_cannot_write_attack_potency(self):
+        provider = source_registry.load_registry()["powerlisting"]
+        fields = source_registry.filter_allowed_fields(
+            {"attack_potency": "Planet level", **powerlisting.parse_ability_taxonomy("Flight definition")},
+            provider,
+        )
+
+        self.assertNotIn("attack_potency", fields)
+        self.assertIn("ability_definitions", fields)
+
+    def test_kaggle_adapter_skips_cleanly_when_dataset_missing(self):
+        with TemporaryDirectory() as temp_dir:
+            fields, metadata = kaggle_superherodb.load_local_fields("Batman", Path(temp_dir) / "missing")
+
+        self.assertEqual(fields, {})
+        self.assertEqual(metadata["note"], "local_dataset_missing")
+
+    def test_kaggle_adapter_extracts_sample_aliases_and_stats(self):
+        fields, metadata = kaggle_superherodb.load_local_fields("Batman", FIXTURE_DIR)
+
+        self.assertEqual(metadata["note"], "ok")
+        self.assertIn("Dark Knight", fields["aliases"])
+        self.assertIn("intelligence: 100", fields["stat_notes"])
+
+    def test_superherodb_parser_extracts_sample_powers(self):
+        fields = superherodb.parse_superherodb_html((FIXTURE_DIR / "superherodb_batman.html").read_text())
+
+        self.assertIn("Bruce Wayne", fields["aliases"])
+        self.assertIn("Detective Skills", fields["powers_and_abilities"])
+        self.assertIn("Intelligence: 100", fields["stat_notes"])
+
+    def test_comicvine_adapter_reports_missing_api_key_cleanly(self):
+        with patch.dict("os.environ", {}, clear=True):
+            fields, metadata = comicvine.missing_api_key_metadata()
+
+        self.assertEqual(fields, {})
+        self.assertEqual(metadata["note"], "missing_api_key_env: COMICVINE_API_KEY")
 
     async def test_debug_report_records_provider_authority(self):
         with TemporaryDirectory() as temp_dir:

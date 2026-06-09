@@ -147,6 +147,71 @@ def provider_candidates(
                         notes=f"{provider.provider_id}_candidate",
                     )
                 )
+        elif provider.provider_id == "superherodb" and provider.primary_domain:
+            name = str(profile.get("name") or "")
+            if name:
+                candidates.append(
+                    {
+                        "id": service.slugify(f"superherodb-{name}"),
+                        "title": name,
+                        "url": f"https://www.superherodb.com/{service.slugify(name)}/10-1/",
+                        "source_type": "html",
+                        "notes": "superherodb_candidate",
+                        "provider_id": provider.provider_id,
+                        "authority": provider.authority,
+                        "promotion_allowed": provider.promotion_allowed,
+                        "allowed_fields": list(provider.allowed_fields),
+                        "parser": provider.parser,
+                    }
+                )
+        elif provider.provider_id == "kaggle_superherodb":
+            candidates.append(
+                {
+                    "id": service.slugify(f"kaggle-superherodb-{profile.get('name') or 'character'}"),
+                    "title": profile.get("name") or "",
+                    "url": provider.local_path or "data/external/superherodb",
+                    "source_type": "local_dataset",
+                    "notes": "kaggle_superherodb_candidate",
+                    "provider_id": provider.provider_id,
+                    "authority": provider.authority,
+                    "promotion_allowed": provider.promotion_allowed,
+                    "allowed_fields": list(provider.allowed_fields),
+                    "parser": provider.parser,
+                    "local_path": provider.local_path,
+                }
+            )
+        elif provider.provider_id == "comicvine":
+            candidates.append(
+                {
+                    "id": service.slugify(f"comicvine-{profile.get('name') or 'character'}"),
+                    "title": profile.get("name") or "",
+                    "url": "https://comicvine.gamespot.com/api/",
+                    "source_type": "api",
+                    "notes": "comicvine_api_candidate",
+                    "provider_id": provider.provider_id,
+                    "authority": provider.authority,
+                    "promotion_allowed": provider.promotion_allowed,
+                    "allowed_fields": list(provider.allowed_fields),
+                    "parser": provider.parser,
+                    "requires_api_key_env": provider.requires_api_key_env,
+                }
+            )
+        elif provider.primary_domain:
+            name = str(profile.get("name") or "")
+            candidates.append(
+                {
+                    "id": service.slugify(f"{provider.provider_id}-{name or 'character'}"),
+                    "title": name,
+                    "url": f"https://{provider.primary_domain}/wiki/{quote(name.replace(' ', '_'))}",
+                    "source_type": "html",
+                    "notes": f"{provider.provider_id}_candidate",
+                    "provider_id": provider.provider_id,
+                    "authority": provider.authority,
+                    "promotion_allowed": provider.promotion_allowed,
+                    "allowed_fields": list(provider.allowed_fields),
+                    "parser": provider.parser,
+                }
+            )
     return candidates
 
 

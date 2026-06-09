@@ -10,6 +10,9 @@ from discord import app_commands
 from battlebot.bot.commands.fight import register_fight_command
 
 
+BOT_PUBLIC_NAME = "Nerd Fight Referee"
+
+
 class BattleBotClient(discord.Client):
     def __init__(self) -> None:
         super().__init__(intents=discord.Intents.none())
