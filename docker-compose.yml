@@ -94,6 +94,9 @@ services:
       LITELLM_BASE_URL: ${LITELLM_BASE_URL:-http://litellm:4000}
       LITELLM_API_KEY: ${LITELLM_API_KEY:-sk-local-dev}
       REFEREE_MODEL: ${REFEREE_MODEL:-referee-default}
+    volumes:
+      - ./profiles:/app/profiles:ro
+      - ./data:/app/data
     command: ["python", "-m", "battlebot.worker.main"]
 
   harvester:
@@ -111,7 +114,23 @@ services:
       IGDB_CLIENT_SECRET: ${IGDB_CLIENT_SECRET:-}
       HARVEST_USER_AGENT: ${HARVEST_USER_AGENT:-ai-nerd-fight-bot/0.1}
       HARVEST_MIN_INTERVAL_SECONDS: ${HARVEST_MIN_INTERVAL_SECONDS:-2}
+    volumes:
+      - ./profiles:/app/profiles
+      - ./data:/app/data
     command: ["python", "-m", "battlebot.harvest.auto_profile_harvester"]
+
+  profile-importer:
+    build: .
+    profiles: ["import"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+    volumes:
+      - ./profiles:/app/profiles:ro
+      - ./data:/app/data:ro
+    command: ["python", "-m", "battlebot.ingest.import_profiles", "profiles/generated"]
 
 volumes:
   pgdata:

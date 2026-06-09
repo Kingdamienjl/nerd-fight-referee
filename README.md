@@ -1,11 +1,10 @@
 # AI Nerd Fight Decision Bot Discord
 
-Phase 1 scaffold for a Dockerized Python Discord battle bot.
+Dockerized Python scaffold for a Discord battle bot.
 
-This phase only establishes the project structure, Docker Compose services, package metadata,
-configuration placeholders, profile directories, and empty Python entrypoints. The actual bot,
-worker, profile harvester, database schema, cache, and LLM referee logic are intentionally left
-for later phases.
+Current implemented pieces include the automated profile harvester, enriched YAML profile
+validation, and a Postgres profile compiler/importer. Discord fight commands, worker battle
+execution, battle result caching, and LLM referee calls are intentionally deferred.
 
 ## Stack Targets
 
@@ -24,3 +23,34 @@ docker compose config
 ```
 
 The command should render a valid Compose configuration without starting services.
+
+## Profile Validation And Import
+
+Validate generated profiles:
+
+```bash
+.venv/bin/python -m battlebot.ingest.validate_profile profiles/generated
+```
+
+Compile generated profiles without writing to Postgres:
+
+```bash
+.venv/bin/python -m battlebot.ingest.import_profiles profiles/generated --dry-run
+docker compose run --rm profile-importer python -m battlebot.ingest.import_profiles profiles/generated --dry-run
+```
+
+Import into Postgres:
+
+```bash
+docker compose up -d postgres
+docker compose run --rm profile-importer python -m battlebot.ingest.import_profiles profiles/generated
+```
+
+If an existing local Postgres volume was initialized with the old placeholder schema, reset it
+before importing:
+
+```bash
+docker compose down
+docker volume rm ainerdfightdecisionbotdiscord_pgdata
+docker compose up -d postgres
+```
