@@ -23,12 +23,16 @@ from battlebot.schemas.profile import CharacterProfile
 class ImportOptions:
     include_needs_review: bool = False
     fail_fast: bool = False
+    changed_only: bool = False
+    import_state: dict[str, Any] | None = None
 
 
 @dataclass
 class ImportSummary:
     scanned: int = 0
+    changed: int = 0
     imported: int = 0
+    skipped_unchanged: int = 0
     skipped_invalid: int = 0
     skipped_not_battle_eligible: int = 0
     failed: int = 0
@@ -64,6 +68,53 @@ def load_profile_yaml(path: Path) -> dict[str, Any]:
 
 def validate_profile_path(path: Path) -> CharacterProfile:
     return CharacterProfile.model_validate(load_profile_yaml(path))
+
+
+def load_import_state(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {"profiles": {}}
+    state = json.loads(path.read_text(encoding="utf-8"))
+    state.setdefault("profiles", {})
+    return state
+
+
+def write_import_state_atomic(path: Path, state: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = path.with_name(f"{path.name}.tmp")
+    temp_path.write_text(json.dumps(state, indent=2, sort_keys=True), encoding="utf-8")
+    temp_path.replace(path)
+
+
+def reset_import_state(path: Path) -> dict[str, Any]:
+    if path.exists():
+        path.unlink()
+    return {"profiles": {}}
+
+
+def profile_file_fingerprint(path: Path, profile_hash: str | None = None) -> dict[str, Any]:
+    stat = path.stat()
+    if profile_hash is None:
+        try:
+            data = load_profile_yaml(path)
+            profile_hash = str(data.get("profile_hash") or "")
+        except Exception:
+            profile_hash = ""
+    return {
+        "path": path.as_posix(),
+        "mtime": stat.st_mtime,
+        "size": stat.st_size,
+        "profile_hash": profile_hash,
+    }
+
+
+def profile_fingerprint_changed(
+    path: Path,
+    state: dict[str, Any],
+    fingerprint: dict[str, Any] | None = None,
+) -> bool:
+    fingerprint = fingerprint or profile_file_fingerprint(path)
+    previous = state.setdefault("profiles", {}).get(path.as_posix())
+    return previous != fingerprint
 
 
 def compile_profile(profile: CharacterProfile, path: Path) -> CompiledProfile:
@@ -213,10 +264,17 @@ def build_import_plan(
     options: ImportOptions | None = None,
 ) -> tuple[list[CompiledProfile], ImportSummary]:
     options = options or ImportOptions()
+    import_state = options.import_state or {"profiles": {}}
     summary = ImportSummary()
     compiled = []
     for path in find_profile_paths(root):
         summary.scanned += 1
+        if options.changed_only:
+            fingerprint = profile_file_fingerprint(path)
+            if not profile_fingerprint_changed(path, import_state, fingerprint):
+                summary.skipped_unchanged += 1
+                continue
+            summary.changed += 1
         try:
             profile = validate_profile_path(path)
         except (ValidationError, ValueError, OSError) as exc:
@@ -246,6 +304,16 @@ async def import_compiled_profiles(
                 await wipe_imported_tables(connection)
             for compiled in compiled_profiles:
                 await upsert_compiled_profile(connection, compiled)
+
+
+def update_import_state_for_compiled(
+    state: dict[str, Any],
+    compiled_profiles: list[CompiledProfile],
+) -> None:
+    profiles = state.setdefault("profiles", {})
+    for compiled in compiled_profiles:
+        profile_hash = str(compiled.profile.get("profile_hash") or "")
+        profiles[compiled.path.as_posix()] = profile_file_fingerprint(compiled.path, profile_hash)
 
 
 async def wipe_imported_tables(connection: Any) -> None:
@@ -482,7 +550,9 @@ def print_summary(summary: ImportSummary, *, dry_run: bool) -> None:
     prefix = "DRY RUN " if dry_run else ""
     print(f"{prefix}SUMMARY")
     print(f"  scanned: {summary.scanned}")
+    print(f"  changed: {summary.changed}")
     print(f"  imported: {summary.imported}")
+    print(f"  skipped_unchanged: {summary.skipped_unchanged}")
     print(f"  skipped_invalid: {summary.skipped_invalid}")
     print(f"  skipped_not_battle_eligible: {summary.skipped_not_battle_eligible}")
     print(f"  failed: {summary.failed}")
@@ -497,6 +567,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--fail-fast", action="store_true", help="Stop on the first invalid profile")
     parser.add_argument("--database-url", help="Override DATABASE_URL")
     parser.add_argument(
+        "--import-state-file",
+        type=Path,
+        default=Path("data/import_state.json"),
+        help="Changed-only import state path",
+    )
+    parser.add_argument("--changed-only", action="store_true", help="Import only changed profiles")
+    parser.add_argument(
+        "--reset-import-state",
+        action="store_true",
+        help="Reset changed-only import state before planning",
+    )
+    parser.add_argument(
         "--include-needs-review",
         action="store_true",
         help="Import profiles that are not battle eligible",
@@ -510,12 +592,21 @@ def build_arg_parser() -> argparse.ArgumentParser:
 
 
 async def async_main(args: argparse.Namespace) -> int:
+    import_state = None
+    if args.changed_only:
+        import_state = (
+            reset_import_state(args.import_state_file)
+            if args.reset_import_state
+            else load_import_state(args.import_state_file)
+        )
     try:
         compiled, summary = build_import_plan(
             args.path,
             ImportOptions(
                 include_needs_review=args.include_needs_review,
                 fail_fast=args.fail_fast,
+                changed_only=args.changed_only,
+                import_state=import_state,
             ),
         )
     except Exception as exc:
@@ -529,6 +620,9 @@ async def async_main(args: argparse.Namespace) -> int:
                 database_url=args.database_url or os.getenv("DATABASE_URL"),
                 wipe_profiles=args.wipe_profiles,
             )
+            if args.changed_only and import_state is not None:
+                update_import_state_for_compiled(import_state, compiled)
+                write_import_state_atomic(args.import_state_file, import_state)
         except Exception as exc:
             summary.failed += 1
             summary.errors.append(f"database import failed: {exc}")

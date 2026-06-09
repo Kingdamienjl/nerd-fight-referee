@@ -134,6 +134,18 @@ class HarvestResult:
     errors: list[str] = field(default_factory=list)
 
 
+@dataclass
+class QueueCycleSummary:
+    roster_rows: int = 0
+    completed: int = 0
+    needs_review: int = 0
+    pending: int = 0
+    processed_this_cycle: int = 0
+    generated_this_cycle: int = 0
+    needs_review_this_cycle: int = 0
+    failed_this_cycle: int = 0
+
+
 class RawCache:
     def __init__(self, cache_dir: Path) -> None:
         self.cache_dir = cache_dir
@@ -1102,6 +1114,197 @@ def profile_output_path(base_dir: Path, row: RosterRow) -> Path:
     )
 
 
+def character_row_id(row: RosterRow) -> str:
+    return slugify(f"{row.category}-{row.franchise}-{row.name}")
+
+
+def row_fingerprint(row: RosterRow) -> str:
+    return stable_hash(
+        {
+            "category": row.category,
+            "franchise": row.franchise,
+            "name": row.name,
+            "aliases": row.aliases,
+            "wiki_title": row.wiki_title,
+            "wiki_url": row.wiki_url,
+        }
+    )
+
+
+def roster_state_key(input_path: Path | None, roster_id: str | None) -> str:
+    path_key = input_path.resolve().as_posix() if input_path else "single-character"
+    return f"{roster_id or 'default'}::{path_key}"
+
+
+def empty_roster_state() -> dict[str, Any]:
+    return {
+        "cursor_index": 0,
+        "completed": {},
+        "needs_review": {},
+        "failed": {},
+        "last_processed_at": None,
+    }
+
+
+def load_json_state(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_json_state_atomic(path: Path, state: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = path.with_name(f"{path.name}.tmp")
+    temp_path.write_text(json.dumps(state, indent=2, sort_keys=True), encoding="utf-8")
+    temp_path.replace(path)
+
+
+def get_roster_state(
+    state: dict[str, Any],
+    *,
+    input_path: Path | None,
+    roster_id: str | None,
+) -> tuple[str, dict[str, Any]]:
+    key = roster_state_key(input_path, roster_id)
+    rosters = state.setdefault("rosters", {})
+    roster_state = rosters.setdefault(key, empty_roster_state())
+    for field_name, default in empty_roster_state().items():
+        roster_state.setdefault(field_name, default)
+    return key, roster_state
+
+
+def reset_roster_state(
+    state: dict[str, Any],
+    *,
+    input_path: Path | None,
+    roster_id: str | None,
+) -> None:
+    state.setdefault("rosters", {}).pop(roster_state_key(input_path, roster_id), None)
+
+
+def row_is_done(
+    row: RosterRow,
+    *,
+    output_dir: Path,
+    needs_review_dir: Path,
+    roster_state: dict[str, Any],
+    skip_needs_review_existing: bool,
+) -> tuple[bool, str | None]:
+    row_id = character_row_id(row)
+    fingerprint = row_fingerprint(row)
+    if profile_output_path(output_dir, row).exists():
+        roster_state.setdefault("completed", {})[row_id] = fingerprint
+        return True, "completed"
+    if skip_needs_review_existing and profile_output_path(needs_review_dir, row).exists():
+        roster_state.setdefault("needs_review", {})[row_id] = fingerprint
+        return True, "needs_review"
+    if roster_state.get("completed", {}).get(row_id) == fingerprint:
+        return True, "completed"
+    if (
+        skip_needs_review_existing
+        and roster_state.get("needs_review", {}).get(row_id) == fingerprint
+    ):
+        return True, "needs_review"
+    return False, None
+
+
+def queue_summary_for_rows(
+    rows: list[RosterRow],
+    *,
+    output_dir: Path,
+    needs_review_dir: Path,
+    roster_state: dict[str, Any],
+    skip_needs_review_existing: bool,
+) -> QueueCycleSummary:
+    summary = QueueCycleSummary(roster_rows=len(rows))
+    for row in rows:
+        done, done_type = row_is_done(
+            row,
+            output_dir=output_dir,
+            needs_review_dir=needs_review_dir,
+            roster_state=roster_state,
+            skip_needs_review_existing=skip_needs_review_existing,
+        )
+        if done_type == "completed":
+            summary.completed += 1
+        elif done_type == "needs_review":
+            summary.needs_review += 1
+        if not done:
+            summary.pending += 1
+    return summary
+
+
+def select_queue_rows(
+    rows: list[RosterRow],
+    *,
+    output_dir: Path,
+    needs_review_dir: Path,
+    roster_state: dict[str, Any],
+    skip_needs_review_existing: bool,
+    max_per_cycle: int,
+) -> tuple[list[tuple[int, RosterRow]], QueueCycleSummary]:
+    selected: list[tuple[int, RosterRow]] = []
+    start_index = min(int(roster_state.get("cursor_index", 0) or 0), len(rows))
+    index = start_index
+    limit = max_per_cycle if max_per_cycle and max_per_cycle > 0 else len(rows)
+
+    while index < len(rows) and len(selected) < limit:
+        row = rows[index]
+        done, _done_type = row_is_done(
+            row,
+            output_dir=output_dir,
+            needs_review_dir=needs_review_dir,
+            roster_state=roster_state,
+            skip_needs_review_existing=skip_needs_review_existing,
+        )
+        index += 1
+        if done:
+            continue
+        selected.append((index - 1, row))
+
+    roster_state["cursor_index"] = index
+    summary = queue_summary_for_rows(
+        rows,
+        output_dir=output_dir,
+        needs_review_dir=needs_review_dir,
+        roster_state=roster_state,
+        skip_needs_review_existing=skip_needs_review_existing,
+    )
+    return selected, summary
+
+
+def mark_queue_result(
+    roster_state: dict[str, Any],
+    row: RosterRow,
+    result: HarvestResult,
+) -> None:
+    row_id = character_row_id(row)
+    fingerprint = row_fingerprint(row)
+    if result.errors:
+        failed = roster_state.setdefault("failed", {}).setdefault(row_id, {})
+        failed["fingerprint"] = fingerprint
+        failed["error_count"] = int(failed.get("error_count", 0)) + 1
+        failed["last_error"] = "; ".join(result.errors)
+    if result.status == "auto_generated":
+        roster_state.setdefault("completed", {})[row_id] = fingerprint
+        roster_state.setdefault("failed", {}).pop(row_id, None)
+    elif result.status == "needs_review":
+        roster_state.setdefault("needs_review", {})[row_id] = fingerprint
+    roster_state["last_processed_at"] = now_iso()
+
+
+def print_queue_summary(summary: QueueCycleSummary) -> None:
+    print("QUEUE SUMMARY")
+    print(f"  roster_rows: {summary.roster_rows}")
+    print(f"  completed: {summary.completed}")
+    print(f"  needs_review: {summary.needs_review}")
+    print(f"  pending: {summary.pending}")
+    print(f"  processed_this_cycle: {summary.processed_this_cycle}")
+    print(f"  generated_this_cycle: {summary.generated_this_cycle}")
+    print(f"  needs_review_this_cycle: {summary.needs_review_this_cycle}")
+    print(f"  failed_this_cycle: {summary.failed_this_cycle}")
+
+
 def read_roster_csv(path: Path) -> list[RosterRow]:
     rows = []
     with path.open("r", encoding="utf-8", newline="") as handle:
@@ -1226,6 +1429,17 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--output", type=Path, default=Path("profiles/generated"))
     parser.add_argument("--needs-review", type=Path, default=Path("profiles/needs_review"))
     parser.add_argument("--cache-dir", type=Path, default=Path("data/cache"))
+    parser.add_argument("--state-file", type=Path, default=Path("data/harvest_state.json"))
+    parser.add_argument("--queue-mode", action="store_true", help="Process roster rows as a durable queue")
+    parser.add_argument("--quiet-skips", action="store_true", help="Do not print skipped_existing rows")
+    parser.add_argument(
+        "--skip-needs-review-existing",
+        action="store_true",
+        help="Treat existing needs_review profiles as completed queue items",
+    )
+    parser.add_argument("--max-total", type=int, default=0, help="Stop after this many pending rows")
+    parser.add_argument("--reset-state", action="store_true", help="Reset this roster queue state")
+    parser.add_argument("--roster-id", help="Optional stable roster identifier for queue state")
     parser.add_argument("--force", action="store_true", help="Regenerate existing profiles")
     parser.add_argument("--no-cache", action="store_true", help="Ignore existing raw response cache")
     parser.add_argument("--debug-extract", action="store_true", help="Print MediaWiki extraction details")
@@ -1266,15 +1480,109 @@ async def run_once(args: argparse.Namespace) -> list[HarvestResult]:
         result = await harvester.harvest_row(row)
         results.append(result)
         where = result.output_path.as_posix() if result.output_path else "-"
-        print(f"{result.status}: {row.name} -> {where}", flush=True)
+        if not (args.quiet_skips and result.status == "skipped_existing"):
+            print(f"{result.status}: {row.name} -> {where}", flush=True)
         for error in result.errors:
             print(f"  warning: {error}", flush=True)
     return results
 
 
+async def run_queue_once(args: argparse.Namespace, processed_total: int) -> tuple[list[HarvestResult], int]:
+    if not args.input:
+        raise SystemExit("--queue-mode requires --input")
+
+    rows = read_roster_csv(args.input)
+    state = load_json_state(args.state_file)
+    if args.reset_state:
+        reset_roster_state(state, input_path=args.input, roster_id=args.roster_id)
+        args.reset_state = False
+    _key, roster_state = get_roster_state(state, input_path=args.input, roster_id=args.roster_id)
+
+    if int(roster_state.get("cursor_index", 0) or 0) >= len(rows):
+        summary = queue_summary_for_rows(
+            rows,
+            output_dir=args.output,
+            needs_review_dir=args.needs_review,
+            roster_state=roster_state,
+            skip_needs_review_existing=args.skip_needs_review_existing,
+        )
+        print_queue_summary(summary)
+        write_json_state_atomic(args.state_file, state)
+        return [], processed_total
+
+    selected, summary = select_queue_rows(
+        rows,
+        output_dir=args.output,
+        needs_review_dir=args.needs_review,
+        roster_state=roster_state,
+        skip_needs_review_existing=args.skip_needs_review_existing,
+        max_per_cycle=args.max_per_cycle,
+    )
+    if args.max_total and args.max_total > 0:
+        remaining = max(args.max_total - processed_total, 0)
+        selected = selected[:remaining]
+
+    cache = RawCache(args.cache_dir)
+    http = HttpClient(
+        cache=cache,
+        user_agent=os.getenv("HARVEST_USER_AGENT", "ai-nerd-fight-bot/0.1"),
+        min_interval_seconds=float(os.getenv("HARVEST_MIN_INTERVAL_SECONDS", "2")),
+        use_cache=not args.no_cache,
+    )
+    harvester = ProfileHarvester(
+        http=http,
+        mediawiki_api=args.mediawiki_api,
+        output_dir=args.output,
+        needs_review_dir=args.needs_review,
+        force=args.force,
+        debug_extract=args.debug_extract,
+    )
+
+    results = []
+    for _index, row in selected:
+        result = await harvester.harvest_row(row)
+        results.append(result)
+        mark_queue_result(roster_state, row, result)
+        summary.processed_this_cycle += 1
+        if result.status == "auto_generated":
+            summary.generated_this_cycle += 1
+        elif result.status == "needs_review":
+            summary.needs_review_this_cycle += 1
+        if result.errors:
+            summary.failed_this_cycle += 1
+        where = result.output_path.as_posix() if result.output_path else "-"
+        if not (args.quiet_skips and result.status == "skipped_existing"):
+            print(f"{result.status}: {row.name} -> {where}", flush=True)
+        for error in result.errors:
+            print(f"  warning: {error}", flush=True)
+
+    processed_total += len(selected)
+    final_summary = queue_summary_for_rows(
+        rows,
+        output_dir=args.output,
+        needs_review_dir=args.needs_review,
+        roster_state=roster_state,
+        skip_needs_review_existing=args.skip_needs_review_existing,
+    )
+    final_summary.processed_this_cycle = summary.processed_this_cycle
+    final_summary.generated_this_cycle = summary.generated_this_cycle
+    final_summary.needs_review_this_cycle = summary.needs_review_this_cycle
+    final_summary.failed_this_cycle = summary.failed_this_cycle
+    print_queue_summary(final_summary)
+    write_json_state_atomic(args.state_file, state)
+    return results, processed_total
+
+
 async def async_main(args: argparse.Namespace) -> None:
+    processed_total = 0
     while True:
-        await run_once(args)
+        if args.queue_mode:
+            _results, processed_total = await run_queue_once(args, processed_total)
+        else:
+            results = await run_once(args)
+            processed_total += len([result for result in results if result.status != "skipped_existing"])
+        if args.max_total and args.max_total > 0 and processed_total >= args.max_total:
+            return
         if not args.loop:
             return
         await asyncio.sleep(args.idle_sleep)
