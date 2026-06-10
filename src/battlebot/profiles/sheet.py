@@ -47,10 +47,22 @@ def format_profile_data(profile: dict[str, Any], *, status: str, profile_path: s
     weaknesses = profile.get("weaknesses") or []
     warnings = [warning["flag"] for warning in service.profile_warning_flags(profile)] if hasattr(service, "profile_warning_flags") else []
     source_backed = any(source.get("url") or source.get("revision_id") for source in sources)
+    variant = profile.get("variant") or {}
     lines = [
         f"Name: {profile.get('name')}",
         f"Franchise: {profile.get('franchise')}",
         f"Category: {profile.get('category')}",
+    ]
+    if variant.get("variant_name"):
+        lines.extend(
+            [
+                f"Variant: {variant.get('variant_name')}",
+                f"Variant Type: {variant.get('variant_type')}",
+                f"Parent: {variant.get('parent_character_id') or 'unknown'}",
+            ]
+        )
+    lines.extend(
+        [
         f"Status: {status or profile.get('status')}",
         f"Battle Ready: {bool(profile.get('battle_eligible'))}",
         f"Source-backed: {'yes' if source_backed else 'no'}",
@@ -64,7 +76,8 @@ def format_profile_data(profile: dict[str, Any], *, status: str, profile_path: s
         f"- Stamina: {text_power(profile, 'stamina')}",
         f"- Intelligence: {text_power(profile, 'intelligence')}",
         "Top abilities:",
-    ]
+        ]
+    )
     lines.extend(item_line(item) for item in abilities[:8])
     if not abilities:
         lines.append("- none")

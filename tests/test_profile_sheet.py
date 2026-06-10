@@ -1,6 +1,6 @@
 import unittest
 
-from battlebot.profiles.sheet import profile_sheet
+from battlebot.profiles.sheet import format_profile_data, profile_sheet
 
 
 class ProfileSheetTests(unittest.IsolatedAsyncioTestCase):
@@ -24,6 +24,32 @@ class ProfileSheetTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn(" rev=", text)
         self.assertNotIn("http://", text)
         self.assertNotIn("https://", text)
+
+    def test_variant_profile_sheet_shows_parent_and_type(self):
+        text = format_profile_data(
+            {
+                "name": "Iron Man (Hulkbuster)",
+                "franchise": "Marvel",
+                "category": "comic",
+                "battle_eligible": False,
+                "sources": [],
+                "abilities": [],
+                "weaknesses": [],
+                "power_scale": {},
+                "variant": {
+                    "parent_character_id": "comic-marvel-iron-man",
+                    "variant_name": "Hulkbuster",
+                    "variant_type": "armor",
+                    "default_variant": False,
+                    "battle_notes": "",
+                },
+            },
+            status="roster_stub",
+        )
+
+        self.assertIn("Variant: Hulkbuster", text)
+        self.assertIn("Variant Type: armor", text)
+        self.assertIn("Parent: comic-marvel-iron-man", text)
 
 
 if __name__ == "__main__":

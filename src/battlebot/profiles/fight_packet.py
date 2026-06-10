@@ -72,6 +72,7 @@ def compact_profile(
         "profile_id": profile["profile_id"],
         "profile_hash": profile["profile_hash"],
         "profile_type": profile["profile_type"],
+        "variant": profile_json.get("variant") or {},
         "power_scale": {
             axis: compact_power_entry(power_scale.get(axis)) for axis in CORE_POWER_AXES
         },

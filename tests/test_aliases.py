@@ -1,6 +1,7 @@
 import unittest
 
 from battlebot.profiles.aliases import compact_alias_key, resolve_alias
+from battlebot.profiles.variants import split_variant_name, variant_metadata
 
 
 class AliasTests(unittest.TestCase):
@@ -31,6 +32,13 @@ class AliasTests(unittest.TestCase):
 
     def test_hyphen_and_space_compact_equivalent(self):
         self.assertEqual(compact_alias_key("iron-man"), compact_alias_key("iron man"))
+
+    def test_curated_variant_metadata(self):
+        parent, variant = split_variant_name("Iron Man (Hulkbuster)")
+
+        self.assertEqual(parent, "Iron Man")
+        self.assertEqual(variant, "Hulkbuster")
+        self.assertEqual(variant_metadata("Iron Man (Hulkbuster)")["variant_type"], "armor")
 
 
 if __name__ == "__main__":

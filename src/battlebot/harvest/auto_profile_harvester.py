@@ -24,6 +24,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
 
+from battlebot.profiles.variants import variant_metadata
+
 DEFAULT_MEDIAWIKI_API = "https://vsbattles.fandom.com/api.php"
 ANILIST_GRAPHQL_URL = "https://graphql.anilist.co"
 IGDB_TOKEN_URL = "https://id.twitch.tv/oauth2/token"
@@ -571,6 +573,7 @@ def build_profile(
             "standard_summons": True,
             "outside_help": False,
         },
+        "variant": variant_metadata(row.name, slugify(f"{row.category}-{row.franchise}-{row.name}")),
         "forms": build_forms(extracted),
         "sources": sources,
         "power_scale": build_power_scale(extracted, mediawiki_source_ids, confidence),

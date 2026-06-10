@@ -15,6 +15,7 @@ from battlebot.common.db import connect_database
 from battlebot.profiles.aliases import resolve_alias
 from battlebot.profiles.locate import find_db_name_matches
 from battlebot.profiles.quality import profile_key
+from battlebot.profiles.variants import variant_metadata
 from battlebot.review import service
 
 
@@ -55,6 +56,7 @@ def yaml_search_rows(query: str, root: Path, status: str, *, limit: int) -> list
                 "battle_ready": bool(data.get("battle_eligible")) and status == "generated",
                 "profile_path": str(path),
                 "reason": "" if data.get("battle_eligible") else reason_not_ready(data),
+                "variant": data.get("variant") or variant_metadata(str(data.get("name") or path.stem)),
             }
         )
         if len(rows) >= limit:
@@ -82,6 +84,7 @@ def roster_search_rows(query: str, rosters_dir: Path, *, limit: int) -> list[dic
                         "battle_ready": False,
                         "profile_path": str(csv_path),
                         "reason": "roster only",
+                        "variant": variant_metadata(str(row.get("name") or "")),
                     }
                 )
                 if len(rows) >= limit:
@@ -101,6 +104,7 @@ async def db_search_rows(connection: Any, query: str, *, limit: int) -> list[dic
             "character_id": match["character_id"],
             "profile_path": "",
             "reason": "",
+            "variant": (match.get("profile_json") or {}).get("variant") if isinstance(match.get("profile_json"), dict) else {},
         }
         for match in matches
     ]
@@ -164,9 +168,13 @@ def format_search_results(rows: list[dict[str, Any]]) -> str:
     for index, row in enumerate(rows, start=1):
         ready = "battle ready" if row.get("battle_ready") else row.get("reason") or "not battle ready"
         alias = f" alias:{row['alias_used']}->{row['alias_canonical']}" if row.get("alias_used") else ""
+        variant = row.get("variant") or {}
+        variant_text = ""
+        if variant.get("variant_name"):
+            variant_text = f" variant:{variant.get('variant_type')} parent:{variant.get('parent_character_id') or 'unknown'}"
         lines.append(
             f"{index}. {row.get('canonical_name')} - {row.get('franchise')}/{row.get('category')} - "
-            f"{row.get('status')} - {ready}{alias}"
+            f"{row.get('status')} - {ready}{alias}{variant_text}"
         )
     return "\n".join(lines)
 

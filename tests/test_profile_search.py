@@ -29,6 +29,20 @@ class ProfileSearchTests(unittest.IsolatedAsyncioTestCase):
         self.assertLessEqual(len(page_two), 5)
         self.assertTrue(rows)
 
+    async def test_search_iron_man_returns_base_and_curated_variant(self):
+        rows = await search_characters("iron man", limit=20)
+        names = {row["canonical_name"] for row in rows}
+
+        self.assertIn("Iron Man", names)
+        self.assertIn("Iron Man (Hulkbuster)", names)
+
+    async def test_exact_variant_search_resolves_variant_row(self):
+        rows = await search_characters("Iron Man (Hulkbuster)", limit=10)
+
+        self.assertTrue(rows)
+        self.assertEqual(rows[0]["canonical_name"], "Iron Man (Hulkbuster)")
+        self.assertEqual(rows[0]["variant"]["variant_name"], "Hulkbuster")
+
 
 if __name__ == "__main__":
     unittest.main()

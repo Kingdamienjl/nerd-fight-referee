@@ -45,6 +45,7 @@ def compact_evidence_packet(packet: dict[str, Any], smoke_baseline: dict[str, An
             "canonical_name": contender.get("canonical_name"),
             "franchise": contender.get("franchise"),
             "category": contender.get("category"),
+            "variant": contender.get("variant") or {},
             "power_scale": contender.get("power_scale") or {},
             "abilities": contender.get("abilities") or [],
             "equipment": contender.get("equipment") or [],

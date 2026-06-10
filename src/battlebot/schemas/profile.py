@@ -87,6 +87,7 @@ class CharacterProfile(BaseModel):
     identity: FlexibleObject
     canon_policy: FlexibleObject
     battle_policy: FlexibleObject
+    variant: FlexibleObject | None = None
     forms: list[dict[str, Any]]
     sources: list[Source]
     power_scale: PowerScale

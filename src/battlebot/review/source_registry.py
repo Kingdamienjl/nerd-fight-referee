@@ -11,6 +11,7 @@ from urllib.parse import quote, urlparse
 import yaml
 
 from battlebot.profiles.aliases import resolve_alias
+from battlebot.profiles.variants import variant_search_queries
 from battlebot.review import service
 
 
@@ -117,28 +118,24 @@ def candidate_titles_for_profile(profile: dict[str, Any]) -> list[str]:
     category = str(profile.get("category") or "")
     titles: list[str] = []
     if name:
-        titles.append(name)
+        titles.extend(variant_search_queries(name, franchise))
         alias_match = resolve_alias(name)
         if alias_match:
             titles.append(alias_match.canonical)
-        if franchise:
-            titles.append(f"{name} ({franchise})")
         if category:
             titles.append(f"{name} ({category})")
-        if category.casefold() == "comic":
+        if category.casefold() == "comic" and franchise.casefold() == "marvel":
+            titles.extend([f"{name} (Marvel Comics)", f"{name} (Earth-616)"])
+        if category.casefold() == "comic" and franchise.casefold() == "dc":
             titles.extend(
                 [
-                    f"{name} (Marvel Comics)",
                     f"{name} (DC Comics)",
                     f"{name} (Post-Crisis)",
                     f"{name} (Post-Flashpoint)",
                     f"{name} (Rebirth)",
+                    f"{name} (Prime Earth)",
                 ]
             )
-        if franchise.casefold() == "marvel":
-            titles.append(f"{name} (Marvel Comics)")
-        if franchise.casefold() == "dc":
-            titles.append(f"{name} (DC Comics)")
         if franchise.casefold() == "kingdom hearts":
             titles.append(f"{name} (Kingdom Hearts)")
         if name.casefold() in {"doom slayer", "doomguy"}:
