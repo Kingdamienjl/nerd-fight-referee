@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from battlebot.review import auto_repair, service
+from battlebot.review import auto_repair, enrich_sources, service
 
 
 DEFAULT_PROVIDERS = "vsbattles,character_stats_profiles,superherodb,kaggle_superherodb"
@@ -53,6 +53,8 @@ async def batch_promote(args: argparse.Namespace) -> BatchSummary:
     for path in paths:
         summary.scanned += 1
         try:
+            if not args.dry_run:
+                enrich_sources.enrich_path(path)
             result = await auto_repair.repair_profile(
                 path,
                 dry_run=args.dry_run,

@@ -9,6 +9,7 @@ from battlebot.bot.commands.catalog import (
     is_admin_or_dm,
 )
 from battlebot.bot.commands.fight import discord_message_from_packet, fight_response_ephemeral
+from battlebot.bot.main import EXPECTED_COMMANDS, BattleBotClient, command_names
 from battlebot.fight.smoke_judge import smoke_judge_packet
 
 
@@ -160,6 +161,14 @@ class BotFightCommandTests(unittest.IsolatedAsyncioTestCase):
 
     def test_sources_command_is_not_registered(self):
         self.assertNotIn("sources", catalog_command_names())
+
+    def test_local_command_tree_includes_expected_commands(self):
+        client = BattleBotClient()
+        names = command_names(client.tree)
+
+        for name in EXPECTED_COMMANDS:
+            self.assertIn(name, names)
+        self.assertNotIn("sources", names)
 
     def test_fight_visibility_defaults_public_with_private_override(self):
         self.assertFalse(fight_response_ephemeral())
