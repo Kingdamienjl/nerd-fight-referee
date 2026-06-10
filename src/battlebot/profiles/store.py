@@ -6,6 +6,8 @@ import json
 import re
 from typing import Any
 
+from battlebot.profiles.aliases import resolve_alias
+
 
 CORE_PROFILE_SELECT = """
 SELECT DISTINCT ON (c.id)
@@ -155,28 +157,52 @@ async def resolve_character(
     *,
     battle_eligible_only: bool = True,
 ) -> dict[str, Any]:
+    alias_override = resolve_alias(name)
+    lookup_name = alias_override.canonical if alias_override else name
     exact = await fetch_exact_canonical(
         connection,
-        name,
+        lookup_name,
         battle_eligible_only=battle_eligible_only,
     )
     if exact:
-        return resolution_from_candidates(name, exact, matched_by="canonical_exact")
+        result = resolution_from_candidates(name, exact, matched_by="alias_override" if alias_override else "canonical_exact")
+        if alias_override:
+            result["alias_match"] = {
+                "canonical": alias_override.canonical,
+                "matched_key": alias_override.matched_key,
+                "notes": alias_override.notes,
+            }
+        return result
 
     case_insensitive = await fetch_case_insensitive_canonical(
         connection,
-        name,
+        lookup_name,
         battle_eligible_only=battle_eligible_only,
     )
     if case_insensitive:
-        return resolution_from_candidates(
+        result = resolution_from_candidates(
             name,
             case_insensitive,
-            matched_by="canonical_case_insensitive",
+            matched_by="alias_override" if alias_override else "canonical_case_insensitive",
         )
+        if alias_override:
+            result["alias_match"] = {
+                "canonical": alias_override.canonical,
+                "matched_key": alias_override.matched_key,
+                "notes": alias_override.notes,
+            }
+        return result
 
     alias = await fetch_alias(connection, name, battle_eligible_only=battle_eligible_only)
     if alias:
         return resolution_from_candidates(name, alias, matched_by="alias")
 
-    return {"status": "not_found", "query": name, "candidates": []}
+    result = {"status": "not_found", "query": name, "candidates": []}
+    if alias_override:
+        result["alias_match"] = {
+            "canonical": alias_override.canonical,
+            "matched_key": alias_override.matched_key,
+            "notes": alias_override.notes,
+        }
+        result["canonical_not_battle_ready"] = True
+    return result

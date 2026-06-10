@@ -10,18 +10,40 @@ from discord import app_commands
 from battlebot.common.db import connect_database
 from battlebot.fight.smoke_judge import format_smoke_summary, smoke_judge_packet
 from battlebot.profiles.fight_packet import build_fight_packet
+from battlebot.profiles.search import format_search_results, search_characters
 
 
-def discord_message_from_packet(packet: dict[str, Any], smoke_result: dict[str, Any]) -> str:
+def fight_response_ephemeral(private: bool = False) -> bool:
+    return bool(private)
+
+
+async def discord_message_from_packet(
+    packet: dict[str, Any],
+    smoke_result: dict[str, Any],
+    *,
+    connection: Any | None = None,
+    include_diagnostics: bool = False,
+) -> str:
     if packet.get("errors"):
-        lines = [smoke_result["label"], "Resolution errors:"]
+        lines = [smoke_result["label"], "Character not battle-ready yet."]
         for error in packet["errors"]:
             lines.append(f"- {error['contender']}: {error['status']} for {error['query']!r}")
+            if error.get("alias_match"):
+                lines.append(f"  alias matched: {error['alias_match']['canonical']}")
+            if error.get("canonical_not_battle_ready"):
+                lines.append("  matched character is not battle-ready yet")
             diagnostics = error.get("diagnostics") or {}
-            for path in (diagnostics.get("generated_paths") or [])[:3]:
-                lines.append(f"  generated: {path}")
-            for path in (diagnostics.get("needs_review_paths") or [])[:3]:
-                lines.append(f"  needs_review: {path}")
+            if include_diagnostics:
+                for path in (diagnostics.get("generated_paths") or [])[:3]:
+                    lines.append(f"  generated: {path}")
+                for path in (diagnostics.get("needs_review_paths") or [])[:3]:
+                    lines.append(f"  needs_review: {path}")
+            if connection is not None:
+                suggestions = await search_characters(error["query"], connection=connection, limit=3)
+                if suggestions:
+                    lines.append("  suggestions:")
+                    lines.extend(f"    {line}" for line in format_search_results(suggestions).splitlines())
+        lines.append('Try /search query:"<name>". Admins can queue repair.')
         text = "\n".join(lines)
     else:
         text = format_smoke_summary(smoke_result)
@@ -40,8 +62,10 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
         interaction: discord.Interaction,
         contender_a: str,
         contender_b: str,
+        private: bool = False,
     ) -> None:
-        await interaction.response.defer(thinking=True)
+        ephemeral = fight_response_ephemeral(private)
+        await interaction.response.defer(thinking=True, ephemeral=ephemeral)
         async with connect_database(database_url) as connection:
             packet = await build_fight_packet(
                 connection,
@@ -49,4 +73,10 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
                 contender_b,
                 rules={"smoke": True, "llm_enabled": False},
             )
-        await interaction.followup.send(discord_message_from_packet(packet, smoke_judge_packet(packet)))
+            text = await discord_message_from_packet(
+                packet,
+                smoke_judge_packet(packet),
+                connection=connection,
+                include_diagnostics=ephemeral,
+            )
+        await interaction.followup.send(text, ephemeral=ephemeral)

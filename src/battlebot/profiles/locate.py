@@ -10,13 +10,17 @@ from pathlib import Path
 from typing import Any
 
 from battlebot.common.db import connect_database
+from battlebot.profiles.aliases import resolve_alias
 from battlebot.profiles.quality import profile_key
 
 
 def path_matches_term(path: Path, term: str) -> bool:
     needle = profile_key(term)
     haystack = profile_key(" ".join(path.with_suffix("").parts))
-    return needle in haystack or any(part in haystack for part in needle.split("-") if len(part) > 2)
+    if needle in haystack:
+        return True
+    parts = [part for part in needle.split("-") if len(part) > 2]
+    return bool(parts) and all(part in haystack for part in parts)
 
 
 def find_yaml_matches(term: str, base_dir: Path | str, *, limit: int = 12) -> list[str]:
@@ -86,20 +90,31 @@ async def locate_character(
     needs_review_dir: Path | str = "profiles/needs_review",
     rosters_dir: Path | str = "profiles/rosters",
 ) -> dict[str, Any]:
+    alias_match = resolve_alias(term)
+    canonical_term = alias_match.canonical if alias_match else term
     result: dict[str, Any] = {
         "query": term,
+        "alias_match": {
+            "canonical": alias_match.canonical,
+            "matched_key": alias_match.matched_key,
+            "notes": alias_match.notes,
+        }
+        if alias_match
+        else None,
         "db_matches": [],
-        "generated_paths": find_yaml_matches(term, generated_dir),
-        "needs_review_paths": find_yaml_matches(term, needs_review_dir),
-        "roster_rows": find_roster_matches(term, rosters_dir),
+        "generated_paths": find_yaml_matches(canonical_term, generated_dir),
+        "needs_review_paths": find_yaml_matches(canonical_term, needs_review_dir),
+        "roster_rows": find_roster_matches(canonical_term, rosters_dir),
     }
     if connection is not None:
-        result["db_matches"] = await find_db_name_matches(connection, term)
+        result["db_matches"] = await find_db_name_matches(connection, canonical_term)
     return result
 
 
 def format_locate_result(result: dict[str, Any]) -> str:
     lines = [f"Locate: {result['query']}"]
+    if result.get("alias_match"):
+        lines.append(f"Alias: {result['query']} -> {result['alias_match']['canonical']}")
     db_matches = result.get("db_matches") or []
     lines.append(f"DB matches: {len(db_matches)}")
     for match in db_matches[:8]:

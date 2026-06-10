@@ -105,6 +105,10 @@ async def resolution_error(
         error["candidates"] = resolution.get("candidates", [])
     if resolution["status"] == "not_found":
         error["diagnostics"] = await locate_character(resolution["query"], connection=connection)
+    if resolution.get("alias_match"):
+        error["alias_match"] = resolution["alias_match"]
+    if resolution.get("canonical_not_battle_ready"):
+        error["canonical_not_battle_ready"] = True
     return error
 
 

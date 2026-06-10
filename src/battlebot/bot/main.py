@@ -7,6 +7,7 @@ import os
 import discord
 from discord import app_commands
 
+from battlebot.bot.commands.catalog import register_catalog_commands
 from battlebot.bot.commands.fight import register_fight_command
 
 
@@ -18,6 +19,7 @@ class BattleBotClient(discord.Client):
         super().__init__(intents=discord.Intents.none())
         self.tree = app_commands.CommandTree(self)
         register_fight_command(self.tree, database_url=os.getenv("DATABASE_URL"))
+        register_catalog_commands(self.tree, database_url=os.getenv("DATABASE_URL"))
 
     async def setup_hook(self) -> None:
         guild_sync_id = os.getenv("DISCORD_GUILD_SYNC_ID")
