@@ -38,7 +38,8 @@ class SmokeJudgeTests(unittest.TestCase):
 
         self.assertEqual(result["winner"], "Sephiroth")
         self.assertEqual(result["confidence"], "low_to_medium")
-        self.assertTrue(any("Sephiroth leads" in factor for factor in result["deciding_factors"]))
+        self.assertTrue(any("Sephiroth leads" in factor["evidence"] for factor in result["deciding_factors"]))
+        self.assertTrue(all("tactical_effect" in factor for factor in result["deciding_factors"]))
 
     def test_batman_vs_superman_style_clean_sweep_returns_strong(self):
         packet = {

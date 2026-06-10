@@ -10,6 +10,7 @@ from urllib.parse import quote, urlparse
 
 import yaml
 
+from battlebot.profiles.aliases import resolve_alias
 from battlebot.review import service
 
 
@@ -117,10 +118,31 @@ def candidate_titles_for_profile(profile: dict[str, Any]) -> list[str]:
     titles: list[str] = []
     if name:
         titles.append(name)
+        alias_match = resolve_alias(name)
+        if alias_match:
+            titles.append(alias_match.canonical)
         if franchise:
             titles.append(f"{name} ({franchise})")
         if category:
             titles.append(f"{name} ({category})")
+        if category.casefold() == "comic":
+            titles.extend(
+                [
+                    f"{name} (Marvel Comics)",
+                    f"{name} (DC Comics)",
+                    f"{name} (Post-Crisis)",
+                    f"{name} (Post-Flashpoint)",
+                    f"{name} (Rebirth)",
+                ]
+            )
+        if franchise.casefold() == "marvel":
+            titles.append(f"{name} (Marvel Comics)")
+        if franchise.casefold() == "dc":
+            titles.append(f"{name} (DC Comics)")
+        if franchise.casefold() == "kingdom hearts":
+            titles.append(f"{name} (Kingdom Hearts)")
+        if name.casefold() in {"doom slayer", "doomguy"}:
+            titles.extend(["Doom Slayer", "Doomguy"])
     seen = set()
     unique = []
     for title in titles:

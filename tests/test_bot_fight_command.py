@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from battlebot.bot.commands.catalog import (
     catalog_command_names,
@@ -12,7 +13,7 @@ from battlebot.fight.smoke_judge import smoke_judge_packet
 
 
 class BotFightCommandTests(unittest.IsolatedAsyncioTestCase):
-    async def test_fight_message_uses_smoke_judge_label(self):
+    async def test_fight_message_uses_referee_decision_label(self):
         packet = {
             "errors": [],
             "contender_a": {
@@ -38,8 +39,55 @@ class BotFightCommandTests(unittest.IsolatedAsyncioTestCase):
 
         message = await discord_message_from_packet(packet, smoke_judge_packet(packet))
 
-        self.assertIn("Smoke Test Decision", message)
+        self.assertIn("Nerd Fight Referee Decision", message)
+        self.assertNotIn("pre-LLM", message)
         self.assertIn("winner: Superman", message)
+
+    async def test_fight_output_uses_llm_decision_title_when_enabled(self):
+        packet = {
+            "errors": [],
+            "contender_a": {
+                "canonical_name": "Batman",
+                "character_id": "batman",
+                "power_scale": {"attack_potency": "Building level", "speed": "Peak Human", "durability": "Building level"},
+            },
+            "contender_b": {
+                "canonical_name": "Superman",
+                "character_id": "superman",
+                "power_scale": {
+                    "attack_potency": "Solar System level",
+                    "speed": "Massively FTL+",
+                    "durability": "Solar System level",
+                },
+            },
+            "warnings": [],
+        }
+
+        async def fake_judge(packet_arg, smoke_arg):
+            return {
+                "title": "Nerd Fight Referee Decision",
+                "winner": "Superman",
+                "confidence": "strong",
+                "summary": "Superman wins from packet-backed advantages.",
+                "win_condition": "Speed and power decide the exchange.",
+                "loser_best_path": "Batman needs listed counterplay.",
+                "deciding_factors": [
+                    {
+                        "factor": "Initiative",
+                        "evidence": "Superman leads speed.",
+                        "tactical_effect": "He acts first and controls spacing.",
+                    }
+                ],
+                "warnings": [],
+                "judge_notes": [],
+            }
+
+        with patch("battlebot.bot.commands.fight.judge_fight_packet", fake_judge):
+            message = await discord_message_from_packet(packet, smoke_judge_packet(packet))
+
+        self.assertIn("Nerd Fight Referee Decision", message)
+        self.assertNotIn("pre-LLM", message)
+        self.assertIn("He acts first and controls spacing.", message)
 
     async def test_public_fight_not_found_hides_file_paths_and_includes_suggestions(self):
         packet = {

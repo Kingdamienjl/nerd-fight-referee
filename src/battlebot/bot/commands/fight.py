@@ -8,7 +8,9 @@ import discord
 from discord import app_commands
 
 from battlebot.common.db import connect_database
-from battlebot.fight.smoke_judge import format_smoke_summary, smoke_judge_packet
+from battlebot.fight.decision_formatter import format_decision
+from battlebot.fight.llm_judge import judge_fight_packet
+from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.profiles.fight_packet import build_fight_packet
 from battlebot.profiles.search import format_search_results, search_characters
 
@@ -46,7 +48,8 @@ async def discord_message_from_packet(
         lines.append('Try /search query:"<name>". Admins can queue repair.')
         text = "\n".join(lines)
     else:
-        text = format_smoke_summary(smoke_result)
+        decision = await judge_fight_packet(packet, smoke_result)
+        text = format_decision(decision)
     if len(text) <= 1900:
         return text
     return f"{text[:1897]}..."

@@ -13,6 +13,128 @@ from battlebot.harvest.auto_profile_harvester import (
 )
 
 
+CORE_FIELDS = ("attack_potency", "speed", "durability")
+
+
+def core_count(fields: dict[str, str]) -> int:
+    return len([key for key in CORE_FIELDS if fields.get(key)])
+
+
+async def fetch_title_fields(
+    session: Any,
+    api_url: str,
+    title: str,
+    source: dict[str, Any],
+    parse_content,
+) -> tuple[dict[str, str], dict[str, Any]]:
+    query_params = {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "prop": "revisions|info",
+        "inprop": "url",
+        "rvprop": "ids|timestamp|content",
+        "rvslots": "main",
+        "titles": title,
+        "redirects": "1",
+    }
+    async with session.get(api_url, params=query_params) as response:
+        query_status = response.status
+        body = await response.json(content_type=None)
+    pages = body.get("query", {}).get("pages", [])
+    if not pages:
+        return {}, {
+            "note": "not_found",
+            "fetch_status": "not_found",
+            "http_status": query_status,
+            "content_kind": "api_json",
+            "content_length": len(str(body)),
+        }
+    page = pages[0]
+    if page.get("missing"):
+        return {}, {
+            "title": page.get("title") or title,
+            "note": "not_found",
+            "fetch_status": "not_found",
+            "http_status": query_status,
+            "content_kind": "api_json",
+            "content_length": len(str(body)),
+        }
+    revision = (page.get("revisions") or [{}])[0]
+    content = revision_content(revision)
+    fields = parse_content(content)
+    parse_body: dict[str, Any] = {}
+    parse_status = None
+    if core_count(fields) < 3:
+        parse_params = {
+            "action": "parse",
+            "page": page.get("title") or title,
+            "prop": "text|sections|wikitext",
+            "format": "json",
+            "formatversion": "2",
+        }
+        async with session.get(api_url, params=parse_params) as parse_response:
+            parse_status = parse_response.status
+            parse_body = await parse_response.json(content_type=None)
+        rendered = rendered_text_from_parse(parse_body)
+        wikitext = (((parse_body.get("parse") or {}).get("wikitext") or {}).get("*") or "")
+        fields = merge_extracted_fields(fields, parse_content(rendered))
+        fields = merge_extracted_fields(fields, parse_content(str(wikitext)))
+    metadata = {
+        "title": page.get("title") or title,
+        "url": page.get("fullurl") or source.get("url") or "",
+        "revision_id": str(revision.get("revid") or source.get("revision_id") or ""),
+        "revision_timestamp": revision.get("timestamp"),
+        "source_type": "mediawiki",
+        "note": "ok" if fields else "parser_empty",
+        "fetch_status": "fetched",
+        "http_status": parse_status or query_status,
+        "content_length": len(content) + len(str(parse_body)),
+        "content_kind": "api_json",
+        "raw_content": content,
+    }
+    if fields and core_count(fields) < 3:
+        metadata["note"] = "fetched_no_core_fields"
+    return fields, metadata
+
+
+async def search_titles(session: Any, api_url: str, query: str, limit: int = 5) -> list[str]:
+    titles: list[str] = []
+    opensearch_params = {
+        "action": "opensearch",
+        "search": query,
+        "limit": limit,
+        "format": "json",
+    }
+    async with session.get(api_url, params=opensearch_params) as response:
+        if response.status == 200:
+            body = await response.json(content_type=None)
+            if isinstance(body, list) and len(body) > 1 and isinstance(body[1], list):
+                titles.extend(str(title) for title in body[1])
+    query_params = {
+        "action": "query",
+        "list": "search",
+        "srsearch": query,
+        "srlimit": limit,
+        "format": "json",
+        "formatversion": "2",
+    }
+    async with session.get(api_url, params=query_params) as response:
+        if response.status == 200:
+            body = await response.json(content_type=None)
+            for row in (body.get("query") or {}).get("search") or []:
+                if row.get("title"):
+                    titles.append(str(row["title"]))
+    seen = set()
+    unique = []
+    for title in titles:
+        key = title.casefold()
+        if key not in seen:
+            seen.add(key)
+            unique.append(title)
+    return unique
+
+
 async def fetch_mediawiki_fields(source: dict[str, Any], parse_content) -> tuple[dict[str, str], dict[str, Any]]:
     url = str(source.get("url") or "")
     if not url:
@@ -25,62 +147,33 @@ async def fetch_mediawiki_fields(source: dict[str, Any], parse_content) -> tuple
     import aiohttp
 
     timeout = aiohttp.ClientTimeout(total=10, connect=3, sock_connect=3, sock_read=6)
-    query_params = {
-        "action": "query",
-        "format": "json",
-        "formatversion": "2",
-        "prop": "revisions|info",
-        "inprop": "url",
-        "rvprop": "ids|timestamp|content",
-        "rvslots": "main",
-        "titles": title,
-        "redirects": "1",
-    }
     async with aiohttp.ClientSession(timeout=timeout, headers={"User-Agent": "battlebot-review-repair/0.1"}) as session:
-        async with session.get(api_url, params=query_params) as response:
-            query_status = response.status
-            body = await response.json(content_type=None)
-        pages = body.get("query", {}).get("pages", [])
-        if not pages:
-            return {}, {
-                "note": "mediawiki_no_pages",
-                "fetch_status": "fetched",
-                "http_status": query_status,
-                "content_kind": "api_json",
-                "content_length": len(str(body)),
-            }
-        page = pages[0]
-        revision = (page.get("revisions") or [{}])[0]
-        content = revision_content(revision)
-        fields = parse_content(content)
-        parse_body: dict[str, Any] = {}
-        parse_status = None
-        if len([key for key in ("attack_potency", "speed", "durability") if fields.get(key)]) < 3:
-            parse_params = {
-                "action": "parse",
-                "page": page.get("title") or title,
-                "prop": "text|sections|wikitext",
-                "format": "json",
-                "formatversion": "2",
-            }
-            async with session.get(api_url, params=parse_params) as parse_response:
-                parse_status = parse_response.status
-                parse_body = await parse_response.json(content_type=None)
-            rendered = rendered_text_from_parse(parse_body)
-            wikitext = (((parse_body.get("parse") or {}).get("wikitext") or {}).get("*") or "")
-            fields = merge_extracted_fields(fields, parse_content(rendered))
-            fields = merge_extracted_fields(fields, parse_content(str(wikitext)))
-        metadata = {
-            "title": page.get("title") or title,
-            "url": page.get("fullurl") or url,
-            "revision_id": str(revision.get("revid") or source.get("revision_id") or ""),
-            "revision_timestamp": revision.get("timestamp"),
-            "source_type": "mediawiki",
-            "note": "ok" if fields else "fetched_but_no_fields",
-            "fetch_status": "fetched",
-            "http_status": parse_status or query_status,
-            "content_length": len(content) + len(str(parse_body)),
-            "content_kind": "api_json",
-            "raw_content": content,
-        }
+        fields, metadata = await fetch_title_fields(session, api_url, str(title), source, parse_content)
+        if core_count(fields) >= 3 or fields.get("powers_and_abilities"):
+            return fields, metadata
+        attempted = [str(metadata.get("title") or title)]
+        search_queries = [
+            str(source.get("title") or title),
+            str(source.get("notes") or ""),
+        ]
+        for query in [item for item in search_queries if item.strip()]:
+            for candidate_title in await search_titles(session, api_url, query):
+                if candidate_title in attempted:
+                    continue
+                attempted.append(candidate_title)
+                candidate_fields, candidate_metadata = await fetch_title_fields(
+                    session,
+                    api_url,
+                    candidate_title,
+                    source,
+                    parse_content,
+                )
+                candidate_metadata["search_attempted_titles"] = attempted
+                if core_count(candidate_fields) >= 3 or candidate_fields.get("powers_and_abilities"):
+                    candidate_metadata["note"] = "ok_search_fallback"
+                    return candidate_fields, candidate_metadata
+        metadata["search_attempted_titles"] = attempted
+        metadata["note"] = metadata.get("note") or "ambiguous_candidates"
+        if len(attempted) > 1 and not fields:
+            metadata["note"] = "ambiguous_candidates"
         return fields, metadata

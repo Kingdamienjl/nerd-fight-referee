@@ -20,6 +20,7 @@ from battlebot.harvest.auto_profile_harvester import (
     list_items_from_text,
     title_from_wiki_url,
 )
+from battlebot.profiles.aliases import resolve_alias
 from battlebot.review.providers import comicvine, kaggle_superherodb, mediawiki, powerlisting
 from battlebot.review import service, source_registry
 
@@ -217,10 +218,19 @@ def profile_source_candidates(
     franchise = str(profile.get("franchise") or "")
     if name:
         titles = [name]
+        alias_match = resolve_alias(name)
+        if alias_match:
+            titles.append(alias_match.canonical)
         if franchise:
             titles.append(f"{name} ({franchise})")
         if profile.get("category"):
             titles.append(f"{name} ({profile['category']})")
+        if str(profile.get("category") or "").casefold() == "comic":
+            titles.extend([f"{name} (Marvel Comics)", f"{name} (DC Comics)"])
+        if franchise.casefold() == "kingdom hearts":
+            titles.append(f"{name} (Kingdom Hearts)")
+        if name.casefold() in {"doom slayer", "doomguy"}:
+            titles.extend(["Doom Slayer", "Doomguy"])
         if str(profile.get("category") or "").casefold() == "comic":
             titles.extend(f"{name} {suffix}" for suffix in COMIC_VARIANT_SUFFIXES)
         for title in titles:
