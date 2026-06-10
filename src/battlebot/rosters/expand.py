@@ -7,6 +7,8 @@ import csv
 from dataclasses import dataclass
 from pathlib import Path
 
+from battlebot.profiles.variants import CURATED_VARIANTS
+
 
 ROSTER_HEADER = ["category", "franchise", "name", "aliases", "wiki_title", "wiki_url"]
 DEFAULT_ROSTER_DIR = Path("profiles/rosters")
@@ -15,6 +17,7 @@ OUTPUT_FILES = {
     "game": "backfill_roster_004_games.csv",
     "anime": "backfill_roster_005_anime.csv",
     "mixed": "backfill_roster_006_mixed.csv",
+    "variants": "backfill_roster_007_variants.csv",
 }
 
 
@@ -194,19 +197,10 @@ Michelangelo, He-Man, Skeletor, She-Ra, Spawn, Invincible, Goku, Naruto Uzumaki
 """,
 }
 
-VARIANT_SUFFIXES = (
-    "",
-    " (Classic)",
-    " (Modern)",
-    " (Composite)",
-    " (Post-Crisis)",
-    " (Post-Flashpoint)",
-    " (Rebirth)",
-    " (Marvel Comics)",
-    " (DC Comics)",
-    " (Game)",
-    " (Anime)",
-)
+MARVEL_VARIANTS = ("", " (Marvel Comics)", " (Earth-616)", " (Marvel Cinematic Universe)")
+DC_VARIANTS = ("", " (DC Comics)", " (Post-Crisis)", " (Post-Flashpoint)", " (Rebirth)", " (Prime Earth)")
+IMAGE_VARIANTS = ("", " (Image Comics)")
+MIXED_VARIANTS = ("",)
 
 
 def parse_seed_entry(entry: str) -> tuple[str, str]:
@@ -216,6 +210,26 @@ def parse_seed_entry(entry: str) -> tuple[str, str]:
     return parts[0], "|".join(parts[1:])
 
 
+def title_variants(category: str, franchise: str) -> tuple[str, ...]:
+    normalized_category = category.casefold()
+    normalized_franchise = franchise.casefold()
+    if normalized_category == "comic":
+        if normalized_franchise == "marvel":
+            return MARVEL_VARIANTS
+        if normalized_franchise == "dc":
+            return DC_VARIANTS
+        if normalized_franchise == "image comics":
+            return IMAGE_VARIANTS
+        return ("", f" ({franchise})")
+    if normalized_category == "anime":
+        return ("", f" ({franchise})")
+    if normalized_category == "game":
+        if normalized_franchise in {"marvel", "dc"}:
+            return ("", f" ({franchise})", " (Game)")
+        return ("", f" ({franchise})", " (Game)")
+    return MIXED_VARIANTS
+
+
 def seed_rows() -> list[RosterRow]:
     rows = []
     for (category, franchise), raw_names in SEEDS.items():
@@ -223,12 +237,26 @@ def seed_rows() -> list[RosterRow]:
             name, aliases = parse_seed_entry(raw_entry)
             if not name:
                 continue
-            rows.append(RosterRow(category, franchise, name, aliases, name))
-            for suffix in VARIANT_SUFFIXES[1:]:
-                if suffix in name:
+            for suffix in title_variants(category, franchise):
+                if suffix and suffix in name:
                     continue
-                rows.append(RosterRow(category, franchise, f"{name}{suffix}", aliases, f"{name}{suffix}"))
+                title = f"{name}{suffix}"
+                rows.append(RosterRow(category, franchise, title, aliases, title))
     return rows
+
+
+def variant_rows() -> list[RosterRow]:
+    return [
+        RosterRow(
+            seed.category,
+            seed.franchise,
+            seed.name,
+            seed.aliases,
+            seed.name,
+            "",
+        )
+        for seed in CURATED_VARIANTS
+    ]
 
 
 def read_roster_rows(roster_dir: Path, *, include_generated_outputs: bool = True) -> list[RosterRow]:
@@ -280,6 +308,12 @@ def expand_rosters(roster_dir: Path, target_total: int) -> dict[str, int]:
                 continue
             buckets[key].append(candidates[key].pop(0))
             total += 1
+    for row in variant_rows():
+        buckets["variants"].append(row)
+        if row.key() in used:
+            continue
+        used.add(row.key())
+        total += 1
 
     counts = {}
     for key, filename in OUTPUT_FILES.items():

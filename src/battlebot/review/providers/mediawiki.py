@@ -148,16 +148,18 @@ async def fetch_mediawiki_fields(source: dict[str, Any], parse_content) -> tuple
 
     timeout = aiohttp.ClientTimeout(total=10, connect=3, sock_connect=3, sock_read=6)
     async with aiohttp.ClientSession(timeout=timeout, headers={"User-Agent": "battlebot-review-repair/0.1"}) as session:
-        fields, metadata = await fetch_title_fields(session, api_url, str(title), source, parse_content)
-        if core_count(fields) >= 3 or fields.get("powers_and_abilities"):
-            return fields, metadata
-        attempted = [str(metadata.get("title") or title)]
+        attempted: list[str] = []
+        best_fields: dict[str, str] = {}
+        best_metadata: dict[str, Any] = {}
         search_queries = [
             str(source.get("title") or title),
+            str(source.get("search_query") or ""),
             str(source.get("notes") or ""),
         ]
+        search_found_results = False
         for query in [item for item in search_queries if item.strip()]:
             for candidate_title in await search_titles(session, api_url, query):
+                search_found_results = True
                 if candidate_title in attempted:
                     continue
                 attempted.append(candidate_title)
@@ -170,10 +172,26 @@ async def fetch_mediawiki_fields(source: dict[str, Any], parse_content) -> tuple
                 )
                 candidate_metadata["search_attempted_titles"] = attempted
                 if core_count(candidate_fields) >= 3 or candidate_fields.get("powers_and_abilities"):
-                    candidate_metadata["note"] = "ok_search_fallback"
+                    candidate_metadata["note"] = "extracted_core_fields"
                     return candidate_fields, candidate_metadata
-        metadata["search_attempted_titles"] = attempted
-        metadata["note"] = metadata.get("note") or "ambiguous_candidates"
-        if len(attempted) > 1 and not fields:
-            metadata["note"] = "ambiguous_candidates"
-        return fields, metadata
+                if len(candidate_fields) > len(best_fields):
+                    best_fields = candidate_fields
+                    best_metadata = candidate_metadata
+        if str(title) not in attempted:
+            attempted.append(str(title))
+            direct_fields, direct_metadata = await fetch_title_fields(session, api_url, str(title), source, parse_content)
+            direct_metadata["search_attempted_titles"] = attempted
+            if core_count(direct_fields) >= 3 or direct_fields.get("powers_and_abilities"):
+                direct_metadata["note"] = "extracted_core_fields"
+                return direct_fields, direct_metadata
+            if len(direct_fields) > len(best_fields):
+                best_fields = direct_fields
+                best_metadata = direct_metadata
+        best_metadata.setdefault("search_attempted_titles", attempted)
+        if not search_found_results:
+            best_metadata["note"] = "provider_search_no_results"
+        elif best_fields:
+            best_metadata["note"] = "fetched_no_core_fields"
+        else:
+            best_metadata["note"] = "ambiguous_candidates" if len(attempted) > 1 else "parser_empty"
+        return best_fields, best_metadata

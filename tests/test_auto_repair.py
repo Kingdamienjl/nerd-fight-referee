@@ -47,6 +47,15 @@ def profile_data(*, missing_core=True):
     }
 
 
+def character_profile(name: str, franchise: str, category: str) -> dict:
+    data = profile_data(missing_core=True)
+    data["name"] = name
+    data["franchise"] = franchise
+    data["category"] = category
+    data["sources"] = []
+    return data
+
+
 def write_profile(path: Path, data: dict):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
@@ -243,6 +252,7 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(report["source_attempts"][0]["extraction_failure_reason"], "fetched_but_no_fields")
         self.assertEqual(report["source_attempts"][0]["content_kind"], "html")
+        self.assertGreaterEqual(report["failure_reasons"]["fetched_but_no_fields"], 1)
 
     def test_mediawiki_api_parse_fixture_extracts_core_fields(self):
         body = json.loads(PARSE_FIXTURE.read_text(encoding="utf-8"))
@@ -262,6 +272,84 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
             auto_repair.mediawiki_search_titles_from_body(body),
             ["Superman", "Superman (Post-Crisis)", "Superman (Post-Flashpoint)"],
         )
+
+    def test_search_candidate_prefers_iron_man_marvel_over_dc(self):
+        providers = auto_repair.source_registry.enabled_providers(["vsbattles"])
+        provider = providers["vsbattles"]
+        profile = character_profile("Iron Man", "Marvel", "comic")
+
+        candidates = auto_repair.mediawiki_search_candidates(
+            profile,
+            provider,
+            ["Iron Man (DC Comics)", "Iron Man (Marvel Comics)", "Iron Man"],
+            query="Iron Man Marvel",
+        )
+
+        self.assertEqual(candidates[0]["title"], "Iron Man (Marvel Comics)")
+        self.assertFalse(any(candidate["title"] == "Iron Man (DC Comics)" for candidate in candidates))
+
+    def test_search_candidate_rejects_cloud_strife_marvel(self):
+        providers = auto_repair.source_registry.enabled_providers(["vsbattles"])
+        provider = providers["vsbattles"]
+        profile = character_profile("Cloud Strife", "Final Fantasy", "game")
+
+        candidates = auto_repair.mediawiki_search_candidates(
+            profile,
+            provider,
+            ["Cloud Strife (Marvel Comics)"],
+            query="Cloud Strife Final Fantasy",
+        )
+
+        self.assertEqual(candidates, [])
+
+    def test_variant_source_queries_include_parent_and_keyword(self):
+        profile = character_profile("Iron Man (Hulkbuster)", "Marvel", "comic")
+
+        queries = auto_repair.source_search_queries(profile, Path("missing"))
+
+        self.assertIn("Iron Man (Hulkbuster)", queries)
+        self.assertIn("Iron Man Hulkbuster", queries)
+        self.assertIn("Iron Man Hulkbuster Marvel", queries)
+
+    def test_fake_cross_franchise_variant_remains_rejected(self):
+        profile = character_profile("Iron Man", "Marvel", "comic")
+        source = {"title": "Iron Man (DC Comics)", "extracted_fields": ["attack_potency"]}
+
+        self.assertFalse(auto_repair.valid_source_candidate(profile, source))
+        self.assertEqual(source["rejection_reason"], "wrong_franchise")
+
+    def test_search_candidate_accepts_cloud_strife_final_fantasy(self):
+        providers = auto_repair.source_registry.enabled_providers(["vsbattles"])
+        provider = providers["vsbattles"]
+        profile = character_profile("Cloud Strife", "Final Fantasy", "game")
+
+        candidates = auto_repair.mediawiki_search_candidates(
+            profile,
+            provider,
+            ["Cloud Strife", "Cloud Strife (Final Fantasy)"],
+            query="Cloud Strife Final Fantasy",
+        )
+
+        self.assertEqual(candidates[0]["title"], "Cloud Strife (Final Fantasy)")
+
+    def test_candidates_with_core_fields_rank_above_no_core_candidates(self):
+        profile = character_profile("Iron Man", "Marvel", "comic")
+        core = {
+            "title": "Iron Man (Marvel Comics)",
+            "authority": "high",
+            "extracted_fields": ["attack_potency", "speed", "durability", "powers_and_abilities"],
+        }
+        no_core = {
+            "title": "Iron Man",
+            "authority": "high",
+            "extracted_fields": [],
+        }
+
+        self.assertGreater(
+            auto_repair.rank_source_candidate(profile, core),
+            auto_repair.rank_source_candidate(profile, no_core),
+        )
+        self.assertFalse(auto_repair.valid_source_candidate(profile, no_core))
 
     def test_source_candidate_overrides_prioritize_batman_variants(self):
         candidates = auto_repair.profile_source_candidates(profile_data(missing_core=True), Path("missing"))

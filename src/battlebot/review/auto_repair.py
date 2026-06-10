@@ -7,6 +7,7 @@ import asyncio
 import csv
 import json
 import re
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -18,9 +19,11 @@ from battlebot.harvest.auto_profile_harvester import (
     FIELD_ALIASES,
     extract_vsbattles_fields,
     list_items_from_text,
+    rendered_text_from_parse as _rendered_text_from_parse,
     title_from_wiki_url,
 )
 from battlebot.profiles.aliases import resolve_alias
+from battlebot.profiles.variants import variant_search_queries
 from battlebot.review.providers import comicvine, kaggle_superherodb, mediawiki, powerlisting
 from battlebot.review import service, source_registry
 
@@ -152,6 +155,10 @@ def detected_stat_labels(content: str) -> list[str]:
     return sorted(labels)
 
 
+def rendered_text_from_parse(body: dict[str, Any]) -> str:
+    return _rendered_text_from_parse(body)
+
+
 def source_id_for(source: dict[str, Any], fallback: str) -> str:
     source_id = source.get("id")
     if source_id:
@@ -170,6 +177,8 @@ def candidate_row_from_source(source: dict[str, Any], fallback: str) -> dict[str
         "authority": source.get("authority") or "",
         "promotion_allowed": bool(source.get("promotion_allowed", False)),
         "allowed_fields": source.get("allowed_fields") or [],
+        "rejection_reason": source.get("rejection_reason") or "",
+        "search_query": source.get("search_query") or "",
     }
 
 
@@ -184,7 +193,118 @@ def candidate_row_from_attempt(attempt: SourceAttempt) -> dict[str, Any]:
         "authority": attempt.authority,
         "promotion_allowed": attempt.promotion_allowed,
         "allowed_fields": attempt.allowed_fields,
+        "rejection_reason": attempt.extraction_failure_reason,
     }
+
+
+def roster_titles_for_profile(profile: dict[str, Any], roster_dir: Path) -> list[str]:
+    return [
+        str(row.get("wiki_title") or "")
+        for row in roster_source_rows(profile, roster_dir)
+        if str(row.get("wiki_title") or "").strip()
+    ]
+
+
+def source_search_queries(profile: dict[str, Any], roster_dir: Path) -> list[str]:
+    name = str(profile.get("name") or "")
+    franchise = str(profile.get("franchise") or "")
+    aliases = []
+    alias_match = resolve_alias(name)
+    if alias_match:
+        aliases.append(alias_match.canonical)
+    queries = variant_search_queries(name, franchise, aliases)
+    queries.extend(roster_titles_for_profile(profile, roster_dir))
+    seen = set()
+    unique = []
+    for query in queries:
+        cleaned = query.strip()
+        key = cleaned.casefold()
+        if cleaned and key not in seen:
+            seen.add(key)
+            unique.append(cleaned)
+    return unique
+
+
+def title_wrong_for_profile(profile: dict[str, Any], title: str) -> str:
+    lowered = title.casefold()
+    franchise = str(profile.get("franchise") or "").casefold()
+    category = str(profile.get("category") or "").casefold()
+    if franchise == "marvel" and any(marker in lowered for marker in ("dc comics", "post-crisis", "post-flashpoint", "prime earth", "rebirth", "anime")):
+        return "wrong_franchise"
+    if franchise == "dc" and any(marker in lowered for marker in ("marvel comics", "earth-616", "marvel cinematic universe", "anime")):
+        return "wrong_franchise"
+    if category == "anime" and any(marker in lowered for marker in ("marvel comics", "dc comics", "post-crisis", "post-flashpoint", "prime earth", "rebirth")):
+        return "wrong_category"
+    if category == "game" and franchise not in {"marvel", "dc"} and any(marker in lowered for marker in ("marvel comics", "dc comics", "post-crisis", "post-flashpoint", "prime earth", "rebirth")):
+        return "wrong_franchise"
+    return ""
+
+
+def rank_source_candidate(profile: dict[str, Any], source: dict[str, Any]) -> int:
+    title = str(source.get("title") or "").casefold()
+    name = str(profile.get("name") or "").casefold()
+    franchise = str(profile.get("franchise") or "").casefold()
+    score = 0
+    if title == name:
+        score += 40
+    elif name and name in title:
+        score += 25
+    if franchise and franchise in title:
+        score += 25
+    if franchise == "marvel" and any(marker in title for marker in ("marvel comics", "earth-616")):
+        score += 25
+    if franchise == "dc" and any(marker in title for marker in ("dc comics", "post-crisis", "post-flashpoint", "prime earth", "rebirth")):
+        score += 25
+    if source.get("revision_id"):
+        score += 55
+    if source.get("authority") == "high":
+        score += 20
+    if source.get("notes") == "override_preferred_title":
+        score += 40
+    extracted = set(source.get("extracted_fields") or [])
+    for field_name in ("attack_potency", "speed", "durability"):
+        if field_name in extracted:
+            score += 15
+    if "powers_and_abilities" in extracted or "abilities" in extracted:
+        score += 15
+    if title_wrong_for_profile(profile, str(source.get("title") or "")):
+        score -= 100
+    if any(word in title for word in ("disambiguation", "category:", "list of")):
+        score -= 60
+    return score
+
+
+def valid_source_candidate(profile: dict[str, Any], source: dict[str, Any]) -> bool:
+    reason = title_wrong_for_profile(profile, str(source.get("title") or ""))
+    if reason:
+        source["rejection_reason"] = reason
+        return False
+    extracted = set(source.get("extracted_fields") or [])
+    if "extracted_fields" in source and not {"attack_potency", "speed", "durability", "powers_and_abilities", "abilities"}.intersection(extracted):
+        source["rejection_reason"] = "fetched_no_core_fields"
+        return False
+    return True
+
+
+def mediawiki_search_candidates(
+    profile: dict[str, Any],
+    provider: source_registry.SourceProvider,
+    titles: list[str],
+    *,
+    query: str,
+) -> list[dict[str, Any]]:
+    candidates = []
+    for title in titles:
+        candidate = source_registry.mediawiki_candidate_for_provider(
+            provider,
+            title,
+            notes="provider_search_candidate",
+        )
+        candidate["search_query"] = query
+        candidate["rank"] = rank_source_candidate(profile, candidate)
+        if valid_source_candidate(profile, candidate):
+            candidates.append(candidate)
+    return sorted(candidates, key=lambda item: item.get("rank") or 0, reverse=True)
 
 
 def profile_source_candidates(
@@ -195,9 +315,20 @@ def profile_source_candidates(
     providers = source_registry.enabled_providers(provider_ids)
     sources = [annotate_source_with_provider(dict(source), providers) for source in profile.get("sources") or []]
     existing_urls = {source.get("url") for source in sources if source.get("url")}
+    vsbattles_enabled = "vsbattles" in providers
+    for provider in providers.values():
+        if provider.provider_id in {"vsbattles", "character_stats_profiles"} and provider.primary_domain:
+            for query in source_search_queries(profile, roster_dir):
+                for candidate in mediawiki_search_candidates(profile, provider, [query], query=query):
+                    if candidate["url"] not in existing_urls:
+                        sources.append(candidate)
+                        existing_urls.add(candidate["url"])
     for title in preferred_titles_for_profile(profile):
+        if not vsbattles_enabled:
+            break
         candidate = mediawiki_candidate(profile, title, "override_preferred_title", providers=providers)
-        if candidate["url"] not in existing_urls:
+        candidate["rank"] = rank_source_candidate(profile, candidate)
+        if valid_source_candidate(profile, candidate) and candidate["url"] not in existing_urls:
             sources.append(candidate)
             existing_urls.add(candidate["url"])
     for row in roster_source_rows(profile, roster_dir):
@@ -225,19 +356,25 @@ def profile_source_candidates(
             titles.append(f"{name} ({franchise})")
         if profile.get("category"):
             titles.append(f"{name} ({profile['category']})")
-        if str(profile.get("category") or "").casefold() == "comic":
-            titles.extend([f"{name} (Marvel Comics)", f"{name} (DC Comics)"])
+        category = str(profile.get("category") or "").casefold()
+        normalized_franchise = franchise.casefold()
+        if category == "comic" and normalized_franchise == "marvel":
+            titles.extend([f"{name} (Marvel Comics)", f"{name} (Earth-616)"])
+        if category == "comic" and normalized_franchise == "dc":
+            titles.extend([f"{name} (DC Comics)", f"{name} (Prime Earth)"])
         if franchise.casefold() == "kingdom hearts":
             titles.append(f"{name} (Kingdom Hearts)")
         if name.casefold() in {"doom slayer", "doomguy"}:
             titles.extend(["Doom Slayer", "Doomguy"])
-        if str(profile.get("category") or "").casefold() == "comic":
+        if category == "comic" and normalized_franchise == "dc":
             titles.extend(f"{name} {suffix}" for suffix in COMIC_VARIANT_SUFFIXES)
-        for title in titles:
-            candidate = mediawiki_candidate(profile, title, "fallback_title_variant", providers=providers)
-            if candidate["url"] not in existing_urls:
-                sources.append(candidate)
-                existing_urls.add(candidate["url"])
+        if vsbattles_enabled:
+            for title in titles:
+                candidate = mediawiki_candidate(profile, title, "fallback_title_variant", providers=providers)
+                candidate["rank"] = rank_source_candidate(profile, candidate)
+                if valid_source_candidate(profile, candidate) and candidate["url"] not in existing_urls:
+                    sources.append(candidate)
+                    existing_urls.add(candidate["url"])
         if franchise:
             fandom_host = f"{service.slugify(franchise)}.fandom.com"
             fandom_url = f"https://{fandom_host}/wiki/{quote(name.replace(' ', '_'))}"
@@ -252,10 +389,11 @@ def profile_source_candidates(
                     }
                 )
     for candidate in source_registry.provider_candidates(profile, providers):
-        if candidate["url"] not in existing_urls:
+        candidate["rank"] = rank_source_candidate(profile, candidate)
+        if valid_source_candidate(profile, candidate) and candidate["url"] not in existing_urls:
             sources.append(candidate)
             existing_urls.add(candidate["url"])
-    return sources
+    return sorted(sources, key=lambda item: rank_source_candidate(profile, item), reverse=True)
 
 
 def annotate_source_with_provider(
@@ -569,6 +707,11 @@ def update_repair_metadata(
     candidate_sources: list[dict[str, Any]] | None = None,
     chosen_source_id: str | None = None,
 ) -> None:
+    failure_reasons = Counter(
+        attempt.extraction_failure_reason or attempt.fetch_status or attempt.note
+        for attempt in attempts
+        if attempt.extraction_failure_reason or attempt.fetch_status or attempt.note
+    )
     profile["repair"] = {
         "attempted_at": service.utc_now(),
         "repaired_fields": sorted(set(repaired_fields)),
@@ -602,28 +745,21 @@ def update_repair_metadata(
         "needs_human_source_choice": needs_human_source_choice,
         "candidate_sources": candidate_sources or [],
         "chosen_source_id": chosen_source_id,
+        "failure_reasons": dict(failure_reasons.most_common()),
         "confidence": 0.75 if repaired_fields else 0.0,
     }
 
 
 def rank_attempt(profile: dict[str, Any], attempt: SourceAttempt) -> int:
-    score = 0
-    name = str(profile.get("name") or "").casefold()
-    title = attempt.normalized_page_title.casefold()
-    if title == name:
-        score += 30
-    elif name and name in title:
-        score += 15
-    if attempt.revision_id:
-        score += 10
-    for field_name in ("attack_potency", "speed", "durability"):
-        if field_name in attempt.extracted_fields:
-            score += 10
-    if "powers_and_abilities" in attempt.extracted_fields:
-        score += 10
-    if any(word in title for word in ("disambiguation", "category:", "list of")):
-        score -= 50
-    return score
+    return rank_source_candidate(
+        profile,
+        {
+            "title": attempt.normalized_page_title,
+            "authority": attempt.authority,
+            "extracted_fields": attempt.extracted_fields,
+            "rank": 10 if attempt.revision_id else 0,
+        },
+    )
 
 
 def attempt_from_result(
@@ -686,6 +822,11 @@ def write_debug_report(
     dry_run: bool,
 ) -> None:
     debug_dir.mkdir(parents=True, exist_ok=True)
+    failure_reasons = Counter(
+        attempt.extraction_failure_reason or attempt.fetch_status or attempt.note
+        for attempt in result.source_attempts
+        if attempt.extraction_failure_reason or attempt.fetch_status or attempt.note
+    )
     payload = {
         "profile_path": str(profile_path),
         "dry_run": dry_run,
@@ -698,6 +839,7 @@ def write_debug_report(
         "source_attempts": [attempt.__dict__ for attempt in result.source_attempts],
         "errors": result.errors,
         "chosen_source_id": result.chosen_source_id,
+        "failure_reasons": dict(failure_reasons.most_common()),
     }
     debug_report_path(profile_path, debug_dir).write_text(
         json.dumps(payload, indent=2, sort_keys=True),
