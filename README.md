@@ -53,8 +53,11 @@ DBURL="postgresql://battlebot:change_me@127.0.0.1:55432/battlebot"
 .venv/bin/python -m battlebot.fight.debug "Son Goku" "Sephiroth" --database-url "$DBURL" --summary
 ```
 
-The Discord `/fight` command currently uses the same resolver and packet builder, but only returns
-debug profile summaries. It does not call an LLM or use the battle result cache yet.
+The Discord `/fight` command currently uses the same resolver and packet builder with a
+deterministic smoke judge. It does not call an LLM or use the battle result cache yet.
+Discord profile and fight responses intentionally hide raw source URLs, provider IDs, revision
+IDs, and local profile paths. Those details remain available in YAML, Postgres, the review UI,
+and admin CLIs for validation and repair.
 
 Audit imported profile quality and locate missing characters across local files:
 
@@ -101,6 +104,23 @@ Practical Batman/Superman repair flow:
 
 Use the source panel in the UI to confirm the source ID and whether each source is used by core
 fields, abilities, equipment, or weaknesses before approving.
+
+Batch repair and promote valid `needs_review` profiles:
+
+```bash
+.venv/bin/python -m battlebot.review.batch_promote profiles/needs_review --max-profiles 25 --providers vsbattles,character_stats_profiles,superherodb,kaggle_superherodb --debug-dir data/repair_debug
+```
+
+Scale the local roster queue toward 1000+ battle-ready profiles:
+
+```bash
+.venv/bin/python -m battlebot.rosters.expand --target-total 1500
+.venv/bin/python -m battlebot.harvest.auto_profile_harvester --input profiles/rosters/backfill_roster_003_comics.csv --output profiles/generated --needs-review profiles/needs_review --cache-dir data/cache --queue-mode --quiet-skips --skip-needs-review-existing --max-per-cycle 25
+.venv/bin/python -m battlebot.review.batch_promote profiles/needs_review --max-profiles 100 --providers vsbattles,character_stats_profiles,superherodb,kaggle_superherodb --debug-dir data/repair_debug
+.venv/bin/python -m battlebot.ingest.import_profiles profiles/generated --database-url "$DBURL" --changed-only --import-state-file data/import_state.json
+find profiles/generated -name '*.yaml' | wc -l
+find profiles/needs_review -name '*.yaml' | wc -l
+```
 
 After approving profiles, import changed generated YAML into Postgres:
 

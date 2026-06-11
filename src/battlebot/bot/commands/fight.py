@@ -56,7 +56,7 @@ async def discord_message_from_packet(
 
 
 def register_fight_command(tree: app_commands.CommandTree, *, database_url: str | None = None) -> None:
-    @tree.command(name="fight", description="Run a deterministic pre-LLM smoke fight")
+    @tree.command(name="fight", description="Run a Nerd Fight Referee matchup")
     @app_commands.describe(
         contender_a="First character name or alias",
         contender_b="Second character name or alias",
