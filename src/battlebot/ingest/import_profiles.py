@@ -170,25 +170,42 @@ def compile_aliases(profile: CharacterProfile) -> list[dict[str, Any]]:
 
 
 def compile_sources(profile: CharacterProfile, profile_id: str) -> list[dict[str, Any]]:
-    rows = []
+    """Compile sources while preserving one row per stable source ID."""
+    rows_by_id: dict[str, dict[str, Any]] = {}
+    source_order: list[str] = []
+
     for source in profile.sources:
+        source_id = str(source.id or "").strip()
+        if not source_id:
+            continue
+
         source_data = source.model_dump(mode="json")
-        rows.append(
-            {
-                "source_id": source.id,
-                "profile_id": profile_id,
-                "title": source.title,
-                "url": source.url,
-                "source_type": source.source_type,
-                "license": source_data.get("license"),
-                "page_id": source.page_id,
-                "revision_id": source.revision_id,
-                "revision_timestamp": source.revision_timestamp,
-                "retrieved_at": source.retrieved_at,
-                "admissible": source_data.get("admissible", True),
-            }
-        )
-    return rows
+        row = {
+            "source_id": source_id,
+            "profile_id": profile_id,
+            "title": source.title,
+            "url": source.url,
+            "source_type": source.source_type,
+            "license": source_data.get("license"),
+            "page_id": source.page_id,
+            "revision_id": source.revision_id,
+            "revision_timestamp": source.revision_timestamp,
+            "retrieved_at": source.retrieved_at,
+            "admissible": source_data.get("admissible", True),
+        }
+
+        existing = rows_by_id.get(source_id)
+        if existing is None:
+            rows_by_id[source_id] = row
+            source_order.append(source_id)
+            continue
+
+        # Merge later populated metadata into the existing stable source.
+        for key, value in row.items():
+            if value not in (None, "", [], {}):
+                existing[key] = value
+
+    return [rows_by_id[source_id] for source_id in source_order]
 
 
 def compile_claims(profile: CharacterProfile, profile_id: str) -> list[dict[str, Any]]:

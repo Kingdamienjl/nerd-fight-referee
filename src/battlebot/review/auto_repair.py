@@ -313,8 +313,39 @@ def profile_source_candidates(
     provider_ids: list[str] | None = None,
 ) -> list[dict[str, Any]]:
     providers = source_registry.enabled_providers(provider_ids)
-    sources = [annotate_source_with_provider(dict(source), providers) for source in profile.get("sources") or []]
-    existing_urls = {source.get("url") for source in sources if source.get("url")}
+
+    sources: list[dict[str, Any]] = []
+    seen_source_urls: set[str] = set()
+
+    for raw_source in profile.get("sources") or []:
+        if not isinstance(raw_source, dict):
+            continue
+
+        source = annotate_source_with_provider(
+            dict(raw_source),
+            providers,
+        )
+        provider_id = str(source.get("provider_id") or "")
+
+        # When an explicit provider list is supplied, stored sources must
+        # obey it as well; previously only newly discovered candidates did.
+        if provider_ids and provider_id not in providers:
+            continue
+
+        normalized_url = str(source.get("url") or "").strip().casefold()
+        if normalized_url and normalized_url in seen_source_urls:
+            continue
+
+        sources.append(source)
+
+        if normalized_url:
+            seen_source_urls.add(normalized_url)
+
+    existing_urls = {
+        source.get("url")
+        for source in sources
+        if source.get("url")
+    }
     vsbattles_enabled = "vsbattles" in providers
     for provider in providers.values():
         if provider.provider_id in {"vsbattles", "character_stats_profiles"} and provider.primary_domain:

@@ -77,9 +77,25 @@ async def fetch_title_fields(
             parse_status = parse_response.status
             parse_body = await parse_response.json(content_type=None)
         rendered = rendered_text_from_parse(parse_body)
-        wikitext = (((parse_body.get("parse") or {}).get("wikitext") or {}).get("*") or "")
+
+        parse_value = parse_body.get("parse")
+        parse_data = parse_value if isinstance(parse_value, dict) else {}
+        wikitext_value = parse_data.get("wikitext")
+
+        if isinstance(wikitext_value, str):
+            wikitext = wikitext_value
+        elif isinstance(wikitext_value, dict):
+            wikitext = str(
+                wikitext_value.get("*")
+                or wikitext_value.get("content")
+                or wikitext_value.get("text")
+                or ""
+            )
+        else:
+            wikitext = ""
+
         fields = merge_extracted_fields(fields, parse_content(rendered))
-        fields = merge_extracted_fields(fields, parse_content(str(wikitext)))
+        fields = merge_extracted_fields(fields, parse_content(wikitext))
     metadata = {
         "title": page.get("title") or title,
         "url": page.get("fullurl") or source.get("url") or "",
@@ -135,14 +151,36 @@ async def search_titles(session: Any, api_url: str, query: str, limit: int = 5) 
     return unique
 
 
+def resolve_mediawiki_api_url(url: str) -> str:
+    """Resolve an Action API endpoint from a MediaWiki/Fandom URL."""
+    api_url = mediawiki_api_from_url(url)
+    if api_url:
+        return api_url
+
+    from urllib.parse import urlparse
+
+    parsed = urlparse(url)
+    host = parsed.netloc.casefold()
+
+    if (
+        parsed.scheme in {"http", "https"}
+        and (host == "fandom.com" or host.endswith(".fandom.com"))
+    ):
+        return f"{parsed.scheme}://{parsed.netloc}/api.php"
+
+    return ""
+
+
 async def fetch_mediawiki_fields(source: dict[str, Any], parse_content) -> tuple[dict[str, str], dict[str, Any]]:
     url = str(source.get("url") or "")
     if not url:
         return {}, {"note": "missing_url"}
-    api_url = mediawiki_api_from_url(url)
+    api_url = resolve_mediawiki_api_url(url)
     title = title_from_wiki_url(url) or source.get("title")
-    if not api_url or not title:
+    if not title:
         return {}, {"note": "missing_mediawiki_title"}
+    if not api_url:
+        return {}, {"note": "missing_mediawiki_api_url"}
 
     import aiohttp
 
