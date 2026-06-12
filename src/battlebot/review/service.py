@@ -532,8 +532,11 @@ def approved_profile_data(
 ) -> dict[str, Any]:
     data = sanitize_generated_profile(profile)
     data["battle_eligible"] = not blockers
-    data["profile_type"] = "approved_override"
-    data["status"] = "needs_manual_review_approved" if force else "approved_override"
+    if not blockers and data.get("status") in {"provisional", "verified"}:
+        data["profile_type"] = "auto_evidence_profile"
+    else:
+        data["profile_type"] = "approved_override"
+        data["status"] = "needs_manual_review_approved" if force else "approved_override"
     review = data.get("review") if isinstance(data.get("review"), dict) else {}
     review["approved_at"] = utc_now()
     review["approved_by"] = "local_review_ui"

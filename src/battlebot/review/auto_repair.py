@@ -73,6 +73,21 @@ class SourceAttempt:
     promotion_allowed: bool = False
     allowed_fields: list[str] = field(default_factory=list)
     field_candidates: list[dict[str, Any]] = field(default_factory=list)
+    identity_match: bool = False
+    identity_score: int = 0
+    variant_score: int = 0
+    provider_priority: int = 0
+    core_field_count: int = 0
+    ability_count: int = 0
+    exact_name_match: bool = False
+    alias_match: bool = False
+    franchise_match: bool = False
+    variant_match: bool = False
+    duplicate_key: str = ""
+    retryable: bool = False
+    exception_class: str = ""
+    source_payload: dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -194,6 +209,17 @@ def candidate_row_from_attempt(attempt: SourceAttempt) -> dict[str, Any]:
         "promotion_allowed": attempt.promotion_allowed,
         "allowed_fields": attempt.allowed_fields,
         "rejection_reason": attempt.extraction_failure_reason,
+        "identity_match": attempt.identity_match,
+        "identity_score": attempt.identity_score,
+        "variant_score": attempt.variant_score,
+        "provider_priority": attempt.provider_priority,
+        "core_field_count": attempt.core_field_count,
+        "ability_count": attempt.ability_count,
+        "exact_name_match": attempt.exact_name_match,
+        "alias_match": attempt.alias_match,
+        "franchise_match": attempt.franchise_match,
+        "variant_match": attempt.variant_match,
+        "duplicate_key": attempt.duplicate_key,
     }
 
 
@@ -691,17 +717,258 @@ def high_authority_core_attempts(attempts: list[SourceAttempt]) -> list[SourceAt
 
 def high_authority_core_disagreements(attempts: list[SourceAttempt]) -> list[str]:
     disagreements = []
+    compatible_attempts = [
+        attempt
+        for attempt in attempts
+        if attempt.authority == "high"
+        and attempt.promotion_allowed
+        and attempt.identity_match
+        and attempt.variant_score >= 0
+    ]
     for field_name in ("attack_potency", "speed", "durability"):
         values = {
             str(candidate.get("value") or "").strip().casefold()
-            for attempt in attempts
-            if attempt.authority == "high" and attempt.promotion_allowed
+            for attempt in compatible_attempts
             for candidate in attempt.field_candidates
             if candidate.get("field") == field_name and candidate.get("value")
         }
         if len(values) > 1:
             disagreements.append(field_name)
     return disagreements
+
+
+def provider_priority(authority: str, provider_id: str) -> int:
+    score = {"high": 100, "medium": 60, "low": 30}.get(authority, 0)
+    if provider_id in {"vsbattles", "character_stats_profiles"}:
+        score += 20
+    return score
+
+
+def normalized_identity_text(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", value.casefold()).strip()
+
+
+def profile_identity_names(profile: dict[str, Any]) -> list[str]:
+    identity = profile.get("identity") if isinstance(profile.get("identity"), dict) else {}
+    names = [
+        str(profile.get("name") or ""),
+        *(str(alias) for alias in profile.get("aliases") or []),
+        *(str(alias) for alias in identity.get("aliases") or []),
+    ]
+    alias_match = resolve_alias(str(profile.get("name") or ""))
+    if alias_match:
+        names.append(alias_match.canonical)
+    seen: set[str] = set()
+    unique: list[str] = []
+    for name in names:
+        normalized = normalized_identity_text(name)
+        if normalized and normalized not in seen:
+            unique.append(name)
+            seen.add(normalized)
+    return unique
+
+
+def text_for_identity_matching(attempt: SourceAttempt) -> str:
+    return " ".join(
+        str(value or "")
+        for value in (
+            attempt.normalized_page_title,
+            attempt.source_payload.get("title"),
+            attempt.url,
+        )
+    )
+
+
+def tokens_for_identity(value: str) -> list[str]:
+    return [token for token in normalized_identity_text(value).split() if len(token) > 2]
+
+
+def identity_score_for_attempt(profile: dict[str, Any], attempt: SourceAttempt) -> int:
+    title = normalized_identity_text(attempt.normalized_page_title)
+    name = normalized_identity_text(str(profile.get("name") or ""))
+    franchise = normalized_identity_text(str(profile.get("franchise") or ""))
+    match_text = normalized_identity_text(text_for_identity_matching(attempt))
+    if not title or not name:
+        return 0
+    if title_wrong_for_profile(profile, attempt.normalized_page_title):
+        return 0
+    normalized_names = [normalized_identity_text(value) for value in profile_identity_names(profile)]
+    alias_names = [value for value in normalized_names if value != name]
+    attempt.exact_name_match = title == name
+    attempt.alias_match = any(title == alias or alias in match_text for alias in alias_names)
+    attempt.franchise_match = bool(franchise and franchise in match_text)
+    score = 0
+    if attempt.exact_name_match:
+        score += 100
+    elif attempt.alias_match:
+        score += 90
+    elif name in title and (attempt.franchise_match or len(tokens_for_identity(name)) > 1):
+        score += 80
+    else:
+        tokens = tokens_for_identity(name)
+        if tokens and all(token in title for token in tokens):
+            score += 60
+    if attempt.franchise_match:
+        score += 20
+    return score
+
+
+def variant_score_for_attempt(profile: dict[str, Any], attempt: SourceAttempt) -> int:
+    title = attempt.normalized_page_title.casefold()
+    franchise = str(profile.get("franchise") or "").casefold()
+    category = str(profile.get("category") or "").casefold()
+    score = 0
+    if franchise and franchise in title:
+        score += 25
+    if category == "comic" and franchise == "marvel" and any(
+        marker in title for marker in ("marvel comics", "earth-616")
+    ):
+        score += 30
+    if category == "comic" and franchise == "dc" and any(
+        marker in title for marker in ("dc comics", "prime earth", "rebirth", "post-crisis", "post-flashpoint")
+    ):
+        score += 30
+    if title_wrong_for_profile(profile, attempt.normalized_page_title):
+        score -= 100
+    attempt.variant_match = score > 0 or category not in {"comic", "mixed"}
+    return score
+
+
+def duplicate_key_for_attempt(attempt: SourceAttempt) -> str:
+    host = urlparse(attempt.url).netloc.casefold()
+    title = normalized_identity_text(attempt.normalized_page_title)
+    revision = str(attempt.revision_id or "")
+    if revision:
+        return f"{host}|{title}|{revision}"
+    return f"{host}|{title}"
+
+
+def exception_retryable(exc: Exception) -> bool:
+    text = str(exc).casefold()
+    retryable_markers = (
+        "timeout",
+        "429",
+        "too many requests",
+        "5xx",
+        "500",
+        "502",
+        "503",
+        "504",
+        "connection reset",
+        "connection",
+        "temporarily unavailable",
+        "maxlag",
+    )
+    deterministic_types = (TypeError, AttributeError, ValueError, KeyError)
+    if isinstance(exc, deterministic_types):
+        return False
+    return any(marker in text for marker in retryable_markers)
+
+
+def sanitized_exception_message(exc: Exception) -> str:
+    return re.sub(r"\s+", " ", str(exc)).strip()[:500]
+
+
+def primary_sort_key(attempt: SourceAttempt) -> tuple[int, int, int, int, int, int, int, int]:
+    return (
+        int(attempt.exact_name_match),
+        int(attempt.alias_match),
+        int(attempt.franchise_match),
+        int(attempt.variant_match),
+        attempt.provider_priority,
+        attempt.rank,
+        attempt.core_field_count,
+        attempt.ability_count,
+    )
+
+
+def annotate_attempt_quality(profile: dict[str, Any], attempt: SourceAttempt) -> None:
+    fields = set(attempt.extracted_fields)
+    attempt.core_field_count = sum(
+        1 for field_name in ("attack_potency", "speed", "durability") if field_name in fields
+    )
+    attempt.ability_count = int("powers_and_abilities" in fields or "abilities" in fields)
+    attempt.identity_score = identity_score_for_attempt(profile, attempt)
+    attempt.identity_match = attempt.identity_score >= 60
+    attempt.variant_score = variant_score_for_attempt(profile, attempt)
+    attempt.provider_priority = provider_priority(attempt.authority, attempt.provider_id)
+    attempt.duplicate_key = duplicate_key_for_attempt(attempt)
+
+
+def eligible_primary_attempts(attempts: list[SourceAttempt]) -> list[SourceAttempt]:
+    eligible = [
+        attempt
+        for attempt in attempts
+        if attempt.fetch_status == "fetched"
+        and attempt.identity_match
+        and attempt.core_field_count >= 3
+        and attempt.ability_count >= 1
+        and attempt.promotion_allowed
+        and attempt.variant_score >= 0
+    ]
+    deduped: dict[str, SourceAttempt] = {}
+    for attempt in eligible:
+        existing = deduped.get(attempt.duplicate_key)
+        if existing is None or primary_sort_key(attempt) > primary_sort_key(existing):
+            deduped[attempt.duplicate_key] = attempt
+    eligible = list(deduped.values())
+    eligible.sort(key=primary_sort_key, reverse=True)
+    return eligible
+
+
+def attempt_field_map(attempt: SourceAttempt) -> dict[str, str]:
+    return {
+        str(candidate.get("field")): str(candidate.get("value"))
+        for candidate in attempt.field_candidates
+        if candidate.get("field") and candidate.get("value")
+    }
+
+
+def has_independent_corroboration(primary: SourceAttempt, other_attempts: list[SourceAttempt]) -> bool:
+    primary_host = urlparse(primary.url).netloc.casefold()
+    for attempt in other_attempts:
+        if not attempt.identity_match or attempt.core_field_count < 3 or attempt.ability_count < 1:
+            continue
+        if attempt.source_id == primary.source_id:
+            continue
+        if attempt.duplicate_key == primary.duplicate_key:
+            continue
+        host = urlparse(attempt.url).netloc.casefold()
+        if attempt.provider_id and primary.provider_id and attempt.provider_id != primary.provider_id:
+            return True
+        if host and primary_host and host != primary_host:
+            return True
+    return False
+
+
+def apply_primary_profile_state(
+    profile: dict[str, Any],
+    *,
+    primary: SourceAttempt | None,
+    corroborated: bool,
+) -> None:
+    generation = profile.get("generation") if isinstance(profile.get("generation"), dict) else {}
+    if primary:
+        profile["profile_type"] = "auto_evidence_profile"
+        profile["status"] = "verified" if corroborated else "provisional"
+        profile["battle_eligible"] = True
+        generation["confidence"] = max(float(generation.get("confidence") or 0), 0.80 if corroborated else 0.60)
+        generation["ineligible_reasons"] = []
+        review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
+        review["readiness_state"] = "verified" if corroborated else "provisional"
+        review["profile_state"] = "verified" if corroborated else "auto_evidence_profile"
+        review["primary_source_id"] = primary.source_id
+        review["secondary_disagreement_policy"] = "warning_only"
+        profile["review"] = review
+    else:
+        profile["profile_type"] = "needs_review"
+        profile["status"] = "needs_review"
+        profile["battle_eligible"] = False
+        review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
+        review["readiness_state"] = "needs_review"
+        profile["review"] = review
+        generation.setdefault("ineligible_reasons", ["needs_review"])
+    profile["generation"] = generation
 
 
 def boost_confidence_from_cross_checks(profile: dict[str, Any], attempts: list[SourceAttempt]) -> None:
@@ -770,6 +1037,19 @@ def update_repair_metadata(
                 "promotion_allowed": attempt.promotion_allowed,
                 "allowed_fields": attempt.allowed_fields,
                 "field_candidates": attempt.field_candidates,
+                "identity_match": attempt.identity_match,
+                "identity_score": attempt.identity_score,
+                "variant_score": attempt.variant_score,
+                "provider_priority": attempt.provider_priority,
+                "core_field_count": attempt.core_field_count,
+                "ability_count": attempt.ability_count,
+                "exact_name_match": attempt.exact_name_match,
+                "alias_match": attempt.alias_match,
+                "franchise_match": attempt.franchise_match,
+                "variant_match": attempt.variant_match,
+                "duplicate_key": attempt.duplicate_key,
+                "retryable": attempt.retryable,
+                "exception_class": attempt.exception_class,
             }
             for attempt in attempts
         ],
@@ -825,6 +1105,8 @@ def attempt_from_result(
         authority=str(metadata.get("authority") or source.get("authority") or ""),
         promotion_allowed=bool(metadata.get("promotion_allowed", source.get("promotion_allowed", False))),
         allowed_fields=list(metadata.get("allowed_fields") or source.get("allowed_fields") or []),
+        source_payload=dict(source),
+        metadata=dict(metadata),
         field_candidates=[
             {
                 "field": field_name,
@@ -838,6 +1120,7 @@ def attempt_from_result(
         ],
     )
     attempt.rank = rank_attempt(profile, attempt)
+    annotate_attempt_quality(profile, attempt)
     return attempt
 
 
@@ -1020,28 +1303,36 @@ async def repair_profile(
                     authority=str(source.get("authority") or ""),
                     promotion_allowed=bool(source.get("promotion_allowed", False)),
                     allowed_fields=list(source.get("allowed_fields") or []),
+                    retryable=True,
+                    exception_class="TimeoutError",
+                    source_payload=dict(source),
                 )
             )
             errors.append(f"source timeout: {source.get('url')}")
             continue
         except Exception as exc:
+            retryable = exception_retryable(exc)
+            message = sanitized_exception_message(exc)
             attempts.append(
                 SourceAttempt(
                     source_id,
                     str(source.get("url") or ""),
                     False,
-                    str(exc),
+                    message,
                     normalized_page_title=str(source.get("title") or ""),
                     source_type=str(source.get("source_type") or ""),
                     fetch_status="error",
-                    extraction_failure_reason=str(exc),
+                    extraction_failure_reason=message,
                     provider_id=str(source.get("provider_id") or ""),
                     authority=str(source.get("authority") or ""),
                     promotion_allowed=bool(source.get("promotion_allowed", False)),
                     allowed_fields=list(source.get("allowed_fields") or []),
+                    retryable=retryable,
+                    exception_class=type(exc).__name__,
+                    source_payload=dict(source),
                 )
             )
-            errors.append(str(exc))
+            errors.append(f"provider_exception:{type(exc).__name__}: {message}")
             continue
         provider = providers.get(str(source.get("provider_id") or ""))
         fields = source_registry.filter_allowed_fields(raw_fields, provider)
@@ -1060,10 +1351,15 @@ async def repair_profile(
             note=metadata.get("note") or ("ok" if fields else "no_fields_extracted"),
         )
         attempts.append(attempt)
-        if not fields:
-            continue
-        applied_source_id = apply_source_metadata(profile, source, metadata)
-        confidence = 0.75 if metadata.get("revision_id") else 0.6
+
+    eligible_attempts = eligible_primary_attempts(attempts)
+    primary = eligible_attempts[0] if eligible_attempts else None
+    corroborated = has_independent_corroboration(primary, eligible_attempts[1:]) if primary else False
+
+    if primary:
+        fields = attempt_field_map(primary)
+        applied_source_id = apply_source_metadata(profile, primary.source_payload, primary.metadata)
+        confidence = 0.80 if corroborated else 0.60
         repaired_fields.extend(
             apply_extracted_fields(
                 profile_path,
@@ -1074,26 +1370,20 @@ async def repair_profile(
                 overwrite=overwrite,
                 dry_run=dry_run,
                 notes_path=notes_path,
-                allow_power_fields=attempt.authority == "high" and attempt.promotion_allowed,
+                allow_power_fields=True,
             )
         )
-        if not promote_if_valid and not missing_targets(profile):
-            break
 
     unresolved = missing_targets(profile)
-    viable = [
-        attempt
-        for attempt in attempts
-        if {"attack_potency", "speed", "durability", "powers_and_abilities"}.issubset(
-            set(attempt.extracted_fields)
-        )
-    ]
-    needs_human_source_choice = False if choose_source_id else len(viable) > 1
-    has_promotion_source = bool(high_authority_core_attempts(attempts))
+    needs_human_source_choice = False
+    has_promotion_source = bool(primary)
     disagreements = high_authority_core_disagreements(attempts)
     if disagreements:
-        needs_human_source_choice = True
-        errors.append(f"high_authority_core_disagreement: {', '.join(disagreements)}")
+        review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
+        warnings = list(review.get("warnings") or [])
+        warnings.append(f"secondary_core_disagreement_warning: {', '.join(disagreements)}")
+        review["warnings"] = sorted(set(warnings))
+        profile["review"] = review
     boost_confidence_from_cross_checks(profile, attempts)
     candidate_sources = sorted(
         [candidate_row_from_attempt(attempt) for attempt in attempts if attempt.extracted_fields],
@@ -1110,11 +1400,14 @@ async def repair_profile(
             missing = sorted(required - chosen_fields)
             errors.append(f"chosen_source_missing_required_fields: {choose_source_id}: {', '.join(missing)}")
         elif not (
-            chosen_attempt.authority == "high"
+            chosen_attempt.fetch_status == "fetched"
+            and chosen_attempt.identity_match
+            and chosen_attempt.core_field_count >= 3
+            and chosen_attempt.ability_count >= 1
             and chosen_attempt.promotion_allowed
-            and {"attack_potency", "speed", "durability"}.issubset(chosen_fields)
         ):
             errors.append(f"chosen_source_not_promotion_allowed: {choose_source_id}")
+    apply_primary_profile_state(profile, primary=primary, corroborated=corroborated)
     update_repair_metadata(
         profile,
         repaired_fields=repaired_fields,

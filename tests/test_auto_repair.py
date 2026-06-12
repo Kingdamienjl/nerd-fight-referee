@@ -358,7 +358,7 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("Batman (Post-Crisis)", titles)
         self.assertIn("Batman (Post-Flashpoint)", titles)
 
-    async def test_ambiguous_candidates_do_not_auto_promote(self):
+    async def test_ambiguous_candidates_select_primary_and_auto_promote_provisional(self):
         async def variant_fetch(source):
             return await fake_fetch_source_fields(source)
 
@@ -380,10 +380,109 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
                     max_source_candidates=3,
                 )
             generated_exists = (generated / "comic" / "dc" / "batman.yaml").exists()
+            generated_profile = service.load_yaml(generated / "comic" / "dc" / "batman.yaml") if generated_exists else {}
 
-        self.assertTrue(result.needs_human_source_choice)
+        self.assertFalse(result.needs_human_source_choice)
+        self.assertTrue(result.promoted)
+        self.assertTrue(generated_exists)
+        self.assertEqual(generated_profile["status"], "provisional")
+        self.assertGreaterEqual(generated_profile["generation"]["confidence"], 0.60)
+
+    async def test_second_independent_source_upgrades_to_verified(self):
+        async def independent_fetch(source):
+            fields, metadata = await fake_fetch_source_fields(source)
+            if source.get("provider_id") == "character_stats_profiles":
+                metadata["provider_id"] = "character_stats_profiles"
+                metadata["url"] = "https://character-stats-and-profiles.fandom.com/wiki/Batman"
+                metadata["revision_id"] = "charstats-1"
+            return fields, metadata
+
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "profiles"
+            needs_review = root / "needs_review"
+            generated = root / "generated"
+            path = needs_review / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", independent_fetch):
+                result = await auto_repair.repair_profile(
+                    path,
+                    promote_if_valid=True,
+                    needs_review_dir=needs_review,
+                    generated_dir=generated,
+                    notes_path=root / "review_notes.yaml",
+                    provider_ids=["vsbattles", "character_stats_profiles"],
+                    max_source_candidates=10,
+                )
+            generated_profile = service.load_yaml(generated / "comic" / "dc" / "batman.yaml")
+
+        self.assertTrue(result.promoted)
+        self.assertEqual(generated_profile["status"], "verified")
+        self.assertGreaterEqual(generated_profile["generation"]["confidence"], 0.80)
+
+    async def test_duplicate_same_revision_does_not_count_as_corroboration(self):
+        async def duplicate_fetch(source):
+            return await fake_fetch_source_fields(source)
+
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "profiles"
+            needs_review = root / "needs_review"
+            generated = root / "generated"
+            path = needs_review / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", duplicate_fetch):
+                result = await auto_repair.repair_profile(
+                    path,
+                    promote_if_valid=True,
+                    needs_review_dir=needs_review,
+                    generated_dir=generated,
+                    notes_path=root / "review_notes.yaml",
+                    provider_ids=["vsbattles"],
+                    max_source_candidates=4,
+                )
+            generated_profile = service.load_yaml(generated / "comic" / "dc" / "batman.yaml")
+
+        self.assertTrue(result.promoted)
+        self.assertEqual(generated_profile["status"], "provisional")
+
+    async def test_unrelated_character_page_is_rejected_for_primary(self):
+        source = auto_repair.SourceAttempt(
+            "wrong",
+            "https://character-stats-and-profiles.fandom.com/wiki/Guts_(Canon)/ElJoaki5",
+            True,
+            "ok",
+            ["attack_potency", "speed", "durability", "powers_and_abilities"],
+            normalized_page_title="Guts (Canon)/ElJoaki5",
+            fetch_status="fetched",
+            provider_id="character_stats_profiles",
+            authority="high",
+            promotion_allowed=True,
+        )
+        auto_repair.annotate_attempt_quality(character_profile("Zodd", "Berserk", "anime"), source)
+
+        self.assertFalse(source.identity_match)
+        self.assertEqual(auto_repair.eligible_primary_attempts([source]), [])
+
+    async def test_provider_exception_is_recorded_without_crashing(self):
+        async def broken_fetch(source):
+            raise AttributeError("'NoneType' object has no attribute 'get'")
+
+        with TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "dc" / "batman.yaml"
+            write_profile(path, profile_data(missing_core=True))
+
+            with patch("battlebot.review.auto_repair.fetch_source_fields", broken_fetch):
+                result = await auto_repair.repair_profile(
+                    path,
+                    notes_path=Path(temp_dir) / "notes.yaml",
+                    provider_ids=["vsbattles"],
+                    max_source_candidates=1,
+                )
+
         self.assertFalse(result.promoted)
-        self.assertFalse(generated_exists)
+        self.assertEqual(result.source_attempts[0].exception_class, "AttributeError")
+        self.assertFalse(result.source_attempts[0].retryable)
 
     async def test_chosen_source_bypasses_ambiguity_when_valid(self):
         async def variant_fetch(source):

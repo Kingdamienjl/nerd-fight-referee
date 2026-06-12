@@ -200,6 +200,8 @@ def provider_candidates(
                 }
             )
         elif provider.provider_id == "comicvine":
+            if str(profile.get("category") or "").casefold() != "comic":
+                continue
             candidates.append(
                 {
                     "id": service.slugify(f"comicvine-{profile.get('name') or 'character'}"),

@@ -40,7 +40,8 @@ async def fetch_title_fields(
     }
     async with session.get(api_url, params=query_params) as response:
         query_status = response.status
-        body = await response.json(content_type=None)
+        body_value = await response.json(content_type=None)
+    body = body_value if isinstance(body_value, dict) else {}
     pages = body.get("query", {}).get("pages", [])
     if not pages:
         return {}, {
@@ -75,7 +76,8 @@ async def fetch_title_fields(
         }
         async with session.get(api_url, params=parse_params) as parse_response:
             parse_status = parse_response.status
-            parse_body = await parse_response.json(content_type=None)
+            parse_body_value = await parse_response.json(content_type=None)
+            parse_body = parse_body_value if isinstance(parse_body_value, dict) else {}
         rendered = rendered_text_from_parse(parse_body)
 
         parse_value = parse_body.get("parse")
@@ -124,7 +126,8 @@ async def search_titles(session: Any, api_url: str, query: str, limit: int = 5) 
     }
     async with session.get(api_url, params=opensearch_params) as response:
         if response.status == 200:
-            body = await response.json(content_type=None)
+            body_value = await response.json(content_type=None)
+            body = body_value if isinstance(body_value, (dict, list)) else {}
             if isinstance(body, list) and len(body) > 1 and isinstance(body[1], list):
                 titles.extend(str(title) for title in body[1])
     query_params = {
@@ -137,7 +140,8 @@ async def search_titles(session: Any, api_url: str, query: str, limit: int = 5) 
     }
     async with session.get(api_url, params=query_params) as response:
         if response.status == 200:
-            body = await response.json(content_type=None)
+            body_value = await response.json(content_type=None)
+            body = body_value if isinstance(body_value, dict) else {}
             for row in (body.get("query") or {}).get("search") or []:
                 if row.get("title"):
                     titles.append(str(row["title"]))
