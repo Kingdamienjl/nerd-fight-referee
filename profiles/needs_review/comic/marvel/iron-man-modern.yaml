@@ -431,9 +431,10 @@ review:
   ineligible_reasons: *id002
   source_errors: []
   notes: []
+  readiness_state: needs_review
 profile_hash: 18c79c3b71e229828a693786dbc199abef3b8aac150b41e701cb56b03b1aa544
 repair:
-  attempted_at: '2026-06-10T13:39:14Z'
+  attempted_at: '2026-06-13T22:43:46Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -443,24 +444,53 @@ repair:
   source_attempts:
   - source_id: vsbattles-iron-man-modern-marvel-comics
     url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Modern%29_%28Marvel_Comics%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern) (Marvel Comics)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id003
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man (Marvel Comics)
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 95
+    revision_id: '9404254'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 22621
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id004
     - attack_potency
     - speed
     - durability
@@ -469,56 +499,286 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-modern-marvel-comics
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Modern%29_%28Marvel_Comics%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern) (Marvel Comics)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 95
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: tier
+      value: '{{10-A}} | {{9-A}} | {{Varies}}, up to {{1-A}} | {{1-A}}, likely higher'
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Base= Preparation, Genius Intelligence, Martial Arts, Weapon Mastery,
+        Summoning |-|Extremis Enhanced and RepulsorTech Node= All previous abilities,
+        plus Technology Manipulation, Hacking, Regeneration (High-Low over time, heals
+        from the fatal injuries he sufferedIron Man Vol 4 #4 in 24 hoursIron Man Vol
+        4 #5), Flight, Energy Projection, Enhanced Senses, Magnetism Manipulation
+        and Extrasensory Perception via R.T Node |-|Iron Man Armors= All previous
+        abilities, plus the weapons and gadgets from the Iron Legion |-|Cosmic Iron
+        Man= All previous abilities, plus Superhuman Physical Characteristics, Flight,
+        Cosmic Awareness and Retrocognition (Thanks to his link to the cosmos, Iron
+        Man is able to view a multitude of realities. He can also hear the "stories"
+        of these realities from their whispers and gasps, which he used to deduce
+        what happened to the dead universe he was inIron Man (2020) #15), Space-Time
+        Manipulation (Tore a hole in the universe with a repulsor blast, creating
+        a gateway to another Was stated to be tearing through galaxies and dimensions
+        during his battle with Korvac), Dimensional Travel and BFR (Traveled to an
+        alternate universe and intended to leave Korvac there), Size Manipulation
+        (When arriving to Earth giant-sized, he shrank to the height of the Washington
+        Square Arch, and then to human heightIron Man (2020) #16) up to Large Size
+        (Type 5; Can grow large enough to grab and throw planets), Statistics Amplification
+        and Reduction (Made everyone in NYC as smart as him, including Reed Richards,
+        which made him dumber. Reduced the IQ of the people in his prison to 80Iron
+        Man (2020) #17), Transformation (Can quickly shift between human form and
+        Iron God form), Teleportation (As shown here), Creation (Built a special floating
+        prison), Morality Manipulation (Was able to get an entire group of politicians
+        to agree to what he says), Matter Manipulation and Transmutation (Disassembled
+        the Big Wheel and turned Gargoyle to stone), Heat Manipulation (Melted the
+        Silver Surfer with an energy blast, reducing him to a silver puddle), Explosion
+        Manipulation, possibly Death Manipulation (Killed Jim Hammond with a wave
+        of his hand), Telekinesis (Killed Halcyon by choking him from afar), Forcefield
+        Creation (Can use forcefields to trap opponents or to block attacks), and
+        Resurrection (As shown hereIron Man (2020) #18), as a user of the Power Cosmic,
+        he should likely have all of the abilities of the Silver Surfer'
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Athlete level (He is an adult man who regularly trains in combat with
+        Captain America and other highly skilled fightersIron Man: Fatal Frontier
+        #12) | Small Building level (Can overpower DaredevilSuperior Iron Man #2)
+        | Varies (Has access to suits such as Model 1, Model 4, Model 29 and Hulkbusters),
+        up to Outerverse level (Built the Phoenixbuster, which fragmented the Phoenix
+        Force) | Outerverse level, likely higher (Wields the Power Cosmic. Fought
+        evenly with a Power Cosmic-amped Korvac, who threatened to destroy the universe
+        and was considered to be a disturbance to the universal balance by the Living
+        Tribunal. The same Korvac claimed to be too powerful for the Living Tribunal
+        and the In-Betweener to contain. The Abstracts showed concern over Iron Man''s
+        state and believed that his power could possibly determine the fate of existence.
+        It is also stated that he could cause radical and drastic change to the universe,
+        and even reality itself)'
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Athletic Human | At least Athletic Human, Partial Speed of Light Reactions
+        (Some of his brain functions process information at light speedIron Man Vol
+        4 #25) | At least Hypersonic with several armors (From Model 4 to upwardsMach
+        8.23) | Massively FTL+ (Battled with Korvac across the galaxy)'
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Athlete level | Small Building level | Varies | Outerverse level (Took
+        several attacks from a Power Cosmic-amped Korvac)
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: 'Superhuman (Can work for 2 days straight with no restIron Man Vol 1
+        #98) | Higher than before due to his advanced metabolism | Varies from armor
+        to armor | Unknown'
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range; Planetary through extremis, Several Meters with
+        R.T Node blast, can manipulate armors from light years of distance | Standard
+        Melee Range; Planetary with Mind Manipulation, up to Interplanetary with Size
+        Manipulation; Outerversal with Cosmic Awareness and Dimensional Travel
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: '*Iron Man Armor: Tony''s primary powers mostly come from his iron man
+        armors, sophisticated suits containing various offensive, defensive and evasive
+        abilities. Some are mission-specific, some are prototypes for testing, and
+        others are older models kept for nostalgia or for research. *Extremis virus:
+        After being fatally wounded by an Extremis-enhanced terrorist, Tony Stark
+        had to inject himself with the Extremis virus in order to survive. His entire
+        body has also been enhanced by the techno-organic Extremis virus which granted
+        him enhanced senses, reflexes, and regenerative healing. He also reprogrammed
+        the serum to help him have better, fourth connection and control over his
+        Iron Man armor, effectively making him Iron Man "inside and out.Iron Man Vol
+        4 #4 *RepulsorTech Node: Also known as R.T node is a type of fusion power
+        which derived from the repulsor technology of the Iron Man suit created by
+        Tony. It can be used as a source for clean energy as well as a powerful bomb.
+        After being left in a coma in a battle against Norman Osborn, an arc reactor
+        was used to run Stark''s body once more by using it to run the basic machine
+        codes to keep Stark''s Extremis-modified body working, also providing Stark
+        with an increased intelligence, multitasking abilities and additional powers.Iron
+        Man Vol 5 #25'
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'At least Extraordinary Genius, likely Supergenius (He is only a fraction
+        less smart than Reed Richards, and his technology is nearly a worthy match
+        for Asgardian wizardry. Created various armors that operate on a higher or
+        beyond-dimensional scale, like models 22, 38, 61, 63, and 72, the first of
+        which is powered by the same enchantment that gives mjolnir its strength,
+        which Thor described as taking and weaponizing a gift of the gods. He and
+        his team made a virtual universe in which one could do anything, go anywhere
+        and be anyone. He reverse-engineered a celestial to make Model 72. Aside from
+        his powers granted to him by his suits, Tony Stark is easily one of the smartest
+        people on Earth. Being a engineer and mechanic prodigy capable of fixing almost
+        any machinery, he graduated from the Massachusetts Institute of Technology
+        with honors at the age of 17. He''s designed and built all of the devices
+        and armors listed here and as a futurist, he has shown to predict certain
+        events in the future.Illuminati Vol 1 Stark is also a world-renowned businessman
+        with impeccable business ethics, able to command people''s attentions when
+        he speaks on economic matters and is a brilliant tactician and strategist
+        capable of quickly formulating battle strategies and new plans if the situation
+        changes, even going as far as putting Reed Richards in check on five different
+        boards in chess, a game he didn''t learn until later in his life. Besides
+        English, Tony can speak different languages fluently such as Japanese, Mandarin
+        Chinese, French, Russian, Korean, and even multiple Middle Eastern languages
+        and is a quite physically formidable combatant on his own when the situation
+        demands it, managing to fight Hammer Industries guards and bare-handedly confront
+        several ninjas) | At least Extraordinary Genius with the Extremis enhancements
+        that allow him to process information at a much faster rate. Feats: Base:
+        *Beats up several skrulls in hand to hand.Illuminati Vol 2 #1 *Easily flips
+        over a guy with a laser via Caps moves. *Takes out several gladiators in hand
+        to hand. *Can fight Crimson Dynamo, take a conference, checks over the laboratories
+        and bids on a relic simultaneously.Iron Man Vol 4 #7 *Temporary held his own
+        against Madame Hydra.Iron Man: Director of S.H.I.E.L.D. *Can even hack advanced
+        technology with simple tools while being mentally unstable. As Cosmic Iron
+        Man: *Blew a hole through Korvac with his unibeam, temporarily incapacitating
+        him. *Was fine after Korvac threw a planet at him. *Was so powerful that Hellcat
+        called for Doctor Doom and the Silver Surfer to help stop him. *One-shotted
+        Doctor Doom. *Destroyed several planets and extinguished a star during his
+        fight with Korvac.'
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Without his armor, Extremis or the R.T Node, he is just a normal human
+        being. He holds back against opponents he finds harmless or personally refuses
+        to kill. Even though he quit drinking, Tony continues to struggle and avoid
+        falling off the wagon, making his alcoholism susceptible to the prospect of
+        drinking, especially under pressure. | Due to Extremis being biologically
+        attached to his body he is directly vulnerable to technological assaults,
+        the virus also accelerates some of his brain functions while leaving others
+        at normal levels, making him suffer from things like hallucinations. He is
+        highly dependent on the R.T Node to keep his Extremis-modified body working
+        should he lose Extremis. | Varies from armor to armor. | None Notable. Notable
+        Attacks/Techniques: By himself: *Iron Legion: Also known as Royalguard, an
+        army of several Iron Man Armors are summoned and commanded from his armory,
+        those can be controlled remotely or automatically by his I.As. The legions
+        includes both known and unknown models and marks. Stark mainly calls them
+        to battle several foes at time or one large and strong enemy. Extremis Enhanced:
+        *Technology Interference: Via Extremis, Stark can remotely access to external
+        communications systems such as satellites, cellular phones, and computers
+        throughout the world. H was could project his voice through a cellular phones
+        for example. He can crack codes entire nations couldn''tIron Man: Inevitable
+        #6 , and take over Cloc which was a fabrication of Reed RichardsIron Man Vol
+        4 #11 *Armor Undersheath: The nanoparticles inside the hollow of his bones
+        can form a gold outershell that has the primary functions to manipulate the
+        extremis armor, it also works as a shield of sorts RepulsorTech Node: *Energy
+        Projection: The R.T. node not only provided repulsor energy to run devices
+        such as the Iron Man Armor, its user could produce beams of energy at will,
+        albeit much weaker.Iron Man Vol 5 #521 *Electrical Fields Detection: As the
+        R.T. node was connected to Tony, he could feel different electrical fields
+        that the node was picking up. This included all kinds of invisible frequencies.Iron
+        Man Vol 5 #4 *Magnetic Force-Field: The R.T. node created a force-field which
+        could be modified at will by its user by increasing the power of the reactor
+        incrementally. The Forcefield can be used to levitate the person. Note: Before
+        making any changes to this page, please read and follow the Power-scaling
+        Rules for Marvel and DC Comics. ==Gallery== {| cla'
+      source_id: vsbattles-iron-man-modern-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|iron man marvel comics|9404254
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-iron-man-modern-marvel
     url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Modern%29_Marvel
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern) Marvel
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id007
+    - durability
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    normalized_page_title: Marvel Comics
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
+    revision_id: '9555991'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 1023448
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Power of the Verse
+    - Galaxy level and Low Complex Multiverse level scaling
+    - Explanations
+    - The Size of the Marvel Universe
+    - Calculations
+    - Knowledgeable Members
+    - Supporters/Opponents/Neutral
+    - Supporters
+    - Opponents
+    - Neutral
+    - Characters
+    - 0-/
+    - A-C
+    - D-F
+    - G-I
+    - J-L
+    - M-O
+    - P-R
+    - S-U
+    - V-X
+    - Y-Z
+    - Other Continuities
+    - Spider-Verse
+    - Others
+    - Weapons
+    - Armors
+    - Cosmic Weapons
+    - Others
+    - Teams
+    - Civilizations
+    - Locations
+    - Concepts, Powers and Abilities
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 115
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id008
     - attack_potency
     - speed
     - durability
@@ -527,56 +787,273 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-modern-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Modern%29_Marvel
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern) Marvel
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: durability
+      value: '{{#tag:tabber| {{!}}-{{!}}9-B to 9-A= *Daredevil survives an explosion
+        - 0.008 Tons of TNT (Small Building level) *Iron Fist gets cratered - 12,550,909
+        Joules (Wall level+) *Elsa Bloodstone deforms a car - 9,386,099 Joules (Wall
+        level) *Stilt-Man destroys a wall - 3,561,792 Joules (Wall level) *Daredevil
+        smashes through a wall - 1,790,404 Joules (Wall level) *Human Torch tackles
+        Trapster through a metal wall - 1,434,636 Joules (Wall level) *Moon Knight
+        deforms a jeep - 476,822 Joules (Wall level) *Hawkeye breaks a doorlock -
+        165,791 Joules (Wall level) *Darren Cross gets cratered - 132,892 Joules (Wall
+        level) *Daredevil tanks an explosion - 45,690 Joules (Wall level) {{!}}-{{!}}9-A
+        to 8-C= *Crossbones shatters stone statues - 0.019 Tons of TNT (Small Building
+        level) {{!}}-{{!}}High 8-C to 8-A= *Dagger lights up Manhattam - 102.67 Tons
+        of TNT (Multi-City Block level) *Punisher''s explosives - 61.26 Tons of TNT
+        (City Block level+) *Collective Man''s punch yield - 19.84 Tons of TNT (City
+        Block level) *Black Widow''s explosives - 8.95 Tons of TNT (Large Building
+        level+) *Nuke''s rocket launcher - 8.13 Tons of TNT (Large Building level+)
+        *Mettle tanks an explosion - 7.98 Tons of TNT (Large Building level+) *Iron
+        Man''s Model 4 Armor destroys the Hammer Villa - 4.56 Tons of TNT (Large Building
+        level) *Daily Bugle lands on Spider-Man - 4.45 Tons of TNT (Large Building
+        level) *Gravity tanks Warhead''s explosion - 3.54 Tons of TNT (Large Building
+        level) *Spider-Man withstands Ultimate Nullifier''s explosion - 2.46 Tons
+        of TNT (Large Building level) {{!}}-{{!}}Low 7-C to 7-B= *Quake does some
+        earthquakes - 15.18 Megatons of TNT (City level) *Firebrand''s Explosion -
+        5.62 Megatons of TNT (Small City level+) *Magneto destroys a siberian town
+        - 188.6 Kilotons of TNT (Large Town level) *Luke Cage tanks a nuclear blast
+        - 3.23 Kilotons of TNT (Small Town level) {{!}}-{{!}}6-C to High 6-C= *Mandarin
+        causes an earthquake - 254.07 Gigatons of TNT (Large Island level) *Captain
+        Marvel destroys a meteor - 230.16 Gigatons of TNT (Large Island level) *Temperature
+        decrease in Artic - 38.24 Gigatons of TNT (Island Level) {{!}}-{{!}}5-B= *Grey
+        Hulk destroys an asteroid - 1.2 Yottatons of TNT (Planet level) {{!}}-{{!}}4-B
+        to 3-B= *God Tempest''s kinetic energy - 2.5 Ronnafoe (Multi-Galaxy level)
+        *Thor shakes the stars - 63 ZettaFoe (Galaxy level) *Shaking the Universe
+        98.3 ExaFoe (Multi-Solar System level) *Nova tanks an explosion - 810 Foe
+        (Solar System level) {{!}}-{{!}}Miscellaneous= *Bailey Hoskins'' explosion
+        - 200 Tons of TNT (Multi-City Block level) *Reign Spider-Man tanks an explosion
+        - 0.45 Tons of TNT (Building level) *CAGE! gets cratered - 829,080 Joules
+        (Wall level) *Golden Age Captain America stops a car - 155,850 Joules (Wall
+        level) }}'
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: '*Silver Surfer''s flight speed - 105,192,000,000,000,000c (Massively
+        FTL+) *Thor flies to the edge of the Universe - 8.0861519e+17c (Massively
+        FTL+) *Thor Sends Enchantress and the Executioner back to Asgard - 1,674,000,000,000,000c
+        (Massively FTL+) *Thor Throws Loki to Asgard from Earth - 13.950,000,000,000
+        c (Massively FTL+) *Mighty Thor creates a galaxy wide lightning attack - 7.8840505e+13c
+        (Massively FTL+) *Mighty Thor cross several galaxies quickly - 1.5767987e+13c
+        (Massively FTL+) *Nova sightseeing in Cancerverse - 30,435,150c (Massively
+        FTL+) *Nova finds the Milky Way - 8,414,710,242c (Massively FTL+) *Gladiator
+        flies a many light years in seconds - 4,207,799.984 c (Massively FTL+) *Nova
+        tries his new Helmet - 137,895,397c (Massively FTL+) *Captain Marvel and Firelord
+        fly a few light years in a short time - 105,194.998 c (Massively FTL+) *Carol
+        Danvers flies several light years in a couple of hours - 13,149.37 c (Massively
+        FTL+) *Captain Marvel''s teleportation speed - 1,610 c (Massively FTL+) *Mentor
+        flies Moondragon to Titan - 44.8c (FTL+) *Silver Surfer flies from Dr. Strange''s
+        Sanctum Sanctorum to Rurutu - 35.4c (FTL+) *Iron Man and Sentry flew from
+        Earth to the Sun in a short timeframe - 8.31c (FTL) *Thor deflects Star-Blazer
+        - 4.39c (FTL) *Grim Reaper reacts and intercepts Vision''s Eye Beams - 1.26c
+        (FTL) *Spider-Man''s Dodges Light - 0.38c (Relativistic) *Iron Man intercepts
+        Dr. Spectrum''s Blast - 0.08c (Sub-Relativistic) *Sentinels fly to Earth -
+        0.02c (Sub-Relativistic) *Spider-Man''s destroys a stone slab in a microsecond
+        - 2,590,000 m/s (Massively Hypersonic+) *Spider-Man Dodges Lightning - 369,237
+        (Massively Hypersonic+) *Hawkeye shoots Champion''s bowstring - 149,253 m/s
+        (Massively Hypersonic) *Moon Knight dodges rifle bullets - 34,223 m/s (High
+        Hypersonic) *Captain Marvel''s flight speed - 10,677 m/s (High Hypersonic)
+        *Silver Centurion Flies to Denver from LA in minutes - 6,026 m/s (Hypersonic+)
+        *Silver Centurion Flies to New York from California in 20 minutes - 3,684
+        m/s (Hypersonic+) *Elektra kicks a bullet - 2,825 m/s (Hypersonic) *Daredevil
+        deflects bullet - 1,567 m/s (Supersonic+) *Moon Knight dodges a bullet - 900
+        m/s (Supersonic+) *Elektra Blocks Bullets - 821 m/s (Supersonic) *Daredevil
+        Blocks Bullets - 612 m/s (Supersonic) *Daredevil Blocks Arrows - 429.9 m/s
+        (Supersonic) *Blade creates an afterimage - 351 m/s (Transonic) *Blade blitzes
+        a ghoul - 215 m/s (Subsonic+) *Daredevil Dodges Gunshots - 211 m/s (Subsonic+)
+        *Moon Knight ducks a Bullet at Close Range - 142 m/s (Subsonic) *Moon Knight
+        ducks a bullet - 129 m/s (Subsonic) *Moon Knight intercepts a Bullet - 124
+        m/s (Subsonic) *Moon Knight dodges gunfire - 118 m/s (Subsonic)'
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Venom Vol 4 28 Unknown Comic Books Kirkham Exclusive Virgin Variant.jpg|All-Black
+        the Necrosword|link=All-Black the Necrosword CosmicCube.png|Cosmic Cubes|link=Cosmic
+        Cubes Guardians of the Galaxy Vol 2 8 Villain Variant Textless.webp|The Infinity
+        Gauntlet|link=The Infinity Gauntlet Anath-Na Mut (Earth-97751) from What If?
+        Vol 1 15 0001.webp|Ka Stone|link=Ka Stone Immortal Thor Vol 1 4 Textless.webp|Mjolnir|link=Mjolnir
+        (Marvel Comics) UltimateNullifier1.png|The Ultimate Nullifier|link=The Ultimate
+        Nullifier Universal Weapon Logo.jpg|Universal Weapon|link=Universal Weapon
+        (Marvel Comics) ===Others=== Big wheel big wheel big wheel big wheel.png|Big
+        Wheel|link=Big Wheel (Marvel Comics) Spider-Mobile MC GalImg.jpg|Spider-Mobile|link=Spider-Mobile
+        (Marvel Comics) ==Teams== Avengers The Origin Vol 1 1 Textless.webp|Avengers
+        (1960s)|link=Avengers (1960s Team) Enforcers MC GalImg.webp|The Enforcers|link=Enforcers
+        (Marvel Comics) ==Civilizations== Books of Doom Vol 1 5 Textless full.jpg|Latveria|link=Latveria
+        Wakanda flag.png|Wakanda|link=Wakanda (Marvel Comics) Kree race .jpg|Kree|link=Kree
+        (Marvel Comics) ==Locations== House of Ideas MC GalImg.jpg|House of Ideas|link=House
+        of Ideas (Marvel Comics) ==Concepts,
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Astral Plane.webp|link=The Nature of Astral Forms, the Astral Plane,
+        and Telepathy (Marvel Comics)|Astral Plane G.O.D.S. Vol 1 6 Textless.webp|Cosmology|link=Marvel
+        Comics Cosmology (World Hierarchy) Thor & Hercules- Encyclopaedia Mythologica
+        Vol 1 1 Textless Crop.webp|God Physiology|link=God Physiology (Marvel Comics)
+        Sorcerer Supreme Vol 1 1 Promo Variant crop.png|Magic|link=Magic (Marvel Comics)
+        ==References== {{Reflist|2}} {{discussions}} {{GeneralDiscussion|120870}}
+        Category:Verses Category:Marvel Entertainment Category:Comic Books Category:Disney
+        Category:Science Fantasy Category:Metafiction Category:1930s
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: '142 m/s (Subsonic) *Moon Knight ducks a bullet - 129 m/s (Subsonic)
+        *Moon Knight intercepts a Bullet - 124 m/s (Subsonic) *Moon Knight dodges
+        gunfire - 118 m/s (Subsonic) |-|Lifting Strength= *Kang''s spaceship holds
+        back Mercury''s alignment - 5.288166703e25 kg (Class Y) *Graviton compresses
+        a rock - 45,712,500,000 kg (Class G) *Spider-Man holds up the Daily Bugle
+        - 508,805,393 kg (Class M) *Wolverine pries open elevator doors - 9,486,000
+        kg (Class M) *Kingpin crushes a rock - 566,667 kg (Class K) *Deadpool pushes
+        a large statue - 241,000 kg (Class K) *Falcon rips up some chains - 175,615
+        (Class K) *Deadpool carries a large bomb - 100,000 kg (Class K) *Falcon bends
+        a metal bar - 70,000 kg (Class K) *Falcon overpowers a giant''s grip - 39,900
+        kg (Class 50) *Ox pushes a boulder - 21689 kg (Class 25) *Moon Knight lifts
+        a steel door - 7,379 kg (Class 10) *D-Man lifts several plates - 5,443 kg
+        (Class 10) *Daredevil easily swings a large barbell - 3,400 kg (Class 5) ==
+        Knowledgeable Members== {{Scroll box|content= *The real cal howard *Antvasima
+        *Matthew Schroeder *Eficiente *Spinosaurus75DinosaurFan *Sandman31 *Kahndaq
+        Lord (Before Secret Wars (2015) *RinkakuKagune *Moonshadow137 *Tllmbrg (Knowledge
+        is admittedly somewhat random) *CrimsonStarFallen *Dark-Carioca *Hykuu (literally
+        everything excluding Street) *LordTracer *ObberGobb *Eseseso (Especially Doctor
+        Doom and Dormammu) *Marvel Champion 07 (Primarily knowledgeable about Thor
+        in modern comics) *Excellence616 (Everything excluding anything related to
+        Marvel Comics Cosmology) *ProfectusInfinity (Knowledgeable on the accepted
+        cosmology, and cosmic/magic lore) *VeryGoofyToddler2 *Rgerdeena }} == Supporters/Opponents/Neutral==
+        ===Supporters=== {{Scroll box|content= *FinePoint *The Imp-ress *Elizhaa *KLOL506
+        *Rose of Ragnarok *DBZMLP12345 *HeadlessKramerGeoff777 *Apex Predator GX *I''m
+        Blue daba dee daba die *MarvelFanatic119 *Dark-Carioca *TISSG7Redgrave *Roachman40
+        *Tonygameman *Re5yh *PsychoWarper *Not Icarus *Excellence616 *KingEzran *Unoriginal
+        Memes *Sans2345 *Sir sun man *Crazylatin77 *GojiBoyForever *Alonik *Tllmbrg
+        *Spinosaurus75DinosaurFan *Amelia Lonelyheart *SamanPatou *MistaClean *Maverick
+        Zero X *Marvel Champion 07 *Da3ggman *ProfectusInfinity *Eseseso *Tomfer *Anarchy219
+        *Maikolpry *TugiaTheNarrator *Rgerdeena }} ===Opponents=== *Mariogoods *Dargoo
+        Faust *Newendigo *Bernkastelll ===Neutral=== {{Scroll box|content= *Zensum
+        *Ryukama *Matthew Schroeder *Megamangohan *Oloserian *Sandman31 *ElixirBlue
+        *Starter Pack *Confluctor *LordTracer *Rose of Ragnarok *DarkDragonMedeus
+        }} ==Characters== Notes: Before making any changes to the following pages,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics instructions.
+        In addition, some profiles may need to have their statistics updated. The
+        improvements are a steady work in progress. ===0-/=== 8-Ball MC GalImg.webp|8-Ball|link=8-Ball
+        (Marvel Comics) ===A-C=== Emil Blonsky (Earth-616) from Hulk Vol 3 2 cover
+        full.jpg|Abomination|link=Abomination (Marvel Comics) Abraxas MC GalImg.jpg|Abraxas|link=Abraxas
+        (Marvel Comics) Adam Warlock MC GalImg.jpg|Adam Warlock|link=Adam Warlock
+        (Marvel Comics) the adverdsary 2.jpg|The Adversary|link=The Adversary (Marvel
+        Comics) AeroVariant.webp|Aero|link=Aero (Marvel Comics) AgathaHarknessIcon.png|Agatha
+        Harkness|link=Agatha Harkness (Marvel Comics) Agent Venom MC GalImg.jpg|Agent
+        Venom|link=Agent Venom Ai Apaec MC GalImg.jpg|Ai Apaec|link=Ai Apaec (Marvel
+        Comics) AirWalker_(Marvel_Comics).jpg|Air-Walker|link=Air-Walker AlligatorLokiPortrait.webp|Alligator
+        Loki|link=Alligator Loki Totally Awesome Hulk Vol 1 16 Textless full.jpg|Amadeus
+        Cho|link=Amadeus Cho Amelia Voght MC GalImg.webp|Amelia Voght|link=Amelia
+        Voght (Marvel Comics) America Chavez MC TR.jpg|America Chavez|link=America
+        Chavez (Marvel Comics) Uncanny X-Force Vol 1 19 Garney Variant Textless.jpg|Angel/Archangel|link=Archangel
+        (Marvel Comics) Angela Marvel (Verse Page Image).jpg|Angela|link=Angela (Marvel
+        Comics) Annihilation - Scourge Alpha Vol 1 1 Lim Variant Textless.jpg|Annihilus|link=Annihilus
+        Ant-Man Eric.png|Ant-Man (Eric O''Grady)|link=Ant-Man (Eric O''Grady) Ant-Man
+        MC GalImg.jpg|Ant-Man (Scott Lang)|link=Ant-Man (Scott Lang) Anti-Man Marvel
+        Comics GalImg.jpg|Anti-Man|link=Anti-Man (Marvel Comics) House of X Vol 1
+        5 Virgin Variant.jpg|Apocalypse|link=Apocalypse (Marvel Comics) Arnim Zola
+        MC GalImg.jpg|Arnim Zola|link=Arnim Zola (Marvel Comics) RCO017 1463410368.jpg|Aspirants|link=Aspirants
+        (Marvel Comics) Atum Original Form.jpeg|Atum|link=Atum (Marvel Comics) Alpha
+        Flight Vol 1 3 Textless.webp|Aurora|link=Aurora (Marvel Comics) Awesome Android
+        MC GalImg.jpg|Awesome Android|link=Awesome Android (Marvel Comics) Azazel
+        MC GalImg.jpg|Azazel|link=Azazel (Marvel Comics) Powers of X Vol 1 2 Character
+        Decades Variant Textless.jpg|The Beast|link=Beast (Marvel Comics) Beetle MC
+        GalImg.jpg|Beetle|link=Beetle (Janice Lincoln) Benjamin Franklin % 28Earth-616%
+        29 from S.H.I.E.L.D. Vol 1 4 001.webp|Benjamin'
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 2
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|marvel comics|9555991
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-iron-man-modern-marvel
     url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Modern%29_%28Marvel%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern) (Marvel)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id009
+    - durability
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    normalized_page_title: Marvel Comics
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
+    revision_id: '9555991'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 1023448
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Power of the Verse
+    - Galaxy level and Low Complex Multiverse level scaling
+    - Explanations
+    - The Size of the Marvel Universe
+    - Calculations
+    - Knowledgeable Members
+    - Supporters/Opponents/Neutral
+    - Supporters
+    - Opponents
+    - Neutral
+    - Characters
+    - 0-/
+    - A-C
+    - D-F
+    - G-I
+    - J-L
+    - M-O
+    - P-R
+    - S-U
+    - V-X
+    - Y-Z
+    - Other Continuities
+    - Spider-Verse
+    - Others
+    - Weapons
+    - Armors
+    - Cosmic Weapons
+    - Others
+    - Teams
+    - Civilizations
+    - Locations
+    - Concepts, Powers and Abilities
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 115
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id010
     - attack_potency
     - speed
     - durability
@@ -585,145 +1062,252 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-modern-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Modern%29_%28Marvel%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern) (Marvel)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: durability
+      value: '{{#tag:tabber| {{!}}-{{!}}9-B to 9-A= *Daredevil survives an explosion
+        - 0.008 Tons of TNT (Small Building level) *Iron Fist gets cratered - 12,550,909
+        Joules (Wall level+) *Elsa Bloodstone deforms a car - 9,386,099 Joules (Wall
+        level) *Stilt-Man destroys a wall - 3,561,792 Joules (Wall level) *Daredevil
+        smashes through a wall - 1,790,404 Joules (Wall level) *Human Torch tackles
+        Trapster through a metal wall - 1,434,636 Joules (Wall level) *Moon Knight
+        deforms a jeep - 476,822 Joules (Wall level) *Hawkeye breaks a doorlock -
+        165,791 Joules (Wall level) *Darren Cross gets cratered - 132,892 Joules (Wall
+        level) *Daredevil tanks an explosion - 45,690 Joules (Wall level) {{!}}-{{!}}9-A
+        to 8-C= *Crossbones shatters stone statues - 0.019 Tons of TNT (Small Building
+        level) {{!}}-{{!}}High 8-C to 8-A= *Dagger lights up Manhattam - 102.67 Tons
+        of TNT (Multi-City Block level) *Punisher''s explosives - 61.26 Tons of TNT
+        (City Block level+) *Collective Man''s punch yield - 19.84 Tons of TNT (City
+        Block level) *Black Widow''s explosives - 8.95 Tons of TNT (Large Building
+        level+) *Nuke''s rocket launcher - 8.13 Tons of TNT (Large Building level+)
+        *Mettle tanks an explosion - 7.98 Tons of TNT (Large Building level+) *Iron
+        Man''s Model 4 Armor destroys the Hammer Villa - 4.56 Tons of TNT (Large Building
+        level) *Daily Bugle lands on Spider-Man - 4.45 Tons of TNT (Large Building
+        level) *Gravity tanks Warhead''s explosion - 3.54 Tons of TNT (Large Building
+        level) *Spider-Man withstands Ultimate Nullifier''s explosion - 2.46 Tons
+        of TNT (Large Building level) {{!}}-{{!}}Low 7-C to 7-B= *Quake does some
+        earthquakes - 15.18 Megatons of TNT (City level) *Firebrand''s Explosion -
+        5.62 Megatons of TNT (Small City level+) *Magneto destroys a siberian town
+        - 188.6 Kilotons of TNT (Large Town level) *Luke Cage tanks a nuclear blast
+        - 3.23 Kilotons of TNT (Small Town level) {{!}}-{{!}}6-C to High 6-C= *Mandarin
+        causes an earthquake - 254.07 Gigatons of TNT (Large Island level) *Captain
+        Marvel destroys a meteor - 230.16 Gigatons of TNT (Large Island level) *Temperature
+        decrease in Artic - 38.24 Gigatons of TNT (Island Level) {{!}}-{{!}}5-B= *Grey
+        Hulk destroys an asteroid - 1.2 Yottatons of TNT (Planet level) {{!}}-{{!}}4-B
+        to 3-B= *God Tempest''s kinetic energy - 2.5 Ronnafoe (Multi-Galaxy level)
+        *Thor shakes the stars - 63 ZettaFoe (Galaxy level) *Shaking the Universe
+        98.3 ExaFoe (Multi-Solar System level) *Nova tanks an explosion - 810 Foe
+        (Solar System level) {{!}}-{{!}}Miscellaneous= *Bailey Hoskins'' explosion
+        - 200 Tons of TNT (Multi-City Block level) *Reign Spider-Man tanks an explosion
+        - 0.45 Tons of TNT (Building level) *CAGE! gets cratered - 829,080 Joules
+        (Wall level) *Golden Age Captain America stops a car - 155,850 Joules (Wall
+        level) }}'
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: '*Silver Surfer''s flight speed - 105,192,000,000,000,000c (Massively
+        FTL+) *Thor flies to the edge of the Universe - 8.0861519e+17c (Massively
+        FTL+) *Thor Sends Enchantress and the Executioner back to Asgard - 1,674,000,000,000,000c
+        (Massively FTL+) *Thor Throws Loki to Asgard from Earth - 13.950,000,000,000
+        c (Massively FTL+) *Mighty Thor creates a galaxy wide lightning attack - 7.8840505e+13c
+        (Massively FTL+) *Mighty Thor cross several galaxies quickly - 1.5767987e+13c
+        (Massively FTL+) *Nova sightseeing in Cancerverse - 30,435,150c (Massively
+        FTL+) *Nova finds the Milky Way - 8,414,710,242c (Massively FTL+) *Gladiator
+        flies a many light years in seconds - 4,207,799.984 c (Massively FTL+) *Nova
+        tries his new Helmet - 137,895,397c (Massively FTL+) *Captain Marvel and Firelord
+        fly a few light years in a short time - 105,194.998 c (Massively FTL+) *Carol
+        Danvers flies several light years in a couple of hours - 13,149.37 c (Massively
+        FTL+) *Captain Marvel''s teleportation speed - 1,610 c (Massively FTL+) *Mentor
+        flies Moondragon to Titan - 44.8c (FTL+) *Silver Surfer flies from Dr. Strange''s
+        Sanctum Sanctorum to Rurutu - 35.4c (FTL+) *Iron Man and Sentry flew from
+        Earth to the Sun in a short timeframe - 8.31c (FTL) *Thor deflects Star-Blazer
+        - 4.39c (FTL) *Grim Reaper reacts and intercepts Vision''s Eye Beams - 1.26c
+        (FTL) *Spider-Man''s Dodges Light - 0.38c (Relativistic) *Iron Man intercepts
+        Dr. Spectrum''s Blast - 0.08c (Sub-Relativistic) *Sentinels fly to Earth -
+        0.02c (Sub-Relativistic) *Spider-Man''s destroys a stone slab in a microsecond
+        - 2,590,000 m/s (Massively Hypersonic+) *Spider-Man Dodges Lightning - 369,237
+        (Massively Hypersonic+) *Hawkeye shoots Champion''s bowstring - 149,253 m/s
+        (Massively Hypersonic) *Moon Knight dodges rifle bullets - 34,223 m/s (High
+        Hypersonic) *Captain Marvel''s flight speed - 10,677 m/s (High Hypersonic)
+        *Silver Centurion Flies to Denver from LA in minutes - 6,026 m/s (Hypersonic+)
+        *Silver Centurion Flies to New York from California in 20 minutes - 3,684
+        m/s (Hypersonic+) *Elektra kicks a bullet - 2,825 m/s (Hypersonic) *Daredevil
+        deflects bullet - 1,567 m/s (Supersonic+) *Moon Knight dodges a bullet - 900
+        m/s (Supersonic+) *Elektra Blocks Bullets - 821 m/s (Supersonic) *Daredevil
+        Blocks Bullets - 612 m/s (Supersonic) *Daredevil Blocks Arrows - 429.9 m/s
+        (Supersonic) *Blade creates an afterimage - 351 m/s (Transonic) *Blade blitzes
+        a ghoul - 215 m/s (Subsonic+) *Daredevil Dodges Gunshots - 211 m/s (Subsonic+)
+        *Moon Knight ducks a Bullet at Close Range - 142 m/s (Subsonic) *Moon Knight
+        ducks a bullet - 129 m/s (Subsonic) *Moon Knight intercepts a Bullet - 124
+        m/s (Subsonic) *Moon Knight dodges gunfire - 118 m/s (Subsonic)'
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Venom Vol 4 28 Unknown Comic Books Kirkham Exclusive Virgin Variant.jpg|All-Black
+        the Necrosword|link=All-Black the Necrosword CosmicCube.png|Cosmic Cubes|link=Cosmic
+        Cubes Guardians of the Galaxy Vol 2 8 Villain Variant Textless.webp|The Infinity
+        Gauntlet|link=The Infinity Gauntlet Anath-Na Mut (Earth-97751) from What If?
+        Vol 1 15 0001.webp|Ka Stone|link=Ka Stone Immortal Thor Vol 1 4 Textless.webp|Mjolnir|link=Mjolnir
+        (Marvel Comics) UltimateNullifier1.png|The Ultimate Nullifier|link=The Ultimate
+        Nullifier Universal Weapon Logo.jpg|Universal Weapon|link=Universal Weapon
+        (Marvel Comics) ===Others=== Big wheel big wheel big wheel big wheel.png|Big
+        Wheel|link=Big Wheel (Marvel Comics) Spider-Mobile MC GalImg.jpg|Spider-Mobile|link=Spider-Mobile
+        (Marvel Comics) ==Teams== Avengers The Origin Vol 1 1 Textless.webp|Avengers
+        (1960s)|link=Avengers (1960s Team) Enforcers MC GalImg.webp|The Enforcers|link=Enforcers
+        (Marvel Comics) ==Civilizations== Books of Doom Vol 1 5 Textless full.jpg|Latveria|link=Latveria
+        Wakanda flag.png|Wakanda|link=Wakanda (Marvel Comics) Kree race .jpg|Kree|link=Kree
+        (Marvel Comics) ==Locations== House of Ideas MC GalImg.jpg|House of Ideas|link=House
+        of Ideas (Marvel Comics) ==Concepts,
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Astral Plane.webp|link=The Nature of Astral Forms, the Astral Plane,
+        and Telepathy (Marvel Comics)|Astral Plane G.O.D.S. Vol 1 6 Textless.webp|Cosmology|link=Marvel
+        Comics Cosmology (World Hierarchy) Thor & Hercules- Encyclopaedia Mythologica
+        Vol 1 1 Textless Crop.webp|God Physiology|link=God Physiology (Marvel Comics)
+        Sorcerer Supreme Vol 1 1 Promo Variant crop.png|Magic|link=Magic (Marvel Comics)
+        ==References== {{Reflist|2}} {{discussions}} {{GeneralDiscussion|120870}}
+        Category:Verses Category:Marvel Entertainment Category:Comic Books Category:Disney
+        Category:Science Fantasy Category:Metafiction Category:1930s
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: '142 m/s (Subsonic) *Moon Knight ducks a bullet - 129 m/s (Subsonic)
+        *Moon Knight intercepts a Bullet - 124 m/s (Subsonic) *Moon Knight dodges
+        gunfire - 118 m/s (Subsonic) |-|Lifting Strength= *Kang''s spaceship holds
+        back Mercury''s alignment - 5.288166703e25 kg (Class Y) *Graviton compresses
+        a rock - 45,712,500,000 kg (Class G) *Spider-Man holds up the Daily Bugle
+        - 508,805,393 kg (Class M) *Wolverine pries open elevator doors - 9,486,000
+        kg (Class M) *Kingpin crushes a rock - 566,667 kg (Class K) *Deadpool pushes
+        a large statue - 241,000 kg (Class K) *Falcon rips up some chains - 175,615
+        (Class K) *Deadpool carries a large bomb - 100,000 kg (Class K) *Falcon bends
+        a metal bar - 70,000 kg (Class K) *Falcon overpowers a giant''s grip - 39,900
+        kg (Class 50) *Ox pushes a boulder - 21689 kg (Class 25) *Moon Knight lifts
+        a steel door - 7,379 kg (Class 10) *D-Man lifts several plates - 5,443 kg
+        (Class 10) *Daredevil easily swings a large barbell - 3,400 kg (Class 5) ==
+        Knowledgeable Members== {{Scroll box|content= *The real cal howard *Antvasima
+        *Matthew Schroeder *Eficiente *Spinosaurus75DinosaurFan *Sandman31 *Kahndaq
+        Lord (Before Secret Wars (2015) *RinkakuKagune *Moonshadow137 *Tllmbrg (Knowledge
+        is admittedly somewhat random) *CrimsonStarFallen *Dark-Carioca *Hykuu (literally
+        everything excluding Street) *LordTracer *ObberGobb *Eseseso (Especially Doctor
+        Doom and Dormammu) *Marvel Champion 07 (Primarily knowledgeable about Thor
+        in modern comics) *Excellence616 (Everything excluding anything related to
+        Marvel Comics Cosmology) *ProfectusInfinity (Knowledgeable on the accepted
+        cosmology, and cosmic/magic lore) *VeryGoofyToddler2 *Rgerdeena }} == Supporters/Opponents/Neutral==
+        ===Supporters=== {{Scroll box|content= *FinePoint *The Imp-ress *Elizhaa *KLOL506
+        *Rose of Ragnarok *DBZMLP12345 *HeadlessKramerGeoff777 *Apex Predator GX *I''m
+        Blue daba dee daba die *MarvelFanatic119 *Dark-Carioca *TISSG7Redgrave *Roachman40
+        *Tonygameman *Re5yh *PsychoWarper *Not Icarus *Excellence616 *KingEzran *Unoriginal
+        Memes *Sans2345 *Sir sun man *Crazylatin77 *GojiBoyForever *Alonik *Tllmbrg
+        *Spinosaurus75DinosaurFan *Amelia Lonelyheart *SamanPatou *MistaClean *Maverick
+        Zero X *Marvel Champion 07 *Da3ggman *ProfectusInfinity *Eseseso *Tomfer *Anarchy219
+        *Maikolpry *TugiaTheNarrator *Rgerdeena }} ===Opponents=== *Mariogoods *Dargoo
+        Faust *Newendigo *Bernkastelll ===Neutral=== {{Scroll box|content= *Zensum
+        *Ryukama *Matthew Schroeder *Megamangohan *Oloserian *Sandman31 *ElixirBlue
+        *Starter Pack *Confluctor *LordTracer *Rose of Ragnarok *DarkDragonMedeus
+        }} ==Characters== Notes: Before making any changes to the following pages,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics instructions.
+        In addition, some profiles may need to have their statistics updated. The
+        improvements are a steady work in progress. ===0-/=== 8-Ball MC GalImg.webp|8-Ball|link=8-Ball
+        (Marvel Comics) ===A-C=== Emil Blonsky (Earth-616) from Hulk Vol 3 2 cover
+        full.jpg|Abomination|link=Abomination (Marvel Comics) Abraxas MC GalImg.jpg|Abraxas|link=Abraxas
+        (Marvel Comics) Adam Warlock MC GalImg.jpg|Adam Warlock|link=Adam Warlock
+        (Marvel Comics) the adverdsary 2.jpg|The Adversary|link=The Adversary (Marvel
+        Comics) AeroVariant.webp|Aero|link=Aero (Marvel Comics) AgathaHarknessIcon.png|Agatha
+        Harkness|link=Agatha Harkness (Marvel Comics) Agent Venom MC GalImg.jpg|Agent
+        Venom|link=Agent Venom Ai Apaec MC GalImg.jpg|Ai Apaec|link=Ai Apaec (Marvel
+        Comics) AirWalker_(Marvel_Comics).jpg|Air-Walker|link=Air-Walker AlligatorLokiPortrait.webp|Alligator
+        Loki|link=Alligator Loki Totally Awesome Hulk Vol 1 16 Textless full.jpg|Amadeus
+        Cho|link=Amadeus Cho Amelia Voght MC GalImg.webp|Amelia Voght|link=Amelia
+        Voght (Marvel Comics) America Chavez MC TR.jpg|America Chavez|link=America
+        Chavez (Marvel Comics) Uncanny X-Force Vol 1 19 Garney Variant Textless.jpg|Angel/Archangel|link=Archangel
+        (Marvel Comics) Angela Marvel (Verse Page Image).jpg|Angela|link=Angela (Marvel
+        Comics) Annihilation - Scourge Alpha Vol 1 1 Lim Variant Textless.jpg|Annihilus|link=Annihilus
+        Ant-Man Eric.png|Ant-Man (Eric O''Grady)|link=Ant-Man (Eric O''Grady) Ant-Man
+        MC GalImg.jpg|Ant-Man (Scott Lang)|link=Ant-Man (Scott Lang) Anti-Man Marvel
+        Comics GalImg.jpg|Anti-Man|link=Anti-Man (Marvel Comics) House of X Vol 1
+        5 Virgin Variant.jpg|Apocalypse|link=Apocalypse (Marvel Comics) Arnim Zola
+        MC GalImg.jpg|Arnim Zola|link=Arnim Zola (Marvel Comics) RCO017 1463410368.jpg|Aspirants|link=Aspirants
+        (Marvel Comics) Atum Original Form.jpeg|Atum|link=Atum (Marvel Comics) Alpha
+        Flight Vol 1 3 Textless.webp|Aurora|link=Aurora (Marvel Comics) Awesome Android
+        MC GalImg.jpg|Awesome Android|link=Awesome Android (Marvel Comics) Azazel
+        MC GalImg.jpg|Azazel|link=Azazel (Marvel Comics) Powers of X Vol 1 2 Character
+        Decades Variant Textless.jpg|The Beast|link=Beast (Marvel Comics) Beetle MC
+        GalImg.jpg|Beetle|link=Beetle (Janice Lincoln) Benjamin Franklin % 28Earth-616%
+        29 from S.H.I.E.L.D. Vol 1 4 001.webp|Benjamin'
+      source_id: vsbattles-iron-man-modern-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 2
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|marvel comics|9555991
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-iron-man-modern-earth-616
     url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Modern%29_%28Earth-616%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern) (Earth-616)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id005
     - attack_potency
-    - speed
     - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-modern-earth-616
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Modern%29_%28Earth-616%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern) (Earth-616)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
+    - powers_and_abilities
+    - range
     - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
     - stamina
-    - intelligence
-    field_candidates: []
-  - source_id: mediawiki-iron-man-modern
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_(Modern)
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 60
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
+    - standard_equipment
     - tier
-    - attack_potency
-    - speed
-    - durability
-    - range
-    - stamina
-    - intelligence
-    - abilities
-    - equipment
     - weaknesses
-    field_candidates: []
-  - source_id: vsbattles-iron-man-modern
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Modern%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern)
+    normalized_page_title: Iron Lad (Marvel Comics)
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 60
+    revision_id: '9442809'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6526
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Explanation
+    - References
+    - Notable Matchups
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id006
     - attack_potency
     - speed
     - durability
@@ -732,68 +1316,213 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-modern
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Modern%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Modern)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 60
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-  - source_id: vsbattles-iron-man-modern-marvel
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_Modern_Marvel
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man Modern Marvel
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 45
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: tier
+      value: '{{5-B}} Name: Nathaniel Richards, Iron Lad, Kid Immortus Origin: Marvel
+        Comics Gender: Male Age: 16 Classification: Human, conqueror, former superhero
+        and member of the Young Avengers'
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Genius Intelligence and Resistance to Radiation Manipulation (Within
+        his time period people are highly resistant to radiation)Avengers Vol 1 8.
+        The Neurokinetic Armor grants him Superhuman Physical Characteristics, Flight,
+        Intangibility, Energy Projection, Magnetism Manipulation (can create magnetic
+        fields that can hold people), Fire Extinguishers, functionally Instinctive
+        Reaction (As an armor, can act on the wearer's thoughts alone, even before
+        they think them)Young Avengers Vol 1 1, Time Travel, Portal Creation, Light
+        Projection, Pain Manipulation, Hacking, Technology Manipulation, Electricity
+        Manipulation, Shapeshifting (the armor can turn into many forms as well as
+        form weapons on its arms), Heat Manipulation, Enhanced Senses, Extrasensory
+        Perception and Resistance to Transmutation
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Planet level (One-shot the Extremis Armor while holding back)Young Avengers
+        Vol 1 3
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least HypersonicMach 8.23 (Comparable to Ghost and the Extremis Armor)
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Planet level (Can harm those who harm him)
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Can stay in combat for extended periods of time
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard melee range, unknown with blasts
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: The Neurokinetic Armor
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: At least Genius (Holds knowledge about the timeline second-to-none. Created
+        the Growing Man stimuloid by himself.)FF Vol 2 13Young Avengers Vol 1 2, Extraordinary
+        Genius for his suit (Has all the emotional and physical capabilities of the
+        original Vision, and possesses all the Avengers' files ever made. Extremely
+        capable AI able to perform complex tasks.)Young Avengers Vol 1 7New Avengers
+        Vol 1 18
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "Shows vulnerability to electricity, even while phasing Notes: * Before\
+        \ making any changes to this page, please read and follow the Power-scaling\
+        \ Rules for Marvel and DC Comics ==Explanation== Nathaniel Richards is an\
+        \ incredibly complicated character as there are multiple divergents of him\
+        \ along the timestream. The wiki condenses them as such: * Nathaniel Richards,\
+        \ who was to become Rama-Tut, but his life diverged when he was approached\
+        \ by a time-traveling Kang at age 16, and became a hero under the name of\
+        \ Iron Lad, and then became Kid Immortus. - Iron Lad * Rama-Tut, who then\
+        \ became Kang, became Rama-Tut again, and later became Kang and didn't change\
+        \ to another identity. There were many of these, but Immortus cleaned up his\
+        \ own timeline by manipulating the Kangs into killing each other off and then\
+        \ absorbed the memories of all into a single Kang. This Kang was then killed\
+        \ by a variant who succeeded him. - Kang the Conqueror (Classic Iteration)\
+        \ * Nathaniel Richards, who became Rama-Tut, who then became Kang, became\
+        \ Rama-Tut again, and later became Kang and then eventually changed to Immortus.\
+        \ This version of Kang was later made into an independent being due to Kang\u2019\
+        s willpower to not turn, now with his own history - Immortus ==References==\
+        \ {{Scroll box| {{reflist|2}}}} ==Notable Matchups== Victories: Losses: Inconclusive:\
+        \ ==Statistics Values== {{Discussions|Iron Lad Marvel Comics|Iron Lad (Marvel\
+        \ Comics)}} Category:Marvel Comics Category:Comic Book Characters Category:Characters\
+        \ Category:Male Characters Category:Teenagers Category:Kids Category:Protagonists\
+        \ Category:Good Characters Category:Neutral Characters Category:Heroes Category:Superheroes\
+        \ Category:Students Category:Avengers Category:Humans Category:Armor Users\
+        \ Category:Armor Users Category:Villains Category:Geniuses Category:Flight\
+        \ Users Category:Intangibility Users Category:Energy Projection Users Category:Magnetism\
+        \ Users Category:Instinctive Action Users Category:Time Travelers Category:Portal\
+        \ Users Category:Light Users Category:Pain Users Category:Hackers Category:Technology\
+        \ Users Category:Electricity Users Category:Shapeshifters Category:Temperature\
+        \ Users Category:Enhanced Senses Users Category:Extrasensory Perception Users"
+      source_id: vsbattles-iron-man-modern-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|iron lad marvel comics|9442809
+    retryable: false
+    exception_class: ''
   needs_human_source_choice: false
-  candidate_sources: []
+  candidate_sources:
+  - source_id: vsbattles-iron-man-modern-marvel-comics
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Modern%29_%28Marvel_Comics%29
+    title: Iron Man (Marvel Comics)
+    rank: 130
+    extracted_fields: *id003
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id004
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|iron man marvel comics|9404254
+  - source_id: vsbattles-iron-man-modern-earth-616
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Modern%29_%28Earth-616%29
+    title: Iron Lad (Marvel Comics)
+    rank: 130
+    extracted_fields: *id005
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id006
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|iron lad marvel comics|9442809
+  - source_id: vsbattles-iron-man-modern-marvel
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Modern%29_Marvel
+    title: Marvel Comics
+    rank: 115
+    extracted_fields: *id007
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id008
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 2
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|marvel comics|9555991
+  - source_id: vsbattles-iron-man-modern-marvel
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Modern%29_%28Marvel%29
+    title: Marvel Comics
+    rank: 115
+    extracted_fields: *id009
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id010
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 2
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|marvel comics|9555991
   chosen_source_id: null
   failure_reasons:
-    missing_mediawiki_title: 12
+    fetched: 4
   confidence: 0.0

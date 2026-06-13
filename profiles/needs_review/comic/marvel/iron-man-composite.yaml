@@ -431,9 +431,10 @@ review:
   ineligible_reasons: *id002
   source_errors: []
   notes: []
+  readiness_state: needs_review
 profile_hash: 0cb74d2f300005eed5d92c4516d9ce233faaf363f085489a473d013a35757837
 repair:
-  attempted_at: '2026-06-10T13:39:13Z'
+  attempted_at: '2026-06-13T22:43:03Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -443,24 +444,46 @@ repair:
   source_attempts:
   - source_id: vsbattles-iron-man-composite-marvel-comics
     url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel_Comics%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite) (Marvel Comics)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id005
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - range
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man Armor Model 13
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 95
+    revision_id: '9360925'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 10190
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - References
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id006
     - attack_potency
     - speed
     - durability
@@ -469,56 +492,139 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-composite-marvel-comics
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel_Comics%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite) (Marvel Comics)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 95
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: tier
+      value: At least {{8-B}} | {{5-B}}
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Model 13=Superhuman Physical Characteristics, Energy Projection, Energy
+        Absorption, Plasma Manipulation via Phased Plama Streams, Flight, Adhesive
+        Manipulation via Polybond Adhesive Compound, Magnetism Manipulation (As shown
+        here. The armor can also emit electromagnetic pulses), Ice Manipulation via
+        Cryogenic Compact Module, Explosion Manipulation via Explosive Shells, Sound
+        Manipulation (Uses ultrasound imaging to sense Venom), Electric Discharge
+        (Electrocutes Venom), Temperature Manipulation (Can absorb and convert heat
+        into energy with thermocouples), Limited Atomic Manipulation (By attaching
+        two compact modules, mutually opposing magnetic fields are generated onto
+        Ted's body, "polarizing his synthetic structure and causing his atoms to repel
+        one another"), Illusion Creation with Image Inducers, Limited Technology Manipulation
+        (Can use a Compact Electromagnetic Field Generator to short-circuit Ultimo),
+        Limited Gravity Manipulation with Magnogravetic Field Generator, Resistance
+        to Energy Projection (The Modular Armor has a retractive coating that shields
+        itself from energy attacks), and Microwave Radiation Projection (Shrugs off
+        Firestar's microwave radiation blasts) |-|Hulk Buster=Superhuman Physical
+        Characteristics, Flight, Energy Projection (As shown here), Resistance to
+        Blunt Force Trauma (The Hulk Buster exo-armor is built with Impact-Resistant
+        Carbon Composites, allowing the armor to survive the forceful impact of Hulk's
+        blows)
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'At least City Block level (During its run, it was the most advanced
+        and versatile armor yet and was regarded by Tony as a "quantum leap" from
+        the previous armors. Therefore, it should be at least comparable, if not superior
+        to previous armors such as Model 8, Model 9, and Model 11) | Planet level
+        (Fought and traded blowsIron Man Vol 1 #305 with Professor Hulk, although
+        the fight ended in a stalemate)'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Hypersonic (Should be far faster than earlier models such as
+        Model 4Mach 8.23) | Unknown, possibly at most Hypersonic combat speed (In
+        order to fight the Hulk, versatility and mobility was sacrificed for enhanced
+        physical strength and hand-to-hand combat. Even so, the armor is still capable
+        of keeping up with the HulkMach 8.23)
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least City Block level, possibly far higher (Should have equal, if
+        not superior durability to Model 11) | Planet level (Took blows from Professor
+        Hulk)
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, Unknown with repulsors
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None Notable | The Hulk-Buster armor lacks versatility and mobility
+        compared to other armors due to being made specifically for the Hulk Notable
+        Attacks/Techniques: Model 13: *Phased Plasma Streams: Uses phased plasma streams
+        against EmberForce Works #4. *Polybond Adhesive Compound: Can launch an adhesive
+        substance against enemies, which he does to SpeedballIron Man #303. *Cryogenic
+        Compact Module: Can use liquid nitrogen to freeze and solidify opponentsIron
+        Man #318. *Explosive Shel'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|iron man armor model 13|9360925
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-iron-man-composite-marvel
     url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite) Marvel
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id007
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - range
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man Armor Model 50
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
+    revision_id: '9463001'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4208
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - References
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id008
     - attack_potency
     - speed
     - durability
@@ -527,56 +633,126 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-composite-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite) Marvel
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: tier
+      value: '{{Varies}}, up to {{5-B}}, {{Low 1-C}} in Hulkbuster mode Name: Iron
+        Man Armor Model 50, Endo-Sym Armor Origin: Marvel Comics Age: Unknown Classification:
+        Iron Man Armor, Symbiote Wielders: Tony Stark'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=Yes|Visible=Yes|Content= *Superhuman Physical Characteristics
+        *Flight *Repulsor Projection *Information Analysis (An example hereSuperior
+        Iron Man Vol 1 2) *Electricity Projection (As shown here) *Summoning (Summons
+        Ultimo to attack GreeceCaptain America and the Mighty Avengers, and can summon
+        the armor to himself) *Absorption (Can absorb a specific frequency of energy
+        at a time) *Self-Healing (High-Mid; As a symbioteSuperior Iron Man Vol 1 1,
+        should be comparable in this regard to Venom) *Shapeshifting (The armor is
+        able to change its structure on the whim of the user) *Hacking (Hacked into
+        the Stark A.I.Superior Iron Man Vol 1 7) Resistance to Sound Manipulation
+        (As explained hereSuperior Iron Man Vol 1 9) }}'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Varies (The strength of the armor is dependent on the amount of forming
+        compound added), up to Planet level (Should be superior to previous models),
+        Low Complex Multiverse level in Hulkbuster mode (One-shot the Model 36 armor)
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Hypersonic, likely far higher (Should be considerably superior
+        to Model 4Mach 8.23) with FTL flight speed (Should be as fast as Extremis)
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Varies, up to Planet level. At most Wall level+ for its weakpoint (Daredevil
+        was able to one-shot the armor by striking its arc reactor preciselyAvengers
+        & X-Men: AXIS Vol 1 6)'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Unknown
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Possesses a weakpoint in its chestpiece. Note: Many of the powers used
+        during the Superior Iron Man run are actually associated to the Extremis 3.0
+        app, rather than this armor. ==References== {{scroll box|content= {{Reflist|2}}}}
+        ==Statistics Values== {{Discussions}} Category:Items Category:Marvel Comics
+        Category:Flight Users Category:Energy Projection Users Category:Information
+        Analysis Users Category:Electricity Users Category:Summoners Category:Summons
+        Category:Absorption Users Category:Healers Category:Shapeshifters Category:Hackers
+        Category:Iron Man Armors'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|iron man armor model 50|9463001
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-iron-man-composite-marvel
     url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite) (Marvel)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id009
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - range
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man Armor Model 50
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
+    revision_id: '9463001'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4208
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - References
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id010
     - attack_potency
     - speed
     - durability
@@ -585,145 +761,132 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-composite-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite) (Marvel)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: tier
+      value: '{{Varies}}, up to {{5-B}}, {{Low 1-C}} in Hulkbuster mode Name: Iron
+        Man Armor Model 50, Endo-Sym Armor Origin: Marvel Comics Age: Unknown Classification:
+        Iron Man Armor, Symbiote Wielders: Tony Stark'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=Yes|Visible=Yes|Content= *Superhuman Physical Characteristics
+        *Flight *Repulsor Projection *Information Analysis (An example hereSuperior
+        Iron Man Vol 1 2) *Electricity Projection (As shown here) *Summoning (Summons
+        Ultimo to attack GreeceCaptain America and the Mighty Avengers, and can summon
+        the armor to himself) *Absorption (Can absorb a specific frequency of energy
+        at a time) *Self-Healing (High-Mid; As a symbioteSuperior Iron Man Vol 1 1,
+        should be comparable in this regard to Venom) *Shapeshifting (The armor is
+        able to change its structure on the whim of the user) *Hacking (Hacked into
+        the Stark A.I.Superior Iron Man Vol 1 7) Resistance to Sound Manipulation
+        (As explained hereSuperior Iron Man Vol 1 9) }}'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Varies (The strength of the armor is dependent on the amount of forming
+        compound added), up to Planet level (Should be superior to previous models),
+        Low Complex Multiverse level in Hulkbuster mode (One-shot the Model 36 armor)
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Hypersonic, likely far higher (Should be considerably superior
+        to Model 4Mach 8.23) with FTL flight speed (Should be as fast as Extremis)
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Varies, up to Planet level. At most Wall level+ for its weakpoint (Daredevil
+        was able to one-shot the armor by striking its arc reactor preciselyAvengers
+        & X-Men: AXIS Vol 1 6)'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Unknown
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Possesses a weakpoint in its chestpiece. Note: Many of the powers used
+        during the Superior Iron Man run are actually associated to the Extremis 3.0
+        app, rather than this armor. ==References== {{scroll box|content= {{Reflist|2}}}}
+        ==Statistics Values== {{Discussions}} Category:Items Category:Marvel Comics
+        Category:Flight Users Category:Energy Projection Users Category:Information
+        Analysis Users Category:Electricity Users Category:Summoners Category:Summons
+        Category:Absorption Users Category:Healers Category:Shapeshifters Category:Hackers
+        Category:Iron Man Armors'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|iron man armor model 50|9463001
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-iron-man-composite-earth-616
     url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Earth-616%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite) (Earth-616)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id003
     - attack_potency
-    - speed
     - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-composite-earth-616
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Earth-616%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite) (Earth-616)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
+    - powers_and_abilities
+    - range
     - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
     - stamina
-    - intelligence
-    field_candidates: []
-  - source_id: mediawiki-iron-man-composite
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_(Composite)
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 60
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
+    - standard_equipment
     - tier
-    - attack_potency
-    - speed
-    - durability
-    - range
-    - stamina
-    - intelligence
-    - abilities
-    - equipment
     - weaknesses
-    field_candidates: []
-  - source_id: vsbattles-iron-man-composite
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite)
+    normalized_page_title: War Machine (Marvel Comics)
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 60
+    revision_id: '9330294'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 8084
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id004
     - attack_potency
     - speed
     - durability
@@ -732,68 +895,195 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-  - source_id: character-stats-profiles-iron-man-composite
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man (Composite)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 60
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-  - source_id: vsbattles-iron-man-composite-marvel
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_Composite_Marvel
-    ok: false
-    note: missing_mediawiki_title
-    extracted_fields: []
-    normalized_page_title: Iron Man Composite Marvel
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: missing_mediawiki_title
-    rank: 45
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: tier
+      value: 'At least {{8-B}} to {{5-B}} Name: James Rupert "Rhodey" Rhodes, War
+        Machine Origin: Marvel Comics Gender: Male Age: Middle aged (Probably in his
+        40s) Classification: Human Cyborg with Power Armor'
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: By himself=Enhanced intelligence and processing speed due to cybernetic
+        implants, Martial Arts and Weapon Mastery (Is a trained USAF soldier) |-|With
+        Armors=Superhuman Physical Characteristics, Flight, Energy Manipulation and
+        Absorption, Information Analysis, Light Manipulation, Forcefield Creation,
+        Plasma Manipulation with Plasma Cannon, Guided Missiles, Fire Manipulation
+        with Flamethrower, Tear Gas, Limited Radiation Manipulation with Depleted
+        Uranium, Smoke Manipulation, Sleep Manipulation with Tranquilizer Rounds,
+        Explosion Manipulation with Rocket Launcher and Missiles, Electricity Manipulation,
+        Magnetism Manipulation, Attack Reflection, Invisibility, Enhanced Senses,
+        Technology Manipulation, Body Control, Fusionism, Camouflage, Intangibility,
+        Resistance to Energy Projection and Heat, Poison Manipulation, Radiation and
+        Vacuum
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least City Block level (With War Machine Armor Model 1) to Planet
+        level (With War Machine Armor Model 6)
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Likely HypersonicMach 8.23 combat speed without armor (Comparable to
+        Hawkeye). At least HypersonicMach 8.23 with armor
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least City Block level to Planet level
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman, can travel around the world fighting for days without getting
+        exhausted, can recharge via solar energy
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range. Unknown with projectiles.
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: '* War Machine Armor: Iron Man Armor Model 11 MK II.png|Model 1|link=War
+        Machine Armor Model 1 WM Md2.png|Model 2|link=War Machine Armor Model 2 WM
+        Md 4.png|Model 4|link=War Machine Armor Model 4 WM Md 6.png|Model 6|link=War
+        Machine Armor Model 6'
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Trained United States Marine, knowledgeable about aircraft and aviation
+        engineering, can fly nearly any kind of aircraft, very skilled in both armed
+        and unarmed combat, has strong business acumen, years of experience with the
+        various War Machine armors, cyborg nature allows him to think and process
+        information much faster than a normal human being.
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Same as Iron Man. Without his armor, he is just a normal human. Iron
+        Man 2.0 Armor cannot go intangible and invisible simultaneously. Notable Attacks/Techniques:
+        * Repulsor Rays: The armor can fire particle beams from either or both the
+        palm gauntlets which can repel physical and energy-based attacks, traveling
+        as a single stream or as a wide-field dispersal. * Unibeam: A powerful searchlight
+        capable of projecting beams in virtually every light spectrum. *Power Cel'
+      source_id: vsbattles-iron-man-composite-earth-616
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|war machine marvel comics|9330294
+    retryable: false
+    exception_class: ''
   needs_human_source_choice: false
-  candidate_sources: []
+  candidate_sources:
+  - source_id: vsbattles-iron-man-composite-earth-616
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Earth-616%29
+    title: War Machine (Marvel Comics)
+    rank: 130
+    extracted_fields: *id003
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id004
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|war machine marvel comics|9330294
+  - source_id: vsbattles-iron-man-composite-marvel-comics
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel_Comics%29
+    title: Iron Man Armor Model 13
+    rank: 80
+    extracted_fields: *id005
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id006
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|iron man armor model 13|9360925
+  - source_id: vsbattles-iron-man-composite-marvel
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
+    title: Iron Man Armor Model 50
+    rank: 80
+    extracted_fields: *id007
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id008
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|iron man armor model 50|9463001
+  - source_id: vsbattles-iron-man-composite-marvel
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel%29
+    title: Iron Man Armor Model 50
+    rank: 80
+    extracted_fields: *id009
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id010
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|iron man armor model 50|9463001
   chosen_source_id: null
   failure_reasons:
-    missing_mediawiki_title: 12
+    fetched: 4
   confidence: 0.0
