@@ -18,6 +18,7 @@ import yaml
 from battlebot.harvest.auto_profile_harvester import (
     FIELD_ALIASES,
     extract_vsbattles_fields,
+    field_alias,
     list_items_from_text,
     rendered_text_from_parse as _rendered_text_from_parse,
     title_from_wiki_url,
@@ -139,7 +140,7 @@ def extract_table_like_fields(content: str) -> dict[str, str]:
         if ":" not in line:
             continue
         label, value = line.split(":", 1)
-        canonical = FIELD_ALIASES.get(normalize_label(label))
+        canonical = field_alias(normalize_label(label))
         value = normalize_value(value)
         if canonical and value:
             fields.setdefault(canonical, value)
@@ -148,6 +149,9 @@ def extract_table_like_fields(content: str) -> dict[str, str]:
 
 def normalize_label(value: str) -> str:
     value = re.sub(r"['*|=\[\]{}]", " ", value)
+    value = value.replace("&amp;", "&")
+    value = re.sub(r"\s*/\s*", "/", value)
+    value = re.sub(r"\s*&\s*", " & ", value)
     return re.sub(r"\s+", " ", value.strip().casefold())
 
 

@@ -13,6 +13,7 @@ FIXTURE = Path("tests/fixtures/review_repair/batman_table.wikitext")
 PARSE_FIXTURE = Path("tests/fixtures/review_repair/mediawiki_parse_superman.json")
 SEARCH_FIXTURE = Path("tests/fixtures/review_repair/mediawiki_search_superman.json")
 NO_FIELDS_FIXTURE = Path("tests/fixtures/review_repair/fetched_no_fields.html")
+YAMI_EMBEDDED_STATS_FIXTURE = Path("tests/fixtures/review_repair/yami_embedded_stats_excerpt.wikitext")
 
 
 def profile_data(*, missing_core=True):
@@ -104,6 +105,71 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(fields["attack_potency"], "Building level with standard equipment")
         self.assertEqual(fields["speed"], "Peak Human combat speed")
         self.assertEqual(fields["durability"], "Wall level physically, higher with armor")
+
+    def test_parser_normalizes_common_stat_label_variants(self):
+        content = """
+        | Tier = 9-A
+        | AP = Building level
+        | Speed = Peak Human
+        | Durability = Wall level
+        | Powers/Abilities = Martial Arts, Stealth
+        | Stamina = High
+        | Range = Extended melee
+        """
+
+        fields = auto_repair.parse_source_content(content)
+
+        self.assertEqual(fields["tier"], "9-A")
+        self.assertEqual(fields["attack_potency"], "Building level")
+        self.assertEqual(fields["speed"], "Peak Human")
+        self.assertEqual(fields["durability"], "Wall level")
+        self.assertEqual(fields["powers_and_abilities"], "Martial Arts, Stealth")
+        self.assertEqual(fields["stamina"], "High")
+        self.assertEqual(fields["range"], "Extended melee")
+
+    def test_parser_normalizes_attack_potency_and_powers_and_abilities_labels(self):
+        content = """
+        Attack Potency: City level
+        Powers and Abilities: Flight, Energy Projection
+        """
+
+        fields = auto_repair.parse_source_content(content)
+
+        self.assertEqual(fields["attack_potency"], "City level")
+        self.assertEqual(fields["powers_and_abilities"], "Flight, Energy Projection")
+
+    def test_parser_normalizes_plain_abilities_label(self):
+        fields = auto_repair.parse_source_content("Abilities: Precognition, Telepathy")
+
+        self.assertEqual(fields["powers_and_abilities"], "Precognition, Telepathy")
+
+    def test_parser_extracts_embedded_delimiterless_stats_from_table_excerpt(self):
+        fields = auto_repair.parse_source_content(YAMI_EMBEDDED_STATS_FIXTURE.read_text(encoding="utf-8"))
+
+        self.assertIn("Dark Magic", fields["powers_and_abilities"])
+        self.assertEqual(
+            fields["attack_potency"],
+            "Large Mountain level (Able to damage Patry) | Country level+ (Damaged Zagred)",
+        )
+        self.assertEqual(fields["speed"], "Massively Hypersonic (Can keep up with Patry)")
+        self.assertEqual(fields["durability"], "Large Mountain level (Comparable to his Attack Potency)")
+        self.assertEqual(fields["stamina"], "Very high")
+        self.assertEqual(fields["range"], "Extended melee range, hundreds of meters with ranged attacks")
+
+    def test_parser_uses_first_useful_abilities_section_when_table_field_is_missing(self):
+        content = """
+        == Summary ==
+        Short profile text.
+        == Abilities ==
+        * Flight
+        * Energy Projection
+        == Gallery ==
+        image.jpg
+        """
+
+        fields = auto_repair.parse_source_content(content)
+
+        self.assertEqual(fields["powers_and_abilities"], "* Flight * Energy Projection")
 
     async def test_existing_values_are_not_overwritten_by_default(self):
         with TemporaryDirectory() as temp_dir:

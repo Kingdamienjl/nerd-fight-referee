@@ -54,6 +54,7 @@ FIELD_ALIASES = {
     "attack potency": "attack_potency",
     "attack": "attack_potency",
     "ap": "attack_potency",
+    "attack power": "attack_potency",
     "destructive capacity": "attack_potency",
     "attack_potency": "attack_potency",
     "speed": "speed",
@@ -76,12 +77,28 @@ FIELD_ALIASES = {
     "weaknesses": "weaknesses",
     "weakness": "weaknesses",
     "powers and abilities": "powers_and_abilities",
+    "powers & abilities": "powers_and_abilities",
     "powers": "powers_and_abilities",
     "abilities": "powers_and_abilities",
     "p&a": "powers_and_abilities",
     "powers/abilities": "powers_and_abilities",
+    "powers / abilities": "powers_and_abilities",
     "powers_and_abilities": "powers_and_abilities",
 }
+
+DELIMITERLESS_FIELD_LABELS = (
+    "Attack Potency",
+    "AP",
+    "Speed",
+    "Durability",
+    "Powers and Abilities",
+    "Powers/Abilities",
+    "Abilities",
+    "Tier",
+    "Stamina",
+    "Range",
+    "Weaknesses",
+)
 
 KEYWORD_RULES = {
     "biological_possession": ["possession", "possess", "host body", "parasite", "symbiote"],
@@ -775,8 +792,10 @@ def extract_vsbattles_fields(content: str) -> dict[str, str]:
     fields.update(extract_template_pipe_fields(content))
     light_text = light_markup_to_text(content)
     fields.update({k: v for k, v in extract_inline_labeled_fields(light_text).items() if k not in fields})
+    fields.update({k: v for k, v in extract_delimiterless_labeled_fields(light_text).items() if k not in fields})
     text = strip_markup(content)
     fields.update({k: v for k, v in extract_inline_labeled_fields(text).items() if k not in fields})
+    fields.update({k: v for k, v in extract_delimiterless_labeled_fields(text).items() if k not in fields})
     lines = [line.strip() for line in text.splitlines() if line.strip()]
     for index, line in enumerate(lines):
         parsed = parse_field_line(line)
@@ -785,9 +804,13 @@ def extract_vsbattles_fields(content: str) -> dict[str, str]:
             fields.setdefault(key, value)
             continue
         header = normalize_field_name(line)
-        if header in FIELD_ALIASES and index + 1 < len(lines):
-            fields.setdefault(FIELD_ALIASES[header], lines[index + 1])
-    fields.update({k: v for k, v in extract_section_fields(content).items() if k not in fields})
+        canonical = field_alias(header)
+        if canonical and index + 1 < len(lines):
+            fields.setdefault(canonical, lines[index + 1])
+    section_fields = extract_section_fields(content)
+    for key, value in section_fields.items():
+        if key not in fields or (key == "powers_and_abilities" and len(value) > len(fields.get(key, ""))):
+            fields[key] = value
     return fields
 
 
@@ -798,7 +821,7 @@ def parse_field_line(line: str) -> tuple[str, str] | None:
         return None
     key = normalize_field_name(match.group("key"))
     value = normalize_text(match.group("value"))
-    canonical = FIELD_ALIASES.get(key)
+    canonical = field_alias(key)
     if not canonical or not value:
         return None
     return canonical, value
@@ -813,7 +836,7 @@ def extract_template_pipe_fields(content: str) -> dict[str, str]:
         match = re.match(r"^\s*\|\s*(?P<key>[^=|]+?)\s*=\s*(?P<value>.*)$", line)
         if match:
             flush_multiline_field(fields, current_key, current_value)
-            current_key = FIELD_ALIASES.get(normalize_field_name(match.group("key")))
+            current_key = field_alias(match.group("key"))
             current_value = [match.group("value").strip()] if current_key else []
             continue
         if current_key:
@@ -848,12 +871,12 @@ def extract_section_fields(content: str) -> dict[str, str]:
     fields: dict[str, str] = {}
     for index, match in enumerate(matches):
         title = normalize_field_name(match.group("title"))
-        canonical = FIELD_ALIASES.get(title)
+        canonical = field_alias(title)
         if not canonical:
             continue
         start = match.end()
         end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
-        value = normalize_text(text[start:end])
+        value = first_useful_section_text(text[start:end])
         if value:
             fields[canonical] = value
     return fields
@@ -868,8 +891,10 @@ def extract_inline_labeled_fields(text: str) -> dict[str, str]:
     matches = list(pattern.finditer(text))
     fields: dict[str, str] = {}
     for index, match in enumerate(matches):
+        if inline_match_is_heading(text, match):
+            continue
         label = normalize_field_name(match.group("label"))
-        canonical = FIELD_ALIASES.get(label)
+        canonical = field_alias(label)
         if not canonical:
             continue
         start = match.end()
@@ -878,6 +903,46 @@ def extract_inline_labeled_fields(text: str) -> dict[str, str]:
         if value and not fields.get(canonical):
             fields[canonical] = value
     return fields
+
+
+def extract_delimiterless_labeled_fields(text: str) -> dict[str, str]:
+    label_pattern = "|".join(re.escape(label) for label in sorted(DELIMITERLESS_FIELD_LABELS, key=len, reverse=True))
+    pattern = re.compile(rf"\b(?P<label>{label_pattern})\b(?:(?:\s*(?:=|:|：)\s*)|\s+)")
+    matches = list(pattern.finditer(text))
+    if len(matches) < 2:
+        return {}
+
+    accepted: list[tuple[re.Match[str], str]] = []
+    for match in matches:
+        canonical = field_alias(match.group("label"))
+        if not canonical:
+            continue
+        if not accepted:
+            prefix = text[max(0, match.start() - 3):match.start()].rstrip()
+            if match.start() != 0 and not re.search(r"[\n|}=]$", prefix):
+                continue
+        elif canonical == accepted[-1][1]:
+            continue
+        accepted.append((match, canonical))
+
+    fields: dict[str, str] = {}
+    for index, (match, canonical) in enumerate(accepted):
+        start = match.end()
+        end = accepted[index + 1][0].start() if index + 1 < len(accepted) else len(text)
+        value = normalize_extracted_value(text[start:end])
+        if value and not fields.get(canonical):
+            fields[canonical] = value
+    return fields
+
+
+def inline_match_is_heading(text: str, match: re.Match[str]) -> bool:
+    line_start = text.rfind("\n", 0, match.start()) + 1
+    line_end = text.find("\n", match.end())
+    if line_end == -1:
+        line_end = len(text)
+    prefix = text[line_start:match.start()].strip()
+    suffix = text[match.end():line_end].strip()
+    return bool(prefix) and set(prefix) == {"="} and suffix.startswith("=")
 
 
 def merge_extracted_fields(primary: dict[str, str], fallback: dict[str, str]) -> dict[str, str]:
@@ -924,7 +989,25 @@ def light_markup_to_text(content: str) -> str:
 
 
 def normalize_field_name(value: str) -> str:
-    return re.sub(r"\s+", " ", value.strip().lower().replace("_", " "))
+    value = value.strip().lower().replace("_", " ")
+    value = value.replace("&amp;", "&")
+    value = re.sub(r"['*|=\[\]{}]", " ", value)
+    value = re.sub(r"\s*/\s*", "/", value)
+    value = re.sub(r"\s*&\s*", " & ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def field_alias(value: str) -> str | None:
+    normalized = normalize_field_name(value)
+    canonical = FIELD_ALIASES.get(normalized)
+    if canonical:
+        return canonical
+    slash_spaced = normalized.replace("/", " / ")
+    canonical = FIELD_ALIASES.get(re.sub(r"\s+", " ", slash_spaced).strip())
+    if canonical:
+        return canonical
+    ampersand_expanded = normalized.replace(" & ", " and ")
+    return FIELD_ALIASES.get(re.sub(r"\s+", " ", ampersand_expanded).strip())
 
 
 def normalize_text(value: str) -> str:
@@ -936,6 +1019,18 @@ def normalize_extracted_value(value: str) -> str:
     value = re.sub(r"^\s*(?:[-|=]+|▾)+\s*", "", value)
     value = re.sub(r"\s*(?:[-|=]+|▾)+\s*$", "", value)
     return value[:5000].strip()
+
+
+def first_useful_section_text(value: str) -> str:
+    text = normalize_extracted_value(value)
+    if not text:
+        return ""
+    stop = re.search(r"(?i)\b(?:gallery|notable matchups|references|notes/explanations)\b", text)
+    if stop:
+        text = text[:stop.start()].strip()
+    if text.casefold() in {"none", "n/a", "not applicable"}:
+        return ""
+    return text
 
 
 def list_items_from_text(
