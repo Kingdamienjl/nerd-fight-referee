@@ -530,6 +530,53 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(source.identity_match)
         self.assertEqual(auto_repair.eligible_primary_attempts([source]), [])
 
+    def test_identity_matching_ignores_local_franchise_suffixes_and_title_variants(self):
+        cases = [
+            ("rukia-kuchiki-bleach", "Rukia Kuchiki"),
+            ("kaname-tosen-bleach", "Kaname Tōsen"),
+            ("ichigo-kurosaki-bleach", "Ichigo Kurosaki (Post-Timeskip)"),
+        ]
+        for local_name, page_title in cases:
+            with self.subTest(local_name=local_name, page_title=page_title):
+                attempt = auto_repair.SourceAttempt(
+                    "source",
+                    f"https://vsbattles.fandom.com/wiki/{page_title.replace(' ', '_')}",
+                    True,
+                    "ok",
+                    ["attack_potency", "speed", "durability", "powers_and_abilities"],
+                    normalized_page_title=page_title,
+                    fetch_status="fetched",
+                    provider_id="vsbattles",
+                    authority="high",
+                    promotion_allowed=True,
+                )
+
+                auto_repair.annotate_attempt_quality(
+                    character_profile(local_name, "Bleach", "anime"),
+                    attempt,
+                )
+
+                self.assertTrue(attempt.identity_match)
+
+    def test_identity_matching_keeps_wrong_character_rejection_strict(self):
+        attempt = auto_repair.SourceAttempt(
+            "wrong",
+            "https://vsbattles.fandom.com/wiki/Guts",
+            True,
+            "ok",
+            ["attack_potency", "speed", "durability", "powers_and_abilities"],
+            normalized_page_title="Guts",
+            fetch_status="fetched",
+            provider_id="vsbattles",
+            authority="high",
+            promotion_allowed=True,
+        )
+
+        auto_repair.annotate_attempt_quality(character_profile("zodd", "Berserk", "anime"), attempt)
+
+        self.assertFalse(attempt.identity_match)
+        self.assertEqual(auto_repair.eligible_primary_attempts([attempt]), [])
+
     async def test_provider_exception_is_recorded_without_crashing(self):
         async def broken_fetch(source):
             raise AttributeError("'NoneType' object has no attribute 'get'")

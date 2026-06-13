@@ -7,6 +7,7 @@ import asyncio
 import csv
 import json
 import re
+import unicodedata
 from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -749,7 +750,29 @@ def provider_priority(authority: str, provider_id: str) -> int:
 
 
 def normalized_identity_text(value: str) -> str:
-    return re.sub(r"[^a-z0-9]+", " ", value.casefold()).strip()
+    folded = unicodedata.normalize("NFKD", value)
+    folded = "".join(char for char in folded if not unicodedata.combining(char))
+    return re.sub(r"[^a-z0-9]+", " ", folded.casefold()).strip()
+
+
+def identity_text_without_trailing_tokens(value: str, trailing: str) -> str:
+    normalized = normalized_identity_text(value)
+    suffix = normalized_identity_text(trailing)
+    if not normalized or not suffix:
+        return normalized
+    suffix_tokens = suffix.split()
+    tokens = normalized.split()
+    if len(tokens) > len(suffix_tokens) and tokens[-len(suffix_tokens) :] == suffix_tokens:
+        return " ".join(tokens[: -len(suffix_tokens)])
+    return normalized
+
+
+def local_identity_text(profile: dict[str, Any], value: str) -> str:
+    return identity_text_without_trailing_tokens(value, str(profile.get("franchise") or ""))
+
+
+def base_title_identity_text(value: str) -> str:
+    return normalized_identity_text(re.sub(r"\s*\([^)]*\)\s*$", "", value).strip())
 
 
 def profile_identity_names(profile: dict[str, Any]) -> list[str]:
@@ -765,7 +788,7 @@ def profile_identity_names(profile: dict[str, Any]) -> list[str]:
     seen: set[str] = set()
     unique: list[str] = []
     for name in names:
-        normalized = normalized_identity_text(name)
+        normalized = local_identity_text(profile, name)
         if normalized and normalized not in seen:
             unique.append(name)
             seen.add(normalized)
@@ -789,24 +812,26 @@ def tokens_for_identity(value: str) -> list[str]:
 
 def identity_score_for_attempt(profile: dict[str, Any], attempt: SourceAttempt) -> int:
     title = normalized_identity_text(attempt.normalized_page_title)
-    name = normalized_identity_text(str(profile.get("name") or ""))
+    title_base = base_title_identity_text(attempt.normalized_page_title)
+    name = local_identity_text(profile, str(profile.get("name") or ""))
     franchise = normalized_identity_text(str(profile.get("franchise") or ""))
     match_text = normalized_identity_text(text_for_identity_matching(attempt))
     if not title or not name:
         return 0
     if title_wrong_for_profile(profile, attempt.normalized_page_title):
         return 0
-    normalized_names = [normalized_identity_text(value) for value in profile_identity_names(profile)]
+    normalized_names = [local_identity_text(profile, value) for value in profile_identity_names(profile)]
     alias_names = [value for value in normalized_names if value != name]
+    exact_base_name_match = title_base == name
     attempt.exact_name_match = title == name
-    attempt.alias_match = any(title == alias or alias in match_text for alias in alias_names)
+    attempt.alias_match = any(title == alias or title_base == alias or alias in match_text for alias in alias_names)
     attempt.franchise_match = bool(franchise and franchise in match_text)
     score = 0
-    if attempt.exact_name_match:
+    if attempt.exact_name_match or exact_base_name_match:
         score += 100
     elif attempt.alias_match:
         score += 90
-    elif name in title and (attempt.franchise_match or len(tokens_for_identity(name)) > 1):
+    elif (name in title or name in title_base) and (attempt.franchise_match or len(tokens_for_identity(name)) > 1):
         score += 80
     else:
         tokens = tokens_for_identity(name)
