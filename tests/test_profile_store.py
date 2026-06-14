@@ -3,23 +3,34 @@ import unittest
 from battlebot.profiles.store import resolve_character
 
 
-def profile_row(character_id, name, *, aliases=None, profile_hash=None):
+def profile_row(
+    character_id,
+    name,
+    *,
+    aliases=None,
+    profile_hash=None,
+    franchise="Test",
+    status="auto_generated",
+    sources=None,
+    variant=None,
+):
     return {
         "character_id": character_id,
         "canonical_name": name,
-        "franchise": "Test",
+        "franchise": franchise,
         "category": "test",
         "profile_id": character_id,
         "profile_type": "auto_evidence_profile",
-        "status": "auto_generated",
+        "status": status,
         "battle_eligible": True,
         "profile_hash": profile_hash or f"hash-{character_id}",
         "profile_json": {
             "abilities": [],
             "equipment": [],
             "weaknesses": [],
-            "sources": [],
+            "sources": sources or [],
             "power_scale": {},
+            "variant": variant or {},
         },
         "aliases": aliases or [],
         "imported_at": None,
@@ -97,6 +108,40 @@ class ProfileStoreTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(result["status"], "ambiguous")
         self.assertEqual(len(result["candidates"]), 2)
+
+    async def test_resolver_picks_default_sephiroth_instead_of_ambiguity(self):
+        result = await resolve_character(
+            FakeProfileConnection(
+                [
+                    profile_row("sephiroth-crossover", "Sephiroth", franchise="Crossover Icons"),
+                    profile_row(
+                        "sephiroth-ff7",
+                        "Sephiroth",
+                        franchise="Final Fantasy VII",
+                        sources=[{"title": "source"}],
+                        variant={"default_variant": True},
+                    ),
+                ]
+            ),
+            "sephiroth",
+        )
+
+        self.assertEqual(result["status"], "resolved")
+        self.assertEqual(result["profile"]["character_id"], "sephiroth-ff7")
+
+    async def test_resolver_rejects_unrelated_alias_when_exact_candidate_exists(self):
+        result = await resolve_character(
+            FakeProfileConnection(
+                [
+                    profile_row("son-goku", "Son Goku"),
+                    profile_row("anderson", "Alexander Anderson", aliases=["goku"]),
+                ]
+            ),
+            "goku",
+        )
+
+        self.assertEqual(result["status"], "resolved")
+        self.assertEqual(result["profile"]["character_id"], "son-goku")
 
 
 if __name__ == "__main__":

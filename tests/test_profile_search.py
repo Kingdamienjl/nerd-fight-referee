@@ -1,6 +1,29 @@
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+import yaml
 
 from battlebot.profiles.search import format_search_results, search_characters
+
+
+def write_profile(path: Path, name: str, franchise: str = "Test", category: str = "anime"):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        yaml.safe_dump(
+            {
+                "name": name,
+                "franchise": franchise,
+                "category": category,
+                "battle_eligible": True,
+                "sources": [],
+                "abilities": [],
+                "weaknesses": [],
+                "power_scale": {},
+            }
+        ),
+        encoding="utf-8",
+    )
 
 
 class ProfileSearchTests(unittest.IsolatedAsyncioTestCase):
@@ -42,6 +65,50 @@ class ProfileSearchTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(rows)
         self.assertEqual(rows[0]["canonical_name"], "Iron Man (Hulkbuster)")
         self.assertEqual(rows[0]["variant"]["variant_name"], "Hulkbuster")
+
+    async def test_search_goku_ranks_son_goku_above_unrelated_alias_matches(self):
+        with TemporaryDirectory() as temp_dir:
+            generated = Path(temp_dir) / "generated"
+            write_profile(generated / "anime" / "dragon-ball" / "son-goku.yaml", "Son Goku", "Dragon Ball")
+            write_profile(
+                generated / "anime" / "hellsing" / "alexander-anderson-son-goku-alias.yaml",
+                "Alexander Anderson",
+                "Hellsing",
+            )
+
+            rows = await search_characters(
+                "goku",
+                limit=5,
+                generated_dir=generated,
+                needs_review_dir=Path(temp_dir) / "missing-review",
+                rosters_dir=Path(temp_dir) / "missing-rosters",
+            )
+
+        self.assertGreaterEqual(len(rows), 2)
+        self.assertEqual(rows[0]["canonical_name"], "Son Goku")
+
+    async def test_search_cloud_ranks_canonical_before_crossover_duplicates(self):
+        with TemporaryDirectory() as temp_dir:
+            generated = Path(temp_dir) / "generated"
+            write_profile(generated / "game" / "final-fantasy-vii" / "cloud-strife.yaml", "Cloud Strife", "Final Fantasy VII", "game")
+            write_profile(
+                generated / "game" / "crossover-icons" / "cloud-strife-crossover-icons.yaml",
+                "Cloud Strife - Crossover Icons",
+                "Crossover Icons",
+                "game",
+            )
+
+            rows = await search_characters(
+                "cloud",
+                limit=5,
+                generated_dir=generated,
+                needs_review_dir=Path(temp_dir) / "missing-review",
+                rosters_dir=Path(temp_dir) / "missing-rosters",
+            )
+
+        self.assertTrue(rows)
+        self.assertEqual(rows[0]["canonical_name"], "Cloud Strife")
+        self.assertNotIn("Cloud Strife - Crossover Icons", [row["canonical_name"] for row in rows])
 
 
 if __name__ == "__main__":

@@ -13,6 +13,7 @@ import yaml
 
 from battlebot.common.db import connect_database
 from battlebot.profiles.aliases import resolve_alias
+from battlebot.profiles.canonical import normalize_text, row_canonical_group_key, row_display_name
 from battlebot.profiles.locate import find_db_name_matches
 from battlebot.profiles.quality import profile_key
 from battlebot.profiles.variants import variant_metadata
@@ -230,11 +231,56 @@ def format_character_catalog(page_data: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+STATUS_PRIORITY = {
+    "imported": 0,
+    "generated": 1,
+    "needs_review": 2,
+    "roster_stub": 3,
+}
+
+
+def row_names(row: dict[str, Any]) -> tuple[str, str]:
+    canonical = str(row.get("canonical_name") or "")
+    display = row_display_name(row) or canonical
+    return canonical, display
+
+
+def search_rank(row: dict[str, Any], query: str, *, alias_used: bool = False) -> tuple[int, int, int, str]:
+    query_key = normalize_text(query)
+    canonical, display = row_names(row)
+    canonical_key = normalize_text(canonical)
+    display_key = normalize_text(display)
+    variant = row.get("variant") if isinstance(row.get("variant"), dict) else {}
+    variant_name = str(variant.get("variant_name") or "")
+    variant_display = normalize_text(f"{canonical} ({variant_name})") if variant_name else ""
+    text = " ".join([canonical, display, str(row.get("franchise") or "")]).casefold()
+    crossover_penalty = 1 if "crossover icons" in text else 0
+    if canonical_key == query_key:
+        bucket = 0
+    elif display_key == query_key:
+        bucket = 1
+    elif variant_display and variant_display == query_key:
+        bucket = 2
+    elif canonical_key.startswith(query_key) or display_key.startswith(query_key):
+        bucket = 3
+    elif alias_used and str(row.get("franchise") or "").casefold() in query.casefold():
+        bucket = 4
+    else:
+        bucket = 5
+    return (bucket, crossover_penalty, STATUS_PRIORITY.get(str(row.get("status") or ""), 9), canonical_key)
+
+
+def sort_search_rows(rows: list[dict[str, Any]], query: str, *, alias_used: bool = False) -> list[dict[str, Any]]:
+    indexed = list(enumerate(rows))
+    indexed.sort(key=lambda item: (search_rank(item[1], query, alias_used=alias_used), item[0]))
+    return [row for _, row in indexed]
+
+
 def dedupe_rows(rows: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
     seen = set()
     unique = []
     for row in rows:
-        key = (str(row.get("canonical_name") or "").casefold(), row.get("franchise"), row.get("status"))
+        key = (row_canonical_group_key(row), row.get("category"))
         if key in seen:
             continue
         seen.add(key)
@@ -278,6 +324,7 @@ async def search_characters(
         rows = [row for row in rows if str(row.get("category") or "").casefold() == category.casefold()]
     if franchise:
         rows = [row for row in rows if str(row.get("franchise") or "").casefold() == franchise.casefold()]
+    rows = sort_search_rows(rows, search_query, alias_used=bool(alias_match))
     return dedupe_rows(rows, limit)
 
 

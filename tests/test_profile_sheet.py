@@ -8,14 +8,16 @@ class ProfileSheetTests(unittest.IsolatedAsyncioTestCase):
         text = await profile_sheet("Batman")
 
         self.assertIn("Name: Batman", text)
-        self.assertIn("Damage Class:", text)
-        self.assertIn("Footprint:", text)
-        self.assertIn("Source Tier:", text)
+        self.assertIn("Threat Rating:", text)
+        self.assertIn("Destruction Scale:", text)
         self.assertIn("Attack summary:", text)
         self.assertIn("Speed summary:", text)
         self.assertIn("Durability summary:", text)
         self.assertIn("Source-backed:", text)
         self.assertIn("Source count:", text)
+        self.assertNotIn("Status: imported", text)
+        self.assertNotIn("Profile Quality:", text)
+        self.assertNotIn("Source Tier:", text)
 
     async def test_profile_sheet_for_alias(self):
         text = await profile_sheet("superman")
@@ -48,9 +50,9 @@ class ProfileSheetTests(unittest.IsolatedAsyncioTestCase):
             status="imported",
         )
 
-        self.assertIn("Damage Class: Skyscraper-Buster → Block-Buster", text)
-        self.assertIn("Footprint: large building / skyscraper → city block", text)
-        self.assertIn("Source Tier: High 8-C → 8-B", text)
+        self.assertIn("Threat Rating: Skyscraper-Buster → Block-Buster", text)
+        self.assertIn("Destruction Scale: large building / skyscraper → city block", text)
+        self.assertNotIn("Source Tier:", text)
         self.assertNotIn("{{", text)
         self.assertNotIn("}}", text)
         self.assertNotIn("[[", text)

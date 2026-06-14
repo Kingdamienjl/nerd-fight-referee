@@ -7,6 +7,7 @@ import re
 from typing import Any
 
 from battlebot.profiles.aliases import resolve_alias
+from battlebot.profiles.canonical import row_display_name
 
 
 CORE_PROFILE_SELECT = """
@@ -55,19 +56,83 @@ def row_to_profile(row: Any) -> dict[str, Any]:
         "battle_eligible": data["battle_eligible"],
         "profile_hash": data["profile_hash"],
         "profile_json": profile_json,
+        "aliases": data.get("aliases") or [],
         "imported_at": data.get("imported_at"),
         "updated_at": data.get("updated_at"),
     }
 
 
 def candidate_summary(profile: dict[str, Any]) -> dict[str, str]:
-    return {
+    summary = {
         "character_id": profile["character_id"],
         "canonical_name": profile["canonical_name"],
         "franchise": profile["franchise"],
         "category": profile["category"],
         "profile_id": profile["profile_id"],
     }
+    display_name = row_display_name(profile)
+    if display_name and display_name != profile["canonical_name"]:
+        summary["display_name"] = display_name
+    return summary
+
+
+def profile_source_count(profile: dict[str, Any]) -> int:
+    profile_json = profile.get("profile_json") if isinstance(profile.get("profile_json"), dict) else {}
+    sources = profile_json.get("sources") or []
+    return len(sources) if isinstance(sources, list) else 0
+
+
+def profile_quality_rank(profile: dict[str, Any]) -> int:
+    status = str(profile.get("status") or "").casefold()
+    profile_type = str(profile.get("profile_type") or "").casefold()
+    if status in {"verified", "approved"}:
+        return 4
+    if status in {"provisional", "auto_generated", "imported"}:
+        return 3
+    if "generated" in profile_type:
+        return 2
+    return 1
+
+
+def is_default_variant(profile: dict[str, Any]) -> bool:
+    profile_json = profile.get("profile_json") if isinstance(profile.get("profile_json"), dict) else {}
+    variant = profile_json.get("variant") if isinstance(profile_json.get("variant"), dict) else {}
+    return bool(variant.get("default_variant"))
+
+
+def fallback_penalty(profile: dict[str, Any]) -> int:
+    text = " ".join(
+        [
+            str(profile.get("canonical_name") or ""),
+            str(profile.get("franchise") or ""),
+            row_display_name(profile),
+        ]
+    ).casefold()
+    return -10 if "crossover icons" in text else 0
+
+
+def default_profile_score(profile: dict[str, Any]) -> tuple[int, int, int, int]:
+    return (
+        1 if is_default_variant(profile) else 0,
+        profile_quality_rank(profile),
+        profile_source_count(profile),
+        fallback_penalty(profile),
+    )
+
+
+def choose_default_candidate(candidates: list[dict[str, Any]]) -> dict[str, Any] | None:
+    if not candidates:
+        return None
+    ranked = sorted(candidates, key=default_profile_score, reverse=True)
+    if len(ranked) == 1:
+        return ranked[0]
+    return ranked[0] if default_profile_score(ranked[0]) > default_profile_score(ranked[1]) else None
+
+
+def row_has_alias(profile: dict[str, Any], query: str) -> bool:
+    aliases = profile.get("aliases") or []
+    query_key = normalize_lookup(query)
+    return query_key in {normalize_lookup(str(alias)) for alias in aliases}
 
 
 async def fetch_exact_canonical(
@@ -137,6 +202,14 @@ def resolution_from_candidates(
     if not candidates:
         return {"status": "not_found", "query": query, "candidates": []}
     if len(candidates) > 1:
+        default = choose_default_candidate(candidates)
+        if default:
+            return {
+                "status": "resolved",
+                "query": query,
+                "matched_by": f"{matched_by}_default",
+                "profile": default,
+            }
         return {
             "status": "ambiguous",
             "query": query,
@@ -157,41 +230,53 @@ async def resolve_character(
     *,
     battle_eligible_only: bool = True,
 ) -> dict[str, Any]:
-    alias_override = resolve_alias(name)
-    lookup_name = alias_override.canonical if alias_override else name
     exact = await fetch_exact_canonical(
         connection,
-        lookup_name,
+        name,
         battle_eligible_only=battle_eligible_only,
     )
     if exact:
-        result = resolution_from_candidates(name, exact, matched_by="alias_override" if alias_override else "canonical_exact")
-        if alias_override:
-            result["alias_match"] = {
-                "canonical": alias_override.canonical,
-                "matched_key": alias_override.matched_key,
-                "notes": alias_override.notes,
-            }
-        return result
+        return resolution_from_candidates(name, exact, matched_by="canonical_exact")
 
     case_insensitive = await fetch_case_insensitive_canonical(
         connection,
-        lookup_name,
+        name,
         battle_eligible_only=battle_eligible_only,
     )
     if case_insensitive:
-        result = resolution_from_candidates(
-            name,
-            case_insensitive,
-            matched_by="alias_override" if alias_override else "canonical_case_insensitive",
+        return resolution_from_candidates(name, case_insensitive, matched_by="canonical_case_insensitive")
+
+    alias_override = resolve_alias(name)
+    if alias_override:
+        override_exact = await fetch_exact_canonical(
+            connection,
+            alias_override.canonical,
+            battle_eligible_only=battle_eligible_only,
         )
-        if alias_override:
+        if override_exact:
+            matched_by = "alias" if any(row_has_alias(profile, name) for profile in override_exact) else "alias_override"
+            result = resolution_from_candidates(name, override_exact, matched_by=matched_by)
             result["alias_match"] = {
                 "canonical": alias_override.canonical,
                 "matched_key": alias_override.matched_key,
                 "notes": alias_override.notes,
             }
-        return result
+            return result
+
+        override_case = await fetch_case_insensitive_canonical(
+            connection,
+            alias_override.canonical,
+            battle_eligible_only=battle_eligible_only,
+        )
+        if override_case:
+            matched_by = "alias" if any(row_has_alias(profile, name) for profile in override_case) else "alias_override"
+            result = resolution_from_candidates(name, override_case, matched_by=matched_by)
+            result["alias_match"] = {
+                "canonical": alias_override.canonical,
+                "matched_key": alias_override.matched_key,
+                "notes": alias_override.notes,
+            }
+            return result
 
     alias = await fetch_alias(connection, name, battle_eligible_only=battle_eligible_only)
     if alias:

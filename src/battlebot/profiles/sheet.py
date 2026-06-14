@@ -38,6 +38,13 @@ def abilities_summary(abilities: list[dict[str, Any]]) -> str:
     return ", ".join(names) + suffix
 
 
+def public_profile_status(profile: dict[str, Any], warnings: list[str], source_backed: bool) -> str:
+    status = str(profile.get("status") or "").casefold()
+    if status in {"verified", "approved"}:
+        return "Verified"
+    return "Verified" if source_backed and not warnings else "Provisional"
+
+
 def yaml_profile_sheet(path: Path) -> str:
     profile = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     return format_profile_data(profile, status=path.parts[path.parts.index("profiles") + 1] if "profiles" in path.parts else "yaml", profile_path=str(path))
@@ -60,19 +67,17 @@ def format_profile_data(profile: dict[str, Any], *, status: str, profile_path: s
     warnings = [warning["flag"] for warning in service.profile_warning_flags(profile)] if hasattr(service, "profile_warning_flags") else []
     source_backed = any(source.get("url") or source.get("revision_id") for source in sources)
     power_scale = public_power_scale(text_power(profile, "tier"))
-    quality = ", ".join(warnings) if warnings else "clean"
+    profile_status = public_profile_status(profile, warnings, source_backed)
     lines = [
         f"Name: {clean_public_text(profile.get('name'))}",
         f"Franchise: {clean_public_text(profile.get('franchise'))}",
         f"Category: {clean_public_text(profile.get('category'))}",
-        f"Status: {status or profile.get('status')}",
         f"Battle Ready: {bool(profile.get('battle_eligible'))}",
         f"Source-backed: {'yes' if source_backed else 'no'}",
         f"Source count: {len(sources)}",
-        f"Profile Quality: {quality}",
-        f"Damage Class: {power_scale.damage_class}",
-        f"Footprint: {power_scale.footprint}",
-        f"Source Tier: {power_scale.source_tier}",
+        f"Profile Status: {profile_status}",
+        f"Threat Rating: {power_scale.damage_class}",
+        f"Destruction Scale: {power_scale.footprint}",
         f"Attack summary: {summary_text(profile, 'attack_potency')}",
         f"Speed summary: {summary_text(profile, 'speed')}",
         f"Durability summary: {summary_text(profile, 'durability')}",
