@@ -8,7 +8,7 @@ import discord
 from discord import app_commands
 
 from battlebot.common.db import connect_database
-from battlebot.profiles.search import format_search_results, search_characters
+from battlebot.profiles.search import browse_character_catalog, format_character_catalog, format_search_results, search_characters
 from battlebot.profiles.sheet import profile_sheet
 from battlebot.review import service
 
@@ -94,23 +94,21 @@ def register_catalog_commands(tree: app_commands.CommandTree, *, database_url: s
         interaction: discord.Interaction,
         category: str | None = None,
         franchise: str | None = None,
-        status: str = "imported",
         page: int = 1,
+        limit: int = 20,
         public: bool = False,
     ) -> None:
         ephemeral = catalog_response_ephemeral(public)
         await interaction.response.defer(thinking=True, ephemeral=ephemeral)
-        offset = max(page - 1, 0) * 10
         async with connect_database(database_url) as connection:
-            rows = await search_characters(
-                "",
+            page_data = await browse_character_catalog(
                 connection=connection,
-                status_filter=status,
                 category=category,
                 franchise=franchise,
-                limit=offset + 10,
+                page=page,
+                limit=limit,
             )
-        await interaction.followup.send(clamp_message(format_search_results(rows[offset : offset + 10])), ephemeral=ephemeral)
+        await interaction.followup.send(clamp_message(format_character_catalog(page_data)), ephemeral=ephemeral)
 
     @tree.command(name="profile", description="Show a human-readable profile sheet")
     async def profile(interaction: discord.Interaction, character: str, public: bool = False) -> None:

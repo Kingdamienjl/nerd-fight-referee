@@ -8,9 +8,12 @@ class ProfileSheetTests(unittest.IsolatedAsyncioTestCase):
         text = await profile_sheet("Batman")
 
         self.assertIn("Name: Batman", text)
-        self.assertIn("- Attack:", text)
-        self.assertIn("- Speed:", text)
-        self.assertIn("- Durability:", text)
+        self.assertIn("Damage Class:", text)
+        self.assertIn("Footprint:", text)
+        self.assertIn("Source Tier:", text)
+        self.assertIn("Attack summary:", text)
+        self.assertIn("Speed summary:", text)
+        self.assertIn("Durability summary:", text)
         self.assertIn("Source-backed:", text)
         self.assertIn("Source count:", text)
 
@@ -25,31 +28,34 @@ class ProfileSheetTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("http://", text)
         self.assertNotIn("https://", text)
 
-    def test_variant_profile_sheet_shows_parent_and_type(self):
+    def test_profile_sheet_public_power_scale_cleans_raw_tier_markup(self):
         text = format_profile_data(
             {
-                "name": "Iron Man (Hulkbuster)",
-                "franchise": "Marvel",
-                "category": "comic",
-                "battle_eligible": False,
-                "sources": [],
-                "abilities": [],
+                "name": "Form Fighter",
+                "franchise": "Example",
+                "category": "anime",
+                "battle_eligible": True,
+                "sources": [{"url": "https://example.invalid/source"}],
+                "abilities": [{"name": "[[Power Strike]]", "description": "{{8-B}} force"}],
                 "weaknesses": [],
-                "power_scale": {},
-                "variant": {
-                    "parent_character_id": "comic-marvel-iron-man",
-                    "variant_name": "Hulkbuster",
-                    "variant_type": "armor",
-                    "default_variant": False,
-                    "battle_notes": "",
+                "power_scale": {
+                    "tier": {"text": "{{Varies}}, [[High 8-C]], [[8-B]]"},
+                    "attack_potency": {"text": "Large building to [[8-B]] strikes"},
+                    "speed": {"text": "[[Supersonic]]"},
+                    "durability": {"text": "{{High 8-C}} armor"},
                 },
             },
-            status="roster_stub",
+            status="imported",
         )
 
-        self.assertIn("Variant: Hulkbuster", text)
-        self.assertIn("Variant Type: armor", text)
-        self.assertIn("Parent: comic-marvel-iron-man", text)
+        self.assertIn("Damage Class: Skyscraper-Buster → Block-Buster", text)
+        self.assertIn("Footprint: large building / skyscraper → city block", text)
+        self.assertIn("Source Tier: High 8-C → 8-B", text)
+        self.assertNotIn("{{", text)
+        self.assertNotIn("}}", text)
+        self.assertNotIn("[[", text)
+        self.assertNotIn("]]", text)
+        self.assertNotIn("https://", text)
 
 
 if __name__ == "__main__":

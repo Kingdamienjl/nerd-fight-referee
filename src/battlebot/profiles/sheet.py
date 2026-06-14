@@ -10,6 +10,7 @@ from typing import Any
 import yaml
 
 from battlebot.common.db import connect_database
+from battlebot.profiles.power_display import clean_public_text, public_power_scale
 from battlebot.profiles.search import search_characters
 from battlebot.profiles.store import resolve_character
 from battlebot.review import service
@@ -20,9 +21,21 @@ def text_power(profile: dict[str, Any], field: str) -> str:
 
 
 def item_line(item: dict[str, Any]) -> str:
-    name = item.get("name") or item.get("id") or "item"
-    description = item.get("description") or ""
+    name = clean_public_text(item.get("name") or item.get("id") or "item")
+    description = clean_public_text(item.get("description") or "")
     return f"- {name}: {description[:160]}"
+
+
+def summary_text(profile: dict[str, Any], field: str) -> str:
+    return clean_public_text(text_power(profile, field))
+
+
+def abilities_summary(abilities: list[dict[str, Any]]) -> str:
+    if not abilities:
+        return "none listed"
+    names = [clean_public_text(item.get("name") or item.get("id") or "ability") for item in abilities[:5]]
+    suffix = f" (+{len(abilities) - 5} more)" if len(abilities) > 5 else ""
+    return ", ".join(names) + suffix
 
 
 def yaml_profile_sheet(path: Path) -> str:
@@ -44,48 +57,27 @@ def imported_profile_to_data(profile: dict[str, Any]) -> dict[str, Any]:
 def format_profile_data(profile: dict[str, Any], *, status: str, profile_path: str = "") -> str:
     sources = profile.get("sources") or []
     abilities = profile.get("abilities") or []
-    weaknesses = profile.get("weaknesses") or []
     warnings = [warning["flag"] for warning in service.profile_warning_flags(profile)] if hasattr(service, "profile_warning_flags") else []
     source_backed = any(source.get("url") or source.get("revision_id") for source in sources)
-    variant = profile.get("variant") or {}
+    power_scale = public_power_scale(text_power(profile, "tier"))
+    quality = ", ".join(warnings) if warnings else "clean"
     lines = [
-        f"Name: {profile.get('name')}",
-        f"Franchise: {profile.get('franchise')}",
-        f"Category: {profile.get('category')}",
-    ]
-    if variant.get("variant_name"):
-        lines.extend(
-            [
-                f"Variant: {variant.get('variant_name')}",
-                f"Variant Type: {variant.get('variant_type')}",
-                f"Parent: {variant.get('parent_character_id') or 'unknown'}",
-            ]
-        )
-    lines.extend(
-        [
+        f"Name: {clean_public_text(profile.get('name'))}",
+        f"Franchise: {clean_public_text(profile.get('franchise'))}",
+        f"Category: {clean_public_text(profile.get('category'))}",
         f"Status: {status or profile.get('status')}",
         f"Battle Ready: {bool(profile.get('battle_eligible'))}",
         f"Source-backed: {'yes' if source_backed else 'no'}",
         f"Source count: {len(sources)}",
-        "Power Scale:",
-        f"- Tier: {text_power(profile, 'tier')}",
-        f"- Attack: {text_power(profile, 'attack_potency')}",
-        f"- Speed: {text_power(profile, 'speed')}",
-        f"- Durability: {text_power(profile, 'durability')}",
-        f"- Range: {text_power(profile, 'range')}",
-        f"- Stamina: {text_power(profile, 'stamina')}",
-        f"- Intelligence: {text_power(profile, 'intelligence')}",
-        "Top abilities:",
-        ]
-    )
-    lines.extend(item_line(item) for item in abilities[:8])
-    if not abilities:
-        lines.append("- none")
-    lines.append("Weaknesses:")
-    lines.extend(item_line(item) for item in weaknesses[:8])
-    if not weaknesses:
-        lines.append("- none")
-    lines.append(f"Quality warnings: {', '.join(warnings) or 'none'}")
+        f"Profile Quality: {quality}",
+        f"Damage Class: {power_scale.damage_class}",
+        f"Footprint: {power_scale.footprint}",
+        f"Source Tier: {power_scale.source_tier}",
+        f"Attack summary: {summary_text(profile, 'attack_potency')}",
+        f"Speed summary: {summary_text(profile, 'speed')}",
+        f"Durability summary: {summary_text(profile, 'durability')}",
+        f"Abilities summary: {abilities_summary(abilities)}",
+    ]
     return "\n".join(lines)
 
 

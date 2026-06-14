@@ -19,6 +19,10 @@ from battlebot.profiles.variants import variant_metadata
 from battlebot.review import service
 
 
+DEFAULT_CHARACTER_CATALOG_LIMIT = 20
+MAX_CHARACTER_CATALOG_LIMIT = 25
+
+
 def profile_matches(path: Path, query: str) -> bool:
     key = profile_key(query)
     if not key:
@@ -108,6 +112,122 @@ async def db_search_rows(connection: Any, query: str, *, limit: int) -> list[dic
         }
         for match in matches
     ]
+
+
+def normalize_catalog_page(page: int) -> int:
+    return max(1, page)
+
+
+def normalize_catalog_limit(limit: int) -> int:
+    return max(1, min(limit, MAX_CHARACTER_CATALOG_LIMIT))
+
+
+def catalog_display_name(row: dict[str, Any]) -> str:
+    name = str(row.get("canonical_name") or "").strip()
+    if name:
+        return name
+    profile_json = row.get("profile_json") if isinstance(row.get("profile_json"), dict) else {}
+    name = str(profile_json.get("name") or "").strip()
+    if name:
+        return name
+    return str(row.get("character_id") or row.get("profile_id") or "unknown")
+
+
+async def browse_character_catalog(
+    connection: Any,
+    *,
+    category: str | None = None,
+    franchise: str | None = None,
+    page: int = 1,
+    limit: int = DEFAULT_CHARACTER_CATALOG_LIMIT,
+) -> dict[str, Any]:
+    effective_page = normalize_catalog_page(page)
+    effective_limit = normalize_catalog_limit(limit)
+    offset = (effective_page - 1) * effective_limit
+    total = int(
+        await connection.fetchval(
+            """
+SELECT count(DISTINCT c.id)
+FROM characters c
+JOIN character_profiles cp ON cp.character_id = c.id
+WHERE cp.battle_eligible = true
+  AND ($1::text IS NULL OR lower(c.category) = lower($1))
+  AND ($2::text IS NULL OR lower(c.franchise) = lower($2))
+""",
+            category,
+            franchise,
+        )
+        or 0
+    )
+    rows = await connection.fetch(
+        """
+WITH latest AS (
+    SELECT DISTINCT ON (c.id)
+        c.id AS character_id,
+        c.canonical_name,
+        c.franchise,
+        c.category,
+        cp.profile_id,
+        cp.profile_json
+    FROM characters c
+    JOIN character_profiles cp ON cp.character_id = c.id
+    WHERE cp.battle_eligible = true
+      AND ($1::text IS NULL OR lower(c.category) = lower($1))
+      AND ($2::text IS NULL OR lower(c.franchise) = lower($2))
+    ORDER BY c.id, cp.imported_at DESC, cp.updated_at DESC
+)
+SELECT character_id, canonical_name, franchise, category, profile_id, profile_json
+FROM latest
+ORDER BY lower(franchise), lower(canonical_name), character_id
+LIMIT $3 OFFSET $4
+""",
+        category,
+        franchise,
+        effective_limit,
+        offset,
+    )
+    return {
+        "rows": [dict(row) for row in rows],
+        "total": total,
+        "page": effective_page,
+        "limit": effective_limit,
+        "page_count": (total + effective_limit - 1) // effective_limit if total else 0,
+        "category": category,
+        "franchise": franchise,
+    }
+
+
+def format_character_catalog(page_data: dict[str, Any]) -> str:
+    category = page_data.get("category") or "all"
+    franchise = page_data.get("franchise") or "all"
+    page = int(page_data.get("page") or 1)
+    page_count = int(page_data.get("page_count") or 0)
+    total = int(page_data.get("total") or 0)
+    rows = list(page_data.get("rows") or [])
+    lines = [
+        "Characters",
+        f"Total matching characters: {total}",
+        f"Page: {page} of {page_count}",
+        f"Filters: category={category}, franchise={franchise}",
+    ]
+    if not rows:
+        lines.append("No characters found for these filters.")
+    else:
+        for index, row in enumerate(rows, start=1):
+            lines.append(
+                f"{index}. {catalog_display_name(row)} - "
+                f"{row.get('franchise') or 'unknown'}/{row.get('category') or 'unknown'}"
+            )
+    lines.extend(
+        [
+            "",
+            "Examples:",
+            "/characters category:anime franchise:Dragon Ball page:2",
+            "/search query:goku",
+            "/profile character:goku",
+        ]
+    )
+    return "\n".join(lines)
 
 
 def dedupe_rows(rows: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
