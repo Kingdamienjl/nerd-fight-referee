@@ -104,6 +104,7 @@ async def resolution_error(
     }
     if resolution["status"] == "ambiguous":
         error["candidates"] = resolution.get("candidates", [])
+        error["disambiguation_options"] = resolution.get("disambiguation_options", [])
     if resolution["status"] == "not_found":
         error["diagnostics"] = await locate_character(resolution["query"], connection=connection)
     if resolution.get("alias_match"):
