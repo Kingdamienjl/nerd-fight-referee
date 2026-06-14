@@ -113,6 +113,24 @@ CREATE TABLE IF NOT EXISTS profile_weaknesses (
     PRIMARY KEY (profile_id, weakness_id)
 );
 
+CREATE TABLE IF NOT EXISTS profile_jobs (
+    id bigserial PRIMARY KEY,
+    profile_path text UNIQUE NOT NULL,
+    target text NOT NULL,
+    providers text NOT NULL,
+    status text NOT NULL DEFAULT 'pending',
+    priority integer NOT NULL DEFAULT 100,
+    attempts integer NOT NULL DEFAULT 0,
+    max_attempts integer NOT NULL DEFAULT 3,
+    next_attempt_at timestamptz NOT NULL DEFAULT now(),
+    locked_at timestamptz,
+    worker_id text,
+    last_error text,
+    last_summary jsonb,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    updated_at timestamptz NOT NULL DEFAULT now()
+);
+
 CREATE INDEX IF NOT EXISTS idx_characters_canonical_name ON characters(canonical_name);
 CREATE INDEX IF NOT EXISTS idx_characters_franchise ON characters(franchise);
 CREATE INDEX IF NOT EXISTS idx_character_aliases_normalized_alias
@@ -133,3 +151,5 @@ CREATE INDEX IF NOT EXISTS idx_profile_weaknesses_tags
     ON profile_weaknesses USING GIN (tags);
 CREATE INDEX IF NOT EXISTS idx_character_profiles_profile_json
     ON character_profiles USING GIN (profile_json);
+CREATE INDEX IF NOT EXISTS idx_profile_jobs_claim
+    ON profile_jobs (status, next_attempt_at, priority, id);
