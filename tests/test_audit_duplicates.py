@@ -33,6 +33,7 @@ class DuplicateAuditTests(unittest.TestCase):
         self.assertEqual(report["summary"]["groups"], 1)
         group = report["duplicate_groups"][0]
         self.assertEqual(group["group"], "cloud strife")
+        self.assertEqual(group["universe"], "final fantasy")
         self.assertEqual(group["suggested_canonical_default"]["name"], "Cloud Strife")
         self.assertEqual(group["suggested_archive_or_merge_candidates"][0]["name"], "Cloud Strife - Crossover Icons")
 
@@ -47,6 +48,48 @@ class DuplicateAuditTests(unittest.TestCase):
 
         self.assertEqual(report["summary"]["groups"], 0)
         self.assertEqual(report["summary"]["likely_variants"], 3)
+
+    def test_zero_different_franchises_are_homonyms_not_duplicates(self):
+        report = audit_duplicate_rows(
+            [
+                row("Zero", "Drakengard", "game"),
+                row("Zero", "Mega Man", "game"),
+            ]
+        )
+
+        self.assertEqual(report["summary"]["groups"], 0)
+        self.assertEqual(report["summary"]["homonyms"], 1)
+        self.assertEqual(report["homonym_groups"][0]["group"], "zero")
+
+    def test_thor_different_franchises_are_homonyms_not_duplicates(self):
+        report = audit_duplicate_rows(
+            [
+                row("Thor", "Marvel", "comic"),
+                row("Thor", "God of War", "game"),
+            ]
+        )
+
+        self.assertEqual(report["summary"]["groups"], 0)
+        self.assertEqual(report["summary"]["homonyms"], 1)
+        self.assertEqual(report["homonym_groups"][0]["group"], "thor")
+
+    def test_v_different_franchises_are_homonyms_not_duplicates(self):
+        report = audit_duplicate_rows(
+            [
+                row("V", "Cyberpunk 2077", "game"),
+                row("V", "Devil May Cry", "game"),
+            ]
+        )
+
+        self.assertEqual(report["summary"]["groups"], 0)
+        self.assertEqual(report["summary"]["homonyms"], 1)
+        self.assertEqual(report["homonym_groups"][0]["group"], "v")
+
+    def test_fake_variant_is_flagged(self):
+        report = audit_duplicate_rows([row("Cloud Strife (DC Comics)", "Final Fantasy", "game")])
+
+        self.assertEqual(report["summary"]["invalid_variants"], 1)
+        self.assertEqual(report["invalid_variants"][0]["name"], "Cloud Strife (DC Comics)")
 
 
 if __name__ == "__main__":

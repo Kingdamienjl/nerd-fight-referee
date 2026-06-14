@@ -13,6 +13,7 @@ def profile_row(
     status="auto_generated",
     sources=None,
     variant=None,
+    battle_eligible=True,
 ):
     return {
         "character_id": character_id,
@@ -22,7 +23,7 @@ def profile_row(
         "profile_id": character_id,
         "profile_type": "auto_evidence_profile",
         "status": status,
-        "battle_eligible": True,
+        "battle_eligible": battle_eligible,
         "profile_hash": profile_hash or f"hash-{character_id}",
         "profile_json": {
             "abilities": [],
@@ -142,6 +143,50 @@ class ProfileStoreTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(result["status"], "resolved")
         self.assertEqual(result["profile"]["character_id"], "son-goku")
+
+    async def test_resolver_goku_returns_son_goku(self):
+        result = await resolve_character(
+            FakeProfileConnection(
+                [
+                    profile_row("son-goku", "Son Goku", aliases=["Goku"], franchise="Dragon Ball"),
+                    profile_row("anderson", "Alexander Anderson", aliases=["goku"], franchise="Hellsing"),
+                ]
+            ),
+            "goku",
+        )
+
+        self.assertEqual(result["status"], "resolved")
+        self.assertEqual(result["profile"]["canonical_name"], "Son Goku")
+
+    async def test_resolver_sephiroth_prefers_final_fantasy_vii_when_no_default_flag(self):
+        result = await resolve_character(
+            FakeProfileConnection(
+                [
+                    profile_row("sephiroth-crossover", "Sephiroth", franchise="Crossover Icons", sources=[{"title": "source"}]),
+                    profile_row("sephiroth-ff", "Sephiroth", franchise="Final Fantasy", sources=[{"title": "source"}]),
+                    profile_row("sephiroth-ff7", "Sephiroth", franchise="Final Fantasy VII", sources=[{"title": "source"}]),
+                ]
+            ),
+            "sephiroth",
+        )
+
+        self.assertEqual(result["status"], "resolved")
+        self.assertEqual(result["profile"]["character_id"], "sephiroth-ff7")
+
+    async def test_ambiguous_disambiguation_options_do_not_include_blank_suggestions(self):
+        result = await resolve_character(
+            FakeProfileConnection(
+                [
+                    profile_row("akira-one", "Akira"),
+                    profile_row("akira-two", "Akira"),
+                ]
+            ),
+            "Akira",
+        )
+
+        self.assertEqual(result["status"], "ambiguous")
+        self.assertTrue(result["disambiguation_options"])
+        self.assertFalse(any(", ," in option or " -  -" in option for option in result["disambiguation_options"]))
 
 
 if __name__ == "__main__":

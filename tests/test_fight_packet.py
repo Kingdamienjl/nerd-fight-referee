@@ -25,6 +25,9 @@ def profile_row(
     profile_hash,
     franchise="Test",
     attack_potency="Planet level",
+    status="auto_generated",
+    sources=None,
+    variant=None,
 ):
     return {
         "character_id": character_id,
@@ -33,7 +36,7 @@ def profile_row(
         "category": "test",
         "profile_id": character_id,
         "profile_type": "auto_evidence_profile",
-        "status": "auto_generated",
+        "status": status,
         "battle_eligible": True,
         "profile_hash": profile_hash,
         "profile_json": {
@@ -49,7 +52,8 @@ def profile_row(
             "abilities": [make_item(index) for index in range(20)],
             "equipment": [make_item(index) for index in range(10)],
             "weaknesses": [make_item(index) for index in range(12)],
-            "sources": [{"id": f"source-{index}", "title": "Source"} for index in range(7)],
+            "sources": sources if sources is not None else [{"id": f"source-{index}", "title": "Source"} for index in range(7)],
+            "variant": variant or {},
         },
         "aliases": [],
         "imported_at": None,
@@ -163,6 +167,34 @@ class FightPacketTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(packet["ordered_pair_key"], "goku::sephiroth")
         self.assertTrue(packet["contender_a"]["warnings"])
         self.assertTrue(packet["warnings"])
+
+    async def test_fight_goku_sephiroth_does_not_fallback_on_sephiroth_ambiguity(self):
+        packet = await build_fight_packet(
+            FakeProfileConnection(
+                [
+                    profile_row("goku", "Son Goku", profile_hash="hash-goku", franchise="Dragon Ball"),
+                    profile_row(
+                        "sephiroth-crossover",
+                        "Sephiroth",
+                        profile_hash="hash-sephiroth-crossover",
+                        franchise="Crossover Icons",
+                        sources=[{"id": "source-1", "title": "Source"}],
+                    ),
+                    profile_row(
+                        "sephiroth-ff7",
+                        "Sephiroth",
+                        profile_hash="hash-sephiroth-ff7",
+                        franchise="Final Fantasy VII",
+                        sources=[{"id": "source-1", "title": "Source"}],
+                    ),
+                ]
+            ),
+            "goku",
+            "sephiroth",
+        )
+
+        self.assertEqual(packet["errors"], [])
+        self.assertEqual(packet["contender_b"]["character_id"], "sephiroth-ff7")
 
     def test_locate_finds_generated_path(self):
         with TemporaryDirectory() as temp_dir:

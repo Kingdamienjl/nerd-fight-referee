@@ -63,17 +63,30 @@ def row_to_profile(row: Any) -> dict[str, Any]:
 
 
 def candidate_summary(profile: dict[str, Any]) -> dict[str, str]:
-    summary = {
-        "character_id": profile["character_id"],
-        "canonical_name": profile["canonical_name"],
-        "franchise": profile["franchise"],
-        "category": profile["category"],
-        "profile_id": profile["profile_id"],
-    }
+    summary = {}
+    for key in ("character_id", "canonical_name", "franchise", "category", "profile_id"):
+        value = str(profile.get(key) or "").strip()
+        if value:
+            summary[key] = value
     display_name = row_display_name(profile)
-    if display_name and display_name != profile["canonical_name"]:
+    if display_name and display_name != profile.get("canonical_name"):
         summary["display_name"] = display_name
     return summary
+
+
+def disambiguation_options(candidates: list[dict[str, Any]]) -> list[str]:
+    options = []
+    for index, candidate in enumerate(candidates, start=1):
+        summary = candidate_summary(candidate)
+        parts = [
+            summary.get("display_name") or summary.get("canonical_name"),
+            summary.get("franchise"),
+            summary.get("category"),
+        ]
+        label = " - ".join(part for part in parts if part)
+        if label:
+            options.append(f"{index}. {label}")
+    return options
 
 
 def profile_source_count(profile: dict[str, Any]) -> int:
@@ -86,11 +99,13 @@ def profile_quality_rank(profile: dict[str, Any]) -> int:
     status = str(profile.get("status") or "").casefold()
     profile_type = str(profile.get("profile_type") or "").casefold()
     if status in {"verified", "approved"}:
-        return 4
-    if status in {"provisional", "auto_generated", "imported"}:
         return 3
-    if "generated" in profile_type:
+    if status == "provisional":
         return 2
+    if status in {"imported", "auto_generated", "generated"} or "generated" in profile_type:
+        return 1
+    if status == "roster_stub":
+        return 0
     return 1
 
 
@@ -100,7 +115,27 @@ def is_default_variant(profile: dict[str, Any]) -> bool:
     return bool(variant.get("default_variant"))
 
 
-def fallback_penalty(profile: dict[str, Any]) -> int:
+def canonical_franchise_rank(profile: dict[str, Any]) -> int:
+    franchise = normalize_lookup(str(profile.get("franchise") or ""))
+    text = " ".join(
+        [
+            str(profile.get("canonical_name") or ""),
+            franchise,
+            row_display_name(profile),
+        ]
+    ).casefold()
+    if "crossover icons" in text or str(profile.get("status") or "").casefold() == "roster_stub":
+        return -10
+    return len(franchise.split())
+
+
+def non_stub_rank(profile: dict[str, Any]) -> int:
+    status = str(profile.get("status") or "").casefold()
+    profile_type = str(profile.get("profile_type") or "").casefold()
+    return 0 if status == "roster_stub" or "stub" in profile_type else 1
+
+
+def display_tiebreaker(profile: dict[str, Any]) -> str:
     text = " ".join(
         [
             str(profile.get("canonical_name") or ""),
@@ -108,15 +143,17 @@ def fallback_penalty(profile: dict[str, Any]) -> int:
             row_display_name(profile),
         ]
     ).casefold()
-    return -10 if "crossover icons" in text else 0
+    return text
 
 
-def default_profile_score(profile: dict[str, Any]) -> tuple[int, int, int, int]:
+def default_profile_score(profile: dict[str, Any]) -> tuple[int, int, int, int, int, str]:
     return (
         1 if is_default_variant(profile) else 0,
         profile_quality_rank(profile),
         profile_source_count(profile),
-        fallback_penalty(profile),
+        canonical_franchise_rank(profile),
+        non_stub_rank(profile),
+        display_tiebreaker(profile),
     )
 
 
@@ -215,6 +252,7 @@ def resolution_from_candidates(
             "query": query,
             "matched_by": matched_by,
             "candidates": [candidate_summary(candidate) for candidate in candidates[:8]],
+            "disambiguation_options": disambiguation_options(candidates[:8]),
         }
     return {
         "status": "resolved",

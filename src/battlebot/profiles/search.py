@@ -245,6 +245,15 @@ def row_names(row: dict[str, Any]) -> tuple[str, str]:
     return canonical, display
 
 
+def row_matches_canonical_target(row: dict[str, Any], target: str) -> bool:
+    target_key = normalize_text(target)
+    target_tokens = set(target_key.split())
+    canonical, display = row_names(row)
+    candidate_text = normalize_text(" ".join([canonical, display]))
+    candidate_tokens = set(candidate_text.split())
+    return target_key in {normalize_text(canonical), normalize_text(display)} or target_tokens <= candidate_tokens
+
+
 def search_rank(row: dict[str, Any], query: str, *, alias_used: bool = False) -> tuple[int, int, int, str]:
     query_key = normalize_text(query)
     canonical, display = row_names(row)
@@ -299,6 +308,7 @@ async def search_characters(
     category: str | None = None,
     franchise: str | None = None,
     limit: int = 10,
+    include_stubs: bool = False,
     generated_dir: Path | str = "profiles/generated",
     needs_review_dir: Path | str = "profiles/needs_review",
     rosters_dir: Path | str = "profiles/rosters",
@@ -313,13 +323,18 @@ async def search_characters(
             rows.extend(await db_search_rows(db, search_query, limit=limit))
     rows.extend(yaml_search_rows(search_query, Path(generated_dir), "generated", limit=limit))
     rows.extend(yaml_search_rows(search_query, Path(needs_review_dir), "needs_review", limit=limit))
-    rows.extend(roster_search_rows(search_query, Path(rosters_dir), limit=limit))
+    if include_stubs:
+        rows.extend(roster_search_rows(search_query, Path(rosters_dir), limit=limit))
+    if alias_match:
+        rows = [row for row in rows if row_matches_canonical_target(row, alias_match.canonical)]
     if alias_match:
         for row in rows:
             row["alias_used"] = query
             row["alias_canonical"] = alias_match.canonical
     if status_filter and status_filter != "all":
         rows = [row for row in rows if row.get("status") == status_filter]
+    elif not include_stubs:
+        rows = [row for row in rows if row.get("battle_ready")]
     if category:
         rows = [row for row in rows if str(row.get("category") or "").casefold() == category.casefold()]
     if franchise:
@@ -354,6 +369,7 @@ async def async_main(args: argparse.Namespace) -> int:
         category=args.category,
         franchise=args.franchise,
         limit=args.limit,
+        include_stubs=args.include_stubs,
     )
     print(json.dumps(rows, indent=2) if args.json else format_search_results(rows))
     return 0
@@ -367,6 +383,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--category")
     parser.add_argument("--franchise")
     parser.add_argument("--limit", type=int, default=10)
+    parser.add_argument("--include-stubs", action="store_true")
     parser.add_argument("--json", action="store_true")
     return parser
 

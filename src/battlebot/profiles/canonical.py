@@ -17,6 +17,32 @@ TRUE_VARIANT_MARKERS = {
     "kingdom hearts",
 }
 
+FAKE_VARIANT_MARKERS = {
+    "anime",
+    "dc comics",
+    "game",
+    "marvel comics",
+    "modern",
+    "post crisis",
+    "post flashpoint",
+    "rebirth",
+}
+
+FRANCHISE_SUFFIX_MARKERS = {
+    "dc comics": {"dc"},
+    "marvel comics": {"marvel"},
+    "marvel cinematic universe": {"marvel"},
+}
+
+UNIVERSE_PREFIXES = (
+    "final fantasy",
+    "dragon ball",
+    "mega man",
+    "devil may cry",
+    "god of war",
+    "kingdom hearts",
+)
+
 DUPLICATE_SUFFIX_MARKERS = {
     "crossover icons",
     "final fantasy",
@@ -59,6 +85,22 @@ def canonical_character_key(name: str) -> str:
     return normalize_text(name)
 
 
+def row_universe_key(row: dict[str, Any]) -> str:
+    universe = normalize_text(str(row.get("universe") or row.get("franchise") or "unknown"))
+    for prefix in UNIVERSE_PREFIXES:
+        if universe.startswith(prefix):
+            return prefix
+    return universe
+
+
+def row_category_key(row: dict[str, Any]) -> str:
+    return normalize_text(str(row.get("category") or "unknown"))
+
+
+def row_duplicate_group_key(row: dict[str, Any]) -> tuple[str, str, str]:
+    return (row_canonical_group_key(row), row_universe_key(row), row_category_key(row))
+
+
 def row_canonical_group_key(row: dict[str, Any]) -> str:
     return canonical_character_key(row_display_name(row) or str(row.get("canonical_name") or ""))
 
@@ -66,3 +108,17 @@ def row_canonical_group_key(row: dict[str, Any]) -> str:
 def is_likely_variant_name(name: str) -> bool:
     _, parenthetical = parenthetical_parts(name)
     return bool(parenthetical and normalize_text(parenthetical) in TRUE_VARIANT_MARKERS)
+
+
+def is_fake_variant(row: dict[str, Any]) -> bool:
+    _, parenthetical = parenthetical_parts(row_display_name(row))
+    if not parenthetical:
+        return False
+    marker = normalize_text(parenthetical)
+    if marker in TRUE_VARIANT_MARKERS:
+        return False
+    franchise = row_universe_key(row)
+    allowed_franchises = FRANCHISE_SUFFIX_MARKERS.get(marker)
+    if allowed_franchises is not None:
+        return not any(value in franchise for value in allowed_franchises)
+    return marker in FAKE_VARIANT_MARKERS
