@@ -13,6 +13,7 @@ from typing import Any
 
 import yaml
 
+from battlebot.profiles import yaml_io
 from battlebot.profiles.quality import profile_warning_flags
 
 
@@ -40,19 +41,17 @@ def utc_now() -> str:
 
 
 def load_yaml(path: Path | str) -> dict[str, Any]:
-    data = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
-    return data if isinstance(data, dict) else {}
+    return yaml_io.load_yaml(path)
 
 
-def write_yaml(path: Path | str, data: dict[str, Any]) -> None:
-    target = Path(path)
-    target.parent.mkdir(parents=True, exist_ok=True)
-    temp_path = target.with_name(f".{target.name}.tmp")
-    temp_path.write_text(
-        yaml.safe_dump(data, sort_keys=False, allow_unicode=False),
-        encoding="utf-8",
-    )
-    temp_path.replace(target)
+def write_yaml(
+    path: Path | str,
+    data: dict[str, Any],
+    *,
+    validate: Any | None = None,
+    quarantine_dir: Path | str = yaml_io.DEFAULT_MALFORMED_QUARANTINE_DIR,
+) -> None:
+    yaml_io.write_yaml(path, data, validate=validate, quarantine_dir=quarantine_dir)
 
 
 def profile_path_kind(path: Path) -> str:
