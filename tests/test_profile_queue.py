@@ -4,6 +4,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import AsyncMock, patch
 
+import yaml
+
 from battlebot.review import batch_promote
 from battlebot.review.queue import CLAIM_JOBS_SQL
 from battlebot.review.queue_seed import seed_queue
@@ -142,6 +144,24 @@ class ProfileQueueTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(status, "failed")
         self.assertEqual(connection.executed[-1][1][1], "failed")
+
+    async def test_worker_quarantines_yaml_parse_failure_without_retry(self):
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            path = root / "profiles" / "needs_review" / "a.yaml"
+            path.parent.mkdir(parents=True)
+            path.write_text("name: [unterminated\n", encoding="utf-8")
+            connection = FakeConnection()
+
+            with patch(
+                "battlebot.review.queue_worker.batch_promote.batch_promote",
+                AsyncMock(side_effect=yaml.YAMLError("bad yaml")),
+            ):
+                status = await process_job(connection, job(path, attempts=1, max_attempts=3), worker_args(root))
+
+        self.assertEqual(status, "quarantined")
+        self.assertEqual(connection.executed[-1][1][1], "quarantined")
+        self.assertFalse(path.exists())
 
     async def test_import_is_called_after_promotion_threshold(self):
         with TemporaryDirectory() as temp_dir:

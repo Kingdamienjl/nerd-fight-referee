@@ -13,6 +13,7 @@ from typing import Any
 
 from pydantic import ValidationError
 
+from battlebot.profiles import yaml_io
 from battlebot.schemas.profile import CharacterProfile
 from battlebot.review import auto_repair, enrich_sources, service
 
@@ -105,12 +106,29 @@ def is_transient_exception(exc: Exception) -> bool:
     return any(marker in text for marker in transient_markers)
 
 
+def malformed_quarantine_dir(args: argparse.Namespace) -> Path:
+    return Path(args.quarantine_dir) / "malformed_yaml"
+
+
+def is_malformed_yaml_exception(exc: Exception) -> bool:
+    return yaml_io.is_yaml_parse_error(exc) or isinstance(exc, yaml_io.YAMLProfileWriteError)
+
+
+def quarantine_malformed_profile(path: Path, *, exc: Exception, args: argparse.Namespace) -> yaml_io.QuarantineResult | None:
+    if not path.exists():
+        return None
+    return yaml_io.quarantine_file(path, error=exc, quarantine_dir=malformed_quarantine_dir(args))
+
+
 def record_retry_or_quarantine(
     path: Path,
     *,
     exc: Exception,
     args: argparse.Namespace,
 ) -> str:
+    if is_malformed_yaml_exception(exc):
+        quarantine_malformed_profile(path, exc=exc, args=args)
+        return "quarantined"
     data = service.load_yaml(path)
     repair = data.get("repair") if isinstance(data.get("repair"), dict) else {}
     attempts = int(repair.get("attempts") or 0) + 1
@@ -195,6 +213,15 @@ async def batch_promote(args: argparse.Namespace) -> BatchSummary:
         except Exception as exc:  # noqa: BLE001 - batch mode must continue across bad profiles.
             summary.failed += 1
             summary.parser_crashes += 1
+            if is_malformed_yaml_exception(exc):
+                summary.deterministic_failures += 1
+                summary.failures.append(f"{path}: malformed_yaml_quarantined: {exc}")
+                try:
+                    quarantine_malformed_profile(path, exc=exc, args=args)
+                    summary.quarantined += 1
+                except Exception as quarantine_exc:  # noqa: BLE001 - preserve the parse failure.
+                    summary.failures.append(f"{path}: failed_to_quarantine_malformed_yaml: {quarantine_exc}")
+                continue
             if is_transient_exception(exc):
                 summary.retryable_failures += 1
             else:

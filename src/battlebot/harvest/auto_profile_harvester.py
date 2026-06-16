@@ -24,7 +24,9 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
 
+from battlebot.profiles import yaml_io
 from battlebot.profiles.variants import variant_metadata
+from battlebot.schemas.profile import CharacterProfile
 
 DEFAULT_MEDIAWIKI_API = "https://vsbattles.fandom.com/api.php"
 ANILIST_GRAPHQL_URL = "https://graphql.anilist.co"
@@ -1481,11 +1483,12 @@ def now_iso() -> str:
 
 
 def write_yaml(path: Path, data: dict[str, Any]) -> None:
-    import yaml
-
-    path.write_text(
-        yaml.safe_dump(data, sort_keys=False, allow_unicode=False, width=100),
-        encoding="utf-8",
+    validate = CharacterProfile.model_validate if data.get("battle_eligible") else None
+    yaml_io.write_yaml(
+        path,
+        data,
+        validate=validate,
+        width=100,
     )
 
 

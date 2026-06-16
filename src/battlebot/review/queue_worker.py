@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from battlebot.common.db import apply_schema, connect_database
+from battlebot.profiles import yaml_io
 from battlebot.ingest import import_profiles
 from battlebot.review import batch_promote, service
 from battlebot.review.queue import claim_jobs, mark_job, mark_retry
@@ -31,6 +32,7 @@ class WorkerSummary:
     needs_review: int = 0
     retry: int = 0
     failed: int = 0
+    quarantined: int = 0
     imported: int = 0
     errors: list[str] | None = None
 
@@ -41,6 +43,7 @@ class WorkerSummary:
             "needs_review": self.needs_review,
             "retry": self.retry,
             "failed": self.failed,
+            "quarantined": self.quarantined,
             "imported": self.imported,
             "errors": self.errors or [],
         }
@@ -127,6 +130,9 @@ async def process_job(connection: Any, job: dict[str, Any], args: argparse.Names
             return "promoted"
         if summary.retry or summary.retryable_failures:
             return await mark_retry(connection, job, summary=data, error=job_error(data))
+        if summary.quarantined:
+            await mark_job(connection, int(job["id"]), status="quarantined", summary=data, error=job_error(data))
+            return "quarantined"
         if summary.failed or summary.deterministic_failures:
             if int(job.get("attempts") or 0) >= int(job.get("max_attempts") or args.max_attempts):
                 await mark_job(connection, int(job["id"]), status="failed", summary=data, error=job_error(data))
@@ -136,6 +142,16 @@ async def process_job(connection: Any, job: dict[str, Any], args: argparse.Names
         return "needs_review"
     except Exception as exc:  # noqa: BLE001 - one job must not kill the worker batch.
         data = {"exception": type(exc).__name__, "error": str(exc)}
+        if batch_promote.is_malformed_yaml_exception(exc):
+            if Path(job["profile_path"]).exists():
+                result = yaml_io.quarantine_file(
+                    Path(job["profile_path"]),
+                    error=exc,
+                    quarantine_dir=Path(args.quarantine_dir) / "malformed_yaml",
+                )
+                data["quarantine_path"] = str(result.quarantine_path)
+            await mark_job(connection, int(job["id"]), status="quarantined", summary=data, error=str(exc))
+            return "quarantined"
         if batch_promote.is_transient_exception(exc):
             return await mark_retry(connection, job, summary=data, error=str(exc))
         if int(job.get("attempts") or 0) >= int(job.get("max_attempts") or args.max_attempts):
@@ -163,6 +179,8 @@ async def run_worker(connection: Any, args: argparse.Namespace) -> WorkerSummary
             summary.retry += 1
         elif status == "failed":
             summary.failed += 1
+        elif status == "quarantined":
+            summary.quarantined += 1
 
         if args.import_every > 0 and promotions_since_import >= args.import_every:
             try:
