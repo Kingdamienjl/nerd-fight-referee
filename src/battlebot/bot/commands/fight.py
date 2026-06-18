@@ -49,10 +49,10 @@ async def discord_message_from_packet(
         text = "\n".join(lines)
     else:
         decision = await judge_fight_packet(packet, smoke_result)
-        text = format_decision(decision)
-    if len(text) <= 1900:
+        text = format_decision(decision, include_diagnostics=include_diagnostics)
+    if len(text) <= 1800:
         return text
-    return f"{text[:1897]}..."
+    return f"{text[:1797]}..."
 
 
 def register_fight_command(tree: app_commands.CommandTree, *, database_url: str | None = None) -> None:

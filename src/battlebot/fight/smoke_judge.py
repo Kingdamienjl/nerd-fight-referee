@@ -67,6 +67,18 @@ MATCHUP_CAPPING_FLAGS = {
     "missing_speed",
     "missing_durability",
 }
+TACTICAL_CATEGORIES = (
+    "Range Control",
+    "Mobility / Initiative",
+    "Finishing Power",
+    "Durability / Attrition",
+    "Special Abilities",
+    "Resistance / Counterplay",
+    "Skill / Tactics",
+    "Prep Dependence",
+    "Weakness Exploitation",
+    "Battlefield Control",
+)
 
 
 def text_rank(value: str | None, *, speed: bool = False) -> int | None:
@@ -100,10 +112,10 @@ def item_names(contender: dict[str, Any], section: str, limit: int = 3) -> list[
 
 def axis_label(axis: str) -> str:
     return {
-        "attack_potency": "finishing power",
-        "speed": "initiative and spacing",
-        "durability": "exchange durability",
-        "range": "range control",
+        "attack_potency": "Finishing Power",
+        "speed": "Mobility / Initiative",
+        "durability": "Durability / Attrition",
+        "range": "Range Control",
     }.get(axis, axis.replace("_", " "))
 
 
@@ -134,16 +146,11 @@ def tactical_effect(axis: str, winner: dict[str, Any], loser: dict[str, Any]) ->
 
 
 def deciding_factor(axis: str, winner: dict[str, Any], loser: dict[str, Any]) -> dict[str, str]:
-    winner_power = winner.get("power_scale") or {}
-    loser_power = loser.get("power_scale") or {}
     winner_name = str(winner.get("canonical_name") or "Winner")
     loser_name = str(loser.get("canonical_name") or "Loser")
     return {
         "factor": axis_label(axis).title(),
-        "evidence": (
-            f"{winner_name} leads {axis}: {winner_power.get(axis) or 'n/a'} "
-            f"vs {loser_name}: {loser_power.get(axis) or 'n/a'}"
-        ),
+        "evidence": f"{winner_name} leads {axis_label(axis).casefold()} over {loser_name} in the packet.",
         "tactical_effect": tactical_effect(axis, winner, loser),
     }
 
@@ -154,13 +161,105 @@ def ability_factor(winner: dict[str, Any]) -> dict[str, str] | None:
         return None
     winner_name = str(winner.get("canonical_name") or "The winner")
     return {
-        "factor": "Listed ability pressure",
+        "factor": "Special Abilities",
         "evidence": f"{winner_name} has listed abilities: {', '.join(names)}",
         "tactical_effect": (
             f"{winner_name} has more than raw stats in the packet and can use listed "
             "abilities to create openings. No unlisted feats are assumed."
         ),
     }
+
+
+def tactical_value(contender: dict[str, Any], key: str) -> Any:
+    tactical = contender.get("tactical_profile") if isinstance(contender.get("tactical_profile"), dict) else {}
+    return contender.get(key) or tactical.get(key)
+
+
+def compact_names(values: Any, *, limit: int = 3) -> list[str]:
+    if not values:
+        return []
+    if isinstance(values, str):
+        return [values]
+    names = []
+    if isinstance(values, list):
+        for item in values:
+            if isinstance(item, dict):
+                name = item.get("name") or item.get("id") or item.get("description")
+            else:
+                name = item
+            if name:
+                names.append(str(name))
+    return names[:limit]
+
+
+def structured_factor(winner: dict[str, Any], loser: dict[str, Any]) -> dict[str, str] | None:
+    winner_name = str(winner.get("canonical_name") or "Winner")
+    loser_name = str(loser.get("canonical_name") or "Loser")
+    battlefield = tactical_value(winner, "battlefield_control")
+    if battlefield:
+        return {
+            "factor": "Battlefield Control",
+            "evidence": f"{winner_name} has packet battlefield-control notes.",
+            "tactical_effect": (
+                f"{winner_name} can shape positioning or engagement terms instead of letting "
+                f"{loser_name} fight on preferred timing."
+            ),
+        }
+    counters = compact_names(tactical_value(winner, "counters"))
+    if counters:
+        return {
+            "factor": "Resistance / Counterplay",
+            "evidence": f"{winner_name} has listed counterplay: {', '.join(counters)}",
+            "tactical_effect": f"{winner_name} has an explicit packet route for blunting {loser_name}'s best tools.",
+        }
+    intelligence = tactical_value(winner, "tactical_intelligence")
+    style = tactical_value(winner, "combat_style")
+    if intelligence or style:
+        return {
+            "factor": "Skill / Tactics",
+            "evidence": f"{winner_name} has packet tactical notes.",
+            "tactical_effect": f"{winner_name} can choose exchanges more deliberately and avoid low-value trades.",
+        }
+    forms = compact_names(tactical_value(winner, "forms"))
+    if forms:
+        return {
+            "factor": "Special Abilities",
+            "evidence": f"{winner_name} has listed form access: {', '.join(forms)}",
+            "tactical_effect": f"{winner_name} has escalation options in the packet if the opening exchange stalls.",
+        }
+    return None
+
+
+def route_to_victory(winner: dict[str, Any], loser: dict[str, Any], factors: list[dict[str, str]]) -> str:
+    winner_name = str(winner.get("canonical_name") or "Winner")
+    loser_name = str(loser.get("canonical_name") or "Loser")
+    factor_names = [str(factor.get("factor") or "") for factor in factors]
+    structured_win = compact_names(tactical_value(winner, "win_conditions") or tactical_value(winner, "matchup_notes"), limit=1)
+    if structured_win:
+        return f"{winner_name} wins by playing toward the listed win condition: {structured_win[0]}"
+    if "Battlefield Control" in factor_names or "Range Control" in factor_names:
+        return f"{winner_name} wins by controlling distance and engagement terms until {loser_name} is forced into bad trades."
+    if "Mobility / Initiative" in factor_names and "Finishing Power" in factor_names:
+        return f"{winner_name} wins by taking first meaningful action, forcing reactions, then cashing in the higher output edge."
+    if "Durability / Attrition" in factor_names:
+        return f"{winner_name} wins by surviving the exchange pattern longer and turning repeated counters into attrition."
+    if "Skill / Tactics" in factor_names:
+        return f"{winner_name} wins by steering the matchup through cleaner decisions, timing, and packet-backed tactics."
+    if "Special Abilities" in factor_names:
+        return f"{winner_name} wins by using listed abilities to create the opening that raw stats alone do not describe."
+    return f"{winner_name} has the clearer packet-backed route over {loser_name}."
+
+
+def loser_path(loser: dict[str, Any], winner: dict[str, Any]) -> str:
+    loser_name = str(loser.get("canonical_name") or "Loser")
+    winner_name = str(winner.get("canonical_name") or "Winner")
+    loss_conditions = compact_names(tactical_value(winner, "losing_conditions") or tactical_value(winner, "loss_conditions"), limit=1)
+    if loss_conditions:
+        return f"{loser_name} needs to force the listed failure case: {loss_conditions[0]}"
+    weaknesses = item_names(winner, "weaknesses", limit=2)
+    if weaknesses:
+        return f"{loser_name} needs to exploit listed weaknesses such as {', '.join(weaknesses)} before {winner_name}'s main route stabilizes."
+    return f"{loser_name} needs a listed counter, weakness exploit, or matchup-specific angle not resolved by the core packet comparison."
 
 
 def quality_notes(packet: dict[str, Any]) -> list[str]:
@@ -202,13 +301,14 @@ def matchup_capping_warnings(packet: dict[str, Any]) -> list[str]:
 def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
     if packet.get("errors"):
         return {
-            "label": "Nerd Fight Referee Decision - fallback mode",
+            "label": "Nerd Fight Referee Decision",
             "winner": None,
             "confidence": "none",
             "verdict_type": "needs_judge_review",
             "deciding_factors": [],
             "warnings": ["fight packet has resolution errors"],
             "profile_quality_notes": quality_notes(packet),
+            "diagnostics": {"fallback": True, "fallback_reason": "resolution_error"},
         }
 
     a = packet["contender_a"]
@@ -233,13 +333,14 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
     notes = quality_notes(packet)
     if parsed < 2 or score_total == 0:
         return {
-            "label": "Nerd Fight Referee Decision - fallback mode",
+            "label": "Nerd Fight Referee Decision",
             "winner": "needs_judge_review",
             "confidence": "low",
             "verdict_type": "needs_judge_review",
             "deciding_factors": deciding,
             "warnings": ["tier parsing was insufficient for a deterministic smoke winner"],
             "profile_quality_notes": notes,
+            "diagnostics": {"fallback": True, "fallback_reason": "insufficient_packet_ranking"},
         }
     winner_label = "contender_a" if score_total > 0 else "contender_b"
     winner = a if score_total > 0 else b
@@ -254,27 +355,26 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
     factor = ability_factor(winner)
     if factor:
         deciding.append(factor)
+    factor = structured_factor(winner, loser)
+    if factor:
+        deciding.insert(0, factor)
+    route = route_to_victory(winner, loser, deciding)
     return {
-        "label": "Nerd Fight Referee Decision - fallback mode",
+        "label": "Nerd Fight Referee Decision",
         "winner": winner["canonical_name"],
         "winner_character_id": winner["character_id"],
         "confidence": confidence,
         "verdict_type": "smoke_test_decision",
         "summary": (
             f"{winner['canonical_name']} has the clearer packet-backed route over "
-            f"{loser['canonical_name']} in this deterministic fallback."
+            f"{loser['canonical_name']} from the supplied packet."
         ),
-        "win_condition": (
-            f"{winner['canonical_name']} wins by converting the listed stat leads into "
-            "initiative, damage pressure, and survivable exchanges."
-        ),
-        "loser_best_path": (
-            f"{loser['canonical_name']} needs to exploit listed weaknesses or abilities "
-            "not covered by the core stat comparison; missing evidence limits confidence."
-        ),
+        "win_condition": route,
+        "loser_best_path": loser_path(loser, winner),
         "deciding_factors": deciding,
         "warnings": warnings,
         "profile_quality_notes": notes,
+        "diagnostics": {"fallback": True, "fallback_reason": "deterministic_smoke_judge"},
     }
 
 

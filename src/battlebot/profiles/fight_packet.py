@@ -19,6 +19,19 @@ CORE_POWER_AXES = (
     "stamina",
     "intelligence",
 )
+OPTIONAL_TACTICAL_FIELDS = (
+    "combat_style",
+    "win_conditions",
+    "losing_conditions",
+    "loss_conditions",
+    "counters",
+    "resistances",
+    "battlefield_control",
+    "tactical_intelligence",
+    "forms",
+    "equipment_loadout",
+    "matchup_notes",
+)
 
 
 def compact_power_entry(entry: Any) -> str | None:
@@ -85,6 +98,11 @@ def compact_profile(
         "sources": [compact_source(source) for source in sources[:source_limit]],
         "source_count": len(sources),
         "warnings": profile_warning_flags(profile),
+        "tactical_profile": {
+            key: profile_json.get(key)
+            for key in OPTIONAL_TACTICAL_FIELDS
+            if profile_json.get(key) not in (None, "", [], {})
+        },
     }
 
 

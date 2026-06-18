@@ -83,6 +83,7 @@ FIELD_ALIASES = {
     "powers": "powers_and_abilities",
     "abilities": "powers_and_abilities",
     "p&a": "powers_and_abilities",
+    "p & a": "powers_and_abilities",
     "powers/abilities": "powers_and_abilities",
     "powers / abilities": "powers_and_abilities",
     "powers_and_abilities": "powers_and_abilities",

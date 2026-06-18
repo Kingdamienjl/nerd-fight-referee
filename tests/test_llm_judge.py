@@ -1,5 +1,6 @@
 import json
 import unittest
+import httpx
 
 from battlebot.fight.llm_judge import build_prompt, judge_fight_packet
 from battlebot.fight.smoke_judge import smoke_judge_packet
@@ -98,8 +99,60 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
         )
 
         self.assertEqual(result["winner"], "Superman")
-        self.assertIn("fallback mode", result["title"])
+        self.assertEqual(result["title"], "Nerd Fight Referee Decision")
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "malformed JSON")
         self.assertTrue(any("LLM judge unavailable" in note for note in result["judge_notes"]))
+
+    async def test_disabled_llm_records_fallback_reason(self):
+        result = await judge_fight_packet(
+            packet(),
+            smoke_judge_packet(packet()),
+            env={"BATTLEBOT_LLM_ENABLED": "false"},
+        )
+
+        self.assertEqual(result["winner"], "Superman")
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "LLM disabled")
+
+    async def test_timeout_records_fallback_reason(self):
+        async def caller(messages, env=None):
+            raise httpx.TimeoutException("timed out")
+
+        result = await judge_fight_packet(
+            packet(),
+            smoke_judge_packet(packet()),
+            env={"BATTLEBOT_LLM_ENABLED": "true"},
+            ollama_caller=caller,
+        )
+
+        self.assertEqual(result["winner"], "Superman")
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "timeout")
+
+    async def test_ollama_unavailable_records_fallback_reason(self):
+        async def caller(messages, env=None):
+            raise httpx.ConnectError("connection refused")
+
+        result = await judge_fight_packet(
+            packet(),
+            smoke_judge_packet(packet()),
+            env={"BATTLEBOT_LLM_ENABLED": "true"},
+            ollama_caller=caller,
+        )
+
+        self.assertEqual(result["winner"], "Superman")
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "Ollama unavailable")
+
+    async def test_schema_validation_failure_records_fallback_reason(self):
+        async def caller(messages, env=None):
+            return json.dumps({"winner": "Superman", "confidence": "strong"})
+
+        result = await judge_fight_packet(
+            packet(),
+            smoke_judge_packet(packet()),
+            env={"BATTLEBOT_LLM_ENABLED": "true"},
+            ollama_caller=caller,
+        )
+
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "schema validation failed")
 
     async def test_conflicting_llm_winner_falls_back_to_smoke_winner(self):
         async def caller(messages, env=None):
@@ -125,6 +178,7 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(result["winner"], "Superman")
         self.assertIn("judge_conflict", result["warnings"])
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "winner conflict")
 
     def test_smoke_deciding_factors_include_tactical_effect(self):
         result = smoke_judge_packet(packet())

@@ -700,6 +700,66 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(inspection["repair_debug"])
         self.assertEqual(inspection["repair_attempts"][0]["extraction_failure_reason"], "fetched_but_no_fields")
 
+    async def test_needs_review_with_missing_fields_promoted_after_source_repair(self):
+        """Test that a needs_review profile with missing core fields becomes battle_eligible and is promoted when sources provide repairs."""
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "profiles"
+            needs_review = root / "needs_review"
+            generated = root / "generated"
+            path = needs_review / "comic" / "dc" / "batman.yaml"
+            
+            # Create a profile with missing core fields
+            write_profile(path, profile_data(missing_core=True))
+
+            # Verify initial state: profile is missing fields
+            initial_profile = service.load_yaml(path)
+            self.assertFalse(initial_profile.get("battle_eligible"))
+            initial_missing = auto_repair.missing_targets(initial_profile)
+            self.assertIn("attack_potency", initial_missing)
+            self.assertIn("speed", initial_missing)
+            self.assertIn("durability", initial_missing)
+            self.assertIn("abilities", initial_missing)
+
+            # Run repair with mocked source fetch that provides all fields
+            with patch("battlebot.review.auto_repair.fetch_source_fields", fake_fetch_source_fields):
+                result = await auto_repair.repair_profile(
+                    path,
+                    promote_if_valid=True,
+                    needs_review_dir=needs_review,
+                    generated_dir=generated,
+                    notes_path=root / "review_notes.yaml",
+                    provider_ids=["vsbattles"],
+                    max_source_candidates=1,
+                )
+
+            # Verify repair was successful
+            self.assertTrue(result.changed, "Profile should show as changed")
+            self.assertGreater(len(result.repaired_fields), 0, "Should have repaired at least one field")
+            
+            # Load the repaired profile
+            repaired_profile = service.load_yaml(path)
+            
+            # Verify fields were applied
+            self.assertIsNotNone(auto_repair.service.power_text(repaired_profile, "attack_potency"))
+            self.assertIsNotNone(auto_repair.service.power_text(repaired_profile, "speed"))
+            self.assertIsNotNone(auto_repair.service.power_text(repaired_profile, "durability"))
+            self.assertGreater(len(repaired_profile.get("abilities") or []), 0)
+            
+            # Verify eligibility was recomputed
+            remaining_missing = auto_repair.missing_targets(repaired_profile)
+            self.assertNotIn("attack_potency", remaining_missing, "attack_potency should be satisfied by repair")
+            self.assertNotIn("speed", remaining_missing, "speed should be satisfied by repair")
+            self.assertNotIn("durability", remaining_missing, "durability should be satisfied by repair")
+            
+            # Verify promotion occurred
+            self.assertTrue(result.promoted, "Profile should be promoted after repair")
+            
+            # Verify generated profile was created
+            generated_path = generated / "comic" / "dc" / "batman.yaml"
+            self.assertTrue(generated_path.exists(), "Generated profile should be created")
+            generated_profile = service.load_yaml(generated_path)
+            self.assertTrue(generated_profile.get("battle_eligible"), "Generated profile should be battle_eligible")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -18,6 +18,12 @@ from battlebot.profiles.fight_packet import build_fight_packet
 
 VALID_CONFIDENCE = {"low", "low_to_medium", "medium", "high", "strong", "needs_judge_review"}
 CONFLICT_NOTE = "judge_conflict: LLM contradicted deterministic baseline without packet evidence"
+FALLBACK_LLM_DISABLED = "LLM disabled"
+FALLBACK_OLLAMA_UNAVAILABLE = "Ollama unavailable"
+FALLBACK_TIMEOUT = "timeout"
+FALLBACK_MALFORMED_JSON = "malformed JSON"
+FALLBACK_SCHEMA_VALIDATION = "schema validation failed"
+FALLBACK_WINNER_CONFLICT = "winner conflict"
 SYSTEM_PROMPT = (
     "You are Nerd Fight Referee. Decide only from the supplied packet. Do not invent feats, "
     "forms, equipment, prep time, or weaknesses. Explain how the winner turns the listed "
@@ -106,21 +112,54 @@ def parse_json_response(text: str) -> dict[str, Any]:
     return data
 
 
+def normalize_factor_name(value: str) -> str:
+    normalized = value.casefold()
+    if "range" in normalized:
+        return "Range Control"
+    if "speed" in normalized or "initiative" in normalized or "mobility" in normalized:
+        return "Mobility / Initiative"
+    if "attack" in normalized or "power" in normalized or "finish" in normalized:
+        return "Finishing Power"
+    if "durability" in normalized or "attrition" in normalized:
+        return "Durability / Attrition"
+    if "resistance" in normalized or "counter" in normalized:
+        return "Resistance / Counterplay"
+    if "skill" in normalized or "tactic" in normalized or "intelligence" in normalized:
+        return "Skill / Tactics"
+    if "prep" in normalized:
+        return "Prep Dependence"
+    if "weakness" in normalized:
+        return "Weakness Exploitation"
+    if "battlefield" in normalized:
+        return "Battlefield Control"
+    if "ability" in normalized or "special" in normalized:
+        return "Special Abilities"
+    return value or "Key Factor"
+
+
 def normalize_decision(data: dict[str, Any]) -> dict[str, Any]:
+    required = ("winner", "confidence", "win_condition", "loser_best_path")
+    missing = [key for key in required if not data.get(key)]
+    if missing:
+        raise ValueError(f"missing required decision fields: {', '.join(missing)}")
     factors = data.get("deciding_factors") or []
+    if not isinstance(factors, list):
+        raise ValueError("deciding_factors must be a list")
     normalized_factors = []
     for factor in factors:
         if isinstance(factor, dict):
             normalized_factors.append(
                 {
-                    "factor": str(factor.get("factor") or "Deciding factor"),
+                    "factor": normalize_factor_name(str(factor.get("factor") or "Deciding factor")),
                     "evidence": str(factor.get("evidence") or ""),
                     "tactical_effect": str(factor.get("tactical_effect") or ""),
                 }
             )
+        else:
+            raise ValueError("deciding_factors entries must be objects")
     confidence = str(data.get("confidence") or "needs_judge_review")
     if confidence not in VALID_CONFIDENCE:
-        confidence = "needs_judge_review"
+        raise ValueError(f"unsupported confidence: {confidence}")
     return {
         "title": "Nerd Fight Referee Decision",
         "winner": str(data.get("winner") or "needs_judge_review"),
@@ -134,9 +173,9 @@ def normalize_decision(data: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def fallback_decision(smoke_baseline: dict[str, Any], note: str) -> dict[str, Any]:
+def fallback_decision(smoke_baseline: dict[str, Any], reason: str, detail: str = "") -> dict[str, Any]:
     return {
-        "title": "Nerd Fight Referee Decision - fallback mode",
+        "title": "Nerd Fight Referee Decision",
         "winner": smoke_baseline.get("winner"),
         "confidence": smoke_baseline.get("confidence") or "needs_judge_review",
         "summary": smoke_baseline.get("summary") or "LLM judge unavailable; using deterministic fallback.",
@@ -144,7 +183,12 @@ def fallback_decision(smoke_baseline: dict[str, Any], note: str) -> dict[str, An
         "loser_best_path": smoke_baseline.get("loser_best_path") or "Evidence is incomplete.",
         "deciding_factors": smoke_baseline.get("deciding_factors") or [],
         "warnings": list(smoke_baseline.get("warnings") or []),
-        "judge_notes": [note, *list(smoke_baseline.get("profile_quality_notes") or [])],
+        "judge_notes": [detail, *list(smoke_baseline.get("profile_quality_notes") or [])] if detail else list(smoke_baseline.get("profile_quality_notes") or []),
+        "diagnostics": {
+            "fallback": True,
+            "fallback_reason": reason,
+            "fallback_detail": detail,
+        },
     }
 
 
@@ -152,10 +196,22 @@ def validate_against_smoke(decision: dict[str, Any], smoke_baseline: dict[str, A
     smoke_winner = smoke_baseline.get("winner")
     llm_winner = decision.get("winner")
     if smoke_winner and smoke_winner != "needs_judge_review" and llm_winner != smoke_winner:
-        fallback = fallback_decision(smoke_baseline, CONFLICT_NOTE)
+        fallback = fallback_decision(smoke_baseline, FALLBACK_WINNER_CONFLICT, CONFLICT_NOTE)
         fallback["warnings"].append("judge_conflict")
         return fallback
     return decision
+
+
+def fallback_reason_for_exception(exc: Exception) -> str:
+    if isinstance(exc, (asyncio.TimeoutError, TimeoutError, httpx.TimeoutException)):
+        return FALLBACK_TIMEOUT
+    if isinstance(exc, (json.JSONDecodeError,)):
+        return FALLBACK_MALFORMED_JSON
+    if isinstance(exc, ValueError):
+        return FALLBACK_SCHEMA_VALIDATION
+    if isinstance(exc, (httpx.ConnectError, httpx.HTTPStatusError, httpx.RequestError)):
+        return FALLBACK_OLLAMA_UNAVAILABLE
+    return FALLBACK_OLLAMA_UNAVAILABLE
 
 
 async def call_ollama(
@@ -185,13 +241,17 @@ async def judge_fight_packet(
 ) -> dict[str, Any]:
     smoke = smoke_baseline or smoke_judge_packet(packet)
     if not llm_enabled(env):
-        return fallback_decision(smoke, "LLM judge disabled; using deterministic fallback.")
+        return fallback_decision(smoke, FALLBACK_LLM_DISABLED, "LLM judge disabled; using deterministic fallback.")
     try:
         caller = ollama_caller or call_ollama
         raw = await caller(build_prompt(packet, smoke), env=env)
         decision = normalize_decision(parse_json_response(raw))
     except Exception as exc:  # noqa: BLE001 - judge must degrade cleanly.
-        return fallback_decision(smoke, f"LLM judge unavailable; using deterministic fallback. {exc}")
+        return fallback_decision(
+            smoke,
+            fallback_reason_for_exception(exc),
+            f"LLM judge unavailable; using deterministic fallback. {exc}",
+        )
     return validate_against_smoke(decision, smoke)
 
 

@@ -12,6 +12,8 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+import os
+import tempfile
 
 from battlebot.profiles import yaml_io
 from battlebot.profiles.quality import profile_warning_flags
@@ -344,10 +346,35 @@ def load_repair_debug(profile_path: Path, debug_dir: Path | None = None) -> dict
 
 
 def atomic_append_note(notes_path: Path, note: dict[str, Any]) -> None:
-    current = load_yaml(notes_path) if notes_path.exists() else {}
+    notes_path = Path(notes_path)
+    # Ensure parent directory exists before attempting any writes
+    notes_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Load existing notes (if any)
+    try:
+        current = load_yaml(notes_path) if notes_path.exists() else {}
+    except Exception:
+        current = {}
     notes = current.get("notes") or []
     notes.append(note)
-    write_yaml(notes_path, {"notes": notes})
+
+    # Write to a temporary file in the same directory, then atomically replace
+    tmp_file = None
+    try:
+        with tempfile.NamedTemporaryFile("w", delete=False, dir=str(notes_path.parent), encoding="utf-8") as handle:
+            tmp_file = Path(handle.name)
+            handle.write(yaml.safe_dump({"notes": notes}, sort_keys=False, allow_unicode=False))
+            handle.flush()
+            os.fsync(handle.fileno())
+        # Replace the target file atomically (cross-platform safe)
+        os.replace(str(tmp_file), str(notes_path))
+    except Exception:
+        try:
+            if tmp_file and tmp_file.exists():
+                tmp_file.unlink(missing_ok=True)
+        except Exception:
+            pass
+        raise
 
 
 def add_review_note(

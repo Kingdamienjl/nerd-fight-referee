@@ -709,6 +709,70 @@ def apply_extracted_fields(
     return repaired
 
 
+def attempts_with_core_fields(attempts: list[SourceAttempt]) -> list[SourceAttempt]:
+    """Return attempts that have all three core fields (regardless of other eligibility)."""
+    return [
+        attempt
+        for attempt in attempts
+        if attempt.fetch_status == "fetched"
+        and attempt.core_field_count >= 3
+    ]
+
+
+def apply_repairs_from_available_sources(
+    profile_path: Path,
+    profile: dict[str, Any],
+    attempts: list[SourceAttempt],
+    *,
+    dry_run: bool,
+    notes_path: Path,
+) -> tuple[list[str], list[SourceAttempt]]:
+    """
+    Apply repairs from all sources that have core fields extracted.
+    Returns (repaired_fields, sources_used).
+    """
+    repaired_fields: list[str] = []
+    sources_used: list[SourceAttempt] = []
+    seen_source_ids: set[str] = set()
+
+    # Try to apply repairs from sources with core fields, prioritized by quality
+    candidates = sorted(
+        attempts_with_core_fields(attempts),
+        key=lambda a: (a.provider_priority, a.identity_score, a.core_field_count),
+        reverse=True,
+    )
+
+    for attempt in candidates:
+        if attempt.source_id in seen_source_ids:
+            continue
+
+        fields = attempt_field_map(attempt)
+        if not fields:
+            continue
+
+        applied_source_id = apply_source_metadata(profile, attempt.source_payload, attempt.metadata)
+        # Use high confidence if identity matches, moderate otherwise
+        confidence = 0.75 if attempt.identity_match else 0.60
+        repaired = apply_extracted_fields(
+            profile_path,
+            profile,
+            fields,
+            source_id=applied_source_id,
+            confidence=confidence,
+            overwrite=False,  # Don't overwrite existing valid values
+            dry_run=dry_run,
+            notes_path=notes_path,
+            allow_power_fields=True,
+        )
+
+        if repaired:
+            repaired_fields.extend(repaired)
+            sources_used.append(attempt)
+            seen_source_ids.add(attempt.source_id)
+
+    return sorted(set(repaired_fields)), sources_used
+
+
 def high_authority_core_attempts(attempts: list[SourceAttempt]) -> list[SourceAttempt]:
     required = {"attack_potency", "speed", "durability"}
     return [
@@ -975,25 +1039,29 @@ def apply_primary_profile_state(
     *,
     primary: SourceAttempt | None,
     corroborated: bool,
+    force_promotable: bool = False,
+    primary_source_id: str | None = None,
 ) -> None:
     generation = profile.get("generation") if isinstance(profile.get("generation"), dict) else {}
-    if primary:
+    review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
+    if primary or force_promotable:
         profile["profile_type"] = "auto_evidence_profile"
         profile["status"] = "verified" if corroborated else "provisional"
         profile["battle_eligible"] = True
-        generation["confidence"] = max(float(generation.get("confidence") or 0), 0.80 if corroborated else 0.60)
+        generation["confidence"] = max(
+            float(generation.get("confidence") or 0),
+            0.80 if corroborated else 0.60,
+        )
         generation["ineligible_reasons"] = []
-        review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
         review["readiness_state"] = "verified" if corroborated else "provisional"
         review["profile_state"] = "verified" if corroborated else "auto_evidence_profile"
-        review["primary_source_id"] = primary.source_id
+        review["primary_source_id"] = primary.source_id if primary else primary_source_id
         review["secondary_disagreement_policy"] = "warning_only"
         profile["review"] = review
     else:
         profile["profile_type"] = "needs_review"
         profile["status"] = "needs_review"
         profile["battle_eligible"] = False
-        review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
         review["readiness_state"] = "needs_review"
         profile["review"] = review
         generation.setdefault("ineligible_reasons", ["needs_review"])
@@ -1385,6 +1453,7 @@ async def repair_profile(
     primary = eligible_attempts[0] if eligible_attempts else None
     corroborated = has_independent_corroboration(primary, eligible_attempts[1:]) if primary else False
 
+    # Apply repairs from primary source if available
     if primary:
         fields = attempt_field_map(primary)
         applied_source_id = apply_source_metadata(profile, primary.source_payload, primary.metadata)
@@ -1403,9 +1472,28 @@ async def repair_profile(
             )
         )
 
+    # Apply repairs from any other sources with core fields
+    # This ensures we extract available values even if sources aren't fully eligible
+    additional_repaired, sources_used_for_repair = apply_repairs_from_available_sources(
+        profile_path,
+        profile,
+        [attempt for attempt in attempts if attempt is not primary and attempt.source_id],
+        dry_run=dry_run,
+        notes_path=notes_path,
+    )
+    repaired_fields.extend(additional_repaired)
+
+    # Recompute unresolved fields AFTER applying all available repairs
     unresolved = missing_targets(profile)
     needs_human_source_choice = False
     has_promotion_source = bool(primary)
+    
+    # Determine if profile is now promotable based on repaired state
+    has_core_fields = not any(field in unresolved for field in ("attack_potency", "speed", "durability"))
+    has_abilities = "abilities" not in unresolved
+    has_sources = "sources" not in unresolved
+    is_now_promotable = has_core_fields and has_abilities and has_sources
+    
     disagreements = high_authority_core_disagreements(attempts)
     if disagreements:
         review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
@@ -1436,7 +1524,29 @@ async def repair_profile(
             and chosen_attempt.promotion_allowed
         ):
             errors.append(f"chosen_source_not_promotion_allowed: {choose_source_id}")
-    apply_primary_profile_state(profile, primary=primary, corroborated=corroborated)
+    
+    # Apply profile state based on repair success and eligibility.
+    # If we have all required fields after repairs and at least one identity-matching source,
+    # promote the profile even if no previously eligible primary source existed.
+    has_identity_match_source = any(
+        attempt.identity_match
+        for attempt in attempts
+        if attempt.fetch_status == "fetched"
+        and attempt.core_field_count >= 3
+        and attempt.ability_count >= 1
+    )
+    force_promotable = is_now_promotable and has_identity_match_source
+    primary_source_id = primary.source_id if primary else (
+        sources_used_for_repair[0].source_id if sources_used_for_repair else None
+    )
+    apply_primary_profile_state(
+        profile,
+        primary=primary,
+        corroborated=corroborated,
+        force_promotable=force_promotable,
+        primary_source_id=primary_source_id,
+    )
+
     update_repair_metadata(
         profile,
         repaired_fields=repaired_fields,

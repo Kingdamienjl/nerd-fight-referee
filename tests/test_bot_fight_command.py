@@ -42,7 +42,9 @@ class BotFightCommandTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertIn("Nerd Fight Referee Decision", message)
         self.assertNotIn("pre-LLM", message)
+        self.assertNotIn("fallback mode", message)
         self.assertIn("winner: Superman", message)
+        self.assertLessEqual(len(message), 1800)
 
     async def test_fight_output_uses_llm_decision_title_when_enabled(self):
         packet = {
@@ -89,6 +91,32 @@ class BotFightCommandTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("Nerd Fight Referee Decision", message)
         self.assertNotIn("pre-LLM", message)
         self.assertIn("He acts first and controls spacing.", message)
+
+    async def test_public_fight_hides_fallback_diagnostics_private_can_show_them(self):
+        packet = {
+            "errors": [],
+            "contender_a": {
+                "canonical_name": "Batman",
+                "character_id": "batman",
+                "power_scale": {"attack_potency": "Building level", "speed": "Peak Human", "durability": "Building level"},
+            },
+            "contender_b": {
+                "canonical_name": "Superman",
+                "character_id": "superman",
+                "power_scale": {
+                    "attack_potency": "Solar System level",
+                    "speed": "Massively FTL+",
+                    "durability": "Solar System level",
+                },
+            },
+            "warnings": [],
+        }
+
+        public = await discord_message_from_packet(packet, smoke_judge_packet(packet))
+        private = await discord_message_from_packet(packet, smoke_judge_packet(packet), include_diagnostics=True)
+
+        self.assertNotIn("fallback reason", public)
+        self.assertIn("fallback reason", private)
 
     async def test_public_fight_not_found_hides_file_paths_and_includes_suggestions(self):
         packet = {
