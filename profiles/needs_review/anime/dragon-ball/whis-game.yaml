@@ -11,7 +11,7 @@ generation:
   generated_at: '2026-06-10T01:06:35Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id005
+  ineligible_reasons: &id007
   - missing_source_revision_metadata
   - missing_attack_potency
   - missing_speed
@@ -96,7 +96,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Mr._Game_%26_Watch
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields:
+  allowed_fields: &id003
   - attack_potency
   - speed
   - durability
@@ -142,7 +142,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Whis_(Canon)/KaaydoManic
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields:
+  allowed_fields: &id004
   - attack_potency
   - speed
   - durability
@@ -304,7 +304,15 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29_Dragon_Ball
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: *id002
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
 - id: vsbattles-whis-game-dragon-ball
@@ -332,15 +340,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29_%28Dragon_Ball%29
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
+  allowed_fields: *id002
   parser: mediawiki_battle_stats
   promotion_allowed: true
 - id: vsbattles-whis-dragon-ball-game
@@ -366,6 +366,44 @@ sources:
   source_type: mediawiki
   title: Whis Dragon Ball Game
   url: https://character-stats-and-profiles.fandom.com/wiki/Whis_Dragon_Ball_Game
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
+- id: vsbattles-whis-game
+  provider_id: vsbattles
+  source_type: mediawiki
+  title: Whis (Game)
+  url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields: *id003
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
+- id: character-stats-profiles-whis-game
+  provider_id: character_stats_profiles
+  source_type: mediawiki
+  title: Whis (Game)
+  url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields: *id004
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
+- id: character-stats-profiles-whis-game-dragon-ball
+  provider_id: character_stats_profiles
+  source_type: mediawiki
+  title: Whis Game Dragon Ball
+  url: https://character-stats-and-profiles.fandom.com/wiki/Whis_Game_Dragon_Ball
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -444,7 +482,7 @@ abilities:
 - id: powers-and-abilities-border
   name: '{{Border'
   description: '{{Border'
-  source_ids: &id003
+  source_ids: &id005
   - character-stats-profiles-whis-game-dragon-ball
   source_claim_ids: []
   confidence: 0.85
@@ -460,7 +498,7 @@ abilities:
 - id: powers-and-abilities-scroll-yes
   name: Scroll=Yes
   description: Scroll=Yes
-  source_ids: *id003
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -475,7 +513,7 @@ abilities:
 - id: powers-and-abilities-visible-yes
   name: Visible=Yes
   description: Visible=Yes
-  source_ids: *id003
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -490,7 +528,7 @@ abilities:
 - id: powers-and-abilities-padding-yes
   name: Padding=Yes
   description: Padding=Yes
-  source_ids: *id003
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -506,7 +544,7 @@ abilities:
   name: 'Content= Passive: * Acausality [Type 4]: * Self-Sustenance [All Types]: Skil'
   description: 'Content= Passive: * Acausality [Type 4]: * Self-Sustenance [All Types]:
     Skil'
-  source_ids: *id003
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -525,7 +563,7 @@ weaknesses:
 - id: weaknesses-notable-matchups-border
   name: Notable Matchups == {{Border
   description: Notable Matchups == {{Border
-  source_ids: &id004
+  source_ids: &id006
   - character-stats-profiles-whis-game-dragon-ball
   source_claim_ids: []
   confidence: 0.85
@@ -541,7 +579,7 @@ weaknesses:
 - id: weaknesses-scroll-yes
   name: Scroll=Yes
   description: Scroll=Yes
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -556,7 +594,7 @@ weaknesses:
 - id: weaknesses-visible-yes
   name: Visible=Yes
   description: Visible=Yes
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -571,7 +609,7 @@ weaknesses:
 - id: weaknesses-padding-yes
   name: Padding=Yes
   description: Padding=Yes
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -586,7 +624,7 @@ weaknesses:
 - id: weaknesses-content
   name: Content=
   description: Content=
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -601,7 +639,7 @@ weaknesses:
 - id: weaknesses
   name: '-'
   description: '-'
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -616,7 +654,7 @@ weaknesses:
 - id: weaknesses-cross-verse-tag-tabber
   name: Cross-Verse= {{#tag:tabber
   description: Cross-Verse= {{#tag:tabber
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -633,7 +671,7 @@ weaknesses:
     Inconclusive Matches: }}'
   description: 'Victories= Notable Victories: {{!}}-{{!}}Losses= Notable Losses: {{!}}-{{!}}Inconclusive=
     Inconclusive Matches: }}'
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -648,7 +686,7 @@ weaknesses:
 - id: weaknesses
   name: '-'
   description: '-'
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -663,7 +701,7 @@ weaknesses:
 - id: weaknesses-in-verse-tag-tabber
   name: In-Verse= {{#tag:tabber
   description: In-Verse= {{#tag:tabber
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -680,7 +718,7 @@ weaknesses:
     Inconclusive Matches: }} }} =='
   description: 'Victories= Notable Victories: {{!}}-{{!}}Losses= Notable Losses: {{!}}-{{!}}Inconclusive=
     Inconclusive Matches: }} }} == Notes and Explanations == {{Border'
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -695,7 +733,7 @@ weaknesses:
 - id: weaknesses-scroll-yes
   name: Scroll=Yes
   description: Scroll=Yes
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -710,7 +748,7 @@ weaknesses:
 - id: weaknesses-visible-yes
   name: Visible=Yes
   description: Visible=Yes
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -725,7 +763,7 @@ weaknesses:
 - id: weaknesses-padding-yes
   name: Padding=Yes
   description: Padding=Yes
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -740,7 +778,7 @@ weaknesses:
 - id: weaknesses-content-statistics-values-general-references-category-kaaydomanic
   name: 'Content= Statistics Values: ------------ General References: }} Category:KaaydoManic'
   description: 'Content= Statistics Values: ------------ General References: }} Category:KaaydoManic'
-  source_ids: *id004
+  source_ids: *id006
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -763,481 +801,22 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id005
+  ineligible_reasons: *id007
   source_errors:
   - 'AniList lookup failed for Whis (Game): anilist request failed: HTTP 404'
   notes: []
   readiness_state: needs_review
 profile_hash: c223a5e010fd974869d9edaa910ab3cd05dd87a37bbe333774ec9f6992b8bcc7
 repair:
-  attempted_at: '2026-06-18T03:13:56Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-06-18T17:22:07Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-whis-game-dragon-ball
-    url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29_Dragon_Ball
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id016
-    - powers_and_abilities
-    - speed
-    normalized_page_title: Dragon Ball (Games)
-    source_type: mediawiki
-    revision_id: '9552274'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 184980
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Timeline
-    - Power of the Verse
-    - Explanation Pages
-    - Knowledgeable Member
-    - Supporter/Opponent/Neutral
-    - Characters
-    - Other Games
-    - Notable Power & Ability, Physiology
-    - Notable Item
-    - Notable Location
-    - Gallery
-    - Notes
-    stat_labels_detected:
-    - attack_potency
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - speed
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 75
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id017
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: speed
-      value: In terms of speed they also often scale to the Massively FTL+ levels
-        of speed of the DBS anime, up to Infinite Speed via scaling from the Toei
-        anime continuity, giving them formidable speed. With Dragon Ball Heroes &
-        Xenoverse, the verse has reached Immeasurable Speed with feats like the Dark
-        Dragon Balls being capable of physically flying beyond space-time, reaching
-        to different eras/points in time & the Demon Gods chasing after them. Time
-        Patrolllers have also performed similar feats, chasing/intercepting their
-        enemies across time.
-      source_id: vsbattles-whis-game-dragon-ball
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'As a verse that composited all Dragon Ball materials, powerful and unique
-        abilities from both Canon and Toei was carried over to Dragon Ball Games Other
-        than that, game verse also introduced a lot of original and extremely powerful
-        abilities, especially among the Demon race featured in Dragon Ball Heroes
-        & Xenoverse Multiverse. Things such as Mind Manipulation that works on higher-dimensional,
-        non-corporeal and abstract beings, the ability to attack souls, potent infinite
-        (6-D) multiverse scale Absorption, the ability to erase beings from all of
-        history, extremely potent Power Nullification and passive Corruption which
-        results in mind control through dispersed dark energy across the multiverse
-        are some of the powerful abilities introduced through Demons in Xenoverse
-        and Heroes, along with resistance to such abilities from the protagonists
-        often times. All of this make Dragon Ball Games verse a powerful verse with
-        powerful special abilities. }} ==Explanation Pages== Despite simply being
-        another Dragon Ball verse, Game verse however are far more complicated than
-        what it show on the surface. For better understanding of the verse, visit
-        these pages: *Cosmology page for Dragon Ball Heroes & Xenoverse Multiverse
-        *Page that explains special terminologies within Dragon Ball Game multiverse
-        *Dragon Ball Xenoverse and Heroes Tiering Explanations *Page that explains
-        the reasoning for DB Heroes/Xenoverse Immeasurable Speed *Conceptual Energy
-        Explanation (Dragon Ball Games) ==Knowledgeable Member== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        *Dominodalek *Vietthai96 *Ottavio Merluzzo *Dagoth OwO *SSJRyu1 *Zenkaibattery1
-        }} ==Supporter/Opponent/Neutral== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        |-|Supporters= *Ss3micah *TheGodOfICE777 *ProudLearner *Whyaresomanynamestaken
-        *Sanicspood *God900 *Cmoon12 *Brak *ProfectusInfinity *StarShooter80 *Killerdrone123
-        |-|Opponents= None |-|Neutral= None }} ==Characters== |-|Time God= {| border
-        = "5" cellspacing="1/6" cellpadding="2" align="center" width="auto" style="border:
-        1px solid #000000;" ! colspan="5" style="background: #0000FF; font-size: 110%;"
-        |Time God |- ! cla'
-      source_id: vsbattles-whis-game-dragon-ball
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 1
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|dragon ball games|9552274
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-whis-game-dragon-ball
-    url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29_Dragon_Ball
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id006
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Whis (Canon)/KaaydoManic
-    source_type: mediawiki
-    revision_id: '586707'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4424
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - Notes and Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id007
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{High 1-A}}
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Passive: * Acausality
-        [Type 4]: * Self-Sustenance [All Types]: Skil'
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least High Outerverse level (Much stronger than Beerus. Oneshot Ultra
-        Instinct Goku)
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Infinite Flight Speed (Created the a cube capable of reaching the Neutral
-        Zone in 36 minutes; the Neutral Zone is space outside of the infinite sized
-        Universes. Takes two days to reach Zeno's Palace which is outside of the Multiverse
-        and implied to transcend the Neutral Zone) with Irrelevant Combat Speed (Can
-        react and stop Beerus. Couldn't be hit by Super Saiyan Broly and easily dodged
-        Instant Transmission)
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least High Outerverse level (Can make a force-field that can protect
-        from Ultra Instinct Goku and Beast Gohan)
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Notable Matchups == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        |-|Cross-Verse= {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses=
-        Notable Losses: {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} |-|In-Verse=
-        {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses= Notable Losses:
-        {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} }} == Notes and Explanations
-        == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Statistics Values:
-        ------------ General References: }} Category:KaaydoManic'
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|whis canon kaaydomanic|586707
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-whis-game-dragon-ball
-    url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29_%28Dragon_Ball%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id018
-    - powers_and_abilities
-    - speed
-    normalized_page_title: Dragon Ball (Games)
-    source_type: mediawiki
-    revision_id: '9552274'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 184980
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Timeline
-    - Power of the Verse
-    - Explanation Pages
-    - Knowledgeable Member
-    - Supporter/Opponent/Neutral
-    - Characters
-    - Other Games
-    - Notable Power & Ability, Physiology
-    - Notable Item
-    - Notable Location
-    - Gallery
-    - Notes
-    stat_labels_detected:
-    - attack_potency
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - speed
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 75
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id019
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: speed
-      value: In terms of speed they also often scale to the Massively FTL+ levels
-        of speed of the DBS anime, up to Infinite Speed via scaling from the Toei
-        anime continuity, giving them formidable speed. With Dragon Ball Heroes &
-        Xenoverse, the verse has reached Immeasurable Speed with feats like the Dark
-        Dragon Balls being capable of physically flying beyond space-time, reaching
-        to different eras/points in time & the Demon Gods chasing after them. Time
-        Patrolllers have also performed similar feats, chasing/intercepting their
-        enemies across time.
-      source_id: vsbattles-whis-game-dragon-ball
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'As a verse that composited all Dragon Ball materials, powerful and unique
-        abilities from both Canon and Toei was carried over to Dragon Ball Games Other
-        than that, game verse also introduced a lot of original and extremely powerful
-        abilities, especially among the Demon race featured in Dragon Ball Heroes
-        & Xenoverse Multiverse. Things such as Mind Manipulation that works on higher-dimensional,
-        non-corporeal and abstract beings, the ability to attack souls, potent infinite
-        (6-D) multiverse scale Absorption, the ability to erase beings from all of
-        history, extremely potent Power Nullification and passive Corruption which
-        results in mind control through dispersed dark energy across the multiverse
-        are some of the powerful abilities introduced through Demons in Xenoverse
-        and Heroes, along with resistance to such abilities from the protagonists
-        often times. All of this make Dragon Ball Games verse a powerful verse with
-        powerful special abilities. }} ==Explanation Pages== Despite simply being
-        another Dragon Ball verse, Game verse however are far more complicated than
-        what it show on the surface. For better understanding of the verse, visit
-        these pages: *Cosmology page for Dragon Ball Heroes & Xenoverse Multiverse
-        *Page that explains special terminologies within Dragon Ball Game multiverse
-        *Dragon Ball Xenoverse and Heroes Tiering Explanations *Page that explains
-        the reasoning for DB Heroes/Xenoverse Immeasurable Speed *Conceptual Energy
-        Explanation (Dragon Ball Games) ==Knowledgeable Member== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        *Dominodalek *Vietthai96 *Ottavio Merluzzo *Dagoth OwO *SSJRyu1 *Zenkaibattery1
-        }} ==Supporter/Opponent/Neutral== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        |-|Supporters= *Ss3micah *TheGodOfICE777 *ProudLearner *Whyaresomanynamestaken
-        *Sanicspood *God900 *Cmoon12 *Brak *ProfectusInfinity *StarShooter80 *Killerdrone123
-        |-|Opponents= None |-|Neutral= None }} ==Characters== |-|Time God= {| border
-        = "5" cellspacing="1/6" cellpadding="2" align="center" width="auto" style="border:
-        1px solid #000000;" ! colspan="5" style="background: #0000FF; font-size: 110%;"
-        |Time God |- ! cla'
-      source_id: vsbattles-whis-game-dragon-ball
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 1
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|dragon ball games|9552274
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-whis-game-dragon-ball
-    url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29_%28Dragon_Ball%29
+  - source_id: mediawiki-whis-game
+    url: https://vsbattles.fandom.com/wiki/Mr._Game_%26_Watch
     ok: true
     note: extracted_core_fields
     extracted_fields: &id008
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Whis (Canon)/KaaydoManic
-    source_type: mediawiki
-    revision_id: '586707'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4424
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - Notes and Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id009
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{High 1-A}}
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Passive: * Acausality
-        [Type 4]: * Self-Sustenance [All Types]: Skil'
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least High Outerverse level (Much stronger than Beerus. Oneshot Ultra
-        Instinct Goku)
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Infinite Flight Speed (Created the a cube capable of reaching the Neutral
-        Zone in 36 minutes; the Neutral Zone is space outside of the infinite sized
-        Universes. Takes two days to reach Zeno's Palace which is outside of the Multiverse
-        and implied to transcend the Neutral Zone) with Irrelevant Combat Speed (Can
-        react and stop Beerus. Couldn't be hit by Super Saiyan Broly and easily dodged
-        Instant Transmission)
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least High Outerverse level (Can make a force-field that can protect
-        from Ultra Instinct Goku and Beast Gohan)
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Notable Matchups == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        |-|Cross-Verse= {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses=
-        Notable Losses: {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} |-|In-Verse=
-        {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses= Notable Losses:
-        {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} }} == Notes and Explanations
-        == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Statistics Values:
-        ------------ General References: }} Category:KaaydoManic'
-      source_id: character-stats-profiles-whis-game-dragon-ball
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|whis canon kaaydomanic|586707
-    retryable: false
-    exception_class: ''
-  - source_id: mediawiki-whis-game
-    url: https://vsbattles.fandom.com/wiki/Whis_(Game)
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id010
     - attack_potency
     - durability
     - intelligence
@@ -1280,7 +859,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id011
+    allowed_fields: &id009
     - tier
     - attack_potency
     - speed
@@ -1496,11 +1075,576 @@ repair:
     duplicate_key: vsbattles.fandom.com|mr game watch|9385346
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-whis-game
+    url: https://character-stats-and-profiles.fandom.com/wiki/Whis_(Canon)/KaaydoManic
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id010
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Whis (Canon)/KaaydoManic
+    source_type: mediawiki
+    revision_id: '586707'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4424
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Notes and Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id011
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least {{High 1-A}}
+      source_id: character-stats-profiles-whis-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Passive: * Acausality
+        [Type 4]: * Self-Sustenance [All Types]: Skil'
+      source_id: character-stats-profiles-whis-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least High Outerverse level (Much stronger than Beerus. Oneshot Ultra
+        Instinct Goku)
+      source_id: character-stats-profiles-whis-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Infinite Flight Speed (Created the a cube capable of reaching the Neutral
+        Zone in 36 minutes; the Neutral Zone is space outside of the infinite sized
+        Universes. Takes two days to reach Zeno's Palace which is outside of the Multiverse
+        and implied to transcend the Neutral Zone) with Irrelevant Combat Speed (Can
+        react and stop Beerus. Couldn't be hit by Super Saiyan Broly and easily dodged
+        Instant Transmission)
+      source_id: character-stats-profiles-whis-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least High Outerverse level (Can make a force-field that can protect
+        from Ultra Instinct Goku and Beast Gohan)
+      source_id: character-stats-profiles-whis-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Notable Matchups == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
+        |-|Cross-Verse= {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses=
+        Notable Losses: {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} |-|In-Verse=
+        {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses= Notable Losses:
+        {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} }} == Notes and Explanations
+        == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Statistics Values:
+        ------------ General References: }} Category:KaaydoManic'
+      source_id: character-stats-profiles-whis-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|whis canon kaaydomanic|586707
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-whis-game-dragon-ball
+    url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29_Dragon_Ball
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id020
+    - powers_and_abilities
+    - speed
+    normalized_page_title: Dragon Ball (Games)
+    source_type: mediawiki
+    revision_id: '9552274'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 184980
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Timeline
+    - Power of the Verse
+    - Explanation Pages
+    - Knowledgeable Member
+    - Supporter/Opponent/Neutral
+    - Characters
+    - Other Games
+    - Notable Power & Ability, Physiology
+    - Notable Item
+    - Notable Location
+    - Gallery
+    - Notes
+    stat_labels_detected:
+    - attack_potency
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - speed
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 75
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id021
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: speed
+      value: In terms of speed they also often scale to the Massively FTL+ levels
+        of speed of the DBS anime, up to Infinite Speed via scaling from the Toei
+        anime continuity, giving them formidable speed. With Dragon Ball Heroes &
+        Xenoverse, the verse has reached Immeasurable Speed with feats like the Dark
+        Dragon Balls being capable of physically flying beyond space-time, reaching
+        to different eras/points in time & the Demon Gods chasing after them. Time
+        Patrolllers have also performed similar feats, chasing/intercepting their
+        enemies across time.
+      source_id: vsbattles-whis-game-dragon-ball
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'As a verse that composited all Dragon Ball materials, powerful and unique
+        abilities from both Canon and Toei was carried over to Dragon Ball Games Other
+        than that, game verse also introduced a lot of original and extremely powerful
+        abilities, especially among the Demon race featured in Dragon Ball Heroes
+        & Xenoverse Multiverse. Things such as Mind Manipulation that works on higher-dimensional,
+        non-corporeal and abstract beings, the ability to attack souls, potent infinite
+        (6-D) multiverse scale Absorption, the ability to erase beings from all of
+        history, extremely potent Power Nullification and passive Corruption which
+        results in mind control through dispersed dark energy across the multiverse
+        are some of the powerful abilities introduced through Demons in Xenoverse
+        and Heroes, along with resistance to such abilities from the protagonists
+        often times. All of this make Dragon Ball Games verse a powerful verse with
+        powerful special abilities. }} ==Explanation Pages== Despite simply being
+        another Dragon Ball verse, Game verse however are far more complicated than
+        what it show on the surface. For better understanding of the verse, visit
+        these pages: *Cosmology page for Dragon Ball Heroes & Xenoverse Multiverse
+        *Page that explains special terminologies within Dragon Ball Game multiverse
+        *Dragon Ball Xenoverse and Heroes Tiering Explanations *Page that explains
+        the reasoning for DB Heroes/Xenoverse Immeasurable Speed *Conceptual Energy
+        Explanation (Dragon Ball Games) ==Knowledgeable Member== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
+        *Dominodalek *Vietthai96 *Ottavio Merluzzo *Dagoth OwO *SSJRyu1 *Zenkaibattery1
+        }} ==Supporter/Opponent/Neutral== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
+        |-|Supporters= *Ss3micah *TheGodOfICE777 *ProudLearner *Whyaresomanynamestaken
+        *Sanicspood *God900 *Cmoon12 *Brak *ProfectusInfinity *StarShooter80 *Killerdrone123
+        |-|Opponents= None |-|Neutral= None }} ==Characters== |-|Time God= {| border
+        = "5" cellspacing="1/6" cellpadding="2" align="center" width="auto" style="border:
+        1px solid #000000;" ! colspan="5" style="background: #0000FF; font-size: 110%;"
+        |Time God |- ! cla'
+      source_id: vsbattles-whis-game-dragon-ball
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 1
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|dragon ball games|9552274
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-whis-game-dragon-ball
+    url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29_Dragon_Ball
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id012
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Whis (Canon)/KaaydoManic
+    source_type: mediawiki
+    revision_id: '586707'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4424
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Notes and Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id013
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least {{High 1-A}}
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Passive: * Acausality
+        [Type 4]: * Self-Sustenance [All Types]: Skil'
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least High Outerverse level (Much stronger than Beerus. Oneshot Ultra
+        Instinct Goku)
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Infinite Flight Speed (Created the a cube capable of reaching the Neutral
+        Zone in 36 minutes; the Neutral Zone is space outside of the infinite sized
+        Universes. Takes two days to reach Zeno's Palace which is outside of the Multiverse
+        and implied to transcend the Neutral Zone) with Irrelevant Combat Speed (Can
+        react and stop Beerus. Couldn't be hit by Super Saiyan Broly and easily dodged
+        Instant Transmission)
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least High Outerverse level (Can make a force-field that can protect
+        from Ultra Instinct Goku and Beast Gohan)
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Notable Matchups == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
+        |-|Cross-Verse= {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses=
+        Notable Losses: {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} |-|In-Verse=
+        {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses= Notable Losses:
+        {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} }} == Notes and Explanations
+        == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Statistics Values:
+        ------------ General References: }} Category:KaaydoManic'
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|whis canon kaaydomanic|586707
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-whis-game-dragon-ball
+    url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29_%28Dragon_Ball%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id022
+    - powers_and_abilities
+    - speed
+    normalized_page_title: Dragon Ball (Games)
+    source_type: mediawiki
+    revision_id: '9552274'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 184980
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Timeline
+    - Power of the Verse
+    - Explanation Pages
+    - Knowledgeable Member
+    - Supporter/Opponent/Neutral
+    - Characters
+    - Other Games
+    - Notable Power & Ability, Physiology
+    - Notable Item
+    - Notable Location
+    - Gallery
+    - Notes
+    stat_labels_detected:
+    - attack_potency
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - speed
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 75
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id023
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: speed
+      value: In terms of speed they also often scale to the Massively FTL+ levels
+        of speed of the DBS anime, up to Infinite Speed via scaling from the Toei
+        anime continuity, giving them formidable speed. With Dragon Ball Heroes &
+        Xenoverse, the verse has reached Immeasurable Speed with feats like the Dark
+        Dragon Balls being capable of physically flying beyond space-time, reaching
+        to different eras/points in time & the Demon Gods chasing after them. Time
+        Patrolllers have also performed similar feats, chasing/intercepting their
+        enemies across time.
+      source_id: vsbattles-whis-game-dragon-ball
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'As a verse that composited all Dragon Ball materials, powerful and unique
+        abilities from both Canon and Toei was carried over to Dragon Ball Games Other
+        than that, game verse also introduced a lot of original and extremely powerful
+        abilities, especially among the Demon race featured in Dragon Ball Heroes
+        & Xenoverse Multiverse. Things such as Mind Manipulation that works on higher-dimensional,
+        non-corporeal and abstract beings, the ability to attack souls, potent infinite
+        (6-D) multiverse scale Absorption, the ability to erase beings from all of
+        history, extremely potent Power Nullification and passive Corruption which
+        results in mind control through dispersed dark energy across the multiverse
+        are some of the powerful abilities introduced through Demons in Xenoverse
+        and Heroes, along with resistance to such abilities from the protagonists
+        often times. All of this make Dragon Ball Games verse a powerful verse with
+        powerful special abilities. }} ==Explanation Pages== Despite simply being
+        another Dragon Ball verse, Game verse however are far more complicated than
+        what it show on the surface. For better understanding of the verse, visit
+        these pages: *Cosmology page for Dragon Ball Heroes & Xenoverse Multiverse
+        *Page that explains special terminologies within Dragon Ball Game multiverse
+        *Dragon Ball Xenoverse and Heroes Tiering Explanations *Page that explains
+        the reasoning for DB Heroes/Xenoverse Immeasurable Speed *Conceptual Energy
+        Explanation (Dragon Ball Games) ==Knowledgeable Member== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
+        *Dominodalek *Vietthai96 *Ottavio Merluzzo *Dagoth OwO *SSJRyu1 *Zenkaibattery1
+        }} ==Supporter/Opponent/Neutral== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
+        |-|Supporters= *Ss3micah *TheGodOfICE777 *ProudLearner *Whyaresomanynamestaken
+        *Sanicspood *God900 *Cmoon12 *Brak *ProfectusInfinity *StarShooter80 *Killerdrone123
+        |-|Opponents= None |-|Neutral= None }} ==Characters== |-|Time God= {| border
+        = "5" cellspacing="1/6" cellpadding="2" align="center" width="auto" style="border:
+        1px solid #000000;" ! colspan="5" style="background: #0000FF; font-size: 110%;"
+        |Time God |- ! cla'
+      source_id: vsbattles-whis-game-dragon-ball
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 1
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|dragon ball games|9552274
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-whis-game-dragon-ball
+    url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29_%28Dragon_Ball%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id014
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Whis (Canon)/KaaydoManic
+    source_type: mediawiki
+    revision_id: '586707'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4424
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Notes and Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id015
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least {{High 1-A}}
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Passive: * Acausality
+        [Type 4]: * Self-Sustenance [All Types]: Skil'
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least High Outerverse level (Much stronger than Beerus. Oneshot Ultra
+        Instinct Goku)
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Infinite Flight Speed (Created the a cube capable of reaching the Neutral
+        Zone in 36 minutes; the Neutral Zone is space outside of the infinite sized
+        Universes. Takes two days to reach Zeno's Palace which is outside of the Multiverse
+        and implied to transcend the Neutral Zone) with Irrelevant Combat Speed (Can
+        react and stop Beerus. Couldn't be hit by Super Saiyan Broly and easily dodged
+        Instant Transmission)
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least High Outerverse level (Can make a force-field that can protect
+        from Ultra Instinct Goku and Beast Gohan)
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Notable Matchups == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
+        |-|Cross-Verse= {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses=
+        Notable Losses: {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} |-|In-Verse=
+        {{#tag:tabber|Victories= Notable Victories: {{!}}-{{!}}Losses= Notable Losses:
+        {{!}}-{{!}}Inconclusive= Inconclusive Matches: }} }} == Notes and Explanations
+        == {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= Statistics Values:
+        ------------ General References: }} Category:KaaydoManic'
+      source_id: character-stats-profiles-whis-game-dragon-ball
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|whis canon kaaydomanic|586707
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-whis-game
     url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id012
+    extracted_fields: &id016
     - attack_potency
     - durability
     - intelligence
@@ -1543,7 +1687,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id013
+    allowed_fields: &id017
     - attack_potency
     - speed
     - durability
@@ -1761,7 +1905,7 @@ repair:
     url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id014
+    extracted_fields: &id018
     - attack_potency
     - durability
     - powers_and_abilities
@@ -1799,7 +1943,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id015
+    allowed_fields: &id019
     - attack_potency
     - speed
     - durability
@@ -1872,127 +2016,59 @@ repair:
     duplicate_key: character-stats-and-profiles.fandom.com|whis canon kaaydomanic|586707
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-whis-game-dragon-ball
-    url: https://vsbattles.fandom.com/wiki/Whis_Game_Dragon_Ball
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id020
-    - powers_and_abilities
-    - speed
-    normalized_page_title: Dragon Ball (Games)
-    source_type: mediawiki
-    revision_id: '9552274'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 184980
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Timeline
-    - Power of the Verse
-    - Explanation Pages
-    - Knowledgeable Member
-    - Supporter/Opponent/Neutral
-    - Characters
-    - Other Games
-    - Notable Power & Ability, Physiology
-    - Notable Item
-    - Notable Location
-    - Gallery
-    - Notes
-    stat_labels_detected:
-    - attack_potency
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - speed
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 75
+  needs_human_source_choice: false
+  candidate_sources:
+  - source_id: mediawiki-whis-game
+    url: https://vsbattles.fandom.com/wiki/Mr._Game_%26_Watch
+    title: Mr. Game & Watch
+    rank: 80
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id021
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: speed
-      value: In terms of speed they also often scale to the Massively FTL+ levels
-        of speed of the DBS anime, up to Infinite Speed via scaling from the Toei
-        anime continuity, giving them formidable speed. With Dragon Ball Heroes &
-        Xenoverse, the verse has reached Immeasurable Speed with feats like the Dark
-        Dragon Balls being capable of physically flying beyond space-time, reaching
-        to different eras/points in time & the Demon Gods chasing after them. Time
-        Patrolllers have also performed similar feats, chasing/intercepting their
-        enemies across time.
-      source_id: vsbattles-whis-game-dragon-ball
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'As a verse that composited all Dragon Ball materials, powerful and unique
-        abilities from both Canon and Toei was carried over to Dragon Ball Games Other
-        than that, game verse also introduced a lot of original and extremely powerful
-        abilities, especially among the Demon race featured in Dragon Ball Heroes
-        & Xenoverse Multiverse. Things such as Mind Manipulation that works on higher-dimensional,
-        non-corporeal and abstract beings, the ability to attack souls, potent infinite
-        (6-D) multiverse scale Absorption, the ability to erase beings from all of
-        history, extremely potent Power Nullification and passive Corruption which
-        results in mind control through dispersed dark energy across the multiverse
-        are some of the powerful abilities introduced through Demons in Xenoverse
-        and Heroes, along with resistance to such abilities from the protagonists
-        often times. All of this make Dragon Ball Games verse a powerful verse with
-        powerful special abilities. }} ==Explanation Pages== Despite simply being
-        another Dragon Ball verse, Game verse however are far more complicated than
-        what it show on the surface. For better understanding of the verse, visit
-        these pages: *Cosmology page for Dragon Ball Heroes & Xenoverse Multiverse
-        *Page that explains special terminologies within Dragon Ball Game multiverse
-        *Dragon Ball Xenoverse and Heroes Tiering Explanations *Page that explains
-        the reasoning for DB Heroes/Xenoverse Immeasurable Speed *Conceptual Energy
-        Explanation (Dragon Ball Games) ==Knowledgeable Member== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        *Dominodalek *Vietthai96 *Ottavio Merluzzo *Dagoth OwO *SSJRyu1 *Zenkaibattery1
-        }} ==Supporter/Opponent/Neutral== {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        |-|Supporters= *Ss3micah *TheGodOfICE777 *ProudLearner *Whyaresomanynamestaken
-        *Sanicspood *God900 *Cmoon12 *Brak *ProfectusInfinity *StarShooter80 *Killerdrone123
-        |-|Opponents= None |-|Neutral= None }} ==Characters== |-|Time God= {| border
-        = "5" cellspacing="1/6" cellpadding="2" align="center" width="auto" style="border:
-        1px solid #000000;" ! colspan="5" style="background: #0000FF; font-size: 110%;"
-        |Time God |- ! cla'
-      source_id: vsbattles-whis-game-dragon-ball
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
+    allowed_fields: *id009
+    rejection_reason: ''
     identity_match: false
-    identity_score: 20
-    variant_score: 25
+    identity_score: 0
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 1
+    core_field_count: 3
     ability_count: 1
     exact_name_match: false
     alias_match: false
-    franchise_match: true
+    franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|dragon ball games|9552274
-    retryable: false
-    exception_class: ''
-  needs_human_source_choice: false
-  candidate_sources:
+    duplicate_key: vsbattles.fandom.com|mr game watch|9385346
+  - source_id: character-stats-profiles-whis-game
+    url: https://character-stats-and-profiles.fandom.com/wiki/Whis_(Canon)/KaaydoManic
+    title: Whis (Canon)/KaaydoManic
+    rank: 80
+    extracted_fields: *id010
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id011
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|whis canon kaaydomanic|586707
   - source_id: character-stats-profiles-whis-game-dragon-ball
     url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29_Dragon_Ball
     title: Whis (Canon)/KaaydoManic
     rank: 80
-    extracted_fields: *id006
+    extracted_fields: *id012
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id007
+    allowed_fields: *id013
     rejection_reason: ''
     identity_match: false
     identity_score: 20
@@ -2009,11 +2085,11 @@ repair:
     url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29_%28Dragon_Ball%29
     title: Whis (Canon)/KaaydoManic
     rank: 80
-    extracted_fields: *id008
+    extracted_fields: *id014
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id009
+    allowed_fields: *id015
     rejection_reason: ''
     identity_match: false
     identity_score: 20
@@ -2026,36 +2102,15 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|whis canon kaaydomanic|586707
-  - source_id: mediawiki-whis-game
-    url: https://vsbattles.fandom.com/wiki/Whis_(Game)
-    title: Mr. Game & Watch
-    rank: 80
-    extracted_fields: *id010
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id011
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|mr game watch|9385346
   - source_id: vsbattles-whis-game
     url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29
     title: Mr. Game & Watch
     rank: 80
-    extracted_fields: *id012
+    extracted_fields: *id016
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id013
+    allowed_fields: *id017
     rejection_reason: ''
     identity_match: false
     identity_score: 0
@@ -2072,11 +2127,11 @@ repair:
     url: https://character-stats-and-profiles.fandom.com/wiki/Whis_%28Game%29
     title: Whis (Canon)/KaaydoManic
     rank: 80
-    extracted_fields: *id014
+    extracted_fields: *id018
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id015
+    allowed_fields: *id019
     rejection_reason: ''
     identity_match: false
     identity_score: 0
@@ -2091,48 +2146,6 @@ repair:
     duplicate_key: character-stats-and-profiles.fandom.com|whis canon kaaydomanic|586707
   - source_id: vsbattles-whis-game-dragon-ball
     url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29_Dragon_Ball
-    title: Dragon Ball (Games)
-    rank: 75
-    extracted_fields: *id016
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id017
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 1
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|dragon ball games|9552274
-  - source_id: vsbattles-whis-game-dragon-ball
-    url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29_%28Dragon_Ball%29
-    title: Dragon Ball (Games)
-    rank: 75
-    extracted_fields: *id018
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id019
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 1
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|dragon ball games|9552274
-  - source_id: vsbattles-whis-game-dragon-ball
-    url: https://vsbattles.fandom.com/wiki/Whis_Game_Dragon_Ball
     title: Dragon Ball (Games)
     rank: 75
     extracted_fields: *id020
@@ -2152,7 +2165,28 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|dragon ball games|9552274
+  - source_id: vsbattles-whis-game-dragon-ball
+    url: https://vsbattles.fandom.com/wiki/Whis_%28Game%29_%28Dragon_Ball%29
+    title: Dragon Ball (Games)
+    rank: 75
+    extracted_fields: *id022
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id023
+    rejection_reason: ''
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 1
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|dragon ball games|9552274
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0
