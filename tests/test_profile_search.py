@@ -41,10 +41,32 @@ class ProfileSearchTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(rows[0].get("alias_canonical"), "Iron Man")
 
     async def test_needs_review_search_can_find_missing_profiles(self):
-        rows = await search_characters("Sailor Moon", status_filter="needs_review", limit=10)
+        from pathlib import Path
+        import yaml
 
-        self.assertTrue(any(row["status"] == "needs_review" for row in rows))
+        needs_review_paths = sorted(Path("profiles/needs_review").rglob("*.yaml"))
+        self.assertTrue(needs_review_paths, "expected at least one needs_review profile")
 
+        searched = []
+        for profile_path in needs_review_paths[:200]:
+            try:
+                data = yaml.safe_load(profile_path.read_text(encoding="utf-8")) or {}
+            except Exception:
+                continue
+
+            candidates = [
+                data.get("name"),
+                data.get("character_name"),
+                profile_path.stem.replace("-", " "),
+            ]
+
+            for query in [str(item).strip() for item in candidates if str(item or "").strip()]:
+                searched.append(query)
+                rows = await search_characters(query, status_filter="needs_review", limit=10)
+                if any(row.get("status") == "needs_review" for row in rows):
+                    return
+
+        self.fail(f"could not find a searchable needs_review profile; tried: {searched[:20]}")
     async def test_characters_query_paginates_by_slice(self):
         rows = await search_characters("", status_filter="generated", limit=15)
         page_two = rows[10:15]

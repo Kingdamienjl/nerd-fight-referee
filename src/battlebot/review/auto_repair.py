@@ -1536,6 +1536,7 @@ async def repair_profile(
         and attempt.ability_count >= 1
     )
     force_promotable = is_now_promotable and has_identity_match_source
+    has_promotion_source = has_promotion_source or force_promotable
     primary_source_id = primary.source_id if primary else (
         sources_used_for_repair[0].source_id if sources_used_for_repair else None
     )
