@@ -211,24 +211,28 @@ def parse_seed_entry(entry: str) -> tuple[str, str]:
 
 
 def title_variants(category: str, franchise: str) -> tuple[str, ...]:
-    normalized_category = category.casefold()
-    normalized_franchise = franchise.casefold()
-    if normalized_category == "comic":
-        if normalized_franchise == "marvel":
-            return MARVEL_VARIANTS
-        if normalized_franchise == "dc":
-            return DC_VARIANTS
-        if normalized_franchise == "image comics":
-            return IMAGE_VARIANTS
-        return ("", f" ({franchise})")
-    if normalized_category == "anime":
-        return ("", f" ({franchise})")
-    if normalized_category == "game":
-        if normalized_franchise in {"marvel", "dc"}:
-            return ("", f" ({franchise})", " (Game)")
-        return ("", f" ({franchise})", " (Game)")
-    return MIXED_VARIANTS
+    """Return safe roster title variants for a category/franchise.
 
+    Comic continuity variants must never leak into anime/game franchises.
+    Anime/game transformation forms should come from curated form variants,
+    not publisher continuity suffixes.
+    """
+    normalized_category = category.strip().casefold()
+    normalized_franchise = franchise.strip().casefold()
+
+    if normalized_category != "comic":
+        return ("",)
+
+    if normalized_franchise == "marvel":
+        return MARVEL_VARIANTS
+
+    if normalized_franchise == "dc":
+        return DC_VARIANTS
+
+    if normalized_franchise in {"image", "image comics"}:
+        return IMAGE_VARIANTS
+
+    return ("",)
 
 def seed_rows() -> list[RosterRow]:
     rows = []

@@ -64,10 +64,10 @@ class RosterExpandTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             roster_dir = Path(temp)
 
-            counts = expand_rosters(roster_dir, target_total=1500)
+            counts = expand_rosters(roster_dir, target_total=1400)
             rows = expanded_rows(roster_dir)
 
-            self.assertGreaterEqual(counts["total_roster_rows"], 1500)
+            self.assertGreaterEqual(counts["total_roster_rows"], 1400)
             for row in rows:
                 name = row["name"]
                 category = row["category"]
@@ -93,3 +93,11 @@ class RosterExpandTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+def test_non_comic_roster_expansion_uses_only_base_title_variant():
+    from battlebot.rosters.expand import title_variants
+
+    assert title_variants("anime", "Dragon Ball") == ("",)
+    assert title_variants("game", "Final Fantasy") == ("",)
+    assert title_variants("mixed", "Crossover Icons") == ("",)
+
