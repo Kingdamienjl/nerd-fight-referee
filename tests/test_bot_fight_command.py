@@ -142,7 +142,7 @@ class BotFightCommandTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("alias matched: Iron Man", message)
         self.assertIn("not battle-ready yet", message)
         self.assertIn("/search", message)
-        self.assertIn("Admins can queue repair", message)
+        self.assertIn("Missing fighters are queued automatically", message)
         self.assertNotIn("profiles/generated", message)
 
     async def test_private_fight_not_found_can_include_diagnostics(self):
@@ -225,3 +225,62 @@ class BotFightCommandTests(unittest.IsolatedAsyncioTestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    async def test_missing_fight_target_is_queued_for_retrieval(self):
+        packet = {
+            "errors": [
+                {
+                    "contender": "A",
+                    "status": "missing",
+                    "query": "Homelander",
+                    "diagnostics": {},
+                }
+            ],
+            "warnings": [],
+        }
+
+        class FakeConnection:
+            def __init__(self):
+                self.calls = []
+
+            async def fetchrow(self, sql, *args):
+                self.calls.append(args)
+                return {"id": 1}
+
+        connection = FakeConnection()
+        message = await discord_message_from_packet(
+            packet,
+            smoke_judge_packet(packet),
+            connection=connection,
+        )
+
+        self.assertIn("queued for retrieval", message)
+        self.assertIn("Missing fighters are queued automatically.", message)
+        self.assertEqual(connection.calls[0][0], "profiles/needs_review/mixed/user-requests/homelander.yaml")
+        self.assertEqual(connection.calls[0][1], "Homelander")
+
+    async def test_duplicate_missing_fight_target_reports_already_queued(self):
+        packet = {
+            "errors": [
+                {
+                    "contender": "A",
+                    "status": "missing",
+                    "query": "Godzilla Minus One",
+                    "diagnostics": {},
+                }
+            ],
+            "warnings": [],
+        }
+
+        class FakeConnection:
+            async def fetchrow(self, sql, *args):
+                return None
+
+        message = await discord_message_from_packet(
+            packet,
+            smoke_judge_packet(packet),
+            connection=FakeConnection(),
+        )
+
+        self.assertIn("already queued or awaiting review", message)
+

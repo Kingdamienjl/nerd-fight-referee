@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 import discord
@@ -13,10 +14,28 @@ from battlebot.fight.llm_judge import judge_fight_packet
 from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.profiles.fight_packet import build_fight_packet
 from battlebot.profiles.search import format_search_results, search_characters
+from battlebot.review.queue import enqueue_job
 
 
 def fight_response_ephemeral(private: bool = False) -> bool:
     return bool(private)
+
+
+def missing_fighter_slug(query: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", query.casefold()).strip("-")
+    return slug or "unknown"
+
+
+async def enqueue_missing_fighter(connection: Any, query: str) -> bool:
+    slug = missing_fighter_slug(query)
+    return await enqueue_job(
+        connection,
+        profile_path=f"profiles/needs_review/mixed/user-requests/{slug}.yaml",
+        target=query,
+        providers="vsbattles,character_stats_profiles,superherodb",
+        priority=25,
+        max_attempts=3,
+    )
 
 
 async def discord_message_from_packet(
@@ -45,7 +64,12 @@ async def discord_message_from_packet(
                 if suggestions:
                     lines.append("  suggestions:")
                     lines.extend(f"    {line}" for line in format_search_results(suggestions).splitlines())
-        lines.append('Try /search query:"<name>". Admins can queue repair.')
+                inserted = await enqueue_missing_fighter(connection, str(error["query"]))
+                if inserted:
+                    lines.append("  queued for retrieval")
+                else:
+                    lines.append("  already queued or awaiting review")
+        lines.append('Try /search query:"<name>". Missing fighters are queued automatically.')
         text = "\n".join(lines)
     else:
         decision = await judge_fight_packet(packet, smoke_result)
