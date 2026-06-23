@@ -11,6 +11,7 @@ from battlebot.common.db import connect_database
 from battlebot.profiles.search import browse_character_catalog, format_character_catalog, format_search_results, search_characters
 from battlebot.profiles.sheet import profile_sheet
 from battlebot.review import service
+from battlebot.bot.commands.fight import enqueue_missing_fighter
 
 
 REGISTERED_CATALOG_COMMANDS = ("search", "characters", "profile", "needs_review", "repair_queue")
@@ -87,7 +88,14 @@ def register_catalog_commands(tree: app_commands.CommandTree, *, database_url: s
         await interaction.response.defer(thinking=True, ephemeral=ephemeral)
         async with connect_database(database_url) as connection:
             rows = await search_characters(query, connection=connection, limit=max(1, min(limit, 25)))
-        await interaction.followup.send(clamp_message(format_search_results(rows)), ephemeral=ephemeral)
+            message = format_search_results(rows)
+            if not rows:
+                inserted = await enqueue_missing_fighter(connection, query)
+                if inserted:
+                    message += "\nQueued for retrieval."
+                else:
+                    message += "\nAlready queued or awaiting review."
+        await interaction.followup.send(clamp_message(message), ephemeral=ephemeral)
 
     @tree.command(name="characters", description="List available characters")
     async def characters(
