@@ -43,3 +43,19 @@ class AliasTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+def test_dragon_ball_form_variants_are_curated():
+    from battlebot.profiles.variants import variant_metadata, variant_search_queries
+
+    frieza = variant_metadata("Frieza (Final Form)")
+    assert frieza["variant_name"] == "Final Form"
+    assert frieza["variant_type"] == "form"
+
+    goku = variant_metadata("Son Goku (Super Saiyan Blue Kaioken)")
+    assert goku["variant_name"] == "Super Saiyan Blue Kaioken"
+    assert goku["variant_type"] == "form"
+
+    queries = variant_search_queries("Frieza (Golden)", "Dragon Ball")
+    assert "Frieza Golden" in queries
+    assert "Frieza Golden Dragon Ball" in queries
+
