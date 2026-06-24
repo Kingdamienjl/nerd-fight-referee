@@ -152,6 +152,8 @@ def ensure_user_request_profile(job: dict[str, Any]) -> None:
                 "  confidence: 0.05",
                 "  ineligible_reasons:",
                 "  - queued_user_request",
+                "approval_blockers:",
+                "  - user_request_skeleton_schema_incomplete",
                 "review:",
                 "  reasons:",
                 "  - queued_user_request",

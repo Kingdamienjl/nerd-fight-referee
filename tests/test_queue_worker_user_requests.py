@@ -16,6 +16,7 @@ def test_ensure_user_request_profile_creates_skeleton(tmp_path):
     assert "category: mixed" in text
     assert "franchise: User Requests" in text
     assert "queued_user_request" in text
+    assert "user_request_skeleton_schema_incomplete" in text
 
 
 def test_ensure_user_request_profile_ignores_non_user_request_paths(tmp_path):
