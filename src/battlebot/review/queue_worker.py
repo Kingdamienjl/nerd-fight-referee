@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import re
 import socket
 from dataclasses import dataclass
 from pathlib import Path
@@ -121,8 +122,50 @@ def job_error(summary: dict[str, Any]) -> str:
     return "profile repair did not promote"
 
 
+def slugify_user_request(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", value.casefold()).strip("-") or "unknown"
+
+
+def ensure_user_request_profile(job: dict[str, Any]) -> None:
+    profile_path = Path(str(job.get("profile_path") or ""))
+    target = str(job.get("target") or "").strip()
+
+    if not target or profile_path.exists():
+        return
+
+    if "profiles/needs_review/mixed/user-requests/" not in profile_path.as_posix():
+        return
+
+    slug = slugify_user_request(target)
+    profile_path.parent.mkdir(parents=True, exist_ok=True)
+    profile_path.write_text(
+        "\n".join(
+            [
+                f"id: mixed-user-requests-{slug}",
+                f"name: {target}",
+                "category: mixed",
+                "franchise: User Requests",
+                "status: needs_review",
+                "battle_eligible: false",
+                "generation:",
+                "  generator: battlebot.review.queue_worker",
+                "  confidence: 0.05",
+                "  ineligible_reasons:",
+                "  - queued_user_request",
+                "review:",
+                "  reasons:",
+                "  - queued_user_request",
+                "sources: []",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
 async def process_job(connection: Any, job: dict[str, Any], args: argparse.Namespace) -> str:
     try:
+        ensure_user_request_profile(job)
         summary = await batch_promote.batch_promote(args_for_job(job, args))
         data = summary.as_dict()
         if summary.promoted:
