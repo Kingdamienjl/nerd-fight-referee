@@ -46,6 +46,7 @@ def minimal_profile(name="Batman", *, missing_core=False):
                 "title": name,
                 "source_type": "mediawiki",
                 "revision_id": "123",
+                "revision_timestamp": "2026-01-01T00:00:00Z",
                 "url": "https://example.test/wiki",
             }
         ],

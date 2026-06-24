@@ -12,11 +12,13 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+from pydantic import ValidationError
 import os
 import tempfile
 
 from battlebot.profiles import yaml_io
 from battlebot.profiles.quality import profile_warning_flags
+from battlebot.schemas.profile import CharacterProfile
 
 
 DEFAULT_GENERATED_DIR = Path("profiles/generated")
@@ -103,6 +105,20 @@ def slugify(value: str) -> str:
     return slug or "item"
 
 
+def stable_hash_without_profile_hash(profile: dict[str, Any]) -> str:
+    clone = json.loads(json.dumps(profile, sort_keys=True, default=str))
+    clone["profile_hash"] = ""
+    return json_hash(clone)
+
+
+def json_hash(value: Any) -> str:
+    import hashlib
+
+    return hashlib.sha256(
+        json.dumps(value, sort_keys=True, ensure_ascii=True, default=str).encode("utf-8")
+    ).hexdigest()
+
+
 def safe_unique_id(value: str, existing_ids: set[str], *, fallback: str) -> str:
     base = slugify(value or fallback)
     candidate = base
@@ -158,8 +174,23 @@ def source_details(profile: dict[str, Any]) -> list[dict[str, Any]]:
     return details
 
 
+def schema_validation_blockers(profile: dict[str, Any]) -> list[str]:
+    try:
+        CharacterProfile.model_validate(profile)
+    except ValidationError as exc:
+        fields = sorted(
+            {
+                ".".join(str(part) for part in error.get("loc", ())) or "profile"
+                for error in exc.errors()
+            }
+        )
+        return [f"schema_invalid:{field}" for field in fields]
+    return []
+
+
 def approval_blockers(profile: dict[str, Any]) -> list[str]:
     blockers = [f"missing_{field}" for field in missing_core_fields(profile)]
+    blockers.extend(str(blocker) for blocker in profile.get("approval_blockers") or [])
     if not profile.get("sources"):
         blockers.append("missing_sources")
     if not profile.get("abilities"):
@@ -575,10 +606,152 @@ def approved_profile_data(
     return data
 
 
+def normalized_power_scale_entry(entry: Any) -> dict[str, Any]:
+    if isinstance(entry, dict):
+        return {
+            "text": entry.get("text"),
+            "source_ids": list(entry.get("source_ids") or []),
+            "confidence": float(entry.get("confidence") or 0.0),
+        }
+    return {"text": str(entry) if entry else None, "source_ids": [], "confidence": 0.0}
+
+
+def normalized_enriched_items(items: Any) -> list[dict[str, Any]]:
+    normalized = []
+    if not isinstance(items, list):
+        return normalized
+    for index, item in enumerate(items, start=1):
+        if not isinstance(item, dict):
+            description = str(item)
+            normalized.append(
+                {
+                    "id": f"item-{index}",
+                    "name": description,
+                    "description": description,
+                    "source_ids": [],
+                    "confidence": 0.0,
+                    "tags": [],
+                    "targets": [],
+                    "activation_requirements": [],
+                    "counters": [],
+                    "resource_dependencies": [],
+                    "scope_limitations": [],
+                    "enrichment": {},
+                }
+            )
+            continue
+        item_id = str(item.get("id") or slugify(str(item.get("name") or f"item-{index}")))
+        description = str(item.get("description") or item.get("name") or item_id)
+        normalized.append(
+            {
+                **item,
+                "id": item_id,
+                "name": item.get("name") or item_id,
+                "description": description,
+                "source_ids": list(item.get("source_ids") or []),
+                "confidence": float(item.get("confidence") or 0.0),
+                "tags": list(item.get("tags") or []),
+                "targets": list(item.get("targets") or []),
+                "activation_requirements": list(item.get("activation_requirements") or []),
+                "counters": list(item.get("counters") or []),
+                "resource_dependencies": list(item.get("resource_dependencies") or []),
+                "scope_limitations": list(item.get("scope_limitations") or []),
+                "enrichment": item.get("enrichment") if isinstance(item.get("enrichment"), dict) else {},
+            }
+        )
+    return normalized
+
+
 def sanitize_generated_profile(data: dict[str, Any]) -> dict[str, Any]:
     profile = deepcopy(data)
     profile.pop("repair", None)
-    return profile
+    profile.pop("approval_blockers", None)
+
+    name = str(profile.get("name") or "Unknown")
+    franchise = str(profile.get("franchise") or "Unknown")
+    category = str(profile.get("category") or "mixed")
+    aliases = profile.get("aliases") if isinstance(profile.get("aliases"), list) else [name]
+    profile_id = str(profile.get("id") or slugify(f"{category}-{franchise}-{name}"))
+
+    generation = profile.get("generation") if isinstance(profile.get("generation"), dict) else {}
+    generation.setdefault("generated_at", utc_now())
+    generation.setdefault("generator", "battlebot.review.service")
+    generation.setdefault("confidence", 0.0)
+    generation.setdefault("ineligible_reasons", ["needs_review"])
+
+    power_scale = profile.get("power_scale") if isinstance(profile.get("power_scale"), dict) else {}
+    normalized_power_scale = {
+        field: normalized_power_scale_entry(power_scale.get(field))
+        for field in (
+            "tier",
+            "attack_potency",
+            "speed",
+            "lifting_strength",
+            "striking_strength",
+            "durability",
+            "stamina",
+            "range",
+            "intelligence",
+        )
+    }
+
+    identity = profile.get("identity") if isinstance(profile.get("identity"), dict) else {}
+    identity.setdefault("canonical_name", name)
+    identity.setdefault("franchise", franchise)
+    identity.setdefault("category", category)
+    identity.setdefault("aliases", aliases)
+    identity.setdefault("external_ids", {})
+
+    review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
+
+    sanitized = {
+        **profile,
+        "schema_version": str(profile.get("schema_version") or "1"),
+        "id": profile_id,
+        "name": name,
+        "franchise": franchise,
+        "category": category,
+        "aliases": aliases,
+        "profile_type": str(profile.get("profile_type") or "needs_review"),
+        "status": str(profile.get("status") or "needs_review"),
+        "battle_eligible": bool(profile.get("battle_eligible")),
+        "generation": generation,
+        "identity": identity,
+        "canon_policy": profile.get("canon_policy") if isinstance(profile.get("canon_policy"), dict) else {
+            "default": "strongest_consistent_canonical_form",
+            "composite_allowed": False,
+        },
+        "battle_policy": profile.get("battle_policy") if isinstance(profile.get("battle_policy"), dict) else {
+            "prepared": True,
+            "standard_equipment": True,
+            "standard_summons": True,
+            "outside_help": False,
+        },
+        "forms": list(profile.get("forms") or []),
+        "sources": list(profile.get("sources") or []),
+        "power_scale": normalized_power_scale,
+        "claims": list(profile.get("claims") or []),
+        "abilities": normalized_enriched_items(profile.get("abilities")),
+        "equipment": normalized_enriched_items(profile.get("equipment")),
+        "summons": normalized_enriched_items(profile.get("summons")),
+        "resistances": normalized_enriched_items(profile.get("resistances")),
+        "weaknesses": normalized_enriched_items(profile.get("weaknesses")),
+        "win_conditions": list(profile.get("win_conditions") or []),
+        "loss_conditions": list(profile.get("loss_conditions") or []),
+        "battlefield_dependencies": list(profile.get("battlefield_dependencies") or []),
+        "interaction_tags": list(profile.get("interaction_tags") or []),
+        "resource_dependencies": list(profile.get("resource_dependencies") or []),
+        "scope_limitations": profile.get("scope_limitations") if isinstance(profile.get("scope_limitations"), dict) else {
+            "items": list(profile.get("scope_limitations") or []),
+            "native_realm_only": False,
+            "dimensional_scope": False,
+            "range_limit": False,
+        },
+        "review": review,
+        "profile_hash": str(profile.get("profile_hash") or ""),
+    }
+    sanitized["profile_hash"] = stable_hash_without_profile_hash(sanitized)
+    return sanitized
 
 
 def approve_profile(
@@ -601,15 +774,24 @@ def approve_profile(
             "destination": None,
         }
     destination = destination_for(source, Path(needs_review_dir), Path(generated_dir))
-    write_yaml(
-        destination,
-        approved_profile_data(
-            profile,
-            force=force,
-            missing=missing_core_fields(profile),
-            blockers=blockers,
-        ),
+    approved = approved_profile_data(
+        profile,
+        force=force,
+        missing=missing_core_fields(profile),
+        blockers=blockers,
     )
+    approved["profile_hash"] = stable_hash_without_profile_hash(approved)
+    schema_blockers = schema_validation_blockers(approved)
+    if schema_blockers:
+        return {
+            "ok": False,
+            "error": "schema_validation_blockers",
+            "approval_blockers": blockers,
+            "schema_validation_blockers": schema_blockers,
+            "missing_core_fields": missing_core_fields(profile),
+            "destination": None,
+        }
+    write_yaml(destination, approved)
     add_review_note(
         source,
         issue_type="approved",
