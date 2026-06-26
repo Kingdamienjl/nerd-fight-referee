@@ -37,7 +37,7 @@ BATTLE_RULES = (
 
 def llm_enabled(env: dict[str, str] | None = None) -> bool:
     values = env or os.environ
-    return str(values.get("BATTLEBOT_LLM_ENABLED") or "").casefold() == "true"
+    return str(values.get("BATTLEBOT_LLM_ENABLED") or "").casefold() in {"1", "true", "yes", "on"}
 
 
 def compact_evidence_packet(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> dict[str, Any]:
@@ -221,7 +221,7 @@ async def call_ollama(
 ) -> str:
     values = env or os.environ
     base_url = str(values.get("OLLAMA_BASE_URL") or "http://127.0.0.1:11434").rstrip("/")
-    model = str(values.get("BATTLEBOT_LLM_MODEL") or "llama3.1")
+    model = str(values.get("BATTLEBOT_LLM_MODEL") or values.get("REFEREE_MODEL") or "qwen3:8b")
     timeout = float(values.get("BATTLEBOT_LLM_TIMEOUT_SECONDS") or 60)
     payload = {"model": model, "messages": messages, "stream": False, "format": "json"}
     async with httpx.AsyncClient(timeout=timeout) as client:
