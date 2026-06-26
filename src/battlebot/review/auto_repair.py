@@ -50,6 +50,7 @@ COMIC_VARIANT_SUFFIXES = (
 )
 DEFAULT_DEBUG_DIR = Path("data/repair_debug")
 DEFAULT_SOURCE_CANDIDATES_PATH = Path("profiles/overrides/source_candidates.yaml")
+IDENTITY_MATCH_THRESHOLD = 60
 
 
 @dataclass
@@ -709,12 +710,21 @@ def apply_extracted_fields(
     return repaired
 
 
+def retained_repair_candidate(attempt: SourceAttempt) -> bool:
+    return (
+        attempt.fetch_status == "fetched"
+        and attempt.identity_score >= IDENTITY_MATCH_THRESHOLD
+        and attempt.identity_match
+        and attempt.variant_score >= 0
+    )
+
+
 def attempts_with_core_fields(attempts: list[SourceAttempt]) -> list[SourceAttempt]:
-    """Return attempts that have all three core fields (regardless of other eligibility)."""
+    """Return identity-compatible fetched attempts that have all three core fields."""
     return [
         attempt
         for attempt in attempts
-        if attempt.fetch_status == "fetched"
+        if retained_repair_candidate(attempt)
         and attempt.core_field_count >= 3
     ]
 
@@ -982,7 +992,7 @@ def annotate_attempt_quality(profile: dict[str, Any], attempt: SourceAttempt) ->
     )
     attempt.ability_count = int("powers_and_abilities" in fields or "abilities" in fields)
     attempt.identity_score = identity_score_for_attempt(profile, attempt)
-    attempt.identity_match = attempt.identity_score >= 60
+    attempt.identity_match = attempt.identity_score >= IDENTITY_MATCH_THRESHOLD
     attempt.variant_score = variant_score_for_attempt(profile, attempt)
     attempt.provider_priority = provider_priority(attempt.authority, attempt.provider_id)
     attempt.duplicate_key = duplicate_key_for_attempt(attempt)
@@ -1503,7 +1513,11 @@ async def repair_profile(
         profile["review"] = review
     boost_confidence_from_cross_checks(profile, attempts)
     candidate_sources = sorted(
-        [candidate_row_from_attempt(attempt) for attempt in attempts if attempt.extracted_fields],
+        [
+            candidate_row_from_attempt(attempt)
+            for attempt in attempts
+            if attempt.extracted_fields and retained_repair_candidate(attempt)
+        ],
         key=lambda item: item["rank"],
         reverse=True,
     )

@@ -57,6 +57,56 @@ def character_profile(name: str, franchise: str, category: str) -> dict:
     return data
 
 
+def professor_x_profile() -> dict:
+    data = character_profile("Professor X (Composite)", "Marvel", "comic")
+    data["aliases"] = ["Charles Xavier", "Professor X Composite"]
+    data["identity"] = {"aliases": ["Charles Xavier"]}
+    return data
+
+
+def source_candidate(title: str) -> dict:
+    return {
+        "id": service.slugify(f"vsbattles-{title}"),
+        "title": title,
+        "url": f"https://vsbattles.fandom.com/wiki/{title.replace(' ', '_')}",
+        "source_type": "mediawiki",
+        "provider_id": "vsbattles",
+        "authority": "high",
+        "promotion_allowed": True,
+        "allowed_fields": [
+            "tier",
+            "attack_potency",
+            "speed",
+            "durability",
+            "range",
+            "stamina",
+            "intelligence",
+            "powers_and_abilities",
+            "weaknesses",
+        ],
+    }
+
+
+def fetched_fields() -> dict[str, str]:
+    return {
+        "attack_potency": "City level",
+        "speed": "Supersonic",
+        "durability": "City level",
+        "powers_and_abilities": "Telepathy, Telekinesis",
+    }
+
+
+async def fetch_as_page_title(source):
+    return fetched_fields(), {
+        "title": source.get("fetched_title") or source.get("title"),
+        "url": source.get("url"),
+        "revision_id": "prof-x-test-1",
+        "revision_timestamp": "2026-01-01T00:00:00Z",
+        "source_type": "mediawiki",
+        "note": "ok",
+    }
+
+
 def write_profile(path: Path, data: dict):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
@@ -576,6 +626,100 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertFalse(attempt.identity_match)
         self.assertEqual(auto_repair.eligible_primary_attempts([attempt]), [])
+
+    def test_professor_x_identity_matching_allows_aliases_and_variants(self):
+        cases = [
+            ("Professor X (Composite)", professor_x_profile()),
+            ("Professor X Composite", professor_x_profile()),
+            ("Charles Xavier", professor_x_profile()),
+            ("Professor X (Earth-616)", character_profile("Professor X", "Marvel", "comic")),
+            ("Professor X (Marvel Comics)", character_profile("Professor X", "Marvel", "comic")),
+        ]
+        for page_title, profile in cases:
+            with self.subTest(page_title=page_title):
+                attempt = auto_repair.SourceAttempt(
+                    "source",
+                    f"https://vsbattles.fandom.com/wiki/{page_title.replace(' ', '_')}",
+                    True,
+                    "ok",
+                    ["attack_potency", "speed", "durability", "powers_and_abilities"],
+                    normalized_page_title=page_title,
+                    fetch_status="fetched",
+                    provider_id="vsbattles",
+                    authority="high",
+                    promotion_allowed=True,
+                )
+
+                auto_repair.annotate_attempt_quality(profile, attempt)
+
+                self.assertTrue(attempt.identity_match)
+                self.assertGreaterEqual(attempt.identity_score, auto_repair.IDENTITY_MATCH_THRESHOLD)
+
+    async def test_wrong_fetched_pages_are_not_retained_as_repair_candidates(self):
+        wrong_sources = [
+            {**source_candidate("Professor X (Composite)"), "fetched_title": "The Sentry"},
+            {
+                **source_candidate("Professor X Composite"),
+                "fetched_title": "Spider-Man (Canon, Marvel Comics)/StoneKillerz12",
+            },
+        ]
+
+        with TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "marvel" / "professor-x-composite.yaml"
+            write_profile(path, professor_x_profile())
+
+            with patch("battlebot.review.auto_repair.profile_source_candidates", return_value=wrong_sources):
+                with patch("battlebot.review.auto_repair.fetch_source_fields", fetch_as_page_title):
+                    result = await auto_repair.repair_profile(
+                        path,
+                        debug_dir=Path(temp_dir) / "debug",
+                        notes_path=Path(temp_dir) / "review_notes.yaml",
+                        provider_ids=["vsbattles"],
+                        max_source_candidates=2,
+                    )
+            repaired_profile = service.load_yaml(path)
+
+        self.assertFalse(result.changed)
+        self.assertEqual(result.candidate_sources, [])
+        self.assertTrue(result.source_attempts)
+        self.assertTrue(all(not attempt.identity_match for attempt in result.source_attempts))
+        self.assertTrue(
+            all(attempt.identity_score < auto_repair.IDENTITY_MATCH_THRESHOLD for attempt in result.source_attempts)
+        )
+        self.assertEqual(repaired_profile.get("sources"), [])
+        self.assertEqual((repaired_profile.get("repair") or {}).get("candidate_sources"), [])
+        self.assertEqual(
+            {attempt.normalized_page_title for attempt in result.source_attempts},
+            {"The Sentry", "Spider-Man (Canon, Marvel Comics)/StoneKillerz12"},
+        )
+
+    async def test_matching_professor_x_fetched_page_is_retained_for_repair(self):
+        sources = [
+            {**source_candidate("Professor X (Composite)"), "fetched_title": "Professor X (Composite)"}
+        ]
+
+        with TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "marvel" / "professor-x-composite.yaml"
+            write_profile(path, professor_x_profile())
+
+            with patch("battlebot.review.auto_repair.profile_source_candidates", return_value=sources):
+                with patch("battlebot.review.auto_repair.fetch_source_fields", fetch_as_page_title):
+                    result = await auto_repair.repair_profile(
+                        path,
+                        debug_dir=Path(temp_dir) / "debug",
+                        notes_path=Path(temp_dir) / "review_notes.yaml",
+                        provider_ids=["vsbattles"],
+                        max_source_candidates=1,
+                    )
+            repaired_profile = service.load_yaml(path)
+
+        self.assertTrue(result.changed)
+        self.assertEqual(
+            [row["title"] for row in result.candidate_sources],
+            ["Professor X (Composite)"],
+        )
+        self.assertEqual(repaired_profile["sources"][0]["title"], "Professor X (Composite)")
+        self.assertTrue(result.source_attempts[0].identity_match)
 
     async def test_provider_exception_is_recorded_without_crashing(self):
         async def broken_fetch(source):
