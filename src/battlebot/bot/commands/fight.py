@@ -5,6 +5,8 @@ from __future__ import annotations
 import re
 from typing import Any
 
+import os
+
 import discord
 from discord import app_commands
 
@@ -98,7 +100,11 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
                 connection,
                 contender_a,
                 contender_b,
-                rules={"smoke": True, "llm_enabled": False},
+                rules={
+                    "smoke": True,
+                    "llm_enabled": os.getenv("BATTLEBOT_LLM_ENABLED", "").lower() in {"1", "true", "yes", "on"},
+                    "llm_model": os.getenv("BATTLEBOT_LLM_MODEL") or "",
+                },
             )
             text = await discord_message_from_packet(
                 packet,
