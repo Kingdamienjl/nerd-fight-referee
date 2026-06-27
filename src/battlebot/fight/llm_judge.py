@@ -112,6 +112,15 @@ def parse_json_response(text: str) -> dict[str, Any]:
     return data
 
 
+def llm_text_enhanced_decision(smoke: dict[str, Any], raw: str) -> dict[str, Any]:
+    decision = fallback_decision(smoke, "llm_text_enhanced", "LLM returned text instead of valid JSON.")
+    cleaned = " ".join(str(raw).replace("\n", " ").split())
+    if cleaned:
+        decision["summary"] = cleaned[:700]
+        decision["judge_notes"] = ["LLM text was used as summary; structured JSON parse failed."]
+    return decision
+
+
 def normalize_factor_name(value: str) -> str:
     normalized = value.casefold()
     if "range" in normalized:
@@ -223,7 +232,18 @@ async def call_ollama(
     base_url = str(values.get("OLLAMA_BASE_URL") or "http://127.0.0.1:11434").rstrip("/")
     model = str(values.get("BATTLEBOT_LLM_MODEL") or values.get("REFEREE_MODEL") or "qwen3:8b")
     timeout = float(values.get("BATTLEBOT_LLM_TIMEOUT_SECONDS") or 60)
-    payload = {"model": model, "messages": messages, "stream": False, "format": "json"}
+    payload = {
+        "model": model,
+        "messages": messages,
+        "stream": False,
+        "format": "json",
+        "options": {
+            "num_predict": int(values.get("BATTLEBOT_LLM_NUM_PREDICT") or 512),
+            "temperature": float(values.get("BATTLEBOT_LLM_TEMPERATURE") or 0.1),
+            "num_ctx": int(values.get("BATTLEBOT_LLM_NUM_CTX") or 4096),
+            "num_thread": int(values.get("BATTLEBOT_LLM_NUM_THREAD") or 8),
+        },
+    }
     async with httpx.AsyncClient(timeout=timeout) as client:
         response = await client.post(f"{base_url}/api/chat", json=payload)
         response.raise_for_status()
@@ -246,13 +266,17 @@ async def judge_fight_packet(
         caller = ollama_caller or call_ollama
         raw = await caller(build_prompt(packet, smoke), env=env)
         decision = normalize_decision(parse_json_response(raw))
+        return validate_against_smoke(decision, smoke)
+    except json.JSONDecodeError:
+        if "raw" in locals():
+            return llm_text_enhanced_decision(smoke, raw)
+        return fallback_decision(smoke, FALLBACK_MALFORMED_JSON, "LLM returned malformed JSON.")
     except Exception as exc:  # noqa: BLE001 - judge must degrade cleanly.
         return fallback_decision(
             smoke,
             fallback_reason_for_exception(exc),
             f"LLM judge unavailable; using deterministic fallback. {exc}",
         )
-    return validate_against_smoke(decision, smoke)
 
 
 async def async_main(args: argparse.Namespace) -> int:

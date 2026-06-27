@@ -100,8 +100,9 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(result["winner"], "Superman")
         self.assertEqual(result["title"], "Nerd Fight Referee Decision")
-        self.assertEqual(result["diagnostics"]["fallback_reason"], "malformed JSON")
-        self.assertTrue(any("LLM judge unavailable" in note for note in result["judge_notes"]))
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "llm_text_enhanced")
+        self.assertIn("not json", result["summary"])
+        self.assertTrue(any("LLM text was used as summary" in note for note in result["judge_notes"]))
 
     async def test_disabled_llm_records_fallback_reason(self):
         result = await judge_fight_packet(
