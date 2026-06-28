@@ -16,18 +16,14 @@ from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.profiles.fight_packet import build_fight_packet
 
 
-VALID_CONFIDENCE = {"low", "low_to_medium", "medium", "high", "strong", "needs_judge_review"}
-CONFLICT_NOTE = "judge_conflict: LLM contradicted deterministic baseline without packet evidence"
 FALLBACK_LLM_DISABLED = "LLM disabled"
 FALLBACK_OLLAMA_UNAVAILABLE = "Ollama unavailable"
 FALLBACK_TIMEOUT = "timeout"
-FALLBACK_MALFORMED_JSON = "malformed JSON"
-FALLBACK_SCHEMA_VALIDATION = "schema validation failed"
-FALLBACK_WINNER_CONFLICT = "winner conflict"
+LOCKED_ENGINE_CONFIDENCE = {"high", "strong"}
 SYSTEM_PROMPT = (
-    "You are Nerd Fight Referee. Decide only from the supplied packet. Do not invent feats, "
-    "forms, equipment, prep time, or weaknesses. Explain how the winner turns the listed "
-    "advantages into an actual fight plan."
+    "You are the official Nerd Fight Referee. Explain the deterministic engine result using "
+    "only the supplied packet evidence. Do not invent feats, forms, equipment, prep time, or "
+    "weaknesses."
 )
 BATTLE_RULES = (
     "Battle rules: standard encounter; no prep unless profile explicitly grants it; strongest "
@@ -68,156 +64,178 @@ def compact_evidence_packet(packet: dict[str, Any], smoke_baseline: dict[str, An
 
 def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list[dict[str, str]]:
     evidence = compact_evidence_packet(packet, smoke_baseline)
+    deciding_factors = smoke_baseline.get("deciding_factors") or []
+    briefing = "\n".join(
+        [
+            f"Winner: {smoke_baseline.get('winner')}",
+            f"Confidence: {smoke_baseline.get('confidence')}",
+            f"Win condition / route to victory: {smoke_baseline.get('win_condition') or smoke_baseline.get('route_to_victory')}",
+            f"Loser's best path: {smoke_baseline.get('loser_best_path')}",
+            "Deciding factors:",
+            json.dumps(deciding_factors, sort_keys=True),
+            "Compact packet evidence for both contenders:",
+            json.dumps(evidence, sort_keys=True),
+        ]
+    )
     user_prompt = "\n".join(
         [
             BATTLE_RULES,
-            "Return only JSON with this schema:",
-            json.dumps(
-                {
-                    "title": "Nerd Fight Referee Decision",
-                    "winner": "string",
-                    "confidence": "low|low_to_medium|medium|high|strong|needs_judge_review",
-                    "summary": "2-4 sentence plain-English matchup summary",
-                    "win_condition": "how the winner actually wins",
-                    "loser_best_path": "how the loser could plausibly threaten or upset",
-                    "deciding_factors": [
-                        {
-                            "factor": "Range control",
-                            "evidence": "Packet-backed evidence only",
-                            "tactical_effect": "How this changes the fight",
-                        }
-                    ],
-                    "warnings": ["..."],
-                    "judge_notes": ["..."],
-                }
-            ),
-            "Evidence packet:",
-            json.dumps(evidence, sort_keys=True),
+            briefing,
+            "You are the official Nerd Fight Referee.",
+            "Do not change the winner.",
+            "Do not invent feats.",
+            "Do not contradict supplied evidence.",
+            "Explain how the fight unfolds.",
+            "Reference supplied evidence naturally.",
+            "Write 3-6 concise paragraphs.",
+            "No JSON.",
+            "No bullet lists.",
+            "No markdown headings.",
         ]
     )
     return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user_prompt}]
 
 
-def parse_json_response(text: str) -> dict[str, Any]:
-    try:
-        data = json.loads(text)
-    except json.JSONDecodeError:
-        start = text.find("{")
-        end = text.rfind("}")
-        if start < 0 or end < start:
-            raise
-        data = json.loads(text[start : end + 1])
-    if not isinstance(data, dict):
-        raise ValueError("LLM response JSON was not an object")
-    return data
-
-
-def llm_text_enhanced_decision(smoke: dict[str, Any], raw: str) -> dict[str, Any]:
-    decision = fallback_decision(smoke, "llm_text_enhanced", "LLM returned text instead of valid JSON.")
-    cleaned = " ".join(str(raw).replace("\n", " ").split())
-    if cleaned:
-        decision["summary"] = cleaned[:700]
-        decision["judge_notes"] = ["LLM text was used as summary; structured JSON parse failed."]
-    return decision
-
-
-def normalize_factor_name(value: str) -> str:
-    normalized = value.casefold()
-    if "range" in normalized:
-        return "Range Control"
-    if "speed" in normalized or "initiative" in normalized or "mobility" in normalized:
-        return "Mobility / Initiative"
-    if "attack" in normalized or "power" in normalized or "finish" in normalized:
-        return "Finishing Power"
-    if "durability" in normalized or "attrition" in normalized:
-        return "Durability / Attrition"
-    if "resistance" in normalized or "counter" in normalized:
-        return "Resistance / Counterplay"
-    if "skill" in normalized or "tactic" in normalized or "intelligence" in normalized:
-        return "Skill / Tactics"
-    if "prep" in normalized:
-        return "Prep Dependence"
-    if "weakness" in normalized:
-        return "Weakness Exploitation"
-    if "battlefield" in normalized:
-        return "Battlefield Control"
-    if "ability" in normalized or "special" in normalized:
-        return "Special Abilities"
-    return value or "Key Factor"
-
-
-def normalize_decision(data: dict[str, Any]) -> dict[str, Any]:
-    required = ("winner", "confidence", "win_condition", "loser_best_path")
-    missing = [key for key in required if not data.get(key)]
-    if missing:
-        raise ValueError(f"missing required decision fields: {', '.join(missing)}")
-    factors = data.get("deciding_factors") or []
-    if not isinstance(factors, list):
-        raise ValueError("deciding_factors must be a list")
-    normalized_factors = []
-    for factor in factors:
-        if isinstance(factor, dict):
-            normalized_factors.append(
-                {
-                    "factor": normalize_factor_name(str(factor.get("factor") or "Deciding factor")),
-                    "evidence": str(factor.get("evidence") or ""),
-                    "tactical_effect": str(factor.get("tactical_effect") or ""),
-                }
-            )
-        else:
-            raise ValueError("deciding_factors entries must be objects")
-    confidence = str(data.get("confidence") or "needs_judge_review")
-    if confidence not in VALID_CONFIDENCE:
-        raise ValueError(f"unsupported confidence: {confidence}")
+def engine_verdict(smoke: dict[str, Any]) -> dict[str, Any]:
     return {
-        "title": "Nerd Fight Referee Decision",
-        "winner": str(data.get("winner") or "needs_judge_review"),
-        "confidence": confidence,
-        "summary": str(data.get("summary") or "The supplied packet did not support a complete LLM decision."),
-        "win_condition": str(data.get("win_condition") or "Evidence is incomplete."),
-        "loser_best_path": str(data.get("loser_best_path") or "Evidence is incomplete."),
-        "deciding_factors": normalized_factors,
-        "warnings": [str(item) for item in data.get("warnings") or []],
-        "judge_notes": [str(item) for item in data.get("judge_notes") or []],
+        "winner": smoke.get("winner"),
+        "winner_character_id": smoke.get("winner_character_id"),
+        "confidence": smoke.get("confidence"),
+        "win_condition": smoke.get("win_condition"),
+        "loser_best_path": smoke.get("loser_best_path"),
+        "deciding_factors": smoke.get("deciding_factors") or [],
+        "winner_probability": smoke.get("winner_probability"),
+        "loser_probability": smoke.get("loser_probability"),
+        "overall_probability": smoke.get("overall_probability"),
+        "advantage_breakdown": smoke.get("advantage_breakdown") or {},
+        "swing_factors": smoke.get("swing_factors") or [],
     }
 
 
+def confidence_allows_upset(confidence: Any) -> bool:
+    return str(confidence or "").casefold() not in LOCKED_ENGINE_CONFIDENCE
+
+
+def contender_names(packet: dict[str, Any]) -> list[str]:
+    names = []
+    for key in ("contender_a", "contender_b"):
+        contender = packet.get(key) if isinstance(packet.get(key), dict) else {}
+        for value in (contender.get("canonical_name"), contender.get("character_id")):
+            if value and str(value) not in names:
+                names.append(str(value))
+    return names
+
+
+def extract_prefixed_line(text: str, prefix: str) -> str:
+    normalized_prefix = prefix.casefold()
+    for line in str(text or "").splitlines():
+        stripped = line.strip()
+        if stripped.casefold().startswith(normalized_prefix):
+            return stripped[len(prefix) :].strip(" :-")
+    return ""
+
+
+def referee_winner_from_text(raw: str, names: list[str]) -> str:
+    explicit = extract_prefixed_line(raw, "Referee verdict")
+    search_space = explicit or raw
+    for name in names:
+        if name and name.casefold() in search_space.casefold():
+            return name
+    return explicit
+
+
+def referee_verdict(
+    smoke: dict[str, Any],
+    raw: str,
+    explanation: str,
+    *,
+    packet: dict[str, Any],
+) -> dict[str, Any]:
+    engine_winner = str(smoke.get("winner") or "")
+    recommended_winner = engine_winner
+    upset_justification = ""
+    changed = False
+    if confidence_allows_upset(smoke.get("confidence")):
+        candidate = referee_winner_from_text(raw, contender_names(packet))
+        if candidate and candidate != engine_winner:
+            recommended_winner = candidate
+            changed = True
+            upset_justification = extract_prefixed_line(raw, "Upset justification") or explanation[:280]
+    return {
+        "winner": recommended_winner,
+        "changed_winner": changed,
+        "upset_allowed": confidence_allows_upset(smoke.get("confidence")),
+        "upset_justification": upset_justification,
+        "explanation": explanation,
+    }
+
+
+def clean_llm_explanation(raw: str) -> str:
+    return " ".join(str(raw or "").replace("\n", " ").split()).strip()
+
+
+def llm_explained_decision(smoke: dict[str, Any], raw: str, *, packet: dict[str, Any]) -> dict[str, Any]:
+    explanation = clean_llm_explanation(raw)
+    if not explanation:
+        return fallback_decision(smoke, FALLBACK_OLLAMA_UNAVAILABLE, "LLM returned an empty explanation.")
+    engine = engine_verdict(smoke)
+    referee = referee_verdict(smoke, raw, explanation[:700], packet=packet)
+    decision = {
+        **smoke,
+        "title": "Nerd Fight Referee Decision",
+        "summary": explanation[:700],
+        "win_condition": explanation[:700],
+        "engine_verdict": engine,
+        "referee_verdict": referee,
+    }
+    notes = list(decision.get("judge_notes") or [])
+    notes.append("LLM generated referee review; deterministic engine verdict remains available.")
+    if referee["changed_winner"]:
+        notes.append("Referee recommended an upset winner because engine confidence allowed review.")
+    decision["judge_notes"] = notes
+    decision["diagnostics"] = {
+        "fallback": False,
+        "fallback_reason": "llm_explanation",
+        "fallback_detail": "LLM explanation applied to deterministic decision.",
+        "engine_verdict": engine,
+    }
+    return decision
+
+
+
 def fallback_decision(smoke_baseline: dict[str, Any], reason: str, detail: str = "") -> dict[str, Any]:
+    engine = engine_verdict(smoke_baseline)
+    explanation = smoke_baseline.get("summary") or "LLM judge unavailable; using deterministic fallback."
     return {
         "title": "Nerd Fight Referee Decision",
         "winner": smoke_baseline.get("winner"),
         "confidence": smoke_baseline.get("confidence") or "needs_judge_review",
-        "summary": smoke_baseline.get("summary") or "LLM judge unavailable; using deterministic fallback.",
+        "summary": explanation,
         "win_condition": smoke_baseline.get("win_condition") or "Fallback uses packet-backed stat leads.",
         "loser_best_path": smoke_baseline.get("loser_best_path") or "Evidence is incomplete.",
         "deciding_factors": smoke_baseline.get("deciding_factors") or [],
+        "engine_verdict": engine,
+        "referee_verdict": {
+            "winner": smoke_baseline.get("winner"),
+            "changed_winner": False,
+            "upset_allowed": confidence_allows_upset(smoke_baseline.get("confidence")),
+            "upset_justification": "",
+            "explanation": explanation,
+        },
         "warnings": list(smoke_baseline.get("warnings") or []),
         "judge_notes": [detail, *list(smoke_baseline.get("profile_quality_notes") or [])] if detail else list(smoke_baseline.get("profile_quality_notes") or []),
         "diagnostics": {
             "fallback": True,
             "fallback_reason": reason,
             "fallback_detail": detail,
+            "engine_verdict": engine,
         },
     }
-
-
-def validate_against_smoke(decision: dict[str, Any], smoke_baseline: dict[str, Any]) -> dict[str, Any]:
-    smoke_winner = smoke_baseline.get("winner")
-    llm_winner = decision.get("winner")
-    if smoke_winner and smoke_winner != "needs_judge_review" and llm_winner != smoke_winner:
-        fallback = fallback_decision(smoke_baseline, FALLBACK_WINNER_CONFLICT, CONFLICT_NOTE)
-        fallback["warnings"].append("judge_conflict")
-        return fallback
-    return decision
 
 
 def fallback_reason_for_exception(exc: Exception) -> str:
     if isinstance(exc, (asyncio.TimeoutError, TimeoutError, httpx.TimeoutException)):
         return FALLBACK_TIMEOUT
-    if isinstance(exc, (json.JSONDecodeError,)):
-        return FALLBACK_MALFORMED_JSON
-    if isinstance(exc, ValueError):
-        return FALLBACK_SCHEMA_VALIDATION
     if isinstance(exc, (httpx.ConnectError, httpx.HTTPStatusError, httpx.RequestError)):
         return FALLBACK_OLLAMA_UNAVAILABLE
     return FALLBACK_OLLAMA_UNAVAILABLE
@@ -236,7 +254,6 @@ async def call_ollama(
         "model": model,
         "messages": messages,
         "stream": False,
-        "format": "json",
         "options": {
             "num_predict": int(values.get("BATTLEBOT_LLM_NUM_PREDICT") or 512),
             "temperature": float(values.get("BATTLEBOT_LLM_TEMPERATURE") or 0.1),
@@ -265,17 +282,12 @@ async def judge_fight_packet(
     try:
         caller = ollama_caller or call_ollama
         raw = await caller(build_prompt(packet, smoke), env=env)
-        decision = normalize_decision(parse_json_response(raw))
-        return validate_against_smoke(decision, smoke)
-    except json.JSONDecodeError:
-        if "raw" in locals():
-            return llm_text_enhanced_decision(smoke, raw)
-        return fallback_decision(smoke, FALLBACK_MALFORMED_JSON, "LLM returned malformed JSON.")
+        return llm_explained_decision(smoke, raw, packet=packet)
     except Exception as exc:  # noqa: BLE001 - judge must degrade cleanly.
         return fallback_decision(
             smoke,
             fallback_reason_for_exception(exc),
-            f"LLM judge unavailable; using deterministic fallback. {exc}",
+            f"LLM referee unavailable; using deterministic explanation. {exc}",
         )
 
 

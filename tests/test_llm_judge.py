@@ -1,7 +1,7 @@
-import json
 import unittest
 import httpx
 
+from battlebot.fight.decision_formatter import format_decision
 from battlebot.fight.llm_judge import build_prompt, judge_fight_packet
 from battlebot.fight.smoke_judge import smoke_judge_packet
 
@@ -48,61 +48,120 @@ def packet():
 
 
 class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
-    def test_prompt_contains_do_not_invent_feats(self):
+    def test_prompt_is_referee_briefing_not_verdict_schema(self):
         messages = build_prompt(packet(), smoke_judge_packet(packet()))
+        user_prompt = messages[1]["content"]
 
-        self.assertIn("Do not invent feats", messages[0]["content"])
-        self.assertIn("evidence packet is source of truth", messages[1]["content"])
+        self.assertIn("You are the official Nerd Fight Referee.", user_prompt)
+        self.assertIn("Winner: Superman", user_prompt)
+        self.assertIn("Confidence:", user_prompt)
+        self.assertIn("Win condition / route to victory:", user_prompt)
+        self.assertIn("Loser's best path:", user_prompt)
+        self.assertIn("Deciding factors:", user_prompt)
+        self.assertIn("Compact packet evidence for both contenders:", user_prompt)
+        self.assertIn("Do not change the winner.", user_prompt)
+        self.assertIn("Do not invent feats.", user_prompt)
+        self.assertIn("No JSON.", user_prompt)
+        self.assertIn("No bullet lists.", user_prompt)
+        self.assertIn("No markdown headings.", user_prompt)
+        self.assertNotIn("Referee verdict:", user_prompt)
+        self.assertNotIn("Upset justification:", user_prompt)
+        self.assertIn("evidence packet is source of truth", user_prompt)
 
-    async def test_llm_judge_returns_valid_schema_from_mocked_ollama_response(self):
+    async def test_llm_judge_uses_plain_text_as_referee_explanation_only(self):
         async def caller(messages, env=None):
-            return json.dumps(
-                {
-                    "title": "Nerd Fight Referee Decision",
-                    "winner": "Superman",
-                    "confidence": "strong",
-                    "summary": "Superman controls the fight from the listed packet advantages.",
-                    "win_condition": "He wins through speed, power, and durability pressure.",
-                    "loser_best_path": "Batman needs a listed weakness exploit, but none is present.",
-                    "deciding_factors": [
-                        {
-                            "factor": "Range control",
-                            "evidence": "Superman has Flight and leads speed.",
-                            "tactical_effect": "He can deny close combat and choose exchanges.",
-                        }
-                    ],
-                    "warnings": [],
-                    "judge_notes": [],
-                }
+            return "Superman wins because speed, power, and durability let him control every exchange."
+
+        smoke = smoke_judge_packet(packet())
+        result = await judge_fight_packet(
+            packet(),
+            smoke,
+            env={"BATTLEBOT_LLM_ENABLED": "true"},
+            ollama_caller=caller,
+        )
+
+        self.assertEqual(result["title"], "Nerd Fight Referee Decision")
+        self.assertEqual(result["winner"], smoke["winner"])
+        self.assertEqual(result["confidence"], smoke["confidence"])
+        self.assertEqual(result["deciding_factors"], smoke["deciding_factors"])
+        self.assertIn("Superman wins because", result["summary"])
+        self.assertIn("Superman wins because", format_decision(result))
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "llm_explanation")
+
+    async def test_json_shaped_llm_output_is_treated_as_plain_explanation(self):
+        async def caller(messages, env=None):
+            return '{"winner":"Batman","summary":"Batman wins, but this is just prose now."}'
+
+        smoke = smoke_judge_packet(packet())
+        result = await judge_fight_packet(
+            packet(),
+            smoke,
+            env={"BATTLEBOT_LLM_ENABLED": "true"},
+            ollama_caller=caller,
+        )
+
+        self.assertEqual(result["winner"], smoke["winner"])
+        self.assertNotEqual(result["winner"], "Batman")
+        self.assertIn('"winner":"Batman"', result["summary"])
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "llm_explanation")
+
+    async def test_strong_engine_confidence_locks_referee_winner(self):
+        async def caller(messages, env=None):
+            return "Referee verdict: Batman\nUpset justification: Batman has a path, but this should be locked."
+
+        smoke = smoke_judge_packet(packet())
+        result = await judge_fight_packet(
+            packet(),
+            smoke,
+            env={"BATTLEBOT_LLM_ENABLED": "true"},
+            ollama_caller=caller,
+        )
+
+        self.assertEqual(result["winner"], smoke["winner"])
+        self.assertEqual(result["engine_verdict"]["winner"], smoke["winner"])
+        self.assertEqual(result["referee_verdict"]["winner"], smoke["winner"])
+        self.assertFalse(result["referee_verdict"]["changed_winner"])
+        self.assertFalse(result["referee_verdict"]["upset_allowed"])
+
+    async def test_medium_engine_confidence_allows_referee_upset_recommendation(self):
+        async def caller(messages, env=None):
+            return (
+                "Batman survives the first exchange by avoiding direct trades.\n"
+                "Referee verdict: Batman\n"
+                "Upset justification: Batman's listed martial arts gives him a narrow tactical path."
             )
 
+        smoke = {**smoke_judge_packet(packet()), "confidence": "medium"}
         result = await judge_fight_packet(
             packet(),
-            smoke_judge_packet(packet()),
+            smoke,
             env={"BATTLEBOT_LLM_ENABLED": "true"},
             ollama_caller=caller,
         )
 
-        self.assertEqual(result["title"], "Nerd Fight Referee Decision")
-        self.assertEqual(result["winner"], "Superman")
-        self.assertEqual(result["deciding_factors"][0]["tactical_effect"], "He can deny close combat and choose exchanges.")
+        self.assertEqual(result["winner"], smoke["winner"])
+        self.assertEqual(result["engine_verdict"]["winner"], smoke["winner"])
+        self.assertEqual(result["referee_verdict"]["winner"], "Batman")
+        self.assertTrue(result["referee_verdict"]["changed_winner"])
+        self.assertTrue(result["referee_verdict"]["upset_allowed"])
+        self.assertIn("martial arts", result["referee_verdict"]["upset_justification"])
+        self.assertEqual(result["diagnostics"]["engine_verdict"]["winner"], smoke["winner"])
 
-    async def test_malformed_llm_json_falls_back_to_smoke_judge(self):
+    async def test_empty_llm_text_falls_back_to_deterministic_explanation(self):
         async def caller(messages, env=None):
-            return "not json"
+            return "   "
 
+        smoke = smoke_judge_packet(packet())
         result = await judge_fight_packet(
             packet(),
-            smoke_judge_packet(packet()),
+            smoke,
             env={"BATTLEBOT_LLM_ENABLED": "true"},
             ollama_caller=caller,
         )
 
-        self.assertEqual(result["winner"], "Superman")
-        self.assertEqual(result["title"], "Nerd Fight Referee Decision")
-        self.assertEqual(result["diagnostics"]["fallback_reason"], "llm_text_enhanced")
-        self.assertIn("not json", result["summary"])
-        self.assertTrue(any("LLM text was used as summary" in note for note in result["judge_notes"]))
+        self.assertEqual(result["winner"], smoke["winner"])
+        self.assertEqual(result["summary"], smoke["summary"])
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "Ollama unavailable")
 
     async def test_disabled_llm_records_fallback_reason(self):
         result = await judge_fight_packet(
@@ -141,45 +200,6 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(result["winner"], "Superman")
         self.assertEqual(result["diagnostics"]["fallback_reason"], "Ollama unavailable")
-
-    async def test_schema_validation_failure_records_fallback_reason(self):
-        async def caller(messages, env=None):
-            return json.dumps({"winner": "Superman", "confidence": "strong"})
-
-        result = await judge_fight_packet(
-            packet(),
-            smoke_judge_packet(packet()),
-            env={"BATTLEBOT_LLM_ENABLED": "true"},
-            ollama_caller=caller,
-        )
-
-        self.assertEqual(result["diagnostics"]["fallback_reason"], "schema validation failed")
-
-    async def test_conflicting_llm_winner_falls_back_to_smoke_winner(self):
-        async def caller(messages, env=None):
-            return json.dumps(
-                {
-                    "winner": "Batman",
-                    "confidence": "high",
-                    "summary": "Contradiction.",
-                    "win_condition": "Contradiction.",
-                    "loser_best_path": "Contradiction.",
-                    "deciding_factors": [],
-                    "warnings": [],
-                    "judge_notes": [],
-                }
-            )
-
-        result = await judge_fight_packet(
-            packet(),
-            smoke_judge_packet(packet()),
-            env={"BATTLEBOT_LLM_ENABLED": "true"},
-            ollama_caller=caller,
-        )
-
-        self.assertEqual(result["winner"], "Superman")
-        self.assertIn("judge_conflict", result["warnings"])
-        self.assertEqual(result["diagnostics"]["fallback_reason"], "winner conflict")
 
     def test_smoke_deciding_factors_include_tactical_effect(self):
         result = smoke_judge_packet(packet())
