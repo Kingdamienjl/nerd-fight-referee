@@ -111,7 +111,7 @@ def format_decision(
     )
     analysis = compress_route_text(
         decision,
-        truncate_at_sentence_boundary(raw_analysis, 700),
+        truncate_at_sentence_boundary(raw_analysis, 1100),
     )
     if not analysis:
         analysis = "Deterministic referee could not produce a supported fight explanation."
