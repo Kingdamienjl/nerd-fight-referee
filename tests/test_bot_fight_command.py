@@ -44,6 +44,12 @@ class BotFightCommandTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("pre-LLM", message)
         self.assertNotIn("fallback mode", message)
         self.assertIn("winner: Superman", message)
+        self.assertIn("judge's analysis:", message)
+        self.assertIn("evidence:", message)
+        self.assertIn("loser's best path:", message)
+        self.assertNotIn("Route to Victory", message)
+        self.assertNotIn("Key Factors", message)
+        self.assertNotIn("Evidence Summary", message)
         self.assertLessEqual(len(message), 1800)
 
     async def test_fight_output_uses_llm_decision_title_when_enabled(self):
@@ -90,7 +96,9 @@ class BotFightCommandTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertIn("Nerd Fight Referee Decision", message)
         self.assertNotIn("pre-LLM", message)
-        self.assertIn("He acts first and controls spacing.", message)
+        self.assertIn("judge\'s analysis:\nSuperman wins from packet-backed advantages.", message)
+        self.assertIn("- Mobility / Initiative: He acts first and controls spacing.", message)
+        self.assertIn("loser's best path:\nBatman needs listed counterplay.", message)
 
     async def test_public_fight_hides_fallback_diagnostics_private_can_show_them(self):
         packet = {

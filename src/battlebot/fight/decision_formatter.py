@@ -91,32 +91,31 @@ def format_decision(
     include_diagnostics: bool = False,
 ) -> str:
     factors = [factor for factor in decision.get("deciding_factors") or [] if isinstance(factor, dict)]
-    route = compress_route_text(
+    analysis = compress_route_text(
         decision,
         clean_text(
-            decision.get("win_condition") or decision.get("route_to_victory") or decision.get("summary"),
-            limit=300,
+            decision.get("summary") or decision.get("win_condition") or decision.get("route_to_victory"),
+            limit=700,
         ),
     )
+    if not analysis:
+        analysis = "Deterministic referee could not produce a supported fight explanation."
+    loser_best_path = clean_text(decision.get("loser_best_path"), limit=300)
+    if not loser_best_path:
+        loser_best_path = "Evidence is incomplete."
     lines = [
         "Nerd Fight Referee Decision",
         f"winner: {clean_text(decision.get('winner'), limit=80)}",
         f"confidence: {clean_text(decision.get('confidence'), limit=40)}",
+        "",
+        "judge's analysis:",
+        analysis,
     ]
-    if route:
-        lines.append(f"route to victory: {route}")
     if factors:
-        lines.append("key factors:")
-        for factor in factors[:3]:
-            category = factor_category(str(factor.get("factor") or ""))
-            effect = clean_text(factor.get("tactical_effect") or factor.get("evidence"), limit=170)
-            lines.append(f"- {category}: {effect}")
-    if decision.get("loser_best_path"):
-        lines.append(f"loser's best path: {clean_text(decision['loser_best_path'], limit=240)}")
-    if factors:
-        lines.append("evidence summary:")
+        lines.extend(["", "evidence:"])
         for factor in factors[:3]:
             lines.append(f"- {compressed_evidence(factor)}")
+    lines.extend(["", "loser's best path:", loser_best_path])
     warnings = decision.get("warnings") or []
     if warnings:
         lines.append("caveats:")

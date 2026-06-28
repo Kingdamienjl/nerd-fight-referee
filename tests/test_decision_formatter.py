@@ -109,7 +109,10 @@ class DecisionFormatterTests(unittest.TestCase):
 
         text = format_decision(decision)
 
-        self.assertIn("Battlefield Control", text)
+        self.assertIn("judge's analysis:", text)
+        self.assertIn("evidence:", text)
+        self.assertIn("- Battlefield Control", text)
+        self.assertIn("loser's best path:", text)
         self.assertIn("controlling distance and engagement terms", decision["win_condition"])
 
 
