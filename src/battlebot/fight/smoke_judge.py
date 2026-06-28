@@ -101,6 +101,273 @@ def contender_scores(contender: dict[str, Any]) -> dict[str, int | None]:
     }
 
 
+def contender_name(contender: dict[str, Any]) -> str:
+    return str(contender.get("canonical_name") or contender.get("character_id") or "unknown")
+
+
+def probability_for_confidence(confidence: str) -> float:
+    return {
+        "strong": 0.85,
+        "medium": 0.7,
+        "low_to_medium": 0.62,
+        "low": 0.55,
+    }.get(confidence, 0.5)
+
+
+def margin_label(left: int | None, right: int | None) -> str:
+    if left is None or right is None:
+        return "low"
+    diff = abs(left - right)
+    if diff >= 30:
+        return "high"
+    if diff >= 15:
+        return "medium"
+    return "low"
+
+
+def margin_from_presence(left: int, right: int) -> str:
+    if left == right:
+        return "low"
+    if max(left, right) >= 3:
+        return "high"
+    if max(left, right) >= 2:
+        return "medium"
+    return "low"
+
+
+def compact_value(value: Any) -> str:
+    names = compact_names(value, limit=2)
+    if names:
+        return ", ".join(names)
+    return str(value).strip() if value else "no listed packet entry"
+
+
+def reason_margin_word(margin: str) -> str:
+    return {"high": "substantially", "medium": "clearly"}.get(margin, "slightly")
+
+
+def category_reason(category: str, winner: str, loser: str, margin: str) -> str:
+    degree = reason_margin_word(margin)
+    if category == "speed":
+        return f"{winner} controls initiative because their listed speed tier {degree} exceeds {loser}'s."
+    if category == "strength":
+        return f"{winner} threatens the cleaner finish because their listed output {degree} exceeds {loser}'s."
+    if category == "durability":
+        return f"{winner} has the durability edge because {loser} needs repeated clean openings to finish."
+    if category == "mobility":
+        return f"{winner} is better positioned to set the pace and deny {loser} stable engagement timing."
+    if category == "range":
+        return f"{winner} has the range edge because they can force {loser} to spend more effort entering safely."
+    if category == "skill":
+        return f"{winner} has the skill edge because their listed tactics give them cleaner decision points."
+    if category == "abilities":
+        return f"{winner} has the abilities edge because their listed abilities create more reliable win conditions."
+    if category == "battlefield":
+        return f"{winner} controls battlefield terms because their listed tools better shape positioning."
+    return f"{winner} has the {category} edge because it creates more reliable fight pressure than {loser}'s route."
+
+
+def ranked_factor(
+    label: str,
+    a: dict[str, Any],
+    b: dict[str, Any],
+    left: int | None,
+    right: int | None,
+    left_value: Any,
+    right_value: Any,
+    *,
+    scoring: bool = False,
+) -> dict[str, str]:
+    if left is None or right is None:
+        winner = "unknown"
+        reason = (
+            f"{label.title()} remains uncertain because the deterministic judge could not rank both sides cleanly."
+        )
+    elif left > right:
+        winner = contender_name(a)
+        reason = category_reason(label, winner, contender_name(b), margin_label(left, right))
+    elif right > left:
+        winner = contender_name(b)
+        reason = category_reason(label, winner, contender_name(a), margin_label(left, right))
+    else:
+        winner = "even"
+        reason = (
+            f"{label.title()} does not create a decisive edge because both sides occupy the same listed tier."
+        )
+    return {"winner": winner, "margin": margin_label(left, right), "reason": reason}
+
+
+def text_presence_factor(label: str, a: dict[str, Any], b: dict[str, Any], a_value: Any, b_value: Any) -> dict[str, str]:
+    left = 1 if a_value else 0
+    right = 1 if b_value else 0
+    factor = ranked_factor(label, a, b, left, right, a_value, b_value)
+    factor["margin"] = margin_from_presence(left, right)
+    return factor
+
+
+def ability_count_factor(a: dict[str, Any], b: dict[str, Any]) -> dict[str, str]:
+    abilities_a = a.get("abilities") or []
+    abilities_b = b.get("abilities") or []
+    left = len(abilities_a)
+    right = len(abilities_b)
+    factor = ranked_factor("abilities", a, b, left, right, abilities_a, abilities_b)
+    factor["margin"] = margin_from_presence(left, right)
+    return factor
+
+
+def advantage_breakdown(a: dict[str, Any], b: dict[str, Any], scores_a: dict[str, int | None], scores_b: dict[str, int | None]) -> dict[str, dict[str, str]]:
+    power_a = a.get("power_scale") or {}
+    power_b = b.get("power_scale") or {}
+    return {
+        "speed": ranked_factor(
+            "speed",
+            a,
+            b,
+            scores_a.get("speed"),
+            scores_b.get("speed"),
+            power_a.get("speed"),
+            power_b.get("speed"),
+            scoring=True,
+        ),
+        "strength": ranked_factor(
+            "strength",
+            a,
+            b,
+            scores_a.get("attack_potency"),
+            scores_b.get("attack_potency"),
+            power_a.get("attack_potency"),
+            power_b.get("attack_potency"),
+            scoring=True,
+        ),
+        "durability": ranked_factor(
+            "durability",
+            a,
+            b,
+            scores_a.get("durability"),
+            scores_b.get("durability"),
+            power_a.get("durability"),
+            power_b.get("durability"),
+            scoring=True,
+        ),
+        "range": text_presence_factor("range", a, b, power_a.get("range"), power_b.get("range")),
+        "mobility": ranked_factor(
+            "mobility",
+            a,
+            b,
+            scores_a.get("speed"),
+            scores_b.get("speed"),
+            power_a.get("speed"),
+            power_b.get("speed"),
+        ),
+        "skill": text_presence_factor(
+            "skill",
+            a,
+            b,
+            tactical_value(a, "tactical_intelligence") or tactical_value(a, "combat_style"),
+            tactical_value(b, "tactical_intelligence") or tactical_value(b, "combat_style"),
+        ),
+        "abilities": ability_count_factor(a, b),
+        "battlefield": text_presence_factor(
+            "battlefield",
+            a,
+            b,
+            tactical_value(a, "battlefield_control"),
+            tactical_value(b, "battlefield_control"),
+        ),
+    }
+
+
+def swing_factors_from_breakdown(breakdown: dict[str, dict[str, str]], winner_name: str) -> list[dict[str, str]]:
+    swings = []
+    for factor_name, factor in breakdown.items():
+        if factor.get("winner") == winner_name:
+            title = factor_name.replace("_", " ").title()
+            margin = factor.get("margin") or "low"
+            swings.append(
+                {
+                    "title": title,
+                    "reason": factor.get("reason") or f"{title} favors {winner_name} in the packet.",
+                    "impact": (
+                        f"{winner_name} has a {margin} {factor_name} edge, so this factor helps explain "
+                        "the deterministic verdict without changing the scoring calculation."
+                    ),
+                }
+            )
+    return swings[:4]
+
+
+def empty_fight_flow() -> dict[str, list[dict[str, str]]]:
+    return {"opening": [], "mid_fight": [], "turning_point": [], "finish": [], "loser_paths": []}
+
+
+def flow_item(winner: str, reason: str) -> dict[str, str]:
+    return {"winner": winner, "reason": reason}
+
+
+def first_breakdown_reason(
+    breakdown: dict[str, dict[str, str]],
+    winner_name: str,
+    categories: tuple[str, ...],
+) -> str:
+    for category in categories:
+        factor = breakdown.get(category) or {}
+        if factor.get("winner") == winner_name and factor.get("reason"):
+            return str(factor["reason"])
+    return ""
+
+
+def first_deciding_effect(factors: list[dict[str, str]], keywords: tuple[str, ...] = ()) -> str:
+    for factor in factors:
+        effect = str(factor.get("tactical_effect") or "").strip()
+        factor_name = str(factor.get("factor") or "").casefold()
+        if effect and (not keywords or any(keyword in factor_name for keyword in keywords)):
+            return effect
+    return ""
+
+
+def build_fight_flow(
+    winner_name: str,
+    loser_name: str,
+    deciding_factors: list[dict[str, str]],
+    breakdown: dict[str, dict[str, str]],
+    swing_factors: list[dict[str, str]],
+    loser_best_path: str,
+) -> dict[str, list[dict[str, str]]]:
+    flow = empty_fight_flow()
+    opening = first_breakdown_reason(breakdown, winner_name, ("speed", "mobility", "range"))
+    if not opening:
+        opening = first_deciding_effect(deciding_factors, ("initiative", "mobility", "range"))
+    flow["opening"].append(flow_item(winner_name, opening or f"{winner_name} establishes the first reliable tempo edge."))
+
+    mid_fight = first_breakdown_reason(breakdown, winner_name, ("durability", "skill", "abilities", "battlefield"))
+    if not mid_fight:
+        mid_fight = first_deciding_effect(deciding_factors, ("durability", "skill", "ability", "battlefield"))
+    flow["mid_fight"].append(flow_item(winner_name, mid_fight or f"{winner_name} keeps the exchange pattern more stable."))
+
+    swing = swing_factors[0] if swing_factors else {}
+    turning_point = str(swing.get("impact") or swing.get("reason") or "").strip()
+    flow["turning_point"].append(
+        flow_item(winner_name, turning_point or f"{winner_name} converts the strongest listed edge into control.")
+    )
+
+    finish = first_deciding_effect(deciding_factors, ("finishing", "power", "durability", "ability"))
+    if not finish:
+        finish = f"{winner_name} finishes by forcing {loser_name} into repeated losing exchanges."
+    flow["finish"].append(flow_item(winner_name, finish))
+    flow["loser_paths"].append(flow_item(loser_name, loser_best_path))
+    return flow
+
+
+def engine_reasoning_from_flow(fight_flow: dict[str, list[dict[str, str]]]) -> list[str]:
+    reasoning = []
+    for phase in ("opening", "mid_fight", "turning_point", "finish", "loser_paths"):
+        for item in fight_flow.get(phase) or []:
+            reason = str(item.get("reason") or "").strip()
+            if reason:
+                reasoning.append(reason)
+    return reasoning[:6]
+
+
 def item_names(contender: dict[str, Any], section: str, limit: int = 3) -> list[str]:
     names = []
     for item in contender.get(section) or []:
@@ -306,6 +573,13 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
             "confidence": "none",
             "verdict_type": "needs_judge_review",
             "deciding_factors": [],
+            "overall_probability": {"winner": 0.5, "loser": 0.5},
+            "winner_probability": 0.5,
+            "loser_probability": 0.5,
+            "advantage_breakdown": {},
+            "swing_factors": [],
+            "fight_flow": empty_fight_flow(),
+            "engine_reasoning": [],
             "warnings": ["fight packet has resolution errors"],
             "profile_quality_notes": quality_notes(packet),
             "diagnostics": {"fallback": True, "fallback_reason": "resolution_error"},
@@ -338,6 +612,13 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
             "confidence": "low",
             "verdict_type": "needs_judge_review",
             "deciding_factors": deciding,
+            "overall_probability": {"winner": 0.5, "loser": 0.5},
+            "winner_probability": 0.5,
+            "loser_probability": 0.5,
+            "advantage_breakdown": advantage_breakdown(a, b, scores_a, scores_b),
+            "swing_factors": [],
+            "fight_flow": empty_fight_flow(),
+            "engine_reasoning": ["The packet did not provide enough parsed ranking data for a deterministic winner."],
             "warnings": ["tier parsing was insufficient for a deterministic smoke winner"],
             "profile_quality_notes": notes,
             "diagnostics": {"fallback": True, "fallback_reason": "insufficient_packet_ranking"},
@@ -359,6 +640,20 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
     if factor:
         deciding.insert(0, factor)
     route = route_to_victory(winner, loser, deciding)
+    winner_probability = probability_for_confidence(confidence)
+    loser_probability = round(1.0 - winner_probability, 2)
+    breakdown = advantage_breakdown(a, b, scores_a, scores_b)
+    best_loser_path = loser_path(loser, winner)
+    swings = swing_factors_from_breakdown(breakdown, contender_name(winner))
+    fight_flow = build_fight_flow(
+        contender_name(winner),
+        contender_name(loser),
+        deciding,
+        breakdown,
+        swings,
+        best_loser_path,
+    )
+    reasoning = engine_reasoning_from_flow(fight_flow)
     return {
         "label": "Nerd Fight Referee Decision",
         "winner": winner["canonical_name"],
@@ -370,8 +665,15 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
             f"{loser['canonical_name']} from the supplied packet."
         ),
         "win_condition": route,
-        "loser_best_path": loser_path(loser, winner),
+        "loser_best_path": best_loser_path,
         "deciding_factors": deciding,
+        "overall_probability": {"winner": winner_probability, "loser": loser_probability},
+        "winner_probability": winner_probability,
+        "loser_probability": loser_probability,
+        "advantage_breakdown": breakdown,
+        "swing_factors": swings,
+        "fight_flow": fight_flow,
+        "engine_reasoning": reasoning,
         "warnings": warnings,
         "profile_quality_notes": notes,
         "diagnostics": {"fallback": True, "fallback_reason": "deterministic_smoke_judge"},

@@ -16,6 +16,10 @@ def contender(name, character_id, attack, speed, durability, warnings=None):
     }
 
 
+RICH_ADVANTAGE_CATEGORIES = {"speed", "strength", "durability", "mobility", "range", "skill", "abilities", "battlefield"}
+FIGHT_FLOW_PHASES = {"opening", "mid_fight", "turning_point", "finish", "loser_paths"}
+
+
 class SmokeJudgeTests(unittest.TestCase):
     def test_tier_phrase_ranking(self):
         self.assertGreater(text_rank("Solar System level"), text_rank("Building level"))
@@ -53,6 +57,45 @@ class SmokeJudgeTests(unittest.TestCase):
 
         self.assertEqual(result["winner"], "Superman")
         self.assertEqual(result["confidence"], "strong")
+
+    def test_smoke_judge_exposes_probability_and_advantage_breakdown(self):
+        packet = {
+            "errors": [],
+            "contender_a": contender("Batman", "batman", "Building level", "Peak Human", "Building level"),
+            "contender_b": contender("Superman", "superman", "Solar System level", "Massively FTL+", "Solar System level"),
+            "warnings": [],
+        }
+
+        result = smoke_judge_packet(packet)
+
+        self.assertEqual(result["winner_probability"], 0.85)
+        self.assertEqual(result["loser_probability"], 0.15)
+        self.assertEqual(result["overall_probability"], {"winner": 0.85, "loser": 0.15})
+        self.assertEqual(set(result["advantage_breakdown"]), RICH_ADVANTAGE_CATEGORIES)
+        for factor in result["advantage_breakdown"].values():
+            self.assertEqual(set(factor), {"winner", "margin", "reason"})
+            self.assertIn(factor["margin"], {"low", "medium", "high"})
+            self.assertTrue(factor["reason"])
+            self.assertNotIn("packet compares", factor["reason"])
+        self.assertTrue(result["swing_factors"])
+        for factor in result["swing_factors"]:
+            self.assertEqual(set(factor), {"title", "reason", "impact"})
+            self.assertTrue(factor["title"])
+            self.assertTrue(factor["reason"])
+            self.assertTrue(factor["impact"])
+        self.assertEqual(set(result["fight_flow"]), FIGHT_FLOW_PHASES)
+        for phase in result["fight_flow"].values():
+            self.assertTrue(phase)
+            for item in phase:
+                self.assertEqual(set(item), {"winner", "reason"})
+                self.assertTrue(item["winner"])
+                self.assertTrue(item["reason"])
+        self.assertTrue(result["engine_reasoning"])
+        self.assertTrue(all(isinstance(step, str) and step for step in result["engine_reasoning"]))
+        self.assertEqual(
+            result["engine_reasoning"][0],
+            result["fight_flow"]["opening"][0]["reason"],
+        )
 
     def test_ordinary_loser_warning_does_not_reduce_clean_sweep_confidence(self):
         packet = {

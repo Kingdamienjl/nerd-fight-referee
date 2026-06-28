@@ -65,6 +65,10 @@ def compact_evidence_packet(packet: dict[str, Any], smoke_baseline: dict[str, An
 def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list[dict[str, str]]:
     evidence = compact_evidence_packet(packet, smoke_baseline)
     deciding_factors = smoke_baseline.get("deciding_factors") or []
+    advantage_breakdown = smoke_baseline.get("advantage_breakdown") or {}
+    fight_flow = smoke_baseline.get("fight_flow") or {}
+    engine_reasoning = smoke_baseline.get("engine_reasoning") or []
+    swing_factors = smoke_baseline.get("swing_factors") or []
     briefing = "\n".join(
         [
             f"Winner: {smoke_baseline.get('winner')}",
@@ -73,6 +77,14 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             f"Loser's best path: {smoke_baseline.get('loser_best_path')}",
             "Deciding factors:",
             json.dumps(deciding_factors, sort_keys=True),
+            "advantage_breakdown:",
+            json.dumps(advantage_breakdown, sort_keys=True),
+            "fight_flow:",
+            json.dumps(fight_flow, sort_keys=True),
+            "engine_reasoning:",
+            json.dumps(engine_reasoning, sort_keys=True),
+            "swing_factors:",
+            json.dumps(swing_factors, sort_keys=True),
             "Compact packet evidence for both contenders:",
             json.dumps(evidence, sort_keys=True),
         ]
@@ -109,6 +121,8 @@ def engine_verdict(smoke: dict[str, Any]) -> dict[str, Any]:
         "overall_probability": smoke.get("overall_probability"),
         "advantage_breakdown": smoke.get("advantage_breakdown") or {},
         "swing_factors": smoke.get("swing_factors") or [],
+        "fight_flow": smoke.get("fight_flow") or {},
+        "engine_reasoning": smoke.get("engine_reasoning") or [],
     }
 
 
@@ -214,6 +228,13 @@ def fallback_decision(smoke_baseline: dict[str, Any], reason: str, detail: str =
         "win_condition": smoke_baseline.get("win_condition") or "Fallback uses packet-backed stat leads.",
         "loser_best_path": smoke_baseline.get("loser_best_path") or "Evidence is incomplete.",
         "deciding_factors": smoke_baseline.get("deciding_factors") or [],
+        "overall_probability": smoke_baseline.get("overall_probability"),
+        "winner_probability": smoke_baseline.get("winner_probability"),
+        "loser_probability": smoke_baseline.get("loser_probability"),
+        "advantage_breakdown": smoke_baseline.get("advantage_breakdown") or {},
+        "swing_factors": smoke_baseline.get("swing_factors") or [],
+        "fight_flow": smoke_baseline.get("fight_flow") or {},
+        "engine_reasoning": smoke_baseline.get("engine_reasoning") or [],
         "engine_verdict": engine,
         "referee_verdict": {
             "winner": smoke_baseline.get("winner"),
