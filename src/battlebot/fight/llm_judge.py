@@ -11,7 +11,7 @@ from typing import Any
 import httpx
 
 from battlebot.common.db import connect_database
-from battlebot.fight.decision_formatter import format_decision
+from battlebot.fight.decision_formatter import format_decision, truncate_at_sentence_boundary
 from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.profiles.fight_packet import build_fight_packet
 
@@ -98,8 +98,12 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             "Do not invent feats.",
             "Do not contradict supplied evidence.",
             "Explain how the fight unfolds.",
-            "Reference supplied evidence naturally.",
-            "Write 3-6 concise paragraphs.",
+            "Use concrete supplied terms from the compact evidence packet.",
+            "Mention at least two concrete listed traits, stats, abilities, equipment, or weaknesses when available.",
+            'Avoid vague phrases like "various forms", "special abilities", or "high strength" unless those exact phrases are in the packet.',
+            "Reference supplied evidence naturally without repeating the evidence list verbatim.",
+            "Write 2-4 concise paragraphs.",
+            "End with a complete sentence.",
             "No JSON.",
             "No bullet lists.",
             "No markdown headings.",
@@ -192,13 +196,14 @@ def llm_explained_decision(smoke: dict[str, Any], raw: str, *, packet: dict[str,
     explanation = clean_llm_explanation(raw)
     if not explanation:
         return fallback_decision(smoke, FALLBACK_OLLAMA_UNAVAILABLE, "LLM returned an empty explanation.")
+    concise_explanation = truncate_at_sentence_boundary(explanation, 700)
     engine = engine_verdict(smoke)
-    referee = referee_verdict(smoke, raw, explanation[:700], packet=packet)
+    referee = referee_verdict(smoke, raw, concise_explanation, packet=packet)
     decision = {
         **smoke,
         "title": "Nerd Fight Referee Decision",
-        "summary": explanation[:700],
-        "win_condition": explanation[:700],
+        "summary": concise_explanation,
+        "win_condition": concise_explanation,
         "engine_verdict": engine,
         "referee_verdict": referee,
     }
@@ -275,8 +280,9 @@ async def call_ollama(
         "model": model,
         "messages": messages,
         "stream": False,
+        "keep_alive": str(values.get("BATTLEBOT_LLM_KEEP_ALIVE") or "30m"),
         "options": {
-            "num_predict": int(values.get("BATTLEBOT_LLM_NUM_PREDICT") or 512),
+            "num_predict": int(values.get("BATTLEBOT_LLM_NUM_PREDICT") or 768),
             "temperature": float(values.get("BATTLEBOT_LLM_TEMPERATURE") or 0.1),
             "num_ctx": int(values.get("BATTLEBOT_LLM_NUM_CTX") or 4096),
             "num_thread": int(values.get("BATTLEBOT_LLM_NUM_THREAD") or 8),

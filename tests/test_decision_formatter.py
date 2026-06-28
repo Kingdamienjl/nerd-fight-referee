@@ -115,6 +115,43 @@ class DecisionFormatterTests(unittest.TestCase):
         self.assertIn("loser's best path:", text)
         self.assertIn("controlling distance and engagement terms", decision["win_condition"])
 
+    def test_judge_analysis_truncates_at_sentence_boundary_when_possible(self):
+        complete_sentence = "Superman uses Flight to control range. "
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Superman",
+            "confidence": "strong",
+            "summary": (complete_sentence * 22) + ("This unfinished clause keeps expanding " * 30),
+            "loser_best_path": "Batman needs repeated clean openings.",
+            "deciding_factors": [],
+            "warnings": [],
+        }
+
+        text = format_decision(decision)
+        analysis = text.split("judge's analysis:\n", 1)[1].split("\n\nloser's best path:", 1)[0]
+
+        self.assertTrue(analysis.endswith("..."))
+        self.assertTrue(analysis.removesuffix("...").endswith("."))
+        self.assertNotIn("unfinished clause", analysis)
+
+    def test_judge_analysis_truncation_does_not_cut_mid_word(self):
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Cloud",
+            "confidence": "medium",
+            "summary": " ".join(f"suppliedterm{i}" for i in range(140)),
+            "loser_best_path": "Opponent needs a clean counter.",
+            "deciding_factors": [],
+            "warnings": [],
+        }
+
+        text = format_decision(decision)
+        analysis = text.split("judge's analysis:\n", 1)[1].split("\n\nloser's best path:", 1)[0]
+        final_word = analysis.removesuffix("...").split()[-1]
+
+        self.assertTrue(analysis.endswith("..."))
+        self.assertRegex(final_word, r"^suppliedterm\d+$")
+
 
 if __name__ == "__main__":
     unittest.main()

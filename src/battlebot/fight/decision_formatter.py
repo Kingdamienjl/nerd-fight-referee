@@ -11,8 +11,22 @@ RAW_TEMPLATE_RE = re.compile(r"\{\{[^{}\n]*(?:\n[^{}]*)?\}\}")
 GENERIC_ROUTE = "converts stat leads into initiative, damage pressure, and survivable exchanges"
 
 
+def truncate_at_sentence_boundary(text: str, limit: int) -> str:
+    if len(text) <= limit:
+        return text
+    cutoff = max(0, limit - 3)
+    truncated = text[:cutoff].rstrip()
+    sentence_end = max(truncated.rfind("."), truncated.rfind("!"), truncated.rfind("?"))
+    if sentence_end >= cutoff // 3:
+        return f"{truncated[: sentence_end + 1]}..."
+    word_end = truncated.rfind(" ")
+    if word_end > 0:
+        truncated = truncated[:word_end].rstrip()
+    return f"{truncated}..."
+
+
 def clamp_text(text: str, limit: int = PUBLIC_LIMIT) -> str:
-    return text if len(text) <= limit else f"{text[: limit - 3]}..."
+    return truncate_at_sentence_boundary(text, limit)
 
 
 def clean_text(value: Any, *, limit: int = 220) -> str:
@@ -91,12 +105,13 @@ def format_decision(
     include_diagnostics: bool = False,
 ) -> str:
     factors = [factor for factor in decision.get("deciding_factors") or [] if isinstance(factor, dict)]
+    raw_analysis = clean_text(
+        decision.get("summary") or decision.get("win_condition") or decision.get("route_to_victory"),
+        limit=1200,
+    )
     analysis = compress_route_text(
         decision,
-        clean_text(
-            decision.get("summary") or decision.get("win_condition") or decision.get("route_to_victory"),
-            limit=700,
-        ),
+        truncate_at_sentence_boundary(raw_analysis, 700),
     )
     if not analysis:
         analysis = "Deterministic referee could not produce a supported fight explanation."
