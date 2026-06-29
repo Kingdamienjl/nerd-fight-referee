@@ -87,6 +87,21 @@ def source_candidate(title: str) -> dict:
     }
 
 
+def identity_attempt(title: str) -> auto_repair.SourceAttempt:
+    return auto_repair.SourceAttempt(
+        "source",
+        f"https://vsbattles.fandom.com/wiki/{title.replace(' ', '_')}",
+        True,
+        "ok",
+        ["attack_potency", "speed", "durability", "powers_and_abilities"],
+        normalized_page_title=title,
+        fetch_status="fetched",
+        provider_id="vsbattles",
+        authority="high",
+        promotion_allowed=True,
+    )
+
+
 def fetched_fields() -> dict[str, str]:
     return {
         "attack_potency": "City level",
@@ -654,6 +669,94 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
 
                 self.assertTrue(attempt.identity_match)
                 self.assertGreaterEqual(attempt.identity_score, auto_repair.IDENTITY_MATCH_THRESHOLD)
+
+    def test_identity_matching_tolerates_comic_continuity_suffixes(self):
+        cases = [
+            ("Silver Surfer Earth-616", character_profile("Silver Surfer (Marvel Comics)", "Marvel", "comic")),
+            ("Silver Surfer (Marvel Comics)", character_profile("Silver Surfer", "Marvel", "comic")),
+            ("Silver Surfer Earth-616", character_profile("Silver Surfer", "Marvel", "comic")),
+            ("Silver Surfer Earth 616", character_profile("Silver Surfer", "Marvel", "comic")),
+            ("Silver Surfer Earth-0", character_profile("Silver Surfer", "Marvel", "comic")),
+            ("Batman Prime Earth", character_profile("Batman (DC Comics)", "DC", "comic")),
+            ("Batman (DC Comics)", character_profile("Batman", "DC", "comic")),
+            ("Batman Prime Earth", character_profile("Batman", "DC", "comic")),
+            ("Batman New Earth", character_profile("Batman", "DC", "comic")),
+            ("Superman New Earth", character_profile("Superman", "DC", "comic")),
+            ("Superman (DC Comics)", character_profile("Superman New Earth", "DC", "comic")),
+            ("Batman Post-Crisis", character_profile("Batman", "DC", "comic")),
+            ("Batman Pre-Crisis", character_profile("Batman", "DC", "comic")),
+            ("Batman main continuity", character_profile("Batman", "DC", "comic")),
+            ("Batman - DC Comics", character_profile("Batman", "DC", "comic")),
+            ("Silver Surfer: Marvel Comics", character_profile("Silver Surfer", "Marvel", "comic")),
+        ]
+        for page_title, profile in cases:
+            with self.subTest(page_title=page_title):
+                attempt = identity_attempt(page_title)
+
+                auto_repair.annotate_attempt_quality(profile, attempt)
+
+                self.assertTrue(attempt.identity_match)
+                self.assertGreaterEqual(attempt.identity_score, auto_repair.IDENTITY_MATCH_THRESHOLD)
+
+    def test_identity_matching_tolerates_source_suffix_separators(self):
+        cases = [
+            "Silver Surfer - Marvel Comics",
+            "Silver Surfer – Marvel Comics",
+            "Silver Surfer — Marvel Comics",
+            "Silver Surfer: Marvel Comics",
+        ]
+        profile = character_profile("Silver Surfer", "Marvel", "comic")
+        for page_title in cases:
+            with self.subTest(page_title=page_title):
+                attempt = identity_attempt(page_title)
+
+                auto_repair.annotate_attempt_quality(profile, attempt)
+
+                self.assertTrue(attempt.identity_match)
+                self.assertGreaterEqual(attempt.identity_score, auto_repair.IDENTITY_MATCH_THRESHOLD)
+
+    def test_peter_parker_matches_spider_man_only_with_alias_support(self):
+        without_alias = character_profile("Peter Parker", "Marvel", "comic")
+        with_alias = character_profile("Peter Parker", "Marvel", "comic")
+        with_alias["aliases"] = ["Spider-Man"]
+
+        no_alias_attempt = identity_attempt("Spider-Man")
+        alias_attempt = identity_attempt("Spider-Man")
+        auto_repair.annotate_attempt_quality(without_alias, no_alias_attempt)
+        auto_repair.annotate_attempt_quality(with_alias, alias_attempt)
+
+        self.assertFalse(no_alias_attempt.identity_match)
+        self.assertTrue(alias_attempt.identity_match)
+
+    def test_ambiguous_captain_marvel_variants_need_source_or_alias_support(self):
+        profile = character_profile("Captain Marvel", "Marvel", "comic")
+        unrelated = identity_attempt("Captain Marvel (Shazam)")
+        supported = identity_attempt("Captain Marvel (Marvel Comics)")
+
+        auto_repair.annotate_attempt_quality(profile, unrelated)
+        auto_repair.annotate_attempt_quality(profile, supported)
+
+        self.assertFalse(unrelated.identity_match)
+        self.assertTrue(supported.identity_match)
+
+    def test_ambiguous_character_titles_do_not_match_other_bearers_without_alias_support(self):
+        cases = [
+            (character_profile("Captain Marvel Carol Danvers", "Marvel", "comic"), "Captain Marvel (Marvel Comics)"),
+            (character_profile("Captain Marvel Carol Danvers", "Marvel", "comic"), "Captain Marvel Billy Batson"),
+            (character_profile("Captain Marvel Billy Batson", "DC", "comic"), "Captain Marvel (Marvel Comics)"),
+            (character_profile("Captain Marvel Billy Batson", "DC", "comic"), "Captain Marvel Carol Danvers"),
+            (character_profile("Green Lantern Hal Jordan", "DC", "comic"), "Green Lantern John Stewart"),
+            (character_profile("Green Lantern John Stewart", "DC", "comic"), "Green Lantern Hal Jordan"),
+            (character_profile("Peter Quill", "Marvel", "comic"), "Peter Parker"),
+            (character_profile("Zodd", "Berserk", "anime"), "Guts"),
+        ]
+        for profile, page_title in cases:
+            with self.subTest(profile=profile["name"], page_title=page_title):
+                attempt = identity_attempt(page_title)
+
+                auto_repair.annotate_attempt_quality(profile, attempt)
+
+                self.assertFalse(attempt.identity_match)
 
     async def test_wrong_fetched_pages_are_not_retained_as_repair_candidates(self):
         wrong_sources = [

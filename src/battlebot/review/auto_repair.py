@@ -51,6 +51,20 @@ COMIC_VARIANT_SUFFIXES = (
 DEFAULT_DEBUG_DIR = Path("data/repair_debug")
 DEFAULT_SOURCE_CANDIDATES_PATH = Path("profiles/overrides/source_candidates.yaml")
 IDENTITY_MATCH_THRESHOLD = 60
+CONTINUITY_SUFFIX_TOKEN_SETS = (
+    ("marvel", "comics"),
+    ("dc", "comics"),
+    ("earth", "616"),
+    ("earth", "0"),
+    ("prime", "earth"),
+    ("new", "earth"),
+    ("post", "crisis"),
+    ("pre", "crisis"),
+    ("post", "flashpoint"),
+    ("main", "continuity"),
+    ("post", "timeskip"),
+    ("pre", "timeskip"),
+)
 
 
 @dataclass
@@ -836,17 +850,59 @@ def identity_text_without_trailing_tokens(value: str, trailing: str) -> str:
         return normalized
     suffix_tokens = suffix.split()
     tokens = normalized.split()
-    if len(tokens) > len(suffix_tokens) and tokens[-len(suffix_tokens) :] == suffix_tokens:
+    if len(tokens) > len(suffix_tokens) + 1 and tokens[-len(suffix_tokens) :] == suffix_tokens:
         return " ".join(tokens[: -len(suffix_tokens)])
     return normalized
 
 
 def local_identity_text(profile: dict[str, Any], value: str) -> str:
-    return identity_text_without_trailing_tokens(value, str(profile.get("franchise") or ""))
+    return strip_known_continuity_suffix(
+        identity_text_without_trailing_tokens(value, str(profile.get("franchise") or ""))
+    )
 
 
 def base_title_identity_text(value: str) -> str:
-    return normalized_identity_text(re.sub(r"\s*\([^)]*\)\s*$", "", value).strip())
+    match = re.search(r"\s*\(([^)]*)\)\s*$", value)
+    if not match:
+        return normalized_identity_text(value)
+    suffix = tuple(normalized_identity_text(match.group(1)).split())
+    if suffix in CONTINUITY_SUFFIX_TOKEN_SETS:
+        return normalized_identity_text(value[: match.start()].strip())
+    return normalized_identity_text(value)
+
+
+def strip_known_continuity_suffix(value: str) -> str:
+    tokens = normalized_identity_text(value).split()
+    for suffix_tokens in sorted(CONTINUITY_SUFFIX_TOKEN_SETS, key=len, reverse=True):
+        if len(tokens) > len(suffix_tokens) and tuple(tokens[-len(suffix_tokens) :]) == suffix_tokens:
+            return " ".join(tokens[: -len(suffix_tokens)])
+    return " ".join(tokens)
+
+
+def source_suffix_identity_text(value: str, profile: dict[str, Any]) -> str:
+    parts = re.split(r"\s+[-\u2013\u2014]\s+|:", re.sub(r"\s+", " ", value).strip(), maxsplit=1)
+    if len(parts) != 2:
+        return ""
+    base, suffix = parts
+    normalized_suffix = normalized_identity_text(suffix)
+    franchise = normalized_identity_text(str(profile.get("franchise") or ""))
+    compatible_suffixes = {f"{franchise} comics"} if franchise in {"marvel", "dc"} else set()
+    compatible_suffixes.update(" ".join(tokens) for tokens in CONTINUITY_SUFFIX_TOKEN_SETS)
+    if normalized_suffix in compatible_suffixes:
+        return normalized_identity_text(base)
+    return ""
+
+
+def title_identity_bases(value: str, profile: dict[str, Any]) -> set[str]:
+    bases = {
+        normalized_identity_text(value),
+        base_title_identity_text(value),
+        strip_known_continuity_suffix(value),
+    }
+    source_suffix_base = source_suffix_identity_text(value, profile)
+    if source_suffix_base:
+        bases.add(source_suffix_base)
+    return {base for base in bases if base}
 
 
 def profile_identity_names(profile: dict[str, Any]) -> list[str]:
@@ -886,7 +942,7 @@ def tokens_for_identity(value: str) -> list[str]:
 
 def identity_score_for_attempt(profile: dict[str, Any], attempt: SourceAttempt) -> int:
     title = normalized_identity_text(attempt.normalized_page_title)
-    title_base = base_title_identity_text(attempt.normalized_page_title)
+    title_bases = title_identity_bases(attempt.normalized_page_title, profile)
     name = local_identity_text(profile, str(profile.get("name") or ""))
     franchise = normalized_identity_text(str(profile.get("franchise") or ""))
     match_text = normalized_identity_text(text_for_identity_matching(attempt))
@@ -896,20 +952,19 @@ def identity_score_for_attempt(profile: dict[str, Any], attempt: SourceAttempt) 
         return 0
     normalized_names = [local_identity_text(profile, value) for value in profile_identity_names(profile)]
     alias_names = [value for value in normalized_names if value != name]
-    exact_base_name_match = title_base == name
+    exact_base_name_match = name in title_bases
     attempt.exact_name_match = title == name
-    attempt.alias_match = any(title == alias or title_base == alias or alias in match_text for alias in alias_names)
+    attempt.alias_match = any(alias in title_bases or alias in match_text for alias in alias_names)
     attempt.franchise_match = bool(franchise and franchise in match_text)
     score = 0
     if attempt.exact_name_match or exact_base_name_match:
         score += 100
     elif attempt.alias_match:
         score += 90
-    elif (name in title or name in title_base) and (attempt.franchise_match or len(tokens_for_identity(name)) > 1):
-        score += 80
     else:
         tokens = tokens_for_identity(name)
-        if tokens and all(token in title for token in tokens):
+        title_tokens = set(title.split())
+        if tokens and set(tokens) == title_tokens:
             score += 60
     if attempt.franchise_match:
         score += 20
@@ -1242,7 +1297,6 @@ def write_debug_report(
     result: RepairResult,
     dry_run: bool,
 ) -> None:
-    debug_dir.mkdir(parents=True, exist_ok=True)
     failure_reasons = Counter(
         attempt.extraction_failure_reason or attempt.fetch_status or attempt.note
         for attempt in result.source_attempts
@@ -1262,10 +1316,14 @@ def write_debug_report(
         "chosen_source_id": result.chosen_source_id,
         "failure_reasons": dict(failure_reasons.most_common()),
     }
-    debug_report_path(profile_path, debug_dir).write_text(
-        json.dumps(payload, indent=2, sort_keys=True),
-        encoding="utf-8",
-    )
+    try:
+        debug_dir.mkdir(parents=True, exist_ok=True)
+        debug_report_path(profile_path, debug_dir).write_text(
+            json.dumps(payload, indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+    except OSError:
+        return
 
 
 async def repair_profile(

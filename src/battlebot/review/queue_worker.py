@@ -165,9 +165,41 @@ def ensure_user_request_profile(job: dict[str, Any]) -> None:
     )
 
 
+def is_user_request_skeleton_profile(profile_path: Path) -> bool:
+    if "profiles/needs_review/mixed/user-requests/" not in profile_path.as_posix():
+        return False
+    if not profile_path.exists():
+        return False
+    try:
+        profile = service.load_yaml(profile_path)
+    except Exception:
+        return False
+    blockers = {str(blocker) for blocker in profile.get("approval_blockers") or []}
+    generation = profile.get("generation") if isinstance(profile.get("generation"), dict) else {}
+    ineligible = {str(reason) for reason in generation.get("ineligible_reasons") or []}
+    review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
+    review_reasons = {str(reason) for reason in review.get("reasons") or []}
+    return bool(
+        "user_request_skeleton_schema_incomplete" in blockers
+        or "queued_user_request" in ineligible
+        or "queued_user_request" in review_reasons
+    )
+
+
 async def process_job(connection: Any, job: dict[str, Any], args: argparse.Namespace) -> str:
     try:
         ensure_user_request_profile(job)
+        profile_path = Path(job["profile_path"])
+        if is_user_request_skeleton_profile(profile_path):
+            data = {"skipped": "user_request_skeleton", "profile_path": str(profile_path)}
+            await mark_job(
+                connection,
+                int(job["id"]),
+                status="needs_review",
+                summary=data,
+                error="user_request_skeleton_schema_incomplete",
+            )
+            return "needs_review"
         summary = await batch_promote.batch_promote(args_for_job(job, args))
         data = summary.as_dict()
         if summary.promoted:

@@ -8,6 +8,7 @@ import yaml
 
 from battlebot.review import batch_promote
 from battlebot.review.queue import CLAIM_JOBS_SQL
+from battlebot.review.requeue_source_choice import SOURCE_CHOICE_FILTER_SQL, requeue_needs_human_source_choice
 from battlebot.review.queue_seed import seed_queue
 from battlebot.review.queue_worker import process_job, run_worker
 
@@ -16,6 +17,7 @@ class FakeConnection:
     def __init__(self):
         self.inserted = []
         self.executed = []
+        self.fetch_values = []
 
     async def fetchrow(self, sql, *args):
         self.inserted.append(args)
@@ -23,6 +25,10 @@ class FakeConnection:
 
     async def execute(self, sql, *args):
         self.executed.append((sql, args))
+
+    async def fetchval(self, sql, *args):
+        self.executed.append((sql, args))
+        return self.fetch_values.pop(0) if self.fetch_values else 0
 
 
 def write_profile(path: Path):
@@ -185,6 +191,73 @@ class ProfileQueueTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result.promoted, 2)
         self.assertEqual(result.imported, 2)
         imported.assert_awaited_once()
+
+    async def test_requeue_source_choice_updates_only_matching_needs_review_jobs(self):
+        connection = FakeConnection()
+        connection.fetch_values = [3, 3]
+
+        result = await requeue_needs_human_source_choice(
+            connection,
+            providers="vsbattles",
+            priority=5,
+        )
+
+        self.assertEqual(result.matched, 3)
+        self.assertEqual(result.requeued, 3)
+        update_sql, update_args = connection.executed[-1]
+        self.assertIn("needs_human_source_choice", update_sql)
+        self.assertIn("status = 'needs_review'", update_sql)
+        self.assertIn("last_summary", update_sql)
+        self.assertIn("top_missing_fields", update_sql)
+        self.assertIn("failure_reasons", update_sql)
+        self.assertNotIn("error_code", update_sql)
+        self.assertNotIn("attempts =", update_sql)
+        self.assertIn("position('/user-requests/' in profile_path) = 0", update_sql)
+        self.assertIn("/profiles/quarantined/", update_sql)
+        self.assertIn("last_error = NULL", update_sql)
+        self.assertEqual(update_args, ("vsbattles", 5))
+
+    async def test_requeue_source_choice_dry_run_does_not_update(self):
+        connection = FakeConnection()
+        connection.fetch_values = [2]
+
+        result = await requeue_needs_human_source_choice(connection, dry_run=True)
+
+        self.assertEqual(result.matched, 2)
+        self.assertEqual(result.requeued, 0)
+        self.assertEqual(len(connection.executed), 1)
+
+    def test_requeue_source_choice_filter_excludes_runtime_skeleton_and_quarantine_paths(self):
+        self.assertIn("profile_path LIKE 'profiles/needs_review/%'", SOURCE_CHOICE_FILTER_SQL)
+        self.assertNotIn("error_code", SOURCE_CHOICE_FILTER_SQL)
+        self.assertIn("last_summary", SOURCE_CHOICE_FILTER_SQL)
+        self.assertIn("top_missing_fields", SOURCE_CHOICE_FILTER_SQL)
+        self.assertIn("failure_reasons", SOURCE_CHOICE_FILTER_SQL)
+        self.assertIn("last_summary::text LIKE '%needs_human_source_choice%'", SOURCE_CHOICE_FILTER_SQL)
+        self.assertIn("position('/user-requests/' in profile_path) = 0", SOURCE_CHOICE_FILTER_SQL)
+        self.assertIn("target NOT ILIKE '%user request%'", SOURCE_CHOICE_FILTER_SQL)
+        self.assertIn("position('/profiles/quarantined/' in profile_path) = 0", SOURCE_CHOICE_FILTER_SQL)
+
+    def test_requeue_source_choice_filter_does_not_touch_unrelated_needs_review_jobs(self):
+        self.assertIn("status = 'needs_review'", SOURCE_CHOICE_FILTER_SQL)
+        self.assertIn("needs_human_source_choice", SOURCE_CHOICE_FILTER_SQL)
+        self.assertIn("last_summary", SOURCE_CHOICE_FILTER_SQL)
+
+    async def test_user_request_skeleton_job_is_not_auto_promoted(self):
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            path = root / "profiles" / "needs_review" / "mixed" / "user-requests" / "homelander.yaml"
+            connection = FakeConnection()
+            summary = batch_promote.BatchSummary(promoted=1)
+
+            with patch("battlebot.review.queue_worker.batch_promote.batch_promote", AsyncMock(return_value=summary)):
+                status = await process_job(connection, job(path), worker_args(root))
+
+        self.assertEqual(status, "needs_review")
+        update_sql, update_args = connection.executed[-1]
+        self.assertIn("UPDATE profile_jobs", update_sql)
+        self.assertEqual(update_args[1], "needs_review")
+        self.assertEqual(update_args[2], "user_request_skeleton_schema_incomplete")
 
 
 if __name__ == "__main__":
