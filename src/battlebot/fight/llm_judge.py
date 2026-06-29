@@ -196,7 +196,7 @@ def llm_explained_decision(smoke: dict[str, Any], raw: str, *, packet: dict[str,
     explanation = clean_llm_explanation(raw)
     if not explanation:
         return fallback_decision(smoke, FALLBACK_OLLAMA_UNAVAILABLE, "LLM returned an empty explanation.")
-    concise_explanation = truncate_at_sentence_boundary(explanation, 700)
+    concise_explanation = truncate_at_sentence_boundary(explanation, 1100)
     engine = engine_verdict(smoke)
     referee = referee_verdict(smoke, raw, concise_explanation, packet=packet)
     decision = {
@@ -280,6 +280,7 @@ async def call_ollama(
         "model": model,
         "messages": messages,
         "stream": False,
+        "think": False,
         "keep_alive": str(values.get("BATTLEBOT_LLM_KEEP_ALIVE") or "30m"),
         "options": {
             "num_predict": int(values.get("BATTLEBOT_LLM_NUM_PREDICT") or 768),
