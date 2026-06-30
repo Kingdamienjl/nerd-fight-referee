@@ -180,6 +180,65 @@ class DecisionFormatterTests(unittest.TestCase):
         self.assertTrue(bullets)
         self.assertTrue(all(not bullet.endswith(",") for bullet in bullets))
 
+    def test_evidence_bullets_include_concrete_named_ability_when_available(self):
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Itachi",
+            "confidence": "medium",
+            "summary": "Itachi controlled the pace through named packet tools.",
+            "loser_best_path": "Kratos needed to force close range.",
+            "deciding_factors": [
+                {
+                    "factor": "Special Abilities",
+                    "evidence": "Itachi brings named tools: Sharingan, Genjutsu, Susanoo",
+                    "tactical_effect": "Itachi can build a fight plan around those named tools.",
+                }
+            ],
+            "warnings": [],
+        }
+
+        text = format_decision(decision)
+
+        self.assertIn("- Special Abilities: Itachi brings named tools: Sharingan, Genjutsu, Susanoo", text)
+
+    def test_loser_best_path_removes_scraped_field_labels(self):
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Itachi",
+            "confidence": "medium",
+            "summary": "Itachi controlled the pace through named packet tools.",
+            "loser_best_path": (
+                "Kratos needs to exploit weaknesses such as Part I= The Sharingan's ability. "
+                "Notable Attacks/Techniques: Sword pressure."
+            ),
+            "deciding_factors": [],
+            "warnings": [],
+        }
+
+        text = format_decision(decision)
+
+        self.assertNotIn("Part I=", text)
+        self.assertNotIn("Notable Attacks/Techniques:", text)
+        self.assertIn("The Sharingan's ability.", text)
+
+    def test_loser_best_path_falls_back_cleanly_when_empty(self):
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Itachi",
+            "confidence": "medium",
+            "summary": "Itachi controlled the pace through named packet tools.",
+            "loser_best_path": "",
+            "deciding_factors": [],
+            "warnings": [],
+        }
+
+        text = format_decision(decision)
+
+        self.assertIn(
+            "The loser needed to force the fight into their strongest confirmed lane, but the packet did not provide a clean exploitable weakness.",
+            text,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

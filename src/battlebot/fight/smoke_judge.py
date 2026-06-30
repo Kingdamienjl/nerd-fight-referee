@@ -375,8 +375,20 @@ def item_names(contender: dict[str, Any], section: str, limit: int = 3) -> list[
     for item in contender.get(section) or []:
         name = item.get("name") or item.get("id")
         if name:
-            names.append(str(name))
+            cleaned = clean_strategy_fragment(str(name))
+            if cleaned:
+                names.append(cleaned)
     return names[:limit]
+
+
+def clean_strategy_fragment(value: str) -> str:
+    text = str(value or "")
+    text = re.sub(r"\{\{[^{}\n]*(?:\n[^{}]*)?\}\}", "", text)
+    text = re.sub(r"\bPart\s+[IVXLC]+\s*=\s*", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bNotable Attacks/Techniques\s*:?", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:Weaknesses|Weakness|Abilities|Equipment|Powers?)\s*:?", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\s+", " ", text).strip(" -:=,;\n\t")
+    return text
 
 
 def axis_label(axis: str) -> str:
@@ -417,9 +429,17 @@ def tactical_effect(axis: str, winner: dict[str, Any], loser: dict[str, Any]) ->
 def deciding_factor(axis: str, winner: dict[str, Any], loser: dict[str, Any]) -> dict[str, str]:
     winner_name = str(winner.get("canonical_name") or "Winner")
     loser_name = str(loser.get("canonical_name") or "Loser")
+    winner_value = clean_strategy_fragment(str((winner.get("power_scale") or {}).get(axis) or ""))
+    loser_value = clean_strategy_fragment(str((loser.get("power_scale") or {}).get(axis) or ""))
+    evidence = f"{winner_name} leads {axis_label(axis).casefold()} over {loser_name} in the packet."
+    if winner_value and loser_value:
+        evidence = (
+            f"{winner_name} leads {axis_label(axis).casefold()}: listed as {winner_value} "
+            f"against {loser_name}'s {loser_value}."
+        )
     return {
         "factor": axis_label(axis).title(),
-        "evidence": f"{winner_name} leads {axis_label(axis).casefold()} over {loser_name} in the packet.",
+        "evidence": evidence,
         "tactical_effect": tactical_effect(axis, winner, loser),
     }
 
@@ -433,7 +453,7 @@ def ability_factor(winner: dict[str, Any]) -> dict[str, str] | None:
         "factor": "Special Abilities",
         "evidence": f"{winner_name} brings named tools: {', '.join(names)}",
         "tactical_effect": (
-            f"{winner_name} can build a fight plan around those named tools instead of relying only "
+            f"{winner_name} can build a fight plan around {', '.join(names)} instead of relying only "
             "on raw stat pressure. No unlisted feats are assumed."
         ),
     }
@@ -457,7 +477,9 @@ def compact_names(values: Any, *, limit: int = 3) -> list[str]:
             else:
                 name = item
             if name:
-                names.append(str(name))
+                cleaned = clean_strategy_fragment(str(name))
+                if cleaned:
+                    names.append(cleaned)
     return names[:limit]
 
 
@@ -466,9 +488,10 @@ def structured_factor(winner: dict[str, Any], loser: dict[str, Any]) -> dict[str
     loser_name = str(loser.get("canonical_name") or "Loser")
     battlefield = tactical_value(winner, "battlefield_control")
     if battlefield:
+        battlefield_text = clean_strategy_fragment(str(battlefield))
         return {
             "factor": "Battlefield Control",
-            "evidence": f"{winner_name} has packet battlefield-control notes.",
+            "evidence": f"{winner_name}'s battlefield-control note: {battlefield_text}",
             "tactical_effect": (
                 f"{winner_name} can shape positioning or engagement terms instead of letting "
                 f"{loser_name} fight on preferred timing."
@@ -484,17 +507,18 @@ def structured_factor(winner: dict[str, Any], loser: dict[str, Any]) -> dict[str
     intelligence = tactical_value(winner, "tactical_intelligence")
     style = tactical_value(winner, "combat_style")
     if intelligence or style:
+        tactical_note = clean_strategy_fragment(str(style or intelligence))
         return {
             "factor": "Skill / Tactics",
-            "evidence": f"{winner_name} has packet tactical notes.",
-            "tactical_effect": f"{winner_name} can choose exchanges more deliberately and avoid low-value trades.",
+            "evidence": f"{winner_name}'s tactical note: {tactical_note}",
+            "tactical_effect": f"{winner_name} can use {tactical_note} to avoid low-value trades.",
         }
     forms = compact_names(tactical_value(winner, "forms"))
     if forms:
         return {
             "factor": "Special Abilities",
             "evidence": f"{winner_name} has listed form access: {', '.join(forms)}",
-            "tactical_effect": f"{winner_name} can change tempo with those forms if the first approach stalls.",
+            "tactical_effect": f"{winner_name} can change tempo with {', '.join(forms)} if the first approach stalls.",
         }
     return None
 
@@ -524,11 +548,21 @@ def loser_path(loser: dict[str, Any], winner: dict[str, Any]) -> str:
     winner_name = str(winner.get("canonical_name") or "Winner")
     loss_conditions = compact_names(tactical_value(winner, "losing_conditions") or tactical_value(winner, "loss_conditions"), limit=1)
     if loss_conditions:
-        return f"{loser_name} needs to force the listed failure case: {loss_conditions[0]}"
+        return (
+            f"{loser_name}'s best route was to force the listed failure case, {loss_conditions[0]}, "
+            f"before {winner_name} settled into their preferred pace."
+        )
     weaknesses = item_names(winner, "weaknesses", limit=2)
     if weaknesses:
-        return f"{loser_name} needs to exploit weaknesses such as {', '.join(weaknesses)} before {winner_name} controls the tempo."
-    return f"{loser_name} needs a listed counter, weakness exploit, or matchup-specific angle not resolved by the core packet comparison."
+        return (
+            f"{loser_name}'s best route was to force their strongest confirmed lane early, pressure "
+            f"{winner_name} around {', '.join(weaknesses)}, and punish any timing or stamina gap "
+            f"before {winner_name} controlled the pace."
+        )
+    return (
+        f"{loser_name} needed to force the fight into their strongest confirmed lane, but the packet "
+        "did not provide a clean exploitable weakness."
+    )
 
 
 def quality_notes(packet: dict[str, Any]) -> list[str]:

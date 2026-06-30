@@ -3,7 +3,7 @@ import unittest
 from battlebot.fight.smoke_judge import smoke_judge_packet, text_rank
 
 
-def contender(name, character_id, attack, speed, durability, warnings=None):
+def contender(name, character_id, attack, speed, durability, warnings=None, abilities=None, weaknesses=None):
     return {
         "canonical_name": name,
         "character_id": character_id,
@@ -12,6 +12,8 @@ def contender(name, character_id, attack, speed, durability, warnings=None):
             "speed": speed,
             "durability": durability,
         },
+        "abilities": abilities or [],
+        "weaknesses": weaknesses or [],
         "warnings": warnings or [],
     }
 
@@ -144,6 +146,71 @@ class SmokeJudgeTests(unittest.TestCase):
 
         self.assertEqual(result["winner"], "A")
         self.assertEqual(result["confidence"], "medium")
+
+    def test_deciding_factor_evidence_names_abilities_when_available(self):
+        packet = {
+            "errors": [],
+            "contender_a": contender(
+                "Itachi",
+                "itachi",
+                "Town level",
+                "Supersonic",
+                "Building level",
+                abilities=[
+                    {"name": "Sharingan"},
+                    {"name": "Genjutsu"},
+                    {"name": "Susanoo"},
+                ],
+            ),
+            "contender_b": contender("Kratos", "kratos", "Building level", "Human", "Wall level"),
+            "warnings": [],
+        }
+
+        result = smoke_judge_packet(packet)
+        evidence = " ".join(factor["evidence"] for factor in result["deciding_factors"])
+
+        self.assertIn("Sharingan", evidence)
+        self.assertIn("Genjutsu", evidence)
+        self.assertIn("Susanoo", evidence)
+
+    def test_loser_best_path_cleans_scraped_weakness_fragments(self):
+        packet = {
+            "errors": [],
+            "contender_a": contender(
+                "Itachi",
+                "itachi",
+                "Town level",
+                "Supersonic",
+                "Building level",
+                weaknesses=[
+                    {"name": "Part I= The Sharingan's ability to copy Ninjutsu"},
+                    {"name": "Notable Attacks/Techniques: stamina drain"},
+                ],
+            ),
+            "contender_b": contender("Kratos", "kratos", "Building level", "Human", "Wall level"),
+            "warnings": [],
+        }
+
+        result = smoke_judge_packet(packet)
+
+        self.assertNotIn("Part I=", result["loser_best_path"])
+        self.assertNotIn("Notable Attacks/Techniques:", result["loser_best_path"])
+        self.assertIn("The Sharingan's ability to copy Ninjutsu", result["loser_best_path"])
+
+    def test_loser_best_path_falls_back_when_weaknesses_are_empty(self):
+        packet = {
+            "errors": [],
+            "contender_a": contender("Itachi", "itachi", "Town level", "Supersonic", "Building level"),
+            "contender_b": contender("Kratos", "kratos", "Building level", "Human", "Wall level"),
+            "warnings": [],
+        }
+
+        result = smoke_judge_packet(packet)
+
+        self.assertEqual(
+            result["loser_best_path"],
+            "Kratos needed to force the fight into their strongest confirmed lane, but the packet did not provide a clean exploitable weakness.",
+        )
 
 
 if __name__ == "__main__":

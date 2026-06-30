@@ -32,6 +32,9 @@ def clamp_text(text: str, limit: int = PUBLIC_LIMIT) -> str:
 def clean_text(value: Any, *, limit: int = 220) -> str:
     text = str(value or "")
     text = RAW_TEMPLATE_RE.sub("", text)
+    text = re.sub(r"\bPart\s+[IVXLC]+\s*=\s*", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bNotable Attacks/Techniques\s*:?", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:Weaknesses|Weakness|Abilities|Equipment|Powers?)\s*:?", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\s+", " ", text).strip(" -:\n\t")
     text = text.replace(GENERIC_ROUTE, "turns the listed packet edge into practical fight pressure")
     return clamp_text(text, limit)
@@ -77,10 +80,10 @@ def compressed_evidence(factor: dict[str, Any]) -> str:
     category = factor_category(str(factor.get("factor") or ""))
     evidence = clean_text(factor.get("evidence"), limit=120)
     effect = clean_text(factor.get("tactical_effect"), limit=120)
+    if evidence:
+        return bullet_text(f"{category}: {evidence}")
     if category and effect:
         return bullet_text(f"{category}: {effect}")
-    if evidence:
-        return bullet_text(f"{category}: packet evidence favors this lane.")
     return bullet_text(f"{category}: packet-backed edge.")
 
 
@@ -119,9 +122,9 @@ def format_decision(
     )
     if not analysis:
         analysis = "Deterministic referee could not produce a supported fight explanation."
-    loser_best_path = clean_text(decision.get("loser_best_path"), limit=300)
+    loser_best_path = truncate_at_sentence_boundary(clean_text(decision.get("loser_best_path"), limit=360), 300)
     if not loser_best_path:
-        loser_best_path = "Evidence is incomplete."
+        loser_best_path = "The loser needed to force the fight into their strongest confirmed lane, but the packet did not provide a clean exploitable weakness."
     lines = [
         "Nerd Fight Referee Decision",
         f"winner: {clean_text(decision.get('winner'), limit=80)}",

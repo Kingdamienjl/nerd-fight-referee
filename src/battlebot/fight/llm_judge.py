@@ -6,6 +6,7 @@ import argparse
 import asyncio
 import json
 import os
+import re
 from typing import Any
 
 import httpx
@@ -37,24 +38,31 @@ def llm_enabled(env: dict[str, str] | None = None) -> bool:
     return str(values.get("BATTLEBOT_LLM_ENABLED") or "").casefold() in {"1", "true", "yes", "on"}
 
 
+def compact_snippet(value: Any, *, limit: int = 180) -> str:
+    text = re.sub(r"\s+", " ", str(value or "")).strip()
+    if len(text) <= limit:
+        return text
+    return f"{text[: limit - 3].rstrip()}..."
+
+
 def compact_named_items(values: Any, *, limit: int = 6) -> list[Any]:
     if not values:
         return []
     if isinstance(values, str):
-        return [values]
+        return [compact_snippet(values)]
     compact = []
     if isinstance(values, (list, tuple)):
         for item in list(values)[:limit]:
             if isinstance(item, dict):
                 compact.append(
                     {
-                        key: item.get(key)
+                        key: compact_snippet(item.get(key))
                         for key in ("name", "id", "description", "effect", "tags", "scope_limitations")
                         if item.get(key)
                     }
                 )
             else:
-                compact.append(item)
+                compact.append(compact_snippet(item))
     return compact
 
 
@@ -148,6 +156,7 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             "Use fight scene detail, but keep the analysis outcome-focused rather than present-tense commentary.",
             "Describe what happened in the opening exchange, the winner's first meaningful tactic, the loser's best counterplay, how the winner adapted or countered that counterplay, and the finishing sequence.",
             "Use safe tactical inference: infer how supplied abilities were used in combat, but do not invent new powers, forms, weapons, techniques, or feats not in the packet.",
+            "Do not name any technique, form, weapon, power source, eye power, transformation, spell, or named attack unless the exact name appears in the compact evidence packet.",
             "Only name a technique, ability, weapon, or form if the exact name appears in the compact evidence packet.",
             "If only a generic capability is supplied, describe it generically.",
             "Explicitly forbid invented named techniques, powers, forms, or equipment.",
@@ -158,6 +167,10 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             'Never use these phrases: "as evidenced by the packet", "listed abilities", "main route stabilizes", "clean openings into decisive damage", "exchange pattern", "escalation options", "higher speed tier".',
             'Avoid live play-by-play phrases like "as the fight begins", "the opening exchange is", or present-tense phrasing like "Green Lantern does X".',
             'Prefer past-tense phrasing like "Green Lantern opened by...", "Naruto tried to...", "That failed because...", and "The finish came when...".',
+            'Itachi may use "Sharingan" only if "Sharingan" appears in the compact evidence packet.',
+            'Itachi may NOT use "Byakugan" unless "Byakugan" appears in the compact evidence packet.',
+            'Green Lantern may NOT use "Speed Force" unless "Speed Force" appears in the compact evidence packet.',
+            "Naruto may NOT use invented chakra techniques unless the exact technique appears in the compact evidence packet.",
             'Allowed if the packet says "Shadow Clone Jutsu": "Naruto tried to flood the field with Shadow Clone Jutsu."',
             'Forbidden if the packet does not say "Chakra Resonance Technique" or "Speed Force": do not invent it.',
             "Do not make every fight only about speed, strength, and durability.",
