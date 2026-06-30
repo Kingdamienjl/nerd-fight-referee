@@ -21,9 +21,10 @@ FALLBACK_OLLAMA_UNAVAILABLE = "Ollama unavailable"
 FALLBACK_TIMEOUT = "timeout"
 LOCKED_ENGINE_CONFIDENCE = {"high", "strong"}
 SYSTEM_PROMPT = (
-    "You are the official Nerd Fight Referee and fight commentator. The deterministic engine "
-    "chooses the winner and confidence; you choreograph why that verdict happens using only "
-    "the supplied packet evidence. Do not invent feats, forms, equipment, prep time, or weaknesses."
+    "You are the official Nerd Fight Referee giving a post-fight referee explanation. The "
+    "deterministic engine chooses the winner and confidence; you explain why that verdict "
+    "happened using only the supplied packet evidence. Do not invent feats, named techniques, "
+    "powers, forms, equipment, prep time, or weaknesses."
 )
 BATTLE_RULES = (
     "Battle rules: standard encounter; no prep unless profile explicitly grants it; strongest "
@@ -143,18 +144,25 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             "Do not change the winner.",
             "Do not invent feats.",
             "Do not contradict supplied evidence.",
-            "Write judge's analysis like a fight scene, not a stat summary.",
-            "You are the commentator/choreographer, not a second judge.",
-            "Describe the opening exchange, the winner's first meaningful tactic, the loser's best counterplay, how the winner adapts or counters that counterplay, and the finishing sequence.",
-            "Use safe tactical inference: infer how supplied abilities would be used in combat, but do not invent new powers, forms, weapons, or feats not in the packet.",
+            "Write in past tense as a post-fight referee explanation, not live play-by-play.",
+            "Use fight scene detail, but keep the analysis outcome-focused rather than present-tense commentary.",
+            "Describe what happened in the opening exchange, the winner's first meaningful tactic, the loser's best counterplay, how the winner adapted or countered that counterplay, and the finishing sequence.",
+            "Use safe tactical inference: infer how supplied abilities were used in combat, but do not invent new powers, forms, weapons, techniques, or feats not in the packet.",
+            "Only name a technique, ability, weapon, or form if the exact name appears in the compact evidence packet.",
+            "If only a generic capability is supplied, describe it generically.",
+            "Explicitly forbid invented named techniques, powers, forms, or equipment.",
             "Use concrete supplied terms from the compact evidence packet.",
             "Mention named abilities, equipment, techniques, forms, weaknesses, or counters from both fighters when available.",
             "Mention at least two concrete listed traits, stats, abilities, equipment, or weaknesses when available.",
             'Avoid vague phrases like "various forms", "special abilities", or "high strength" unless those exact phrases are in the packet.',
             'Never use these phrases: "as evidenced by the packet", "listed abilities", "main route stabilizes", "clean openings into decisive damage", "exchange pattern", "escalation options", "higher speed tier".',
+            'Avoid live play-by-play phrases like "as the fight begins", "the opening exchange is", or present-tense phrasing like "Green Lantern does X".',
+            'Prefer past-tense phrasing like "Green Lantern opened by...", "Naruto tried to...", "That failed because...", and "The finish came when...".',
+            'Allowed if the packet says "Shadow Clone Jutsu": "Naruto tried to flood the field with Shadow Clone Jutsu."',
+            'Forbidden if the packet does not say "Chakra Resonance Technique" or "Speed Force": do not invent it.',
             "Do not make every fight only about speed, strength, and durability.",
             "When present, consider intelligence, tactics, battlefield control, hax, resistances, weaknesses, counters, regeneration, time manipulation, sealing, mind control, energy absorption, range, mobility, and win conditions.",
-            'Prefer concrete choreography: "Goku pressures with rapid movement, forces a guard with close-range strikes, then creates space for a Kamehameha once the opponent is pinned or staggered."',
+            'Prefer concrete post-fight wording: "Goku pressured with rapid movement, forced a guard with close-range strikes, then created space for a Kamehameha once the opponent was pinned or staggered."',
             "Reference supplied evidence naturally without repeating the evidence list verbatim.",
             "Write 2-4 concise paragraphs.",
             "End with a complete sentence.",
