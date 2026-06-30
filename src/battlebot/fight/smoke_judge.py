@@ -386,7 +386,8 @@ def clean_strategy_fragment(value: str) -> str:
     text = re.sub(r"\{\{[^{}\n]*(?:\n[^{}]*)?\}\}", "", text)
     text = re.sub(r"\bPart\s+[IVXLC]+\s*=\s*", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\bNotable Attacks/Techniques\s*:?", "", text, flags=re.IGNORECASE)
-    text = re.sub(r"\b(?:Weaknesses|Weakness|Abilities|Equipment|Powers?)\s*:?", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:Weaknesses|Weakness|Abilities|Equipment|Powers?)\s*:", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(his|her|their),\s+\1\b", r"\1", text, flags=re.IGNORECASE)
     text = re.sub(r"\s+", " ", text).strip(" -:=,;\n\t")
     return text
 
@@ -468,7 +469,8 @@ def compact_names(values: Any, *, limit: int = 3) -> list[str]:
     if not values:
         return []
     if isinstance(values, str):
-        return [values]
+        cleaned = clean_strategy_fragment(values)
+        return [cleaned] if cleaned else []
     names = []
     if isinstance(values, list):
         for item in values:
@@ -481,6 +483,69 @@ def compact_names(values: Any, *, limit: int = 3) -> list[str]:
                 if cleaned:
                     names.append(cleaned)
     return names[:limit]
+
+
+def named_tools(contender: dict[str, Any], *, limit: int = 5) -> list[str]:
+    tools: list[str] = []
+    for section in ("abilities", "equipment"):
+        tools.extend(item_names(contender, section, limit=limit))
+    for key in ("forms", "transformations", "notable_attacks", "techniques"):
+        tools.extend(compact_names(tactical_value(contender, key), limit=limit))
+    power_scale = contender.get("power_scale") if isinstance(contender.get("power_scale"), dict) else {}
+    for key in ("attack_potency", "speed", "durability", "range"):
+        value = clean_strategy_fragment(str(power_scale.get(key) or ""))
+        if value:
+            tools.append(f"{key.replace('_', ' ')}: {value}")
+    deduped = []
+    seen = set()
+    for tool in tools:
+        normalized = tool.casefold()
+        if normalized in seen:
+            continue
+        seen.add(normalized)
+        deduped.append(tool)
+    return deduped[:limit]
+
+
+def main_risk(contender: dict[str, Any]) -> str:
+    risks = item_names(contender, "weaknesses", limit=1)
+    if risks:
+        return risks[0]
+    loss_conditions = compact_names(tactical_value(contender, "losing_conditions") or tactical_value(contender, "loss_conditions"), limit=1)
+    if loss_conditions:
+        return loss_conditions[0]
+    return "No clean exploitable weakness supplied."
+
+
+def matchup_card(
+    contender_a: dict[str, Any],
+    contender_b: dict[str, Any],
+    *,
+    winner: dict[str, Any] | None = None,
+    loser: dict[str, Any] | None = None,
+    winner_route: str = "",
+    loser_route: str = "",
+) -> list[dict[str, Any]]:
+    winner_id = (winner or {}).get("character_id")
+    loser_id = (loser or {}).get("character_id")
+    cards = []
+    for contender in (contender_a, contender_b):
+        contender_id = contender.get("character_id")
+        if contender_id == winner_id:
+            best_route = winner_route
+        elif contender_id == loser_id:
+            best_route = loser_route
+        else:
+            best_route = "Needs a clearer packet-backed win route."
+        cards.append(
+            {
+                "name": contender_name(contender),
+                "key_tools": named_tools(contender),
+                "best_route": best_route,
+                "risk": main_risk(contender),
+            }
+        )
+    return cards
 
 
 def structured_factor(winner: dict[str, Any], loser: dict[str, Any]) -> dict[str, str] | None:
@@ -555,13 +620,13 @@ def loser_path(loser: dict[str, Any], winner: dict[str, Any]) -> str:
     weaknesses = item_names(winner, "weaknesses", limit=2)
     if weaknesses:
         return (
-            f"{loser_name}'s best route was to force their strongest confirmed lane early, pressure "
+            f"{loser_name}'s best route against {winner_name} was to force their strongest confirmed lane early, pressure "
             f"{winner_name} around {', '.join(weaknesses)}, and punish any timing or stamina gap "
             f"before {winner_name} controlled the pace."
         )
     return (
-        f"{loser_name} needed to force the fight into their strongest confirmed lane, but the packet "
-        "did not provide a clean exploitable weakness."
+        f"{loser_name} needed to force the fight against {winner_name} into their strongest confirmed lane, "
+        "but the packet did not provide a clean exploitable weakness."
     )
 
 
@@ -655,6 +720,7 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
             "swing_factors": [],
             "fight_flow": empty_fight_flow(),
             "engine_reasoning": ["The packet did not provide enough parsed ranking data for a deterministic winner."],
+            "matchup_card": matchup_card(a, b),
             "warnings": ["tier parsing was insufficient for a deterministic smoke winner"],
             "profile_quality_notes": notes,
             "diagnostics": {"fallback": True, "fallback_reason": "insufficient_packet_ranking"},
@@ -702,6 +768,8 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
         ),
         "win_condition": route,
         "loser_best_path": best_loser_path,
+        "loser": loser["canonical_name"],
+        "loser_character_id": loser["character_id"],
         "deciding_factors": deciding,
         "overall_probability": {"winner": winner_probability, "loser": loser_probability},
         "winner_probability": winner_probability,
@@ -710,6 +778,7 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
         "swing_factors": swings,
         "fight_flow": fight_flow,
         "engine_reasoning": reasoning,
+        "matchup_card": matchup_card(a, b, winner=winner, loser=loser, winner_route=route, loser_route=best_loser_path),
         "warnings": warnings,
         "profile_quality_notes": notes,
         "diagnostics": {"fallback": True, "fallback_reason": "deterministic_smoke_judge"},

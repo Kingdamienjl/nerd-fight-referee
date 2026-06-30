@@ -155,6 +155,10 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             "Write in past tense as a post-fight referee explanation, not live play-by-play.",
             "Use fight scene detail, but keep the analysis outcome-focused rather than present-tense commentary.",
             "Describe what happened in the opening exchange, the winner's first meaningful tactic, the loser's best counterplay, how the winner adapted or countered that counterplay, and the finishing sequence.",
+            "The loser must make at least one concrete counterplay attempt using supplied evidence.",
+            "Do not require both fighter names in every paragraph; use names naturally instead of repetitive forced naming.",
+            'When a fighter name is known, avoid vague labels: "the opponent", "his opponent", "her opponent", "their opponent", "the adversary".',
+            "Use fighter names naturally at phase transitions: opening, counterplay, and finish.",
             "Use safe tactical inference: infer how supplied abilities were used in combat, but do not invent new powers, forms, weapons, techniques, or feats not in the packet.",
             "Do not name any technique, form, weapon, power source, eye power, transformation, spell, or named attack unless the exact name appears in the compact evidence packet.",
             "Only name a technique, ability, weapon, or form if the exact name appears in the compact evidence packet.",
@@ -194,6 +198,8 @@ def engine_verdict(smoke: dict[str, Any]) -> dict[str, Any]:
         "confidence": smoke.get("confidence"),
         "win_condition": smoke.get("win_condition"),
         "loser_best_path": smoke.get("loser_best_path"),
+        "loser": smoke.get("loser"),
+        "loser_character_id": smoke.get("loser_character_id"),
         "deciding_factors": smoke.get("deciding_factors") or [],
         "winner_probability": smoke.get("winner_probability"),
         "loser_probability": smoke.get("loser_probability"),
@@ -202,6 +208,7 @@ def engine_verdict(smoke: dict[str, Any]) -> dict[str, Any]:
         "swing_factors": smoke.get("swing_factors") or [],
         "fight_flow": smoke.get("fight_flow") or {},
         "engine_reasoning": smoke.get("engine_reasoning") or [],
+        "matchup_card": smoke.get("matchup_card") or [],
     }
 
 
@@ -307,6 +314,8 @@ def fallback_decision(smoke_baseline: dict[str, Any], reason: str, detail: str =
         "summary": explanation,
         "win_condition": smoke_baseline.get("win_condition") or "Fallback uses packet-backed stat leads.",
         "loser_best_path": smoke_baseline.get("loser_best_path") or "Evidence is incomplete.",
+        "loser": smoke_baseline.get("loser"),
+        "loser_character_id": smoke_baseline.get("loser_character_id"),
         "deciding_factors": smoke_baseline.get("deciding_factors") or [],
         "overall_probability": smoke_baseline.get("overall_probability"),
         "winner_probability": smoke_baseline.get("winner_probability"),
@@ -315,6 +324,7 @@ def fallback_decision(smoke_baseline: dict[str, Any], reason: str, detail: str =
         "swing_factors": smoke_baseline.get("swing_factors") or [],
         "fight_flow": smoke_baseline.get("fight_flow") or {},
         "engine_reasoning": smoke_baseline.get("engine_reasoning") or [],
+        "matchup_card": smoke_baseline.get("matchup_card") or [],
         "engine_verdict": engine,
         "referee_verdict": {
             "winner": smoke_baseline.get("winner"),

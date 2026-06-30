@@ -1,6 +1,6 @@
 import unittest
 
-from battlebot.fight.decision_formatter import format_decision
+from battlebot.fight.decision_formatter import compact_field, format_decision, sanitize_fight_card_item, split_text_for_discord, structured_decision_output
 from battlebot.fight.smoke_judge import smoke_judge_packet
 
 
@@ -128,7 +128,7 @@ class DecisionFormatterTests(unittest.TestCase):
         }
 
         text = format_decision(decision)
-        analysis = text.split("judge's analysis:\n", 1)[1].split("\n\nloser's best path:", 1)[0]
+        analysis = text.split("judge's analysis:\n", 1)[1].split("\n\nevidence:", 1)[0]
 
         self.assertTrue(analysis.endswith("..."))
         self.assertTrue(analysis.removesuffix("...").endswith("."))
@@ -146,7 +146,7 @@ class DecisionFormatterTests(unittest.TestCase):
         }
 
         text = format_decision(decision)
-        analysis = text.split("judge's analysis:\n", 1)[1].split("\n\nloser's best path:", 1)[0]
+        analysis = text.split("judge's analysis:\n", 1)[1].split("\n\nevidence:", 1)[0]
         final_word = analysis.removesuffix("...").split()[-1]
 
         self.assertTrue(analysis.endswith("..."))
@@ -179,6 +179,241 @@ class DecisionFormatterTests(unittest.TestCase):
 
         self.assertTrue(bullets)
         self.assertTrue(all(not bullet.endswith(",") for bullet in bullets))
+
+    def test_formatted_decision_includes_compact_fight_card_for_both_fighters(self):
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Spawn",
+            "loser": "Godzilla",
+            "confidence": "medium",
+            "summary": "Spawn opened by forcing short engagements. Godzilla answered with pressure. The finish came when Spawn reset spacing.",
+            "loser_best_path": "Godzilla needed to keep Spawn spending necroplasm before Spawn controlled spacing.",
+            "matchup_card": [
+                {
+                    "name": "Spawn",
+                    "key_tools": ["Necroplasm", "chains", "teleportation", "Hell King Spawn"],
+                    "best_route": "Burst in and out, spend necroplasm carefully, and avoid a long attrition fight.",
+                    "risk": "limited necroplasm supply",
+                },
+                {
+                    "name": "Godzilla",
+                    "key_tools": ["atomic breath", "size", "durability", "raw power"],
+                    "best_route": "Force a long fight and punish Spawn's resource drain.",
+                    "risk": "slower adaptation",
+                },
+            ],
+            "deciding_factors": [
+                {
+                    "factor": "Forms",
+                    "evidence": "Spawn had Pre-Metamorphosis, Post-Metamorphosis, and Hell King Spawn to change tempo.",
+                    "tactical_effect": "",
+                }
+            ],
+            "warnings": [],
+        }
+
+        text = format_decision(decision)
+
+        self.assertIn("fight card:", text)
+        self.assertIn("Spawn\n- Key tools: Necroplasm, chains, teleportation, Hell King Spawn", text)
+        self.assertIn("Godzilla\n- Key tools: atomic breath, size, durability, raw power", text)
+        self.assertIn("- Best route: Burst in and out", text)
+        self.assertIn("- Risk: limited necroplasm supply", text)
+
+    def test_evidence_bullets_are_compact_and_include_loser_path(self):
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Spawn",
+            "loser": "Godzilla",
+            "confidence": "medium",
+            "summary": "Spawn opened by forcing short engagements. Godzilla answered with pressure. The finish came when Spawn reset spacing.",
+            "loser_best_path": "Godzilla needed to drag the fight out and exploit Spawn's limited necroplasm before Spawn controlled spacing.",
+            "deciding_factors": [
+                {
+                    "factor": "Forms",
+                    "evidence": "Spawn had Pre-Metamorphosis, Post-Metamorphosis, and Hell King Spawn to change tempo.",
+                    "tactical_effect": "",
+                },
+                {
+                    "factor": "Mobility",
+                    "evidence": "Spawn's Subsonic travel speed let him choose when to engage Godzilla.",
+                    "tactical_effect": "",
+                },
+                {
+                    "factor": "Extra",
+                    "evidence": "This should not appear because evidence is capped.",
+                    "tactical_effect": "",
+                },
+            ],
+            "warnings": [],
+        }
+
+        text = format_decision(decision)
+        evidence_section = text.split("\nevidence:\n", 1)[1].split("\n\nloser's best path:", 1)[0]
+        bullets = [line for line in evidence_section.splitlines() if line.startswith("- ")]
+
+        self.assertEqual(len(bullets), 3)
+        self.assertTrue(any("Loser path: Godzilla" in bullet and "Spawn" in bullet for bullet in bullets))
+        self.assertTrue(all(len(bullet.removeprefix("- ")) <= 160 for bullet in bullets))
+        self.assertTrue(all(not bullet.endswith(",") for bullet in bullets))
+
+    def test_structured_decision_output_is_embed_friendly(self):
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Sentry",
+            "loser": "Godzilla",
+            "confidence": "medium",
+            "summary": "Sentry opened with pressure. Godzilla forced a durability check. Sentry finished by changing range.",
+            "loser_best_path": "Godzilla needed to drag the fight out before Sentry controlled the pace.",
+            "matchup_card": [
+                {
+                    "name": "Sentry",
+                    "key_tools": [
+                        "Robert Reynolds= Life Creation (Created one of Sentry's first villains)...",
+                        "3 & 4) Transformation",
+                        "Fusionism",
+                        "Energy Projection",
+                        "Molecular Manipulation",
+                    ],
+                    "best_route": "Use versatile powers without allowing a long attrition fight.",
+                    "risk": "unstable mental state",
+                },
+                {
+                    "name": "Godzilla",
+                    "key_tools": ["atomic breath", "durability", "raw power"],
+                    "best_route": "Force a long fight.",
+                    "risk": "slower adaptation",
+                },
+            ],
+            "deciding_factors": [
+                {
+                    "factor": "Special Abilities",
+                    "evidence": "Sentry brings named tools: Life Creation, Transformation, Fusionism, Energy Projection",
+                    "tactical_effect": "",
+                }
+            ],
+            "warnings": [],
+        }
+
+        structured = structured_decision_output(decision)
+
+        self.assertEqual(structured["winner"], "Sentry")
+        self.assertEqual(structured["loser"], "Godzilla")
+        self.assertEqual(len(structured["fight_card"]), 2)
+        self.assertIn("Life Creation", structured["fight_card"][0]["value"])
+        self.assertNotIn("Robert Reynolds=", structured["fight_card"][0]["value"])
+        self.assertNotIn("3 & 4)", structured["fight_card"][0]["value"])
+        self.assertLessEqual(structured["fight_card"][0]["value"].splitlines()[0].count(","), 3)
+        self.assertTrue(structured["evidence_bullets"])
+        self.assertTrue(all(len(bullet) <= 160 for bullet in structured["evidence_bullets"]))
+        self.assertTrue(all(not bullet.endswith(",") for bullet in structured["evidence_bullets"]))
+        self.assertIn("Godzilla", structured["loser_best_path"])
+        self.assertIn("Sentry", structured["loser_best_path"])
+        self.assertIn("Evidence:", structured["full_analysis"])
+
+    def test_structured_decision_output_includes_matchup_title_and_odds(self):
+        decision = {
+            "winner": "Sentry",
+            "loser": "Wolverine",
+            "confidence": "medium",
+            "winner_probability": 0.65,
+            "loser_probability": 0.35,
+            "summary": "Sentry controlled range.",
+            "loser_best_path": "Wolverine needed melee attrition before Sentry controlled range.",
+            "matchup_card": [
+                {"name": "Sentry", "key_tools": ["flight"], "best_route": "Deny melee.", "risk": "instability"},
+                {"name": "Wolverine", "key_tools": ["Adamantium claws"], "best_route": "Force melee.", "risk": "range denial"},
+            ],
+            "deciding_factors": [],
+        }
+
+        structured = structured_decision_output(decision)
+
+        self.assertEqual(structured["matchup_title"], "Sentry vs Wolverine")
+        self.assertEqual(structured["display_title"], "⚔️ SENTRY VS WOLVERINE")
+        self.assertEqual(structured["winner"], "Sentry")
+        self.assertEqual(structured["battle_odds_text"], "Sentry 65% / Wolverine 35%")
+        self.assertEqual(structured["confidence_color_name"], "gold")
+        self.assertEqual(structured["fighter_cards"][0]["fighter_name"], "Sentry")
+        self.assertIn("quick_verdict", structured)
+        self.assertIn("full_evidence", structured)
+
+    def test_medium_confidence_probability_fallback_gives_65_35(self):
+        structured = structured_decision_output(
+            {
+                "winner": "Sentry",
+                "loser": "Wolverine",
+                "confidence": "medium",
+                "summary": "Sentry controlled range.",
+                "loser_best_path": "Wolverine needed melee attrition.",
+                "deciding_factors": [],
+            }
+        )
+
+        self.assertEqual(structured["winner_probability"], 65)
+        self.assertEqual(structured["loser_probability"], 35)
+        self.assertEqual(structured["battle_odds_text"], "Sentry 65% / Wolverine 35%")
+
+    def test_compact_field_does_not_cut_mid_word(self):
+        value = compact_field("alpha beta gamma delta", 17)
+
+        self.assertEqual(value, "alpha beta...")
+
+    def test_split_text_for_discord_avoids_mid_word_and_empty_chunks(self):
+        chunks = split_text_for_discord("Alpha beta gamma.\n\nDelta epsilon zeta. Eta theta iota.", 24)
+
+        self.assertGreater(len(chunks), 1)
+        self.assertTrue(all(chunk for chunk in chunks))
+        self.assertTrue(all(len(chunk) <= 24 for chunk in chunks))
+        self.assertEqual(chunks[1], "Delta epsilon zeta.")
+
+    def test_long_analysis_splits_into_multiple_chunks(self):
+        text = "\n\n".join(f"Paragraph {index} has enough words to split safely." for index in range(12))
+        chunks = split_text_for_discord(text, 80)
+
+        self.assertGreater(len(chunks), 2)
+        self.assertTrue(all(" " in chunk for chunk in chunks))
+
+    def test_sanitize_fight_card_item_removes_scraped_source_heading(self):
+        item = sanitize_fight_card_item("Robert Reynolds= Life Creation (Created one of Sentry's first villains)...")
+
+        self.assertEqual(item, "Life Creation")
+
+    def test_sanitize_fight_card_item_removes_numbering_and_markdown(self):
+        item = sanitize_fight_card_item("3 & 4)Transformation *Fusionism...")
+
+        self.assertIn(item, {"Transformation Fusionism", "Transformation, Fusionism"})
+        self.assertNotIn("3 & 4)", item)
+        self.assertNotIn("*", item)
+
+    def test_fight_card_items_are_short_and_not_comma_ended(self):
+        decision = {
+            "winner": "Sentry",
+            "loser": "Godzilla",
+            "confidence": "medium",
+            "summary": "Sentry controlled the range.",
+            "loser_best_path": "Godzilla needed pressure.",
+            "matchup_card": [
+                {
+                    "name": "Sentry",
+                    "key_tools": [
+                        "Robert Reynolds= Life Creation (Created one of Sentry's first villains)...",
+                        "3 & 4)Transformation *Fusionism...",
+                        "Energy Projection,",
+                    ],
+                    "best_route": "Use versatile powers.",
+                    "risk": "unstable mental state",
+                }
+            ],
+            "deciding_factors": [],
+        }
+
+        structured = structured_decision_output(decision)
+        key_tools = structured["fight_card"][0]["value"].splitlines()[0].removeprefix("Key tools: ")
+
+        for item in [part.strip() for part in key_tools.split(",")]:
+            self.assertLessEqual(len(item), 60)
+            self.assertFalse(item.endswith(","))
 
     def test_evidence_bullets_include_concrete_named_ability_when_available(self):
         decision = {
@@ -220,6 +455,25 @@ class DecisionFormatterTests(unittest.TestCase):
         self.assertNotIn("Part I=", text)
         self.assertNotIn("Notable Attacks/Techniques:", text)
         self.assertIn("The Sharingan's ability.", text)
+
+    def test_loser_best_path_names_both_fighters_and_cleans_duplicate_pronouns(self):
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Itachi",
+            "loser": "Kratos",
+            "confidence": "medium",
+            "summary": "Itachi controlled the pace through named packet tools.",
+            "loser_best_path": "force close range around his, his stamina drain",
+            "deciding_factors": [],
+            "warnings": [],
+        }
+
+        text = format_decision(decision)
+        loser_path = text.split("\n\nloser's best path:\n", 1)[1]
+
+        self.assertIn("Kratos", loser_path)
+        self.assertIn("Itachi", loser_path)
+        self.assertNotIn("his, his", loser_path)
 
     def test_loser_best_path_falls_back_cleanly_when_empty(self):
         decision = {

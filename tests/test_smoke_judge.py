@@ -3,7 +3,7 @@ import unittest
 from battlebot.fight.smoke_judge import smoke_judge_packet, text_rank
 
 
-def contender(name, character_id, attack, speed, durability, warnings=None, abilities=None, weaknesses=None):
+def contender(name, character_id, attack, speed, durability, warnings=None, abilities=None, weaknesses=None, equipment=None, tactical_profile=None):
     return {
         "canonical_name": name,
         "character_id": character_id,
@@ -13,7 +13,9 @@ def contender(name, character_id, attack, speed, durability, warnings=None, abil
             "durability": durability,
         },
         "abilities": abilities or [],
+        "equipment": equipment or [],
         "weaknesses": weaknesses or [],
+        "tactical_profile": tactical_profile or {},
         "warnings": warnings or [],
     }
 
@@ -173,6 +175,41 @@ class SmokeJudgeTests(unittest.TestCase):
         self.assertIn("Genjutsu", evidence)
         self.assertIn("Susanoo", evidence)
 
+    def test_smoke_judge_exposes_compact_matchup_card_for_both_fighters(self):
+        packet = {
+            "errors": [],
+            "contender_a": contender(
+                "Spawn",
+                "spawn",
+                "Town level",
+                "Subsonic",
+                "Building level",
+                abilities=[{"name": "Necroplasm"}, {"name": "teleportation"}],
+                equipment=[{"name": "chains"}],
+                weaknesses=[{"name": "limited necroplasm supply"}],
+                tactical_profile={"forms": [{"name": "Hell King Spawn"}]},
+            ),
+            "contender_b": contender(
+                "Godzilla",
+                "godzilla",
+                "Building level",
+                "Human",
+                "Wall level",
+                abilities=[{"name": "atomic breath"}, {"name": "raw power"}],
+                weaknesses=[{"name": "slower adaptation"}],
+            ),
+            "warnings": [],
+        }
+
+        result = smoke_judge_packet(packet)
+
+        self.assertEqual([card["name"] for card in result["matchup_card"]], ["Spawn", "Godzilla"])
+        self.assertIn("Necroplasm", result["matchup_card"][0]["key_tools"])
+        self.assertIn("atomic breath", result["matchup_card"][1]["key_tools"])
+        self.assertTrue(result["matchup_card"][0]["best_route"])
+        self.assertTrue(result["matchup_card"][1]["best_route"])
+        self.assertEqual(result["matchup_card"][0]["risk"], "limited necroplasm supply")
+
     def test_loser_best_path_cleans_scraped_weakness_fragments(self):
         packet = {
             "errors": [],
@@ -209,7 +246,7 @@ class SmokeJudgeTests(unittest.TestCase):
 
         self.assertEqual(
             result["loser_best_path"],
-            "Kratos needed to force the fight into their strongest confirmed lane, but the packet did not provide a clean exploitable weakness.",
+            "Kratos needed to force the fight against Itachi into their strongest confirmed lane, but the packet did not provide a clean exploitable weakness.",
         )
 
 
