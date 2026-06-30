@@ -210,6 +210,74 @@ class SmokeJudgeTests(unittest.TestCase):
         self.assertTrue(result["matchup_card"][1]["best_route"])
         self.assertEqual(result["matchup_card"][0]["risk"], "limited necroplasm supply")
 
+    def test_smoke_judge_matchup_card_extracts_physical_and_weapon_power_fields(self):
+        cloud = contender(
+            "Cloud Strife",
+            "cloud",
+            "Town level",
+            "Subsonic",
+            "Building level",
+            abilities=[{"name": "Limit Breaks"}, {"name": "{{ tag:tabber"}],
+            equipment=[{"name": "Buster Sword"}],
+        )
+        cloud["physical_profile"] = {"height": "5'7\"", "weight": "160 lb"}
+        kratos = contender(
+            "Kratos",
+            "kratos",
+            "Building level",
+            "Human",
+            "Wall level",
+            equipment=[{"name": "{{Border|No|Yes|Content}}"}, {"name": "Blades of Chaos"}],
+        )
+        packet = {"errors": [], "contender_a": cloud, "contender_b": kratos, "warnings": []}
+
+        result = smoke_judge_packet(packet)
+
+        self.assertEqual(result["matchup_card"][0]["height_weight"], "5'7\" / 160 lb")
+        self.assertIn("Buster Sword", result["matchup_card"][0]["weapon_power"])
+        self.assertIn("Limit Breaks", result["matchup_card"][0]["key_tools"])
+        self.assertNotIn("{{ tag:tabber", result["matchup_card"][0]["key_tools"])
+        self.assertIn("Blades of Chaos", result["matchup_card"][1]["weapon_power"])
+        self.assertNotIn("{{Border|No|Yes|Content}}", result["matchup_card"][1]["weapon_power"])
+
+    def test_smoke_judge_extracts_magical_combat_identity_and_non_physical_options(self):
+        sailor_moon = contender(
+            "Usagi Tsukino",
+            "sailor-moon",
+            "Moon level",
+            "Subsonic",
+            "Building level",
+            abilities=[
+                {"name": "Transformation"},
+                {"name": "Magic"},
+                {"name": "Purification"},
+                {"name": "Healing"},
+                {"name": "Energy Projection"},
+                {"name": "Barriers"},
+                {"name": "Superhuman Physical Characteristics"},
+                {"name": "{{Border|No|Yes|Content}}"},
+            ],
+            equipment=[{"name": "Silver Crystal"}, {"name": "Moon Stick"}],
+            tactical_profile={"combat_style": "magical ranged escalation"},
+        )
+        packet = {
+            "errors": [],
+            "contender_a": sailor_moon,
+            "contender_b": contender("Street Fighter", "street-fighter", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+
+        result = smoke_judge_packet(packet)
+        identity = result["matchup_card"][0]["combat_identity"]
+
+        self.assertIn(identity["combat_mode"], {"magic user", "cosmic/reality hax user"})
+        self.assertIn("Magic", identity["non_physical_options"])
+        self.assertIn("Purification", identity["non_physical_options"])
+        self.assertIn("Barriers", identity["non_physical_options"])
+        self.assertIn("Silver Crystal", result["matchup_card"][0]["weapon_power"])
+        self.assertNotEqual(result["matchup_card"][0]["key_tools"], ["Superhuman Physical Characteristics"])
+        self.assertNotIn("{{Border", " ".join(result["matchup_card"][0]["key_tools"]))
+
     def test_loser_best_path_cleans_scraped_weakness_fragments(self):
         packet = {
             "errors": [],

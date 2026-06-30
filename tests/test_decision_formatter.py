@@ -1,6 +1,13 @@
 import unittest
 
-from battlebot.fight.decision_formatter import compact_field, format_decision, sanitize_fight_card_item, split_text_for_discord, structured_decision_output
+from battlebot.fight.decision_formatter import (
+    compact_field,
+    format_decision,
+    is_dirty_fight_card_item,
+    sanitize_fight_card_item,
+    split_text_for_discord,
+    structured_decision_output,
+)
 from battlebot.fight.smoke_judge import smoke_judge_packet
 
 
@@ -215,9 +222,9 @@ class DecisionFormatterTests(unittest.TestCase):
         text = format_decision(decision)
 
         self.assertIn("fight card:", text)
-        self.assertIn("Spawn\n- Key tools: Necroplasm, chains, teleportation, Hell King Spawn", text)
-        self.assertIn("Godzilla\n- Key tools: atomic breath, size, durability, raw power", text)
-        self.assertIn("- Best route: Burst in and out", text)
+        self.assertIn("Spawn\n- Key tools: Necroplasm, chains, teleportation", text)
+        self.assertIn("Godzilla\n- Key tools: atomic breath, size, durability", text)
+        self.assertIn("- Win path: Burst in and out", text)
         self.assertIn("- Risk: limited necroplasm supply", text)
 
     def test_evidence_bullets_are_compact_and_include_loser_path(self):
@@ -254,7 +261,7 @@ class DecisionFormatterTests(unittest.TestCase):
 
         self.assertEqual(len(bullets), 3)
         self.assertTrue(any("Loser path: Godzilla" in bullet and "Spawn" in bullet for bullet in bullets))
-        self.assertTrue(all(len(bullet.removeprefix("- ")) <= 160 for bullet in bullets))
+        self.assertTrue(all(len(bullet.removeprefix("- ")) <= 140 for bullet in bullets))
         self.assertTrue(all(not bullet.endswith(",") for bullet in bullets))
 
     def test_structured_decision_output_is_embed_friendly(self):
@@ -309,7 +316,7 @@ class DecisionFormatterTests(unittest.TestCase):
         self.assertTrue(all(not bullet.endswith(",") for bullet in structured["evidence_bullets"]))
         self.assertIn("Godzilla", structured["loser_best_path"])
         self.assertIn("Sentry", structured["loser_best_path"])
-        self.assertIn("Evidence:", structured["full_analysis"])
+        self.assertNotIn("Robert Reynolds=", structured["full_evidence"])
 
     def test_structured_decision_output_includes_matchup_title_and_odds(self):
         decision = {
@@ -337,6 +344,8 @@ class DecisionFormatterTests(unittest.TestCase):
         self.assertEqual(structured["fighter_cards"][0]["fighter_name"], "Sentry")
         self.assertIn("quick_verdict", structured)
         self.assertIn("full_evidence", structured)
+        self.assertIn("public_summary", structured)
+        self.assertIn("loser_best_path_full", structured)
 
     def test_medium_confidence_probability_fallback_gives_65_35(self):
         structured = structured_decision_output(
@@ -378,6 +387,131 @@ class DecisionFormatterTests(unittest.TestCase):
         item = sanitize_fight_card_item("Robert Reynolds= Life Creation (Created one of Sentry's first villains)...")
 
         self.assertEqual(item, "Life Creation")
+
+    def test_dirty_fight_card_items_are_rejected(self):
+        dirty_values = [
+            "{{Border|No|Yes|Content}}",
+            "{{ tag:tabber | Before Crisis and Crisis Core | Disc 1",
+            "No • Yes • Content",
+        ]
+
+        for value in dirty_values:
+            self.assertTrue(is_dirty_fight_card_item(value))
+            self.assertEqual(sanitize_fight_card_item(value), "")
+
+    def test_cloud_like_dirty_item_is_omitted_from_fight_card(self):
+        structured = structured_decision_output(
+            {
+                "winner": "Cloud",
+                "loser": "Kratos",
+                "confidence": "medium",
+                "summary": "Cloud controlled the decisive burst.",
+                "loser_best_path": "Kratos needed to force melee before Cloud controlled range.",
+                "matchup_card": [
+                    {
+                        "name": "Cloud",
+                        "key_tools": [
+                            "Innate",
+                            "{{ tag:tabber",
+                            "Before Crisis and Crisis Core",
+                            "Disc 1",
+                            "Buster Sword",
+                        ],
+                        "best_route": "Use burst damage.",
+                        "risk": "needs pressure",
+                    }
+                ],
+            }
+        )
+
+        card = structured["fight_card"][0]["value"]
+
+        self.assertNotIn("{{", card)
+        self.assertNotIn("tag:tabber", card)
+        self.assertIn("Buster Sword", card)
+
+    def test_fight_card_includes_height_weight_and_weapon_power_when_provided(self):
+        structured = structured_decision_output(
+            {
+                "winner": "Cloud",
+                "loser": "Kratos",
+                "confidence": "medium",
+                "summary": "Cloud controlled the decisive burst.",
+                "loser_best_path": "Kratos needed to force melee before Cloud controlled range.",
+                "matchup_card": [
+                    {
+                        "name": "Cloud",
+                        "height_weight": "5'7\" / 160 lb",
+                        "weapon_power": ["Buster Sword", "Limit Breaks", "Materia"],
+                        "key_tools": ["SOLDIER skill", "Materia", "superhuman speed"],
+                        "best_route": "Punish openings with burst damage.",
+                        "risk": "Needs pressure to access Limit Breaks.",
+                    }
+                ],
+            }
+        )
+
+        card = structured["fight_card"][0]["value"]
+
+        self.assertIn("Height/Weight: 5'7\" / 160 lb", card)
+        self.assertIn("Weapon/Power: Buster Sword, Limit Breaks", card)
+        self.assertIn("Key tools: SOLDIER skill, Materia, superhuman speed", card)
+
+    def test_fight_card_surfaces_magical_style_and_non_physical_evidence(self):
+        structured = structured_decision_output(
+            {
+                "winner": "Usagi Tsukino",
+                "loser": "Street Fighter",
+                "confidence": "medium",
+                "summary": "Usagi used magical range rather than trading melee.",
+                "loser_best_path": "Street Fighter needed to rush Usagi before magical escalation.",
+                "matchup_card": [
+                    {
+                        "name": "Usagi Tsukino",
+                        "weapon_power": ["Silver Crystal", "Moon Stick"],
+                        "style": "magical ranged escalation",
+                        "key_tools": ["Transformation", "Magic", "Purification", "Superhuman Physical Characteristics"],
+                        "best_route": "Create space, escalate forms, and attack with magic instead of trading melee.",
+                        "risk": "vulnerable if rushed before transformation",
+                        "combat_identity": {
+                            "identity_summary": "Usagi Tsukino is a magic user with non-physical options: Magic, Purification, Barriers",
+                            "combat_style": "magical ranged escalation",
+                            "non_physical_options": ["Magic", "Purification", "Barriers"],
+                        },
+                    }
+                ],
+                "deciding_factors": [
+                    {
+                        "factor": "Non-physical options",
+                        "evidence": "Usagi's best lane was magical escalation and ranged pressure, not melee trading.",
+                    }
+                ],
+            }
+        )
+
+        card = structured["fight_card"][0]["value"]
+        evidence = "\n".join(structured["quick_evidence"])
+
+        self.assertIn("Weapon/Power: Silver Crystal, Moon Stick", card)
+        self.assertIn("Style: magical ranged escalation", card)
+        self.assertIn("Key tools: Transformation, Magic, Purification", card)
+        self.assertNotIn("{{", card)
+        self.assertIn("magical escalation", evidence)
+        self.assertTrue(all(not bullet.endswith("...") for bullet in structured["quick_evidence"]))
+
+    def test_fight_card_omits_unknown_height_weight_cleanly(self):
+        structured = structured_decision_output(
+            {
+                "winner": "Cloud",
+                "loser": "Kratos",
+                "confidence": "medium",
+                "summary": "Cloud controlled the decisive burst.",
+                "loser_best_path": "Kratos needed to force melee before Cloud controlled range.",
+                "matchup_card": [{"name": "Cloud", "key_tools": ["Buster Sword"], "best_route": "Burst.", "risk": "pressure"}],
+            }
+        )
+
+        self.assertNotIn("Height/Weight:", structured["fight_card"][0]["value"])
 
     def test_sanitize_fight_card_item_removes_numbering_and_markdown(self):
         item = sanitize_fight_card_item("3 & 4)Transformation *Fusionism...")

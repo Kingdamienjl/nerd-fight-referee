@@ -12,7 +12,7 @@ from typing import Any
 import httpx
 
 from battlebot.common.db import connect_database
-from battlebot.fight.decision_formatter import format_decision, truncate_at_sentence_boundary
+from battlebot.fight.decision_formatter import format_decision, sanitize_fight_card_item, truncate_at_sentence_boundary
 from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.profiles.fight_packet import build_fight_packet
 
@@ -40,6 +40,8 @@ def llm_enabled(env: dict[str, str] | None = None) -> bool:
 
 def compact_snippet(value: Any, *, limit: int = 180) -> str:
     text = re.sub(r"\s+", " ", str(value or "")).strip()
+    if any(fragment in text.casefold() for fragment in ("{{", "}}", "tag:", "tabber", "border", "content", "no • yes")):
+        text = sanitize_fight_card_item(text)
     if len(text) <= limit:
         return text
     return f"{text[: limit - 3].rstrip()}..."
@@ -49,20 +51,23 @@ def compact_named_items(values: Any, *, limit: int = 6) -> list[Any]:
     if not values:
         return []
     if isinstance(values, str):
-        return [compact_snippet(values)]
+        snippet = compact_snippet(values)
+        return [snippet] if snippet else []
     compact = []
     if isinstance(values, (list, tuple)):
         for item in list(values)[:limit]:
             if isinstance(item, dict):
-                compact.append(
-                    {
-                        key: compact_snippet(item.get(key))
-                        for key in ("name", "id", "description", "effect", "tags", "scope_limitations")
-                        if item.get(key)
-                    }
-                )
+                entry = {
+                    key: snippet
+                    for key in ("name", "id", "description", "effect", "tags", "scope_limitations")
+                    if item.get(key) and (snippet := compact_snippet(item.get(key)))
+                }
+                if entry:
+                    compact.append(entry)
             else:
-                compact.append(compact_snippet(item))
+                snippet = compact_snippet(item)
+                if snippet:
+                    compact.append(snippet)
     return compact
 
 
@@ -81,6 +86,11 @@ def compact_tactical_fields(contender: dict[str, Any]) -> dict[str, Any]:
         "win_conditions",
         "loss_conditions",
         "matchup_notes",
+        "fighting_style",
+        "power_source",
+        "magic",
+        "special_abilities",
+        "personality",
     )
     compact = {}
     for key in keys:
@@ -106,6 +116,9 @@ def compact_evidence_packet(packet: dict[str, Any], smoke_baseline: dict[str, An
             "abilities": compact_named_items(contender.get("abilities") or []),
             "equipment": compact_named_items(contender.get("equipment") or []),
             "weaknesses": compact_named_items(contender.get("weaknesses") or []),
+            "powers": compact_named_items(contender.get("powers") or contender.get("special_abilities") or []),
+            "magic": compact_named_items(contender.get("magic") or []),
+            "weapons": compact_named_items(contender.get("weapons") or []),
             "tactical_profile": compact_tactical_fields(contender),
             "warnings": contender.get("warnings") or [],
         }
@@ -159,6 +172,11 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             "Do not require both fighter names in every paragraph; use names naturally instead of repetitive forced naming.",
             'When a fighter name is known, avoid vague labels: "the opponent", "his opponent", "her opponent", "their opponent", "the adversary".',
             "Use fighter names naturally at phase transitions: opening, counterplay, and finish.",
+            "Before narrating, identify each fighter's combat mode from the packet: brawler, weapon specialist, martial artist, magic user, ranged energy user, cosmic/reality hax user, speedster, tank/bruiser, summoner, or tech user.",
+            "Use each fighter's combat identity when narrating their opening and counterplay.",
+            "Do not describe a fighter as relying on punches, kicks, grappling, or mundane melee unless those tactics are present in the packet.",
+            "If a fighter has signature magic, transformation, ranged powers, purification, barriers, cosmic power, or energy projection, their counterplay must use those tools instead of generic melee.",
+            "Do not flatten magical, cosmic, ranged, tech, or hax-based fighters into generic brawlers.",
             "Use safe tactical inference: infer how supplied abilities were used in combat, but do not invent new powers, forms, weapons, techniques, or feats not in the packet.",
             "Do not name any technique, form, weapon, power source, eye power, transformation, spell, or named attack unless the exact name appears in the compact evidence packet.",
             "Only name a technique, ability, weapon, or form if the exact name appears in the compact evidence packet.",

@@ -10,6 +10,22 @@ PUBLIC_LIMIT = 1800
 DISCORD_FIELD_LIMIT = 1024
 RAW_TEMPLATE_RE = re.compile(r"\{\{[^{}\n]*(?:\n[^{}]*)?\}\}")
 GENERIC_ROUTE = "converts stat leads into initiative, damage pressure, and survivable exchanges"
+DIRTY_FIGHT_CARD_PATTERNS = (
+    "{{",
+    "}}",
+    "tag:",
+    "tabber",
+    "border",
+    "content",
+    "{|",
+    "|}",
+    "no • yes",
+    "yes • no",
+)
+FIELD_LABEL_RE = re.compile(
+    r"\b(?:tier|origin|classification|powers?|abilities|equipment|weaknesses|notable attacks/techniques|attack potency|speed|durability)\s*:",
+    re.IGNORECASE,
+)
 
 
 def truncate_at_sentence_boundary(text: str, limit: int) -> str:
@@ -80,6 +96,18 @@ def clean_text(value: Any, *, limit: int = 220) -> str:
     return clamp_text(text, limit)
 
 
+def clean_detail_text(value: Any, *, limit: int = 8000) -> str:
+    text = str(value or "")
+    text = RAW_TEMPLATE_RE.sub("", text)
+    text = re.sub(r"\{\{|\}\}|\|", " ", text)
+    text = re.sub(r"\bPart\s+[IVXLC]+\s*=\s*", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bNotable Attacks/Techniques\s*:?", "Notable techniques:", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(his|her|their),\s+\1\b", r"\1", text, flags=re.IGNORECASE)
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n{3,}", "\n\n", text).strip(" -:\n\t")
+    return text[:limit].rstrip()
+
+
 def compress_route_text(decision: dict[str, Any], route: str) -> str:
     normalized = route.casefold()
     if any(axis in normalized for axis in ("attack_potency:", "speed:", "durability:", "outerverse level", "athlete level")):
@@ -116,14 +144,14 @@ def factor_category(value: str) -> str:
     return clean_text(value, limit=48) or "Key Factor"
 
 
-def compressed_evidence(factor: dict[str, Any]) -> str:
+def compressed_evidence(factor: dict[str, Any], *, limit: int = 160) -> str:
     category = factor_category(str(factor.get("factor") or ""))
-    evidence = clean_text(factor.get("evidence"), limit=125)
-    effect = clean_text(factor.get("tactical_effect"), limit=125)
+    evidence = clean_text(factor.get("evidence"), limit=max(80, limit - 35))
+    effect = clean_text(factor.get("tactical_effect"), limit=max(80, limit - 35))
     if evidence:
-        return bullet_text(clamp_text(f"{category}: {evidence}", 160))
+        return bullet_text(clamp_text(f"{category}: {evidence}", limit))
     if category and effect:
-        return bullet_text(clamp_text(f"{category}: {effect}", 160))
+        return bullet_text(clamp_text(f"{category}: {effect}", limit))
     return bullet_text(f"{category}: packet-backed edge.")
 
 
@@ -131,8 +159,33 @@ def bullet_text(value: str) -> str:
     return str(value or "").rstrip(" ,;:")
 
 
+def is_dirty_fight_card_item(value: str) -> bool:
+    text = str(value or "")
+    normalized = text.casefold()
+    if any(pattern in normalized for pattern in DIRTY_FIGHT_CARD_PATTERNS):
+        return True
+    if FIELD_LABEL_RE.search(text):
+        return True
+    if normalized.count("|") >= 2 or normalized.count("{") or normalized.count("}"):
+        return True
+    punctuation = sum(normalized.count(mark) for mark in ("=", "[", "]", "{", "}", "|"))
+    return punctuation >= 3
+
+
 def sanitize_fight_card_item(value: str) -> str:
-    text = RAW_TEMPLATE_RE.sub("", str(value or ""))
+    raw = str(value or "")
+    if not raw.strip():
+        return ""
+    if is_dirty_fight_card_item(raw):
+        source_label_match = re.match(r"^[A-Z][A-Za-z .'-]{1,40}=\s*(.+)$", raw)
+        if not source_label_match:
+            return ""
+        raw = source_label_match.group(1)
+    text = RAW_TEMPLATE_RE.sub("", raw)
+    text = re.sub(r"\{\{.*?$", "", text)
+    text = re.sub(r"\{\{|\}\}|\|", " ", text)
+    text = re.sub(r"\b(?:tag:|tabber|Border|Content)\b", " ", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:No|Yes)\b(?:\s*•\s*\b(?:No|Yes|Content)\b)+", " ", text, flags=re.IGNORECASE)
     text = re.sub(r"\bPart\s+[IVXLC]+\s*=\s*", "", text, flags=re.IGNORECASE)
     text = re.sub(r"^\s*\d+\s*(?:&\s*\d+)?\)\s*", "", text)
     text = re.sub(r"^\s*\d+[.)]\s*", "", text)
@@ -150,7 +203,12 @@ def sanitize_fight_card_item(value: str) -> str:
     if "," in text:
         parts = [part.strip(" -,:;") for part in text.split(",") if part.strip(" -,:;")]
         text = ", ".join(parts[:4])
+    text = text.replace("[", " ").replace("]", " ")
+    if text.count("(") != text.count(")"):
+        text = text.replace("(", " ").replace(")", " ")
     text = re.sub(r"\s+", " ", text).strip(" -,:;.")
+    if is_dirty_fight_card_item(text):
+        return ""
     return bullet_text(clamp_text(text, 60))
 
 
@@ -173,6 +231,13 @@ def compact_list(values: Any, *, limit: int = 5) -> list[str]:
         if len(compact) >= limit:
             break
     return compact
+
+
+def compact_value(value: Any, *, limit: int = 60) -> str:
+    if isinstance(value, dict):
+        value = value.get("name") or value.get("value") or value.get("description")
+    cleaned = sanitize_fight_card_item(str(value or ""))
+    return clamp_text(cleaned, limit) if cleaned else ""
 
 
 def join_tools(values: Any) -> str:
@@ -198,6 +263,29 @@ def formatted_loser_best_path(decision: dict[str, Any]) -> str:
     if winner and winner.casefold() not in path.casefold():
         path = path.rstrip(".") + f" before {winner} could control the pace."
     return truncate_at_sentence_boundary(path, 300)
+
+
+def formatted_loser_best_path_full(decision: dict[str, Any]) -> str:
+    short = formatted_loser_best_path(decision)
+    loser = clean_text(decision.get("loser"), limit=80) or "The loser"
+    winner = clean_text(decision.get("winner"), limit=80) or "the winner"
+    raw = clean_detail_text(decision.get("loser_best_path_full") or decision.get("loser_best_path"), limit=2500)
+    if raw and len(raw) > len(short) + 40:
+        base = raw
+    else:
+        base = short
+    if loser.casefold() not in base.casefold() or winner.casefold() not in base.casefold():
+        base = (
+            f"{base.rstrip('.')} The practical upset route for {loser} was to pressure {winner}'s risk early, "
+            f"force the fight into {loser}'s strongest confirmed lane, and prevent {winner} from settling into "
+            "the more reliable route."
+        )
+    if "less reliable" not in base.casefold():
+        base = (
+            f"{base.rstrip('.')} It remained less reliable because the deterministic packet gave "
+            f"{winner} the cleaner route to repeatable control or finishing pressure."
+        )
+    return clean_detail_text(base, limit=3000)
 
 
 def probability_pair(decision: dict[str, Any]) -> tuple[int, int]:
@@ -250,10 +338,22 @@ def fight_card_blocks(decision: dict[str, Any]) -> list[dict[str, str]]:
         name = clean_text(card.get("name"), limit=80)
         if not name:
             continue
-        lines = [
-            f"Key tools: {join_tools(card.get('key_tools'))}",
-            f"Best route: {clean_text(card.get('best_route') or 'Needs a clearer packet-backed win route.', limit=170)}",
-        ]
+        lines = []
+        height_weight = clean_text(card.get("height_weight"), limit=80)
+        if height_weight:
+            lines.append(f"Height/Weight: {height_weight}")
+        weapon_power = join_tools(card.get("weapon_power") or card.get("weapon_of_choice") or card.get("power_of_choice"))
+        if weapon_power != "No named tools supplied.":
+            lines.append(f"Weapon/Power: {weapon_power}")
+        style = clean_text(card.get("style") or (card.get("combat_identity") or {}).get("combat_style"), limit=90)
+        if style:
+            lines.append(f"Style: {style}")
+        lines.extend(
+            [
+                f"Key tools: {join_tools(card.get('key_tools'))}",
+                f"Win path: {clean_text(card.get('best_route') or 'Needs a clearer packet-backed win route.', limit=170)}",
+            ]
+        )
         risk = clean_text(card.get("risk"), limit=130)
         if risk:
             lines.append(f"Risk: {risk}")
@@ -273,7 +373,10 @@ def fighter_cards(decision: dict[str, Any]) -> list[dict[str, Any]]:
         fighters.append(
             {
                 "fighter_name": name,
-                "key_tools": compact_list(card.get("key_tools"), limit=4),
+                "height_weight": clean_text(card.get("height_weight"), limit=80),
+                "weapon_power": compact_list(card.get("weapon_power") or card.get("weapon_of_choice") or card.get("power_of_choice"), limit=2),
+                "style": clean_text(card.get("style") or (card.get("combat_identity") or {}).get("combat_style"), limit=90),
+                "key_tools": compact_list(card.get("key_tools"), limit=3),
                 "win_path": clean_text(card.get("best_route") or "Needs a clearer packet-backed win route.", limit=160),
                 "risk": clean_text(card.get("risk") or "No clean exploitable weakness supplied.", limit=120),
             }
@@ -281,13 +384,66 @@ def fighter_cards(decision: dict[str, Any]) -> list[dict[str, Any]]:
     return fighters
 
 
-def evidence_bullets(decision: dict[str, Any]) -> list[str]:
+def evidence_bullets(decision: dict[str, Any], *, limit: int = 160) -> list[str]:
     factors = [factor for factor in decision.get("deciding_factors") or [] if isinstance(factor, dict)]
     loser_best_path = formatted_loser_best_path(decision)
-    bullets = [compressed_evidence(factor) for factor in factors[:2]]
+    bullets = [compressed_evidence(factor, limit=limit) for factor in factors[:2]]
     if loser_best_path:
-        bullets.append(bullet_text(clamp_text(f"Loser path: {loser_best_path}", 160)))
+        bullets.append(bullet_text(clamp_text(f"Loser path: {loser_best_path}", limit)))
     return [bullet for bullet in bullets[:3] if bullet]
+
+
+def full_evidence_text(decision: dict[str, Any]) -> str:
+    lines: list[str] = []
+    for card in decision.get("matchup_card") or []:
+        if not isinstance(card, dict):
+            continue
+        identity = card.get("combat_identity") if isinstance(card.get("combat_identity"), dict) else {}
+        summary = clean_detail_text(identity.get("identity_summary"), limit=400)
+        non_physical = ", ".join(compact_list(identity.get("non_physical_options"), limit=4))
+        if summary:
+            lines.append(f"Combat identity: {summary}")
+        if non_physical:
+            lines.append(f"Non-physical options: {card.get('name')}: {non_physical}")
+    for factor in decision.get("deciding_factors") or []:
+        if not isinstance(factor, dict):
+            continue
+        category = factor_category(str(factor.get("factor") or "Key Factor"))
+        evidence = clean_detail_text(factor.get("evidence"), limit=900)
+        effect = clean_detail_text(factor.get("tactical_effect"), limit=900)
+        if evidence or effect:
+            lines.append(f"{category}: {evidence or effect}")
+            if evidence and effect and effect.casefold() not in evidence.casefold():
+                lines.append(f"  Matchup read: {effect}")
+    breakdown = decision.get("advantage_breakdown") if isinstance(decision.get("advantage_breakdown"), dict) else {}
+    for category, item in breakdown.items():
+        if not isinstance(item, dict):
+            continue
+        reason = clean_detail_text(item.get("reason"), limit=600)
+        winner = clean_text(item.get("winner"), limit=80)
+        margin = clean_text(item.get("margin"), limit=40)
+        if reason:
+            label = factor_category(str(category))
+            suffix = f" ({winner}, {margin} margin)" if winner or margin else ""
+            lines.append(f"{label}{suffix}: {reason}")
+    for swing in decision.get("swing_factors") or []:
+        if not isinstance(swing, dict):
+            continue
+        title = clean_text(swing.get("title"), limit=80) or "Swing factor"
+        reason = clean_detail_text(swing.get("reason") or swing.get("impact"), limit=700)
+        if reason:
+            lines.append(f"{title}: {reason}")
+    loser_path = formatted_loser_best_path_full(decision)
+    if loser_path:
+        lines.append(f"Why the alternate route fell short: {loser_path}")
+    deduped: list[str] = []
+    seen = set()
+    for line in lines:
+        normalized = line.casefold()
+        if line and normalized not in seen:
+            seen.add(normalized)
+            deduped.append(line)
+    return "\n".join(f"• {line}" for line in deduped) or "No expanded evidence available."
 
 
 def structured_decision_output(decision: dict[str, Any]) -> dict[str, Any]:
@@ -296,8 +452,9 @@ def structured_decision_output(decision: dict[str, Any]) -> dict[str, Any]:
     confidence = clean_text(decision.get("confidence"), limit=40)
     winner_pct, loser_pct = probability_pair(decision)
     summary = short_summary(decision)
-    loser_best_path = formatted_loser_best_path(decision)
-    evidence = evidence_bullets(decision)
+    loser_best_path_short = formatted_loser_best_path(decision)
+    loser_best_path_full = formatted_loser_best_path_full(decision)
+    evidence = evidence_bullets(decision, limit=140)
     battle_odds_text = f"{winner or 'Winner'} {winner_pct}% / {loser or 'Loser'} {loser_pct}%"
     title = matchup_title(decision)
     display_title = f"⚔️ {title.upper()}"
@@ -310,16 +467,9 @@ def structured_decision_output(decision: dict[str, Any]) -> dict[str, Any]:
         confidence_color_name = "orange"
     else:
         confidence_color_name = "neutral"
-    full_evidence = "\n".join(f"• {bullet}" for bullet in evidence)
-    full_analysis = "\n\n".join(
-        part
-        for part in (
-            summary,
-            f"Evidence:\n{full_evidence}" if full_evidence else "",
-            f"Loser's best path:\n{loser_best_path}" if loser_best_path else "",
-        )
-        if part
-    )
+    public_summary = clamp_text(summary, 300)
+    full_analysis = clean_detail_text(decision.get("summary") or decision.get("analysis") or summary, limit=8000)
+    full_evidence = full_evidence_text(decision)
     return {
         "matchup_title": title,
         "display_title": display_title,
@@ -332,13 +482,16 @@ def structured_decision_output(decision: dict[str, Any]) -> dict[str, Any]:
         "battle_odds_text": battle_odds_text,
         "fight_card": fight_card_blocks(decision),
         "fighter_cards": fighter_cards(decision),
-        "quick_verdict": clamp_text(summary, 300),
+        "public_summary": public_summary,
+        "quick_verdict": public_summary,
         "quick_evidence": evidence,
         "status": clean_text(decision.get("status") or "", limit=180),
         "short_summary": clamp_text(summary, 650),
         "evidence_bullets": evidence,
         "full_evidence": full_evidence,
-        "loser_best_path": loser_best_path,
+        "loser_best_path": loser_best_path_short,
+        "loser_best_path_short": loser_best_path_short,
+        "loser_best_path_full": loser_best_path_full,
         "full_analysis": full_analysis,
     }
 

@@ -9,6 +9,7 @@ import re
 from typing import Any
 
 from battlebot.common.db import connect_database
+from battlebot.fight.decision_formatter import sanitize_fight_card_item
 from battlebot.profiles.fight_packet import build_fight_packet
 
 
@@ -79,6 +80,25 @@ TACTICAL_CATEGORIES = (
     "Weakness Exploitation",
     "Battlefield Control",
 )
+NON_PHYSICAL_TERMS = (
+    "magic",
+    "spell",
+    "purification",
+    "healing",
+    "barrier",
+    "energy projection",
+    "telepathy",
+    "telekinesis",
+    "reality warping",
+    "soul manipulation",
+    "transformation",
+    "time manipulation",
+    "sealing",
+    "elemental",
+    "ranged",
+    "cosmic",
+)
+PHYSICAL_ONLY_TERMS = ("superhuman physical characteristics", "enhanced strength", "martial arts")
 
 
 def text_rank(value: str | None, *, speed: bool = False) -> int | None:
@@ -375,7 +395,7 @@ def item_names(contender: dict[str, Any], section: str, limit: int = 3) -> list[
     for item in contender.get(section) or []:
         name = item.get("name") or item.get("id")
         if name:
-            cleaned = clean_strategy_fragment(str(name))
+            cleaned = sanitize_fight_card_item(clean_strategy_fragment(str(name)))
             if cleaned:
                 names.append(cleaned)
     return names[:limit]
@@ -384,9 +404,14 @@ def item_names(contender: dict[str, Any], section: str, limit: int = 3) -> list[
 def clean_strategy_fragment(value: str) -> str:
     text = str(value or "")
     text = re.sub(r"\{\{[^{}\n]*(?:\n[^{}]*)?\}\}", "", text)
+    text = re.sub(r"\{\{.*?$|\}\}|\|", " ", text)
+    text = re.sub(r"\b(?:tag:|tabber|Border|Content)\b", " ", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:No|Yes)\b(?:\s*•\s*\b(?:No|Yes|Content)\b)+", " ", text, flags=re.IGNORECASE)
     text = re.sub(r"\bPart\s+[IVXLC]+\s*=\s*", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\bNotable Attacks/Techniques\s*:?", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\b(?:Weaknesses|Weakness|Abilities|Equipment|Powers?)\s*:", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"^[A-Z][A-Za-z .'-]{1,40}=\s*", "", text)
+    text = re.sub(r"^\s*\d+\s*(?:&\s*\d+)?\)\s*", "", text)
     text = re.sub(r"\b(his|her|their),\s+\1\b", r"\1", text, flags=re.IGNORECASE)
     text = re.sub(r"\s+", " ", text).strip(" -:=,;\n\t")
     return text
@@ -469,7 +494,7 @@ def compact_names(values: Any, *, limit: int = 3) -> list[str]:
     if not values:
         return []
     if isinstance(values, str):
-        cleaned = clean_strategy_fragment(values)
+        cleaned = sanitize_fight_card_item(clean_strategy_fragment(values))
         return [cleaned] if cleaned else []
     names = []
     if isinstance(values, list):
@@ -479,10 +504,183 @@ def compact_names(values: Any, *, limit: int = 3) -> list[str]:
             else:
                 name = item
             if name:
-                cleaned = clean_strategy_fragment(str(name))
+                cleaned = sanitize_fight_card_item(clean_strategy_fragment(str(name)))
                 if cleaned:
                     names.append(cleaned)
     return names[:limit]
+
+
+def nested_value(mapping: dict[str, Any], paths: tuple[tuple[str, ...], ...]) -> Any:
+    for path in paths:
+        value: Any = mapping
+        for key in path:
+            if not isinstance(value, dict) or key not in value:
+                value = None
+                break
+            value = value.get(key)
+        if value not in (None, ""):
+            return value
+    return None
+
+
+def physical_line(contender: dict[str, Any]) -> str:
+    height = clean_strategy_fragment(
+        str(
+            nested_value(
+                contender,
+                (
+                    ("height",),
+                    ("physical_profile", "height"),
+                    ("stats", "height"),
+                    ("bio", "height"),
+                ),
+            )
+            or ""
+        )
+    )
+    weight = clean_strategy_fragment(
+        str(
+            nested_value(
+                contender,
+                (
+                    ("weight",),
+                    ("physical_profile", "weight"),
+                    ("stats", "weight"),
+                    ("bio", "weight"),
+                ),
+            )
+            or ""
+        )
+    )
+    if height and weight:
+        return f"{height} / {weight}"
+    return height or weight
+
+
+def weapon_power_choice(contender: dict[str, Any]) -> list[str]:
+    weapons = compact_names(
+        contender.get("weapon_of_choice")
+        or contender.get("weapons")
+        or contender.get("equipment")
+        or tactical_value(contender, "weapon_of_choice"),
+        limit=2,
+    )
+    if weapons:
+        return weapons
+    powers = compact_names(
+        contender.get("power_of_choice")
+        or contender.get("powers")
+        or contender.get("abilities")
+        or tactical_value(contender, "power_of_choice")
+        or tactical_value(contender, "power_source"),
+        limit=2,
+    )
+    return powers
+
+
+def combined_clean_terms(contender: dict[str, Any], *, limit: int = 20) -> list[str]:
+    terms: list[str] = []
+    for key in (
+        "abilities",
+        "powers",
+        "special_abilities",
+        "equipment",
+        "weapons",
+        "magic",
+        "forms",
+        "transformations",
+        "techniques",
+        "weaknesses",
+    ):
+        terms.extend(compact_names(contender.get(key) or tactical_value(contender, key), limit=limit))
+    for key in (
+        "power_source",
+        "combat_style",
+        "fighting_style",
+        "personality",
+        "summary",
+        "description",
+        "notes",
+        "win_conditions",
+        "loss_conditions",
+    ):
+        value = contender.get(key) or tactical_value(contender, key)
+        if value:
+            terms.extend(compact_names(value, limit=3))
+    deduped: list[str] = []
+    seen = set()
+    for term in terms:
+        normalized = term.casefold()
+        if normalized not in seen:
+            seen.add(normalized)
+            deduped.append(term)
+    return deduped[:limit]
+
+
+def non_physical_options(contender: dict[str, Any]) -> list[str]:
+    options = []
+    for term in combined_clean_terms(contender, limit=30):
+        normalized = term.casefold()
+        if any(marker in normalized for marker in NON_PHYSICAL_TERMS):
+            options.append(term)
+    return options[:6]
+
+
+def combat_mode(contender: dict[str, Any]) -> str:
+    terms = " ".join(combined_clean_terms(contender, limit=30)).casefold()
+    if any(marker in terms for marker in ("reality warping", "time manipulation", "cosmic", "silver crystal", "soul manipulation")):
+        return "cosmic/reality hax user"
+    if any(marker in terms for marker in ("magic", "spell", "purification", "healing", "barrier", "transformation")):
+        return "magic user"
+    if any(marker in terms for marker in ("energy projection", "ranged", "beam", "blast")):
+        return "ranged energy user"
+    if any(marker in terms for marker in ("weapon", "sword", "axe", "claws", "gun", "staff", "rod")):
+        return "weapon specialist"
+    if any(marker in terms for marker in ("tech", "armor", "gadget")):
+        return "tech user"
+    if any(marker in terms for marker in ("martial", "combat style", "hand to hand")):
+        return "martial artist"
+    if any(marker in terms for marker in ("durability", "strength", "bruiser", "tank")):
+        return "tank/bruiser"
+    return "packet-defined fighter"
+
+
+def combat_identity(contender: dict[str, Any]) -> dict[str, Any]:
+    style = compact_names(
+        contender.get("combat_style")
+        or contender.get("fighting_style")
+        or tactical_value(contender, "combat_style")
+        or tactical_value(contender, "fighting_style"),
+        limit=1,
+    )
+    powers = compact_names(
+        contender.get("abilities")
+        or contender.get("powers")
+        or contender.get("special_abilities")
+        or contender.get("magic"),
+        limit=6,
+    )
+    weapons = compact_names(contender.get("weapons") or contender.get("equipment"), limit=4)
+    forms = compact_names(contender.get("forms") or contender.get("transformations") or tactical_value(contender, "forms"), limit=4)
+    power_source = compact_names(contender.get("power_source") or tactical_value(contender, "power_source"), limit=2)
+    non_physical = non_physical_options(contender)
+    mode = combat_mode(contender)
+    identity_summary = f"{contender_name(contender)} is a {mode}"
+    if non_physical:
+        identity_summary += f" with non-physical options: {', '.join(non_physical[:3])}"
+    return {
+        "identity_summary": identity_summary,
+        "combat_mode": mode,
+        "combat_style": style[0] if style else mode,
+        "power_source": power_source,
+        "signature_powers": powers,
+        "signature_weapons": weapons,
+        "signature_forms": forms,
+        "non_physical_options": non_physical,
+        "usual_win_condition": compact_names(tactical_value(contender, "win_conditions") or contender.get("win_conditions"), limit=2),
+        "personality_flavor": compact_names(contender.get("personality") or tactical_value(contender, "personality"), limit=1),
+        "limitations_or_risks": compact_names(contender.get("weaknesses") or tactical_value(contender, "loss_conditions"), limit=3),
+    }
 
 
 def named_tools(contender: dict[str, Any], *, limit: int = 5) -> list[str]:
@@ -499,6 +697,9 @@ def named_tools(contender: dict[str, Any], *, limit: int = 5) -> list[str]:
     deduped = []
     seen = set()
     for tool in tools:
+        tool = sanitize_fight_card_item(tool)
+        if not tool:
+            continue
         normalized = tool.casefold()
         if normalized in seen:
             continue
@@ -537,9 +738,14 @@ def matchup_card(
             best_route = loser_route
         else:
             best_route = "Needs a clearer packet-backed win route."
+        identity = combat_identity(contender)
         cards.append(
             {
                 "name": contender_name(contender),
+                "height_weight": physical_line(contender),
+                "weapon_power": weapon_power_choice(contender),
+                "combat_identity": identity,
+                "style": identity["combat_style"],
                 "key_tools": named_tools(contender),
                 "best_route": best_route,
                 "risk": main_risk(contender),

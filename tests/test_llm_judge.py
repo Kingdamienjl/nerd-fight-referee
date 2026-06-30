@@ -82,6 +82,12 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn('"his opponent"', user_prompt)
         self.assertIn('"their opponent"', user_prompt)
         self.assertIn("Use fighter names naturally at phase transitions", user_prompt)
+        self.assertIn("identify each fighter's combat mode", user_prompt)
+        self.assertIn("magic user", user_prompt)
+        self.assertIn("cosmic/reality hax user", user_prompt)
+        self.assertIn("Do not describe a fighter as relying on punches, kicks, grappling, or mundane melee", user_prompt)
+        self.assertIn("signature magic, transformation, ranged powers, purification, barriers", user_prompt)
+        self.assertIn("Do not flatten magical, cosmic, ranged, tech, or hax-based fighters into generic brawlers", user_prompt)
         self.assertIn("Only name a technique", user_prompt)
         self.assertIn("exact name appears in the compact evidence packet", user_prompt)
         self.assertIn("invented named techniques", user_prompt)
@@ -100,6 +106,39 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("Upset justification:", user_prompt)
         self.assertIn("evidence packet is source of truth", user_prompt)
         self.assertIn("tactical_profile", user_prompt)
+
+    def test_prompt_surfaces_sailor_moon_like_non_physical_options(self):
+        sailor_packet = {
+            "errors": [],
+            "contender_a": {
+                "canonical_name": "Usagi Tsukino",
+                "character_id": "sailor-moon",
+                "franchise": "Sailor Moon",
+                "category": "anime",
+                "power_scale": {"attack_potency": "Moon level", "speed": "Subsonic", "durability": "Building level"},
+                "abilities": [
+                    {"name": "Transformation"},
+                    {"name": "Magic"},
+                    {"name": "Purification"},
+                    {"name": "Healing"},
+                    {"name": "Energy Projection"},
+                    {"name": "Barriers"},
+                ],
+                "equipment": [{"name": "Silver Crystal"}, {"name": "Moon Stick"}, {"name": "{{Border|No|Yes|Content}}"}],
+                "tactical_profile": {"combat_style": "magical ranged escalation"},
+            },
+            "contender_b": contender("Street Fighter", "street-fighter", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+        smoke = smoke_judge_packet(sailor_packet)
+        user_prompt = build_prompt(sailor_packet, smoke)[1]["content"]
+
+        self.assertIn("Silver Crystal", user_prompt)
+        self.assertIn("Moon Stick", user_prompt)
+        self.assertIn("Purification", user_prompt)
+        self.assertIn("Barriers", user_prompt)
+        self.assertIn("magical ranged escalation", user_prompt)
+        self.assertNotIn("{{Border", user_prompt)
 
     async def test_llm_judge_uses_plain_text_as_referee_explanation_only(self):
         async def caller(messages, env=None):

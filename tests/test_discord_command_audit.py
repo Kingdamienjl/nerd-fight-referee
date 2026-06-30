@@ -6,7 +6,14 @@ from tempfile import TemporaryDirectory
 from unittest.mock import AsyncMock, patch
 
 from battlebot.bot import audit
-from battlebot.bot.commands.fight import FightDetailsView, build_confidence_embed_color, build_fight_embed, send_deferred_fight_result
+from battlebot.bot.commands.fight import (
+    FightDetailsView,
+    build_confidence_embed_color,
+    build_fight_embed,
+    fight_detail_payload,
+    send_deferred_fight_result,
+    send_ephemeral_chunks,
+)
 
 
 class FakeDiscordObject:
@@ -45,9 +52,18 @@ class FakeFollowup:
         return None
 
 
+class FakeResponse:
+    def __init__(self):
+        self.calls = []
+
+    async def send_message(self, *args, **kwargs):
+        self.calls.append({"args": args, "kwargs": kwargs})
+
+
 class FakeFightInteraction(FakeInteraction):
     def __init__(self):
         self.followup = FakeFollowup()
+        self.response = FakeResponse()
 
 
 class DiscordCommandAuditTests(unittest.IsolatedAsyncioTestCase):
@@ -92,7 +108,7 @@ class DiscordCommandAuditTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("🟦 Godzilla — Fight Card", field_names)
         self.assertIn("⚖️ Quick Verdict", field_names)
         self.assertIn("🔎 Quick Evidence", field_names)
-        self.assertIn("Evidence:", full_analysis)
+        self.assertEqual(full_analysis, "Spawn opened by forcing short engagements. Godzilla answered by extending pressure.")
 
     def test_confidence_colors_use_custom_theme_values(self):
         self.assertEqual(build_confidence_embed_color("strong").value, 0x10B981)
@@ -105,6 +121,40 @@ class DiscordCommandAuditTests(unittest.IsolatedAsyncioTestCase):
         labels = [item.label for item in view.children]
 
         self.assertEqual(labels, ["🧠 Full Analysis", "📜 Evidence", "🛣️ Loser's Path"])
+
+    def test_fight_detail_payload_uses_separate_full_fields(self):
+        payload = fight_detail_payload(
+            {
+                "winner": "Cloud",
+                "loser": "Kratos",
+                "confidence": "medium",
+                "summary": "Full judge analysis paragraph one. Full judge analysis paragraph two.",
+                "loser_best_path": "Kratos needed to force melee before Cloud controlled range.",
+                "deciding_factors": [
+                    {
+                        "factor": "Weapon",
+                        "evidence": "Cloud had Buster Sword and Limit Breaks.",
+                        "tactical_effect": "Cloud could punish openings with burst damage.",
+                    }
+                ],
+            }
+        )
+
+        self.assertIn("Full judge analysis paragraph two.", payload["full_analysis"])
+        self.assertIn("Weapon: Cloud had Buster Sword", payload["full_evidence"])
+        self.assertIn("less reliable", payload["loser_best_path"])
+        self.assertNotEqual(payload["full_analysis"], payload["full_evidence"])
+        self.assertNotEqual(payload["full_evidence"], payload["loser_best_path"])
+
+    async def test_ephemeral_detail_chunks_are_page_labeled_and_split(self):
+        interaction = FakeFightInteraction()
+        text = "\n\n".join(f"Paragraph {index} has enough words to split safely." for index in range(80))
+
+        await send_ephemeral_chunks(interaction, "Full Analysis", text)
+
+        self.assertGreater(len(interaction.response.calls) + len(interaction.followup.calls), 1)
+        self.assertIn("Full Analysis - Page 1/", interaction.response.calls[0]["args"][0])
+        self.assertIn("Full Analysis - Page 2/", interaction.followup.calls[0]["args"][0])
 
     async def test_initial_fight_output_is_sent_before_llm_finishes(self):
         interaction = FakeFightInteraction()

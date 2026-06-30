@@ -101,14 +101,22 @@ def title_case_confidence(confidence: str) -> str:
 
 def fighter_card_value(card: dict[str, Any]) -> str:
     tools = card.get("key_tools") or ["No named tools supplied."]
+    lines = []
+    if card.get("height_weight"):
+        lines.append(f"Height/Weight: {card['height_weight']}")
+    if card.get("weapon_power"):
+        lines.append(f"Weapon/Power: {' • '.join(str(tool) for tool in card['weapon_power'][:2])}")
+    if card.get("style"):
+        lines.append(f"Style: {card['style']}")
+    lines.extend(
+        [
+            f"Key tools: {' • '.join(str(tool) for tool in tools[:3])}",
+            f"Win path: {card.get('win_path') or 'Needs a clearer packet-backed win route.'}",
+            f"Risk: {card.get('risk') or 'No clean exploitable weakness supplied.'}",
+        ]
+    )
     return compact_field(
-        "\n".join(
-            [
-                f"Tools: {' • '.join(str(tool) for tool in tools[:4])}",
-                f"Win path: {card.get('win_path') or 'Needs a clearer packet-backed win route.'}",
-                f"Risk: {card.get('risk') or 'No clean exploitable weakness supplied.'}",
-            ]
-        ),
+        "\n".join(lines[:5]),
         900,
     )
 
@@ -116,7 +124,7 @@ def fighter_card_value(card: dict[str, Any]) -> str:
 async def send_ephemeral_chunks(interaction: discord.Interaction, title: str, content: str) -> None:
     chunks = split_text_for_discord(content or "No detail available.", 1800)
     for index, chunk in enumerate(chunks):
-        prefix = f"**{title}**\n" if index == 0 else f"**{title} continued**\n"
+        prefix = f"**{title} - Page {index + 1}/{len(chunks)}**\n"
         if index == 0:
             await interaction.response.send_message(prefix + chunk, ephemeral=True)
         else:
@@ -146,7 +154,7 @@ def fight_detail_payload(decision: dict[str, Any]) -> dict[str, str]:
     return {
         "full_analysis": structured["full_analysis"],
         "full_evidence": structured["full_evidence"] or "No expanded evidence available.",
-        "loser_best_path": structured["loser_best_path"] or "No alternate loser path available.",
+        "loser_best_path": structured["loser_best_path_full"] or "No alternate loser path available.",
     }
 
 
