@@ -240,6 +240,33 @@ class SmokeJudgeTests(unittest.TestCase):
         self.assertIn("Blades of Chaos", result["matchup_card"][1]["weapon_power"])
         self.assertNotIn("{{Border|No|Yes|Content}}", result["matchup_card"][1]["weapon_power"])
 
+    def test_smoke_judge_rejects_image_filename_and_keeps_clean_masamune(self):
+        sephiroth = contender(
+            "Sephiroth",
+            "sephiroth",
+            "Moon level",
+            "Supersonic",
+            "Building level",
+            abilities=[{"name": "No, Yes, Yes"}],
+            equipment=[
+                {"name": "SephirothCGModel CrisisCore.png"},
+                {"name": "Sephiroth with the Masamune in Crisis Core Original"},
+            ],
+        )
+        packet = {
+            "errors": [],
+            "contender_a": sephiroth,
+            "contender_b": contender("Cloud", "cloud", "Town level", "Subsonic", "Building level"),
+            "warnings": [],
+        }
+
+        result = smoke_judge_packet(packet)
+        card = result["matchup_card"][0]
+
+        self.assertIn("Masamune", card["weapon_power"])
+        self.assertNotIn("SephirothCGModel CrisisCore.png", card["weapon_power"])
+        self.assertNotIn("No, Yes, Yes", card["key_tools"])
+
     def test_smoke_judge_extracts_magical_combat_identity_and_non_physical_options(self):
         sailor_moon = contender(
             "Usagi Tsukino",
@@ -275,6 +302,12 @@ class SmokeJudgeTests(unittest.TestCase):
         self.assertIn("Purification", identity["non_physical_options"])
         self.assertIn("Barriers", identity["non_physical_options"])
         self.assertIn("Silver Crystal", result["matchup_card"][0]["weapon_power"])
+        self.assertNotIn("Superhuman Physical Characteristics", result["matchup_card"][0]["weapon_power"])
+        if "Superhuman Physical Characteristics" in result["matchup_card"][0]["key_tools"]:
+            self.assertLess(
+                result["matchup_card"][0]["key_tools"].index("Magic"),
+                result["matchup_card"][0]["key_tools"].index("Superhuman Physical Characteristics"),
+            )
         self.assertNotEqual(result["matchup_card"][0]["key_tools"], ["Superhuman Physical Characteristics"])
         self.assertNotIn("{{Border", " ".join(result["matchup_card"][0]["key_tools"]))
 

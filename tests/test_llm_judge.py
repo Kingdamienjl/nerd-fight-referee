@@ -2,7 +2,7 @@ import unittest
 import httpx
 
 from battlebot.fight.decision_formatter import format_decision
-from battlebot.fight.llm_judge import build_prompt, judge_fight_packet
+from battlebot.fight.llm_judge import build_prompt, judge_fight_packet, llm_output_violates_grounding
 from battlebot.fight.smoke_judge import smoke_judge_packet
 
 
@@ -88,6 +88,8 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("Do not describe a fighter as relying on punches, kicks, grappling, or mundane melee", user_prompt)
         self.assertIn("signature magic, transformation, ranged powers, purification, barriers", user_prompt)
         self.assertIn("Do not flatten magical, cosmic, ranged, tech, or hax-based fighters into generic brawlers", user_prompt)
+        self.assertIn("Ban these vague labels", user_prompt)
+        self.assertIn("Require both fighter names in the opening, counterplay, and finish", user_prompt)
         self.assertIn("Only name a technique", user_prompt)
         self.assertIn("exact name appears in the compact evidence packet", user_prompt)
         self.assertIn("invented named techniques", user_prompt)
@@ -139,6 +141,60 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("Barriers", user_prompt)
         self.assertIn("magical ranged escalation", user_prompt)
         self.assertNotIn("{{Border", user_prompt)
+
+    def test_grounding_guard_catches_vague_opponent_labels_and_generic_melee(self):
+        sailor_packet = {
+            "errors": [],
+            "contender_a": {
+                "canonical_name": "Usagi Tsukino",
+                "character_id": "sailor-moon",
+                "power_scale": {"attack_potency": "Moon level", "speed": "Subsonic", "durability": "Building level"},
+                "abilities": [{"name": "Magic"}, {"name": "Purification"}, {"name": "Energy Projection"}],
+                "equipment": [{"name": "Silver Crystal"}],
+            },
+            "contender_b": contender("Street Fighter", "street-fighter", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+        smoke = smoke_judge_packet(sailor_packet)
+
+        self.assertIn(
+            "banned vague label",
+            llm_output_violates_grounding("Usagi overwhelmed his opponent with magic.", smoke),
+        )
+        self.assertIn(
+            "generic melee",
+            llm_output_violates_grounding("Usagi Tsukino countered with rapid strikes and heavy punches.", smoke),
+        )
+
+    async def test_grounding_guard_falls_back_when_llm_uses_generic_melee_for_magic_user(self):
+        sailor_packet = {
+            "errors": [],
+            "contender_a": {
+                "canonical_name": "Usagi Tsukino",
+                "character_id": "sailor-moon",
+                "power_scale": {"attack_potency": "Moon level", "speed": "Subsonic", "durability": "Building level"},
+                "abilities": [{"name": "Magic"}, {"name": "Purification"}, {"name": "Energy Projection"}],
+                "equipment": [{"name": "Silver Crystal"}],
+            },
+            "contender_b": contender("Street Fighter", "street-fighter", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+        smoke = smoke_judge_packet(sailor_packet)
+
+        async def caller(messages, env=None):
+            return "Usagi Tsukino opened with rapid strikes before his opponent fell back."
+
+        result = await judge_fight_packet(
+            sailor_packet,
+            smoke,
+            env={"BATTLEBOT_LLM_ENABLED": "true"},
+            ollama_caller=caller,
+        )
+
+        self.assertTrue(result["diagnostics"]["fallback"])
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "grounding_guard")
+        self.assertNotIn("his opponent", result["summary"])
+        self.assertNotIn("rapid strikes", result["summary"])
 
     async def test_llm_judge_uses_plain_text_as_referee_explanation_only(self):
         async def caller(messages, env=None):

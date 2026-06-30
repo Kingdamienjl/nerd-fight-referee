@@ -264,6 +264,26 @@ class DecisionFormatterTests(unittest.TestCase):
         self.assertTrue(all(len(bullet.removeprefix("- ")) <= 140 for bullet in bullets))
         self.assertTrue(all(not bullet.endswith(",") for bullet in bullets))
 
+    def test_evidence_omits_boolean_template_residue(self):
+        structured = structured_decision_output(
+            {
+                "winner": "Sephiroth",
+                "loser": "Cloud",
+                "confidence": "medium",
+                "summary": "Sephiroth controlled the weapon lane.",
+                "loser_best_path": "Cloud needed to interrupt Sephiroth before range settled.",
+                "deciding_factors": [
+                    {"factor": "Named tools", "evidence": "named tools: No, Yes, Yes"},
+                    {"factor": "Weapon", "evidence": "Weapon/power: Sephiroth's clean weapon lane is Masamune."},
+                ],
+            }
+        )
+
+        evidence = "\n".join(structured["quick_evidence"])
+
+        self.assertNotIn("No, Yes, Yes", evidence)
+        self.assertIn("Masamune", evidence)
+
     def test_structured_decision_output_is_embed_friendly(self):
         decision = {
             "title": "Nerd Fight Referee Decision",
@@ -392,12 +412,22 @@ class DecisionFormatterTests(unittest.TestCase):
         dirty_values = [
             "{{Border|No|Yes|Content}}",
             "{{ tag:tabber | Before Crisis and Crisis Core | Disc 1",
+            "{{#Tag:Tabber | Before Crisis and Crisis Core | Disc 1",
             "No • Yes • Content",
+            "No, Yes, Yes",
+            "SephirothCGModel CrisisCore.png",
+            "File:Sephiroth.jpg",
         ]
 
         for value in dirty_values:
             self.assertTrue(is_dirty_fight_card_item(value))
             self.assertEqual(sanitize_fight_card_item(value), "")
+
+    def test_clean_weapon_phrase_survives_non_image_caption(self):
+        self.assertEqual(
+            sanitize_fight_card_item("Sephiroth with the Masamune in Crisis Core Original"),
+            "Masamune",
+        )
 
     def test_cloud_like_dirty_item_is_omitted_from_fight_card(self):
         structured = structured_decision_output(
@@ -455,7 +485,7 @@ class DecisionFormatterTests(unittest.TestCase):
 
         self.assertIn("Height/Weight: 5'7\" / 160 lb", card)
         self.assertIn("Weapon/Power: Buster Sword, Limit Breaks", card)
-        self.assertIn("Key tools: SOLDIER skill, Materia, superhuman speed", card)
+        self.assertIn("Key tools: Materia, SOLDIER skill, superhuman speed", card)
 
     def test_fight_card_surfaces_magical_style_and_non_physical_evidence(self):
         structured = structured_decision_output(
@@ -494,7 +524,8 @@ class DecisionFormatterTests(unittest.TestCase):
 
         self.assertIn("Weapon/Power: Silver Crystal, Moon Stick", card)
         self.assertIn("Style: magical ranged escalation", card)
-        self.assertIn("Key tools: Transformation, Magic, Purification", card)
+        self.assertIn("Key tools: Magic, Purification, Transformation", card)
+        self.assertNotIn("Superhuman Physical Characteristics", card.split("Key tools: ", 1)[1].splitlines()[0])
         self.assertNotIn("{{", card)
         self.assertIn("magical escalation", evidence)
         self.assertTrue(all(not bullet.endswith("...") for bullet in structured["quick_evidence"]))

@@ -21,6 +21,39 @@ FALLBACK_LLM_DISABLED = "LLM disabled"
 FALLBACK_OLLAMA_UNAVAILABLE = "Ollama unavailable"
 FALLBACK_TIMEOUT = "timeout"
 LOCKED_ENGINE_CONFIDENCE = {"high", "strong"}
+BANNED_NARRATION_LABELS = (
+    "the opponent",
+    "his opponent",
+    "her opponent",
+    "their opponent",
+    "the challenger",
+    "the adversary",
+)
+GENERIC_MELEE_NARRATION = (
+    "punch",
+    "punches",
+    "kick",
+    "kicks",
+    "grappling",
+    "grapple",
+    "flurry of strikes",
+    "rapid strikes",
+    "heavy punches",
+    "heavy kicks",
+    "mundane melee",
+)
+MELEE_EVIDENCE_TERMS = (
+    "martial arts",
+    "punch",
+    "kick",
+    "grappling",
+    "claws",
+    "swordsmanship",
+    "melee",
+    "sword",
+    "axe",
+    "staff",
+)
 SYSTEM_PROMPT = (
     "You are the official Nerd Fight Referee giving a post-fight referee explanation. The "
     "deterministic engine chooses the winner and confidence; you explain why that verdict "
@@ -40,7 +73,29 @@ def llm_enabled(env: dict[str, str] | None = None) -> bool:
 
 def compact_snippet(value: Any, *, limit: int = 180) -> str:
     text = re.sub(r"\s+", " ", str(value or "")).strip()
-    if any(fragment in text.casefold() for fragment in ("{{", "}}", "tag:", "tabber", "border", "content", "no • yes")):
+    if any(
+        fragment in text.casefold()
+        for fragment in (
+            "{{",
+            "}}",
+            "{{!",
+            "#tag",
+            "tag:",
+            "tabber",
+            "border",
+            "content",
+            "no • yes",
+            "no, yes",
+            "file:",
+            "image:",
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".gif",
+            ".webp",
+            ".svg",
+        )
+    ):
         text = sanitize_fight_card_item(text)
     if len(text) <= limit:
         return text
@@ -171,11 +226,14 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             "The loser must make at least one concrete counterplay attempt using supplied evidence.",
             "Do not require both fighter names in every paragraph; use names naturally instead of repetitive forced naming.",
             'When a fighter name is known, avoid vague labels: "the opponent", "his opponent", "her opponent", "their opponent", "the adversary".',
+            'Ban these vague labels when fighter names are known: "the opponent", "his opponent", "her opponent", "their opponent", "the challenger", "the adversary".',
             "Use fighter names naturally at phase transitions: opening, counterplay, and finish.",
+            "Require both fighter names in the opening, counterplay, and finish descriptions.",
             "Before narrating, identify each fighter's combat mode from the packet: brawler, weapon specialist, martial artist, magic user, ranged energy user, cosmic/reality hax user, speedster, tank/bruiser, summoner, or tech user.",
             "Use each fighter's combat identity when narrating their opening and counterplay.",
             "Do not describe a fighter as relying on punches, kicks, grappling, or mundane melee unless those tactics are present in the packet.",
             "If a fighter has signature magic, transformation, ranged powers, purification, barriers, cosmic power, or energy projection, their counterplay must use those tools instead of generic melee.",
+            "If Usagi Tsukino has Magic, Purification, Energy Projection, Forcefield Creation, Telekinesis, or Silver Crystal in the packet, Usagi Tsukino's counterplay must use those tools, not generic melee.",
             "Do not flatten magical, cosmic, ranged, tech, or hax-based fighters into generic brawlers.",
             "Use safe tactical inference: infer how supplied abilities were used in combat, but do not invent new powers, forms, weapons, techniques, or feats not in the packet.",
             "Do not name any technique, form, weapon, power source, eye power, transformation, spell, or named attack unless the exact name appears in the compact evidence packet.",
@@ -292,11 +350,68 @@ def clean_llm_explanation(raw: str) -> str:
     return " ".join(str(raw or "").replace("\n", " ").split()).strip()
 
 
+def matchup_card_for_name(smoke: dict[str, Any], name: str) -> dict[str, Any]:
+    normalized = str(name or "").casefold()
+    for card in smoke.get("matchup_card") or []:
+        if normalized and normalized == str(card.get("name") or "").casefold():
+            return card
+    return {}
+
+
+def card_has_melee_evidence(card: dict[str, Any]) -> bool:
+    text = json.dumps(card, sort_keys=True).casefold()
+    return any(term in text for term in MELEE_EVIDENCE_TERMS)
+
+
+def card_is_non_physical(card: dict[str, Any]) -> bool:
+    identity = card.get("combat_identity") if isinstance(card.get("combat_identity"), dict) else {}
+    mode = str(identity.get("combat_mode") or card.get("style") or "").casefold()
+    if any(marker in mode for marker in ("magic", "cosmic", "ranged", "hax", "energy")):
+        return True
+    return bool(identity.get("non_physical_options"))
+
+
+def llm_output_violates_grounding(explanation: str, smoke: dict[str, Any]) -> str:
+    normalized = str(explanation or "").casefold()
+    for label in BANNED_NARRATION_LABELS:
+        if label in normalized:
+            return f"banned vague label: {label}"
+    if any(term in normalized for term in GENERIC_MELEE_NARRATION):
+        for card in smoke.get("matchup_card") or []:
+            if card_is_non_physical(card) and not card_has_melee_evidence(card):
+                name = str(card.get("name") or "non-physical fighter")
+                return f"generic melee narration for {name}"
+    return ""
+
+
+def deterministic_tactical_summary(smoke: dict[str, Any]) -> str:
+    winner = str(smoke.get("winner") or "The winner")
+    loser = str(smoke.get("loser") or "the loser")
+    reasoning = [str(item) for item in smoke.get("engine_reasoning") or [] if item]
+    if reasoning:
+        return truncate_at_sentence_boundary(" ".join(reasoning), 1100)
+    return (
+        f"{winner} retained the deterministic verdict over {loser} through the packet-backed route: "
+        f"{smoke.get('win_condition') or 'the cleaner confirmed advantages.'}"
+    )
+
+
 def llm_explained_decision(smoke: dict[str, Any], raw: str, *, packet: dict[str, Any]) -> dict[str, Any]:
     explanation = clean_llm_explanation(raw)
     if not explanation:
         return fallback_decision(smoke, FALLBACK_OLLAMA_UNAVAILABLE, "LLM returned an empty explanation.")
     concise_explanation = truncate_at_sentence_boundary(explanation, 1100)
+    violation = llm_output_violates_grounding(concise_explanation, smoke)
+    if violation:
+        fallback = fallback_decision(
+            smoke,
+            "grounding_guard",
+            f"LLM explanation rejected by grounding guard: {violation}.",
+        )
+        fallback["summary"] = deterministic_tactical_summary(smoke)
+        fallback["win_condition"] = fallback["summary"]
+        fallback["referee_verdict"]["explanation"] = fallback["summary"]
+        return fallback
     engine = engine_verdict(smoke)
     referee = referee_verdict(smoke, raw, concise_explanation, packet=packet)
     decision = {

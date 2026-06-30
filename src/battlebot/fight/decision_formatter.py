@@ -13,19 +13,41 @@ GENERIC_ROUTE = "converts stat leads into initiative, damage pressure, and survi
 DIRTY_FIGHT_CARD_PATTERNS = (
     "{{",
     "}}",
+    "{{!",
+    "#tag",
     "tag:",
     "tabber",
     "border",
     "content",
+    "file:",
+    "image:",
     "{|",
     "|}",
     "no • yes",
     "yes • no",
+    "no, yes",
+    "yes, no",
 )
+IMAGE_FILE_RE = re.compile(r"\.(?:png|jpe?g|gif|webp|svg)\b", re.IGNORECASE)
 FIELD_LABEL_RE = re.compile(
     r"\b(?:tier|origin|classification|powers?|abilities|equipment|weaknesses|notable attacks/techniques|attack potency|speed|durability)\s*:",
     re.IGNORECASE,
 )
+KNOWN_SHORT_TOOL_PHRASES = (
+    "Buster Sword",
+    "Limit Breaks",
+    "Materia",
+    "Masamune",
+    "Silver Crystal",
+    "Moon Stick",
+    "Spiral Heart Moon Rod",
+    "Magic",
+    "Purification",
+    "Energy Projection",
+    "Forcefield Creation",
+)
+LOW_VALUE_TOOL_TERMS = ("innate", "before crisis", "crisis core", "disc 1", "content")
+BOOLEAN_RESIDUE_RE = re.compile(r"^(?:no|yes)(?:\s*(?:,|•|/)\s*(?:no|yes))*$", re.IGNORECASE)
 
 
 def truncate_at_sentence_boundary(text: str, limit: int) -> str:
@@ -146,22 +168,46 @@ def factor_category(value: str) -> str:
 
 def compressed_evidence(factor: dict[str, Any], *, limit: int = 160) -> str:
     category = factor_category(str(factor.get("factor") or ""))
-    evidence = clean_text(factor.get("evidence"), limit=max(80, limit - 35))
-    effect = clean_text(factor.get("tactical_effect"), limit=max(80, limit - 35))
+    evidence = clean_evidence_text(factor.get("evidence"), limit=max(80, limit - 35))
+    effect = clean_evidence_text(factor.get("tactical_effect"), limit=max(80, limit - 35))
     if evidence:
         return bullet_text(clamp_text(f"{category}: {evidence}", limit))
     if category and effect:
         return bullet_text(clamp_text(f"{category}: {effect}", limit))
-    return bullet_text(f"{category}: packet-backed edge.")
+    return ""
 
 
 def bullet_text(value: str) -> str:
     return str(value or "").rstrip(" ,;:")
 
 
+def clean_evidence_text(value: Any, *, limit: int = 220) -> str:
+    raw = str(value or "")
+    if is_dirty_evidence_item(raw):
+        return ""
+    cleaned = clean_text(raw, limit=limit)
+    if is_dirty_evidence_item(cleaned):
+        return ""
+    return cleaned
+
+
+def is_dirty_evidence_item(value: str) -> bool:
+    text = str(value or "")
+    normalized = text.casefold()
+    if IMAGE_FILE_RE.search(text):
+        return True
+    if BOOLEAN_RESIDUE_RE.fullmatch(text.strip()):
+        return True
+    return any(pattern in normalized for pattern in DIRTY_FIGHT_CARD_PATTERNS)
+
+
 def is_dirty_fight_card_item(value: str) -> bool:
     text = str(value or "")
     normalized = text.casefold()
+    if IMAGE_FILE_RE.search(text):
+        return True
+    if BOOLEAN_RESIDUE_RE.fullmatch(text.strip()):
+        return True
     if any(pattern in normalized for pattern in DIRTY_FIGHT_CARD_PATTERNS):
         return True
     if FIELD_LABEL_RE.search(text):
@@ -175,6 +221,8 @@ def is_dirty_fight_card_item(value: str) -> bool:
 def sanitize_fight_card_item(value: str) -> str:
     raw = str(value or "")
     if not raw.strip():
+        return ""
+    if IMAGE_FILE_RE.search(raw):
         return ""
     if is_dirty_fight_card_item(raw):
         source_label_match = re.match(r"^[A-Z][A-Za-z .'-]{1,40}=\s*(.+)$", raw)
@@ -200,6 +248,10 @@ def sanitize_fight_card_item(value: str) -> str:
     text = re.split(r"\s+-\s+|\s+–\s+|\s+—\s+|:\s+", text, maxsplit=1)[0].strip()
     if "..." in text:
         text = text.split("...", 1)[0].strip()
+    for phrase in KNOWN_SHORT_TOOL_PHRASES:
+        if re.search(rf"\b{re.escape(phrase)}\b", text, flags=re.IGNORECASE):
+            text = phrase
+            break
     if "," in text:
         parts = [part.strip(" -,:;") for part in text.split(",") if part.strip(" -,:;")]
         text = ", ".join(parts[:4])
@@ -228,9 +280,18 @@ def compact_list(values: Any, *, limit: int = 5) -> list[str]:
         if cleaned and normalized not in seen:
             seen.add(normalized)
             compact.append(cleaned)
-        if len(compact) >= limit:
-            break
-    return compact
+    return sorted(compact, key=tool_display_priority, reverse=True)[:limit]
+
+
+def tool_display_priority(value: str) -> int:
+    normalized = str(value or "").casefold()
+    if any(phrase.casefold() in normalized for phrase in KNOWN_SHORT_TOOL_PHRASES):
+        return 40
+    if any(term in normalized for term in ("magic", "purification", "energy projection", "barrier", "transformation")):
+        return 30
+    if any(term in normalized for term in LOW_VALUE_TOOL_TERMS):
+        return -10
+    return 10
 
 
 def compact_value(value: Any, *, limit: int = 60) -> str:
@@ -240,8 +301,8 @@ def compact_value(value: Any, *, limit: int = 60) -> str:
     return clamp_text(cleaned, limit) if cleaned else ""
 
 
-def join_tools(values: Any) -> str:
-    tools = compact_list(values, limit=4)
+def join_tools(values: Any, *, limit: int = 4) -> str:
+    tools = compact_list(values, limit=limit)
     if not tools:
         return "No named tools supplied."
     return clean_text(", ".join(tools), limit=150)
@@ -342,7 +403,7 @@ def fight_card_blocks(decision: dict[str, Any]) -> list[dict[str, str]]:
         height_weight = clean_text(card.get("height_weight"), limit=80)
         if height_weight:
             lines.append(f"Height/Weight: {height_weight}")
-        weapon_power = join_tools(card.get("weapon_power") or card.get("weapon_of_choice") or card.get("power_of_choice"))
+        weapon_power = join_tools(card.get("weapon_power") or card.get("weapon_of_choice") or card.get("power_of_choice"), limit=2)
         if weapon_power != "No named tools supplied.":
             lines.append(f"Weapon/Power: {weapon_power}")
         style = clean_text(card.get("style") or (card.get("combat_identity") or {}).get("combat_style"), limit=90)
@@ -350,7 +411,7 @@ def fight_card_blocks(decision: dict[str, Any]) -> list[dict[str, str]]:
             lines.append(f"Style: {style}")
         lines.extend(
             [
-                f"Key tools: {join_tools(card.get('key_tools'))}",
+                f"Key tools: {join_tools(card.get('key_tools'), limit=3)}",
                 f"Win path: {clean_text(card.get('best_route') or 'Needs a clearer packet-backed win route.', limit=170)}",
             ]
         )

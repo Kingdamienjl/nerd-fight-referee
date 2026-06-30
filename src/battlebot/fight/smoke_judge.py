@@ -99,6 +99,18 @@ NON_PHYSICAL_TERMS = (
     "cosmic",
 )
 PHYSICAL_ONLY_TERMS = ("superhuman physical characteristics", "enhanced strength", "martial arts")
+SIGNATURE_POWER_TERMS = (
+    "silver crystal",
+    "moon stick",
+    "spiral heart moon rod",
+    "masamune",
+    "magic",
+    "purification",
+    "energy projection",
+    "forcefield creation",
+    "barriers",
+    "transformation",
+)
 
 
 def text_rank(value: str | None, *, speed: bool = False) -> int | None:
@@ -573,9 +585,21 @@ def weapon_power_choice(contender: dict[str, Any]) -> list[str]:
         or contender.get("abilities")
         or tactical_value(contender, "power_of_choice")
         or tactical_value(contender, "power_source"),
-        limit=2,
+        limit=8,
     )
-    return powers
+    prioritized = sorted(powers, key=tool_priority, reverse=True)
+    return prioritized[:2]
+
+
+def tool_priority(value: str) -> int:
+    normalized = str(value or "").casefold()
+    if any(term in normalized for term in SIGNATURE_POWER_TERMS):
+        return 40
+    if any(term in normalized for term in NON_PHYSICAL_TERMS):
+        return 30
+    if any(term in normalized for term in PHYSICAL_ONLY_TERMS):
+        return -10
+    return 10
 
 
 def combined_clean_terms(contender: dict[str, Any], *, limit: int = 20) -> list[str]:
@@ -614,7 +638,7 @@ def combined_clean_terms(contender: dict[str, Any], *, limit: int = 20) -> list[
         if normalized not in seen:
             seen.add(normalized)
             deduped.append(term)
-    return deduped[:limit]
+    return sorted(deduped, key=tool_priority, reverse=True)[:limit]
 
 
 def non_physical_options(contender: dict[str, Any]) -> list[str]:
