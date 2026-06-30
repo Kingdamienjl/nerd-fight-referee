@@ -69,12 +69,20 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("at least two concrete listed traits", user_prompt)
         self.assertIn("complete sentence", user_prompt)
         self.assertIn("Write 2-4 concise paragraphs.", user_prompt)
+        self.assertIn("fight scene", user_prompt)
+        self.assertIn("opening exchange", user_prompt)
+        self.assertIn("loser's best counterplay", user_prompt)
+        self.assertIn("safe tactical inference", user_prompt)
+        self.assertIn("as evidenced by the packet", user_prompt)
+        self.assertIn("main route stabilizes", user_prompt)
+        self.assertIn("Never use these phrases", user_prompt)
         self.assertIn("No JSON.", user_prompt)
         self.assertIn("No bullet lists.", user_prompt)
         self.assertIn("No markdown headings.", user_prompt)
         self.assertNotIn("Referee verdict:", user_prompt)
         self.assertNotIn("Upset justification:", user_prompt)
         self.assertIn("evidence packet is source of truth", user_prompt)
+        self.assertIn("tactical_profile", user_prompt)
 
     async def test_llm_judge_uses_plain_text_as_referee_explanation_only(self):
         async def caller(messages, env=None):

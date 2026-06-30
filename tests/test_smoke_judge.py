@@ -17,7 +17,13 @@ def contender(name, character_id, attack, speed, durability, warnings=None):
 
 
 RICH_ADVANTAGE_CATEGORIES = {"speed", "strength", "durability", "mobility", "range", "skill", "abilities", "battlefield"}
-FIGHT_FLOW_PHASES = {"opening", "mid_fight", "turning_point", "finish", "loser_paths"}
+FIGHT_FLOW_PHASES = {"opening", "pressure", "counterplay", "adaptation", "finish", "loser_path"}
+BANNED_GENERIC_PHRASES = (
+    "clean openings",
+    "exchange pattern",
+    "main route stabilizes",
+    "escalation options",
+)
 
 
 class SmokeJudgeTests(unittest.TestCase):
@@ -96,6 +102,9 @@ class SmokeJudgeTests(unittest.TestCase):
             result["engine_reasoning"][0],
             result["fight_flow"]["opening"][0]["reason"],
         )
+        serialized = str(result)
+        for phrase in BANNED_GENERIC_PHRASES:
+            self.assertNotIn(phrase, serialized)
 
     def test_ordinary_loser_warning_does_not_reduce_clean_sweep_confidence(self):
         packet = {

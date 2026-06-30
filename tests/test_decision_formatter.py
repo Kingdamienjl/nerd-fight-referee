@@ -152,6 +152,34 @@ class DecisionFormatterTests(unittest.TestCase):
         self.assertTrue(analysis.endswith("..."))
         self.assertRegex(final_word, r"^suppliedterm\d+$")
 
+    def test_evidence_bullets_do_not_end_with_commas(self):
+        decision = {
+            "title": "Nerd Fight Referee Decision",
+            "winner": "Spawn",
+            "confidence": "medium",
+            "summary": "Spawn pressures with necroplasm, then changes angles before the counter lands.",
+            "loser_best_path": "Godzilla needs to force a beam trade.",
+            "deciding_factors": [
+                {
+                    "factor": "Battlefield Control",
+                    "evidence": "Spawn has necroplasm.",
+                    "tactical_effect": "Spawn uses short necroplasm bursts,",
+                },
+                {
+                    "factor": "Resistance / Counterplay",
+                    "evidence": "Godzilla has atomic breath,",
+                    "tactical_effect": "",
+                },
+            ],
+            "warnings": [],
+        }
+
+        text = format_decision(decision)
+        bullets = [line for line in text.splitlines() if line.startswith("- ")]
+
+        self.assertTrue(bullets)
+        self.assertTrue(all(not bullet.endswith(",") for bullet in bullets))
+
 
 if __name__ == "__main__":
     unittest.main()

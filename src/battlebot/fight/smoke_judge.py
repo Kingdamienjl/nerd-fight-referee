@@ -153,7 +153,7 @@ def category_reason(category: str, winner: str, loser: str, margin: str) -> str:
     if category == "strength":
         return f"{winner} threatens the cleaner finish because their listed output {degree} exceeds {loser}'s."
     if category == "durability":
-        return f"{winner} has the durability edge because {loser} needs repeated clean openings to finish."
+        return f"{winner} has the durability edge because {loser} must keep landing meaningful damage without being punished."
     if category == "mobility":
         return f"{winner} is better positioned to set the pace and deny {loser} stable engagement timing."
     if category == "range":
@@ -161,7 +161,7 @@ def category_reason(category: str, winner: str, loser: str, margin: str) -> str:
     if category == "skill":
         return f"{winner} has the skill edge because their listed tactics give them cleaner decision points."
     if category == "abilities":
-        return f"{winner} has the abilities edge because their listed abilities create more reliable win conditions."
+        return f"{winner} has the abilities edge because their named tools create more reliable win conditions."
     if category == "battlefield":
         return f"{winner} controls battlefield terms because their listed tools better shape positioning."
     return f"{winner} has the {category} edge because it creates more reliable fight pressure than {loser}'s route."
@@ -297,7 +297,7 @@ def swing_factors_from_breakdown(breakdown: dict[str, dict[str, str]], winner_na
 
 
 def empty_fight_flow() -> dict[str, list[dict[str, str]]]:
-    return {"opening": [], "mid_fight": [], "turning_point": [], "finish": [], "loser_paths": []}
+    return {"opening": [], "pressure": [], "counterplay": [], "adaptation": [], "finish": [], "loser_path": []}
 
 
 def flow_item(winner: str, reason: str) -> dict[str, str]:
@@ -339,28 +339,30 @@ def build_fight_flow(
         opening = first_deciding_effect(deciding_factors, ("initiative", "mobility", "range"))
     flow["opening"].append(flow_item(winner_name, opening or f"{winner_name} establishes the first reliable tempo edge."))
 
-    mid_fight = first_breakdown_reason(breakdown, winner_name, ("durability", "skill", "abilities", "battlefield"))
-    if not mid_fight:
-        mid_fight = first_deciding_effect(deciding_factors, ("durability", "skill", "ability", "battlefield"))
-    flow["mid_fight"].append(flow_item(winner_name, mid_fight or f"{winner_name} keeps the exchange pattern more stable."))
+    pressure = first_breakdown_reason(breakdown, winner_name, ("skill", "abilities", "battlefield", "range"))
+    if not pressure:
+        pressure = first_deciding_effect(deciding_factors, ("skill", "ability", "battlefield", "range"))
+    flow["pressure"].append(flow_item(winner_name, pressure or f"{winner_name} forces {loser_name} to defend before setting offense."))
+
+    flow["counterplay"].append(flow_item(loser_name, loser_best_path))
 
     swing = swing_factors[0] if swing_factors else {}
-    turning_point = str(swing.get("impact") or swing.get("reason") or "").strip()
-    flow["turning_point"].append(
-        flow_item(winner_name, turning_point or f"{winner_name} converts the strongest listed edge into control.")
+    adaptation = str(swing.get("impact") or swing.get("reason") or "").strip()
+    flow["adaptation"].append(
+        flow_item(winner_name, adaptation or f"{winner_name} adapts by leaning on the strongest confirmed matchup edge.")
     )
 
     finish = first_deciding_effect(deciding_factors, ("finishing", "power", "durability", "ability"))
     if not finish:
-        finish = f"{winner_name} finishes by forcing {loser_name} into repeated losing exchanges."
+        finish = f"{winner_name} finishes once {loser_name} is pinned, staggered, or out of reliable answers."
     flow["finish"].append(flow_item(winner_name, finish))
-    flow["loser_paths"].append(flow_item(loser_name, loser_best_path))
+    flow["loser_path"].append(flow_item(loser_name, loser_best_path))
     return flow
 
 
 def engine_reasoning_from_flow(fight_flow: dict[str, list[dict[str, str]]]) -> list[str]:
     reasoning = []
-    for phase in ("opening", "mid_fight", "turning_point", "finish", "loser_paths"):
+    for phase in ("opening", "pressure", "counterplay", "adaptation", "finish", "loser_path"):
         for item in fight_flow.get(phase) or []:
             reason = str(item.get("reason") or "").strip()
             if reason:
@@ -391,8 +393,8 @@ def tactical_effect(axis: str, winner: dict[str, Any], loser: dict[str, Any]) ->
     loser_name = str(loser.get("canonical_name") or "the opponent")
     if axis == "attack_potency":
         return (
-            f"{winner_name} can turn clean openings into decisive damage, forcing "
-            f"{loser_name} to avoid direct exchanges instead of trading."
+            f"{winner_name} can punish a stagger or pinned guard hard enough that "
+            f"{loser_name} cannot afford prolonged direct trades."
         )
     if axis == "speed":
         return (
@@ -429,10 +431,10 @@ def ability_factor(winner: dict[str, Any]) -> dict[str, str] | None:
     winner_name = str(winner.get("canonical_name") or "The winner")
     return {
         "factor": "Special Abilities",
-        "evidence": f"{winner_name} has listed abilities: {', '.join(names)}",
+        "evidence": f"{winner_name} brings named tools: {', '.join(names)}",
         "tactical_effect": (
-            f"{winner_name} has more than raw stats in the packet and can use listed "
-            "abilities to create openings. No unlisted feats are assumed."
+            f"{winner_name} can build a fight plan around those named tools instead of relying only "
+            "on raw stat pressure. No unlisted feats are assumed."
         ),
     }
 
@@ -492,7 +494,7 @@ def structured_factor(winner: dict[str, Any], loser: dict[str, Any]) -> dict[str
         return {
             "factor": "Special Abilities",
             "evidence": f"{winner_name} has listed form access: {', '.join(forms)}",
-            "tactical_effect": f"{winner_name} has escalation options in the packet if the opening exchange stalls.",
+            "tactical_effect": f"{winner_name} can change tempo with those forms if the first approach stalls.",
         }
     return None
 
@@ -509,11 +511,11 @@ def route_to_victory(winner: dict[str, Any], loser: dict[str, Any], factors: lis
     if "Mobility / Initiative" in factor_names and "Finishing Power" in factor_names:
         return f"{winner_name} wins by taking first meaningful action, forcing reactions, then cashing in the higher output edge."
     if "Durability / Attrition" in factor_names:
-        return f"{winner_name} wins by surviving the exchange pattern longer and turning repeated counters into attrition."
+        return f"{winner_name} wins by weathering early answers and making each return hit cost {loser_name} more."
     if "Skill / Tactics" in factor_names:
         return f"{winner_name} wins by steering the matchup through cleaner decisions, timing, and packet-backed tactics."
     if "Special Abilities" in factor_names:
-        return f"{winner_name} wins by using listed abilities to create the opening that raw stats alone do not describe."
+        return f"{winner_name} wins by using named tools to create the opening that raw stats alone do not describe."
     return f"{winner_name} has the clearer packet-backed route over {loser_name}."
 
 
@@ -525,7 +527,7 @@ def loser_path(loser: dict[str, Any], winner: dict[str, Any]) -> str:
         return f"{loser_name} needs to force the listed failure case: {loss_conditions[0]}"
     weaknesses = item_names(winner, "weaknesses", limit=2)
     if weaknesses:
-        return f"{loser_name} needs to exploit listed weaknesses such as {', '.join(weaknesses)} before {winner_name}'s main route stabilizes."
+        return f"{loser_name} needs to exploit weaknesses such as {', '.join(weaknesses)} before {winner_name} controls the tempo."
     return f"{loser_name} needs a listed counter, weakness exploit, or matchup-specific angle not resolved by the core packet comparison."
 
 

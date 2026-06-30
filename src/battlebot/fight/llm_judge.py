@@ -21,9 +21,9 @@ FALLBACK_OLLAMA_UNAVAILABLE = "Ollama unavailable"
 FALLBACK_TIMEOUT = "timeout"
 LOCKED_ENGINE_CONFIDENCE = {"high", "strong"}
 SYSTEM_PROMPT = (
-    "You are the official Nerd Fight Referee. Explain the deterministic engine result using "
-    "only the supplied packet evidence. Do not invent feats, forms, equipment, prep time, or "
-    "weaknesses."
+    "You are the official Nerd Fight Referee and fight commentator. The deterministic engine "
+    "chooses the winner and confidence; you choreograph why that verdict happens using only "
+    "the supplied packet evidence. Do not invent feats, forms, equipment, prep time, or weaknesses."
 )
 BATTLE_RULES = (
     "Battle rules: standard encounter; no prep unless profile explicitly grants it; strongest "
@@ -34,6 +34,51 @@ BATTLE_RULES = (
 def llm_enabled(env: dict[str, str] | None = None) -> bool:
     values = env or os.environ
     return str(values.get("BATTLEBOT_LLM_ENABLED") or "").casefold() in {"1", "true", "yes", "on"}
+
+
+def compact_named_items(values: Any, *, limit: int = 6) -> list[Any]:
+    if not values:
+        return []
+    if isinstance(values, str):
+        return [values]
+    compact = []
+    if isinstance(values, (list, tuple)):
+        for item in list(values)[:limit]:
+            if isinstance(item, dict):
+                compact.append(
+                    {
+                        key: item.get(key)
+                        for key in ("name", "id", "description", "effect", "tags", "scope_limitations")
+                        if item.get(key)
+                    }
+                )
+            else:
+                compact.append(item)
+    return compact
+
+
+def compact_tactical_fields(contender: dict[str, Any]) -> dict[str, Any]:
+    tactical = contender.get("tactical_profile") if isinstance(contender.get("tactical_profile"), dict) else {}
+    keys = (
+        "tactical_intelligence",
+        "combat_style",
+        "battlefield_control",
+        "notable_attacks",
+        "techniques",
+        "forms",
+        "transformations",
+        "counters",
+        "resistances",
+        "win_conditions",
+        "loss_conditions",
+        "matchup_notes",
+    )
+    compact = {}
+    for key in keys:
+        value = contender.get(key) or tactical.get(key)
+        if value:
+            compact[key] = compact_named_items(value) if isinstance(value, (list, tuple)) else value
+    return compact
 
 
 def compact_evidence_packet(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> dict[str, Any]:
@@ -49,9 +94,10 @@ def compact_evidence_packet(packet: dict[str, Any], smoke_baseline: dict[str, An
             "category": contender.get("category"),
             "variant": contender.get("variant") or {},
             "power_scale": contender.get("power_scale") or {},
-            "abilities": contender.get("abilities") or [],
-            "equipment": contender.get("equipment") or [],
-            "weaknesses": contender.get("weaknesses") or [],
+            "abilities": compact_named_items(contender.get("abilities") or []),
+            "equipment": compact_named_items(contender.get("equipment") or []),
+            "weaknesses": compact_named_items(contender.get("weaknesses") or []),
+            "tactical_profile": compact_tactical_fields(contender),
             "warnings": contender.get("warnings") or [],
         }
     return {
@@ -97,10 +143,18 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             "Do not change the winner.",
             "Do not invent feats.",
             "Do not contradict supplied evidence.",
-            "Explain how the fight unfolds.",
+            "Write judge's analysis like a fight scene, not a stat summary.",
+            "You are the commentator/choreographer, not a second judge.",
+            "Describe the opening exchange, the winner's first meaningful tactic, the loser's best counterplay, how the winner adapts or counters that counterplay, and the finishing sequence.",
+            "Use safe tactical inference: infer how supplied abilities would be used in combat, but do not invent new powers, forms, weapons, or feats not in the packet.",
             "Use concrete supplied terms from the compact evidence packet.",
+            "Mention named abilities, equipment, techniques, forms, weaknesses, or counters from both fighters when available.",
             "Mention at least two concrete listed traits, stats, abilities, equipment, or weaknesses when available.",
             'Avoid vague phrases like "various forms", "special abilities", or "high strength" unless those exact phrases are in the packet.',
+            'Never use these phrases: "as evidenced by the packet", "listed abilities", "main route stabilizes", "clean openings into decisive damage", "exchange pattern", "escalation options", "higher speed tier".',
+            "Do not make every fight only about speed, strength, and durability.",
+            "When present, consider intelligence, tactics, battlefield control, hax, resistances, weaknesses, counters, regeneration, time manipulation, sealing, mind control, energy absorption, range, mobility, and win conditions.",
+            'Prefer concrete choreography: "Goku pressures with rapid movement, forces a guard with close-range strikes, then creates space for a Kamehameha once the opponent is pinned or staggered."',
             "Reference supplied evidence naturally without repeating the evidence list verbatim.",
             "Write 2-4 concise paragraphs.",
             "End with a complete sentence.",

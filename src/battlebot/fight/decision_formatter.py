@@ -78,10 +78,14 @@ def compressed_evidence(factor: dict[str, Any]) -> str:
     evidence = clean_text(factor.get("evidence"), limit=120)
     effect = clean_text(factor.get("tactical_effect"), limit=120)
     if category and effect:
-        return f"{category}: {effect}"
+        return bullet_text(f"{category}: {effect}")
     if evidence:
-        return f"{category}: packet evidence favors this lane."
-    return f"{category}: packet-backed edge."
+        return bullet_text(f"{category}: packet evidence favors this lane.")
+    return bullet_text(f"{category}: packet-backed edge.")
+
+
+def bullet_text(value: str) -> str:
+    return str(value or "").rstrip(" ,;:")
 
 
 def fallback_diagnostics(decision: dict[str, Any]) -> list[str]:
@@ -107,11 +111,11 @@ def format_decision(
     factors = [factor for factor in decision.get("deciding_factors") or [] if isinstance(factor, dict)]
     raw_analysis = clean_text(
         decision.get("summary") or decision.get("win_condition") or decision.get("route_to_victory"),
-        limit=1200,
+        limit=1400,
     )
     analysis = compress_route_text(
         decision,
-        truncate_at_sentence_boundary(raw_analysis, 1100),
+        truncate_at_sentence_boundary(raw_analysis, 1250),
     )
     if not analysis:
         analysis = "Deterministic referee could not produce a supported fight explanation."
