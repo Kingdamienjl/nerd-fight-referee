@@ -420,6 +420,44 @@ class SmokeJudgeTests(unittest.TestCase):
 
         self.assertIn(result["matchup_card"][0]["combat_identity"]["combat_mode"], {"magic user", "cosmic/reality hax user"})
 
+    def test_alchemy_profiles_are_not_generic_magic_users(self):
+        cases = [
+            (
+                contender(
+                    "Roy Mustang",
+                    "roy-mustang",
+                    "Building level",
+                    "Peak Human",
+                    "Building level",
+                    abilities=[{"name": "Flame Alchemy"}, {"name": "Fire blasts"}],
+                    equipment=[{"name": "Ignition gloves"}],
+                ),
+                {"ranged energy user", "tech user"},
+            ),
+            (
+                contender(
+                    "Alphonse Elric",
+                    "alphonse-elric",
+                    "Building level",
+                    "Peak Human",
+                    "Building level",
+                    abilities=[{"name": "Alchemy"}, {"name": "Transmutation"}],
+                    equipment=[{"name": "Armor body"}],
+                ),
+                {"tech user", "tank/bruiser", "weapon specialist"},
+            ),
+        ]
+
+        for fighter, expected_modes in cases:
+            packet = {
+                "errors": [],
+                "contender_a": fighter,
+                "contender_b": contender("Baseline", "baseline", "Wall level", "Human", "Wall level"),
+                "warnings": [],
+            }
+            result = smoke_judge_packet(packet)
+            self.assertIn(result["matchup_card"][0]["combat_identity"]["combat_mode"], expected_modes)
+
 
 if __name__ == "__main__":
     unittest.main()

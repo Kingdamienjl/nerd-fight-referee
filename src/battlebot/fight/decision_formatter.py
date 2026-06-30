@@ -54,6 +54,7 @@ KNOWN_SHORT_TOOL_PHRASES = (
     "Core Drill",
     "Hellsing ARMS",
     "Angel Arm",
+    "Original Sin",
     "Silver Crystal",
     "Moon Stick",
     "Spiral Heart Moon Rod",
@@ -100,6 +101,7 @@ LOW_VALUE_TOOL_TERMS = (
     "advent children",
     "content",
 )
+ALLOWED_SHORT_ACRONYMS = {"ki", "size"}
 LOW_VALUE_STANDALONE_RE = re.compile(
     r"^(?:however|intrinsic|original|innate|none notable(?: optional)?|optional|cla|right|thumb|right,\s*thumb|"
     r"magic,\s*including|are allowed to use their own personalized gear|strongest consistent canonical form|"
@@ -309,6 +311,12 @@ def is_dirty_fight_card_item(value: str) -> bool:
     stripped = text.strip()
     if stripped.endswith(" Name") or LOW_VALUE_STANDALONE_RE.fullmatch(stripped):
         return True
+    if len(stripped) <= 4 and stripped.casefold() not in ALLOWED_SHORT_ACRONYMS:
+        return True
+    if stripped.endswith(","):
+        return True
+    if re.search(r"(?:^|[^\w])cla(?:[^\w]|$)", stripped, flags=re.IGNORECASE):
+        return True
     words = stripped.split()
     if len(words) > 3 and stripped[:1].islower():
         return True
@@ -332,6 +340,11 @@ def sanitize_fight_card_item(value: str) -> str:
         return ""
     if IMAGE_FILE_RE.search(raw):
         return ""
+    innate_match = re.search(r"\bInnate Technique\s*:\s*([A-Z][A-Za-z0-9' -]{2,60})", raw, flags=re.IGNORECASE)
+    if innate_match:
+        raw = innate_match.group(1)
+    elif re.search(r"\bOriginal Sin\b", raw, flags=re.IGNORECASE):
+        raw = "Original Sin"
     if is_dirty_fight_card_item(raw):
         source_label_match = re.match(r"^[A-Z][A-Za-z .'-]{1,40}=\s*(.+)$", raw)
         if not source_label_match:

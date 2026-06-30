@@ -99,7 +99,7 @@ NON_PHYSICAL_TERMS = (
     "cosmic",
 )
 PHYSICAL_ONLY_TERMS = ("superhuman physical characteristics", "enhanced strength", "martial arts")
-MAJOR_MAGIC_TERMS = ("magic", "spell", "sorcery", "alchemy", "cursed energy", "requip", "cosmo", "chakra", "ninjutsu")
+MAJOR_MAGIC_TERMS = ("magic", "spell", "sorcery", "cursed energy", "requip", "cosmo", "chakra", "ninjutsu")
 INCIDENTAL_MAGIC_TERMS = ("healing", "transformation", "resistance to telepathy", "telepathy resistance")
 COSMIC_HAX_TERMS = (
     "reality warping",
@@ -117,11 +117,14 @@ RANGED_ENERGY_TERMS = (
     "firearms",
     "energy cannon",
     "optic blast",
+    "flame",
+    "fire",
     "barrier",
     "forcefield",
     "a.t. field",
 )
 WEAPON_TERMS = ("weapon", "sword", "axe", "claws", "gun", "bow", "armor", "staff", "rod", "masamune")
+ALCHEMY_TERMS = ("alchemy", "flame alchemy", "alchemist", "transmutation")
 SIGNATURE_POWER_TERMS = (
     "silver crystal",
     "moon stick",
@@ -701,10 +704,12 @@ def combat_mode(contender: dict[str, Any]) -> str:
     incidental_hits = term_hits(terms, INCIDENTAL_MAGIC_TERMS)
     if any(marker in terms for marker in COSMIC_HAX_TERMS):
         return "cosmic/reality hax user"
-    if major_magic_hits >= 2 or any(marker in terms for marker in MAJOR_MAGIC_TERMS[:4]):
-        return "magic user"
     if any(marker in terms for marker in RANGED_ENERGY_TERMS):
         return "ranged energy user"
+    if any(marker in terms for marker in ALCHEMY_TERMS):
+        return "tech user"
+    if major_magic_hits >= 2 or any(marker in terms for marker in ("spell", "sorcery", "cursed energy", "requip", "cosmo", "chakra", "ninjutsu")):
+        return "magic user"
     if any(marker in terms for marker in WEAPON_TERMS):
         return "weapon specialist"
     if any(marker in terms for marker in ("tech", "armor", "gadget")):

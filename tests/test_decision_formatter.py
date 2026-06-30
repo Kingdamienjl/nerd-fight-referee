@@ -435,6 +435,14 @@ class DecisionFormatterTests(unittest.TestCase):
             "Masamune",
         )
 
+    def test_source_tab_residue_is_rejected_but_meaningful_names_survive(self):
+        self.assertEqual(sanitize_fight_card_item("cla"), "")
+        self.assertEqual(sanitize_fight_card_item("weakness, cla"), "")
+        self.assertEqual(sanitize_fight_card_item("Original"), "")
+        self.assertEqual(sanitize_fight_card_item("Innate"), "")
+        self.assertEqual(sanitize_fight_card_item("Original Sin"), "Original Sin")
+        self.assertEqual(sanitize_fight_card_item("Innate Technique: Shrine"), "Shrine")
+
     def test_cloud_like_dirty_item_is_omitted_from_fight_card(self):
         structured = structured_decision_output(
             {

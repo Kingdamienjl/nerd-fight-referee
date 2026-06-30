@@ -46,8 +46,10 @@ def test_audit_detects_new_bad_fragments_and_style_misclassification():
 
 
 def test_low_value_standalone_tools_are_rejected():
-    for value in ("however", "Intrinsic", "Original", "Innate", "Content", "No", "Yes"):
+    for value in ("however", "Intrinsic", "Original", "Innate", "Content", "No", "Yes", "cla", "weakness, cla"):
         assert sanitize_fight_card_item(value) == ""
+    assert sanitize_fight_card_item("Original Sin") == "Original Sin"
+    assert sanitize_fight_card_item("Innate Technique: Shrine") == "Shrine"
 
 
 def test_full_evidence_groups_by_winner_loser_and_matchup():
@@ -178,6 +180,35 @@ def test_report_writes_expected_json_shape(tmp_path):
     assert payload["summary"]["matchups_audited"] == 1
     assert "problem_counts_by_type" in payload["summary"]
     assert {"fighter_a", "fighter_b", "problems", "problem_score"} <= set(payload["entries"][0])
+
+
+def test_report_problem_counts_stay_empty_for_cleaned_residue_cases():
+    profiles = [
+        {
+            "canonical_name": "Original Sin User",
+            "character_id": "original-sin-user",
+            "franchise": "Test",
+            "category": "comic",
+            "power_scale": {"attack_potency": "Town level", "speed": "Subsonic", "durability": "Building level"},
+            "abilities": [{"name": "Original Sin"}, {"name": "Innate Technique: Shrine"}, {"name": "cla"}],
+            "battle_eligible": True,
+        },
+        {
+            "canonical_name": "Roy Mustang",
+            "character_id": "roy-mustang",
+            "franchise": "Fullmetal Alchemist",
+            "category": "anime",
+            "power_scale": {"attack_potency": "Building level", "speed": "Peak Human", "durability": "Wall level"},
+            "abilities": [{"name": "Flame Alchemy"}, {"name": "Fire blasts"}],
+            "equipment": [{"name": "Ignition gloves"}],
+            "battle_eligible": True,
+        },
+    ]
+
+    report = fight_output_audit.build_report(profiles, sample_size=1, seed=1)
+
+    assert report["summary"]["problem_counts_by_type"].get("dirty token leakage", 0) == 0
+    assert report["summary"]["problem_counts_by_type"].get("style misclassification", 0) == 0
 
 
 def test_load_profiles_reads_battle_eligible_yaml_only(tmp_path):

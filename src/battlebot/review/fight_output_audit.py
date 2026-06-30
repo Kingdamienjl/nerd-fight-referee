@@ -98,6 +98,11 @@ LOW_VALUE_TOOLS = (
 )
 STYLE_MISCLASSIFICATION_NAMES = ("wolverine", "guts", "power girl", "android 17", "roy mustang")
 SCALAR_KEYS = ("name", "value", "tier", "rating", "level", "text", "description", "label")
+CONTEXT_DIRTY_TOKEN_RE = {
+    "cla": re.compile(r"(?:^|[^\w])cla(?:[^\w]|$)", re.IGNORECASE),
+    "original": re.compile(r"\boriginal\b(?!\s+sin\b)", re.IGNORECASE),
+    "innate": re.compile(r"\binnate\b(?!\s+technique\b)", re.IGNORECASE),
+}
 
 
 def clean_id(value: Any, fallback: str) -> str:
@@ -286,7 +291,10 @@ def detect_output_problems(entry: dict[str, Any]) -> list[str]:
     text = json.dumps(entry, sort_keys=True)
     problems = []
     for token in DIRTY_TOKENS:
-        if token.casefold() in text.casefold():
+        if token in CONTEXT_DIRTY_TOKEN_RE:
+            if CONTEXT_DIRTY_TOKEN_RE[token].search(text):
+                problems.append(f"dirty token leakage: {token}")
+        elif token.casefold() in text.casefold():
             problems.append(f"dirty token leakage: {token}")
     for phrase in GENERIC_PHRASES:
         if phrase.casefold() in text.casefold():
