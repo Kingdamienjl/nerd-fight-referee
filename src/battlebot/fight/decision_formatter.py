@@ -27,6 +27,11 @@ DIRTY_FIGHT_CARD_PATTERNS = (
     "yes • no",
     "no, yes",
     "yes, no",
+    "none notable",
+    "none notable optional",
+    "are allowed to use their own personalized gear",
+    "right, thumb",
+    "px",
 )
 IMAGE_FILE_RE = re.compile(r"\.(?:png|jpe?g|gif|webp|svg)\b", re.IGNORECASE)
 FIELD_LABEL_RE = re.compile(
@@ -38,16 +43,91 @@ KNOWN_SHORT_TOOL_PHRASES = (
     "Limit Breaks",
     "Materia",
     "Masamune",
+    "Blades of Chaos",
+    "Leviathan Axe",
+    "Dragon Slayer",
+    "Sticky Fingers",
+    "Excalibur",
+    "Sacred arrows",
+    "Rika",
+    "Demon Scythe",
+    "Core Drill",
+    "Hellsing ARMS",
+    "Angel Arm",
     "Silver Crystal",
     "Moon Stick",
     "Spiral Heart Moon Rod",
+    "Cursed Energy",
+    "Alchemy",
+    "Requip",
+    "Haki",
+    "Nen",
+    "Ki",
+    "Cosmo",
+    "Chakra",
+    "A.T. Field",
     "Magic",
     "Purification",
+    "Decay",
+    "One For All",
+    "Spirit Gun",
     "Energy Projection",
+    "Barrier Manipulation",
     "Forcefield Creation",
 )
-LOW_VALUE_TOOL_TERMS = ("innate", "before crisis", "crisis core", "disc 1", "content")
+LOW_VALUE_TOOL_TERMS = (
+    "however",
+    "intrinsic",
+    "original",
+    "innate",
+    "none notable",
+    "optional",
+    "cla",
+    "right",
+    "thumb",
+    "right, thumb",
+    "magic, including",
+    "are allowed to use their own personalized gear",
+    "strongest consistent canonical form",
+    "base form",
+    "base▼",
+    "volume 0▼",
+    "before crisis",
+    "crisis core",
+    "disc 1",
+    "disc 2",
+    "disc 3",
+    "advent children",
+    "content",
+)
+LOW_VALUE_STANDALONE_RE = re.compile(
+    r"^(?:however|intrinsic|original|innate|none notable(?: optional)?|optional|cla|right|thumb|right,\s*thumb|"
+    r"magic,\s*including|are allowed to use their own personalized gear|strongest consistent canonical form|"
+    r"base form|base▼|volume 0▼|content|name|no|yes)$",
+    re.IGNORECASE,
+)
 BOOLEAN_RESIDUE_RE = re.compile(r"^(?:no|yes)(?:\s*(?:,|•|/)\s*(?:no|yes))*$", re.IGNORECASE)
+SOURCE_TAB_RE = re.compile(
+    r"\b(?:before crisis|crisis core|disc [123]|advent children|original|intrinsic)\b",
+    re.IGNORECASE,
+)
+BAD_ENDING_RE = re.compile(r"\b(?:with|and|or|of|to|from)$", re.IGNORECASE)
+CITATION_NO_NOUN_RE = re.compile(
+    r"\b(?:chapter|vol\.?|volume|episode|act)\b(?!.*\b(?:magic|sword|gun|blade|claws|energy|beam|blast|field|barrier|"
+    r"jutsu|alchemy|haki|nen|ki|cosmo|chakra|arrow|axe|armor|weapon)\b)",
+    re.IGNORECASE,
+)
+USER_FACING_REPLACEMENTS = (
+    ("from the supplied packet", "from the profile data"),
+    ("supplied packet", "profile data"),
+    ("packet-backed", "profile-backed"),
+    ("best listed tactic", "most reliable opening"),
+    ("force their best listed tactic early", "force their most reliable opening early"),
+    ("controlled the pace", "kept initiative"),
+    ("control the pace", "keep initiative"),
+    ("repeatable control", "consistent pressure"),
+    ("cleaner route", "more consistent finish"),
+)
 
 
 def truncate_at_sentence_boundary(text: str, limit: int) -> str:
@@ -114,7 +194,9 @@ def clean_text(value: Any, *, limit: int = 220) -> str:
     if text.count("(") != text.count(")"):
         text = text.replace("(", " ").replace(")", " ")
     text = re.sub(r"\s+", " ", text).strip(" -:\n\t")
-    text = text.replace(GENERIC_ROUTE, "turns the listed packet edge into practical fight pressure")
+    text = text.replace(GENERIC_ROUTE, "turns the listed edge into practical fight pressure")
+    for old, new in USER_FACING_REPLACEMENTS:
+        text = re.sub(re.escape(old), new, text, flags=re.IGNORECASE)
     return clamp_text(text, limit)
 
 
@@ -127,6 +209,9 @@ def clean_detail_text(value: Any, *, limit: int = 8000) -> str:
     text = re.sub(r"\b(his|her|their),\s+\1\b", r"\1", text, flags=re.IGNORECASE)
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n{3,}", "\n\n", text).strip(" -:\n\t")
+    for old, new in USER_FACING_REPLACEMENTS:
+        text = re.sub(re.escape(old), new, text, flags=re.IGNORECASE)
+    text = re.sub(r"\bNo unlisted feats are assumed\.?", "", text, flags=re.IGNORECASE).strip()
     return text[:limit].rstrip()
 
 
@@ -136,8 +221,8 @@ def compress_route_text(decision: dict[str, Any], route: str) -> str:
         winner = clean_text(decision.get("winner"), limit=80) or "The winner"
         loser_path = clean_text(decision.get("loser_best_path"), limit=120)
         if "prep" in loser_path.casefold() or "tactic" in loser_path.casefold():
-            return f"{winner} has the stronger packet-backed output range; the opposing route leans on tactics, counters, or prep."
-        return f"{winner} has the stronger packet-backed output and survivability lane without relying on raw tier dumps."
+            return f"{winner} has the stronger profile-backed output range; the opposing route leans on tactics, counters, or prep."
+        return f"{winner} has the stronger output and survivability lane without relying on raw tier dumps."
     return route
 
 
@@ -168,6 +253,11 @@ def factor_category(value: str) -> str:
 
 def compressed_evidence(factor: dict[str, Any], *, limit: int = 160) -> str:
     category = factor_category(str(factor.get("factor") or ""))
+    raw = f"{factor.get('evidence') or ''} {factor.get('tactical_effect') or ''}"
+    if category == "Special Abilities" and SOURCE_TAB_RE.search(raw):
+        return ""
+    if category == "Forms/Eras" and SOURCE_TAB_RE.search(raw):
+        return ""
     evidence = clean_evidence_text(factor.get("evidence"), limit=max(80, limit - 35))
     effect = clean_evidence_text(factor.get("tactical_effect"), limit=max(80, limit - 35))
     if evidence:
@@ -194,6 +284,8 @@ def clean_evidence_text(value: Any, *, limit: int = 220) -> str:
 def is_dirty_evidence_item(value: str) -> bool:
     text = str(value or "")
     normalized = text.casefold()
+    if LOW_VALUE_STANDALONE_RE.fullmatch(text.strip()):
+        return True
     if IMAGE_FILE_RE.search(text):
         return True
     if BOOLEAN_RESIDUE_RE.fullmatch(text.strip()):
@@ -204,6 +296,8 @@ def is_dirty_evidence_item(value: str) -> bool:
 def is_dirty_fight_card_item(value: str) -> bool:
     text = str(value or "")
     normalized = text.casefold()
+    if LOW_VALUE_STANDALONE_RE.fullmatch(text.strip()):
+        return True
     if IMAGE_FILE_RE.search(text):
         return True
     if BOOLEAN_RESIDUE_RE.fullmatch(text.strip()):
@@ -211,6 +305,20 @@ def is_dirty_fight_card_item(value: str) -> bool:
     if any(pattern in normalized for pattern in DIRTY_FIGHT_CARD_PATTERNS):
         return True
     if FIELD_LABEL_RE.search(text):
+        return True
+    stripped = text.strip()
+    if stripped.endswith(" Name") or LOW_VALUE_STANDALONE_RE.fullmatch(stripped):
+        return True
+    words = stripped.split()
+    if len(words) > 3 and stripped[:1].islower():
+        return True
+    if BAD_ENDING_RE.search(stripped):
+        return True
+    if CITATION_NO_NOUN_RE.search(stripped):
+        return True
+    if re.search(r"\bright,|\bthumb\b|\bpx\b", normalized):
+        return True
+    if SOURCE_TAB_RE.search(stripped) and not any(phrase.casefold() in normalized for phrase in KNOWN_SHORT_TOOL_PHRASES):
         return True
     if normalized.count("|") >= 2 or normalized.count("{") or normalized.count("}"):
         return True
@@ -233,6 +341,7 @@ def sanitize_fight_card_item(value: str) -> str:
     text = re.sub(r"\{\{.*?$", "", text)
     text = re.sub(r"\{\{|\}\}|\|", " ", text)
     text = re.sub(r"\b(?:tag:|tabber|Border|Content)\b", " ", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:none notable(?: optional)?|optional|right,\s*thumb|cla)\b", " ", text, flags=re.IGNORECASE)
     text = re.sub(r"\b(?:No|Yes)\b(?:\s*•\s*\b(?:No|Yes|Content)\b)+", " ", text, flags=re.IGNORECASE)
     text = re.sub(r"\bPart\s+[IVXLC]+\s*=\s*", "", text, flags=re.IGNORECASE)
     text = re.sub(r"^\s*\d+\s*(?:&\s*\d+)?\)\s*", "", text)
@@ -285,7 +394,7 @@ def compact_list(values: Any, *, limit: int = 5) -> list[str]:
 
 def tool_display_priority(value: str) -> int:
     normalized = str(value or "").casefold()
-    if any(phrase.casefold() in normalized for phrase in KNOWN_SHORT_TOOL_PHRASES):
+    if any(re.search(rf"\b{re.escape(phrase.casefold())}\b", normalized) for phrase in KNOWN_SHORT_TOOL_PHRASES):
         return 40
     if any(term in normalized for term in ("magic", "purification", "energy projection", "barrier", "transformation")):
         return 30
@@ -311,18 +420,20 @@ def join_tools(values: Any, *, limit: int = 4) -> str:
 def formatted_loser_best_path(decision: dict[str, Any]) -> str:
     loser = clean_text(decision.get("loser"), limit=80)
     winner = clean_text(decision.get("winner"), limit=80)
+    if str(decision.get("verdict_type") or "").casefold() == "needs_judge_review" or winner.casefold() == "needs_judge_review":
+        return "No supported loser path available."
     path = truncate_at_sentence_boundary(clean_text(decision.get("loser_best_path"), limit=360), 300)
     if not path:
         if loser and winner:
             return (
-                f"{loser} needed to force the fight against {winner} into their strongest confirmed lane, "
-                "but the packet did not provide a clean exploitable weakness."
+                f"{loser} needed to force the fight against {winner} into their most reliable opening, "
+                "but the profile data did not provide a clean exploitable weakness."
             )
-        return "The loser needed to force the fight into their strongest confirmed lane, but the packet did not provide a clean exploitable weakness."
+        return "No supported loser path available."
     if loser and loser.casefold() not in path.casefold():
         path = f"{loser}'s best path was {path[0].casefold()}{path[1:]}" if path else path
     if winner and winner.casefold() not in path.casefold():
-        path = path.rstrip(".") + f" before {winner} could control the pace."
+        path = path.rstrip(".") + f" before {winner} could keep initiative."
     return truncate_at_sentence_boundary(path, 300)
 
 
@@ -338,13 +449,13 @@ def formatted_loser_best_path_full(decision: dict[str, Any]) -> str:
     if loser.casefold() not in base.casefold() or winner.casefold() not in base.casefold():
         base = (
             f"{base.rstrip('.')} The practical upset route for {loser} was to pressure {winner}'s risk early, "
-            f"force the fight into {loser}'s strongest confirmed lane, and prevent {winner} from settling into "
+            f"force the fight into {loser}'s most reliable opening, and prevent {winner} from settling into "
             "the more reliable route."
         )
     if "less reliable" not in base.casefold():
         base = (
             f"{base.rstrip('.')} It remained less reliable because the deterministic packet gave "
-            f"{winner} the cleaner route to repeatable control or finishing pressure."
+            f"{winner} the more reliable route to consistent pressure or finishing pressure."
         )
     return clean_detail_text(base, limit=3000)
 
@@ -412,7 +523,7 @@ def fight_card_blocks(decision: dict[str, Any]) -> list[dict[str, str]]:
         lines.extend(
             [
                 f"Key tools: {join_tools(card.get('key_tools'), limit=3)}",
-                f"Win path: {clean_text(card.get('best_route') or 'Needs a clearer packet-backed win route.', limit=170)}",
+                f"Win path: {clean_text(card.get('best_route') or 'Needs a clearer profile-backed win route.', limit=170)}",
             ]
         )
         risk = clean_text(card.get("risk"), limit=130)
@@ -438,7 +549,7 @@ def fighter_cards(decision: dict[str, Any]) -> list[dict[str, Any]]:
                 "weapon_power": compact_list(card.get("weapon_power") or card.get("weapon_of_choice") or card.get("power_of_choice"), limit=2),
                 "style": clean_text(card.get("style") or (card.get("combat_identity") or {}).get("combat_style"), limit=90),
                 "key_tools": compact_list(card.get("key_tools"), limit=3),
-                "win_path": clean_text(card.get("best_route") or "Needs a clearer packet-backed win route.", limit=160),
+                "win_path": clean_text(card.get("best_route") or "Needs a clearer profile-backed win route.", limit=160),
                 "risk": clean_text(card.get("risk") or "No clean exploitable weakness supplied.", limit=120),
             }
         )
@@ -448,14 +559,25 @@ def fighter_cards(decision: dict[str, Any]) -> list[dict[str, Any]]:
 def evidence_bullets(decision: dict[str, Any], *, limit: int = 160) -> list[str]:
     factors = [factor for factor in decision.get("deciding_factors") or [] if isinstance(factor, dict)]
     loser_best_path = formatted_loser_best_path(decision)
-    bullets = [compressed_evidence(factor, limit=limit) for factor in factors[:2]]
+    bullets = []
+    for factor in factors:
+        bullet = compressed_evidence(factor, limit=limit)
+        if bullet:
+            bullets.append(bullet)
+        if len(bullets) >= 2:
+            break
     if loser_best_path:
         bullets.append(bullet_text(clamp_text(f"Loser path: {loser_best_path}", limit)))
     return [bullet for bullet in bullets[:3] if bullet]
 
 
 def full_evidence_text(decision: dict[str, Any]) -> str:
-    lines: list[str] = []
+    winner = clean_text(decision.get("winner"), limit=80) or "Winner"
+    if str(decision.get("verdict_type") or "").casefold() == "needs_judge_review" or winner.casefold() == "needs_judge_review":
+        return "No expanded evidence available until judge review."
+    winner_lines: list[str] = []
+    loser_lines: list[str] = []
+    matchup_lines: list[str] = []
     for card in decision.get("matchup_card") or []:
         if not isinstance(card, dict):
             continue
@@ -463,9 +585,11 @@ def full_evidence_text(decision: dict[str, Any]) -> str:
         summary = clean_detail_text(identity.get("identity_summary"), limit=400)
         non_physical = ", ".join(compact_list(identity.get("non_physical_options"), limit=4))
         if summary:
-            lines.append(f"Combat identity: {summary}")
+            target = winner_lines if clean_text(card.get("name"), limit=80) == winner else loser_lines
+            target.append(f"Combat identity: {summary}")
         if non_physical:
-            lines.append(f"Non-physical options: {card.get('name')}: {non_physical}")
+            target = winner_lines if clean_text(card.get("name"), limit=80) == winner else loser_lines
+            target.append(f"Non-physical options: {card.get('name')}: {non_physical}")
     for factor in decision.get("deciding_factors") or []:
         if not isinstance(factor, dict):
             continue
@@ -473,9 +597,10 @@ def full_evidence_text(decision: dict[str, Any]) -> str:
         evidence = clean_detail_text(factor.get("evidence"), limit=900)
         effect = clean_detail_text(factor.get("tactical_effect"), limit=900)
         if evidence or effect:
-            lines.append(f"{category}: {evidence or effect}")
+            target = winner_lines if winner and winner.casefold() in (evidence or effect).casefold() else matchup_lines
+            target.append(f"{category}: {clean_detail_text(evidence or effect, limit=500)}")
             if evidence and effect and effect.casefold() not in evidence.casefold():
-                lines.append(f"  Matchup read: {effect}")
+                matchup_lines.append(f"Matchup read: {effect}")
     breakdown = decision.get("advantage_breakdown") if isinstance(decision.get("advantage_breakdown"), dict) else {}
     for category, item in breakdown.items():
         if not isinstance(item, dict):
@@ -486,17 +611,27 @@ def full_evidence_text(decision: dict[str, Any]) -> str:
         if reason:
             label = factor_category(str(category))
             suffix = f" ({winner}, {margin} margin)" if winner or margin else ""
-            lines.append(f"{label}{suffix}: {reason}")
+            matchup_lines.append(f"{label}{suffix}: {reason}")
     for swing in decision.get("swing_factors") or []:
         if not isinstance(swing, dict):
             continue
         title = clean_text(swing.get("title"), limit=80) or "Swing factor"
         reason = clean_detail_text(swing.get("reason") or swing.get("impact"), limit=700)
         if reason:
-            lines.append(f"{title}: {reason}")
+            matchup_lines.append(f"{title}: {reason}")
     loser_path = formatted_loser_best_path_full(decision)
     if loser_path:
-        lines.append(f"Why the alternate route fell short: {loser_path}")
+        matchup_lines.append(f"Why loser path was less reliable: {loser_path}")
+    lines: list[str] = []
+    if winner_lines:
+        lines.append("Winner evidence")
+        lines.extend(winner_lines)
+    if loser_lines:
+        lines.append("Loser evidence")
+        lines.extend(loser_lines)
+    if matchup_lines:
+        lines.append("Matchup read")
+        lines.extend(matchup_lines)
     deduped: list[str] = []
     seen = set()
     for line in lines:
@@ -511,12 +646,26 @@ def structured_decision_output(decision: dict[str, Any]) -> dict[str, Any]:
     winner = clean_text(decision.get("winner"), limit=80)
     loser = clean_text(decision.get("loser"), limit=80)
     confidence = clean_text(decision.get("confidence"), limit=40)
+    needs_review = str(decision.get("verdict_type") or "").casefold() == "needs_judge_review" or winner.casefold() == "needs_judge_review"
+    if needs_review:
+        winner = "Judge review needed"
+        loser = ""
+        decision = {
+            **decision,
+            "winner": winner,
+            "loser": loser,
+            "summary": "This matchup needs judge review because the profiles do not provide enough clean battle data.",
+            "loser_best_path": "No supported loser path available.",
+            "winner_probability": None,
+            "loser_probability": None,
+            "overall_probability": {},
+        }
     winner_pct, loser_pct = probability_pair(decision)
     summary = short_summary(decision)
     loser_best_path_short = formatted_loser_best_path(decision)
     loser_best_path_full = formatted_loser_best_path_full(decision)
     evidence = evidence_bullets(decision, limit=140)
-    battle_odds_text = f"{winner or 'Winner'} {winner_pct}% / {loser or 'Loser'} {loser_pct}%"
+    battle_odds_text = "Judge review needed" if needs_review else f"{winner or 'Winner'} {winner_pct}% / {loser or 'Loser'} {loser_pct}%"
     title = matchup_title(decision)
     display_title = f"⚔️ {title.upper()}"
     confidence_key = str(confidence or "").casefold()

@@ -101,6 +101,8 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("as evidenced by the packet", user_prompt)
         self.assertIn("main route stabilizes", user_prompt)
         self.assertIn("Never use these phrases", user_prompt)
+        self.assertIn("best listed tactic", user_prompt)
+        self.assertIn("controlled the pace", user_prompt)
         self.assertIn("No JSON.", user_prompt)
         self.assertIn("No bullet lists.", user_prompt)
         self.assertIn("No markdown headings.", user_prompt)

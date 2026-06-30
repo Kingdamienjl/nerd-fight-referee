@@ -99,6 +99,29 @@ NON_PHYSICAL_TERMS = (
     "cosmic",
 )
 PHYSICAL_ONLY_TERMS = ("superhuman physical characteristics", "enhanced strength", "martial arts")
+MAJOR_MAGIC_TERMS = ("magic", "spell", "sorcery", "alchemy", "cursed energy", "requip", "cosmo", "chakra", "ninjutsu")
+INCIDENTAL_MAGIC_TERMS = ("healing", "transformation", "resistance to telepathy", "telepathy resistance")
+COSMIC_HAX_TERMS = (
+    "reality warping",
+    "soul manipulation",
+    "time manipulation",
+    "existence erasure",
+    "cosmic power",
+    "silver crystal",
+)
+RANGED_ENERGY_TERMS = (
+    "energy projection",
+    "beam",
+    "blast",
+    "projectile",
+    "firearms",
+    "energy cannon",
+    "optic blast",
+    "barrier",
+    "forcefield",
+    "a.t. field",
+)
+WEAPON_TERMS = ("weapon", "sword", "axe", "claws", "gun", "bow", "armor", "staff", "rod", "masamune")
 SIGNATURE_POWER_TERMS = (
     "silver crystal",
     "moon stick",
@@ -108,9 +131,23 @@ SIGNATURE_POWER_TERMS = (
     "purification",
     "energy projection",
     "forcefield creation",
+    "cursed energy",
+    "alchemy",
+    "requip",
+    "haki",
+    "nen",
+    "ki",
+    "cosmo",
+    "chakra",
+    "a.t. field",
+    "decay",
+    "one for all",
+    "spirit gun",
+    "barrier manipulation",
     "barriers",
     "transformation",
 )
+SOURCE_TAB_TERMS = ("before crisis", "crisis core", "disc 1", "disc 2", "disc 3", "advent children", "original", "intrinsic")
 
 
 def text_rank(value: str | None, *, speed: bool = False) -> int | None:
@@ -461,7 +498,7 @@ def tactical_effect(axis: str, winner: dict[str, Any], loser: dict[str, Any]) ->
             f"{winner_name} can shape the engagement distance and make {loser_name} "
             "spend actions closing or defending."
         )
-    return f"{winner_name} can convert this listed advantage into tactical pressure."
+    return f"{winner_name} can convert this confirmed advantage into tactical pressure."
 
 
 def deciding_factor(axis: str, winner: dict[str, Any], loser: dict[str, Any]) -> dict[str, str]:
@@ -469,7 +506,7 @@ def deciding_factor(axis: str, winner: dict[str, Any], loser: dict[str, Any]) ->
     loser_name = str(loser.get("canonical_name") or "Loser")
     winner_value = clean_strategy_fragment(str((winner.get("power_scale") or {}).get(axis) or ""))
     loser_value = clean_strategy_fragment(str((loser.get("power_scale") or {}).get(axis) or ""))
-    evidence = f"{winner_name} leads {axis_label(axis).casefold()} over {loser_name} in the packet."
+    evidence = f"{winner_name} leads {axis_label(axis).casefold()} over {loser_name} in the profile data."
     if winner_value and loser_value:
         evidence = (
             f"{winner_name} leads {axis_label(axis).casefold()}: listed as {winner_value} "
@@ -492,7 +529,7 @@ def ability_factor(winner: dict[str, Any]) -> dict[str, str] | None:
         "evidence": f"{winner_name} brings named tools: {', '.join(names)}",
         "tactical_effect": (
             f"{winner_name} can build a fight plan around {', '.join(names)} instead of relying only "
-            "on raw stat pressure. No unlisted feats are assumed."
+            "on raw stat pressure."
         ),
     }
 
@@ -593,13 +630,21 @@ def weapon_power_choice(contender: dict[str, Any]) -> list[str]:
 
 def tool_priority(value: str) -> int:
     normalized = str(value or "").casefold()
-    if any(term in normalized for term in SIGNATURE_POWER_TERMS):
+    if any(re.search(rf"\b{re.escape(term)}\b", normalized) for term in SIGNATURE_POWER_TERMS):
         return 40
     if any(term in normalized for term in NON_PHYSICAL_TERMS):
         return 30
     if any(term in normalized for term in PHYSICAL_ONLY_TERMS):
         return -10
     return 10
+
+
+def term_hits(terms: str, markers: tuple[str, ...]) -> int:
+    return sum(1 for marker in markers if marker in terms)
+
+
+def source_tab_only(values: list[str]) -> bool:
+    return bool(values) and all(any(term in str(value).casefold() for term in SOURCE_TAB_TERMS) for value in values)
 
 
 def combined_clean_terms(contender: dict[str, Any], *, limit: int = 20) -> list[str]:
@@ -652,19 +697,23 @@ def non_physical_options(contender: dict[str, Any]) -> list[str]:
 
 def combat_mode(contender: dict[str, Any]) -> str:
     terms = " ".join(combined_clean_terms(contender, limit=30)).casefold()
-    if any(marker in terms for marker in ("reality warping", "time manipulation", "cosmic", "silver crystal", "soul manipulation")):
+    major_magic_hits = term_hits(terms, MAJOR_MAGIC_TERMS)
+    incidental_hits = term_hits(terms, INCIDENTAL_MAGIC_TERMS)
+    if any(marker in terms for marker in COSMIC_HAX_TERMS):
         return "cosmic/reality hax user"
-    if any(marker in terms for marker in ("magic", "spell", "purification", "healing", "barrier", "transformation")):
+    if major_magic_hits >= 2 or any(marker in terms for marker in MAJOR_MAGIC_TERMS[:4]):
         return "magic user"
-    if any(marker in terms for marker in ("energy projection", "ranged", "beam", "blast")):
+    if any(marker in terms for marker in RANGED_ENERGY_TERMS):
         return "ranged energy user"
-    if any(marker in terms for marker in ("weapon", "sword", "axe", "claws", "gun", "staff", "rod")):
+    if any(marker in terms for marker in WEAPON_TERMS):
         return "weapon specialist"
     if any(marker in terms for marker in ("tech", "armor", "gadget")):
         return "tech user"
     if any(marker in terms for marker in ("martial", "combat style", "hand to hand")):
         return "martial artist"
-    if any(marker in terms for marker in ("durability", "strength", "bruiser", "tank")):
+    if incidental_hits and any(marker in terms for marker in ("strength", "durability", "regeneration", "claws", "flight", "cyborg")):
+        return "tank/bruiser"
+    if any(marker in terms for marker in ("durability", "strength", "bruiser", "tank", "regeneration")):
         return "tank/bruiser"
     return "packet-defined fighter"
 
@@ -761,7 +810,7 @@ def matchup_card(
         elif contender_id == loser_id:
             best_route = loser_route
         else:
-            best_route = "Needs a clearer packet-backed win route."
+            best_route = "Needs a clearer profile-backed win route."
         identity = combat_identity(contender)
         cards.append(
             {
@@ -797,7 +846,7 @@ def structured_factor(winner: dict[str, Any], loser: dict[str, Any]) -> dict[str
         return {
             "factor": "Resistance / Counterplay",
             "evidence": f"{winner_name} has listed counterplay: {', '.join(counters)}",
-            "tactical_effect": f"{winner_name} has an explicit packet route for blunting {loser_name}'s best tools.",
+            "tactical_effect": f"{winner_name} has an explicit counter route for blunting {loser_name}'s best tools.",
         }
     intelligence = tactical_value(winner, "tactical_intelligence")
     style = tactical_value(winner, "combat_style")
@@ -810,8 +859,10 @@ def structured_factor(winner: dict[str, Any], loser: dict[str, Any]) -> dict[str
         }
     forms = compact_names(tactical_value(winner, "forms"))
     if forms:
+        if source_tab_only(forms):
+            return None
         return {
-            "factor": "Special Abilities",
+            "factor": "Forms/Eras",
             "evidence": f"{winner_name} has listed form access: {', '.join(forms)}",
             "tactical_effect": f"{winner_name} can change tempo with {', '.join(forms)} if the first approach stalls.",
         }
@@ -830,12 +881,12 @@ def route_to_victory(winner: dict[str, Any], loser: dict[str, Any], factors: lis
     if "Mobility / Initiative" in factor_names and "Finishing Power" in factor_names:
         return f"{winner_name} wins by taking first meaningful action, forcing reactions, then cashing in the higher output edge."
     if "Durability / Attrition" in factor_names:
-        return f"{winner_name} wins by weathering early answers and making each return hit cost {loser_name} more."
+        return f"{winner_name} wins by using the durability edge to extend exchanges until {loser_name}'s counters lose value."
     if "Skill / Tactics" in factor_names:
-        return f"{winner_name} wins by steering the matchup through cleaner decisions, timing, and packet-backed tactics."
+        return f"{winner_name} wins by steering the matchup through cleaner decisions, timing, and profile-backed tactics."
     if "Special Abilities" in factor_names:
         return f"{winner_name} wins by using named tools to create the opening that raw stats alone do not describe."
-    return f"{winner_name} has the clearer packet-backed route over {loser_name}."
+    return f"{winner_name} has the more reliable stat-and-tool profile over {loser_name}."
 
 
 def loser_path(loser: dict[str, Any], winner: dict[str, Any]) -> str:
@@ -850,13 +901,13 @@ def loser_path(loser: dict[str, Any], winner: dict[str, Any]) -> str:
     weaknesses = item_names(winner, "weaknesses", limit=2)
     if weaknesses:
         return (
-            f"{loser_name}'s best route against {winner_name} was to force their strongest confirmed lane early, pressure "
+            f"{loser_name}'s best route against {winner_name} was to force their most reliable opening early, pressure "
             f"{winner_name} around {', '.join(weaknesses)}, and punish any timing or stamina gap "
-            f"before {winner_name} controlled the pace."
+            f"before {winner_name} kept initiative."
         )
     return (
-        f"{loser_name} needed to force the fight against {winner_name} into their strongest confirmed lane, "
-        "but the packet did not provide a clean exploitable weakness."
+        f"{loser_name} needed to force the fight against {winner_name} into their most reliable opening, "
+        "but the profile data did not provide a clean exploitable weakness."
     )
 
 
@@ -993,8 +1044,8 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
         "confidence": confidence,
         "verdict_type": "smoke_test_decision",
         "summary": (
-            f"{winner['canonical_name']} has the clearer packet-backed route over "
-            f"{loser['canonical_name']} from the supplied packet."
+            f"{winner['canonical_name']} has the more reliable stat-and-tool profile over "
+            f"{loser['canonical_name']} from the profile data."
         ),
         "win_condition": route,
         "loser_best_path": best_loser_path,

@@ -347,8 +347,78 @@ class SmokeJudgeTests(unittest.TestCase):
 
         self.assertEqual(
             result["loser_best_path"],
-            "Kratos needed to force the fight against Itachi into their strongest confirmed lane, but the packet did not provide a clean exploitable weakness.",
+            "Kratos needed to force the fight against Itachi into their most reliable opening, but the profile data did not provide a clean exploitable weakness.",
         )
+
+    def test_incidental_terms_do_not_make_physical_fighters_magic_users(self):
+        cases = [
+            contender(
+                "Wolverine",
+                "wolverine",
+                "Building level",
+                "Peak Human",
+                "Building level",
+                abilities=[
+                    {"name": "Regeneration"},
+                    {"name": "Resistance to Telepathy"},
+                    {"name": "Adamantium claws"},
+                ],
+            ),
+            contender(
+                "Guts",
+                "guts",
+                "Building level",
+                "Peak Human",
+                "Building level",
+                equipment=[{"name": "Dragon Slayer"}],
+            ),
+            contender(
+                "Power Girl",
+                "power-girl",
+                "Town level",
+                "Supersonic",
+                "Town level",
+                abilities=[{"name": "Flight"}, {"name": "Spaceflight"}, {"name": "Superhuman Strength"}],
+            ),
+            contender(
+                "Android 17",
+                "android-17",
+                "Town level",
+                "Supersonic",
+                "Town level",
+                abilities=[{"name": "Barrier"}, {"name": "Cyborg physiology"}, {"name": "Energy Projection"}],
+            ),
+        ]
+
+        for fighter in cases:
+            packet = {
+                "errors": [],
+                "contender_a": fighter,
+                "contender_b": contender("Baseline", "baseline", "Wall level", "Human", "Wall level"),
+                "warnings": [],
+            }
+            result = smoke_judge_packet(packet)
+            self.assertNotEqual(result["matchup_card"][0]["combat_identity"]["combat_mode"], "magic user")
+
+    def test_sailor_moon_core_magic_still_classifies_as_magic_or_cosmic(self):
+        packet = {
+            "errors": [],
+            "contender_a": contender(
+                "Usagi Tsukino",
+                "usagi",
+                "Moon level",
+                "Subsonic",
+                "Building level",
+                abilities=[{"name": "Magic"}, {"name": "Purification"}, {"name": "Energy Projection"}],
+                equipment=[{"name": "Silver Crystal"}],
+            ),
+            "contender_b": contender("Baseline", "baseline", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+
+        result = smoke_judge_packet(packet)
+
+        self.assertIn(result["matchup_card"][0]["combat_identity"]["combat_mode"], {"magic user", "cosmic/reality hax user"})
 
 
 if __name__ == "__main__":

@@ -417,6 +417,12 @@ class DecisionFormatterTests(unittest.TestCase):
             "No, Yes, Yes",
             "SephirothCGModel CrisisCore.png",
             "File:Sephiroth.jpg",
+            "however",
+            "are allowed to use their own personalized gear",
+            "None notable Optional",
+            "right, thumb",
+            "Strongest consistent canonical form",
+            "High 7 A with A.T. Field Name",
         ]
 
         for value in dirty_values:
@@ -654,9 +660,91 @@ class DecisionFormatterTests(unittest.TestCase):
         text = format_decision(decision)
 
         self.assertIn(
-            "The loser needed to force the fight into their strongest confirmed lane, but the packet did not provide a clean exploitable weakness.",
+            "No supported loser path available.",
             text,
         )
+
+    def test_quick_evidence_skips_source_tab_forms(self):
+        structured = structured_decision_output(
+            {
+                "winner": "Sephiroth",
+                "loser": "Cloud",
+                "confidence": "medium",
+                "summary": "Sephiroth had the more consistent finish.",
+                "loser_best_path": "Cloud needed to pressure Sephiroth early.",
+                "deciding_factors": [
+                    {
+                        "factor": "Forms/Eras",
+                        "evidence": "Sephiroth has listed form access: Before Crisis and Crisis Core, Disc 1",
+                    },
+                    {"factor": "Finishing Power", "evidence": "Sephiroth has the stronger finishing tier."},
+                ],
+            }
+        )
+
+        evidence = "\n".join(structured["quick_evidence"])
+
+        self.assertNotIn("Before Crisis", evidence)
+        self.assertIn("stronger finishing tier", evidence)
+
+    def test_full_evidence_uses_grouped_sections_and_no_generic_packet_phrases(self):
+        structured = structured_decision_output(
+            {
+                "winner": "Usagi Tsukino",
+                "loser": "Sephiroth",
+                "confidence": "medium",
+                "summary": "Usagi Tsukino controlled the pace from the supplied packet.",
+                "loser_best_path": "Sephiroth needed to force their best listed tactic early.",
+                "matchup_card": [
+                    {
+                        "name": "Usagi Tsukino",
+                        "combat_identity": {"identity_summary": "Usagi Tsukino is a magic user."},
+                    },
+                    {
+                        "name": "Sephiroth",
+                        "combat_identity": {"identity_summary": "Sephiroth is a weapon specialist."},
+                    },
+                ],
+                "deciding_factors": [
+                    {"factor": "Abilities", "evidence": "Usagi Tsukino had a packet-backed route."}
+                ],
+            }
+        )
+
+        text = "\n".join(
+            [
+                structured["public_summary"],
+                "\n".join(structured["quick_evidence"]),
+                structured["full_evidence"],
+                structured["loser_best_path"],
+            ]
+        )
+
+        self.assertIn("Winner evidence", structured["full_evidence"])
+        self.assertIn("Loser evidence", structured["full_evidence"])
+        self.assertIn("Matchup read", structured["full_evidence"])
+        self.assertNotIn("supplied packet", text)
+        self.assertNotIn("packet-backed", text)
+        self.assertNotIn("controlled the pace", text)
+        self.assertNotIn("best listed tactic", text)
+
+    def test_needs_judge_review_output_is_user_safe(self):
+        structured = structured_decision_output(
+            {
+                "winner": "needs_judge_review",
+                "confidence": "low",
+                "verdict_type": "needs_judge_review",
+                "summary": "",
+                "loser_best_path": "",
+                "matchup_card": [{"name": "Dirty Profile", "key_tools": ["Masamune"]}],
+            }
+        )
+
+        self.assertEqual(structured["winner"], "Judge review needed")
+        self.assertEqual(structured["battle_odds_text"], "Judge review needed")
+        self.assertIn("needs judge review", structured["public_summary"])
+        self.assertEqual(structured["loser_best_path"], "No supported loser path available.")
+        self.assertNotIn("needs_judge_review", format_decision({"winner": "needs_judge_review", "verdict_type": "needs_judge_review"}))
 
 
 if __name__ == "__main__":

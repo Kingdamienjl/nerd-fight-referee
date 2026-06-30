@@ -245,6 +245,7 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             "Mention at least two concrete listed traits, stats, abilities, equipment, or weaknesses when available.",
             'Avoid vague phrases like "various forms", "special abilities", or "high strength" unless those exact phrases are in the packet.',
             'Never use these phrases: "as evidenced by the packet", "listed abilities", "main route stabilizes", "clean openings into decisive damage", "exchange pattern", "escalation options", "higher speed tier".',
+            'Never use generic public-facing phrases like "from the supplied packet", "packet-backed", "best listed tactic", "controlled the pace", "repeatable control", or "cleaner route".',
             'Avoid live play-by-play phrases like "as the fight begins", "the opening exchange is", or present-tense phrasing like "Green Lantern does X".',
             'Prefer past-tense phrasing like "Green Lantern opened by...", "Naruto tried to...", "That failed because...", and "The finish came when...".',
             'Itachi may use "Sharingan" only if "Sharingan" appears in the compact evidence packet.',
@@ -391,7 +392,7 @@ def deterministic_tactical_summary(smoke: dict[str, Any]) -> str:
     if reasoning:
         return truncate_at_sentence_boundary(" ".join(reasoning), 1100)
     return (
-        f"{winner} retained the deterministic verdict over {loser} through the packet-backed route: "
+        f"{winner} retained the deterministic verdict over {loser} through the profile-backed route: "
         f"{smoke.get('win_condition') or 'the cleaner confirmed advantages.'}"
     )
 
@@ -445,7 +446,7 @@ def fallback_decision(smoke_baseline: dict[str, Any], reason: str, detail: str =
         "winner": smoke_baseline.get("winner"),
         "confidence": smoke_baseline.get("confidence") or "needs_judge_review",
         "summary": explanation,
-        "win_condition": smoke_baseline.get("win_condition") or "Fallback uses packet-backed stat leads.",
+        "win_condition": smoke_baseline.get("win_condition") or "Fallback uses profile-backed stat leads.",
         "loser_best_path": smoke_baseline.get("loser_best_path") or "Evidence is incomplete.",
         "loser": smoke_baseline.get("loser"),
         "loser_character_id": smoke_baseline.get("loser_character_id"),
