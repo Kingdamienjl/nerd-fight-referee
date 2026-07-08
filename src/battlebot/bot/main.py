@@ -10,6 +10,7 @@ from discord import app_commands
 
 from battlebot.bot.commands.catalog import register_catalog_commands
 from battlebot.bot.commands.fight import register_fight_command
+from battlebot.common.db import apply_schema, connect_database
 
 
 BOT_PUBLIC_NAME = "Nerd Fight Referee"
@@ -39,6 +40,13 @@ class BattleBotClient(discord.Client):
 
     async def setup_hook(self) -> None:
         LOGGER.info("Startup environment: %s", startup_environment_summary())
+        database_url = os.getenv("DATABASE_URL")
+        if database_url:
+            try:
+                async with connect_database(database_url) as connection:
+                    await apply_schema(connection)
+            except Exception as exc:  # noqa: BLE001 - audit schema creation must not block Discord startup.
+                LOGGER.warning("Database schema setup failed; audit JSONL fallback remains available: %s", exc)
         LOGGER.info("Local command names before sync: %s", ", ".join(command_names(self.tree)))
         guild_sync_id = os.getenv("DISCORD_GUILD_ID")
         if guild_sync_id:

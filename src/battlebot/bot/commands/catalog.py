@@ -7,6 +7,7 @@ from typing import Any
 import discord
 from discord import app_commands
 
+from battlebot.bot.audit import run_audited_command
 from battlebot.common.db import connect_database
 from battlebot.profiles.search import browse_character_catalog, format_character_catalog, format_search_results, search_characters
 from battlebot.profiles.sheet import profile_sheet
@@ -85,17 +86,30 @@ def register_catalog_commands(tree: app_commands.CommandTree, *, database_url: s
     @tree.command(name="search", description="Search imported, generated, review, and roster characters")
     async def search(interaction: discord.Interaction, query: str, limit: int = 10, public: bool = False) -> None:
         ephemeral = catalog_response_ephemeral(public)
-        await interaction.response.defer(thinking=True, ephemeral=ephemeral)
-        async with connect_database(database_url) as connection:
-            rows = await search_characters(query, connection=connection, limit=max(1, min(limit, 25)))
-            message = format_search_results(rows)
-            if not rows:
-                inserted = await enqueue_missing_fighter(connection, query)
-                if inserted:
-                    message += "\nQueued for retrieval."
-                else:
-                    message += "\nAlready queued or awaiting review."
-        await interaction.followup.send(clamp_message(message), ephemeral=ephemeral)
+
+        async def handler() -> str:
+            await interaction.response.defer(thinking=True, ephemeral=ephemeral)
+            async with connect_database(database_url) as connection:
+                rows = await search_characters(query, connection=connection, limit=max(1, min(limit, 25)))
+                message = format_search_results(rows)
+                if not rows:
+                    inserted = await enqueue_missing_fighter(connection, query)
+                    if inserted:
+                        message += "\nQueued for retrieval."
+                    else:
+                        message += "\nAlready queued or awaiting review."
+            message = clamp_message(message)
+            await interaction.followup.send(message, ephemeral=ephemeral)
+            return message
+
+        await run_audited_command(
+            interaction,
+            command_name="search",
+            options={"query": query, "limit": limit, "public": public},
+            response_is_private=ephemeral,
+            database_url=database_url,
+            handler=handler,
+        )
 
     @tree.command(name="characters", description="List available characters")
     async def characters(
@@ -107,24 +121,50 @@ def register_catalog_commands(tree: app_commands.CommandTree, *, database_url: s
         public: bool = False,
     ) -> None:
         ephemeral = catalog_response_ephemeral(public)
-        await interaction.response.defer(thinking=True, ephemeral=ephemeral)
-        async with connect_database(database_url) as connection:
-            page_data = await browse_character_catalog(
-                connection=connection,
-                category=category,
-                franchise=franchise,
-                page=page,
-                limit=limit,
-            )
-        await interaction.followup.send(clamp_message(format_character_catalog(page_data)), ephemeral=ephemeral)
+
+        async def handler() -> str:
+            await interaction.response.defer(thinking=True, ephemeral=ephemeral)
+            async with connect_database(database_url) as connection:
+                page_data = await browse_character_catalog(
+                    connection=connection,
+                    category=category,
+                    franchise=franchise,
+                    page=page,
+                    limit=limit,
+                )
+            message = clamp_message(format_character_catalog(page_data))
+            await interaction.followup.send(message, ephemeral=ephemeral)
+            return message
+
+        await run_audited_command(
+            interaction,
+            command_name="characters",
+            options={"category": category, "franchise": franchise, "page": page, "limit": limit, "public": public},
+            response_is_private=ephemeral,
+            database_url=database_url,
+            handler=handler,
+        )
 
     @tree.command(name="profile", description="Show a human-readable profile sheet")
     async def profile(interaction: discord.Interaction, character: str, public: bool = False) -> None:
         ephemeral = catalog_response_ephemeral(public)
-        await interaction.response.defer(thinking=True, ephemeral=ephemeral)
-        async with connect_database(database_url) as connection:
-            text = await profile_sheet(character, connection=connection)
-        await interaction.followup.send(clamp_message(text), ephemeral=ephemeral)
+
+        async def handler() -> str:
+            await interaction.response.defer(thinking=True, ephemeral=ephemeral)
+            async with connect_database(database_url) as connection:
+                text = await profile_sheet(character, connection=connection)
+            message = clamp_message(text)
+            await interaction.followup.send(message, ephemeral=ephemeral)
+            return message
+
+        await run_audited_command(
+            interaction,
+            command_name="profile",
+            options={"character": character, "public": public},
+            response_is_private=ephemeral,
+            database_url=database_url,
+            handler=handler,
+        )
 
     @tree.command(name="needs_review", description="List profiles waiting for review")
     async def needs_review(
@@ -134,18 +174,34 @@ def register_catalog_commands(tree: app_commands.CommandTree, *, database_url: s
         franchise: str | None = None,
         limit: int = 10,
     ) -> None:
-        if not is_admin_or_dm(interaction):
-            await interaction.response.send_message("Admin only.", ephemeral=True)
-            return
-        profiles = service.list_profiles(
-            kind="needs_review",
-            category=category,
-            franchise=franchise,
-            limit=max(1, min(limit, 50)),
+        async def handler() -> str:
+            if not is_admin_or_dm(interaction):
+                await interaction.response.send_message("Admin only.", ephemeral=True)
+                return "Admin only."
+            profiles = service.list_profiles(
+                kind="needs_review",
+                category=category,
+                franchise=franchise,
+                limit=max(1, min(limit, 50)),
+            )
+            if query:
+                profiles = [
+                    profile
+                    for profile in profiles
+                    if query.casefold() in str(profile.get("name") or "").casefold()
+                ]
+            message = format_needs_review(profiles)
+            await interaction.response.send_message(message, ephemeral=True)
+            return message
+
+        await run_audited_command(
+            interaction,
+            command_name="needs_review",
+            options={"query": query, "category": category, "franchise": franchise, "limit": limit},
+            response_is_private=True,
+            database_url=database_url,
+            handler=handler,
         )
-        if query:
-            profiles = [profile for profile in profiles if query.casefold() in str(profile.get("name") or "").casefold()]
-        await interaction.response.send_message(format_needs_review(profiles), ephemeral=True)
 
     @tree.command(name="repair_queue", description="Show a safe terminal command for review auto-repair")
     async def repair_queue(
@@ -155,10 +211,24 @@ def register_catalog_commands(tree: app_commands.CommandTree, *, database_url: s
         limit: int = 25,
         promote_if_valid: bool = True,
     ) -> None:
-        if not is_admin_or_dm(interaction):
-            await interaction.response.send_message("Admin only.", ephemeral=True)
-            return
-        await interaction.response.send_message(
-            clamp_message(format_repair_queue_command(category, franchise, limit, promote_if_valid)),
-            ephemeral=True,
+        async def handler() -> str:
+            if not is_admin_or_dm(interaction):
+                await interaction.response.send_message("Admin only.", ephemeral=True)
+                return "Admin only."
+            message = clamp_message(format_repair_queue_command(category, franchise, limit, promote_if_valid))
+            await interaction.response.send_message(message, ephemeral=True)
+            return message
+
+        await run_audited_command(
+            interaction,
+            command_name="repair_queue",
+            options={
+                "category": category,
+                "franchise": franchise,
+                "limit": limit,
+                "promote_if_valid": promote_if_valid,
+            },
+            response_is_private=True,
+            database_url=database_url,
+            handler=handler,
         )

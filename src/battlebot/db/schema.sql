@@ -131,6 +131,25 @@ CREATE TABLE IF NOT EXISTS profile_jobs (
     updated_at timestamptz NOT NULL DEFAULT now()
 );
 
+CREATE TABLE IF NOT EXISTS discord_command_audit (
+    id bigserial PRIMARY KEY,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    command_name text NOT NULL,
+    guild_id text,
+    channel_id text,
+    user_id text,
+    user_display_name text,
+    options_json jsonb NOT NULL DEFAULT '{}',
+    response_text text,
+    response_is_private boolean NOT NULL DEFAULT false,
+    success boolean NOT NULL DEFAULT false,
+    error_type text,
+    error_message text,
+    duration_ms integer NOT NULL DEFAULT 0,
+    llm_enabled boolean NOT NULL DEFAULT false,
+    llm_model text
+);
+
 CREATE INDEX IF NOT EXISTS idx_characters_canonical_name ON characters(canonical_name);
 CREATE INDEX IF NOT EXISTS idx_characters_franchise ON characters(franchise);
 CREATE INDEX IF NOT EXISTS idx_character_aliases_normalized_alias
@@ -153,3 +172,7 @@ CREATE INDEX IF NOT EXISTS idx_character_profiles_profile_json
     ON character_profiles USING GIN (profile_json);
 CREATE INDEX IF NOT EXISTS idx_profile_jobs_claim
     ON profile_jobs (status, next_attempt_at, priority, id);
+CREATE INDEX IF NOT EXISTS idx_discord_command_audit_created_at
+    ON discord_command_audit (created_at);
+CREATE INDEX IF NOT EXISTS idx_discord_command_audit_command_name
+    ON discord_command_audit (command_name);

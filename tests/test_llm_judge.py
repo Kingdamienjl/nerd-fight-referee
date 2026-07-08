@@ -2,7 +2,12 @@ import unittest
 import httpx
 
 from battlebot.fight.decision_formatter import format_decision
-from battlebot.fight.llm_judge import build_prompt, judge_fight_packet, llm_output_violates_grounding
+from battlebot.fight.llm_judge import (
+    build_prompt,
+    judge_fight_packet,
+    llm_output_violates_entity_grounding,
+    llm_output_violates_grounding,
+)
 from battlebot.fight.smoke_judge import smoke_judge_packet
 
 
@@ -103,6 +108,7 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("Never use these phrases", user_prompt)
         self.assertIn("best listed tactic", user_prompt)
         self.assertIn("controlled the pace", user_prompt)
+        self.assertIn("Mention only the two fighters in this matchup", user_prompt)
         self.assertIn("No JSON.", user_prompt)
         self.assertIn("No bullet lists.", user_prompt)
         self.assertIn("No markdown headings.", user_prompt)
@@ -197,6 +203,94 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result["diagnostics"]["fallback_reason"], "grounding_guard")
         self.assertNotIn("his opponent", result["summary"])
         self.assertNotIn("rapid strikes", result["summary"])
+
+    def test_entity_grounding_rejects_foreign_characters_and_techniques(self):
+        pg_packet = {
+            "errors": [],
+            "contender_a": contender("Power Girl", "power-girl", "Town level", "Supersonic", "Town level"),
+            "contender_b": contender("Riddler", "riddler", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+
+        reasons = llm_output_violates_entity_grounding(
+            "Powering up his ring, Green Lantern opened by unleashing green energy blasts at Naruto. "
+            "The Shinobi answered with Shadow Clone Jutsu.",
+            pg_packet,
+        )
+
+        self.assertIn("llm foreign entity: Green Lantern", reasons)
+        self.assertIn("llm foreign entity: Naruto", reasons)
+        self.assertIn("llm foreign entity: Shinobi", reasons)
+        self.assertIn("llm foreign technique: Shadow Clone Jutsu", reasons)
+
+    def test_entity_grounding_allows_matchup_names_and_packet_terms(self):
+        pg_packet = {
+            "errors": [],
+            "contender_a": {
+                **contender("Power Girl", "power-girl", "Town level", "Supersonic", "Town level"),
+                "weaknesses": [{"name": "Kryptonite"}, {"name": "Red Sun Radiation"}],
+            },
+            "contender_b": contender("Riddler", "riddler", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+
+        reasons = llm_output_violates_entity_grounding(
+            "Power Girl kept Riddler from setting traps, but Kryptonite and Red Sun Radiation remained risks.",
+            pg_packet,
+        )
+
+        self.assertEqual(reasons, [])
+
+    def test_shadow_clone_jutsu_allowed_only_when_grounded(self):
+        pg_packet = {
+            "errors": [],
+            "contender_a": contender("Power Girl", "power-girl", "Town level", "Supersonic", "Town level"),
+            "contender_b": contender("Riddler", "riddler", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+        naruto_packet = {
+            "errors": [],
+            "contender_a": {
+                **contender("Naruto", "naruto", "Town level", "Supersonic", "Building level"),
+                "abilities": [{"name": "Shadow Clone Jutsu"}],
+            },
+            "contender_b": contender("Riddler", "riddler", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+
+        self.assertIn(
+            "llm foreign technique: Shadow Clone Jutsu",
+            llm_output_violates_entity_grounding("Riddler was overwhelmed by Shadow Clone Jutsu.", pg_packet),
+        )
+        self.assertEqual(
+            llm_output_violates_entity_grounding("Naruto used Shadow Clone Jutsu to pressure Riddler.", naruto_packet),
+            [],
+        )
+
+    async def test_entity_grounding_guard_falls_back_to_deterministic_summary(self):
+        pg_packet = {
+            "errors": [],
+            "contender_a": contender("Power Girl", "power-girl", "Town level", "Supersonic", "Town level"),
+            "contender_b": contender("Riddler", "riddler", "Wall level", "Human", "Wall level"),
+            "warnings": [],
+        }
+        smoke = smoke_judge_packet(pg_packet)
+
+        async def caller(messages, env=None):
+            return "Green Lantern opened on Naruto with Shadow Clone Jutsu somehow involved."
+
+        result = await judge_fight_packet(
+            pg_packet,
+            smoke,
+            env={"BATTLEBOT_LLM_ENABLED": "true"},
+            ollama_caller=caller,
+        )
+
+        self.assertTrue(result["diagnostics"]["fallback"])
+        self.assertEqual(result["diagnostics"]["fallback_reason"], "entity_grounding_guard")
+        self.assertTrue(result["llm_guarded"])
+        self.assertNotIn("Green Lantern", result["summary"])
+        self.assertNotIn("Naruto", result["summary"])
 
     async def test_llm_judge_uses_plain_text_as_referee_explanation_only(self):
         async def caller(messages, env=None):

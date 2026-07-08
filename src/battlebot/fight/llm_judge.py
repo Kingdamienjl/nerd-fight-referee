@@ -54,6 +54,35 @@ MELEE_EVIDENCE_TERMS = (
     "axe",
     "staff",
 )
+KNOWN_FOREIGN_ENTITIES = (
+    "Green Lantern",
+    "Naruto",
+    "Shinobi",
+    "Batman",
+    "Superman",
+    "Goku",
+    "Luffy",
+    "Spider-Man",
+    "Doctor Strange",
+)
+KNOWN_FOREIGN_TECHNIQUES = (
+    "Shadow Clone Jutsu",
+    "Lantern ring",
+    "Speed Force",
+    "Kamehameha",
+    "Chidori",
+    "Rasengan",
+)
+COMMON_CAPITALIZED_PHRASES = (
+    "The finish",
+    "That failed",
+    "The fight",
+    "Full Analysis",
+    "Nerd Fight Referee",
+    "Battle odds",
+    "Winner",
+    "Confidence",
+)
 SYSTEM_PROMPT = (
     "You are the official Nerd Fight Referee giving a post-fight referee explanation. The "
     "deterministic engine chooses the winner and confidence; you explain why that verdict "
@@ -236,6 +265,7 @@ def build_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any]) -> list
             "If Usagi Tsukino has Magic, Purification, Energy Projection, Forcefield Creation, Telekinesis, or Silver Crystal in the packet, Usagi Tsukino's counterplay must use those tools, not generic melee.",
             "Do not flatten magical, cosmic, ranged, tech, or hax-based fighters into generic brawlers.",
             "Use safe tactical inference: infer how supplied abilities were used in combat, but do not invent new powers, forms, weapons, techniques, or feats not in the packet.",
+            "Mention only the two fighters in this matchup and packet-listed tools. Do not introduce any other character, franchise, team, technique, or power system.",
             "Do not name any technique, form, weapon, power source, eye power, transformation, spell, or named attack unless the exact name appears in the compact evidence packet.",
             "Only name a technique, ability, weapon, or form if the exact name appears in the compact evidence packet.",
             "If only a generic capability is supplied, describe it generically.",
@@ -351,6 +381,94 @@ def clean_llm_explanation(raw: str) -> str:
     return " ".join(str(raw or "").replace("\n", " ").split()).strip()
 
 
+def clean_grounding_phrase(value: Any) -> str:
+    return re.sub(r"\s+", " ", str(value or "")).strip()
+
+
+def collect_grounded_phrases(value: Any, phrases: set[str]) -> None:
+    if value is None:
+        return
+    if isinstance(value, (str, int, float, bool)):
+        text = clean_grounding_phrase(value)
+        if text:
+            phrases.add(text.casefold())
+        return
+    if isinstance(value, dict):
+        for item in value.values():
+            collect_grounded_phrases(item, phrases)
+        return
+    if isinstance(value, (list, tuple, set)):
+        for item in value:
+            collect_grounded_phrases(item, phrases)
+
+
+def grounded_phrases_for_packet(packet: dict[str, Any]) -> set[str]:
+    phrases: set[str] = set()
+    for key in ("contender_a", "contender_b"):
+        contender = packet.get(key) if isinstance(packet.get(key), dict) else {}
+        collect_grounded_phrases(
+            {
+                "canonical_name": contender.get("canonical_name"),
+                "character_id": contender.get("character_id"),
+                "aliases": contender.get("aliases") or contender.get("alias") or [],
+                "franchise": contender.get("franchise"),
+                "category": contender.get("category"),
+                "variant": contender.get("variant") or {},
+                "abilities": contender.get("abilities") or [],
+                "equipment": contender.get("equipment") or [],
+                "weapons": contender.get("weapons") or [],
+                "forms": contender.get("forms") or contender.get("transformations") or [],
+                "powers": contender.get("powers") or contender.get("special_abilities") or [],
+                "weaknesses": contender.get("weaknesses") or [],
+                "tactical_profile": contender.get("tactical_profile") or {},
+                "power_scale": contender.get("power_scale") or {},
+            },
+            phrases,
+        )
+    return phrases
+
+
+def phrase_is_grounded(phrase: str, grounded: set[str]) -> bool:
+    normalized = clean_grounding_phrase(phrase).casefold()
+    if not normalized:
+        return True
+    if normalized in {item.casefold() for item in COMMON_CAPITALIZED_PHRASES}:
+        return True
+    return any(normalized == item or normalized in item or item in normalized for item in grounded)
+
+
+def foreign_phrase_kind(phrase: str) -> str:
+    normalized = phrase.casefold()
+    if any(technique.casefold() == normalized for technique in KNOWN_FOREIGN_TECHNIQUES):
+        return "technique"
+    return "entity"
+
+
+def llm_output_violates_entity_grounding(text: str, packet: dict[str, Any]) -> list[str]:
+    grounded = grounded_phrases_for_packet(packet)
+    reasons: list[str] = []
+    seen: set[str] = set()
+    for phrase in (*KNOWN_FOREIGN_TECHNIQUES, *KNOWN_FOREIGN_ENTITIES):
+        if re.search(rf"\b{re.escape(phrase)}\b", str(text or ""), flags=re.IGNORECASE) and not phrase_is_grounded(phrase, grounded):
+            kind = foreign_phrase_kind(phrase)
+            reason = f"llm foreign {kind}: {phrase}"
+            if reason not in seen:
+                seen.add(reason)
+                reasons.append(reason)
+    for match in re.finditer(r"\b[A-Z][A-Za-z0-9'’-]+(?:\s+[A-Z][A-Za-z0-9'’-]+)+\b", str(text or "")):
+        phrase = match.group(0).strip()
+        if phrase_is_grounded(phrase, grounded):
+            continue
+        if any(common.casefold() == phrase.casefold() for common in COMMON_CAPITALIZED_PHRASES):
+            continue
+        kind = foreign_phrase_kind(phrase)
+        reason = f"llm foreign {kind}: {phrase}"
+        if reason not in seen:
+            seen.add(reason)
+            reasons.append(reason)
+    return reasons
+
+
 def matchup_card_for_name(smoke: dict[str, Any], name: str) -> dict[str, Any]:
     normalized = str(name or "").casefold()
     for card in smoke.get("matchup_card") or []:
@@ -403,6 +521,7 @@ def llm_explained_decision(smoke: dict[str, Any], raw: str, *, packet: dict[str,
         return fallback_decision(smoke, FALLBACK_OLLAMA_UNAVAILABLE, "LLM returned an empty explanation.")
     concise_explanation = truncate_at_sentence_boundary(explanation, 1100)
     violation = llm_output_violates_grounding(concise_explanation, smoke)
+    entity_violations = llm_output_violates_entity_grounding(concise_explanation, packet)
     if violation:
         fallback = fallback_decision(
             smoke,
@@ -412,6 +531,18 @@ def llm_explained_decision(smoke: dict[str, Any], raw: str, *, packet: dict[str,
         fallback["summary"] = deterministic_tactical_summary(smoke)
         fallback["win_condition"] = fallback["summary"]
         fallback["referee_verdict"]["explanation"] = fallback["summary"]
+        return fallback
+    if entity_violations:
+        fallback = fallback_decision(
+            smoke,
+            "entity_grounding_guard",
+            f"LLM explanation rejected by entity grounding guard: {'; '.join(entity_violations)}.",
+        )
+        fallback["summary"] = deterministic_tactical_summary(smoke)
+        fallback["win_condition"] = fallback["summary"]
+        fallback["referee_verdict"]["explanation"] = fallback["summary"]
+        fallback["llm_guarded"] = True
+        fallback["llm_guard_reasons"] = entity_violations
         return fallback
     engine = engine_verdict(smoke)
     referee = referee_verdict(smoke, raw, concise_explanation, packet=packet)

@@ -12,6 +12,7 @@ from typing import Any
 import yaml
 
 from battlebot.fight.decision_formatter import format_fight_card, structured_decision_output
+from battlebot.fight.llm_judge import llm_output_violates_entity_grounding
 from battlebot.fight.smoke_judge import smoke_judge_packet
 
 
@@ -82,6 +83,48 @@ SOURCE_TAB_TERMS = (
     "Advent Children",
     "Original",
     "Intrinsic",
+)
+SOURCE_LABEL_TERMS = (
+    "final fantasy",
+    "marvel",
+    "dc comics",
+    "crossover icons",
+    "before crisis",
+    "crisis core",
+    "disc 1",
+    "disc 2",
+    "disc 3",
+    "advent children",
+)
+GENERIC_WIN_PATH_PHRASES = (
+    "taking first meaningful action",
+    "forcing reactions",
+    "cash in the higher output edge",
+    "extend exchanges",
+)
+SIGNATURE_TOOL_TERMS = (
+    "sword",
+    "blade",
+    "claws",
+    "gun",
+    "bow",
+    "axe",
+    "magic",
+    "alchemy",
+    "energy",
+    "blast",
+    "beam",
+    "barrier",
+    "crystal",
+    "jutsu",
+    "haki",
+    "nen",
+    "ki",
+    "cosmo",
+    "chakra",
+    "teleport",
+    "regeneration",
+    "flight",
 )
 LOW_VALUE_TOOLS = (
     "however",
@@ -309,6 +352,8 @@ def detect_output_problems(entry: dict[str, Any]) -> list[str]:
             problems.append(f"low-value tool: {value}")
     if "magic user" in text.casefold() and any(name in text.casefold() for name in STYLE_MISCLASSIFICATION_NAMES):
         problems.append("style misclassification: likely physical/tech fighter labeled magic user")
+    for reason in entry.get("llm_guard_reasons") or []:
+        problems.append(str(reason))
     return sorted(set(problems))
 
 
@@ -316,12 +361,99 @@ def problem_type(problem: str) -> str:
     return problem.split(":", 1)[0]
 
 
-def audit_matchup(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
+def public_field_values(public_fight_card_text: str, label: str) -> list[str]:
+    prefix = f"{label}:"
+    values = []
+    for line in str(public_fight_card_text or "").splitlines():
+        stripped = line.removeprefix("- ").strip()
+        if stripped.casefold().startswith(prefix.casefold()):
+            values.extend(part.strip() for part in stripped.split(":", 1)[1].split(",") if part.strip())
+    return values
+
+
+def looks_like_sentence_fragment(value: str) -> bool:
+    words = value.split()
+    return len(words) > 8 or bool(words and words[0][:1].islower() and len(words) > 3)
+
+
+def source_label_as_tool(value: str) -> bool:
+    normalized = value.casefold()
+    return any(term in normalized for term in SOURCE_LABEL_TERMS)
+
+
+def has_signature_tool(values: list[str]) -> bool:
+    text = " ".join(values).casefold()
+    return any(term in text for term in SIGNATURE_TOOL_TERMS)
+
+
+def quality_notes_for_entry(entry: dict[str, Any]) -> list[str]:
+    notes: list[str] = []
+    fight_card = str(entry.get("public_fight_card_text") or "")
+    weapon_power = public_field_values(fight_card, "Weapon/Power")
+    key_tools = public_field_values(fight_card, "Key tools")
+    win_paths = public_field_values(fight_card, "Win path")
+    risks = public_field_values(fight_card, "Risk")
+    evidence = [str(item) for item in entry.get("quick_evidence") or []]
+    full_evidence = str(entry.get("full_evidence") or "")
+    all_tools = weapon_power + key_tools
+
+    if not weapon_power or any(source_label_as_tool(tool) for tool in weapon_power):
+        notes.append("weak_weapon_power")
+    if any(source_label_as_tool(tool) for tool in all_tools):
+        notes.append("source_label_as_tool")
+    if not key_tools or any(looks_like_sentence_fragment(tool) for tool in key_tools):
+        notes.append("weak_key_tools")
+    if any(looks_like_sentence_fragment(tool) for tool in all_tools):
+        notes.append("sentence_fragment_tool")
+    if not has_signature_tool(all_tools):
+        notes.append("no_signature_tool")
+    if any("Forms/Eras" in item for item in evidence) and any(
+        any(label in item for label in ("Finishing Power", "Mobility", "Special Abilities", "Range Control"))
+        for item in evidence
+    ):
+        notes.append("forms_eras_overused")
+    if any(len(line) > 220 for line in full_evidence.splitlines() if line.strip().startswith("•")):
+        notes.append("raw_stat_dump")
+    if any(any(phrase in path.casefold() for phrase in GENERIC_WIN_PATH_PHRASES) for path in win_paths):
+        notes.append("generic_win_path")
+    if not risks or any(risk.strip(" .").casefold() in {"no clean exploitable weakness supplied", "unknown", "none"} for risk in risks):
+        notes.append("vague_risk")
+    return sorted(set(notes))
+
+
+def quality_score_from_notes(notes: list[str]) -> int:
+    penalties = {
+        "weak_weapon_power": 12,
+        "weak_key_tools": 12,
+        "raw_stat_dump": 15,
+        "forms_eras_overused": 10,
+        "generic_win_path": 12,
+        "vague_risk": 6,
+        "no_signature_tool": 10,
+        "source_label_as_tool": 15,
+        "sentence_fragment_tool": 12,
+    }
+    return max(0, 100 - sum(penalties.get(note, 5) for note in notes))
+
+
+def simulated_llm_commentary(left: dict[str, Any], right: dict[str, Any]) -> str:
+    return ""
+
+
+def audit_matchup(
+    left: dict[str, Any],
+    right: dict[str, Any],
+    *,
+    include_llm: bool = False,
+    llm_analysis: str = "",
+) -> dict[str, Any]:
     left = normalize_profile_for_fight(left)
     right = normalize_profile_for_fight(right)
     packet = {"errors": [], "contender_a": left, "contender_b": right, "warnings": []}
     smoke = smoke_judge_packet(packet)
     structured = structured_decision_output(smoke)
+    candidate_llm = llm_analysis or (simulated_llm_commentary(left, right) if include_llm else "")
+    llm_guard_reasons = llm_output_violates_entity_grounding(candidate_llm, packet) if candidate_llm else []
     entry = {
         "fighter_a": left.get("canonical_name"),
         "fighter_b": right.get("canonical_name"),
@@ -333,20 +465,33 @@ def audit_matchup(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]
         "full_evidence": structured["full_evidence"],
         "summary": structured["short_summary"],
         "loser_best_path": structured["loser_best_path"],
+        "llm_analysis": "" if llm_guard_reasons else candidate_llm,
+        "llm_guarded": bool(llm_guard_reasons),
+        "llm_guard_reasons": llm_guard_reasons,
     }
     problems = detect_output_problems(entry)
+    quality_notes = quality_notes_for_entry(entry)
     entry["problems"] = problems
     entry["problem_score"] = len(problems)
+    entry["quality_notes"] = quality_notes
+    entry["quality_score"] = quality_score_from_notes(quality_notes)
     return entry
 
 
-def build_report(profiles: list[dict[str, Any]], *, sample_size: int, seed: int) -> dict[str, Any]:
-    entries = [audit_matchup(left, right) for left, right in sample_matchups(profiles, sample_size=sample_size, seed=seed)]
+def build_report(profiles: list[dict[str, Any]], *, sample_size: int, seed: int, include_llm: bool = False) -> dict[str, Any]:
+    entries = [
+        audit_matchup(left, right, include_llm=include_llm)
+        for left, right in sample_matchups(profiles, sample_size=sample_size, seed=seed)
+    ]
     counts_by_problem_type: dict[str, int] = {}
     for entry in entries:
         for problem in entry["problems"]:
             key = problem_type(str(problem))
             counts_by_problem_type[key] = counts_by_problem_type.get(key, 0) + 1
+    quality_note_counts: dict[str, int] = {}
+    for entry in entries:
+        for note in entry["quality_notes"]:
+            quality_note_counts[note] = quality_note_counts.get(note, 0) + 1
     return {
         "summary": {
             "profiles_loaded": len(profiles),
@@ -354,6 +499,13 @@ def build_report(profiles: list[dict[str, Any]], *, sample_size: int, seed: int)
             "problem_entries": sum(1 for entry in entries if entry["problems"]),
             "total_problem_score": sum(int(entry["problem_score"]) for entry in entries),
             "problem_counts_by_type": counts_by_problem_type,
+            "average_quality_score": round(
+                sum(int(entry["quality_score"]) for entry in entries) / len(entries),
+                2,
+            )
+            if entries
+            else 0,
+            "quality_note_counts": quality_note_counts,
         },
         "entries": entries,
     }
@@ -379,7 +531,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main() -> None:
     args = build_arg_parser().parse_args()
     profiles = load_profiles(args.generated_dir, args.needs_review_dir)
-    report = build_report(profiles, sample_size=max(0, args.sample_size), seed=args.seed)
+    report = build_report(profiles, sample_size=max(0, args.sample_size), seed=args.seed, include_llm=args.include_llm)
     if args.write_report:
         write_report(report)
     print(json.dumps(report, indent=2, sort_keys=True))

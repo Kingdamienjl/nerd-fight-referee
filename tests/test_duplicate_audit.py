@@ -279,3 +279,89 @@ def test_cli_accepts_source_filter():
     args = parser.parse_args(["--source", "generated"])
 
     assert args.source == "generated"
+
+
+def test_needs_review_duplicate_of_generated_profile_becomes_safe_auto_archive(tmp_path):
+    generated = tmp_path / "profiles/generated"
+    needs = tmp_path / "profiles/needs_review"
+    write_profile(generated, "game/kingdom-hearts/xion.yaml", name="Xion", franchise="Kingdom Hearts", category="game")
+    write_profile(needs, "game/kingdom-hearts/xion-copy.yaml", name="Xion", franchise="Kingdom Hearts", category="game", status="needs_review")
+
+    plan = duplicate_audit.build_apply_plan(audit_tmp(generated, needs))
+    action = plan["actions"][0]
+
+    assert action["cluster_key"] == "xion"
+    assert action["safety_level"] == "safe_auto_archive"
+    assert action["keep_profile"]["profile_path"].endswith("profiles/generated/game/kingdom-hearts/xion.yaml")
+    assert [profile["profile_path"] for profile in action["archive_profiles"]] == [
+        (needs / "game/kingdom-hearts/xion-copy.yaml").as_posix()
+    ]
+
+
+def test_verified_profile_is_chosen_over_auto_generated(tmp_path):
+    generated = tmp_path / "profiles/generated"
+    needs = tmp_path / "profiles/needs_review"
+    verified = write_profile(generated, "comic/marvel/thor.yaml", name="Thor", status="verified")
+    write_profile(needs, "comic/marvel/thor-copy.yaml", name="Thor", status="auto_generated")
+
+    action = duplicate_audit.build_apply_plan(audit_tmp(generated, needs))["actions"][0]
+
+    assert action["keep_profile"]["profile_path"] == verified.as_posix()
+
+
+def test_review_variant_split_plan_is_manual_review_only(tmp_path):
+    generated = tmp_path / "profiles/generated"
+    needs = tmp_path / "profiles/needs_review"
+    write_profile(generated, "game/final-fantasy/yuna.yaml", name="Yuna", franchise="Final Fantasy", category="game")
+    write_profile(needs, "game/final-fantasy/yuna-classic.yaml", name="Yuna Classic", franchise="Final Fantasy", category="game")
+
+    action = duplicate_audit.build_apply_plan(audit_tmp(generated, needs))["actions"][0]
+
+    assert action["action"] == "manual_review"
+    assert action["safety_level"] == "manual_review"
+    assert action["archive_profiles"] == []
+
+
+def test_cross_franchise_same_name_plan_is_manual_review(tmp_path):
+    generated = tmp_path / "profiles/generated"
+    needs = tmp_path / "profiles/needs_review"
+    write_profile(generated, "game/mega-man/zero.yaml", name="Zero", franchise="Mega Man", category="game")
+    write_profile(needs, "game/drakengard/zero.yaml", name="Zero", franchise="Drakengard", category="game")
+
+    action = duplicate_audit.build_apply_plan(audit_tmp(generated, needs))["actions"][0]
+
+    assert action["safety_level"] == "manual_review"
+    assert action["archive_profiles"] == []
+
+
+def test_write_plan_writes_expected_json_shape(tmp_path):
+    generated = tmp_path / "profiles/generated"
+    needs = tmp_path / "profiles/needs_review"
+    write_profile(generated, "game/kingdom-hearts/xion.yaml", name="Xion", franchise="Kingdom Hearts", category="game")
+    write_profile(needs, "game/kingdom-hearts/xion-copy.yaml", name="Xion", franchise="Kingdom Hearts", category="game", status="needs_review")
+    plan = duplicate_audit.build_apply_plan(audit_tmp(generated, needs))
+    target = tmp_path / "data/reports/duplicate_character_apply_plan.json"
+
+    duplicate_audit.write_plan(plan, path=target)
+    payload = json.loads(target.read_text(encoding="utf-8"))
+
+    assert {"summary", "actions"} <= set(payload)
+    assert payload["actions"][0]["keep_profile"]
+    assert "archive_profiles" in payload["actions"][0]
+    assert "safety_level" in payload["actions"][0]
+
+
+def test_apply_plan_dry_run_does_not_modify_files(tmp_path, capsys):
+    generated = tmp_path / "profiles/generated"
+    needs = tmp_path / "profiles/needs_review"
+    keep = write_profile(generated, "game/kingdom-hearts/xion.yaml", name="Xion", franchise="Kingdom Hearts", category="game")
+    archive = write_profile(needs, "game/kingdom-hearts/xion-copy.yaml", name="Xion", franchise="Kingdom Hearts", category="game", status="needs_review")
+    before = {keep: keep.read_text(encoding="utf-8"), archive: archive.read_text(encoding="utf-8")}
+    report = audit_tmp(generated, needs)
+
+    print(duplicate_audit.format_apply_plan_dry_run(duplicate_audit.build_apply_plan(report)))
+
+    output = capsys.readouterr().out
+    assert "would archive" in output
+    assert keep.read_text(encoding="utf-8") == before[keep]
+    assert archive.read_text(encoding="utf-8") == before[archive]

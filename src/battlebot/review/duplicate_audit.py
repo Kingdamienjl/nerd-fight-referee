@@ -17,6 +17,7 @@ from battlebot.common.db import connect_database
 
 
 DEFAULT_REPORT_PATH = Path("data/reports/duplicate_character_audit.json")
+DEFAULT_PLAN_PATH = Path("data/reports/duplicate_character_apply_plan.json")
 CONTINUITY_SUFFIXES = (
     "marvel comics",
     "dc comics",
@@ -36,6 +37,9 @@ CONTINUITY_SUFFIXES = (
     "mcu",
 )
 AMBIGUOUS_TITLE_ROOTS = ("captain marvel", "green lantern")
+HIGH_TRUST_STATUSES = ("verified", "approved_override", "approved")
+LOW_TRUST_STATUSES = ("needs_review", "auto_generated", "generated")
+GENERIC_FRANCHISE_MARKERS = ("crossover", "mixed", "icons", "unknown", "user requests", "")
 
 
 @dataclass(frozen=True)
@@ -160,6 +164,14 @@ def record_summary(record: ProfileRecord) -> dict[str, Any]:
         "character_id": record.character_id,
         "battle_eligible": record.battle_eligible,
     }
+
+
+def profile_summary_path(profile: dict[str, Any]) -> str:
+    return str(profile.get("profile_path") or "")
+
+
+def profile_sources(profile: dict[str, Any]) -> set[str]:
+    return {str(source) for source in profile.get("sources") or [profile.get("source") or ""] if source}
 
 
 def source_family(source: str) -> str:
@@ -348,6 +360,165 @@ def audit_records(records: list[ProfileRecord], *, min_cluster_size: int = 2, in
     }
 
 
+def profile_completeness_score(profile: dict[str, Any]) -> int:
+    score = 0
+    if profile.get("battle_eligible"):
+        score += 3
+    if profile.get("canonical_name"):
+        score += 1
+    if profile.get("franchise"):
+        score += 1
+    if profile.get("category"):
+        score += 1
+    if profile.get("profile_path"):
+        score += 1
+    return score
+
+
+def status_priority(profile: dict[str, Any]) -> int:
+    status = normalized_text(str(profile.get("status") or ""))
+    if "verified" in status:
+        return 50
+    if "approved override" in status or "approved" in status:
+        return 40
+    if profile.get("battle_eligible") and "generated" in profile_sources(profile):
+        return 35
+    if "auto generated" in status or "generated" in status:
+        return 25
+    if "needs review" in status or "needs_review" in status:
+        return 10
+    return 0
+
+
+def franchise_specificity_score(profile: dict[str, Any]) -> int:
+    franchise = normalized_text(str(profile.get("franchise") or ""))
+    category = normalized_text(str(profile.get("category") or ""))
+    if any(marker and marker in franchise for marker in GENERIC_FRANCHISE_MARKERS):
+        return 0
+    if category in {"mixed", "crossover"}:
+        return 1
+    return 3 if franchise else 0
+
+
+def keep_profile_sort_key(profile: dict[str, Any]) -> tuple[int, int, int, int]:
+    path = profile_summary_path(profile)
+    return (
+        status_priority(profile),
+        franchise_specificity_score(profile),
+        profile_completeness_score(profile),
+        -len(path),
+    )
+
+
+def choose_keep_profile(profiles: list[dict[str, Any]]) -> dict[str, Any]:
+    return max(profiles, key=keep_profile_sort_key)
+
+
+def cluster_has_status_conflict(profiles: list[dict[str, Any]]) -> bool:
+    high = any(any(status in normalized_text(str(profile.get("status") or "")) for status in HIGH_TRUST_STATUSES) for profile in profiles)
+    low = any(any(status in normalized_text(str(profile.get("status") or "")) for status in LOW_TRUST_STATUSES) for profile in profiles)
+    return high and low and len({normalized_text(str(profile.get("status") or "")) for profile in profiles}) > 2
+
+
+def safety_level_for_cluster(cluster: dict[str, Any], keep_profile: dict[str, Any]) -> str:
+    profiles = list(cluster.get("profiles") or [])
+    franchises = {normalized_text(str(profile.get("franchise") or "")) for profile in profiles}
+    categories = {normalized_text(str(profile.get("category") or "")) for profile in profiles}
+    if len(franchises) > 1 or len(categories) > 1:
+        return "manual_review"
+    if cluster_has_status_conflict(profiles):
+        return "manual_review"
+    keep_sources = profile_sources(keep_profile)
+    archive_sources = set().union(*(profile_sources(profile) for profile in profiles if profile is not keep_profile))
+    if {"generated", "needs_review"}.issubset(keep_sources | archive_sources) and (
+        "generated" in keep_sources or keep_profile.get("battle_eligible")
+    ):
+        return "safe_auto_archive"
+    generated_count = sum(1 for profile in profiles if "generated" in profile_sources(profile))
+    if generated_count > 1:
+        return "cautious_review"
+    return "cautious_review"
+
+
+def plan_reason(cluster: dict[str, Any], keep_profile: dict[str, Any], safety_level: str) -> str:
+    keep_name = keep_profile.get("canonical_name") or keep_profile.get("profile_path") or "selected profile"
+    if safety_level == "safe_auto_archive":
+        return (
+            f"Keep {keep_name}: same franchise/category/base identity, with generated or battle-ready coverage "
+            "beating needs_review duplicate records."
+        )
+    if safety_level == "manual_review":
+        return f"Manual review required for {cluster['cluster_key']}: cross-franchise/category or status conflict could indicate real variants."
+    return f"Keep {keep_name} for now, but review before archiving because multiple generated or versioned profiles may be meaningful."
+
+
+def build_apply_plan(report: dict[str, Any]) -> dict[str, Any]:
+    actions = []
+    for cluster in report.get("clusters") or []:
+        profiles = list(cluster.get("profiles") or [])
+        action = str(cluster.get("suggested_action") or "")
+        if action == "review_variant_split":
+            actions.append(
+                {
+                    "cluster_key": cluster.get("cluster_key"),
+                    "action": "manual_review",
+                    "keep_profile": None,
+                    "archive_profiles": [],
+                    "reason": "Variant split clusters are never auto-archived by the duplicate audit plan.",
+                    "safety_level": "manual_review",
+                    "profiles": profiles,
+                }
+            )
+            continue
+        if action != "likely_bad_duplicate" or not profiles:
+            continue
+        keep_profile = choose_keep_profile(profiles)
+        keep_path = profile_summary_path(keep_profile)
+        archive_profiles = [profile for profile in profiles if profile_summary_path(profile) != keep_path]
+        safety = safety_level_for_cluster(cluster, keep_profile)
+        if safety == "manual_review":
+            archive_profiles = []
+        actions.append(
+            {
+                "cluster_key": cluster.get("cluster_key"),
+                "action": "archive_duplicates" if archive_profiles else "manual_review",
+                "keep_profile": keep_profile,
+                "archive_profiles": archive_profiles,
+                "reason": plan_reason(cluster, keep_profile, safety),
+                "safety_level": safety,
+                "profiles": profiles,
+            }
+        )
+    counts = {"safe_auto_archive": 0, "cautious_review": 0, "manual_review": 0}
+    for action in actions:
+        safety = str(action.get("safety_level") or "")
+        if safety in counts:
+            counts[safety] += 1
+    return {
+        "summary": {
+            "clusters_considered": len(report.get("clusters") or []),
+            "actions": len(actions),
+            **counts,
+        },
+        "actions": actions,
+    }
+
+
+def format_apply_plan_dry_run(plan: dict[str, Any]) -> str:
+    lines = ["duplicate apply-plan dry run"]
+    for action in plan.get("actions") or []:
+        archive_profiles = action.get("archive_profiles") or []
+        if not archive_profiles:
+            continue
+        keep = action.get("keep_profile") or {}
+        lines.append(f"- {action['cluster_key']}: keep {profile_summary_path(keep)}")
+        for profile in archive_profiles:
+            lines.append(f"  would archive: {profile_summary_path(profile)}")
+    if len(lines) == 1:
+        lines.append("- no archive candidates")
+    return "\n".join(lines)
+
+
 async def fetch_db_records(database_url: str | None) -> list[ProfileRecord]:
     if not database_url:
         return []
@@ -453,6 +624,11 @@ def write_report(report: dict[str, Any], path: Path = DEFAULT_REPORT_PATH) -> No
     path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def write_plan(plan: dict[str, Any], path: Path = DEFAULT_PLAN_PATH) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(plan, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Audit duplicate or overlapping character profiles")
     parser.add_argument("--generated-dir", type=Path, default=Path("profiles/generated"))
@@ -461,6 +637,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--source", choices=("generated", "needs_review", "db", "all"), default="all")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--write-report", action="store_true")
+    parser.add_argument("--write-plan", action="store_true")
+    parser.add_argument("--apply-plan-dry-run", action="store_true")
     parser.add_argument("--min-cluster-size", type=int, default=2)
     parser.add_argument("--include-user-requests", action="store_true")
     return parser
@@ -470,6 +648,12 @@ async def async_main(args: argparse.Namespace) -> int:
     report = await build_report(args)
     if args.write_report:
         write_report(report)
+    plan = build_apply_plan(report)
+    if args.write_plan:
+        write_plan(plan)
+    if args.apply_plan_dry_run:
+        print(format_apply_plan_dry_run(plan))
+        return 0
     print(json.dumps(report, indent=2, sort_keys=True) if args.json else format_summary(report))
     return 0
 

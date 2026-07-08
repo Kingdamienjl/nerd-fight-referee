@@ -445,7 +445,12 @@ def engine_reasoning_from_flow(fight_flow: dict[str, list[dict[str, str]]]) -> l
 def item_names(contender: dict[str, Any], section: str, limit: int = 3) -> list[str]:
     names = []
     for item in contender.get(section) or []:
-        name = item.get("name") or item.get("id")
+        if isinstance(item, str):
+            name = item
+        elif isinstance(item, dict):
+            name = item.get("name") or item.get("id")
+        else:
+            continue
         if name:
             cleaned = sanitize_fight_card_item(clean_strategy_fragment(str(name)))
             if cleaned:
@@ -878,19 +883,21 @@ def route_to_victory(winner: dict[str, Any], loser: dict[str, Any], factors: lis
     winner_name = str(winner.get("canonical_name") or "Winner")
     loser_name = str(loser.get("canonical_name") or "Loser")
     factor_names = [str(factor.get("factor") or "") for factor in factors]
+    tools = named_tools(winner, limit=2)
+    tool_text = f" through {', '.join(tools)}" if tools else ""
     structured_win = compact_names(tactical_value(winner, "win_conditions") or tactical_value(winner, "matchup_notes"), limit=1)
     if structured_win:
         return f"{winner_name} wins by playing toward the listed win condition: {structured_win[0]}"
     if "Battlefield Control" in factor_names or "Range Control" in factor_names:
-        return f"{winner_name} wins by controlling distance and engagement terms until {loser_name} is forced into bad trades."
+        return f"{winner_name} wins by controlling distance and engagement terms{tool_text} until {loser_name} is forced into bad trades."
     if "Mobility / Initiative" in factor_names and "Finishing Power" in factor_names:
-        return f"{winner_name} wins by taking first meaningful action, forcing reactions, then cashing in the higher output edge."
+        return f"{winner_name} wins by pairing mobility with finishing power{tool_text}, creating the safer first damage window against {loser_name}."
     if "Durability / Attrition" in factor_names:
-        return f"{winner_name} wins by using the durability edge to extend exchanges until {loser_name}'s counters lose value."
+        return f"{winner_name} wins by making {loser_name}'s counterplay run through the durability gap while preserving the better finish."
     if "Skill / Tactics" in factor_names:
         return f"{winner_name} wins by steering the matchup through cleaner decisions, timing, and profile-backed tactics."
     if "Special Abilities" in factor_names:
-        return f"{winner_name} wins by using named tools to create the opening that raw stats alone do not describe."
+        return f"{winner_name} wins by using named tools{tool_text} to create the opening that raw stats alone do not describe."
     return f"{winner_name} has the more reliable stat-and-tool profile over {loser_name}."
 
 

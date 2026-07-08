@@ -695,6 +695,27 @@ class DecisionFormatterTests(unittest.TestCase):
         self.assertNotIn("Before Crisis", evidence)
         self.assertIn("stronger finishing tier", evidence)
 
+    def test_quick_evidence_prefers_combat_reason_over_real_forms(self):
+        structured = structured_decision_output(
+            {
+                "winner": "Spawn",
+                "loser": "Godzilla",
+                "confidence": "medium",
+                "summary": "Spawn had the more reliable toolset.",
+                "loser_best_path": "Godzilla needed sustained pressure.",
+                "deciding_factors": [
+                    {"factor": "Forms/Eras", "evidence": "Spawn has listed form access: Hell King Spawn."},
+                    {"factor": "Finishing Power", "evidence": "Spawn has the stronger finishing tier."},
+                    {"factor": "Special Abilities", "evidence": "Spawn brings named tools: Necroplasm, Teleportation"},
+                ],
+            }
+        )
+
+        evidence = structured["quick_evidence"]
+
+        self.assertIn("Finishing Power", evidence[0])
+        self.assertTrue(all("Forms/Eras" not in bullet for bullet in evidence[:2]))
+
     def test_full_evidence_uses_grouped_sections_and_no_generic_packet_phrases(self):
         structured = structured_decision_output(
             {

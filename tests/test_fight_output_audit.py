@@ -179,7 +179,120 @@ def test_report_writes_expected_json_shape(tmp_path):
     assert {"summary", "entries"} <= set(payload)
     assert payload["summary"]["matchups_audited"] == 1
     assert "problem_counts_by_type" in payload["summary"]
+    assert "average_quality_score" in payload["summary"]
+    assert "quality_note_counts" in payload["summary"]
+    assert {"quality_notes", "quality_score"} <= set(payload["entries"][0])
     assert {"fighter_a", "fighter_b", "problems", "problem_score"} <= set(payload["entries"][0])
+
+
+def test_quality_notes_detect_low_quality_but_clean_output():
+    entry = {
+        "public_fight_card_text": (
+            "Cloud\n"
+            "- Weapon/Power: Final Fantasy VII\n"
+            "- Key tools: I have to work harder than anyone else to win this fight\n"
+            "- Win path: Cloud wins by taking first meaningful action, forcing reactions, then cashing in the higher output edge.\n"
+            "- Risk: No clean exploitable weakness supplied."
+        ),
+        "quick_evidence": [
+            "Forms/Eras: Cloud has listed form access: Disc 1",
+            "Finishing Power: Cloud has the stronger finishing tier.",
+        ],
+        "full_evidence": "• " + ("Attack potency raw dump " * 20),
+        "summary": "Cloud wins.",
+        "loser_best_path": "No supported loser path available.",
+    }
+
+    notes = fight_output_audit.quality_notes_for_entry(entry)
+
+    assert "source_label_as_tool" in notes
+    assert "weak_key_tools" in notes
+    assert "sentence_fragment_tool" in notes
+    assert "forms_eras_overused" in notes
+    assert "raw_stat_dump" in notes
+    assert "generic_win_path" in notes
+    assert "vague_risk" in notes
+    assert fight_output_audit.quality_score_from_notes(notes) < 60
+
+
+def test_named_scenario_quality_scores_are_present():
+    profiles = [
+        {
+            "canonical_name": "Usagi Tsukino",
+            "character_id": "usagi",
+            "franchise": "Sailor Moon",
+            "category": "anime",
+            "power_scale": {"attack_potency": "Moon level", "speed": "Subsonic", "durability": "Building level"},
+            "abilities": [{"name": "Magic"}, {"name": "Purification"}, {"name": "Energy Projection"}],
+            "equipment": [{"name": "Silver Crystal"}],
+            "battle_eligible": True,
+        },
+        {
+            "canonical_name": "Sephiroth",
+            "character_id": "sephiroth",
+            "franchise": "Final Fantasy VII",
+            "category": "game",
+            "power_scale": {"attack_potency": "Town level", "speed": "Subsonic", "durability": "Building level"},
+            "equipment": [{"name": "Masamune"}],
+            "battle_eligible": True,
+        },
+        {
+            "canonical_name": "Spawn",
+            "character_id": "spawn",
+            "franchise": "Image Comics",
+            "category": "comic",
+            "power_scale": {"attack_potency": "City level", "speed": "Supersonic", "durability": "City level"},
+            "abilities": [{"name": "Necroplasm"}, {"name": "Teleportation"}],
+            "equipment": [{"name": "Chains"}],
+            "battle_eligible": True,
+        },
+        {
+            "canonical_name": "Godzilla",
+            "character_id": "godzilla",
+            "franchise": "Godzilla",
+            "category": "movie",
+            "power_scale": {"attack_potency": "Town level", "speed": "Subsonic", "durability": "City level"},
+            "abilities": [{"name": "Atomic breath"}, {"name": "Regeneration"}],
+            "battle_eligible": True,
+        },
+    ]
+
+    report = fight_output_audit.build_report(profiles, sample_size=2, seed=1)
+
+    assert all(0 <= entry["quality_score"] <= 100 for entry in report["entries"])
+    assert all(isinstance(entry["quality_notes"], list) for entry in report["entries"])
+
+
+def test_audit_records_llm_foreign_entity_guard():
+    left = {
+        "canonical_name": "Power Girl",
+        "character_id": "power-girl",
+        "franchise": "DC Comics",
+        "category": "comic",
+        "power_scale": {"attack_potency": "Town level", "speed": "Supersonic", "durability": "Town level"},
+        "abilities": [{"name": "Flight"}, {"name": "Superhuman Strength"}],
+    }
+    right = {
+        "canonical_name": "Riddler",
+        "character_id": "riddler",
+        "franchise": "DC Comics",
+        "category": "comic",
+        "power_scale": {"attack_potency": "Wall level", "speed": "Human", "durability": "Wall level"},
+        "abilities": [{"name": "Planning"}],
+    }
+
+    entry = fight_output_audit.audit_matchup(
+        left,
+        right,
+        include_llm=True,
+        llm_analysis="Green Lantern attacked Naruto with Shadow Clone Jutsu.",
+    )
+
+    assert entry["llm_guarded"] is True
+    assert entry["llm_analysis"] == ""
+    assert "llm foreign entity: Green Lantern" in entry["problems"]
+    assert "llm foreign entity: Naruto" in entry["problems"]
+    assert "llm foreign technique: Shadow Clone Jutsu" in entry["problems"]
 
 
 def test_report_problem_counts_stay_empty_for_cleaned_residue_cases():

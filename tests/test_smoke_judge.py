@@ -458,6 +458,36 @@ class SmokeJudgeTests(unittest.TestCase):
             result = smoke_judge_packet(packet)
             self.assertIn(result["matchup_card"][0]["combat_identity"]["combat_mode"], expected_modes)
 
+    def test_route_to_victory_avoids_generic_quality_penalty_phrases(self):
+        packet = {
+            "errors": [],
+            "contender_a": contender(
+                "Power Girl",
+                "power-girl",
+                "Town level",
+                "Supersonic",
+                "Town level",
+                abilities=[{"name": "Flight"}, {"name": "Superhuman Strength"}],
+            ),
+            "contender_b": contender(
+                "Riddler",
+                "riddler",
+                "Wall level",
+                "Human",
+                "Wall level",
+                abilities=[{"name": "Planning"}],
+            ),
+            "warnings": [],
+        }
+
+        result = smoke_judge_packet(packet)
+        win_condition = result["win_condition"]
+
+        self.assertNotIn("taking first meaningful action", win_condition)
+        self.assertNotIn("forcing reactions", win_condition)
+        self.assertNotIn("cash", win_condition)
+        self.assertNotIn("extend exchanges", win_condition)
+
 
 if __name__ == "__main__":
     unittest.main()
