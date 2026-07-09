@@ -33,66 +33,37 @@ Quick Evidence:
 
 ---
 
-Kenpachi Zaraki (Bleach) VS Genryusai Yamamoto
+Genryusai Yamamoto VS Mayuri Kurotsuchi (Bleach)
 
 Winner: Genryusai Yamamoto
-Battle odds: Genryusai Yamamoto 85% / Kenpachi Zaraki (Bleach) 15%
-Confidence: strong
+Battle odds: Genryusai Yamamoto 70% / Mayuri Kurotsuchi (Bleach) 30%
+Confidence: medium
 
-Genryusai Yamamoto has the more reliable stat-and-tool profile over Kenpachi Zaraki (Bleach) from the profile data.
+Genryusai Yamamoto has the more reliable stat-and-tool profile over Mayuri Kurotsuchi (Bleach) from the profile data.
 
 Fight Card:
-Kenpachi Zaraki (Bleach)
-- Weapon/Power: profile-backed abilities
-- Style: weapon specialist
-- Key tools: Soul Physiology & Soul Reaper Physiology, Slash it", 000 different sword stylesBleach
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Kenpachi is dangerously overconfident
 Genryusai Yamamoto
 - Weapon/Power: profile-backed abilities
 - Style: cosmic/reality hax user
 - Key tools: Soul Physiology & Shinigami Physiology, Color Bleach+, Shockwave Generation & Space Time Manipulation
-- Win path: Genryusai Yamamoto wins by pairing mobility with finishing power through Soul Physiology & Shinigami Physiology, Color Bleach+, creating the safer first damage...
+- Win path: Genryusai Yamamoto wins by making Mayuri Kurotsuchi (Bleach)'s counterplay run through the durability gap while preserving the better finish.
 - Risk: He has lost his left arm
-
-Quick Evidence:
-- Finishing Power: Genryusai Yamamoto leads finishing power: listed as At least Small Planet level, possibly Multi-Solar System level (Yamamoto has among the highest combined Attack and Spiritual Pressure stats of all the Captains and not even multiple stronger can match the transcendent power of his strongest fire-type Zanpakutō.Bleach Official Bootleg: Bleach Color+Bleach Official Character Book SoulsBleach Chapter 155Bleach Chapter 156Bleach Chapter 172 Yamamoto eviscerates the Tres Bestias and Ayon,Bleach Chapter 337Bleach Chapter 338Bleach Chapter 339 Aizen concedes inferiority to the power of Yamamoto's Ryuujin Jakka, even developing an entire Arrancar solely to counter it,Bleach Chapter 393 Yamamoto tears apart Resurreccion Wonderweiss,Bleach Chapter 394Bleach Chapter 395 he injures Aizen despite being gravely injured,Bleach Chapter 395 and he states that he has remained unsurpassed by Shinigami for 1000 years,Bleach Chapter 394 which the databooks confirm to be true, as Yamamoto is the best in all Shinigami combat arts.Bleach Official Character Book 3 Unmasked Yamamoto surpasses the power of all the Captains,13 Blades including the likes of Unohana, easily vaporizes Driscoll,Bleach TYBW Episode 5 he blasts away Bazz-B, NaNaNa, and As Nodt,Bleach TYBW Episode 6 and he nicks RoydBleach TYBW Episode 63.2129 Zettatons, possibly 1.266 ExaFoe), higher with Ennetsu Jigoku (Capable of severely wounding himselfBleach Chapter 395), even higher with South: Kaka Jūmanokushi Daisōjin (The skeletons Yamamoto summons with his Bankai can contest RoydBleach TYBW Episode 6), Small Planet level+, possibly Multi-Solar System level with East: Kyokujitsujin (His Bankai can passively destroy the entire Soul Society over time, Yamamoto's Bankai seals all the flames into the blade, explosively increasing his power,Bleach TYBW Episode 6 his Spiritual Pressure is so immense it takes the form of actual flames,Bleach TYBW Episode 6 his passive aura would have disintegrated Royd,Bleach TYBW Episode 6 and he cuts through Royd's arrow.Bleach TYBW Episode 6 Yhwach believes he's the only person in the invading Quincy army that can handle the power of Yamamoto's Bankai,Bleach TYBW Episode 6 implying that Yamamoto's Bankai is stronger than all the other Stern Ritter, which would include Gremmy42.8393 Zettatons, possibly 16.88 ExaFoe), higher with North: Tenchi Kaijin (Yamamoto kills RoydBleach TYBW Episode 6) against Kenpachi Zaraki (Bleach)'s At least Country level (Possesses a combined Attack and Spiritual Pressure stats above ByakuyaBleach Official Bootleg: Bleach Color+, obliterated Tosen's Bankai in a couple strikesBleach, Chapter 148: "Countdown to the End: 2 (Lady Lennon~Frankenstein)"38.9448 Teratons), higher without eyepatch (By removing his eyepatch, Zaraki gains access to all the Reiryoku it had consumed,Bleach, Chapter 113: "The Undead 3 (Closing Frantica)" thus increasing his stats).
-- Special Abilities: Genryusai Yamamoto brings named tools: Soul Physiology & Shinigami Physiology, Color Bleach+, Yamamoto's hand to hand combative skill is also...
-- Loser path: Kenpachi Zaraki (Bleach)'s best route against Genryusai Yamamoto was to force their most reliable opening early, pressure Genryusai Yamamoto around He has lost his left arm, and punish any timing or stamina gap before Genryusai Yamamoto kept initiative.
-
-
----
-
-Reze VS Denji
-
-Winner: Reze
-Battle odds: Reze 85% / Denji 15%
-Confidence: strong
-
-Reze has the more reliable stat-and-tool profile over Denji from the profile data.
-
-Fight Card:
-Reze
-- Style: packet-defined fighter
-- Key tools: Hybrid
-- Win path: Reze wins by pairing mobility with finishing power through Reze doesn't enter her transformed state unless it's, Hybrid, creating the safer first damage window...
-- Risk: source-cleanup pending
-Denji
-- Weapon/Power: Physical Prowe
-- Style: packet-defined fighter
-- Key tools: Physical Prowe
+Mayuri Kurotsuchi (Bleach)
+- Weapon/Power: profile-backed abilities
+- Style: weapon specialist
+- Key tools: Soul Physiology & Shinigami Physiology, Mayuri is a skilled swordsmanBleach, Paralysis Inducement & Sound Manipulation
 - Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Anemia/Low Blood Amount
+- Risk: No clean exploitable weakness supplied.
 
 Quick Evidence:
-- Finishing Power: Reze leads finishing power: listed as At least Small Building level (Was able to maneuver around, place in a stranglehold, and choke an armed assassin to death who had access to some of the Typhoon Devil's powerChainsaw Man Chapter 41Chainsaw Man Chapter 43. Is greatly feared by the Typhoon Devil, showing her superiority over him. Was able to bite off Post-Training Denji's tongue, slice through his throat, cut off his hand in the same slash,Chainsaw Man Chapter 44 and easily break Denji's neck with little to no effort.Chainsaw Man Chapter 51Scales above 57.15 Kilograms of TNT), Varies (As a hybrid with the power of the fear of bombs within her, the more feared she is, the more powerful she becomesChainsaw Man Chapter 6, even a relatively minor boost in fear can immensely boost a devil's overall strength and effects of their abilitiesChainsaw Man Chapter 148); At least Multi-City Block level with explosions (Was able to crush an 18-wheeler with an explosive punch and send Chainsaw Man hurtling through the air, before detonating a blast powerful enough to launch him through a shutter door and multiple reinforced concrete-and-rebar walls, devastating and clearing the entire floor of a building. Generated an explosion that violently tore open his chest, leaving a massive cavity through his torso.Chainsaw Man Chapter 48Scales above 443.66 Tons of TNT), Multi-City Block level+ with self-detonation (By pulling her pin and beheading herself to regenerate a new body, Reze can weaponize her previous body in combat.Chainsaw Man Chapter 46 Her discarded body is capable of self-detonating, unleashing an explosion powerful enough to completely obliterate a Public Safety jacket and tear the arm off a target she considered "hard to kill".Scales to 550 Tons of TNT), higher with torpedoes (Upon detonation, the explosion utterly obliterates Post-Training Chainsaw Man, reducing him to a mangled mound of gore and shattering his chainsaws in the process), far higher with explosive sparks (By flicking her fingers together, Reze can unleash an explosive spark powerful enough to vaporize its target outright, instantly reducing even opponents in full Public Safety uniforms to a drifting mist of smoke) against Denji's Small Building level (Even before merging with Pochita, has shown to be capable of taking down low tier devils while using Pochita as a weapon and seemingly without any injury in spite of surviving on essentially almost no food every single day. After his merge with Pochita, his impressive strength remained, being able to knock down Aki Hayakawa with a kick to his balls before briefly trading blows with him, albeit Aki had been caught off guard by the initial attack, and with the use of an axe; chopped off a fiend's head with easeScales to 6.72 Kilograms of TNT), Varies (With the devil embodying the fear of chainsaws within him, the more feared he is, the more powerful he becomes, even a relatively minor boost in fear can immensely boost a devil's overall strength and effects of their abilitiesChainsaw Man Chapter 148); Building level with chainsaws (When transformed, Denji's chainsaw's are able to easily pierce through his own body and are capable of easily tearing through devils such as the Zombie, Bat,Chainsaw Man Chapter 8 and Eternity DevilChainsaw Man Chapter 18 as well as be able contend with Katana Man with his chainsaws,Chainsaw Man Chapter 26 the latter two shown capable of directly harming Denji's durability.Chainsaw Man Chapter 19Downscales to 250 Kilograms of TNT).
-- Mobility / Initiative: Reze leads mobility / initiative: listed as At least Subsonic+ (Was able to perception blitz Post-Training Denji, slicing through his throat and cutting off his hand in the same slash before he could even react.Chainsaw Man Chapter 44 Was able to dash behind Makima in an attempt to stab her.Chainsaw Man Chapter 52Scales to Mach 0.83), Varies; At least High Hypersonic when transformed (Was able to evade the Fox Devil's attacks multiple times and fire an explosive spark at gunmen before they could shoot.Chainsaw Man Chapter 46 Was able to blow Chainsaw Man's arm off before he could pull his rip-cordChainsaw Man Chapter 51 and completely outsped Chainsaw Man during this fight, initially making him unable to land a hit on her. Aki needed precognition to combat her but still struggled to dodge her attacks.Scales above Mach 25.8), High Hypersonic+ with explosions (Is able to utilize her explosions to propel her body and move faster, as shown when she was able to cross the distance between herself and Beam, propelling herself to instantly traverse the distance before Beam could get away. This technique is compared to Katana Man's sword draw dash in speed. She can also use this as a mode of travel over longer distances, as shown when she blasts herself onto Aki's car or through the air to catch up to Aki's car while it's on the highway. She can even blast herself up multiple stories to axe kick Chainsaw Man and use it as a mode of flight to fly the Chainsaw Devil through a building and into the sky.Chainsaw Man Chapter 37Scales to Mach 81.48) against Denji's Athletic Human (Should be comparable to other human devil hunters such as Aki Hayakawa, Denji himself could casually behead a fiend before it could strike him in spite of the fiend attacking before himChainsaw Man Chapter 4), Varies; At least Supersonic when transformed (Generally portrayed to be faster when transformed; being able to dodge attacks from and land attacks before devils such as the Bat Devil could properly react.Chainsaw Man Chapter 8 Able to trade blows with Katana Man and easily blitzed a couple of goonsChainsaw Man Chapter 26Scales to Mach 1.2).
-- Loser path: Denji's best route against Reze was to force their most reliable opening early, pressure Reze around Reze can not use her explosion powers if she is wet, and punish any timing or stamina gap before Reze kept initiative.
+- Finishing Power: Genryusai Yamamoto leads finishing power: listed as At least Small Planet level, possibly Multi-Solar System level (Yamamoto has among the highest combined Attack and Spiritual Pressure stats of all the Captains and not even multiple stronger can match the transcendent power of his strongest fire-type Zanpakutō.Bleach Official Bootleg: Bleach Color+Bleach Official Character Book SoulsBleach Chapter 155Bleach Chapter 156Bleach Chapter 172 Yamamoto eviscerates the Tres Bestias and Ayon,Bleach Chapter 337Bleach Chapter 338Bleach Chapter 339 Aizen concedes inferiority to the power of Yamamoto's Ryuujin Jakka, even developing an entire Arrancar solely to counter it,Bleach Chapter 393 Yamamoto tears apart Resurreccion Wonderweiss,Bleach Chapter 394Bleach Chapter 395 he injures Aizen despite being gravely injured,Bleach Chapter 395 and he states that he has remained unsurpassed by Shinigami for 1000 years,Bleach Chapter 394 which the databooks confirm to be true, as Yamamoto is the best in all Shinigami combat arts.Bleach Official Character Book 3 Unmasked Yamamoto surpasses the power of all the Captains,13 Blades including the likes of Unohana, easily vaporizes Driscoll,Bleach TYBW Episode 5 he blasts away Bazz-B, NaNaNa, and As Nodt,Bleach TYBW Episode 6 and he nicks RoydBleach TYBW Episode 63.2129 Zettatons, possibly 1.266 ExaFoe), higher with Ennetsu Jigoku (Capable of severely wounding himselfBleach Chapter 395), even higher with South: Kaka Jūmanokushi Daisōjin (The skeletons Yamamoto summons with his Bankai can contest RoydBleach TYBW Episode 6), Small Planet level+, possibly Multi-Solar System level with East: Kyokujitsujin (His Bankai can passively destroy the entire Soul Society over time, Yamamoto's Bankai seals all the flames into the blade, explosively increasing his power,Bleach TYBW Episode 6 his Spiritual Pressure is so immense it takes the form of actual flames,Bleach TYBW Episode 6 his passive aura would have disintegrated Royd,Bleach TYBW Episode 6 and he cuts through Royd's arrow.Bleach TYBW Episode 6 Yhwach believes he's the only person in the invading Quincy army that can handle the power of Yamamoto's Bankai,Bleach TYBW Episode 6 implying that Yamamoto's Bankai is stronger than all the other Stern Ritter, which would include Gremmy42.8393 Zettatons, possibly 16.88 ExaFoe), higher with North: Tenchi Kaijin (Yamamoto kills RoydBleach TYBW Episode 6) against Mayuri Kurotsuchi (Bleach)'s At most Country level (Capable of dealing Uryu harm and possesses combined Attack and Spiritual Pressure statistics equal to ToshiroBleach Official Bootleg: Bleach Color+38.9448 Teratons) At least Large Country level (Mayuri with and without his Bankai was capable of harming Resurreccion SzayelaporroBleach Chapter 304Bleach Chapter 305, with the databooks stating that Szayelaporro needed to evade Mayuri's attacksBleach Official Character Book 2 Masked194.7239 Teratons) Multi-Continent level (Askin believes Mayuri would be a difficult opponentBleach TYBW Episode 15 and he clashed evenly with ToshiroBleach TYBW Episode 233.8945 Exatons), Moon level with Bankai (Mayuri states that he didn't give his Bankai teeth because he feared it would've severed and smashed Pernida to piecesBleach TYBW Episode 36: 0:25-0:37, which should logically include Pernida's Blut enhanced defense38.9448 Exatons).
+- Special Abilities: Genryusai Yamamoto brings named tools: Soul Physiology & Shinigami Physiology, Color Bleach+, Yamamoto's hand to hand combative skill is also...
+- Loser path: Mayuri Kurotsuchi (Bleach)'s best route against Genryusai Yamamoto was to force their most reliable opening early, pressure Genryusai Yamamoto around He has lost his left arm, and punish any timing or stamina gap before Genryusai Yamamoto kept initiative.
 
 
 ---
 
-Lelouch vi Britannia VS C.C.
+C.C. VS Lelouch vi Britannia
 
 Winner: C.C.
 Battle odds: C.C. 70% / Lelouch vi Britannia 30%
@@ -101,18 +72,18 @@ Confidence: medium
 C.C. has the more reliable stat-and-tool profile over Lelouch vi Britannia from the profile data.
 
 Fight Card:
-Lelouch vi Britannia
-- Weapon/Power: Genius Intelligence, Social Influencing
-- Style: packet-defined fighter
-- Key tools: Genius Intelligence, Social Influencing, Lelouch
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Lelouch is incredibly arrogant
 C.C.
 - Weapon/Power: Extrasensory Perception
 - Style: packet-defined fighter
 - Key tools: Extrasensory Perception, Gawain, Code Bearer
 - Win path: C.C. wins by pairing mobility with finishing power through Extrasensory Perception, Gawain, creating the safer first damage window against Lelouch vi Britannia.
 - Risk: C.C. barely cares about anything
+Lelouch vi Britannia
+- Weapon/Power: Genius Intelligence, Social Influencing
+- Style: packet-defined fighter
+- Key tools: Genius Intelligence, Social Influencing, Lelouch
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: Lelouch is incredibly arrogant
 
 Quick Evidence:
 - Finishing Power: C.C. leads finishing power: listed as Athlete level (Can easily pin a grown man to a wall and restrain him with just one legCode Gea against Lelouch vi Britannia's Human level (Barely physical capable, though he has to take remedial classes for physical educationCode Gea.
@@ -122,43 +93,43 @@ Quick Evidence:
 
 ---
 
-Eva Unit-01 VS Asuka Langley Soryu
+Majin Buu (Classic) VS Raditz
 
-Winner: Asuka Langley Soryu
-Battle odds: Asuka Langley Soryu 70% / Eva Unit-01 30%
+Winner: Majin Buu (Classic)
+Battle odds: Majin Buu (Classic) 70% / Raditz 30%
 Confidence: medium
 
-Asuka Langley Soryu has the more reliable stat-and-tool profile over Eva Unit-01 from the profile data.
+Majin Buu (Classic) has the more reliable stat-and-tool profile over Raditz from the profile data.
 
 Fight Card:
-Eva Unit-01
-- Weapon/Power: A.T. Field, The Third Angel
-- Style: ranged energy user
-- Key tools: A.T. Field, The Third Angel, Child of Adam Powers and Angel Physiology
+Majin Buu (Classic)
+- Weapon/Power: Magic, Longevity
+- Style: weapon specialist
+- Key tools: Magic, Superhuman Physical Characteristics, Longevity
+- Win path: Majin Buu (Classic) wins by pairing mobility with finishing power through Superhuman Physical Characteristics, Longevity, creating the safer first damage window...
+- Risk: source-cleanup pending
+Raditz
+- Weapon/Power: Information Analysis & Extrasensory Perception
+- Style: packet-defined fighter
+- Key tools: Information Analysis & Extrasensory Perception
 - Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Sachiel has a particularly slow regenerative proce
-Asuka Langley Soryu
-- Weapon/Power: Large Size, Type 3 with Wings of Light
-- Style: ranged energy user
-- Key tools: Superhuman Physical Characteristics, Large Size, Type 3 with Wings of Light
-- Win path: Asuka Langley Soryu wins by making Eva Unit-01's counterplay run through the durability gap while preserving the better finish.
-- Risk: The core of an Angel
+- Risk: source-cleanup pending
 
 Quick Evidence:
-- Finishing Power: Asuka Langley Soryu leads finishing power: listed as Small Planet Level (Adam, along with Lilith, are god-like beings who stand as the two strongest characters within the Evangelion setting, being vastly superior to their progeny and would thus upscale any feats that they perform. Evangelion Unit-01 upon acquiring the Fruit of Life attains a level of existence equal to that of Adam, meaning that he would scale to the former's feat of harming Lilith-Rei, who is Low 5-B via sheer size), higher with A.T. Field. Can negate durability with Anti-A.T. Field against Eva Unit-01's Mountain level (Broke Unit-01's arm and later managed to punch through its head), Large Mountain level with A.T. Field (A.T. Fields can be used offensively to bypass those of others).
-- Special Abilities: Asuka Langley Soryu brings named tools: Superhuman Physical Characteristics, Large Size, Type 3 with Wings of Light
-- Loser path: Eva Unit-01's best route against Asuka Langley Soryu was to force their most reliable opening early, pressure Asuka Langley Soryu around The core of an Angel, once breached, and punish any timing or stamina gap before Asuka Langley Soryu kept initiative.
+- Finishing Power: Majin Buu (Classic) leads finishing power: listed as High 5-A (1.8052586424117 Quettatons) * Vegeta destroys planet Arlia and it's moon: 4-C (252.900496607 Quettatons) * Frieza casually destroys planet Vegeta: High 4-C (3.70458891013 KiloQuettatons) * Frieza destroys innumerable stars: 4-A (1.36 ExaFoe) * Garlic Jr. threatens to destroy two realms each with a starry sky: 4-A (270.19 ExaFoe) against Raditz's At least Large Planet level (Capable of easily defeating Piccolo who, at the time, was capable of blowing up the moon with a single ki blast. Blasted off Piccolo's arm and severely injured Goku, who was comparable if not slightly stronger than Piccolo, as well as stated to have >=1/20th of the strength he had at the time of the Saiyan invasion), higher as an Ōzaru (10 times stronger than before).
+- Special Abilities: Majin Buu (Classic) brings named tools: Superhuman Physical Characteristics, Longevity, Magic
+- Loser path: Raditz's best route against Majin Buu (Classic) was to force their most reliable opening early, pressure Majin Buu (Classic) around He becomes extremely dumb when he becomes Kid Buu Absorption, after enough charging, and punish any timing or stamina gap before Majin Buu (Classic) kept initiative.
 
 
 ---
 
-Kamina VS Yoko Littner
+Kamina VS Simon
 
-Winner: Yoko Littner
-Battle odds: Yoko Littner 85% / Kamina 15%
+Winner: Simon
+Battle odds: Simon 85% / Kamina 15%
 Confidence: strong
 
-Yoko Littner has the more reliable stat-and-tool profile over Kamina from the profile data.
+Simon has the more reliable stat-and-tool profile over Kamina from the profile data.
 
 Fight Card:
 Kamina
@@ -167,372 +138,403 @@ Kamina
 - Key tools: Superhuman Physical Characteristics, Physical Combat, Skilled Swordsman
 - Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
 - Risk: source-cleanup pending
-Yoko Littner
-- Weapon/Power: Superconducting Rifle, Pistol
-- Style: weapon specialist
-- Key tools: Superhuman Physical Characteristics, Physical Combat, Acrobatics
-- Win path: Yoko Littner wins by pairing mobility with finishing power through Superhuman Physical Characteristics, Physical Combat, creating the safer first damage window...
-- Risk: source-cleanup pending
-
-Quick Evidence:
-- Finishing Power: Yoko Littner leads finishing power: listed as Wall level (Held her own against Adiane who could easily damage Viral, although she was outmatched), Large Town level with Superconducting Rifle (Shot through the shoulder of Adiane's gunman, Sayrune, who fought on par with Gurren Lagann), higher in Yoko-M-Tank (Aided Gurren Lagann in destroying Do-Ten-Kai-Zan, and should be superior to her rifle) Wall level, Large Town level with Superconducting Rifle, At least Multi-Continent level in Yoko-M-Tank (Easily destroyed a large number of Mugann; a feat Gurren Lagann could easily pull off as well), Possibly Large Planet level in Space Yoko-W-Tank (Comparable to Space King Kittan, and fought along side him), High Complex Multiverse level in Tengen Toppa Yoko-W-Tank & Tengen Toppa Yoko SP (As a Tengen Toppa Gunmen, it should be comparable in power to Tengen Toppa Gurren Lagann; a mecha which was created by Simon after integrating the Multiverse (an 11 dimensional infinite multiverse), along with being implied to have infinite Spiral Power flowing within it. Knocked back Granzeboma with her rifle) against Kamina's Wall level (On par with Viral, able to cut apart a large swath of grass beyond his reach with one sword swing.) Likely Large Town level (Was able to overpower Enki Du) Large Town level.
-- Special Abilities: Yoko Littner brings named tools: Superhuman Physical Characteristics, Physical Combat, Acrobatics
-- Loser path: Kamina's best route against Yoko Littner was to force their most reliable opening early, pressure Yoko Littner around She cannot utilize spiral power without the will to..., and punish any timing or stamina gap before Yoko Littner kept initiative.
-
-
----
-
-Sesshomaru VS Kagome Higurashi
-
-Winner: Sesshomaru
-Battle odds: Sesshomaru 85% / Kagome Higurashi 15%
-Confidence: strong
-
-Sesshomaru has the more reliable stat-and-tool profile over Kagome Higurashi from the profile data.
-
-Fight Card:
-Sesshomaru
-- Weapon/Power: profile-backed abilities
-- Style: cosmic/reality hax user
-- Key tools: Superhuman Physical Characteristics, Master Swordsmanship, Master Hand to Hand Combatant
-- Win path: Sesshomaru wins by pairing mobility with finishing power through Superhuman Physical Characteristics, Master Swordsmanship, creating the safer first damage window...
-- Risk: His pride and arrogance
-Kagome Higurashi
-- Weapon/Power: Sacred arrows, Sacred longbow of Mount Azusa
-- Style: cosmic/reality hax user
-- Key tools: Purification, Superhuman combat speed and reactions, Immense Spiritual Powers
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Normal human weaknesses
-
-Quick Evidence:
-- Finishing Power: Sesshomaru leads finishing power: listed as At least Continent level (Able to harm Inuyasha with ease. Vaporized the top of a mountain while handling the Tessaiga,InuYasha manga; Chapter 60 superior to Tessaiga mastered Inuyasha, managed to subjugate Tokijin and match Inuyasha wielding Tessaiga with it), can ignore conventional durability with Meidō At least Continent level, likely higher (Far surpassed both Inuyasha and Inu no Taisho and is the most powerful character at the end of the series. Far superior to Osama Kirin who stopped a meteor the size of a country) against Kagome Higurashi's Athlete level physically. At least Small City level against demons & evil spirits with purification arrows (Caught up to Kikyo by end of series).
-- Special Abilities: Sesshomaru brings named tools: Superhuman Physical Characteristics, Master Swordsmanship, Master Hand to Hand Combatant
-- Loser path: Kagome Higurashi's best route against Sesshomaru was to force their most reliable opening early, pressure Sesshomaru around His pride and arrogance, Sesshōmaru can be incapacitated with extremely powerful..., and punish any timing or stamina gap before Sesshomaru kept initiative.
-
-
----
-
-Dio Brando VS Leone Abbacchio
-
-Winner: Dio Brando
-Battle odds: Dio Brando 85% / Leone Abbacchio 15%
-Confidence: strong
-
-Dio Brando has the more reliable stat-and-tool profile over Leone Abbacchio from the profile data.
-
-Fight Card:
-Dio Brando
-- Weapon/Power: The World and a number of knives
-- Style: packet-defined fighter
-- Key tools: The World and a number of knives, Phantom Blood, Stardust Crusaders
-- Win path: Dio Brando wins by pairing mobility with finishing power through The World and a number of knives, Phantom Blood, creating the safer first damage window against...
-- Risk: Dio is very overconfident
-Leone Abbacchio
-- Weapon/Power: Moody Blues
-- Style: cosmic/reality hax user
-- Key tools: Superhuman Physical Characteristics, Extrasensory Perception, Afterimage Creation
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: source-cleanup pending
-
-Quick Evidence:
-- Finishing Power: Dio Brando leads finishing power: listed as Large Building level (Stated to be one of the most powerful beings in the verse, whether this applies to his Part 1 self or later on is unknown though. Furthered his power by drinking the blood of numerous innocents throughout the Part, to the point where even while casual, he was shown to be at least several times stronger than when he first turned, being stated to be 5 times stronger than Pre-Deep Pass Overdrive Jonathan and Will Anthonio Zeppeli combined.≈4 Tons of TNT Much stronger than Tarkus, Bruford, Jack the Ripper and Wang Chan), higher with Space Ripper Stingy Eyes (Capable of effortlessly defeating Jonathan Joestar), can ignore conventional durability with Vaporization Freezing. Likely Large Building level (Should be near to his peak during Part 1. Consistently deflected Emerald Splash, even with just one finger). At least Large Building level+ with The World (The World has overwhelming power with its physical capabilities far exceeding Star Platinum's initial capabilities and completely matching it blow for blow7.83 Tons of TNT, with no other Stand managing to replicate such a feat throughout the entire series. Dio claimed it was the most powerful Stand which would include the likes of Whitesnake and the rest of his allies, stated to be one of the strongest Stands in the whole world alongside Star Platinum and claimed to be one of the most powerful). At least Large Building level (Much stronger than before due to Joseph Joestar's blood, claiming it was the most powerful that body has ever been. Overpowered Star Platinum, in conjunction with The World). At least Large Building level+ with The World (The more familiar DIO becomes with Jonathan's body, it's likely The World's fighting capabilities increase as well. Demonstrably stronger than he was initially against an enraged Star Platinum, even breaking through his guard at maximum output. With DIO, they overpowered Star Platinum) against Leone Abbacchio's Wall level (Is the physically strongest member of the gang), Wall level with Moody Blues (Damaged Man in the Mirror, which successfully blocked a punch from Purple Haze).
-- Mobility / Initiative: Dio Brando leads mobility / initiative: listed as Massively FTL (Should have around the same speed as his Stardust Crusaders self. Immensely superior to his minions225.15 c) Massively FTL (Could casually and consistently deflect the Emerald Splash multiple times, seeing it as if it was in slow motion. Stopped time after being skewered but seemingly before Silver Chariot could greatly damage him. Managed to react to an enraged Star Platinum's punch). At least Massively FTL with The World (Faster than an initial Star Platinum; Out-speeding him and matching him in a contest of speed and moreover surpassing him. DIO claimed his speed is far greater than that of Star Platinum and that he's slow comparatively) At least Massively FTL reactions (At least equal, if not greater than he was before in regards to speed, blocked a strike from an enraged Star Platinum). At least Massively FTL with The World (His fighting capabilities likely increased and is faster than an enraged Star Platinum, having matched him and at maximum output he could cross-counter with Star Platinum at its peak) against Leone Abbacchio's Peak Human, Varies with Moody Blues (Has an unknown base speed, but the speed of its rewind can vary depending on the speed of the replay or object being replayed).
-- Loser path: Leone Abbacchio's best route against Dio Brando was to force their most reliable opening early, pressure Dio Brando around Dio is very overconfident, Due to his new peak of power, and punish any timing or stamina gap before Dio Brando kept initiative.
-
-
----
-
-Shoto Todoroki VS Tomura Shigaraki
-
-Winner: Shoto Todoroki
-Battle odds: Shoto Todoroki 85% / Tomura Shigaraki 15%
-Confidence: strong
-
-Shoto Todoroki has the more reliable stat-and-tool profile over Tomura Shigaraki from the profile data.
-
-Fight Card:
-Shoto Todoroki
-- Weapon/Power: His Hero Costume, Combat Vest
+Simon
+- Weapon/Power: Core Drill
 - Style: ranged energy user
-- Key tools: His Hero Costume, Combat Vest, pain medication
-- Win path: Shoto Todoroki wins by pairing mobility with finishing power through His Hero Costume, Combat Vest, creating the safer first damage window against Tomura Shigaraki.
-- Risk: source-cleanup pending
-Tomura Shigaraki
-- Weapon/Power: profile-backed abilities
-- Style: packet-defined fighter
-- Key tools: All previous abilities to a greater extent, Villain
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Decay
+- Key tools: Superhuman Physical Characteristics, Piloting, Will Empowerment
+- Win path: Simon wins by pairing mobility with finishing power through Superhuman Physical Characteristics, Piloting, creating the safer first damage window against Kamina.
+- Risk: Gets scared
 
 Quick Evidence:
-- Finishing Power: Shoto Todoroki leads finishing power: listed as Multi-City Block level (Stronger than Base Deku and most Pro HeroesMy Hero Academia Vol. 5 Chapter 38237.32 Tons of TNT), Large Town level+ with Half-Cold (Capable of stopping multiple steel beams at onceMy Hero Academia: Two Heroes575.26 Kilotons of TNT), higher with Flashfreeze Heatwave (His strongest attack that combines the full power of both sides of his Quirk) Multi-City Block level (Has focused on improving his Quirk and his control over it), Large Town level+ with Half-Cold, higher with Flashfreeze Heatwave Multi-City Block level, Large Town level+ with Half-Cold, higher with Flashfreeze Heatwave, far higher with Flashfire Fist (One-shotted Leviathan, who had tanked his Flashfreeze HeatwaveMy Hero Academia: World Heroes' Mission) Multi-City Block level, Country level with Half-Cold Half-Hot (All For One praised his Quirk along with Wave Motion, considering both to be strong.My Hero Academia Vol. 30 Chapter 290 Was capable of clashing with Dabi's Blueflame,My Hero Academia Vol. 35 Chapter 344 which is strong enough to match Endeavor's Flashfire FistMy Hero Academia: Heroes: Rising18.65 Teratons of TNT), higher with Flashfire Fist and Flashfreeze Heatwave (By raising his flames to their maximum and compressing them into a small point, he can drastically increase his output. His Flashfreeze Heatwave is much stronger than his normal attacks), far higher with Plus Ultra (He was able to overpower Golden Age Dark Might, who was shocked that he was getting strongerMy Hero Academia: You're Next), Can ignore conventional durability with Half-Cold Half-Hot (His ice attacks were able to freeze solid half of U.S.J. Nomu's body despite it being as durable as All Might.My Hero Academia Vol. 3 Chapter 19 Capable of using Flashfire Fist moves, fire attacks with a heat so high that it can burn people on All Might's level) against Tomura Shigaraki's Multi-City Block level+ (Managed to block strikes from Eraser Head) Multi-City Block level+ (Has trained with Gigantomachia constantly for a month and a half, making him much stronger than before), Can ignore conventional durability (With Decay he could disintegrate any kind of material to dust).
-- Mobility / Initiative: Shoto Todoroki leads mobility / initiative: listed as Athletic Human (Faster than Base Deku) with Hypersonic reactions and combat speed (Able to react and dodge Ingenium's Recipro BurstMy Hero Academia Vol. 5 Chapter 41Mach 8.58), Supersonic+ attack speed with Half-Cold Half-Hot (Can create ice structures in the blink of an eye, and his fire side is just as quickMy Hero Academia Vol. 8 Chapter 64Mach 2.58) Hypersonic+ reactions and combat speed (Managed to keep up with ChimeraMach 16.34), Hypersonic+ attack speed with Half-Cold Half-Hot Hypersonic+ reactions and combat speed (Can keep up with Dynamight at the Endeavor AgencyMach 22.87), Hypersonic+ attack speed with Half-Cold Half-Hot (Matched the speed of 10% Deku), higher with Flashfire Fist (By condensing his flames to a white-hot point, he can boost the speed of his attacks) Relativistic+ reactions and combat speed (Was able to keep up with Dabi's Flashfire Fist, which is faster than Endeavor's0.77c), higher with Flashfire Fist and Flashfreeze Heatwave (Can propel himself at such speed that Dabi was only barely able to react to his approach) against Tomura Shigaraki's Hypersonic+ (Could keep up with Eraser Head. Blitzed Base Deku and Froppy in the U.S.J. Arc) High Hypersonic (His speed took Overhaul completely by surprise, and he has since become much faster thanks to his training with Gigantomachia. After his awakening, he was able to react to and counter Re-Destro's attacks by destroying them with Decay, even though Re-Destro was easily outspeeding him prior to this awakening).
-- Loser path: Tomura Shigaraki's best route against Shoto Todoroki was to force their most reliable opening early, pressure Shoto Todoroki around Overusing one aspect of his power will cause him to..., Shoto relies on his Quirk too much in combat, and punish any timing or stamina gap before Shoto Todoroki kept initiative.
+- Finishing Power: Simon leads finishing power: listed as Unknown; At most Large Town level in Lagann (Damaged Viral's gunman; Enki) Unknown; At least Multi-Continent level with Core Drill (Blew a hole in Lordgenome's chest), higher in Lagann (Fought on par with Lordgenome who is superior to Lazengann. Superior to Gurren Lagann) Wall level (Fought on par with Viral who kicked a beastman through a wall in prison), higher with Pistol, At least Multi-Continent level with Core Drill, higher in Lagann High Complex Multiverse level (Integrated the Multiverse; an 11 dimensional infinite multiverse), higher in Tengen Toppa Lagann (As a Tengen Toppa Gunmen, it should be comparable in power to Tengen Toppa Gurren Lagann; a mecha which was created by Simon after integrating the Multiverse, along with being implied to have infinite Spiral Power flowing within it. Created a drill, which could match Granzeboma’s drill) High Complex Multiverse level (Surprised Antispiral by matching his full power. Fought equally with, and eventually killed Antispiral on foot. Has become significantly more powerful, after he left the universe in Simon’s hands) against Kamina's Wall level (On par with Viral, able to cut apart a large swath of grass beyond his reach with one sword swing.) Likely Large Town level (Was able to overpower Enki Du) Large Town level.
+- Special Abilities: Simon brings named tools: Superhuman Physical Characteristics, Piloting, Will Empowerment
+- Loser path: Kamina's best route against Simon was to force their most reliable opening early, pressure Simon around Gets scared, Simon was in his Post Apotheosis Key, and punish any timing or stamina gap before Simon kept initiative.
 
 
 ---
 
-Enel (One Piece) VS Marshall D. Teach
+Narancia Ghirga (JoJo's Bizarre Adventure) VS Trish Una (JoJo's Bizarre Adventure)
 
-Winner: Marshall D. Teach
-Battle odds: Marshall D. Teach 85% / Enel (One Piece) 15%
+Winner: Trish Una (JoJo's Bizarre Adventure)
+Battle odds: Trish Una (JoJo's Bizarre Adventure) 85% / Narancia Ghirga (JoJo's Bizarre Adventure) 15%
 Confidence: strong
 
-Marshall D. Teach has the more reliable stat-and-tool profile over Enel (One Piece) from the profile data.
+Trish Una (JoJo's Bizarre Adventure) has the more reliable stat-and-tool profile over Narancia Ghirga (JoJo's Bizarre Adventure) from the profile data.
 
 Fight Card:
-Enel (One Piece)
-- Weapon/Power: Genius Intelligence, Master in Bōjutsu
-- Style: tank/bruiser
-- Key tools: Superhuman Physical Characteristics, Genius Intelligence, Master in Bōjutsu
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Standard Devil Fruit users weaknesses
-Marshall D. Teach
+Narancia Ghirga (JoJo's Bizarre Adventure)
 - Weapon/Power: profile-backed abilities
-- Style: cosmic/reality hax user
-- Key tools: Busoshoku Flintlock pistol and Claw user Proficient, Absorption, Gravity Manipulation
-- Win path: Marshall D. Teach wins by pairing mobility with finishing power through Busoshoku Flintlock pistol and Claw user Proficient, Absorption, creating the safer first...
+- Style: packet-defined fighter
+- Key tools: Superhuman Physical Characteristics, Berserk Mode when he is angered, Extrasensory Perception
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: source-cleanup pending
+Trish Una (JoJo's Bizarre Adventure)
+- Weapon/Power: Peak Human Physical Characteristics, Extrasensory Perception
+- Style: packet-defined fighter
+- Key tools: Peak Human Physical Characteristics, Extrasensory Perception, Multiple Selves
+- Win path: Trish Una (JoJo's Bizarre Adventure) wins by pairing mobility with finishing power through Peak Human Physical Characteristics, Extrasensory Perception, creating the...
+- Risk: punctured
+
+Quick Evidence:
+- Finishing Power: Trish Una (JoJo's Bizarre Adventure) leads finishing power: listed as Street level (Overpowered Narancia Ghirga in her introduction). At least Building level with Spice Girl (Has excellent attack power and cut off Sticky Fingers' arm), Spice Girl's softening ignores durability against Narancia Ghirga (JoJo's Bizarre Adventure)'s Street level (Was capable of creating dents in a while car at a decreased size), Wall level with Aerosmith (Harmed Formaggio even when reduced in size. Its bomb blew up part of a car).
+- Special Abilities: Trish Una (JoJo's Bizarre Adventure) brings named tools: Peak Human Physical Characteristics, Extrasensory Perception, Multiple Selves
+- Loser path: Narancia Ghirga (JoJo's Bizarre Adventure)'s best route against Trish Una (JoJo's Bizarre Adventure) was to force their most reliable opening early, pressure Trish Una (JoJo's Bizarre Adventure) around punctured, or broken through, and punish any timing or stamina gap before Trish Una (JoJo's Bizarre Adventure) kept initiative.
+
+
+---
+
+Seiya VS Shiryu
+
+Winner: Seiya
+Battle odds: Seiya 85% / Shiryu 15%
+Confidence: strong
+
+Seiya has the more reliable stat-and-tool profile over Shiryu from the profile data.
+
+Fight Card:
+Seiya
+- Weapon/Power: Cosmo
+- Style: magic user
+- Key tools: Cosmo, Has awakened the 7th Sense
+- Win path: Seiya wins by pairing mobility with finishing power through Cosmo, creating the safer first damage window against Shiryu.
+- Risk: source-cleanup pending
+Shiryu
+- Weapon/Power: His nodachi Raiu
+- Style: weapon specialist
+- Key tools: Superhuman Physical Characteristics, Large Size, Master Swordsmanship
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
 - Risk: Standard Devil Fruit users weaknesses...
 
 Quick Evidence:
-- Finishing Power: Marshall D. Teach leads finishing power: listed as Moon level (He could harm Ace by hitting him in his weak spots like his neck and his stomach. Even before getting his Devil Fruits, he was widely considered a solid candidate as one of Whitebeard's commanders, making his physical AP at least comparable to the likes of Jozu and Izou188.362 Exatons), far higher with Devil Fruit Powers (His power is increased by the abilities of the Yami Yami no Mi and the Gura Gura no Mi. With Whitebeard's fruit, he's capable of generating Magnitude 6 earthquakes throughout the entire planet. Alongside his crew, he fought against Sengoku and Garp at the same time. Despite having just obtained the Gura Gura no Mi and not being able to control it well, Teach was able to cause earthquakes this powerful188.362 Exatons) Moon level (At least as strong as he was before the time-skip188.362 Exatons), Small Planet level with Devil Fruit Powers (Alongside his crew, he clashed against Marco and the other remnants of the Whitebeard Pirates during the timeskip and obliterated them with Marco stating that they couldn't overcome him anymore. Should have greater mastery over Whitebeard's Devil Fruit than before. Old Rayleigh believed that he wouldn't be able to defeat Blackbeard. Defeated Trafalgar Law in battle9.042 Zettatons) against Enel (One Piece)'s Small City level (Casually dispersed Wyper's Burn Bazooka and said that the energy that Wyper's Burn Bazooka had was nothing compared to his power,One Piece Vol. 29 Chapter 275 then shattered his skate. Nami stated that Zoro couldn't beat him, then Enel proved it to be true by easily defeating ZoroOne Piece Vol. 29 Chapter 275), higher with Amaru, possibly Island level with Environmental Destruction (his strongest Raigou should be this powerful but was never used) Multi-Continent level+ (Damaged the tools of the Space Pirates, which were able to cause and withstand this explosion's full might), higher with Amaru.
-- Special Abilities: Marshall D. Teach brings named tools: Busoshoku Flintlock pistol and Claw user Proficient..., Absorption, Gravity Manipulation
-- Loser path: Enel (One Piece)'s best route against Marshall D. Teach was to force their most reliable opening early, pressure Marshall D. Teach around Standard Devil Fruit users weaknesses...., Blackbeard's Yami Yami and Gura Gura powers Yami Yami no Mi, and punish any timing or stamina gap before Marshall D. Teach kept initiative.
+- Finishing Power: Seiya leads finishing power: listed as At least Continent level (Seiya can harm Phoenix Ikki, and crack his cloth, but was stated to be weaker than him.1.09484 Petatons), Multi-Continent level with Pegasus Comet Fist (The Pegasus Comet Fist has 100 times more force, and power, than his Pegasus Meteor Fist109.48411 Petatons) Multi-Continent level (During his fight with Lizard Misty he was growing strong enough to damage him, and then eventually defeat him. Seiya then went on to fight the other Silver Saints defeating them, and eventually becoming strong enough to defeat the Silver Saggitta Saint in one blow with his Pegasus Ryusei Ken). Higher with Pegasus Suisei Ken Star level, at most Multi-Solar System level (Cut Aldebaran's horn, harmed Leo Aiolia. Defeated Hippocamp Baian who's as strong as a Gold Saint). Higher with Miracles and Pegasus Comet Fist (Overpowered Gemini Saga's Galaxian Explosion with his Pegasus Comet Fist.) Star level, at most Multi-Solar System level (Stronger than an Underworld Judge, greatly harmed Wyvern Rhadamanthys. Comparable to the strongest Gold Saints). Higher with Pegasus Comet Fist Multiverse level+, possibly Low Complex Multiverse level (Effortlessly killed Thanatos. Raised his Cosmos infinitely, to a level higher than the Athena Exclamation and the sacrifice of the Gold Saints. Was capable of harming Hades, who created the Underworld. Although it cost him his life, Hades suffered no grave injury), higher with Pegasus Comet Fist against Shiryu's Moon level (Fought Magellan and was stated by Emporio Ivankov to be just as strong as him. Gave Impel Down its notoriety alongside MagellanOne Piece Vol. 55 Chapter 538. Made Pre-Timeskip Blackbeard wary because of his strengthOne Piece Vol. 56 Chapter 543. Stabbed through Old Garp's abdomenOne Piece Vol. 107 Chapter 1087188.362 Exatons).
+- Special Abilities: Seiya brings named tools: Cosmo, Cosmo, By virtue of having the 6th Sense Saint of Athena...
+- Loser path: Shiryu's best route against Seiya was to force their most reliable opening early, pressure Seiya around Seiya cannot survive in space for very long...., and punish any timing or stamina gap before Seiya kept initiative.
 
 
 ---
 
-Minako Aino (Sailor Moon) VS Usagi Tsukino
+Vash the Stampede VS Nicholas D. Wolfwood
 
-Winner: Usagi Tsukino
-Battle odds: Usagi Tsukino 85% / Minako Aino (Sailor Moon) 15%
+Winner: Vash the Stampede
+Battle odds: Vash the Stampede 85% / Nicholas D. Wolfwood 15%
 Confidence: strong
 
-Usagi Tsukino has the more reliable stat-and-tool profile over Minako Aino (Sailor Moon) from the profile data.
+Vash the Stampede has the more reliable stat-and-tool profile over Nicholas D. Wolfwood from the profile data.
 
 Fight Card:
-Minako Aino (Sailor Moon)
-- Weapon/Power: Magic
-- Style: cosmic/reality hax user
-- Key tools: Magic
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Suffers from terminal illness
-Usagi Tsukino
-- Weapon/Power: Magic, Transformation
-- Style: cosmic/reality hax user
-- Key tools: Transformation, Superhuman Physical Characteristics, Shapeshifting
-- Win path: Usagi Tsukino wins by pairing mobility with finishing power through Superhuman Physical Characteristics, Transformation, creating the safer first damage window...
-- Risk: Initially a coward
-
-Quick Evidence:
-- Finishing Power: Usagi Tsukino leads finishing power: listed as Building level (She defeated Kunzite who drained all the energy of Tokyo very easily) Unknown Planet level (The energy of the Silver Crystal Surpasses Makaiju's energy, which is easily able to destroy a planet; The Silver Crystal can also destroy a planet) Possibly Universe level as Princess Serenity (Superior to Wiseman, who can return this universe to nothingness) Universe level, likely higher (In Super Sailor Form, she was able to get inside Pharaoh 90, and surpass his energy barrier. Only Sailor Saturn managed to do this. She also has a vastly superior power to her previous forms) Universe level+ (Far superior to all other forms. Eternal Sailor Moon is superior to Sailor Saturn. She also created a new story for Nehellenia) Universe level+ (She fought and purged Chaos Galaxia) against Minako Aino (Sailor Moon)'s Small City level (Clashed with Tuxedo Mask on occasionAct 0 - The Birth of Sailor V! 24:42) Small City level+5.44151479200599 megatons (Vaporized Zoisite causing him to fade away,Act 12 - Sailor V’s True Identity was the Princess! 22:17 held her own against Dark Mercury,Act 22 - Ami in the Hands of the Enemy 16:18 countered Kunzite's attack with her Venus Love Me ChainAct 35 - Sailor Venus and Zoisite are Working Together? 19:50) At least City level (Was able to harm Metalia Youma and forced out Queen MetaliaAct 46 - Sailor Venus Awakened her Guardian Powers 20:05Said youma no sold three Sailor Guardians' attacks at the same time.).
-- Special Abilities: Usagi Tsukino brings named tools: Superhuman Physical Characteristics, Transformation, Shapeshifting
-- Loser path: Minako Aino (Sailor Moon)'s best route against Usagi Tsukino was to force their most reliable opening early, pressure Usagi Tsukino around Initially a coward, crybaby, and punish any timing or stamina gap before Usagi Tsukino kept initiative.
-
-
----
-
-Nicholas D. Wolfwood VS Millions Knives
-
-Winner: Millions Knives
-Battle odds: Millions Knives 70% / Nicholas D. Wolfwood 30%
-Confidence: medium
-
-Millions Knives has the more reliable stat-and-tool profile over Nicholas D. Wolfwood from the profile data.
-
-Fight Card:
+Vash the Stampede
+- Weapon/Power: 45 Caliber Revolver, Bulletproof jacket
+- Style: tank/bruiser
+- Key tools: Plant Physiology, Master Marksman, Limited Body Control
+- Win path: Vash the Stampede wins by pairing mobility with finishing power through Plant Physiology, Master Marksman, creating the safer first damage window against Nicholas D....
+- Risk: Is against killing
 Nicholas D. Wolfwood
 - Weapon/Power: Healing, Regeneration
 - Style: tank/bruiser
 - Key tools: Superhuman Physical Characteristics, Regeneration, Amazing aim and marksmanship
 - Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
 - Risk: No clean exploitable weakness supplied.
-Millions Knives
-- Weapon/Power: Plant Physiology, Immortality and Regeneration
-- Style: ranged energy user
-- Key tools: Plant Physiology, Weapon Mastery and Martial Arts, Immortality and Regeneration
-- Win path: Millions Knives wins by making Nicholas D. Wolfwood's counterplay run through the durability gap while preserving the better finish.
-- Risk: source-cleanup pending
 
 Quick Evidence:
-- Finishing Power: Millions Knives leads finishing power: listed as Planet level (Plants are capable of containing a high amount of energy equivalent to 10 quadrillion times the Hiroshima nuclear explosion, which would instantly vaporize the planet. Able to harm Vash, who can withstand the force of his own Angel Arm Universe level (Fused with thousands of Plants and gained so much power that he was stated to become a being from a different dimension. His power as a Fused Entity was going to passively change the shape of the planet, and his energy storage is compared to stars if he were to be stable. His power growth was exponential to the point that he was stated to become a threat to the Galaxy. Is similar to the Child of the Lost Plant, who created an entire Universe from the Big Bang) against Nicholas D. Wolfwood's Town level (Better than Monev the Gale and was able to kill him with ease) City level (Drugs make him equal to base Vash).
-- Special Abilities: Millions Knives brings named tools: Plant Physiology, Weapon Mastery and Martial Arts, Immortality and Regeneration
-- Loser path: Nicholas D. Wolfwood's best route against Millions Knives was to force their most reliable opening early, pressure Millions Knives around Is extremely sadistic and behaves psychotic in battle, and punish any timing or stamina gap before Millions Knives kept initiative.
+- Finishing Power: Vash the Stampede leads finishing power: listed as At least Planet level (Stated that he could decimate No-Mans-Land) Low Complex Multiverse level (As an Independent Plant, Vash is superior to Non-Independent Plants, which are 5-dimensional in nature. His Black-Hole bullets could overpower and forcibly suck a Singularity Plant into its own dimension, said Plant was able to destroy and recreate its own Universe including its space-time. Vash almost overwhelmed a Fused Knives after the latter attempted to absorb him, due to possessing a bigger Gate) At least Low Complex Multiverse level (Although weaker, Vash could contend with Ark Knives for a while before collapsing. Legato stated that Vash is a completely different person when putting his oath of peace away) against Nicholas D. Wolfwood's Town level (Better than Monev the Gale and was able to kill him with ease) City level (Drugs make him equal to base Vash).
+- Special Abilities: Vash the Stampede brings named tools: Plant Physiology, Master Marksman, Limited Body Control
+- Loser path: Nicholas D. Wolfwood's best route against Vash the Stampede was to force their most reliable opening early, pressure Vash the Stampede around Is against killing, and punish any timing or stamina gap before Vash the Stampede kept initiative.
 
 
 ---
 
-Toguro VS Yusuke Urameshi
+Nightwing VS Power Girl
 
-Winner: Yusuke Urameshi
-Battle odds: Yusuke Urameshi 70% / Toguro 30%
+Winner: Power Girl
+Battle odds: Power Girl 70% / Nightwing 30%
 Confidence: medium
 
-Yusuke Urameshi has the more reliable stat-and-tool profile over Toguro from the profile data.
+Power Girl has the more reliable stat-and-tool profile over Nightwing from the profile data.
 
 Fight Card:
-Toguro
-- Weapon/Power: Ki, Soul Manipulation
+Nightwing
+- Weapon/Power: Body Armor, Utility Belt
+- Style: weapon specialist
+- Key tools: Superhuman Physical Characteristics, Master Martial Artist, Master Acrobat
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: Normal human weaknesses. Refuses to kill. Feats
+Power Girl
+- Weapon/Power: Her self repairing suit
+- Style: tech user
+- Key tools: Superhuman Physical Characteristics, Flight, Spaceflight
+- Win path: Power Girl wins by pairing mobility with finishing power through Superhuman Physical Characteristics, Flight, creating the safer first damage window against Nightwing.
+- Risk: Kryptonite
+
+Quick Evidence:
+- Finishing Power: Power Girl leads finishing power: listed as Multiverse level+ (Among the mightiest beings in the multiverse and helped defeat Maaldor.Superman Vol 1 295 Helped defeat the Anti-MonitorFlash Vol 2 150 Almost equal to peak Superman.Infinity Inc, Vol 1 7 Shattered Alan Scott's constructsAll-Star Comics Vol 1 68) Multiverse level+ (Wonder Woman noted Kara was at least as strong as she was.Wonder Woman Vol 3 41 Concluded to be the most powerful woman on Earth.Power Girl Vol 2 26 EqualJustice League of America Vol 1 45 or stronger thanSupergirl Vol 5 1 Supergirl and consistentlySupergirl Vol 5 9 matchesSupergirl Vol 5 96 her. Compared to a New God in strength, and foughtPower Girl Vol 1 17 her equallyPower Girl Vol 1 18 Comparable to Black AdamJSA Vol 1 74 and Solomon GrundySuperman/Batman Vol 1 27'. One-shot Mistress MarvelJLA: Classified Vol 1 8. Defeated MaximaAquaman Vol 5 41 Fought Superboy-PrimeTales from the Sinestro Corps: Superboy-Prime Vol 1 152 Universes). Can ignore durability via Frost Breath (Froze over a Negaspike and destroyed it in one punch. Negaspikes were indestructible creatures that Power Girl struggled to harm prior to going all outPower Girl Vol 2 7) against Nightwing's Small Building level+ (Comparable to Katana).
+- Special Abilities: Power Girl brings named tools: Superhuman Physical Characteristics, Flight, Spaceflight
+- Loser path: Nightwing's best route against Power Girl was to force their most reliable opening early, pressure Power Girl around Kryptonite, Red Sun Radiation, and punish any timing or stamina gap before Power Girl kept initiative.
+
+
+---
+
+Battle Beast VS Spawn
+
+Winner: Spawn
+Battle odds: Spawn 85% / Battle Beast 15%
+Confidence: strong
+
+Spawn has the more reliable stat-and-tool profile over Battle Beast from the profile data.
+
+Fight Card:
+Battle Beast
+- Weapon/Power: Sword, Heavy Blade
+- Style: weapon specialist
+- Key tools: Superhuman Physical Characteristics Enhanced Senses, Sword, Heavy Blade
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: Obsessed with battle
+Spawn
+- Weapon/Power: K7 Leetha, Chains
+- Style: ranged energy user
+- Key tools: K7 Leetha, Chains, Various Firearms
+- Win path: Spawn wins by pairing mobility with finishing power through K7 Leetha, Chains, creating the safer first damage window against Battle Beast.
+- Risk: source-cleanup pending
+
+Quick Evidence:
+- Finishing Power: Spawn leads finishing power: listed as Wall level (Created an explosion; smashed a wooden door which requires this much energy to do), likely Small Building level (Destroyed a speeding car with his body which would make him this strong), up to City Block level (Can harm thoseSpawn Vol 1 #23 (August, 1994) who can harm him) Town level (Far stronger than before; fought evenly with Urizen who was strong enough to destroySpawn Vol 1 #97 (July, 2000) buildings, which would be this level), Island level with Green Powers (Summoned a massive tidal wave; created a giant forest which should be this level), up to Solar System level (Fought evenly with Tiffany who is second only to Angela), Universe level+ at peak (Shook every creation such as all circles of Hell and reality with his war cry after killing Malebolgia who was said to have brought agony to "billions of worlds and dimensions"Curse of the Spawn Vol 1 #10 (June, 1997)) Universe level+ (Holds absolute control over a universal realm of Hell, which is infinite inSpawn: The Undead Vol 1 #6 (November, 1999) size; can also create universes with his mind; every heartbeat increases his power a hundredfold) Low Complex Multiverse level (After eating the Forbidden Fruit given to him by the Mother, he became equal to God and Satan and stated that he can fight them for all eternity;Spawn Vol 1 #163 (December, 2006) defeated the entire army of the Eighth Sphere of Hell and destroyed the combined forces of Heaven and Hell, wiping out all life on Earth in the process) At least Complex Multiverse level (Became one with the Mother; remade the entire universe and sent God and Satan to a separate plane of existence) At least Country level (Unleashed an unholy nuke upon the Earth), up to Solar System level, Low Complex Multiverse level at peak (Far stronger than before; damaged Satan, who is superior to Malebolgia and equal to God, both physicallySpawn Vol 1 #261 (February, 2016) and with the Sword of the Spirit whichSpawn: Resurrection Vol 1 (March, 2015) is God's word) against Battle Beast's At least Small Planet level (Stomped Invincible and BulletproofInvincible #19, and evenly matched Thragg in a fight that lasted days, while being unarmed and sliced in the stomach to even the odds, before being defeated), far higher with weaponry (Easily tore through Rognarrs with his Heavy Blade and Hammer, who could rip Thragg apart, and heavily injured himself with them).
+- Mobility / Initiative: Spawn leads mobility / initiative: listed as Subsonic travel speed (Can move as a "crimson blur") with Speed of Light teleportation speed (He can teleport at exactly the speed of light) and FTL reactions/combat speed (Dodged Angela's light beams; blocked a laser with his cape) Supersonic travel speed (Faster than before; can move with "inhuman swiftness";Spawn Vol 1 #54 (October, 1996) stated to move faster than a speeding bullet; can move so fast he sets the air on fire with frictionSpawn Vol 1 #42 (February, 1996)) with Speed of Light teleportation speed and FTL reactions, up to Massively FTL+ travel speed (Kept up with Tiffany in combat; comparable to Angela and other angels who can move 6.3 billion times faster than light), Immeasurable at peak (Moved so fast the concept of time was obliterated and no one knew how long his soul's transition took; comparable to angels who can move through non-linear time, essentially going fast enough to travel through time itselfCurse of the Spawn Vol 1 #15 (December, 1997)) Immeasurable, Omnipresent within his realm (The 8th Sphere of Hell is an extension of himself) Immeasurable Omnipresent At least Supersonic travel speed with Speed of Light teleportation speed and FTL reactions, up to Massively FTL+ travel speed; Omnipresent at peak (Fought against Satan who's superior to Malebolgia who is everywhere at once), otherwise Immeasurable against Battle Beast's Massively FTL+ (Can keep up with Invincible and Thragg).
+- Loser path: Battle Beast's best route against Spawn was to force their most reliable opening early, pressure Spawn around Spawn has a limited power supply of necroplasm and each..., his counter drains, and punish any timing or stamina gap before Spawn kept initiative.
+
+
+---
+
+Hulk (Marvel Comics) VS Magneto (Marvel Cinematic Universe)
+
+Winner: Magneto (Marvel Cinematic Universe)
+Battle odds: Magneto (Marvel Cinematic Universe) 70% / Hulk (Marvel Comics) 30%
+Confidence: medium
+
+Magneto (Marvel Cinematic Universe) has the more reliable stat-and-tool profile over Hulk (Marvel Comics) from the profile data.
+
+Fight Card:
+Hulk (Marvel Comics)
+- Weapon/Power: profile-backed abilities
+- Style: ranged energy user
+- Key tools: Superhuman Physical Characteristics Genius Intelligence, Fire Manipulation & Magma Manipulation, Can scan someone for being an android
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: If he is not sufficiently enraged
+Magneto (Marvel Cinematic Universe)
+- Weapon/Power: profile-backed abilities
+- Style: ranged energy user
+- Key tools: Superhuman Physical Characteristics, Magnetism Manipulation and Electricity Manipulation, Expert Martial Artist
+- Win path: Magneto (Marvel Cinematic Universe) wins by making Hulk (Marvel Comics)'s counterplay run through the durability gap while preserving the better finish.
+- Risk: source-cleanup pending
+
+Quick Evidence:
+- Special Abilities: Magneto (Marvel Cinematic Universe) brings named tools: Superhuman Physical Characteristics, Magnetism Manipulation and Electricity Manipulation, Expert Martial Artist
+- Mobility / Initiative: Magneto (Marvel Cinematic Universe) leads mobility / initiative: listed as Hypersonic combat speed and reactions (Repeatedly fought evenly against the X-Men, himself and them gaining the upper hand against each other several times; The X-Men include the likes of Cyclops, Wolverine, Jean Grey, Rogue, Beast, Nightcrawler, Psylocke, etc. Kept up with Namor, Havok, Red Hulk, Doctor Doom, a held-back Hercules & Thor, and a Hulk on this levelMach 8.23). Up to Massively FTL flight speed (Seized control of revolutionary magnetic rays that could travel from Earth to a planet in another galaxy and used them to return from said planet to Earth in less than a day.(The) Avengers Vol 1/(1963) issue 47 This situational feat shows he can control magnetic rays faster than himself and use them to fly at comparable speeds to them) and Massively FTL attack speed (Covered his body with the metal from the satellites around that allowed Iron Man to quickly siphon some of Jupiter's magnetic field and himself stole the same kind of power from the sun, then channeled more power from every planet within reach and grew stronger by the second) against Hulk (Marvel Comics)'s Hypersonic combat speed (Can react to BushwhackerMach 8.23).
+- Loser path: Hulk (Marvel Comics)'s best route against Magneto (Marvel Cinematic Universe) was to force their most reliable opening early, pressure Magneto (Marvel Cinematic Universe) around Manipulating energies instead of magnetism can take a..., When severely injured, and punish any timing or stamina gap before Magneto (Marvel Cinematic Universe) kept initiative.
+
+
+---
+
+Artorias the Abysswalker VS Manus Father of the Abyss
+
+Winner: Manus Father of the Abyss
+Battle odds: Manus Father of the Abyss 70% / Artorias the Abysswalker 30%
+Confidence: medium
+
+Manus Father of the Abyss has the more reliable stat-and-tool profile over Artorias the Abysswalker from the profile data.
+
+Fight Card:
+Artorias the Abysswalker
+- Weapon/Power: profile-backed abilities
+- Style: weapon specialist
+- Key tools: Superhuman Physical Characteristics, Immortality, Master Greatsword wielder
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: source-cleanup pending
+Manus Father of the Abyss
+- Weapon/Power: Magic
+- Style: packet-defined fighter
+- Key tools: Magic, Superhuman Physical Characteristics, Abyss Manipulation
+- Win path: Manus Father of the Abyss wins by making Artorias the Abysswalker's counterplay run through the durability gap while preserving the better finish.
+- Risk: Manus Father of the Abyss
+
+Quick Evidence:
+- Finishing Power: Manus Father of the Abyss leads finishing power: listed as Likely Star level (Should be superior to the likes of Nashandra and comparable to the Chosen Undead) against Artorias the Abysswalker's Small Country level (Comparable to Dragonslayer Ornstein and fought against the Everlasting Dragons with the other Knights of Gwyn; Everlasting Dragons can generate powerful storms with their artifacts).
+- Special Abilities: Manus Father of the Abyss brings named tools: Superhuman Physical Characteristics, Magic, Abyss Manipulation
+- Loser path: Artorias the Abysswalker's best route against Manus Father of the Abyss was to force their most reliable opening early, pressure Manus Father of the Abyss around Manus Father of the Abyss, Manus, and punish any timing or stamina gap before Manus Father of the Abyss kept initiative.
+
+
+---
+
+Phantom Assassin VS Terrorblade
+
+Winner: Phantom Assassin
+Battle odds: Phantom Assassin 70% / Terrorblade 30%
+Confidence: medium
+
+Phantom Assassin has the more reliable stat-and-tool profile over Terrorblade from the profile data.
+
+Fight Card:
+Phantom Assassin
+- Weapon/Power: Astral Projection, Extrasensory Perception
 - Style: cosmic/reality hax user
-- Key tools: Superhuman Physical Characteristics, Longevity, Acrobatics
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Toguro cannot fly
-Yusuke Urameshi
-- Weapon/Power: profile-backed abilities
-- Style: ranged energy user
-- Key tools: Abilities Enhanced Senses and Non Physical Interaction, Ki
-- Win path: Yusuke Urameshi wins by making Toguro's counterplay run through the durability gap while preserving the better finish.
-- Risk: Yusuke acts unintelligently outside of actual battles...
-
-Quick Evidence:
-- Finishing Power: Yusuke Urameshi leads finishing power: listed as Wall level (Even before his Spirit Detective resurrection, he has been known for "Ramming people's heads through the pavement, punch doors off its hinges, and he grew stronger after his death and resurrection. Defeated Gouki after a rematch with some assistance to increase the power of his Spirit Gun) Large Building level (Contributed to the total destruction of the dome he and Suzaku were fighting under) Large Town level (Should be at least comparable, if not superior to old Genkai and Shishiwakamaru) At least Large Town level (Stronger than Hiei. His Reigan tore through the stadium wall, a skyscraper-sized slab of concrete, a few kilometers of forest and was kicking up large quantities of water while passing well over head, grew much stronger with the thought Kuwabara's death on his shoulders) Multi Continent level (Many order of magnitudes stronger than the strongest Class A demons, which would include Chapter Black Dragon Absorbed Hiei, making his energy output 132 Petatons), higher when possessed by Raizen (Savagely beat down Offensive Armour Sensui, who was simply unable to put up a fight against Yusuke in this state; eventually killed Sensui with a single Spirit Gun blast) At least Moon level (Although initially estimated to be on Shura's level and being someone who Shura could possibly defeat, being solidly below Yomi, he went blow for blow with Yomi and was capable of injuring him, then as he slowly grew over the fight, he closed the gap in his inferiority, fighting him for 60 hours. Was noted to be inferior, but in the ballpark of Mukuro) against Toguro's Large Town level (Should be stronger than Rinku and Suzuki) Large Town level (Defeated Genkai and is well above both Bui and Karasu) Large Town level (Overpowered Yusuke post absorbing Spirit Wave and without Spirit Cuffs, should be stronger than Hiei) At least Large Town level (Stopped Yusuke's final Reigan).
-- Special Abilities: Yusuke Urameshi brings named tools: Superhuman Physical Characteristics Skilled Hand to..., Abilities Enhanced Senses and Non Physical Interaction, Ki
-- Loser path: Toguro's best route against Yusuke Urameshi was to force their most reliable opening early, pressure Yusuke Urameshi around Yusuke acts unintelligently outside of actual battles...., Yusuke has once received a possession from his ancestor, and punish any timing or stamina gap before Yusuke Urameshi kept initiative.
-
-
----
-
-Omni-Man VS Thragg
-
-Winner: Thragg
-Battle odds: Thragg 70% / Omni-Man 30%
-Confidence: medium
-
-Thragg has the more reliable stat-and-tool profile over Omni-Man from the profile data.
-
-Fight Card:
-Omni-Man
-- Weapon/Power: Superhuman Physical Characteristics Enhanced Senses
-- Style: packet-defined fighter
-- Key tools: Superhuman Physical Characteristics Enhanced Senses
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: source-cleanup pending
-Thragg
-- Weapon/Power: profile-backed abilities
-- Style: tank/bruiser
-- Key tools: Superhuman Physical Characteristics Regeneration, Low Mid overtime BFR, a combat genius
-- Win path: Thragg wins by making Omni-Man's counterplay run through the durability gap while preserving the better finish.
-- Risk: A Specific frequency of Sound disrupts flight...
-
-Quick Evidence:
-- Finishing Power: Thragg leads finishing power: listed as At least Small Star level possibly Solar System level (Ripped Thaedus' head from his shoulders, Far superior to Omni-Man and Conquest, to a point the latter actually fears him.Upscales to 7.505 Tenatons of TNT possibly >>150.1437 Foe) At least Star level possibly Solar System level, likely far higher (Outmatched Allen's forces and was portrayed as being a threat to all of them despite having Post-Colossal Amplification Tech Jacket on his side. Can one shot a Post-Timeskip Omni-Man. Fought on par with Invincible after being resurrected by eve.>>>376.0756 Tenatons of TNT possibly >>>15.014 Kilofoe) against Omni-Man's Large Star level + (Canonically fought Mean Supreme to a stalemate which ended in a double knockout. Mean Supreme was powerful enough to destroy Planet Khromium with ease. Mean Supreme is also far stronger than Suprema, who could knit a black hole closed, or "play kick-ball with a star". This fight is canon as Omni-Man and Supreme have known each other for a while. ) Destroyed Viltrum along with Thaddeus, Invincible and Space Racer's Gun . Scales to Viltrumite War Invincible who can overpower Conquest. For context, Conquest was able to destroy the Coalition of Planets spaceship, which held a canon that destroyed the Sun Disk blocking all heat to the Rognarr's planet, creating a ice age. The spaceship would need to be tough enough to withstand its own recoil energy. Stronger than the average Viltrumite.).
-- Special Abilities: Thragg brings named tools: Superhuman Physical Characteristics Regeneration, Low Mid overtime BFR, a combat genius
-- Loser path: Omni-Man's best route against Thragg was to force their most reliable opening early, pressure Thragg around A Specific frequency of Sound disrupts flight..., Temperatures of over 6000 degrees break apart their..., and punish any timing or stamina gap before Thragg kept initiative.
-
-
----
-
-Gehrman the First Hunter VS Hunter
-
-Winner: Hunter
-Battle odds: Hunter 70% / Gehrman the First Hunter 30%
-Confidence: medium
-
-Hunter has the more reliable stat-and-tool profile over Gehrman the First Hunter from the profile data.
-
-Fight Card:
-Gehrman the First Hunter
-- Weapon/Power: profile-backed abilities
-- Style: ranged energy user
-- Key tools: Superhuman Physical Characteristics Immortality, swordsman, the Bound Widow
-- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: Cannot leave the Hunter's Dream Rally
-Hunter
-- Style: packet-defined fighter
-- Key tools: profile-backed abilities
-- Win path: Hunter wins by pairing mobility with finishing power, creating the safer first damage window against Gehrman the First Hunter.
-- Risk: No clean exploitable weakness supplied.
-
-Quick Evidence:
-- Finishing Power: Hunter leads finishing power: listed as At least Multi-City Block level (Capable of fighting and killing Henryk, the Old Hunter, who can withstand the meteors of the Fluorescent Flower, which are this strong. Able to fight and kill Father Gascoigne as well as weaker Beasts such as the Cleric Beast, Blood-Starved Beast, and Vicar Amelia) Town level (Can fight and kill the Living Failures, who are capable of this, as well as Darkbeast Paarl and the Abhorrent Beast) Large Island level+ (Has access to equipment such as A Call Beyond, which is this powerful, the Augur of Ebrietas, which summons part of Ebrietas to wield as an attack, the Amygdalan Arm, which is the severed still-living arm of a lesser Amygdala, and the Kos Parasite, which is able to transform The Hunter into a fully fledged Kin. Can fight and defeat Great Ones such as Ebrietas, Rom, Amygdala, and the Celestial Emissary, as well as other users of A Call Beyond and Augur of Ebrietas such as Yurie, Imposter Iosefka, Micolash, and Forgotten Madman) At least Large Island level+, likely Large Planet level (Can defeat Great Ones such as The Orphan of Kos, and Mergo's Wet Nurse, as well as Gehrman, the First Hunter and Lady Maria of the Astral Clocktower) Large Planet level (After consuming 3 Third Umbilical Cords, The Hunter transcends The Hunt entirely and becomes one of the most powerful Great Ones, surpassing the likes of Mergo, who moved the moon and created the Nightmare of Mensis. Fought, defeated, and usurped the Moon Presence, which created the Hunter's Dream and moved the moon, and took control of the Hunter's Dream as a result) against Gehrman the First Hunter's At least Large Island level+, likely Large Planet level (Significantly stronger than Lady Maria of the Astral Clocktower and the Bloody Crow of Cainhurst. Comparable to and capable of visceral attacking the End-Game Hunter even after they had consumed 3 One Third Umbilical Cords.).
-- Mobility / Initiative: Hunter leads mobility / initiative: listed as High Hypersonic Combat Speed and Reactions (Able to dodge the meteors of the Fluorescent Flower as well as keep up with Henryk who can do the same. Can easily dodge point-blank gunfire from flintlock rifles and Victorian-era gatling guns) Massively Hypersonic Combat Speed and Reactions (Faster than before. Capable of dodging lightning as well as the meteors of the Living Failures and Blacksky Eye) At least Massively Hypersonic, likely higher Combat Speed and Reactions (Faster than before. Can react to the projectiles of A Call Beyond) At least Massively Hypersonic, likely higher Combat Speed and Reactions (Faster than before. Able to react to Amygdala's lasers) At least Massively Hypersonic, likely Massively Hypersonic+ Combat Speed and Reactions (Faster than before. Can react to the cloud-to-ground lightning attack of the Orphan of Kos. Can keep up with Gehrman) Massively Hypersonic+ combat speed and Reactions (Can keep up with the Moon Presence, who can move from the moon in seconds) against Gehrman the First Hunter's At least Massively Hypersonic, likely Massively Hypersonic+ Combat Speed and Reactions (Comparable to the Hunter and the Moon Presence).
-- Loser path: Gehrman the First Hunter needed to force the fight against Hunter into their most reliable opening, but the profile data did not provide a clean exploitable weakness.
-
-
----
-
-Terrorblade VS Shadow Fiend
-
-Winner: Shadow Fiend
-Battle odds: Shadow Fiend 70% / Terrorblade 30%
-Confidence: medium
-
-Shadow Fiend has the more reliable stat-and-tool profile over Terrorblade from the profile data.
-
-Fight Card:
+- Key tools: Superhuman Physical Characteristics, Astral Projection, Extrasensory Perception
+- Win path: Phantom Assassin wins by making Terrorblade's counterplay run through the durability gap while preserving the better finish.
+- Risk: when released
 Terrorblade
 - Weapon/Power: Magic, Soul Manipulation
 - Style: cosmic/reality hax user
 - Key tools: Magic, Superhuman Physical Characteristics, Necromancy
 - Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
 - Risk: Thoan is capable of teleporting across space
-Shadow Fiend
-- Weapon/Power: Telekinesis, Soul Manipulation
-- Style: cosmic/reality hax user
-- Key tools: Superhuman Physical Characteristics, Large Size, Power Nullification
-- Win path: Shadow Fiend wins by making Terrorblade's counterplay run through the durability gap while preserving the better finish.
-- Risk: Can be overly sadistic at times Note
 
 Quick Evidence:
-- Finishing Power: Shadow Fiend leads finishing power: listed as At least Multi-City Block level, Possibly Small Town level (Able to shake the entire Underworld just by shouting, with the Underworld being shown to contain, as shown by the art of Police Patrol of the Underworld and Tour Bus from the Underworld, multiple large mountains and a tower of bones tall enough to reach well beyond the cloud layer) At least Multi-City Block level, Possibly Small Town level (Overpowered and defeated Dark King of the Abyss) against Terrorblade's Building level (Can fight on par with the Bounty Hunter for a long period of time, completely superior to the likes of Cursed Spirit and Ser Baker).
-- Special Abilities: Shadow Fiend brings named tools: Superhuman Physical Characteristics, Large Size, Power Nullification
-- Loser path: Terrorblade's best route against Shadow Fiend was to force their most reliable opening early, pressure Shadow Fiend around Can be overly sadistic at times Note, and punish any timing or stamina gap before Shadow Fiend kept initiative.
+- Finishing Power: Phantom Assassin leads finishing power: listed as Multi-City Block level+ (Capable of killing Phantom Assassin), Varies, up to Multiverse level+ with Prophesies (Created an infinite number of alternate and branching timelines in response to being uncertain of the outcome of an event), False Promise ignores conventional durability against Terrorblade's Building level (Can fight on par with the Bounty Hunter for a long period of time, completely superior to the likes of Cursed Spirit and Ser Baker).
+- Special Abilities: Phantom Assassin brings named tools: Superhuman Physical Characteristics, Astral Projection, Extrasensory Perception
+- Loser path: Terrorblade's best route against Phantom Assassin was to force their most reliable opening early, pressure Phantom Assassin around when released, damages, and punish any timing or stamina gap before Phantom Assassin kept initiative.
 
 
 ---
 
-Radahn VS Ranni the Witch
+Fran VS Vaan
 
-Winner: Radahn
-Battle odds: Radahn 85% / Ranni the Witch 15%
+Winner: Vaan
+Battle odds: Vaan 85% / Fran 15%
 Confidence: strong
 
-Radahn has the more reliable stat-and-tool profile over Ranni the Witch from the profile data.
+Vaan has the more reliable stat-and-tool profile over Fran from the profile data.
 
 Fight Card:
-Radahn
-- Weapon/Power: Magic
-- Style: packet-defined fighter
-- Key tools: Magic
-- Win path: Radahn wins by pairing mobility with finishing power through Magic, creating the safer first damage window against Ranni the Witch.
-- Risk: source-cleanup pending
-Ranni the Witch
-- Style: packet-defined fighter
-- Key tools: profile-backed abilities
+Fran
+- Weapon/Power: Magic, Accelerated Development
+- Style: ranged energy user
+- Key tools: Magic, Superhuman Physical Characteristics, Accelerated Development
 - Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
-- Risk: after a moment
+- Risk: Magic
+Vaan
+- Weapon/Power: A sword, greatsword
+- Style: cosmic/reality hax user
+- Key tools: Magic, Superhuman Physical Characteristics, Non Physical Interaction
+- Win path: Vaan wins by pairing mobility with finishing power through Superhuman Physical Characteristics, Non Physical Interaction, creating the safer first damage window...
+- Risk: source-cleanup pending
 
 Quick Evidence:
-- Finishing Power: Radahn leads finishing power: listed as At least Mountain level118.057 Megatons, likely Large Star level3.64 Foe (Stronger than his rotted self. Was able to stalemate against Malenia even shattered her prosthetic arm with his weapons. Is stated to be the mightiest of the Demigods118.057 Megatons) Mountain level, likely Large Star level3.64 Foe (Even while severely weakened by Scarlet Rot, he was able to hold up the "stars" and constellations with his gravity magic) At most Small Planet level (Capable of battling the Tarnished while they were assisted with Sir Ansbach and Thiollier but was ultimately being overpowered), higher with Miquella's light (Created an extremely bright light during his meteor attack1.68 Zettatons of TNT), likely Multi-Solar System level (Is at his peak physical health and prowess upon his resurrection. As a lord, he should be relative to the likes of Godfrey, First Elden Lord and Radagon of the Golden Order. Empowered by both Miquella's light and Mohg's accursed blood16.88 ExaFoe) against Ranni the Witch's Mountain level, likely Large Star level (Fought the Tarnished after they had defeated Astel. Fought against Ranni the Witch, who is a Demigoddess, though they were defeated).
-- Special Abilities: Radahn brings named tools: Magic
-- Loser path: Ranni the Witch's best route against Radahn was to force their most reliable opening early, pressure Radahn around Due to being afflicted by the Scarlet Rot, Leonard, and punish any timing or stamina gap before Radahn kept initiative.
+- Finishing Power: Vaan leads finishing power: listed as Large Planet level (Has defeated Gilgamesh in an intermediate transformation [6 arms] and is hailed as the strongest being in Ivalice, at least to the best of Clan Centurio's knowledge, for slaying Yiazmat) At least Multiverse level+ (Is comparable to the other Warriors of Materia and draws power from the gods of the cycle. Participated in the defeat of Shinryu) against Fran's Large Town level (Created a deep hole via vaporization), possibly City level (Superior to Goldalfa we could create a Earthquake, with a 10 on the Mercalli scale, albeit possibly just local).
+- Special Abilities: Vaan brings named tools: Superhuman Physical Characteristics, Non Physical Interaction, Magic
+- Loser path: Fran's best route against Vaan was to force their most reliable opening early, pressure Vaan around A bit naive at first and isn't very worldly due to his..., and punish any timing or stamina gap before Vaan kept initiative.
 
 
 ---
 
-Ganondorf VS Zelda
+Sergeant Johnson VS Master Chief
 
-Winner: Ganondorf
-Battle odds: Ganondorf 70% / Zelda 30%
-Confidence: medium
+Winner: Master Chief
+Battle odds: Master Chief 85% / Sergeant Johnson 15%
+Confidence: strong
 
-Ganondorf has the more reliable stat-and-tool profile over Zelda from the profile data.
+Master Chief has the more reliable stat-and-tool profile over Sergeant Johnson from the profile data.
 
 Fight Card:
-Ganondorf
-- Weapon/Power: profile-backed abilities
-- Style: packet-defined fighter
-- Key tools: Beast Ganon, Triforce of Power, Completed Triforce
-- Win path: Ganondorf wins by making Zelda's counterplay run through the durability gap while preserving the better finish.
-- Risk: No clean exploitable weakness supplied.
-Zelda
-- Weapon/Power: Magic, Master All
+Sergeant Johnson
+- Weapon/Power: Can wield both human and covenant weapons
 - Style: ranged energy user
-- Key tools: Magic, Superhuman Physical Characteristics, Genius Intelligence
+- Key tools: Peak Human Physical Conditioning, Immune to Flood Infestation, Has experience with numerous human and Covenant
 - Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: Normal human weaknesses Note
+Master Chief
+- Weapon/Power: profile-backed abilities
+- Style: ranged energy user
+- Key tools: Superhuman Physical Characteristics Cyborgization, Reputation, Leadership
+- Win path: Master Chief wins by pairing mobility with finishing power through Superhuman Physical Characteristics Cyborgization, Reputation, creating the safer first damage...
 - Risk: source-cleanup pending
 
 Quick Evidence:
-- Finishing Power: Ganondorf leads finishing power: listed as At least Building level+ (Much stronger than Child Link>1.31794 Tons) At least Large Island level (Superior to Twinrova, who could fight the Hero of Time after he had obtained the Master Sword and the combined power of 5 Sages, with just one sage possessing greater power than the Master SwordHyrule Historia; Page 77) Small Planet level (Is capable of harming himself with his own magic), several of his abilities ignore durability Universe level (Possesses and is empowered by the completed Triforce), several of his abilities ignore durability against Zelda's Unknown, Building level+ with the Sheikah Slate (Uses bombs as one of her primary forms of attack, which are this powerfulThe Legend of Zelda: Breath of the Wild) At least City level (Even after her powers weakened she was still powerful enough to briefly restrain Dark Beast Ganon and make him roar in pain, who in a weaker state was still durable enough to withstand the combined energy of 4 Divine Beast lasersThe Legend of Zelda: Breath of the Wild; Calamity Ganon Battle, just 1 laser being this powerful, and at full power she was capable of repelling an attack from Calamity Ganon who by that point had achieved his true powerThe Legend of Zelda: Age of Calamity; Final Boss Battle).
-- Durability / Attrition: Ganondorf leads durability / attrition: listed as At least Building level+ (Wasn't threatened at all by Child Link) At least Large Island level (Took many blows from Oracles Link) Small Planet level (Can withstand being struck by Light Arrows, which are strong enough to damage TwinmoldThe Legend of Zelda: Majora's Mask 3D; Twinmold Boss Battle) Universe level (Empowered by the completed Triforce) against Zelda's Large Building level (Can withstand blows from monsters that are comparable to her bombs) At least City level (Can take attacks from a full power Calamity Ganon).
-- Loser path: Zelda needed to force the fight against Ganondorf into their most reliable opening, but the profile data did not provide a clean exploitable weakness.
+- Finishing Power: Master Chief leads finishing power: listed as At least Wall level (Accidentally killed two ODST soldiers when he was 14.Halo: Helljumper Issue #1. David, Peter. Marvel Comics, 2009 Casually kicked a man wearing an exoskeleton comparable in mass to Mjolnir armor 8 meters away.Halo: The Fall Of Reach - Page #72. Del Ray, 2001 Can spar with other Spartans and survive, and is considerably stronger now as an adult) Small Building level+, possibly higher (Can KO other Spartans and other comparable troops with multiple punches. Overpowered an Elite Zealot while extremely exhausted. Is capable of killing weaker Sangheili with one punch), Street level to Building level+ with Weapons (Arsenal ranges from Handguns to Spartan Lasers), Multi-City Block level with Mjolnir Self-Destruction (Spartans can set the reactor in their armor to self-destruct to prevent it from falling into enemy hands, resulting in a massive explosion161.2429 tons of TNT) Building level (His new suit is significantly more powerful than before. Is comparable to Spartan Edward Buck who casually killed a Promethean Soldier with a stomp. Managed to penetrate the Didact's eye with a knife, but got stomped shortly afterward), higher with Spartan Charge and Spartan Ground Pound (Both Spartan Abilities greatly increase the power of the Spartan, letting them smash through thick walls or flip Wraith tanks with their shockwaves). Street level to Town level with Weapons (UNSC weapons are slightly stronger than before. The Incineration Cannon is capable of vaporizing large portions of a Gravemind, requiring this much energy. Can get access to various Promethean Weapons) and Mjolnir Self-Destruction, higher with Damage Powerups and REQ Variants against Sergeant Johnson's Street level to Small Building level (Depending on the weapon; pistols and rifles are closer to the former while rocket launchers and grenades are closer to the latter) Large Building level+ (Able to fight on par with and kill Grunt Goblins and Hunter Captains).
+- Special Abilities: Master Chief brings named tools: Superhuman Physical Characteristics Cyborgization..., Reputation, Leadership
+- Loser path: Sergeant Johnson's best route against Master Chief was to force their most reliable opening early, pressure Master Chief around If he gets hit with enough force his armor might lock...., Master Chief's armor evolution, and punish any timing or stamina gap before Master Chief kept initiative.
+
+
+---
+
+Viego VS Garen
+
+Winner: Garen
+Battle odds: Garen 70% / Viego 30%
+Confidence: medium
+
+Garen has the more reliable stat-and-tool profile over Viego from the profile data.
+
+Fight Card:
+Viego
+- Weapon/Power: The Blade of the Ruined King
+- Style: cosmic/reality hax user
+- Key tools: Magic, Superhuman Physical Characteristics, Immortality
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: source-cleanup pending
+Garen
+- Weapon/Power: Magic, Weapon Mastery
+- Style: cosmic/reality hax user
+- Key tools: Magic, Superhuman Physical Characteristics, Martial Arts
+- Win path: Garen wins by making Viego's counterplay run through the durability gap while preserving the better finish.
+- Risk: source-cleanup pending
+
+Quick Evidence:
+- Finishing Power: Garen leads finishing power: listed as Small Building level (Destroyed a bridgeLux Comic Issue #1. Fought Sylas multiple timesLux Comic Issue #3The Mageseeker: A League of Legends Story. Exchanged blowsKatarina Comic Issue #3 with Katarina), Demacian Justice ignores conventional durability At least Galaxy level, likely Multi-Galaxy level (Has fought and killed gods on the level of the God Fist and the God Staff and sees them as lesser beings, Defeated God-King Darius), Demacian Justice ignores conventional durability against Viego's Country level (Fought Crew of the Charming Lady memebersRuined King: A League of Legends Story), higher, potentially Multi-Continent level Environmental Damage with The Black Mist (Capable of fully controlling and manipulating the Black Mist, which is this powerful, and is repeatedly stated to be able to envelop continents and cover the entire planet with it if left unopposed) Low Complex Multiverse level (Fought and defeated PantheonLeague of Legends Story: Rise of Sentinels Chapter II - Targon. Stated to have power greater than the celestial realmLeague of Legends Story: Rise of Sentinels Chapter III - Bilgewater).
+- Special Abilities: Garen brings named tools: Base/Warring Kingdoms=Superhuman Physical Characteristics, Martial Arts, Weapon Mastery
+- Loser path: Viego's best route against Garen was to force their most reliable opening early, pressure Garen around Garen's next basic attack lunges him towards the target, Magic, and punish any timing or stamina gap before Garen kept initiative.
+
+
+---
+
+Rosalina VS Bowser
+
+Winner: Bowser
+Battle odds: Bowser 70% / Rosalina 30%
+Confidence: medium
+
+Bowser has the more reliable stat-and-tool profile over Rosalina from the profile data.
+
+Fight Card:
+Rosalina
+- Weapon/Power: Transformation and Statistics Amplification, Mega Mushroom
+- Style: ranged energy user
+- Key tools: Superhuman Physical Characteristics Longevity, boomerangsSuper Mario Party, Swords
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: No clean exploitable weakness supplied.
+Bowser
+- Weapon/Power: profile-backed abilities
+- Style: ranged energy user
+- Key tools: Koopa Clown Car. Koopa Clown Car, beams of energy, spiked bombs
+- Win path: Bowser wins by making Rosalina's counterplay run through the durability gap while preserving the better finish.
+- Risk: source-cleanup pending
+
+Quick Evidence:
+- Finishing Power: Bowser leads finishing power: listed as Multi-Continent level (Physically stronger than Mario and Luigi, as he can casuallySuper Mario 3D Land - Final Boss destroy objects thatSuper Mario Odyssey - Final Boss Mario himself cannot.Super Mario Odyssey - Final Boss Can easily shake the entirety of Pagoda Peak), far higher with Size Manipulation (Was capable of sending Peach's mechanized Castle flying around the planet with one punch) and certain power-ups (Powered states such as Fury Bowser also render him gigantic, which should render him more powerful than his usual Giant Bowser form). Multi-Solar System level with Reality Warping (Warped the reality of Yoshi´s Island by transforming it into a storybook with a cosmological structure big enough to house a starry sky, which would yield this much energy) and Galaxy level with preparation (He was going to create his own galaxy via his Galaxy Reactor had he not been stopped by Mario and lost his Grand Star) Large Star level, higher with more Power Stars Multi-Solar System level, likely Galaxy level (Possesses a Grand Star, an artifact which had the energy to create a galaxy and could generate and sustain a black hole of this size) Multiverse level (Absorbed the Dream Stone and gained its power, with the Dream Stone containing a cosmology of 100,000 universes), several of his abilities ignore durability against Rosalina's Multi-Continent level (Capable of fighting alongside the likes of Mario and Luigi. Can defeat the likes of Boom Boom, MeowserSuper Mario 3D World, and Petey PiranhaMario Party Star Rush), far higher with certain Power-Ups (Should be comparable to Mario and Luigi, who can match Bowser in his giant forms) Large Star level, higher with more Power Stars (Should be comparable to other users).
+- Durability / Attrition: Bowser leads durability / attrition: listed as Multi-Continent level (Can take attacks from Mario and Luigi. He is sometimes portrayed as so durable that the Bros. can't even hurt him by normal means, though this is not always the case), higher via his shell (Many attacks that can normally cause Bowser great harm can't even scratch his shellMario & Luigi: Bowser's Inside Story - Final Boss), far higher with Size Manipulation and certain power-ups Large Star level, higher with more Power Stars Multi-Solar System level, likely Galaxy level Multiverse level (Empowered by the Dream Stone, and can tank hits from the Zeekeeper, who had fought and defeated a Dark Stone-empowered Antasma), higher via his shell against Rosalina's Multi-Continent level (Can take blows from the likes of Mario and Luigi as well as foes like Meowser and Bowser Jr.), far higher with certain Power-Ups Large Star level, higher with more Power Stars.
+- Loser path: Rosalina's best route against Bowser was to force their most reliable opening early, pressure Bowser around While in his enraged state his durability drops by half...., weaknesses, and punish any timing or stamina gap before Bowser kept initiative.
+
+
+---
+
+Palutena (Anime) VS Pit (Classic)
+
+Winner: Pit (Classic)
+Battle odds: Pit (Classic) 70% / Palutena (Anime) 30%
+Confidence: medium
+
+Pit (Classic) has the more reliable stat-and-tool profile over Palutena (Anime) from the profile data.
+
+Fight Card:
+Palutena (Anime)
+- Weapon/Power: Magic, Energy Projection
+- Style: ranged energy user
+- Key tools: Magic, Superhuman Physical Characteristics, Immortality
+- Win path: Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.
+- Risk: source-cleanup pending
+Pit (Classic)
+- Style: packet-defined fighter
+- Key tools: profile-backed abilities
+- Win path: Pit (Classic) wins by making Palutena (Anime)'s counterplay run through the durability gap while preserving the better finish.
+- Risk: Mega Man is powered by sunlight
+
+Quick Evidence:
+- Finishing Power: Pit (Classic) leads finishing power: listed as At least Large Island level+, likely Brown Dwarf level (Defeated the Mega Man 1-5 Robot Masters, who are all superior to Dr. Wily) Brown Dwarf level (On par with Duo and Sunstar), higher with the Double Rock Buster (The Double Rock Buster destroyed Ra Moon) and Super Adaptor individually (The Super Adaptor is superior to the Double Rock Buster), higher with Double Rock Buster + Super Adaptor (Should be able to stack both at the same time due to Bass being able to fire charged shots with his Super Adaptor) and Power Gear individually (Dr. Light claimed that Rock would not stand a chance against Double Gear System users, so it would be above the previously mentioned power boost), possibly Small Star level with Double Rock Buster or Super Adaptor + Power Gear (For being able to stack the 3 power boosts accordingly. See note 3 below), possibly Star level with all 3 combined (For being able to stack the 3 power boosts accordingly. See note 3 below) against Palutena (Anime)'s Large Country level (Able to fight and harm Pit), higher via the Palutena Glam Blaster/Sacred Goddess Clobberlaser (One shot Hewdraw and could've obliterated Pit).
+- Durability / Attrition: Pit (Classic) leads durability / attrition: listed as At least Large Island level+, likely Brown Dwarf level (Took hits from the Mega Man 1-5 Robot Masters) Brown Dwarf level (Took blasts from Wily's #8 machine that injured Duo, and hits from Sunstar), higher with Super Adaptor (Took blasts from Super Adaptor Bass) against Palutena (Anime)'s Large Country level (Can withstand a barrage of attacks from Pit).
+- Loser path: Palutena (Anime)'s best route against Pit (Classic) was to force their most reliable opening early, pressure Pit (Classic) around Mega Man is powered by sunlight, Mega Man 8 and Mega Man & Bass shows that it can be..., and punish any timing or stamina gap before Pit (Classic) kept initiative.
