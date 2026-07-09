@@ -1519,3 +1519,35 @@ def _tactic_walk(x):
 _ORIG_FORMAT_DECISION_KW_COMPAT = format_decision
 def format_decision(decision, *args, include_diagnostics=False, **kwargs):
     return _ORIG_FORMAT_DECISION_KW_COMPAT(decision)
+
+
+# AI_NERD_FINAL_DECISION_TEXT_SANITIZER
+def _ai_nerd_sanitize_decision_text(text):
+    text = str(text or "")
+    replacements = {
+        "{{": "",
+        "}}": "",
+        "profile-backed abilities": "listed signature tools",
+        "Profile pending source verification": "signature kit still needs deeper source enrichment",
+        "profile pending source verification": "signature kit still needs deeper source enrichment",
+        "Basic combat capability": "core combat kit",
+        "basic combat capability": "core combat kit",
+        "needs source-backed": "needs matchup-specific",
+        "Needs source-backed": "Needs matchup-specific",
+        "packet-defined fighter": "profile-defined fighter",
+        "Needs a cleaner opening, matchup-specific counter, or confirmed exploit to swing the call.": "Needs a concrete counter-route or confirmed exploit to swing the call.",
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    while "  " in text:
+        text = text.replace("  ", " ")
+    return text.strip()
+
+
+
+# AI_NERD_FORMAT_DECISION_SANITIZER_WRAP
+_AI_NERD_ORIG_FORMAT_DECISION_SANITIZER = format_decision
+def format_decision(*args, **kwargs):
+    return _ai_nerd_sanitize_decision_text(
+        _AI_NERD_ORIG_FORMAT_DECISION_SANITIZER(*args, **kwargs)
+    )

@@ -70,12 +70,9 @@ def clean_value(v):
     return v 
 
 def refresh_profile(profile_path, reason, hints):
-    # Convert Linux-style absolute paths to Windows paths
-    if profile_path.startswith("/mnt/"):
-        drive_letter = profile_path[5]
-        rest_of_path = profile_path[6:]
-        profile_path = f"{drive_letter.upper()}:\\{rest_of_path.replace('/', '\\')}" 
-    p = Path(profile_path) 
+    p = Path(profile_path)
+    if not p.is_absolute():
+        p = ROOT / p
     if not p.exists(): 
         return False, "missing_profile" 
 

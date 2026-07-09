@@ -11,150 +11,137 @@ Confidence: medium
 
 Spawn has the more reliable stat-and-tool profile over Godzilla from the profile data.
 
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-Byakuya Kuchiki (Bleach) VS Grimmjow Jaegerjaquez
+Kenpachi Zaraki (Bleach) VS Genryusai Yamamoto
 
-Winner: Byakuya Kuchiki (Bleach)
-Battle odds: Byakuya Kuchiki (Bleach) 70% / Grimmjow Jaegerjaquez 30%
-Confidence: medium
-
-Byakuya Kuchiki (Bleach) has the more reliable stat-and-tool profile over Grimmjow Jaegerjaquez from the profile data.
-
-The ref has ruled. Drop the next matchup.
-
-
----
-
-Denji VS Makima
-
-Winner: Makima
-Battle odds: Makima 85% / Denji 15%
+Winner: Genryusai Yamamoto
+Battle odds: Genryusai Yamamoto 85% / Kenpachi Zaraki (Bleach) 15%
 Confidence: strong
 
-Makima has the more reliable stat-and-tool profile over Denji from the profile data.
+Genryusai Yamamoto has the more reliable stat-and-tool profile over Kenpachi Zaraki (Bleach) from the profile data.
 
-The ref has ruled. Drop the next matchup.
-
-
----
-
-Suzaku Kururugi VS Lelouch vi Britannia
-
-Winner: Suzaku Kururugi
-Battle odds: Suzaku Kururugi 70% / Lelouch vi Britannia 30%
-Confidence: medium
-
-Suzaku Kururugi has the more reliable stat-and-tool profile over Lelouch vi Britannia from the profile data.
-
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-Future Trunks VS Beerus (Modern)
+Reze VS Denji
 
-Winner: Beerus (Modern)
-Battle odds: Beerus (Modern) 70% / Future Trunks 30%
-Confidence: medium
-
-Beerus (Modern) has the more reliable stat-and-tool profile over Future Trunks from the profile data.
-
-The ref has ruled. Drop the next matchup.
-
-
----
-
-Kagome Higurashi VS Inuyasha
-
-Winner: Inuyasha
-Battle odds: Inuyasha 85% / Kagome Higurashi 15%
+Winner: Reze
+Battle odds: Reze 85% / Denji 15%
 Confidence: strong
 
-Inuyasha has the more reliable stat-and-tool profile over Kagome Higurashi from the profile data.
+Reze has the more reliable stat-and-tool profile over Denji from the profile data.
 
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-Kars (JoJo's Bizarre Adventure) VS Bruno Bucciarati (JoJo's Bizarre Adventure)
+Lelouch vi Britannia VS C.C.
 
-Winner: Kars (JoJo's Bizarre Adventure)
-Battle odds: Kars (JoJo's Bizarre Adventure) 70% / Bruno Bucciarati (JoJo's Bizarre Adventure) 30%
+Winner: C.C.
+Battle odds: C.C. 70% / Lelouch vi Britannia 30%
 Confidence: medium
 
-Kars (JoJo's Bizarre Adventure) has the more reliable stat-and-tool profile over Bruno Bucciarati (JoJo's Bizarre Adventure) from the profile data.
+C.C. has the more reliable stat-and-tool profile over Lelouch vi Britannia from the profile data.
 
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-Megumi Fushiguro VS Yuji Itadori
+Eva Unit-01 VS Asuka Langley Soryu
 
-Winner: Yuji Itadori
-Battle odds: Yuji Itadori 70% / Megumi Fushiguro 30%
+Winner: Asuka Langley Soryu
+Battle odds: Asuka Langley Soryu 70% / Eva Unit-01 30%
 Confidence: medium
 
-Yuji Itadori has the more reliable stat-and-tool profile over Megumi Fushiguro from the profile data.
+Asuka Langley Soryu has the more reliable stat-and-tool profile over Eva Unit-01 from the profile data.
 
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-All Might VS Izuku Midoriya
+Kamina VS Yoko Littner
 
-Winner: All Might
-Battle odds: All Might 85% / Izuku Midoriya 15%
+Winner: Yoko Littner
+Battle odds: Yoko Littner 85% / Kamina 15%
 Confidence: strong
 
-All Might has the more reliable stat-and-tool profile over Izuku Midoriya from the profile data.
+Yoko Littner has the more reliable stat-and-tool profile over Kamina from the profile data.
 
-The ref has ruled. Drop the next matchup.
-
-
----
-
-Crocodile VS Sabo
-
-Winner: Sabo
-Battle odds: Sabo 70% / Crocodile 30%
-Confidence: medium
-
-Sabo has the more reliable stat-and-tool profile over Crocodile from the profile data.
-
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-Saitama VS Genos
+Sesshomaru VS Kagome Higurashi
 
-Winner: Saitama
-Battle odds: Saitama 85% / Genos 15%
+Winner: Sesshomaru
+Battle odds: Sesshomaru 85% / Kagome Higurashi 15%
 Confidence: strong
 
-Saitama has the more reliable stat-and-tool profile over Genos from the profile data.
+Sesshomaru has the more reliable stat-and-tool profile over Kagome Higurashi from the profile data.
 
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-Minako Aino (Sailor Moon) VS Chibiusa (Sailor Moon)
+Dio Brando VS Leone Abbacchio
 
-Winner: Chibiusa (Sailor Moon)
-Battle odds: Chibiusa (Sailor Moon) 85% / Minako Aino (Sailor Moon) 15%
+Winner: Dio Brando
+Battle odds: Dio Brando 85% / Leone Abbacchio 15%
 Confidence: strong
 
-Chibiusa (Sailor Moon) has the more reliable stat-and-tool profile over Minako Aino (Sailor Moon) from the profile data.
+Dio Brando has the more reliable stat-and-tool profile over Leone Abbacchio from the profile data.
 
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
+
+
+---
+
+Shoto Todoroki VS Tomura Shigaraki
+
+Winner: Shoto Todoroki
+Battle odds: Shoto Todoroki 85% / Tomura Shigaraki 15%
+Confidence: strong
+
+Shoto Todoroki has the more reliable stat-and-tool profile over Tomura Shigaraki from the profile data.
+
+The AI Nerd Referee has spoken. Drop the next matchup.
+
+
+---
+
+Enel (One Piece) VS Marshall D. Teach
+
+Winner: Marshall D. Teach
+Battle odds: Marshall D. Teach 85% / Enel (One Piece) 15%
+Confidence: strong
+
+Marshall D. Teach has the more reliable stat-and-tool profile over Enel (One Piece) from the profile data.
+
+The AI Nerd Referee has spoken. Drop the next matchup.
+
+
+---
+
+Minako Aino (Sailor Moon) VS Usagi Tsukino
+
+Winner: Usagi Tsukino
+Battle odds: Usagi Tsukino 85% / Minako Aino (Sailor Moon) 15%
+Confidence: strong
+
+Usagi Tsukino has the more reliable stat-and-tool profile over Minako Aino (Sailor Moon) from the profile data.
+
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
@@ -167,59 +154,59 @@ Confidence: medium
 
 Millions Knives has the more reliable stat-and-tool profile over Nicholas D. Wolfwood from the profile data.
 
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-Cyborg VS Ra's al Ghul
+Toguro VS Yusuke Urameshi
 
-Winner: Cyborg
-Battle odds: Cyborg 85% / Ra's al Ghul 15%
-Confidence: strong
-
-Cyborg has the more reliable stat-and-tool profile over Ra's al Ghul from the profile data.
-
-The ref has ruled. Drop the next matchup.
-
-
----
-
-Omni-Man VS Invincible
-
-Winner: Omni-Man
-Battle odds: Omni-Man 70% / Invincible 30%
+Winner: Yusuke Urameshi
+Battle odds: Yusuke Urameshi 70% / Toguro 30%
 Confidence: medium
 
-Omni-Man has the more reliable stat-and-tool profile over Invincible from the profile data.
+Yusuke Urameshi has the more reliable stat-and-tool profile over Toguro from the profile data.
 
-The ref has ruled. Drop the next matchup.
-
-
----
-
-Songbird VS V
-
-Winner: Songbird
-Battle odds: Songbird 85% / V 15%
-Confidence: strong
-
-Songbird has the more reliable stat-and-tool profile over V from the profile data.
-
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-Vergil (Game) VS Credo (Devil May Cry)
+Omni-Man VS Thragg
 
-Winner: Vergil (Game)
-Battle odds: Vergil (Game) 85% / Credo (Devil May Cry) 15%
-Confidence: strong
+Winner: Thragg
+Battle odds: Thragg 70% / Omni-Man 30%
+Confidence: medium
 
-Vergil (Game) has the more reliable stat-and-tool profile over Credo (Devil May Cry) from the profile data.
+Thragg has the more reliable stat-and-tool profile over Omni-Man from the profile data.
 
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
+
+
+---
+
+Gehrman the First Hunter VS Hunter
+
+Winner: Hunter
+Battle odds: Hunter 70% / Gehrman the First Hunter 30%
+Confidence: medium
+
+Hunter has the more reliable stat-and-tool profile over Gehrman the First Hunter from the profile data.
+
+The AI Nerd Referee has spoken. Drop the next matchup.
+
+
+---
+
+Terrorblade VS Shadow Fiend
+
+Winner: Shadow Fiend
+Battle odds: Shadow Fiend 70% / Terrorblade 30%
+Confidence: medium
+
+Shadow Fiend has the more reliable stat-and-tool profile over Terrorblade from the profile data.
+
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
@@ -232,30 +219,17 @@ Confidence: strong
 
 Radahn has the more reliable stat-and-tool profile over Ranni the Witch from the profile data.
 
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
 
 
 ---
 
-Ryu VS Guile
+Ganondorf VS Zelda
 
-Winner: Ryu
-Battle odds: Ryu 85% / Guile 15%
-Confidence: strong
+Winner: Ganondorf
+Battle odds: Ganondorf 70% / Zelda 30%
+Confidence: medium
 
-Ryu has the more reliable stat-and-tool profile over Guile from the profile data.
+Ganondorf has the more reliable stat-and-tool profile over Zelda from the profile data.
 
-The ref has ruled. Drop the next matchup.
-
-
----
-
-Skull Kid VS Midna
-
-Winner: Skull Kid
-Battle odds: Skull Kid 85% / Midna 15%
-Confidence: strong
-
-Skull Kid has the more reliable stat-and-tool profile over Midna from the profile data.
-
-The ref has ruled. Drop the next matchup.
+The AI Nerd Referee has spoken. Drop the next matchup.
