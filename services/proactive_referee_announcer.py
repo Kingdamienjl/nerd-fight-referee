@@ -718,13 +718,29 @@ def humanize_referee_copy(content: str) -> str:
 
 
 
+def _ranked_outbox_files(outbox: Path) -> list[Path]:
+    ranked = Path("harvest/promotion_ranked_today.json")
+    if not ranked.exists():
+        return sorted(outbox.glob("*.md"))
+    try:
+        data = __import__("json").loads(ranked.read_text())
+    except Exception:
+        return sorted(outbox.glob("*.md"))
+    files = []
+    for item in data:
+        path = Path(item.get("path", ""))
+        if path.exists() and path.parent == outbox:
+            files.append(path)
+    return files or sorted(outbox.glob("*.md"))
+
+
 def make_outbox_social_result(state: dict) -> str | None:
     outbox = Path("harvest/promotion_outbox")
     if not outbox.exists():
         return None
 
     posted = set(state.get("posted_outbox_files") or [])
-    files = sorted(outbox.glob("*.md"))
+    files = _ranked_outbox_files(outbox)
 
     for path in files:
         key = path.name
