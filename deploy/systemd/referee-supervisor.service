@@ -1,0 +1,14 @@
+[Unit]
+Description=Nerd Referee automatic service recovery and status updates
+Wants=network-online.target
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/referee
+EnvironmentFile=-/opt/referee/.env
+ExecStart=/usr/bin/python3 /opt/referee/services/referee_supervisor.py
+TimeoutStartSec=240
+UMask=0027
+

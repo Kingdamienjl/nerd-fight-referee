@@ -1,4 +1,4 @@
-"""Discord bot entrypoint."""
+"""Discord bot entrypoint with multi-guild support and instant slash command sync."""
 
 from __future__ import annotations
 
@@ -33,7 +33,8 @@ def startup_environment_summary() -> dict[str, str]:
 
 class BattleBotClient(discord.Client):
     def __init__(self) -> None:
-        super().__init__(intents=discord.Intents.none())
+        intents = discord.Intents.default()
+        super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
         register_fight_command(self.tree, database_url=os.getenv("DATABASE_URL"))
         register_catalog_commands(self.tree, database_url=os.getenv("DATABASE_URL"))
@@ -48,17 +49,42 @@ class BattleBotClient(discord.Client):
             except Exception as exc:  # noqa: BLE001 - audit schema creation must not block Discord startup.
                 LOGGER.warning("Database schema setup failed; audit JSONL fallback remains available: %s", exc)
         LOGGER.info("Local command names before sync: %s", ", ".join(command_names(self.tree)))
+
+        # 1. Global sync so all servers receive slash commands
+        try:
+            global_synced = await self.tree.sync()
+            LOGGER.info("Discord accepted %d global command(s): %s", len(global_synced), ", ".join(sorted(c.name for c in global_synced)))
+        except Exception as exc:
+            LOGGER.error("Discord global tree sync failed: %s", exc)
+
+        # 2. Specific guild sync if requested for zero-delay test deployment
         guild_sync_id = os.getenv("DISCORD_GUILD_ID")
         if guild_sync_id:
-            guild = discord.Object(id=int(guild_sync_id))
+            try:
+                guild = discord.Object(id=int(guild_sync_id))
+                self.tree.copy_global_to(guild=guild)
+                synced = await self.tree.sync(guild=guild)
+                LOGGER.info("Discord accepted guild command names: %s", ", ".join(sorted(command.name for command in synced)))
+            except Exception as exc:
+                LOGGER.warning("Failed to sync to specific guild %s: %s", guild_sync_id, exc)
+
+    async def on_ready(self) -> None:
+        LOGGER.info("Logged in as %s (ID: %s)", self.user, self.user.id if self.user else "unknown")
+        LOGGER.info("Connected to %d guild(s):", len(self.guilds))
+        for guild in self.guilds:
+            LOGGER.info(" - %s (ID: %s, members: %d)", guild.name, guild.id, guild.member_count)
+
+    async def on_guild_join(self, guild: discord.Guild) -> None:
+        LOGGER.info("Joined new guild: %s (ID: %s, members: %d). Syncing commands...", guild.name, guild.id, guild.member_count)
+        try:
             self.tree.copy_global_to(guild=guild)
             synced = await self.tree.sync(guild=guild)
-            LOGGER.info("Guild synced commands: %s", ", ".join(EXPECTED_COMMANDS))
-            LOGGER.info("Discord accepted guild command names: %s", ", ".join(sorted(command.name for command in synced)))
-        else:
-            LOGGER.warning("DISCORD_GUILD_ID missing; global sync is being used and may not show immediately.")
-            synced = await self.tree.sync()
-            LOGGER.info("Discord accepted global command names: %s", ", ".join(sorted(command.name for command in synced)))
+            LOGGER.info("Successfully synced %d commands to new guild: %s", len(synced), guild.name)
+        except Exception as exc:
+            LOGGER.error("Failed to sync commands to new guild %s: %s", guild.name, exc)
+
+    async def on_guild_remove(self, guild: discord.Guild) -> None:
+        LOGGER.info("Removed from guild: %s (ID: %s)", guild.name, guild.id)
 
 
 def main() -> None:

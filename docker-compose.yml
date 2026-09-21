@@ -10,7 +10,7 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./src/battlebot/db/schema.sql:/docker-entrypoint-initdb.d/001_schema.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-battlebot} -d $${POSTGRES_DB:-battlebot}"]
+      test: ["CMD-SHELL", "pg_isready -U $ -d $"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -27,28 +27,9 @@ services:
       timeout: 5s
       retries: 10
 
-  ollama:
-    image: ollama/ollama:latest
-    restart: unless-stopped
-    ports:
-      - "127.0.0.1:11434:11434"
-    volumes:
-      - ollama:/root/.ollama
-      - ./models:/models:ro
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
-
   litellm:
     image: docker.litellm.ai/berriai/litellm:main-latest
     restart: unless-stopped
-    depends_on:
-      ollama:
-        condition: service_started
     ports:
       - "127.0.0.1:4000:4000"
     environment:
@@ -145,7 +126,6 @@ services:
 volumes:
   pgdata:
   redisdata:
-  ollama:
 
 secrets:
   discord_token:

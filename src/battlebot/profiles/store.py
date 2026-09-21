@@ -320,6 +320,31 @@ async def resolve_character(
     if alias:
         return resolution_from_candidates(name, alias, matched_by="alias")
 
+    # Form / Variant fallback resolution
+    from battlebot.profiles.variants import split_variant_name, variant_metadata
+    parent, variant = split_variant_name(name)
+    if variant and parent and parent.casefold() != name.casefold():
+        parent_resolution = await resolve_character(
+            connection,
+            parent,
+            battle_eligible_only=battle_eligible_only,
+        )
+        if parent_resolution.get("status") == "resolved":
+            parent_profile = parent_resolution["profile"]
+            profile_copy = dict(parent_profile)
+            p_json = dict(profile_copy.get("profile_json") or {})
+            v_meta = variant_metadata(name, character_id=str(profile_copy.get("character_id") or ""))
+            v_meta["variant_name"] = variant
+            v_meta["default_variant"] = False
+            p_json["variant"] = v_meta
+            profile_copy["profile_json"] = p_json
+            return {
+                "status": "resolved",
+                "query": name,
+                "matched_by": "variant_form_resolution",
+                "profile": profile_copy,
+            }
+
     result = {"status": "not_found", "query": name, "candidates": []}
     if alias_override:
         result["alias_match"] = {
@@ -329,3 +354,4 @@ async def resolve_character(
         }
         result["canonical_not_battle_ready"] = True
     return result
+

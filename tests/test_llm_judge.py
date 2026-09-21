@@ -4,6 +4,8 @@ import httpx
 from battlebot.fight.decision_formatter import format_decision
 from battlebot.fight.llm_judge import (
     build_prompt,
+    build_analyst_prompt,
+    build_referee_stage2_prompt,
     judge_fight_packet,
     llm_output_violates_entity_grounding,
     llm_output_violates_grounding,
@@ -443,6 +445,58 @@ class LlmJudgeTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertTrue(result["deciding_factors"])
         self.assertIn("tactical_effect", result["deciding_factors"][0])
+
+
+    def test_build_analyst_prompt_and_referee_stage2_prompt(self):
+        p = packet()
+        smoke = smoke_judge_packet(p)
+        analyst_msgs = build_analyst_prompt(p, smoke)
+        self.assertEqual(len(analyst_msgs), 2)
+        self.assertIn("Tactical Analyst", analyst_msgs[1]["content"])
+        self.assertIn("STAT & SPEED TIER COMPARISON", analyst_msgs[1]["content"])
+
+        referee_msgs = build_referee_stage2_prompt(p, smoke, "Superman blitzes with Solar System AP.")
+        self.assertEqual(len(referee_msgs), 2)
+        self.assertIn("STAGE 1 TACTICAL ANALYST BREAKDOWN", referee_msgs[1]["content"])
+        self.assertIn("Superman blitzes with Solar System AP.", referee_msgs[1]["content"])
+
+    async def test_2llm_pipeline_stages_end_to_end(self):
+        calls = []
+
+        async def multi_caller(messages, model=None, env=None):
+            calls.append((model, messages))
+            if model == "qwen3:8b":
+                return "1. STAT COMPARISON: Superman massively outstats Batman.\n2. TACTICAL VERDICT: Superman Extreme Diff."
+            return (
+                "Predicted winner: Superman\n"
+                "Quick Verdict: Superman leverages speed and durability to overpower Batman [1].\n"
+                "Phase 1: Neutral & Probing Exchange\nSuperman probes Batman's defenses with flight and speed [1].\n"
+                "Phase 2: Escalation & Tool Deployment\nBatman attempts martial arts counters [1], but Superman's solar durability resists.\n"
+                "Phase 3: The Climax & Finishing Blow\nSuperman concludes the encounter directly [1].\n"
+                "Difficulty: Extreme Diff"
+            )
+
+        multi_caller.is_2llm = True
+
+        result = await judge_fight_packet(
+            packet(),
+            smoke_judge_packet(packet()),
+            env={
+                "BATTLEBOT_LLM_ENABLED": "true",
+                "REFEREE_ANALYST_MODEL": "qwen3:8b",
+                "REFEREE_VOICE_MODEL": "hermes3:8b",
+            },
+            ollama_caller=multi_caller,
+        )
+
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(calls[0][0], "qwen3:8b")
+        self.assertEqual(calls[1][0], "hermes3:8b")
+        self.assertEqual(result["winner"], "Superman")
+        self.assertIn("analyst_breakdown", result)
+        self.assertEqual(result["diagnostics"]["pipeline"], "2-llm-dynamic")
+        self.assertEqual(result["analyst_model"], "qwen3:8b")
+        self.assertEqual(result["voice_model"], "hermes3:8b")
 
 
 if __name__ == "__main__":

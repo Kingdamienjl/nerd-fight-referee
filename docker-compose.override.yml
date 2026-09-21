@@ -1,4 +1,161 @@
 services:
   postgres:
     ports:
-      - "55432:5432"
+    - 55432:5432
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+  litellm:
+    ports:
+    - 127.0.0.1:4000:4000
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+  bot:
+    image: referee-operational:20260909
+    volumes:
+    - ./profiles:/app/profiles:ro
+    - ./data:/app/data
+    - ./config:/app/config:ro
+    - ./src:/app/src
+    - ./tests:/app/tests:ro
+    environment:
+      PYTHONPATH: /app/src:/app
+      BATTLEBOT_LLM_ENABLED: 'true'
+      OLLAMA_BASE_URL: http://192.168.1.221:11434
+      BATTLEBOT_LLM_MODEL: qwen3:8b
+      REFEREE_ANALYST_MODEL: qwen3:8b
+      REFEREE_VOICE_MODEL: hermes3:8b
+      BATTLEBOT_LLM_TIMEOUT_SECONDS: '120'
+      BATTLEBOT_LLM_NUM_CTX: '6144'
+      BATTLEBOT_LLM_NUM_PREDICT: '1000'
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+  worker:
+    image: referee-worker-evidence:20260913
+    volumes:
+    - ./profiles:/app/profiles
+    - ./data:/app/data
+    - ./config:/app/config:ro
+    - ./src:/app/src
+    - ./tests:/app/tests:ro
+    stop_grace_period: 45s
+    environment:
+      PYTHONPATH: /app/src:/app
+      REFEREE_WORKER_INTERVAL: '60'
+      OLLAMA_BASE_URL: http://192.168.1.221:11434
+      BATTLEBOT_LLM_MODEL: qwen3:8b
+      REFEREE_ANALYST_MODEL: qwen3:8b
+      REFEREE_VOICE_MODEL: hermes3:8b
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+  harvester:
+    image: referee-harvest-guard:20260913
+    restart: always
+    volumes:
+    - ./profiles:/app/profiles
+    - ./data:/app/data
+    - ./config:/app/config:ro
+    - ./src:/app/src
+    - ./tests:/app/tests:ro
+    command:
+    - python
+    - -m
+    - battlebot.harvest.loop
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+  mock-duels:
+    image: referee-operational:20260909
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PYTHONPATH: /app/src:/app
+      BATTLEBOT_LLM_ENABLED: 'true'
+      OLLAMA_BASE_URL: http://192.168.1.221:11434
+      BATTLEBOT_LLM_MODEL: qwen3:8b
+      REFEREE_ANALYST_MODEL: qwen3:8b
+      REFEREE_VOICE_MODEL: hermes3:8b
+      BATTLEBOT_LLM_TIMEOUT_SECONDS: '120'
+      BATTLEBOT_LLM_NUM_CTX: '6144'
+      BATTLEBOT_LLM_NUM_PREDICT: '1000'
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+    volumes:
+    - ./profiles:/app/profiles:ro
+    - ./data:/app/data
+    - ./config:/app/config:ro
+    - ./src:/app/src
+    - ./tests:/app/tests:ro
+    command:
+    - python
+    - -m
+    - battlebot.fight.mock_runner
+    - --loop
+    - --interval
+    - '1800'
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+  web:
+    image: referee-operational:20260909
+    restart: always
+    ports:
+    - 0.0.0.0:8080:8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+    - ./profiles:/app/profiles:ro
+    - ./data:/app/data
+    - ./config:/app/config:ro
+    - ./src:/app/src
+    - ./tests:/app/tests:ro
+    environment:
+      PYTHONPATH: /app/src:/app
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+      BATTLEBOT_LLM_ENABLED: 'true'
+      OLLAMA_BASE_URL: http://192.168.1.221:11434
+      BATTLEBOT_LLM_MODEL: qwen3:8b
+      REFEREE_ANALYST_MODEL: qwen3:8b
+      REFEREE_VOICE_MODEL: hermes3:8b
+      BATTLEBOT_LLM_TIMEOUT_SECONDS: '120'
+      BATTLEBOT_LLM_NUM_CTX: '6144'
+      BATTLEBOT_LLM_NUM_PREDICT: '1000'
+    command:
+    - python
+    - -m
+    - battlebot.web.server
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+  redis:
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+

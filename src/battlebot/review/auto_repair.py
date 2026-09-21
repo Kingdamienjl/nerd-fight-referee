@@ -129,11 +129,13 @@ def profile_paths(target: Path, max_profiles: int = 0) -> list[Path]:
 
 
 def missing_targets(profile: dict[str, Any]) -> list[str]:
+    from battlebot.profiles.evidence_quality import has_usable_ability, usable_text
+
     missing = []
     for field_name in ("attack_potency", "speed", "durability"):
-        if not service.power_text(profile, field_name):
+        if not usable_text(service.power_text(profile, field_name)):
             missing.append(field_name)
-    if not profile.get("abilities"):
+    if not has_usable_ability(profile):
         missing.append("abilities")
     if not profile.get("sources"):
         missing.append("sources")
@@ -1107,9 +1109,12 @@ def apply_primary_profile_state(
     force_promotable: bool = False,
     primary_source_id: str | None = None,
 ) -> None:
+    from battlebot.profiles.evidence_quality import evidence_quality_blockers
+
     generation = profile.get("generation") if isinstance(profile.get("generation"), dict) else {}
     review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
-    if primary or force_promotable:
+    content_blockers = evidence_quality_blockers(profile)
+    if (primary or force_promotable) and not content_blockers:
         profile["profile_type"] = "auto_evidence_profile"
         profile["status"] = "verified" if corroborated else "provisional"
         profile["battle_eligible"] = True
@@ -1130,6 +1135,8 @@ def apply_primary_profile_state(
         review["readiness_state"] = "needs_review"
         profile["review"] = review
         generation.setdefault("ineligible_reasons", ["needs_review"])
+        if content_blockers:
+            generation["ineligible_reasons"] = sorted(set(generation.get("ineligible_reasons") or []) | set(content_blockers))
     profile["generation"] = generation
 
 

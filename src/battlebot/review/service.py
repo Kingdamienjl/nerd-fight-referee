@@ -189,11 +189,14 @@ def schema_validation_blockers(profile: dict[str, Any]) -> list[str]:
 
 
 def approval_blockers(profile: dict[str, Any]) -> list[str]:
+    from battlebot.profiles.evidence_quality import evidence_quality_blockers, has_usable_ability
+
     blockers = [f"missing_{field}" for field in missing_core_fields(profile)]
+    blockers.extend(evidence_quality_blockers(profile))
     blockers.extend(str(blocker) for blocker in profile.get("approval_blockers") or [])
     if not profile.get("sources"):
         blockers.append("missing_sources")
-    if not profile.get("abilities"):
+    if not has_usable_ability(profile):
         blockers.append("missing_ability")
     power_scale = profile.get("power_scale") or {}
     for field in POWER_CORE_FIELDS:
@@ -765,7 +768,7 @@ def approve_profile(
     source = Path(profile_path)
     profile = load_yaml(source)
     blockers = approval_blockers(profile)
-    if blockers and not force:
+    if blockers and (not force or any(blocker.startswith("invalid_evidence_") for blocker in blockers)):
         return {
             "ok": False,
             "error": "approval_blockers",

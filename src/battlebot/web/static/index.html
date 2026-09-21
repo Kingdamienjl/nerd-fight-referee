@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nerd Fight Referee • Combat Arbitration & Duel Simulator</title>
+  <meta name="description" content="Simulate cross-universe fights, search 40,000+ characters, configure battle conditions, and call results directly to Discord via webhook." />
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <!-- Ambient background glow layers -->
+  <div class="glow-sphere sphere-crimson"></div>
+  <div class="glow-sphere sphere-cyan"></div>
+  <div class="cyber-grid-overlay"></div>
+
+  <div class="app-container">
+    <!-- Navigation / Header -->
+    <header class="app-header">
+      <div class="brand-cluster">
+        <div class="brand-badge">⚔️</div>
+        <div class="brand-titles">
+          <h1 class="brand-name">NERD FIGHT REFEREE</h1>
+          <p class="brand-tagline">QUANTITATIVE EVIDENCE & COMBAT ARBITRATION MATRIX</p>
+        </div>
+      </div>
+
+      <div class="status-cluster">
+        <div class="status-pill" id="api-status-pill">
+          <span class="status-dot dot-emerald"></span>
+          <span class="status-text">SYSTEM ONLINE</span>
+        </div>
+        <div class="status-pill" id="webhook-pill">
+          <span class="status-dot dot-emerald"></span>
+          <span class="status-text">WEBHOOK ACTIVE</span>
+        </div>
+        <a href="https://discord.com/oauth2/authorize?client_id=1514035996511965325&permissions=277025778752&integration_type=0&scope=bot%20applications.commands" target="_blank" rel="noopener noreferrer" class="btn-discord-invite" id="btn-discord-invite">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+          </svg>
+          <span>Invite Bot to Server</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Global Public Service Portal Banner Card -->
+    <div class="service-portal-card" id="service-portal-banner">
+      <div class="service-card-left">
+        <div class="service-logo-wrap">
+          <span class="service-logo-icon">⚔️</span>
+          <span class="service-pulse-dot"></span>
+        </div>
+        <div class="service-meta-block">
+          <div class="service-title-row">
+            <h2 class="service-main-title">Nerd Fight Referee Matrix</h2>
+            <span class="service-live-badge">LIVE SERVICE • 2,201 FIGHTERS READY</span>
+          </div>
+          <p class="service-tagline">
+            Autonomous 2-LLM Powerscaling Arbiter & Battle Simulator • Verified DB Canon • Zero Energy Equalization
+          </p>
+        </div>
+      </div>
+      <div class="service-card-right">
+        <div class="portal-link-box">
+          <span class="portal-link-label">🌐 PUBLIC TAILSCALE PORTAL</span>
+          <a href="https://altprox.tail4e8997.ts.net/" target="_blank" rel="noopener noreferrer" class="portal-url-link" id="public-portal-url">
+            https://altprox.tail4e8997.ts.net/
+          </a>
+        </div>
+        <button type="button" class="btn-copy-portal" id="btn-copy-portal" title="Copy public portal link">
+          <span id="copy-portal-icon">📋</span>
+          <span id="copy-portal-label">Copy Link</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Combat Arena Form -->
+    <main class="combat-stage">
+      <div class="duel-grid">
+        
+        <!-- CORNER ALPHA (Contender A) -->
+        <section class="corner-card corner-crimson" id="card-contender-a">
+          <div class="corner-header">
+            <span class="corner-tag">CORNER ALPHA // CONTENDER A</span>
+            <span class="ready-badge" id="badge-ready-a">SELECT FIGHTER</span>
+          </div>
+
+          <!-- Fighter Search Input -->
+          <div class="search-box-wrap">
+            <div class="search-input-group">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="search-input-a" class="search-input" placeholder="Search fighter (e.g. Goku, Ryu, Superman)..." autocomplete="off" />
+              <button type="button" class="btn-clear" id="btn-clear-a" title="Clear">✕</button>
+            </div>
+            <div class="autocomplete-dropdown" id="suggestions-a"></div>
+          </div>
+
+          <!-- Character Portrait Display & Image Searcher -->
+          <div class="character-preview-panel">
+            <div class="portrait-viewport" id="portrait-frame-a">
+              <img id="image-a" src="https://placehold.co/400x550/161B26/EF4444?text=Contender+A" alt="Contender A Art" loading="lazy" />
+              <div class="portrait-overlay">
+                <div class="fighter-title-stack">
+                  <h2 class="fighter-display-name" id="display-name-a">Contender Alpha</h2>
+                  <div class="fighter-meta-tags" id="meta-tags-a">
+                    <span class="meta-pill franchise-pill" id="pill-franchise-a">Franchise: --</span>
+                    <span class="meta-pill category-pill" id="pill-category-a">Category: --</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image Search Tool -->
+            <div class="image-search-bar">
+              <input type="text" id="img-search-a" class="img-search-input" placeholder="Custom image search query or image URL..." />
+              <button type="button" class="btn-subtle" id="btn-fetch-img-a">Refresh Art</button>
+            </div>
+          </div>
+
+          <!-- Form Selection -->
+          <div class="form-selector-wrap">
+            <label for="form-select-a" class="field-label">Active Form / Variant:</label>
+            <select id="form-select-a" class="form-select">
+              <option value="base">Canonical Base / Standard Form</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- CENTER VERSUS NEXUS -->
+        <section class="nexus-center">
+          <div class="vs-emblem-wrap">
+            <div class="vs-ring"></div>
+            <div class="vs-text">VS</div>
+          </div>
+
+          <!-- Match Conditions & Options Panel -->
+          <div class="options-glass-card">
+            <h3 class="options-heading">⚙️ ENGAGEMENT RULES</h3>
+            
+            <div class="option-row">
+              <div class="option-info">
+                <span class="option-label">Energy Equalization</span>
+                <span class="option-desc" id="eq-desc">RAW LITERAL RULES (Ki ≠ Chakra ≠ Magic)</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggle-energy">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="option-row">
+              <div class="option-info">
+                <span class="option-label">Battle Arena</span>
+                <span class="option-desc">Neutral environmental conditions</span>
+              </div>
+              <select id="select-arena" class="mini-select">
+                <option value="Neutral Dimensional Void">Neutral Dimensional Void</option>
+                <option value="Ruined Metropolis (Destructible)">Ruined Metropolis (Destructible)</option>
+                <option value="Tournament Arena (Indestructible)">Tournament Arena (Indestructible)</option>
+                <option value="Deep Space Vacuum">Deep Space Vacuum</option>
+                <option value="Infinite Desert Plain">Infinite Desert Plain</option>
+              </select>
+            </div>
+
+            <div class="option-row">
+              <div class="option-info">
+                <span class="option-label">Preparation Time</span>
+                <span class="option-desc">Standard combat encounter</span>
+              </div>
+              <select id="select-prep" class="mini-select">
+                <option value="Standard Encounter">Random Encounter (0 Prep)</option>
+                <option value="24 Hours Prep">24 Hours Prep (With Lore Archive)</option>
+                <option value="1 Week Full Prep">1 Week Full Prep (Access to Gear)</option>
+              </select>
+            </div>
+
+            <div class="option-row">
+              <div class="option-info">
+                <span class="option-label">Discord Webhook Dispatch</span>
+                <span class="option-desc">Broadcast results instantly to Discord</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggle-webhook" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- MASTER ACTION BUTTON -->
+          <button type="button" class="btn-simulate-duel" id="btn-simulate-duel">
+            <span class="btn-icon">⚡</span>
+            <span class="btn-label" id="btn-label">SIMULATE DUEL</span>
+            <span class="btn-glint"></span>
+          </button>
+
+          <!-- Real-time Progress Bar -->
+          <div class="progress-bar-wrap" id="progress-wrap">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+            <div class="progress-status-text" id="progress-status">Initializing Referee Engine...</div>
+          </div>
+        </section>
+
+        <!-- CORNER OMEGA (Contender B) -->
+        <section class="corner-card corner-cyan" id="card-contender-b">
+          <div class="corner-header">
+            <span class="corner-tag">CORNER OMEGA // CONTENDER B</span>
+            <span class="ready-badge" id="badge-ready-b">SELECT FIGHTER</span>
+          </div>
+
+          <!-- Fighter Search Input -->
+          <div class="search-box-wrap">
+            <div class="search-input-group">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="search-input-b" class="search-input" placeholder="Search fighter (e.g. Radahn, Ken, Kratos)..." autocomplete="off" />
+              <button type="button" class="btn-clear" id="btn-clear-b" title="Clear">✕</button>
+            </div>
+            <div class="autocomplete-dropdown" id="suggestions-b"></div>
+          </div>
+
+          <!-- Character Portrait Display & Image Searcher -->
+          <div class="character-preview-panel">
+            <div class="portrait-viewport" id="portrait-frame-b">
+              <img id="image-b" src="https://placehold.co/400x550/161B26/06B6D4?text=Contender+B" alt="Contender B Art" loading="lazy" />
+              <div class="portrait-overlay">
+                <div class="fighter-title-stack">
+                  <h2 class="fighter-display-name" id="display-name-b">Contender Omega</h2>
+                  <div class="fighter-meta-tags" id="meta-tags-b">
+                    <span class="meta-pill franchise-pill" id="pill-franchise-b">Franchise: --</span>
+                    <span class="meta-pill category-pill" id="pill-category-b">Category: --</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image Search Tool -->
+            <div class="image-search-bar">
+              <input type="text" id="img-search-b" class="img-search-input" placeholder="Custom image search query or image URL..." />
+              <button type="button" class="btn-subtle" id="btn-fetch-img-b">Refresh Art</button>
+            </div>
+          </div>
+
+          <!-- Form Selection -->
+          <div class="form-selector-wrap">
+            <label for="form-select-b" class="field-label">Active Form / Variant:</label>
+            <select id="form-select-b" class="form-select">
+              <option value="base">Canonical Base / Standard Form</option>
+            </select>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- ARBITRATION RESULTS SECTION -->
+    <section class="results-section hidden" id="results-section">
+      <div class="results-header-bar">
+        <h2 class="results-title">⚔️ ARBITRATION VERDICT</h2>
+        <div class="results-actions">
+          <button type="button" class="btn-re-dispatch" id="btn-re-dispatch">
+            <span class="dispatch-icon">📢</span>
+            <span>Send Result to Discord Webhook</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Winner Banner -->
+      <div class="verdict-banner" id="verdict-banner">
+        <div class="trophy-badge">🏆</div>
+        <div class="verdict-lead">
+          <div class="winner-title-row">
+            <h3 class="winner-headline" id="winner-headline">VICTOR DETERMINED</h3>
+            <span class="diff-badge" id="diff-badge">HIGH DIFFICULTY</span>
+          </div>
+          <div class="odds-bar-container">
+            <div class="odds-labels">
+              <span id="odds-label-a">Contender A 50%</span>
+              <span id="odds-label-b">Contender B 50%</span>
+            </div>
+            <div class="odds-track">
+              <div class="odds-fill-a" id="odds-fill-a" style="width: 50%;"></div>
+              <div class="odds-fill-b" id="odds-fill-b" style="width: 50%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual Fighter Cards -->
+      <div class="cards-dual-grid">
+        <div class="result-card result-card-a">
+          <div class="result-card-header" id="res-header-a">🥊 CONTENDER A — FIGHT CARD</div>
+          <div class="result-card-body" id="res-body-a">
+            <div class="card-detail-item"><strong>Key Tools:</strong> <span id="tools-a">Loading...</span></div>
+            <div class="card-detail-item"><strong>Win Path:</strong> <span id="win-a">Loading...</span></div>
+            <div class="card-detail-item"><strong>Critical Risk:</strong> <span id="risk-a">Loading...</span></div>
+          </div>
+        </div>
+
+        <div class="result-card result-card-b">
+          <div class="result-card-header" id="res-header-b">🥊 CONTENDER B — FIGHT CARD</div>
+          <div class="result-card-body" id="res-body-b">
+            <div class="card-detail-item"><strong>Key Tools:</strong> <span id="tools-b">Loading...</span></div>
+            <div class="card-detail-item"><strong>Win Path:</strong> <span id="win-b">Loading...</span></div>
+            <div class="card-detail-item"><strong>Critical Risk:</strong> <span id="risk-b">Loading...</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Verdict Analysis -->
+      <div class="analysis-panel">
+        <h3 class="panel-heading">⚡ QUICK VERDICT & CRITICAL DECIDING FACTOR</h3>
+        <p class="panel-prose" id="quick-verdict-text">Arbitrating simulation...</p>
+      </div>
+
+      <!-- 3-Phase Play-by-Play Narrative -->
+      <div class="narrative-panel" id="narrative-panel">
+        <div class="narrative-header-row">
+          <h3 class="panel-heading">🥊 MULTI-STAGE COMBAT NARRATIVE</h3>
+          <div class="stage-nav-tabs" role="tablist">
+            <button type="button" class="stage-tab active" data-stage="all" id="tab-stage-all">
+              <span>⚔️ All Stages</span>
+            </button>
+            <button type="button" class="stage-tab" data-stage="0" id="tab-stage-0">
+              <span class="stage-tab-badge">1</span>
+              <span>Stage 1: Neutral</span>
+            </button>
+            <button type="button" class="stage-tab" data-stage="1" id="tab-stage-1">
+              <span class="stage-tab-badge">2</span>
+              <span>Stage 2: Escalation</span>
+            </button>
+            <button type="button" class="stage-tab" data-stage="2" id="tab-stage-2">
+              <span class="stage-tab-badge">3</span>
+              <span>Stage 3: Climax</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="play-by-play-grid" id="play-by-play-grid">
+          <div class="phase-card clickable" data-stage="0" id="card-stage-0" title="Click to focus Stage 1">
+            <div class="phase-card-top">
+              <div class="phase-badge badge-stage-1">STAGE 1 OF 3</div>
+              <span class="stage-status-tag">NEUTRAL & PROBING</span>
+            </div>
+            <h4 class="phase-title">Neutral & Probing Exchange</h4>
+            <p class="phase-text" id="phase-0-text">Analyzing initial engagement speed, mobility limits, and probing strikes...</p>
+            <div class="phase-card-hint">Click card to read stage breakdown ↗</div>
+          </div>
+
+          <div class="phase-card clickable" data-stage="1" id="card-stage-1" title="Click to focus Stage 2">
+            <div class="phase-card-top">
+              <div class="phase-badge badge-stage-2">STAGE 2 OF 3</div>
+              <span class="stage-status-tag">ESCALATION & TOOLS</span>
+            </div>
+            <h4 class="phase-title">Escalation & Tool Deployment</h4>
+            <p class="phase-text" id="phase-1-text">Analyzing technique deployment, form shifts, and hax deployment...</p>
+            <div class="phase-card-hint">Click card to read stage breakdown ↗</div>
+          </div>
+
+          <div class="phase-card clickable" data-stage="2" id="card-stage-2" title="Click to focus Stage 3">
+            <div class="phase-card-top">
+              <div class="phase-badge badge-stage-3">STAGE 3 OF 3</div>
+              <span class="stage-status-tag">CLIMAX & FINISH</span>
+            </div>
+            <h4 class="phase-title">Climax & Decisive Factor</h4>
+            <p class="phase-text" id="phase-2-text">Analyzing fatal exchange and decisive finish...</p>
+            <div class="phase-card-hint">Click card to read stage breakdown ↗</div>
+          </div>
+        </div>
+
+        <!-- Expanded Stage Focus Reader View -->
+        <div class="stage-focus-view hidden" id="stage-focus-view">
+          <div class="focus-header">
+            <div class="focus-title-stack">
+              <div class="focus-badge" id="focus-stage-badge">STAGE 1 OF 3</div>
+              <h4 class="focus-title" id="focus-stage-title">Neutral & Probing Exchange</h4>
+            </div>
+            <div class="focus-controls">
+              <button type="button" class="btn-focus-nav" id="btn-prev-stage">← Previous Stage</button>
+              <button type="button" class="btn-focus-nav" id="btn-next-stage">Next Stage →</button>
+              <button type="button" class="btn-focus-close" id="btn-close-focus" title="Return to 3-Card Grid">✕ Close Focus</button>
+            </div>
+          </div>
+          <div class="focus-body">
+            <p class="focus-text" id="focus-stage-text"></p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Discord Webhook Live Preview -->
+      <div class="discord-preview-panel">
+        <div class="discord-preview-header">
+          <span>📢 DISCORD WEBHOOK BROADCAST PREVIEW</span>
+          <span class="delivery-status" id="delivery-status">READY TO DISPATCH</span>
+        </div>
+        <div class="discord-embed-card" id="discord-embed-card">
+          <div class="discord-embed-pill" id="discord-pill"></div>
+          <div class="discord-embed-inner">
+            <div class="discord-embed-title" id="discord-embed-title">⚔️ MATCHUP TITLE</div>
+            <div class="discord-embed-desc">Evidence-backed matchup arbitrated by Nerd Fight Referee.</div>
+            <div class="discord-embed-fields" id="discord-embed-fields"></div>
+            <div class="discord-embed-footer">Nerd Fight Referee • Web Portal & Match Simulator</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <footer class="app-footer">
+      <p>Nerd Fight Referee Matrix • Autonomous 2-LLM Arbiter Powered by Qwen & Hermes • AltProx Infrastructure</p>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+[Unit]
+Description=Nerd Referee fighter and fight-summary announcements
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/referee
+EnvironmentFile=/opt/referee/.env
+ExecStart=/usr/bin/flock -n /run/nerd-referee-announcer.lock /usr/bin/python3 /opt/referee/services/proactive_referee_announcer.py --mode auto
+TimeoutStartSec=90
+UMask=0027

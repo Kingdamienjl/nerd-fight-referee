@@ -146,6 +146,11 @@ class RosterRow:
     aliases: list[str] = field(default_factory=list)
     wiki_title: str | None = None
     wiki_url: str | None = None
+    wiki_page_id: str | None = None
+
+    def __post_init__(self):
+        if self.wiki_page_id is not None and not re.fullmatch(r"[1-9][0-9]*", str(self.wiki_page_id)):
+            raise ValueError("wiki_page_id must be a positive MediaWiki page ID")
 
 
 @dataclass
@@ -449,9 +454,13 @@ class ProfileHarvester:
             "inprop": "url",
             "rvprop": "ids|timestamp|content",
             "rvslots": "main",
-            "titles": title,
-            "redirects": "1",
         }
+        if row.wiki_page_id:
+            # Titles can be reused for a different fighter/version after a move.
+            # A known page ID is authoritative; don't follow it to another page.
+            params["pageids"] = str(row.wiki_page_id)
+        else:
+            params.update({"titles": title, "redirects": "1"})
         record = await self.http.request_json(
             "GET",
             api_url,
@@ -462,14 +471,20 @@ class ProfileHarvester:
         if not pages:
             return None
         page = pages[0]
+        if "missing" in page or "invalid" in page:
+            return None
+        if row.wiki_page_id and str(page.get("pageid")) != str(row.wiki_page_id):
+            raise ValueError("MediaWiki returned a different page than the pinned source")
         revision = first_revision(page)
         content = revision_content(revision)
+        if not content or not revision.get("revid"):
+            return None
         fields = extract_vsbattles_fields(content)
         parse_record = None
         parse_text = ""
         if count_core_fields(fields) < 3:
             try:
-                parse_record = await self.fetch_mediawiki_parse(api_url, page.get("title") or title)
+                parse_record = await self.fetch_mediawiki_parse(api_url, revision["revid"])
                 parse_text = rendered_text_from_parse(parse_record["body"])
                 parsed_fields = extract_vsbattles_fields(parse_text)
                 fields = merge_extracted_fields(fields, parsed_fields)
@@ -492,20 +507,23 @@ class ProfileHarvester:
             "fields": fields,
         }
 
-    async def fetch_mediawiki_parse(self, api_url: str, title: str) -> dict[str, Any]:
+    async def fetch_mediawiki_parse(self, api_url: str, revision_id: int | str) -> dict[str, Any]:
         params = {
             "action": "parse",
-            "page": title,
-            "prop": "text|sections",
+            "oldid": str(revision_id),
+            "prop": "text|sections|revid",
             "format": "json",
             "formatversion": "2",
         }
-        return await self.http.request_json(
+        record = await self.http.request_json(
             "GET",
             api_url,
             params=params,
             source_type="mediawiki_parse",
         )
+        if str(record.get("body", {}).get("parse", {}).get("revid", "")) != str(revision_id):
+            raise ValueError("Rendered MediaWiki response does not match source revision")
+        return record
 
 
 def build_profile(
@@ -968,6 +986,22 @@ def clean_label_line(line: str) -> str:
     return clean.strip()
 
 
+def unpack_mediawiki_templates(text: str) -> str:
+    if not text:
+        return ""
+    text = re.sub(r"\{\{#tag:tabber\s*\|", "", text, flags=re.IGNORECASE)
+    content_match = re.search(r"\|\s*Content\s*=\s*(.+?)(?:\}\}\$|\}\}\s*\n)", text, flags=re.DOTALL | re.IGNORECASE)
+    if content_match:
+        text = content_match.group(1)
+    text = re.sub(r"\b(?:Border|Scroll|Visible|Padding|Header|Title|Width)\s*=\s*[^|\n}]*", "", text, flags=re.IGNORECASE)
+    for _ in range(5):
+        prev = text
+        text = re.sub(r"\{\{[^{}]*\}\}", "", text)
+        if text == prev:
+            break
+    text = text.replace("{{", "").replace("}}", "")
+    return text
+
 def strip_markup(content: str) -> str:
     text = re.sub(r"<ref[^>]*>.*?</ref>", "", content, flags=re.DOTALL | re.IGNORECASE)
     text = re.sub(r"<br\s*/?>", "\n", text, flags=re.IGNORECASE)
@@ -1047,7 +1081,7 @@ def list_items_from_text(
 ) -> list[dict[str, Any]]:
     if not text:
         return []
-    pieces = split_listish(text)
+    pieces = split_listish(unpack_mediawiki_templates(text))
     return [
         {
             "id": slugify(f"{kind}-{piece}")[:80],
@@ -1056,12 +1090,13 @@ def list_items_from_text(
             "source_ids": source_ids,
             "source_claim_ids": [],
             "confidence": 0.85 if source_ids else 0.5,
-            "tags": tags_for_text(piece, inherited_tags),
+            # Page-wide metadata is not evidence for this individual claim.
+            "tags": tags_for_text(piece, []),
             "targets": [],
             "activation_requirements": [],
             "counters": [],
-            "resource_dependencies": dependencies_for_text(piece, inherited_dependencies),
-            "scope_limitations": scope_limitations_for_text(piece, inherited_scope_limitations),
+            "resource_dependencies": dependencies_for_text(piece, []),
+            "scope_limitations": scope_limitations_for_text(piece, []),
             "enrichment": {
                 "method": "deterministic_keyword_rules",
                 "metadata_only": True,
@@ -1074,8 +1109,25 @@ def list_items_from_text(
 def split_listish(text: str | None) -> list[str]:
     if not text:
         return []
-    parts = re.split(r"\s*(?:\||;|,|\n|\u2022)\s*", text)
-    return [normalize_text(part) for part in parts if normalize_text(part)]
+    # A partially parsed tabber has lost its form/era boundaries. Do not promote
+    # layout parameters or assign its surviving clauses to canonical base form.
+    if re.search(r"\{\{|\}\}|#tag:|\btabber\b|\b(?:Border|Scroll|Visible|Padding|Content)\s*=", text, re.I):
+        return []
+    parts, start, depth = [], 0, 0
+    for index, char in enumerate(text):
+        if char == '(':
+            depth += 1
+        elif char == ')':
+            if depth == 0:
+                return []
+            depth -= 1
+        elif depth == 0 and char in '|;,\n\u2022':
+            parts.append(text[start:index])
+            start = index + 1
+    if depth:
+        return []
+    parts.append(text[start:])
+    return [normalize_text(part) for part in parts if re.search(r"\w", part)]
 
 
 def tags_for_text(text: str, inherited_tags: list[str]) -> list[str]:
@@ -1228,6 +1280,7 @@ def row_fingerprint(row: RosterRow) -> str:
             "aliases": row.aliases,
             "wiki_title": row.wiki_title,
             "wiki_url": row.wiki_url,
+            **({"wiki_page_id": str(row.wiki_page_id)} if row.wiki_page_id else {}),
         }
     )
 
@@ -1427,6 +1480,7 @@ def read_roster_csv(path: Path) -> list[RosterRow]:
                     aliases=aliases,
                     wiki_title=(raw.get("wiki_title") or "").strip() or None,
                     wiki_url=(raw.get("wiki_url") or "").strip() or None,
+                    wiki_page_id=(raw.get("wiki_page_id") or "").strip() or None,
                 )
             )
     return rows
@@ -1441,6 +1495,7 @@ def single_row_from_args(args: argparse.Namespace) -> RosterRow:
         aliases=aliases,
         wiki_title=args.wiki_title,
         wiki_url=args.wiki_url,
+        wiki_page_id=getattr(args, "wiki_page_id", None),
     )
 
 
@@ -1527,6 +1582,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--aliases", default="", help="Pipe-separated aliases for single-character mode")
     parser.add_argument("--wiki-title", help="MediaWiki page title for single-character mode")
     parser.add_argument("--wiki-url", help="MediaWiki page URL or api.php URL")
+    parser.add_argument("--wiki-page-id", help="Known MediaWiki page ID; preserves identity when a title moves")
     parser.add_argument("--mediawiki-api", default=DEFAULT_MEDIAWIKI_API)
     parser.add_argument("--output", type=Path, default=Path("profiles/generated"))
     parser.add_argument("--needs-review", type=Path, default=Path("profiles/needs_review"))

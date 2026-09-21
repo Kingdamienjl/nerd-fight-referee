@@ -837,7 +837,8 @@ def main() -> int:
         content = choose_auto(state)
 
     if not content:
-        print("No post available.")
+        now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{now_str}] Cadence check: No post available or cooldown active.")
         return 0
 
     content += f"\n\n`posted {datetime.now().strftime('%Y-%m-%d %H:%M')}`"
@@ -845,6 +846,8 @@ def main() -> int:
     content = humanize_referee_copy(content)
 
     post_webhook(content, dry_run=args.dry_run)
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"[{now_str}] Successfully posted announcement via webhook.")
 
     if not args.dry_run:
         save_state(state)

@@ -209,7 +209,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Dragon_Ball
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -247,19 +247,8 @@ sources:
   - Deities
   - Eternal Dragons
   - Fusions
-  - Heroes
   - Demon Realm
-  - Heroes
-  - Villains
   - Universes
-  - Deities
-  - Fusions
-  - Heroes
-  - Villains
-  - Universes
-  - Deities
-  - Eternal Dragons
-  - Fusions
   - Main Series
   - Spin-Offs
   - Live-Action
@@ -282,7 +271,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Cell_(Canon,_Dragon_Ball_Z:_Manga)/KaaydoManic
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -362,7 +351,15 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Cell_%28Game%29_%28Dragon_Ball%29
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: *id002
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
 - id: character-stats-profiles-cell-game-dragon-ball
@@ -372,7 +369,15 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Cell_%28Game%29_%28Dragon_Ball%29
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: *id003
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
 - id: vsbattles-cell-dragon-ball-game
@@ -558,153 +563,16 @@ power_scale:
     confidence: 0.6
     notes: auto_repair source extraction
 claims: []
-abilities:
-- id: powers-and-abilities-border
-  name: '{{Border'
-  description: '{{Border'
-  source_ids: &id004
-  - character-stats-profiles-cell-game-dragon-ball
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: powers-and-abilities-scroll-yes
-  name: Scroll=Yes
-  description: Scroll=Yes
-  source_ids: *id004
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: powers-and-abilities-visible-yes
-  name: Visible=Yes
-  description: Visible=Yes
-  source_ids: *id004
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: powers-and-abilities-padding-yes
-  name: Padding=Yes
-  description: Padding=Yes
-  source_ids: *id004
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: powers-and-abilities-content-abilities-here
-  name: Content= Abilities here. }}
-  description: Content= Abilities here. }}
-  source_ids: *id004
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
+abilities: []
 equipment: []
 summons: []
 resistances: []
 weaknesses:
 - id: weaknesses-notes-and-explanations-border
-  name: Notes and Explanations == {{Border
-  description: Notes and Explanations == {{Border
-  source_ids: &id005
+  name: Notes and Explanations == Border
+  description: Notes and Explanations == Border
+  source_ids:
   - character-stats-profiles-cell-game-dragon-ball
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-scroll-yes
-  name: Scroll=Yes
-  description: Scroll=Yes
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-visible-yes
-  name: Visible=Yes
-  description: Visible=Yes
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-padding-yes
-  name: Padding=Yes
-  description: Padding=Yes
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-content-statistics-values-speed-values-lifting-values-footnotes-categ
-  name: 'Content= Statistics Values: Speed Values: Lifting Values: Footnotes: }} Category:KaaydoManic'
-  description: 'Content= Statistics Values: Speed Values: Lifting Values: Footnotes:
-    }} Category:KaaydoManic'
-  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -739,3 +607,16 @@ review:
   notes: []
   readiness_state: needs_review
 profile_hash: c0185dcd679af4f57ea26cc20b5e53096c51412eb5b538c452820c1f0189ece0
+weapon_power: Cell (Game)'s signature abilities and core combat kit
+key_tools:
+- Cell (Game)'s signature combat tools
+- Dragon Ball matchup experience
+- profile-specific win condition pending deeper source enrichment
+risk: Needs deeper source enrichment before being treated as fully battle-certified.
+best_route: Cell (Game) needs to force their most reliable signature-tool route while
+  denying the opponent's strongest opening.
+qa_status:
+  refresh_status: refreshed_needs_mock_duel_recheck
+  refresh_reason: Profile appeared in a mock duel that produced weak/generic/bad fight
+    text.
+  refreshed_at: '2026-07-08T21:43:42'

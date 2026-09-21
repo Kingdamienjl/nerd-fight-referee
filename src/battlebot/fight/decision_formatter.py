@@ -582,6 +582,8 @@ def is_dirty_fight_card_item(value: str) -> bool:
     words = stripped.split()
     if len(words) > 3 and stripped[:1].islower():
         return True
+    if re.match(r"^(?:without|which|he\b|she\b|they\b|but\b|and\b|can\b|could\b|just\b|due to\b|with the\b|to the\b|in almost\b)", stripped, re.I):
+        return True
     if BAD_ENDING_RE.search(stripped):
         return True
     if CITATION_NO_NOUN_RE.search(stripped):
@@ -600,6 +602,9 @@ def sanitize_fight_card_item(value: str) -> str:
     raw = str(value or "")
     if not raw.strip():
         return ""
+    # Never expose harvested wiki layout fragments as a named tool.
+    if re.search(r"(?i)\{\{?\s*(?:#?tag:)?(?:border|scroll|visible|padding|content)\b|\b(?:scroll|visible|padding|content)\s*=", raw):
+        return ""
     if IMAGE_FILE_RE.search(raw):
         return ""
     innate_match = re.search(r"\bInnate Technique\s*:\s*([A-Z][A-Za-z0-9' -]{2,60})", raw, flags=re.IGNORECASE)
@@ -608,7 +613,7 @@ def sanitize_fight_card_item(value: str) -> str:
     elif re.search(r"\bOriginal Sin\b", raw, flags=re.IGNORECASE):
         raw = "Original Sin"
     if is_dirty_fight_card_item(raw):
-        source_label_match = re.match(r"^[A-Z][A-Za-z .'-]{1,40}=\s*(.+)$", raw)
+        source_label_match = re.match(r"^[A-Za-z0-9 /_'.-]{1,60}=\s*(.+)$", raw)
         if not source_label_match:
             return ""
         raw = source_label_match.group(1)
@@ -621,8 +626,9 @@ def sanitize_fight_card_item(value: str) -> str:
     text = re.sub(r"\bPart\s+[IVXLC]+\s*=\s*", "", text, flags=re.IGNORECASE)
     text = re.sub(r"^\s*\d+\s*(?:&\s*\d+)?\)\s*", "", text)
     text = re.sub(r"^\s*\d+[.)]\s*", "", text)
-    text = re.sub(r"^[A-Z][A-Za-z .'-]{1,40}=\s*", "", text)
+    text = re.sub(r"^[A-Za-z0-9 /_'.-]{1,60}=\s*", "", text)
     text = re.sub(r"[*_`#>-]+", " ", text)
+
     text = re.sub(r"\.{3,}", "...", text)
     text = re.sub(r"\s+", " ", text).strip(" -,:;*_\n\t")
     if not text:
