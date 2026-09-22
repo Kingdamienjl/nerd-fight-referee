@@ -20,7 +20,7 @@ from battlebot.profiles.readiness import assess_readiness
 from battlebot.schemas.profile import CharacterProfile
 from battlebot.ingest.import_profiles import compile_profile, upsert_compiled_profile
 
-POLICY = 'legacy-repair-20260922-v1'
+POLICY = 'legacy-repair-20260922-v2'
 PROTECTED = {'verified', 'approved_override', 'approved'}
 
 
@@ -40,6 +40,19 @@ def pinned_source(profile):
             continue
         candidates[str(source['page_id'])] = source
     return next(iter(candidates.values())) if len(candidates) == 1 else None
+
+
+def title_source(profile):
+    """Recover a previously fetched page title; never trust discovery candidates."""
+    candidates={}
+    for source in profile.get('sources') or []:
+        if not isinstance(source,dict) or not source.get('raw_cache_key'):
+            continue
+        if urlsplit(str(source.get('url') or '')).hostname != 'vsbattles.fandom.com':
+            continue
+        if identity_matches(profile.get('name'),source.get('title'),profile.get('franchise')):
+            candidates[str(source.get('url'))]=source
+    return next(iter(candidates.values())) if len(candidates)==1 else None
 
 
 def digest(content):
@@ -117,7 +130,7 @@ async def run(args):
             previous=state.get(key,{})
             if previous.get('fingerprint')==fingerprint and (previous.get('status') != 'error' or time.time() < previous.get('retry_after',0)):
                 summary['already_attempted']+=1; continue
-            source=pinned_source(profile)
+            source=pinned_source(profile) or title_source(profile)
             if not source:
                 summary['needs_source_identity']+=1; continue
             selected.append((len(readiness['blockers']), key, path, original, profile, source, fingerprint))
@@ -130,10 +143,12 @@ async def run(args):
         result={'fingerprint':fingerprint,'name':old.get('name'),'timestamp':datetime.now(timezone.utc).isoformat()}
         archive=args.output/'attempts'/digest(original)
         try:
-            row=RosterRow(category=old['category'],franchise=old['franchise'],name=old['name'],aliases=old.get('aliases') or [],wiki_title=source['title'],wiki_url=source['url'],wiki_page_id=str(source['page_id']))
+            row=RosterRow(category=old['category'],franchise=old['franchise'],name=old['name'],aliases=old.get('aliases') or [],wiki_title=source['title'],wiki_url=source['url'],wiki_page_id=str(source['page_id']) if re.fullmatch(r'[1-9][0-9]*',str(source.get('page_id') or '')) else None)
             wiki=await asyncio.wait_for(harvester.fetch_mediawiki_source(row),timeout=45)
             if not wiki or not identity_matches(row.name,wiki['title'],row.franchise):
                 raise ValueError('Source identity could not be confirmed')
+            if not row.wiki_page_id and not (wiki.get('fields') or {}).get('origin'):
+                raise ValueError('Title-only recovery requires source franchise evidence')
             candidate=build_profile(row=row,anilist_identity=None,igdb_identity=None,wiki_source=wiki,errors=[])
             candidate['id']=old['id']
             candidate['profile_hash']=stable_hash_without_profile_hash(candidate)

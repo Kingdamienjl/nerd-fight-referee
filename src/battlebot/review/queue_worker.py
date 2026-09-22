@@ -100,15 +100,19 @@ def args_for_job(job: dict[str, Any], args: argparse.Namespace) -> argparse.Name
 
 
 async def import_generated_profiles(generated_dir: Path, *, database_url: str | None) -> int:
+    state_path = Path("data/worker_import_state.json")
+    state = import_profiles.load_import_state(state_path)
     compiled, summary = import_profiles.build_import_plan(
         generated_dir,
-        import_profiles.ImportOptions(changed_only=False),
+        import_profiles.ImportOptions(changed_only=True, import_state=state),
     )
     await import_profiles.import_compiled_profiles(
         compiled,
         database_url=database_url,
         wipe_profiles=False,
     )
+    import_profiles.update_import_state_for_compiled(state, compiled)
+    import_profiles.write_import_state_atomic(state_path, state)
     return summary.imported
 
 

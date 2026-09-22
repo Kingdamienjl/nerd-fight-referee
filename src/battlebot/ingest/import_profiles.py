@@ -305,7 +305,11 @@ def build_import_plan(
         if not profile.battle_eligible and not options.include_needs_review:
             summary.skipped_not_battle_eligible += 1
             continue
-        compiled.append(compile_profile(profile, path))
+        candidate = compile_profile(profile, path)
+        if not candidate.profile["battle_eligible"] and not options.include_needs_review:
+            summary.skipped_not_battle_eligible += 1
+            continue
+        compiled.append(candidate)
         summary.imported += 1
     return compiled, summary
 

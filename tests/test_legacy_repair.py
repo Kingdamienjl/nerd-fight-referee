@@ -47,3 +47,11 @@ class PromotionRollbackTests(unittest.IsolatedAsyncioTestCase):
                     await repair.promote({'id':'example'},path,original,SimpleNamespace(root=root),root/'archive')
             self.assertEqual(path.read_bytes(),original)
             self.assertEqual((root/'archive'/'original.yaml').read_bytes(),original)
+
+class TitleRecoveryTests(unittest.TestCase):
+    def test_discovery_candidate_is_not_repair_evidence(self):
+        from services.repair_legacy_profiles import title_source
+        p={'name':'Example','franchise':'Test','sources':[{'title':'Example','url':'https://vsbattles.fandom.com/wiki/Example','notes':'enrich_sources_candidate'}]}
+        self.assertIsNone(title_source(p))
+        p['sources'][0]['raw_cache_key']='previously-fetched'
+        self.assertIsNotNone(title_source(p))
