@@ -48,6 +48,7 @@ POWER_SCALE_FIELDS = (
 REQUIRED_POWER_FIELDS = ("attack_potency", "speed", "durability")
 
 FIELD_ALIASES = {
+    "origin": "origin",
     "tier": "tier",
     "keys": "keys",
     "key": "keys",
@@ -279,7 +280,7 @@ class HttpClient:
         request_body = json_body if json_body is not None else data_body
         cache_key = self.cache.cache_key(method, url, params=params, body=request_body)
         cached = self.cache.read(cache_key)
-        if cached and self.use_cache:
+        if cached and self.use_cache and 200 <= int(cached.get("status", 200)) < 300:
             return cached
 
         host = urlparse(url).netloc
@@ -594,6 +595,15 @@ def build_profile(
         has_revision=has_revision(wiki_source),
     )
     ineligible_reasons = []
+    from battlebot.profiles.source_identity import identity_matches, origin_matches
+    if wiki_source and not identity_matches(row.name, wiki_source.get("title"), row.franchise):
+        # Derived, explicitly source-scoped forms are handled separately below.
+        source_key = extracted.get("keys")
+        parent = row.name.removesuffix(f" ({source_key})") if source_key else row.name
+        if not (source_key and parent != row.name and identity_matches(parent, wiki_source.get("title"), row.franchise)):
+            ineligible_reasons.append("source_identity_mismatch")
+    if not origin_matches(row.franchise, extracted.get("origin")):
+        ineligible_reasons.append("source_franchise_mismatch")
     if not has_revision(wiki_source):
         ineligible_reasons.append("missing_source_revision_metadata")
     for field_name in REQUIRED_POWER_FIELDS:
@@ -734,6 +744,7 @@ def build_sources(
                 "revision_timestamp": wiki_source["revision_timestamp"],
                 "retrieved_at": wiki_source["retrieved_at"],
                 "raw_cache_key": wiki_source["cache_key"],
+                "origin": (wiki_source.get("fields") or {}).get("origin"),
             }
         )
     return sources

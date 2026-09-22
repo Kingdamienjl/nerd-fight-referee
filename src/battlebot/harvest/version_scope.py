@@ -20,7 +20,7 @@ def scope_extracted_fields(fields, selected):
     labels=[x.strip() for x in raw.split('|') if x.strip()]
     if not 1 <= len(labels) <= 16 or labels.count(selected) != 1:
         return None
-    scoped={'keys':selected}
+    scoped={'keys':selected, 'origin':fields.get('origin')}
     for axis in ('tier','attack_potency','speed','durability','range','stamina','intelligence','lifting_strength','striking_strength'):
         text=fields.get(axis) or ''
         explicit=labelled_section(text,selected,labels)
