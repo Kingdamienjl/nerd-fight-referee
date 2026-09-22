@@ -119,6 +119,8 @@ def profile_fingerprint_changed(
 
 def compile_profile(profile: CharacterProfile, path: Path) -> CompiledProfile:
     profile_json = profile.model_dump(mode="json")
+    from battlebot.profiles.readiness import assess_readiness
+    readiness = assess_readiness(profile_json)
     character_id = profile.id
     profile_id = profile.id
     return CompiledProfile(
@@ -134,8 +136,8 @@ def compile_profile(profile: CharacterProfile, path: Path) -> CompiledProfile:
             "profile_id": profile_id,
             "character_id": character_id,
             "profile_type": str(profile.profile_type),
-            "status": profile.status,
-            "battle_eligible": profile.battle_eligible,
+            "status": profile.status if readiness["battle_ready"] else "provisional",
+            "battle_eligible": profile.battle_eligible and readiness["battle_ready"],
             "profile_hash": profile.profile_hash,
             "profile_path": path.as_posix(),
             "profile_json": profile_json,
@@ -303,7 +305,11 @@ def build_import_plan(
         if not profile.battle_eligible and not options.include_needs_review:
             summary.skipped_not_battle_eligible += 1
             continue
-        compiled.append(compile_profile(profile, path))
+        candidate = compile_profile(profile, path)
+        if not candidate.profile["battle_eligible"] and not options.include_needs_review:
+            summary.skipped_not_battle_eligible += 1
+            continue
+        compiled.append(candidate)
         summary.imported += 1
     return compiled, summary
 

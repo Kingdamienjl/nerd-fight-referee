@@ -1,0 +1,13 @@
+[Unit]
+Description=Nerd Referee validated legacy profile repair
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/referee
+ExecStart=/bin/bash /opt/referee/services/legacy_repair_cycle.sh
+TimeoutStartSec=15min
+TimeoutStopSec=45
+Restart=on-failure
+RestartSec=60

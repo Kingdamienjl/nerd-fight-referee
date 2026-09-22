@@ -63,6 +63,11 @@ services:
       options:
         max-size: 10m
         max-file: '3'
+    command:
+    - python
+    - -P
+    - -m
+    - battlebot.worker.main
   harvester:
     image: referee-harvest-guard:20260913
     restart: always
@@ -74,6 +79,7 @@ services:
     - ./tests:/app/tests:ro
     command:
     - python
+    - -P
     - -m
     - battlebot.harvest.loop
     logging:
@@ -81,6 +87,10 @@ services:
       options:
         max-size: 10m
         max-file: '3'
+    environment:
+      PYTHONPATH: /app/src:/app
+      REFEREE_HARVEST_BATCH: '8'
+      REFEREE_HARVEST_INTERVAL: '60'
   mock-duels:
     image: referee-operational:20260909
     restart: always
@@ -158,4 +168,3 @@ services:
       options:
         max-size: 10m
         max-file: '3'
-

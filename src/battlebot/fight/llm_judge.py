@@ -945,6 +945,9 @@ def deterministic_tactical_summary(smoke: dict[str, Any]) -> str:
 
 
 def llm_explained_decision(smoke: dict[str, Any], raw: str, *, packet: dict[str, Any]) -> dict[str, Any]:
+    from battlebot.fight.evidence_verdict_guard import assumes_decisive_power, unresolved_assumption_result
+    if assumes_decisive_power(raw):
+        return unresolved_assumption_result(packet)
     raw_phases = parse_phases(raw)
     phases = [clean_llm_explanation(p, packet=packet) for p in raw_phases]
     quick_match = re.search(r"(?is)Quick Verdict:\s*(.*?)\n\s*(?:\*\*)?Phase 1:", raw)
