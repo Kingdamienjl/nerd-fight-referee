@@ -298,23 +298,7 @@ class FightPanelView(discord.ui.View):
         await interaction.response.edit_message(content=view.content(), embed=None, view=view)
 
 
-def fight_detail_payload(decision: dict[str, Any]) -> dict[str, str]:
-    structured = structured_decision_output(decision)
-    packet = decision.get("presentation_packet") or {}
-    content = personality_details(decision, packet)
-    winner = decision.get("winner") or "Unresolved"
-    difficulty = decision.get("difficulty") or "Unresolved"
-    verdict = decision.get("quick_verdict") or "A matchup-specific verdict is not available yet. Review the evidence before relying on the provisional result."
-    return {
-        **{key: linked_citations(value, packet) for key, value in content.items()},
-        "quick_verdict": f"**Predicted winner: {winner}**\n**Difficulty: {difficulty}**\n\n" + linked_citations(verdict, packet),
-        "quick_evidence": evidence_brief(packet),
-        "full_battle": linked_citations("\n\n".join(content[f"phase_{i}"] for i in range(3)), packet),
-        "sources": source_panel(packet),
-        "full_analysis": structured["full_analysis"],
-        "full_evidence": structured["full_evidence"] or "No expanded evidence available.",
-        "loser_best_path": structured["loser_best_path_full"] or "No alternate loser path available.",
-    }
+from battlebot.fight.presentation import fight_detail_payload
 
 
 def build_fight_embed(decision: dict[str, Any], *, status: str | None = None) -> tuple[discord.Embed, str]:

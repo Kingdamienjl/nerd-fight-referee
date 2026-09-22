@@ -38,9 +38,9 @@ OPTIONAL_TACTICAL_FIELDS = (
 def compact_power_entry(entry: Any) -> str | None:
     if isinstance(entry, dict):
         text = entry.get("text")
-        return str(text) if text else None
+        return str(text) if text and "|" not in str(text) else None
     if entry:
-        return str(entry)
+        return str(entry) if "|" not in str(entry) else None
     return None
 
 
@@ -75,13 +75,17 @@ def compact_profile(
     source_limit: int = 5,
 ) -> dict[str, Any]:
     profile_json = profile["profile_json"]
+    from battlebot.profiles.readiness import assess_readiness
+    readiness = assess_readiness(profile_json)
     power_scale = profile_json.get("power_scale") or {}
-    abilities = profile_json.get("abilities") or []
+    from battlebot.profiles.evidence_quality import usable_item
+    abilities = [x for x in profile_json.get("abilities") or [] if usable_item(x)]
+    resistances = [x for x in profile_json.get("resistances") or [] if usable_item(x)]
     equipment = profile_json.get("equipment") or []
     weaknesses = profile_json.get("weaknesses") or []
     sources = profile_json.get("sources") or []
     used_sources = set()
-    for item in [*abilities[:ability_limit], *equipment[:equipment_limit], *weaknesses[:weakness_limit], *power_scale.values()]:
+    for item in [*abilities[:ability_limit], *resistances[:ability_limit], *equipment[:equipment_limit], *weaknesses[:weakness_limit], *power_scale.values()]:
         if isinstance(item, dict):
             used_sources.update(item.get("source_ids") or [])
     # Preserve every source cited by the selected evidence; cap only uncited extras.
@@ -95,6 +99,7 @@ def compact_profile(
         "profile_hash": profile["profile_hash"],
         "profile_type": profile["profile_type"],
         "variant": profile_json.get("variant") or {},
+        "readiness": readiness,
         "interaction_tags": profile_json.get("interaction_tags") or [],
         "resource_dependencies": profile_json.get("resource_dependencies") or [],
         "power_source": profile_json.get("power_source"),
@@ -108,6 +113,8 @@ def compact_profile(
             if not re.search(r"(?i)border|scroll\s*=|visible\s*=|padding\s*=|content\s*=|\{\{|tabber", str(item.get("name") or ""))
         ][:ability_limit],
         "ability_count": len(abilities),
+        "resistances": [compact_item(item) for item in resistances[:ability_limit]],
+        "resistance_count": len(resistances),
         "equipment": [compact_item(item) for item in equipment[:equipment_limit]],
         "equipment_count": len(equipment),
         "weaknesses": [compact_item(item) for item in weaknesses[:weakness_limit]],
@@ -143,6 +150,9 @@ async def resolution_error(
         error["disambiguation_options"] = resolution.get("disambiguation_options", [])
     if resolution["status"] == "not_found":
         error["diagnostics"] = await locate_character(resolution["query"], connection=connection)
+    if resolution.get("reason"):
+        error["reason"] = resolution["reason"]
+        error["message"] = resolution.get("message")
     if resolution.get("alias_match"):
         error["alias_match"] = resolution["alias_match"]
     if resolution.get("canonical_not_battle_ready"):

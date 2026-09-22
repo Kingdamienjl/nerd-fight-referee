@@ -284,6 +284,24 @@ async def resolve_character(
     if case_insensitive:
         return resolution_from_candidates(name, case_insensitive, matched_by="canonical_case_insensitive")
 
+    # A named form must resolve to its own evidence, never relabel a base profile.
+    from battlebot.profiles.variants import split_variant_name, CURATED_VARIANTS
+    parent, variant = split_variant_name(name)
+    if variant:
+        targets = [seed.name for seed in CURATED_VARIANTS
+                   if seed.variant_name.casefold() == variant.casefold()
+                   and parent.casefold() in {seed.parent_name.casefold(), *(a.casefold() for a in seed.aliases.split("|") if a)}]
+        for target in targets:
+            if target.casefold() == name.casefold():
+                continue
+            candidates = await fetch_case_insensitive_canonical(connection, target, battle_eligible_only=battle_eligible_only)
+            if candidates:
+                return resolution_from_candidates(name, candidates, matched_by="version_alias_exact")
+        return {"status": "not_found", "query": name, "candidates": [],
+                "reason": "version_evidence_unavailable", "requested_version": variant,
+                "message": "This selected version has no dedicated battle-ready evidence profile yet."}
+
+
     alias_override = resolve_alias(name)
     if alias_override:
         override_exact = await fetch_exact_canonical(
@@ -319,31 +337,6 @@ async def resolve_character(
     alias = await fetch_alias(connection, name, battle_eligible_only=battle_eligible_only)
     if alias:
         return resolution_from_candidates(name, alias, matched_by="alias")
-
-    # Form / Variant fallback resolution
-    from battlebot.profiles.variants import split_variant_name, variant_metadata
-    parent, variant = split_variant_name(name)
-    if variant and parent and parent.casefold() != name.casefold():
-        parent_resolution = await resolve_character(
-            connection,
-            parent,
-            battle_eligible_only=battle_eligible_only,
-        )
-        if parent_resolution.get("status") == "resolved":
-            parent_profile = parent_resolution["profile"]
-            profile_copy = dict(parent_profile)
-            p_json = dict(profile_copy.get("profile_json") or {})
-            v_meta = variant_metadata(name, character_id=str(profile_copy.get("character_id") or ""))
-            v_meta["variant_name"] = variant
-            v_meta["default_variant"] = False
-            p_json["variant"] = v_meta
-            profile_copy["profile_json"] = p_json
-            return {
-                "status": "resolved",
-                "query": name,
-                "matched_by": "variant_form_resolution",
-                "profile": profile_copy,
-            }
 
     result = {"status": "not_found", "query": name, "candidates": []}
     if alias_override:

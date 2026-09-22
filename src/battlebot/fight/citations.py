@@ -21,9 +21,7 @@ def power_summary(value, limit=260):
         raw = re.sub(r"\{\{Tabber\|?", "", raw, flags=re.I)
         raw = re.sub(r"\}\}", "", raw)
     if "|" in raw:
-        parts = [p.strip() for p in raw.split("|") if p.strip() and not p.strip().startswith("{{")]
-        if parts:
-            raw = parts[0]
+        return "Unresolved: source contains multiple versions; select a source-scoped profile."
     raw = re.sub(r"^[A-Za-z0-9 /_'.-]{1,60}=\s*", "", raw)
     cleaned = clean_profile_text(raw, limit)
     return cleaned or clean_profile_text(value, limit)
@@ -46,6 +44,21 @@ def source_catalog(packet):
 def reference_numbers(catalog,side,ids):
     return [s['number'] for s in catalog if s['side']==side and s['id'] in (ids or [])]
 
+def normalize_references(text):
+    """Canonicalize numeric groups; URLs always come from the source catalog.
+
+    This validates reference syntax only, not whether a source supports a claim.
+    """
+    pattern = r"\[(\d+(?:\s*,\s*\d+)*)\](?:\([^\s]*\))?"
+    return re.sub(pattern, lambda match: " ".join(
+        f"[{int(number.strip())}]" for number in match.group(1).split(",")
+    ), str(text or ""))
+
+
+def cited_numbers(text):
+    return [int(number) for number in re.findall(r"\[(\d+)\]", normalize_references(text))]
+
+
 def linked_citations(text,packet):
     catalog={s['number']:s for s in source_catalog(packet)}
     def replace(match):
@@ -54,7 +67,7 @@ def linked_citations(text,packet):
             return '[source unavailable]'
         url=source['url'].replace('(', '%28').replace(')', '%29').replace(' ', '%20')
         return f'[{number}]({url})'
-    return re.sub(r'\[(\d+)\](?!\()',replace,str(text))
+    return re.sub(r'\[(\d+)\](?!\()',replace,normalize_references(text))
 
 def source_panel(packet):
     lines=[]

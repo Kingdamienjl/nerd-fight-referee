@@ -39,16 +39,16 @@ def build_discord_webhook_payload(
     loser = decision.get("loser") or ""
     confidence = decision.get("confidence") or "Moderate"
     color = build_confidence_color(confidence)
-    odds = decision.get("battle_odds_text") or "Even odds"
-    summary = decision.get("public_summary") or decision.get("summary") or "Matchup evaluated under standard conditions."
+    odds = decision.get("battle_odds_text") or "Not established by the supplied evidence."
+    summary = decision.get("public_summary") or decision.get("summary") or "Not established by the supplied evidence."
 
     card_a = decision.get("contender_a_card") or {}
     card_b = decision.get("contender_b_card") or {}
 
-    tools_a = " • ".join(card_a.get("key_tools", [])[:3]) or "Standard combat capabilities"
-    tools_b = " • ".join(card_b.get("key_tools", [])[:3]) or "Standard combat capabilities"
-    win_a = card_a.get("win_path") or "Presses combat advantages to control the pace."
-    win_b = card_b.get("win_path") or "Presses combat advantages to control the pace."
+    tools_a = " • ".join(card_a.get("key_tools", [])[:3]) or "Not established by the supplied evidence."
+    tools_b = " • ".join(card_b.get("key_tools", [])[:3]) or "Not established by the supplied evidence."
+    win_a = card_a.get("win_path") or "Not established by the supplied evidence."
+    win_b = card_b.get("win_path") or "Not established by the supplied evidence."
 
     embed_fields = [
         {
@@ -113,6 +113,7 @@ def build_discord_webhook_payload(
         "avatar_url": "https://cdn.discordapp.com/embed/avatars/1.png",
         "content": custom_note or f"🚨 **DUEL SIMULATED**: `{contender_a_name}` vs `{contender_b_name}`! Results in:",
         "embeds": [embed],
+        "allowed_mentions": {"parse": []},
     }
     return payload
 

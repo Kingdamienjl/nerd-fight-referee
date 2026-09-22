@@ -193,6 +193,8 @@ def approval_blockers(profile: dict[str, Any]) -> list[str]:
 
     blockers = [f"missing_{field}" for field in missing_core_fields(profile)]
     blockers.extend(evidence_quality_blockers(profile))
+    from battlebot.profiles.readiness import assess_readiness
+    blockers.extend(assess_readiness(profile)["blockers"])
     blockers.extend(str(blocker) for blocker in profile.get("approval_blockers") or [])
     if not profile.get("sources"):
         blockers.append("missing_sources")

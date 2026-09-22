@@ -18,6 +18,7 @@ from battlebot.profiles.locate import find_db_name_matches
 from battlebot.profiles.quality import profile_key
 from battlebot.profiles.variants import variant_metadata
 from battlebot.review import service
+from battlebot.profiles.readiness import assess_readiness
 
 
 DEFAULT_CHARACTER_CATALOG_LIMIT = 20
@@ -58,9 +59,9 @@ def yaml_search_rows(query: str, root: Path, status: str, *, limit: int) -> list
                 "franchise": data.get("franchise"),
                 "category": data.get("category"),
                 "status": status,
-                "battle_ready": bool(data.get("battle_eligible")) and status == "generated",
+                "battle_ready": bool(data.get("battle_eligible")) and status == "generated" and assess_readiness(data)["battle_ready"],
                 "profile_path": str(path),
-                "reason": "" if data.get("battle_eligible") else reason_not_ready(data),
+                "reason": "" if assess_readiness(data)["battle_ready"] else reason_not_ready(data),
                 "variant": data.get("variant") or variant_metadata(str(data.get("name") or path.stem)),
             }
         )
@@ -99,13 +100,15 @@ def roster_search_rows(query: str, rosters_dir: Path, *, limit: int) -> list[dic
 
 async def db_search_rows(connection: Any, query: str, *, limit: int) -> list[dict[str, Any]]:
     matches = await find_db_name_matches(connection, query, limit=limit)
+    from battlebot.profiles.readiness import assess_readiness
+    from battlebot.profiles.store import decode_profile_json
     return [
         {
             "canonical_name": match["canonical_name"],
             "franchise": match["franchise"],
             "category": match["category"],
             "status": "imported",
-            "battle_ready": True,
+            "battle_ready": assess_readiness(decode_profile_json(match.get("profile_json")))["battle_ready"],
             "character_id": match["character_id"],
             "profile_path": "",
             "reason": "",
@@ -334,7 +337,7 @@ async def search_characters(
     if status_filter and status_filter != "all":
         rows = [row for row in rows if row.get("status") == status_filter]
     elif not include_stubs:
-        rows = [row for row in rows if row.get("battle_ready")]
+        rows = [row for row in rows if row.get("status") in ("imported", "generated")]
     if category:
         rows = [row for row in rows if str(row.get("category") or "").casefold() == category.casefold()]
     if franchise:

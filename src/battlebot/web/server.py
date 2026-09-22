@@ -175,15 +175,8 @@ def create_app() -> FastAPI:
 
         smoke_result = smoke_judge_packet(packet)
         decision = await judge_fight_packet(packet, smoke_result)
-        structured = structured_decision_output(decision)
-        structured["narrative_phases"] = decision.get("narrative_phases") or []
-        structured["quick_verdict"] = decision.get("quick_verdict") or structured.get("public_summary")
-        try:
-            from battlebot.fight.fight import fight_detail_payload
-            structured["sections"] = fight_detail_payload(decision)
-        except Exception:
-            pass
-
+        from battlebot.fight.presentation import present_decision
+        structured = present_decision(decision)
 
         webhook_result: dict[str, Any] | None = None
         webhook_url = os.getenv("DISCORD_WEBHOOK_URL")

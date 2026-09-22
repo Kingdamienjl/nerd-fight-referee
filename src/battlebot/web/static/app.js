@@ -547,59 +547,81 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  function renderCitedText(element, text, sources = []) {
+    element.replaceChildren();
+    const byNumber = new Map((sources || []).map(source => [String(source.number), source]));
+    const pattern = /\[(\d+)\](?:\((https?:[^\s]+?)\))?/g;
+    let offset = 0;
+    for (const match of String(text || "").matchAll(pattern)) {
+      element.append(document.createTextNode(text.slice(offset, match.index)));
+      const source = byNumber.get(match[1]);
+      if (source && /^https?:\/\//i.test(source.url)) {
+        const link = document.createElement("a");
+        link.href = source.url;
+        link.textContent = `(${match[1]})`;
+        link.title = `${source.fighter}: ${source.title}${source.revision ? " — revision " + source.revision : ""}`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        element.append(link);
+      } else element.append(document.createTextNode("[source unavailable]"));
+      offset = match.index + match[0].length;
+    }
+    element.append(document.createTextNode(String(text || "").slice(offset)));
+  }
+
   // RENDER RESULTS TO DOM
   function renderResults(data) {
     resultsSection.classList.remove("hidden");
 
     const dec = data.decision || {};
-    const winner = dec.winner || "Draw / Review Needed";
+    const winner = dec.winner || "Unresolved";
     const confidence = (dec.confidence || "MODERATE").toUpperCase();
     const oddsText = dec.battle_odds_text || "Even Match";
 
-    winnerHeadline.textContent = `${winner.toUpperCase()} WINS`;
-    diffBadge.textContent = `${confidence} DIFFICULTY`;
+    winnerHeadline.textContent = winner === "Unresolved" ? "ASSESSMENT UNRESOLVED" : `${winner.toUpperCase()} — PREDICTED WINNER`;
+    diffBadge.textContent = `DIFFICULTY: ${dec.difficulty || "Unresolved"}`;
 
     // Parse odds percentages
     const pctMatch = oddsText.match(/(\d+)%.*?(\d+)%/);
-    let pctA = 50;
-    let pctB = 50;
+    let pctA = null;
+    let pctB = null;
     if (pctMatch) {
       pctA = parseInt(pctMatch[1], 10);
       pctB = parseInt(pctMatch[2], 10);
     }
-    oddsLabelA.textContent = `${data.contender_a}: ${pctA}%`;
-    oddsLabelB.textContent = `${data.contender_b}: ${pctB}%`;
-    oddsFillA.style.width = `${pctA}%`;
-    oddsFillB.style.width = `${pctB}%`;
+    oddsLabelA.textContent = `${data.contender_a}: ${pctA === null ? "Unresolved" : pctA + "%"}`;
+    oddsLabelB.textContent = `${data.contender_b}: ${pctB === null ? "Unresolved" : pctB + "%"}`;
+    oddsFillA.style.width = `${pctA || 0}%`;
+    oddsFillB.style.width = `${pctB || 0}%`;
 
     // Fight Cards
     const cardA = dec.contender_a_card || {};
     const cardB = dec.contender_b_card || {};
 
     resHeaderA.textContent = `🥊 ${data.contender_a.toUpperCase()} — FIGHT CARD`;
-    toolsA.textContent = (cardA.key_tools || []).join(" • ") || "Standard combat capability";
-    winA.textContent = cardA.win_path || "Capitalizes on tempo and combat advantages.";
-    riskA.textContent = cardA.risk || "Standard combat vulnerability.";
+    toolsA.textContent = (cardA.key_tools || []).join(" • ") || "Not established by the supplied evidence.";
+    winA.textContent = cardA.win_path || "Not established by the supplied evidence.";
+    riskA.textContent = cardA.risk || "Not established by the supplied evidence.";
 
     resHeaderB.textContent = `🥊 ${data.contender_b.toUpperCase()} — FIGHT CARD`;
-    toolsB.textContent = (cardB.key_tools || []).join(" • ") || "Standard combat capability";
-    winB.textContent = cardB.win_path || "Capitalizes on tempo and combat advantages.";
-    riskB.textContent = cardB.risk || "Standard combat vulnerability.";
+    toolsB.textContent = (cardB.key_tools || []).join(" • ") || "Not established by the supplied evidence.";
+    winB.textContent = cardB.win_path || "Not established by the supplied evidence.";
+    riskB.textContent = cardB.risk || "Not established by the supplied evidence.";
 
     // Quick Verdict
-    quickVerdictText.textContent = dec.public_summary || dec.summary || "Matchup arbitrated cleanly under supplied battle rules.";
+    renderCitedText(quickVerdictText, dec.quick_verdict || "No complete assessment is available.", dec.sources);
 
     // 3-Phase Play-by-Play
     const sections = dec.sections || {};
     const phases = [
-      sections.phase_0 || "Fighters open at mid-range, establishing control of the battlefield and probing defense.",
-      sections.phase_1 || "Techniques and signature abilities are deployed. Durability and speed deltas dictate initiative.",
-      sections.phase_2 || "The decisive advantage culminates in a final exchange, finishing the matchup."
+      sections.phase_0 || dec.narrative_phases?.[0] || "Opening assessment unavailable.",
+      sections.phase_1 || dec.narrative_phases?.[1] || "Escalation assessment unavailable.",
+      sections.phase_2 || dec.narrative_phases?.[2] || "Finishing assessment unavailable."
     ];
     state.currentPhases = phases;
-    phase0Text.textContent = phases[0];
-    phase1Text.textContent = phases[1];
-    phase2Text.textContent = phases[2];
+    renderCitedText(phase0Text, phases[0], dec.sources);
+    renderCitedText(phase1Text, phases[1], dec.sources);
+    renderCitedText(phase2Text, phases[2], dec.sources);
     setFocusedStage(null);
 
     // Discord Live Preview
@@ -620,12 +642,22 @@ document.addEventListener("DOMContentLoaded", () => {
       deliveryStatus.style.color = "var(--amber-core)";
     }
 
-    discordEmbedFields.innerHTML = `
-      <div><strong>🥊 ${data.contender_a} — Fight Card:</strong> ${(dec.contender_a_card?.key_tools || []).slice(0, 3).join(" • ")}</div>
-      <div><strong>🥊 ${data.contender_b} — Fight Card:</strong> ${(dec.contender_b_card?.key_tools || []).slice(0, 3).join(" • ")}</div>
-      <div><strong>⚡ Quick Verdict:</strong> ${(dec.public_summary || dec.summary || "").slice(0, 300)}...</div>
-      <div><strong>📊 Battle Assessment:</strong> Victor: ${dec.winner || "Unknown"} (${dec.battle_odds_text || "Even"})</div>
-    `;
+    discordEmbedFields.replaceChildren();
+    for (const [label, body] of [
+      [data.contender_a + " — Fight Card", (dec.contender_a_card?.key_tools || []).slice(0, 3).join(" • ")],
+      [data.contender_b + " — Fight Card", (dec.contender_b_card?.key_tools || []).slice(0, 3).join(" • ")],
+      ["Quick Verdict", dec.quick_verdict || "Assessment unavailable."],
+      ["Battle Assessment", `Predicted winner: ${dec.winner || "Unresolved"}; Difficulty: ${dec.difficulty || "Unresolved"}`]
+    ]) {
+      const row = document.createElement("div");
+      const heading = document.createElement("strong");
+      heading.textContent = label + ": ";
+      const content = document.createElement("span");
+      renderCitedText(content, body, dec.sources);
+      row.append(heading, content);
+      discordEmbedFields.append(row);
+    }
+
   }
 
   // RE-DISPATCH BUTTON

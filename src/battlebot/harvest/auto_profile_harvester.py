@@ -366,6 +366,24 @@ class ProfileHarvester:
             wiki_source=wiki_source,
             errors=errors,
         )
+        # Export only versions whose source supplies explicit ability blocks and aligned stats.
+        if wiki_source and not (profile.get("variant") or {}).get("variant_name"):
+            from battlebot.harvest.version_scope import scope_extracted_fields
+            from dataclasses import replace
+            for form in (profile.get("forms") or [])[:16]:
+                key = form.get("name") or ""
+                scoped_fields = scope_extracted_fields(wiki_source.get("fields") or {}, key)
+                if not scoped_fields:
+                    continue
+                scoped_row = replace(row, name=f"{row.name} ({key})", aliases=[])
+                scoped_source = {**wiki_source, "fields": scoped_fields}
+                scoped = build_profile(row=scoped_row, anilist_identity=anilist_identity, igdb_identity=igdb_identity, wiki_source=scoped_source, errors=errors)
+                scoped["variant"].update(source_key=key, evidence_scoped=True)
+                scoped["profile_hash"] = stable_hash_without_profile_hash(scoped)
+                target = profile_output_path(self.output_dir if scoped["battle_eligible"] else self.needs_review_dir, scoped_row)
+                if not target.exists():
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    write_yaml(target, scoped)
         if self.debug_extract:
             print_extraction_debug(wiki_source, profile)
 
@@ -549,6 +567,10 @@ def build_profile(
         inherited_dependencies=dependencies,
         inherited_scope_limitations=scopes.get("scope_limitations", []),
     )
+    resistances = [item for item in abilities if re.match(r"(?i)^(?:resistance\b|resistant\b|immunity\b|immune\b)", item["description"])]
+    abilities = [item for item in abilities if item not in resistances]
+    for item in resistances:
+        item["tags"] = ["defensive_resistance"]
     equipment = list_items_from_text(
         "standard_equipment",
         extracted.get("standard_equipment"),
@@ -619,7 +641,7 @@ def build_profile(
         "abilities": abilities,
         "equipment": equipment,
         "summons": [],
-        "resistances": [],
+        "resistances": resistances,
         "weaknesses": weaknesses,
         "win_conditions": [],
         "loss_conditions": [],
@@ -639,6 +661,14 @@ def build_profile(
         },
         "profile_hash": "",
     }
+    from battlebot.profiles.readiness import assess_readiness
+    readiness = assess_readiness(profile)
+    if not readiness["battle_ready"]:
+        profile["battle_eligible"] = False
+        profile["status"] = "needs_review"
+        profile["profile_type"] = "needs_review"
+        profile["generation"]["ineligible_reasons"] = sorted(set(ineligible_reasons + readiness["blockers"]))
+        profile["review"]["ineligible_reasons"] = profile["generation"]["ineligible_reasons"]
     return profile
 
 
@@ -727,7 +757,8 @@ def build_identity(
 
 
 def build_forms(extracted: dict[str, str]) -> list[dict[str, Any]]:
-    keys = split_listish(extracted.get("keys")) or ["Strongest consistent canonical form"]
+    raw_keys = re.split(r"(?i)\b(?:Name|Origin|Age|Gender|Classification)\s*:", extracted.get("keys") or "")[0]
+    keys = [normalize_text(part) for part in raw_keys.split("|") if normalize_text(part)] or ["Strongest consistent canonical form"]
     return [
         {
             "id": slugify(key),
@@ -904,10 +935,10 @@ def extract_section_fields(content: str) -> dict[str, str]:
 
 
 def extract_inline_labeled_fields(text: str) -> dict[str, str]:
-    aliases = sorted(FIELD_ALIASES.keys(), key=len, reverse=True)
+    aliases = sorted(set(FIELD_ALIASES) | {"Name", "Origin", "Age", "Gender", "Classification"}, key=len, reverse=True)
     label_pattern = "|".join(re.escape(alias) for alias in aliases)
     pattern = re.compile(
-        rf"(?i)(?P<label>{label_pattern})\s*(?:=|:|：)"
+        rf"(?i)(?<![\w])(?P<label>{label_pattern})\s*(?:=|:|：)"
     )
     matches = list(pattern.finditer(text))
     fields: dict[str, str] = {}
@@ -1113,6 +1144,12 @@ def split_listish(text: str | None) -> list[str]:
     # layout parameters or assign its surviving clauses to canonical base form.
     if re.search(r"\{\{|\}\}|#tag:|\btabber\b|\b(?:Border|Scroll|Visible|Padding|Content)\s*=", text, re.I):
         return []
+    # Keep the complete resistance clause together: splitting its commas would
+    # turn subsequent defensive properties into offensive abilities.
+    defensive = re.search(r"(?i)\b(?:resistance(?:s)? to|resistant to|immunity to|immune to)\b", text)
+    if defensive:
+        prefix, suffix = text[:defensive.start()], text[defensive.start():]
+        return split_listish(prefix.rstrip(" ,;|\n")) + [normalize_text(suffix)]
     parts, start, depth = [], 0, 0
     for index, char in enumerate(text):
         if char == '(':
@@ -1121,7 +1158,7 @@ def split_listish(text: str | None) -> list[str]:
             if depth == 0:
                 return []
             depth -= 1
-        elif depth == 0 and char in '|;,\n\u2022':
+        elif depth == 0 and char in '|;,\n\u2022*':
             parts.append(text[start:index])
             start = index + 1
     if depth:
