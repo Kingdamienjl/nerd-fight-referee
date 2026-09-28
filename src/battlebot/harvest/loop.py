@@ -1,5 +1,6 @@
 """Rate-limited roster rotation using the harvester's durable cursor."""
 import json
+import hashlib
 import os
 from pathlib import Path
 import subprocess
@@ -18,10 +19,34 @@ def run_bounded(command, timeout):
         return result
 
 
+def generated_snapshot(root=Path("profiles/generated")):
+    entries=[]
+    for path in sorted(root.rglob("*.yaml")):
+        try:
+            stat=path.stat()
+        except FileNotFoundError:
+            continue
+        entries.append((str(path),stat.st_size,stat.st_mtime_ns))
+    return hashlib.sha256(json.dumps(entries).encode()).hexdigest()
+
+
+def import_if_changed(state):
+    snapshot=generated_snapshot()
+    if state.get("last_import_snapshot")==snapshot:
+        print(json.dumps({"stage":"import","skipped":"generated_profiles_unchanged"}),flush=True)
+        return
+    imported=run_bounded([sys.executable,"-P","-m","battlebot.ingest.import_profiles",
+                          "profiles/generated","--changed-only"],timeout=300)
+    if imported.returncode==0:
+        state["last_import_snapshot"]=snapshot
+    print(json.dumps({"stage":"import","exit_code":imported.returncode}),flush=True)
+
+
 def main():
     state_path = Path("data/harvest_rotation.json")
     state_path.parent.mkdir(parents=True, exist_ok=True)
-    index = json.loads(state_path.read_text()).get("index", 0) if state_path.exists() else 0
+    state = json.loads(state_path.read_text()) if state_path.exists() else {}
+    index = state.get("index", 0)
     while True:
         rosters = sorted(Path("profiles/rosters").glob("*.csv"))
         if not rosters:
@@ -33,14 +58,13 @@ def main():
             result = run_bounded(cmd, timeout=600)
             print(json.dumps({"stage": "harvest", "roster": str(roster), "exit_code": result.returncode}), flush=True)
             if result.returncode == 0:
-                imported = run_bounded([sys.executable, "-P", "-m", "battlebot.ingest.import_profiles",
-                    "profiles/generated", "--changed-only"], timeout=300)
-                print(json.dumps({"stage": "import", "exit_code": imported.returncode}), flush=True)
+                import_if_changed(state)
         except subprocess.TimeoutExpired:
             print(json.dumps({"stage": "harvest/import", "error": "timeout"}), flush=True)
         index += 1
         temp = state_path.with_suffix(".tmp")
-        temp.write_text(json.dumps({"index": index}))
+        state["index"] = index
+        temp.write_text(json.dumps(state))
         temp.replace(state_path)
         time.sleep(max(60, int(os.getenv("REFEREE_HARVEST_INTERVAL", "180"))))
 
