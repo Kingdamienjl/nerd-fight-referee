@@ -55,6 +55,17 @@ def title_source(profile):
     return next(iter(candidates.values())) if len(candidates)==1 else None
 
 
+class SourceIdentityReview(ValueError):
+    """Missing or conflicting source identity requires evidence review, not polling."""
+
+
+def failed_attempt(error):
+    if isinstance(error, SourceIdentityReview):
+        return {'status':'needs_review','error':str(error)[:500],
+                'blockers':['source_identity_unresolved']}
+    return {'status':'error','error':str(error)[:500],'retry_after':time.time()+3600}
+
+
 def digest(content):
     return hashlib.sha256(content).hexdigest()
 
@@ -146,9 +157,9 @@ async def run(args):
             row=RosterRow(category=old['category'],franchise=old['franchise'],name=old['name'],aliases=old.get('aliases') or [],wiki_title=source['title'],wiki_url=source['url'],wiki_page_id=str(source['page_id']) if re.fullmatch(r'[1-9][0-9]*',str(source.get('page_id') or '')) else None)
             wiki=await asyncio.wait_for(harvester.fetch_mediawiki_source(row),timeout=45)
             if not wiki or not identity_matches(row.name,wiki['title'],row.franchise):
-                raise ValueError('Source identity could not be confirmed')
+                raise SourceIdentityReview('Source identity could not be confirmed')
             if not row.wiki_page_id and not (wiki.get('fields') or {}).get('origin'):
-                raise ValueError('Title-only recovery requires source franchise evidence')
+                raise SourceIdentityReview('Title-only recovery requires source franchise evidence')
             candidate=build_profile(row=row,anilist_identity=None,igdb_identity=None,wiki_source=wiki,errors=[])
             candidate['id']=old['id']
             candidate['profile_hash']=stable_hash_without_profile_hash(candidate)
@@ -165,7 +176,7 @@ async def run(args):
             else:
                 result['status']='needs_review'
         except Exception as error:
-            result['status']='error';result['error']=str(error)[:500];result['retry_after']=time.time()+3600
+            result.update(failed_attempt(error))
         state[key]=result
         summary[result['status']]+=1
         write_json(state_path,state)
