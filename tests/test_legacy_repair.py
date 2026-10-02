@@ -55,3 +55,38 @@ class TitleRecoveryTests(unittest.TestCase):
         self.assertIsNone(title_source(p))
         p['sources'][0]['raw_cache_key']='previously-fetched'
         self.assertIsNotNone(title_source(p))
+
+
+class CuratedRosterRecoveryTests(unittest.TestCase):
+    def test_unique_curated_roster_mapping_is_repairable_and_fingerprinted(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from services.repair_legacy_profiles import roster_source, source_identity_fingerprint
+        with TemporaryDirectory() as folder:
+            roster_dir = Path(folder)
+            (roster_dir / 'roster.csv').write_text(
+                'category,franchise,name,aliases,wiki_title,wiki_url\n'
+                'anime,Dragon Ball,Son Goku,Goku,Son Goku (Dragon Ball),\n',
+                encoding='utf-8',
+            )
+            source = roster_source({'name': 'Son Goku', 'franchise': 'Dragon Ball'}, roster_dir)
+            self.assertIsNotNone(source)
+            self.assertEqual(source['mapping_kind'], 'curated_roster')
+            self.assertEqual(source['title'], 'Son Goku (Dragon Ball)')
+            first = source_identity_fingerprint(source)
+            source['title'] = 'Son Goku'
+            self.assertNotEqual(first, source_identity_fingerprint(source))
+
+    def test_conflicting_curated_titles_still_require_review(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from services.repair_legacy_profiles import roster_source
+        with TemporaryDirectory() as folder:
+            roster_dir = Path(folder)
+            (roster_dir / 'roster.csv').write_text(
+                'category,franchise,name,aliases,wiki_title,wiki_url\n'
+                'comic,Marvel,Luke Cage,,Luke Cage (Marvel Comics),\n'
+                'comic,Marvel,Luke Cage,,Luke Cage (Marvel Cinematic Universe),\n',
+                encoding='utf-8',
+            )
+            self.assertIsNone(roster_source({'name': 'Luke Cage', 'franchise': 'Marvel'}, roster_dir))

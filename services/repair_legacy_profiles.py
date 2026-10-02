@@ -5,6 +5,7 @@ identity, schema and structural evidence must all pass before replacement.
 """
 import argparse
 import asyncio
+import csv
 from collections import Counter
 from datetime import datetime, timezone
 import hashlib
@@ -12,7 +13,7 @@ import json
 from pathlib import Path
 import re
 import time
-from urllib.parse import urlsplit
+from urllib.parse import quote, urlsplit
 import yaml
 from battlebot.common.db import connect_database
 from battlebot.harvest.auto_profile_harvester import (RosterRow, RawCache, HttpClient, ProfileHarvester, build_profile, stable_hash_without_profile_hash)
@@ -20,11 +21,11 @@ from battlebot.profiles.readiness import assess_readiness
 from battlebot.schemas.profile import CharacterProfile
 from battlebot.ingest.import_profiles import compile_profile, upsert_compiled_profile
 
-POLICY = 'legacy-repair-20260922-v2'
+POLICY = 'legacy-repair-20260922-v3'
 PROTECTED = {'verified', 'approved_override', 'approved'}
 
 
-from battlebot.profiles.source_identity import identity_matches
+from battlebot.profiles.source_identity import identity_matches, origin_matches
 
 
 def pinned_source(profile):
@@ -53,6 +54,52 @@ def title_source(profile):
         if identity_matches(profile.get('name'),source.get('title'),profile.get('franchise')):
             candidates[str(source.get('url'))]=source
     return next(iter(candidates.values())) if len(candidates)==1 else None
+
+
+def roster_source(profile, roster_dir=Path('profiles/rosters')):
+    """Return one unambiguous source identity from the curated roster registry."""
+    profile_name = str(profile.get('name') or '').strip()
+    profile_franchise = str(profile.get('franchise') or '').strip()
+    if not profile_name or not profile_franchise or not roster_dir.exists():
+        return None
+    candidates = {}
+    for roster_path in sorted(roster_dir.glob('*.csv')):
+        try:
+            with roster_path.open(encoding='utf-8-sig', newline='') as handle:
+                rows = csv.DictReader(handle)
+                for row in rows:
+                    row_name = str(row.get('name') or '').strip()
+                    row_franchise = str(row.get('franchise') or '').strip()
+                    title = str(row.get('wiki_title') or '').strip()
+                    if not row_name or not row_franchise or not title:
+                        continue
+                    if not identity_matches(profile_name, row_name, profile_franchise):
+                        continue
+                    if not (origin_matches(profile_franchise, row_franchise) and origin_matches(row_franchise, profile_franchise)):
+                        continue
+                    url = str(row.get('wiki_url') or '').strip()
+                    if not url:
+                        url = 'https://vsbattles.fandom.com/wiki/' + quote(title.replace(' ', '_'), safe='()_-')
+                    key = (title.casefold(), url.casefold())
+                    candidates[key] = {
+                        'title': title,
+                        'url': url,
+                        'page_id': None,
+                        'revision_id': None,
+                        'mapping_kind': 'curated_roster',
+                        'roster_path': str(roster_path),
+                    }
+        except (OSError, csv.Error):
+            continue
+    return next(iter(candidates.values())) if len(candidates) == 1 else None
+
+
+def source_identity_fingerprint(source):
+    identity = {
+        key: source.get(key)
+        for key in ('title', 'url', 'page_id', 'revision_id', 'mapping_kind', 'roster_path')
+    }
+    return digest(json.dumps(identity, sort_keys=True, default=str).encode('utf-8'))
 
 
 class SourceIdentityReview(ValueError):
@@ -135,15 +182,15 @@ async def run(args):
             if readiness['battle_ready']:
                 summary['already_structurally_ready']+=1; continue
             key=str(path.relative_to(args.root))
-            fingerprint=POLICY+':'+digest(original)
+            source=pinned_source(profile) or title_source(profile) or roster_source(profile)
+            if not source:
+                summary['needs_source_identity']+=1; continue
+            fingerprint=POLICY+':'+digest(original)+':'+source_identity_fingerprint(source)
             if args.apply and (preview.get(key,{}).get('status')!='validated_candidate' or preview[key].get('fingerprint')!=fingerprint):
                 summary['awaiting_validated_preview']+=1; continue
             previous=state.get(key,{})
             if previous.get('fingerprint')==fingerprint and (previous.get('status') != 'error' or time.time() < previous.get('retry_after',0)):
                 summary['already_attempted']+=1; continue
-            source=pinned_source(profile) or title_source(profile)
-            if not source:
-                summary['needs_source_identity']+=1; continue
             selected.append((len(readiness['blockers']), key, path, original, profile, source, fingerprint))
             if len(selected)>=args.limit:
                 break
@@ -156,10 +203,16 @@ async def run(args):
         try:
             row=RosterRow(category=old['category'],franchise=old['franchise'],name=old['name'],aliases=old.get('aliases') or [],wiki_title=source['title'],wiki_url=source['url'],wiki_page_id=str(source['page_id']) if re.fullmatch(r'[1-9][0-9]*',str(source.get('page_id') or '')) else None)
             wiki=await asyncio.wait_for(harvester.fetch_mediawiki_source(row),timeout=45)
-            if not wiki or not identity_matches(row.name,wiki['title'],row.franchise):
+            if not wiki:
                 raise SourceIdentityReview('Source identity could not be confirmed')
-            if not row.wiki_page_id and not (wiki.get('fields') or {}).get('origin'):
+            roster_identity = source.get('mapping_kind') == 'curated_roster' and str(wiki.get('title') or '').casefold() == str(source.get('title') or '').casefold()
+            if not (identity_matches(row.name,wiki['title'],row.franchise) or roster_identity):
+                raise SourceIdentityReview('Source identity could not be confirmed')
+            source_origin = (wiki.get('fields') or {}).get('origin')
+            if not row.wiki_page_id and not source_origin:
                 raise SourceIdentityReview('Title-only recovery requires source franchise evidence')
+            if source_origin and not origin_matches(row.franchise, source_origin):
+                raise SourceIdentityReview('Source franchise evidence does not match the roster identity')
             candidate=build_profile(row=row,anilist_identity=None,igdb_identity=None,wiki_source=wiki,errors=[])
             candidate['id']=old['id']
             candidate['profile_hash']=stable_hash_without_profile_hash(candidate)

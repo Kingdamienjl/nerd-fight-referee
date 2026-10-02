@@ -26,7 +26,13 @@ run_batch() {
         -v /opt/referee:/workspace -v /opt/referee/profiles/generated:/live/profiles/generated \
         -v "$output":/results -w /workspace -e PYTHONPATH=/workspace/src:/workspace \
         referee-operational:20260909 python -P services/repair_legacy_profiles.py \
-        --root /live/profiles/generated --output /results --limit 16 "$@"
+        --root /live/profiles/generated --output /results --limit 24 "$@"
+}
+record_progress() {
+    docker run --rm --name referee-verification-progress --network referee_default --env-file /opt/referee/.env \
+        -v /opt/referee:/workspace -w /workspace -e PYTHONPATH=/workspace/src:/workspace \
+        referee-operational:20260909 python -P services/verification_progress.py
 }
 run_batch
 run_batch --apply
+record_progress

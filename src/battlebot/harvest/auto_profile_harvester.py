@@ -1712,6 +1712,11 @@ async def run_queue_once(args: argparse.Namespace, processed_total: int) -> tupl
             roster_state=roster_state,
             skip_needs_review_existing=args.skip_needs_review_existing,
         )
+        # A completed cursor only means that one pass ended. Failed or
+        # otherwise unresolved rows remain pending and must be revisited on
+        # the next roster rotation instead of becoming permanently stranded.
+        if summary.pending:
+            roster_state["cursor_index"] = 0
         print_queue_summary(summary)
         write_json_state_atomic(args.state_file, state)
         return [], processed_total

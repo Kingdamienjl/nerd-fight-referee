@@ -539,7 +539,38 @@ def extract_promoted_names_from_log(path: Path) -> list[str]:
     return clean
 
 
+def latest_repair_promotions(limit: int = 12) -> list[str]:
+    state_path = Path("backups/legacy-repair-20260922/apply-state.json")
+    if not state_path.exists():
+        return []
+    try:
+        state = json.loads(state_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    promoted = [
+        item
+        for item in state.values()
+        if isinstance(item, dict) and item.get("status") == "promoted" and item.get("name")
+    ]
+    promoted.sort(key=lambda item: str(item.get("timestamp") or ""), reverse=True)
+    names: list[str] = []
+    seen: set[str] = set()
+    for item in promoted:
+        name = display_fighter_name(str(item["name"]).strip())
+        key = name.casefold()
+        if name and key not in seen:
+            seen.add(key)
+            names.append(name)
+        if len(names) >= limit:
+            break
+    return names
+
+
 def latest_actual_promotions(limit: int = 12) -> tuple[list[str], str | None]:
+    repaired = latest_repair_promotions(limit=limit)
+    if repaired:
+        return repaired, "backups/legacy-repair-20260922/apply-state.json"
+
     logs = sorted(
         Path("logs/promote").glob("refinement_promote_*.json"),
         key=lambda p: p.stat().st_mtime,
@@ -590,7 +621,7 @@ def make_recent_ready_report(state: dict) -> str | None:
     return (
         "🧬 **Recently Promoted Battle-Ready Fighters**\n\n"
         f"{body}\n\n"
-        f"Source: latest promotion log `{source_log}`. Pick two and call the next fight."
+        f"Source: verified promotion record `{source_log}`. Pick two and call the next fight."
     )
 
 
