@@ -999,7 +999,33 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
             score_total -= 1
             deciding.append(deciding_factor(axis, b, a))
     notes = quality_notes(packet)
-    if parsed < 2 or score_total == 0:
+    # Tiebreakers: when raw stat axes tie but we have enough parsed data,
+    # break the tie deterministically before punting to judge review.
+    tiebreak_winner: str | None = None
+    tiebreak_reason: str | None = None
+    if parsed >= 2 and score_total == 0:
+        abilities_a = len(a.get("abilities") or [])
+        abilities_b = len(b.get("abilities") or [])
+        if abilities_a != abilities_b:
+            tiebreak_winner = "contender_a" if abilities_a > abilities_b else "contender_b"
+            tiebreak_reason = (
+                f"ability count {max(abilities_a, abilities_b)} vs {min(abilities_a, abilities_b)}"
+            )
+        else:
+            equip_a = len(a.get("equipment") or a.get("weapons") or [])
+            equip_b = len(b.get("equipment") or b.get("weapons") or [])
+            if equip_a != equip_b:
+                tiebreak_winner = "contender_a" if equip_a > equip_b else "contender_b"
+                tiebreak_reason = (
+                    f"equipment count {max(equip_a, equip_b)} vs {min(equip_a, equip_b)}"
+                )
+            else:
+                speed_a = scores_a.get("speed")
+                speed_b = scores_b.get("speed")
+                if speed_a is not None and speed_b is not None and speed_a != speed_b:
+                    tiebreak_winner = "contender_a" if speed_a > speed_b else "contender_b"
+                    tiebreak_reason = "speed edge"
+    if parsed < 2 or (score_total == 0 and tiebreak_winner is None):
         return {
             "label": "Nerd Fight Referee Decision",
             "winner": "needs_judge_review",
@@ -1018,11 +1044,25 @@ def smoke_judge_packet(packet: dict[str, Any]) -> dict[str, Any]:
             "profile_quality_notes": notes,
             "diagnostics": {"fallback": True, "fallback_reason": "insufficient_packet_ranking"},
         }
-    winner_label = "contender_a" if score_total > 0 else "contender_b"
-    winner = a if score_total > 0 else b
-    loser = b if score_total > 0 else a
-    axis_leads = abs(score_total)
-    confidence = "strong" if parsed == 3 and axis_leads == 3 else "medium" if axis_leads >= 2 else "low"
+    if tiebreak_winner:
+        winner_label = tiebreak_winner
+        winner = a if tiebreak_winner == "contender_a" else b
+        loser = b if tiebreak_winner == "contender_a" else a
+        confidence = "low"
+        tiebreak_name = contender_name(winner)
+        deciding.append(
+            {
+                "factor": "Tiebreaker",
+                "evidence": f"{tiebreak_name} wins on tiebreaker: {tiebreak_reason}.",
+                "tactical_effect": "Stat axes tied; secondary profile depth decided the deterministic outcome.",
+            }
+        )
+    else:
+        winner_label = "contender_a" if score_total > 0 else "contender_b"
+        winner = a if score_total > 0 else b
+        loser = b if score_total > 0 else a
+        axis_leads = abs(score_total)
+        confidence = "strong" if parsed == 3 and axis_leads == 3 else "medium" if axis_leads >= 2 else "low"
     warnings = []
     capping_warnings = winner_capping_warnings(packet, winner, winner_label) or matchup_capping_warnings(packet)
     if capping_warnings:

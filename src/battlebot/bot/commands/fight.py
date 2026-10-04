@@ -460,14 +460,13 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
 
         async def handler() -> str:
             if (forms_a or forms_b) and not form_a and not form_b:
-                embed = discord.Embed(
-                    title="Form Selection Available",
-                    description=f"Multiple canonical forms exist for this matchup.\nChoose specific active forms below, or click **Confirm Form & Fight** to proceed with base/strongest canonical forms.",
-                    color=discord.Color(0xF1C40F),
+                # Auto-default to base/canonical forms instead of stalling on a picker.
+                # Users can still request a specific form via the form_a/form_b options.
+                print(
+                    f"[fight] auto-selected base forms: '{contender_a}' "
+                    f"(skipped forms: {forms_a}) vs '{contender_b}' (skipped forms: {forms_b})",
+                    flush=True,
                 )
-                view = FormSelectionView(contender_a, contender_b, forms_a, forms_b, on_confirmed=execute_fight)
-                await interaction.response.send_message(embed=embed, view=view, ephemeral=ephemeral)
-                return "Prompted for form selection"
 
             return await execute_fight(interaction, None, None)
 
