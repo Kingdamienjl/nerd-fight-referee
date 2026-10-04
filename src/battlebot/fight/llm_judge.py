@@ -564,16 +564,17 @@ def build_referee_stage2_prompt(
         "- BRAWLER RULE: Brute-force fighters NEVER gain multilocation/omnipresence or learn to absorb foreign exotic energies.",
         "- Append [n] only to claims supported by the matching source_refs/stat_source_refs in the packet.",
         "",
-        "You MUST output exactly this layout (350-500 words total):",
-        f"Predicted winner: <{name_a} OR {name_b} OR Unresolved>",
-        f"Quick Verdict: <Write 2-3 concise sentences on this line: the decisive interaction between {name_a} and {name_b}, why the winning route works, and the alternate counter route.>",
-        f"Phase 1: Neutral & Probing Exchange",
-        f"<One analytical paragraph for opening neutral engagement between {name_a} and {name_b}.>",
-        f"Phase 2: Escalation & Tool Deployment",
-        f"<One analytical paragraph for tool and ability deployment between {name_a} and {name_b}.>",
-        f"Phase 3: The Climax & Finishing Blow",
-        f"<One analytical paragraph for decisive finishing blow between {name_a} and {name_b}.>",
-        f"Difficulty: {det_diff}",
+        "Respond with ONLY a valid JSON object (no markdown fences, no commentary, no extra text) with exactly these fields:",
+        "predicted_winner: one of '" + name_a + "' | '" + name_b + "' | 'Unresolved'",
+        "quick_verdict: 2-3 concise sentences on the decisive interaction, why the winning route works, and the alternate counter route",
+        "phase_1: one analytical paragraph on the opening neutral engagement",
+        "phase_2: one analytical paragraph on tool and ability deployment",
+        "phase_3: one analytical paragraph on the decisive finishing blow",
+        "difficulty: exactly '" + det_diff + "'",
+        "confidence: one of 'high' | 'medium' | 'low'",
+        'Example shape: {"predicted_winner": "<name>", "quick_verdict": "<text>", "phase_1": "<text>", "phase_2": "<text>", "phase_3": "<text>", "difficulty": "<diff>", "confidence": "<high|medium|low>"}',
+        "Total narrative content (quick_verdict + all phases) should be 350-500 words.",
+        "Every narrative field must obey all grounding rules above (exact fighter names, zero invention, named forms only).",
     ])
     return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user_prompt}]
 
@@ -621,6 +622,63 @@ def extract_prefixed_line(text: str, prefix: str) -> str:
         if stripped.casefold().startswith(normalized_prefix):
             return stripped[len(prefix) :].strip(" :-")
     return ""
+
+
+
+
+
+def normalize_referee_output(raw, name_a, name_b, det_diff):
+    """Parse JSON if present; fall back to raw text. Returns (text, dict|None)."""
+    data = parse_referee_json(raw)
+    if data and any(k in data for k in ("predicted_winner", "quick_verdict", "phase_1")):
+        return referee_json_to_text(data, name_a, name_b, det_diff), data
+    return raw, None
+
+
+def referee_json_to_text(data, name_a, name_b, det_diff):
+    """Reconstruct canonical referee text layout from parsed JSON."""
+    winner = str(data.get("predicted_winner") or "Unresolved").strip() or "Unresolved"
+    quick = str(data.get("quick_verdict") or "").strip()
+    p1 = str(data.get("phase_1") or "").strip()
+    p2 = str(data.get("phase_2") or "").strip()
+    p3 = str(data.get("phase_3") or "").strip()
+    diff = str(data.get("difficulty") or det_diff).strip() or det_diff
+    return "\n".join([
+        "Predicted winner: " + winner,
+        "Quick Verdict: " + quick,
+        "Phase 1: Neutral & Probing Exchange",
+        p1,
+        "Phase 2: Escalation & Tool Deployment",
+        p2,
+        "Phase 3: The Climax & Finishing Blow",
+        p3,
+        "Difficulty: " + diff,
+    ])
+
+
+def parse_referee_json(raw):
+    """Try to parse structured JSON referee output. Returns dict or None."""
+    import json as _json
+    import re as _re
+    text = (raw or "").strip()
+    if text.startswith("```"):
+        lines = text.splitlines()
+        if lines and lines[0].strip().startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        text = "\n".join(lines).strip()
+    try:
+        data = _json.loads(text)
+    except Exception:
+        m = _re.search(r"\{.*\}", text, _re.S)
+        if not m:
+            return None
+        try:
+            data = _json.loads(m.group(0))
+        except Exception:
+            return None
+    return data if isinstance(data, dict) else None
 
 
 def referee_winner_from_text(raw: str, names: list[str]) -> str:
@@ -1103,6 +1161,7 @@ async def call_ollama(
     messages: list[dict[str, str]],
     *,
     env: dict[str, str] | None = None,
+    format_json: bool = False,
 ) -> str:
     values = env or os.environ
     base_url = str(values.get("OLLAMA_BASE_URL") or "http://127.0.0.1:11434").rstrip("/")
@@ -1121,6 +1180,8 @@ async def call_ollama(
             "num_thread": int(values.get("BATTLEBOT_LLM_NUM_THREAD") or 8),
         },
     }
+    if format_json:
+        payload["format"] = "json"
     async with httpx.AsyncClient(timeout=timeout) as client:
         response = await client.post(f"{base_url}/api/chat", json=payload)
         response.raise_for_status()
@@ -1129,7 +1190,7 @@ async def call_ollama(
     return str(message.get("content") or data.get("response") or "")
 
 
-async def _invoke_caller(caller: Any, messages: list[dict[str, str]], *, model: str | None = None, env: dict[str, str] | None = None) -> str:
+async def _invoke_caller(caller: Any, messages: list[dict[str, str]], *, model: str | None = None, env: dict[str, str] | None = None, format_json: bool = False) -> str:
     import inspect
     sig = inspect.signature(caller)
     params = list(sig.parameters.keys())
@@ -1138,6 +1199,8 @@ async def _invoke_caller(caller: Any, messages: list[dict[str, str]], *, model: 
         kwargs["model"] = model
     if "env" in params:
         kwargs["env"] = env
+    if "format_json" in params and format_json:
+        kwargs["format_json"] = format_json
     try:
         res = caller(messages, **kwargs)
     except TypeError:
@@ -1178,9 +1241,15 @@ async def judge_fight_packet(
                 analyst_raw = f"Tactical analysis unavailable: {analyst_exc}"
 
             referee_messages = build_referee_stage2_prompt(packet, smoke, analyst_raw)
-            referee_raw = await _invoke_caller(caller, referee_messages, model=voice_model, env=env)
+            referee_raw = await _invoke_caller(caller, referee_messages, model=voice_model, env=env, format_json=True)
+            _rfa = (packet.get("contender_a") or {}).get("canonical_name") or "Contender A"
+            _rfb = (packet.get("contender_b") or {}).get("canonical_name") or "Contender B"
+            _rdiff = deterministic_difficulty(smoke)
+            referee_raw, referee_structured = normalize_referee_output(referee_raw, _rfa, _rfb, _rdiff)
 
             decision = llm_explained_decision(smoke, referee_raw, packet=packet)
+            if referee_structured:
+                decision["referee_structured"] = referee_structured
             decision["analyst_breakdown"] = analyst_raw
             decision["analyst_model"] = analyst_model
             decision["voice_model"] = voice_model
