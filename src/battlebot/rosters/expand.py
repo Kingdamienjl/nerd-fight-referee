@@ -195,6 +195,16 @@ Geralt of Rivia, 2B, Link, Zelda, Samus Aran, Pikachu, Mewtwo, Lucario,
 Charizard, Ash Ketchum, Optimus Prime, Megatron, Leonardo, Raphael, Donatello,
 Michelangelo, He-Man, Skeletor, She-Ra, Spawn, Invincible, Goku, Naruto Uzumaki
 """,
+    ("mixed", "Adult Cartoons"): """
+Lois Griffin|Lois Pewterschmidt, Peter Griffin, Stewie Griffin, Brian Griffin,
+Marge Simpson, Homer Simpson, Bart Simpson, Lisa Simpson,
+Rick Sanchez, Morty Smith, SpongeBob SquarePants, Patrick Star
+""",
+    ("mixed", "Movie Icons"): """
+Terminator|T-800|Model 101, T-1000, Pinhead|Hell Priest, Michael Myers,
+Freddy Krueger, Jason Voorhees, RoboCop|Alex Murphy, John Wick,
+Ellen Ripley, Predator|Yautja, Xenomorph
+""",
 }
 
 MARVEL_VARIANTS = ("", " (Marvel Comics)", " (Earth-616)", " (Marvel Cinematic Universe)")

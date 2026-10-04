@@ -16,7 +16,7 @@ def run_bounded(command, timeout):
         output.seek(max(0, size - 8000))
         tail = output.read().decode("utf-8", errors="replace")
         print(json.dumps({"stage": "subprocess", "exit_code": result.returncode, "output_bytes": size, "output_tail": tail}), flush=True)
-        return result
+        return result, tail
 
 
 def generated_snapshot(root=Path("profiles/generated")):
@@ -35,7 +35,7 @@ def import_if_changed(state):
     if state.get("last_import_snapshot")==snapshot:
         print(json.dumps({"stage":"import","skipped":"generated_profiles_unchanged"}),flush=True)
         return
-    imported=run_bounded([sys.executable,"-P","-m","battlebot.ingest.import_profiles",
+    imported, _tail=run_bounded([sys.executable,"-P","-m","battlebot.ingest.import_profiles",
                           "profiles/generated","--changed-only"],timeout=300)
     if imported.returncode==0:
         state["last_import_snapshot"]=snapshot
@@ -47,6 +47,7 @@ def main():
     state_path.parent.mkdir(parents=True, exist_ok=True)
     state = json.loads(state_path.read_text()) if state_path.exists() else {}
     index = state.get("index", 0)
+    idle_cycles = 0
     while True:
         rosters = sorted(Path("profiles/rosters").glob("*.csv"))
         if not rosters:
@@ -55,17 +56,25 @@ def main():
         cmd = [sys.executable, "-P", "-m", "battlebot.harvest.auto_profile_harvester",
                "--input", str(roster), "--queue-mode", "--max-per-cycle", str(max(1, min(8, int(os.getenv("REFEREE_HARVEST_BATCH", "4"))))), "--quiet-skips"]
         try:
-            result = run_bounded(cmd, timeout=600)
+            result, tail = run_bounded(cmd, timeout=600)
             print(json.dumps({"stage": "harvest", "roster": str(roster), "exit_code": result.returncode}), flush=True)
             if result.returncode == 0:
                 import_if_changed(state)
+            if "processed_this_cycle: 0" in tail and "generated_this_cycle: 0" in tail:
+                idle_cycles += 1
+            else:
+                idle_cycles = 0
         except subprocess.TimeoutExpired:
             print(json.dumps({"stage": "harvest/import", "error": "timeout"}), flush=True)
+            idle_cycles = 0
         index += 1
         temp = state_path.with_suffix(".tmp")
         state["index"] = index
         temp.write_text(json.dumps(state))
         temp.replace(state_path)
+        if idle_cycles >= len(rosters):
+            print(json.dumps({"stage": "harvest", "status": "idle_rotation_complete", "msg": "exiting"}), flush=True)
+            break
         time.sleep(max(60, int(os.getenv("REFEREE_HARVEST_INTERVAL", "180"))))
 
 
