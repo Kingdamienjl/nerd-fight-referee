@@ -2,25 +2,31 @@
 
 from __future__ import annotations
 
+import os
 import re
 from typing import Any
 
-import os
-
 import discord
-from discord import app_commands
-
 from battlebot.bot.audit import run_audited_command
 from battlebot.common.db import connect_database
-from battlebot.fight.decision_formatter import clamp_text, compact_field, format_decision, split_text_for_discord, structured_decision_output, sanitize_fight_card_item, is_dirty_fight_card_item
+from battlebot.fight.citations import evidence_brief, linked_citations, source_panel
+from battlebot.fight.decision_formatter import (
+    clamp_text,
+    compact_field,
+    format_decision,
+    is_dirty_fight_card_item,
+    sanitize_fight_card_item,
+    split_text_for_discord,
+    structured_decision_output,
+)
 from battlebot.fight.llm_judge import judge_fight_packet
 from battlebot.fight.personality import details as personality_details
-from battlebot.fight.citations import linked_citations, source_panel, evidence_brief
 from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.profiles.fight_packet import build_fight_packet
 from battlebot.profiles.search import format_search_results, search_characters
 from battlebot.profiles.variants import CURATED_VARIANTS, split_variant_name
 from battlebot.review.queue import enqueue_job
+from discord import app_commands
 
 
 def available_forms_for_query(query: str) -> list[str]:
@@ -34,9 +40,8 @@ def available_forms_for_query(query: str) -> list[str]:
             seed.parent_name.casefold() == target
             or seed.name.casefold() == target
             or any(target == a.casefold() for a in seed.aliases.split("|") if a)
-        ):
-            if seed.variant_name and seed.variant_name not in forms:
-                forms.append(seed.variant_name)
+        ) and seed.variant_name and seed.variant_name not in forms:
+            forms.append(seed.variant_name)
     return forms
 
 
@@ -390,7 +395,7 @@ async def send_deferred_fight_result(
     decision = await judge_fight_packet(packet, smoke_result)
     decision["presentation_packet"] = packet
     text = format_decision(decision, include_diagnostics=ephemeral)
-    structured = structured_decision_output(decision)
+    structured_decision_output(decision)
     status = "Choose a section below to explore the matchup."
     if (decision.get("diagnostics") or {}).get("fallback") and (decision.get("diagnostics") or {}).get("fallback_reason") != "llm_explanation":
         status = "Full breakdown unavailable. The evidence and provisional assessment remain available."
@@ -491,10 +496,9 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
                     needle in display.casefold()
                     or needle in seed.parent_name.casefold()
                     or any(needle in a.casefold() for a in seed.aliases.split("|") if a)
-                ):
-                    if display.casefold() not in seen:
-                        seen.add(display.casefold())
-                        choices.append(app_commands.Choice(name=display[:100], value=display[:100]))
+                ) and display.casefold() not in seen:
+                    seen.add(display.casefold())
+                    choices.append(app_commands.Choice(name=display[:100], value=display[:100]))
                 if len(choices) >= 12:
                     break
 
@@ -508,7 +512,7 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
                         choices.append(app_commands.Choice(name=name[:100], value=name[:100]))
                     if len(choices) >= 25:
                         break
-        except Exception:
+        except Exception:  # noqa: BLE001, S110
             pass
 
         return choices[:25]
