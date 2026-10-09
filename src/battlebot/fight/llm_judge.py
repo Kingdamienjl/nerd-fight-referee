@@ -10,14 +10,19 @@ import re
 from typing import Any
 
 import httpx
-
 from battlebot.common.db import connect_database
-from battlebot.fight.personality import PERSONA, PHASES, DIFFICULTIES, parse_phases, generate_fallback_phases
-from battlebot.fight.citations import source_catalog, reference_numbers
-from battlebot.fight.decision_formatter import format_decision, sanitize_fight_card_item, truncate_at_sentence_boundary
+from battlebot.fight.decision_formatter import (
+    format_decision,
+    sanitize_fight_card_item,
+    truncate_at_sentence_boundary,
+)
+from battlebot.fight.personality import (
+    DIFFICULTIES,
+    generate_fallback_phases,
+    parse_phases,
+)
 from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.profiles.fight_packet import build_fight_packet
-
 
 FALLBACK_LLM_DISABLED = "LLM disabled"
 FALLBACK_OLLAMA_UNAVAILABLE = "Ollama unavailable"
@@ -131,9 +136,7 @@ def is_sludge_text(text: str) -> bool:
         return True
     if any(re.search(pat, text) for pat in SLUDGE_DISCARD_PATTERNS):
         return True
-    if normalized.startswith("category:"):
-        return True
-    return False
+    return bool(normalized.startswith("category:"))
 
 
 def compact_snippet(value: Any, *, limit: int = 180) -> str:
@@ -524,15 +527,7 @@ def build_analyst_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any])
         "Compact packet evidence for both contenders:",
         json.dumps(evidence, sort_keys=True),
     ])
-    user_prompt = "\n".join([
-        "=== TACTICAL ANALYST BRIEFING ===",
-        briefing,
-        "=================================",
-        "You are the Tactical Analyst. Provide a structured powerscaling tactical breakdown:",
-        "1. STAT & SPEED TIER COMPARISON: explicit speed, AP, durability, range limits.",
-        "2. TOOL & ABILITY INTERACTIONS: specific mechanics, counters, and resistances.",
-        "3. DECISIVE WIN CONDITIONS: why the winner prevails and what the loser must exploit.",
-    ])
+    user_prompt = f"=== TACTICAL ANALYST BRIEFING ===\n{briefing}\n=================================\nYou are the Tactical Analyst. Provide a structured powerscaling tactical breakdown:\n1. STAT & SPEED TIER COMPARISON: explicit speed, AP, durability, range limits.\n2. TOOL & ABILITY INTERACTIONS: specific mechanics, counters, and resistances.\n3. DECISIVE WIN CONDITIONS: why the winner prevails and what the loser must exploit."
     return [{"role": "system", "content": ANALYST_SYSTEM_PROMPT}, {"role": "user", "content": user_prompt}]
 
 
@@ -670,13 +665,13 @@ def parse_referee_json(raw):
         text = "\n".join(lines).strip()
     try:
         data = _json.loads(text)
-    except Exception:
-        m = _re.search(r"\{.*\}", text, _re.S)
+    except Exception:  # noqa: BLE001
+        m = _re.search(r"\{.*\}", text, _re.DOTALL)
         if not m:
             return None
         try:
             data = _json.loads(m.group(0))
-        except Exception:
+        except Exception:  # noqa: BLE001
             return None
     return data if isinstance(data, dict) else None
 
@@ -687,7 +682,7 @@ def referee_winner_from_text(raw: str, names: list[str]) -> str:
         explicit = extract_prefixed_line(raw, prefix)
         if explicit:
             for name in names:
-                if name and re.search(rf"\b{re.escape(name)}\b", explicit, re.I):
+                if name and re.search(rf"\b{re.escape(name)}\b", explicit, re.IGNORECASE):
                     return name
 
     # 2. Regex fallback for lines starting with Predicted winner / Victor
@@ -695,7 +690,7 @@ def referee_winner_from_text(raw: str, names: list[str]) -> str:
     if m:
         val = m.group(1).strip()
         for name in names:
-            if name and re.search(rf"\b{re.escape(name)}\b", val, re.I):
+            if name and re.search(rf"\b{re.escape(name)}\b", val, re.IGNORECASE):
                 return name
 
     # 3. Search Quick Verdict / Decisive factor lines
@@ -704,23 +699,23 @@ def referee_winner_from_text(raw: str, names: list[str]) -> str:
         for name in names:
             other_names = [n for n in names if n != name]
             for other in other_names:
-                if re.search(rf"\b{re.escape(name)}.*(?:overwhelmed|defeated|countered|surpassed|outmatched)\s+{re.escape(other)}\b", quick_line, re.I):
+                if re.search(rf"\b{re.escape(name)}.*(?:overwhelmed|defeated|countered|surpassed|outmatched)\s+{re.escape(other)}\b", quick_line, re.IGNORECASE):
                     return name
-                if re.search(rf"\b(?:decisive\s+factor\s+was|decisive\s+advantage\s+belongs\s+to|victory\s+goes\s+to)\s+{re.escape(name)}\b", quick_line, re.I):
+                if re.search(rf"\b(?:decisive\s+factor\s+was|decisive\s+advantage\s+belongs\s+to|victory\s+goes\s+to)\s+{re.escape(name)}\b", quick_line, re.IGNORECASE):
                     return name
 
     # 4. Search concluding lines / Phase 3 for decisive finish
     for line in reversed([l.strip() for l in raw.splitlines() if l.strip()]):
         for name in names:
-            if re.search(rf"\b{re.escape(name)}\s+(?:wins|prevails|is victorious|takes the victory|defeats|secures the win|finishes the fight)\b", line, re.I):
+            if re.search(rf"\b{re.escape(name)}\s+(?:wins|prevails|is victorious|takes the victory|defeats|secures the win|finishes the fight)\b", line, re.IGNORECASE):
                 return name
-            if re.search(rf"\b{re.escape(name)}.*(?:proved decisive|proves decisive|claims victory|secures victory)\b", line, re.I):
+            if re.search(rf"\b{re.escape(name)}.*(?:proved decisive|proves decisive|claims victory|secures victory)\b", line, re.IGNORECASE):
                 return name
             other_names = [n for n in names if n != name]
             for other in other_names:
-                if re.search(rf"\boverwhelmed\s+{re.escape(other)}.*(?:leaving|allowing)\s+{re.escape(name)}\b", line, re.I):
+                if re.search(rf"\boverwhelmed\s+{re.escape(other)}.*(?:leaving|allowing)\s+{re.escape(name)}\b", line, re.IGNORECASE):
                     return name
-                if re.search(rf"\b{re.escape(other)}\s+(?:collapsed|fell|succumbed|was overwhelmed)\b", line, re.I):
+                if re.search(rf"\b{re.escape(other)}\s+(?:collapsed|fell|succumbed|was overwhelmed)\b", line, re.IGNORECASE):
                     return name
 
     # 5. Score mentions near win keywords across the whole text
@@ -736,10 +731,10 @@ def referee_winner_from_text(raw: str, names: list[str]) -> str:
             rf"\b{re.escape(name)}.*overwhelmed\b",
         ]
         for pat in win_patterns:
-            matches = len(re.findall(pat, raw, re.I))
+            matches = len(re.findall(pat, raw, re.IGNORECASE))
             scores[name] += matches * 3
         last_chunk = "\n".join(raw.splitlines()[-6:])
-        if re.search(rf"\b{re.escape(name)}\b", last_chunk, re.I):
+        if re.search(rf"\b{re.escape(name)}\b", last_chunk, re.IGNORECASE):
             scores[name] += 1
 
     ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
@@ -789,20 +784,20 @@ def clean_llm_explanation(raw: str, packet: dict[str, Any] | None = None) -> str
             name = str(contender.get("canonical_name") or "")
             equipment_names = " ".join(str(e.get("name") or "") for e in contender.get("equipment", [])).casefold()
             if "senzu" in equipment_names and name:
-                cleaned = re.sub(rf"\b{re.escape(name)}'s\s+regeneration\b", f"{name}'s Senzu Beans", cleaned, flags=re.I)
-                cleaned = re.sub(rf"\b{re.escape(name)}'s\s+healing\s+factor\b", f"{name}'s Senzu Beans", cleaned, flags=re.I)
-                cleaned = re.sub(rf"\b{re.escape(name)}'s\s+regenerative\s+capabilities\b", f"{name}'s Senzu Beans", cleaned, flags=re.I)
+                cleaned = re.sub(rf"\b{re.escape(name)}'s\s+regeneration\b", f"{name}'s Senzu Beans", cleaned, flags=re.IGNORECASE)
+                cleaned = re.sub(rf"\b{re.escape(name)}'s\s+healing\s+factor\b", f"{name}'s Senzu Beans", cleaned, flags=re.IGNORECASE)
+                cleaned = re.sub(rf"\b{re.escape(name)}'s\s+regenerative\s+capabilities\b", f"{name}'s Senzu Beans", cleaned, flags=re.IGNORECASE)
         # Sanitize false energy equalization claims in narrative
         if not (packet.get("rules") or {}).get("energy_equalization"):
-            cleaned = re.sub(r"\band\s+energy\s+equalization\s+prevents?\b", "prevents", cleaned, flags=re.I)
-            cleaned = re.sub(r"\benergy\s+equalization\s+prevents?\b", "durability prevents", cleaned, flags=re.I)
+            cleaned = re.sub(r"\band\s+energy\s+equalization\s+prevents?\b", "prevents", cleaned, flags=re.IGNORECASE)
+            cleaned = re.sub(r"\benergy\s+equalization\s+prevents?\b", "durability prevents", cleaned, flags=re.IGNORECASE)
         # Sanitize ungrounded energy absorption to energy barrier if contender has ki/barrier
         for side in ("contender_a", "contender_b"):
             contender = packet.get(side) or {}
             name = str(contender.get("canonical_name") or "")
             abilities_text = json.dumps(contender.get("abilities", [])).casefold()
             if "barrier" in abilities_text or "ki manipulation" in abilities_text:
-                cleaned = re.sub(rf"\b{re.escape(name)}'s\s+energy\s+absorption\b", f"{name}'s energy barrier", cleaned, flags=re.I)
+                cleaned = re.sub(rf"\b{re.escape(name)}'s\s+energy\s+absorption\b", f"{name}'s energy barrier", cleaned, flags=re.IGNORECASE)
     return cleaned
 
 
@@ -923,14 +918,12 @@ def llm_output_violates_grounding(explanation: str, smoke: dict[str, Any], *, pa
 
     if packet:
         # Check optical invisibility
-        if any(term in normalized for term in ("invisibility", "invisible", "turns invisible", "became invisible")):
-            if not packet_has_ability_keyword(packet, "invisib") and not packet_has_ability_keyword(packet, "cloaking") and not packet_has_ability_keyword(packet, "camouflage"):
-                return "hallucinated optical invisibility power (neither contender possesses optical invisibility)"
+        if any(term in normalized for term in ("invisibility", "invisible", "turns invisible", "became invisible")) and not packet_has_ability_keyword(packet, "invisib") and not packet_has_ability_keyword(packet, "cloaking") and not packet_has_ability_keyword(packet, "camouflage"):
+            return "hallucinated optical invisibility power (neither contender possesses optical invisibility)"
 
         # Check multilocation / omnipresence
-        if any(term in normalized for term in ("multilocation", "multilocating", "omnipresent", "omnipresence")):
-            if not packet_has_ability_keyword(packet, "multilocation") and not packet_has_ability_keyword(packet, "omnipresen") and not packet_has_ability_keyword(packet, "duplication"):
-                return "hallucinated multilocation/omnipresence"
+        if any(term in normalized for term in ("multilocation", "multilocating", "omnipresent", "omnipresence")) and not packet_has_ability_keyword(packet, "multilocation") and not packet_has_ability_keyword(packet, "omnipresen") and not packet_has_ability_keyword(packet, "duplication"):
+            return "hallucinated multilocation/omnipresence"
 
         # Check exotic energy absorption / conceptualization violations
         if any(term in normalized for term in (
@@ -955,19 +948,16 @@ def llm_output_violates_grounding(explanation: str, smoke: dict[str, Any], *, pa
                 return "hallucinated Ultra Instinct (neither contender has Ultra Instinct selected as active form)"
 
         # Check hallucinated passive regeneration or healing
-        if any(term in normalized for term in ("regeneration", "regenerates", "regenerating", "healing factor", "rapidly heals")):
-            if not packet_has_ability_keyword(packet, "regenerat") and not packet_has_ability_keyword(packet, "healing factor") and not packet_has_ability_keyword(packet, "immortal"):
-                return "hallucinated passive regeneration or healing factor (neither contender possesses innate regeneration)"
+        if any(term in normalized for term in ("regeneration", "regenerates", "regenerating", "healing factor", "rapidly heals")) and not packet_has_ability_keyword(packet, "regenerat") and not packet_has_ability_keyword(packet, "healing factor") and not packet_has_ability_keyword(packet, "immortal"):
+            return "hallucinated passive regeneration or healing factor (neither contender possesses innate regeneration)"
 
         # Check ungrounded energy absorption
-        if any(term in normalized for term in ("energy absorption", "absorbs the energy", "absorbed the blast", "absorbs the blast")):
-            if not packet_has_ability_keyword(packet, "absorption") and not packet_has_ability_keyword(packet, "absorb"):
-                return "hallucinated energy absorption (neither contender possesses energy absorption)"
+        if any(term in normalized for term in ("energy absorption", "absorbs the energy", "absorbed the blast", "absorbs the blast")) and not packet_has_ability_keyword(packet, "absorption") and not packet_has_ability_keyword(packet, "absorb"):
+            return "hallucinated energy absorption (neither contender possesses energy absorption)"
 
         # Check ungrounded teleportation
-        if any(term in normalized for term in ("teleportation", "teleports", "teleporting", "teleported")):
-            if not packet_has_ability_keyword(packet, "teleport") and not packet_has_ability_keyword(packet, "instant transmission"):
-                return "hallucinated teleportation (neither contender possesses teleportation)"
+        if any(term in normalized for term in ("teleportation", "teleports", "teleporting", "teleported")) and not packet_has_ability_keyword(packet, "teleport") and not packet_has_ability_keyword(packet, "instant transmission"):
+            return "hallucinated teleportation (neither contender possesses teleportation)"
 
         # Check prompt-leak terms from unrelated franchises
         for term in ("genjutsu", "stand perception", "stand user"):
@@ -984,7 +974,7 @@ def llm_output_violates_grounding(explanation: str, smoke: dict[str, Any], *, pa
             # Attribute melee to its actor; a speedster attacking a caster does not
             # mean the caster has been assigned unsupported melee abilities.
             for sentence in re.split(r"[.!?]", str(explanation or "")):
-                actor = re.search(re.escape(name) + r"\s+(?:(?:would|could|may|might|can)\s+)?(?:counter(?:ed|s)?\s+with|use(?:s|d)?|deliver(?:s|ed)?|throw(?:s)?|punch(?:es|ed)?|kick(?:s|ed)?|grappl(?:e|es|ed))\b", sentence, re.I)
+                actor = re.search(re.escape(name) + r"\s+(?:(?:would|could|may|might|can)\s+)?(?:counter(?:ed|s)?\s+with|use(?:s|d)?|deliver(?:s|ed)?|throw(?:s)?|punch(?:es|ed)?|kick(?:s|ed)?|grappl(?:e|es|ed))\b", sentence, re.IGNORECASE)
                 if actor and any(term in sentence[actor.start():].casefold() for term in GENERIC_MELEE_NARRATION):
                     return f"generic melee narration for {name}"
     return ""
@@ -1003,7 +993,10 @@ def deterministic_tactical_summary(smoke: dict[str, Any]) -> str:
 
 
 def llm_explained_decision(smoke: dict[str, Any], raw: str, *, packet: dict[str, Any]) -> dict[str, Any]:
-    from battlebot.fight.evidence_verdict_guard import assumes_decisive_power, unresolved_assumption_result
+    from battlebot.fight.evidence_verdict_guard import (
+        assumes_decisive_power,
+        unresolved_assumption_result,
+    )
     if assumes_decisive_power(raw):
         return unresolved_assumption_result(packet)
     raw_phases = parse_phases(raw)
@@ -1045,23 +1038,20 @@ def llm_explained_decision(smoke: dict[str, Any], raw: str, *, packet: dict[str,
         fallback["llm_guarded"] = True
         fallback["llm_guard_reasons"] = entity_violations
         return fallback
-    if (packet.get("rules") or {}).get("conditional_assessment"):
+    if (packet.get("rules") or {}).get("conditional_assessment") and len(phases) < 2 and not quick:
         # Only fallback if the model genuinely failed to generate narrative phases and quick verdict
-        if len(phases) < 2 and not quick:
-            fallback = fallback_decision(smoke, "incomplete_evidence_assessment", "The model did not provide a complete narrative breakdown.")
-            fallback["winner"] = smoke.get("winner") or "Unresolved"
-            fallback["quick_verdict"] = "A complete interaction assessment is unavailable. The raw-stat lean is insufficient to establish how the fighters' counters would interact."
-            fallback["narrative_phases"] = phases if len(phases) == 3 else generate_fallback_phases(fallback, packet)
-            return fallback
+        fallback = fallback_decision(smoke, "incomplete_evidence_assessment", "The model did not provide a complete narrative breakdown.")
+        fallback["winner"] = smoke.get("winner") or "Unresolved"
+        fallback["quick_verdict"] = "A complete interaction assessment is unavailable. The raw-stat lean is insufficient to establish how the fighters' counters would interact."
+        fallback["narrative_phases"] = phases if len(phases) == 3 else generate_fallback_phases(fallback, packet)
+        return fallback
 
     engine = engine_verdict(smoke)
     referee = referee_verdict(smoke, raw, concise_explanation, packet=packet)
     
     det_diff = deterministic_difficulty(smoke)
     raw_llm_diff = next((d for d in DIFFICULTIES if re.search(r"(?im)^\s*Difficulty:\s*" + re.escape(d) + r"[.\s]*$", raw)), None)
-    if det_diff in ("Neg/No Diff", "Low Diff") and raw_llm_diff in ("High Diff", "Extreme Diff"):
-        final_difficulty = det_diff
-    elif det_diff == "Extreme Diff" and raw_llm_diff in ("Neg/No Diff", "Low Diff"):
+    if det_diff in ("Neg/No Diff", "Low Diff") and raw_llm_diff in ("High Diff", "Extreme Diff") or det_diff == "Extreme Diff" and raw_llm_diff in ("Neg/No Diff", "Low Diff"):
         final_difficulty = det_diff
     else:
         final_difficulty = raw_llm_diff or det_diff
@@ -1237,7 +1227,7 @@ async def judge_fight_packet(
             analyst_messages = build_analyst_prompt(packet, smoke)
             try:
                 analyst_raw = await _invoke_caller(caller, analyst_messages, model=analyst_model, env=env)
-            except Exception as analyst_exc:
+            except Exception as analyst_exc:  # noqa: BLE001
                 analyst_raw = f"Tactical analysis unavailable: {analyst_exc}"
 
             referee_messages = build_referee_stage2_prompt(packet, smoke, analyst_raw)
