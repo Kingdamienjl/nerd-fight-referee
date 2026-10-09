@@ -12,7 +12,6 @@ from battlebot.common.db import connect_database
 from battlebot.fight.decision_formatter import sanitize_fight_card_item
 from battlebot.profiles.fight_packet import build_fight_packet
 
-
 TIER_PHRASES: tuple[tuple[str, int], ...] = (
     ("outerversal", 130),
     ("hyperversal", 120),
