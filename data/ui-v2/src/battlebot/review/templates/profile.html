@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ profile.name }} - Profile Review</title>
+    <link rel="stylesheet" href="/static/review.css">
+  </head>
+  <body>
+    <main class="detail">
+      <nav><a href="/">Back to profiles</a></nav>
+      <header class="detail-header">
+        <div>
+          <h1>{{ profile.name }}</h1>
+          <p>{{ profile.franchise }} / {{ profile.category }}</p>
+          <p class="path">{{ profile.path }}</p>
+        </div>
+        <div class="badges">
+          <span>{{ profile.status }}</span>
+          <span>{{ profile.profile_type }}</span>
+          <span>eligible: {{ profile.battle_eligible }}</span>
+          <span>confidence: {{ profile.confidence }}</span>
+        </div>
+      </header>
+
+      <section class="grid">
+        <article>
+          <h2>Review</h2>
+          <p><strong>Missing core:</strong> {{ profile.missing_core_fields|join(", ") or "none" }}</p>
+          <p><strong>Approval blockers:</strong> {{ profile.approval_blockers|join(", ") or "none" }}</p>
+          <p><strong>Reasons:</strong> {{ profile.review_reasons|join(", ") or "none" }}</p>
+          <p><strong>Ineligible:</strong> {{ profile.ineligible_reasons|join(", ") or "none" }}</p>
+          <p><strong>Warnings:</strong>
+            {% for warning in profile.quality_warnings %}
+            <span class="pill">{{ warning.flag }}</span>
+            {% else %}
+            none
+            {% endfor %}
+          </p>
+        </article>
+        <article>
+          <h2>Core Scale</h2>
+          <p><strong>Attack:</strong> {{ profile.attack_potency or "n/a" }}</p>
+          <p><strong>Speed:</strong> {{ profile.speed or "n/a" }}</p>
+          <p><strong>Durability:</strong> {{ profile.durability or "n/a" }}</p>
+        </article>
+      </section>
+
+      <section class="actions">
+        <form method="post" action="/approve">
+          <input type="hidden" name="path" value="{{ profile.path }}">
+          <button type="submit" {% if profile.approval_blockers %}disabled{% endif %}>Approve</button>
+          {% if profile.approval_blockers %}
+          <p class="warning">Repair blockers before normal approval.</p>
+          {% endif %}
+        </form>
+        <form method="post" action="/approve">
+          <input type="hidden" name="path" value="{{ profile.path }}">
+          <input type="hidden" name="force" value="true">
+          <button type="submit" class="danger">Force approve</button>
+          <p class="warning">Force approval keeps review warnings visible and should only be used intentionally.</p>
+        </form>
+        <form method="post" action="/reject">
+          <input type="hidden" name="path" value="{{ profile.path }}">
+          <input name="note" placeholder="Rejection note">
+          <button type="submit">Reject</button>
+        </form>
+        <form method="post" action="/requeue">
+          <input type="hidden" name="path" value="{{ profile.path }}">
+          <input name="note" placeholder="What should be fixed">
+          <button type="submit">Requeue</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Sources</h2>
+        <div class="source-list">
+          {% for source in profile.sources %}
+          <article>
+            <h3>{{ source.id }} - {{ source.title or "n/a" }}</h3>
+            <p><strong>Type:</strong> {{ source.source_type or "n/a" }}</p>
+            <p><strong>Revision:</strong> {{ source.revision_id or "n/a" }} {% if source.has_revision_id %}<span class="pill">has revision</span>{% endif %}</p>
+            <p><strong>Used by:</strong> {{ source.used_by|join(", ") or "unused" }}</p>
+            {% if source.url %}<p><a href="{{ source.url }}">{{ source.url }}</a></p>{% endif %}
+            {% if source.notes %}<p>{{ source.notes }}</p>{% endif %}
+          </article>
+          {% else %}
+          <p class="empty">No sources are present.</p>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section>
+        <h2>Auto-Repair Attempts</h2>
+        {% if profile.repair_debug %}
+        <p class="path">Debug report loaded for this profile.</p>
+        {% endif %}
+        <div class="source-list">
+          {% for attempt in profile.repair_attempts %}
+          <article>
+            <h3>{{ attempt.source_id }} - {{ attempt.normalized_page_title or "n/a" }}</h3>
+            <p><strong>URL:</strong> {{ attempt.url or "n/a" }}</p>
+            <p><strong>Status:</strong> {{ attempt.fetch_status or attempt.note }} {% if not attempt.extracted_fields %}<span class="pill">fetched but no fields</span>{% endif %}</p>
+            <p><strong>HTTP:</strong> {{ attempt.http_status or "n/a" }} <strong>Revision:</strong> {{ attempt.revision_id or "n/a" }}</p>
+            <p><strong>Content:</strong> {{ attempt.content_kind or "unknown" }} {{ attempt.content_length or 0 }} bytes</p>
+            <p><strong>Headings:</strong> {{ attempt.headings_detected|join(", ") or "none" }}</p>
+            <p><strong>Stat labels:</strong> {{ attempt.stat_labels_detected|join(", ") or "none" }}</p>
+            <p><strong>Extracted:</strong> {{ attempt.extracted_fields|join(", ") or "none" }}</p>
+            <p><strong>Failure:</strong> {{ attempt.extraction_failure_reason or attempt.note or "none" }}</p>
+            {% if attempt.extracted_fields %}
+            <form method="post" action="/auto-repair-selected" class="inline-action">
+              <input type="hidden" name="path" value="{{ profile.path }}">
+              <input type="hidden" name="source_id" value="{{ attempt.source_id }}">
+              <label>
+                <input type="checkbox" name="promote_if_valid" value="true" checked>
+                promote if valid
+              </label>
+              <button type="submit">Repair using this source</button>
+            </form>
+            {% endif %}
+          </article>
+          {% else %}
+          <p class="empty">No auto-repair attempts recorded yet.</p>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section>
+        <h2>Add Source</h2>
+        <form class="note-form" method="post" action="/add-source">
+          <input type="hidden" name="path" value="{{ profile.path }}">
+          <input name="source_id" placeholder="source id (optional)">
+          <input name="title" placeholder="title">
+          <input name="url" placeholder="url">
+          <input name="source_type" placeholder="source type" value="mediawiki">
+          <input name="revision_id" placeholder="revision id">
+          <textarea name="notes" placeholder="notes"></textarea>
+          <button type="submit">Add Source</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Manual Core Field Editor</h2>
+        <div class="core-editor">
+          {% for field in profile.editable_power_fields %}
+          <form class="repair-form" method="post" action="/set-core">
+            <input type="hidden" name="path" value="{{ profile.path }}">
+            <input type="hidden" name="field" value="{{ field.field }}">
+            <label>
+              {{ field.field }}
+              <textarea name="text" placeholder="{{ field.field }}">{{ field.text or "" }}</textarea>
+            </label>
+            <input name="source_id" placeholder="source id" value="{{ field.source_ids[0] if field.source_ids else "" }}" required>
+            <input name="confidence" type="number" min="0" max="1" step="0.01" value="{{ field.confidence if field.confidence is not none else 0.75 }}" required>
+            <input name="note" placeholder="review note" required>
+            <button type="submit">Save {{ field.field }}</button>
+          </form>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="grid">
+        <article>
+          <h2>Add Ability</h2>
+          <form class="note-form" method="post" action="/add-ability">
+            <input type="hidden" name="path" value="{{ profile.path }}">
+            <input name="item_id" placeholder="id (optional)">
+            <input name="name" placeholder="name">
+            <textarea name="description" placeholder="description" required></textarea>
+            <input name="source_id" placeholder="source id" required>
+            <input name="confidence" type="number" min="0" max="1" step="0.01" value="0.75" required>
+            <input name="tags" placeholder="tags, comma separated">
+            <button type="submit">Add Ability</button>
+          </form>
+        </article>
+        <article>
+          <h2>Add Weakness</h2>
+          <form class="note-form" method="post" action="/add-weakness">
+            <input type="hidden" name="path" value="{{ profile.path }}">
+            <input name="item_id" placeholder="id (optional)">
+            <input name="name" placeholder="name">
+            <textarea name="description" placeholder="description" required></textarea>
+            <input name="source_id" placeholder="source id" required>
+            <input name="confidence" type="number" min="0" max="1" step="0.01" value="0.75" required>
+            <input name="tags" placeholder="tags, comma separated">
+            <button type="submit">Add Weakness</button>
+          </form>
+        </article>
+      </section>
+
+      <section>
+        <h2>Add Review Note</h2>
+        <form class="note-form" method="post" action="/note">
+          <input type="hidden" name="path" value="{{ profile.path }}">
+          <input name="field_path" placeholder="field path">
+          <input name="issue_type" placeholder="issue type">
+          <input name="suggested_value" placeholder="suggested value">
+          <textarea name="note" placeholder="note"></textarea>
+          <button type="submit">Save Note</button>
+        </form>
+      </section>
+
+      <section class="grid">
+        <article>
+          <h2>Abilities ({{ profile.abilities_count }})</h2>
+          {% for item in profile.abilities %}
+          <p><strong>{{ item.name or item.id }}</strong><br>{{ item.description }}</p>
+          {% endfor %}
+        </article>
+        <article>
+          <h2>Weaknesses ({{ profile.weaknesses_count }})</h2>
+          {% for item in profile.weaknesses %}
+          <p>{{ item.description }}</p>
+          {% endfor %}
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

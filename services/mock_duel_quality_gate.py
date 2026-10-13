@@ -137,6 +137,23 @@ def judge_text(text):
     bad = [p for p in BAD_PATTERNS if p in low] 
     generic = [p for p in GENERIC_PATTERNS if p in low] 
     too_short = len(text.strip()) < 500 
+    # Detect fragmented abilities from unbalanced parentheses (parser corruption).
+    # If the output contains ability names with unclosed parens, the profile
+    # data is corrupted and the duel output is unreliable.
+    paren_depth = 0
+    has_unbalanced = False
+    for char in text:
+        if char == '(':
+            paren_depth += 1
+        elif char == ')':
+            paren_depth -= 1
+            if paren_depth < 0:
+                has_unbalanced = True
+                break
+    if paren_depth != 0:
+        has_unbalanced = True
+    if has_unbalanced:
+        bad = bad + ["unbalanced_parentheses_fragment"]
     return bad, generic, too_short 
 
 def main(): 

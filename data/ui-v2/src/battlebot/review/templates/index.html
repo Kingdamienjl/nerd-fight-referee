@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile Review</title>
+    <link rel="stylesheet" href="/static/review.css">
+  </head>
+  <body>
+    <main class="layout">
+      <aside class="sidebar">
+        <h1>Profile Review</h1>
+
+        <nav style="display:flex; gap:0.75rem; flex-wrap:wrap; margin:0.75rem 0 1rem;">
+
+          <a href="/?kind=needs_review&franchise=&category=&warning_flag=">Needs Review</a>
+
+          <a href="/?kind=generated&franchise=&category=&warning_flag=">Battle Ready / Generated</a>
+
+          <a href="/?kind=all&franchise=&category=&warning_flag=">All Profiles</a>
+
+        </nav>
+        <form class="filters" method="get" action="/">
+          <label>
+            Status
+            <select name="kind">
+              {% for option in ["needs_review", "generated", "rejected", "all"] %}
+              <option value="{{ option }}" {% if option == kind %}selected{% endif %}>{{ option }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            Franchise
+            <input name="franchise" value="{{ franchise }}">
+          </label>
+          <label>
+            Category
+            <input name="category" value="{{ category }}">
+          </label>
+          <label>
+            Warning
+            <input name="warning_flag" value="{{ warning_flag }}">
+          </label>
+          <button type="submit">Filter</button>
+        </form>
+      </aside>
+      <section class="content">
+        <div class="list-header">
+          <h2>{{ kind }}</h2>
+          <span>{{ profiles|length }} profiles</span>
+        </div>
+        <div class="profile-list">
+          {% for profile in profiles %}
+          <a class="profile-row" href="/profile?path={{ profile.path }}">
+            <span class="name">{{ profile.name }}</span>
+            <span>{{ profile.franchise }} / {{ profile.category }}</span>
+            <span>{{ profile.status }}</span>
+            <span>{{ profile.warning_flags|join(", ") if profile.warning_flags else "no warnings" }}</span>
+          </a>
+          {% else %}
+          <p class="empty">No profiles match the current filters.</p>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -621,6 +621,29 @@ def build_profile(
         },
         "profile_hash": "",
     }
+    # Fan-wiki powerscaling interpretations are not canonical. If the primary
+    # source is a fan-run wiki, label the variant explicitly so fight cards
+    # don't present it as "Canonical base."
+    FAN_WIKI_DOMAINS = {
+        "vsbattles.fandom.com": "VS Battles Wiki",
+        "character-stats-and-profiles.fandom.com": "Character Stats & Profiles Wiki",
+    }
+    source_url = (wiki_source.get("full_url") or "") if wiki_source else ""
+    fan_wiki_label = next(
+        (label for domain, label in FAN_WIKI_DOMAINS.items() if domain in source_url),
+        None,
+    )
+    if fan_wiki_label and not (profile.get("variant") or {}).get("variant_name"):
+        profile["variant"] = {
+            "variant_name": f"{fan_wiki_label} interpretation",
+            "variant_type": "fan_interpretation",
+            "label": f"Fan-made powerscaling ({fan_wiki_label}); not direct canon",
+            "default_variant": False,
+            "battle_notes": (
+                f"Abilities sourced from {fan_wiki_label}, a fan-run powerscaling wiki. "
+                "Treat as fan interpretation, not canonical base form."
+            ),
+        }
     return profile
 
 
@@ -1074,8 +1097,30 @@ def list_items_from_text(
 def split_listish(text: str | None) -> list[str]:
     if not text:
         return []
-    parts = re.split(r"\s*(?:\||;|,|\n|\u2022)\s*", text)
-    return [normalize_text(part) for part in parts if normalize_text(part)]
+    # A partially parsed tabber has lost its form/era boundaries. Do not promote
+    # layout parameters or assign its surviving clauses to canonical base form.
+    if re.search(r"\{\{|\}\}|#tag:|\btabber\b|\b(?:Border|Scroll|Visible|Padding|Content)\s*=", text, re.I):
+        return []
+    # Keep the complete resistance clause together: splitting its commas would
+    # turn subsequent defensive properties into offensive abilities.
+    defensive = re.search(r"(?i)\b(?:resistance(?:s)? to|resistant to|immunity to|immune to)\b", text)
+    if defensive:
+        prefix, suffix = text[:defensive.start()], text[defensive.start():]
+        return split_listish(prefix.rstrip(" ,;|\n")) + [normalize_text(suffix)]
+    parts, start, depth = [], 0, 0
+    for index, char in enumerate(text):
+        if char == '(':
+            depth += 1
+        elif char == ')':
+            if depth > 0:
+                depth -= 1
+            # Unmatched ')' treated as literal; do not discard the field.
+        elif depth == 0 and char in '|;,\n\u2022*':
+            parts.append(text[start:index])
+            start = index + 1
+    # Unbalanced '(' at end: include text as-is rather than discarding.
+    parts.append(text[start:])
+    return [normalize_text(part) for part in parts if re.search(r"\w", part)]
 
 
 def tags_for_text(text: str, inherited_tags: list[str]) -> list[str]:
