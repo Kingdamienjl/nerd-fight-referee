@@ -42,8 +42,9 @@ def build_discord_webhook_payload(
     odds = decision.get("battle_odds_text") or "Even odds"
     summary = decision.get("public_summary") or decision.get("summary") or "Matchup evaluated under standard conditions."
 
-    card_a = decision.get("contender_a_card") or {}
-    card_b = decision.get("contender_b_card") or {}
+    _fighter_cards = decision.get("fighter_cards") or [{}, {}]
+    card_a = _fighter_cards[0] if len(_fighter_cards) > 0 else {}
+    card_b = _fighter_cards[1] if len(_fighter_cards) > 1 else {}
 
     tools_a = " • ".join(card_a.get("key_tools", [])[:3]) or "Standard combat capabilities"
     tools_b = " • ".join(card_b.get("key_tools", [])[:3]) or "Standard combat capabilities"

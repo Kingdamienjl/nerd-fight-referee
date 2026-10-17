@@ -600,6 +600,11 @@ def confidence_allows_upset(confidence: Any) -> bool:
     return str(confidence or "").casefold() not in LOCKED_ENGINE_CONFIDENCE
 
 
+def _strip_parenthetical(name):
+    base = re.sub(r"\s*\([^()]*\)\s*$", "", str(name)).strip()
+    return base or str(name)
+
+
 def contender_names(packet: dict[str, Any]) -> list[str]:
     names = []
     for key in ("contender_a", "contender_b"):
@@ -607,6 +612,9 @@ def contender_names(packet: dict[str, Any]) -> list[str]:
         for value in (contender.get("canonical_name"), contender.get("character_id")):
             if value and str(value) not in names:
                 names.append(str(value))
+                base = _strip_parenthetical(value)
+                if base and base not in names:
+                    names.append(base)
     return names
 
 
@@ -1172,9 +1180,26 @@ async def call_ollama(
     }
     if format_json:
         payload["format"] = "json"
-    async with httpx.AsyncClient(timeout=timeout) as client:
-        response = await client.post(f"{base_url}/api/chat", json=payload)
-        response.raise_for_status()
+    _retryable = (httpx.TimeoutException, httpx.ConnectError)
+    _backoffs = (5.0, 15.0)
+    _last_exc = None
+    for _attempt in range(3):
+        try:
+            async with httpx.AsyncClient(timeout=timeout) as client:
+                response = await client.post(f"{base_url}/api/chat", json=payload)
+                response.raise_for_status()
+            break
+        except httpx.HTTPStatusError as _exc:
+            _status = _exc.response.status_code if _exc.response is not None else 0
+            if 400 <= _status < 500:
+                raise
+            _last_exc = _exc
+        except _retryable as _exc:
+            _last_exc = _exc
+        if _attempt < 2:
+            await asyncio.sleep(_backoffs[_attempt])
+    else:
+        raise _last_exc  # type: ignore[misc]
     data = response.json()
     message = data.get("message") or {}
     return str(message.get("content") or data.get("response") or "")
