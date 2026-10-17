@@ -20,6 +20,7 @@ from battlebot.fight.decision_formatter import (
     structured_decision_output,
 )
 from battlebot.fight.llm_judge import judge_fight_packet
+from battlebot.fight.tier_utils import maybe_stomp_decision
 from battlebot.fight.personality import details as personality_details
 from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.profiles.fight_packet import build_fight_packet
@@ -157,7 +158,12 @@ async def discord_message_from_packet(
         lines.append('Try /search query:"<name>". Missing fighters are queued automatically.')
         text = "\n".join(lines)
     else:
-        decision = await judge_fight_packet(packet, smoke_result)
+        stomp_decision = maybe_stomp_decision(packet)
+        decision = (
+            stomp_decision
+            if stomp_decision is not None
+            else await judge_fight_packet(packet, smoke_result)
+        )
         text = format_decision(decision, include_diagnostics=include_diagnostics)
     if len(text) <= 1800:
         return text
@@ -392,7 +398,12 @@ async def send_deferred_fight_result(
     initial_embed, _ = build_fight_embed(smoke_result, status="Generating full referee breakdown...")
     initial_view = FightDetailsView(fight_detail_payload(smoke_result))
     message = await interaction.followup.send(embed=initial_embed, view=initial_view, ephemeral=ephemeral, wait=True)
-    decision = await judge_fight_packet(packet, smoke_result)
+    stomp_decision = maybe_stomp_decision(packet)
+    decision = (
+        stomp_decision
+        if stomp_decision is not None
+        else await judge_fight_packet(packet, smoke_result)
+    )
     decision["presentation_packet"] = packet
     text = format_decision(decision, include_diagnostics=ephemeral)
     structured_decision_output(decision)

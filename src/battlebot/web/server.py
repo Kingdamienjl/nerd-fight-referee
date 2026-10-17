@@ -19,6 +19,7 @@ from battlebot.profiles.variants import CURATED_VARIANTS, split_variant_name
 from battlebot.profiles.fight_packet import build_fight_packet
 from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.fight.llm_judge import judge_fight_packet
+from battlebot.fight.tier_utils import maybe_stomp_decision
 from battlebot.fight.decision_formatter import structured_decision_output
 from battlebot.web.webhook import build_discord_webhook_payload, dispatch_discord_webhook
 from battlebot.web.image_finder import find_character_image
@@ -174,7 +175,12 @@ def create_app() -> FastAPI:
             }
 
         smoke_result = smoke_judge_packet(packet)
-        decision = await judge_fight_packet(packet, smoke_result)
+        stomp_decision = maybe_stomp_decision(packet)
+        decision = (
+            stomp_decision
+            if stomp_decision is not None
+            else await judge_fight_packet(packet, smoke_result)
+        )
         structured = structured_decision_output(decision)
         structured["narrative_phases"] = decision.get("narrative_phases") or []
         structured["quick_verdict"] = decision.get("quick_verdict") or structured.get("public_summary")
