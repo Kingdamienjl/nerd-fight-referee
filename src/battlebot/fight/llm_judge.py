@@ -1377,6 +1377,9 @@ async def call_ollama(
     json_schema: dict[str, Any] | None = None,
     temperature: float | None = None,
     num_predict: int | None = None,
+    num_ctx: int | None = None,
+    timeout: float | None = None,
+    request_info: dict[str, Any] | None = None,
 ) -> str:
     """Call the LLM backend with retry-with-backoff.
 
@@ -1386,48 +1389,63 @@ async def call_ollama(
 
     ``json_schema`` enables constrained JSON decoding: it is passed as Ollama's
     ``format`` schema, or as ``response_format`` (json_schema) via LiteLLM.
+
+    On the LiteLLM path, if the primary model group fails with a retryable
+    error, the call fails over to the ``<group>-fallback`` model group
+    (application-layer failover; the proxy's own retries are kept as well).
+    ``request_info``, when given, is populated with the serving ``provider``
+    and ``model_group`` for diagnostics.
     """
     values = env or os.environ
     provider = _llm_provider(values)
-    timeout = float(values.get("BATTLEBOT_LLM_TIMEOUT_SECONDS") or 60)
+    if timeout is None:
+        timeout = float(values.get("BATTLEBOT_LLM_TIMEOUT_SECONDS") or 60)
     if temperature is None:
         temperature = float(values.get("BATTLEBOT_LLM_TEMPERATURE") or 0.1)
     if num_predict is None:
         num_predict = int(values.get("BATTLEBOT_LLM_NUM_PREDICT") or 768)
+    if num_ctx is None:
+        num_ctx = int(values.get("BATTLEBOT_LLM_NUM_CTX") or 4096)
     default_model = str(values.get("BATTLEBOT_LLM_MODEL") or values.get("REFEREE_MODEL") or "qwen3:8b")
     requested_model = model or default_model
 
     use_litellm = provider == "litellm"
     litellm_base = str(values.get("LITELLM_BASE_URL") or "").rstrip("/")
-    litellm_headers: dict[str, str] = {}
-    litellm_url = ""
-    litellm_body: dict[str, Any] = {}
+    # Each target: (url, body, headers, is_litellm, label).
+    targets: list[tuple[str, dict[str, Any], dict[str, str], bool, str]] = []
     if use_litellm and litellm_base:
         litellm_model = _litellm_model_name(requested_model)
         litellm_url = f"{litellm_base}/v1/chat/completions"
         litellm_headers = {"Content-Type": "application/json"}
-        api_key = str(values.get("LITELLM_API_KEY") or "")
-        if api_key:
-            litellm_headers["Authorization"] = f"Bearer {api_key}"
-        litellm_body = {
-            "model": litellm_model,
-            "messages": messages,
-            "stream": False,
-            "temperature": temperature,
-            "max_tokens": num_predict,
-            "think": False,  # qwen3 thinks by default; keep parity with direct path
-        }
-        if json_schema is not None:
-            litellm_body["response_format"] = {
-                "type": "json_schema",
-                "json_schema": {
-                    "name": "FightVerdict",
-                    "schema": json_schema,
-                    "strict": True,
-                },
+        _api_key = str(values.get("LITELLM_API_KEY") or "")
+        if _api_key:
+            litellm_headers["Authorization"] = f"Bearer {_api_key}"
+        groups = [litellm_model]
+        fallback_group = f"{litellm_model}-fallback"
+        if fallback_group in LITELLM_KNOWN_MODELS and fallback_group != litellm_model:
+            groups.append(fallback_group)
+        for grp in groups:
+            body: dict[str, Any] = {
+                "model": grp,
+                "messages": messages,
+                "stream": False,
+                "temperature": temperature,
+                "max_tokens": num_predict,
+                "think": False,  # qwen3 thinks by default; keep parity with direct path
+                "extra_body": {"options": {"num_ctx": num_ctx}},
             }
-        elif format_json:
-            litellm_body["response_format"] = {"type": "json_object"}
+            if json_schema is not None:
+                body["response_format"] = {
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": "FightVerdict",
+                        "schema": json_schema,
+                        "strict": True,
+                    },
+                }
+            elif format_json:
+                body["response_format"] = {"type": "json_object"}
+            targets.append((litellm_url, body, litellm_headers, True, grp))
     elif use_litellm:
         # Misconfigured: provider forced to litellm but no base URL.
         use_litellm = False
@@ -1444,7 +1462,7 @@ async def call_ollama(
             "options": {
                 "num_predict": num_predict,
                 "temperature": temperature,
-                "num_ctx": int(values.get("BATTLEBOT_LLM_NUM_CTX") or 4096),
+                "num_ctx": num_ctx,
                 "num_thread": int(values.get("BATTLEBOT_LLM_NUM_THREAD") or 8),
             },
         }
@@ -1452,32 +1470,52 @@ async def call_ollama(
             payload["format"] = json_schema
         elif format_json:
             payload["format"] = "json"
+        targets.append((ollama_url, payload, {}, False, requested_model))
 
     _retryable = (httpx.TimeoutException, httpx.ConnectError)
     _backoffs = (5.0, 15.0)
-    _last_exc = None
-    for _attempt in range(3):
-        try:
-            async with httpx.AsyncClient(timeout=timeout) as client:
-                if use_litellm:
-                    response = await client.post(litellm_url, json=litellm_body, headers=litellm_headers)
-                else:
-                    response = await client.post(ollama_url, json=payload)
-                response.raise_for_status()
-            break
-        except httpx.HTTPStatusError as _exc:
-            _status = _exc.response.status_code if _exc.response is not None else 0
-            if 400 <= _status < 500:
-                raise
-            _last_exc = _exc
-        except _retryable as _exc:
-            _last_exc = _exc
-        if _attempt < 2:
-            await asyncio.sleep(_backoffs[_attempt])
+    _last_exc: Exception | None = None
+    _served_by: str | None = None
+    _served_provider: str | None = None
+    for target_url, target_body, target_headers, target_is_litellm, target_label in targets:
+        # The proxy already retries internally (router_settings.num_retries),
+        # so fewer client-side attempts are needed on the LiteLLM path.
+        _attempts = 2 if target_is_litellm else 3
+        for _attempt in range(_attempts):
+            try:
+                async with httpx.AsyncClient(timeout=timeout) as client:
+                    response = await client.post(
+                        target_url, json=target_body, headers=target_headers or None
+                    )
+                    response.raise_for_status()
+                _served_by = target_label
+                _served_provider = "litellm" if target_is_litellm else "ollama"
+                break
+            except httpx.HTTPStatusError as _exc:
+                _status = _exc.response.status_code if _exc.response is not None else 0
+                if 400 <= _status < 500:
+                    raise
+                _last_exc = _exc
+            except _retryable as _exc:
+                _last_exc = _exc
+            if _attempt < 2:
+                await asyncio.sleep(_backoffs[_attempt])
+        else:
+            # Retries exhausted for this target; move to the fallback group if any.
+            LOGGER.warning(
+                "LLM target %s failed after retries (%r); trying fallback",
+                target_label,
+                _last_exc,
+            )
+            continue
+        break
     else:
         raise _last_exc  # type: ignore[misc]
+    if request_info is not None:
+        request_info["provider"] = _served_provider
+        request_info["model_group"] = _served_by
     data = response.json()
-    if use_litellm:
+    if _served_provider == "litellm":
         try:
             return str(data["choices"][0]["message"]["content"] or "")
         except (KeyError, IndexError, TypeError):
@@ -1496,6 +1534,9 @@ async def _invoke_caller(
     json_schema: dict[str, Any] | None = None,
     temperature: float | None = None,
     num_predict: int | None = None,
+    num_ctx: int | None = None,
+    timeout: float | None = None,
+    request_info: dict[str, Any] | None = None,
 ) -> str:
     import inspect
     sig = inspect.signature(caller)
@@ -1513,6 +1554,12 @@ async def _invoke_caller(
         kwargs["temperature"] = temperature
     if "num_predict" in params and num_predict is not None:
         kwargs["num_predict"] = num_predict
+    if "num_ctx" in params and num_ctx is not None:
+        kwargs["num_ctx"] = num_ctx
+    if "timeout" in params and timeout is not None:
+        kwargs["timeout"] = timeout
+    if "request_info" in params and request_info is not None:
+        kwargs["request_info"] = request_info
     try:
         res = caller(messages, **kwargs)
     except TypeError:
@@ -1529,13 +1576,15 @@ async def request_fight_verdict(
     env: dict[str, str] | None = None,
     analyst_breakdown: str | None = None,
     caller: Any | None = None,
+    request_info: dict[str, Any] | None = None,
 ) -> FightVerdict | None:
     """Run the schema-constrained G-Eval verdict call at temperature 0.
 
     Returns a validated ``FightVerdict``, or ``None`` when the schema judge is
     disabled, the transport call fails, or validation fails twice (the schema
     constraint should make the latter rare). Callers fall back to the regex
-    winner parser when this returns ``None``.
+    winner parser when this returns ``None``. When ``request_info`` is given
+    it is populated with the serving ``provider``/``model_group``.
     """
     values = env or os.environ
     if str(values.get("BATTLEBOT_SCHEMA_JUDGE_ENABLED", "true")).casefold() not in {"1", "true", "yes", "on"}:
@@ -1549,6 +1598,12 @@ async def request_fight_verdict(
         # Direct Ollama has no referee-* model groups; use the analyst tag.
         model = str(values.get("BATTLEBOT_LLM_MODEL") or values.get("REFEREE_MODEL") or "qwen3:8b")
     num_predict = int(values.get("BATTLEBOT_VERDICT_NUM_PREDICT") or 1024)
+    # The verdict prompt carries the full evidence packet (~13k tokens for
+    # composite profiles); give it a large context window and a generous
+    # timeout rather than the pipeline defaults.
+    num_ctx = int(values.get("BATTLEBOT_VERDICT_NUM_CTX") or 16384)
+    timeout = float(values.get("BATTLEBOT_VERDICT_TIMEOUT_SECONDS") or 300)
+    call_info: dict[str, Any] = request_info if request_info is not None else {}
     messages = build_verdict_prompt(packet, smoke, analyst_breakdown)
     effective_caller = caller or call_ollama
     last_error: Exception | None = None
@@ -1562,6 +1617,9 @@ async def request_fight_verdict(
                 json_schema=schema,
                 temperature=0.0,
                 num_predict=num_predict,
+                num_ctx=num_ctx,
+                timeout=timeout,
+                request_info=call_info,
             )
         except Exception as exc:  # noqa: BLE001 - transport failure -> regex fallback
             last_error = exc
@@ -1612,9 +1670,15 @@ async def judge_fight_packet(
             # legacy regex winner parsing via referee_winner_from_text().
             schema_verdict = None
             schema_winner_name = None
+            verdict_request_info: dict[str, Any] = {}
             if ollama_caller is None:
                 schema_verdict = await request_fight_verdict(
-                    packet, smoke, env=env, analyst_breakdown=analyst_raw, caller=caller
+                    packet,
+                    smoke,
+                    env=env,
+                    analyst_breakdown=analyst_raw,
+                    caller=caller,
+                    request_info=verdict_request_info,
                 )
                 if schema_verdict is not None:
                     schema_winner_name = verdict_winner_name(schema_verdict, packet)
@@ -1649,6 +1713,8 @@ async def judge_fight_packet(
                     decision["diagnostics"]["verdict_model"] = str(
                         (env or os.environ).get("REFEREE_VERDICT_MODEL") or "referee-judge"
                     )
+                    if verdict_request_info.get("model_group"):
+                        decision["diagnostics"]["verdict_served_by"] = verdict_request_info["model_group"]
             decision["presentation_packet"] = packet
             return decision
         else:
