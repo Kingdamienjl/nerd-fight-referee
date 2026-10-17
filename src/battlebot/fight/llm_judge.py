@@ -1326,6 +1326,48 @@ def fallback_reason_for_exception(exc: Exception) -> str:
     return FALLBACK_OLLAMA_UNAVAILABLE
 
 
+# LiteLLM model names served by the referee-litellm proxy (see
+# config/litellm_config.yaml). Ollama-style tags are mapped to these groups
+# when routing through the proxy.
+LITELLM_KNOWN_MODELS = frozenset(
+    {
+        "referee-judge",
+        "referee-judge-fallback",
+        "referee-analyst",
+        "referee-analyst-fallback",
+        "referee-voice",
+        "referee-voice-fallback",
+        "referee-default",
+        "referee-default-fallback",
+        "referee-reasoning",
+        "referee-reasoning-fallback",
+    }
+)
+LITELLM_MODEL_ALIASES = {
+    "qwen3:8b": "referee-analyst",
+    "qwen3.5:9b": "referee-reasoning",
+    "qwen3:32b": "referee-reasoning",
+    "hermes3:8b": "referee-voice",
+    "qwen2.5:3b": "referee-default",
+}
+
+
+def _litellm_model_name(requested: str) -> str:
+    """Translate an Ollama tag (or env model name) to a LiteLLM model group."""
+    if requested in LITELLM_KNOWN_MODELS:
+        return requested
+    return LITELLM_MODEL_ALIASES.get(requested, requested)
+
+
+def _llm_provider(values: Any) -> str:
+    provider = str(values.get("BATTLEBOT_LLM_PROVIDER") or "").casefold()
+    if provider in {"litellm", "ollama"}:
+        return provider
+    if str(values.get("LITELLM_BASE_URL") or "").strip():
+        return "litellm"
+    return "ollama"
+
+
 async def call_ollama(
     messages: list[dict[str, str]],
     *,
@@ -1336,43 +1378,91 @@ async def call_ollama(
     temperature: float | None = None,
     num_predict: int | None = None,
 ) -> str:
-    """Call Ollama's /api/chat with retry-with-backoff (kept from 317f97d7).
+    """Call the LLM backend with retry-with-backoff.
 
-    ``json_schema`` enables constrained JSON decoding via Ollama's ``format``
-    parameter. (LiteLLM proxy routing lands in the follow-up commit.)
+    Routes through the LiteLLM proxy (OpenAI-compatible ``/v1/chat/completions``)
+    when ``LITELLM_BASE_URL`` is set (or ``BATTLEBOT_LLM_PROVIDER=litellm``),
+    otherwise calls Ollama's ``/api/chat`` directly.
+
+    ``json_schema`` enables constrained JSON decoding: it is passed as Ollama's
+    ``format`` schema, or as ``response_format`` (json_schema) via LiteLLM.
     """
     values = env or os.environ
-    base_url = str(values.get("OLLAMA_BASE_URL") or "http://127.0.0.1:11434").rstrip("/")
-    requested_model = model or str(values.get("BATTLEBOT_LLM_MODEL") or values.get("REFEREE_MODEL") or "qwen3:8b")
+    provider = _llm_provider(values)
     timeout = float(values.get("BATTLEBOT_LLM_TIMEOUT_SECONDS") or 60)
     if temperature is None:
         temperature = float(values.get("BATTLEBOT_LLM_TEMPERATURE") or 0.1)
     if num_predict is None:
         num_predict = int(values.get("BATTLEBOT_LLM_NUM_PREDICT") or 768)
-    payload: dict[str, Any] = {
-        "model": requested_model,
-        "messages": messages,
-        "stream": False,
-        "think": False,
-        "keep_alive": str(values.get("BATTLEBOT_LLM_KEEP_ALIVE") or "30m"),
-        "options": {
-            "num_predict": num_predict,
+    default_model = str(values.get("BATTLEBOT_LLM_MODEL") or values.get("REFEREE_MODEL") or "qwen3:8b")
+    requested_model = model or default_model
+
+    use_litellm = provider == "litellm"
+    litellm_base = str(values.get("LITELLM_BASE_URL") or "").rstrip("/")
+    litellm_headers: dict[str, str] = {}
+    litellm_url = ""
+    litellm_body: dict[str, Any] = {}
+    if use_litellm and litellm_base:
+        litellm_model = _litellm_model_name(requested_model)
+        litellm_url = f"{litellm_base}/v1/chat/completions"
+        litellm_headers = {"Content-Type": "application/json"}
+        api_key = str(values.get("LITELLM_API_KEY") or "")
+        if api_key:
+            litellm_headers["Authorization"] = f"Bearer {api_key}"
+        litellm_body = {
+            "model": litellm_model,
+            "messages": messages,
+            "stream": False,
             "temperature": temperature,
-            "num_ctx": int(values.get("BATTLEBOT_LLM_NUM_CTX") or 4096),
-            "num_thread": int(values.get("BATTLEBOT_LLM_NUM_THREAD") or 8),
-        },
-    }
-    if json_schema is not None:
-        payload["format"] = json_schema
-    elif format_json:
-        payload["format"] = "json"
+            "max_tokens": num_predict,
+            "think": False,  # qwen3 thinks by default; keep parity with direct path
+        }
+        if json_schema is not None:
+            litellm_body["response_format"] = {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "FightVerdict",
+                    "schema": json_schema,
+                    "strict": True,
+                },
+            }
+        elif format_json:
+            litellm_body["response_format"] = {"type": "json_object"}
+    elif use_litellm:
+        # Misconfigured: provider forced to litellm but no base URL.
+        use_litellm = False
+
+    if not use_litellm:
+        base_url = str(values.get("OLLAMA_BASE_URL") or "http://127.0.0.1:11434").rstrip("/")
+        ollama_url = f"{base_url}/api/chat"
+        payload: dict[str, Any] = {
+            "model": requested_model,
+            "messages": messages,
+            "stream": False,
+            "think": False,
+            "keep_alive": str(values.get("BATTLEBOT_LLM_KEEP_ALIVE") or "30m"),
+            "options": {
+                "num_predict": num_predict,
+                "temperature": temperature,
+                "num_ctx": int(values.get("BATTLEBOT_LLM_NUM_CTX") or 4096),
+                "num_thread": int(values.get("BATTLEBOT_LLM_NUM_THREAD") or 8),
+            },
+        }
+        if json_schema is not None:
+            payload["format"] = json_schema
+        elif format_json:
+            payload["format"] = "json"
+
     _retryable = (httpx.TimeoutException, httpx.ConnectError)
     _backoffs = (5.0, 15.0)
     _last_exc = None
     for _attempt in range(3):
         try:
             async with httpx.AsyncClient(timeout=timeout) as client:
-                response = await client.post(f"{base_url}/api/chat", json=payload)
+                if use_litellm:
+                    response = await client.post(litellm_url, json=litellm_body, headers=litellm_headers)
+                else:
+                    response = await client.post(ollama_url, json=payload)
                 response.raise_for_status()
             break
         except httpx.HTTPStatusError as _exc:
@@ -1387,6 +1477,11 @@ async def call_ollama(
     else:
         raise _last_exc  # type: ignore[misc]
     data = response.json()
+    if use_litellm:
+        try:
+            return str(data["choices"][0]["message"]["content"] or "")
+        except (KeyError, IndexError, TypeError):
+            return ""
     message = data.get("message") or {}
     return str(message.get("content") or data.get("response") or "")
 
@@ -1449,7 +1544,10 @@ async def request_fight_verdict(
         schema = fight_verdict_json_schema()
     except Exception:  # noqa: BLE001 - schema build failure -> regex fallback
         return None
-    model = str(values.get("REFEREE_VERDICT_MODEL") or values.get("BATTLEBOT_LLM_MODEL") or "qwen3:8b")
+    model = str(values.get("REFEREE_VERDICT_MODEL") or "referee-judge")
+    if _llm_provider(values) == "ollama" and model.startswith("referee-"):
+        # Direct Ollama has no referee-* model groups; use the analyst tag.
+        model = str(values.get("BATTLEBOT_LLM_MODEL") or values.get("REFEREE_MODEL") or "qwen3:8b")
     num_predict = int(values.get("BATTLEBOT_VERDICT_NUM_PREDICT") or 1024)
     messages = build_verdict_prompt(packet, smoke, analyst_breakdown)
     effective_caller = caller or call_ollama

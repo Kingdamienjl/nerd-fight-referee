@@ -1,23 +1,72 @@
+# Nerd Fight Referee LiteLLM router config.
+#
+# Primary backends live on Fails PC (192.168.1.221); the fallback for every
+# model group is the small local model on AltProx LAN (192.168.1.207).
+# The judge pipeline (src/battlebot/fight/llm_judge.py) routes through this
+# proxy via LITELLM_BASE_URL instead of calling Fails PC directly.
+
 model_list:
-  - model_name: referee-default
+  # Schema-constrained G-Eval verdict judge (primary judge path).
+  - model_name: referee-judge
     litellm_params:
       model: ollama_chat/qwen3:8b
       api_base: http://192.168.1.221:11434
-
-  - model_name: referee-reasoning
+  - model_name: referee-judge-fallback
     litellm_params:
-      model: ollama_chat/qwen3.5:9b
-      api_base: http://192.168.1.221:11434
+      model: ollama_chat/qwen2.5:3b
+      api_base: http://192.168.1.207:11434
 
+  # Tactical analyst (stage 1 of the 2-LLM pipeline).
   - model_name: referee-analyst
     litellm_params:
       model: ollama_chat/qwen3:8b
       api_base: http://192.168.1.221:11434
+  - model_name: referee-analyst-fallback
+    litellm_params:
+      model: ollama_chat/qwen2.5:3b
+      api_base: http://192.168.1.207:11434
 
+  # Referee voice / narration (stage 2 of the 2-LLM pipeline).
   - model_name: referee-voice
     litellm_params:
       model: ollama_chat/hermes3:8b
       api_base: http://192.168.1.221:11434
+  - model_name: referee-voice-fallback
+    litellm_params:
+      model: ollama_chat/qwen2.5:3b
+      api_base: http://192.168.1.207:11434
+
+  # General-purpose default (bot service REFEREE_MODEL).
+  - model_name: referee-default
+    litellm_params:
+      model: ollama_chat/qwen3:8b
+      api_base: http://192.168.1.221:11434
+  - model_name: referee-default-fallback
+    litellm_params:
+      model: ollama_chat/qwen2.5:3b
+      api_base: http://192.168.1.207:11434
+
+  # Heavy reasoning model.
+  - model_name: referee-reasoning
+    litellm_params:
+      model: ollama_chat/qwen3:32b
+      api_base: http://192.168.1.221:11434
+  - model_name: referee-reasoning-fallback
+    litellm_params:
+      model: ollama_chat/qwen2.5:3b
+      api_base: http://192.168.1.207:11434
+
+fallbacks:
+  - referee-judge: ["referee-judge-fallback"]
+  - referee-analyst: ["referee-analyst-fallback"]
+  - referee-voice: ["referee-voice-fallback"]
+  - referee-default: ["referee-default-fallback"]
+  - referee-reasoning: ["referee-reasoning-fallback"]
+
+router_settings:
+  num_retries: 2
+  allowed_fails: 3
+  cooldown_time: 60
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
