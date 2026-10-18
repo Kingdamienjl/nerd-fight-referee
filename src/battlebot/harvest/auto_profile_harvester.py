@@ -28,6 +28,17 @@ from battlebot.profiles import yaml_io
 from battlebot.profiles.variants import variant_metadata
 from battlebot.schemas.profile import CharacterProfile
 
+import mwclient
+import mwclient.errors
+import requests
+from tenacity import (
+    retry,
+    retry_if_exception,
+    stop_after_attempt,
+    wait_exponential,
+    wait_random,
+)
+
 DEFAULT_MEDIAWIKI_API = "https://vsbattles.fandom.com/api.php"
 ANILIST_GRAPHQL_URL = "https://graphql.anilist.co"
 IGDB_TOKEN_URL = "https://id.twitch.tv/oauth2/token"
@@ -318,6 +329,137 @@ class HttpClient:
                 return record
 
 
+def _mediawiki_error_retryable(exc: BaseException) -> bool:
+    """Decide whether a MediaWiki fetch failure is worth retrying.
+
+    Transient network problems (timeouts, connection errors) and HTTP 5xx
+    responses are retried. HTTP 4xx responses (bad title, bad revision,
+    permission denied, ...) are never retried.
+    """
+    if isinstance(exc, (requests.exceptions.Timeout, requests.exceptions.ConnectionError)):
+        return True
+    if isinstance(exc, requests.exceptions.HTTPError):
+        response = exc.response
+        status = response.status_code if response is not None else 0
+        return 500 <= status < 600
+    if isinstance(exc, mwclient.errors.MaximumRetriesExceeded):
+        # mwclient already retried internally; still transient, worth another
+        # attempt under the tenacity backoff.
+        return True
+    return False
+
+
+mediawiki_retry = retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=1, max=30) + wait_random(0, 2),
+    retry=retry_if_exception(_mediawiki_error_retryable),
+    reraise=True,
+)
+
+
+class MediaWikiClient:
+    """MediaWiki api.php fetch layer built on mwclient.
+
+    Replaces the hand-rolled MediaWiki request code: mwclient wraps API
+    errors and handles its own transport retries, while tenacity adds
+    exponential backoff + jitter across attempts (3 total) for transient
+    failures. Returns the same RawCache record shape as
+    HttpClient.request_json so callers are unchanged.
+
+    mwclient is synchronous, so network calls run in a worker thread via
+    asyncio.to_thread to keep the harvester event loop free.
+    """
+
+    def __init__(
+        self,
+        *,
+        cache: RawCache,
+        user_agent: str,
+        min_interval_seconds: float,
+        use_cache: bool,
+    ) -> None:
+        self.cache = cache
+        self.user_agent = user_agent
+        self.min_interval_seconds = min_interval_seconds
+        self.use_cache = use_cache
+        self._sites: dict[str, mwclient.Site] = {}
+
+    def _site_for(self, api_url: str) -> mwclient.Site:
+        parsed = urlparse(api_url)
+        path = parsed.path
+        if path.endswith("api.php"):
+            path = path[: -len("api.php")]
+        if not path.endswith("/"):
+            path += "/"
+        site_key = f"{parsed.scheme}://{parsed.netloc}{path}"
+        site = self._sites.get(site_key)
+        if site is None:
+            site = mwclient.Site(
+                parsed.netloc,
+                path=path,
+                scheme=parsed.scheme or "https",
+                # Keep mwclient's own retry loop short; tenacity owns the
+                # retry policy (3 attempts, exponential backoff + jitter).
+                max_retries=1,
+                connection_options={"timeout": (3, 8)},
+                clients_useragent=self.user_agent,
+            )
+            self._sites[site_key] = site
+        return site
+
+    @mediawiki_retry
+    def _api_get(self, api_url: str, params: dict[str, Any]) -> dict[str, Any]:
+        site = self._site_for(api_url)
+        action = str(params.get("action", "query"))
+        call_params = {key: value for key, value in params.items() if key != "action"}
+        try:
+            result = site.api(action, "GET", **call_params)
+        except mwclient.errors.APIError as exc:
+            raise RuntimeError(
+                f"mediawiki request failed: API error {exc.code}: {exc.info}"
+            ) from exc
+        if not isinstance(result, dict):
+            raise RuntimeError("mediawiki request failed: unexpected API response")
+        return result
+
+    async def request_json(
+        self,
+        method: str,
+        url: str,
+        *,
+        params: dict[str, Any] | None = None,
+        source_type: str,
+    ) -> dict[str, Any]:
+        cache_key = self.cache.cache_key(method, url, params=params, body=None)
+        cached = self.cache.read(cache_key)
+        if cached and self.use_cache and 200 <= int(cached.get("status", 200)) < 300:
+            return cached
+
+        host = urlparse(url).netloc
+        await self.cache.wait_for_cooldown(host, self.min_interval_seconds)
+
+        try:
+            body = await asyncio.to_thread(self._api_get, url, params or {})
+        except requests.exceptions.HTTPError as exc:
+            response = exc.response
+            status = response.status_code if response is not None else 0
+            if status == 429 and response is not None:
+                retry_after = parse_retry_after(response.headers.get("Retry-After"))
+                self.cache.set_cooldown(host, time.time() + retry_after)
+            raise RuntimeError(f"{source_type} request failed: HTTP {status}") from exc
+
+        record = self.cache.write(
+            cache_key,
+            method=method,
+            url=url,
+            status=200,
+            headers={"X-Fetch-Layer": "mwclient/0.11.0"},
+            body=body,
+            source_type=source_type,
+        )
+        return record
+
+
 class ProfileHarvester:
     def __init__(
         self,
@@ -335,6 +477,12 @@ class ProfileHarvester:
         self.needs_review_dir = needs_review_dir
         self.force = force
         self.debug_extract = debug_extract
+        self.mw = MediaWikiClient(
+            cache=http.cache,
+            user_agent=http.user_agent,
+            min_interval_seconds=http.min_interval_seconds,
+            use_cache=http.use_cache,
+        )
 
     async def harvest_row(self, row: RosterRow) -> HarvestResult:
         errors: list[str] = []
@@ -480,7 +628,7 @@ class ProfileHarvester:
             params["pageids"] = str(row.wiki_page_id)
         else:
             params.update({"titles": title, "redirects": "1"})
-        record = await self.http.request_json(
+        record = await self.mw.request_json(
             "GET",
             api_url,
             params=params,
@@ -534,7 +682,7 @@ class ProfileHarvester:
             "format": "json",
             "formatversion": "2",
         }
-        record = await self.http.request_json(
+        record = await self.mw.request_json(
             "GET",
             api_url,
             params=params,
