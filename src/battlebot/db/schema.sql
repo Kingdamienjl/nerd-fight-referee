@@ -25,7 +25,9 @@ CREATE TABLE IF NOT EXISTS character_profiles (
     profile_json jsonb NOT NULL,
     generated_at timestamptz,
     imported_at timestamptz DEFAULT now(),
-    updated_at timestamptz DEFAULT now()
+    updated_at timestamptz DEFAULT now(),
+    revid bigint,
+    rev_timestamp timestamptz
 );
 
 CREATE TABLE IF NOT EXISTS profile_sources (
@@ -170,9 +172,16 @@ CREATE INDEX IF NOT EXISTS idx_profile_weaknesses_tags
     ON profile_weaknesses USING GIN (tags);
 CREATE INDEX IF NOT EXISTS idx_character_profiles_profile_json
     ON character_profiles USING GIN (profile_json);
+CREATE INDEX IF NOT EXISTS idx_character_profiles_revid
+    ON character_profiles(revid);
 CREATE INDEX IF NOT EXISTS idx_profile_jobs_claim
     ON profile_jobs (status, next_attempt_at, priority, id);
 CREATE INDEX IF NOT EXISTS idx_discord_command_audit_created_at
     ON discord_command_audit (created_at);
 CREATE INDEX IF NOT EXISTS idx_discord_command_audit_command_name
     ON discord_command_audit (command_name);
+
+-- Round 2 harvester overhaul: record which parser extracted the profile.
+-- Idempotent: safe to apply on every schema load.
+ALTER TABLE character_profiles
+    ADD COLUMN IF NOT EXISTS extraction_method text NOT NULL DEFAULT 'parser';

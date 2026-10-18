@@ -16,6 +16,7 @@ import yaml
 from pydantic import ValidationError
 
 from battlebot.common.db import apply_schema, connect_database
+from battlebot.harvest.revid_checker import primary_mediawiki_revid
 from battlebot.schemas.profile import CharacterProfile
 
 
@@ -394,9 +395,9 @@ async def upsert_compiled_profile(connection: Any, compiled: CompiledProfile) ->
         """
         INSERT INTO character_profiles (
             profile_id, character_id, profile_type, status, battle_eligible, profile_hash,
-            profile_path, profile_json, generated_at, updated_at
+            profile_path, profile_json, generated_at, extraction_method, updated_at
         )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9, now())
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9, $10, now())
         ON CONFLICT (profile_id) DO UPDATE SET
             character_id = EXCLUDED.character_id,
             profile_type = EXCLUDED.profile_type,
@@ -406,6 +407,7 @@ async def upsert_compiled_profile(connection: Any, compiled: CompiledProfile) ->
             profile_path = EXCLUDED.profile_path,
             profile_json = EXCLUDED.profile_json,
             generated_at = EXCLUDED.generated_at,
+            extraction_method = EXCLUDED.extraction_method,
             updated_at = now()
         """,
         compiled.profile["profile_id"],
@@ -417,7 +419,23 @@ async def upsert_compiled_profile(connection: Any, compiled: CompiledProfile) ->
         compiled.profile["profile_path"],
         json.dumps(compiled.profile["profile_json"], sort_keys=True),
         compiled.profile["generated_at"],
+        str(compiled.profile.get("extraction_method") or "parser"),
     )
+
+    # Revid change detection: persist the wiki revision this profile was
+    # harvested from so the harvest cycle can skip unchanged pages.
+    revid, rev_timestamp = primary_mediawiki_revid(compiled.sources)
+    if revid is not None:
+        await connection.execute(
+            """
+            UPDATE character_profiles
+            SET revid = $1, rev_timestamp = $2, updated_at = now()
+            WHERE profile_id = $3
+            """,
+            revid,
+            rev_timestamp,
+            compiled.profile["profile_id"],
+        )
 
     await replace_profile_children(connection, compiled)
 
