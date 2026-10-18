@@ -190,6 +190,9 @@ class QueueCycleSummary:
     generated_this_cycle: int = 0
     needs_review_this_cycle: int = 0
     failed_this_cycle: int = 0
+    revid_checked: int = 0
+    revid_skipped: int = 0
+    revid_changed: int = 0
 
 
 class RawCache:
@@ -1794,6 +1797,9 @@ def print_queue_summary(summary: QueueCycleSummary) -> None:
     print(f"  generated_this_cycle: {summary.generated_this_cycle}")
     print(f"  needs_review_this_cycle: {summary.needs_review_this_cycle}")
     print(f"  failed_this_cycle: {summary.failed_this_cycle}")
+    print(f"  revid_checked: {summary.revid_checked}")
+    print(f"  revid_skipped: {summary.revid_skipped}")
+    print(f"  revid_changed: {summary.revid_changed}")
 
 
 def read_roster_csv(path: Path) -> list[RosterRow]:
@@ -2038,6 +2044,19 @@ async def run_queue_once(args: argparse.Namespace, processed_total: int) -> tupl
         debug_extract=args.debug_extract,
     )
 
+    # --- revid change detection: skip pages whose wiki revision is unchanged ---
+    from battlebot.harvest.revid_checker import RevidGate
+    revid_gate = RevidGate(harvester.mw)
+    to_harvest, _revid_decisions = await revid_gate.filter_rows(
+        [row for _index, row in selected],
+        output_dir=args.output,
+        needs_review_dir=args.needs_review,
+    )
+    keep_ids = {id(row) for row in to_harvest}
+    selected = [(index, row) for index, row in selected if id(row) in keep_ids]
+    revid_gate.log_summary()
+    # --- end revid gate ---
+
     results = []
     for _index, row in selected:
         result = await harvester.harvest_row(row)
@@ -2068,6 +2087,9 @@ async def run_queue_once(args: argparse.Namespace, processed_total: int) -> tupl
     final_summary.generated_this_cycle = summary.generated_this_cycle
     final_summary.needs_review_this_cycle = summary.needs_review_this_cycle
     final_summary.failed_this_cycle = summary.failed_this_cycle
+    final_summary.revid_checked = revid_gate.stats["revid_checked"]
+    final_summary.revid_skipped = revid_gate.stats["revid_skipped"]
+    final_summary.revid_changed = revid_gate.stats["revid_changed"]
     print_queue_summary(final_summary)
     write_json_state_atomic(args.state_file, state)
     return results, processed_total
