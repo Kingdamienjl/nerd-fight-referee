@@ -193,6 +193,7 @@ class QueueCycleSummary:
     revid_checked: int = 0
     revid_skipped: int = 0
     revid_changed: int = 0
+    rc_injected: int = 0
 
 
 class RawCache:
@@ -1800,6 +1801,7 @@ def print_queue_summary(summary: QueueCycleSummary) -> None:
     print(f"  revid_checked: {summary.revid_checked}")
     print(f"  revid_skipped: {summary.revid_skipped}")
     print(f"  revid_changed: {summary.revid_changed}")
+    print(f"  rc_injected: {summary.rc_injected}")
 
 
 def read_roster_csv(path: Path) -> list[RosterRow]:
@@ -1988,6 +1990,65 @@ async def run_once(args: argparse.Namespace) -> list[HarvestResult]:
     return results
 
 
+def drain_recentchanges_feed(selected, max_per_cycle):
+    """Poll the recentchanges feed, drain its queue, convert new titles to rows.
+
+    Returns (rc_entries, rc_injected). Entries duplicating already-selected
+    roster rows (by wiki title) are dropped. Never raises: on any error it
+    logs and returns ([], 0) so the roster cycle is unaffected.
+    Toggle: HARVEST_RECENTCHANGES=1 (default on).
+    """
+    if (os.environ.get("HARVEST_RECENTCHANGES", "1") or "").strip().lower() not in (
+        "1", "true", "yes", "on",
+    ):
+        return [], 0
+    try:
+        from battlebot.harvest.recentchanges_feed import (
+            poll_once as _rc_poll_once,
+            load_queue as _rc_load_queue,
+            save_queue as _rc_save_queue,
+            default_queue_path as _rc_default_queue_path,
+        )
+        _rc_poll_once()  # incremental poll; updates watermark + queue file
+        _rc_queue_path = _rc_default_queue_path()
+        _rc_queue = _rc_load_queue(_rc_queue_path)
+        _roster_titles = {
+            (row.wiki_title or row.name or "").strip().lower()
+            for _, row in selected
+        }
+        _rc_rows = []
+        _consumed = 0
+        _rc_cap = max(1, max_per_cycle or 4)
+        for _entry in _rc_queue:
+            _consumed += 1
+            if len(_rc_rows) >= _rc_cap:
+                continue
+            _title = (_entry.get("title") or "").strip()
+            if not _title or _title.lower() in _roster_titles:
+                continue
+            _pageid = _entry.get("pageid")
+            _rc_rows.append(
+                RosterRow(
+                    category="recentchanges",
+                    franchise="unknown",
+                    name=_title,
+                    wiki_title=_title,
+                    wiki_page_id=str(_pageid) if _pageid else None,
+                )
+            )
+            _roster_titles.add(_title.lower())
+        if _consumed:
+            _rc_save_queue(_rc_queue_path, _rc_queue[_consumed:])
+        # index -1 marks non-roster rows; mark_queue_result keys on row id, not index
+        _entries = [(-1, _r) for _r in _rc_rows]
+        if _entries:
+            print(f"  recentchanges injected: {len(_entries)} rows", flush=True)
+        return _entries, len(_entries)
+    except Exception as _rc_exc:  # never let the feed break the roster cycle
+        print(f"  recentchanges feed skipped: {_rc_exc}", flush=True)
+        return [], 0
+
+
 async def run_queue_once(args: argparse.Namespace, processed_total: int) -> tuple[list[HarvestResult], int]:
     if not args.input:
         raise SystemExit("--queue-mode requires --input")
@@ -1998,6 +2059,8 @@ async def run_queue_once(args: argparse.Namespace, processed_total: int) -> tupl
         reset_roster_state(state, input_path=args.input, roster_id=args.roster_id)
         args.reset_state = False
     _key, roster_state = get_roster_state(state, input_path=args.input, roster_id=args.roster_id)
+    rc_injected = 0
+    _rc_only_mode = False
 
     if int(roster_state.get("cursor_index", 0) or 0) >= len(rows):
         summary = queue_summary_for_rows(
@@ -2012,18 +2075,31 @@ async def run_queue_once(args: argparse.Namespace, processed_total: int) -> tupl
         # the next roster rotation instead of becoming permanently stranded.
         if summary.pending:
             roster_state["cursor_index"] = 0
-        print_queue_summary(summary)
-        write_json_state_atomic(args.state_file, state)
-        return [], processed_total
+        # Roster exhausted: the recentchanges feed is still worth draining --
+        # wiki pages change even when the roster pass is complete.
+        _rc_only, _rc_n = drain_recentchanges_feed([], args.max_per_cycle)
+        if _rc_n:
+            selected = _rc_only
+            summary = QueueCycleSummary()
+            rc_injected = _rc_n
+            _rc_only_mode = True
+        else:
+            print_queue_summary(summary)
+            write_json_state_atomic(args.state_file, state)
+            return [], processed_total
 
-    selected, summary = select_queue_rows(
-        rows,
-        output_dir=args.output,
-        needs_review_dir=args.needs_review,
-        roster_state=roster_state,
-        skip_needs_review_existing=args.skip_needs_review_existing,
-        max_per_cycle=args.max_per_cycle,
-    )
+    if not _rc_only_mode:
+        selected, summary = select_queue_rows(
+            rows,
+            output_dir=args.output,
+            needs_review_dir=args.needs_review,
+            roster_state=roster_state,
+            skip_needs_review_existing=args.skip_needs_review_existing,
+            max_per_cycle=args.max_per_cycle,
+        )
+    if not _rc_only_mode:
+        rc_entries, rc_injected = drain_recentchanges_feed(selected, args.max_per_cycle)
+        selected = selected + rc_entries
     if args.max_total and args.max_total > 0:
         remaining = max(args.max_total - processed_total, 0)
         selected = selected[:remaining]
@@ -2090,6 +2166,7 @@ async def run_queue_once(args: argparse.Namespace, processed_total: int) -> tupl
     final_summary.revid_checked = revid_gate.stats["revid_checked"]
     final_summary.revid_skipped = revid_gate.stats["revid_skipped"]
     final_summary.revid_changed = revid_gate.stats["revid_changed"]
+    final_summary.rc_injected = rc_injected
     print_queue_summary(final_summary)
     write_json_state_atomic(args.state_file, state)
     return results, processed_total
