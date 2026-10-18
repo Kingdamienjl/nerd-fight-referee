@@ -56,6 +56,16 @@ model_list:
       model: ollama_chat/qwen2.5:3b
       api_base: http://192.168.1.207:11434
 
+  # Harvester LLM extraction fallback (small fast model, GPU-backed).
+  - model_name: harvester-extract
+    litellm_params:
+      model: ollama_chat/qwen2.5:3b
+      api_base: http://192.168.1.221:11434
+  - model_name: harvester-extract-fallback
+    litellm_params:
+      model: ollama_chat/qwen2.5:3b
+      api_base: http://192.168.1.207:11434
+
 fallbacks:
   - referee-judge: ["referee-judge-fallback"]
   - referee-analyst: ["referee-analyst-fallback"]

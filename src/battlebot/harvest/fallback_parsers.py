@@ -60,6 +60,8 @@ DEFAULT_OLLAMA_MODEL = os.getenv("HARVEST_OLLAMA_MODEL", "qwen2.5:3b")
 LLM_MAX_WIKITEXT_CHARS = int(os.getenv("HARVEST_LLM_MAX_CHARS", "6000"))
 # AltProx Ollama box is CPU-only: full extractions take minutes.
 LLM_TIMEOUT_SECONDS = float(os.getenv("HARVEST_LLM_TIMEOUT", "600"))
+FALLBACK_OLLAMA_BASE_URL = os.getenv("HARVEST_OLLAMA_FALLBACK_URL", "http://192.168.1.207:11434")
+FALLBACK_OLLAMA_MODEL = os.getenv("HARVEST_OLLAMA_FALLBACK_MODEL", "qwen2.5:3b")
 
 EXTRACTION_METHOD_MIGRATION_SQL = (
     "ALTER TABLE character_profiles "
@@ -401,34 +403,45 @@ def extract_with_llm(
         log.warning("llm fallback unavailable: %s", exc)
         return None
 
-    try:
-        client = instructor.from_openai(
-            OpenAI(
-                base_url=ollama_base_url.rstrip("/") + "/v1",
-                api_key="ollama",
-                timeout=timeout,
-            ),
-            mode=instructor.Mode.JSON,
-        )
-        stats = client.chat.completions.create(
-            model=model,
-            response_model=CharacterStats,
-            messages=[
-                {"role": "system", "content": _LLM_SYSTEM_PROMPT},
-                {
-                    "role": "user",
-                    "content": (
-                        f"Character page: {title}\n\n"
-                        f"Page text:\n{(text or '')[:max_chars]}"
-                    ),
-                },
-            ],
-            max_retries=2,
-        )
-        return stats
-    except Exception as exc:
-        log.warning("llm extraction failed for %r: %s", title, exc)
-        return None
+    # Try primary (LiteLLM proxy -> Fails PC GPU), then LAN fallback.
+    # Config-level LiteLLM fallbacks are not wired in this build, so we do it here.
+    _key = os.getenv("HARVEST_LITELLM_API_KEY", "sk-test")
+    _endpoints = [(ollama_base_url, model)]
+    if FALLBACK_OLLAMA_BASE_URL and FALLBACK_OLLAMA_BASE_URL != ollama_base_url:
+        _endpoints.append((FALLBACK_OLLAMA_BASE_URL, FALLBACK_OLLAMA_MODEL))
+    _last_exc = None
+    for _ep_url, _ep_model in _endpoints:
+        try:
+            client = instructor.from_openai(
+                OpenAI(
+                    base_url=_ep_url.rstrip("/") + "/v1",
+                    api_key=_key,
+                    timeout=timeout,
+                ),
+                mode=instructor.Mode.JSON,
+            )
+            stats = client.chat.completions.create(
+                model=_ep_model,
+                response_model=CharacterStats,
+                messages=[
+                    {"role": "system", "content": _LLM_SYSTEM_PROMPT},
+                    {
+                        "role": "user",
+                        "content": (
+                            f"Character page: {title}\n\n"
+                            f"Page text:\n{(text or '')[:max_chars]}"
+                        ),
+                    },
+                ],
+                max_retries=2,
+            )
+            return stats
+        except Exception as exc:
+            _last_exc = exc
+            log.warning("llm extraction failed for %r on %s: %s", title, _ep_url, exc)
+            continue
+    log.warning("llm extraction failed for %r on all endpoints: %s", title, _last_exc)
+    return None
 
 
 # ---------------------------------------------------------------------------
