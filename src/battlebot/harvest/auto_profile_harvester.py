@@ -28,6 +28,13 @@ from battlebot.profiles import yaml_io
 from battlebot.profiles.variants import variant_metadata
 from battlebot.schemas.profile import CharacterProfile
 
+try:
+    import mwparserfromhell
+    _HAS_MWPARSE = True
+except ImportError:
+    mwparserfromhell = None
+    _HAS_MWPARSE = False
+
 import mwclient
 import mwclient.errors
 import requests
@@ -649,15 +656,35 @@ class ProfileHarvester:
         fields = extract_vsbattles_fields(content)
         parse_record = None
         parse_text = ""
-        if count_core_fields(fields) < 3:
-            try:
-                parse_record = await self.fetch_mediawiki_parse(api_url, revision["revid"])
-                parse_text = rendered_text_from_parse(parse_record["body"])
-                parsed_fields = extract_vsbattles_fields(parse_text)
-                fields = merge_extracted_fields(fields, parsed_fields)
-            except Exception:
-                parse_record = None
-                parse_text = ""
+        # [fallback-chain] Round 2: leak/weak-parse escalation chain
+        # mwparserfromhell -> wikitextparser -> rendered HTML -> LLM (env-gated).
+        # Fully defensive: any failure leaves the step-1 fields intact.
+        parser_used = "mwparserfromhell"  # [fallback-chain]
+        extraction_method = "parser"  # [fallback-chain]
+        _chain_holder: dict[str, Any] = {}  # [fallback-chain]
+
+        async def _chain_fetch_rendered_html() -> str:  # [fallback-chain]
+            # Raw HTML: the fallback chain's BeautifulSoup step needs real tags.  # [fallback-chain]
+            record = await self.fetch_mediawiki_parse(api_url, revision["revid"])  # [fallback-chain]
+            _chain_holder["record"] = record  # [fallback-chain]
+            return raw_html_from_parse(record["body"])  # [fallback-chain]
+
+        try:  # [fallback-chain]
+            from battlebot.harvest import fallback_parsers as _fp  # [fallback-chain] deferred: avoids import cycle
+            _chain = await _fp.run_parse_fallback_chain(  # [fallback-chain]
+                wikitext=content,  # [fallback-chain]
+                title=title,  # [fallback-chain]
+                first_pass_fields=fields,  # [fallback-chain]
+                fetch_rendered_html=_chain_fetch_rendered_html,  # [fallback-chain]
+            )  # [fallback-chain]
+            fields = _chain["fields"]  # [fallback-chain]
+            parser_used = _chain["parser_used"]  # [fallback-chain]
+            extraction_method = _chain["extraction_method"]  # [fallback-chain]
+            if _chain["used_rendered_html"]:  # [fallback-chain]
+                parse_record = _chain_holder.get("record")  # [fallback-chain]
+                parse_text = rendered_text_from_parse(parse_record["body"]) if parse_record else ""  # [fallback-chain]
+        except Exception:  # [fallback-chain]
+            pass  # step-1 fields and defaults stand  # [fallback-chain]
         return {
             "source_id": source_id("mediawiki", page.get("pageid"), title),
             "title": page.get("title") or title,
@@ -669,6 +696,8 @@ class ProfileHarvester:
             "cache_key": record["cache_key"],
             "parse_cache_key": parse_record["cache_key"] if parse_record else None,
             "api_url": api_url,
+            "parser_used": parser_used,  # [fallback-chain]
+            "extraction_method": extraction_method,  # [fallback-chain]
             "raw_content": content,
             "parse_text": parse_text,
             "fields": fields,
@@ -779,6 +808,7 @@ def build_profile(
             "generator": "battlebot.harvest.auto_profile_harvester",
             "confidence": confidence,
             "ineligible_reasons": ineligible_reasons,
+            "parser_used": (wiki_source or {}).get("parser_used", "mwparserfromhell"),  # [fallback-chain]
         },
         "identity": build_identity(row, anilist_identity, igdb_identity),
         "canon_policy": {
@@ -818,6 +848,7 @@ def build_profile(
             "notes": [],
         },
         "profile_hash": "",
+        "extraction_method": (wiki_source or {}).get("extraction_method", "parser"),  # [fallback-chain]
     }
     from battlebot.profiles.readiness import assess_readiness
     readiness = assess_readiness(profile)
@@ -1001,7 +1032,10 @@ def enrich_metadata(extracted: dict[str, str]) -> tuple[list[str], dict[str, lis
 def extract_vsbattles_fields(content: str) -> dict[str, str]:
     fields: dict[str, str] = {}
     fields.update(extract_template_pipe_fields(content))
-    light_text = light_markup_to_text(content)
+    # Expand tabber/templates with mwparserfromhell before text extraction
+    # This prevents {{#tag:tabber}} markup from leaking into field values
+    expanded = unpack_mediawiki_templates(content)
+    light_text = light_markup_to_text(expanded)
     fields.update({k: v for k, v in extract_inline_labeled_fields(light_text).items() if k not in fields})
     fields.update({k: v for k, v in extract_delimiterless_labeled_fields(light_text).items() if k not in fields})
     text = strip_markup(content)
@@ -1068,13 +1102,17 @@ def flush_multiline_field(
 ) -> None:
     if not current_key:
         return
-    value = normalize_text(strip_markup("\n".join(current_value)))
+    raw = "\n".join(current_value)
+    # Expand tabber and other templates with mwparserfromhell before stripping
+    raw = unpack_mediawiki_templates(raw)
+    value = normalize_text(strip_markup(raw))
     if value:
         fields[current_key] = value
 
 
 def extract_section_fields(content: str) -> dict[str, str]:
-    text = strip_markup(content)
+    # Expand tabber/templates with mwparserfromhell before stripping markup
+    text = strip_markup(unpack_mediawiki_templates(content))
     section_pattern = re.compile(
         r"(?im)^\s*=+\s*(?P<title>[^=\n]+?)\s*=+\s*$"
     )
@@ -1176,9 +1214,103 @@ def clean_label_line(line: str) -> str:
     return clean.strip()
 
 
+def _expand_tabber_mwparse(code) -> str:
+    """Expand {{#tag:tabber}} and <tabber> blocks into concatenated tab contents using mwparserfromhell."""
+    import re as _re
+    # Handle <tabber> HTML tags first
+    for tag in code.filter_tags():
+        if tag.tag.lower() == "tabber":
+            tab_content = str(tag.contents)
+            # Tabber tabs are separated by |-|
+            tab_content = _re.sub(r"\|\-\|", "\n", tab_content)
+            # Strip tab name headers
+            lines = []
+            for line in tab_content.split("\n"):
+                header_match = _re.match(r"^\s*[A-Za-z][A-Za-z0-9 /&\-]*\s*=\s*$", line)
+                if header_match:
+                    continue
+                inline_match = _re.match(r"^\s*[A-Za-z][A-Za-z0-9 /&\-]*\s*=\s*(.+)$", line)
+                if inline_match:
+                    line = inline_match.group(1)
+                lines.append(line)
+            code.replace(tag, "\n".join(lines))
+    # Re-parse to catch nested {{#tag:tabber}} that were inside <tabber> tags
+    code = mwparserfromhell.parse(str(code))
+    for tmpl in code.filter_templates():
+        tname = str(tmpl.name).strip()
+        if tname.lower() == "#tag:tabber":
+            # Collect all tab contents
+            tab_texts = []
+            for param in tmpl.params:
+                pname = str(param.name).strip() if param.showkey else ""
+                pval = str(param.value).strip()
+                # Skip layout params, keep actual content tabs
+                if pname.lower() in ("border", "scroll", "visible", "padding", "header", "title", "width", "content"):
+                    # Content param holds the actual tabber body
+                    if pname.lower() == "content":
+                        pval = pval  # process below
+                    else:
+                        continue
+                # Recursively expand nested templates in tab content
+                sub_code = mwparserfromhell.parse(pval)
+                # Replace {{!}} with pipe
+                for sub_tmpl in sub_code.filter_templates():
+                    if str(sub_tmpl.name).strip() == "!":
+                        sub_code.replace(sub_tmpl, "|")
+                tab_content = str(sub_code)
+                # Strip tab separators (|-|) and tab name headers (TabName=)
+                # Tabber uses |-| as tab separator, optionally followed by TabName=
+                tab_content = _re.sub(r"\|\-\|", "\n", tab_content)
+                # Remove tab-name headers like "Shown Resistances=" (own line or inline)
+                lines = []
+                for line in tab_content.split("\n"):
+                    # Strip "TabName=" prefix if line looks like a tab header (own line)
+                    header_match = _re.match(r"^\s*[A-Za-z][A-Za-z0-9 /&\-]*\s*=\s*$", line)
+                    if header_match:
+                        continue
+                    # Strip inline "TabName=" prefix (e.g. "Shown Resistances= *Fire...")
+                    inline_match = _re.match(r"^\s*[A-Za-z][A-Za-z0-9 /&\-]*\s*=\s*(\*.*)$", line)
+                    if inline_match:
+                        line = inline_match.group(1)
+                    lines.append(line)
+                tab_content = "\n".join(lines)
+                tab_texts.append(tab_content)
+            # Replace the entire tabber with concatenated tab contents
+            replacement = "\n".join(tab_texts)
+            code.replace(tmpl, replacement)
+    return str(code)
+
+
 def unpack_mediawiki_templates(text: str) -> str:
     if not text:
         return ""
+    if _HAS_MWPARSE:
+        try:
+            code = mwparserfromhell.parse(text)
+            # Expand tabber blocks properly
+            text = _expand_tabber_mwparse(code)
+            # Re-parse after tabber expansion
+            code = mwparserfromhell.parse(text)
+            # Replace {{!}} (pipe template) with actual pipe
+            for tmpl in list(code.filter_templates()):
+                if str(tmpl.name).strip() == "!":
+                    try:
+                        code.replace(tmpl, "|")
+                    except ValueError:
+                        pass
+            # Remove all remaining templates
+            for tmpl in list(code.filter_templates()):
+                try:
+                    code.replace(tmpl, "")
+                except ValueError:
+                    pass
+            text = str(code)
+        except Exception:
+            # Fall through to regex approach on parse failure
+            pass
+        else:
+            return text
+    # Fallback: original regex-based approach
     text = re.sub(r"\{\{#tag:tabber\s*\|", "", text, flags=re.IGNORECASE)
     content_match = re.search(r"\|\s*Content\s*=\s*(.+?)(?:\}\}\$|\}\}\s*\n)", text, flags=re.DOTALL | re.IGNORECASE)
     if content_match:
@@ -1378,6 +1510,15 @@ def rendered_text_from_parse(parse_body: dict[str, Any]) -> str:
     if isinstance(html, dict):
         html = html.get("*", "")
     return strip_markup(str(html))
+
+
+def raw_html_from_parse(parse_body: dict[str, Any]) -> str:  # [fallback-chain]
+    """Raw rendered HTML from an action=parse response (for BeautifulSoup)."""  # [fallback-chain]
+    parse_data = parse_body.get("parse", {})  # [fallback-chain]
+    html = parse_data.get("text") or ""  # [fallback-chain]
+    if isinstance(html, dict):  # [fallback-chain]
+        html = html.get("*", "")  # [fallback-chain]
+    return str(html)  # [fallback-chain]
 
 
 def has_revision(wiki_source: dict[str, Any] | None) -> bool:

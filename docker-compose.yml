@@ -95,6 +95,12 @@ services:
       IGDB_CLIENT_SECRET: ${IGDB_CLIENT_SECRET:-}
       HARVEST_USER_AGENT: ${HARVEST_USER_AGENT:-ai-nerd-fight-bot/0.1}
       HARVEST_MIN_INTERVAL_SECONDS: ${HARVEST_MIN_INTERVAL_SECONDS:-2}
+      # Parse fallback chain (LLM last resort). Off by default; set to 1 to enable.
+      HARVEST_LLM_FALLBACK: ${HARVEST_LLM_FALLBACK:-0}
+      HARVEST_OLLAMA_URL: ${HARVEST_OLLAMA_URL:-http://192.168.1.207:11434}
+      HARVEST_OLLAMA_MODEL: ${HARVEST_OLLAMA_MODEL:-qwen2.5:3b}
+      HARVEST_LLM_MAX_CHARS: ${HARVEST_LLM_MAX_CHARS:-6000}
+      HARVEST_LLM_TIMEOUT: ${HARVEST_LLM_TIMEOUT:-600}
     volumes:
       - ./profiles:/app/profiles
       - ./data:/app/data

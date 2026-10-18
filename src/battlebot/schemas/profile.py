@@ -106,6 +106,7 @@ class CharacterProfile(BaseModel):
     scope_limitations: FlexibleObject
     review: FlexibleObject
     profile_hash: str
+    extraction_method: str = "parser"
 
     # Existing enrichment tools attach these legacy display/research fields.
     # Preserve them, but combat and eligibility continue to use the structured,

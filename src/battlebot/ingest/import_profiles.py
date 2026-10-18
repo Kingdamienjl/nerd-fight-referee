@@ -143,6 +143,7 @@ def compile_profile(profile: CharacterProfile, path: Path) -> CompiledProfile:
             "profile_path": path.as_posix(),
             "profile_json": profile_json,
             "generated_at": parse_timestamp(getattr(profile.generation, "generated_at", None)),
+            "extraction_method": getattr(profile, "extraction_method", None) or "parser",
         },
         sources=compile_sources(profile, profile_id),
         claims=compile_claims(profile, profile_id),
