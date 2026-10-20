@@ -1221,25 +1221,47 @@ def clean_label_line(line: str) -> str:
 def _expand_tabber_mwparse(code) -> str:
     """Expand {{#tag:tabber}} and <tabber> blocks into concatenated tab contents using mwparserfromhell."""
     import re as _re
-    # Handle <tabber> HTML tags first
-    for tag in code.filter_tags():
-        if tag.tag.lower() == "tabber":
-            tab_content = str(tag.contents)
-            # Tabber tabs are separated by |-|
-            tab_content = _re.sub(r"\|\-\|", "\n", tab_content)
-            # Strip tab name headers
-            lines = []
-            for line in tab_content.split("\n"):
-                header_match = _re.match(r"^\s*[A-Za-z][A-Za-z0-9 /&\-]*\s*=\s*$", line)
-                if header_match:
-                    continue
-                inline_match = _re.match(r"^\s*[A-Za-z][A-Za-z0-9 /&\-]*\s*=\s*(.+)$", line)
-                if inline_match:
-                    line = inline_match.group(1)
-                lines.append(line)
-            code.replace(tag, "\n".join(lines))
+
+    def _tabber_block_to_text(tab_content: str) -> str:
+        """Convert one <tabber> block's inner content into concatenated tab text."""
+        # Tabber tabs are separated by |-|
+        tab_content = _re.sub(r"\|\-\|", "\n", tab_content)
+        # Strip tab name headers
+        lines = []
+        for line in tab_content.split("\n"):
+            header_match = _re.match(r"^\s*[A-Za-z][A-Za-z0-9 /&\-]*\s*=\s*$", line)
+            if header_match:
+                continue
+            inline_match = _re.match(r"^\s*[A-Za-z][A-Za-z0-9 /&\-]*\s*=\s*(.+)$", line)
+            if inline_match:
+                line = inline_match.group(1)
+            lines.append(line)
+        return "\n".join(lines)
+
+    # Handle <tabber> HTML tags via regex on the raw text: mwparserfromhell's
+    # filter_tags() misses <tabber> tags nested inside other HTML tags
+    # (e.g. <div>), so expand them textually first, then re-parse.
+    text = str(code)
+    for _ in range(10):  # repeat to unwrap nested tabbers
+        new_text = _re.sub(
+            r"<tabber[^>]*>(.*?)</tabber>",
+            lambda m: _tabber_block_to_text(m.group(1)),
+            text,
+            flags=_re.IGNORECASE | _re.DOTALL,
+        )
+        if new_text == text:
+            break
+        text = new_text
+    # Malformed source: unclosed <tabber> with no </tabber>. Treat everything
+    # up to the next section header (or end of text) as the tabber body.
+    text = _re.sub(
+        r"<tabber[^>]*>((?:(?!</tabber>).)*?)(?=\n==|\Z)",
+        lambda m: _tabber_block_to_text(m.group(1)),
+        text,
+        flags=_re.IGNORECASE | _re.DOTALL,
+    )
     # Re-parse to catch nested {{#tag:tabber}} that were inside <tabber> tags
-    code = mwparserfromhell.parse(str(code))
+    code = mwparserfromhell.parse(text)
     for tmpl in code.filter_templates():
         tname = str(tmpl.name).strip()
         if tname.lower() == "#tag:tabber":
