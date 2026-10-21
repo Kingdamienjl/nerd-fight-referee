@@ -720,6 +720,18 @@ def sanitize_generated_profile(data: dict[str, Any]) -> dict[str, Any]:
     profile = deepcopy(data)
     profile.pop("repair", None)
     profile.pop("approval_blockers", None)
+    # version_scope is review working state: readiness reads it on the raw
+    # profile, but CharacterProfile (extra="forbid") does not declare it,
+    # so it cannot appear at the top level of a generated profile. Mirror
+    # it under review (a declared container) so the scoping provenance
+    # survives into the approved artifact.
+    version_scope = profile.pop("version_scope", None)
+    if isinstance(version_scope, dict):
+        review_state = profile.get("review")
+        if not isinstance(review_state, dict):
+            review_state = {}
+            profile["review"] = review_state
+        review_state.setdefault("version_scope", version_scope)
 
     name = str(profile.get("name") or "Unknown")
     franchise = str(profile.get("franchise") or "Unknown")
