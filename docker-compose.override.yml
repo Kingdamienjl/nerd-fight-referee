@@ -42,11 +42,12 @@ services:
         max-size: 10m
         max-file: '3'
   worker:
-    # Scaled to 3 replicas 2026-10-20 (referee-worker-1/2/3). Job claiming
-    # is atomic (FOR UPDATE SKIP LOCKED); imports are serialized across
-    # replicas via a pg advisory lock in queue_worker.
+    # Scaled to 6 replicas 2026-10-21 (was 3 since 2026-10-20). Job
+    # claiming is atomic (FOR UPDATE SKIP LOCKED) and ordered by
+    # blocker-count priority; imports are serialized across replicas
+    # via a pg advisory lock in queue_worker.
     deploy:
-      replicas: 3
+      replicas: 6
     image: referee-worker-evidence:20260913
     volumes:
     - ./profiles:/app/profiles
