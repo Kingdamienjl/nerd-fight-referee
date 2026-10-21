@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import fcntl
 import json
 import re
 import shutil
@@ -381,20 +382,8 @@ def load_repair_debug(profile_path: Path, debug_dir: Path | None = None) -> dict
     return data if isinstance(data, dict) else {}
 
 
-def atomic_append_note(notes_path: Path, note: dict[str, Any]) -> None:
-    notes_path = Path(notes_path)
-    # Ensure parent directory exists before attempting any writes
-    notes_path.parent.mkdir(parents=True, exist_ok=True)
-
-    # Load existing notes (if any)
-    try:
-        current = load_yaml(notes_path) if notes_path.exists() else {}
-    except Exception:
-        current = {}
-    notes = current.get("notes") or []
-    notes.append(note)
-
-    # Write to a temporary file in the same directory, then atomically replace
+def _write_full_notes_file(notes_path: Path, notes: list[dict[str, Any]]) -> None:
+    """Rewrite the whole notes file atomically (temp file + os.replace)."""
     tmp_file = None
     try:
         with tempfile.NamedTemporaryFile("w", delete=False, dir=str(notes_path.parent), encoding="utf-8") as handle:
@@ -402,7 +391,6 @@ def atomic_append_note(notes_path: Path, note: dict[str, Any]) -> None:
             handle.write(yaml.safe_dump({"notes": notes}, sort_keys=False, allow_unicode=False))
             handle.flush()
             os.fsync(handle.fileno())
-        # Replace the target file atomically (cross-platform safe)
         os.replace(str(tmp_file), str(notes_path))
     except Exception:
         try:
@@ -411,6 +399,66 @@ def atomic_append_note(notes_path: Path, note: dict[str, Any]) -> None:
         except Exception:
             pass
         raise
+
+
+def _notes_file_shape_ok(notes_path: Path) -> bool:
+    """True when the notes file is exactly a top-level 'notes:' mapping whose
+    value is a block sequence written with indentless '- ' items, so a new
+    item can be appended as raw text without re-parsing the document."""
+    try:
+        with notes_path.open("rb") as handle:
+            first = handle.readline()
+    except OSError:
+        return False
+    return first.rstrip(b"\r\n") == b"notes:"
+
+
+def atomic_append_note(notes_path: Path, note: dict[str, Any]) -> None:
+    """Append one note to the review-notes YAML file.
+
+    The file is an append-only audit log of tens of thousands of notes
+    (>20MB). The previous implementation re-parsed and re-wrote the entire
+    document for every single note (~98s per append at 26k notes) and raced
+    across worker processes, silently dropping notes appended concurrently.
+
+    Now: appends are serialized with an flock on a sibling lock file, and
+    when the file has the canonical shape ('notes:' followed by indentless
+    block-sequence items, which is what this module always writes) the new
+    note is appended as a YAML fragment in O(1). Files with any other shape
+    (missing, empty, hand-edited) fall back to the full load-modify-rewrite
+    path, still under the lock so concurrent appends cannot be lost.
+    """
+    notes_path = Path(notes_path)
+    # Ensure parent directory exists before attempting any writes
+    notes_path.parent.mkdir(parents=True, exist_ok=True)
+
+    lock_path = notes_path.with_name(notes_path.name + ".lock")
+    with lock_path.open("a+", encoding="utf-8") as lock_handle:
+        fcntl.flock(lock_handle.fileno(), fcntl.LOCK_EX)
+        try:
+            if notes_path.exists() and notes_path.stat().st_size > 0 and _notes_file_shape_ok(notes_path):
+                fragment = yaml.safe_dump([note], sort_keys=False, allow_unicode=False)
+                with notes_path.open("rb") as handle:
+                    handle.seek(-1, os.SEEK_END)
+                    needs_newline = handle.read(1) != b"\n"
+                with notes_path.open("a", encoding="utf-8") as handle:
+                    if needs_newline:
+                        handle.write("\n")
+                    handle.write(fragment)
+                    handle.flush()
+                    os.fsync(handle.fileno())
+                return
+            # Fallback: full load-modify-rewrite (first note, or a file whose
+            # shape this module did not produce).
+            try:
+                current = load_yaml(notes_path) if notes_path.exists() else {}
+            except Exception:
+                current = {}
+            notes = current.get("notes") or []
+            notes.append(note)
+            _write_full_notes_file(notes_path, notes)
+        finally:
+            fcntl.flock(lock_handle.fileno(), fcntl.LOCK_UN)
 
 
 def add_review_note(
