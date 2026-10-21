@@ -7,6 +7,7 @@ import asyncio
 import csv
 import json
 import re
+import time
 import unicodedata
 from collections import Counter
 from dataclasses import dataclass, field
@@ -2099,3 +2100,362 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# ---------------------------------------------------------------------------
+# Targeted evidence recovery (Fix A)
+#
+# Re-extracts ONLY the missing stats/abilities evidence for a profile from
+# its OWN already-recorded sources, using the harvester's full fallback
+# parser chain (mwparserfromhell -> wikitextparser -> rendered HTML ->
+# LLM, the last step env-gated by HARVEST_LLM_FALLBACK). No new sources:
+# fetching goes through the same per-source provider entry points repair
+# uses, constrained to the profile's recorded source records, and a
+# name-token identity guard rejects any page that does not match the
+# profile. Recovered fields are scoped to the profile's version key with
+# the same labelled/positional rules as harvest-time scoping, merged
+# without overwriting existing usable evidence, and stamped through
+# apply_primary_profile_state exactly like a normal repair.
+# ---------------------------------------------------------------------------
+
+_RECOVERY_AXES = (
+    "tier",
+    "attack_potency",
+    "speed",
+    "durability",
+    "range",
+    "stamina",
+    "intelligence",
+    "lifting_strength",
+    "striking_strength",
+)
+_RECOVERY_SECTIONS = ("powers_and_abilities", "standard_equipment", "weaknesses")
+
+
+def _recovery_key_labels(fields: dict[str, str]) -> list[str]:
+    raw = re.split(
+        r"(?i)\b(?:Name|Origin|Age|Gender|Classification)\s*:",
+        fields.get("keys") or "",
+    )[0]
+    return [part.strip() for part in raw.split("|") if part.strip()]
+
+
+def _recovery_scope_key(
+    profile: dict[str, Any], page_labels: list[str]
+) -> str | None:
+    """The profile's version key for one source page, when unambiguous.
+
+    Order: the variant record's key; an exact profile-name match among the
+    page's keys; the first listed key form when it is one of the page's
+    keys; the page's only key. Anything else is genuinely ambiguous.
+    """
+    variant_key, _origin = _profile_scope_key(profile)
+    if variant_key:
+        return variant_key
+    folded = {label.casefold(): label for label in page_labels}
+    name = str(profile.get("name") or "").strip()
+    if name and name.casefold() in folded:
+        return folded[name.casefold()]
+    forms = [
+        form
+        for form in profile.get("forms") or []
+        if isinstance(form, dict) and form.get("source_field") == "keys"
+    ]
+    form_names = [str(form.get("name") or "").strip() for form in forms]
+    form_names = [label for label in form_names if label]
+    if form_names and form_names[0].casefold() in folded:
+        return folded[form_names[0].casefold()]
+    if len(page_labels) == 1:
+        return page_labels[0]
+    return None
+
+
+def _scope_recovery_fields(
+    fields: dict[str, str],
+    *,
+    key: str | None,
+    page_labels: list[str],
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Scope extracted fields to the profile's key, harvest rules.
+
+    Per field: an explicit 'Key = value' labelled section wins; else a
+    positional segment when segment count equals the page key count; else
+    the whole text when the page has a single key. Unresolvable fields on
+    multi-key pages are dropped (unknown scope) rather than guessed.
+    """
+    from battlebot.harvest.version_scope import labelled_section
+
+    if not page_labels:
+        return dict(fields), {}
+    labels = list(dict.fromkeys(page_labels + ([key] if key else [])))
+    scoped: dict[str, str] = {}
+    methods: dict[str, str] = {}
+    for field_name in _RECOVERY_AXES + _RECOVERY_SECTIONS:
+        text = fields.get(field_name) or ""
+        if not text:
+            continue
+        if key:
+            explicit = labelled_section(text, key, labels)
+            if explicit:
+                scoped[field_name] = explicit
+                methods[field_name] = "labelled_section"
+                continue
+        parts = [part.strip() for part in text.split("|")]
+        if key and len(parts) == len(page_labels) and key in page_labels:
+            scoped[field_name] = parts[page_labels.index(key)]
+            methods[field_name] = "positional"
+        elif len(page_labels) == 1:
+            scoped[field_name] = text
+            methods[field_name] = "single_key"
+        # else: multi-key page, field cannot be attributed -> dropped
+    return scoped, methods
+
+
+async def recover_profile_evidence(
+    profile_path: Path,
+    *,
+    dry_run: bool = False,
+    notes_path: Path = service.DEFAULT_REVIEW_NOTES_PATH,
+    max_sources: int = 3,
+) -> dict[str, Any]:
+    """Recover missing stats/abilities evidence from recorded sources.
+
+    Returns a report dict; the profile file is rewritten in place when
+    anything was recovered (unless dry_run). Promotion is the caller's
+    decision (recompute approval_blockers on the returned profile).
+    """
+    import aiohttp
+
+    from battlebot.harvest.fallback_parsers import run_parse_fallback_chain
+    from battlebot.profiles.evidence_quality import (
+        evidence_quality_blockers,
+        has_usable_ability,
+    )
+    from battlebot.review.providers import mediawiki
+
+    started = time.monotonic()
+    report: dict[str, Any] = {
+        "path": str(profile_path),
+        "recovered_fields": [],
+        "sources_tried": [],
+        "parser_used": [],
+        "scoped_key": None,
+        "blockers_before": [],
+        "blockers_after": [],
+        "identity_mismatch": False,
+        "error": "",
+    }
+    profile = service.load_yaml(profile_path)
+    blockers_before = service.approval_blockers(profile)
+    report["blockers_before"] = blockers_before
+    stat_targets = {
+        axis
+        for axis in ("attack_potency", "speed", "durability")
+        if f"missing_{axis}" in blockers_before or f"unlinked_stat:{axis}" in blockers_before
+    }
+    ability_target = (
+        "missing_ability" in blockers_before
+        or "missing_clean_linked_ability" in blockers_before
+    )
+    if not stat_targets and not ability_target:
+        report["blockers_after"] = blockers_before
+        report["profile"] = profile
+        return report
+
+    # The profile's own recorded mediawiki sources only, best first:
+    # sources already cited by the profile's stats, then by candidate rank.
+    cited_ids: set[str] = set()
+    power = profile.get("power_scale") or {}
+    for entry in power.values():
+        if isinstance(entry, dict):
+            cited_ids.update(str(s) for s in entry.get("source_ids") or [])
+    candidates: list[dict[str, Any]] = []
+    seen_urls: set[str] = set()
+    for source in profile.get("sources") or []:
+        if not isinstance(source, dict):
+            continue
+        url = str(source.get("url") or "")
+        if not url or url in seen_urls:
+            continue
+        if not mediawiki.resolve_mediawiki_api_url(url):
+            continue
+        seen_urls.add(url)
+        candidates.append(source)
+    candidates.sort(
+        key=lambda s: (
+            0 if str(s.get("id") or "") in cited_ids else 1,
+            -rank_source_candidate(profile, s),
+        )
+    )
+    candidates = candidates[:max_sources]
+    if not candidates:
+        report["error"] = "no_recorded_mediawiki_sources"
+        report["blockers_after"] = blockers_before
+        report["profile"] = profile
+        return report
+
+    timeout = aiohttp.ClientTimeout(total=20, connect=3, sock_connect=3, sock_read=12)
+    best_attempt: SourceAttempt | None = None
+    async with aiohttp.ClientSession(
+        timeout=timeout, headers={"User-Agent": "battlebot-evidence-recovery/0.1"}
+    ) as session:
+        for source in candidates:
+            url = str(source.get("url") or "")
+            api_url = mediawiki.resolve_mediawiki_api_url(url)
+            source_id = source_id_for(source, str(source.get("title") or "source"))
+            tried: dict[str, Any] = {"source_id": source_id}
+            report["sources_tried"].append(tried)
+            parser = str(source.get("parser") or "")
+            try:
+                if parser == "mediawiki_ability_taxonomy":
+                    fields0, meta = await mediawiki.fetch_mediawiki_fields(
+                        source, powerlisting.parse_ability_taxonomy
+                    )
+                elif parser in {
+                    "",
+                    "mediawiki_battle_stats",
+                    "mediawiki_ability_taxonomy",
+                    "mediawiki_power_levels",
+                }:
+                    fields0, meta = await mediawiki.fetch_mediawiki_fields(
+                        source, parse_source_content
+                    )
+                else:
+                    fields0, meta = await fetch_source_fields(source)
+            except Exception as exc:  # noqa: BLE001 - per-source isolation
+                tried["error"] = f"{type(exc).__name__}: {exc}"
+                continue
+            tried["fetch_status"] = meta.get("fetch_status")
+            tried["note"] = meta.get("note")
+            fetched_title = str(meta.get("title") or source.get("title") or "")
+            tried["title"] = fetched_title
+            if meta.get("fetch_status") != "fetched" or not fetched_title:
+                continue
+            # Identity guard: the fetched page must be the profile's own
+            # character (the source record constrains the search, this
+            # verifies the result).
+            name_tokens = [
+                token
+                for token in re.split(r"[^a-z0-9]+", str(profile.get("name") or "").casefold())
+                if len(token) > 2
+            ]
+            title_fold = fetched_title.casefold()
+            if name_tokens and not any(token in title_fold for token in name_tokens):
+                tried["identity_mismatch"] = True
+                report["identity_mismatch"] = True
+                continue
+            wikitext = str(meta.get("raw_content") or "")
+            fields = fields0
+            if wikitext:
+                async def _fetch_rendered_html() -> str:
+                    params = {
+                        "action": "parse",
+                        "page": fetched_title,
+                        "prop": "text",
+                        "format": "json",
+                        "formatversion": "2",
+                    }
+                    async with session.get(api_url, params=params) as response:
+                        body = await response.json(content_type=None)
+                    parse = (body or {}).get("parse") or {}
+                    text = parse.get("text")
+                    if isinstance(text, dict):
+                        return str(text.get("*") or "")
+                    return str(text or "")
+
+                chain = await run_parse_fallback_chain(
+                    wikitext=wikitext,
+                    title=fetched_title,
+                    first_pass_fields=fields0,
+                    fetch_rendered_html=_fetch_rendered_html,
+                )
+                fields = chain.get("fields") or fields0
+                tried["parser_used"] = chain.get("parser_used")
+                report["parser_used"].append(chain.get("parser_used"))
+            page_labels = _recovery_key_labels(fields)
+            key = _recovery_scope_key(profile, page_labels)
+            if key and report["scoped_key"] is None:
+                report["scoped_key"] = key
+            scoped_fields, scope_methods = _scope_recovery_fields(
+                fields, key=key, page_labels=page_labels
+            )
+            tried["page_keys"] = page_labels
+            tried["scoped_fields"] = sorted(scoped_fields)
+            tried["scope_methods"] = scope_methods
+
+            before_fields = set(report["recovered_fields"])
+            recovered = apply_extracted_fields(
+                profile_path,
+                profile,
+                scoped_fields,
+                source_id=source_id,
+                confidence=0.9,
+                overwrite=False,
+                dry_run=dry_run,
+                notes_path=notes_path,
+            )
+            # Abilities: apply_extracted_fields only fills an empty list.
+            # When no existing ability is usable, replace the unusable set
+            # with source-backed items from the profile's own source page.
+            if "powers_and_abilities" in scoped_fields and not has_usable_ability(profile):
+                abilities = list_items_from_text(
+                    "powers_and_abilities",
+                    scoped_fields["powers_and_abilities"],
+                    source_ids=[source_id],
+                    inherited_tags=[],
+                    inherited_dependencies=[],
+                    inherited_scope_limitations=[],
+                )
+                if abilities:
+                    profile["abilities"] = abilities
+                    if "abilities" not in recovered:
+                        recovered.append("abilities")
+            if recovered:
+                best_attempt = SourceAttempt(
+                    source_id=source_id,
+                    url=url,
+                    ok=True,
+                    note="evidence_recovery",
+                    authority=str(source.get("authority") or ""),
+                    promotion_allowed=bool(source.get("promotion_allowed", False)),
+                    provider_id=str(source.get("provider_id") or ""),
+                    revision_id=str(meta.get("revision_id") or ""),
+                    fetch_status="fetched",
+                )
+                report["recovered_fields"] = sorted(before_fields | set(recovered))
+            remaining_stats = {
+                axis
+                for axis in stat_targets
+                if not service.power_text(profile, axis)
+            }
+            if not remaining_stats and (
+                not ability_target or has_usable_ability(profile)
+            ):
+                break
+
+    if report["recovered_fields"]:
+        _collapse_duplicate_source_ids(profile)
+        scope_report = apply_version_scope_default(profile)
+        if scope_report.get("fired"):
+            report["version_scope_fired"] = True
+        if best_attempt is not None and not evidence_quality_blockers(profile):
+            apply_primary_profile_state(
+                profile, primary=best_attempt, corroborated=False
+            )
+        if not dry_run:
+            service.write_yaml(profile_path, profile)
+            service.add_review_note(
+                profile_path,
+                field_path="evidence_recovery",
+                issue_type="auto_repair",
+                note=(
+                    "Evidence recovery from recorded sources: "
+                    + ", ".join(report["recovered_fields"])
+                    + f" (parsers: {', '.join(p for p in report['parser_used'] if p)})"
+                ),
+                notes_path=notes_path,
+            )
+    report["blockers_after"] = service.approval_blockers(profile)
+    report["wall_seconds"] = round(time.monotonic() - started, 2)
+    report["profile"] = profile
+    return report
