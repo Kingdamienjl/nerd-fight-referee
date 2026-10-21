@@ -1402,6 +1402,143 @@ def _collapse_duplicate_source_ids(profile: dict[str, Any]) -> int:
         ]
     return len(drop)
 
+
+VERSION_SCOPE_RULE_ID = "repair_rule:version_scope_default_v1"
+_VERSION_SCOPE_AXES = (
+    "tier",
+    "attack_potency",
+    "speed",
+    "durability",
+    "range",
+    "stamina",
+    "intelligence",
+    "lifting_strength",
+    "striking_strength",
+)
+
+
+def _profile_scope_key(profile: dict[str, Any]) -> tuple[str | None, str]:
+    """The profile's own version key, when one is recorded.
+
+    Variant profiles record the source key they were harvested for in
+    ``variant.source_key`` / ``variant.variant_name``. That is the single
+    unambiguous scope for the profile's stats.
+    """
+    variant = profile.get("variant")
+    if isinstance(variant, dict):
+        for field_name in ("source_key", "variant_name"):
+            value = str(variant.get(field_name) or "").strip()
+            if value:
+                return value, f"variant.{field_name}"
+    return None, ""
+
+
+def apply_version_scope_default(profile: dict[str, Any]) -> dict[str, Any]:
+    """Attribute pipe-joined multi-key stat text to the profile's one key.
+
+    Harvested power_scale texts can carry one value per source version key,
+    joined with '|' in source-key order. readiness blocks those axes as
+    unresolved_version_scope because the profile does not say which value
+    is its own. This rule resolves the scope ONLY when it is unambiguous:
+
+    - the profile's key comes from its variant record, or (with no variant
+      record) is the first listed key form -- the primary/default key, the
+      same base-form convention the fight packet builder already uses;
+    - per axis, the value is taken from an explicit 'Key = value' labelled
+      section when one exists (the harvester's own labelled_section rule),
+      else positionally when the segment count equals the key count.
+
+    Anything else (segment/key count mismatch, key not among the listed
+    keys, empty or still-piped segment) is refused per axis and left for
+    human or source-level repair. Successful scoping is recorded in
+    profile['version_scope'] with the rule id and timestamp.
+    """
+    from battlebot.harvest.version_scope import labelled_section
+
+    report: dict[str, Any] = {
+        "rule": VERSION_SCOPE_RULE_ID,
+        "fired": False,
+        "key": None,
+        "key_origin": "",
+        "axes": {},
+        "refused": [],
+    }
+    forms = [
+        form
+        for form in profile.get("forms") or []
+        if isinstance(form, dict) and form.get("source_field") == "keys"
+    ]
+    labels = [str(form.get("name") or "").strip() for form in forms]
+    labels = [label for label in labels if label]
+    key, key_origin = _profile_scope_key(profile)
+    if key is None:
+        if labels:
+            key, key_origin = labels[0], "primary_form_position"
+        else:
+            report["refused"].append("no_scope_key")
+            return report
+    report["key"] = key
+    report["key_origin"] = key_origin
+
+    power = profile.get("power_scale")
+    if not isinstance(power, dict):
+        report["refused"].append("no_power_scale")
+        return report
+    label_set = list(dict.fromkeys(labels + [key]))
+    for axis in _VERSION_SCOPE_AXES:
+        entry = power.get(axis)
+        raw_text = entry.get("text") if isinstance(entry, dict) else entry
+        if not raw_text or "|" not in str(raw_text):
+            continue
+        text = str(raw_text)
+        chosen: str | None = None
+        method = ""
+        explicit = labelled_section(text, key, label_set)
+        if explicit:
+            chosen, method = explicit, "labelled_section"
+        else:
+            parts = [part.strip() for part in text.split("|")]
+            if labels and len(parts) == len(labels) and key in labels:
+                chosen, method = parts[labels.index(key)], "positional"
+        if not chosen or not chosen.strip() or "|" in chosen:
+            report["refused"].append(axis)
+            continue
+        if isinstance(entry, dict):
+            new_entry = dict(entry)
+            new_entry["text"] = chosen
+            power[axis] = new_entry
+        else:
+            power[axis] = chosen
+        report["axes"][axis] = {
+            "method": method,
+            "segments": len(text.split("|")),
+        }
+    if report["axes"]:
+        report["fired"] = True
+        remaining_piped = []
+        for axis in _VERSION_SCOPE_AXES:
+            entry = power.get(axis)
+            value = entry.get("text") if isinstance(entry, dict) else entry
+            if value and "|" in str(value):
+                remaining_piped.append(axis)
+        scope = profile.get("version_scope")
+        if not isinstance(scope, dict):
+            scope = {}
+        scope.update(
+            {
+                "evidence_scoped": not remaining_piped,
+                "scoped_key": key,
+                "scoped_by": VERSION_SCOPE_RULE_ID,
+                "scoped_at": service.utc_now(),
+                "key_origin": key_origin,
+                "axes": report["axes"],
+                "remaining_piped_axes": remaining_piped,
+            }
+        )
+        profile["version_scope"] = scope
+    return report
+
+
 async def repair_profile(
     profile_path: Path,
     *,
@@ -1750,6 +1887,7 @@ async def repair_profile(
     )
 
     _collapse_duplicate_source_ids(profile)
+    apply_version_scope_default(profile)
     changed = bool(repaired_fields)
     promoted = False
     if not dry_run:
