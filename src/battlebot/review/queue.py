@@ -47,12 +47,24 @@ async def enqueue_job(
     providers: str,
     priority: int,
     max_attempts: int = 3,
+    requeue: bool = False,
 ) -> bool:
+    # requeue=True lets a terminal job (needs_review/failed) whose inputs
+    # changed be reset to 'retry' with a fresh attempt budget; without it
+    # the insert stays a no-op for any existing row, exactly as before.
     row = await connection.fetchrow(
         """
 INSERT INTO profile_jobs (profile_path, target, providers, priority, max_attempts)
 VALUES ($1, $2, $3, $4, $5)
-ON CONFLICT (profile_path) DO NOTHING
+ON CONFLICT (profile_path) DO UPDATE
+SET status = 'retry',
+    attempts = 0,
+    locked_at = NULL,
+    worker_id = NULL,
+    next_attempt_at = now(),
+    last_error = 'Requeued: profile changed since last attempt',
+    updated_at = now()
+WHERE profile_jobs.status IN ('needs_review', 'failed') AND $6
 RETURNING id
 """,
         profile_path,
@@ -60,6 +72,7 @@ RETURNING id
         providers,
         priority,
         max_attempts,
+        requeue,
     )
     return row is not None
 

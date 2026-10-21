@@ -30,6 +30,10 @@ class FakeConnection:
         self.executed.append((sql, args))
         return self.fetch_values.pop(0) if self.fetch_values else 0
 
+    async def fetch(self, sql, *args):
+        self.executed.append((sql, args))
+        return []
+
 
 def write_profile(path: Path):
     path.parent.mkdir(parents=True, exist_ok=True)

@@ -18,6 +18,8 @@ from battlebot.review import batch_promote, service
 from battlebot.review.queue import claim_jobs, mark_job, mark_retry
 
 
+IMPORT_LOCK_ID = 73190602
+
 PROVIDER_HOSTS = {
     "vsbattles": "vsbattles.fandom.com",
     "character_stats_profiles": "character-stats-and-profiles.fandom.com",
@@ -100,6 +102,22 @@ def args_for_job(job: dict[str, Any], args: argparse.Namespace) -> argparse.Name
 
 
 async def import_generated_profiles(generated_dir: Path, *, database_url: str | None) -> int:
+    # The import state file is read-modify-write shared state, so imports
+    # are serialized across worker replicas with an advisory lock. A worker
+    # that loses the race skips: the winner imports the whole generated
+    # directory, which covers this worker's promotions too.
+    if database_url:
+        async with connect_database(database_url) as guard:
+            if not await guard.fetchval("SELECT pg_try_advisory_lock($1)", IMPORT_LOCK_ID):
+                return 0
+            try:
+                return await _import_generated_profiles(generated_dir, database_url=database_url)
+            finally:
+                await guard.execute("SELECT pg_advisory_unlock($1)", IMPORT_LOCK_ID)
+    return await _import_generated_profiles(generated_dir, database_url=database_url)
+
+
+async def _import_generated_profiles(generated_dir: Path, *, database_url: str | None) -> int:
     state_path = Path("data/worker_import_state.json")
     state = import_profiles.load_import_state(state_path)
     compiled, summary = import_profiles.build_import_plan(

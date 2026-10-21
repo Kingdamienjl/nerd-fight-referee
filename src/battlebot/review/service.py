@@ -591,6 +591,7 @@ def approved_profile_data(
     force: bool,
     missing: list[str],
     blockers: list[str],
+    approved_by: str = "local_review_ui",
 ) -> dict[str, Any]:
     data = sanitize_generated_profile(profile)
     data["battle_eligible"] = not blockers
@@ -601,7 +602,7 @@ def approved_profile_data(
         data["status"] = "needs_manual_review_approved" if force else "approved_override"
     review = data.get("review") if isinstance(data.get("review"), dict) else {}
     review["approved_at"] = utc_now()
-    review["approved_by"] = "local_review_ui"
+    review["approved_by"] = approved_by
     data["review"] = review
     generation = data.get("generation") if isinstance(data.get("generation"), dict) else {}
     generation["ineligible_reasons"] = [] if not blockers else blockers
@@ -766,6 +767,7 @@ def approve_profile(
     needs_review_dir: Path | str = DEFAULT_NEEDS_REVIEW_DIR,
     generated_dir: Path | str = DEFAULT_GENERATED_DIR,
     notes_path: Path | str = DEFAULT_REVIEW_NOTES_PATH,
+    approved_by: str = "local_review_ui",
 ) -> dict[str, Any]:
     source = Path(profile_path)
     profile = load_yaml(source)
@@ -784,6 +786,7 @@ def approve_profile(
         force=force,
         missing=missing_core_fields(profile),
         blockers=blockers,
+        approved_by=approved_by,
     )
     approved["profile_hash"] = stable_hash_without_profile_hash(approved)
     schema_blockers = schema_validation_blockers(approved)

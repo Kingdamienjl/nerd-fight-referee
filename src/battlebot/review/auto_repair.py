@@ -604,6 +604,24 @@ def apply_source_metadata(profile: dict[str, Any], source: dict[str, Any], metad
             item.setdefault("id", source_id)
             item.update({key: value for key, value in metadata.items() if value and key != "note"})
             item.setdefault("source_type", source.get("source_type") or "mediawiki")
+            if metadata.get("url"):
+                # This source id has been resolved to a canonical page. Drop
+                # same-id candidate stubs that were never resolved to a
+                # different revision: they are alternate title spellings of
+                # this same logical source, and keeping them makes one page
+                # look like several conflicting sources. Entries resolved to
+                # a different revision are genuine and are kept.
+                resolved_revision = str(metadata.get("revision_id") or "")
+                sources[:] = [
+                    entry
+                    for entry in sources
+                    if entry is item
+                    or entry.get("id") != source_id
+                    or (
+                        entry.get("revision_id")
+                        and str(entry["revision_id"]) != resolved_revision
+                    )
+                ]
             return str(item["id"])
     new_source = {"id": source_id, **source}
     new_source.update({key: value for key, value in metadata.items() if value and key != "note"})
@@ -1333,6 +1351,57 @@ def write_debug_report(
         return
 
 
+def _collapse_duplicate_source_ids(profile: dict[str, Any]) -> int:
+    """Keep one recorded source per source id where variants are one source.
+
+    enrich_sources records several title-spelling candidates that can
+    slugify to the same source id (e.g. "Name Series" and
+    "Name %28Series%29"). readiness groups sources by id, so two recorded
+    URLs under one id read as ambiguous_source_identity forever, even
+    though the variants are the same logical source. Collapse each id
+    group: resolved entries (revision_id) are always kept; unresolved
+    stubs whose URL matches a resolved URL are kept; other stubs are
+    dropped when the group has a resolved entry. When a group is all
+    unresolved stubs, keep one (preferring the parenthetical %28 wiki
+    spelling). Returns the number of dropped records.
+    """
+    sources = profile.get("sources")
+    if not isinstance(sources, list) or len(sources) < 2:
+        return 0
+    groups: dict[str, list[int]] = {}
+    for idx, entry in enumerate(sources):
+        if isinstance(entry, dict) and entry.get("id"):
+            groups.setdefault(str(entry["id"]), []).append(idx)
+    drop: set[int] = set()
+    for idxs in groups.values():
+        if len(idxs) < 2:
+            continue
+        urls = {str(sources[i].get("url") or "") for i in idxs}
+        if len(urls) < 2:
+            continue
+        resolved_urls = {
+            str(sources[i].get("url") or "")
+            for i in idxs
+            if sources[i].get("revision_id")
+        }
+        if resolved_urls:
+            for i in idxs:
+                if sources[i].get("revision_id"):
+                    continue
+                if str(sources[i].get("url") or "") not in resolved_urls:
+                    drop.add(i)
+        else:
+            keep = next(
+                (i for i in idxs if "%28" in str(sources[i].get("url") or "")),
+                idxs[0],
+            )
+            drop.update(i for i in idxs if i != keep)
+    if drop:
+        profile["sources"] = [
+            entry for idx, entry in enumerate(sources) if idx not in drop
+        ]
+    return len(drop)
+
 async def repair_profile(
     profile_path: Path,
     *,
@@ -1359,6 +1428,48 @@ async def repair_profile(
 
     if "sources" in missing_targets(profile):
         profile.setdefault("sources", [])
+
+    # Fast path: a profile an earlier repair pass already brought to a
+    # battle-ready state (provisional/verified + battle_eligible) whose
+    # approval blockers are now empty can be promoted through the normal
+    # approval gate without re-fetching sources. approve_profile re-runs
+    # approval_blockers and schema validation itself, so no gate is skipped.
+    if (
+        promote_if_valid
+        and not dry_run
+        and not choose_source_id
+        and profile.get("battle_eligible")
+        and profile.get("status") in {"provisional", "verified"}
+        and not service.approval_blockers(profile)
+    ):
+        approval = service.approve_profile(
+            profile_path,
+            needs_review_dir=needs_review_dir,
+            generated_dir=generated_dir,
+            notes_path=notes_path,
+            approved_by="auto_repair",
+        )
+        fast_promoted = bool(approval.get("ok"))
+        if fast_promoted and move:
+            profile_path.unlink(missing_ok=True)
+        result = RepairResult(
+            path=profile_path,
+            changed=False,
+            promoted=fast_promoted,
+            repaired_fields=[],
+            unresolved_fields=[],
+            source_attempts=[],
+            errors=[]
+            if fast_promoted
+            else [f"fast_path_approval_failed: {approval.get('error')}"],
+            needs_human_source_choice=False,
+            candidate_sources=[],
+            chosen_source_id=choose_source_id,
+        )
+        write_debug_report(profile_path, debug_dir=debug_dir, result=result, dry_run=dry_run)
+        if verbose:
+            print(f"debug_report: {debug_report_path(profile_path, debug_dir)}")
+        return result
 
     providers = source_registry.enabled_providers(provider_ids)
     candidates = profile_source_candidates(profile, roster_dir, provider_ids)[:max_source_candidates]
@@ -1611,6 +1722,7 @@ async def repair_profile(
         attempt.identity_match
         for attempt in attempts
         if attempt.fetch_status == "fetched"
+        and attempt.promotion_allowed
         and attempt.core_field_count >= 3
         and attempt.ability_count >= 1
     )
@@ -1637,6 +1749,7 @@ async def repair_profile(
         chosen_source_id=choose_source_id,
     )
 
+    _collapse_duplicate_source_ids(profile)
     changed = bool(repaired_fields)
     promoted = False
     if not dry_run:
@@ -1652,6 +1765,7 @@ async def repair_profile(
                 needs_review_dir=needs_review_dir,
                 generated_dir=generated_dir,
                 notes_path=notes_path,
+                approved_by="auto_repair",
             )
             promoted = bool(approval.get("ok"))
             if promoted and move:

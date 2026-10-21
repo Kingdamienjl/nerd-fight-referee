@@ -20,16 +20,18 @@ async def run() -> None:
     interval = max(10, int(os.getenv("REFEREE_WORKER_INTERVAL", "60")))
     async with connect_database(args.database_url) as connection:
         await apply_schema(connection)
-        if not await connection.fetchval("SELECT pg_try_advisory_lock($1)", LOCK_ID):
-            raise RuntimeError("Another persistent referee worker owns the queue")
-        # The global session lock means no other supervised consumer is active.
-        # Recover interrupted jobs, preserving attempt limits and retry history.
+        # Job claiming is atomic (FOR UPDATE SKIP LOCKED in review/queue.py),
+        # so multiple worker replicas may consume the queue concurrently; no
+        # global session lock is taken. Startup recovery therefore only
+        # touches jobs whose worker has clearly disappeared: a 'running' job
+        # is stale once its lock outlives the longest plausible repair run.
         await connection.execute("""
             UPDATE profile_jobs SET
               status=CASE WHEN attempts >= max_attempts THEN 'failed' ELSE 'retry' END,
               locked_at=NULL, worker_id=NULL, next_attempt_at=now(), updated_at=now(),
               last_error='Recovered interrupted worker job'
             WHERE status='running'
+              AND locked_at < now() - interval '30 minutes'
         """)
         while True:
             summary = await queue_seed.seed_queue(

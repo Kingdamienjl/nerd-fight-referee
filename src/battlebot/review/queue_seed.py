@@ -6,6 +6,7 @@ import argparse
 import asyncio
 import json
 from dataclasses import dataclass
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +21,7 @@ class SeedSummary:
     seeded: int = 0
     skipped_existing_output: int = 0
     skipped_existing_job: int = 0
+    requeued: int = 0
 
     def as_dict(self) -> dict[str, int]:
         return {
@@ -27,6 +29,7 @@ class SeedSummary:
             "seeded": self.seeded,
             "skipped_existing_output": self.skipped_existing_output,
             "skipped_existing_job": self.skipped_existing_job,
+            "requeued": self.requeued,
         }
 
 
@@ -58,6 +61,15 @@ async def seed_queue(
     max_attempts: int = 3,
 ) -> SeedSummary:
     summary = SeedSummary()
+    terminal_rows = await connection.fetch(
+        "SELECT profile_path, status, updated_at FROM profile_jobs "
+        "WHERE status IN ('needs_review', 'failed')"
+    )
+    terminal_jobs = {
+        str(row["profile_path"]): (str(row["status"]), row["updated_at"])
+        for row in terminal_rows
+    }
+    now = datetime.now(UTC)
     for path in profile_paths(target):
         summary.scanned += 1
         if should_skip_output(
@@ -68,6 +80,22 @@ async def seed_queue(
         ):
             summary.skipped_existing_output += 1
             continue
+        # A terminal job may be re-queued only when its inputs plausibly
+        # changed: the profile file was rewritten after the job's last
+        # attempt, or a failed job has been sitting for a week. Anything
+        # else stays terminal so blocked profiles cannot spin the queue.
+        requeue = False
+        terminal = terminal_jobs.get(str(path))
+        if terminal is not None:
+            job_status, job_updated_at = terminal
+            try:
+                file_changed = datetime.fromtimestamp(
+                    path.stat().st_mtime, UTC
+                ) > job_updated_at + timedelta(hours=1)
+            except OSError:
+                file_changed = False
+            stale_failed = job_status == "failed" and job_updated_at < now - timedelta(days=7)
+            requeue = file_changed or stale_failed
         inserted = await enqueue_job(
             connection,
             profile_path=str(path),
@@ -75,9 +103,12 @@ async def seed_queue(
             providers=providers,
             priority=priority,
             max_attempts=max_attempts,
+            requeue=requeue,
         )
         if inserted:
             summary.seeded += 1
+            if terminal is not None:
+                summary.requeued += 1
         else:
             summary.skipped_existing_job += 1
     return summary
