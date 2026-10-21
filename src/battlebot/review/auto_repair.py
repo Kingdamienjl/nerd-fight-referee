@@ -2110,12 +2110,23 @@ if __name__ == "__main__":
 # parser chain (mwparserfromhell -> wikitextparser -> rendered HTML ->
 # LLM, the last step env-gated by HARVEST_LLM_FALLBACK). No new sources:
 # fetching goes through the same per-source provider entry points repair
-# uses, constrained to the profile's recorded source records, and a
-# name-token identity guard rejects any page that does not match the
-# profile. Recovered fields are scoped to the profile's version key with
-# the same labelled/positional rules as harvest-time scoping, merged
-# without overwriting existing usable evidence, and stamped through
-# apply_primary_profile_state exactly like a normal repair.
+# uses, constrained to the profile's recorded source records.
+#
+# Every fetched page must pass the recovery guard before anything merges:
+# (1) the page must be about THIS character (fanon-normalized title vs the
+# profile's identity names), (2) the page must carry positive evidence of
+# the profile's franchise (categories / origin field / title
+# disambiguator / dedicated host; pages reached by search substitution
+# need one of those strong channels), (3) real-world/non-fiction pages
+# are rejected for fictional characters, and (4) each recovered field is
+# filtered for template boilerplate. When search substitution fails the
+# guard, the recorded title itself is fetched directly and guarded too.
+# Recovered fields are scoped to the profile's version key with the same
+# labelled/positional rules as harvest-time scoping, merged without
+# overwriting existing usable evidence, and stamped through
+# apply_primary_profile_state exactly like a normal repair. Every merge
+# records provenance (source id, fetched title/URL, revision, via,
+# guard channels) in the report and the review note.
 # ---------------------------------------------------------------------------
 
 _RECOVERY_AXES = (
@@ -2130,6 +2141,9 @@ _RECOVERY_AXES = (
     "striking_strength",
 )
 _RECOVERY_SECTIONS = ("powers_and_abilities", "standard_equipment", "weaknesses")
+
+_STRONG_FRANCHISE_CHANNELS = {"categories", "origin", "title_disambiguator", "dedicated_host"}
+_NONFICTION_CATEGORIES = {"real", "real_world", "nonfiction", "non-fiction"}
 
 
 def _recovery_key_labels(fields: dict[str, str]) -> list[str]:
@@ -2211,6 +2225,320 @@ def _scope_recovery_fields(
     return scoped, methods
 
 
+# ---------------------------------------------------------------------------
+# Recovery guard (Fix A hardening)
+# ---------------------------------------------------------------------------
+
+
+def _guard_token_set(value: Any) -> set[str]:
+    return set(normalized_identity_text(str(value or "")).split())
+
+
+def _fanon_title_parts(title: str) -> tuple[str, str, str]:
+    """Split a fetched page title into (head, base, disambiguator).
+
+    Fanon wikis suffix user pages as 'Title/Username'; the part after the
+    first '/' is the author, not the subject. A trailing parenthetical is
+    the disambiguator (usually the franchise); it is stripped from the
+    base used for name matching but kept as franchise evidence.
+    """
+    head = str(title or "").strip()
+    if "/" in head:
+        head = head.split("/", 1)[0].strip()
+    match = re.search(r"\(([^()]*)\)\s*$", head)
+    if match:
+        return head, head[: match.start()].strip(), match.group(1).strip()
+    return head, head, ""
+
+
+def _disambiguator_candidates(paren: str) -> list[str]:
+    """Disambiguator strings to test for franchise evidence.
+
+    '(Canon, Kimetsu no Yaiba)' yields both the full text and the part
+    after the Canon marker; a bare '(Canon)' yields nothing testable.
+    """
+    text = str(paren or "").strip()
+    if not text:
+        return []
+    candidates = [text]
+    lowered = text.casefold()
+    if lowered == "canon":
+        return []
+    if lowered.startswith("canon,"):
+        candidates.append(text.split(",", 1)[1].strip())
+    elif lowered.startswith("canon "):
+        candidates.append(text[len("canon "):].strip())
+    return [item for item in candidates if item]
+
+
+def _guard_name_match(profile: dict[str, Any], fetched_title: str) -> bool:
+    """True when the fetched page is about the profile's character."""
+    if title_wrong_for_profile(profile, fetched_title):
+        return False
+    head, base, _paren = _fanon_title_parts(fetched_title)
+    bases: set[str] = set()
+    for variant in {fetched_title, head, base}:
+        if variant:
+            bases |= title_identity_bases(variant, profile)
+    names = {
+        local_identity_text(profile, name)
+        for name in profile_identity_names(profile)
+    } - {""}
+    if any(name in bases for name in names):
+        return True
+    base_tokens = _guard_token_set(base)
+    if not base_tokens:
+        return False
+    return any(set(name.split()) == base_tokens for name in names)
+
+
+def _franchise_token_sets(profile: dict[str, Any]) -> list[set[str]]:
+    identity = profile.get("identity") if isinstance(profile.get("identity"), dict) else {}
+    values = [
+        profile.get("franchise"),
+        identity.get("franchise"),
+        profile.get("series"),
+        identity.get("series"),
+    ]
+    token_sets: list[set[str]] = []
+    for value in values:
+        tokens = _guard_token_set(value)
+        if tokens and tokens not in token_sets:
+            token_sets.append(tokens)
+    return token_sets
+
+
+def _tokens_cover(token_sets: list[set[str]], haystack: set[str]) -> bool:
+    return any(tokens and tokens <= haystack for tokens in token_sets)
+
+
+def _guard_franchise_channels(
+    profile: dict[str, Any],
+    *,
+    fetched_title: str,
+    fetched_url: str,
+    fields: dict[str, str],
+    categories: list[str],
+    wikitext: str,
+) -> list[str]:
+    """Positive franchise-evidence channels present on the fetched page."""
+    token_sets = _franchise_token_sets(profile)
+    if not token_sets:
+        return []
+    channels: list[str] = []
+    category_tokens: set[str] = set()
+    for category in categories:
+        category_tokens |= _guard_token_set(category)
+    if _tokens_cover(token_sets, category_tokens):
+        channels.append("categories")
+    origin_tokens = _guard_token_set(fields.get("origin"))
+    if origin_tokens and (
+        _tokens_cover(token_sets, origin_tokens)
+        or any(origin_tokens <= tokens for tokens in token_sets)
+    ):
+        channels.append("origin")
+    _head, _base, paren = _fanon_title_parts(fetched_title)
+    for candidate in _disambiguator_candidates(paren):
+        candidate_tokens = _guard_token_set(candidate)
+        if candidate_tokens and (
+            _tokens_cover(token_sets, candidate_tokens)
+            or any(candidate_tokens <= tokens for tokens in token_sets)
+        ):
+            channels.append("title_disambiguator")
+            break
+    host = urlparse(fetched_url or "").netloc.casefold()
+    if host:
+        host_tokens = set(re.split(r"[^a-z0-9]+", host)) - {""}
+        slug = service.slugify(str(profile.get("franchise") or ""))
+        if (slug and slug in host) or _tokens_cover(token_sets, host_tokens):
+            channels.append("dedicated_host")
+    if wikitext:
+        haystack = wikitext[:6000] + wikitext[-6000:]
+        if _tokens_cover(token_sets, _guard_token_set(haystack)):
+            channels.append("wikitext")
+    return channels
+
+
+def _guard_nonfiction_hits(
+    profile: dict[str, Any],
+    *,
+    fetched_url: str,
+    fields: dict[str, str],
+    categories: list[str],
+    wikitext: str,
+) -> list[str]:
+    """Real-world subject signals; any hit rejects for fictional profiles."""
+    identity = profile.get("identity") if isinstance(profile.get("identity"), dict) else {}
+    category = str(profile.get("category") or identity.get("category") or "").casefold()
+    if category in _NONFICTION_CATEGORIES:
+        return []
+    hits: list[str] = []
+    host = urlparse(fetched_url or "").netloc.casefold()
+    if host == "wikipedia.org" or host.endswith(".wikipedia.org"):
+        hits.append("wikipedia_domain")
+    category_names = {str(item or "").strip().casefold() for item in categories}
+    if "real world" in category_names:
+        hits.append("real_world_category")
+    origin = str(fields.get("origin") or "").casefold()
+    if "real world" in origin:
+        hits.append("real_world_origin")
+    lead = str(wikitext or "")[:1500].casefold()
+    if re.search(r"\bis an?\s+(genus|species|family|subfamily|tribe|order)\s+of\b", lead):
+        hits.append("taxonomy_lead")
+    return hits
+
+
+_BOILERPLATE_INSTRUCTION_PATTERNS = (
+    r"add any explanations",
+    r"using brackets,?\s+not in bold",
+    r"\(in bold[;,)]",
+    r"the character'?s (attack power or destructive capacity|destructive capacity|attack power|speed|durability|stamina|range|intelligence|lifting strength|striking strength)\b",
+    r"current (tier|level) of the character",
+    r"for characters who have (transformation|multiple|power-up)",
+    r"insert (those|the following) (transformations|power-ups)",
+    r"lorem ipsum",
+    r"this (article|page) is a (stub|work in progress)",
+    r"under construction",
+)
+_BOILERPLATE_MARKUP_PATTERNS = (
+    r"\{\{",
+    r"\}\}",
+    r"\{\|",
+    r"\|\}",
+    r"\[\[\s*category\s*:",
+    r"#tag\s*:",
+    r"<nowiki",
+    r"\btemplate\s*:",
+    r"\d{2,4}\s*px\s*\|",
+    r"\.(?:png|jpe?g|gif|webp)\s*\|",
+)
+
+
+def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
+    """Template-residue checks for one recovered field's text.
+
+    Instruction patterns (the source wiki's unfilled profile template)
+    apply to every field; markup-residue and substantiveness checks
+    apply to scalar stat fields and the keys field, whose values must be
+    prose/values, not template fragments. Returns reason strings; an
+    empty list means the text is clean.
+    """
+    value = str(text or "")
+    if not value.strip():
+        return []
+    lowered = value.casefold()
+    reasons: list[str] = []
+    if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_INSTRUCTION_PATTERNS):
+        reasons.append("template_instruction")
+    if scalar:
+        if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_MARKUP_PATTERNS):
+            reasons.append("markup_residue")
+        cleaned = re.sub(r"[^a-z0-9]+", " ", lowered).strip()
+        if len(cleaned) < 8:
+            reasons.append("insubstantive")
+    return reasons
+
+
+def _wikitext_categories(wikitext: str) -> list[str]:
+    return [
+        match.group(1).strip()
+        for match in re.finditer(r"\[\[Category:([^\]|]+)", str(wikitext or ""))
+    ]
+
+
+async def _fetch_page_categories(session: Any, api_url: str, title: str) -> list[str]:
+    params = {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "prop": "categories",
+        "cllimit": "500",
+        "titles": title,
+        "redirects": "1",
+    }
+    try:
+        async with session.get(api_url, params=params) as response:
+            body = await response.json(content_type=None)
+    except Exception:  # noqa: BLE001 - categories are one evidence channel
+        return []
+    pages = ((body or {}).get("query") or {}).get("pages") or []
+    if not pages:
+        return []
+    return [
+        str(row.get("title") or "").removeprefix("Category:").strip()
+        for row in pages[0].get("categories") or []
+        if row.get("title")
+    ]
+
+
+def evaluate_recovery_guard(
+    profile: dict[str, Any],
+    source: dict[str, Any],
+    fields: dict[str, str],
+    metadata: dict[str, Any],
+    *,
+    categories: list[str],
+) -> dict[str, Any]:
+    """Page-level guard verdict for one fetched recovery source page.
+
+    Returns a JSON-safe verdict: accepted flag, how the page was reached
+    ('recorded_title' when the fetched page is the recorded source page
+    itself, else 'search_substitution'), the individual check results,
+    franchise evidence channels, non-fiction hits, and rejection reasons.
+    Boilerplate is field-level and applied separately to scoped fields.
+    """
+    fetched_title = str(metadata.get("title") or source.get("title") or "")
+    fetched_url = str(metadata.get("url") or source.get("url") or "")
+    recorded_title = str(source.get("title") or title_from_wiki_url(str(source.get("url") or "")) or "")
+    via = (
+        "recorded_title"
+        if recorded_title
+        and normalized_identity_text(fetched_title) == normalized_identity_text(recorded_title)
+        else "search_substitution"
+    )
+    wikitext = str(metadata.get("raw_content") or "")
+    all_categories = list(dict.fromkeys([*categories, *_wikitext_categories(wikitext)]))
+    name_match = _guard_name_match(profile, fetched_title)
+    channels = _guard_franchise_channels(
+        profile,
+        fetched_title=fetched_title,
+        fetched_url=fetched_url,
+        fields=fields,
+        categories=all_categories,
+        wikitext=wikitext,
+    )
+    nonfiction_hits = _guard_nonfiction_hits(
+        profile,
+        fetched_url=fetched_url,
+        fields=fields,
+        categories=all_categories,
+        wikitext=wikitext,
+    )
+    reasons: list[str] = []
+    if not name_match:
+        reasons.append("name_mismatch")
+    if nonfiction_hits:
+        reasons.extend(f"nonfiction:{hit}" for hit in nonfiction_hits)
+    if not channels:
+        reasons.append("franchise_no_evidence")
+    elif via == "search_substitution" and not (
+        _STRONG_FRANCHISE_CHANNELS & set(channels)
+    ):
+        reasons.append("franchise_weak_evidence_only")
+    return {
+        "accepted": not reasons,
+        "via": via,
+        "fetched_title": fetched_title,
+        "fetched_url": fetched_url,
+        "revision_id": str(metadata.get("revision_id") or ""),
+        "name_match": name_match,
+        "franchise_channels": channels,
+        "nonfiction_hits": nonfiction_hits,
+        "categories": all_categories,
+        "reasons": reasons,
+    }
+
+
 async def recover_profile_evidence(
     profile_path: Path,
     *,
@@ -2238,6 +2566,8 @@ async def recover_profile_evidence(
         "path": str(profile_path),
         "recovered_fields": [],
         "sources_tried": [],
+        "merges": [],
+        "guard_rejections": [],
         "parser_used": [],
         "scoped_key": None,
         "blockers_before": [],
@@ -2306,6 +2636,11 @@ async def recover_profile_evidence(
             tried: dict[str, Any] = {"source_id": source_id}
             report["sources_tried"].append(tried)
             parser = str(source.get("parser") or "")
+            parse_fn = (
+                powerlisting.parse_ability_taxonomy
+                if parser == "mediawiki_ability_taxonomy"
+                else parse_source_content
+            )
             try:
                 if parser == "mediawiki_ability_taxonomy":
                     fields0, meta = await mediawiki.fetch_mediawiki_fields(
@@ -2331,19 +2666,66 @@ async def recover_profile_evidence(
             tried["title"] = fetched_title
             if meta.get("fetch_status") != "fetched" or not fetched_title:
                 continue
-            # Identity guard: the fetched page must be the profile's own
-            # character (the source record constrains the search, this
-            # verifies the result).
-            name_tokens = [
-                token
-                for token in re.split(r"[^a-z0-9]+", str(profile.get("name") or "").casefold())
-                if len(token) > 2
-            ]
-            title_fold = fetched_title.casefold()
-            if name_tokens and not any(token in title_fold for token in name_tokens):
-                tried["identity_mismatch"] = True
-                report["identity_mismatch"] = True
+
+            # --- Recovery guard: the fetched page must be this profile's
+            # own character, in this profile's franchise, and fictional
+            # evidence only. Search substitution gets a direct-title
+            # retry under the same guard before the source is given up.
+            categories = await _fetch_page_categories(session, api_url, fetched_title)
+            verdict = evaluate_recovery_guard(
+                profile, source, fields0, meta, categories=categories
+            )
+            guard_attempts = [verdict]
+            if not verdict["accepted"] and verdict["via"] == "search_substitution":
+                recorded_title = str(
+                    source.get("title") or title_from_wiki_url(url) or ""
+                )
+                if recorded_title and recorded_title != fetched_title:
+                    try:
+                        retry_fields, retry_meta = await mediawiki.fetch_title_fields(
+                            session, api_url, recorded_title, source, parse_fn
+                        )
+                    except Exception as exc:  # noqa: BLE001 - retry is best-effort
+                        retry_fields, retry_meta = {}, {"error": f"{type(exc).__name__}: {exc}"}
+                    if retry_meta.get("fetch_status") == "fetched" and retry_meta.get("title"):
+                        retry_categories = await _fetch_page_categories(
+                            session, api_url, str(retry_meta.get("title"))
+                        )
+                        retry_verdict = evaluate_recovery_guard(
+                            profile, source, retry_fields, retry_meta,
+                            categories=retry_categories,
+                        )
+                        retry_verdict["via"] = (
+                            "direct_title_retry"
+                            if retry_verdict["via"] == "recorded_title"
+                            else retry_verdict["via"]
+                        )
+                        guard_attempts.append(retry_verdict)
+                        if retry_verdict["accepted"]:
+                            fields0, meta = retry_fields, retry_meta
+                            verdict = retry_verdict
+                            fetched_title = str(meta.get("title") or recorded_title)
+                            tried["title"] = fetched_title
+                            tried["fetch_status"] = meta.get("fetch_status")
+                            tried["note"] = meta.get("note")
+            tried["guard_attempts"] = guard_attempts
+            tried["guard"] = verdict
+            if not verdict["accepted"]:
+                if "name_mismatch" in verdict["reasons"]:
+                    report["identity_mismatch"] = True
+                report["guard_rejections"].append(
+                    {
+                        "source_id": source_id,
+                        "fetched_title": verdict["fetched_title"],
+                        "fetched_url": verdict["fetched_url"],
+                        "via": verdict["via"],
+                        "reasons": verdict["reasons"],
+                    }
+                )
                 continue
+            via = verdict["via"]
+            fetched_title = verdict["fetched_title"] or fetched_title
+
             wikitext = str(meta.get("raw_content") or "")
             fields = fields0
             if wikitext:
@@ -2372,6 +2754,11 @@ async def recover_profile_evidence(
                 fields = chain.get("fields") or fields0
                 tried["parser_used"] = chain.get("parser_used")
                 report["parser_used"].append(chain.get("parser_used"))
+            # Boilerplate hygiene: a template-residue keys field would
+            # poison the scope labels, so drop it before label extraction.
+            if fields.get("keys") and boilerplate_reasons(fields["keys"], scalar=True):
+                tried.setdefault("boilerplate_fields", []).append("keys")
+                fields = {k: v for k, v in fields.items() if k != "keys"}
             page_labels = _recovery_key_labels(fields)
             key = _recovery_scope_key(profile, page_labels)
             if key and report["scoped_key"] is None:
@@ -2379,6 +2766,16 @@ async def recover_profile_evidence(
             scoped_fields, scope_methods = _scope_recovery_fields(
                 fields, key=key, page_labels=page_labels
             )
+            # Field-level boilerplate filter: template instructions or
+            # markup residue in a recovered field reject that field only.
+            for field_name in list(scoped_fields):
+                scalar = field_name in _RECOVERY_AXES or field_name == "keys"
+                reasons = boilerplate_reasons(scoped_fields[field_name], scalar=scalar)
+                if reasons:
+                    tried.setdefault("boilerplate_fields", []).append(field_name)
+                    tried.setdefault("boilerplate_reasons", {})[field_name] = reasons
+                    del scoped_fields[field_name]
+                    scope_methods.pop(field_name, None)
             tried["page_keys"] = page_labels
             tried["scoped_fields"] = sorted(scoped_fields)
             tried["scope_methods"] = scope_methods
@@ -2423,6 +2820,17 @@ async def recover_profile_evidence(
                     fetch_status="fetched",
                 )
                 report["recovered_fields"] = sorted(before_fields | set(recovered))
+                report["merges"].append(
+                    {
+                        "source_id": source_id,
+                        "fetched_title": verdict["fetched_title"],
+                        "fetched_url": verdict["fetched_url"],
+                        "revision_id": verdict["revision_id"],
+                        "via": via,
+                        "franchise_channels": verdict["franchise_channels"],
+                        "recovered_fields": sorted(recovered),
+                    }
+                )
             remaining_stats = {
                 axis
                 for axis in stat_targets
@@ -2444,6 +2852,12 @@ async def recover_profile_evidence(
             )
         if not dry_run:
             service.write_yaml(profile_path, profile)
+            provenance = "; ".join(
+                f"{m['source_id']} -> {m['fetched_title']} "
+                f"(rev {m['revision_id'] or '?'}, via {m['via']}, "
+                f"franchise via {','.join(m['franchise_channels']) or 'n/a'})"
+                for m in report["merges"]
+            )
             service.add_review_note(
                 profile_path,
                 field_path="evidence_recovery",
@@ -2452,6 +2866,7 @@ async def recover_profile_evidence(
                     "Evidence recovery from recorded sources: "
                     + ", ".join(report["recovered_fields"])
                     + f" (parsers: {', '.join(p for p in report['parser_used'] if p)})"
+                    + (f" [provenance: {provenance}]" if provenance else "")
                 ),
                 notes_path=notes_path,
             )
