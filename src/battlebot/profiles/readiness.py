@@ -4,6 +4,26 @@ from urllib.parse import urlsplit
 from battlebot.profiles.evidence_quality import evidence_quality_blockers, usable_item
 
 
+def _evidence_scoped(profile):
+    """Whether the profile's stats are pinned to a version key.
+
+    The scoping record lives at top-level ``version_scope`` on raw review
+    profiles. CharacterProfile (extra="forbid") does not declare that
+    field, so schema dumps and generated profiles carry it mirrored under
+    ``review.version_scope`` instead (see sanitize_generated_profile) --
+    honor both locations or compiled imports can never see the scoping.
+    """
+    scope = profile.get('version_scope')
+    if isinstance(scope, dict) and scope.get('evidence_scoped'):
+        return True
+    review = profile.get('review')
+    if isinstance(review, dict):
+        mirrored = review.get('version_scope')
+        if isinstance(mirrored, dict) and mirrored.get('evidence_scoped'):
+            return True
+    return False
+
+
 def assess_readiness(profile):
     blockers = evidence_quality_blockers(profile)
     name = str(profile.get('name') or '').casefold()
@@ -58,7 +78,7 @@ def assess_readiness(profile):
     if not linked:
         blockers.append('missing_clean_linked_ability')
     forms = [f for f in profile.get('forms') or [] if isinstance(f, dict) and f.get('source_field') == 'keys']
-    if len(forms) > 1 and not profile.get('version_scope', {}).get('evidence_scoped'):
+    if len(forms) > 1 and not _evidence_scoped(profile):
         blockers.append('unresolved_version_scope:multiple_source_keys')
     blockers = sorted(set(blockers))
     return {'level': 'provisional' if blockers else 'structurally_ready',
