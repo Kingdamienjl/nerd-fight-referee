@@ -12,7 +12,7 @@ from typing import Any
 
 from battlebot.common.db import apply_schema, connect_database
 from battlebot.review import batch_promote, service
-from battlebot.review.queue import enqueue_job
+from battlebot.review.queue import enqueue_job, priority_for_blocker_count
 
 
 @dataclass
@@ -49,6 +49,20 @@ def should_skip_output(path: Path, *, needs_review_dir: Path, generated_dir: Pat
     return generated.exists() or archived.exists()
 
 
+def assessed_priority(path: Path, *, default: int) -> int:
+    """Priority for a job about to be (re)inserted: 1 + blocker count.
+
+    Falls back to the caller's default when the profile cannot be
+    loaded or assessed, so a malformed file never blocks seeding.
+    """
+    try:
+        profile = service.load_yaml(path)
+        blockers = service.approval_blockers(profile)
+    except Exception:  # noqa: BLE001 - seeding must not die on one bad file
+        return default
+    return priority_for_blocker_count(len(blockers))
+
+
 async def seed_queue(
     connection: Any,
     *,
@@ -69,6 +83,11 @@ async def seed_queue(
         str(row["profile_path"]): (str(row["status"]), row["updated_at"])
         for row in terminal_rows
     }
+    active_rows = await connection.fetch(
+        "SELECT profile_path FROM profile_jobs "
+        "WHERE status IN ('pending', 'retry', 'running')"
+    )
+    active_jobs = {str(row["profile_path"]) for row in active_rows}
     now = datetime.now(UTC)
     for path in profile_paths(target):
         summary.scanned += 1
@@ -96,12 +115,18 @@ async def seed_queue(
                 file_changed = False
             stale_failed = job_status == "failed" and job_updated_at < now - timedelta(days=7)
             requeue = file_changed or stale_failed
+        # Jobs that already exist and are claimable keep the priority
+        # they were stored with; only new inserts and terminal requeues
+        # pay for a fresh blocker assessment here.
+        job_priority = priority
+        if str(path) not in active_jobs:
+            job_priority = assessed_priority(path, default=priority)
         inserted = await enqueue_job(
             connection,
             profile_path=str(path),
             target=str(target),
             providers=providers,
-            priority=priority,
+            priority=job_priority,
             max_attempts=max_attempts,
             requeue=requeue,
         )

@@ -29,6 +29,17 @@ RETURNING job.*
 """
 
 
+def priority_for_blocker_count(blocker_count: int) -> int:
+    """Queue priority derived from a profile's approval-blocker count.
+
+    Claiming orders by priority ASC, so fewer blockers run earlier and
+    empty skeletons (most blockers) run last. Counted profiles land in
+    1..99; the uninformed default stays 100, so any profile whose
+    blockers were actually assessed sorts ahead of never-assessed ones.
+    """
+    return max(1, min(99, 1 + int(blocker_count)))
+
+
 def utc_now() -> datetime:
     return datetime.now(UTC)
 
@@ -58,6 +69,7 @@ INSERT INTO profile_jobs (profile_path, target, providers, priority, max_attempt
 VALUES ($1, $2, $3, $4, $5)
 ON CONFLICT (profile_path) DO UPDATE
 SET status = 'retry',
+    priority = $4,
     attempts = 0,
     locked_at = NULL,
     worker_id = NULL,
