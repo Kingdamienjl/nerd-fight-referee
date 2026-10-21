@@ -54,7 +54,7 @@ def main():
             raise RuntimeError("No roster CSV files found")
         roster = rosters[index % len(rosters)]
         cmd = [sys.executable, "-P", "-m", "battlebot.harvest.auto_profile_harvester",
-               "--input", str(roster), "--queue-mode", "--max-per-cycle", str(max(1, min(8, int(os.getenv("REFEREE_HARVEST_BATCH", "4"))))), "--quiet-skips"]
+               "--input", str(roster), "--queue-mode", "--skip-needs-review-existing", "--max-per-cycle", str(max(1, min(8, int(os.getenv("REFEREE_HARVEST_BATCH", "4"))))), "--quiet-skips"]
         try:
             result, tail = run_bounded(cmd, timeout=600)
             print(json.dumps({"stage": "harvest", "roster": str(roster), "exit_code": result.returncode}), flush=True)
