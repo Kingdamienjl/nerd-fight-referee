@@ -65,6 +65,20 @@ CONTINUITY_SUFFIX_TOKEN_SETS = (
     ("main", "continuity"),
     ("post", "timeskip"),
     ("pre", "timeskip"),
+    ("dc", "animated", "universe"),
+    ("dc", "extended", "universe"),
+    ("marvel", "cinematic", "universe"),
+    ("new", "52"),
+    ("earth", "1610"),
+    ("ultimate", "universe"),
+    ("golden", "age"),
+    ("silver", "age"),
+    ("animated", "series"),
+    ("arrowverse",),
+    ("rebirth",),
+    ("dcau",),
+    ("dceu",),
+    ("mcu",),
 )
 
 
@@ -101,6 +115,8 @@ class SourceAttempt:
     alias_match: bool = False
     franchise_match: bool = False
     variant_match: bool = False
+    continuity_mismatch: bool = False
+    continuity_detail: str = ""
     duplicate_key: str = ""
     retryable: bool = False
     exception_class: str = ""
@@ -242,6 +258,8 @@ def candidate_row_from_attempt(attempt: SourceAttempt) -> dict[str, Any]:
         "alias_match": attempt.alias_match,
         "franchise_match": attempt.franchise_match,
         "variant_match": attempt.variant_match,
+        "continuity_mismatch": attempt.continuity_mismatch,
+        "continuity_detail": attempt.continuity_detail,
         "duplicate_key": attempt.duplicate_key,
     }
 
@@ -751,6 +769,7 @@ def retained_repair_candidate(attempt: SourceAttempt) -> bool:
         and attempt.identity_score >= IDENTITY_MATCH_THRESHOLD
         and attempt.identity_match
         and attempt.variant_score >= 0
+        and not attempt.continuity_mismatch
     )
 
 
@@ -838,6 +857,7 @@ def high_authority_core_disagreements(attempts: list[SourceAttempt]) -> list[str
         and attempt.promotion_allowed
         and attempt.identity_match
         and attempt.variant_score >= 0
+        and not attempt.continuity_mismatch
     ]
     for field_name in ("attack_potency", "speed", "durability"):
         values = {
@@ -1013,6 +1033,201 @@ def variant_score_for_attempt(profile: dict[str, Any], attempt: SourceAttempt) -
     return score
 
 
+# ---------------------------------------------------------------------------
+# Continuity validation (shared by repair and evidence recovery)
+#
+# A version-scoped profile must only take evidence from a page of the
+# SAME continuity. Recorded source URLs routinely resolve (redirect or
+# search substitution) to a flagship or screen-adaptation page of a
+# different continuity -- the iteration-3 recovery sample found four
+# Amanda Waller comics profiles all stamped from the DCAU page, and the
+# unguarded repair path re-promoted Apollo (Post-Crisis) from the
+# Post-Flashpoint page minutes after the sample reverted him. The
+# check rejects only on POSITIVE evidence: the fetched page must carry
+# a continuity signal (title disambiguator, origin field, categories)
+# that names a different continuity than the profile's scope. A page
+# with no continuity signal is never rejected on suspicion.
+# ---------------------------------------------------------------------------
+
+# (normalized marker, canonical label, kind); scanned in order, so
+# specific markers precede the generic ones they contain.
+_CONTINUITY_MARKERS: tuple[tuple[str, str, str], ...] = (
+    ("dc animated universe", "dcau", "adaptation"),
+    ("dc extended universe", "dceu", "adaptation"),
+    ("marvel cinematic universe", "mcu", "adaptation"),
+    ("dcau", "dcau", "adaptation"),
+    ("dceu", "dceu", "adaptation"),
+    ("mcu", "mcu", "adaptation"),
+    ("arrowverse", "arrowverse", "adaptation"),
+    ("animated series", "animated-series", "adaptation"),
+    ("live action", "live-action", "adaptation"),
+    ("post flashpoint", "post-flashpoint", "print"),
+    ("post crisis", "post-crisis", "print"),
+    ("pre crisis", "pre-crisis", "print"),
+    ("prime earth", "prime-earth", "print"),
+    ("new earth", "new-earth", "print"),
+    ("new 52", "new-52", "print"),
+    ("earth 616", "earth-616", "print"),
+    ("earth 1610", "earth-1610", "print"),
+    ("ultimate universe", "earth-1610", "print"),
+    ("earth 0", "earth-0", "print"),
+    ("rebirth", "rebirth", "print"),
+    ("golden age", "golden-age", "print"),
+    ("silver age", "silver-age", "print"),
+    ("main continuity", "main-continuity", "print"),
+    ("dc comics", "dc-comics", "print"),
+    ("marvel comics", "marvel-comics", "print"),
+)
+
+# Labels naming the same continuity under different wiki conventions.
+_CONTINUITY_GROUPS = (
+    frozenset({"post-flashpoint", "prime-earth", "new-52", "earth-0"}),
+    frozenset({"post-crisis", "new-earth"}),
+)
+_GENERIC_PRINT_LABELS = frozenset({"dc-comics", "marvel-comics", "main-continuity"})
+
+
+def _continuity_group(label: str) -> str:
+    for group in _CONTINUITY_GROUPS:
+        if label in group:
+            return "group:" + ",".join(sorted(group))
+    return "single:" + label
+
+
+def _continuity_label_in_text(text: Any) -> tuple[str | None, str | None]:
+    """The first (most specific) continuity marker in one text."""
+    normalized = normalized_identity_text(str(text or ""))
+    if not normalized:
+        return None, None
+    padded = f" {normalized} "
+    for marker, label, kind in _CONTINUITY_MARKERS:
+        if f" {marker} " in padded:
+            return label, kind
+    return None, None
+
+
+def _title_continuity(title: Any) -> tuple[str | None, str | None]:
+    """Continuity signalled by a page title: the trailing
+    parenthetical disambiguator first, then the whole title."""
+    head, _base, paren = _fanon_title_parts(str(title or ""))
+    if paren:
+        label, kind = _continuity_label_in_text(paren)
+        if label:
+            return label, kind
+    return _continuity_label_in_text(head)
+
+
+def page_continuity(
+    *,
+    title: str = "",
+    url: str = "",
+    origin: str = "",
+    categories: list[str] | tuple = (),
+) -> tuple[str | None, str | None]:
+    """The continuity a fetched page belongs to, from its strongest
+    signals: title, origin field, then categories. The recorded URL is
+    consulted only when no title was fetched (it names the candidate,
+    not the resolved page)."""
+    label, kind = _title_continuity(title)
+    if label:
+        return label, kind
+    label, kind = _continuity_label_in_text(origin)
+    if label:
+        return label, kind
+    for category in categories or ():
+        label, kind = _continuity_label_in_text(category)
+        if label:
+            return label, kind
+    if url:
+        return _title_continuity(title_from_wiki_url(url))
+    return None, None
+
+
+def profile_continuity_scope(profile: dict[str, Any]) -> tuple[str | None, str | None, str]:
+    """(label, kind, origin) of the profile's own continuity scope.
+
+    Strongest first: the variant record's key/name, the profile name's
+    trailing parenthetical, the version-scope rule's scoped key.
+    (None, None, "") when the profile carries no continuity signal --
+    generic profiles may take any print page (see continuity_check).
+    """
+    key, key_origin = _profile_scope_key(profile)
+    if key:
+        label, kind = _continuity_label_in_text(key)
+        if label:
+            return label, kind, key_origin
+    label, kind = _title_continuity(str(profile.get("name") or ""))
+    if label:
+        return label, kind, "profile_name"
+    scope = profile.get("version_scope")
+    if isinstance(scope, dict) and scope.get("scoped_key"):
+        label, kind = _continuity_label_in_text(scope.get("scoped_key"))
+        if label:
+            return label, kind, "version_scope.scoped_key"
+    return None, None, ""
+
+
+def _profile_is_comics(profile: dict[str, Any]) -> bool:
+    identity = profile.get("identity") if isinstance(profile.get("identity"), dict) else {}
+    category = str(profile.get("category") or identity.get("category") or "").casefold()
+    return category in {"comic", "comics"}
+
+
+def continuity_check(
+    profile: dict[str, Any],
+    *,
+    page_title: str = "",
+    page_url: str = "",
+    origin: str = "",
+    categories: list[str] | tuple = (),
+) -> dict[str, Any]:
+    """Shared continuity verdict for one fetched page.
+
+    mismatch is True only on positive evidence that the page names a
+    different continuity than the profile's scope. Known equivalences
+    (Prime Earth == the Post-Flashpoint/New 52 continuity; New Earth
+    == Post-Crisis) count as the same continuity. A generic print
+    scope ("(DC Comics)"-style variants) accepts any print page but
+    never a screen adaptation; an unscoped comics profile likewise
+    rejects screen-adaptation pages. When the page names no
+    continuity, or the profile's scope cannot be determined and the
+    page is print, the verdict is no mismatch.
+    """
+    scope_label, scope_kind, scope_origin = profile_continuity_scope(profile)
+    page_label, page_kind = page_continuity(
+        title=page_title, url=page_url, origin=origin, categories=categories
+    )
+    result: dict[str, Any] = {
+        "mismatch": False,
+        "reason": "",
+        "profile_scope": scope_label or "",
+        "profile_scope_origin": scope_origin,
+        "page_continuity": page_label or "",
+        "page_kind": page_kind or "",
+        "detail": "",
+    }
+    if not page_label:
+        return result
+    if scope_label:
+        if scope_kind != page_kind:
+            result["mismatch"] = True
+        elif (
+            scope_label not in _GENERIC_PRINT_LABELS
+            and page_label not in _GENERIC_PRINT_LABELS
+            and _continuity_group(scope_label) != _continuity_group(page_label)
+        ):
+            result["mismatch"] = True
+    elif page_kind == "adaptation" and _profile_is_comics(profile):
+        result["mismatch"] = True
+    if result["mismatch"]:
+        result["reason"] = "continuity_mismatch"
+        result["detail"] = (
+            f"page continuity '{page_label}' ({page_kind}) != "
+            f"profile scope '{scope_label or 'comics'}'"
+        )
+    return result
+
+
 def duplicate_key_for_attempt(attempt: SourceAttempt) -> str:
     host = urlparse(attempt.url).netloc.casefold()
     title = normalized_identity_text(attempt.normalized_page_title)
@@ -1072,6 +1287,14 @@ def annotate_attempt_quality(profile: dict[str, Any], attempt: SourceAttempt) ->
     attempt.variant_score = variant_score_for_attempt(profile, attempt)
     attempt.provider_priority = provider_priority(attempt.authority, attempt.provider_id)
     attempt.duplicate_key = duplicate_key_for_attempt(attempt)
+    fields_map = attempt_field_map(attempt)
+    verdict = continuity_check(
+        profile,
+        page_title=attempt.normalized_page_title,
+        origin=str(fields_map.get("origin") or ""),
+    )
+    attempt.continuity_mismatch = bool(verdict["mismatch"])
+    attempt.continuity_detail = str(verdict["detail"] or "")
 
 
 def eligible_primary_attempts(attempts: list[SourceAttempt]) -> list[SourceAttempt]:
@@ -1084,6 +1307,7 @@ def eligible_primary_attempts(attempts: list[SourceAttempt]) -> list[SourceAttem
         and attempt.ability_count >= 1
         and attempt.promotion_allowed
         and attempt.variant_score >= 0
+        and not attempt.continuity_mismatch
     ]
     deduped: dict[str, SourceAttempt] = {}
     for attempt in eligible:
@@ -1106,6 +1330,8 @@ def attempt_field_map(attempt: SourceAttempt) -> dict[str, str]:
 def has_independent_corroboration(primary: SourceAttempt, other_attempts: list[SourceAttempt]) -> bool:
     primary_host = urlparse(primary.url).netloc.casefold()
     for attempt in other_attempts:
+        if attempt.continuity_mismatch:
+            continue
         if not attempt.identity_match or attempt.core_field_count < 3 or attempt.ability_count < 1:
             continue
         if attempt.source_id == primary.source_id:
@@ -1270,6 +1496,21 @@ def attempt_from_result(
     ok: bool,
     note: str,
 ) -> SourceAttempt:
+    # Scalar hygiene for the repair path: a stat value that is template
+    # boilerplate, page scaffolding, an editor note, an insubstantive
+    # placeholder ("Self-explanatory"), or an infobox-header dump is
+    # dropped before it can be counted or merged -- the same screens
+    # the recovery path applies (stat_field_rejection_reasons).
+    fields = dict(fields)
+    dropped_scalar: dict[str, list[str]] = {}
+    for field_name in list(fields):
+        if field_name in POWER_FIELDS or field_name in ("lifting_strength", "striking_strength"):
+            reasons = stat_field_rejection_reasons(fields[field_name])
+            if reasons:
+                dropped_scalar[field_name] = reasons
+                del fields[field_name]
+    if dropped_scalar:
+        metadata = {**metadata, "dropped_scalar_fields": dropped_scalar}
     source_id = source_id_for(source, profile.get("name") or "source")
     authority = str(metadata.get("authority") or source.get("authority") or "")
     confidence = 0.75 if metadata.get("revision_id") else 0.5
@@ -1863,6 +2104,7 @@ async def repair_profile(
         and attempt.promotion_allowed
         and attempt.core_field_count >= 3
         and attempt.ability_count >= 1
+        and not attempt.continuity_mismatch
     )
     force_promotable = is_now_promotable and has_identity_match_source
     has_promotion_source = has_promotion_source or force_promotable
@@ -2118,9 +2360,12 @@ if __name__ == "__main__":
 # the profile's franchise (categories / origin field / title
 # disambiguator / dedicated host; pages reached by search substitution
 # need one of those strong channels), (3) real-world/non-fiction pages
-# are rejected for fictional characters, and (4) each recovered field is
-# filtered for template boilerplate. When search substitution fails the
-# guard, the recorded title itself is fetched directly and guarded too.
+# are rejected for fictional characters, (4) each recovered field is
+# filtered for template boilerplate, page scaffolding, and infobox-header
+# dumps, and (5) the page's continuity must match the profile's version
+# scope (continuity_check, shared with the repair path). When search
+# substitution fails the guard, the recorded title itself is fetched
+# directly and guarded too.
 # Recovered fields are scoped to the profile's version key with the same
 # labelled/positional rules as harvest-time scoping, merged without
 # overwriting existing usable evidence, and stamped through
@@ -2413,6 +2658,24 @@ _BOILERPLATE_MARKUP_PATTERNS = (
     r"\.(?:png|jpe?g|gif|webp)\s*\|",
 )
 
+# Page scaffolding inside a scalar stat value: wiki section markers and
+# the fanon author's editorial furniture (the Aquaman Prime Earth
+# intelligence merge: "Above Average Note: Please do not edit this page
+# without permission... ==Explanations & Related Blog Posts== ...
+# ==Gallery== ... ==Others== Notable Victories:"). A scalar stat is a
+# value, never a page skeleton, so any of these reject it.
+_SCALAR_SCAFFOLDING_PATTERNS = (
+    r"==",
+    r"\bnotable (?:victories|losses)\s*:",
+    r"\bplease do not edit\b",
+    r"\bdo not edit this page\b",
+    r"\bexplanations\s*(?:&|and)\s*related blog posts\b",
+)
+
+# Whole-value placeholders that are long enough to slip past the
+# length-based insubstantive check but carry no information.
+_INSUBSTANTIVE_SCALAR_EXACT = frozenset({"self explanatory"})
+
 
 def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
     """Template-residue checks for one recovered field's text.
@@ -2433,8 +2696,10 @@ def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
     if scalar:
         if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_MARKUP_PATTERNS):
             reasons.append("markup_residue")
+        if any(re.search(pattern, lowered) for pattern in _SCALAR_SCAFFOLDING_PATTERNS):
+            reasons.append("page_scaffolding")
         cleaned = re.sub(r"[^a-z0-9]+", " ", lowered).strip()
-        if len(cleaned) < 8:
+        if len(cleaned) < 8 or cleaned in _INSUBSTANTIVE_SCALAR_EXACT:
             reasons.append("insubstantive")
     return reasons
 
@@ -2563,6 +2828,18 @@ def infobox_header_reasons(text: Any) -> list[str]:
     return ["infobox_header"] if len(keys) >= 3 else []
 
 
+def stat_field_rejection_reasons(text: Any) -> list[str]:
+    """All field-level screens for one scalar stat value: template
+    boilerplate, page scaffolding, editor notes, insubstantive
+    placeholders, and infobox-header dumps. Applied identically by
+    the repair path (attempt_from_result) and the recovery path."""
+    reasons = boilerplate_reasons(text, scalar=True)
+    for reason in infobox_header_reasons(text):
+        if reason not in reasons:
+            reasons.append(reason)
+    return reasons
+
+
 def _wikitext_categories(wikitext: str) -> list[str]:
     return [
         match.group(1).strip()
@@ -2638,11 +2915,19 @@ def evaluate_recovery_guard(
         categories=all_categories,
         wikitext=wikitext,
     )
+    continuity = continuity_check(
+        profile,
+        page_title=fetched_title,
+        origin=str(fields.get("origin") or ""),
+        categories=all_categories,
+    )
     reasons: list[str] = []
     if not name_match:
         reasons.append("name_mismatch")
     if nonfiction_hits:
         reasons.extend(f"nonfiction:{hit}" for hit in nonfiction_hits)
+    if continuity["mismatch"]:
+        reasons.append("continuity_mismatch")
     if not channels:
         reasons.append("franchise_no_evidence")
     elif via == "search_substitution" and not (
@@ -2658,6 +2943,7 @@ def evaluate_recovery_guard(
         "name_match": name_match,
         "franchise_channels": channels,
         "nonfiction_hits": nonfiction_hits,
+        "continuity": continuity,
         "categories": all_categories,
         "reasons": reasons,
     }
@@ -2727,6 +3013,10 @@ async def recover_profile_evidence(
     seen_urls: set[str] = set()
     for source in profile.get("sources") or []:
         if not isinstance(source, dict):
+            continue
+        if source.get("continuity_suspect"):
+            # Recorded source proven to resolve to a different
+            # continuity's page (source-repair sweep); never fetch it.
             continue
         url = str(source.get("url") or "")
         if not url or url in seen_urls:

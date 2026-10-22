@@ -9,11 +9,15 @@ import unittest
 
 from battlebot.review.auto_repair import (
     _guard_name_match,
+    attempt_from_result,
     boilerplate_reasons,
+    continuity_check,
+    eligible_primary_attempts,
     evaluate_recovery_guard,
     filter_list_field_items,
     infobox_header_reasons,
     placeholder_item_reasons,
+    stat_field_rejection_reasons,
 )
 
 
@@ -399,6 +403,294 @@ class Iteration3RegressionTests(unittest.TestCase):
         self.assertNotIn("Notable Victories", kept)
         self.assertEqual(len(dropped), 1)
 
+
+def comic_profile(name, variant_name=None, franchise="DC"):
+    prof = profile(name, franchise, "comic")
+    if variant_name is not None:
+        prof["variant"] = {
+            "variant_name": variant_name,
+            "variant_type": "version",
+            "source_key": "",
+            "default_variant": False,
+        }
+    return prof
+
+
+class ContinuityGuardTests(unittest.TestCase):
+    """Regression: the iteration-3 sample's continuity substitutions.
+
+    Version-scoped profiles took evidence from the right character in
+    the right franchise but the WRONG continuity: four Amanda Waller
+    comics profiles from the DCAU page, Animal Man (Post-Flashpoint)
+    from the Post-Crisis page, Apollo (Post-Crisis) from the
+    Post-Flashpoint page, Aquaman from the DCEU film page. Name and
+    franchise checks all pass on these pages; only a continuity check
+    rejects them.
+    """
+
+    DCAU_CATEGORIES = ["DC Animated Universe", "Characters", "Tier 9"]
+
+    def test_waller_post_crisis_rejects_dcau(self):
+        result = verdict(
+            comic_profile("Amanda Waller (Post-Crisis)", "Post-Crisis"),
+            "Amanda Waller (Post-Crisis)",
+            "Amanda Waller (DCAU)",
+            origin="DC Animated Universe",
+            categories=self.DCAU_CATEGORIES,
+        )
+        self.assertFalse(result["accepted"])
+        self.assertTrue(result["name_match"])
+        self.assertIn("continuity_mismatch", result["reasons"])
+        self.assertEqual(result["continuity"]["page_continuity"], "dcau")
+        self.assertEqual(result["continuity"]["profile_scope"], "post-crisis")
+
+    def test_waller_dc_comics_variant_rejects_dcau(self):
+        result = verdict(
+            comic_profile("Amanda Waller (DC Comics)", "DC Comics"),
+            "Amanda Waller (DC Comics)",
+            "Amanda Waller (DCAU)",
+            origin="DC Animated Universe",
+            categories=self.DCAU_CATEGORIES,
+        )
+        self.assertFalse(result["accepted"])
+        self.assertIn("continuity_mismatch", result["reasons"])
+
+    def test_waller_post_flashpoint_rejects_dcau(self):
+        result = verdict(
+            comic_profile("Amanda Waller (Post-Flashpoint)", "Post-Flashpoint"),
+            "Amanda Waller (Post-Flashpoint)",
+            "Amanda Waller (DCAU)",
+            origin="DC Animated Universe",
+            categories=self.DCAU_CATEGORIES,
+        )
+        self.assertFalse(result["accepted"])
+        self.assertIn("continuity_mismatch", result["reasons"])
+
+    def test_waller_base_profile_rejects_dcau(self):
+        result = verdict(
+            comic_profile("Amanda Waller"),
+            "Amanda Waller",
+            "Amanda Waller (DCAU)",
+            origin="DC Animated Universe",
+            categories=self.DCAU_CATEGORIES,
+        )
+        self.assertFalse(result["accepted"])
+        self.assertIn("continuity_mismatch", result["reasons"])
+
+    def test_animal_man_post_flashpoint_rejects_post_crisis_page(self):
+        result = verdict(
+            comic_profile("Animal Man (Post-Flashpoint)", "Post-Flashpoint"),
+            "Animal Man (Post-Flashpoint)",
+            "Animal Man (Post-Crisis)",
+            origin="DC Comics",
+            categories=["DC Comics", "Characters"],
+        )
+        self.assertFalse(result["accepted"])
+        self.assertIn("continuity_mismatch", result["reasons"])
+        self.assertEqual(result["continuity"]["page_continuity"], "post-crisis")
+
+    def test_apollo_post_crisis_rejects_post_flashpoint_page(self):
+        result = verdict(
+            comic_profile("Apollo (Post-Crisis)", "Post-Crisis"),
+            "Apollo (Post-Crisis)",
+            "Apollo (Post-Flashpoint)",
+            origin="DC Comics",
+            categories=["DC Comics", "Characters"],
+        )
+        self.assertFalse(result["accepted"])
+        self.assertIn("continuity_mismatch", result["reasons"])
+
+    def test_aquaman_rejects_dceu_film_page(self):
+        result = verdict(
+            comic_profile("Aquaman (DC Comics)", "DC Comics"),
+            "Aquaman (DC Comics)",
+            "Aquaman (DC Extended Universe)",
+            origin="DC Extended Universe",
+            categories=["DC Extended Universe", "Characters"],
+        )
+        self.assertFalse(result["accepted"])
+        self.assertIn("continuity_mismatch", result["reasons"])
+        self.assertEqual(result["continuity"]["page_continuity"], "dceu")
+
+    def test_prime_earth_accepts_post_flashpoint_flagship(self):
+        # Known equivalence: Prime Earth IS the Post-Flashpoint /
+        # New 52 continuity (the iteration-3 audit kept exactly this).
+        result = verdict(
+            comic_profile("Apollo (Prime Earth)", "Prime Earth"),
+            "Apollo (Prime Earth)",
+            "Apollo (Post-Flashpoint)",
+            origin="DC Comics",
+            categories=["DC Comics", "Characters"],
+        )
+        self.assertTrue(result["accepted"], result["reasons"])
+        self.assertNotIn("continuity_mismatch", result["reasons"])
+
+    def test_generic_profile_accepts_print_flagship(self):
+        result = verdict(
+            comic_profile("Aquaman"),
+            "Aquaman",
+            "Aquaman (Post-Crisis)",
+            origin="DC Comics",
+            categories=["DC Comics", "Characters"],
+        )
+        self.assertTrue(result["accepted"], result["reasons"])
+
+    def test_scoped_profile_accepts_unsignalled_page(self):
+        # No positive continuity evidence on the page: no rejection.
+        result = verdict(
+            comic_profile("Apollo (Post-Crisis)", "Post-Crisis"),
+            "Apollo (Post-Crisis)",
+            "Apollo",
+            origin="DC Comics",
+            categories=["DC Comics", "Characters"],
+        )
+        self.assertNotIn("continuity_mismatch", result["reasons"])
+
+    def test_dcau_profile_rejects_comics_page(self):
+        result = verdict(
+            comic_profile("Amanda Waller (DCAU)", "DCAU"),
+            "Amanda Waller (DCAU)",
+            "Amanda Waller (Post-Crisis)",
+            origin="DC Comics",
+            categories=["DC Comics", "Characters"],
+        )
+        self.assertFalse(result["accepted"])
+        self.assertIn("continuity_mismatch", result["reasons"])
+
+    def test_continuity_check_equivalences_directly(self):
+        prof = comic_profile("Animal Man (Post-Flashpoint)", "Post-Flashpoint")
+        self.assertFalse(
+            continuity_check(prof, page_title="Animal Man (Prime Earth)")["mismatch"]
+        )
+        self.assertFalse(
+            continuity_check(prof, page_title="Animal Man (New 52)")["mismatch"]
+        )
+        self.assertTrue(
+            continuity_check(prof, page_title="Animal Man (Rebirth)")["mismatch"]
+        )
+        self.assertFalse(
+            continuity_check(prof, page_title="Animal Man")["mismatch"]
+        )
+
+
+AQUAMAN_EDITORIAL_INTELLIGENCE = (
+    "Above Average Note: Please do not edit this page without permission "
+    "from the author, as it is still being worked on. "
+    "==Explanations & Related Blog Posts== ==Gallery== ==Others== "
+    "Notable Victories:"
+)
+
+
+class ScalarScaffoldingTests(unittest.TestCase):
+    """Regression: Aquaman Prime Earth's intelligence merged a fanon
+    author's editorial note plus page scaffolding, and his stamina was
+    the insubstantive 'Self-explanatory'. Scalar stat values had no
+    scaffolding screen."""
+
+    def test_editorial_note_scalar_rejected(self):
+        self.assertIn(
+            "page_scaffolding",
+            boilerplate_reasons(AQUAMAN_EDITORIAL_INTELLIGENCE, scalar=True),
+        )
+        self.assertTrue(stat_field_rejection_reasons(AQUAMAN_EDITORIAL_INTELLIGENCE))
+
+    def test_section_markers_alone_reject_scalar(self):
+        self.assertIn(
+            "page_scaffolding",
+            boilerplate_reasons("City level ==Gallery== extra", scalar=True),
+        )
+
+    def test_self_explanatory_is_insubstantive(self):
+        self.assertIn(
+            "insubstantive", boilerplate_reasons("Self-explanatory", scalar=True)
+        )
+        self.assertIn(
+            "insubstantive", stat_field_rejection_reasons("Self-explanatory")
+        )
+
+    def test_clean_scalars_pass_all_screens(self):
+        self.assertEqual(
+            stat_field_rejection_reasons(
+                "Small Building level (Smashed a semi-truck with a casual swing)"
+            ),
+            [],
+        )
+        self.assertEqual(
+            stat_field_rejection_reasons(
+                "Superhuman (Can regain stamina in sunlight)"
+            ),
+            [],
+        )
+        self.assertEqual(
+            stat_field_rejection_reasons(
+                "Varies, up to Solar System level (Far stronger when "
+                "exposed to direct sunlight)"
+            ),
+            [],
+        )
+
+
+class RepairPathContinuityTests(unittest.TestCase):
+    """The continuity check and scalar screen in the MAIN repair path
+    (attempt_from_result / eligible_primary_attempts) -- the path that
+    re-promoted Apollo (Post-Crisis) from Post-Flashpoint evidence."""
+
+    FIELDS = {
+        "attack_potency": "Wall level (Can shatter reinforced concrete with a casual strike)",
+        "speed": "Supersonic (Can outpace fighter jets in sustained flight)",
+        "durability": "Wall level (Shrugged off anti-tank fire at close range)",
+        "powers_and_abilities": "Solar Energy Absorption, Flight, Heat Vision",
+        "origin": "DC Comics",
+    }
+
+    def _attempt(self, prof, title, fields=None):
+        source = {
+            "id": "vsbattles-test",
+            "title": title,
+            "url": "https://vsbattles.fandom.com/wiki/" + title.replace(" ", "_"),
+            "provider_id": "vsbattles",
+            "authority": "high",
+            "promotion_allowed": True,
+        }
+        metadata = {
+            "title": title,
+            "url": source["url"],
+            "revision_id": "42",
+            "fetch_status": "fetched",
+            "promotion_allowed": True,
+            "authority": "high",
+            "provider_id": "vsbattles",
+        }
+        return attempt_from_result(
+            prof, source, dict(fields or self.FIELDS), metadata, ok=True, note="ok"
+        )
+
+    def test_repair_attempt_flags_cross_continuity(self):
+        prof = comic_profile("Apollo (Post-Crisis)", "Post-Crisis")
+        attempt = self._attempt(prof, "Apollo (Post-Flashpoint)")
+        self.assertTrue(attempt.identity_match)
+        self.assertTrue(attempt.continuity_mismatch)
+        self.assertIn("post-flashpoint", attempt.continuity_detail)
+        self.assertEqual(eligible_primary_attempts([attempt]), [])
+
+    def test_repair_attempt_accepts_matching_continuity(self):
+        prof = comic_profile("Apollo (Post-Crisis)", "Post-Crisis")
+        attempt = self._attempt(prof, "Apollo (Post-Crisis)")
+        self.assertFalse(attempt.continuity_mismatch)
+        self.assertEqual(eligible_primary_attempts([attempt]), [attempt])
+
+    def test_repair_attempt_drops_scaffolded_scalars(self):
+        prof = comic_profile("Aquaman (Prime Earth)", "Prime Earth")
+        fields = dict(self.FIELDS)
+        fields["intelligence"] = AQUAMAN_EDITORIAL_INTELLIGENCE
+        fields["stamina"] = "Self-explanatory"
+        attempt = self._attempt(prof, "Aquaman (Prime Earth)", fields)
+        self.assertNotIn("intelligence", attempt.extracted_fields)
+        self.assertNotIn("stamina", attempt.extracted_fields)
+        dropped = attempt.metadata.get("dropped_scalar_fields") or {}
+        self.assertIn("page_scaffolding", dropped.get("intelligence") or [])
+        self.assertIn("insubstantive", dropped.get("stamina") or [])
+        self.assertIn("attack_potency", attempt.extracted_fields)
 
 
 if __name__ == "__main__":
