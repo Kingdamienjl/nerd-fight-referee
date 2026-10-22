@@ -78,78 +78,6 @@ sources:
 - id: vsbattles-deadman-dc
   provider_id: vsbattles
   source_type: mediawiki
-  title: Deadman DC
-  url: https://vsbattles.fandom.com/wiki/Deadman_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-deadman-dc
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Deadman DC
-  url: https://character-stats-and-profiles.fandom.com/wiki/Deadman_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-deadman-dc
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Deadman (DC)
-  url: https://vsbattles.fandom.com/wiki/Deadman_%28DC%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-deadman-dc
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Deadman (DC)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Deadman_%28DC%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-deadman-dc-comics
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Deadman (Post-Flashpoint)
   url: https://vsbattles.fandom.com/wiki/Deadman_(Post-Flashpoint)
   authority: high
@@ -193,6 +121,24 @@ sources:
   - striking_strength
   - tier
   - weaknesses
+- id: character-stats-profiles-deadman-dc
+  provider_id: character_stats_profiles
+  source_type: mediawiki
+  title: Deadman (DC)
+  url: https://character-stats-and-profiles.fandom.com/wiki/Deadman_%28DC%29
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
 - id: character-stats-profiles-deadman-dc-comics
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -278,8 +224,8 @@ sources:
 - id: vsbattles-deadman-post-crisis
   provider_id: vsbattles
   source_type: mediawiki
-  title: Deadman (Post-Crisis)
-  url: https://vsbattles.fandom.com/wiki/Deadman_%28Post-Crisis%29
+  title: Deadman (Pre-Crisis)
+  url: https://vsbattles.fandom.com/wiki/Deadman_(Pre-Crisis)
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -293,6 +239,34 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9368060'
+  revision_timestamp: '2026-02-06T20:41:44Z'
+  fetch_status: fetched
+  http_status: 200
+  content_length: 5038
+  content_kind: api_json
+  search_attempted_titles:
+  - Deadman (Pre-Crisis)
+  headings_detected:
+  - Summary
+  - Powers and Stats
+  - Notable Matchups
+  - References
+  stat_labels_detected:
+  - attack_potency
+  - durability
+  - intelligence
+  - keys
+  - lifting_strength
+  - origin
+  - powers_and_abilities
+  - range
+  - speed
+  - stamina
+  - standard_equipment
+  - striking_strength
+  - tier
+  - weaknesses
 - id: character-stats-profiles-deadman-post-crisis
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -347,45 +321,10 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-deadman-dc-comics
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Deadman (DC Comics)
-  url: https://vsbattles.fandom.com/wiki/Deadman_%28DC_Comics%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-deadman-prime-earth
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Deadman (Prime Earth)
-  url: https://vsbattles.fandom.com/wiki/Deadman_%28Prime_Earth%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 power_scale:
   tier:
-    text: '{{Unknown}}'
+    text: 'Name: Boston Brand, Deadman Origin: DC Comics Gender: Male Age: Unknown
+      Classification: Ghost'
     source_ids:
     - vsbattles-deadman-dc-comics
     confidence: 0.6
@@ -631,9 +570,11 @@ review:
   profile_state: auto_evidence_profile
   primary_source_id: vsbattles-deadman-dc-comics
   secondary_disagreement_policy: warning_only
+  warnings:
+  - 'secondary_core_disagreement_warning: attack_potency, speed, durability'
 profile_hash: 985d4e34cbbc00bf190c73dff0f15107f84310266cb9492800daf9caa36fe8a5
 repair:
-  attempted_at: '2026-09-25T09:41:02Z'
+  attempted_at: '2026-10-21T11:32:19Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -703,12 +644,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{Unknown}}'
-      source_id: vsbattles-deadman-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: 'Superhuman Speed & Durability, Social Influencing (Managed to outsmart
         the goddess Rama Kushna in a philosophical debate and convince her to renounce
@@ -822,19 +757,24 @@ repair:
         DC Comics *While Deadman has sometimes been depicted as able to hold objects
         normally, this contrasts most of his appearances where he''s unable to directly
         interact with the tangible world. ==Notable Matchups== Victories: Losses:
-        Inconclusive: ==References== {{scroll box|content={{reflist|2}}}} {{discussions|Deadman
-        Post-Flashpoint|Deadman (Post-Flashpoint)}} Category:Characters Category:DC
-        Comics Category:Acrobats Category:Body Control Users Category:Comic Book Characters
-        Category:Darkness Users Category:Dimensional Travel Users Category:Duplication
-        Users Category:Durability Negation Users Category:Extrasensory Perception
-        Users Category:Flight Users Category:Ghosts Category:Heroes Category:Immersion
-        Users Category:Intangibility Users Category:Invisibility Users Category:Justice
-        League Dark Members Category:Justice League Members Category:Male Characters
-        Category:Martial Artists Category:Mind Users Category:Non-Physical Interaction
-        Users Category:Possession Users Category:Post-Flashpoint Category:Regeneration
-        Users Category:Self-Sustenance Users Category:Sleep Users Category:Social
-        Influencers Category:Statistics Amplification Users Category:Superheroes Category:Weapon
-        Masters'
+        Inconclusive: ==References== Category:Characters Category:DC Comics Category:Acrobats
+        Category:Body Control Users Category:Comic Book Characters Category:Darkness
+        Users Category:Dimensional Travel Users Category:Duplication Users Category:Durability
+        Negation Users Category:Extrasensory Perception Users Category:Flight Users
+        Category:Ghosts Category:Heroes Category:Immersion Users Category:Intangibility
+        Users Category:Invisibility Users Category:Justice League Dark Members Category:Justice
+        League Members Category:Male Characters Category:Martial Artists Category:Mind
+        Users Category:Non-Physical Interaction Users Category:Possession Users Category:Post-Flashpoint
+        Category:Regeneration Users Category:Self-Sustenance Users Category:Sleep
+        Users Category:Social Influencers Category:Statistics Amplification Users
+        Category:Superheroes Category:Weapon Masters'
+      source_id: vsbattles-deadman-dc-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Boston Brand, Deadman Origin: DC Comics Gender: Male Age: Unknown
+        Classification: Ghost'
       source_id: vsbattles-deadman-dc-comics
       provider_id: vsbattles
       authority: high
@@ -866,7 +806,7 @@ repair:
     revision_id: '330577'
     fetch_status: fetched
     http_status: 200
-    content_length: 46902
+    content_length: 47102
     content_kind: api_json
     headings_detected:
     - Summary
@@ -923,29 +863,28 @@ repair:
       authority: high
       confidence: 0.75
     - field: speed
-      value: 'Irrelevant |-|House of Mystery= The House of Mystery''s origins are
-        unknown, yet it appears to exist simultaneously in both The Dreaming and Earth,
-        near to a graveyard. The House appears to be sentient and serves as a repository
-        for stories, usually extremely awful ones. Cain has cared after the House
-        for endless years, much as his brother Abel looks for the House of Secrets.
-        Cain went absent briefly a few years ago, and the House nominated Elvira as
-        its new caretaker until he returned; the House appears to require a caretaker,
-        despite the fact that it is perfectly capable of looking after itself, and
-        indeed of totally rebuilding itself at will.Elvira''s House of Mystery #1
-        Cain eventually confessed that he had been lurking inside the House all along,
-        and Elvira went on to host horror stories elsewhere.Elvira''s House of Mystery
-        #11 Shortly later, Morpheus, the Lord of the Dreaming, returned to his domain
-        after over a century in jail and staggered to the House of Mystery''s door,
-        where Cain and Abel nursed him to health. Following Morpheus'' return, the
-        House focused mostly on the Dreaming, where Cain frequently entertained other
-        supernatural storytellers.Sandman (Volume 2) #2 More recently, the House has
-        vanished from its usual location(s) and transformed into a coaching inn in
-        an extradimensional realm; Cain spent several months searching for it. John
-        Constantine won the House in a card game, but when the Justice League Dark
-        battled Blight, he lost it to Zatanna. The House eventually called on John
-        Constantine to return to the land, and he restored control. |-|Second Tab
-        Title= Second tab content goes here. Note: This article is protected. Any
-        unauthorized modifications, alterations, or revisions are strictly prohibited.
+      value: 'Irrelevant The House of Mystery''s origins are unknown, yet it appears
+        to exist simultaneously in both The Dreaming and Earth, near to a graveyard.
+        The House appears to be sentient and serves as a repository for stories, usually
+        extremely awful ones. Cain has cared after the House for endless years, much
+        as his brother Abel looks for the House of Secrets. Cain went absent briefly
+        a few years ago, and the House nominated Elvira as its new caretaker until
+        he returned; the House appears to require a caretaker, despite the fact that
+        it is perfectly capable of looking after itself, and indeed of totally rebuilding
+        itself at will.Elvira''s House of Mystery #1 Cain eventually confessed that
+        he had been lurking inside the House all along, and Elvira went on to host
+        horror stories elsewhere.Elvira''s House of Mystery #11 Shortly later, Morpheus,
+        the Lord of the Dreaming, returned to his domain after over a century in jail
+        and staggered to the House of Mystery''s door, where Cain and Abel nursed
+        him to health. Following Morpheus'' return, the House focused mostly on the
+        Dreaming, where Cain frequently entertained other supernatural storytellers.Sandman
+        (Volume 2) #2 More recently, the House has vanished from its usual location(s)
+        and transformed into a coaching inn in an extradimensional realm; Cain spent
+        several months searching for it. John Constantine won the House in a card
+        game, but when the Justice League Dark battled Blight, he lost it to Zatanna.
+        The House eventually called on John Constantine to return to the land, and
+        he restored control. Second tab content goes here. Note: This article is protected.
+        Any unauthorized modifications, alterations, or revisions are strictly prohibited.
         Unauthorized editing may compromise the accuracy, integrity, and reliability
         of the content. If you have suggestions or concerns regarding the information
         presented herein, please contact the designated administrator for assistance.
@@ -1038,12 +977,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{Unknown}}'
-      source_id: vsbattles-deadman-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: 'Superhuman Speed & Durability, Social Influencing (Managed to outsmart
         the goddess Rama Kushna in a philosophical debate and convince her to renounce
@@ -1157,19 +1090,24 @@ repair:
         DC Comics *While Deadman has sometimes been depicted as able to hold objects
         normally, this contrasts most of his appearances where he''s unable to directly
         interact with the tangible world. ==Notable Matchups== Victories: Losses:
-        Inconclusive: ==References== {{scroll box|content={{reflist|2}}}} {{discussions|Deadman
-        Post-Flashpoint|Deadman (Post-Flashpoint)}} Category:Characters Category:DC
-        Comics Category:Acrobats Category:Body Control Users Category:Comic Book Characters
-        Category:Darkness Users Category:Dimensional Travel Users Category:Duplication
-        Users Category:Durability Negation Users Category:Extrasensory Perception
-        Users Category:Flight Users Category:Ghosts Category:Heroes Category:Immersion
-        Users Category:Intangibility Users Category:Invisibility Users Category:Justice
-        League Dark Members Category:Justice League Members Category:Male Characters
-        Category:Martial Artists Category:Mind Users Category:Non-Physical Interaction
-        Users Category:Possession Users Category:Post-Flashpoint Category:Regeneration
-        Users Category:Self-Sustenance Users Category:Sleep Users Category:Social
-        Influencers Category:Statistics Amplification Users Category:Superheroes Category:Weapon
-        Masters'
+        Inconclusive: ==References== Category:Characters Category:DC Comics Category:Acrobats
+        Category:Body Control Users Category:Comic Book Characters Category:Darkness
+        Users Category:Dimensional Travel Users Category:Duplication Users Category:Durability
+        Negation Users Category:Extrasensory Perception Users Category:Flight Users
+        Category:Ghosts Category:Heroes Category:Immersion Users Category:Intangibility
+        Users Category:Invisibility Users Category:Justice League Dark Members Category:Justice
+        League Members Category:Male Characters Category:Martial Artists Category:Mind
+        Users Category:Non-Physical Interaction Users Category:Possession Users Category:Post-Flashpoint
+        Category:Regeneration Users Category:Self-Sustenance Users Category:Sleep
+        Users Category:Social Influencers Category:Statistics Amplification Users
+        Category:Superheroes Category:Weapon Masters'
+      source_id: vsbattles-deadman-dc-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Boston Brand, Deadman Origin: DC Comics Gender: Male Age: Unknown
+        Classification: Ghost'
       source_id: vsbattles-deadman-dc-comics
       provider_id: vsbattles
       authority: high
@@ -1188,283 +1126,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: vsbattles-deadman-dc
-    url: https://vsbattles.fandom.com/wiki/Deadman_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Deadman (DC Animated Movies)
-    source_type: mediawiki
-    revision_id: '9637353'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 2741
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{Unknown}} physically, {{Varies}} depending on his host'
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Immortality (Type 7, possibly type 5 due being already dead), Possession
-        (Can possess living beings), Intangibility and Incorporeality, Invisibility
-        (Can only be seen and heared by supernatural beings), Enhanced Senses (Can
-        perceive other spirits unseen by mortals), Self-Sustenance (Type 1, 2 and
-        3), Flight
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Unknown physically (As a ghost, he cannot interact with the physical
-        world outside a host), varies depending on his host (Can possess beings like
-        Batman)
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Superhuman by himself, varies depending on his host
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Unknown (Due to being a ghost, Boston is non-corporeal and thus cannot
-        be affected by regular attacks. The only way to affect is by using magic)
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite due to being already dead
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Unknown
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Cannot interact with the physical world. Some spells can still hurt
-        him and some individuals can resist to possession thanks to magic or sheer
-        will ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions|Deadman
-        DC Animated Movies|Deadman (DC Animated Movies)}} Category:Characters Category:Male
-        Characters Category:Immortals Category:Possession Users Category:Intangibility
-        Users Category:Incorporeal Characters Category:Invisibility Users Category:Enhanced
-        Senses Users Category:Self-Sustenance Users Category:Flight Users Category:Ghosts
-        Category:Undead Category:Good Characters Category:Cartoon Characters Category:Movie
-        Characters Category:DC Animated Movies'
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|deadman dc animated movies|9637353
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-deadman-dc
-    url: https://character-stats-and-profiles.fandom.com/wiki/Deadman_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - powers_and_abilities
-    - speed
-    - tier
-    normalized_page_title: Justice League Dark (Canon, DC Comics, Prime Earth)/ItsSoba
-    source_type: mediawiki
-    revision_id: '330577'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 46902
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - History & Formation
-    - Powers and Stats
-    - Explanations & Related Blog Posts
-    - Trivia
-    - Gallery
-    - Others
-    - Categories
-    stat_labels_detected:
-    - attack_potency
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 115
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: Varies mostly Outerverse Level (See Attack Potency)
-      source_id: character-stats-profiles-deadman-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: A list of the character's general abilities (Please add links to the
-        "Powers and Abilities" pages, if it is possible).
-      source_id: character-stats-profiles-deadman-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Varies mostly Outerverse Level
-      source_id: character-stats-profiles-deadman-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: 'Irrelevant |-|House of Mystery= The House of Mystery''s origins are
-        unknown, yet it appears to exist simultaneously in both The Dreaming and Earth,
-        near to a graveyard. The House appears to be sentient and serves as a repository
-        for stories, usually extremely awful ones. Cain has cared after the House
-        for endless years, much as his brother Abel looks for the House of Secrets.
-        Cain went absent briefly a few years ago, and the House nominated Elvira as
-        its new caretaker until he returned; the House appears to require a caretaker,
-        despite the fact that it is perfectly capable of looking after itself, and
-        indeed of totally rebuilding itself at will.Elvira''s House of Mystery #1
-        Cain eventually confessed that he had been lurking inside the House all along,
-        and Elvira went on to host horror stories elsewhere.Elvira''s House of Mystery
-        #11 Shortly later, Morpheus, the Lord of the Dreaming, returned to his domain
-        after over a century in jail and staggered to the House of Mystery''s door,
-        where Cain and Abel nursed him to health. Following Morpheus'' return, the
-        House focused mostly on the Dreaming, where Cain frequently entertained other
-        supernatural storytellers.Sandman (Volume 2) #2 More recently, the House has
-        vanished from its usual location(s) and transformed into a coaching inn in
-        an extradimensional realm; Cain spent several months searching for it. John
-        Constantine won the House in a card game, but when the Justice League Dark
-        battled Blight, he lost it to Zatanna. The House eventually called on John
-        Constantine to return to the land, and he restored control. |-|Second Tab
-        Title= Second tab content goes here. Note: This article is protected. Any
-        unauthorized modifications, alterations, or revisions are strictly prohibited.
-        Unauthorized editing may compromise the accuracy, integrity, and reliability
-        of the content. If you have suggestions or concerns regarding the information
-        presented herein, please contact the designated administrator for assistance.
-        (Basically don''t edit my page without my consent) ==Explanations & Related
-        Blog Posts== TBD ==Trivia== *During the time of creator Peter Milligan, the
-        team did not go by the name Justice League Dark. They went unnamed until Jeff
-        Lemire had Steve Trevor give them the A.R.G.U.S. moniker. *Several members
-        of the Justice League Dark serve as consultants rather than being full members.:
-        **Kent Nelson served in the team as a consultant. **John Constantine typically
-        serves as a consultant and occassionally loses priviledges. **Khalid Nassour
-        initally served as consultant. He was later promoted to a full member following
-        becoming Doctor Fate. ==Gallery== *177 Appearances of Justice League Dark
-        (Prime Earth) *99 Images that include Justice League Dark (Prime Earth) *Team
-        Gallery: Justice League Dark (Prime Earth) ==Others== Notable Victories: *Perpetua
-        (Canon Fight) (Through manipulating the Green regrew all of creation inside
-        of Pralaya ultimately ending her threat) Notable Losses: Inconclusive Matches:
-        ==Categories'
-      source_id: character-stats-profiles-deadman-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 2
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|justice league dark canon
-      dc comics prime earth itssoba|330577
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-deadman-dc
     url: https://vsbattles.fandom.com/wiki/Deadman_%28DC%29
     ok: true
     note: extracted_core_fields
-    extracted_fields:
+    extracted_fields: &id007
     - attack_potency
     - durability
     - intelligence
@@ -1475,17 +1140,18 @@ repair:
     - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Deadman (DC Animated Movies)
+    normalized_page_title: Deadman (Post-Flashpoint)
     source_type: mediawiki
-    revision_id: '9637353'
+    revision_id: '8866209'
     fetch_status: fetched
     http_status: 200
-    content_length: 2741
+    content_length: 10973
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
     - Notable Matchups
+    - References
     stat_labels_detected:
     - attack_potency
     - durability
@@ -1506,7 +1172,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id008
     - attack_potency
     - speed
     - durability
@@ -1516,51 +1182,97 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{Unknown}} physically, {{Varies}} depending on his host'
-      source_id: vsbattles-deadman-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: Immortality (Type 7, possibly type 5 due being already dead), Possession
-        (Can possess living beings), Intangibility and Incorporeality, Invisibility
-        (Can only be seen and heared by supernatural beings), Enhanced Senses (Can
-        perceive other spirits unseen by mortals), Self-Sustenance (Type 1, 2 and
-        3), Flight
+      value: 'Superhuman Speed & Durability, Social Influencing (Managed to outsmart
+        the goddess Rama Kushna in a philosophical debate and convince her to renounce
+        her control over himDC Universe Presents Vol 1 5), Martial Arts and Weapon
+        Mastery (Has shown the ability to defeat groups of enemies with only a sword
+        or "his" bare hands.Deadman Vol 5 1Justice League Dark Vol 1 Annual 1 Shot
+        an assassin''s guns four times without missing once. Could accurately analyze
+        the wounds he inflicted to an enemy mid-fightDeadman Vol 5 2), Possession
+        (Can possess peopleJustice League Dark Vol 1 2, and even slip past eventual
+        defenses meant to prevent thisJustice League Dark Vol 1 13, as well as dive
+        into quasi-sentient objects such as the House of Mystery.Justice League Dark
+        Vol 1 21 With Brahma Dass'' support, he managed to affect the collective mind
+        of Pantheon, a fusion of 10.000 gods.Justice League Dark Vol 1 34 Temporarily
+        possessed the House of Wonders, a fusion of the House of Mystery and the House
+        of Secrets.Justice League Dark Vol 1 Annual 2 Can partially control John Constantine,
+        who previously was immune to Deadman''s abilities.Constantine: The Hellblazer
+        Vol 1 11 Can possess animals too.Young Monsters in Love He can also simply
+        enter beings without possessing themThe Phantom Stranger Vol 4 6), Durability
+        Negation (Seemingly able to tear people apart from the inside while he''s
+        possessing themJustice League Dark Vol 1 4), Extrasensory Perception (Possessing
+        someone lets Deadman see within them, which he has used to search for other
+        beings possessing them or simply comb through their memories.The Flash Vol
+        4 28 He can also sense the status of their spirit without doing that.Justice
+        League Dark Vol 1 18 Sensible to mystical eventsJustice League Dark Vol 1
+        23), Acrobatics (Used to be a circus performer and can pull off incredible
+        showings of acrobatic skill even right as he possesses someoneJustice League
+        Dark Vol 1 3, using this ability to avoid attacks from multiple enemiesJustice
+        League Dark Vol 1 11), Intangibility (Is intangible), Flight (Can hover, even
+        with such precision that he can make it look like he''s riding a car while
+        he is in reality moving along with it), Dimensional Travel (After being forcefully
+        sent to the land of the dead, Deadman managed to return, although the experience
+        was very taxing for him.Justice League Dark Vol 1 12 Could reach Wonder Woman
+        when she went to Valhalla, and move across other realms of the Sphere of the
+        GodsWonder Woman Vol 1 772Wonder Woman Vol 1 774), Regeneration (Low-Mid:
+        After being torn apart by an ectoplasmic cage, Deadman healed in the span
+        of what must have been at most a couple hoursJustice League Dark Vol 1 17),
+        Teleportation (Shown hereJustice League Dark Vol 1 30), Immortality (Type
+        1, 2 and 7: As a spirit, Deadman cannot age, and while his appearance is just
+        a reflection of his mind, it is able to withstand damage that would kill a
+        normal beingJustice League Dark Vol 1 33), Body Control and Duplication (As
+        Deadman''s "body" is really just a reflection of his own imagination, he can
+        believe himself to be any shape, and even turn himself into an army of DeadmenJustice
+        League Dark Vol 1 39), Mind Manipulation (Can mind control people without
+        possessing them), Darkness Manipulation and Sleep Manipulation (Caused everyone
+        in an airplane to fall asleep as darkness invaded it), Immersion (Can appear
+        in mirrors and paintingsSecrets of Sinister House Vol 2 1), Statistics Amplification
+        (Deadman makes those he possesses stronger), Invisibility (Can be invisible
+        when he wishes to beWonder Woman Vol 5 56, and even do that while simultaneously
+        allow others to see himThe Flash Vol 4 29), Non-Physical Interaction (Could
+        physically carry Dr. Psycho''s psycheWonder Woman Vol 1 773), Self-Sustenance
+        (Likely all types. Boston doesn''t need to rest, and as a ghost he is likely
+        physically unable to eat or breatheJustice League Dark Vol 1 19)'
       source_id: vsbattles-deadman-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Unknown physically (As a ghost, he cannot interact with the physical
-        world outside a host), varies depending on his host (Can possess beings like
-        Batman)
+      value: Unknown (Typically depicted as being unable to touch anything as a ghost
+        although he is strong enough to knock out other spectral beings in one punch.Justice
+        League Dark Vol 1 20 He can also greatly increase the strength of any host
+        he's possessing)
       source_id: vsbattles-deadman-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Superhuman by himself, varies depending on his host
+      value: Supersonic movement speed (Outraced a bullet. Can keep up with a casual
+        Flash moving fast enough to be a blur), at least Supersonic+, possibly Hypersonic+
+        combat speed (Can tag people such as John Constantine even while he's visible
+        and they're attempting to avoid himJustice League Dark Vol 1 5)
       source_id: vsbattles-deadman-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Unknown (Due to being a ghost, Boston is non-corporeal and thus cannot
-        be affected by regular attacks. The only way to affect is by using magic)
+      value: Wall level (Withstood an attack strong enough to crack the floor underneath
+        him, from an enemy who could harm himWonder Woman Vol 1 777)
       source_id: vsbattles-deadman-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: Infinite due to being already dead
+      value: At least Superhuman (Deadman doesn't need to rest at all, and has incredible
+        pain endurance, being able to think straight even through incredible agony)
       source_id: vsbattles-deadman-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: Unknown
+      value: Standard Melee Range, Low Complex Multiversal with Dimensional Travel
+        (Can move across the Sphere of the Gods)
       source_id: vsbattles-deadman-dc
       provider_id: vsbattles
       authority: high
@@ -1572,28 +1284,42 @@ repair:
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Above Average
+      value: Average
       source_id: vsbattles-deadman-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Cannot interact with the physical world. Some spells can still hurt
-        him and some individuals can resist to possession thanks to magic or sheer
-        will ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions|Deadman
-        DC Animated Movies|Deadman (DC Animated Movies)}} Category:Characters Category:Male
-        Characters Category:Immortals Category:Possession Users Category:Intangibility
-        Users Category:Incorporeal Characters Category:Invisibility Users Category:Enhanced
-        Senses Users Category:Self-Sustenance Users Category:Flight Users Category:Ghosts
-        Category:Undead Category:Good Characters Category:Cartoon Characters Category:Movie
-        Characters Category:DC Animated Movies'
+      value: 'Cannot interact with physical objects. Notes: *Before making any changes
+        to this page, please read and follow the Power-scaling Rules for Marvel and
+        DC Comics *While Deadman has sometimes been depicted as able to hold objects
+        normally, this contrasts most of his appearances where he''s unable to directly
+        interact with the tangible world. ==Notable Matchups== Victories: Losses:
+        Inconclusive: ==References== Category:Characters Category:DC Comics Category:Acrobats
+        Category:Body Control Users Category:Comic Book Characters Category:Darkness
+        Users Category:Dimensional Travel Users Category:Duplication Users Category:Durability
+        Negation Users Category:Extrasensory Perception Users Category:Flight Users
+        Category:Ghosts Category:Heroes Category:Immersion Users Category:Intangibility
+        Users Category:Invisibility Users Category:Justice League Dark Members Category:Justice
+        League Members Category:Male Characters Category:Martial Artists Category:Mind
+        Users Category:Non-Physical Interaction Users Category:Possession Users Category:Post-Flashpoint
+        Category:Regeneration Users Category:Self-Sustenance Users Category:Sleep
+        Users Category:Social Influencers Category:Statistics Amplification Users
+        Category:Superheroes Category:Weapon Masters'
       source_id: vsbattles-deadman-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
+    - field: tier
+      value: 'Name: Boston Brand, Deadman Origin: DC Comics Gender: Male Age: Unknown
+        Classification: Ghost'
+      source_id: vsbattles-deadman-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 120
+    variant_score: 30
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
@@ -1601,7 +1327,7 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|deadman dc animated movies|9637353
+    duplicate_key: vsbattles.fandom.com|deadman post flashpoint|8866209
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-deadman-dc
@@ -1618,7 +1344,7 @@ repair:
     revision_id: '330577'
     fetch_status: fetched
     http_status: 200
-    content_length: 46902
+    content_length: 47102
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1675,29 +1401,28 @@ repair:
       authority: high
       confidence: 0.75
     - field: speed
-      value: 'Irrelevant |-|House of Mystery= The House of Mystery''s origins are
-        unknown, yet it appears to exist simultaneously in both The Dreaming and Earth,
-        near to a graveyard. The House appears to be sentient and serves as a repository
-        for stories, usually extremely awful ones. Cain has cared after the House
-        for endless years, much as his brother Abel looks for the House of Secrets.
-        Cain went absent briefly a few years ago, and the House nominated Elvira as
-        its new caretaker until he returned; the House appears to require a caretaker,
-        despite the fact that it is perfectly capable of looking after itself, and
-        indeed of totally rebuilding itself at will.Elvira''s House of Mystery #1
-        Cain eventually confessed that he had been lurking inside the House all along,
-        and Elvira went on to host horror stories elsewhere.Elvira''s House of Mystery
-        #11 Shortly later, Morpheus, the Lord of the Dreaming, returned to his domain
-        after over a century in jail and staggered to the House of Mystery''s door,
-        where Cain and Abel nursed him to health. Following Morpheus'' return, the
-        House focused mostly on the Dreaming, where Cain frequently entertained other
-        supernatural storytellers.Sandman (Volume 2) #2 More recently, the House has
-        vanished from its usual location(s) and transformed into a coaching inn in
-        an extradimensional realm; Cain spent several months searching for it. John
-        Constantine won the House in a card game, but when the Justice League Dark
-        battled Blight, he lost it to Zatanna. The House eventually called on John
-        Constantine to return to the land, and he restored control. |-|Second Tab
-        Title= Second tab content goes here. Note: This article is protected. Any
-        unauthorized modifications, alterations, or revisions are strictly prohibited.
+      value: 'Irrelevant The House of Mystery''s origins are unknown, yet it appears
+        to exist simultaneously in both The Dreaming and Earth, near to a graveyard.
+        The House appears to be sentient and serves as a repository for stories, usually
+        extremely awful ones. Cain has cared after the House for endless years, much
+        as his brother Abel looks for the House of Secrets. Cain went absent briefly
+        a few years ago, and the House nominated Elvira as its new caretaker until
+        he returned; the House appears to require a caretaker, despite the fact that
+        it is perfectly capable of looking after itself, and indeed of totally rebuilding
+        itself at will.Elvira''s House of Mystery #1 Cain eventually confessed that
+        he had been lurking inside the House all along, and Elvira went on to host
+        horror stories elsewhere.Elvira''s House of Mystery #11 Shortly later, Morpheus,
+        the Lord of the Dreaming, returned to his domain after over a century in jail
+        and staggered to the House of Mystery''s door, where Cain and Abel nursed
+        him to health. Following Morpheus'' return, the House focused mostly on the
+        Dreaming, where Cain frequently entertained other supernatural storytellers.Sandman
+        (Volume 2) #2 More recently, the House has vanished from its usual location(s)
+        and transformed into a coaching inn in an extradimensional realm; Cain spent
+        several months searching for it. John Constantine won the House in a card
+        game, but when the Justice League Dark battled Blight, he lost it to Zatanna.
+        The House eventually called on John Constantine to return to the land, and
+        he restored control. Second tab content goes here. Note: This article is protected.
+        Any unauthorized modifications, alterations, or revisions are strictly prohibited.
         Unauthorized editing may compromise the accuracy, integrity, and reliability
         of the content. If you have suggestions or concerns regarding the information
         presented herein, please contact the designated administrator for assistance.
@@ -1739,33 +1464,37 @@ repair:
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
-    - powers_and_abilities
+    - durability
     - speed
     - tier
-    normalized_page_title: Justice League Dark (Canon, DC Comics, Prime Earth)/ItsSoba
+    - weaknesses
+    normalized_page_title: Zatanna Zatara (Canon, DC Comics, Prime Earth)/Azmarin
     source_type: mediawiki
-    revision_id: '330577'
+    revision_id: '326280'
     fetch_status: fetched
     http_status: 200
-    content_length: 46902
+    content_length: 14752
     content_kind: api_json
     headings_detected:
     - Summary
-    - History & Formation
     - Powers and Stats
+    - '''''''Weaknesses'''''''
     - Explanations & Related Blog Posts
-    - Trivia
     - Gallery
     - Others
+    - References
     - Categories
     stat_labels_detected:
     - attack_potency
+    - durability
+    - intelligence
     - keys
     - lifting_strength
     - origin
     - powers_and_abilities
     - range
     - speed
+    - stamina
     - striking_strength
     - tier
     - weaknesses
@@ -1785,65 +1514,54 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: Varies mostly Outerverse Level (See Attack Potency)
-      source_id: character-stats-profiles-deadman-prime-earth
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: A list of the character's general abilities (Please add links to the
-        "Powers and Abilities" pages, if it is possible).
+      value: High 1-A
       source_id: character-stats-profiles-deadman-prime-earth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Varies mostly Outerverse Level
+      value: 'Outerverse Level to High Outerverse Level (Held her own against Felix
+        Faust for an extended period of timeJustice League Dark #11 whom previously
+        was stated by herself and John Constantine to be strongJustice League Dark
+        #9; With the help of John Constantine regrew an aspect of Swamp Thing inside
+        Pralaya by manipulating it''s connection to The Green, Pralaya is the manifestation
+        of the infinite darkness which predates the creation as well as the Creator
+        otherwise known as The Presence, she herself states to be that of Gods Unconscious
+        and is stated to be the place where all things originated and will return
+        to in the end; As the Sorceress SupremeDC Nation #0/3 should be superior to
+        Doctor Fate, John Constantine, all other Prime Earth magic users)'
       source_id: character-stats-profiles-deadman-prime-earth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: 'Irrelevant |-|House of Mystery= The House of Mystery''s origins are
-        unknown, yet it appears to exist simultaneously in both The Dreaming and Earth,
-        near to a graveyard. The House appears to be sentient and serves as a repository
-        for stories, usually extremely awful ones. Cain has cared after the House
-        for endless years, much as his brother Abel looks for the House of Secrets.
-        Cain went absent briefly a few years ago, and the House nominated Elvira as
-        its new caretaker until he returned; the House appears to require a caretaker,
-        despite the fact that it is perfectly capable of looking after itself, and
-        indeed of totally rebuilding itself at will.Elvira''s House of Mystery #1
-        Cain eventually confessed that he had been lurking inside the House all along,
-        and Elvira went on to host horror stories elsewhere.Elvira''s House of Mystery
-        #11 Shortly later, Morpheus, the Lord of the Dreaming, returned to his domain
-        after over a century in jail and staggered to the House of Mystery''s door,
-        where Cain and Abel nursed him to health. Following Morpheus'' return, the
-        House focused mostly on the Dreaming, where Cain frequently entertained other
-        supernatural storytellers.Sandman (Volume 2) #2 More recently, the House has
-        vanished from its usual location(s) and transformed into a coaching inn in
-        an extradimensional realm; Cain spent several months searching for it. John
-        Constantine won the House in a card game, but when the Justice League Dark
-        battled Blight, he lost it to Zatanna. The House eventually called on John
-        Constantine to return to the land, and he restored control. |-|Second Tab
-        Title= Second tab content goes here. Note: This article is protected. Any
-        unauthorized modifications, alterations, or revisions are strictly prohibited.
-        Unauthorized editing may compromise the accuracy, integrity, and reliability
-        of the content. If you have suggestions or concerns regarding the information
-        presented herein, please contact the designated administrator for assistance.
-        (Basically don''t edit my page without my consent) ==Explanations & Related
-        Blog Posts== TBD ==Trivia== *During the time of creator Peter Milligan, the
-        team did not go by the name Justice League Dark. They went unnamed until Jeff
-        Lemire had Steve Trevor give them the A.R.G.U.S. moniker. *Several members
-        of the Justice League Dark serve as consultants rather than being full members.:
-        **Kent Nelson served in the team as a consultant. **John Constantine typically
-        serves as a consultant and occassionally loses priviledges. **Khalid Nassour
-        initally served as consultant. He was later promoted to a full member following
-        becoming Doctor Fate. ==Gallery== *177 Appearances of Justice League Dark
-        (Prime Earth) *99 Images that include Justice League Dark (Prime Earth) *Team
-        Gallery: Justice League Dark (Prime Earth) ==Others== Notable Victories: *Perpetua
-        (Canon Fight) (Through manipulating the Green regrew all of creation inside
-        of Pralaya ultimately ending her threat) Notable Losses: Inconclusive Matches:
-        ==Categories'
+      value: 'Inaccessible Speed to Irrelevant Speed (Can move within the House of
+        Mystery one of the two Twin Houses which exists at the very cross-section
+        of space and timeJustice League Dark #10, this house is also stated to exist
+        within the higher plane ofSame comic as before (Justice League Dark #10)Limbo;
+        )'
+      source_id: character-stats-profiles-deadman-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Outerverse Level to High Outerverse level (Can tank having her magic
+        thrown back at herJustice League Dark #12)'
+      source_id: character-stats-profiles-deadman-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: '*Cost of Magic: While being a powerful practioner of magic, Zatanna''s
+        magic often comes at a cost, although the specifics cost may depend on the
+        type of magic performed. **Ressurection Limitaton: Zatanna is incapable of
+        properly ressurecting people or animals without a cost, in which comes in
+        the form of internal damage and pain. Note: This page contains crucial information;
+        please refrain from any editing to ensure data integrity and accuracy. Unauthorized
+        modifications may result in unintended consequences and jeopardize the document''s
+        reliability. ==Explanations & Related Blog Posts== ==Gallery== *Character
+        Gallery: Zatanna Zatara (Prime Earth) ==Others== Notable Victories: Notable
+        Losses: Inconclusive Matches: ==References== ==Categories'
       source_id: character-stats-profiles-deadman-prime-earth
       provider_id: character_stats_profiles
       authority: high
@@ -1852,14 +1570,374 @@ repair:
     identity_score: 20
     variant_score: 55
     provider_priority: 120
-    core_field_count: 2
-    ability_count: 1
+    core_field_count: 3
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|justice league dark canon
-      dc comics prime earth itssoba|330577
+    duplicate_key: character-stats-and-profiles.fandom.com|zatanna zatara canon dc
+      comics prime earth azmarin|326280
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-deadman-post-crisis
+    url: https://vsbattles.fandom.com/wiki/Deadman_%28Post-Crisis%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id009
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Deadman (Pre-Crisis)
+    source_type: mediawiki
+    revision_id: '9368060'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 5038
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id010
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Incorporeality and Immortality (Type
+        7; Is a ghost), Self-Sustenance (Type 1 and 2; Due to his ghostly nature he
+        doesn't require any sustenance), Possession (Can possess peopleStrange Adventure
+        Volume 1 Issue 205, variousAquaman Volume 1 Issue 52 animalsAdventure Comics
+        Volume 1 issue 466 soulsChallangers of the Unknown Volume 1 Issue 74, portraitsThe
+        Brave and the Bold Volume 1 Issue 133 and even the likesWorld's Finest Volume
+        1 Issue 223 ofChallangers of the Unknown Volume 1 Issue 85 Superman and Swamp
+        Thing), Intangibility (Shown hereThe Phantom Stranger Volume 2 Issue 33),
+        Invisibility (Shown here), Flight (Shown here), Non-Physical Interaction (Can
+        punch people's astral form), Biological Manipulation (Can rid a person from
+        fungusChallangers of the Unknown Volume 1 Issue 84 through possession), Mind
+        Manipulation (Can open closed areas of the mind)Aquaman Volume 1 Issue 50,
+        Martial Arts (While possessing a person he outskillsStrange Adventure Volume
+        1 Issue 212 several people), Acrobatics (Can force bodies he possesses to
+        perform acrobatics stuntsStrange Adventure Volume 1 Issue 214), Limited Power
+        Nullification (Can sever psychic connections), Resistance to Pain Manipulation
+        (Can endure pain that made other ghosts go insane)
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Unknown (Lacks a physical form)
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Supersonic (Surpasses the speed of sound), possibly far higher
+        (Flies to various parts of the world in an unknown amount of time)
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Unknown
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Unknown
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: None notable
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Average
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Lacks a physical body thus he''s unable to interact with most things
+        without possessing a person. Note: Although this character was unaffected
+        by the Crisis, due to consistency, in both showings and in narrative tropes,
+        the page is being split into both its Pre-Crisis and Post-Crisis incarnations
+        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:DC
+        Comics Category:Characters Category:Comic Book Characters Category:Good Characters
+        Category:Undead Category:Ghosts Category:Immortals Category:Self-Sustenance
+        Users Category:Intangibility Users Category:Possession Users Category:Mind
+        Users Category:Biology Users Category:Flight Users Category:Invisibility Users
+        Category:Power Nullification Users Category:Non-Physical Interaction Users
+        Category:Martial Artists Category:Acrobats Category:Incorporeal Characters'
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Boston Brand Origin: DC Comics Gender: Male Age: At least 34 Classification:
+        Ghost'
+      source_id: vsbattles-deadman-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 100
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|deadman pre crisis|9368060
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-deadman-post-crisis
+    url: https://character-stats-and-profiles.fandom.com/wiki/Deadman_%28Post-Crisis%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Batman (Canon, Post-Crisis)/Spinosaurus75DinosaurFan
+    source_type: mediawiki
+    revision_id: '366623'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 29123
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 8-C. At least 8-C with Explosives, 4-B with Preparation
+      source_id: character-stats-profiles-deadman-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "Genius Intelligence, Superhuman Physical Characteristics, Martial Arts,\
+        \ Stealth Mastery (Regularly disappears on members of the league, even those\
+        \ with senses as powerful as Superman. Can disappear even when people are\
+        \ looking at him. Can disguise himself as people of different ethnicities\
+        \ or age ranges, regularly bypasses Oracle\u2019s security, which uses air\
+        \ pressure change detection and state of the art systems. Superman can't see\
+        \ his actions), Weapon Mastery (Has mastered all weapons. Can easily hit foes\
+        \ at multiple angles and directions in a single throw), Hacking (Easily hacked\
+        \ into Lexcorp and Darkseid\u2019s Hellspores), Extrasensory Perception (Can\
+        \ sense Chi. Can sense the presence of Deadman, who is a invisible spirit),\
+        \ Clairvoyance (Can see the past, present, and future in his dreams), Limited\
+        \ Information Analysis (Is a master detective, Can visualize entire sequences\
+        \ of events and plots in his head and analyze them in the middle of combat.\
+        \ Easily figured out what was really causing disturbances across Earth, and\
+        \ saw through the methods Wonder Woman used to fight the Flash), Instinctive\
+        \ Reactions and Precognition (Has a sixth sense that allows him to instinctively\
+        \ dodge attacks without knowing about them, warns him of danger, and allows\
+        \ him to easily anticipate the attacks of multiple foes. Can predict someone\u2019\
+        s movement based on speed and momentum), Mind Manipulation (Can hypnotize\
+        \ people), Body Control and Pressure Point Strikes (has methods that allow\
+        \ for self-induced comas and nerve attacks, can loosen muscles, slow blood\
+        \ flow, and control his adrenaline), Power Nullification (Knows a spell which\
+        \ negates magic for a hour), Sealing (Knows magic that allows him to seal\
+        \ someone in a crystal), Self-Perception Manipulation (Can manipulate his\
+        \ own perception of time), Enhanced Senses (Disarmed a foe on a shot described\
+        \ by Deathstroke as impossible. Smelled a fire in Gotham while he was underground\
+        \ outside the city. Smells well enough to identify chemicals. Can literally\
+        \ smell emotion. Described as having superior vision to Eagles, and easily\
+        \ saw Robin spy on him. Hears a dying man\u2019s speech while at the top of\
+        \ a building and a alarm from three blocks away), Vehicular Mastery, Magic,\
+        \ Preparation Electricity Manipulation with Batsuit and Batarangs (Can run\
+        \ up to 200,000 volts through his suit), Status Effect Inducement and Paralysis\
+        \ Inducement with tranquilizer darts, flashbangs, cape and taser gun, Ice\
+        \ Manipulation with freeze ray and liquid nitrogen capsule, Explosion Manipulation\
+        \ with Batarangs, Power Nullification (Has Cold Iron Fillings to disrupt magic,\
+        \ has powerful anti-fire gas), Biological Manipulation (Has a chemical that\
+        \ hypersaturates a person and can repair DNA), Attack Reflection (Has pellets\
+        \ which reflect lasers, can reverse electrical attacks, and reflect sonic\
+        \ attacks), Animal Manipulation (Can summon bats that jam detection), Light\
+        \ Manipulation (Via Flashbombs), Smoke Manipulation (Uses smoke bombs which\
+        \ can mimic his shape and cause pain), Thread Manipulation and Homing Attack\
+        \ (Has a gadget that functions in a similar manner to thread based Omega Beams),\
+        \ Has various tracking devices, Restraint Pellets, Has Syringe Batarangs to\
+        \ deliver chemicals and toxins, Poison Manipulation (Via various poisons and\
+        \ nerve toxins), Sound Manipulation (Via sonic Batarangs and hypersonic attacks,\
+        \ Acid Manipulation (Via Acid Bombs), Magnetism Manipulation (Via Magnet Batarangs,\
+        \ Heat Manipulation (Via Superheated Batarangs), Technopathy (Via EMPs, which\
+        \ can take out thousands of O.M.A.C.S.), has a fake circulatory system to\
+        \ deceive foes, Camouflage (His suit can camouflage him), Illusion Creation\
+        \ (Can create the illusion of a giant bat), Teleportation (Has a teleportation\
+        \ device), Extrasensory Perception (Can see in multiple wavelengths with his\
+        \ cowl. Can see invisible things), Information Analysis (His cowl automatically\
+        \ identifies people, has gadgets that can identify radiation and blood.),\
+        \ Fire Manipulation (Via Firebombs), has a gadget that hides his heartbeat\
+        \ Sleep Manipulation (Was not affected by sleep inducement), Pain Manipulation\
+        \ (Claims pain only motivates him. Overcame two years of torture at the hands\
+        \ of Desaad, who inflicted on him the pain of this he had tortured before\
+        \ him), Fire Manipulation (Unhindered by fire. Survived Etrigan\u2019s hellfire.\
+        \ His suit has internal cooling systems), Poison Manipulation (Is immune to\
+        \ most forms of poison. Survived direct injections of Crystal Meth and Heroin),\
+        \ Fear Manipulation (Has gained a immunity to fear toxin. Phobos, the God\
+        \ of Fear, couldn\u2019t put fear in him), Electricity Manipulation (Was only\
+        \ slightly dazed by 10,000 volts of electricity. Can insulate his suit from\
+        \ the power of Gotham\u2019s grid, and can safely run 200,000 volts through\
+        \ his suit), Acid Manipulation (Tanked acid using his cape), Ice Manipulation\
+        \ (Unharmed by Mr. Freeze\u2019s ice, Radiation Manipulation (His suit is\
+        \ insulated from radiation), Body Puppetry and Biological Manipulation (Somewhat\
+        \ resists"
+      source_id: character-stats-profiles-deadman-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Building level by himself (Can trade blows with those capable of harming
+        him and his suit. Can somewhat harm Bane, who can survive large explosions.
+        Held his own against Deathstroke, who survived an explosion that blew up the
+        White House). At least Building level with explosives (They are usually treated
+        as higher than himself), Solar System level with Preparation (Can create armours
+        and robots equal or superior to Superman and other members of the Justice
+        League)
+      source_id: character-stats-profiles-deadman-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic combat speed (At least comparable to Katana)
+      source_id: character-stats-profiles-deadman-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Building level (Tanked a warehouse explosion), Solar System level with
+        Preparation (Can create armors and robots that can fight with foes of the
+        Justice League)
+      source_id: character-stats-profiles-deadman-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "Normal human weaknesses but has survived situations which would kill\
+        \ an average human, refuses to kill. Notable Attacks/Techniques: * Batarangs:\
+        \ Boomerangs shaped like his symbol, he can use these to knock guns out of\
+        \ enemies' hands and KO them. There are also varieties, such as exploding\
+        \ batarangs, tracking batarangs, electrocuting batarangs, freezing batarangs,\
+        \ etc. * Stealth: Batman is an absolute master of stealth, being capable of\
+        \ disappearing and staying hidden, even from beings with senses as strong\
+        \ as Superman. Batman is also a master of disguise, being capable of disguising\
+        \ himself as people of different races and ages. Batman is known for his ability\
+        \ to be completely unnoticed and unseen through these methods. *Senses: Batman\
+        \ has honed his senses to perfection, allowing him to achieve analysis most\
+        \ others cannot. This includes smelling chemical changes and pheromones in\
+        \ order to smell his foe\u2019s emotion, hearing normally unnoticed sounds\
+        \ in Gotham, and seeing things far too far away for a normal eye to see. *Preparation:\
+        \ Batman is a master of using resources and time in order to prepare himself\
+        \ for any objective. While Batman is a nearly unrivaled scientific genius,\
+        \ the real danger comes from his ability to predict situations that may arise\
+        \ and plan for nearly any future conflict. Even before a situation shows the\
+        \ possibility of occurring, Batman has likely already planned for it. For\
+        \ example, Batman has planned methods to kill every one of his allies individually\
+        \ should the need arise, prepared a extra mind just in case he needed it,\
+        \ and observed the majority of what can be considered human culture, from\
+        \ song references to obscure shows, in order to be ready for any threat, among\
+        \ many other things. Respect Thread: Post-Crisis and Flashpoint Respect Thread\
+        \ ==Others== Notable Victories: Notable Losses: Inconclusive Matches: Category:Tier\
+        \ 8 Category:Tier 4 Category:Spinosaurus75DinosaurFan"
+      source_id: character-stats-profiles-deadman-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 30
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|batman canon post crisis
+      spinosaurus75dinosaurfan|366623
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
@@ -1906,6 +1984,48 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|deadman post flashpoint|8866209
+  - source_id: vsbattles-deadman-dc
+    url: https://vsbattles.fandom.com/wiki/Deadman_%28DC%29
+    title: Deadman (Post-Flashpoint)
+    rank: 130
+    extracted_fields: *id007
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id008
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 120
+    variant_score: 30
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|deadman post flashpoint|8866209
+  - source_id: vsbattles-deadman-post-crisis
+    url: https://vsbattles.fandom.com/wiki/Deadman_%28Post-Crisis%29
+    title: Deadman (Pre-Crisis)
+    rank: 105
+    extracted_fields: *id009
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id010
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 100
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|deadman pre crisis|9368060
   chosen_source_id: null
   failure_reasons:
     fetched: 8

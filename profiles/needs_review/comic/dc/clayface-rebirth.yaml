@@ -10,19 +10,8 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-04T12:07:53Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Clayface (Rebirth)
   franchise: DC
@@ -323,17 +312,24 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least 9-B, likely higher
+    source_ids:
+    - character-stats-profiles-clayface-rebirth-dc
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Wall level, likely higher (Hospitalized Rick Flag, almost killed
+      FrankensteinCreature Commandos Season 1 Episode 5 - The Iron Pot> 12.55 Megajoules)
+    source_ids:
+    - character-stats-profiles-clayface-rebirth-dc
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Transonic (Can keep up with Rick Flag and FrankensteinMach 1.01)
+    source_ids:
+    - character-stats-profiles-clayface-rebirth-dc
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -343,23 +339,110 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Wall level, likely higher (Was unaffected by attacks from Rick
+      Flag and Frankenstein)
+    source_ids:
+    - character-stats-profiles-clayface-rebirth-dc
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
     text: null
     source_ids: []
     confidence: 0.0
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Extended Melee Range
+    source_ids:
+    - character-stats-profiles-clayface-rebirth-dc
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Gifted (Clayface is able to use his metahuman abilities to perfectly mimic
+      the appearance of others, succesfully fooling MacPherson's students and even
+      making Amanda Waller suspicious of her own ally)
+    source_ids:
+    - character-stats-profiles-clayface-rebirth-dc
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - character-stats-profiles-clayface-rebirth-dc
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-shapeshifting
+  name: Shapeshifting
+  description: Shapeshifting
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-regeneration-high-low-healed-from-having-a-massive-hole-sho
+  name: Regeneration (High-Low; Healed from having a massive hole shot into his body)
+  description: Regeneration (High-Low; Healed from having a massive hole shot into
+    his body)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-additional-limbs-weapon-creation-as-shown-here
+  name: Additional Limbs & Weapon Creation (As shown here)
+  description: Additional Limbs & Weapon Creation (As shown here)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-inorganic-physiology-is-made-out-of-clay
+  name: Inorganic Physiology (Is made out of clay)
+  description: Inorganic Physiology (Is made out of clay)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
@@ -375,19 +458,29 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: character-stats-profiles-clayface-rebirth-dc
+  secondary_disagreement_policy: warning_only
 profile_hash: 26ad5990d12e2f1154931ecb56d34cc4cf8a62aef88eb2523be0ac3f0bda8278
 repair:
-  attempted_at: '2026-10-05T03:24:31Z'
+  attempted_at: '2026-10-22T19:37:48Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
   - source_id: vsbattles-clayface-rebirth-dc
     url: https://vsbattles.fandom.com/wiki/Clayface_%28Rebirth%29_DC
@@ -448,68 +541,67 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-C}}, up to {{5-A}} with Absorption'
+      value: ', up to with Absorption'
       source_id: vsbattles-clayface-rebirth-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Pre-Cataclysm= *Superhuman Physical Characteristics *Inorganic Physiology
-        (Type 2; Similar to Preston Payne, his blood is more akin to mineral virus
-        while the rest of his body is made of clayThe Outsiders Vol 4 #22, His biosystem
-        contains almost no trace of recognisable human biological materialBatman:
-        Gotham Knights #70) **Self-Sustenance (Type 1 & 2; Came back offscreen from
-        being launched into space by Mary Marvel, Does not need nutrients to survive
-        anymoreBatman: Shadow of the Bat #88) *Skilled Hand-to-Hand Combatant (Said
-        to be a fierce hand-to-hand combatantWho''s Who: The Definitive Directory
-        of the DC Universe #5, was able to outmatch Robin in a fight) *Skilled Knife
-        User (Has shown skill with a knife to be able to make it stand on his fingertips
-        without supportDetective Comics Vol 1 #607 as well as implied to be a good
-        knife throwerSecret Origins Vol 2 #44) *Social Influencing (Self-proclaimed
-        as one of the greatest actors of our time and able to play the roles of almost
-        anyone, Was able to trick Wonder Woman and Donna Troy when disguised as Superman
-        and CheetahWonder Woman Vol 2 #161Wonder Woman Vol 2 #160 as well as many
-        others in his other disguises, Manipulated Clayface IV into doing his bidding
-        when he was part of the Mudpack), *Regeneration (At least High-Mid; Has quickly
-        reconstituted his body from being sliced in halfTitans Vol 2 #29 and being
-        blown upBatman Confidential #21, Likely Mid-High overtime; Was able to come
-        back offscreen from having his whole body be eaten by Poison Ivy''s plants)
-        *Body Control, Elasticity & Shapeshifting (Able to morph or shift his body
-        in about any way possible) *Weapon Creation (Has shown to be able to create
-        weapons from nets and hooks to hammers and chainsawsTitans Vol 2 #30) *Density
-        Manipulation & Elemental Intangibility (Can control his density to make attacks
-        pass through him or become extremely hard) *Size Manipulation (Able to grow
-        in size to Type 0 normally at a moments notice and shrink to Type 1, up to
-        Type 1 by absorbing people into himself) *Duplication (Able to make a bunch
-        of decoy people out of himself each able to act on their own and with different
-        personalitiesJoker''s Asylum II: Clayface) *Limited Earth Manipulation (Due
-        to being mostly made out of clay) *Stealth Mastery & Camouflage (Able to disguise
-        himself as parts of the ground to sneak on the Riddler and Mary MarvelCountdown
-        #42) *Statistics Amplification, Power Mimicry & Absorption (Due being partial
-        made of smectites, he can absorb properties at a greater rate than any other
-        clay group, which was shown when he absorbed other clay types into his body,
-        the power of deep quartz into his body or he absorbed the clay that made up
-        Wonder Woman''s body, Absorbing people into himself can increase his power
-        and size) *Poison Manipulation (Capable of expunging material classified as
-        toxic waste if he consumes sewageArkham Reborn #2) *Disease Manipulation,
-        Biological Manipulation & Corrosion Inducement (Similar to Preston Payne,
-        with his Deadly Touch able to dissolve people into protoplasm by secreting
-        a unique enzyme with a touch, also able to corrode through inorganic material
-        such as dirt and stone as wellDetective Comics Vol 1 Annual #2) Resistance
-        to *Earth Manipulation (Able to be immune to Geo-Force''s geokinesis due to
-        being a force of nature unto himself) Same Powers and Resistances as Matt
-        Hagen, Preston Payne and Sondra Fuller due to having their blood extracts
-        injected into himBatman Vol 1 #550 |-|Post-Cataclysm= Same powers as before
-        *Electricity Manipulation (Due to absorbing the properties of deep quartz
-        has gained to power of piezoelectricity which allows him the ability to electrocute
-        peopleDetective Comics Vol 1 #735) *Heat Manipulation (Can send enough heat
-        into the ground to fuse rubble together) *Fire Manipulation (Able to shoot
-        out blasts of fire that can harm Batman as well as ignite his whole body with
-        flames) Resistance to *Fire Manipulation (Shown to be unfazed when completely
-        set alight on fireBatman: Shadow of the Bat #75) *Electricity Manipulation
-        (Shrugged off being electrocuted) *Ice Manipulation (Was able to quickly break
-        of being frozen by Mr. Freeze) For more details and further applications of
-        Clayface''s powers, it is suggested to visit this blog.'
+      value: '*Superhuman Physical Characteristics *Inorganic Physiology (Type 2;
+        Similar to Preston Payne, his blood is more akin to mineral virus while the
+        rest of his body is made of clayThe Outsiders Vol 4 #22, His biosystem contains
+        almost no trace of recognisable human biological materialBatman: Gotham Knights
+        #70) **Self-Sustenance (Type 1 & 2; Came back offscreen from being launched
+        into space by Mary Marvel, Does not need nutrients to survive anymoreBatman:
+        Shadow of the Bat #88) *Skilled Hand-to-Hand Combatant (Said to be a fierce
+        hand-to-hand combatantWho''s Who: The Definitive Directory of the DC Universe
+        #5, was able to outmatch Robin in a fight) *Skilled Knife User (Has shown
+        skill with a knife to be able to make it stand on his fingertips without supportDetective
+        Comics Vol 1 #607 as well as implied to be a good knife throwerSecret Origins
+        Vol 2 #44) *Social Influencing (Self-proclaimed as one of the greatest actors
+        of our time and able to play the roles of almost anyone, Was able to trick
+        Wonder Woman and Donna Troy when disguised as Superman and CheetahWonder Woman
+        Vol 2 #161Wonder Woman Vol 2 #160 as well as many others in his other disguises,
+        Manipulated Clayface IV into doing his bidding when he was part of the Mudpack),
+        *Regeneration (At least High-Mid; Has quickly reconstituted his body from
+        being sliced in halfTitans Vol 2 #29 and being blown upBatman Confidential
+        #21, Likely Mid-High overtime; Was able to come back offscreen from having
+        his whole body be eaten by Poison Ivy''s plants) *Body Control, Elasticity
+        & Shapeshifting (Able to morph or shift his body in about any way possible)
+        *Weapon Creation (Has shown to be able to create weapons from nets and hooks
+        to hammers and chainsawsTitans Vol 2 #30) *Density Manipulation & Elemental
+        Intangibility (Can control his density to make attacks pass through him or
+        become extremely hard) *Size Manipulation (Able to grow in size to Type 0
+        normally at a moments notice and shrink to Type 1, up to Type 1 by absorbing
+        people into himself) *Duplication (Able to make a bunch of decoy people out
+        of himself each able to act on their own and with different personalitiesJoker''s
+        Asylum II: Clayface) *Limited Earth Manipulation (Due to being mostly made
+        out of clay) *Stealth Mastery & Camouflage (Able to disguise himself as parts
+        of the ground to sneak on the Riddler and Mary MarvelCountdown #42) *Statistics
+        Amplification, Power Mimicry & Absorption (Due being partial made of smectites,
+        he can absorb properties at a greater rate than any other clay group, which
+        was shown when he absorbed other clay types into his body, the power of deep
+        quartz into his body or he absorbed the clay that made up Wonder Woman''s
+        body, Absorbing people into himself can increase his power and size) *Poison
+        Manipulation (Capable of expunging material classified as toxic waste if he
+        consumes sewageArkham Reborn #2) *Disease Manipulation, Biological Manipulation
+        & Corrosion Inducement (Similar to Preston Payne, with his Deadly Touch able
+        to dissolve people into protoplasm by secreting a unique enzyme with a touch,
+        also able to corrode through inorganic material such as dirt and stone as
+        wellDetective Comics Vol 1 Annual #2) Resistance to *Earth Manipulation (Able
+        to be immune to Geo-Force''s geokinesis due to being a force of nature unto
+        himself) Same Powers and Resistances as Matt Hagen, Preston Payne and Sondra
+        Fuller due to having their blood extracts injected into himBatman Vol 1 #550
+        Same powers as before *Electricity Manipulation (Due to absorbing the properties
+        of deep quartz has gained to power of piezoelectricity which allows him the
+        ability to electrocute peopleDetective Comics Vol 1 #735) *Heat Manipulation
+        (Can send enough heat into the ground to fuse rubble together) *Fire Manipulation
+        (Able to shoot out blasts of fire that can harm Batman as well as ignite his
+        whole body with flames) Resistance to *Fire Manipulation (Shown to be unfazed
+        when completely set alight on fireBatman: Shadow of the Bat #75) *Electricity
+        Manipulation (Shrugged off being electrocuted) *Ice Manipulation (Was able
+        to quickly break of being frozen by Mr. Freeze) For more details and further
+        applications of Clayface''s powers, it is suggested to visit this blog.'
       source_id: vsbattles-clayface-rebirth-dc
       provider_id: vsbattles
       authority: high
@@ -602,11 +694,10 @@ repair:
         them into his body as well. Note: Before making any changes to this page,
         please read and follow the Power-scaling Rules for Marvel and DC Comics. ==Gallery==
         Clayface Basil Karlo Art PC.png Clayface_Basil_Karlo_0002.jpg ClayfaceI_01.jpg
-        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== {{scroll
-        box|content={{reflist|2}}}} {{discussions|Clayface Post-Crisis|Clayface (Post-Crisis)}}
-        Category:Characters Category:DC Comics Category:Absorption Users Category:Actors
-        Category:Adults Category:Biology Users Category:Body Control Users Category:Camouflage
-        Users Category:Comic Book Characters Category:Corrosion Users Category:Criminals
+        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:Characters
+        Category:DC Comics Category:Absorption Users Category:Actors Category:Adults
+        Category:Biology Users Category:Body Control Users Category:Camouflage Users
+        Category:Comic Book Characters Category:Corrosion Users Category:Criminals
         Category:Disease Users Category:Duplication Users Category:Durability Negation
         Users Category:Earth Users Category:Elasticity Users Category:Inorganic Beings
         Category:Intangibility Users Category:Male Characters Category:Monsters Category:Murderers
@@ -640,368 +731,6 @@ repair:
     exception_class: ''
   - source_id: character-stats-profiles-clayface-rebirth-dc
     url: https://character-stats-and-profiles.fandom.com/wiki/Clayface_%28Rebirth%29_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Clayface (Canon, DC Universe)/Lesshe
-    source_type: mediawiki
-    revision_id: '583464'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4080
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Power and Stats
-    - Statistics Values
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least 9-B, likely higher
-      source_id: character-stats-profiles-clayface-rebirth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Shapeshifting *Regeneration (High-Low;
-        Healed from having a massive hole shot into his body) *Additional Limbs &
-        Weapon Creation (As shown here) *Inorganic Physiology (Is made out of clay)'
-      source_id: character-stats-profiles-clayface-rebirth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Wall level, likely higher (Hospitalized Rick Flag, almost killed
-        FrankensteinCreature Commandos Season 1 Episode 5 - The Iron Pot> 12.55 Megajoules)
-      source_id: character-stats-profiles-clayface-rebirth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Transonic (Can keep up with Rick Flag and FrankensteinMach 1.01)
-      source_id: character-stats-profiles-clayface-rebirth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Wall level, likely higher (Was unaffected by attacks from Rick
-        Flag and Frankenstein)
-      source_id: character-stats-profiles-clayface-rebirth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Electricity seemingly dismembers him == Statistics Values == == References
-        == __FORCETOC__ Category:Lesshe Category:Tier 9 Category:Tier 9-B Category:Superhuman
-        Physical Characteristics Users Category:Shapeshifters Category:Regeneration
-        Users Category:Additional Limbs Users Category:Weapon Creation Users Category:Inorganic
-        Beings Category:Male Characters Category:Adults Category:Villains Category:Evil
-        Characters Category:Antagonists Category:Television Characters Category:DC
-        Universe Category:Characters Category:Criminals Category:Elasticity Users
-        Category:Size Users Category:Thieves Category:Immortals
-      source_id: character-stats-profiles-clayface-rebirth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|clayface canon dc universe
-      lesshe|583464
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-clayface-rebirth-dc
-    url: https://vsbattles.fandom.com/wiki/Clayface_%28Rebirth%29_%28DC%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Clayface (Basil Karlo) (Post-Crisis)
-    source_type: mediawiki
-    revision_id: '9129490'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 17801
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{8-C}}, up to {{5-A}} with Absorption'
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Pre-Cataclysm= *Superhuman Physical Characteristics *Inorganic Physiology
-        (Type 2; Similar to Preston Payne, his blood is more akin to mineral virus
-        while the rest of his body is made of clayThe Outsiders Vol 4 #22, His biosystem
-        contains almost no trace of recognisable human biological materialBatman:
-        Gotham Knights #70) **Self-Sustenance (Type 1 & 2; Came back offscreen from
-        being launched into space by Mary Marvel, Does not need nutrients to survive
-        anymoreBatman: Shadow of the Bat #88) *Skilled Hand-to-Hand Combatant (Said
-        to be a fierce hand-to-hand combatantWho''s Who: The Definitive Directory
-        of the DC Universe #5, was able to outmatch Robin in a fight) *Skilled Knife
-        User (Has shown skill with a knife to be able to make it stand on his fingertips
-        without supportDetective Comics Vol 1 #607 as well as implied to be a good
-        knife throwerSecret Origins Vol 2 #44) *Social Influencing (Self-proclaimed
-        as one of the greatest actors of our time and able to play the roles of almost
-        anyone, Was able to trick Wonder Woman and Donna Troy when disguised as Superman
-        and CheetahWonder Woman Vol 2 #161Wonder Woman Vol 2 #160 as well as many
-        others in his other disguises, Manipulated Clayface IV into doing his bidding
-        when he was part of the Mudpack), *Regeneration (At least High-Mid; Has quickly
-        reconstituted his body from being sliced in halfTitans Vol 2 #29 and being
-        blown upBatman Confidential #21, Likely Mid-High overtime; Was able to come
-        back offscreen from having his whole body be eaten by Poison Ivy''s plants)
-        *Body Control, Elasticity & Shapeshifting (Able to morph or shift his body
-        in about any way possible) *Weapon Creation (Has shown to be able to create
-        weapons from nets and hooks to hammers and chainsawsTitans Vol 2 #30) *Density
-        Manipulation & Elemental Intangibility (Can control his density to make attacks
-        pass through him or become extremely hard) *Size Manipulation (Able to grow
-        in size to Type 0 normally at a moments notice and shrink to Type 1, up to
-        Type 1 by absorbing people into himself) *Duplication (Able to make a bunch
-        of decoy people out of himself each able to act on their own and with different
-        personalitiesJoker''s Asylum II: Clayface) *Limited Earth Manipulation (Due
-        to being mostly made out of clay) *Stealth Mastery & Camouflage (Able to disguise
-        himself as parts of the ground to sneak on the Riddler and Mary MarvelCountdown
-        #42) *Statistics Amplification, Power Mimicry & Absorption (Due being partial
-        made of smectites, he can absorb properties at a greater rate than any other
-        clay group, which was shown when he absorbed other clay types into his body,
-        the power of deep quartz into his body or he absorbed the clay that made up
-        Wonder Woman''s body, Absorbing people into himself can increase his power
-        and size) *Poison Manipulation (Capable of expunging material classified as
-        toxic waste if he consumes sewageArkham Reborn #2) *Disease Manipulation,
-        Biological Manipulation & Corrosion Inducement (Similar to Preston Payne,
-        with his Deadly Touch able to dissolve people into protoplasm by secreting
-        a unique enzyme with a touch, also able to corrode through inorganic material
-        such as dirt and stone as wellDetective Comics Vol 1 Annual #2) Resistance
-        to *Earth Manipulation (Able to be immune to Geo-Force''s geokinesis due to
-        being a force of nature unto himself) Same Powers and Resistances as Matt
-        Hagen, Preston Payne and Sondra Fuller due to having their blood extracts
-        injected into himBatman Vol 1 #550 |-|Post-Cataclysm= Same powers as before
-        *Electricity Manipulation (Due to absorbing the properties of deep quartz
-        has gained to power of piezoelectricity which allows him the ability to electrocute
-        peopleDetective Comics Vol 1 #735) *Heat Manipulation (Can send enough heat
-        into the ground to fuse rubble together) *Fire Manipulation (Able to shoot
-        out blasts of fire that can harm Batman as well as ignite his whole body with
-        flames) Resistance to *Fire Manipulation (Shown to be unfazed when completely
-        set alight on fireBatman: Shadow of the Bat #75) *Electricity Manipulation
-        (Shrugged off being electrocuted) *Ice Manipulation (Was able to quickly break
-        of being frozen by Mr. Freeze) For more details and further applications of
-        Clayface''s powers, it is suggested to visit this blog.'
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Building level (Could overpower Robin before he even transformed, Significantly
-        stronger than Batman to where he admits that Basil is too powerful to take
-        on aloneBatman Vol 1 #568, knocked out Poison Ivy with just a single blow,
-        Restrained Roy Harper, Was able to rip open Mr. Freeze''s suit), up to Large
-        Planet level with Absorption (Absorbing things into himself can increase his
-        power, such as being able to battle Batman''s large mechs after absorbing
-        a lot of people into himselfBatman: Gotham After Midnight #3 or after absorbing
-        some miners and kids into himself could harm Geo-Force and significantly damage
-        MetamorphoThe Outsiders Vol 4 #21, After absorbing the Sacred Clay could damage
-        Wonder Woman, Shown to be able to harm a demotivated Supergirl offscreen).
-        Deadly Touch can bypass durability.'
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: 'At least Supersonic+, possibly Hypersonic+ (Can keep up with Batman
-        and and Stephanie BrownBatgirl Vol 3 #13)'
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: 'Building level (Density control allows him to make himself soft enough
-        that people will pass through him or become hard enough that Batman and Poison
-        Ivy are unable to break it, Survived a hit from one of the Batwing''s missiles),
-        up to Large Planet level with Absorption (Able to tank hits from Batman''s
-        building size suit and crashing into buildings relatively unharmed after absorbing
-        a lot of people into himselfBatman: Gotham After Midnight #4, Survived being
-        crushed by Geo-Force after absorbing a bunch of people, Able to survive hits
-        from Supergirl although she most likely was holding back immenselySupergirl
-        Vol 5 #33Batman And Superman: World''s Finest #10)'
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (As his body is no longer human, he has not shown any signs
-        of tire or need to sleep as well as showing minimal pain from reconstituting
-        himself)
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: 'Extended melee range, Tens of meters with projectiles and from sheer
-        size from absorptionBatman Vol 1 #690'
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable *Optional
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Gifted (A seasoned actor who proclaims himself as one of the greatest
-        of all time with decades of cinema experience and shows it with his disguises
-        of various heroes, villains and normal citizens that has shown to be able
-        to fool people such as Wonder Woman, Batgirl and Batman briefly. Master manipulator,
-        influencing even the very people that went to recruit him in the first place
-        as seen by his time in the Mud Pack and stated to be a crafty criminal tactician
-        as well)
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Extreme cold or heat is good at turning his body''s fluidity into solid,
-        allowing him to be temporarily subduedGotham City Sirens #24. Heat up to 1,000
-        degrees Celsius to his clay core undermines his basic cellular structure.
-        Sufficiently powerful sonics is able to disrupt his metabolismArkham Reborn
-        #3. Water can melt down his body structureDC Comics Presents: Batman. People
-        that he has absorbed is able to be removed through certain poisonous gases.
-        Crowbars are able to trigger PTSD within him, making him blind with rageGotham
-        City Sirens #20. Notable Attacks/Techniques: *Deadly Touch: Gained from Preston
-        Payne''s blood, Basil is able to surround parts of his body with a special
-        enzyme that''s capable of turning whatever organic material it comes in contract
-        with into protoplasm whilst inorganic material will melt away like butter.
-        *Absorption: Gained from Sondra Fuller''s blood, Basil is capable of increasing
-        his strength and size by absorbing others into himself, and also capable of
-        gaining unique properties of different minerals or clay via absorbing them
-        them into his body as well. Note: Before making any changes to this page,
-        please read and follow the Power-scaling Rules for Marvel and DC Comics. ==Gallery==
-        Clayface Basil Karlo Art PC.png Clayface_Basil_Karlo_0002.jpg ClayfaceI_01.jpg
-        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== {{scroll
-        box|content={{reflist|2}}}} {{discussions|Clayface Post-Crisis|Clayface (Post-Crisis)}}
-        Category:Characters Category:DC Comics Category:Absorption Users Category:Actors
-        Category:Adults Category:Biology Users Category:Body Control Users Category:Camouflage
-        Users Category:Comic Book Characters Category:Corrosion Users Category:Criminals
-        Category:Disease Users Category:Duplication Users Category:Durability Negation
-        Users Category:Earth Users Category:Elasticity Users Category:Inorganic Beings
-        Category:Intangibility Users Category:Male Characters Category:Monsters Category:Murderers
-        Category:Poison Users Category:Power Mimicry Users Category:Regeneration Users
-        Category:Secret Society Members Category:Shapeshifters Category:Size Users
-        Category:Social Influencers Category:Statistics Amplification Users Category:Stealth
-        Masters Category:Villains Category:Weapon Masters Category:Supervillains Category:Antagonists
-        Category:Weapon Users Category:Knife Users Category:Matchstick Users Category:Crowbar
-        Users Category:Small Sized Characters Category:Large Sized Characters Category:Density
-        Users Category:Weapon Creation Users Category:Net Users Category:Hook Users
-        Category:Hammer Users Category:Chainsaw Users Category:Self-Sustenance Users
-        Category:Martial Artists Category:Electricity Users Category:Fire Users Category:Temperature
-        Users Category:Club Users Category:Blade Users Category:Claw Users Category:Mace
-        Users Category:Axe Users Category:Extrasensory Perception Users'
-      source_id: vsbattles-clayface-rebirth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 30
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|clayface basil karlo post crisis|9129490
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-clayface-rebirth-dc
-    url: https://character-stats-and-profiles.fandom.com/wiki/Clayface_%28Rebirth%29_%28DC%29
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -1172,68 +901,67 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-C}}, up to {{5-A}} with Absorption'
+      value: ', up to with Absorption'
       source_id: vsbattles-clayface-rebirth-dc-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Pre-Cataclysm= *Superhuman Physical Characteristics *Inorganic Physiology
-        (Type 2; Similar to Preston Payne, his blood is more akin to mineral virus
-        while the rest of his body is made of clayThe Outsiders Vol 4 #22, His biosystem
-        contains almost no trace of recognisable human biological materialBatman:
-        Gotham Knights #70) **Self-Sustenance (Type 1 & 2; Came back offscreen from
-        being launched into space by Mary Marvel, Does not need nutrients to survive
-        anymoreBatman: Shadow of the Bat #88) *Skilled Hand-to-Hand Combatant (Said
-        to be a fierce hand-to-hand combatantWho''s Who: The Definitive Directory
-        of the DC Universe #5, was able to outmatch Robin in a fight) *Skilled Knife
-        User (Has shown skill with a knife to be able to make it stand on his fingertips
-        without supportDetective Comics Vol 1 #607 as well as implied to be a good
-        knife throwerSecret Origins Vol 2 #44) *Social Influencing (Self-proclaimed
-        as one of the greatest actors of our time and able to play the roles of almost
-        anyone, Was able to trick Wonder Woman and Donna Troy when disguised as Superman
-        and CheetahWonder Woman Vol 2 #161Wonder Woman Vol 2 #160 as well as many
-        others in his other disguises, Manipulated Clayface IV into doing his bidding
-        when he was part of the Mudpack), *Regeneration (At least High-Mid; Has quickly
-        reconstituted his body from being sliced in halfTitans Vol 2 #29 and being
-        blown upBatman Confidential #21, Likely Mid-High overtime; Was able to come
-        back offscreen from having his whole body be eaten by Poison Ivy''s plants)
-        *Body Control, Elasticity & Shapeshifting (Able to morph or shift his body
-        in about any way possible) *Weapon Creation (Has shown to be able to create
-        weapons from nets and hooks to hammers and chainsawsTitans Vol 2 #30) *Density
-        Manipulation & Elemental Intangibility (Can control his density to make attacks
-        pass through him or become extremely hard) *Size Manipulation (Able to grow
-        in size to Type 0 normally at a moments notice and shrink to Type 1, up to
-        Type 1 by absorbing people into himself) *Duplication (Able to make a bunch
-        of decoy people out of himself each able to act on their own and with different
-        personalitiesJoker''s Asylum II: Clayface) *Limited Earth Manipulation (Due
-        to being mostly made out of clay) *Stealth Mastery & Camouflage (Able to disguise
-        himself as parts of the ground to sneak on the Riddler and Mary MarvelCountdown
-        #42) *Statistics Amplification, Power Mimicry & Absorption (Due being partial
-        made of smectites, he can absorb properties at a greater rate than any other
-        clay group, which was shown when he absorbed other clay types into his body,
-        the power of deep quartz into his body or he absorbed the clay that made up
-        Wonder Woman''s body, Absorbing people into himself can increase his power
-        and size) *Poison Manipulation (Capable of expunging material classified as
-        toxic waste if he consumes sewageArkham Reborn #2) *Disease Manipulation,
-        Biological Manipulation & Corrosion Inducement (Similar to Preston Payne,
-        with his Deadly Touch able to dissolve people into protoplasm by secreting
-        a unique enzyme with a touch, also able to corrode through inorganic material
-        such as dirt and stone as wellDetective Comics Vol 1 Annual #2) Resistance
-        to *Earth Manipulation (Able to be immune to Geo-Force''s geokinesis due to
-        being a force of nature unto himself) Same Powers and Resistances as Matt
-        Hagen, Preston Payne and Sondra Fuller due to having their blood extracts
-        injected into himBatman Vol 1 #550 |-|Post-Cataclysm= Same powers as before
-        *Electricity Manipulation (Due to absorbing the properties of deep quartz
-        has gained to power of piezoelectricity which allows him the ability to electrocute
-        peopleDetective Comics Vol 1 #735) *Heat Manipulation (Can send enough heat
-        into the ground to fuse rubble together) *Fire Manipulation (Able to shoot
-        out blasts of fire that can harm Batman as well as ignite his whole body with
-        flames) Resistance to *Fire Manipulation (Shown to be unfazed when completely
-        set alight on fireBatman: Shadow of the Bat #75) *Electricity Manipulation
-        (Shrugged off being electrocuted) *Ice Manipulation (Was able to quickly break
-        of being frozen by Mr. Freeze) For more details and further applications of
-        Clayface''s powers, it is suggested to visit this blog.'
+      value: '*Superhuman Physical Characteristics *Inorganic Physiology (Type 2;
+        Similar to Preston Payne, his blood is more akin to mineral virus while the
+        rest of his body is made of clayThe Outsiders Vol 4 #22, His biosystem contains
+        almost no trace of recognisable human biological materialBatman: Gotham Knights
+        #70) **Self-Sustenance (Type 1 & 2; Came back offscreen from being launched
+        into space by Mary Marvel, Does not need nutrients to survive anymoreBatman:
+        Shadow of the Bat #88) *Skilled Hand-to-Hand Combatant (Said to be a fierce
+        hand-to-hand combatantWho''s Who: The Definitive Directory of the DC Universe
+        #5, was able to outmatch Robin in a fight) *Skilled Knife User (Has shown
+        skill with a knife to be able to make it stand on his fingertips without supportDetective
+        Comics Vol 1 #607 as well as implied to be a good knife throwerSecret Origins
+        Vol 2 #44) *Social Influencing (Self-proclaimed as one of the greatest actors
+        of our time and able to play the roles of almost anyone, Was able to trick
+        Wonder Woman and Donna Troy when disguised as Superman and CheetahWonder Woman
+        Vol 2 #161Wonder Woman Vol 2 #160 as well as many others in his other disguises,
+        Manipulated Clayface IV into doing his bidding when he was part of the Mudpack),
+        *Regeneration (At least High-Mid; Has quickly reconstituted his body from
+        being sliced in halfTitans Vol 2 #29 and being blown upBatman Confidential
+        #21, Likely Mid-High overtime; Was able to come back offscreen from having
+        his whole body be eaten by Poison Ivy''s plants) *Body Control, Elasticity
+        & Shapeshifting (Able to morph or shift his body in about any way possible)
+        *Weapon Creation (Has shown to be able to create weapons from nets and hooks
+        to hammers and chainsawsTitans Vol 2 #30) *Density Manipulation & Elemental
+        Intangibility (Can control his density to make attacks pass through him or
+        become extremely hard) *Size Manipulation (Able to grow in size to Type 0
+        normally at a moments notice and shrink to Type 1, up to Type 1 by absorbing
+        people into himself) *Duplication (Able to make a bunch of decoy people out
+        of himself each able to act on their own and with different personalitiesJoker''s
+        Asylum II: Clayface) *Limited Earth Manipulation (Due to being mostly made
+        out of clay) *Stealth Mastery & Camouflage (Able to disguise himself as parts
+        of the ground to sneak on the Riddler and Mary MarvelCountdown #42) *Statistics
+        Amplification, Power Mimicry & Absorption (Due being partial made of smectites,
+        he can absorb properties at a greater rate than any other clay group, which
+        was shown when he absorbed other clay types into his body, the power of deep
+        quartz into his body or he absorbed the clay that made up Wonder Woman''s
+        body, Absorbing people into himself can increase his power and size) *Poison
+        Manipulation (Capable of expunging material classified as toxic waste if he
+        consumes sewageArkham Reborn #2) *Disease Manipulation, Biological Manipulation
+        & Corrosion Inducement (Similar to Preston Payne, with his Deadly Touch able
+        to dissolve people into protoplasm by secreting a unique enzyme with a touch,
+        also able to corrode through inorganic material such as dirt and stone as
+        wellDetective Comics Vol 1 Annual #2) Resistance to *Earth Manipulation (Able
+        to be immune to Geo-Force''s geokinesis due to being a force of nature unto
+        himself) Same Powers and Resistances as Matt Hagen, Preston Payne and Sondra
+        Fuller due to having their blood extracts injected into himBatman Vol 1 #550
+        Same powers as before *Electricity Manipulation (Due to absorbing the properties
+        of deep quartz has gained to power of piezoelectricity which allows him the
+        ability to electrocute peopleDetective Comics Vol 1 #735) *Heat Manipulation
+        (Can send enough heat into the ground to fuse rubble together) *Fire Manipulation
+        (Able to shoot out blasts of fire that can harm Batman as well as ignite his
+        whole body with flames) Resistance to *Fire Manipulation (Shown to be unfazed
+        when completely set alight on fireBatman: Shadow of the Bat #75) *Electricity
+        Manipulation (Shrugged off being electrocuted) *Ice Manipulation (Was able
+        to quickly break of being frozen by Mr. Freeze) For more details and further
+        applications of Clayface''s powers, it is suggested to visit this blog.'
       source_id: vsbattles-clayface-rebirth-dc-comics
       provider_id: vsbattles
       authority: high
@@ -1326,11 +1054,10 @@ repair:
         them into his body as well. Note: Before making any changes to this page,
         please read and follow the Power-scaling Rules for Marvel and DC Comics. ==Gallery==
         Clayface Basil Karlo Art PC.png Clayface_Basil_Karlo_0002.jpg ClayfaceI_01.jpg
-        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== {{scroll
-        box|content={{reflist|2}}}} {{discussions|Clayface Post-Crisis|Clayface (Post-Crisis)}}
-        Category:Characters Category:DC Comics Category:Absorption Users Category:Actors
-        Category:Adults Category:Biology Users Category:Body Control Users Category:Camouflage
-        Users Category:Comic Book Characters Category:Corrosion Users Category:Criminals
+        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:Characters
+        Category:DC Comics Category:Absorption Users Category:Actors Category:Adults
+        Category:Biology Users Category:Body Control Users Category:Camouflage Users
+        Category:Comic Book Characters Category:Corrosion Users Category:Criminals
         Category:Disease Users Category:Duplication Users Category:Durability Negation
         Users Category:Earth Users Category:Elasticity Users Category:Inorganic Beings
         Category:Intangibility Users Category:Male Characters Category:Monsters Category:Murderers
@@ -1475,6 +1202,366 @@ repair:
       lesshe|583464
     retryable: false
     exception_class: ''
+  - source_id: vsbattles-clayface-rebirth-dc
+    url: https://vsbattles.fandom.com/wiki/Clayface_%28Rebirth%29_%28DC%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Clayface (Basil Karlo) (Post-Crisis)
+    source_type: mediawiki
+    revision_id: '9129490'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 17801
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: ', up to with Absorption'
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '*Superhuman Physical Characteristics *Inorganic Physiology (Type 2;
+        Similar to Preston Payne, his blood is more akin to mineral virus while the
+        rest of his body is made of clayThe Outsiders Vol 4 #22, His biosystem contains
+        almost no trace of recognisable human biological materialBatman: Gotham Knights
+        #70) **Self-Sustenance (Type 1 & 2; Came back offscreen from being launched
+        into space by Mary Marvel, Does not need nutrients to survive anymoreBatman:
+        Shadow of the Bat #88) *Skilled Hand-to-Hand Combatant (Said to be a fierce
+        hand-to-hand combatantWho''s Who: The Definitive Directory of the DC Universe
+        #5, was able to outmatch Robin in a fight) *Skilled Knife User (Has shown
+        skill with a knife to be able to make it stand on his fingertips without supportDetective
+        Comics Vol 1 #607 as well as implied to be a good knife throwerSecret Origins
+        Vol 2 #44) *Social Influencing (Self-proclaimed as one of the greatest actors
+        of our time and able to play the roles of almost anyone, Was able to trick
+        Wonder Woman and Donna Troy when disguised as Superman and CheetahWonder Woman
+        Vol 2 #161Wonder Woman Vol 2 #160 as well as many others in his other disguises,
+        Manipulated Clayface IV into doing his bidding when he was part of the Mudpack),
+        *Regeneration (At least High-Mid; Has quickly reconstituted his body from
+        being sliced in halfTitans Vol 2 #29 and being blown upBatman Confidential
+        #21, Likely Mid-High overtime; Was able to come back offscreen from having
+        his whole body be eaten by Poison Ivy''s plants) *Body Control, Elasticity
+        & Shapeshifting (Able to morph or shift his body in about any way possible)
+        *Weapon Creation (Has shown to be able to create weapons from nets and hooks
+        to hammers and chainsawsTitans Vol 2 #30) *Density Manipulation & Elemental
+        Intangibility (Can control his density to make attacks pass through him or
+        become extremely hard) *Size Manipulation (Able to grow in size to Type 0
+        normally at a moments notice and shrink to Type 1, up to Type 1 by absorbing
+        people into himself) *Duplication (Able to make a bunch of decoy people out
+        of himself each able to act on their own and with different personalitiesJoker''s
+        Asylum II: Clayface) *Limited Earth Manipulation (Due to being mostly made
+        out of clay) *Stealth Mastery & Camouflage (Able to disguise himself as parts
+        of the ground to sneak on the Riddler and Mary MarvelCountdown #42) *Statistics
+        Amplification, Power Mimicry & Absorption (Due being partial made of smectites,
+        he can absorb properties at a greater rate than any other clay group, which
+        was shown when he absorbed other clay types into his body, the power of deep
+        quartz into his body or he absorbed the clay that made up Wonder Woman''s
+        body, Absorbing people into himself can increase his power and size) *Poison
+        Manipulation (Capable of expunging material classified as toxic waste if he
+        consumes sewageArkham Reborn #2) *Disease Manipulation, Biological Manipulation
+        & Corrosion Inducement (Similar to Preston Payne, with his Deadly Touch able
+        to dissolve people into protoplasm by secreting a unique enzyme with a touch,
+        also able to corrode through inorganic material such as dirt and stone as
+        wellDetective Comics Vol 1 Annual #2) Resistance to *Earth Manipulation (Able
+        to be immune to Geo-Force''s geokinesis due to being a force of nature unto
+        himself) Same Powers and Resistances as Matt Hagen, Preston Payne and Sondra
+        Fuller due to having their blood extracts injected into himBatman Vol 1 #550
+        Same powers as before *Electricity Manipulation (Due to absorbing the properties
+        of deep quartz has gained to power of piezoelectricity which allows him the
+        ability to electrocute peopleDetective Comics Vol 1 #735) *Heat Manipulation
+        (Can send enough heat into the ground to fuse rubble together) *Fire Manipulation
+        (Able to shoot out blasts of fire that can harm Batman as well as ignite his
+        whole body with flames) Resistance to *Fire Manipulation (Shown to be unfazed
+        when completely set alight on fireBatman: Shadow of the Bat #75) *Electricity
+        Manipulation (Shrugged off being electrocuted) *Ice Manipulation (Was able
+        to quickly break of being frozen by Mr. Freeze) For more details and further
+        applications of Clayface''s powers, it is suggested to visit this blog.'
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Building level (Could overpower Robin before he even transformed, Significantly
+        stronger than Batman to where he admits that Basil is too powerful to take
+        on aloneBatman Vol 1 #568, knocked out Poison Ivy with just a single blow,
+        Restrained Roy Harper, Was able to rip open Mr. Freeze''s suit), up to Large
+        Planet level with Absorption (Absorbing things into himself can increase his
+        power, such as being able to battle Batman''s large mechs after absorbing
+        a lot of people into himselfBatman: Gotham After Midnight #3 or after absorbing
+        some miners and kids into himself could harm Geo-Force and significantly damage
+        MetamorphoThe Outsiders Vol 4 #21, After absorbing the Sacred Clay could damage
+        Wonder Woman, Shown to be able to harm a demotivated Supergirl offscreen).
+        Deadly Touch can bypass durability.'
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'At least Supersonic+, possibly Hypersonic+ (Can keep up with Batman
+        and and Stephanie BrownBatgirl Vol 3 #13)'
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Building level (Density control allows him to make himself soft enough
+        that people will pass through him or become hard enough that Batman and Poison
+        Ivy are unable to break it, Survived a hit from one of the Batwing''s missiles),
+        up to Large Planet level with Absorption (Able to tank hits from Batman''s
+        building size suit and crashing into buildings relatively unharmed after absorbing
+        a lot of people into himselfBatman: Gotham After Midnight #4, Survived being
+        crushed by Geo-Force after absorbing a bunch of people, Able to survive hits
+        from Supergirl although she most likely was holding back immenselySupergirl
+        Vol 5 #33Batman And Superman: World''s Finest #10)'
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (As his body is no longer human, he has not shown any signs
+        of tire or need to sleep as well as showing minimal pain from reconstituting
+        himself)
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: 'Extended melee range, Tens of meters with projectiles and from sheer
+        size from absorptionBatman Vol 1 #690'
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: None notable *Optional
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted (A seasoned actor who proclaims himself as one of the greatest
+        of all time with decades of cinema experience and shows it with his disguises
+        of various heroes, villains and normal citizens that has shown to be able
+        to fool people such as Wonder Woman, Batgirl and Batman briefly. Master manipulator,
+        influencing even the very people that went to recruit him in the first place
+        as seen by his time in the Mud Pack and stated to be a crafty criminal tactician
+        as well)
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Extreme cold or heat is good at turning his body''s fluidity into solid,
+        allowing him to be temporarily subduedGotham City Sirens #24. Heat up to 1,000
+        degrees Celsius to his clay core undermines his basic cellular structure.
+        Sufficiently powerful sonics is able to disrupt his metabolismArkham Reborn
+        #3. Water can melt down his body structureDC Comics Presents: Batman. People
+        that he has absorbed is able to be removed through certain poisonous gases.
+        Crowbars are able to trigger PTSD within him, making him blind with rageGotham
+        City Sirens #20. Notable Attacks/Techniques: *Deadly Touch: Gained from Preston
+        Payne''s blood, Basil is able to surround parts of his body with a special
+        enzyme that''s capable of turning whatever organic material it comes in contract
+        with into protoplasm whilst inorganic material will melt away like butter.
+        *Absorption: Gained from Sondra Fuller''s blood, Basil is capable of increasing
+        his strength and size by absorbing others into himself, and also capable of
+        gaining unique properties of different minerals or clay via absorbing them
+        them into his body as well. Note: Before making any changes to this page,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics. ==Gallery==
+        Clayface Basil Karlo Art PC.png Clayface_Basil_Karlo_0002.jpg ClayfaceI_01.jpg
+        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:Characters
+        Category:DC Comics Category:Absorption Users Category:Actors Category:Adults
+        Category:Biology Users Category:Body Control Users Category:Camouflage Users
+        Category:Comic Book Characters Category:Corrosion Users Category:Criminals
+        Category:Disease Users Category:Duplication Users Category:Durability Negation
+        Users Category:Earth Users Category:Elasticity Users Category:Inorganic Beings
+        Category:Intangibility Users Category:Male Characters Category:Monsters Category:Murderers
+        Category:Poison Users Category:Power Mimicry Users Category:Regeneration Users
+        Category:Secret Society Members Category:Shapeshifters Category:Size Users
+        Category:Social Influencers Category:Statistics Amplification Users Category:Stealth
+        Masters Category:Villains Category:Weapon Masters Category:Supervillains Category:Antagonists
+        Category:Weapon Users Category:Knife Users Category:Matchstick Users Category:Crowbar
+        Users Category:Small Sized Characters Category:Large Sized Characters Category:Density
+        Users Category:Weapon Creation Users Category:Net Users Category:Hook Users
+        Category:Hammer Users Category:Chainsaw Users Category:Self-Sustenance Users
+        Category:Martial Artists Category:Electricity Users Category:Fire Users Category:Temperature
+        Users Category:Club Users Category:Blade Users Category:Claw Users Category:Mace
+        Users Category:Axe Users Category:Extrasensory Perception Users'
+      source_id: vsbattles-clayface-rebirth-dc
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 30
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|clayface basil karlo post crisis|9129490
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-clayface-rebirth-dc
+    url: https://character-stats-and-profiles.fandom.com/wiki/Clayface_%28Rebirth%29_%28DC%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Clayface (Canon, DC Universe)/Lesshe
+    source_type: mediawiki
+    revision_id: '583464'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4080
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Power and Stats
+    - Statistics Values
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least 9-B, likely higher
+      source_id: character-stats-profiles-clayface-rebirth-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '*Superhuman Physical Characteristics *Shapeshifting *Regeneration (High-Low;
+        Healed from having a massive hole shot into his body) *Additional Limbs &
+        Weapon Creation (As shown here) *Inorganic Physiology (Is made out of clay)'
+      source_id: character-stats-profiles-clayface-rebirth-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Wall level, likely higher (Hospitalized Rick Flag, almost killed
+        FrankensteinCreature Commandos Season 1 Episode 5 - The Iron Pot> 12.55 Megajoules)
+      source_id: character-stats-profiles-clayface-rebirth-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Transonic (Can keep up with Rick Flag and FrankensteinMach 1.01)
+      source_id: character-stats-profiles-clayface-rebirth-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Wall level, likely higher (Was unaffected by attacks from Rick
+        Flag and Frankenstein)
+      source_id: character-stats-profiles-clayface-rebirth-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Electricity seemingly dismembers him == Statistics Values == == References
+        == __FORCETOC__ Category:Lesshe Category:Tier 9 Category:Tier 9-B Category:Superhuman
+        Physical Characteristics Users Category:Shapeshifters Category:Regeneration
+        Users Category:Additional Limbs Users Category:Weapon Creation Users Category:Inorganic
+        Beings Category:Male Characters Category:Adults Category:Villains Category:Evil
+        Characters Category:Antagonists Category:Television Characters Category:DC
+        Universe Category:Characters Category:Criminals Category:Elasticity Users
+        Category:Size Users Category:Thieves Category:Immortals
+      source_id: character-stats-profiles-clayface-rebirth-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|clayface canon dc universe
+      lesshe|583464
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-clayface-rebirth
     url: https://vsbattles.fandom.com/wiki/Clayface_%28Rebirth%29
     ok: true
@@ -1534,8 +1621,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Varies}}, up to {{Low 2-C}}, likely {{Low 1-C}} | {{Varies}}, up to
-        {{Low 1-C}}'
+      value: ', up to , likely | , up to'
       source_id: vsbattles-clayface-rebirth
       provider_id: vsbattles
       authority: high
@@ -1692,8 +1778,7 @@ repair:
         Vol 3 15) ==Notable Matchups== Victories: Losses: *Kai (Ninjago) Kai''s Profile
         (Staff of Elements Kai and Pre-Clayface Absorption keys were used. Speed was
         equalized. Fight took place in a jungle. Starting Distance: 10m) Inconclusive:
-        ==References== {{Reflist}} ==Notes/Explanations== {{Discussions|Wonder Woman
-        Post-Crisis|Wonder Woman (Post-Crisis)}} Category:Characters Category:DC Comics
+        ==References== ==Notes/Explanations== Category:Characters Category:DC Comics
         Category:Adaptation Users Category:Amazons Category:Aura Users Category:Comic
         Book Characters Category:Female Characters Category:Flight Users Category:Good
         Characters Category:Heroes Category:Immortals Category:Justice League Members
@@ -1733,48 +1818,40 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
+    - powers_and_abilities
     - speed
-    normalized_page_title: DC Comics (Canon, The Verse)/Azmarin
+    - weaknesses
+    normalized_page_title: Kai (Ninjago)/Sour6ery
     source_type: mediawiki
-    revision_id: '554795'
+    revision_id: '615288'
     fetch_status: fetched
     http_status: 200
-    content_length: 45234
+    content_length: 48765
     content_kind: api_json
     headings_detected:
     - Summary
-    - Power of the Verse
-    - Explanations
-    - Calculations
-    - Characters
-    - A-C
-    - D-F
-    - G-I
-    - J-L
-    - M-O
-    - P-R
-    - S-U
-    - V-X
-    - Y-Z
-    - Other Elseworlds
-    - Races & Factions
-    - Weapons
-    - Civilization
-    - Concepts/Forces
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    - Notes/Explanations
     stat_labels_detected:
     - attack_potency
     - durability
+    - intelligence
     - keys
     - lifting_strength
     - origin
     - powers_and_abilities
     - range
     - speed
+    - stamina
     - standard_equipment
     - striking_strength
     - tier
+    - weaknesses
     extraction_failure_reason: ''
-    rank: 115
+    rank: 80
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1788,36 +1865,136 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: durability
-      value: '{{!}}-{{!}}'
+    - field: attack_potency
+      value: Star level (His pre-training self harmed the pre-training OG Ninjas,
+        who survived Spinjitzu from their S2 selves, who survived blows from Lloyd
+        who was able to feel the powers of the Golden Weapons and the other Ninjas
+        within him and stated that this was where his own power came from, making
+        him equally powerful to the 4 Golden Weapons, which created a star after destroying
+        the Mega Weapon, which is visually shown in the series. The 4 Golden Weapons
+        and the Mega Weapon were stated to have equal power, thus even individually,
+        this feat scales to each of the four Golden Weapons) | Low Complex Multiversal
+        (6D. Possesses a portion of Draconus Lloyd's power, who is superior to his
+        Ultimate Spinjitzu Master self, who defeated the S2 Overlord, who was stated
+        to be indestructible to anything to Season 15, making him superior to King
+        Nadakhan's Wish Magic, who states that he does not abide by the Djinn rules,
+        making him superior to the concepts of death and love. This should place his
+        magic beyond the mortal plane, scaling it to the Ethereal Divide, which was
+        stated to exist beyond the concepts of dimensionality, time, and space within
+        all 17 realms)
       source_id: character-stats-profiles-clayface-rebirth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: '{{!}}-{{!}}'
+      value: 'Superhuman travel speed with Immeasurable combat and reaction speeds
+        (Comparable to the Pilot OG Ninjas, who caught up to speeding vehicles. #1:
+        Comparable to Master Wu, who upscales his past self, who reacted to the Vermillion
+        Warriors, who kept up with Zane, whose reaction speed should be scaled based
+        on his perception as a nindroid, whose eyes perceived Acronix''s time-travel
+        attack. #2: For consistency, S10 Kai reacted to the Oni Cloud, which can cover
+        all 17 realms. Each realm is a different hypertimeline, with each being parallel
+        to the Ninjago Realm, meaning each of them has infinite spatial extent and
+        its own time axis to travel through, meaning that the Oni Cloud travels unbound
+        by time) | Superhuman travel speed with Immeasurable combat and reaction speeds
+        (Should be faster than his base self)'
       source_id: character-stats-profiles-clayface-rebirth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: attack_potency
-      value: and
+    - field: durability
+      value: Star level (Same reasoning as Attack Potency. He survived hits from the
+        pre-training OG Ninjas) | Low Complex Multiversal (6D. Same as Attack Potency)
+      source_id: character-stats-profiles-clayface-rebirth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Hydrophobia, Hot-headed, arrogant, Fear of Christmas related themes
+        Notable Attacks/Techniques: *Spinjitzu: Kai is a master of Spinjitzu, on which
+        he is able to turn himself into a miniature Tornado, based on fire. This can
+        be combined with the other ninjas Spinjitzu to create the Tornado of Creation.
+        **Airjitzu: Similar to the Spinjitzu, although it gives the ability for short-term
+        flight. *Fire Dragon Summoning: When conquering his fears and doubts, Kai
+        is able to summon a Dragon made out of his fire elemental powers. *Blade Cycle
+        Summoning: Using his Sword of Fire, Kai is able to create a bike called the
+        Blade Cycle. It is surrounded by Fire and can fire numerous missiles. *Ninja
+        Skills: As a trained ninja, Kai is an expert in stealth and martial arts,
+        as well as training with numerous weapons. *Rising Dragon Technique: Kai can
+        use the Rising Dragon Technique, allowing him to boost his stats and launch
+        fire breath attacks from the skies. Using this ability, he can counter Shatterspin.
+        *Elemental Power of Fire: Using the Element of Fire, Kai can launch a variety
+        of attacks, ranging from short ranged fire blasts, to long ranged fire barrages
+        extending on several meters, which he can also do while running towards an
+        enemy, or mid air. He can also create a big wall of flames, or even surround
+        his enemies with flames by running around them, trapping them. Additionally,
+        he was shown to be capable of grabbing someone else''s fire attack, purifying
+        it with his own fire powers and throw it back at them. Kai has also shown
+        on multiples occasions to be using fire to fly around quickly during combat,
+        or to make himself faster. ==Gallery== Kai talking about Wu.jpg|Kai making
+        a speech about Sensei Wu Kai with Nya.webp Kai loosing his powers.webp|Kai
+        losing his powers Kai with wyldfyre.jpg|Kai with Wyldfyre Kai in Season 1.webp
+        Kai pilots.webp|Kai being confident in Pilots Kai vs Karlof.webp|Kai against
+        Karloff Kai against Morro.webp|Kai holding back Morro Kai mountain.webp|Kai
+        surfing a mountain Kai vs Time Twins.webp|Kai against the Time Twins Kai vs
+        Desert Monster.webp|Kai against a desert monster Kai FS.webp|Kai against Aspheera
+        Kai S14.webp Kai vs Kalmaar.webp|Kai against Kalmaar Kai season 15.webp Kai
+        against Jay.webp|Kai fighting off Jay Kai vs Earth Dragons.webp|Kai against
+        the Earth Dragons Kai against Beatrix.webp|Kai fighting Beatrix Kai Mech.webp|Kai
+        with his Elemental Mech KaiShatteredDream.webp ==Notable Matchups== == References
+        == == Notes/Explanations == Category:Characters Category:Ninjago Category:Book
+        Characters Category:Breath Attack Users Category:Cartoon Characters Category:Chain
+        Users Category:Element Users Category:Elemental Masters (Ninjago) Category:Fire
+        Users Category:Flight Users Category:Good Characters Category:Hackers Category:Male
+        Characters Category:Martial Artists Category:Ninjas Category:Non-Physical
+        Interaction Users Category:Pilots Category:Primary Protagonists Category:Protagonists
+        Category:Resistance Negation Users Category:Science Fantasy Characters Category:Spinjitzu
+        Users Category:Summoners Category:Sword Users Category:Teenagers Category:Video
+        Game Characters Category:Weapon Masters Category:Adults Category:Humans Category:Game
+        Characters Category:Playable Characters Category:Heroes Category:Weapon Users
+        Category:Blacksmiths Category:Acrobats Category:Blade Users Category:Time
+        Users Category:Age Users Category:Durability Negation Users Category:Vehicle
+        Users Category:Forcefield Users Category:Stealth Masters Category:Technology
+        Users Category:Explosion Users Category:Temperature Users Category:Magma Users
+        Category:Light Users Category:Smoke Users Category:Power Nullification Users
+        Category:Power Absorption Users Category:Power Mimicry Users Category:Electricity
+        Users Category:Ice Users Category:Earth Users Category:Sand Users Category:Energy
+        Users Category:Matter Users Category:Metal Users Category:Statistics Amplification
+        Users Category:Invisibility Users Category:Intangibility Users Category:Mind
+        Users Category:Precognition Users Category:Telepaths Category:Gravity Users
+        Category:Telekinesis Users Category:Attack Reflection Users Category:Plant
+        Users Category:Life Users Category:Sound Users Category:Extrasensory Perception
+        Users Category:Poison Users Category:Darkness Users Category:Teleportation
+        Users Category:Shapeshifters Category:Empowerment Users Category:Biology Users
+        Category:Creation Users Category:Dimensional Travel Users Category:Portal
+        Users Category:Transformation Users Category:Enhanced Senses Users Category:Soul
+        Users Category:Geniuses Category:Shuriken Users Category:Dual Wielders Category:Construction
+        Users Category:Free Movement Users Category:Space Users Category:Awakened
+        Power Users Category:Supernatural Willpower Users Category:Accelerated Development
+        Users Category:Regeneration Users Category:Power Bestowal Users Category:Aura
+        Users Category:Purification Users Category:Fusionism Users Category:Blog posts'
+      source_id: character-stats-profiles-clayface-rebirth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base \u25BE=\
+        \ {{#tag:tabber|"
       source_id: character-stats-profiles-clayface-rebirth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     identity_match: false
-    identity_score: 20
-    variant_score: 55
+    identity_score: 0
+    variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 0
+    ability_count: 1
     exact_name_match: false
     alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|dc comics canon the verse
-      azmarin|554795
+    franchise_match: false
+    variant_match: false
+    duplicate_key: character-stats-and-profiles.fandom.com|kai ninjago sour6ery|615288
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
