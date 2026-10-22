@@ -308,6 +308,98 @@ class InfoboxHeaderTests(unittest.TestCase):
         self.assertEqual(infobox_header_reasons("Attack Potency: Wall level"), [])
         self.assertEqual(infobox_header_reasons("At least City level, likely far higher"), [])
 
+class Iteration3RegressionTests(unittest.TestCase):
+    """Regression: the second gated sample's two escapes.
+
+    Sailor Galaxia's tier was an infobox dump in comma/space shape,
+    which the separator-based header check missed. Aladdin's sole
+    weakness item was page scaffolding (section markers + the
+    victories/losses record headers), which no item pattern matched.
+    """
+
+    GALAXIA_TIER = (
+        "Key: Sailor Galaxia Name: Galaxia, the Golden Queen of "
+        "Shadow Galactica, Origin: Pretty Soldier Sailor Moon "
+        "Gender: Female Age: Unknown"
+    )
+    ALADDIN_SCAFFOLD = "None Notable == Others == Notable Victories: Notable Losses:"
+
+    # -- infobox: separator-agnostic ---------------------------------
+    def test_galaxia_comma_shape_header_rejected(self):
+        self.assertIn("infobox_header", infobox_header_reasons(self.GALAXIA_TIER))
+
+    def test_space_separated_header_dump_rejected(self):
+        dump = "Name: Galaxia Origin: Sailor Moon Gender: Female Age: Ancient"
+        self.assertIn("infobox_header", infobox_header_reasons(dump))
+
+    def test_key_prefix_counts_toward_threshold(self):
+        # Leading Key: plus two more header keys is a dump...
+        dump = "Key: Base Form Name: Galaxia, Origin: Pretty Soldier Sailor Moon"
+        self.assertIn("infobox_header", infobox_header_reasons(dump))
+
+    def test_key_prefix_alone_is_not_a_dump(self):
+        # ...but a Key: label with no other header keys is not enough.
+        text = "Key: At least Planet level (blew up a planet in her base form), likely far higher"
+        self.assertEqual(infobox_header_reasons(text), [])
+
+    def test_clean_prose_stat_with_commas_passes(self):
+        prose = (
+            "At least Multi-City Block level (Traded blows with Eternal "
+            "Sailor Moon, shattered her brooch, and forced her to the "
+            "brink), possibly far higher"
+        )
+        self.assertEqual(infobox_header_reasons(prose), [])
+        comparable = (
+            "Planet level (Comparable to Sailor Moon, who destroyed a "
+            "planet-sized dimension, and can harm her directly)"
+        )
+        self.assertEqual(infobox_header_reasons(comparable), [])
+
+    # -- items: page scaffolding --------------------------------------
+    def test_aladdin_scaffolding_item_flagged(self):
+        self.assertIn("page_scaffolding", placeholder_item_reasons(self.ALADDIN_SCAFFOLD))
+
+    def test_aladdin_scaffolding_only_field_recovers_nothing(self):
+        kept, dropped = filter_list_field_items(self.ALADDIN_SCAFFOLD)
+        self.assertEqual(kept, "")
+        self.assertEqual(len(dropped), 1)
+        self.assertIn("page_scaffolding", dropped[0]["reasons"])
+
+    def test_none_notable_standalone_item_flagged(self):
+        self.assertIn("placeholder_instruction", placeholder_item_reasons("None Notable"))
+        self.assertIn("placeholder_instruction", placeholder_item_reasons("None notable."))
+
+    def test_section_marker_item_flagged(self):
+        item = "== Weaknesses == Limited stamina after prolonged fights"
+        self.assertIn("page_scaffolding", placeholder_item_reasons(item))
+
+    def test_notable_record_header_item_flagged(self):
+        self.assertIn(
+            "page_scaffolding",
+            placeholder_item_reasons("Notable Victories: Goku, Vegeta"),
+        )
+
+    def test_prose_victories_losses_item_passes(self):
+        prose = (
+            "Prone to overconfidence after hard-fought victories, and "
+            "his losses against faster opponents have exposed his "
+            "stamina limits"
+        )
+        self.assertEqual(placeholder_item_reasons(prose), [])
+        kept, dropped = filter_list_field_items("Limited stamina, " + prose)
+        self.assertEqual(dropped, [])
+        self.assertIn("Limited stamina", kept)
+        self.assertIn("stamina limits", kept)
+
+    def test_scaffolding_mixed_with_real_items(self):
+        kept, dropped = filter_list_field_items(
+            "Weakness to sunlight, " + self.ALADDIN_SCAFFOLD
+        )
+        self.assertIn("Weakness to sunlight", kept)
+        self.assertNotIn("Notable Victories", kept)
+        self.assertEqual(len(dropped), 1)
+
+
 
 if __name__ == "__main__":
     unittest.main()

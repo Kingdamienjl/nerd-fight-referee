@@ -2448,7 +2448,18 @@ _PLACEHOLDER_ITEM_PATTERNS = (
     r"\badd (?:links|any|more|the following|a description)\b",
     r"\beditor'?s note\b",
     r"\bthis (?:section|list|page|article) is (?:incomplete|empty|a stub|under construction)\b",
-    r"^\s*(?:tba|tbd|n/?a|none|unknown)\s*[.!]?\s*$",
+    r"^\s*(?:tba|tbd|n/?a|none(?:\s+notable)?|unknown)\s*[.!]?\s*$",
+)
+
+# Page scaffolding that surfaces as a whole list item when a section's
+# raw text is itemized: wiki section markers and the VS Battles
+# victories/losses record headers (the Aladdin sample-2 escape, whose
+# sole weakness item was "None Notable == Others == Notable Victories:
+# Notable Losses:"). Prose that merely mentions victories or losses
+# does not carry the colon form and is not matched.
+_SCAFFOLDING_ITEM_PATTERNS = (
+    r"==",
+    r"\bnotable (?:victories|losses)\s*:",
 )
 
 
@@ -2470,6 +2481,8 @@ def placeholder_item_reasons(item: Any) -> list[str]:
         reasons.append("placeholder_instruction")
     if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_INSTRUCTION_PATTERNS):
         reasons.append("template_instruction")
+    if any(re.search(pattern, lowered) for pattern in _SCAFFOLDING_ITEM_PATTERNS):
+        reasons.append("page_scaffolding")
     if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_MARKUP_PATTERNS):
         reasons.append("markup_residue")
     if re.search(r"\bfile\s*:", lowered) or re.search(
@@ -2529,17 +2542,24 @@ _INFOBOX_HEADER_KEYS = frozenset(
 def infobox_header_reasons(text: Any) -> list[str]:
     """Reject a scalar stat value that is really the page's infobox header.
 
-    A header dump is a run of Key: value segments (Name:/Origin:/Gender:/
-    Age:/...) -- three or more distinct header keys means the value is
-    the infobox, not a stat (the Kamui / The Captain tier failure).
+    A header dump is a run of Key: value pairs (Name:/Origin:/Gender:/
+    Age:/...) in ANY separator shape -- pipes, semicolons, newlines
+    (the Kamui / The Captain tier failure) or comma/space runs (the
+    Sailor Galaxia sample-2 escape: "Key: Sailor Galaxia Name: Galaxia,
+    ... Origin: Pretty Soldier Sailor Moon Gender:..."). So count
+    distinct header keys wherever "Key:"/"Key =" appears in the text,
+    regardless of what separates the pairs. A leading "Key:" segment --
+    the infobox's own key row leaking into the value -- counts as one
+    header key toward the threshold. Three or more distinct header keys
+    means the value is the infobox, not a stat.
     """
+    lowered = str(text or "").casefold()
     keys: set[str] = set()
-    for segment in re.split(r"[\n|;]+", str(text or "")):
-        match = re.match(
-            r"\s*([a-z][a-z /]{1,24}?)\s*[:=]", segment.strip().casefold()
-        )
-        if match and match.group(1).strip() in _INFOBOX_HEADER_KEYS:
-            keys.add(match.group(1).strip())
+    if re.match(r"\s*key\s*[:=]", lowered):
+        keys.add("key")
+    for key in sorted(_INFOBOX_HEADER_KEYS, key=len, reverse=True):
+        if re.search(rf"(?<![a-z]){re.escape(key)}\s*[:=]", lowered):
+            keys.add(key)
     return ["infobox_header"] if len(keys) >= 3 else []
 
 
