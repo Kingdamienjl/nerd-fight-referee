@@ -2439,6 +2439,110 @@ def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
     return reasons
 
 
+
+_PLACEHOLDER_ITEM_PATTERNS = (
+    r"a list of the character'?s\b",
+    r"\blist of (?:the character'?s|their|his|her|its) (?:general )?(?:abilities|powers|skills|techniques|feats)\b",
+    r"\bplease (?:add|fill|expand|complete|update|edit|insert)\b",
+    r"\bto be (?:added|filled in|completed|written|expanded)\b",
+    r"\badd (?:links|any|more|the following|a description)\b",
+    r"\beditor'?s note\b",
+    r"\bthis (?:section|list|page|article) is (?:incomplete|empty|a stub|under construction)\b",
+    r"^\s*(?:tba|tbd|n/?a|none|unknown)\s*[.!]?\s*$",
+)
+
+
+def placeholder_item_reasons(item: Any) -> list[str]:
+    """Per-item placeholder checks for one recovered list entry.
+
+    Section-level checks cannot see a single template-instruction item
+    hiding in a list -- the Nobara failure, where a fanon placeholder
+    sentence ("A list of the character's general abilities (Please add
+    links...)") merged as the profile's sole ability. Returns reason
+    strings; empty means the item is substantive.
+    """
+    value = str(item or "")
+    if not value.strip():
+        return ["empty_item"]
+    lowered = value.casefold()
+    reasons: list[str] = []
+    if any(re.search(pattern, lowered) for pattern in _PLACEHOLDER_ITEM_PATTERNS):
+        reasons.append("placeholder_instruction")
+    if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_INSTRUCTION_PATTERNS):
+        reasons.append("template_instruction")
+    if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_MARKUP_PATTERNS):
+        reasons.append("markup_residue")
+    if re.search(r"\bfile\s*:", lowered) or re.search(
+        r"\.(?:png|jpe?g|gif|webp)\b", lowered
+    ):
+        reasons.append("media_fragment")
+    cleaned = re.sub(r"[^a-z0-9]+", " ", lowered).strip()
+    if len(cleaned) < 3:
+        reasons.append("insubstantive")
+    return reasons
+
+
+def filter_list_field_items(text: Any) -> tuple[str, list[dict[str, Any]]]:
+    """Item-filter one recovered list section (abilities/weaknesses/...).
+
+    Splits exactly the way list_items_from_text will, evaluates every
+    item, and returns (kept_text, dropped): kept_text holds only the
+    substantive items, dropped records each removed item with its
+    reasons. kept_text is empty when nothing substantive survives --
+    the field then recovers nothing.
+    """
+    from battlebot.harvest.auto_profile_harvester import (
+        split_listish,
+        unpack_mediawiki_templates,
+    )
+
+    raw = str(text or "")
+    if not raw.strip():
+        return "", []
+    pieces = split_listish(unpack_mediawiki_templates(raw))
+    if not pieces:
+        # Unbalanced or tabber/template residue: nothing itemizable.
+        return "", [{"item": raw[:120], "reasons": ["unparseable_list"]}]
+    kept: list[str] = []
+    dropped: list[dict[str, Any]] = []
+    for piece in pieces:
+        reasons = placeholder_item_reasons(piece)
+        if reasons:
+            dropped.append({"item": piece[:120], "reasons": reasons})
+        else:
+            kept.append(piece)
+    return ", ".join(kept), dropped
+
+
+_INFOBOX_HEADER_KEYS = frozenset(
+    {
+        "name", "origin", "age", "gender", "classification", "alias",
+        "aliases", "occupation", "affiliation", "affiliations", "status",
+        "species", "race", "height", "weight", "hair", "hair color",
+        "eye color", "eyes", "birthday", "birthplace", "blood type",
+        "relatives", "family", "first appearance", "debut", "alignment",
+        "kanji", "romaji", "voice actor", "portrayed by",
+    }
+)
+
+
+def infobox_header_reasons(text: Any) -> list[str]:
+    """Reject a scalar stat value that is really the page's infobox header.
+
+    A header dump is a run of Key: value segments (Name:/Origin:/Gender:/
+    Age:/...) -- three or more distinct header keys means the value is
+    the infobox, not a stat (the Kamui / The Captain tier failure).
+    """
+    keys: set[str] = set()
+    for segment in re.split(r"[\n|;]+", str(text or "")):
+        match = re.match(
+            r"\s*([a-z][a-z /]{1,24}?)\s*[:=]", segment.strip().casefold()
+        )
+        if match and match.group(1).strip() in _INFOBOX_HEADER_KEYS:
+            keys.add(match.group(1).strip())
+    return ["infobox_header"] if len(keys) >= 3 else []
+
+
 def _wikitext_categories(wikitext: str) -> list[str]:
     return [
         match.group(1).strip()
@@ -2768,9 +2872,32 @@ async def recover_profile_evidence(
             )
             # Field-level boilerplate filter: template instructions or
             # markup residue in a recovered field reject that field only.
+            # List sections are filtered per item first: one placeholder
+            # item must not poison (or sneak through with) real items.
             for field_name in list(scoped_fields):
+                if field_name in _RECOVERY_SECTIONS:
+                    kept_text, dropped_items = filter_list_field_items(
+                        scoped_fields[field_name]
+                    )
+                    if dropped_items:
+                        tried.setdefault("dropped_items", {})[
+                            field_name
+                        ] = dropped_items
+                    if not kept_text:
+                        tried.setdefault("boilerplate_fields", []).append(field_name)
+                        tried.setdefault("boilerplate_reasons", {})[field_name] = [
+                            "placeholder_items_only"
+                        ]
+                        del scoped_fields[field_name]
+                        scope_methods.pop(field_name, None)
+                        continue
+                    scoped_fields[field_name] = kept_text
                 scalar = field_name in _RECOVERY_AXES or field_name == "keys"
                 reasons = boilerplate_reasons(scoped_fields[field_name], scalar=scalar)
+                if field_name in _RECOVERY_AXES:
+                    reasons = reasons + infobox_header_reasons(
+                        scoped_fields[field_name]
+                    )
                 if reasons:
                     tried.setdefault("boilerplate_fields", []).append(field_name)
                     tried.setdefault("boilerplate_reasons", {})[field_name] = reasons

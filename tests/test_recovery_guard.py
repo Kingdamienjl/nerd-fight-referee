@@ -11,6 +11,9 @@ from battlebot.review.auto_repair import (
     _guard_name_match,
     boilerplate_reasons,
     evaluate_recovery_guard,
+    filter_list_field_items,
+    infobox_header_reasons,
+    placeholder_item_reasons,
 )
 
 
@@ -211,6 +214,99 @@ class BoilerplateTests(unittest.TestCase):
 
     def test_insubstantive_scalar_rejected(self):
         self.assertIn("insubstantive", boilerplate_reasons("Unknown", scalar=True))
+
+
+class ItemFilterTests(unittest.TestCase):
+    """Regression: the first gated sample's Nobara merge.
+
+    Her sole recovered ability was a fanon template placeholder item.
+    The section-level filter could not see it; the item filter must
+    reject the item, and a field of nothing else recovers nothing.
+    """
+
+    NOBARA_PLACEHOLDER = (
+        "A list of the character's general abilities "
+        "(Please add links to the abilities' pages)"
+    )
+
+    def test_nobara_placeholder_item_flagged(self):
+        reasons = placeholder_item_reasons(self.NOBARA_PLACEHOLDER)
+        self.assertIn("placeholder_instruction", reasons)
+
+    def test_nobara_placeholder_only_field_recovers_nothing(self):
+        kept, dropped = filter_list_field_items(self.NOBARA_PLACEHOLDER)
+        self.assertEqual(kept, "")
+        self.assertEqual(len(dropped), 1)
+        self.assertIn("placeholder_instruction", dropped[0]["reasons"])
+
+    def test_mixed_list_keeps_only_substantive_items(self):
+        kept, dropped = filter_list_field_items(
+            "Cursed Energy Manipulation, Straw Doll Technique, "
+            "Please add more abilities here"
+        )
+        self.assertIn("Cursed Energy Manipulation", kept)
+        self.assertIn("Straw Doll Technique", kept)
+        self.assertNotIn("Please add", kept)
+        self.assertEqual(len(dropped), 1)
+
+    def test_media_fragment_item_dropped(self):
+        kept, dropped = filter_list_field_items(
+            "Weakness to sunlight, File:Weakness diagram.png, Limited stamina"
+        )
+        self.assertIn("Weakness to sunlight", kept)
+        self.assertIn("Limited stamina", kept)
+        self.assertNotIn("File:", kept)
+        self.assertTrue(any("media_fragment" in d["reasons"] for d in dropped))
+
+    def test_stat_instruction_item_flagged(self):
+        item = (
+            "The character's attack power or destructive capacity "
+            "(in bold; add any explanations using brackets, not in bold)"
+        )
+        self.assertIn("template_instruction", placeholder_item_reasons(item))
+
+    def test_real_ability_items_pass(self):
+        kept, dropped = filter_list_field_items(
+            "Flight, Superhuman Strength, Regeneration, "
+            "Straw Doll Technique: Resonance"
+        )
+        self.assertEqual(dropped, [])
+        self.assertIn("Flight", kept)
+        self.assertIn("Regeneration", kept)
+        self.assertIn("Straw Doll Technique: Resonance", kept)
+
+    def test_empty_field_is_neutral(self):
+        self.assertEqual(filter_list_field_items(""), ("", []))
+        self.assertEqual(filter_list_field_items(None), ("", []))
+
+
+class InfoboxHeaderTests(unittest.TestCase):
+    """Regression: Kamui and The Captain got their source page's
+    infobox header merged as the tier text."""
+
+    KAMUI_TIER = (
+        "Name: Kamui | Origin: Gintama | Gender: Male | Age: 18 | "
+        "Classification: Yato, Member of the Harusame"
+    )
+
+    def test_infobox_header_tier_rejected(self):
+        self.assertIn("infobox_header", infobox_header_reasons(self.KAMUI_TIER))
+
+    def test_newline_header_dump_rejected(self):
+        dump = "Name: The Captain\nOrigin: Hellsing\nGender: Male\nStatus: Deceased"
+        self.assertIn("infobox_header", infobox_header_reasons(dump))
+
+    def test_two_header_keys_not_enough(self):
+        self.assertEqual(infobox_header_reasons("Name: Kamui | Origin: Gintama"), [])
+
+    def test_real_stat_text_not_infobox(self):
+        good = (
+            "Small Town level (Destroyed several buildings and a bridge "
+            "in his fight with Sougo), possibly higher"
+        )
+        self.assertEqual(infobox_header_reasons(good), [])
+        self.assertEqual(infobox_header_reasons("Attack Potency: Wall level"), [])
+        self.assertEqual(infobox_header_reasons("At least City level, likely far higher"), [])
 
 
 if __name__ == "__main__":
