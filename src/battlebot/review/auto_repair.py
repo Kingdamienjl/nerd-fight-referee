@@ -2772,7 +2772,25 @@ def filter_list_field_items(
     the field then recovers nothing. Every item passes the placeholder
     screen AND the fragment screen (parser splitting debris); `section`
     is the recovery field name, forwarded to the fragment screen for
-    its weaknesses-only shard rule.
+    its weaknesses-only shard rule. Editor-note / version-key tails
+    are stripped before screening (see clean_item_tails); use
+    filter_list_field_items_detailed when the strip records matter.
+    """
+    kept, dropped, _stripped = filter_list_field_items_detailed(
+        text, section=section
+    )
+    return kept, dropped
+
+
+def filter_list_field_items_detailed(
+    text: Any, *, section: str | None = None
+) -> tuple[str, list[dict[str, Any]], list[dict[str, Any]]]:
+    """filter_list_field_items plus strip provenance.
+
+    Returns (kept_text, dropped, stripped): stripped records each
+    item whose editor-note / version-key tail was removed but whose
+    substantive clause survived, as {"item", "kept", "reasons"}.
+    An item that is ONLY a tail is dropped, with the tail reasons.
     """
     from battlebot.harvest.auto_profile_harvester import (
         split_listish,
@@ -2781,23 +2799,38 @@ def filter_list_field_items(
 
     raw = str(text or "")
     if not raw.strip():
-        return "", []
+        return "", [], []
     pieces = split_listish(unpack_mediawiki_templates(raw))
     if not pieces:
         # Unbalanced or tabber/template residue: nothing itemizable.
-        return "", [{"item": raw[:120], "reasons": ["unparseable_list"]}]
+        return "", [{"item": raw[:120], "reasons": ["unparseable_list"]}], []
     kept: list[str] = []
     dropped: list[dict[str, Any]] = []
+    stripped: list[dict[str, Any]] = []
     for piece in pieces:
-        reasons = placeholder_item_reasons(piece)
-        for reason in fragment_item_reasons(piece, section=section):
+        cleaned, tail_reasons = clean_item_tails(piece)
+        if not cleaned:
+            dropped.append(
+                {"item": piece[:120], "reasons": tail_reasons or ["empty_item"]}
+            )
+            continue
+        reasons = placeholder_item_reasons(cleaned)
+        for reason in fragment_item_reasons(cleaned, section=section):
             if reason not in reasons:
                 reasons.append(reason)
         if reasons:
             dropped.append({"item": piece[:120], "reasons": reasons})
         else:
-            kept.append(piece)
-    return ", ".join(kept), dropped
+            kept.append(cleaned)
+            if tail_reasons:
+                stripped.append(
+                    {
+                        "item": piece[:120],
+                        "kept": cleaned[:120],
+                        "reasons": tail_reasons,
+                    }
+                )
+    return ", ".join(kept), dropped, stripped
 
 
 _INFOBOX_HEADER_KEYS = frozenset(
@@ -2896,6 +2929,164 @@ def _fragment_word_count(lowered: str) -> int:
     return len(re.findall(r"[a-z0-9]+(?:'[a-z]+)?", lowered))
 
 
+# ---------------------------------------------------------------------------
+# Tail cleaning + prose shards (fragment screen, second iteration).
+# Sample 50e failed on three shapes the first screen did not model:
+#   6. editor-note tails: a real weakness clause carrying the source
+#      page's editorial footer ("...Order and Chaos. Notes: Before
+#      making any changes to this page"), and pure-note items whose
+#      only head is a version-key label ("Deviantart 2 Note: ...");
+#   7. version-key labels itemized as weaknesses: bare site/key
+#      labels ("Deviantart 1") and label tails on real clauses
+#      ("Grodd is prone to blind savage rage when angered. Respect
+#      Threads: Amino Apps");
+#   8. multi-word prose comma-shards in weaknesses: a lore paragraph
+#      comma-split into sentence fragments above the sub-2-word
+#      threshold ("a woman and a god", "specifically Kent").
+# Chris-approved treatment for tails: when a substantive clause
+# precedes the tail, STRIP the tail and keep the clause (recorded as
+# a strip, not a drop); when the item is only the note/label, REJECT.
+# ---------------------------------------------------------------------------
+
+_EDITOR_NOTE_MARKER = re.compile(r"(?i)\bnotes?\s*:\s*")
+
+# The source wiki's page footer. It usually rides in behind a
+# "Note:"/"Notes:" marker, but comma-splitting can separate the two,
+# leaving a bare "* Before making any changes..." tail.
+_EDITOR_NOTE_PHRASE = re.compile(r"(?i)before making any changes")
+
+# A version-key / respect-thread label segment running to the end of
+# the item, either as the whole item or after a sentence boundary.
+_VERSION_LABEL_TAIL = re.compile(
+    r"(?i)(?:^|[.;]\s*)"
+    r"(respect\s+threads?\s*:.*|deviant\s?art\b.*|amino\s+apps\b.*)$"
+)
+
+# The whole item is just a site/key label plus an optional version
+# number ("Deviantart 1", "Deviantart 2 ...").
+_BARE_VERSION_LABEL = re.compile(
+    r"(?i)^\s*(?:deviant\s?art|amino\s+apps|respect\s+threads?)"
+    r"\b[\s\d.…]*$"
+)
+
+# A tail may be stripped only off a head that can stand as an item on
+# its own: at least three words and not itself a bare label.
+_TAIL_HEAD_MIN_WORDS = 3
+
+
+def _tail_head_substantive(head: str) -> bool:
+    cleaned = head.strip().strip(".;, ")
+    if _fragment_word_count(cleaned.casefold()) < _TAIL_HEAD_MIN_WORDS:
+        return False
+    return not _BARE_VERSION_LABEL.match(cleaned)
+
+
+def clean_item_tails(item: Any) -> tuple[str, list[str]]:
+    """Strip editor-note / version-key tails off one list item.
+
+    Returns (cleaned_item, strip_reasons). A substantive clause keeps
+    its text minus the tail (reasons editor_note_tail /
+    version_key_label_tail). When nothing substantive precedes the
+    tail -- the item IS the note or label -- returns ("", reasons)
+    with editor_note_item / version_key_label, and the caller drops
+    the item with those reasons. An item with no tail returns
+    (item, []).
+    """
+    text = str(item or "").strip()
+    if not text:
+        return "", []
+    reasons: list[str] = []
+    marker = _EDITOR_NOTE_MARKER.search(text)
+    phrase = _EDITOR_NOTE_PHRASE.search(text)
+    cut: int | None = None
+    if marker and (phrase is None or marker.start() <= phrase.start()):
+        cut = marker.start()
+    elif phrase:
+        cut = phrase.start()
+        head_tmp = text[:cut].rstrip()
+        if head_tmp.endswith("*"):
+            # "... * Before making any changes": swallow the bullet.
+            cut = len(head_tmp) - 1
+    if cut is not None:
+        head = text[:cut].rstrip()
+        if _tail_head_substantive(head):
+            text = head.rstrip(" .;,")
+            reasons.append("editor_note_tail")
+        else:
+            drop = ["editor_note_item"]
+            if _BARE_VERSION_LABEL.match(head.strip().strip(".;, ")):
+                drop.append("version_key_label")
+            return "", drop
+    label = _VERSION_LABEL_TAIL.search(text)
+    if label:
+        head = text[: label.start()].rstrip()
+        if _tail_head_substantive(head):
+            text = head.rstrip(" .;,")
+            reasons.append("version_key_label_tail")
+        else:
+            return "", ["version_key_label"]
+    if _BARE_VERSION_LABEL.match(text):
+        return "", ["version_key_label"]
+    return text, reasons
+
+
+# Prose-shard rule (weaknesses only): a comma-split sentence fragment
+# starts mid-sentence, so it opens lowercase with a continuation word
+# (article / demonstrative / adverb / relative / preposition), stays
+# short, and carries no verb of its own. Calibrated against the live
+# corpus: pronoun-led clauses ("he can simply use the opponent's
+# abilities") are spared by the opener set, auxiliary-bearing clauses
+# by the aux set, and verb-bearing openers ("as the Attack Forme
+# lowers durability") by the finite-verb escape. A second narrow
+# clause catches parenthetical name-list shards ("Inza (Kent's wife)
+# and Nabu."), which start capitalized but are pure apposition.
+_PROSE_SHARD_MAX_WORDS = 6
+_PROSE_SHARD_OPENERS = frozenset(
+    {
+        "a", "an", "the", "this", "that", "these", "those",
+        "specifically", "including", "especially", "particularly",
+        "notably", "however", "also", "usually", "often", "sometimes",
+        "despite", "although", "though", "while", "when", "which",
+        "who", "whom", "whose", "such", "as", "then",
+    }
+)
+_PROSE_SHARD_AUX = frozenset(
+    {
+        "is", "are", "was", "were", "has", "have", "had", "can",
+        "could", "will", "would", "shall", "should", "may", "might",
+        "must", "does", "did", "be", "been", "being", "am",
+    }
+)
+
+
+def _looks_like_finite_verb(token: str) -> bool:
+    if token.endswith("'s"):
+        # Possessive, not a verb ("Kent's wife").
+        token = token[:-2]
+    return (
+        len(token) >= 4
+        and token.endswith("s")
+        and not token.endswith(("ss", "us", "is"))
+    )
+
+
+def _prose_shard(item: str, lowered: str, words: int) -> bool:
+    tokens = re.findall(r"[a-z]+(?:'[a-z]+)?", lowered)
+    if not tokens or words < 2 or words > _PROSE_SHARD_MAX_WORDS:
+        return False
+    if any(token in _PROSE_SHARD_AUX for token in tokens):
+        return False
+    if any(_looks_like_finite_verb(token) for token in tokens):
+        return False
+    if item.strip()[:1].islower() and tokens[0] in _PROSE_SHARD_OPENERS:
+        return True
+    return (
+        "(" in item
+        and " and " in lowered
+        and sum(1 for token in item.split() if token[:1].isupper()) >= 2
+    )
+
+
 def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
     """Fragment-debris checks for one recovered list item.
 
@@ -2909,16 +3100,24 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         return []
     lowered = value.casefold()
     reasons: list[str] = []
+    words = _fragment_word_count(lowered)
     if re.search(r"\bcategory\s*:", lowered):
         reasons.append("category_markup")
-    if any(
-        re.search(pattern, lowered)
-        for pattern in _FRAGMENT_SECTION_HEADER_PATTERNS
-    ) or _FRAGMENT_BARE_HEADER.match(value):
+    if (
+        any(
+            re.search(pattern, lowered)
+            for pattern in _FRAGMENT_SECTION_HEADER_PATTERNS
+        )
+        or _FRAGMENT_BARE_HEADER.match(value)
+        or (value.strip().endswith(":") and words <= 5)
+    ):
+        # A short item that ENDS in a colon is a sub-header or a
+        # label introducing a list ("The True Fate:"), never a whole
+        # item; colon-bearing names ("Straw Doll Technique:
+        # Resonance") do not end in a colon and are untouched.
         reasons.append("section_header")
     if value.count("(") != value.count(")"):
         reasons.append("unbalanced_parenthesis")
-    words = _fragment_word_count(lowered)
     if words <= _FRAGMENT_ORPHAN_MAX_WORDS and (
         re.match(r"and\s+", lowered.strip())
         or re.search(r"\b(?:and|or)\s*[.,;]?\s*$", lowered)
@@ -2928,6 +3127,8 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         reasons.append("glued_fragment")
     if section == "weaknesses" and words < 2:
         reasons.append("weakness_fragment")
+    if section == "weaknesses" and _prose_shard(value, lowered, words):
+        reasons.append("prose_shard")
     return reasons
 
 
@@ -3299,13 +3500,19 @@ async def recover_profile_evidence(
             # item must not poison (or sneak through with) real items.
             for field_name in list(scoped_fields):
                 if field_name in _RECOVERY_SECTIONS:
-                    kept_text, dropped_items = filter_list_field_items(
-                        scoped_fields[field_name], section=field_name
+                    kept_text, dropped_items, stripped_items = (
+                        filter_list_field_items_detailed(
+                            scoped_fields[field_name], section=field_name
+                        )
                     )
                     if dropped_items:
                         tried.setdefault("dropped_items", {})[
                             field_name
                         ] = dropped_items
+                    if stripped_items:
+                        tried.setdefault("stripped_items", {})[
+                            field_name
+                        ] = stripped_items
                     if not kept_text:
                         tried.setdefault("boilerplate_fields", []).append(field_name)
                         tried.setdefault("boilerplate_reasons", {})[field_name] = [

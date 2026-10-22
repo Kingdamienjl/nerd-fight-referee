@@ -11,10 +11,12 @@ from battlebot.review.auto_repair import (
     _guard_name_match,
     attempt_from_result,
     boilerplate_reasons,
+    clean_item_tails,
     continuity_check,
     eligible_primary_attempts,
     evaluate_recovery_guard,
     filter_list_field_items,
+    filter_list_field_items_detailed,
     fragment_item_reasons,
     fragment_scalar_reasons,
     infobox_header_reasons,
@@ -558,6 +560,206 @@ class FragmentScreenTests(unittest.TestCase):
 
     def test_colon_technique_name_passes(self):
         self.assertEqual(fragment_item_reasons("Straw Doll Technique: Resonance"), [])
+
+
+class TailCleaningTests(unittest.TestCase):
+    """Regression: gated sample 50e's editor-note tails and
+    version-key label items. Chris-approved treatment: strip the
+    tail off a substantive clause, reject an item that is only the
+    note/label."""
+
+    ETRIGAN = (
+        "particular high frequencies and Order and Chaos. "
+        "Notes: Before making any changes to this page"
+    )
+    GRODD_NOTE = "Deviantart 2 Note: Before making any changes to this page"
+    DEATHSTROKE = (
+        "Often lashes out in rage Note: This profile is based on "
+        "what is in Death Battles video"
+    )
+    GRODD_RAGE = (
+        "Grodd is prone to blind savage rage when angered. "
+        "Respect Threads: Amino Apps"
+    )
+
+    # -- shape 6: editor-note tails ------------------------------------
+    def test_editor_note_tail_stripped_off_clause(self):
+        cleaned, reasons = clean_item_tails(self.ETRIGAN)
+        self.assertEqual(
+            cleaned, "particular high frequencies and Order and Chaos"
+        )
+        self.assertEqual(reasons, ["editor_note_tail"])
+
+    def test_editor_note_tail_stripped_without_footer_phrase(self):
+        cleaned, reasons = clean_item_tails(self.DEATHSTROKE)
+        self.assertEqual(cleaned, "Often lashes out in rage")
+        self.assertEqual(reasons, ["editor_note_tail"])
+
+    def test_markerless_footer_tail_stripped(self):
+        item = (
+            "this profile deals with the Johnny Blaze version of "
+            "Ghost Rider in the main 616 Marvel universe. "
+            "*Before making any changes to this page"
+        )
+        cleaned, reasons = clean_item_tails(item)
+        self.assertEqual(
+            cleaned,
+            "this profile deals with the Johnny Blaze version of "
+            "Ghost Rider in the main 616 Marvel universe",
+        )
+        self.assertEqual(reasons, ["editor_note_tail"])
+
+    def test_bare_footer_item_rejected(self):
+        cleaned, reasons = clean_item_tails(
+            "Before making any changes to this page"
+        )
+        self.assertEqual(cleaned, "")
+        self.assertIn("editor_note_item", reasons)
+
+    def test_placeholder_head_note_item_rejected(self):
+        cleaned, reasons = clean_item_tails(
+            "None notable Note: Before making any changes to this page"
+        )
+        self.assertEqual(cleaned, "")
+        self.assertIn("editor_note_item", reasons)
+
+    def test_label_head_note_item_rejected_with_both_reasons(self):
+        cleaned, reasons = clean_item_tails(self.GRODD_NOTE)
+        self.assertEqual(cleaned, "")
+        self.assertIn("editor_note_item", reasons)
+        self.assertIn("version_key_label", reasons)
+
+    # -- shape 7: version-key labels ------------------------------------
+    def test_bare_version_key_label_rejected(self):
+        for item in ("Deviantart 1", "Deviantart 2"):
+            cleaned, reasons = clean_item_tails(item)
+            self.assertEqual(cleaned, "")
+            self.assertIn("version_key_label", reasons)
+
+    def test_version_key_label_tail_stripped_off_clause(self):
+        cleaned, reasons = clean_item_tails(self.GRODD_RAGE)
+        self.assertEqual(
+            cleaned, "Grodd is prone to blind savage rage when angered"
+        )
+        self.assertEqual(reasons, ["version_key_label_tail"])
+
+    def test_amino_leading_ability_not_a_label(self):
+        # "Amino" alone is not the label; the observed debris shape
+        # is the site label "Amino Apps".
+        item = "Amino Acid Manipulation"
+        self.assertEqual(clean_item_tails(item), (item, []))
+
+    def test_plain_item_untouched(self):
+        item = "Vulnerable to holy weapons"
+        self.assertEqual(clean_item_tails(item), (item, []))
+
+    # -- filter integration ----------------------------------------------
+    def test_filter_strips_tail_and_records_it(self):
+        kept, dropped, stripped = filter_list_field_items_detailed(
+            "Vulnerable to holy weapons, " + self.ETRIGAN,
+            section="weaknesses",
+        )
+        self.assertEqual(
+            kept,
+            "Vulnerable to holy weapons, "
+            "particular high frequencies and Order and Chaos",
+        )
+        self.assertEqual(dropped, [])
+        self.assertEqual(len(stripped), 1)
+        self.assertIn("editor_note_tail", stripped[0]["reasons"])
+        self.assertEqual(
+            stripped[0]["kept"],
+            "particular high frequencies and Order and Chaos",
+        )
+
+    def test_filter_drops_note_only_and_label_items(self):
+        kept, dropped, stripped = filter_list_field_items_detailed(
+            "Weakness to sunlight, " + self.GRODD_NOTE + ", Deviantart 1",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Weakness to sunlight")
+        self.assertEqual(stripped, [])
+        self.assertEqual(len(dropped), 2)
+        all_reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("editor_note_item", all_reasons)
+        self.assertIn("version_key_label", all_reasons)
+
+
+class ProseShardTests(unittest.TestCase):
+    """Regression: gated sample 50e's multi-word prose comma-shards
+    (doctor-fate-rebirth) plus corpus-calibrated controls. The rule
+    is weaknesses-only and conservative: pronoun-led and verb-bearing
+    clauses from the live corpus must survive."""
+
+    def test_doctor_fate_shards_flagged(self):
+        for shard in ("a woman and a god", "specifically Kent"):
+            self.assertIn(
+                "prose_shard",
+                fragment_item_reasons(shard, section="weaknesses"),
+            )
+
+    def test_name_list_appositive_shard_flagged(self):
+        self.assertIn(
+            "prose_shard",
+            fragment_item_reasons(
+                "Inza (Kent's wife) and Nabu.", section="weaknesses"
+            ),
+        )
+
+    def test_such_as_shard_flagged(self):
+        self.assertIn(
+            "prose_shard",
+            fragment_item_reasons("such as poison", section="weaknesses"),
+        )
+
+    def test_trailing_colon_header_flagged(self):
+        self.assertIn(
+            "section_header",
+            fragment_item_reasons("The True Fate:", section="weaknesses"),
+        )
+
+    def test_prose_shard_not_applied_to_abilities(self):
+        self.assertEqual(
+            fragment_item_reasons(
+                "a woman and a god", section="powers_and_abilities"
+            ),
+            [],
+        )
+
+    def test_filter_drops_shards_keeps_real_weakness(self):
+        kept, dropped = filter_list_field_items(
+            "a woman and a god, specifically Kent, Weakness to sunlight",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Weakness to sunlight")
+        self.assertEqual(len(dropped), 2)
+        self.assertTrue(all("prose_shard" in d["reasons"] for d in dropped))
+
+    # -- corpus controls: real items that must survive -------------------
+    def test_corpus_short_weaknesses_pass(self):
+        for item in (
+            "Weak to Dragon",
+            "Vulnerable to Dragon",
+            "special defense",
+            "rendering them berserk",
+            "contains molecular to sub-atomic sensors",
+        ):
+            self.assertEqual(
+                fragment_item_reasons(item, section="weaknesses"),
+                [],
+                msg=item,
+            )
+
+    def test_corpus_clause_weaknesses_pass(self):
+        for item in (
+            "he can simply use the opponent's abilities",
+            "as the Attack Forme lowers durability",
+        ):
+            self.assertEqual(
+                fragment_item_reasons(item, section="weaknesses"),
+                [],
+                msg=item,
+            )
 
 
 def comic_profile(name, variant_name=None, franchise="DC"):
