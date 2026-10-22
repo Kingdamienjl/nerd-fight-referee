@@ -2760,14 +2760,19 @@ def placeholder_item_reasons(item: Any) -> list[str]:
     return reasons
 
 
-def filter_list_field_items(text: Any) -> tuple[str, list[dict[str, Any]]]:
+def filter_list_field_items(
+    text: Any, *, section: str | None = None
+) -> tuple[str, list[dict[str, Any]]]:
     """Item-filter one recovered list section (abilities/weaknesses/...).
 
     Splits exactly the way list_items_from_text will, evaluates every
     item, and returns (kept_text, dropped): kept_text holds only the
     substantive items, dropped records each removed item with its
     reasons. kept_text is empty when nothing substantive survives --
-    the field then recovers nothing.
+    the field then recovers nothing. Every item passes the placeholder
+    screen AND the fragment screen (parser splitting debris); `section`
+    is the recovery field name, forwarded to the fragment screen for
+    its weaknesses-only shard rule.
     """
     from battlebot.harvest.auto_profile_harvester import (
         split_listish,
@@ -2785,6 +2790,9 @@ def filter_list_field_items(text: Any) -> tuple[str, list[dict[str, Any]]]:
     dropped: list[dict[str, Any]] = []
     for piece in pieces:
         reasons = placeholder_item_reasons(piece)
+        for reason in fragment_item_reasons(piece, section=section):
+            if reason not in reasons:
+                reasons.append(reason)
         if reasons:
             dropped.append({"item": piece[:120], "reasons": reasons})
         else:
@@ -2838,6 +2846,111 @@ def stat_field_rejection_reasons(text: Any) -> list[str]:
         if reason not in reasons:
             reasons.append(reason)
     return reasons
+
+
+# ---------------------------------------------------------------------------
+# Fragment screen (recovery merge path only). The fallback parser chain
+# splits page sections into list items and scalar values, and its
+# splitting sheds fragment debris the placeholder/scaffolding screens
+# do not model -- the five shapes that failed gated sample 50d (which
+# had zero franchise/continuity/infobox failures):
+#   1. section-boundary bundles: a "None Notable" weakness carrying
+#      the next section's header plus raw Category: markup;
+#   2. scalar tail-fragments: a tier value that is only the tail of a
+#      longer string (", higher as Werebeast");
+#   3. sentence shards itemized as one-word weaknesses ("space",
+#      "energy" split out of a prose paragraph);
+#   4. comma-bundled items held together by split_listish's
+#      "Resistance to..." keep-whole rule, stray paren included
+#      ("Resistance to Extreme Temperatures), Berserker Mode, ...");
+#   5. conjunction-orphaned list shards ("Gravity Manipulation with
+#      her Mega Rod and", "and Healing with her Mother Box") and
+#      glued "Resistance to: ..." two-item merges.
+# The repair path's screens are deliberately untouched: this screen is
+# wired into filter_list_field_items (recovery-only) and the recovery
+# field loop's scalar branch.
+# ---------------------------------------------------------------------------
+
+_FRAGMENT_SECTION_HEADER_PATTERNS = (
+    r"\bnotable (?:attacks|techniques)(?:\s*/\s*(?:attacks|techniques))?\s*:",
+    r"\bpowers and (?:abilities|techniques)\s*:",
+    r"\bstandard equipment\s*:",
+)
+
+_FRAGMENT_BARE_HEADER = re.compile(
+    r"^\s*(?:powers and abilities|standard equipment|weaknesses?|"
+    r"equipment|intelligence|notable attacks(?:\s*/\s*techniques)?|"
+    r"attacks?|techniques?)\s*:\s*$",
+    re.IGNORECASE,
+)
+
+# A conjunction-led or conjunction-tailed item is an orphan shard only
+# when it is short enough to be a noun-phrase fragment. A long prose
+# clause that happens to begin mid-sentence after a comma split
+# ("and his losses against faster opponents have exposed his stamina
+# limits", 11 words) is substantive text, not a list shard.
+_FRAGMENT_ORPHAN_MAX_WORDS = 8
+
+
+def _fragment_word_count(lowered: str) -> int:
+    return len(re.findall(r"[a-z0-9]+(?:'[a-z]+)?", lowered))
+
+
+def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
+    """Fragment-debris checks for one recovered list item.
+
+    Returns reason strings; an empty list means the item is whole.
+    `section` is the recovery field name; the sub-2-word shard rule
+    applies to the weaknesses section only -- single-word abilities
+    ("Flight") are legitimate items and are never size-checked.
+    """
+    value = str(item or "")
+    if not value.strip():
+        return []
+    lowered = value.casefold()
+    reasons: list[str] = []
+    if re.search(r"\bcategory\s*:", lowered):
+        reasons.append("category_markup")
+    if any(
+        re.search(pattern, lowered)
+        for pattern in _FRAGMENT_SECTION_HEADER_PATTERNS
+    ) or _FRAGMENT_BARE_HEADER.match(value):
+        reasons.append("section_header")
+    if value.count("(") != value.count(")"):
+        reasons.append("unbalanced_parenthesis")
+    words = _fragment_word_count(lowered)
+    if words <= _FRAGMENT_ORPHAN_MAX_WORDS and (
+        re.match(r"and\s+", lowered.strip())
+        or re.search(r"\b(?:and|or)\s*[.,;]?\s*$", lowered)
+    ):
+        reasons.append("conjunction_orphan")
+    if re.match(r"\s*resistance to\s*:", lowered):
+        reasons.append("glued_fragment")
+    if section == "weaknesses" and words < 2:
+        reasons.append("weakness_fragment")
+    return reasons
+
+
+def fragment_scalar_reasons(text: Any) -> list[str]:
+    """Fragment-debris checks for one recovered scalar stat value.
+
+    A value that is only the tail of a longer string -- it starts with
+    punctuation (", higher as Werebeast") or with a bare comparative
+    continuation carrying no value token of its own ("higher with the
+    Moon" with no tier/digit anywhere) -- is debris, not a stat. A
+    full value that merely contains a continuation later ("8-C,
+    higher with ...") is untouched.
+    """
+    value = str(text or "").strip()
+    if not value:
+        return []
+    if value[0] in ",;:)]}":
+        return ["scalar_tail_fragment"]
+    if re.match(r"(?i)(?:far\s+)?(?:higher|lower)\b", value) and not re.search(
+        r"\d", value
+    ):
+        return ["scalar_tail_fragment"]
+    return []
 
 
 def _wikitext_categories(wikitext: str) -> list[str]:
@@ -3187,7 +3300,7 @@ async def recover_profile_evidence(
             for field_name in list(scoped_fields):
                 if field_name in _RECOVERY_SECTIONS:
                     kept_text, dropped_items = filter_list_field_items(
-                        scoped_fields[field_name]
+                        scoped_fields[field_name], section=field_name
                     )
                     if dropped_items:
                         tried.setdefault("dropped_items", {})[
@@ -3208,6 +3321,11 @@ async def recover_profile_evidence(
                     reasons = reasons + infobox_header_reasons(
                         scoped_fields[field_name]
                     )
+                    # Fragment screen (scalars): a value that is only
+                    # the tail of a longer string is parser debris.
+                    for reason in fragment_scalar_reasons(scoped_fields[field_name]):
+                        if reason not in reasons:
+                            reasons.append(reason)
                 if reasons:
                     tried.setdefault("boilerplate_fields", []).append(field_name)
                     tried.setdefault("boilerplate_reasons", {})[field_name] = reasons

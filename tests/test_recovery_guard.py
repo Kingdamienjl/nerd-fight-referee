@@ -15,6 +15,8 @@ from battlebot.review.auto_repair import (
     eligible_primary_attempts,
     evaluate_recovery_guard,
     filter_list_field_items,
+    fragment_item_reasons,
+    fragment_scalar_reasons,
     infobox_header_reasons,
     placeholder_item_reasons,
     stat_field_rejection_reasons,
@@ -402,6 +404,160 @@ class Iteration3RegressionTests(unittest.TestCase):
         self.assertIn("Weakness to sunlight", kept)
         self.assertNotIn("Notable Victories", kept)
         self.assertEqual(len(dropped), 1)
+
+
+class FragmentScreenTests(unittest.TestCase):
+    """Regression: gated sample 50d's five fragment-debris shapes.
+
+    The sample had zero franchise/continuity/infobox failures; it
+    failed because the parser's section/list splitting shed fragments
+    (Beast Boy / Captain Atom / Big Barda / Circe merges). Each shape
+    gets a verbatim regression case plus controls proving legitimate
+    content survives the screen.
+    """
+
+    BEAST_BOY_BUNDLE = (
+        "Resistance to Extreme Temperatures), Berserker Mode, "
+        "Fire Manipulation, Regeneration"
+    )
+    SECTION_BUNDLE = (
+        "None Notable Notable Attacks/Techniques: Beast Boy (comics) "
+        "Category:STAYDENT Category:Tier 2"
+    )
+
+    # -- shape 1: section-boundary / category markup -------------------
+    def test_category_markup_item_flagged(self):
+        self.assertIn("category_markup", fragment_item_reasons(self.SECTION_BUNDLE))
+
+    def test_section_header_item_flagged(self):
+        self.assertIn("section_header", fragment_item_reasons(self.SECTION_BUNDLE))
+        self.assertIn(
+            "section_header",
+            fragment_item_reasons("Notable Attacks/Techniques: Animal Imitation"),
+        )
+        self.assertIn("section_header", fragment_item_reasons("Weaknesses:"))
+
+    def test_filter_drops_markup_and_header_items(self):
+        kept, dropped = filter_list_field_items(
+            "Limited stamina, Category:Tier 2, "
+            "Notable Attacks/Techniques: Animal Imitation"
+        )
+        self.assertEqual(kept, "Limited stamina")
+        self.assertEqual(len(dropped), 2)
+        self.assertTrue(any("category_markup" in d["reasons"] for d in dropped))
+        self.assertTrue(any("section_header" in d["reasons"] for d in dropped))
+
+    # -- shape 2: scalar tail-fragments --------------------------------
+    def test_scalar_tail_fragment_flagged(self):
+        self.assertIn(
+            "scalar_tail_fragment", fragment_scalar_reasons(", higher as Werebeast")
+        )
+        self.assertIn(
+            "scalar_tail_fragment",
+            fragment_scalar_reasons("higher with the power of the Moon"),
+        )
+
+    def test_clean_tier_values_pass_scalar_screen(self):
+        self.assertEqual(fragment_scalar_reasons("8-C"), [])
+        self.assertEqual(fragment_scalar_reasons("At least 8-C, likely higher"), [])
+        # A full value that merely CONTAINS a continuation survives.
+        self.assertEqual(
+            fragment_scalar_reasons("8-C, higher as Werebeast"), []
+        )
+
+    # -- shape 3: sub-2-word weakness shards ---------------------------
+    def test_weakness_shards_flagged(self):
+        for shard in ("space", "energy"):
+            self.assertIn(
+                "weakness_fragment",
+                fragment_item_reasons(shard, section="weaknesses"),
+            )
+
+    def test_filter_drops_weakness_shards_keeps_sentence(self):
+        kept, dropped = filter_list_field_items(
+            "space, energy, Weakness to sunlight", section="weaknesses"
+        )
+        self.assertEqual(kept, "Weakness to sunlight")
+        self.assertEqual(len(dropped), 2)
+        self.assertTrue(all("weakness_fragment" in d["reasons"] for d in dropped))
+
+    def test_single_word_ability_not_size_checked(self):
+        self.assertEqual(fragment_item_reasons("Flight"), [])
+        self.assertEqual(
+            fragment_item_reasons("Flight", section="powers_and_abilities"), []
+        )
+        kept, dropped = filter_list_field_items(
+            "Flight", section="powers_and_abilities"
+        )
+        self.assertEqual((kept, dropped), ("Flight", []))
+
+    def test_normal_weakness_sentence_passes(self):
+        sentence = (
+            "Vulnerable to high-frequency sound, which disrupts his "
+            "shape-shifting and leaves him disoriented"
+        )
+        self.assertEqual(fragment_item_reasons(sentence, section="weaknesses"), [])
+
+    # -- shape 4: comma bundle with stray paren -------------------------
+    def test_unbalanced_parenthesis_bundle_flagged(self):
+        self.assertIn(
+            "unbalanced_parenthesis", fragment_item_reasons(self.BEAST_BOY_BUNDLE)
+        )
+
+    def test_filter_drops_bundle_keeps_clean_items(self):
+        # split_listish holds a "Resistance to..." run together as one
+        # piece; the piece must drop whole, neighbours must survive.
+        kept, dropped = filter_list_field_items("Flight, " + self.BEAST_BOY_BUNDLE)
+        self.assertEqual(kept, "Flight")
+        self.assertEqual(len(dropped), 1)
+        self.assertIn("unbalanced_parenthesis", dropped[0]["reasons"])
+
+    def test_balanced_parenthesis_ability_passes(self):
+        self.assertEqual(fragment_item_reasons("Regeneration (Low-Mid)"), [])
+        kept, dropped = filter_list_field_items("Regeneration (Low-Mid), Flight")
+        self.assertEqual(dropped, [])
+        self.assertIn("Regeneration (Low-Mid)", kept)
+
+    # -- shape 5: conjunction orphans / glued items ---------------------
+    def test_conjunction_orphan_leading_flagged(self):
+        self.assertIn(
+            "conjunction_orphan",
+            fragment_item_reasons("and Healing with her Mother Box"),
+        )
+        self.assertIn(
+            "conjunction_orphan",
+            fragment_item_reasons("and Astral Projection (shown here)"),
+        )
+
+    def test_conjunction_orphan_trailing_flagged(self):
+        self.assertIn(
+            "conjunction_orphan",
+            fragment_item_reasons("Gravity Manipulation with her Mega Rod and"),
+        )
+
+    def test_glued_resistance_item_flagged(self):
+        self.assertIn(
+            "glued_fragment", fragment_item_reasons("Resistance to: Disease Manipulation")
+        )
+        # The un-glued form is a normal item and passes.
+        self.assertEqual(fragment_item_reasons("Resistance to Disease Manipulation"), [])
+
+    def test_long_prose_clause_not_orphaned(self):
+        # Comma-splitting a prose weakness legitimately yields a clause
+        # starting with "and"; at 11 words it is substance, not a shard.
+        clause = (
+            "and his losses against faster opponents have exposed his "
+            "stamina limits"
+        )
+        self.assertEqual(fragment_item_reasons(clause, section="weaknesses"), [])
+
+    # -- cross-shape controls -------------------------------------------
+    def test_comma_description_ability_passes(self):
+        item = "Enhanced senses, including night vision and tracking by scent"
+        self.assertEqual(fragment_item_reasons(item), [])
+
+    def test_colon_technique_name_passes(self):
+        self.assertEqual(fragment_item_reasons("Straw Doll Technique: Resonance"), [])
 
 
 def comic_profile(name, variant_name=None, franchise="DC"):
