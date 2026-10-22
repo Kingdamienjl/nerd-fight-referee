@@ -4,25 +4,14 @@ name: Black Manta
 franchise: DC
 category: comic
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-10-04T10:02:38Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Black Manta
   franchise: DC
@@ -73,42 +62,6 @@ sources:
   source_type: mediawiki
   title: Black Manta
   url: https://character-stats-and-profiles.fandom.com/wiki/Black_Manta
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-black-manta-dc
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Black Manta DC
-  url: https://vsbattles.fandom.com/wiki/Black_Manta_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-black-manta-dc
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Black Manta DC
-  url: https://character-stats-and-profiles.fandom.com/wiki/Black_Manta_DC
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -308,13 +261,17 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Solar System level (Stomped Aqualad, can consistently trade blows with Aquaman)
+    source_ids:
+    - vsbattles-black-manta-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Massively FTL+ (Comparable to Aquaman)
+    source_ids:
+    - vsbattles-black-manta-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -324,27 +281,324 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Solar System level (Can tank hits from Aquaman)
+    source_ids:
+    - vsbattles-black-manta-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman (Can keep on fighting despite taking multiple hits)
+    source_ids:
+    - vsbattles-black-manta-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range. Up to Tens of Meters with most weaponry. Unknown with
+      Optic Blast.
+    source_ids:
+    - vsbattles-black-manta-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Genius (Trained for combat at a young age by his father, and honed
+      experience over the years by fighting Aquaman, having expertise in many types
+      of weaponry. Constructed his own suit, which is considered a technological marvel,
+      and is a cunning strategist and leader)
+    source_ids:
+    - vsbattles-black-manta-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-black-manta-dc-comics
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-genius-intelligence
+  name: Genius Intelligence
+  description: Genius Intelligence
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-martial-arts
+  name: Martial Arts
+  description: Martial Arts
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery-expert-marksman
+  name: Weapon Mastery (Expert Marksman)
+  description: Weapon Mastery (Expert Marksman)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-vehicular-mastery
+  name: Vehicular Mastery
+  description: Vehicular Mastery
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-explosion-manipulation-possesses-explosive-harpoons
+  name: Explosion Manipulation (Possesses explosive harpoons)
+  description: Explosion Manipulation (Possesses explosive harpoons)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - biological_possession
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-underwater-breathing
+  name: Underwater Breathing
+  description: Underwater Breathing
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-camouflage-as-shown-here
+  name: Camouflage (As shown here)
+  description: Camouflage (As shown here)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-energy-projection
+  name: Energy Projection
+  description: Energy Projection
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-heat-manipulation-via-optic-blasts
+  name: Heat Manipulation (via Optic Blasts)
+  description: Heat Manipulation (via Optic Blasts)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-electricity-manipulation-can-electrify-his-swords-gauntlets
+  name: Electricity Manipulation (Can electrify his swords, gauntletsand harpoons)
+  description: Electricity Manipulation (Can electrify his swords, gauntletsand harpoons)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-death-manipulation-with-the-tear-of-extinction
+  name: Death Manipulation with the Tear of Extinction
+  description: Death Manipulation with the Tear of Extinction
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-teleportation-with-the-globe-of-transportation
+  name: Teleportation with the Globe of Transportation
+  description: Teleportation with the Globe of Transportation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  - dimensional_travel
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-information-analysis-with-the-seal-of-clarity
+  name: Information Analysis with the Seal of Clarity
+  description: Information Analysis with the Seal of Clarity
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-resistance-to-telekinesis-can-resist-mera-s-telekinetic-sig
+  name: Resistance to Telekinesis (Can resist Mera's telekinetic signals), Heat Manipulation
+    (Resisted Bizarro's heat breath).
+  description: Resistance to Telekinesis (Can resist Mera's telekinetic signals),
+    Heat Manipulation (Resisted Bizarro's heat breath).
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-formerly-suffered-from-painful-and-debilitating-brain-aneurysms-as-a-
+  name: Formerly suffered from painful and debilitating brain aneurysms as a result
+    of his latent Atlantean DNA being awakened b
+  description: Formerly suffered from painful and debilitating brain aneurysms as
+    a result of his latent Atlantean DNA being awakened by Orichalcum
+  source_ids: &id003
+  - vsbattles-black-manta-dc-comics
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-however
+  name: however
+  description: however
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-he-was-later-cured-by-doctor-mist-note-before-making-any-changes-to-t
+  name: 'he was later cured by Doctor Mist Note: Before making any changes to this
+    page'
+  description: 'he was later cured by Doctor Mist Note: Before making any changes
+    to this page'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -356,10 +610,24 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-black-manta-dc-comics
+  secondary_disagreement_policy: warning_only
 profile_hash: 266ef122601853a8bf7458c4acb09979cba5d7fdf6c632ff1fd3430a648e1325
 repair:
   attempted_at: '2026-10-04T22:39:49Z'
