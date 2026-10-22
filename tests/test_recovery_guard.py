@@ -9,6 +9,7 @@ import unittest
 
 from battlebot.review.auto_repair import (
     _guard_name_match,
+    attempt_field_map,
     attempt_from_result,
     boilerplate_reasons,
     clean_item_tails,
@@ -1049,6 +1050,138 @@ class RepairPathContinuityTests(unittest.TestCase):
         self.assertIn("page_scaffolding", dropped.get("intelligence") or [])
         self.assertIn("insubstantive", dropped.get("stamina") or [])
         self.assertIn("attack_potency", attempt.extracted_fields)
+
+
+class RepairPathItemScreenTests(unittest.TestCase):
+    """The item screens in the MAIN repair path (attempt_from_result).
+
+    The recovery path dropped the editor-note footer bundle, but the
+    drain's repair path merged it straight back into etrigan and both
+    grodd profiles, because repair attempts never item-filtered their
+    list fields. These tests prove the screens now fire at the repair
+    choke point, with drops/strips recorded on the attempt metadata.
+    """
+
+    FIELDS = {
+        "attack_potency": "Wall level (Can shatter reinforced concrete with a casual strike)",
+        "speed": "Supersonic (Can outpace fighter jets in sustained flight)",
+        "durability": "Wall level (Shrugged off anti-tank fire at close range)",
+        "powers_and_abilities": "Solar Energy Absorption, Flight, Heat Vision",
+        "weaknesses": "Vulnerable to holy weapons",
+        "origin": "DC Comics",
+    }
+
+    def _attempt(self, prof, fields=None):
+        title = str(prof.get("name") or "Test")
+        source = {
+            "id": "vsbattles-test",
+            "title": title,
+            "url": "https://vsbattles.fandom.com/wiki/" + title.replace(" ", "_"),
+            "provider_id": "vsbattles",
+            "authority": "high",
+            "promotion_allowed": True,
+        }
+        metadata = {
+            "title": title,
+            "url": source["url"],
+            "revision_id": "42",
+            "fetch_status": "fetched",
+            "promotion_allowed": True,
+            "authority": "high",
+            "provider_id": "vsbattles",
+        }
+        return attempt_from_result(
+            prof, source, dict(fields or self.FIELDS), metadata, ok=True, note="ok"
+        )
+
+    def test_repair_attempt_strips_editor_note_tail(self):
+        prof = comic_profile("Etrigan (Post-Crisis)", "Post-Crisis")
+        fields = dict(self.FIELDS)
+        fields["weaknesses"] = (
+            "Vulnerable to holy weapons, particular high frequencies "
+            "and Order and Chaos. Notes: Before making any changes "
+            "to this page"
+        )
+        attempt = self._attempt(prof, fields)
+        merged = attempt_field_map(attempt)["weaknesses"]
+        self.assertNotIn("Before making any changes", merged)
+        self.assertIn(
+            "particular high frequencies and Order and Chaos", merged
+        )
+        stripped = (attempt.metadata.get("stripped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        self.assertEqual(len(stripped), 1)
+        self.assertIn("editor_note_tail", stripped[0]["reasons"])
+
+    def test_repair_attempt_drops_label_items_keeps_clause(self):
+        prof = comic_profile("Gorilla Grodd (Post-Crisis)", "Post-Crisis")
+        fields = dict(self.FIELDS)
+        fields["weaknesses"] = (
+            "Grodd is prone to blind savage rage when angered. "
+            "Respect Threads: Amino Apps, Deviantart 1, "
+            "Deviantart 2 Note: Before making any changes to this page"
+        )
+        attempt = self._attempt(prof, fields)
+        merged = attempt_field_map(attempt)["weaknesses"]
+        self.assertEqual(
+            merged, "Grodd is prone to blind savage rage when angered"
+        )
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        all_reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("version_key_label", all_reasons)
+        self.assertIn("editor_note_item", all_reasons)
+        stripped = (attempt.metadata.get("stripped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        self.assertEqual(len(stripped), 1)
+        self.assertIn("version_key_label_tail", stripped[0]["reasons"])
+
+    def test_repair_attempt_drops_fragment_bundle_from_abilities(self):
+        prof = comic_profile("Beast Boy (Post-Crisis)", "Post-Crisis")
+        fields = dict(self.FIELDS)
+        fields["powers_and_abilities"] = (
+            "Flight, Resistance to Extreme Temperatures), "
+            "Berserker Mode, Fire Manipulation, Regeneration"
+        )
+        attempt = self._attempt(prof, fields)
+        self.assertEqual(
+            attempt_field_map(attempt)["powers_and_abilities"], "Flight"
+        )
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "powers_and_abilities"
+        ) or []
+        self.assertEqual(len(dropped), 1)
+        self.assertIn("unbalanced_parenthesis", dropped[0]["reasons"])
+
+    def test_repair_attempt_field_removed_when_only_debris(self):
+        prof = comic_profile("Gorilla Grodd (Post-Crisis)", "Post-Crisis")
+        fields = dict(self.FIELDS)
+        fields["weaknesses"] = "Deviantart 1"
+        attempt = self._attempt(prof, fields)
+        self.assertNotIn("weaknesses", attempt.extracted_fields)
+        self.assertNotIn("weaknesses", attempt_field_map(attempt))
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        self.assertEqual(len(dropped), 1)
+        self.assertIn("version_key_label", dropped[0]["reasons"])
+
+    def test_repair_attempt_clean_lists_untouched(self):
+        prof = comic_profile("Apollo (Post-Crisis)", "Post-Crisis")
+        attempt = self._attempt(prof)
+        self.assertEqual(
+            attempt_field_map(attempt)["weaknesses"],
+            "Vulnerable to holy weapons",
+        )
+        self.assertEqual(
+            attempt_field_map(attempt)["powers_and_abilities"],
+            "Solar Energy Absorption, Flight, Heat Vision",
+        )
+        self.assertNotIn("dropped_items", attempt.metadata)
+        self.assertNotIn("stripped_items", attempt.metadata)
 
 
 if __name__ == "__main__":

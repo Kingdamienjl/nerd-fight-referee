@@ -1511,6 +1511,35 @@ def attempt_from_result(
                 del fields[field_name]
     if dropped_scalar:
         metadata = {**metadata, "dropped_scalar_fields": dropped_scalar}
+    # List-item hygiene for the repair path: the same item screens
+    # the recovery path applies (placeholder + fragment + tail
+    # cleaning) run on every list section before its items can be
+    # counted or merged. The drain previously merged list debris the
+    # recovery path had already dropped -- editor-note footers,
+    # version-key labels, fragment shards (the grodd/etrigan drain
+    # merges). Drops and strips are recorded on the attempt metadata
+    # exactly as the recovery path records them in its tried entries.
+    dropped_items: dict[str, list[dict[str, Any]]] = {}
+    stripped_items: dict[str, list[dict[str, Any]]] = {}
+    for field_name in list(fields):
+        if field_name in _RECOVERY_SECTIONS:
+            kept_text, field_dropped, field_stripped = (
+                filter_list_field_items_detailed(
+                    fields[field_name], section=field_name
+                )
+            )
+            if field_dropped:
+                dropped_items[field_name] = field_dropped
+            if field_stripped:
+                stripped_items[field_name] = field_stripped
+            if kept_text:
+                fields[field_name] = kept_text
+            else:
+                del fields[field_name]
+    if dropped_items:
+        metadata = {**metadata, "dropped_items": dropped_items}
+    if stripped_items:
+        metadata = {**metadata, "stripped_items": stripped_items}
     source_id = source_id_for(source, profile.get("name") or "source")
     authority = str(metadata.get("authority") or source.get("authority") or "")
     confidence = 0.75 if metadata.get("revision_id") else 0.5
@@ -2882,11 +2911,11 @@ def stat_field_rejection_reasons(text: Any) -> list[str]:
 
 
 # ---------------------------------------------------------------------------
-# Fragment screen (recovery merge path only). The fallback parser chain
-# splits page sections into list items and scalar values, and its
-# splitting sheds fragment debris the placeholder/scaffolding screens
-# do not model -- the five shapes that failed gated sample 50d (which
-# had zero franchise/continuity/infobox failures):
+# Fragment screen. The fallback parser chain splits page sections
+# into list items and scalar values, and its splitting sheds fragment
+# debris the placeholder/scaffolding screens do not model -- the five
+# shapes that failed gated sample 50d (which had zero
+# franchise/continuity/infobox failures):
 #   1. section-boundary bundles: a "None Notable" weakness carrying
 #      the next section's header plus raw Category: markup;
 #   2. scalar tail-fragments: a tier value that is only the tail of a
@@ -2899,9 +2928,12 @@ def stat_field_rejection_reasons(text: Any) -> list[str]:
 #   5. conjunction-orphaned list shards ("Gravity Manipulation with
 #      her Mega Rod and", "and Healing with her Mother Box") and
 #      glued "Resistance to: ..." two-item merges.
-# The repair path's screens are deliberately untouched: this screen is
-# wired into filter_list_field_items (recovery-only) and the recovery
-# field loop's scalar branch.
+# Wiring: filter_list_field_items (the recovery field loop) and,
+# since the frag job's Part 2, attempt_from_result -- the drain's
+# repair path merged list debris unfiltered until the same screens
+# were wired into its choke point. The scalar branch is wired into
+# the recovery field loop and (via stat_field_rejection_reasons)
+# attempt_from_result.
 # ---------------------------------------------------------------------------
 
 _FRAGMENT_SECTION_HEADER_PATTERNS = (
