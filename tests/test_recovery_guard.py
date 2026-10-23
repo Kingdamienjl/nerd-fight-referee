@@ -765,6 +765,107 @@ class ProseShardTests(unittest.TestCase):
             )
 
 
+class ProseShardContinuationTests(unittest.TestCase):
+    """Regression: gated sample 50h's escapes -- weakness prose shards
+    that carry an auxiliary verb or run past the prose-shard word caps
+    (raven-rebirth / raven-prime-earth, comma-splits of the Soul Self
+    sentence). The extension keys on dangling ends and subjectless
+    long continuations; complete clauses WITH auxiliaries survive."""
+
+    def test_raven_aux_verb_shard_flagged(self):
+        self.assertIn(
+            "prose_shard_continuation",
+            fragment_item_reasons("have it carry her", section="weaknesses"),
+        )
+
+    def test_raven_long_infinitive_chain_flagged(self):
+        self.assertIn(
+            "prose_shard_continuation",
+            fragment_item_reasons(
+                "use it to absorb energy from something or trap someone "
+                "in a pocket dimension",
+                section="weaknesses",
+            ),
+        )
+
+    def test_raven_dangling_shard_flagged(self):
+        self.assertIn(
+            "prose_shard_continuation",
+            fragment_item_reasons(
+                "Can be sometimes exhausted by using her",
+                section="weaknesses",
+            ),
+        )
+
+    def test_continuation_not_applied_to_abilities(self):
+        self.assertEqual(
+            fragment_item_reasons(
+                "have it carry her", section="powers_and_abilities"
+            ),
+            [],
+        )
+
+    def test_filter_drops_raven_shards_keeps_real_weakness(self):
+        kept, dropped = filter_list_field_items(
+            "have it carry her, Can be sometimes exhausted by using her, "
+            "Weakness to sunlight",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Weakness to sunlight")
+        self.assertEqual(len(dropped), 2)
+        self.assertTrue(
+            all("prose_shard_continuation" in d["reasons"] for d in dropped)
+        )
+
+    # -- controls: complete clauses, auxiliaries included ---------------
+    def test_complete_clauses_with_auxiliaries_pass(self):
+        for item in (
+            "She can be killed by removing her heart",
+            "He has been weakened by the loss of his powers and can no "
+            "longer fight at full strength",
+            "Loses her powers when she is exposed to red sunlight for "
+            "too long",
+            "Can be harmed by silver weapons",
+        ):
+            self.assertEqual(
+                fragment_item_reasons(item, section="weaknesses"),
+                [],
+                msg=item,
+            )
+
+    def test_subject_led_long_clauses_pass(self):
+        # Corpus-calibration controls: past-tense clauses head with a
+        # subject pronoun or a proper noun; the long-continuation rule
+        # spares both shapes.
+        for item in (
+            "he learned how to utilize his curse to his advantage",
+            "which allowed Denji to successfully ambush her in their "
+            "final confrontation",
+        ):
+            self.assertEqual(
+                fragment_item_reasons(item, section="weaknesses"),
+                [],
+                msg=item,
+            )
+
+    def test_headed_clauses_ending_on_pronouns_pass(self):
+        # Corpus-calibration controls: whole clauses whose object is
+        # a pronoun end on that pronoun legitimately ("...control
+        # them", "...with it"); only subjectless dangling ends are
+        # shards.
+        for item in (
+            "Whitesnake can control them",
+            "it rips out his heart with it",
+            "Gray possesses extreme mastery over it",
+            "Using One For All in his weakened state hurts him",
+        ):
+            self.assertEqual(
+                fragment_item_reasons(item, section="weaknesses"),
+                [],
+                msg=item,
+            )
+
+
 def comic_profile(name, variant_name=None, franchise="DC"):
     prof = profile(name, franchise, "comic")
     if variant_name is not None:

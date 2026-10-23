@@ -3283,6 +3283,103 @@ def _prose_shard(item: str, lowered: str, words: int) -> bool:
     )
 
 
+# Prose-shard continuation rule (weaknesses only, second generation):
+# the 50h gate showed comma-split prose continuations escaping
+# _prose_shard two ways -- they carry an auxiliary verb ("have it
+# carry her", "Can be sometimes exhausted by using her") or run past
+# the 6-word cap ("use it to absorb energy from something or trap
+# someone in a pocket dimension"). Two signals catch the family
+# while sparing complete clauses:
+#   (a) Dangling end: a SHORT item (<=10 words, single-sentence)
+#       whose final whole token is a pronoun, possessive, preposition
+#       or conjunction -- a word a clause cannot end on -- with no
+#       subject pronoun (he/she/they/we) that could head a clause.
+#       The whole-token test keeps hyphenated compounds ("cave-in")
+#       and the length cap keeps stored multi-sentence prose out.
+#   (b) Long subjectless continuation: a lowercase-opening,
+#       single-sentence item past the word cap with no auxiliary and
+#       no finite verb anywhere, carrying an object pronoun or an
+#       infinitive chain -- a complete clause cannot be built
+#       without a finite verb. Items carrying a subject pronoun or
+#       a proper noun are spared: past-tense clauses ("he learned
+#       how to...", "which allowed Denji to...") head exactly
+#       there, and sparing a subordinate fragment is the cheap
+#       direction.
+_PROSE_CONT_DANGLING_END = frozenset(
+    {
+        "her", "him", "it", "them", "his", "hers", "its", "their",
+        "himself", "herself", "itself", "themselves",
+        "to", "from", "with", "by", "in", "on", "at", "of", "for",
+        "against", "into", "onto", "upon", "and", "or", "but", "than",
+    }
+)
+_PROSE_CONT_SUBJECTS = frozenset({"he", "she", "they", "we"})
+_PROSE_CONT_DANGLING_MAX_WORDS = 10
+# Function words that cannot head a clause: when a verb follows one
+# of these, the verb is not subject-led.
+_PROSE_CONT_FUNCTION = _PROSE_SHARD_AUX | frozenset(
+    {
+        "the", "a", "an", "this", "that", "these", "those",
+        "to", "from", "with", "by", "in", "on", "at", "of", "for",
+        "against", "into", "onto", "upon", "and", "or", "but", "than",
+        "as", "so", "if", "when", "while", "not", "no",
+        "sometimes", "always", "often", "usually", "still", "already",
+        "even", "also", "just", "now", "then", "simply", "quickly",
+    }
+)
+
+
+def _single_sentence(text: str) -> bool:
+    return not re.search(r"[.!?]\s+[A-Z]", text.strip())
+
+
+def _prose_shard_continuation(item: str, lowered: str, words: int) -> bool:
+    tokens = re.findall(r"[a-z]+(?:'[a-z]+)?", lowered)
+    if len(tokens) < 2 or not _single_sentence(item):
+        return False
+    if words <= _PROSE_CONT_DANGLING_MAX_WORDS:
+        raw_words = item.strip().rstrip(" .,;:").split()
+        last = raw_words[-1].casefold().strip("()[]{}\"'") if raw_words else ""
+        # Headed-clause spare: a clause whose verb is led by a
+        # subject token ("opponents would...", "Whitesnake can...",
+        # "it rips...") may legitimately END on a pronoun object;
+        # it is whole, not dangling. The Raven shards open on the
+        # auxiliary itself or on a bare verb -- no verb in them is
+        # preceded by a subject -- so the spare never reaches them.
+        headed = tokens[0] == "it" or any(
+            (
+                token in _PROSE_SHARD_AUX
+                or _looks_like_finite_verb(token)
+            )
+            and idx > 0
+            and tokens[idx - 1] not in _PROSE_CONT_FUNCTION
+            for idx, token in enumerate(tokens)
+        )
+        if (
+            last in _PROSE_CONT_DANGLING_END
+            and not headed
+            and not any(token in _PROSE_CONT_SUBJECTS for token in tokens)
+        ):
+            return True
+    if (
+        item.strip()[:1].islower()
+        and tokens[0] != "it"
+        and words > _PROSE_SHARD_MAX_WORDS
+        and not any(token in _PROSE_SHARD_AUX for token in tokens)
+        and not any(_looks_like_finite_verb(token) for token in tokens)
+        and not any(token in _PROSE_CONT_SUBJECTS for token in tokens)
+        and not any(
+            token[:1].isupper() for token in item.split()[1:]
+        )
+        and (
+            any(token in {"it", "him", "her", "them"} for token in tokens[:-1])
+            or " to " in lowered
+        )
+    ):
+        return True
+    return False
+
+
 # Glued tab-key composites (fourth debris generation, items). The
 # CSPW pages carry a tabber whose tab labels the itemizer glued onto
 # the first ability of a tab: "Base Hax Hammer Harleen Hax AoR
@@ -3348,6 +3445,8 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         reasons.append("weakness_fragment")
     if section == "weaknesses" and _prose_shard(value, lowered, words):
         reasons.append("prose_shard")
+    if section == "weaknesses" and _prose_shard_continuation(value, lowered, words):
+        reasons.append("prose_shard_continuation")
     return reasons
 
 
