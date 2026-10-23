@@ -22,6 +22,7 @@ sys.path.insert(0, "/app/src")
 import asyncpg
 
 from battlebot.profiles import yaml_io
+from battlebot.profiles.demotion import apply_demotion_stamp
 
 REPORT = Path("/app/data/continuity_sweep_report.json")
 OUT = Path("/app/data/phase2_demote_report.json")
@@ -64,7 +65,7 @@ async def main() -> int:
         }
         profile["status"] = "needs_review"
         profile["battle_eligible"] = False
-        profile["continuity_demotion"] = stamp
+        apply_demotion_stamp(profile, "continuity_demotion", stamp)
         dst.parent.mkdir(parents=True, exist_ok=True)
         yaml_io.write_yaml(dst, profile)
         src.unlink()
