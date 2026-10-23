@@ -2706,6 +2706,74 @@ _SCALAR_SCAFFOLDING_PATTERNS = (
 _INSUBSTANTIVE_SCALAR_EXACT = frozenset({"self explanatory"})
 
 
+# ---------------------------------------------------------------------------
+# CSPW template stat screens (third debris generation). Sample 50f's
+# gate failed on a single source -- an unfilled character-stats-
+# profiles template page -- whose editorial furniture merged as
+# stats:
+#   (a) WIP-placeholder stats: attack_potency read "Will Finish Upon
+#       Return", an editor's promise to complete the page, not a
+#       value. The anchored families below cover its close cousins
+#       ("to be added", "will be added", "coming soon", ...) --
+#       anchored to the start of the value so a substantive sentence
+#       that merely mentions pending work later is untouched.
+#   (b) field-definition stats: range read "The distance the
+#       character's attacks/abilities can cover." -- the template's
+#       own generic definition of the field, not this character's
+#       range. The patterns key on the generic third-person "the
+#       character's <field concept>" phrasing (real stat values speak
+#       of THIS character: "his attacks", "her range") and on
+#       "how far/fast/... the character" definitional openings.
+# Wiring: template_stat_reasons is called from
+# boilerplate_reasons(scalar=True), so it fires everywhere scalar
+# stats are screened -- the recovery field loop's axes branch (and
+# its keys hygiene check) and, via stat_field_rejection_reasons, the
+# repair path's attempt_from_result choke point. The item side of
+# the same template family is screened with the item filters (see
+# _TEMPLATE_ITEM_PATTERNS near placeholder_item_reasons).
+# ---------------------------------------------------------------------------
+
+_WIP_PLACEHOLDER_STAT_PATTERNS = (
+    r"^\s*will finish\b",
+    r"\bwill finish (?:upon|on|when)\b",
+    r"^\s*will (?:add|update|complete|fill in)\b",
+    r"^\s*(?:will be|to be) (?:added|finished|completed|filled(?: in)?|written|updated)\b",
+    r"^\s*coming soon\b",
+    r"^\s*not (?:yet )?(?:added|finished|completed|written|complete)\b",
+    r"^\s*(?:tba|tbd)\b",
+)
+
+_FIELD_DEFINITION_STAT_PATTERNS = (
+    r"\bthe character'?s (?:attacks?|abilities|powers|attack power|destructive capacity|durability|speed|stamina|range|intelligence|strength)\b",
+    r"\bhow (?:far|fast|much|strong|durable)\b[^.]{0,60}\bthe character\b",
+)
+
+
+def template_stat_reasons(text: Any) -> list[str]:
+    """CSPW template-residue checks for one scalar stat value.
+
+    Returns wip_placeholder_stat for editor placeholders and
+    field_definition_stat for the template's own definition of the
+    field; an empty list means the value is a real stat.
+    """
+    value = str(text or "")
+    if not value.strip():
+        return []
+    lowered = value.casefold()
+    reasons: list[str] = []
+    if any(
+        re.search(pattern, lowered)
+        for pattern in _WIP_PLACEHOLDER_STAT_PATTERNS
+    ):
+        reasons.append("wip_placeholder_stat")
+    if any(
+        re.search(pattern, lowered)
+        for pattern in _FIELD_DEFINITION_STAT_PATTERNS
+    ):
+        reasons.append("field_definition_stat")
+    return reasons
+
+
 def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
     """Template-residue checks for one recovered field's text.
 
@@ -2727,6 +2795,9 @@ def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
             reasons.append("markup_residue")
         if any(re.search(pattern, lowered) for pattern in _SCALAR_SCAFFOLDING_PATTERNS):
             reasons.append("page_scaffolding")
+        for reason in template_stat_reasons(value):
+            if reason not in reasons:
+                reasons.append(reason)
         cleaned = re.sub(r"[^a-z0-9]+", " ", lowered).strip()
         if len(cleaned) < 8 or cleaned in _INSUBSTANTIVE_SCALAR_EXACT:
             reasons.append("insubstantive")
@@ -2757,6 +2828,48 @@ _SCAFFOLDING_ITEM_PATTERNS = (
 )
 
 
+# CSPW template items (the item side of the third debris generation):
+# the source template's own instructions and its bare "<stat> feats"
+# section labels, itemized as if they were the character's weaknesses
+# -- the harley-quinn-post-flashpoint sample-50f merge: "Self-
+# explanatory Feats: List all of the character's amazing feats.
+# Strength feats", plus standalone "speed feats" / "durability feats"
+# items. A substantive item that merely MENTIONS feats does not
+# match: the instruction patterns key on the template's imperative
+# phrasing, and the label check requires the whole item to be just a
+# stat label plus "feats".
+_TEMPLATE_ITEM_PATTERNS = (
+    r"\blist all of (?:the character'?s|their|his|her|its)\b",
+    r"^\s*self[-\s]?explanatory\b",
+    r"\bfeats\s*:\s*list\b",
+)
+
+_FEATS_LABEL_STATS = frozenset(
+    {
+        "attack potency", "lifting strength", "striking strength",
+        "combat speed", "travel speed", "attack speed",
+        "energy projection", "strength", "speed", "durability",
+        "stamina", "intelligence", "attack", "defense", "defence",
+        "offense", "offence", "range", "combat", "skill", "reaction",
+        "magic", "hax",
+    }
+)
+
+
+def _feats_label_item(lowered: str) -> bool:
+    """True when the whole item is a bare "<stat> feats" label."""
+    text = lowered.strip().rstrip(".!").strip()
+    if not text.endswith("feats"):
+        return False
+    head = text[: -len("feats")].strip()
+    if head in _FEATS_LABEL_STATS:
+        return True
+    # A bare two-token "<word> feats" item is a section label,
+    # never a substantive entry.
+    tokens = head.split()
+    return len(tokens) == 1 and tokens[0].isalpha()
+
+
 def placeholder_item_reasons(item: Any) -> list[str]:
     """Per-item placeholder checks for one recovered list entry.
 
@@ -2775,6 +2888,11 @@ def placeholder_item_reasons(item: Any) -> list[str]:
         reasons.append("placeholder_instruction")
     if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_INSTRUCTION_PATTERNS):
         reasons.append("template_instruction")
+    if any(re.search(pattern, lowered) for pattern in _TEMPLATE_ITEM_PATTERNS):
+        if "template_instruction" not in reasons:
+            reasons.append("template_instruction")
+    if _feats_label_item(lowered):
+        reasons.append("feats_label")
     if any(re.search(pattern, lowered) for pattern in _SCAFFOLDING_ITEM_PATTERNS):
         reasons.append("page_scaffolding")
     if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_MARKUP_PATTERNS):

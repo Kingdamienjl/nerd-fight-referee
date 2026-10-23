@@ -23,6 +23,7 @@ from battlebot.review.auto_repair import (
     infobox_header_reasons,
     placeholder_item_reasons,
     stat_field_rejection_reasons,
+    template_stat_reasons,
 )
 
 
@@ -1182,6 +1183,206 @@ class RepairPathItemScreenTests(unittest.TestCase):
         )
         self.assertNotIn("dropped_items", attempt.metadata)
         self.assertNotIn("stripped_items", attempt.metadata)
+
+
+class TemplateScreenTests(unittest.TestCase):
+    """CSPW template screens (sample 50f's harley-quinn failure).
+
+    The source page was an unfilled character-stats-profiles
+    template: its WIP placeholder and its field definitions merged
+    as stats, and its instruction / feats-label furniture merged as
+    weaknesses. Verbatim regressions first, then the controls that
+    must survive.
+    """
+
+    # -- (a) WIP-placeholder stats --
+
+    def test_wip_stat_rejected_verbatim(self):
+        value = "Will Finish Upon Return"
+        self.assertIn("wip_placeholder_stat", template_stat_reasons(value))
+        self.assertIn(
+            "wip_placeholder_stat", boilerplate_reasons(value, scalar=True)
+        )
+        self.assertIn(
+            "wip_placeholder_stat", stat_field_rejection_reasons(value)
+        )
+
+    def test_wip_family_rejected(self):
+        for value in (
+            "To be added",
+            "Will be added soon",
+            "To be finished",
+            "Coming soon",
+            "Will update later",
+        ):
+            self.assertIn(
+                "wip_placeholder_stat", template_stat_reasons(value), value
+            )
+
+    # -- (b) field-definition stats --
+
+    def test_field_definition_stat_rejected_verbatim(self):
+        value = "The distance the character's attacks/abilities can cover."
+        self.assertIn("field_definition_stat", template_stat_reasons(value))
+        self.assertIn(
+            "field_definition_stat", boilerplate_reasons(value, scalar=True)
+        )
+        self.assertIn(
+            "field_definition_stat", stat_field_rejection_reasons(value)
+        )
+
+    # -- stat controls --
+
+    def test_legit_stats_survive_template_screen(self):
+        for value in (
+            "8-C",
+            "Massively Hypersonic+",
+            "Standard melee range",
+            "Several meters with energy blasts (Can snipe targets "
+            "from rooftops across the city)",
+            "Building level (Destroyed a warehouse with a single strike)",
+            "The character's armor plating shrugs off anti-tank fire",
+        ):
+            self.assertEqual(template_stat_reasons(value), [], value)
+
+    def test_legit_stat_sentences_survive_full_screen(self):
+        for value in (
+            "Massively Hypersonic+",
+            "Standard melee range",
+            "Several meters with energy blasts (Can snipe targets "
+            "from rooftops across the city)",
+            "Building level (Destroyed a warehouse with a single strike)",
+            "The character's armor plating shrugs off anti-tank fire",
+        ):
+            self.assertEqual(stat_field_rejection_reasons(value), [], value)
+
+    # -- (c) template-instruction / feats-label items --
+
+    def test_template_instruction_item_rejected_verbatim(self):
+        item = (
+            "Self-explanatory Feats: List all of the character's "
+            "amazing feats. Strength feats"
+        )
+        self.assertIn("template_instruction", placeholder_item_reasons(item))
+
+    def test_list_all_instruction_rejected(self):
+        self.assertIn(
+            "template_instruction",
+            placeholder_item_reasons("List all of the character's amazing feats"),
+        )
+        self.assertIn(
+            "template_instruction",
+            placeholder_item_reasons("Self-explanatory"),
+        )
+
+    def test_bare_feats_labels_rejected(self):
+        for item in ("speed feats", "durability feats", "Strength feats"):
+            self.assertIn("feats_label", placeholder_item_reasons(item), item)
+
+    def test_feats_labels_filtered_from_weaknesses(self):
+        kept, dropped = filter_list_field_items(
+            "Vulnerable to magic, speed feats, durability feats",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Vulnerable to magic")
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("feats_label", reasons)
+
+    def test_substantive_feats_prose_survives(self):
+        item = "Has replicated the feats of strength performed by veteran heroes"
+        self.assertEqual(placeholder_item_reasons(item), [])
+        kept, dropped = filter_list_field_items(item, section="weaknesses")
+        self.assertEqual(kept, item)
+        self.assertEqual(dropped, [])
+
+
+class TemplateRepairPathTests(unittest.TestCase):
+    """The CSPW template screens at the repair choke point.
+
+    attempt_from_result screens stats via stat_field_rejection_
+    reasons (which now includes the template stat screens) and list
+    fields via the item filters, so the drain can no longer merge
+    the harley template artifacts either.
+    """
+
+    FIELDS = {
+        "attack_potency": "Wall level (Can shatter reinforced concrete "
+        "with a casual strike)",
+        "speed": "Supersonic (Can outpace fighter jets in sustained flight)",
+        "durability": "Wall level (Shrugged off anti-tank fire at close range)",
+        "range": "Standard melee range",
+        "powers_and_abilities": "Solar Energy Absorption, Flight, Heat Vision",
+        "weaknesses": "Vulnerable to holy weapons",
+        "origin": "DC Comics",
+    }
+
+    def _attempt(self, prof, fields=None):
+        title = str(prof.get("name") or "Test")
+        source = {
+            "id": "cspw-test",
+            "title": title,
+            "url": "https://character-stats-profiles.fandom.com/wiki/"
+            + title.replace(" ", "_"),
+            "provider_id": "cspw",
+            "authority": "high",
+            "promotion_allowed": True,
+        }
+        metadata = {
+            "title": title,
+            "url": source["url"],
+            "revision_id": "42",
+            "fetch_status": "fetched",
+            "promotion_allowed": True,
+            "authority": "high",
+            "provider_id": "cspw",
+        }
+        return attempt_from_result(
+            prof, source, dict(fields or self.FIELDS), metadata,
+            ok=True, note="ok",
+        )
+
+    def test_repair_attempt_drops_template_stats(self):
+        prof = comic_profile("Harley Quinn (Post-Flashpoint)", "Post-Flashpoint")
+        fields = dict(self.FIELDS)
+        fields["attack_potency"] = "Will Finish Upon Return"
+        fields["range"] = "The distance the character's attacks/abilities can cover."
+        attempt = self._attempt(prof, fields)
+        merged = attempt_field_map(attempt)
+        self.assertNotIn("attack_potency", merged)
+        self.assertNotIn("range", merged)
+        dropped = attempt.metadata.get("dropped_scalar_fields") or {}
+        self.assertIn("wip_placeholder_stat", dropped.get("attack_potency") or [])
+        self.assertIn("field_definition_stat", dropped.get("range") or [])
+        # Untouched stats survive alongside the drops.
+        self.assertEqual(merged["speed"], self.FIELDS["speed"])
+
+    def test_repair_attempt_drops_template_items(self):
+        prof = comic_profile("Harley Quinn (Post-Flashpoint)", "Post-Flashpoint")
+        fields = dict(self.FIELDS)
+        fields["weaknesses"] = (
+            "Vulnerable to magic, speed feats, "
+            "Self-explanatory Feats: List all of the character's "
+            "amazing feats. Strength feats"
+        )
+        attempt = self._attempt(prof, fields)
+        self.assertEqual(
+            attempt_field_map(attempt)["weaknesses"], "Vulnerable to magic"
+        )
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("feats_label", reasons)
+        self.assertIn("template_instruction", reasons)
+
+    def test_repair_attempt_clean_fields_untouched(self):
+        prof = comic_profile("Harley Quinn (Post-Flashpoint)", "Post-Flashpoint")
+        attempt = self._attempt(prof)
+        merged = attempt_field_map(attempt)
+        self.assertEqual(merged["attack_potency"], self.FIELDS["attack_potency"])
+        self.assertEqual(merged["range"], self.FIELDS["range"])
+        self.assertNotIn("dropped_scalar_fields", attempt.metadata)
+        self.assertNotIn("dropped_items", attempt.metadata)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,21 @@
+{
+  "job": "frag3-part1-cspw-template-screens",
+  "date": "2026-10-22",
+  "screens": {
+    "wip_placeholder_stat": "template_stat_reasons via boilerplate_reasons(scalar=True): recovery axes branch + repair via stat_field_rejection_reasons; regression AP 'Will Finish Upon Return'",
+    "field_definition_stat": "generic 'the character's <field concept>' phrasing; regression range 'The distance the character's attacks/abilities can cover.'",
+    "template_instruction_item": "_TEMPLATE_ITEM_PATTERNS in placeholder_item_reasons (both paths via filter_list_field_items_detailed): list-all instruction + self-explanatory lead",
+    "feats_label": "_feats_label_item in placeholder_item_reasons: bare '<stat> feats' items ('speed feats', 'durability feats')"
+  },
+  "tests": {"guard_suite": "116/116 OK", "discover": "420 tests, 13F + 11E, 1 skipped (band)"},
+  "live_cleanup": {
+    "backup": "backups/20261022-frag3 (profiles tar 292MB verified + DB dump)",
+    "items_removed": 21,
+    "profiles": ["shinobu-kocho (kept live, eligible)", "beerus-game", "cell-classic", "future-trunks-anime", "trunks-anime", "vegeta-classic", "rimuru-tempest"],
+    "stat_cleared_disclosed_extra": "rimuru-tempest attack_potency (template instruction line verbatim)",
+    "demoted_to_needs_review": 6,
+    "battle_eligible": {"before_cleanup": 2268, "after_demote": 2263},
+    "note": "cleanup exposed that template debris propped up 6 profiles' eligibility; importer froze their DB rows with debris, so they were demoted per the continuity-demotion precedent. Discovered latent issue: top-level demotion stamps (Job 2's continuity_demotion too) fail CharacterProfile extra=forbid validation; repair path loads dicts so stamps remain repair-visible."
+  },
+  "disk_part0": {"free_before": "1.1G (97%)", "free_after": "3.8G (89%)", "removed": ["ghcr.io/berriai/litellm:main-v1.43.0", "postgres:16-alpine", "redis:7-alpine", "docker builder cache 300MB"]}
+}
