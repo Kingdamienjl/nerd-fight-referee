@@ -2939,6 +2939,9 @@ def placeholder_item_reasons(item: Any) -> list[str]:
             reasons.append("template_instruction")
     if _feats_label_item(lowered):
         reasons.append("feats_label")
+    for reason in editorial_item_reasons(value):
+        if reason not in reasons:
+            reasons.append(reason)
     if any(re.search(pattern, lowered) for pattern in _SCAFFOLDING_ITEM_PATTERNS):
         reasons.append("page_scaffolding")
     if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_MARKUP_PATTERNS):
@@ -3401,6 +3404,272 @@ def _tab_key_composite(value: str) -> bool:
     return tokens.count(_TAB_KEY_LABEL) >= 2
 
 
+# Editorial essay screen (sixth debris generation, items): wiki
+# explanation/editor prose itemized as character content -- the
+# superman-prime-earth sample-50i merge, whose ENTIRE weaknesses
+# recovery was fragments of the page's explanatory essay ("as well
+# as how the powers and nature of the character fundamentally
+# work. This is particularly useful for more high-tiered
+# characters...") plus a second-person instruction to whoever
+# edits the page ("it is very important that you make sure that
+# the text has good grammar/sentence structure"). Two families:
+#   editor_instruction -- imperatives addressed to an editor and
+#       references to the text/page/grammar as an artifact under
+#       construction. Character content never tells its reader to
+#       mind the grammar.
+#   editorial_essay -- meta prose explaining powers or tiers in
+#       general to readers ("the character" as a generic stand-in,
+#       tier-system vocabulary), stating no trait of THIS
+#       character. The seam every pattern keys on: character
+#       content speaks about the character; this speaks about the
+#       page, the text, or characters in general.
+_EDITOR_INSTRUCTION_PATTERNS = (
+    r"\bit is (?:very )?important that you\b",
+    r"\byou (?:should|must|need to|have to) (?:specify|state|mention|note|include|list|indicate|describe)\b",
+    r"\bmake sure (?:that )?(?:the text|the page|your (?:grammar|spelling))\b",
+    r"\bgood grammar\b",
+    r"\bsentence structure\b",
+    r"\bgrammar\s*(?:/|and)\s*sentence\b",
+    r"\bdo not (?:add|remove|edit|delete|change|revert)\b",
+    r"\bwhen (?:writing|editing|creating) (?:a |the |this )?(?:page|profile|article)\b",
+)
+_EDITORIAL_ESSAY_PATTERNS = (
+    r"\bhow the (?:powers|abilities|nature)(?: and (?:powers|nature|abilities))? of the character\b",
+    r"\bpowers and nature of the character\b",
+    r"\bthe nature of the character\b",
+    r"\bthe character\b[^.]{0,80}\bfundamentally\b",
+    r"\bfundamentally\b[^.]{0,40}\bthe character\b",
+    r"\bparticularly useful for\b[^.]{0,60}\bcharacters\b",
+    r"\bmore (?:high|low)-tiered\b",
+    r"\b(?:high|low)-tiered characters\b",
+    r"\bthis (?:section|page|explanation) (?:explains|will explain|is meant to|is intended to)\b",
+    r"\bexplanation (?:section|page)\b",
+)
+
+
+def editorial_item_reasons(item: Any) -> list[str]:
+    """Editorial-essay checks for one recovered list item.
+
+    Returns reason strings; an empty list means the item is
+    character content, not page prose about character content.
+    """
+    value = str(item or "")
+    if not value.strip():
+        return []
+    lowered = value.casefold()
+    reasons: list[str] = []
+    if any(re.search(p, lowered) for p in _EDITOR_INSTRUCTION_PATTERNS):
+        reasons.append("editor_instruction")
+    if any(re.search(p, lowered) for p in _EDITORIAL_ESSAY_PATTERNS):
+        reasons.append("editorial_essay")
+    return reasons
+
+
+# Concessive tail shards (sixth debris generation, weaknesses
+# only): a fronted concessive clause with no main clause of its
+# own -- the starfire sample-50i weakness "though this is draining
+# to use", the tail of a sentence whose main clause stayed on the
+# page. _prose_shard misses it because it carries an auxiliary, and
+# _prose_shard_continuation misses it because it ends cleanly and
+# opens on a subordinator. Test: the item OPENS with a concessive
+# subordinator; a fronted subordinate clause is only a whole item
+# when a main clause follows the comma -- no comma, or a post-comma
+# tail with no subject-led verb, means the item is the subordinate
+# clause alone. Items that merely CONTAIN a concessive clause after
+# a main clause ("He is strong, though he tires quickly") do not
+# open with the subordinator and are untouched.
+_CONCESSIVE_OPENERS = ("even though ", "although ", "though ")
+# Calibration round 1 (348 raw hits over the stored weakness
+# corpus) showed the corpus legitimately stores concessive
+# QUALIFIERS as standalone items -- clauses with a real subject
+# and concrete limitation content ("although this drains her
+# spiritual energy quickly", "though his transformations fix his
+# eyesight"). Those are content, however fragmentary their syntax.
+# The debris shape is narrower: a SHORT tail whose subject is a
+# bare demonstrative or missing entirely and whose predicate is a
+# vague property with no concrete content noun -- "though this is
+# draining to use" states a cost of NOTHING named. The rule below
+# therefore also requires: no subject pronoun / possessive /
+# determiner-led subject heading the clause, no concrete content
+# marker anywhere in the item, and <= 12 words.
+_CONCESSIVE_SUBJECT_HEADS = frozenset(
+    {
+        "he", "she", "they", "we", "it", "you",
+        "his", "her", "hers", "their", "theirs",
+        "the", "a", "an",
+    }
+)
+_CONCESSIVE_CONTENT_MARKERS = (
+    r"\b(?:energy|strength|stamina|endurance|body|health|damage|"
+    r"sight|eyesight|form|forms|power|powers|weakness|weaknesses|"
+    r"cost|claim|magic|blood|life|mind|soul|durability)\b",
+    r"\b(?:circumvent\w*|mitigat\w*|contradict\w*|unaffected|immune|"
+    r"negat\w*|nullif\w*|counter\w*|ignor\w*|curb\w*|work-arounds?)\b",
+    r"\b(?:will not|won't|does not|doesn't|did not|no longer)\b",
+    # A verbless limitation with its condition stated ("although
+    # weaker without her helmet") conveys the whole weakness; a
+    # comparison tail ("though stronger than he ever let Vergil
+    # see") does not match the condition form and still fires.
+    r"\bweaker\b[^.]{0,30}\b(?:without|when|if|while)\b",
+)
+_CONCESSIVE_MAX_WORDS = 12
+
+
+def _tail_has_main_clause(tail: str) -> bool:
+    tokens = re.findall(r"[a-z]+(?:'[a-z]+)?", tail.casefold())
+    if not tokens:
+        return False
+    if any(
+        (token in _PROSE_SHARD_AUX or _looks_like_finite_verb(token))
+        and idx > 0
+        and tokens[idx - 1] not in _PROSE_CONT_FUNCTION
+        for idx, token in enumerate(tokens)
+    ):
+        return True
+    # Subject-pronoun-led tail whose verb is shielded by an adverb
+    # ("it also leaves her exhausted"): the pronoun heads a clause
+    # as long as some verb follows it.
+    return tokens[0] in {"it", "he", "she", "they", "we"} and any(
+        token in _PROSE_SHARD_AUX or _looks_like_finite_verb(token)
+        for token in tokens[1:]
+    )
+
+
+def _concessive_shard(item: str, lowered: str, words: int) -> bool:
+    stripped = lowered.strip().lstrip("([{\"'* ")
+    if stripped.startswith("and "):
+        stripped = stripped[len("and "):]
+    opener = next(
+        (op for op in _CONCESSIVE_OPENERS if stripped.startswith(op)), None
+    )
+    if opener is None:
+        return False
+    if not _single_sentence(item):
+        return False
+    if "," in item or ";" in item:
+        tail = re.split(r"[,;]", item, maxsplit=1)[1]
+        if _tail_has_main_clause(tail):
+            return False
+    if words > _CONCESSIVE_MAX_WORDS:
+        return False
+    rest_tokens = re.findall(r"[a-z]+(?:'[a-z]+)?", stripped[len(opener):])
+    if rest_tokens and rest_tokens[0] in _CONCESSIVE_SUBJECT_HEADS:
+        return False
+    # A concrete subject performing the clause ("though rage can
+    # override these", "although Madara dropped a second rock") is a
+    # content clause, however subordinate its syntax: a verb in the
+    # first three tokens headed by a non-function token.
+    if any(
+        (token in _PROSE_SHARD_AUX or _looks_like_finite_verb(token))
+        and idx > 0
+        and rest_tokens[idx - 1] not in _PROSE_CONT_FUNCTION
+        for idx, token in enumerate(rest_tokens[:3])
+    ):
+        return False
+    if any(re.search(p, lowered) for p in _CONCESSIVE_CONTENT_MARKERS):
+        return False
+    return True
+
+
+# Section-integrity screen (sixth debris generation, weaknesses
+# only): a named technique entry -- the character's OWN notable
+# attack, label-headed "Name: <the character performs the attack>"
+# -- itemized into the weaknesses field (starfire sample-50i:
+# "Starbolt: Starfire can fire bolts of stellar energy out of her
+# hands", "Nova: Starfire releases an omnidirectional energy
+# pulse"). The content is real; the defect is purely that it is
+# filed as a weakness. Per-item provenance does not survive field
+# extraction, so the test is textual: an attack predicate plus an
+# energy/projectile object, and NO limitation language anywhere in
+# the item. A body that says the technique drains, exhausts, or
+# backfires is stating a cost and is spared, as is any item naming
+# a vulnerability. The screen only rejects from weaknesses; it
+# never reroutes the item into abilities.
+_TECHNIQUE_FINITE_VERBS = frozenset(
+    {
+        "fires", "shoots", "releases", "unleashes", "launches",
+        "emits", "generates", "creates", "summons", "hurls",
+        "projects", "channels", "manifests", "conjures",
+        "produces", "expels", "detonates", "ignites",
+    }
+)
+_TECHNIQUE_BASE_VERBS = (
+    "fire|shoot|release|unleash|launch|emit|generate|create|summon|"
+    "hurl|blast|project|channel|manifest|conjure|produce|expel|"
+    "detonate|ignite"
+)
+_TECHNIQUE_OBJECTS = frozenset(
+    {
+        "energy", "bolt", "bolts", "beam", "beams", "blast", "blasts",
+        "pulse", "pulses", "wave", "waves", "projectile",
+        "projectiles", "flame", "flames", "lightning", "plasma",
+        "radiation", "laser", "lasers", "ray", "rays", "orb", "orbs",
+        "sphere", "spheres", "missile", "missiles", "explosion",
+        "explosions", "aura", "tendrils", "spikes",
+    }
+)
+_TECHNIQUE_WEAKNESS_MARKERS = (
+    r"\b(?:weak|weakness|vulnerable|vulnerability|susceptible|susceptibility)\b",
+    r"\b(?:drains|drained|draining|exhausts|exhausted|exhausting|fatigues|fatigued)\b",
+    r"\b(?:drawback|downside|limitation|backfire|backfires|recoil|overuse|strain|strains)\b",
+    r"\b(?:cannot|can't|can’t|unable|ineffective|useless)\b",
+    r"\bnot immune\b",
+    r"\b(?:leaves|leaving|drains|tires|hurts|harms|injures|damages|costs) (?:him|her|them|himself|herself|itself|themselves)\b",
+    r"\bno (?:effect|defense|defence|resistance) against\b",
+)
+
+
+def _attack_predicate(lowered: str) -> bool:
+    tokens = set(re.findall(r"[a-z]+(?:'[a-z]+)?", lowered))
+    if tokens & _TECHNIQUE_FINITE_VERBS:
+        return True
+    return bool(
+        re.search(
+            rf"\b(?:can|could|will|would|is able to|was able to)\s+"
+            rf"(?:\w+ly\s+)?(?:{_TECHNIQUE_BASE_VERBS})\b",
+            lowered,
+        )
+    )
+
+
+def _technique_label_body(value: str) -> str | None:
+    """Split a "Name: body" technique entry, or None.
+
+    The label must look like a name: 1-5 tokens, the first
+    capitalized, every other token capitalized or a small connector
+    -- sentence-like heads ("She is weak to...") are not labels.
+    """
+    match = re.match(r"^\s*(?P<label>[^:]{1,45}?):\s+(?P<body>\S.*)$", value.strip(), re.S)
+    if not match:
+        return None
+    label = match.group("label").strip()
+    if any(ch in label for ch in ".!?"):
+        return None
+    tokens = label.split()
+    if not 1 <= len(tokens) <= 5:
+        return None
+    if not tokens[0][:1].isupper():
+        return None
+    connectors = {"of", "the", "and", "&", "de", "von"}
+    for token in tokens[1:]:
+        if token[:1].isupper() or token.casefold() in connectors or token.isdigit():
+            continue
+        return None
+    return match.group("body")
+
+
+def _own_technique_in_weaknesses(value: str, lowered: str) -> bool:
+    if any(re.search(p, lowered) for p in _TECHNIQUE_WEAKNESS_MARKERS):
+        return False
+    tokens = set(re.findall(r"[a-z]+(?:'[a-z]+)?", lowered))
+    if not tokens & _TECHNIQUE_OBJECTS:
+        return False
+    body = _technique_label_body(value)
+    if body is not None:
+        return _attack_predicate(body.casefold())
+    return _attack_predicate(lowered)
+
+
 def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
     """Fragment-debris checks for one recovered list item.
 
@@ -3447,6 +3716,10 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         reasons.append("prose_shard")
     if section == "weaknesses" and _prose_shard_continuation(value, lowered, words):
         reasons.append("prose_shard_continuation")
+    if section == "weaknesses" and _concessive_shard(value, lowered, words):
+        reasons.append("concessive_shard")
+    if section == "weaknesses" and _own_technique_in_weaknesses(value, lowered):
+        reasons.append("technique_in_weaknesses")
     return reasons
 
 

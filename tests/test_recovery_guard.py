@@ -15,6 +15,7 @@ from battlebot.review.auto_repair import (
     boilerplate_reasons,
     clean_item_tails,
     continuity_check,
+    editorial_item_reasons,
     eligible_primary_attempts,
     evaluate_recovery_guard,
     filter_list_field_items,
@@ -1659,6 +1660,326 @@ class FourthGenRepairPathTests(unittest.TestCase):
         self.assertEqual(merged["tier"], self.FIELDS["tier"])
         self.assertNotIn("dropped_scalar_fields", attempt.metadata)
         self.assertNotIn("dropped_items", attempt.metadata)
+
+
+class EditorialEssayTests(unittest.TestCase):
+    """Sixth generation, family 1: editorial/explanatory essay prose
+    merged as items (superman-prime-earth sample 50i -- the profile's
+    ENTIRE weaknesses recovery was page essay). Calibrated over the
+    stored corpus (196k item texts): 18 raw hits, 4 distinct texts,
+    all debris -- the two verbatim families plus an editor
+    instruction in hawke. Round 1's generic second-person patterns
+    caught descriptive requirement prose ("which you need to have a
+    strong body...") and quoted dialogue; the adopted patterns key
+    on instructions about the page/text itself."""
+
+    def test_verbatim_essay_fragment_flagged(self):
+        self.assertIn(
+            "editorial_essay",
+            placeholder_item_reasons(
+                "as well as how the powers and nature of the character "
+                "fundamentally work. This is particularly useful for "
+                "more high-tiered characters"
+            ),
+        )
+
+    def test_verbatim_editor_instruction_flagged(self):
+        self.assertIn(
+            "editor_instruction",
+            placeholder_item_reasons(
+                "it is very important that you make sure that the text "
+                "has good grammar/sentence structure"
+            ),
+        )
+
+    def test_specify_instruction_flagged(self):
+        self.assertIn(
+            "editor_instruction",
+            editorial_item_reasons(
+                "so you should specify what gender and class type "
+                "Hawke is on vs matches"
+            ),
+        )
+
+    def test_filter_drops_essay_keeps_real_weakness(self):
+        kept, dropped = filter_list_field_items(
+            "it is very important that you make sure that the text has "
+            "good grammar/sentence structure, Weakness to sunlight",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Weakness to sunlight")
+        self.assertEqual(len(dropped), 1)
+        self.assertIn("editor_instruction", dropped[0]["reasons"])
+
+    # -- corpus controls: legit content that must survive -------------
+    def test_descriptive_requirement_prose_passes(self):
+        self.assertEqual(
+            editorial_item_reasons(
+                "Supernatural Willpower (Was capable of succeeding in "
+                "the heaven ascension ritual, which you need to have a "
+                "strong body and mind to be able to become an angel "
+                "without becoming a mindless beast)"
+            ),
+            [],
+        )
+
+    def test_makes_sure_third_person_passes(self):
+        for item in (
+            "His suit makes sure the wearer survives vacuum",
+            "Makes sure his allies are safe before engaging",
+        ):
+            self.assertEqual(editorial_item_reasons(item), [], item)
+
+    def test_character_prose_passes(self):
+        for item in (
+            "Salem was cursed with immortality by the God of Light, "
+            "ensuring she is unable to die so long as Remnant exists",
+            "Weak to Dragon",
+            "Flight",
+        ):
+            self.assertEqual(editorial_item_reasons(item), [], item)
+
+
+class TechniqueInWeaknessesTests(unittest.TestCase):
+    """Sixth generation, family 2: the character's OWN notable
+    attacks itemized into weaknesses (starfire sample 50i). The
+    content is real; the defect is the section. Calibrated over
+    83,206 stored weakness texts: the sampled hits are the defect
+    class itself (stored weaknesses fields are heavily polluted
+    with misfiled technique lists). Calibration caught one real
+    false-positive mechanism -- "blasts" is a noun as often as a
+    verb ("She is not immune to her own blasts") -- so the finite
+    verb set carries no noun-ambiguous forms."""
+
+    def test_starbolt_verbatim_flagged(self):
+        self.assertIn(
+            "technique_in_weaknesses",
+            fragment_item_reasons(
+                "Starbolt: Starfire can fire bolts of stellar energy "
+                "out of her hands",
+                section="weaknesses",
+            ),
+        )
+
+    def test_nova_verbatim_flagged(self):
+        self.assertIn(
+            "technique_in_weaknesses",
+            fragment_item_reasons(
+                "Nova: Starfire releases an omnidirectional energy pulse",
+                section="weaknesses",
+            ),
+        )
+
+    def test_unlabelled_technique_flagged(self):
+        self.assertIn(
+            "technique_in_weaknesses",
+            fragment_item_reasons(
+                "Babylon Guardian fires a blast of energy down the track",
+                section="weaknesses",
+            ),
+        )
+
+    def test_technique_not_applied_to_abilities(self):
+        self.assertNotIn(
+            "technique_in_weaknesses",
+            fragment_item_reasons(
+                "Starbolt: Starfire can fire bolts of stellar energy "
+                "out of her hands",
+                section="powers_and_abilities",
+            ),
+        )
+
+    def test_filter_drops_techniques_keeps_real_weakness(self):
+        kept, dropped = filter_list_field_items(
+            "Starbolt: Starfire can fire bolts of stellar energy out "
+            "of her hands, Nova: Starfire releases an omnidirectional "
+            "energy pulse, Weakness to sunlight",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Weakness to sunlight")
+        self.assertEqual(len(dropped), 2)
+        self.assertTrue(
+            all("technique_in_weaknesses" in d["reasons"] for d in dropped)
+        )
+
+    # -- controls: genuine weaknesses that must survive ---------------
+    def test_own_blasts_immunity_weakness_passes(self):
+        self.assertNotIn(
+            "technique_in_weaknesses",
+            fragment_item_reasons(
+                "She is not immune to her own blasts", section="weaknesses"
+            ),
+        )
+
+    def test_draining_technique_weakness_passes(self):
+        self.assertNotIn(
+            "technique_in_weaknesses",
+            fragment_item_reasons(
+                "Starbolts: Drawing on stellar energy drains her "
+                "reserves over time",
+                section="weaknesses",
+            ),
+        )
+
+    def test_named_vulnerability_passes(self):
+        self.assertNotIn(
+            "technique_in_weaknesses",
+            fragment_item_reasons(
+                "Kryptonite: A radioactive mineral that weakens him "
+                "and drains his strength",
+                section="weaknesses",
+            ),
+        )
+
+    def test_bare_attack_noun_phrases_pass(self):
+        for item in ("energy blasts", "Cyclops's optical blasts"):
+            self.assertNotIn(
+                "technique_in_weaknesses",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+
+class ConcessiveShardTests(unittest.TestCase):
+    """Sixth generation, family 3: concessive tail shards
+    (starfire sample 50i: "though this is draining to use").
+    Calibration round 1 fired on 348 stored weakness texts -- the
+    corpus legitimately stores concessive QUALIFIERS as items when
+    they carry a real subject and concrete limitation content. The
+    adopted rule is the narrow residue: short, demonstrative- or
+    subject-less, no concrete content marker, no following main
+    clause. Final calibration: 48 raw / 18 distinct, every distinct
+    hit a fragment or sentence tail."""
+
+    def test_verbatim_shard_flagged(self):
+        self.assertIn(
+            "concessive_shard",
+            fragment_item_reasons(
+                "though this is draining to use", section="weaknesses"
+            ),
+        )
+
+    def test_calibration_shards_flagged(self):
+        for shard in (
+            "though in the anime",
+            "although people with",
+            "though stronger than he ever let Vergil see",
+            "though this is usually undesirable",
+        ):
+            self.assertIn(
+                "concessive_shard",
+                fragment_item_reasons(shard, section="weaknesses"),
+                shard,
+            )
+
+    def test_concessive_not_applied_to_abilities(self):
+        self.assertNotIn(
+            "concessive_shard",
+            fragment_item_reasons(
+                "though this is draining to use",
+                section="powers_and_abilities",
+            ),
+        )
+
+    def test_filter_drops_shard_keeps_real_weakness(self):
+        kept, dropped = filter_list_field_items(
+            "though this is draining to use, Weakness to sunlight",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Weakness to sunlight")
+        self.assertEqual(len(dropped), 1)
+        self.assertIn("concessive_shard", dropped[0]["reasons"])
+
+    # -- controls: concessive content that must survive ---------------
+    def test_main_clause_pairs_pass(self):
+        for item in (
+            "Though weak to fire, he is resistant to ice",
+            "Although she is powerful, her stamina is limited",
+            "Though draining, she can use it repeatedly",
+            "He is strong, though he tires quickly",
+        ):
+            self.assertNotIn(
+                "concessive_shard",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+    def test_content_bearing_qualifiers_pass(self):
+        for item in (
+            "although this drains her spiritual energy quickly",
+            "though his transformations fix his eyesight for as long "
+            "as he uses them",
+            "Although unharmed by virtually any form of damage",
+            "although weaker without her helmet",
+            "though rage can override these",
+            "although this can be circumvented with the Bottomless Gloves",
+        ):
+            self.assertNotIn(
+                "concessive_shard",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+
+class SixthGenRepairPathTests(unittest.TestCase):
+    """The sixth-generation item screens at the repair choke point."""
+
+    FIELDS = {
+        "tier": "Building level (8-C)",
+        "attack_potency": "Wall level (Can shatter reinforced concrete "
+        "with a casual strike)",
+        "speed": "Supersonic (Can outpace fighter jets in sustained flight)",
+        "durability": "Wall level (Shrugged off anti-tank fire at close range)",
+        "range": "Standard melee range",
+        "powers_and_abilities": "Solar Energy Absorption, Flight, Heat Vision",
+        "weaknesses": "Vulnerable to holy weapons",
+        "origin": "DC Comics",
+    }
+
+    def _attempt(self, prof, fields=None):
+        title = str(prof.get("name") or "Test")
+        source = {
+            "id": "cspw-test",
+            "title": title,
+            "url": "https://character-stats-profiles.fandom.com/wiki/"
+            + title.replace(" ", "_"),
+            "provider_id": "cspw",
+            "authority": "high",
+            "promotion_allowed": True,
+        }
+        metadata = {
+            "title": title,
+            "url": source["url"],
+            "revision_id": "42",
+            "fetch_status": "fetched",
+            "promotion_allowed": True,
+            "authority": "high",
+            "provider_id": "cspw",
+        }
+        return attempt_from_result(
+            prof, source, dict(fields or self.FIELDS), metadata,
+            ok=True, note="ok",
+        )
+
+    def test_repair_attempt_drops_technique_and_shard_from_weaknesses(self):
+        prof = comic_profile("Starfire (Post-Flashpoint)", "Post-Flashpoint")
+        fields = dict(self.FIELDS)
+        fields["weaknesses"] = (
+            "Starbolt: Starfire can fire bolts of stellar energy out "
+            "of her hands, though this is draining to use, "
+            "Vulnerable to holy weapons"
+        )
+        attempt = self._attempt(prof, fields)
+        self.assertEqual(
+            attempt_field_map(attempt)["weaknesses"],
+            "Vulnerable to holy weapons",
+        )
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("technique_in_weaknesses", reasons)
+        self.assertIn("concessive_shard", reasons)
 
 
 if __name__ == "__main__":
