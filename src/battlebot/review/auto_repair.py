@@ -2774,6 +2774,49 @@ def template_stat_reasons(text: Any) -> list[str]:
     return reasons
 
 
+# ---------------------------------------------------------------------------
+# Bare-qualifier scalars (fourth debris generation). Sample 50g's
+# midnighter merges set tier to "At least" -- the qualifier half of
+# a real value ("At least Small Building level (...)") whose value
+# token the parser dropped. A scalar made ONLY of qualifier words
+# carries no value at all, so it is debris wherever it lands.
+# Wiring: bare_qualifier_reasons is called from
+# boilerplate_reasons(scalar=True) -- hence the recovery axes branch
+# and, via stat_field_rejection_reasons, the repair path's
+# attempt_from_result choke point -- and from
+# fragment_scalar_reasons for audit parity.
+# ---------------------------------------------------------------------------
+
+_BARE_QUALIFIER_TOKENS = frozenset(
+    {
+        "at", "least", "most", "around", "over", "under", "likely",
+        "possibly", "roughly", "about", "approximately", "nearly",
+        "almost", "far", "higher", "lower", "much",
+    }
+)
+
+
+def bare_qualifier_reasons(text: Any) -> list[str]:
+    """Reject a scalar stat value that is only a qualifier phrase.
+
+    Every token must be a qualifier word and no digit may appear:
+    a value token anywhere ("At least 8-C, likely higher", "At
+    least Small Building level (...)") makes it a real stat.
+    """
+    value = str(text or "").strip()
+    if not value:
+        return []
+    cleaned = re.sub(r"[^a-z0-9+]+", " ", value.casefold()).strip()
+    if not cleaned or any(ch.isdigit() for ch in cleaned):
+        return []
+    tokens = cleaned.split()
+    if len(tokens) <= 3 and all(
+        token in _BARE_QUALIFIER_TOKENS for token in tokens
+    ):
+        return ["bare_qualifier"]
+    return []
+
+
 def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
     """Template-residue checks for one recovered field's text.
 
@@ -2796,6 +2839,9 @@ def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
         if any(re.search(pattern, lowered) for pattern in _SCALAR_SCAFFOLDING_PATTERNS):
             reasons.append("page_scaffolding")
         for reason in template_stat_reasons(value):
+            if reason not in reasons:
+                reasons.append(reason)
+        for reason in bare_qualifier_reasons(value):
             if reason not in reasons:
                 reasons.append(reason)
         cleaned = re.sub(r"[^a-z0-9]+", " ", lowered).strip()
@@ -3237,6 +3283,27 @@ def _prose_shard(item: str, lowered: str, words: int) -> bool:
     )
 
 
+# Glued tab-key composites (fourth debris generation, items). The
+# CSPW pages carry a tabber whose tab labels the itemizer glued onto
+# the first ability of a tab: "Base Hax Hammer Harleen Hax AoR
+# Harley Hax Death Manipulation" (the harley-quinn-post-flashpoint
+# sample-50g merge; frag-2 removed the identical composite from
+# harley-quinn-dc-comics). The fingerprint is the tab category label
+# recurring as the tabber cycles forms. Calibrated on the live
+# corpus (67.5k distinct item names, incl. 63.5k from generated
+# profiles): the exact-case token "Hax" appearing twice or more
+# matches ZERO corpus names, while every broader repeated-token
+# rule caught legitimate names (franchise-token runs, parenthetical
+# lists). Prose uses lowercase ("mind hax") and is untouched: the
+# check runs on the item's original case.
+_TAB_KEY_LABEL = "Hax"
+
+
+def _tab_key_composite(value: str) -> bool:
+    tokens = re.findall(r"[A-Za-z0-9']+", value)
+    return tokens.count(_TAB_KEY_LABEL) >= 2
+
+
 def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
     """Fragment-debris checks for one recovered list item.
 
@@ -3275,6 +3342,8 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         reasons.append("conjunction_orphan")
     if re.match(r"\s*resistance to\s*:", lowered):
         reasons.append("glued_fragment")
+    if _tab_key_composite(value):
+        reasons.append("tab_key_composite")
     if section == "weaknesses" and words < 2:
         reasons.append("weakness_fragment")
     if section == "weaknesses" and _prose_shard(value, lowered, words):
@@ -3295,13 +3364,17 @@ def fragment_scalar_reasons(text: Any) -> list[str]:
     value = str(text or "").strip()
     if not value:
         return []
+    reasons: list[str] = []
     if value[0] in ",;:)]}":
-        return ["scalar_tail_fragment"]
-    if re.match(r"(?i)(?:far\s+)?(?:higher|lower)\b", value) and not re.search(
+        reasons.append("scalar_tail_fragment")
+    elif re.match(r"(?i)(?:far\s+)?(?:higher|lower)\b", value) and not re.search(
         r"\d", value
     ):
-        return ["scalar_tail_fragment"]
-    return []
+        reasons.append("scalar_tail_fragment")
+    for reason in bare_qualifier_reasons(value):
+        if reason not in reasons:
+            reasons.append(reason)
+    return reasons
 
 
 def _wikitext_categories(wikitext: str) -> list[str]:

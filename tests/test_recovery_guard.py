@@ -11,6 +11,7 @@ from battlebot.review.auto_repair import (
     _guard_name_match,
     attempt_field_map,
     attempt_from_result,
+    bare_qualifier_reasons,
     boilerplate_reasons,
     clean_item_tails,
     continuity_check,
@@ -1381,6 +1382,180 @@ class TemplateRepairPathTests(unittest.TestCase):
         merged = attempt_field_map(attempt)
         self.assertEqual(merged["attack_potency"], self.FIELDS["attack_potency"])
         self.assertEqual(merged["range"], self.FIELDS["range"])
+        self.assertNotIn("dropped_scalar_fields", attempt.metadata)
+        self.assertNotIn("dropped_items", attempt.metadata)
+
+
+class TabKeyCompositeTests(unittest.TestCase):
+    """Glued tab-key composite items (sample 50g's harley merge).
+
+    The CSPW tabber's labels were itemized as one ability: "Base
+    Hax Hammer Harleen Hax AoR Harley Hax Death Manipulation". The
+    screen keys on the tab category label ("Hax") recurring in the
+    item's original case -- calibrated to zero hits across the live
+    corpus of 67.5k distinct item names.
+    """
+
+    COMPOSITE = "Base Hax Hammer Harleen Hax AoR Harley Hax Death Manipulation"
+
+    def test_composite_rejected_verbatim(self):
+        self.assertIn(
+            "tab_key_composite",
+            fragment_item_reasons(self.COMPOSITE, section="powers_and_abilities"),
+        )
+
+    def test_composite_filtered_from_mixed_list(self):
+        kept, dropped = filter_list_field_items(
+            f"Flight, {self.COMPOSITE}, Heat Vision",
+            section="powers_and_abilities",
+        )
+        self.assertEqual(kept, "Flight, Heat Vision")
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("tab_key_composite", reasons)
+
+    def test_legit_ability_names_survive(self):
+        for item in (
+            "Death Manipulation",
+            "Weather Manipulation",
+            "Master Swordsmanship",
+            "Regeneration (Low-Mid)",
+            "Flight (Via Wings)",
+            "Death Manipulation (Post-Flashpoint)",
+            "Mind Hax",
+            "Hax",
+            "Soul Physiology & Hollow Physiology (Soul: High-Tier Arrancar)",
+            "Explosion Manipulation (Via Burst Bomb, Ink Bomb, Splat Bomb)",
+        ):
+            self.assertEqual(
+                fragment_item_reasons(item, section="powers_and_abilities"),
+                [],
+                item,
+            )
+            self.assertEqual(placeholder_item_reasons(item), [], item)
+
+
+class BareQualifierTests(unittest.TestCase):
+    """Bare-qualifier scalars (sample 50g's midnighter merges).
+
+    Tier read "At least" -- the qualifier half of a real value with
+    the value token dropped. A value token anywhere makes it real.
+    """
+
+    def test_bare_qualifier_rejected_verbatim(self):
+        value = "At least"
+        self.assertIn("bare_qualifier", bare_qualifier_reasons(value))
+        self.assertIn("bare_qualifier", fragment_scalar_reasons(value))
+        self.assertIn(
+            "bare_qualifier", boilerplate_reasons(value, scalar=True)
+        )
+        self.assertIn(
+            "bare_qualifier", stat_field_rejection_reasons(value)
+        )
+
+    def test_qualifier_family_rejected(self):
+        for value in ("At most", "Around", "Over", "Likely", "Likely higher"):
+            self.assertIn("bare_qualifier", bare_qualifier_reasons(value), value)
+            self.assertIn(
+                "bare_qualifier", stat_field_rejection_reasons(value), value
+            )
+
+    def test_qualified_real_values_survive(self):
+        for value in (
+            "At least Small Building level (Destroyed a warehouse "
+            "with a single strike)",
+            "At least 8-C, likely higher",
+            "8-C",
+            "Massively Hypersonic+",
+            "Standard melee range",
+        ):
+            self.assertEqual(bare_qualifier_reasons(value), [], value)
+        # Full-screen controls exclude bare "8-C": the pre-existing
+        # insubstantive check has always required fuller tier text
+        # at the repair choke point.
+        for value in (
+            "At least Small Building level (Destroyed a warehouse "
+            "with a single strike)",
+            "At least 8-C, likely higher",
+            "Massively Hypersonic+",
+            "Standard melee range",
+        ):
+            self.assertEqual(stat_field_rejection_reasons(value), [], value)
+
+
+class FourthGenRepairPathTests(unittest.TestCase):
+    """Both fourth-generation screens at the repair choke point."""
+
+    FIELDS = {
+        "tier": "Building level (8-C)",
+        "attack_potency": "Wall level (Can shatter reinforced concrete "
+        "with a casual strike)",
+        "speed": "Supersonic (Can outpace fighter jets in sustained flight)",
+        "durability": "Wall level (Shrugged off anti-tank fire at close range)",
+        "range": "Standard melee range",
+        "powers_and_abilities": "Solar Energy Absorption, Flight, Heat Vision",
+        "weaknesses": "Vulnerable to holy weapons",
+        "origin": "DC Comics",
+    }
+
+    def _attempt(self, prof, fields=None):
+        title = str(prof.get("name") or "Test")
+        source = {
+            "id": "cspw-test",
+            "title": title,
+            "url": "https://character-stats-profiles.fandom.com/wiki/"
+            + title.replace(" ", "_"),
+            "provider_id": "cspw",
+            "authority": "high",
+            "promotion_allowed": True,
+        }
+        metadata = {
+            "title": title,
+            "url": source["url"],
+            "revision_id": "42",
+            "fetch_status": "fetched",
+            "promotion_allowed": True,
+            "authority": "high",
+            "provider_id": "cspw",
+        }
+        return attempt_from_result(
+            prof, source, dict(fields or self.FIELDS), metadata,
+            ok=True, note="ok",
+        )
+
+    def test_repair_attempt_drops_bare_qualifier_tier(self):
+        prof = comic_profile("Midnighter (Post-Crisis)", "Post-Crisis")
+        fields = dict(self.FIELDS)
+        fields["tier"] = "At least"
+        attempt = self._attempt(prof, fields)
+        merged = attempt_field_map(attempt)
+        self.assertNotIn("tier", merged)
+        dropped = attempt.metadata.get("dropped_scalar_fields") or {}
+        self.assertIn("bare_qualifier", dropped.get("tier") or [])
+        self.assertEqual(merged["speed"], self.FIELDS["speed"])
+
+    def test_repair_attempt_drops_tab_key_composite(self):
+        prof = comic_profile("Harley Quinn (Post-Flashpoint)", "Post-Flashpoint")
+        fields = dict(self.FIELDS)
+        fields["powers_and_abilities"] = (
+            "Flight, Base Hax Hammer Harleen Hax AoR Harley Hax "
+            "Death Manipulation, Heat Vision"
+        )
+        attempt = self._attempt(prof, fields)
+        self.assertEqual(
+            attempt_field_map(attempt)["powers_and_abilities"],
+            "Flight, Heat Vision",
+        )
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "powers_and_abilities"
+        ) or []
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("tab_key_composite", reasons)
+
+    def test_repair_attempt_clean_fields_untouched(self):
+        prof = comic_profile("Midnighter (Post-Crisis)", "Post-Crisis")
+        attempt = self._attempt(prof)
+        merged = attempt_field_map(attempt)
+        self.assertEqual(merged["tier"], self.FIELDS["tier"])
         self.assertNotIn("dropped_scalar_fields", attempt.metadata)
         self.assertNotIn("dropped_items", attempt.metadata)
 
