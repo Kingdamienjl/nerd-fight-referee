@@ -1,0 +1,36 @@
+{
+ "marker": "fixa_itemfilter_sample50_complete",
+ "date": "2026-10-21",
+ "sample_size": 50,
+ "sample_processed": 50,
+ "structure": "single launch, parser-only (HARVEST_LLM_FALLBACK=0); Fails PC Ollama still unreachable",
+ "guard_commit": "8ae8e638",
+ "backup": "backups/20261021-fixa-itemfilter (profiles-tree.tar.gz + battlebot.sql.gz, gzip-verified)",
+ "recovered_profiles": 3,
+ "merges_audited": 3,
+ "promoted_in_sample": 0,
+ "nobara_outcome": "processed first (natural slice position after her sample-1 progress entry was removed); recovered NOTHING -- the placeholder page now yields no merge. Correct behavior.",
+ "audit": {
+  "franchise_mismatches": 0,
+  "boilerplate_merges": 1,
+  "boilerplate_detail": "Aladdin: weakness item was page scaffolding ('None Notable == Others == Notable Victories: Notable Losses:'). Item reverted to pre-sample value ([]); correction note appended; all other Aladdin fields audited franchise-correct and kept.",
+  "infobox_header_merges": 1,
+  "infobox_detail": "Sailor Galaxia: tier merged as the source page's infobox header dump ('Key: Sailor Galaxia Name: Galaxia, ... Origin: Pretty Soldier Sailor Moon Gender...'). The new infobox filter missed it because the dump is comma/space separated, not |/;/newline separated. Tier reverted to pre-sample value and verified; correction note appended; her other recovered fields (stats/abilities/weaknesses) audited franchise-correct and kept. She was NOT promoted (status needs_review, battle_eligible false).",
+  "kept_verified_good": [
+   "Aladdin (stats+abilities)",
+   "Sailor Galaxia (stats+abilities+weaknesses, tier excluded)",
+   "Antares (all fields; disclosed residue: tier fragment ', likely far higher |' and a 'Category:MujRocks' tail on one weakness item -- both pre-existing upstream parser residue classes)"
+  ]
+ },
+ "gate": "NO-GO",
+ "gate_rule": "proceed to full run only with ZERO franchise mismatches AND ZERO boilerplate merges at any level AND ZERO infobox-header stat merges",
+ "gate_failures": [
+  "boilerplate_merges=1",
+  "infobox_header_merges=1"
+ ],
+ "full_run": "NOT EXECUTED per gate. Remaining ~1,131 cohort profiles untouched by this job; their jobs were never held by the sample.",
+ "next_iteration_needs": [
+  "infobox_header_reasons: count distinct header-key occurrences across the whole text regardless of separator (comma/space separated dumps), and treat a leading 'Key:' segment as a header tell",
+  "placeholder_item_reasons: page-scaffolding patterns -- '== section ==' markers, 'Notable Victories/Losses:', 'None Notable' as a whole item"
+ ]
+}

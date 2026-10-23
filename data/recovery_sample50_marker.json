@@ -1,0 +1,24 @@
+{
+ "marker": "fixa_sample50_complete",
+ "date": "2026-10-21",
+ "sample_size": 50,
+ "sample_processed": 50,
+ "structure": "two launches: fixa-sample (35/50, HARVEST_LLM_FALLBACK unset) + fixa-sample-b (15/50, HARVEST_LLM_FALLBACK=0)",
+ "deviation_reason": "Fails PC Ollama unreachable (no route to host); LAN fallback ~0.3 tok/s stalled the LLM step ~10+ min/profile. Part A killed at a profile boundary (per-profile atomic progress; nothing lost). Part B parser-only, 5-10s/profile.",
+ "recovered_profiles": 11,
+ "merges_audited": 11,
+ "promoted_in_sample": 5,
+ "guard_rejections_in_sample": 106,
+ "audit": {
+  "franchise_mismatches": 0,
+  "boilerplate_merges": 1,
+  "boilerplate_detail": "Nobara Kugisaki: fanon template placeholder sentence merged as sole ability; promoted on it. Fully reverted (file, generated copy, DB row, job) to pre-sample state from backups/20261021-fixa-rerun.",
+  "field_reverts": "Kamui + The Captain: tier field held the source page infobox header; tier reverted to pre-sample empty value (Kamui in needs_review+generated+DB). Other fields verified good and kept.",
+  "kept_verified_good": 10
+ },
+ "gate": "NO-GO",
+ "gate_rule": "proceed to full run only with ZERO franchise mismatches AND ZERO boilerplate merges",
+ "full_run": "NOT EXECUTED per gate. Remaining ~1,183 cohort profiles untouched; their jobs were never held by the sample.",
+ "backup": "backups/20261021-fixa-rerun (profiles-tree.tar.gz + battlebot.sql.gz, gzip-verified)",
+ "guard_commit": "13ab2c09"
+}

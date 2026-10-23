@@ -1,0 +1,68 @@
+{
+ "marker": "fixa_iter3_sample50_complete",
+ "date": "2026-10-21",
+ "sample_size": 50,
+ "sample_processed": 50,
+ "structure": "two invocations: runner --sample 50, stop, full merge audit, gate decision",
+ "mode": "parser-only (HARVEST_LLM_FALLBACK=0); Fails PC Ollama verified unreachable once at job start, untouched",
+ "guard_commit": "6ef5f00b",
+ "backup": "backups/20261021-fixa-iter3 (profiles-tree.tar.gz 290MB + battlebot.sql.gz 18MB, gzip-verified)",
+ "cohort_todo_before": 1131,
+ "recovered_profiles": 18,
+ "merges_audited": 19,
+ "promoted_in_sample": 4,
+ "promoted_paths": [
+  "profiles/needs_review/anime/yu-yu-hakusho/mukuro.yaml",
+  "profiles/needs_review/anime/yu-yu-hakusho/yomi.yaml",
+  "profiles/needs_review/comic/dc/apollo.yaml",
+  "profiles/needs_review/comic/dc/azrael.yaml"
+ ],
+ "db_battle_eligible": {
+  "before_sample": 2216,
+  "after_sample": 2219,
+  "at_report": 2222
+ },
+ "audit": {
+  "franchise_mismatches": 7,
+  "franchise_detail": "NEW SHAPE -- continuity substitution: the fetched page is the right character in the right franchise but the WRONG CONTINUITY/VERSION for a version-scoped profile. The profiles' recorded version-specific source URLs resolve (MediaWiki redirect/search) to a single flagship or screen-adaptation page, and the guard has no continuity channel: name, categories, origin and wikitext evidence all match. Cases: four Amanda Waller comics profiles (dc-comics, post-crisis, post-flashpoint, base) ALL stamped from 'Amanda Waller (DCAU)' rev 9410386 (animated continuity); animal-man-post-flashpoint stamped from 'Animal Man (Post-Crisis)'; apollo-post-crisis stamped from 'Apollo (Post-Flashpoint)'; aquaman-dc-comics stats stamped from 'Aquaman (DC Extended Universe)' (film continuity).",
+  "boilerplate_merges": 1,
+  "boilerplate_detail": "NEW SHAPE -- scalar-field scaffolding dump: aquaman-prime-earth's intelligence field merged as the fanon source author's editorial note plus page scaffolding ('Above Average Note: Please do not edit this page without permission... ==Explanations & Related Blog Posts== ... ==Gallery== ... ==Others== Notable Victories:'). The item-level filters do not screen scalar stat values for section markers/editorial notes. Same merge's stamina was the insubstantive value 'Self-explanatory'. Both fields reverted; the merge's remaining fields (Post-Flashpoint = Prime Earth version, substantive) kept.",
+  "infobox_header_merges": 0,
+  "infobox_detail": "Criterion PASSES this sample: no merged stat in any separator shape was an infobox header dump. The iteration-3 separator-agnostic filter also proved itself live in the pre-run dry-run (Galaxia tier rejected as infobox_header; Aladdin scaffolding item dropped as page_scaffolding).",
+  "reverts": [
+   "amanda-waller-dc-comics.yaml -- whole file restored byte-identical (verified)",
+   "amanda-waller-post-crisis.yaml -- whole file restored byte-identical (verified)",
+   "amanda-waller-post-flashpoint.yaml -- whole file restored byte-identical (verified)",
+   "amanda-waller.yaml -- whole file restored byte-identical (verified)",
+   "animal-man-post-flashpoint.yaml -- whole file restored byte-identical (verified)",
+   "apollo-post-crisis.yaml -- whole file restored byte-identical (verified at restore time)",
+   "aquaman-dc-comics.yaml -- field revert: all 7 DCEU-sourced power_scale axes restored to pre-sample values (verified); abilities from the recorded Canon/Post-Flashpoint source audited and kept",
+   "aquaman-prime-earth.yaml -- field revert: intelligence + stamina restored to pre-sample values (verified)"
+  ],
+  "correction_notes": "appended for all 8 reverted profiles (issue_type=sample3_audit_correction)",
+  "kept_verified_good": [
+   "Gina Chamber (own recorded page; stats/abilities/weaknesses franchise-correct)",
+   "Mukuro (own recorded page; promoted; weakness item carries a 'Notable Attacks/Techniques:' tail -- disclosed residue class, item itself substantive)",
+   "Yomi (own YYH page via substitution with strong channels; promoted)",
+   "Azrael (Azrael (Jean-Paul Valley) page; promoted)",
+   "Apollo base + Apollo (dc-comics) + Apollo (Prime Earth) -- Post-Flashpoint flagship page; Prime Earth IS the Post-Flashpoint continuity and the generic profiles carry no contrary version scope",
+   "Animal Man (dc-comics) + Bane (dc-comics) -- generic profiles stamped from the flagship Post-Crisis print pages",
+   "Anti-Monitor -- abilities only, from the profile's own recorded character-stats fanon source; same character/franchise, items substantive; disclosed fanon sourcing; not promoted",
+   "Aquaman (dc-comics) abilities from the recorded Canon/Post-Flashpoint source"
+  ],
+  "disclosed_residue": "Tier-label fragments on several kept profiles (e.g. Gina 'physically, with Beret, with Unchange', Yomi 'At least', Bane ', with Venom') -- the upstream tier parser drops the tier values and leaves qualifier skeletons; same disclosed class as prior samples (Antares), not a gate criterion. Animal Man weakness items include an editorial 'Notes:' tail about tier-upgrade discussion (substantive items, kept, disclosed).",
+  "post_revert_event": "Minutes after the verified restore, a drain worker claimed apollo-post-crisis through the NORMAL repair path (no recovery guard) and promoted it with materially identical Post-Flashpoint evidence (job status 'promoted', DB battle_eligible=true). The sample's own merge stayed reverted; the worker's independent promotion is production state outside the sample's scope and is flagged here as systemic: the DC variant profiles' recorded sources resolve to other versions' pages, so the normal drain will keep cross-stamping them until the recorded sources or the repair path gain a continuity check."
+ },
+ "gate": "NO-GO",
+ "gate_rule": "proceed to full run only with ZERO franchise mismatches AND ZERO boilerplate merges at any level AND ZERO infobox-header stat merges",
+ "gate_failures": [
+  "franchise_mismatches=7 (continuity substitution shape)",
+  "boilerplate_merges=1 (scalar-field scaffolding dump shape)"
+ ],
+ "full_run": "NOT EXECUTED per gate. Remaining 1,081 cohort profiles were never held or touched by this job.",
+ "next_iteration_needs": [
+  "Guard: continuity channel -- when a profile is version-scoped, a fetched page whose title disambiguator names a DIFFERENT version (Post-Crisis vs Post-Flashpoint vs Prime Earth vs Rebirth) or a screen adaptation (DCAU, DC Extended Universe, etc.) for a comics profile must be rejected, for recorded_title fetches too if the recorded URL itself resolves across versions",
+  "Guard: scalar-field scaffolding screen -- boilerplate_reasons for scalar stats should reject values containing '==' section markers, editorial notes ('Please do not edit this page', 'Note: Please...'), and section-bleed dumps, the way list items are now screened",
+  "Data: repair the recorded source URLs for the DC variant families (Waller/Animal Man/Apollo/Aquaman and likely more of the ~1,081) so version-scoped profiles point at version-correct pages; without this, both the recovery pass and the normal drain keep cross-stamping"
+ ]
+}

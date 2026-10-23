@@ -1,0 +1,61 @@
+===== test_enrich_sources
+FF....
+======================================================================
+FAIL: test_anime_profile_does_not_get_comic_variants (tests.test_enrich_sources.EnrichSourcesTests.test_anime_profile_does_not_get_comic_variants)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/tests/test_enrich_sources.py", line 48, in test_anime_profile_does_not_get_comic_variants
+    self.assertIn("Son Goku (Dragon Ball)", titles)
+AssertionError: 'Son Goku (Dragon Ball)' not found in {'Son Goku', 'Goku', 'Son Goku Dragon Ball'}
+
+======================================================================
+FAIL: test_cloud_strife_gets_game_candidates (tests.test_enrich_sources.EnrichSourcesTests.test_cloud_strife_gets_game_candidates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/tests/test_enrich_sources.py", line 36, in test_cloud_strife_gets_game_candidates
+    self.assertIn("Cloud Strife (Final Fantasy)", titles)
+AssertionError: 'Cloud Strife (Final Fantasy)' not found in {'Cloud Strife Final Fantasy', 'Cloud Strife (Game)', 'Cloud Strife'}
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.022s
+
+FAILED (failures=2)
+===== test_repair_failure_classification
+E
+======================================================================
+ERROR: test_repair_failure_classification (unittest.loader._FailedTest.test_repair_failure_classification)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_repair_failure_classification
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/tests/test_repair_failure_classification.py", line 2, in <module>
+    from services.repair_legacy_profiles import failed_attempt, SourceIdentityReview
+ModuleNotFoundError: No module named 'services'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
+===== test_legacy_repair
+E
+======================================================================
+ERROR: test_legacy_repair (unittest.loader._FailedTest.test_legacy_repair)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_legacy_repair
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/tests/test_legacy_repair.py", line 2, in <module>
+    from services.repair_legacy_profiles import identity_matches, pinned_source
+ModuleNotFoundError: No module named 'services'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
+DONE2

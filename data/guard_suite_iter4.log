@@ -1,0 +1,25 @@
+test_recovery_guard (unittest.loader._FailedTest.test_recovery_guard) ... ERROR
+
+======================================================================
+ERROR: test_recovery_guard (unittest.loader._FailedTest.test_recovery_guard)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_recovery_guard
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/unittest/loader.py", line 154, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/referee/tests/test_recovery_guard.py", line 10, in <module>
+    from battlebot.review.auto_repair import (
+  File "/opt/referee/battlebot/review/auto_repair.py", line 19, in <module>
+    from battlebot.harvest.auto_profile_harvester import (
+  File "/opt/referee/battlebot/harvest/auto_profile_harvester.py", line 29, in <module>
+    from battlebot.schemas.profile import CharacterProfile
+  File "/opt/referee/battlebot/schemas/profile.py", line 8, in <module>
+    from pydantic import BaseModel, ConfigDict, Field, model_validator
+ModuleNotFoundError: No module named 'pydantic'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (errors=1)
