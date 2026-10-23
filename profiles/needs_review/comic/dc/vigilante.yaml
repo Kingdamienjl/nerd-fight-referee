@@ -98,42 +98,6 @@ sources:
 - id: vsbattles-vigilante-dc
   provider_id: vsbattles
   source_type: mediawiki
-  title: Vigilante DC
-  url: https://vsbattles.fandom.com/wiki/Vigilante_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-vigilante-dc
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Vigilante DC
-  url: https://character-stats-and-profiles.fandom.com/wiki/Vigilante_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-vigilante-dc
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Vigilante (DC)
   url: https://vsbattles.fandom.com/wiki/Vigilante_%28DC%29
   authority: high
@@ -242,8 +206,8 @@ sources:
 - id: vsbattles-vigilante-post-crisis
   provider_id: vsbattles
   source_type: mediawiki
-  title: Vigilante (Post-Crisis)
-  url: https://vsbattles.fandom.com/wiki/Vigilante_%28Post-Crisis%29
+  title: Vigilante (Pre-Crisis)
+  url: https://vsbattles.fandom.com/wiki/Vigilante_(Pre-Crisis)
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -257,6 +221,47 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9310538'
+  revision_timestamp: '2025-12-23T16:55:37Z'
+  fetch_status: fetched
+  http_status: 200
+  content_length: 13174
+  content_kind: api_json
+  search_attempted_titles:
+  - Vigilante (Pre-Crisis)
+  headings_detected:
+  - Summary
+  - Powers and Stats
+  - Notable Matchups
+  - References
+  stat_labels_detected:
+  - attack_potency
+  - durability
+  - intelligence
+  - lifting_strength
+  - origin
+  - powers_and_abilities
+  - range
+  - speed
+  - stamina
+  - standard_equipment
+  - striking_strength
+  - tier
+  - weaknesses
+  dropped_scalar_fields:
+    tier:
+    - infobox_header
+  dropped_items:
+    weaknesses:
+    - item: 'None notable. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
+        Category:Adults Category:Antiheroes C'
+      reasons:
+      - page_scaffolding
+      - category_markup
+    powers_and_abilities:
+    - item: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content='
+      reasons:
+      - unparseable_list
 - id: character-stats-profiles-vigilante-post-crisis
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -317,13 +322,19 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Wall level (He can trade blows with Leonard, who slammed him against a
+      wallVigilante (Vol. 1) #2)'
+    source_ids:
+    - vsbattles-vigilante-post-crisis
+    confidence: 0.75
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Superhuman (UsuallyVigilante (Vol. 1) #8 dodgesVigilante (Vol. 1) #11 bulletsVigilante
+      (Vol. 1) #38)'
+    source_ids:
+    - vsbattles-vigilante-post-crisis
+    confidence: 0.75
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -333,21 +344,31 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Wall level (Withstood being slammed through a wall)
+    source_ids:
+    - vsbattles-vigilante-post-crisis
+    confidence: 0.75
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman (He trained in the desert for six months)
+    source_ids:
+    - vsbattles-vigilante-post-crisis
+    confidence: 0.75
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range; Hundreds of Meters With weaponry.
+    source_ids:
+    - vsbattles-vigilante-post-crisis
+    confidence: 0.75
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: "Genius (He is a very skilled lawyer, He received a lifetime\u2019s worth\
+      \ of special training in less than six months, during that time he trained in\
+      \ hand-to-hand combat and weapons, mastering most martial arts)"
+    source_ids:
+    - vsbattles-vigilante-post-crisis
+    confidence: 0.75
+    notes: auto_repair source extraction
 claims: []
 abilities: []
 equipment: []
@@ -371,12 +392,15 @@ review:
   readiness_state: needs_review
 profile_hash: 39b3326f1ca04e368762d0a50adb0f484269c30b3ca64652f11a1575fbd5e81c
 repair:
-  attempted_at: '2026-10-05T09:58:18Z'
-  repaired_fields: []
-  unresolved_fields:
+  attempted_at: '2026-10-22T23:08:50Z'
+  repaired_fields:
   - attack_potency
-  - speed
   - durability
+  - intelligence
+  - range
+  - speed
+  - stamina
+  unresolved_fields:
   - abilities
   source_attempts:
   - source_id: mediawiki-4731564
@@ -392,8 +416,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Vigilante (DC Extended Universe)
     source_type: mediawiki
     revision_id: '9459614'
@@ -437,12 +459,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: mediawiki-4731564
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts, Acrobatics, Weapon
         Mastery, Stealth Mastery (Tracked down and followed Task Force X without being
@@ -485,7 +501,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Suit, knives, sword, Walther P99, FN P90, grenades *Optional
+      value: Suit, knives, sword, Walther P99, FN P90, grenades, Optional
       source_id: mediawiki-4731564
       provider_id: vsbattles
       authority: high
@@ -503,25 +519,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Normal human weaknesses. Mentally unstable ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==Notes/Explanations== {{scroll box|content=}} {{discussions|Vigilante
-        DC Extended Universe|Vigilante (DC Extended Universe)}} Category:Characters
-        Category:DC Extended Universe Category:Male Characters Category:Live-Action
-        Characters Category:TV Characters Category:Neutral Characters Category:Protagonists
-        Category:Antiheroes Category:Anti-villains Category:Humans Category:Adults
-        Category:Psychopaths Category:Murderers Category:Vigilantes Category:Martial
-        Artists Category:Acrobats Category:Weapon Masters Category:Knife Users Category:Sword
-        Users Category:Gun Users Category:Snipers Category:Bow Users Category:Chainsaw
-        Users Category:Stealth Masters Category:Explosion Users Category:Suicide Squad
-        Members Category:Sadists Category:Comic Relief Characters Category:Helmet
-        Users'
-      source_id: mediawiki-4731564
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
+    identity_match: true
+    identity_score: 120
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
@@ -546,8 +545,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Vigilante (DC Extended Universe)
     source_type: mediawiki
     revision_id: '9459614'
@@ -589,12 +586,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: vsbattles-vigilante-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts, Acrobatics, Weapon
         Mastery, Stealth Mastery (Tracked down and followed Task Force X without being
@@ -637,7 +628,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Suit, knives, sword, Walther P99, FN P90, grenades *Optional
+      value: Suit, knives, sword, Walther P99, FN P90, grenades, Optional
       source_id: vsbattles-vigilante-dc-comics
       provider_id: vsbattles
       authority: high
@@ -655,25 +646,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Normal human weaknesses. Mentally unstable ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==Notes/Explanations== {{scroll box|content=}} {{discussions|Vigilante
-        DC Extended Universe|Vigilante (DC Extended Universe)}} Category:Characters
-        Category:DC Extended Universe Category:Male Characters Category:Live-Action
-        Characters Category:TV Characters Category:Neutral Characters Category:Protagonists
-        Category:Antiheroes Category:Anti-villains Category:Humans Category:Adults
-        Category:Psychopaths Category:Murderers Category:Vigilantes Category:Martial
-        Artists Category:Acrobats Category:Weapon Masters Category:Knife Users Category:Sword
-        Users Category:Gun Users Category:Snipers Category:Bow Users Category:Chainsaw
-        Users Category:Stealth Masters Category:Explosion Users Category:Suicide Squad
-        Members Category:Sadists Category:Comic Relief Characters Category:Helmet
-        Users'
-      source_id: vsbattles-vigilante-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
+    identity_match: true
+    identity_score: 120
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
@@ -749,22 +723,22 @@ repair:
         Vigilante (Hero), DCEU Vigilante (Out of Universe) Origin: DC Extended Universe
         later incorporated into the DC Multiverse Gender/Sex: Male (He/Him/His) Kill
         Count: At Least 10 Age: 29 (August to October 2020; Born June 1991) Height:
-        180.3 cm Weight: 78 kg Classification: Human, Mass Serial Murderer, Anti-Hero
-        * Status: Alive (Active) Powers and Abilities: * Superhuman Physical Characteristics
-        * Martial Arts (Beat down a thug with little to no effort. Chase is a highly
-        skilled and formidable hand-to-hand combatant and martial artist. He is able
-        to fight the master martial artist, Judomaster alongside Peacemaker, even
-        managing to outlast Peacemaker before he was defeated by the more skilled
-        foe.) ** Pressure Point Strikes * Acrobatics and Agility * Weapon & Armour
-        Mastery * Stealth Mastery (Tracked down and followed Task Force X without
-        being noticed.) * Preparation (Always equipped with weapons and his suit.
-        Found Task Force X with no info.) * Natural Weaponry (Fist, Feet, Teeth, and
-        Nails) * Social Influence ** Reputation, Fear Inducing, & Respect; Known as
-        a hero. Likely gained respect or fear from other prisoners after beating one
-        up. * Vehicular Mastery Attack Potency: Small Building Level physically (Comparable
-        but inferior to Peacemaker. Can fight White Dragon, who charged a blast to
-        destroy part of a van (40.423 MJ), White Dragon could have killed him (0.022-0.0838
-        Tons). Can fight possessed humans who survive shockwaves ([https://vsbattles.fandom.com/wiki/User_blog:Spinosaurus75DinosaurFan/Peacemaker_Sonic_Boom
+        180.3 cm Weight: 78 kg Classification: Human, Mass Serial Murderer, Anti-Hero,
+        Superhuman Physical Characteristics, Martial Arts (Beat down a thug with little
+        to no effort. Chase is a highly skilled and formidable hand-to-hand combatant
+        and martial artist. He is able to fight the master martial artist, Judomaster
+        alongside Peacemaker, even managing to outlast Peacemaker before he was defeated
+        by the more skilled foe.), Pressure Point Strikes, Acrobatics and Agility,
+        Weapon & Armour Mastery, Stealth Mastery (Tracked down and followed Task Force
+        X without being noticed.), Preparation (Always equipped with weapons and his
+        suit. Found Task Force X with no info.), Natural Weaponry (Fist, Feet, Teeth,
+        and Nails), Social Influence, Reputation, Fear Inducing, & Respect, Known
+        as a hero. Likely gained respect or fear from other prisoners after beating
+        one up., Vehicular Mastery Attack Potency: Small Building Level physically
+        (Comparable but inferior to Peacemaker. Can fight White Dragon, who charged
+        a blast to destroy part of a van (40.423 MJ), White Dragon could have killed
+        him (0.022-0.0838 Tons). Can fight possessed humans who survive shockwaves
+        ([https://vsbattles.fandom.com/wiki/User_blog:Spinosaurus75DinosaurFan/Peacemaker_Sonic_Boom
         13,957.2 J]) no problem ([https://character-stats-and-profiles.fandom.com/wiki/User_blog:XxAngel_EditzxX/Feat_Scaling#To_tank_something
         35.65-136.75 KJ]). Possibly comparable to his CW counterpart who can fight
         Green Arrow.), Small Town Level via Weapons (Owns an assortment of guns. Has
@@ -790,17 +764,16 @@ repair:
         tired at the end. Can fight multiple thugs at the same time. Can walk around
         with a toe gut off.) Range: Standard Melee Range to Standard Melee Range+
         (Arm is 38.65% of height; 69.7 cm. Leg is 52.15% of height; 94.03 cm), Extended
-        Melee Range via Chainsaw, Tens of Meters via Guns (25 Meters or higher) Standard
-        Equipment: Glasses, Suit, Knife, Sword, Walther P99, FN P90 * Optional Equipment:
-        Chainsaw, Colt Single Action Army, Mossberg 500 Cruiser, MasterPiece Arms
-        MPA30DMG, Walther PPQ Q5 Match, Dynamite, Grenade Intelligence: Gifted (Is
-        a skilled fighter in both armed and unarmed combat. Killed three targets in
-        quick succession with a sniper rifle. Purposefully got himself arrested to
-        kill Auggie Smith inside the prison and goaded his followers to strike first,
-        so it would look like self-defence to passive onlookers, going on to stomp
-        said followers in hand-to-hand combat. Deduced the weakspots in White Dragon''s
-        armor upon seeing it the first time. Avoided detection from a black-ops group.)
-        Weaknesses: Standard Human Limits, Emotions, & Eyesight.'
+        Melee Range via Chainsaw, Suit, Knife, Sword, Walther P99, FN P90, Optional
+        Equipment: Chainsaw, Colt Single Action Army, Mossberg 500 Cruiser, MasterPiece
+        Arms MPA30DMG, Walther PPQ Q5 Match, Dynamite, Grenade Intelligence: Gifted
+        (Is a skilled fighter in both armed and unarmed combat. Killed three targets
+        in quick succession with a sniper rifle. Purposefully got himself arrested
+        to kill Auggie Smith inside the prison and goaded his followers to strike
+        first, so it would look like self-defence to passive onlookers, going on to
+        stomp said followers in hand-to-hand combat. Deduced the weakspots in White
+        Dragon''s armor upon seeing it the first time. Avoided detection from a black-ops
+        group.) Weaknesses: Standard Human Limits, Emotions, & Eyesight.'
       source_id: character-stats-profiles-vigilante-dc-comics
       provider_id: character_stats_profiles
       authority: high
@@ -834,342 +807,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Standard Human Limits, Emotions, & Eyesight. == Notes/Explanations ==
-        # Credits to the following for my page; Peacemaker, My own calculations, DCEU
-        Fandom Wiki, Vs Battle Wiki == References/Statistic Values == Category:XxAngel
-        EditzxX Category:Tier 9 Category:Tier 9-A Category:Tier 7 Category:Tier Low
-        7-C Category:Class 10 Category:Peak Human (Speed) Category:Gifted Intelligence
-        Category:Superhuman Physical Characteristics Users Category:Superhuman (Speed)
-        Category:Standard Melee Range Category:Extended Melee Range Category:Tens
-        of Meters Range Category:Tier 9-C'
+      value: Standard Human Limits, My own calculations, DCEU Fandom Wiki
       source_id: character-stats-profiles-vigilante-dc-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|vigilante canon dc extended
-      universe xxangel editzxx|539573
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-vigilante-dc
-    url: https://vsbattles.fandom.com/wiki/Vigilante_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Vigilante (DC Extended Universe)
-    source_type: mediawiki
-    revision_id: '9459614'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4172
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Martial Arts, Acrobatics, Weapon
-        Mastery, Stealth Mastery (Tracked down and followed Task Force X without being
-        noticed, until he revealed himself), Explosion Generation (With bombs)
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level (Could harm Judomaster0.038789 Tons of TNT)
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Peak Human (Comparable to Peacemaker. He could fight multiple opponents
-        at once), Supersonic combat speed & reaction speed (Adrian managed to fight
-        with the butterflies.)
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building level (Took hits from Judomaster)
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Athletic (Walked himself to a hospital after being shot in the back)
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range normally, Extended Melee Range with his sword, Hundreds
-        of Meters with firearms
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Suit, knives, sword, Walther P99, FN P90, grenades *Optional
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average combat skills and tactical planning (Is a skilled fighter
-        in both armed and unarmed combat. Killed three targets in quick succession
-        with a sniper rifle. Purposefully got himself arrested to kill Auggie Smith
-        inside the prison and goaded his followers to strike first, so it would look
-        like self-defence to passive onlookers, going on to stomp said followers in
-        hand-to-hand combat. Deduced the weakspots in White Dragon's armor upon seeing
-        it the first time. Avoided detection from a black-ops group). Childish and
-        questionable otherwise.
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Normal human weaknesses. Mentally unstable ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==Notes/Explanations== {{scroll box|content=}} {{discussions|Vigilante
-        DC Extended Universe|Vigilante (DC Extended Universe)}} Category:Characters
-        Category:DC Extended Universe Category:Male Characters Category:Live-Action
-        Characters Category:TV Characters Category:Neutral Characters Category:Protagonists
-        Category:Antiheroes Category:Anti-villains Category:Humans Category:Adults
-        Category:Psychopaths Category:Murderers Category:Vigilantes Category:Martial
-        Artists Category:Acrobats Category:Weapon Masters Category:Knife Users Category:Sword
-        Users Category:Gun Users Category:Snipers Category:Bow Users Category:Chainsaw
-        Users Category:Stealth Masters Category:Explosion Users Category:Suicide Squad
-        Members Category:Sadists Category:Comic Relief Characters Category:Helmet
-        Users'
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|vigilante dc extended universe|9459614
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-vigilante-dc
-    url: https://character-stats-and-profiles.fandom.com/wiki/Vigilante_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Vigilante (Canon/DC Extended Universe)/XxAngel EditzxX
-    source_type: mediawiki
-    revision_id: '539573'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 7615
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers & Abilities
-    - Notes/Explanations
-    - References/Statistic Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 9-A physically, Low 7-C via Weapons
-      source_id: character-stats-profiles-vigilante-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Tier: 9-A physically, Low 7-C via Weapons Name: Adrian Chase Nicknames:
-        Vigilante (Hero), DCEU Vigilante (Out of Universe) Origin: DC Extended Universe
-        later incorporated into the DC Multiverse Gender/Sex: Male (He/Him/His) Kill
-        Count: At Least 10 Age: 29 (August to October 2020; Born June 1991) Height:
-        180.3 cm Weight: 78 kg Classification: Human, Mass Serial Murderer, Anti-Hero
-        * Status: Alive (Active) Powers and Abilities: * Superhuman Physical Characteristics
-        * Martial Arts (Beat down a thug with little to no effort. Chase is a highly
-        skilled and formidable hand-to-hand combatant and martial artist. He is able
-        to fight the master martial artist, Judomaster alongside Peacemaker, even
-        managing to outlast Peacemaker before he was defeated by the more skilled
-        foe.) ** Pressure Point Strikes * Acrobatics and Agility * Weapon & Armour
-        Mastery * Stealth Mastery (Tracked down and followed Task Force X without
-        being noticed.) * Preparation (Always equipped with weapons and his suit.
-        Found Task Force X with no info.) * Natural Weaponry (Fist, Feet, Teeth, and
-        Nails) * Social Influence ** Reputation, Fear Inducing, & Respect; Known as
-        a hero. Likely gained respect or fear from other prisoners after beating one
-        up. * Vehicular Mastery Attack Potency: Small Building Level physically (Comparable
-        but inferior to Peacemaker. Can fight White Dragon, who charged a blast to
-        destroy part of a van (40.423 MJ), White Dragon could have killed him (0.022-0.0838
-        Tons). Can fight possessed humans who survive shockwaves ([https://vsbattles.fandom.com/wiki/User_blog:Spinosaurus75DinosaurFan/Peacemaker_Sonic_Boom
-        13,957.2 J]) no problem ([https://character-stats-and-profiles.fandom.com/wiki/User_blog:XxAngel_EditzxX/Feat_Scaling#To_tank_something
-        35.65-136.75 KJ]). Possibly comparable to his CW counterpart who can fight
-        Green Arrow.), Small Town Level via Weapons (Owns an assortment of guns. Has
-        access to a chainsaw. His guns should be comparable to Peacemakers and Harley''s
-        Javelin which was used to kill Starro (2.467 Kilotons).) Destructive Capacity:
-        Street Level (Can fight regular people.) Physical Strength: Small Building
-        Level Striking Strength: Small Building Level (Knocked a man down in a few
-        hits.) Travel Speed: Peak Human to Peak Human+ (Can keep up with Peacemaker
-        who is faster than most people and likely comparable to a gorilla ([https://a-z-animals.com/animals/western-gorilla/
-        11.176 m/s]).) Combat/Reaction/Perception Speed: Peak Human+ (Can attack faster
-        than most can react, comparable to Peacemaker and Judomaster), Superhuman
-        via Chainsaw (Min 16 m/s), Subsonic to Supersonic via Weapons (100 to 740
-        m/s). Hypersonic+ via Grenade Explosion ([https://vsbattles.fandom.com/wiki/MK2_Grenade
-        6900 m/s]) Lifting Strength: Class 10+ (Can hold his weight. Can restrain
-        people down, can push back White Dragon who ripped a roof of a van off ([https://character-stats-and-profiles.fandom.com/wiki/User_blog:XxAngel_EditzxX/Show_Feats_Scaling#Racist_hates_white_van_(S1_E7)
-        7702.14 kg]). Could be comparable to Peacemaker, who wrestled a gorilla who
-        can rip off limbs ([https://character-stats-and-profiles.fandom.com/wiki/User_blog:XxAngel_EditzxX/Feat_Scaling#Cutting_an_Arm/Leg
-        1019.72 to 8667.59 kgf]).) Durability: Small Building Level (Can survive attacks
-        from White Dragon who was trying to kill him. Survived a dangerous van crashing
-        which is higher than this (Likely [https://vsbattles.fandom.com/wiki/References_for_Common_Feats#Destroying_a_Car
-        50 MJ]). Survived getting a toe cut off.) Stamina: Peak Human [https://fictional-indexing.fandom.com/wiki/Endurance
-        Endurance]: Superhuman (Right after a van crash he went to attack and wasn''t
-        tired at the end. Can fight multiple thugs at the same time. Can walk around
-        with a toe gut off.) Range: Standard Melee Range to Standard Melee Range+
-        (Arm is 38.65% of height; 69.7 cm. Leg is 52.15% of height; 94.03 cm), Extended
-        Melee Range via Chainsaw, Tens of Meters via Guns (25 Meters or higher) Standard
-        Equipment: Glasses, Suit, Knife, Sword, Walther P99, FN P90 * Optional Equipment:
-        Chainsaw, Colt Single Action Army, Mossberg 500 Cruiser, MasterPiece Arms
-        MPA30DMG, Walther PPQ Q5 Match, Dynamite, Grenade Intelligence: Gifted (Is
-        a skilled fighter in both armed and unarmed combat. Killed three targets in
-        quick succession with a sniper rifle. Purposefully got himself arrested to
-        kill Auggie Smith inside the prison and goaded his followers to strike first,
-        so it would look like self-defence to passive onlookers, going on to stomp
-        said followers in hand-to-hand combat. Deduced the weakspots in White Dragon''s
-        armor upon seeing it the first time. Avoided detection from a black-ops group.)
-        Weaknesses: Standard Human Limits, Emotions, & Eyesight.'
-      source_id: character-stats-profiles-vigilante-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building Level physically (Comparable but inferior to Peacemaker.
-        Can fight White Dragon, who charged a blast to destroy part of a van (40.423
-        MJ), White Dragon could have killed him (0.022-0.0838 Tons). Can fight possessed
-        humans who survive shockwaves (13,957.2 J) no problem (35.65-136.75 KJ). Possibly
-        comparable to his CW counterpart who can fight Green Arrow.), Small Town Level
-        via Weapons (Owns an assortment of guns. Has access to a chainsaw. His guns
-        should be comparable to Peacemakers and Harley's Javelin which was used to
-        kill Starro (2.467 Kilotons).)
-      source_id: character-stats-profiles-vigilante-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Peak Human to Peak Human+ (Can keep up with Peacemaker who is faster
-        than most people and likely comparable to a gorilla (11.176 m/s).) Combat/Reaction/Perception
-      source_id: character-stats-profiles-vigilante-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building Level (Can survive attacks from White Dragon who was trying
-        to kill him. Survived a dangerous van crashing which is higher than this (Likely
-        50 MJ). Survived getting a toe cut off.)
-      source_id: character-stats-profiles-vigilante-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Standard Human Limits, Emotions, & Eyesight. == Notes/Explanations ==
-        # Credits to the following for my page; Peacemaker, My own calculations, DCEU
-        Fandom Wiki, Vs Battle Wiki == References/Statistic Values == Category:XxAngel
-        EditzxX Category:Tier 9 Category:Tier 9-A Category:Tier 7 Category:Tier Low
-        7-C Category:Class 10 Category:Peak Human (Speed) Category:Gifted Intelligence
-        Category:Superhuman Physical Characteristics Users Category:Superhuman (Speed)
-        Category:Standard Melee Range Category:Extended Melee Range Category:Tens
-        of Meters Range Category:Tier 9-C'
-      source_id: character-stats-profiles-vigilante-dc
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1200,8 +839,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Vigilante (DC Extended Universe)
     source_type: mediawiki
     revision_id: '9459614'
@@ -1243,12 +880,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts, Acrobatics, Weapon
         Mastery, Stealth Mastery (Tracked down and followed Task Force X without being
@@ -1291,7 +922,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Suit, knives, sword, Walther P99, FN P90, grenades *Optional
+      value: Suit, knives, sword, Walther P99, FN P90, grenades, Optional
       source_id: vsbattles-vigilante-dc
       provider_id: vsbattles
       authority: high
@@ -1309,25 +940,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Normal human weaknesses. Mentally unstable ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==Notes/Explanations== {{scroll box|content=}} {{discussions|Vigilante
-        DC Extended Universe|Vigilante (DC Extended Universe)}} Category:Characters
-        Category:DC Extended Universe Category:Male Characters Category:Live-Action
-        Characters Category:TV Characters Category:Neutral Characters Category:Protagonists
-        Category:Antiheroes Category:Anti-villains Category:Humans Category:Adults
-        Category:Psychopaths Category:Murderers Category:Vigilantes Category:Martial
-        Artists Category:Acrobats Category:Weapon Masters Category:Knife Users Category:Sword
-        Users Category:Gun Users Category:Snipers Category:Bow Users Category:Chainsaw
-        Users Category:Stealth Masters Category:Explosion Users Category:Suicide Squad
-        Members Category:Sadists Category:Comic Relief Characters Category:Helmet
-        Users'
-      source_id: vsbattles-vigilante-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
+    identity_match: true
+    identity_score: 120
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
@@ -1403,22 +1017,22 @@ repair:
         Vigilante (Hero), DCEU Vigilante (Out of Universe) Origin: DC Extended Universe
         later incorporated into the DC Multiverse Gender/Sex: Male (He/Him/His) Kill
         Count: At Least 10 Age: 29 (August to October 2020; Born June 1991) Height:
-        180.3 cm Weight: 78 kg Classification: Human, Mass Serial Murderer, Anti-Hero
-        * Status: Alive (Active) Powers and Abilities: * Superhuman Physical Characteristics
-        * Martial Arts (Beat down a thug with little to no effort. Chase is a highly
-        skilled and formidable hand-to-hand combatant and martial artist. He is able
-        to fight the master martial artist, Judomaster alongside Peacemaker, even
-        managing to outlast Peacemaker before he was defeated by the more skilled
-        foe.) ** Pressure Point Strikes * Acrobatics and Agility * Weapon & Armour
-        Mastery * Stealth Mastery (Tracked down and followed Task Force X without
-        being noticed.) * Preparation (Always equipped with weapons and his suit.
-        Found Task Force X with no info.) * Natural Weaponry (Fist, Feet, Teeth, and
-        Nails) * Social Influence ** Reputation, Fear Inducing, & Respect; Known as
-        a hero. Likely gained respect or fear from other prisoners after beating one
-        up. * Vehicular Mastery Attack Potency: Small Building Level physically (Comparable
-        but inferior to Peacemaker. Can fight White Dragon, who charged a blast to
-        destroy part of a van (40.423 MJ), White Dragon could have killed him (0.022-0.0838
-        Tons). Can fight possessed humans who survive shockwaves ([https://vsbattles.fandom.com/wiki/User_blog:Spinosaurus75DinosaurFan/Peacemaker_Sonic_Boom
+        180.3 cm Weight: 78 kg Classification: Human, Mass Serial Murderer, Anti-Hero,
+        Superhuman Physical Characteristics, Martial Arts (Beat down a thug with little
+        to no effort. Chase is a highly skilled and formidable hand-to-hand combatant
+        and martial artist. He is able to fight the master martial artist, Judomaster
+        alongside Peacemaker, even managing to outlast Peacemaker before he was defeated
+        by the more skilled foe.), Pressure Point Strikes, Acrobatics and Agility,
+        Weapon & Armour Mastery, Stealth Mastery (Tracked down and followed Task Force
+        X without being noticed.), Preparation (Always equipped with weapons and his
+        suit. Found Task Force X with no info.), Natural Weaponry (Fist, Feet, Teeth,
+        and Nails), Social Influence, Reputation, Fear Inducing, & Respect, Known
+        as a hero. Likely gained respect or fear from other prisoners after beating
+        one up., Vehicular Mastery Attack Potency: Small Building Level physically
+        (Comparable but inferior to Peacemaker. Can fight White Dragon, who charged
+        a blast to destroy part of a van (40.423 MJ), White Dragon could have killed
+        him (0.022-0.0838 Tons). Can fight possessed humans who survive shockwaves
+        ([https://vsbattles.fandom.com/wiki/User_blog:Spinosaurus75DinosaurFan/Peacemaker_Sonic_Boom
         13,957.2 J]) no problem ([https://character-stats-and-profiles.fandom.com/wiki/User_blog:XxAngel_EditzxX/Feat_Scaling#To_tank_something
         35.65-136.75 KJ]). Possibly comparable to his CW counterpart who can fight
         Green Arrow.), Small Town Level via Weapons (Owns an assortment of guns. Has
@@ -1444,17 +1058,16 @@ repair:
         tired at the end. Can fight multiple thugs at the same time. Can walk around
         with a toe gut off.) Range: Standard Melee Range to Standard Melee Range+
         (Arm is 38.65% of height; 69.7 cm. Leg is 52.15% of height; 94.03 cm), Extended
-        Melee Range via Chainsaw, Tens of Meters via Guns (25 Meters or higher) Standard
-        Equipment: Glasses, Suit, Knife, Sword, Walther P99, FN P90 * Optional Equipment:
-        Chainsaw, Colt Single Action Army, Mossberg 500 Cruiser, MasterPiece Arms
-        MPA30DMG, Walther PPQ Q5 Match, Dynamite, Grenade Intelligence: Gifted (Is
-        a skilled fighter in both armed and unarmed combat. Killed three targets in
-        quick succession with a sniper rifle. Purposefully got himself arrested to
-        kill Auggie Smith inside the prison and goaded his followers to strike first,
-        so it would look like self-defence to passive onlookers, going on to stomp
-        said followers in hand-to-hand combat. Deduced the weakspots in White Dragon''s
-        armor upon seeing it the first time. Avoided detection from a black-ops group.)
-        Weaknesses: Standard Human Limits, Emotions, & Eyesight.'
+        Melee Range via Chainsaw, Suit, Knife, Sword, Walther P99, FN P90, Optional
+        Equipment: Chainsaw, Colt Single Action Army, Mossberg 500 Cruiser, MasterPiece
+        Arms MPA30DMG, Walther PPQ Q5 Match, Dynamite, Grenade Intelligence: Gifted
+        (Is a skilled fighter in both armed and unarmed combat. Killed three targets
+        in quick succession with a sniper rifle. Purposefully got himself arrested
+        to kill Auggie Smith inside the prison and goaded his followers to strike
+        first, so it would look like self-defence to passive onlookers, going on to
+        stomp said followers in hand-to-hand combat. Deduced the weakspots in White
+        Dragon''s armor upon seeing it the first time. Avoided detection from a black-ops
+        group.) Weaknesses: Standard Human Limits, Emotions, & Eyesight.'
       source_id: character-stats-profiles-vigilante-dc
       provider_id: character_stats_profiles
       authority: high
@@ -1488,14 +1101,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Standard Human Limits, Emotions, & Eyesight. == Notes/Explanations ==
-        # Credits to the following for my page; Peacemaker, My own calculations, DCEU
-        Fandom Wiki, Vs Battle Wiki == References/Statistic Values == Category:XxAngel
-        EditzxX Category:Tier 9 Category:Tier 9-A Category:Tier 7 Category:Tier Low
-        7-C Category:Class 10 Category:Peak Human (Speed) Category:Gifted Intelligence
-        Category:Superhuman Physical Characteristics Users Category:Superhuman (Speed)
-        Category:Standard Melee Range Category:Extended Melee Range Category:Tens
-        of Meters Range Category:Tier 9-C'
+      value: Standard Human Limits, My own calculations, DCEU Fandom Wiki
       source_id: character-stats-profiles-vigilante-dc
       provider_id: character_stats_profiles
       authority: high
@@ -1527,8 +1133,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Vigilante (DC Extended Universe)
     source_type: mediawiki
     revision_id: '9459614'
@@ -1570,12 +1174,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: vsbattles-vigilante-prime-earth
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts, Acrobatics, Weapon
         Mastery, Stealth Mastery (Tracked down and followed Task Force X without being
@@ -1618,7 +1216,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Suit, knives, sword, Walther P99, FN P90, grenades *Optional
+      value: Suit, knives, sword, Walther P99, FN P90, grenades, Optional
       source_id: vsbattles-vigilante-prime-earth
       provider_id: vsbattles
       authority: high
@@ -1636,25 +1234,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Normal human weaknesses. Mentally unstable ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==Notes/Explanations== {{scroll box|content=}} {{discussions|Vigilante
-        DC Extended Universe|Vigilante (DC Extended Universe)}} Category:Characters
-        Category:DC Extended Universe Category:Male Characters Category:Live-Action
-        Characters Category:TV Characters Category:Neutral Characters Category:Protagonists
-        Category:Antiheroes Category:Anti-villains Category:Humans Category:Adults
-        Category:Psychopaths Category:Murderers Category:Vigilantes Category:Martial
-        Artists Category:Acrobats Category:Weapon Masters Category:Knife Users Category:Sword
-        Users Category:Gun Users Category:Snipers Category:Bow Users Category:Chainsaw
-        Users Category:Stealth Masters Category:Explosion Users Category:Suicide Squad
-        Members Category:Sadists Category:Comic Relief Characters Category:Helmet
-        Users'
-      source_id: vsbattles-vigilante-prime-earth
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
+    identity_match: true
+    identity_score: 120
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
@@ -1666,9 +1247,263 @@ repair:
     duplicate_key: vsbattles.fandom.com|vigilante dc extended universe|9459614
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-vigilante-prime-earth
+    url: https://character-stats-and-profiles.fandom.com/wiki/Vigilante_%28Prime_Earth%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Zatanna Zatara (Canon, DC Comics, Prime Earth)/Azmarin
+    source_type: mediawiki
+    revision_id: '326280'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 14752
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - '''''''Weaknesses'''''''
+    - Explanations & Related Blog Posts
+    - Gallery
+    - Others
+    - References
+    - Categories
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 115
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 1-A
+      source_id: character-stats-profiles-vigilante-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Outerverse Level to High Outerverse Level (Held her own against Felix
+        Faust for an extended period of timeJustice League Dark #11 whom previously
+        was stated by herself and John Constantine to be strongJustice League Dark
+        #9; With the help of John Constantine regrew an aspect of Swamp Thing inside
+        Pralaya by manipulating it''s connection to The Green, Pralaya is the manifestation
+        of the infinite darkness which predates the creation as well as the Creator
+        otherwise known as The Presence, she herself states to be that of Gods Unconscious
+        and is stated to be the place where all things originated and will return
+        to in the end; As the Sorceress SupremeDC Nation #0/3 should be superior to
+        Doctor Fate, John Constantine, all other Prime Earth magic users)'
+      source_id: character-stats-profiles-vigilante-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Inaccessible Speed to Irrelevant Speed (Can move within the House of
+        Mystery one of the two Twin Houses which exists at the very cross-section
+        of space and timeJustice League Dark #10, this house is also stated to exist
+        within the higher plane ofSame comic as before (Justice League Dark #10)Limbo;
+        )'
+      source_id: character-stats-profiles-vigilante-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Outerverse Level to High Outerverse level (Can tank having her magic
+        thrown back at herJustice League Dark #12)'
+      source_id: character-stats-profiles-vigilante-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Cost of Magic: While being a powerful practioner of magic, Zatanna''s
+        magic often comes at a cost, although the specifics cost may depend on the
+        type of magic performed., Ressurection Limitaton: Zatanna is incapable of
+        properly ressurecting people or animals without a cost, in which comes in
+        the form of internal damage and pain'
+      source_id: character-stats-profiles-vigilante-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|zatanna zatara canon dc
+      comics prime earth azmarin|326280
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-vigilante-post-crisis
+    url: https://vsbattles.fandom.com/wiki/Vigilante_%28Post-Crisis%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id003
+    - attack_potency
+    - durability
+    - intelligence
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    normalized_page_title: Vigilante (Pre-Crisis)
+    source_type: mediawiki
+    revision_id: '9310538'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 13174
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id004
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: attack_potency
+      value: 'Wall level (He can trade blows with Leonard, who slammed him against
+        a wallVigilante (Vol. 1) #2)'
+      source_id: vsbattles-vigilante-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Superhuman (UsuallyVigilante (Vol. 1) #8 dodgesVigilante (Vol. 1) #11
+        bulletsVigilante (Vol. 1) #38)'
+      source_id: vsbattles-vigilante-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Wall level (Withstood being slammed through a wall)
+      source_id: vsbattles-vigilante-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (He trained in the desert for six months)
+      source_id: vsbattles-vigilante-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range; Hundreds of Meters With weaponry.
+      source_id: vsbattles-vigilante-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Rifle, Magnum, Dart Gun, Micro Grenades, Throwing Stars, Nunchucks, Bolas,
+        Smoke Grenades, Grapple gun, Climbing Claws, Infrared Goggles, Motorcycle,
+        Micro Submarine, Diver suit.
+      source_id: vsbattles-vigilante-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: "Genius (He is a very skilled lawyer, He received a lifetime\u2019s worth\
+        \ of special training in less than six months, during that time he trained\
+        \ in hand-to-hand combat and weapons, mastering most martial arts)"
+      source_id: vsbattles-vigilante-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 100
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|vigilante pre crisis|9310538
+    retryable: false
+    exception_class: ''
   needs_human_source_choice: false
-  candidate_sources: []
+  candidate_sources:
+  - source_id: vsbattles-vigilante-post-crisis
+    url: https://vsbattles.fandom.com/wiki/Vigilante_%28Post-Crisis%29
+    title: Vigilante (Pre-Crisis)
+    rank: 90
+    extracted_fields: *id003
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id004
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 100
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: false
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|vigilante pre crisis|9310538
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.0
+  confidence: 0.75

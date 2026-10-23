@@ -4,25 +4,14 @@ name: Savage Dragon
 franchise: Image Comics
 category: comic
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-10-04T18:33:47Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Savage Dragon
   franchise: Image Comics
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-savage-dragon-image-comics
   provider_id: vsbattles
   source_type: mediawiki
-  title: Savage Dragon Image Comics
-  url: https://vsbattles.fandom.com/wiki/Savage_Dragon_Image_Comics
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-savage-dragon-image-comics
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Savage Dragon Image Comics
-  url: https://character-stats-and-profiles.fandom.com/wiki/Savage_Dragon_Image_Comics
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-savage-dragon-image-comics
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Savage Dragon (Image Comics)
   url: https://vsbattles.fandom.com/wiki/Savage_Dragon_%28Image_Comics%29
   authority: high
@@ -164,13 +117,17 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Large Building level (He has collapsed buildings several times)
+    source_ids:
+    - vsbattles-savage-dragon-image-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Transonic (He can dodge sound attacks from close range)
+    source_ids:
+    - vsbattles-savage-dragon-image-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,23 +137,81 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Large Building level (Completely bulletproof, Withstood a building
+      falling on him, survived enough force to destroy a battleship while weakened)
+    source_ids:
+    - vsbattles-savage-dragon-image-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman
+    source_ids:
+    - vsbattles-savage-dragon-image-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Extended Melee Range
+    source_ids:
+    - vsbattles-savage-dragon-image-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average
+    source_ids:
+    - vsbattles-savage-dragon-image-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-savage-dragon-image-comics
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-regeneration-low-mid
+  name: Regeneration (Low-Mid)
+  description: Regeneration (Low-Mid)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-resistance-to-mind-manipulation-he-eventually-grows-resista
+  name: Resistance to Mind Manipulation (He eventually grows resistant to every type
+    of mind-control that he is subjected to).
+  description: Resistance to Mind Manipulation (He eventually grows resistant to every
+    type of mind-control that he is subjected to).
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
@@ -212,13 +227,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-savage-dragon-image-comics
+  secondary_disagreement_policy: warning_only
 profile_hash: 32fde04fea86cfd5e585f4793029104735ba82d484c85b64d364edef8671f102
 repair:
-  attempted_at: '2026-10-05T14:06:56Z'
+  attempted_at: '2026-10-22T17:01:22Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -226,265 +255,6 @@ repair:
   - durability
   - abilities
   source_attempts:
-  - source_id: vsbattles-savage-dragon-image-comics
-    url: https://vsbattles.fandom.com/wiki/Savage_Dragon_Image_Comics
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Savage Dragon (Image Comics)
-    source_type: mediawiki
-    revision_id: '8559527'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3220
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{High 8-C}}
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Regeneration (Low-Mid), Limited
-        Adaptation and Resistance to Mind Manipulation (He eventually grows resistant
-        to every type of mind-control that he is subjected to).
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Large Building level (He has collapsed buildings several times)
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Transonic (He can dodge sound attacks from close range)
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Large Building level (Completely bulletproof, Withstood a building
-        falling on him, survived enough force to destroy a battleship while weakened)
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Police issue firearms and whatever he can get his hand on, walkie talkie,
-        hand cuffs, police baton
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Savage
-        Dragon Image Comics|Savage Dragon (Image Comics)}} Category:Characters Category:Male
-        Characters Category:Police Officers Category:Heroes Category:Warriors Category:Tyrants
-        Category:Comic Book Characters Category:Aliens Category:Gun Users Category:Protagonists
-        Category:Primary Protagonists Category:Reformed Characters Category:Savage
-        Dragon Category:Walkie-talkie Users Category:Handcuff Users Category:Baton
-        Users Category:Emperors'
-      source_id: vsbattles-savage-dragon-image-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|savage dragon image comics|8559527
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-savage-dragon-image-comics
-    url: https://character-stats-and-profiles.fandom.com/wiki/Savage_Dragon_Image_Comics
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    normalized_page_title: Ant (Canon, Highbrow, Image Comics)/DemonicZinc
-    source_type: mediawiki
-    revision_id: '317027'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 21449
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Explanations
-    - Others
-    - Categories
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 10-A to 9-C | 8-C | Low 2-C
-      source_id: character-stats-profiles-savage-dragon-image-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Enhanced Senses (Her barbs are capable
-        of sensing animals thermal signatures she also has the capability to simply
-        smell them; Could hear a couple arguing from a block away), Extrasensory Perception,
-        Minor Vibration Manipulation (Can map out her surroundings by giving off vibrations
-        through tapping her antennae on hard surfaces, she can also sense vibrations
-        from other people akin to sonar), Impact Absorption (Her exoskeleton absorbs
-        the massive impact of her landings), Acrobatics (Shown here and can jump entire
-        buildings), Surface Scaling, Minor Magnetism Manipulation (She can scales
-        walls and other structures using a magnetic charge within her hands and feet),
-        Master Hand-to-Hand Combatant (Could combat 50,000 soldiers in hand to hand
-        combat), Animal Manipulation (Can manipulate ants), Natural Weaponry (Her
-        antennae are sharp enough to cut police-grade guns to pieces), Indomitable
-        Will (Could keep herself conscious from being hit hard enough to cause explosions
-        through sheer will),
-      source_id: character-stats-profiles-savage-dragon-image-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Athlete Level to Street Level (Claimed that if she hadn't held back she
-        could have accidentally broken dreads neck with a punch, shattered Mimes jaw
-        with a singular punch), Building Level (Can contest and defeat The Cockroach
-        whom can cause explosions of this size) | Universe Level+ likely much higher
-        (Can combat and damage Spawn, and match him in hand to hand combat she does
-        this whilst holding back, this same Spawn was capable of shaking reality with
-        his scream after killing Malebogia, whom was said to have brought agony to
-        multiple dimensions and worlds)
-      source_id: character-stats-profiles-savage-dragon-image-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (Could react to the bullets fired from these pistols), Supersonic
-        (Can react to bullets from multiple MP5s, these have a muzzle velocity of
-        400 m/s; Can block and react to bullets from a high powered rifle) | Immeasurable
-        Speed (Can react to and block Spawn's chains which don't appear on any other
-        senses besides her sight, and is comparable to him in speed)
-      source_id: character-stats-profiles-savage-dragon-image-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Street to Building Level (Can tank this hit from The Cockroach) | Universal+
-        (Can take multiple hits from Spawn whilst he was not holding back),
-      source_id: character-stats-profiles-savage-dragon-image-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|ant canon highbrow image
-      comics demoniczinc|317027
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-savage-dragon-image-comics
     url: https://vsbattles.fandom.com/wiki/Savage_Dragon_%28Image_Comics%29
     ok: true
@@ -542,7 +312,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{High 8-C}}
+      value: At least
       source_id: vsbattles-savage-dragon-image-comics
       provider_id: vsbattles
       authority: high
@@ -600,13 +370,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Savage
-        Dragon Image Comics|Savage Dragon (Image Comics)}} Category:Characters Category:Male
-        Characters Category:Police Officers Category:Heroes Category:Warriors Category:Tyrants
-        Category:Comic Book Characters Category:Aliens Category:Gun Users Category:Protagonists
-        Category:Primary Protagonists Category:Reformed Characters Category:Savage
-        Dragon Category:Walkie-talkie Users Category:Handcuff Users Category:Baton
-        Users Category:Emperors'
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Police Officers Category:Heroes Category:Warriors
+        Category:Tyrants Category:Comic Book Characters Category:Aliens Category:Gun
+        Users Category:Protagonists Category:Primary Protagonists Category:Reformed
+        Characters Category:Savage Dragon Category:Walkie-talkie Users Category:Handcuff
+        Users Category:Baton Users Category:Emperors'
       source_id: vsbattles-savage-dragon-image-comics
       provider_id: vsbattles
       authority: high
@@ -630,10 +399,8 @@ repair:
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
-    - durability
     - powers_and_abilities
     - speed
-    - tier
     - weaknesses
     normalized_page_title: Solar Man (Canon, Image)/Young-Jah
     source_type: mediawiki
@@ -659,7 +426,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -673,12 +440,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: Unknown
-      source_id: character-stats-profiles-savage-dragon-image-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman strength, speed, and durability, Enhanced Senses, Flight,
         and Heat Vision
@@ -699,8 +460,229 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
+    - field: weaknesses
+      value: The more superpowered beings that a planet has, the more they will decrease
+        the power of Solar Man. Otherwise, if he is the only superhero on Earth, his
+        powers will make him unbeatable. Category:Young-Jah Category:Unknown Tier
+      source_id: character-stats-profiles-savage-dragon-image-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 2
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: character-stats-and-profiles.fandom.com|solar man canon image young
+      jah|120391
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-savage-dragon-image-comics
+    url: https://vsbattles.fandom.com/wiki/Savage_Dragon_Image_Comics
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Savage Dragon (Image Comics)
+    source_type: mediawiki
+    revision_id: '8559527'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3220
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Regeneration (Low-Mid), Limited
+        Adaptation and Resistance to Mind Manipulation (He eventually grows resistant
+        to every type of mind-control that he is subjected to).
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Large Building level (He has collapsed buildings several times)
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Transonic (He can dodge sound attacks from close range)
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     - field: durability
-      value: Unknown
+      value: At least Large Building level (Completely bulletproof, Withstood a building
+        falling on him, survived enough force to destroy a battleship while weakened)
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Police issue firearms and whatever he can get his hand on, walkie talkie,
+        hand cuffs, police baton
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Police Officers Category:Heroes Category:Warriors
+        Category:Tyrants Category:Comic Book Characters Category:Aliens Category:Gun
+        Users Category:Protagonists Category:Primary Protagonists Category:Reformed
+        Characters Category:Savage Dragon Category:Walkie-talkie Users Category:Handcuff
+        Users Category:Baton Users Category:Emperors'
+      source_id: vsbattles-savage-dragon-image-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|savage dragon image comics|8559527
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-savage-dragon-image-comics
+    url: https://character-stats-and-profiles.fandom.com/wiki/Savage_Dragon_Image_Comics
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - powers_and_abilities
+    - speed
+    - weaknesses
+    normalized_page_title: Solar Man (Canon, Image)/Young-Jah
+    source_type: mediawiki
+    revision_id: '120391'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 1381
+    content_kind: api_json
+    headings_detected:
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 65
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman strength, speed, and durability, Enhanced Senses, Flight,
+        and Heat Vision
+      source_id: character-stats-profiles-savage-dragon-image-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Unknown (Killed Universo (Image Comics) with his bare hands)
+      source_id: character-stats-profiles-savage-dragon-image-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least FTL (Invincible, Savage Dragon, First Age Spawn, Shadowhawk
+        and Witchblade aren't capable of stopping him.)
       source_id: character-stats-profiles-savage-dragon-image-comics
       provider_id: character_stats_profiles
       authority: high
@@ -717,7 +699,7 @@ repair:
     identity_score: 20
     variant_score: 0
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 1
     exact_name_match: false
     alias_match: false
@@ -784,7 +766,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{High 8-C}}
+      value: At least
       source_id: vsbattles-savage-dragon
       provider_id: vsbattles
       authority: high
@@ -842,13 +824,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Savage
-        Dragon Image Comics|Savage Dragon (Image Comics)}} Category:Characters Category:Male
-        Characters Category:Police Officers Category:Heroes Category:Warriors Category:Tyrants
-        Category:Comic Book Characters Category:Aliens Category:Gun Users Category:Protagonists
-        Category:Primary Protagonists Category:Reformed Characters Category:Savage
-        Dragon Category:Walkie-talkie Users Category:Handcuff Users Category:Baton
-        Users Category:Emperors'
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Police Officers Category:Heroes Category:Warriors
+        Category:Tyrants Category:Comic Book Characters Category:Aliens Category:Gun
+        Users Category:Protagonists Category:Primary Protagonists Category:Reformed
+        Characters Category:Savage Dragon Category:Walkie-talkie Users Category:Handcuff
+        Users Category:Baton Users Category:Emperors'
       source_id: vsbattles-savage-dragon
       provider_id: vsbattles
       authority: high
@@ -872,10 +853,8 @@ repair:
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
-    - durability
     - powers_and_abilities
     - speed
-    - tier
     - weaknesses
     normalized_page_title: Solar Man (Canon, Image)/Young-Jah
     source_type: mediawiki
@@ -901,7 +880,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -915,12 +894,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: Unknown
-      source_id: character-stats-profiles-savage-dragon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman strength, speed, and durability, Enhanced Senses, Flight,
         and Heat Vision
@@ -941,12 +914,6 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: durability
-      value: Unknown
-      source_id: character-stats-profiles-savage-dragon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: weaknesses
       value: The more superpowered beings that a planet has, the more they will decrease
         the power of Solar Man. Otherwise, if he is the only superhero on Earth, his
@@ -959,7 +926,7 @@ repair:
     identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 1
     exact_name_match: false
     alias_match: false
@@ -1028,7 +995,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: At least {{High 8-C}}
+      value: At least
       source_id: vsbattles-savage-dragon-comic
       provider_id: vsbattles
       authority: high
@@ -1086,13 +1053,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Savage
-        Dragon Image Comics|Savage Dragon (Image Comics)}} Category:Characters Category:Male
-        Characters Category:Police Officers Category:Heroes Category:Warriors Category:Tyrants
-        Category:Comic Book Characters Category:Aliens Category:Gun Users Category:Protagonists
-        Category:Primary Protagonists Category:Reformed Characters Category:Savage
-        Dragon Category:Walkie-talkie Users Category:Handcuff Users Category:Baton
-        Users Category:Emperors'
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Police Officers Category:Heroes Category:Warriors
+        Category:Tyrants Category:Comic Book Characters Category:Aliens Category:Gun
+        Users Category:Protagonists Category:Primary Protagonists Category:Reformed
+        Characters Category:Savage Dragon Category:Walkie-talkie Users Category:Handcuff
+        Users Category:Baton Users Category:Emperors'
       source_id: vsbattles-savage-dragon-comic
       provider_id: vsbattles
       authority: high
@@ -1116,38 +1082,34 @@ repair:
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
-    - durability
     - powers_and_abilities
     - speed
-    - tier
-    normalized_page_title: Ant (Canon, Highbrow, Image Comics)/DemonicZinc
+    - weaknesses
+    normalized_page_title: Solar Man (Canon, Image)/Young-Jah
     source_type: mediawiki
-    revision_id: '317027'
+    revision_id: '120391'
     fetch_status: fetched
     http_status: 200
-    content_length: 21449
+    content_length: 1381
     content_kind: api_json
     headings_detected:
-    - Summary
     - Powers and Stats
-    - Explanations
-    - Others
-    - Categories
     stat_labels_detected:
     - attack_potency
     - durability
     - intelligence
-    - keys
     - lifting_strength
     - origin
     - powers_and_abilities
     - range
     - speed
     - stamina
+    - standard_equipment
     - striking_strength
     - tier
+    - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1159,73 +1121,46 @@ repair:
     - abilities
     - weaknesses
     field_candidates:
-    - field: tier
-      value: 10-A to 9-C | 8-C | Low 2-C
-      source_id: character-stats-profiles-savage-dragon-comic
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Enhanced Senses (Her barbs are capable
-        of sensing animals thermal signatures she also has the capability to simply
-        smell them; Could hear a couple arguing from a block away), Extrasensory Perception,
-        Minor Vibration Manipulation (Can map out her surroundings by giving off vibrations
-        through tapping her antennae on hard surfaces, she can also sense vibrations
-        from other people akin to sonar), Impact Absorption (Her exoskeleton absorbs
-        the massive impact of her landings), Acrobatics (Shown here and can jump entire
-        buildings), Surface Scaling, Minor Magnetism Manipulation (She can scales
-        walls and other structures using a magnetic charge within her hands and feet),
-        Master Hand-to-Hand Combatant (Could combat 50,000 soldiers in hand to hand
-        combat), Animal Manipulation (Can manipulate ants), Natural Weaponry (Her
-        antennae are sharp enough to cut police-grade guns to pieces), Indomitable
-        Will (Could keep herself conscious from being hit hard enough to cause explosions
-        through sheer will),
+      value: Superhuman strength, speed, and durability, Enhanced Senses, Flight,
+        and Heat Vision
       source_id: character-stats-profiles-savage-dragon-comic
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Athlete Level to Street Level (Claimed that if she hadn't held back she
-        could have accidentally broken dreads neck with a punch, shattered Mimes jaw
-        with a singular punch), Building Level (Can contest and defeat The Cockroach
-        whom can cause explosions of this size) | Universe Level+ likely much higher
-        (Can combat and damage Spawn, and match him in hand to hand combat she does
-        this whilst holding back, this same Spawn was capable of shaking reality with
-        his scream after killing Malebogia, whom was said to have brought agony to
-        multiple dimensions and worlds)
+      value: Unknown (Killed Universo (Image Comics) with his bare hands)
       source_id: character-stats-profiles-savage-dragon-comic
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Subsonic (Could react to the bullets fired from these pistols), Supersonic
-        (Can react to bullets from multiple MP5s, these have a muzzle velocity of
-        400 m/s; Can block and react to bullets from a high powered rifle) | Immeasurable
-        Speed (Can react to and block Spawn's chains which don't appear on any other
-        senses besides her sight, and is comparable to him in speed)
+      value: At least FTL (Invincible, Savage Dragon, First Age Spawn, Shadowhawk
+        and Witchblade aren't capable of stopping him.)
       source_id: character-stats-profiles-savage-dragon-comic
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: durability
-      value: Street to Building Level (Can tank this hit from The Cockroach) | Universal+
-        (Can take multiple hits from Spawn whilst he was not holding back),
+    - field: weaknesses
+      value: The more superpowered beings that a planet has, the more they will decrease
+        the power of Solar Man. Otherwise, if he is the only superhero on Earth, his
+        powers will make him unbeatable. Category:Young-Jah Category:Unknown Tier
       source_id: character-stats-profiles-savage-dragon-comic
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     identity_match: false
-    identity_score: 20
-    variant_score: 25
+    identity_score: 0
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 1
     exact_name_match: false
     alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|ant canon highbrow image
-      comics demoniczinc|317027
+    franchise_match: false
+    variant_match: false
+    duplicate_key: character-stats-and-profiles.fandom.com|solar man canon image young
+      jah|120391
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
