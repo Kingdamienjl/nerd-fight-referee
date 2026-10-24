@@ -741,11 +741,17 @@ class ProseShardTests(unittest.TestCase):
 
     # -- corpus controls: real items that must survive -------------------
     def test_corpus_short_weaknesses_pass(self):
+        # "rendering them berserk" was in this list before frag-8, but
+        # it is a gerund-led fragment of Axl's ability prose ("effects
+        # on his opponents, rendering them berserk, paralyzed, blinded
+        # ...") misfiled as a weakness -- an offensive effect on
+        # others, not a limitation on the owner. The frag-8 shard
+        # screen deliberately drops it; it is covered by the shard
+        # tests instead.
         for item in (
             "Weak to Dragon",
             "Vulnerable to Dragon",
             "special defense",
-            "rendering them berserk",
             "contains molecular to sub-atomic sensors",
         ):
             self.assertEqual(
@@ -2152,6 +2158,178 @@ class SeventhGenRepairPathTests(unittest.TestCase):
         ) or []
         reasons = [r for d in dropped for r in d["reasons"]]
         self.assertIn("explicit_none", reasons)
+
+
+class EighthGenFrag8Tests(unittest.TestCase):
+    """Frag-8: page disclaimers + prose-sentence shards (gate 50k)."""
+
+    DISCLAIMER_FULL = (
+        "any information displayed on any profile based on Death Battle "
+        "are solely based on whatever is said in their videos and not my "
+        "own opinion. So if a character is weaker or stronger on a "
+        "profile than they actually are then it isn't my fault."
+    )
+    DISCLAIMER_CAPPED = (
+        "any information displayed on any profile based on Death Battle "
+        "are solely based on whatever is said in their videos and "
+    )
+    DISCORD_NOTE = (
+        "Fought Bhunivelze and ultimately proved to be superior to him "
+        "Note: Message me on Discord in case you want to discuss "
+        "anything regarding this page (Vanta #2717)"
+    )
+    SHOVEL_NOTE = (
+        "I just inputted everything according to the legends."
+    )
+
+    def test_verbatim_disclaimer_flagged(self):
+        for text in (self.DISCLAIMER_FULL, self.DISCLAIMER_CAPPED):
+            self.assertIn(
+                "page_disclaimer",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_disclaimer_editor_notes_flagged(self):
+        for text in (self.DISCORD_NOTE, self.SHOVEL_NOTE):
+            self.assertIn(
+                "page_disclaimer",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_disclaimer_controls_survive(self):
+        # "was stated" must not match "as stated" (substring artifact);
+        # the trailing lowercase "i" is the 120-char cap cutting a
+        # word ("...his death i"), not a pronoun; "My Hero Academia"
+        # supplies a phantom "my"; "solely based on" with no
+        # first-person voice is a dependency statement, not a
+        # disclaimer.
+        for text in (
+            "The Post-Flashpoint emanation of Darkseid was stated to be "
+            "a fragment of Godhead Darkseid that resulted from his death i",
+            "requiring a certain amount of consumption of food based on "
+            "how she'll use it.My Hero Academia Volume 9 Chapter 72",
+            "His power is solely based on his ring",
+            "According to Morgana, the entire world is a product of "
+            "Cognition",
+        ):
+            self.assertNotIn(
+                "page_disclaimer",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_disclaimer_is_weaknesses_only(self):
+        self.assertNotIn(
+            "page_disclaimer",
+            fragment_item_reasons(
+                self.DISCLAIMER_FULL, section="powers_and_abilities"
+            ),
+        )
+
+    def test_verbatim_shards_flagged(self):
+        for text in (
+            "but will not meet his desires in many situations. For example",
+            "during his fight with the Hulk",
+            "rather than supplying a combat-related power.",
+            "leading to mistakes.",
+        ):
+            self.assertIn(
+                "prose_sentence_shard",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_lead_clause_not_caught(self):
+        # Documented by design: the darwin lead clause is a complete
+        # clause, and the item-level rule for it has a 12,691-item
+        # false-positive pool (calibration). The gate decides whether
+        # it re-merges.
+        self.assertNotIn(
+            "prose_sentence_shard",
+            fragment_item_reasons(
+                "His body will adapt to whatever means to make Darwin "
+                "survive",
+                section="weaknesses",
+            ),
+        )
+
+    def test_shard_controls_survive(self):
+        # Complete clauses (subject-led, contraction-expanded, -ed /
+        # irregular past), comma-fronted phrases, limitation markers,
+        # and "without" + a noun phrase (a conditional weakness).
+        for text in (
+            "however this can be negated by just using an even bigger "
+            "shield.",
+            "but he cannot fly without his cape",
+            "Using his powers drains him quickly",
+            "Without his armor",
+            "leaving him vulnerable to attack",
+            "Being powerless without his ring",
+            "Is weak to fire",
+            "Lacking in battle experience on his own",
+            "suffering from paranoia and extreme anger",
+            "leaving it vulnerable after its use",
+            "leaving him incapable of moving without causing himself "
+            "further pain",
+            "increasing their strength and agility at the cost of their "
+            "rational thinking",
+            "though he eventually recovered",
+            "though he won't die because he's half-human",
+            "but they'll even break on contact",
+            "meaning he'll occasionally slide along the ground for a "
+            "second",
+            "During full moons, he loses control",
+            "With his sword he cuts through anything",
+            "His belief in his superior hunting abilities may cause him "
+            "to underestimate opponents",
+        ):
+            self.assertNotIn(
+                "prose_sentence_shard",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_shard_is_weaknesses_only(self):
+        self.assertNotIn(
+            "prose_sentence_shard",
+            fragment_item_reasons(
+                "during his fight with the Hulk",
+                section="powers_and_abilities",
+            ),
+        )
+
+    def test_filter_drops_shards_keeps_real_weakness(self):
+        kept, dropped = filter_list_field_items(
+            "but will not meet his desires in many situations. "
+            "For example, during his fight with the Hulk, rather than "
+            "supplying a combat-related power., leading to mistakes., "
+            "Is weak to fire, Without his armor",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Is weak to fire, Without his armor")
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("prose_sentence_shard", reasons)
+
+    def test_repair_attempt_drops_disclaimer_and_shards(self):
+        prof = comic_profile("Darwin", "Marvel Comics")
+        fields = dict(SixthGenRepairPathTests.FIELDS)
+        fields["weaknesses"] = (
+            self.DISCLAIMER_FULL + ", but will not meet his desires in "
+            "many situations. For example, during his fight with the "
+            "Hulk, Is weak to fire"
+        )
+        attempt = SixthGenRepairPathTests()._attempt(prof, fields)
+        self.assertEqual(
+            attempt_field_map(attempt)["weaknesses"], "Is weak to fire"
+        )
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("page_disclaimer", reasons)
+        self.assertIn("prose_sentence_shard", reasons)
 
 
 if __name__ == "__main__":

@@ -3741,6 +3741,334 @@ def _name_only_technique(value: str, lowered: str) -> bool:
     return True
 
 
+# Page-disclaimer screen (eighth debris generation, weaknesses only):
+# a fan-page disclaimer / editor attribution itemized as a weakness --
+# the carnage-marvel-cinematic-universe sample-50k merge ("any
+# information displayed on any profile based on Death Battle are
+# solely based on whatever is said in their videos and not my own
+# opinion. So if a character is weaker or stronger on a profile than
+# they actually are then it isn't my fault."). Two rules, one reason:
+#   (a) first-person voice AND a strong disclaimer/attribution
+#       phrase. Weak markers are deliberately excluded: "based on"
+#       and "according to" fire on narrative prose, "as stated"
+#       matches inside "was stated", and "My Hero Academia" supplies
+#       a phantom "my". A trailing lowercase "i" is ignored: the
+#       120-char item-name cap cuts words mid-stream ("...his death
+#       i"), manufacturing a first-person token.
+#   (b) the capped-name safety net: the cap strips the first-person
+#       tail, so a name carrying "displayed on any profile" fires
+#       with no pronoun at all. Calibration (68,191 stored weakness
+#       items): rule (a) 6 hits, all genuine disclaimers/editor notes
+#       (the carnage text, a "Message me on Discord ... this page"
+#       note x3, an "I just inputted everything according to the
+#       legends" note x2); rule (b) 2 hits, both the stored
+#       tifa-lockhart-classic copy of the same carnage disclaimer.
+_PAGE_DISCLAIMER_STRONG = (
+    "not my own",
+    "my own opinion",
+    "my fault",
+    "isn't my fault",
+    "not my fault",
+    "message me",
+    "this page",
+    "this wiki",
+    "displayed on",
+    "their videos",
+    "whatever is said",
+    "in my opinion",
+    "i think",
+    "i believe",
+    "according to the legends",
+)
+_PAGE_DISCLAIMER_FP = re.compile(
+    r"\b(i|my|me|we|our|us|myself|ourselves|i'm|i've|i'll|we're|we've)\b"
+)
+
+
+def _page_disclaimer(value: str, lowered: str) -> bool:
+    if "displayed on any profile" in lowered:
+        return True
+    raw = str(value or "").strip()
+    # Trailing lowercase "i" is the 120-char cap cutting a word
+    # ("...his death i"), not a first-person pronoun. A real
+    # sentence-final "I" is uppercase and survives this strip.
+    raw = re.sub(r"\si$", "", raw)
+    low = raw.casefold()
+    if not _PAGE_DISCLAIMER_FP.search(low):
+        return False
+    return any(phrase in low for phrase in _PAGE_DISCLAIMER_STRONG)
+
+
+# Prose-sentence-shard screen (eighth debris generation, weaknesses
+# only): the LEADING-EDGE complement to the existing shard screens.
+# The 50k darwin/kraven merges are continuations of a sentence whose
+# head stayed on the page -- an item that OPENS on a conjunction
+# ("but will not meet his desires in many situations. For example"),
+# a preposition ("during his fight with the Hulk"), or a gerund
+# ("leading to mistakes."), or that ENDS on a lead-in ("For
+# example"). The discriminative test is that the item has no clause
+# of its own: no subject-led finite clause, and no main clause after
+# a comma. Spares, all calibrated:
+#   - a subject-led clause ("but he cannot fly", "however this can
+#     be negated...") is a complete statement, not a shard. The
+#     subject check expands contractions ("it's" -> it + is,
+#     "they'll" -> they + will, "won't" -> will + not) and reads
+#     -ed and irregular-past verbs, which the older helpers miss.
+#   - a comma followed by a main clause ("During full moons, he
+#     loses control") is a fronted phrase, not a fragment.
+#   - a limitation marker anywhere ("vulnerable", "powerless",
+#     "exhausted", "lacking", "at the cost of", "suffering from",
+#     "incapable of", "open to attack") states a real limitation
+#     and is spared even in fragment form.
+#   - "without" + a noun phrase is a conditional weakness ("Without
+#     his armor"); "without" + a gerund ("without discussing the
+#     method") is a continuation and fires.
+# Known accepted losses (fragmentary limitation phrasing the screen
+# drops): "due to not having his symbol in her armor", "getting
+# shocked when things don't go his way", plural-verb clauses with
+# no pronoun subject ("however his feet remain on the ground...").
+# Calibration (68,191 stored weakness items, final rule): 2,874 raw
+# hits; sampled hits are fragment-class throughout (ability-prose
+# tails, list fragments, narrative continuations). The darwin lead
+# clause ("His body will adapt to whatever means to make Darwin
+# survive") is deliberately NOT caught: it is a complete clause,
+# and the naive item-level rule for it has a 12,691-item
+# false-positive pool; a sibling-cluster rule is likewise dead
+# (4,951 runs in stored data, including real limitation content
+# such as Storm's emotional-dependence and Thor's holding-back
+# statements). The gate decides whether the lead clause re-merges.
+_SHARD_CONJ_OPENERS = (
+    "but ", "and ", "so ", "yet ", "however ", "although ",
+    "though ", "rather than ",
+)
+_SHARD_PREP_OPENERS = (
+    "during ", "after ", "before ", "with ", "without ", "by ",
+    "through ", "despite ", "because of ", "due to ", "in spite of ",
+    "instead of ",
+)
+_SHARD_TRAILING_LEADIN = ("for example", "for instance", "such as", "e.g.")
+# First tokens ending in -ing that are names or nouns, not gerunds
+# ("Lightning slapping Fang..." is a character name, not a verb).
+_SHARD_GERUND_DENY = frozenset({
+    "king", "ring", "thing", "spring", "morning", "evening",
+    "lightning", "nothing", "something", "anything", "everything",
+    "padding", "wedding", "building", "blessing",
+})
+_SHARD_SUBJECTS = frozenset({
+    "he", "she", "they", "we", "it", "this", "that", "these", "those",
+    "i", "you", "there", "who",
+})
+_SHARD_AUX = _PROSE_SHARD_AUX | frozenset({"cannot", "do", "does"})
+# Function words that cannot head a clause -- the frag-5 set plus
+# possessives and determiners: a "verb" preceded by one is a noun
+# ("his desires", "the attack"), not a subject-led verb.
+# _SHARD_NOUN_HEADS extends that with determiners, quantifiers,
+# numbers, and the adjectives that commonly precede plural nouns in
+# weakness prose ("many situations", "grievous injuries", "dark
+# forces"): an -s token after one of these is a plural noun, not a
+# 3rd-person verb, so it must not count as a headed clause.
+_SHARD_NOUN_HEADS = frozenset({
+    "his", "her", "their", "its", "my", "your", "our",
+    "many", "much", "few", "several", "some", "any", "all", "most",
+    "more", "less", "each", "every", "no", "one", "two", "three",
+    "four", "five", "six", "seven", "eight", "nine", "ten", "both",
+    "either", "neither", "another", "other", "such", "same", "own",
+    "first", "second", "third", "next", "last", "single", "whole",
+    "entire", "only", "great", "dark", "lost", "new", "old", "big",
+    "small", "large", "high", "low", "long", "short", "good", "bad",
+    "strong", "weak", "full", "true", "real", "secret", "hidden",
+    "ancient", "final", "main", "major", "minor", "primary",
+    "supreme", "ultimate", "eternal", "divine", "holy", "cosmic",
+    "mystic", "magical", "physical", "mental", "spiritual",
+    "psychic", "elemental", "natural", "human", "superhuman",
+    "grievous", "severe", "terrible", "horrible", "awful",
+    "serious", "critical", "deadly", "fatal", "mortal", "immortal",
+    "infernal", "celestial", "demonic", "angelic", "arcane",
+    "sacred", "cursed", "blessed", "pure", "bright", "brilliant",
+    "radiant", "shining", "glowing", "blazing", "frozen", "burning",
+    "broken", "shattered", "twisted", "corrupted", "silent",
+    "swift", "slow", "quick", "rapid", "sudden", "instant",
+    "endless", "boundless", "limitless", "countless", "nameless",
+    "faceless", "formless", "timeless", "ageless", "fearless",
+    "helpless", "hopeless", "restless", "breathless", "speechless",
+    "motionless", "lifeless", "soulless", "heartless", "merciless",
+    "ruthless", "relentless", "tireless", "unstoppable",
+    "unbreakable", "invincible", "invulnerable", "undying",
+    "deathless",
+})
+_SHARD_FUNCTION = _PROSE_CONT_FUNCTION | _SHARD_NOUN_HEADS
+_SHARD_IRREGULAR_PAST = frozenset({
+    "grew", "took", "made", "gave", "came", "went", "saw", "knew",
+    "got", "found", "left", "felt", "brought", "began", "kept",
+    "held", "meant", "set", "put", "cut", "hit", "ran", "sat",
+    "stood", "spoke", "told", "thought", "became", "fell", "rose",
+    "drew", "chose", "broke", "woke", "drove", "ate", "drank",
+    "flew", "forgot", "froze", "hid", "rode", "sang", "sank",
+    "shook", "stole", "swore", "tore", "wore", "won", "lost",
+    "paid", "sold", "sent", "spent", "built", "bought", "caught",
+    "taught", "read", "led", "fed", "met", "shot", "shut", "split",
+    "spread", "bit", "bled", "bred", "clung", "dealt", "dug",
+    "dreamt", "fled", "flung", "forbade", "foresaw", "foretold",
+    "forsook", "ground", "hung", "heard", "knelt", "laid", "lay",
+    "lit", "misled", "overcame", "overtook", "partook", "sought",
+    "shrank", "shrunk", "slid", "slung", "slit", "smelt", "sowed",
+    "sped", "spelled", "spilled", "spun", "spoiled", "sprang",
+    "stank", "strove", "stuck", "swept", "swung", "threw", "thrust",
+    "understood", "undertook", "underwent", "upheld", "upset",
+    "wept", "withdrew", "withstood", "wrung", "wrote", "swam",
+    "rang", "stung", "struck", "swept", "arose", "awoke", "bore",
+    "borne", "beat", "beaten", "bent", "bound", "burst", "chosen",
+    "clung", "crept", "dealt", "driven", "eaten", "fallen", "fed",
+    "flown", "forbidden", "forgotten", "frozen", "given", "grown",
+    "hidden", "known", "proven", "risen", "rung", "seen", "shaken",
+    "shown", "sung", "sunk", "taken", "torn", "woken", "worn",
+    "written",
+})
+_SHARD_LIMITATION_RE = re.compile(
+    r"\b(?:weak\w*|vulnerab\w*|susceptib\w*|allerg\w*|immun\w*|"
+    r"intoleran\w*|powerless|helpless|drain\w*|exhaust\w*|fatigue\w*|"
+    r"drawback\w*|limit\w*|backfire\w*|recoil\w*|cannot|can't|"
+    r"unable|ineffective\w*|dependent\w*|addict\w*|fear\w*|afraid|"
+    r"blind\w*|deaf\w*|loses|losing|loss of|lost (?:his|her|their|its)|"
+    r"sick\w*|ill\b|incapab\w*|lack\w*|requir\w*|cost\w*|"
+    r"suffer\w* from|open to (?:attack|harm|damage))\b",
+    re.I,
+)
+_SHARD_CONTRACTIONS = {
+    "it's": ("it", "is"), "he's": ("he", "is"), "she's": ("she", "is"),
+    "that's": ("that", "is"), "there's": ("there", "is"),
+    "what's": ("what", "is"), "who's": ("who", "is"),
+    "it'll": ("it", "will"), "he'll": ("he", "will"),
+    "she'll": ("she", "will"), "we'll": ("we", "will"),
+    "they'll": ("they", "will"), "you'll": ("you", "will"),
+    "i'll": ("i", "will"),
+    "we're": ("we", "are"), "they're": ("they", "are"),
+    "you're": ("you", "are"),
+    "we've": ("we", "have"), "they've": ("they", "have"),
+    "i've": ("i", "have"),
+    "i'd": ("i", "would"), "he'd": ("he", "would"),
+    "she'd": ("she", "would"), "it'd": ("it", "would"),
+    "they'd": ("they", "would"), "we'd": ("we", "would"),
+    "won't": ("will", "not"), "can't": ("can", "not"),
+    "don't": ("do", "not"), "doesn't": ("does", "not"),
+    "didn't": ("did", "not"), "isn't": ("is", "not"),
+    "aren't": ("are", "not"), "wasn't": ("was", "not"),
+    "weren't": ("were", "not"), "couldn't": ("could", "not"),
+    "wouldn't": ("would", "not"), "shouldn't": ("should", "not"),
+    "hasn't": ("has", "not"), "haven't": ("have", "not"),
+    "mustn't": ("must", "not"), "mightn't": ("might", "not"),
+    "needn't": ("need", "not"),
+}
+_SHARD_DETERMINERS = frozenset({
+    "his", "her", "their", "its", "the", "a", "an", "my", "your", "our",
+})
+
+
+def _shard_expand_contractions(tokens: list[str]) -> list[str]:
+    expanded: list[str] = []
+    for token in tokens:
+        expanded.extend(_SHARD_CONTRACTIONS.get(token, (token,)))
+    return expanded
+
+
+def _shard_is_verb(token: str) -> bool:
+    # Full verb test, used ONLY for the subject-led spare, where a
+    # subject pronoun precedes the verb. -ed and irregular-past
+    # forms belong here only: in _shard_headed they misread
+    # participles used as adjectives ("combat-related power" ->
+    # "related" as a verb headed by "combat") and dropped a verbatim
+    # shard from the screen.
+    return (
+        token in _SHARD_AUX
+        or _looks_like_finite_verb(token)
+        or (len(token) >= 4 and token.endswith("ed"))
+        or token in _SHARD_IRREGULAR_PAST
+    )
+
+
+def _shard_headed(tokens: list[str]) -> bool:
+    # Narrower verb test: an auxiliary or a 3rd-person -s verb.
+    # A plural noun or a participle must not count as a verb here;
+    # the noun-head words in _SHARD_FUNCTION keep those cases out.
+    return any(
+        (token in _SHARD_AUX or _looks_like_finite_verb(token))
+        and idx > 0
+        and tokens[idx - 1] not in _SHARD_FUNCTION
+        for idx, token in enumerate(tokens)
+    )
+
+
+def _shard_subject_led(tokens: list[str]) -> bool:
+    for idx, token in enumerate(tokens):
+        if token not in _SHARD_SUBJECTS:
+            continue
+        for nxt in tokens[idx + 1: idx + 3]:
+            if _shard_is_verb(nxt):
+                return True
+        return False
+    return False
+
+
+def _shard_comma_main_clause(text: str) -> bool:
+    if "," not in text:
+        return False
+    tail = re.findall(
+        r"[a-z]+(?:'[a-z]+)?", text.split(",", 1)[1].casefold())
+    tail = _shard_expand_contractions(tail)
+    return _shard_headed(tail) or _shard_subject_led(tail)
+
+
+def _prose_sentence_shard(value: str, lowered: str) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    if _SHARD_LIMITATION_RE.search(text):
+        return False
+    stripped = lowered.strip().lstrip("([\"'* ")
+    opener: str | None = None
+    for op in _SHARD_CONJ_OPENERS:
+        if stripped.startswith(op):
+            opener = "conjunction"
+            break
+    if opener is None:
+        for op in _SHARD_PREP_OPENERS:
+            if stripped.startswith(op):
+                opener = "preposition"
+                break
+    toks = re.findall(r"[a-z]+(?:'[a-z]+)?", lowered)
+    if not toks:
+        return False
+    if opener is None:
+        first = toks[0]
+        if (
+            len(first) >= 4
+            and first.endswith("ing")
+            and first not in _SHARD_GERUND_DENY
+        ):
+            opener = "gerund"
+    tail = re.sub(r"[.\s]+$", "", lowered.strip())
+    trailing = any(tail.endswith(lead) for lead in _SHARD_TRAILING_LEADIN)
+    if opener is None and not trailing:
+        return False
+    # "without" + a noun phrase is a conditional weakness ("Without
+    # his armor"); "without" + a gerund ("without discussing the
+    # method") is a continuation and fires.
+    if opener == "preposition" and stripped.startswith("without "):
+        rest = toks[1:]
+        while rest and rest[0] in _SHARD_DETERMINERS:
+            rest = rest[1:]
+        if rest and not rest[0].endswith("ing"):
+            return False
+    expanded = _shard_expand_contractions(toks)
+    if _shard_headed(expanded):
+        return False
+    if _shard_subject_led(expanded):
+        return False
+    if _shard_comma_main_clause(text):
+        return False
+    return True
+
+
 def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
     """Fragment-debris checks for one recovered list item.
 
@@ -3793,6 +4121,10 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         reasons.append("technique_in_weaknesses")
     if section == "weaknesses" and _name_only_technique(value, lowered):
         reasons.append("name_only_technique_in_weaknesses")
+    if section == "weaknesses" and _page_disclaimer(value, lowered):
+        reasons.append("page_disclaimer")
+    if section == "weaknesses" and _prose_sentence_shard(value, lowered):
+        reasons.append("prose_sentence_shard")
     return reasons
 
 
