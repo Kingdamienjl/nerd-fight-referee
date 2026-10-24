@@ -1060,6 +1060,12 @@ def extract_vsbattles_fields(content: str) -> dict[str, str]:
     for key, value in section_fields.items():
         if key not in fields or (key == "powers_and_abilities" and len(value) > len(fields.get(key, ""))):
             fields[key] = value
+    # An explicit-none weaknesses value ("Weaknesses: None notable")
+    # states the section is empty: yield NO weaknesses field at all,
+    # so no itemizer downstream can file following-section text (or
+    # the none statement itself) as a weakness.
+    if fields.get("weaknesses") and explicit_none_value(fields["weaknesses"]):
+        del fields["weaknesses"]
     return fields
 
 
@@ -1073,7 +1079,7 @@ def parse_field_line(line: str) -> tuple[str, str] | None:
     canonical = field_alias(key)
     if not canonical or not value:
         return None
-    return canonical, value
+    return canonical, truncate_at_section_boundary(value)
 
 
 def extract_template_pipe_fields(content: str) -> dict[str, str]:
@@ -1152,7 +1158,7 @@ def extract_inline_labeled_fields(text: str) -> dict[str, str]:
             continue
         start = match.end()
         end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
-        value = normalize_extracted_value(text[start:end])
+        value = truncate_at_section_boundary(normalize_extracted_value(text[start:end]))
         if value and not fields.get(canonical):
             fields[canonical] = value
     return fields
@@ -1182,7 +1188,7 @@ def extract_delimiterless_labeled_fields(text: str) -> dict[str, str]:
     for index, (match, canonical) in enumerate(accepted):
         start = match.end()
         end = accepted[index + 1][0].start() if index + 1 < len(accepted) else len(text)
-        value = normalize_extracted_value(text[start:end])
+        value = truncate_at_section_boundary(normalize_extracted_value(text[start:end]))
         if value and not fields.get(canonical):
             fields[canonical] = value
     return fields
@@ -1406,6 +1412,62 @@ def normalize_extracted_value(value: str) -> str:
     return value[:5000].strip()
 
 
+# A labeled field's value ends at the next canonical label -- but pages
+# also carry section structure the alias table does not model: ==
+# headings == and bold sub-labels like "Notable Attacks/Techniques:".
+# A terminal label (Weaknesses is usually last in Powers and Stats)
+# otherwise swallows every following section into its value -- the
+# frag-7 root cause: "Weaknesses: None notable" absorbed the whole
+# Notable Attacks bullet list, and the itemizer then filed the
+# character's own attacks as weaknesses.
+_SECTION_BOUNDARY_RE = re.compile(
+    r"(?:\s|^)==+[^=]{1,80}==+"
+    r"|\b(?:notable attacks(?:\s*/\s*techniques)?|notable matchups)\s*[:=]",
+    re.IGNORECASE,
+)
+
+
+def truncate_at_section_boundary(value: str) -> str:
+    """Cut a labeled-field value at the first following section boundary."""
+    match = _SECTION_BOUNDARY_RE.search(value)
+    if match:
+        value = value[: match.start()]
+    return value.strip(" \t\r\n,;|")
+
+
+_EXPLICIT_NONE_RE = re.compile(
+    r"^(?:none(?:[-\s]+(?:notable|known|whatsoever|shown))?"
+    r"|no\s+(?:known\s+)?weaknesses?"
+    r"|no\s+notable\s+weaknesses?"
+    r"|nothing\s+notable"
+    r"|n/?a"
+    r"|not\s+applicable)$"
+)
+
+
+def explicit_none_value(value: Any) -> bool:
+    """True when a whole field value is an explicit-none statement
+    ("None notable", "None known", "N/A", "No weaknesses", ...).
+
+    Such a value is a statement that the section is EMPTY -- it must
+    yield zero items, never an item of its own and never a vehicle
+    for whatever text the extractor glued onto it.
+    """
+    text = normalize_text(str(value or "")).casefold().strip(" .!*,")
+    if not text:
+        return False
+    # "None notable as of Season 2" -- the temporal tail still states
+    # the section is empty.
+    text = re.sub(r"^(none[-\s]+(?:notable|known))\s+as\s+of\s+.*$", r"\1", text)
+    if _EXPLICIT_NONE_RE.match(text):
+        return True
+    # "None Notable (Has never displayed a weakness)" -- a none head
+    # whose only tail is a parenthetical gloss.
+    return bool(
+        re.match(r"^none(?:[-\s]+(?:notable|known))?\s*\(.*\)$", text)
+    )
+
+
 def first_useful_section_text(value: str) -> str:
     text = normalize_extracted_value(value)
     if not text:
@@ -1413,7 +1475,7 @@ def first_useful_section_text(value: str) -> str:
     stop = re.search(r"(?i)\b(?:gallery|notable matchups|references|notes/explanations)\b", text)
     if stop:
         text = text[:stop.start()].strip()
-    if text.casefold() in {"none", "n/a", "not applicable"}:
+    if explicit_none_value(text):
         return ""
     return text
 

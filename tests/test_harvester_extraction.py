@@ -5,6 +5,7 @@ from tempfile import TemporaryDirectory
 from battlebot.harvest.auto_profile_harvester import (
     RosterRow,
     build_profile,
+    explicit_none_value,
     extract_vsbattles_fields,
     profile_output_path,
     row_fingerprint,
@@ -159,6 +160,85 @@ class HarvesterExtractionTests(unittest.TestCase):
 
             self.assertEqual(selected, [])
             self.assertEqual(summary.needs_review, 1)
+
+
+class ExplicitNoneExtractionTests(unittest.TestCase):
+    """Frag-7: explicit-none weakness sections and section boundaries
+    at the extraction layer (the gate 50j root cause)."""
+
+    IMMORTAL_PAGE = (
+        "'''Powers and Abilities:''' Superhuman Physical Characteristics\n"
+        "'''Weaknesses:''' None notable\n"
+        "'''Notable Attacks/Techniques:'''\n"
+        "* '''Out Orbital Punch'''\n"
+        "* '''Air Strike'''\n"
+        "==Notable Matchups==\n"
+        "'''Victories:'''\n"
+        "Category:Characters\n"
+    )
+
+    def test_none_notable_page_yields_no_weaknesses_field(self):
+        fields = extract_vsbattles_fields(self.IMMORTAL_PAGE)
+        self.assertNotIn("weaknesses", fields)
+
+    def test_explicit_none_family(self):
+        for text in (
+            "None",
+            "none",
+            "None notable",
+            "None notable.",
+            "None known",
+            "None whatsoever",
+            "N/A",
+            "n/a",
+            "Not applicable",
+            "No weaknesses",
+            "No known weaknesses",
+            "None notable as of Season 2",
+            "None Notable (Has never displayed a weakness)",
+        ):
+            self.assertTrue(explicit_none_value(text), text)
+
+    def test_explicit_none_negatives(self):
+        for text in (
+            "No weaknesses known to his enemies, but sunlight kills him",
+            "None of his attacks work on Tuesdays",
+            "No weakness to magic",
+            "Fire",
+            "",
+            None,
+        ):
+            self.assertFalse(explicit_none_value(text), text)
+
+    def test_none_known_field_dropped(self):
+        fields = extract_vsbattles_fields(
+            "'''Attack Potency''': Planet level\n'''Weaknesses:''' None known"
+        )
+        self.assertEqual(fields["attack_potency"], "Planet level")
+        self.assertNotIn("weaknesses", fields)
+
+    def test_real_weakness_survives(self):
+        fields = extract_vsbattles_fields(
+            "'''Weaknesses:''' Fire, sunlight"
+        )
+        self.assertEqual(fields["weaknesses"], "Fire, sunlight")
+
+    def test_value_truncated_at_next_heading(self):
+        fields = extract_vsbattles_fields(
+            "'''Weaknesses:''' He can't regenerate if his body parts "
+            "are kept separate\n==Gallery==\nImage one\nImage two"
+        )
+        self.assertEqual(
+            fields["weaknesses"],
+            "He can't regenerate if his body parts are kept separate",
+        )
+
+    def test_value_truncated_at_notable_attacks_label(self):
+        fields = extract_vsbattles_fields(
+            "'''Weaknesses:''' Sunlight kills him Notable "
+            "Attacks/Techniques: * Doom Fist * Doom Kick"
+        )
+        self.assertEqual(fields["weaknesses"], "Sunlight kills him")
 
 
 if __name__ == "__main__":

@@ -1982,5 +1982,162 @@ class SixthGenRepairPathTests(unittest.TestCase):
         self.assertIn("concessive_shard", reasons)
 
 
+class SeventhGenExplicitNoneTests(unittest.TestCase):
+    """Frag-7 root cause: an explicit-none weakness section yields ZERO
+    weakness items (gate 50j -- The Immortal)."""
+
+    VERBATIM_GATE_VALUE = (
+        "None notable Notable Attacks/Techniques: * Out Orbital Punch "
+        "* Air Strike ==Notable Matchups== Victories: Losses: "
+        "Inconclusive: Category:Characters Category:Wrestlers"
+    )
+
+    def test_none_statements_are_placeholder_items(self):
+        for text in (
+            "None",
+            "None notable",
+            "None notable.",
+            "None known",
+            "N/A",
+            "No weaknesses",
+            "None notable as of Season 2",
+            "None Notable (Has never displayed a weakness)",
+        ):
+            self.assertIn(
+                "explicit_none", placeholder_item_reasons(text), text
+            )
+
+    def test_none_field_filters_to_empty(self):
+        kept, dropped = filter_list_field_items(
+            "None notable", section="weaknesses"
+        )
+        self.assertEqual(kept, "")
+        self.assertTrue(dropped)
+
+    def test_verbatim_gate_value_filters_to_empty(self):
+        kept, _dropped = filter_list_field_items(
+            self.VERBATIM_GATE_VALUE, section="weaknesses"
+        )
+        self.assertEqual(kept, "")
+
+    def test_mixed_list_keeps_real_weakness_drops_none_piece(self):
+        kept, _dropped = filter_list_field_items(
+            "Weakness to sunlight, None known", section="weaknesses"
+        )
+        self.assertEqual(kept, "Weakness to sunlight")
+
+    def test_substantive_sentence_is_not_explicit_none(self):
+        text = (
+            "No weaknesses known to his enemies, but sunlight kills him"
+        )
+        self.assertNotIn("explicit_none", placeholder_item_reasons(text))
+
+    def test_no_weakness_to_x_survives_filter(self):
+        kept, _dropped = filter_list_field_items(
+            "No weakness to magic", section="weaknesses"
+        )
+        self.assertEqual(kept, "No weakness to magic")
+
+
+class SeventhGenNameOnlyTechniqueTests(unittest.TestCase):
+    """Frag-7 section integrity: a bare technique NAME is not a
+    weakness (gate 50j's surviving shape)."""
+
+    def test_verbatim_gate_items_flagged(self):
+        for text in ("Out Orbital Punch", "Air Strike"):
+            self.assertIn(
+                "name_only_technique_in_weaknesses",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_corpus_calibration_examples_flagged(self):
+        for text in (
+            "Nova Strike",
+            "Bullet Punch",
+            "Mega Kick",
+            "Red Sword Slash",
+        ):
+            self.assertIn(
+                "name_only_technique_in_weaknesses",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_filter_drops_names_keeps_real_weakness(self):
+        kept, dropped = filter_list_field_items(
+            "Out Orbital Punch, Air Strike, Weakness to sunlight",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Weakness to sunlight")
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("name_only_technique_in_weaknesses", reasons)
+
+    def test_screen_is_weaknesses_only(self):
+        self.assertNotIn(
+            "name_only_technique_in_weaknesses",
+            fragment_item_reasons(
+                "Out Orbital Punch", section="powers_and_abilities"
+            ),
+        )
+
+    def test_legit_bare_names_survive_as_controls(self):
+        # Weapon-noun names: conventionally "can be killed by it".
+        # Lowercase/possessive phrases: not name forms (frag-6
+        # controls). Limitation semantics: never name-only debris.
+        for text in (
+            "Archangel Blades",
+            "Spirit Bomb",
+            "Break Cannon",
+            "energy blasts",
+            "Cyclops's optical blasts",
+            "Weakness to sunlight",
+            "Vulnerable to holy weapons",
+        ):
+            self.assertNotIn(
+                "name_only_technique_in_weaknesses",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+
+class SeventhGenRepairPathTests(unittest.TestCase):
+    """The seventh-generation screens at the repair choke point."""
+
+    FIELDS = SixthGenRepairPathTests.FIELDS
+
+    def _attempt(self, prof, fields=None):
+        return SixthGenRepairPathTests()._attempt(prof, fields)
+
+    def test_repair_attempt_drops_name_only_technique(self):
+        prof = comic_profile("The Immortal", "Image Comics")
+        fields = dict(self.FIELDS)
+        fields["weaknesses"] = (
+            "Out Orbital Punch, Vulnerable to holy weapons"
+        )
+        attempt = self._attempt(prof, fields)
+        self.assertEqual(
+            attempt_field_map(attempt)["weaknesses"],
+            "Vulnerable to holy weapons",
+        )
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("name_only_technique_in_weaknesses", reasons)
+
+    def test_repair_attempt_drops_explicit_none(self):
+        prof = comic_profile("The Immortal", "Image Comics")
+        fields = dict(self.FIELDS)
+        fields["weaknesses"] = "None notable"
+        attempt = self._attempt(prof, fields)
+        self.assertNotIn("weaknesses", attempt_field_map(attempt))
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("explicit_none", reasons)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -19,6 +19,7 @@ import yaml
 
 from battlebot.harvest.auto_profile_harvester import (
     FIELD_ALIASES,
+    explicit_none_value,
     extract_vsbattles_fields,
     field_alias,
     list_items_from_text,
@@ -2916,6 +2917,22 @@ def _feats_label_item(lowered: str) -> bool:
     return len(tokens) == 1 and tokens[0].isalpha()
 
 
+def _explicit_none_item(value: str, lowered: str) -> bool:
+    """A list piece that is itself an explicit-none statement.
+
+    Whole-value statements ("None notable") plus the short-tail
+    forms the corpus stores as items ("None notable as of Season 2",
+    "None Notable (Has never displayed a weakness)"): a none head
+    with at most a few words of tail is still the statement that
+    there is nothing to list -- it is never a weakness.
+    """
+    if explicit_none_value(value):
+        return True
+    if re.match(r"\s*none[-\s]+(?:notable|known)\b", lowered):
+        return _fragment_word_count(lowered) <= 8
+    return False
+
+
 def placeholder_item_reasons(item: Any) -> list[str]:
     """Per-item placeholder checks for one recovered list entry.
 
@@ -2930,6 +2947,8 @@ def placeholder_item_reasons(item: Any) -> list[str]:
         return ["empty_item"]
     lowered = value.casefold()
     reasons: list[str] = []
+    if _explicit_none_item(value, lowered):
+        reasons.append("explicit_none")
     if any(re.search(pattern, lowered) for pattern in _PLACEHOLDER_ITEM_PATTERNS):
         reasons.append("placeholder_instruction")
     if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_INSTRUCTION_PATTERNS):
@@ -3670,6 +3689,58 @@ def _own_technique_in_weaknesses(value: str, lowered: str) -> bool:
     return _attack_predicate(lowered)
 
 
+_NAME_ONLY_TECHNIQUE_MARKERS = frozenset(
+    {
+        "punch", "punches", "strike", "strikes", "kick", "kicks",
+        "blast", "blasts", "beam", "beams", "slam", "slams",
+        "smash", "smashes", "chop", "chops", "slash", "slashes",
+        "barrage", "uppercut", "headbutt", "suplex", "slap", "slaps",
+        "rush",
+    }
+)
+_NAME_FORM_CONNECTORS = frozenset({"of", "the", "and", "&", "de", "von"})
+
+
+def _name_only_technique(value: str, lowered: str) -> bool:
+    """Seventh generation: a bare technique NAME filed as a weakness.
+
+    The frag-6 technique screen keys on labels and attack predicates;
+    a name-only item ("Out Orbital Punch" -- description == name)
+    carries neither. The discriminative residue is the NAME FORM:
+    2-5 tokens, every token capitalized or a small connector (a move
+    title, not a phrase), whose final token is an action noun
+    (Punch / Strike / Kick / Blast / Beam / Slam / ...), with no
+    limitation semantics anywhere in the item. Generic lowercase
+    phrases ("energy blasts") and possessive vulnerability phrases
+    ("Cyclops's optical blasts") are not name forms and survive, as
+    do weapon-noun names ("Archangel Blades", "Spirit Bomb"): a bare
+    weapon name in weaknesses conventionally means the character can
+    be killed by it, so object nouns are excluded from the marker
+    set by calibration decision.
+    """
+    if any(re.search(p, lowered) for p in _TECHNIQUE_WEAKNESS_MARKERS):
+        return False
+    text = value.strip().rstrip(".:!").strip()
+    tokens = text.split()
+    if not 2 <= len(tokens) <= 5:
+        return False
+    last = re.sub(r"[^a-z]", "", tokens[-1].casefold())
+    if last not in _NAME_ONLY_TECHNIQUE_MARKERS:
+        return False
+    for token in tokens:
+        core = token.strip(".,:;'\"()")
+        if not core:
+            return False
+        if (
+            core[:1].isupper()
+            or core.casefold() in _NAME_FORM_CONNECTORS
+            or core.isdigit()
+        ):
+            continue
+        return False
+    return True
+
+
 def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
     """Fragment-debris checks for one recovered list item.
 
@@ -3720,6 +3791,8 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         reasons.append("concessive_shard")
     if section == "weaknesses" and _own_technique_in_weaknesses(value, lowered):
         reasons.append("technique_in_weaknesses")
+    if section == "weaknesses" and _name_only_technique(value, lowered):
+        reasons.append("name_only_technique_in_weaknesses")
     return reasons
 
 
@@ -4089,6 +4162,21 @@ async def recover_profile_evidence(
             scoped_fields, scope_methods = _scope_recovery_fields(
                 fields, key=key, page_labels=page_labels
             )
+            # Explicit-none backstop: a source whose (scoped) weakness
+            # section is an explicit-none statement contributes NO
+            # weakness items, whatever producer built the fields --
+            # the frag-7 root cause was a "None notable" section whose
+            # extractor-glued tail itemized the page's own Notable
+            # Attacks list into the profile's weaknesses.
+            if "weaknesses" in scoped_fields and explicit_none_value(
+                scoped_fields["weaknesses"]
+            ):
+                tried.setdefault("boilerplate_fields", []).append("weaknesses")
+                tried.setdefault("boilerplate_reasons", {})["weaknesses"] = [
+                    "explicit_none_weaknesses"
+                ]
+                del scoped_fields["weaknesses"]
+                scope_methods.pop("weaknesses", None)
             # Field-level boilerplate filter: template instructions or
             # markup residue in a recovered field reject that field only.
             # List sections are filtered per item first: one placeholder
