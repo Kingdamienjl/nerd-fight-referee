@@ -1454,6 +1454,10 @@ def explicit_none_value(value: Any) -> bool:
     for whatever text the extractor glued onto it.
     """
     text = normalize_text(str(value or "")).casefold().strip(" .!*,")
+    # Wikitext bold/italic residue clings to section-scoped values:
+    # the gate profiles' own source yields "''' None notable" --
+    # markup quotes are not part of the statement.
+    text = text.strip("'").strip(" .!*,").strip("'")
     if not text:
         return False
     # "None notable as of Season 2" -- the temporal tail still states

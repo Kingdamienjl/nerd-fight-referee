@@ -2002,6 +2002,7 @@ class SeventhGenExplicitNoneTests(unittest.TestCase):
             "No weaknesses",
             "None notable as of Season 2",
             "None Notable (Has never displayed a weakness)",
+            "''' None notable",
         ):
             self.assertIn(
                 "explicit_none", placeholder_item_reasons(text), text
@@ -2130,6 +2131,20 @@ class SeventhGenRepairPathTests(unittest.TestCase):
         prof = comic_profile("The Immortal", "Image Comics")
         fields = dict(self.FIELDS)
         fields["weaknesses"] = "None notable"
+        attempt = self._attempt(prof, fields)
+        self.assertNotIn("weaknesses", attempt_field_map(attempt))
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("explicit_none", reasons)
+
+    def test_repair_attempt_drops_markup_residue_none(self):
+        # Verbatim from the frag-7 deploy dry-run: the source's
+        # section-scoped value carries wikitext bold residue.
+        prof = comic_profile("The Immortal", "Image Comics")
+        fields = dict(self.FIELDS)
+        fields["weaknesses"] = "''' None notable"
         attempt = self._attempt(prof, fields)
         self.assertNotIn("weaknesses", attempt_field_map(attempt))
         dropped = (attempt.metadata.get("dropped_items") or {}).get(

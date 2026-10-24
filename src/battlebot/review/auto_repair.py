@@ -2928,7 +2928,7 @@ def _explicit_none_item(value: str, lowered: str) -> bool:
     """
     if explicit_none_value(value):
         return True
-    if re.match(r"\s*none[-\s]+(?:notable|known)\b", lowered):
+    if re.match(r"[\s'*]*none[-\s]+(?:notable|known)\b", lowered):
         return _fragment_word_count(lowered) <= 8
     return False
 

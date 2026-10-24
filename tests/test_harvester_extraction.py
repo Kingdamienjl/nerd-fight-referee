@@ -196,6 +196,8 @@ class ExplicitNoneExtractionTests(unittest.TestCase):
             "No known weaknesses",
             "None notable as of Season 2",
             "None Notable (Has never displayed a weakness)",
+            "''' None notable",
+            "None notable'''",
         ):
             self.assertTrue(explicit_none_value(text), text)
 
