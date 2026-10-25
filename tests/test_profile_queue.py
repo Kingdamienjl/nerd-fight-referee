@@ -1,5 +1,6 @@
 import argparse
 import unittest
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import AsyncMock, patch
@@ -33,6 +34,35 @@ class FakeConnection:
     async def fetch(self, sql, *args):
         self.executed.append((sql, args))
         return []
+
+
+class SeedFakeConnection(FakeConnection):
+    """Fake that mirrors enqueue_job's ON CONFLICT semantics.
+
+    fetch() answers the seed's terminal/active queries from configured
+    row sets; fetchrow() returns None when the insert would be a no-op
+    (an existing terminal job without requeue, or an already-active job).
+    """
+
+    def __init__(self, *, terminal_rows=(), active_paths=()):
+        super().__init__()
+        self.terminal_rows = list(terminal_rows)
+        self.active_paths = {str(p) for p in active_paths}
+
+    async def fetch(self, sql, *args):
+        self.executed.append((sql, args))
+        if "needs_review" in sql:
+            return self.terminal_rows
+        return [{"profile_path": p} for p in self.active_paths]
+
+    async def fetchrow(self, sql, *args):
+        self.inserted.append(args)
+        profile_path, _target, _providers, _priority, _max_attempts, requeue = args
+        if profile_path in self.active_paths:
+            return None
+        if any(str(row["profile_path"]) == profile_path for row in self.terminal_rows) and not requeue:
+            return None
+        return {"id": len(self.inserted)}
 
 
 def write_profile(path: Path):
@@ -262,6 +292,95 @@ class ProfileQueueTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("UPDATE profile_jobs", update_sql)
         self.assertEqual(update_args[1], "needs_review")
         self.assertEqual(update_args[2], "user_request_skeleton_schema_incomplete")
+
+    async def _seed_single(self, root, *, connection, assessed_value=7):
+        needs = root / "profiles" / "needs_review"
+        with patch(
+            "battlebot.review.queue_seed.assessed_priority",
+            return_value=assessed_value,
+        ) as assessed:
+            summary = await seed_queue(
+                connection,
+                target=needs,
+                providers="vsbattles",
+                priority=50,
+                needs_review_dir=needs,
+                generated_dir=root / "profiles" / "generated",
+                review_archive_dir=root / "profiles" / "review_archive",
+            )
+        return summary, assessed
+
+    async def test_seed_assesses_new_jobs(self):
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            seed_path = root / "profiles" / "needs_review" / "anime" / "x" / "seed.yaml"
+            write_profile(seed_path)
+            connection = SeedFakeConnection()
+            summary, assessed = await self._seed_single(
+                root, connection=connection
+            )
+
+        assessed.assert_called_once()
+        self.assertEqual(summary.scanned, 1)
+        self.assertEqual(summary.seeded, 1)
+        self.assertEqual(connection.inserted[0][3], 7)
+
+    async def test_seed_skips_assessment_for_parked_terminal_jobs(self):
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            seed_path = root / "profiles" / "needs_review" / "anime" / "x" / "seed.yaml"
+            write_profile(seed_path)
+            # File was just written and the job was just updated: inputs
+            # have not changed and it is not a stale failure, so no requeue.
+            terminal_rows = [{
+                "profile_path": str(seed_path),
+                "status": "needs_review",
+                "updated_at": datetime.now(UTC),
+            }]
+            connection = SeedFakeConnection(terminal_rows=terminal_rows)
+            summary, assessed = await self._seed_single(root, connection=connection)
+
+        assessed.assert_not_called()
+        self.assertEqual(summary.scanned, 1)
+        self.assertEqual(summary.seeded, 0)
+        self.assertEqual(summary.skipped_existing_job, 1)
+        # The caller's default priority goes through untouched.
+        self.assertEqual(connection.inserted[0][3], 50)
+
+    async def test_seed_assesses_terminal_requeue_candidates(self):
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            seed_path = root / "profiles" / "needs_review" / "anime" / "x" / "seed.yaml"
+            write_profile(seed_path)
+            # Job last updated 2h ago; the just-written file is newer
+            # than updated_at + 1h, so this is a requeue candidate.
+            terminal_rows = [{
+                "profile_path": str(seed_path),
+                "status": "needs_review",
+                "updated_at": datetime.now(UTC) - timedelta(hours=2),
+            }]
+            connection = SeedFakeConnection(terminal_rows=terminal_rows)
+            summary, assessed = await self._seed_single(root, connection=connection)
+
+        assessed.assert_called_once()
+        self.assertEqual(summary.scanned, 1)
+        self.assertEqual(summary.seeded, 1)
+        self.assertEqual(summary.requeued, 1)
+        self.assertEqual(connection.inserted[0][3], 7)
+
+    async def test_seed_skips_assessment_for_active_jobs(self):
+        with TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            seed_path = root / "profiles" / "needs_review" / "anime" / "x" / "seed.yaml"
+            write_profile(seed_path)
+            connection = SeedFakeConnection(active_paths={seed_path})
+            summary, assessed = await self._seed_single(root, connection=connection)
+
+        assessed.assert_not_called()
+        self.assertEqual(summary.scanned, 1)
+        self.assertEqual(summary.seeded, 0)
+        self.assertEqual(summary.skipped_existing_job, 1)
+        self.assertEqual(connection.inserted[0][3], 50)
 
 
 if __name__ == "__main__":

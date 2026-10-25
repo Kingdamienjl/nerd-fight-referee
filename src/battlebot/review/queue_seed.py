@@ -115,11 +115,18 @@ async def seed_queue(
                 file_changed = False
             stale_failed = job_status == "failed" and job_updated_at < now - timedelta(days=7)
             requeue = file_changed or stale_failed
-        # Jobs that already exist and are claimable keep the priority
-        # they were stored with; only new inserts and terminal requeues
-        # pay for a fresh blocker assessment here.
+        # Only genuinely new inserts and terminal requeues pay for a
+        # fresh blocker assessment: a file with no job row at all, or a
+        # terminal job whose inputs changed. A terminal job that stays
+        # parked is a no-op in enqueue_job(), and a job that already
+        # exists and is claimable keeps the priority it was stored
+        # with — assessing either is pure waste, and the computed
+        # priority is discarded. (The old guard assessed every
+        # non-active file: ~2,365 full load_yaml + approval_blockers
+        # calls per worker per cycle, ~7 min/cycle, host load 6+ on
+        # 4 CPUs, for zero effect.)
         job_priority = priority
-        if str(path) not in active_jobs:
+        if (terminal is None and str(path) not in active_jobs) or requeue:
             job_priority = assessed_priority(path, default=priority)
         inserted = await enqueue_job(
             connection,
