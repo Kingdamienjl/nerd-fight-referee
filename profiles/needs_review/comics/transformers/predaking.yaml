@@ -10,19 +10,8 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-10T07:28:43Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Predaking
   franchise: Transformers
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-predaking-transformers
   provider_id: vsbattles
   source_type: mediawiki
-  title: Predaking Transformers
-  url: https://vsbattles.fandom.com/wiki/Predaking_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-predaking-transformers
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Predaking Transformers
-  url: https://character-stats-and-profiles.fandom.com/wiki/Predaking_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-predaking-transformers
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Predaking (Transformers)
   url: https://vsbattles.fandom.com/wiki/Predaking_%28Transformers%29
   authority: high
@@ -164,13 +117,22 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Mountain level, likely higher (Stomped Ultra Magnus, Bulkhead,
+      and Wheeljack with some effort. Can go toe-to-toe with Upgraded Optimus Prime.
+      Nearly killed Megatron, who implied that Predaking would've beaten him had he
+      been in his Beast Form), even higher in Beast Mode (Megatron strongly implies
+      he's superior in this form compared to his Robot Mode)
+    source_ids:
+    - vsbattles-predaking-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Massively Hypersonic combat and reaction speed and flight speed (Kept up
+      with the Upgraded Optimus Prime)
+    source_ids:
+    - vsbattles-predaking-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,27 +142,228 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Mountain level, likely far higher (Survived an explosion that brought
+      down a massive cave system along with the actual cave falling on him, continuously
+      took hits from three experienced Wreckers without much staggering, can completely
+      shrug off plasma fire), even higher in Beast Mode
+    source_ids:
+    - vsbattles-predaking-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Unknown (Can continue to battle foes in greater numbers and shrug off a
+      myriad of different attacks and still keep going)
+    source_ids:
+    - vsbattles-predaking-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Tens of Meters with melee attacks, Hundreds of Meters with fire breath
+    source_ids:
+    - vsbattles-predaking-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Average (Shown to be a decently intelligent individual, albeit hampered
+      a bit by his Predacon coding)
+    source_ids:
+    - vsbattles-predaking-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-predaking-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-true-flight-in-beast-mode
+  name: True Flight (in beast mode)
+  description: True Flight (in beast mode)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transformation
+  name: Transformation
+  description: Transformation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-limited-fire-manipulation-in-beast-mode
+  name: Limited Fire Manipulation (in beast mode)
+  description: Limited Fire Manipulation (in beast mode)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-large-size-type-1
+  name: Large Size (Type 1)
+  description: Large Size (Type 1)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-enhanced-senses
+  name: Enhanced Senses
+  description: Enhanced Senses
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-breath-attack
+  name: Breath Attack
+  description: Breath Attack
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-extreme-longevity
+  name: Extreme Longevity
+  description: Extreme Longevity
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-self-sustenance-types-1-and-3
+  name: Self-Sustenance (Types 1 and 3)
+  description: Self-Sustenance (Types 1 and 3)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-natural-weaponry
+  name: Natural Weaponry
+  description: Natural Weaponry
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-predaking-was-formerly-just-a-mindless-beast-that-could-not-properly-
+  name: Predaking was formerly just a mindless beast that could not properly strategize
+    on its own
+  description: Predaking was formerly just a mindless beast that could not properly
+    strategize on its own
+  source_ids: &id003
+  - vsbattles-predaking-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-though-this-weakness-was-overcome-when-he-gradually-evolved-extreme-c
+  name: though this weakness was overcome when he gradually evolved. Extreme cold
+    can also halt him as it does regular Transform
+  description: though this weakness was overcome when he gradually evolved. Extreme
+    cold can also halt him as it does regular Transformers.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -212,269 +375,30 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
-profile_hash: 61289e155859b68145442a564275ab80d902bf60ed7046583f55e1e9be1eb506
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-predaking-transformers
+  secondary_disagreement_policy: warning_only
+profile_hash: 0cf5b789bb1e0182b57d00e096fb2b51055e87cd0a4cf981561f6a97d7738c6b
 repair:
-  attempted_at: '2026-10-10T09:39:00Z'
+  attempted_at: '2026-10-25T06:05:29Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-predaking-transformers
-    url: https://vsbattles.fandom.com/wiki/Predaking_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: 'Predaking (Transformers: Prime)'
-    source_type: mediawiki
-    revision_id: '9661788'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 5952
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{7-A}}, likely higher, even higher with Beast Mode
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, True Flight (in beast mode), Transformation,
-        Limited Fire Manipulation (in beast mode), Large Size (Type 1), Enhanced Senses,
-        Breath Attack, Extreme Longevity, Self-Sustenance (Types 1 and 3), Natural
-        Weaponry
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Mountain level, likely higher (Stomped Ultra Magnus, Bulkhead,
-        and Wheeljack with some effort. Can go toe-to-toe with Upgraded Optimus Prime.
-        Nearly killed Megatron, who implied that Predaking would've beaten him had
-        he been in his Beast Form), even higher in Beast Mode (Megatron strongly implies
-        he's superior in this form compared to his Robot Mode)
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively Hypersonic combat and reaction speed and flight speed (Kept
-        up with the Upgraded Optimus Prime)
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Mountain level, likely far higher (Survived an explosion that
-        brought down a massive cave system along with the actual cave falling on him,
-        continuously took hits from three experienced Wreckers without much staggering,
-        can completely shrug off plasma fire), even higher in Beast Mode
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Unknown (Can continue to battle foes in greater numbers and shrug off
-        a myriad of different attacks and still keep going)
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Tens of Meters with melee attacks, Hundreds of Meters with fire breath
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Average (Shown to be a decently intelligent individual, albeit hampered
-        a bit by his Predacon coding)
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Predaking was formerly just a mindless beast that could not properly\
-        \ strategize on its own, though this weakness was overcome when he gradually\
-        \ evolved. Extreme cold can also halt him as it does regular Transformers.\
-        \ ==Gallery== jose-lopez-joselopez-portfolio-2014-0002-layer-59.jpg|Concept\
-        \ art by Jos\xE9 L\xF3pez a9272daf7998dad125759252fecfd8fd.jpg|Ditto ProtoPred.jpg|Prototype\
-        \ colors ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Predaking\
-        \ Aligned|Predaking (Aligned)}} Category:Characters Category:Transformers\
-        \ Category:Aliens Category:Antagonists Category:Breath Attack Users Category:Enhanced\
-        \ Senses Users Category:Fire Users Category:Flight Users Category:Large Sized\
-        \ Characters Category:Robots Category:Transformation Users"
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|predaking transformers prime|9661788
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-predaking-transformers
-    url: https://character-stats-and-profiles.fandom.com/wiki/Predaking_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Predaking (Canon, Aligned)/WAYNE.BORG
-    source_type: mediawiki
-    revision_id: '326125'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3305
-    content_kind: api_json
-    headings_detected:
-    - '''''''Summary'''''''
-    - '''''''Powers and Stats'''''''
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 90
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least High 6-A
-      source_id: character-stats-profiles-predaking-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Multi-Continent level (His fire breath is stated to burn gases
-        out of the atmosphere, stronger than Optimus Prime and Megatron, stomped the
-        Wreckers, made Starscream with the apex armor his own chew toy, defeated both
-        Skylinx and Darksteel at the same time.)
-      source_id: character-stats-profiles-predaking-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic movement speed with Speed of Light combat and reactions (Kept
-        up with Optimus Prime and Megatron)
-      source_id: character-stats-profiles-predaking-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Multi-Continent level (Tanked hits from Optimus Prime and Megatron).
-      source_id: character-stats-profiles-predaking-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None Notable
-      source_id: character-stats-profiles-predaking-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|predaking canon aligned
-      wayne borg|326125
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-predaking-transformers
     url: https://vsbattles.fandom.com/wiki/Predaking_%28Transformers%29
     ok: true
@@ -487,7 +411,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: 'Predaking (Transformers: Prime)'
@@ -533,7 +456,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{7-A}}, likely higher, even higher with Beast Mode
+      value: At least , likely higher, even higher with Beast Mode
       source_id: vsbattles-predaking-transformers
       provider_id: vsbattles
       authority: high
@@ -586,12 +509,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-predaking-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Average (Shown to be a decently intelligent individual, albeit hampered
         a bit by his Predacon coding)
@@ -600,16 +517,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Predaking was formerly just a mindless beast that could not properly\
-        \ strategize on its own, though this weakness was overcome when he gradually\
-        \ evolved. Extreme cold can also halt him as it does regular Transformers.\
-        \ ==Gallery== jose-lopez-joselopez-portfolio-2014-0002-layer-59.jpg|Concept\
-        \ art by Jos\xE9 L\xF3pez a9272daf7998dad125759252fecfd8fd.jpg|Ditto ProtoPred.jpg|Prototype\
-        \ colors ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Predaking\
-        \ Aligned|Predaking (Aligned)}} Category:Characters Category:Transformers\
-        \ Category:Aliens Category:Antagonists Category:Breath Attack Users Category:Enhanced\
-        \ Senses Users Category:Fire Users Category:Flight Users Category:Large Sized\
-        \ Characters Category:Robots Category:Transformation Users"
+      value: Predaking was formerly just a mindless beast that could not properly
+        strategize on its own, though this weakness was overcome when he gradually
+        evolved. Extreme cold can also halt him as it does regular Transformers.
       source_id: vsbattles-predaking-transformers
       provider_id: vsbattles
       authority: high
@@ -636,7 +546,6 @@ repair:
     - durability
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Predaking (Canon, Aligned)/WAYNE.BORG
     source_type: mediawiki
     revision_id: '326125'
@@ -704,8 +613,230 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|predaking canon aligned
+      wayne borg|326125
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-predaking-transformers
+    url: https://vsbattles.fandom.com/wiki/Predaking_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - tier
+    - weaknesses
+    normalized_page_title: 'Predaking (Transformers: Prime)'
+    source_type: mediawiki
+    revision_id: '9661788'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 5952
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least , likely higher, even higher with Beast Mode
+      source_id: vsbattles-predaking-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, True Flight (in beast mode), Transformation,
+        Limited Fire Manipulation (in beast mode), Large Size (Type 1), Enhanced Senses,
+        Breath Attack, Extreme Longevity, Self-Sustenance (Types 1 and 3), Natural
+        Weaponry
+      source_id: vsbattles-predaking-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Mountain level, likely higher (Stomped Ultra Magnus, Bulkhead,
+        and Wheeljack with some effort. Can go toe-to-toe with Upgraded Optimus Prime.
+        Nearly killed Megatron, who implied that Predaking would've beaten him had
+        he been in his Beast Form), even higher in Beast Mode (Megatron strongly implies
+        he's superior in this form compared to his Robot Mode)
+      source_id: vsbattles-predaking-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic combat and reaction speed and flight speed (Kept
+        up with the Upgraded Optimus Prime)
+      source_id: vsbattles-predaking-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Mountain level, likely far higher (Survived an explosion that
+        brought down a massive cave system along with the actual cave falling on him,
+        continuously took hits from three experienced Wreckers without much staggering,
+        can completely shrug off plasma fire), even higher in Beast Mode
+      source_id: vsbattles-predaking-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Unknown (Can continue to battle foes in greater numbers and shrug off
+        a myriad of different attacks and still keep going)
+      source_id: vsbattles-predaking-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Tens of Meters with melee attacks, Hundreds of Meters with fire breath
+      source_id: vsbattles-predaking-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Average (Shown to be a decently intelligent individual, albeit hampered
+        a bit by his Predacon coding)
+      source_id: vsbattles-predaking-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     - field: weaknesses
-      value: None Notable
+      value: Predaking was formerly just a mindless beast that could not properly
+        strategize on its own, though this weakness was overcome when he gradually
+        evolved. Extreme cold can also halt him as it does regular Transformers.
+      source_id: vsbattles-predaking-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|predaking transformers prime|9661788
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-predaking-transformers
+    url: https://character-stats-and-profiles.fandom.com/wiki/Predaking_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - tier
+    normalized_page_title: Predaking (Canon, Aligned)/WAYNE.BORG
+    source_type: mediawiki
+    revision_id: '326125'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3305
+    content_kind: api_json
+    headings_detected:
+    - '''''''Summary'''''''
+    - '''''''Powers and Stats'''''''
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least High 6-A
+      source_id: character-stats-profiles-predaking-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Multi-Continent level (His fire breath is stated to burn gases
+        out of the atmosphere, stronger than Optimus Prime and Megatron, stomped the
+        Wreckers, made Starscream with the apex armor his own chew toy, defeated both
+        Skylinx and Darksteel at the same time.)
+      source_id: character-stats-profiles-predaking-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic movement speed with Speed of Light combat and reactions (Kept
+        up with Optimus Prime and Megatron)
+      source_id: character-stats-profiles-predaking-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Multi-Continent level (Tanked hits from Optimus Prime and Megatron).
       source_id: character-stats-profiles-predaking-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -736,7 +867,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: 'Predaking (Transformers: Prime)'
@@ -782,7 +912,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{7-A}}, likely higher, even higher with Beast Mode
+      value: At least , likely higher, even higher with Beast Mode
       source_id: vsbattles-predaking
       provider_id: vsbattles
       authority: high
@@ -835,12 +965,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-predaking
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Average (Shown to be a decently intelligent individual, albeit hampered
         a bit by his Predacon coding)
@@ -849,16 +973,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Predaking was formerly just a mindless beast that could not properly\
-        \ strategize on its own, though this weakness was overcome when he gradually\
-        \ evolved. Extreme cold can also halt him as it does regular Transformers.\
-        \ ==Gallery== jose-lopez-joselopez-portfolio-2014-0002-layer-59.jpg|Concept\
-        \ art by Jos\xE9 L\xF3pez a9272daf7998dad125759252fecfd8fd.jpg|Ditto ProtoPred.jpg|Prototype\
-        \ colors ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Predaking\
-        \ Aligned|Predaking (Aligned)}} Category:Characters Category:Transformers\
-        \ Category:Aliens Category:Antagonists Category:Breath Attack Users Category:Enhanced\
-        \ Senses Users Category:Fire Users Category:Flight Users Category:Large Sized\
-        \ Characters Category:Robots Category:Transformation Users"
+      value: Predaking was formerly just a mindless beast that could not properly
+        strategize on its own, though this weakness was overcome when he gradually
+        evolved. Extreme cold can also halt him as it does regular Transformers.
       source_id: vsbattles-predaking
       provider_id: vsbattles
       authority: high
@@ -885,7 +1002,6 @@ repair:
     - durability
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Predaking (Canon, Aligned)/WAYNE.BORG
     source_type: mediawiki
     revision_id: '326125'
@@ -953,12 +1069,6 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: None Notable
-      source_id: character-stats-profiles-predaking
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -978,15 +1088,14 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - attack_potency
     - durability
     - speed
     normalized_page_title: Transformers (Aligned Cartoon)
     source_type: mediawiki
-    revision_id: '9462429'
+    revision_id: '9707876'
     fetch_status: fetched
     http_status: 200
-    content_length: 11980
+    content_length: 11972
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1013,7 +1122,7 @@ repair:
     - striking_strength
     - tier
     extraction_failure_reason: ''
-    rank: 90
+    rank: 75
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1049,23 +1158,17 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: attack_potency
-      value: and
-      source_id: vsbattles-predaking-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|transformers aligned cartoon|9462429
+    duplicate_key: vsbattles.fandom.com|transformers aligned cartoon|9707876
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-predaking-comics
@@ -1078,7 +1181,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Megatron (Canon, Composite)/WAYNE.BORG
     source_type: mediawiki
     revision_id: '176570'
@@ -1127,8 +1229,8 @@ repair:
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2), Energy
         Projection (With arm cannon), Transformation (Can transform into a jet, tank,
-        Line-Haul Replacement Tractor, handgun and a helicopter) , Skilled Hand-to-Hand
-        Combatant , Weapon Mastery, Flight, Self-Sustenance (Types 1 and 3), Longevity,
+        Line-Haul Replacement Tractor, handgun and a helicopter), Skilled Hand-to-Hand
+        Combatant, Weapon Mastery, Flight, Self-Sustenance (Types 1 and 3), Longevity,
         Large Size (Type 0 and 1), Energy Manipulation, Energy Projection, Necromancy,
         Weapon Creation, Extreme Longevity, Explosion Manipulation (With armaments)
         Energy Weapon Creation, Immortality (Type 1 and 2), Mind Manipulation (With
@@ -1196,12 +1298,6 @@ repair:
         durable than his base form) | Large Planet level+ (Tanked an explosion that
         moved Cybertron out of orbit ) | Low Multiverse level (Can tank hits from
         Optimus Prime and Regenesis Shockwave) | High Complex Multiverse level
-      source_id: character-stats-profiles-predaking-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None Notable
       source_id: character-stats-profiles-predaking-comics
       provider_id: character_stats_profiles
       authority: high

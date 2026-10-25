@@ -4,25 +4,14 @@ name: Arcee
 franchise: Transformers
 category: comics
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-10-10T07:11:36Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Arcee
   franchise: Transformers
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-arcee-transformers
   provider_id: vsbattles
   source_type: mediawiki
-  title: Arcee Transformers
-  url: https://vsbattles.fandom.com/wiki/Arcee_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-arcee-transformers
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Arcee Transformers
-  url: https://character-stats-and-profiles.fandom.com/wiki/Arcee_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-arcee-transformers
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Arcee (Transformers)
   url: https://vsbattles.fandom.com/wiki/Arcee_%28Transformers%29
   authority: high
@@ -164,13 +117,27 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Small Planet level (Can harm those who can harm her. Harmed Rom. As Prowl''s
+      own assassin, should be more powerful than he is. Easily tackled Prowl into
+      a building.The Transformers (2014) #37 Considered to be particularly dangerous
+      by Sideswipe.Transformers: Spotlight: Arcee Was Fortress Maximus last resort
+      for Garrus 9''s defenses, despite the former being almost as strong as Ultra
+      Magnushttps://twitter.com/StephenRCase/status/963940946546167809?t=gpgONSlsrFafnQqquFZHLQ&s=1919.81
+      Zettatons of TNT), likely higher (Made Galvatron bleed, albeit Galvatron wasn''t
+      trying to fight backThe Transformers (2014) #37). Brown Dwarf level with Swords
+      (Capable of harming Galvatron with her own swords161.47 Ronnatons of TNT)'
+    source_ids:
+    - vsbattles-arcee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Subsonic movement speed, Massively FTL+ reactions and combat speed (Comparable
+      to Galvatron29.9 Million c) with High Hypersonic flight speed (Comparable to
+      Galvatron, who escaped orbit in a short amount of time)
+    source_ids:
+    - vsbattles-arcee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,23 +147,298 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Planet level, likely higher
+    source_ids:
+    - vsbattles-arcee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman (Can fight and move, even with ridiculous injuries such as a
+      severed leg, cannot tire physically)
+    source_ids:
+    - vsbattles-arcee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Extended Melee Range. At least Tens of Meters with her guns
+    source_ids:
+    - vsbattles-arcee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average (Can think exceptionally well in-battle, has mastered almost
+      every Cybertronian martial art)
+    source_ids:
+    - vsbattles-arcee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-arcee-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-immortality-type-1-and-2-cybertronians-consistently-shrug-o
+  name: 'Immortality (Type 1 and 2; Cybertronians consistently shrug off wounds that
+    should be deadly, such as bisection or even '
+  description: Immortality (Type 1 and 2; Cybertronians consistently shrug off wounds
+    that should be deadly, such as bisection or even worse)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_hacking
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-camouflage
+  name: Camouflage
+  description: Camouflage
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery-can-use-swords-and-guns-with-extreme-experti
+  name: Weapon Mastery (Can use swords and guns with extreme expertise)
+  description: Weapon Mastery (Can use swords and guns with extreme expertise)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-stealth-mastery-has-been-shown-to-sneak-up-on-several-chara
+  name: Stealth Mastery (Has been shown to sneak up on several characters throughout
+    the comics)
+  description: Stealth Mastery (Has been shown to sneak up on several characters throughout
+    the comics)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-martial-arts-listed-as-one-of-the-greatest-martial-arts-mas
+  name: Martial Arts (Listed as one of the greatest Martial Arts Masters)
+  description: Martial Arts (Listed as one of the greatest Martial Arts Masters)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-large-size-type-1
+  name: Large Size (Type 1)
+  description: Large Size (Type 1)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transformation-into-a-cybertronian-car
+  name: Transformation (Into a Cybertronian car)
+  description: Transformation (Into a Cybertronian car)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_hacking
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-enhanced-senses
+  name: Enhanced Senses
+  description: Enhanced Senses
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-self-sustenance-types-1-and-3
+  name: Self-Sustenance (Types 1 and 3)
+  description: Self-Sustenance (Types 1 and 3)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-acrobatics
+  name: Acrobatics
+  description: Acrobatics
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-energy-projection
+  name: Energy Projection
+  description: Energy Projection
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-afterimage-creation
+  name: Afterimage Creation
+  description: Afterimage Creation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-regeneration-low-can-heal-from-small-wounds
+  name: Regeneration (Low; can heal from small wounds)
+  description: Regeneration (Low; can heal from small wounds)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-energy-projection
+  name: Energy Projection
+  description: Energy Projection
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight
+  name: Flight.
+  description: Flight.
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-resistance-to-fire-manipulation-ice-manipulation-and-acid-m
+  name: Resistance to Fire Manipulation, Ice Manipulation and Acid Manipulation
+  description: Resistance to Fire Manipulation, Ice Manipulation and Acid Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
@@ -212,13 +454,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
-profile_hash: 9dda26ea092625009d5eb65a4492188c5e83c3999d48229c7688a39c4fef536d
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-arcee-transformers
+  secondary_disagreement_policy: warning_only
+profile_hash: ee0e04116fa7fd5042eff6ec908d2c5bf85c30ca587e5a232c25fe4790a2fd0f
 repair:
-  attempted_at: '2026-10-10T09:18:50Z'
+  attempted_at: '2026-10-23T01:28:38Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -226,281 +482,6 @@ repair:
   - durability
   - abilities
   source_attempts:
-  - source_id: vsbattles-arcee-transformers
-    url: https://vsbattles.fandom.com/wiki/Arcee_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Arcee (IDW 2005)
-    source_type: mediawiki
-    revision_id: '9470415'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 5653
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{Low 5-B}}, likely higher. {{High 5-A}} with swords'
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Immortality (Type 1 and 2; Cybertronians
-        consistently shrug off wounds that should be deadly, such as bisection or
-        even worse), Camouflage, Weapon Mastery (Can use swords and guns with extreme
-        expertise), Stealth Mastery (Has been shown to sneak up on several characters
-        throughout the comics), Martial Arts (Listed as one of the greatest Martial
-        Arts Masters), Large Size (Type 1), Transformation (Into a Cybertronian car),
-        Enhanced Senses, Self-Sustenance (Types 1 and 3), Acrobatics, Energy Projection,
-        Afterimage Creation, Regeneration (Low; can heal from small wounds), Energy
-        Projection, Flight. Resistance to Fire Manipulation, Ice Manipulation and
-        Acid Manipulation
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Small Planet level (Can harm those who can harm her. Harmed Rom. As
-        Prowl''s own assassin, should be more powerful than he is. Easily tackled
-        Prowl into a building.The Transformers (2014) #37 Considered to be particularly
-        dangerous by Sideswipe.Transformers: Spotlight: Arcee Was Fortress Maximus
-        last resort for Garrus 9''s defenses, despite the former being almost as strong
-        as Ultra Magnushttps://twitter.com/StephenRCase/status/963940946546167809?t=gpgONSlsrFafnQqquFZHLQ&s=1919.81
-        Zettatons of TNT), likely higher (Made Galvatron bleed, albeit Galvatron wasn''t
-        trying to fight backThe Transformers (2014) #37). Brown Dwarf level with Swords
-        (Capable of harming Galvatron with her own swords161.47 Ronnatons of TNT)'
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic movement speed, Massively FTL+ reactions and combat speed (Comparable
-        to Galvatron29.9 Million c) with High Hypersonic flight speed (Comparable
-        to Galvatron, who escaped orbit in a short amount of time)
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Planet level, likely higher
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Can fight and move, even with ridiculous injuries such as
-        a severed leg, cannot tire physically)
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range. At least Tens of Meters with her guns
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Twin energy swords, gun
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average (Can think exceptionally well in-battle, has mastered almost
-        every Cybertronian martial art)
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} ==Notes/Explanations== {{Scroll box |content=
-        }} {{Discussions}} Category:Warriors Category:Transformers Category:Autobots
-        Category:Gladiators Category:Sword Users Category:Gun Users Category:Female
-        Characters Category:Characters Category:Good Characters Category:Protagonists
-        Category:Primary Protagonists Category:Comic Book Characters Category:Heroes
-        Category:Stealth Masters Category:Martial Artists Category:Transformation
-        Users Category:Enhanced Senses Users Category:Self-Sustenance Users Category:Acrobats
-        Category:Large Sized Characters Category:Dual Wielders Category:Brawlers Category:Vehicles
-        Category:Robots Category:Immortals'
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|arcee idw 2005|9470415
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-arcee-transformers
-    url: https://character-stats-and-profiles.fandom.com/wiki/Arcee_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Starscream (Canon, Aligned)/WAYNE.BORG
-    source_type: mediawiki
-    revision_id: '181800'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4196
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: High 6-A | High 6-A | High 6-A, higher with Minicon fusion
-      source_id: character-stats-profiles-arcee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Transformation, Flight, Longevity,
-        Large Size (Type 1), Self-Sustenance (Types 1 and 3), Invisibility, Weapon
-        Mastery, Martial Arts
-      source_id: character-stats-profiles-arcee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multi-Continent level (Should be superior than standard Decepticon solders,
-        damaged Optimus Prime with a surprise attack) | Multi-Continent level (Seemed
-        slightly weaker than his previous self, two shot a clone of himself, killed
-        Cliffjumper although he was badly injured, fought Arcee and even made her
-        bleed, knocked down Airachnid with a missile, damaged Predaking in robot form
-        with a missile in the back causing him to scream) | Multi-Continent level
-        (Should be stronger than before), higher with Minicon fusion (Stated that
-        if all seven minicons fused with him it would surge him in power to a level
-        beyond a prime and that he would destroy Megatron).
-      source_id: character-stats-profiles-arcee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic+ movement speed, Supersonic+ flight speed, Speed of Light combat
-        and reactions (Can react to Optimus Prime and Megatron)
-      source_id: character-stats-profiles-arcee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multi-Continent level (Survived a blast from Megatron's fusion canon
-        two times) | Multi-Continent level (Survived a huge beating from Megatron
-        off screen) | Multi-Continent level, higher with Minicon fusion.
-      source_id: character-stats-profiles-arcee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Can sometimes act too cocky
-      source_id: character-stats-profiles-arcee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|starscream canon aligned
-      wayne borg|181800
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-arcee-transformers
     url: https://vsbattles.fandom.com/wiki/Arcee_%28Transformers%29
     ok: true
@@ -515,7 +496,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Arcee (IDW 2005)
     source_type: mediawiki
     revision_id: '9470415'
@@ -560,7 +540,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 5-B}}, likely higher. {{High 5-A}} with swords'
+      value: ', likely higher. with swords'
       source_id: vsbattles-arcee-transformers
       provider_id: vsbattles
       authority: high
@@ -574,7 +554,7 @@ repair:
         Arts Masters), Large Size (Type 1), Transformation (Into a Cybertronian car),
         Enhanced Senses, Self-Sustenance (Types 1 and 3), Acrobatics, Energy Projection,
         Afterimage Creation, Regeneration (Low; can heal from small wounds), Energy
-        Projection, Flight. Resistance to Fire Manipulation, Ice Manipulation and
+        Projection, Flight., Resistance to Fire Manipulation, Ice Manipulation and
         Acid Manipulation
       source_id: vsbattles-arcee-transformers
       provider_id: vsbattles
@@ -630,21 +610,6 @@ repair:
     - field: intelligence
       value: Above Average (Can think exceptionally well in-battle, has mastered almost
         every Cybertronian martial art)
-      source_id: vsbattles-arcee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} ==Notes/Explanations== {{Scroll box |content=
-        }} {{Discussions}} Category:Warriors Category:Transformers Category:Autobots
-        Category:Gladiators Category:Sword Users Category:Gun Users Category:Female
-        Characters Category:Characters Category:Good Characters Category:Protagonists
-        Category:Primary Protagonists Category:Comic Book Characters Category:Heroes
-        Category:Stealth Masters Category:Martial Artists Category:Transformation
-        Users Category:Enhanced Senses Users Category:Self-Sustenance Users Category:Acrobats
-        Category:Large Sized Characters Category:Dual Wielders Category:Brawlers Category:Vehicles
-        Category:Robots Category:Immortals'
       source_id: vsbattles-arcee-transformers
       provider_id: vsbattles
       authority: high
@@ -776,8 +741,8 @@ repair:
       wayne borg|181800
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-arcee
-    url: https://vsbattles.fandom.com/wiki/Arcee
+  - source_id: vsbattles-arcee-transformers
+    url: https://vsbattles.fandom.com/wiki/Arcee_Transformers
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -790,7 +755,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Arcee (IDW 2005)
     source_type: mediawiki
     revision_id: '9470415'
@@ -835,7 +799,266 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 5-B}}, likely higher. {{High 5-A}} with swords'
+      value: ', likely higher. with swords'
+      source_id: vsbattles-arcee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Type 1 and 2; Cybertronians
+        consistently shrug off wounds that should be deadly, such as bisection or
+        even worse), Camouflage, Weapon Mastery (Can use swords and guns with extreme
+        expertise), Stealth Mastery (Has been shown to sneak up on several characters
+        throughout the comics), Martial Arts (Listed as one of the greatest Martial
+        Arts Masters), Large Size (Type 1), Transformation (Into a Cybertronian car),
+        Enhanced Senses, Self-Sustenance (Types 1 and 3), Acrobatics, Energy Projection,
+        Afterimage Creation, Regeneration (Low; can heal from small wounds), Energy
+        Projection, Flight., Resistance to Fire Manipulation, Ice Manipulation and
+        Acid Manipulation
+      source_id: vsbattles-arcee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Small Planet level (Can harm those who can harm her. Harmed Rom. As
+        Prowl''s own assassin, should be more powerful than he is. Easily tackled
+        Prowl into a building.The Transformers (2014) #37 Considered to be particularly
+        dangerous by Sideswipe.Transformers: Spotlight: Arcee Was Fortress Maximus
+        last resort for Garrus 9''s defenses, despite the former being almost as strong
+        as Ultra Magnushttps://twitter.com/StephenRCase/status/963940946546167809?t=gpgONSlsrFafnQqquFZHLQ&s=1919.81
+        Zettatons of TNT), likely higher (Made Galvatron bleed, albeit Galvatron wasn''t
+        trying to fight backThe Transformers (2014) #37). Brown Dwarf level with Swords
+        (Capable of harming Galvatron with her own swords161.47 Ronnatons of TNT)'
+      source_id: vsbattles-arcee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic movement speed, Massively FTL+ reactions and combat speed (Comparable
+        to Galvatron29.9 Million c) with High Hypersonic flight speed (Comparable
+        to Galvatron, who escaped orbit in a short amount of time)
+      source_id: vsbattles-arcee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Planet level, likely higher
+      source_id: vsbattles-arcee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Can fight and move, even with ridiculous injuries such as
+        a severed leg, cannot tire physically)
+      source_id: vsbattles-arcee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range. At least Tens of Meters with her guns
+      source_id: vsbattles-arcee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Twin energy swords, gun
+      source_id: vsbattles-arcee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average (Can think exceptionally well in-battle, has mastered almost
+        every Cybertronian martial art)
+      source_id: vsbattles-arcee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|arcee idw 2005|9470415
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-arcee-transformers
+    url: https://character-stats-and-profiles.fandom.com/wiki/Arcee_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Starscream (Canon, Aligned)/WAYNE.BORG
+    source_type: mediawiki
+    revision_id: '181800'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4196
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 6-A | High 6-A | High 6-A, higher with Minicon fusion
+      source_id: character-stats-profiles-arcee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Transformation, Flight, Longevity,
+        Large Size (Type 1), Self-Sustenance (Types 1 and 3), Invisibility, Weapon
+        Mastery, Martial Arts
+      source_id: character-stats-profiles-arcee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multi-Continent level (Should be superior than standard Decepticon solders,
+        damaged Optimus Prime with a surprise attack) | Multi-Continent level (Seemed
+        slightly weaker than his previous self, two shot a clone of himself, killed
+        Cliffjumper although he was badly injured, fought Arcee and even made her
+        bleed, knocked down Airachnid with a missile, damaged Predaking in robot form
+        with a missile in the back causing him to scream) | Multi-Continent level
+        (Should be stronger than before), higher with Minicon fusion (Stated that
+        if all seven minicons fused with him it would surge him in power to a level
+        beyond a prime and that he would destroy Megatron).
+      source_id: character-stats-profiles-arcee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic+ movement speed, Supersonic+ flight speed, Speed of Light combat
+        and reactions (Can react to Optimus Prime and Megatron)
+      source_id: character-stats-profiles-arcee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multi-Continent level (Survived a blast from Megatron's fusion canon
+        two times) | Multi-Continent level (Survived a huge beating from Megatron
+        off screen) | Multi-Continent level, higher with Minicon fusion.
+      source_id: character-stats-profiles-arcee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Can sometimes act too cocky
+      source_id: character-stats-profiles-arcee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|starscream canon aligned
+      wayne borg|181800
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-arcee
+    url: https://vsbattles.fandom.com/wiki/Arcee
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    normalized_page_title: Arcee (IDW 2005)
+    source_type: mediawiki
+    revision_id: '9470415'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 5653
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    - Notes/Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: ', likely higher. with swords'
       source_id: vsbattles-arcee
       provider_id: vsbattles
       authority: high
@@ -849,7 +1072,7 @@ repair:
         Arts Masters), Large Size (Type 1), Transformation (Into a Cybertronian car),
         Enhanced Senses, Self-Sustenance (Types 1 and 3), Acrobatics, Energy Projection,
         Afterimage Creation, Regeneration (Low; can heal from small wounds), Energy
-        Projection, Flight. Resistance to Fire Manipulation, Ice Manipulation and
+        Projection, Flight., Resistance to Fire Manipulation, Ice Manipulation and
         Acid Manipulation
       source_id: vsbattles-arcee
       provider_id: vsbattles
@@ -905,21 +1128,6 @@ repair:
     - field: intelligence
       value: Above Average (Can think exceptionally well in-battle, has mastered almost
         every Cybertronian martial art)
-      source_id: vsbattles-arcee
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} ==Notes/Explanations== {{Scroll box |content=
-        }} {{Discussions}} Category:Warriors Category:Transformers Category:Autobots
-        Category:Gladiators Category:Sword Users Category:Gun Users Category:Female
-        Characters Category:Characters Category:Good Characters Category:Protagonists
-        Category:Primary Protagonists Category:Comic Book Characters Category:Heroes
-        Category:Stealth Masters Category:Martial Artists Category:Transformation
-        Users Category:Enhanced Senses Users Category:Self-Sustenance Users Category:Acrobats
-        Category:Large Sized Characters Category:Dual Wielders Category:Brawlers Category:Vehicles
-        Category:Robots Category:Immortals'
       source_id: vsbattles-arcee
       provider_id: vsbattles
       authority: high
@@ -1059,13 +1267,11 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Arcee Bird (Comics)
     source_type: mediawiki
     revision_id: '9633446'
@@ -1095,7 +1301,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1112,19 +1318,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}}, higher via slingshot | {{9-A}}, higher via slingshot'
-      source_id: vsbattles-arcee-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Stella= * Superhuman\
-        \ Physical Characteristics * Enhanced Senses (Telescopic Vision; Birds have\
-        \ sharp eye sight) * Bodily Weaponry (Conventional; Via her beak) * True Flight\
-        \ (Showcased being able to take flight at willAngry Birds Transformers - Issue\
-        \ #1) * BFR via slingshot (EggSpark-Powered Starscream Pig was sent flying\
-        \ into outerspace, all the way to the Autobots' spaceshipAngry Birds Transformers\
-        \ - Issue #4) |-|Arcee Bird \u25BE= {{#tag:tabber| {{!}}-{{!}}"
+      value: ', higher via slingshot | , higher via slingshot'
       source_id: vsbattles-arcee-comics
       provider_id: vsbattles
       authority: high
@@ -1171,9 +1365,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: '* Energon Cannon: The Energon Cannons are the primary weapons for the
+      value: 'Energon Cannon: The Energon Cannons are the primary weapons for the
         various Transformers throughout the comics. It''s used as a standard handgun
-        weapon, firing fire-based attacks. SSSAEEEEEwm.png|Energon Cannon Optional'
+        weapon, Energon Cannon Optional'
       source_id: vsbattles-arcee-comics
       provider_id: vsbattles
       authority: high
@@ -1187,46 +1381,12 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'None notable. {| class="mw-collapsible mw-collapsed" align="center"
-        border="1" cellpadding="1" cellspacing="1" style="width:100%" | colspan="2"
-        style="text-align: left; " |Notable Attacks/Techniques: |- |{{Border|Scroll=Yes|Visible=No|Content=
-        Autobirds_by_jmk_prime_d8bgq20-pre.png|The Autobirds UUXTrgW_(1).png|Vehicle
-        Mode * Autobird Physiology: Due to the effects of the EggSpark, her regular
-        body was changed into one of a Cybertronian, granting him a new body, built-in
-        weaponry, and the ability to transform into a vehicle. Though her head is
-        still detached from the rest of her body. ** Vehicle Mode: The Cybertronians
-        are capable of transforming their bodies into mobile vehicles, allowing them
-        to traverse distances at a much faster pace than beforehand. }} |} == Notable
-        Matchups == {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Victories=
-        {{Border|Scroll=Yes|Visible=No|Content= }} |-|Losses= {{Border|Scroll=Yes|Visible=No|Content=
-        }} |-|Inconclusive= {{Border|Scroll=Yes|Visible=No|Content= }} }} == References
-        == {{scroll box|content={{reflist|2}}}} ==Notes/Explanations== {{Scroll box|content=}}
-        {{Discussions|Arcee Bird Comics|Arcee Bird (Comics)}} Category:Characters
-        Category:Angry Birds Transformers Category:Angry Birds Category:Transformers
-        Category:Autobirds Category:Autobots Category:Female Characters Category:Good
-        Characters Category:Comic Relief Characters Category:Humanoid Characters Category:Comic
-        Book Characters Category:Science Fiction Characters Category:Crossover Characters
-        Category:Military Characters Category:Protagonists Category:Machines Category:Robots
-        Category:Animals Category:Birds Category:Hybrids Category:Heroes Category:Soldiers
-        Category:Giants Category:Vehicles Category:Beak Users Category:Gun Users Category:Weapon
-        Users Category:Slingshot Users Category:Wheel Users Category:Helmet Users
-        Category:Land Vehicles Category:Enhanced Senses Users Category:Bodily Weaponry
-        Category:Flight Users Category:Inorganic Beings Category:Large Sized Characters
-        Category:Transformation Users Category:Vehicular Masters Category:Longevity
-        Users Category:Space Survival Users Category:Self-Sustenance Users Category:BFR
-        Users Category:Martial Artists Category:Weapon Masters Category:Fire Users
-        Category:Explosion Users Category:Glass Cannons'
-      source_id: vsbattles-arcee-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
@@ -1356,7 +1516,7 @@ repair:
         via "Come Back" and "Energy!"), Power Bestowal (everyone in RB2''s ending
         gave their powers to Nepgear to fight the Deity of Sin.), Energy Manipulation
         and Projection (via various attacks), Life Manipulation (With the Dark Ring,
-        Rom can manipulate the life force of all creatures),'
+        Rom can manipulate the life force of all creatures)'
       source_id: character-stats-profiles-arcee-comics
       provider_id: character_stats_profiles
       authority: high
@@ -1389,13 +1549,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Extremely shy and cannot fight at her full potential without Ram. Her
-        Goddess Powers are powered by the Share Energy of her Continent Lowee (Share
-        Energy is basically the amount of Faith the people put into the Goddess).
-        So if her Share Energy were to be drained then her transformation will be
-        cancelled out. Notable Attacks/Techniques: *Hard Drive Divinity (HDD): Due
-        to Rom''s status as a goddess, she is able to draw power from share energy
-        and transform into her goddess'
+      value: 'Hard Drive Divinity (HDD): Due to Rom''s status as a goddess, she is
+        able to draw power from share energy and transform into her goddess'
       source_id: character-stats-profiles-arcee-comics
       provider_id: character_stats_profiles
       authority: high

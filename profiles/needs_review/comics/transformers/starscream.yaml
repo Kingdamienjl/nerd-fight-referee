@@ -10,19 +10,8 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-10T07:28:44Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Starscream
   franchise: Transformers
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-starscream-transformers
   provider_id: vsbattles
   source_type: mediawiki
-  title: Starscream Transformers
-  url: https://vsbattles.fandom.com/wiki/Starscream_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-starscream-transformers
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Starscream Transformers
-  url: https://character-stats-and-profiles.fandom.com/wiki/Starscream_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-starscream-transformers
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Starscream (Transformers)
   url: https://vsbattles.fandom.com/wiki/Starscream_%28Transformers%29
   authority: high
@@ -164,13 +117,20 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: City level+, possibly far higher (Should be comparable, if not superior
+      to Blitzwing. Easily one-shot Bumblebee)
+    source_ids:
+    - vsbattles-starscream-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Hypersonic+ (Flies from the moon to Earth in minutes, flew from
+      Michigan to Detroit in one minute which would make him Mach 14.72), likely Massively
+      FTL+ (Comparable to, and possibly faster than Blitzwing and Lugnut who did this)
+    source_ids:
+    - vsbattles-starscream-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,27 +140,201 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: City level+, possibly far higher
+    source_ids:
+    - vsbattles-starscream-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
     text: null
     source_ids: []
     confidence: 0.0
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Kilometers (Managed to hit the Autobot ship which was faster than
+      him, was a few miles away from him and had several seconds of advantage)
+    source_ids:
+    - vsbattles-starscream-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average (Very good at manipulating and fighting)
+    source_ids:
+    - vsbattles-starscream-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-starscream-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-inorganic-physiology-type-2
+  name: Inorganic Physiology (Type 2)
+  description: Inorganic Physiology (Type 2)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-immortality-type-4
+  name: Immortality (Type 4)
+  description: Immortality (Type 4)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery
+  name: Weapon Mastery
+  description: Weapon Mastery
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transformation-can-transform-into-a-fighter-jet
+  name: Transformation (Can transform into a fighter jet)
+  description: Transformation (Can transform into a fighter jet)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight
+  name: Flight
+  description: Flight
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-energy-projection
+  name: Energy Projection
+  description: Energy Projection
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-self-sustenance-types-1-3
+  name: Self-Sustenance (Types 1 & 3)
+  description: Self-Sustenance (Types 1 & 3)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-longevity
+  name: Longevity
+  description: Longevity
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-large-size-type-0-and-resurrection
+  name: Large Size (Type 0) and Resurrection
+  description: Large Size (Type 0) and Resurrection
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-he-will-die
+  name: he will die.
+  description: he will die.
+  source_ids:
+  - vsbattles-starscream-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -212,275 +346,30 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
-profile_hash: 03bf1f8bae340ee122d0e22655157fceb65e8f0044d8d5c31d764d64ea06be55
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-starscream-transformers
+  secondary_disagreement_policy: warning_only
+profile_hash: 82546fddea4eded61696112f9e085922ff502e50037027997847651812d9b585
 repair:
-  attempted_at: '2026-10-10T09:44:23Z'
+  attempted_at: '2026-10-25T06:06:10Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-starscream-transformers
-    url: https://vsbattles.fandom.com/wiki/Starscream_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Starscream (Transformers Animated)
-    source_type: mediawiki
-    revision_id: '9662453'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3430
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{7-B}}, possibly far higher'
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2), Immortality
-        (Type 4), Weapon Mastery, Transformation (Can transform into a fighter jet),
-        Flight, Energy Projection, Self-Sustenance (Types 1 & 3), Longevity, Large
-        Size (Type 0) and Resurrection
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: City level+, possibly far higher (Should be comparable, if not superior
-        to Blitzwing. Easily one-shot Bumblebee)
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Hypersonic+ (Flies from the moon to Earth in minutes, flew from
-        Michigan to Detroit in one minute which would make him Mach 14.72), likely
-        Massively FTL+ (Comparable to, and possibly faster than Blitzwing and Lugnut
-        who did this)
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: City level+, possibly far higher
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: At least Kilometers (Managed to hit the Autobot ship which was faster
-        than him, was a few miles away from him and had several seconds of advantage)
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Lasers, missiles, laser blades on his elbows
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average (Very good at manipulating and fighting)
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Cocky, very short tempered (If something doesn''t go his way he will
-        throw a tantrum). If the allspark shard in his head is removed, he will die.
-        ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions|Starscream
-        Transformers Animated|Starscream (Transformers Animated)}} Category:Characters
-        Category:Transformers Category:Male Characters Category:Villains Category:Robots
-        Category:Aliens Category:Traitors Category:Flight Users Category:Weapon Masters
-        Category:Transformation Users Category:Decepticons Category:Seekers'
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|starscream transformers animated|9662453
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-starscream-transformers
-    url: https://character-stats-and-profiles.fandom.com/wiki/Starscream_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Starscream (Canon, Death Battle)/Unbacked0
-    source_type: mediawiki
-    revision_id: '104442'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 1850
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 8-C
-      source_id: character-stats-profiles-starscream-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Immortality (Type 1, 2 & 6), Large
-        Size (Type 1), Transformation, Flight, Explosion Manipulation, Energy Projection,
-        Technopathy, Possession (Can possess other machines with his Spark)
-      source_id: character-stats-profiles-starscream-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Building Level (His main weapons are missiles and machine guns, Is the
-        size of a building)
-      source_id: character-stats-profiles-starscream-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Supersonic+ (Can fly at 2100 mph)
-      source_id: character-stats-profiles-starscream-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Building Level
-      source_id: character-stats-profiles-starscream-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Is a bad strategist Notable Attacks/Techniques: * Null-Ray: The Null-Ray
-        is one of Starscream''s main weapons, it has the ability to shut down any
-        piece of machinery it hits. Note: This profile is based on what is in Death
-        Battles video, any information displayed on any profile based on Death Battle
-        are solely based on whatever is said in their videos and not my own opinion.
-        So if a character is weaker or stronger on a profile than they actually are
-        then it isn''t my fault. == Others == Notable Victories: Notable Losses: Inconclusive
-        Matches: Category:Unbacked0 Category:Tier 9 Category:Tier 8'
-      source_id: character-stats-profiles-starscream-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|starscream canon death
-      battle unbacked0|104442
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-starscream-transformers
     url: https://vsbattles.fandom.com/wiki/Starscream_%28Transformers%29
     ok: true
@@ -492,9 +381,7 @@ repair:
     - powers_and_abilities
     - range
     - speed
-    - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Starscream (Transformers Animated)
     source_type: mediawiki
@@ -537,12 +424,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{7-B}}, possibly far higher'
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2), Immortality
         (Type 4), Weapon Mastery, Transformation (Can transform into a fighter jet),
@@ -574,12 +455,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-starscream-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: range
       value: At least Kilometers (Managed to hit the Autobot ship which was faster
         than him, was a few miles away from him and had several seconds of advantage)
@@ -600,13 +475,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Cocky, very short tempered (If something doesn''t go his way he will
-        throw a tantrum). If the allspark shard in his head is removed, he will die.
-        ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions|Starscream
-        Transformers Animated|Starscream (Transformers Animated)}} Category:Characters
-        Category:Transformers Category:Male Characters Category:Villains Category:Robots
-        Category:Aliens Category:Traitors Category:Flight Users Category:Weapon Masters
-        Category:Transformation Users Category:Decepticons Category:Seekers'
+      value: very short tempered (If something doesn't go his way he will throw a
+        tantrum). If the allspark shard in his head is removed, he will die.
       source_id: vsbattles-starscream-transformers
       provider_id: vsbattles
       authority: high
@@ -633,7 +503,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
     - weaknesses
     normalized_page_title: Starscream (Canon, Death Battle)/Unbacked0
     source_type: mediawiki
@@ -676,12 +545,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 8-C
-      source_id: character-stats-profiles-starscream-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Immortality (Type 1, 2 & 6), Large
         Size (Type 1), Transformation, Flight, Explosion Manipulation, Energy Projection,
@@ -710,14 +573,229 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Is a bad strategist Notable Attacks/Techniques: * Null-Ray: The Null-Ray
-        is one of Starscream''s main weapons, it has the ability to shut down any
-        piece of machinery it hits. Note: This profile is based on what is in Death
-        Battles video, any information displayed on any profile based on Death Battle
-        are solely based on whatever is said in their videos and not my own opinion.
-        So if a character is weaker or stronger on a profile than they actually are
-        then it isn''t my fault. == Others == Notable Victories: Notable Losses: Inconclusive
-        Matches: Category:Unbacked0 Category:Tier 9 Category:Tier 8'
+      value: Is a bad strategist
+      source_id: character-stats-profiles-starscream-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|starscream canon death
+      battle unbacked0|104442
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-starscream-transformers
+    url: https://vsbattles.fandom.com/wiki/Starscream_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - weaknesses
+    normalized_page_title: Starscream (Transformers Animated)
+    source_type: mediawiki
+    revision_id: '9662453'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3430
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2), Immortality
+        (Type 4), Weapon Mastery, Transformation (Can transform into a fighter jet),
+        Flight, Energy Projection, Self-Sustenance (Types 1 & 3), Longevity, Large
+        Size (Type 0) and Resurrection
+      source_id: vsbattles-starscream-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: City level+, possibly far higher (Should be comparable, if not superior
+        to Blitzwing. Easily one-shot Bumblebee)
+      source_id: vsbattles-starscream-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Hypersonic+ (Flies from the moon to Earth in minutes, flew from
+        Michigan to Detroit in one minute which would make him Mach 14.72), likely
+        Massively FTL+ (Comparable to, and possibly faster than Blitzwing and Lugnut
+        who did this)
+      source_id: vsbattles-starscream-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: City level+, possibly far higher
+      source_id: vsbattles-starscream-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: At least Kilometers (Managed to hit the Autobot ship which was faster
+        than him, was a few miles away from him and had several seconds of advantage)
+      source_id: vsbattles-starscream-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Lasers, missiles, laser blades on his elbows
+      source_id: vsbattles-starscream-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average (Very good at manipulating and fighting)
+      source_id: vsbattles-starscream-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: very short tempered (If something doesn't go his way he will throw a
+        tantrum). If the allspark shard in his head is removed, he will die.
+      source_id: vsbattles-starscream-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|starscream transformers animated|9662453
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-starscream-transformers
+    url: https://character-stats-and-profiles.fandom.com/wiki/Starscream_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - weaknesses
+    normalized_page_title: Starscream (Canon, Death Battle)/Unbacked0
+    source_type: mediawiki
+    revision_id: '104442'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 1850
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Type 1, 2 & 6), Large
+        Size (Type 1), Transformation, Flight, Explosion Manipulation, Energy Projection,
+        Technopathy, Possession (Can possess other machines with his Spark)
+      source_id: character-stats-profiles-starscream-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Building Level (His main weapons are missiles and machine guns, Is the
+        size of a building)
+      source_id: character-stats-profiles-starscream-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Supersonic+ (Can fly at 2100 mph)
+      source_id: character-stats-profiles-starscream-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Building Level
+      source_id: character-stats-profiles-starscream-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Is a bad strategist
       source_id: character-stats-profiles-starscream-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -747,9 +825,7 @@ repair:
     - powers_and_abilities
     - range
     - speed
-    - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Starscream (Transformers Animated)
     source_type: mediawiki
@@ -792,12 +868,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{7-B}}, possibly far higher'
-      source_id: vsbattles-starscream
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2), Immortality
         (Type 4), Weapon Mastery, Transformation (Can transform into a fighter jet),
@@ -829,12 +899,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-starscream
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: range
       value: At least Kilometers (Managed to hit the Autobot ship which was faster
         than him, was a few miles away from him and had several seconds of advantage)
@@ -855,13 +919,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Cocky, very short tempered (If something doesn''t go his way he will
-        throw a tantrum). If the allspark shard in his head is removed, he will die.
-        ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions|Starscream
-        Transformers Animated|Starscream (Transformers Animated)}} Category:Characters
-        Category:Transformers Category:Male Characters Category:Villains Category:Robots
-        Category:Aliens Category:Traitors Category:Flight Users Category:Weapon Masters
-        Category:Transformation Users Category:Decepticons Category:Seekers'
+      value: very short tempered (If something doesn't go his way he will throw a
+        tantrum). If the allspark shard in his head is removed, he will die.
       source_id: vsbattles-starscream
       provider_id: vsbattles
       authority: high
@@ -1006,8 +1065,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Starscream (IDW Movie Comics)
     source_type: mediawiki
     revision_id: '9528347'
@@ -1051,12 +1108,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{7-B}}'
-      source_id: vsbattles-starscream-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Transformation (into an F-22 Raptor),
         Flight (via jet transformation), Weapon Mastery, Regeneration (High-Low),
@@ -1101,25 +1152,13 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: '*Built-in armaments'
+      value: Built-in armaments
       source_id: vsbattles-starscream-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
       value: Above Average
-      source_id: vsbattles-starscream-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Starscream
-        IDW Movie Comics|Starscream (IDW Movie Comics)}} Category:Characters Category:Transformers
-        Category:Comic Book Characters Category:Evil Characters Category:Robots Category:Transformation
-        Users Category:Flight Users Category:Regeneration Users Category:Self-Sustenance
-        Users Category:Weapon Masters Category:Immortals Category:Enhanced Senses
-        Users Category:Longevity Users Category:Large Sized Characters Category:Seekers
-        Category:Decepticons'
       source_id: vsbattles-starscream-comics
       provider_id: vsbattles
       authority: high
@@ -1146,7 +1185,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
     - weaknesses
     normalized_page_title: Starscream (Canon, Death Battle)/Unbacked0
     source_type: mediawiki
@@ -1187,12 +1225,6 @@ repair:
     - abilities
     - weaknesses
     field_candidates:
-    - field: tier
-      value: 8-C
-      source_id: character-stats-profiles-starscream-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Immortality (Type 1, 2 & 6), Large
         Size (Type 1), Transformation, Flight, Explosion Manipulation, Energy Projection,
@@ -1221,14 +1253,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Is a bad strategist Notable Attacks/Techniques: * Null-Ray: The Null-Ray
-        is one of Starscream''s main weapons, it has the ability to shut down any
-        piece of machinery it hits. Note: This profile is based on what is in Death
-        Battles video, any information displayed on any profile based on Death Battle
-        are solely based on whatever is said in their videos and not my own opinion.
-        So if a character is weaker or stronger on a profile than they actually are
-        then it isn''t my fault. == Others == Notable Victories: Notable Losses: Inconclusive
-        Matches: Category:Unbacked0 Category:Tier 9 Category:Tier 8'
+      value: Is a bad strategist
       source_id: character-stats-profiles-starscream-comics
       provider_id: character_stats_profiles
       authority: high

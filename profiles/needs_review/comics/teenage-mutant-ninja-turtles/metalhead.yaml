@@ -10,19 +10,8 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-10T06:55:45Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Metalhead
   franchise: Teenage Mutant Ninja Turtles
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-metalhead-teenage-mutant-ninja-turtles
   provider_id: vsbattles
   source_type: mediawiki
-  title: Metalhead Teenage Mutant Ninja Turtles
-  url: https://vsbattles.fandom.com/wiki/Metalhead_Teenage_Mutant_Ninja_Turtles
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Metalhead Teenage Mutant Ninja Turtles
-  url: https://character-stats-and-profiles.fandom.com/wiki/Metalhead_Teenage_Mutant_Ninja_Turtles
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Metalhead (Teenage Mutant Ninja Turtles)
   url: https://vsbattles.fandom.com/wiki/Metalhead_%28Teenage_Mutant_Ninja_Turtles%29
   authority: high
@@ -164,13 +117,18 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Small Building level (Far stronger than the Turtles during Season
+      1 and 2, including Leonardo and Raphael)
+    source_ids:
+    - vsbattles-metalhead-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Hypersonic+ (Comparable to the Turtles)
+    source_ids:
+    - vsbattles-metalhead-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,27 +138,104 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Small Building level
+    source_ids:
+    - vsbattles-metalhead-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Infinite
+    source_ids:
+    - vsbattles-metalhead-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range, up to Several Meters with its weapons
+    source_ids:
+    - vsbattles-metalhead-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Unknown (Initially controlled by Donatello, but gained artificial intelligence
+      that could allow it to adapt to enemy techniques)
+    source_ids:
+    - vsbattles-metalhead-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-metalhead-teenage-mutant-ninja-turtles
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery-has-a-wide-array-of-weaponry-like-machinegun
+  name: Weapon Mastery (Has a wide array of weaponry like machineguns, flamethrowers,
+    laser gatlings, rocket powered fists)
+  description: Weapon Mastery (Has a wide array of weaponry like machineguns, flamethrowers,
+    laser gatlings, rocket powered fists)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  - technology_dependency
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight
+  name: Flight
+  description: Flight
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-easily-hackable
+  name: Easily hackable
+  description: Easily hackable
+  source_ids:
+  - vsbattles-metalhead-teenage-mutant-ninja-turtles
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_hacking
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -212,281 +247,30 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+  secondary_disagreement_policy: warning_only
 profile_hash: 3920766e4aeca320a9bb97dd9cd72db34ac5c530a778a2340497f21c88421156
 repair:
-  attempted_at: '2026-10-10T09:04:44Z'
+  attempted_at: '2026-10-25T05:58:19Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-    url: https://vsbattles.fandom.com/wiki/Metalhead_Teenage_Mutant_Ninja_Turtles
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Metalhead (2012)
-    source_type: mediawiki
-    revision_id: '8552167'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 1759
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{9-A}}
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Weapon Mastery (Has a wide array
-        of weaponry like machineguns, flamethrowers, laser gatlings, rocket powered
-        fists), Flight
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Small Building level (Far stronger than the Turtles during Season
-        1 and 2, including Leonardo and Raphael)
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Hypersonic+ (Comparable to the Turtles)
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Small Building level
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, up to Several Meters with its weapons
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Unknown (Initially controlled by Donatello, but gained artificial intelligence
-        that could allow it to adapt to enemy techniques)
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Gatling guns (normal and laser), flamethrowers, a jet booster on its
-        shoes, rocket powered fists
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Easily hackable ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{discussions|Metalhead 2012|Metalhead (2012)}} Category:Characters Category:Teenage
-        Mutant Ninja Turtles Category:Cartoon Characters Category:Flight Users Category:Robots'
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|metalhead 2012|8552167
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
-    url: https://character-stats-and-profiles.fandom.com/wiki/Metalhead_Teenage_Mutant_Ninja_Turtles
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Donatello (Canon, TMNT 2003)/TaiLung5000
-    source_type: mediawiki
-    revision_id: '203914'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 7982
-    content_kind: api_json
-    headings_detected:
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 8-C | At least 7-C | At least 5-B, possibly 5-A | 5-A
-      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Master Martial Artist, Weapon Mastery,
-        Highly adept at stealth, subterfuge, and misdirection, Genius inventor and
-        technician | Enhances his physical stats further, Chi Manipulation, Air Manipulation,
-        Can transform into a dragon, Large Size, Fire Manipulation, Flight, Breath
-        Attack
-      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Building level+ (Should be comparable to Leonardo) | At least Town level
-        (Received training from the Ninja Tribunal. His "Byakko" has shown to have
-        been comparable to Raphael's "Banrai", a weapon that could shatter mountains)
-        | At least Planet level+, possibly Large Planet level (Donatello seemed to
-        have arguably the most control over his Chi Empowered form. Matched and defeated
-        the Mystic Warriors, who were superior, or at least on par with the Ninja
-        Tribunal) | Large Planet level (Beam struggled with Dragon Tengu Shredder
-        and contributed to wiping out an army of demons, all of which were superior
-        to the Mystic Warriors)
-      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Supersonic (Should be comparable to the other turtles) with Massively
-        Hypersonic+ reactions (Trains with Master Splinter who trains the other ninja
-        turtles and has been on pair with the other ninja turtles throughout their
-        adventures. Alongside with the other ninja turtles can react to a huge meteor
-        that was aiming through them.) | Massively Hypersonic+ (Far faster then his
-        base him. Easily one-shot a boulder monster that can easily defeat the Silver
-        Sentry who is capable of travelling at these speeds. Should be equal to the
-        other Chi Empowered/Mystic Forms of the turtles. | Massively Hypersonic+ (Far
-        faster than his Chi Empowered/Mystic Form. Should be equal to the Dragon Forms
-        of the other turtles. Has fought against Tengu Shredder alongside the other
-        turtles.)
-      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Building level+ (Tanked a blast from the Sword of Tengu, which can destroy
-        entire buildings with ease, took hits from mutants "who shook" the city) |
-        At least Town level (Survived blows from the Mokusai No Bushi, though was
-        otherwise soundly defeated) | At least Planet level+, possibly Large Planet
-        level (Traded blows with the Mystic Warriors) | Large Planet level
-      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Pacifist, more interested in technology than his ninjutsu training
-      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|donatello canon tmnt 2003
-      tailung5000|203914
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
     url: https://vsbattles.fandom.com/wiki/Metalhead_%28Teenage_Mutant_Ninja_Turtles%29
     ok: true
@@ -500,7 +284,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Metalhead (2012)
     source_type: mediawiki
@@ -542,12 +325,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: At least {{9-A}}
-      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Weapon Mastery (Has a wide array
         of weaponry like machineguns, flamethrowers, laser gatlings, rocket powered
@@ -602,9 +379,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Easily hackable ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{discussions|Metalhead 2012|Metalhead (2012)}} Category:Characters Category:Teenage
-        Mutant Ninja Turtles Category:Cartoon Characters Category:Flight Users Category:Robots'
+      value: Easily hackable
       source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
       provider_id: vsbattles
       authority: high
@@ -680,10 +455,9 @@ repair:
       confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Master Martial Artist, Weapon Mastery,
-        Highly adept at stealth, subterfuge, and misdirection, Genius inventor and
-        technician | Enhances his physical stats further, Chi Manipulation, Air Manipulation,
-        Can transform into a dragon, Large Size, Fire Manipulation, Flight, Breath
-        Attack
+        Highly adept at stealth, subterfuge, Genius inventor and technician, Enhances
+        his physical stats further, Chi Manipulation, Air Manipulation, Can transform
+        into a dragon, Large Size, Fire Manipulation, Flight, Breath Attack
       source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
       provider_id: character_stats_profiles
       authority: high
@@ -729,7 +503,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: Pacifist, more interested in technology than his ninjutsu training
+      value: more interested in technology than his ninjutsu training
       source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
       provider_id: character_stats_profiles
       authority: high
@@ -748,8 +522,8 @@ repair:
       tailung5000|203914
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-metalhead
-    url: https://vsbattles.fandom.com/wiki/Metalhead
+  - source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+    url: https://vsbattles.fandom.com/wiki/Metalhead_Teenage_Mutant_Ninja_Turtles
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -761,7 +535,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Metalhead (2012)
     source_type: mediawiki
@@ -803,12 +576,257 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: At least {{9-A}}
-      source_id: vsbattles-metalhead
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Weapon Mastery (Has a wide array
+        of weaponry like machineguns, flamethrowers, laser gatlings, rocket powered
+        fists), Flight
+      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
       provider_id: vsbattles
       authority: high
       confidence: 0.75
+    - field: attack_potency
+      value: At least Small Building level (Far stronger than the Turtles during Season
+        1 and 2, including Leonardo and Raphael)
+      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Hypersonic+ (Comparable to the Turtles)
+      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Small Building level
+      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite
+      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, up to Several Meters with its weapons
+      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Unknown (Initially controlled by Donatello, but gained artificial intelligence
+        that could allow it to adapt to enemy techniques)
+      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Gatling guns (normal and laser), flamethrowers, a jet booster on its
+        shoes, rocket powered fists
+      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Easily hackable
+      source_id: vsbattles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|metalhead 2012|8552167
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
+    url: https://character-stats-and-profiles.fandom.com/wiki/Metalhead_Teenage_Mutant_Ninja_Turtles
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Donatello (Canon, TMNT 2003)/TaiLung5000
+    source_type: mediawiki
+    revision_id: '203914'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 7982
+    content_kind: api_json
+    headings_detected:
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 8-C | At least 7-C | At least 5-B, possibly 5-A | 5-A
+      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Master Martial Artist, Weapon Mastery,
+        Highly adept at stealth, subterfuge, Genius inventor and technician, Enhances
+        his physical stats further, Chi Manipulation, Air Manipulation, Can transform
+        into a dragon, Large Size, Fire Manipulation, Flight, Breath Attack
+      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Building level+ (Should be comparable to Leonardo) | At least Town level
+        (Received training from the Ninja Tribunal. His "Byakko" has shown to have
+        been comparable to Raphael's "Banrai", a weapon that could shatter mountains)
+        | At least Planet level+, possibly Large Planet level (Donatello seemed to
+        have arguably the most control over his Chi Empowered form. Matched and defeated
+        the Mystic Warriors, who were superior, or at least on par with the Ninja
+        Tribunal) | Large Planet level (Beam struggled with Dragon Tengu Shredder
+        and contributed to wiping out an army of demons, all of which were superior
+        to the Mystic Warriors)
+      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Supersonic (Should be comparable to the other turtles) with Massively
+        Hypersonic+ reactions (Trains with Master Splinter who trains the other ninja
+        turtles and has been on pair with the other ninja turtles throughout their
+        adventures. Alongside with the other ninja turtles can react to a huge meteor
+        that was aiming through them.) | Massively Hypersonic+ (Far faster then his
+        base him. Easily one-shot a boulder monster that can easily defeat the Silver
+        Sentry who is capable of travelling at these speeds. Should be equal to the
+        other Chi Empowered/Mystic Forms of the turtles. | Massively Hypersonic+ (Far
+        faster than his Chi Empowered/Mystic Form. Should be equal to the Dragon Forms
+        of the other turtles. Has fought against Tengu Shredder alongside the other
+        turtles.)
+      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Building level+ (Tanked a blast from the Sword of Tengu, which can destroy
+        entire buildings with ease, took hits from mutants "who shook" the city) |
+        At least Town level (Survived blows from the Mokusai No Bushi, though was
+        otherwise soundly defeated) | At least Planet level+, possibly Large Planet
+        level (Traded blows with the Mystic Warriors) | Large Planet level
+      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: more interested in technology than his ninjutsu training
+      source_id: character-stats-profiles-metalhead-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|donatello canon tmnt 2003
+      tailung5000|203914
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-metalhead
+    url: https://vsbattles.fandom.com/wiki/Metalhead
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - weaknesses
+    normalized_page_title: Metalhead (2012)
+    source_type: mediawiki
+    revision_id: '8552167'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 1759
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Weapon Mastery (Has a wide array
         of weaponry like machineguns, flamethrowers, laser gatlings, rocket powered
@@ -863,9 +881,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Easily hackable ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{discussions|Metalhead 2012|Metalhead (2012)}} Category:Characters Category:Teenage
-        Mutant Ninja Turtles Category:Cartoon Characters Category:Flight Users Category:Robots'
+      value: Easily hackable
       source_id: vsbattles-metalhead
       provider_id: vsbattles
       authority: high
@@ -975,9 +991,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: Being made out of metal, sledgehammers can conduct electricity in the
-        mallet. Being made out of metal, it can rust and lose their efficiency. Extremely
-        heavy which makes it difficult to use by non-trained humans. Category:Maskboiperson
+      value: sledgehammers can conduct electricity in the mallet. Being made out of
+        metal
       source_id: character-stats-profiles-metalhead
       provider_id: character_stats_profiles
       authority: high
@@ -1054,20 +1069,20 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-A}} | At least {{7-C}} | At least {{5-B}}, possibly {{5-A}} | {{5-A}}'
+      value: At least | At least , possibly
       source_id: vsbattles-metalhead-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "Seasons 1-4= Superhuman Physical Characteristics, Martial Arts (Master\
-        \ of Ninjutsu and combat martial arts, Master of B\u014Djutsu), Stealth Mastery\
-        \ (Is highly adept at stealth, subterfuge, and misdirection), Genius Intelligence\
-        \ (Genius inventor and technician), Rage Power (oftentimes, the Turtles experience\
+      value: "Superhuman Physical Characteristics, Martial Arts (Master of Ninjutsu\
+        \ and combat martial arts, Master of B\u014Djutsu), Stealth Mastery (Is highly\
+        \ adept at stealth, subterfuge, and misdirection), Genius Intelligence (Genius\
+        \ inventor and technician), Rage Power (oftentimes, the Turtles experience\
         \ a boost in stats when becoming enraged, allowing them to easily defeat opponents\
-        \ who had previously been defeating them) |-|Chi Empowered= Same as before,\
-        \ Statistics Amplification (Can enhances his physical stats further), Ki Manipulation,\
-        \ Air Manipulation, Transformation (Can transform into a dragon)"
+        \ who had previously been defeating them) Same as before, Statistics Amplification\
+        \ (Can enhances his physical stats further), Ki Manipulation, Air Manipulation,\
+        \ Transformation (Can transform into a dragon)"
       source_id: vsbattles-metalhead-comics
       provider_id: vsbattles
       authority: high
@@ -1148,17 +1163,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Pacifist, more interested in technology than his ninjutsu training ==Gallery==
-        File:Don in Ninja Tribunal, Chi-Empowered.jpg|Don in Ninja Tribunal, Chi-Empowered
-        File:Dragon Don.jpg|Don as a dragon ==Notable Matchups== Victories: Losses:
-        Inconclusive: {{Discussions|Donatello 4Kids|Donatello}} Category:Characters
-        Category:Teenage Mutant Ninja Turtles Category:Cartoon Characters Category:Protagonists
-        Category:Primary Protagonists Category:Good Characters Category:Geniuses Category:Heroes
-        Category:Animals Category:Mutants Category:Teenagers Category:Staff Users
-        Category:Male Characters Category:Turtles Category:Comic Book Characters Category:Reptiles
-        Category:Air Users Category:Chi Users Category:Transformation Users Category:Stealth
-        Masters Category:Martial Artists Category:Empowerment Users Category:Shuriken
-        Users Category:Weapon Masters Category:Dragons'
+      value: more interested in technology than his ninjutsu training
       source_id: vsbattles-metalhead-comics
       provider_id: vsbattles
       authority: high
@@ -1232,17 +1237,17 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics (See Attack Potency and Durability)
-        *Genius Intelligence (See Intelligence) *Preparation (Set up traps (as well
+      value: Superhuman Physical Characteristics (See Attack Potency and Durability),
+        Genius Intelligence (See Intelligence), Preparation (Set up traps (as well
         as a bomb) in the Museum. Filled a van with nitroglycerin and other explosives.
-        Rigged traps within the Amusement park''s maze, as seen in his debut episode
-        and discussed below) *Hacking (Hacked hundreds of computers throughout Gotham)
-        *Social Influencing (Convinced several doctors at Arkham, as well as a parole
+        Rigged traps within the Amusement park's maze, as seen in his debut episode
+        and discussed below), Hacking (Hacked hundreds of computers throughout Gotham),
+        Social Influencing (Convinced several doctors at Arkham, as well as a parole
         board, that he was sane, when in reality he was anything but) With standard
-        preparation, he can utilize: *Explosion Manipulation (Planted a bomb) * Paralysis
-        Inducement (With this gadget) Within the amusement park''s maze, he can utilize:
-        *Flight (Could theoretically jump on the Hand of Fate and be flown around
-        on it) *Fire Manipulation (Griffins can shoot flame)'
+        preparation, Explosion Manipulation (Planted a bomb), Paralysis Inducement
+        (With this gadget) Within the amusement park's maze, Flight (Could theoretically
+        jump on the Hand of Fate and be flown around on it), Fire Manipulation (Griffins
+        can shoot flame)
       source_id: character-stats-profiles-metalhead-comics
       provider_id: character_stats_profiles
       authority: high
@@ -1288,14 +1293,12 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: 'Normal Human Weaknesses. Is psychologically incapable of committing
-        a crime without leaving a clue at the scene of the crime. Note: Bruce Timm
-        has stated that the original DCAU tie-in comics are not canon, with the only
-        tie in comics that have statements to the contrary (other than Batman: The
-        Adventures Continue, which has so many continuity issues that it''s essentially
-        impossible to argue it''s canon) being Justice League Infinity, the Batman
-        and Harley Quinn tie in comics, and specifically the first annual of Batman
-        Adventures. Ergo, I only consider those three comics canon. Category:Goulden1998
-        Category:Tier 9'
+        a crime without leaving a clue at the scene of the crime, with the only tie
+        in comics that have statements to the contrary (other than Batman: The Adventures
+        Continue, which has so many continuity issues that it''s essentially impossible
+        to argue it''s canon) being Justice League Infinity, the Batman and Harley
+        Quinn tie in comics, and specifically the first annual of Batman Adventures.
+        Ergo'
       source_id: character-stats-profiles-metalhead-comics
       provider_id: character_stats_profiles
       authority: high

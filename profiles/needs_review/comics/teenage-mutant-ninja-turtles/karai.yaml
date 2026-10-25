@@ -10,19 +10,8 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-10T06:55:45Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Karai
   franchise: Teenage Mutant Ninja Turtles
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-karai-teenage-mutant-ninja-turtles
   provider_id: vsbattles
   source_type: mediawiki
-  title: Karai Teenage Mutant Ninja Turtles
-  url: https://vsbattles.fandom.com/wiki/Karai_Teenage_Mutant_Ninja_Turtles
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Karai Teenage Mutant Ninja Turtles
-  url: https://character-stats-and-profiles.fandom.com/wiki/Karai_Teenage_Mutant_Ninja_Turtles
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-karai-teenage-mutant-ninja-turtles
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Karai (Teenage Mutant Ninja Turtles)
   url: https://vsbattles.fandom.com/wiki/Karai_%28Teenage_Mutant_Ninja_Turtles%29
   authority: high
@@ -164,13 +117,18 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level (Can fight evenly with Leonardo. Outfought Tiger Claw
+      during the Super Shredder incident)
+    source_ids:
+    - vsbattles-karai-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Supersonic+ (Can match pace with Leonardo. Has tagged Splinter and the Shredder)
+    source_ids:
+    - vsbattles-karai-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,27 +138,229 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level
+    source_ids:
+    - vsbattles-karai-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Peak Human
+    source_ids:
+    - vsbattles-karai-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range, Extended Melee Range with blades, Several Meters with
+      blinding powder, Tens of Meters with sleeping darts and venom
+    source_ids:
+    - vsbattles-karai-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Above Average (Trained in ninjutsu at a young age, Karai is a high
+      rank as a full-fledged kunoichi of the Foot clan and is capable of going toe
+      to toe with the likes of Leonardo)
+    source_ids:
+    - vsbattles-karai-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-karai-teenage-mutant-ninja-turtles
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-martial-arts-mastery-in-ninjutsu
+  name: Martial Arts (Mastery in ninjutsu)
+  description: Martial Arts (Mastery in ninjutsu)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery
+  name: Weapon Mastery
+  description: Weapon Mastery
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-status-effect-inducement-with-blinding-powder-and-sleeping-
+  name: 'Status Effect Inducement (With blinding powder and sleeping darts/powder.
+    Can spit blinding venom. Her venom can induce '
+  description: Status Effect Inducement (With blinding powder and sleeping darts/powder.
+    Can spit blinding venom. Her venom can induce numbness, weakness, paralysis, black
+    out, and hallucinations)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transformation-can-morph-between-her-human-and-mutant-form
+  name: Transformation (Can morph between her human and mutant form)
+  description: Transformation (Can morph between her human and mutant form)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-enhanced-senses-hearing-sight-and-night-vision
+  name: Enhanced Senses (Hearing, sight, and night vision)
+  description: Enhanced Senses (Hearing, sight, and night vision)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-sharp-fangs
+  name: Sharp fangs
+  description: Sharp fangs
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-prehensile-tongue
+  name: Prehensile tongue
+  description: Prehensile tongue
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-poison-manipulation-can-infect-her-victims-with-extremely-l
+  name: Poison Manipulation (Can infect her victims with extremely lethal poisons
+    and highly toxic venom with no antidote)
+  description: Poison Manipulation (Can infect her victims with extremely lethal poisons
+    and highly toxic venom with no antidote)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-regeneration-mid-low-can-simply-shedd-her-damaged-skin-and-
+  name: Regeneration (Mid-Low. Can simply shedd her damaged skin and replace it with
+    brand-new skin)
+  description: Regeneration (Mid-Low. Can simply shedd her damaged skin and replace
+    it with brand-new skin)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-telepathy-between-snakes
+  name: Telepathy (Between snakes)
+  description: Telepathy (Between snakes)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - mind_control
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-can-be-bitter-and-overconfident
+  name: Can be bitter and overconfident
+  description: Can be bitter and overconfident
+  source_ids:
+  - vsbattles-karai-teenage-mutant-ninja-turtles
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -212,284 +372,30 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+  secondary_disagreement_policy: warning_only
 profile_hash: a434bb34024cb9c4a9fbda7660da2a981ea8c450bbafcecc10e67d1d6ad891a4
 repair:
-  attempted_at: '2026-10-10T09:04:04Z'
+  attempted_at: '2026-10-25T05:57:42Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-    url: https://vsbattles.fandom.com/wiki/Karai_Teenage_Mutant_Ninja_Turtles
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Karai (2012)
-    source_type: mediawiki
-    revision_id: '9628760'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3657
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Martial Arts (Mastery in ninjutsu),
-        Weapon Mastery, Status Effect Inducement (With blinding powder and sleeping
-        darts/powder. Can spit blinding venom. Her venom can induce numbness, weakness,
-        paralysis, black out, and hallucinations), Transformation (Can morph between
-        her human and mutant form), Enhanced Senses (Hearing, sight, and night vision),
-        Sharp fangs, Prehensile tongue, Poison Manipulation (Can infect her victims
-        with extremely lethal poisons and highly toxic venom with no antidote), Regeneration
-        (Mid-Low. Can simply shedd her damaged skin and replace it with brand-new
-        skin), Telepathy (Between snakes)
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level (Can fight evenly with Leonardo. Outfought Tiger
-        Claw during the Super Shredder incident)
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Supersonic+ (Can match pace with Leonardo. Has tagged Splinter and the
-        Shredder)
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building level
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Peak Human
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Extended Melee Range with blades, Several Meters
-        with blinding powder, Tens of Meters with sleeping darts and venom
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: "Tant\u014D, Wakizashi, Naginata, Shuriken, other weapons"
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: At least Above Average (Trained in ninjutsu at a young age, Karai is
-        a high rank as a full-fledged kunoichi of the Foot clan and is capable of
-        going toe to toe with the likes of Leonardo)
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Can be bitter and overconfident ==Notable Matchups== Victories: Losses:
-        Inconclusive: {{discussions|Karai 2012|Karai (2012)}} Category:Teenage Mutant
-        Ninja Turtles Category:Female Characters Category:Characters Category:Teenagers
-        Category:Mutants Category:Humans Category:Protagonists Category:Reformed Characters
-        Category:Anti-villains Category:Antiheroes Category:Antagonists Category:Ninjas
-        Category:Sword Users Category:Martial Artists Category:Weapon Masters Category:Status
-        Effect Users Category:Paralysis Users Category:Perception Users Category:Enhanced
-        Senses Users Category:Poison Users Category:Regeneration Users Category:Telepaths
-        Category:Transformation Users Category:Snakes'
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|karai 2012|9628760
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
-    url: https://character-stats-and-profiles.fandom.com/wiki/Karai_Teenage_Mutant_Ninja_Turtles
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Karai (Canon, TMNT 2012)/TaiLung5000
-    source_type: mediawiki
-    revision_id: '215671'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4511
-    content_kind: api_json
-    headings_detected: []
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 8-C
-      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Martial Arts (Mastery in ninjutsu),
-        Weapon Mastery, Status Effect Inducement (With blinding powder and sleeping
-        darts/powder. Can spit blinding venom. Her venom can induce numbness, weakness,
-        paralysis, black out, and hallucinations), Transformation (Can morph between
-        her human and mutant form), Enhanced Senses (Hearing, sight, and night vision),
-        Natural Weaponry (Sharp fangs, Prehensile tongue), Poison Manipulation (Can
-        infect her victims with extremely lethal poisons and highly toxic venom with
-        no antidote), Regeneration (Mid-Low. Can simply shedd her damaged skin and
-        replace it with brand-new skin), Telepathy (Between snakes), Longevity (She
-        possesses an extended lifespan and slowed aging because she is a mutant with
-        a healing ability)
-      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Building level (Can fight evenly with Leonardo. Outfought Tiger Claw
-        during the Super Shredder incident. In her snake form she is easily far stronger
-        than before)
-      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Supersonic+ with Massively Hypersonic+ reaction speed (Can match pace
-        with Leonardo, who dodged lightning. Has tagged Splinter and the Shredder.
-        In her snake form she is easily far faster than before)
-      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Building level (Even without her snake form she is able to survive an
-        explosion such as this virtually with no damage, took hits from the turtles
-        and Tiger Claw, in her snake form she is easily far more durable than before)
-      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Can be bitter and overconfident Category:Tier 8 Category:TaiLung5000
-      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|karai canon tmnt 2012 tailung5000|215671
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-karai-teenage-mutant-ninja-turtles
     url: https://vsbattles.fandom.com/wiki/Karai_%28Teenage_Mutant_Ninja_Turtles%29
     ok: true
@@ -503,7 +409,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Karai (2012)
     source_type: mediawiki
@@ -546,12 +451,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts (Mastery in ninjutsu),
         Weapon Mastery, Status Effect Inducement (With blinding powder and sleeping
@@ -614,15 +513,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Can be bitter and overconfident ==Notable Matchups== Victories: Losses:
-        Inconclusive: {{discussions|Karai 2012|Karai (2012)}} Category:Teenage Mutant
-        Ninja Turtles Category:Female Characters Category:Characters Category:Teenagers
-        Category:Mutants Category:Humans Category:Protagonists Category:Reformed Characters
-        Category:Anti-villains Category:Antiheroes Category:Antagonists Category:Ninjas
-        Category:Sword Users Category:Martial Artists Category:Weapon Masters Category:Status
-        Effect Users Category:Paralysis Users Category:Perception Users Category:Enhanced
-        Senses Users Category:Poison Users Category:Regeneration Users Category:Telepaths
-        Category:Transformation Users Category:Snakes'
+      value: Can be bitter and overconfident
       source_id: vsbattles-karai-teenage-mutant-ninja-turtles
       provider_id: vsbattles
       authority: high
@@ -649,8 +540,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Karai (Canon, TMNT 2012)/TaiLung5000
     source_type: mediawiki
     revision_id: '215671'
@@ -689,12 +578,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 8-C
-      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts (Mastery in ninjutsu),
         Weapon Mastery, Status Effect Inducement (With blinding powder and sleeping
@@ -735,8 +618,237 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|karai canon tmnt 2012 tailung5000|215671
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+    url: https://vsbattles.fandom.com/wiki/Karai_Teenage_Mutant_Ninja_Turtles
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - weaknesses
+    normalized_page_title: Karai (2012)
+    source_type: mediawiki
+    revision_id: '9628760'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3657
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Martial Arts (Mastery in ninjutsu),
+        Weapon Mastery, Status Effect Inducement (With blinding powder and sleeping
+        darts/powder. Can spit blinding venom. Her venom can induce numbness, weakness,
+        paralysis, black out, and hallucinations), Transformation (Can morph between
+        her human and mutant form), Enhanced Senses (Hearing, sight, and night vision),
+        Sharp fangs, Prehensile tongue, Poison Manipulation (Can infect her victims
+        with extremely lethal poisons and highly toxic venom with no antidote), Regeneration
+        (Mid-Low. Can simply shedd her damaged skin and replace it with brand-new
+        skin), Telepathy (Between snakes)
+      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level (Can fight evenly with Leonardo. Outfought Tiger
+        Claw during the Super Shredder incident)
+      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Supersonic+ (Can match pace with Leonardo. Has tagged Splinter and the
+        Shredder)
+      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level
+      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Peak Human
+      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, Extended Melee Range with blades, Several Meters
+        with blinding powder, Tens of Meters with sleeping darts and venom
+      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: "Tant\u014D, Wakizashi, Naginata, Shuriken, other weapons"
+      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: At least Above Average (Trained in ninjutsu at a young age, Karai is
+        a high rank as a full-fledged kunoichi of the Foot clan and is capable of
+        going toe to toe with the likes of Leonardo)
+      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     - field: weaknesses
-      value: Can be bitter and overconfident Category:Tier 8 Category:TaiLung5000
+      value: Can be bitter and overconfident
+      source_id: vsbattles-karai-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|karai 2012|9628760
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
+    url: https://character-stats-and-profiles.fandom.com/wiki/Karai_Teenage_Mutant_Ninja_Turtles
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    normalized_page_title: Karai (Canon, TMNT 2012)/TaiLung5000
+    source_type: mediawiki
+    revision_id: '215671'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4511
+    content_kind: api_json
+    headings_detected: []
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Martial Arts (Mastery in ninjutsu),
+        Weapon Mastery, Status Effect Inducement (With blinding powder and sleeping
+        darts/powder. Can spit blinding venom. Her venom can induce numbness, weakness,
+        paralysis, black out, and hallucinations), Transformation (Can morph between
+        her human and mutant form), Enhanced Senses (Hearing, sight, and night vision),
+        Natural Weaponry (Sharp fangs, Prehensile tongue), Poison Manipulation (Can
+        infect her victims with extremely lethal poisons and highly toxic venom with
+        no antidote), Regeneration (Mid-Low. Can simply shedd her damaged skin and
+        replace it with brand-new skin), Telepathy (Between snakes), Longevity (She
+        possesses an extended lifespan and slowed aging because she is a mutant with
+        a healing ability)
+      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Building level (Can fight evenly with Leonardo. Outfought Tiger Claw
+        during the Super Shredder incident. In her snake form she is easily far stronger
+        than before)
+      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Supersonic+ with Massively Hypersonic+ reaction speed (Can match pace
+        with Leonardo, who dodged lightning. Has tagged Splinter and the Shredder.
+        In her snake form she is easily far faster than before)
+      source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Building level (Even without her snake form she is able to survive an
+        explosion such as this virtually with no damage, took hits from the turtles
+        and Tiger Claw, in her snake form she is easily far more durable than before)
       source_id: character-stats-profiles-karai-teenage-mutant-ninja-turtles
       provider_id: character_stats_profiles
       authority: high
@@ -767,7 +879,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Karai (2012)
     source_type: mediawiki
@@ -810,12 +921,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: vsbattles-karai
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts (Mastery in ninjutsu),
         Weapon Mastery, Status Effect Inducement (With blinding powder and sleeping
@@ -878,15 +983,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Can be bitter and overconfident ==Notable Matchups== Victories: Losses:
-        Inconclusive: {{discussions|Karai 2012|Karai (2012)}} Category:Teenage Mutant
-        Ninja Turtles Category:Female Characters Category:Characters Category:Teenagers
-        Category:Mutants Category:Humans Category:Protagonists Category:Reformed Characters
-        Category:Anti-villains Category:Antiheroes Category:Antagonists Category:Ninjas
-        Category:Sword Users Category:Martial Artists Category:Weapon Masters Category:Status
-        Effect Users Category:Paralysis Users Category:Perception Users Category:Enhanced
-        Senses Users Category:Poison Users Category:Regeneration Users Category:Telepaths
-        Category:Transformation Users Category:Snakes'
+      value: Can be bitter and overconfident
       source_id: vsbattles-karai
       provider_id: vsbattles
       authority: high
@@ -913,8 +1010,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Karai (Canon, TMNT 2012)/TaiLung5000
     source_type: mediawiki
     revision_id: '215671'
@@ -953,12 +1048,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 8-C
-      source_id: character-stats-profiles-karai
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts (Mastery in ninjutsu),
         Weapon Mastery, Status Effect Inducement (With blinding powder and sleeping
@@ -999,12 +1088,6 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: Can be bitter and overconfident Category:Tier 8 Category:TaiLung5000
-      source_id: character-stats-profiles-karai
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -1031,8 +1114,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Leonardo (2012)
     source_type: mediawiki
     revision_id: '9510080'
@@ -1076,12 +1157,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{9-A}} | At least {{9-A}}'
-      source_id: vsbattles-karai-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: 'Superhuman Physical Characteristics, Martial Arts (Ninjutsu and Kendo
         mostly), Weapon Mastery (Katana, Ninjatos, Kunai, Shuriken, Smoke Bombs (Which
@@ -1141,7 +1216,7 @@ repair:
       confidence: 0.75
     - field: standard_equipment
       value: "Various Katana, Ninjato, Kunai, Shuriken, Tant\u014D, Smoke Bombs, Yumi,\
-        \ Arrows, Trident, Laser Blasters, Rocket Launchers, and grappling hook"
+        \ Arrows, Trident, Laser Blasters, Rocket Launchers"
       source_id: vsbattles-karai-comics
       provider_id: vsbattles
       authority: high
@@ -1156,22 +1231,6 @@ repair:
         \ holding remarkable combat prowess such as Karai, Tiger Claw, and even the\
         \ Shredder. In addition, he is highly adaptable and analytical, capable of\
         \ improvising strategies on the spot)"
-      source_id: vsbattles-karai-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Nothing notable ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{Discussions|Leonardo 2012|Leonardo (2012)}} Category:Characters Category:Cartoon
-        Characters Category:Teenage Mutant Ninja Turtles Category:Mutants Category:Teenagers
-        Category:Ninjas Category:Martial Artists Category:Sword Users Category:Animals
-        Category:Turtles Category:Protagonists Category:Primary Protagonists Category:Male
-        Characters Category:Good Characters Category:Heroes Category:Weather Users
-        Category:Electricity Users Category:Air Users Category:Flight Users Category:Regeneration
-        Users Category:Stealth Masters Category:Healers Category:Smoke Users Category:Pressure
-        Point Users Category:Dual Wielders Category:Bomb Users Category:Shuriken Users
-        Category:Trident Users Category:Rocket Users Category:Grappling Users Category:Kunai
-        Users Category:Weapon Masters'
       source_id: vsbattles-karai-comics
       provider_id: vsbattles
       authority: high

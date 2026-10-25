@@ -10,19 +10,8 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-10T07:44:44Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Wheeljack
   franchise: Transformers
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-wheeljack-transformers
   provider_id: vsbattles
   source_type: mediawiki
-  title: Wheeljack Transformers
-  url: https://vsbattles.fandom.com/wiki/Wheeljack_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-wheeljack-transformers
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Wheeljack Transformers
-  url: https://character-stats-and-profiles.fandom.com/wiki/Wheeljack_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-wheeljack-transformers
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Wheeljack (Transformers)
   url: https://vsbattles.fandom.com/wiki/Wheeljack_%28Transformers%29
   authority: high
@@ -164,13 +117,24 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: City level+ (Stated to be incredibly strongMore Than Meets the Eye#3 page
+      12654.0559 Megatons of TNT), higher while power-linked with Windsheer (Minicons
+      enhance a Cybertronian's strength while Power-linked, which shouldn't be far
+      behind the amp Overload gives to Optimus Prime97.30062 Megatons of TNT)
+    source_ids:
+    - vsbattles-wheeljack-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Subsonic movement speed (His top speed in his alt mode is 285 miles per
+      hourMore Than Meets the Eye#3 page 126) with Massively Hypersonic+ reaction
+      and combat speed (Should be comparable to his Decepticon allies, who could travel
+      from Earth to the Moon in a matter of minutesThe Transformers: Dreamwave Armada
+      Issue 9-11Mach 3735.66569)'
+    source_ids:
+    - vsbattles-wheeljack-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,23 +144,236 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: City level+, higher while power-linked with Windsheer
+    source_ids:
+    - vsbattles-wheeljack-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman (No Cybertronian has ever shown fatigue in their battles)
+    source_ids:
+    - vsbattles-wheeljack-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Several Meters via sheer size and Energy Bastons; at least Hundreds of Meters
+      with his ranged weapons (Should be comparable, if not, superior to real life
+      guns)
+    source_ids:
+    - vsbattles-wheeljack-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Above Average (Is said to be incredibly intelligentMore Than Meets
+      the Eye#3 page 126)
+    source_ids:
+    - vsbattles-wheeljack-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-wheeljack-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-large-size-type-0-should-be-comparable-to-hot-shot-who-is-o
+  name: 'Large Size (Type 0 Should be comparable to Hot Shot, who is over 16 feet
+    tallThe Transfomrers: Armada PS2 game''s booklet'
+  description: 'Large Size (Type 0 Should be comparable to Hot Shot, who is over 16
+    feet tallThe Transfomrers: Armada PS2 game''s booklet)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transformation-into-a-gullwing-doored-supercar
+  name: Transformation (Into a gullwing-doored supercar)
+  description: Transformation (Into a gullwing-doored supercar)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-space-survival-as-a-species-should-be-comparable-to-his-fel
+  name: Space Survival (As a species, should be comparable to his fellow Decepticons,
+    who were able to stay for a prolonged amou
+  description: 'Space Survival (As a species, should be comparable to his fellow Decepticons,
+    who were able to stay for a prolonged amount of time in the moon without showing
+    any side effectsThe Transformers: Dreamwave Armada Issue 9-11)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-longevity-has-lived-for-over-1-million-yearsthe-transfomrer
+  name: 'Longevity (Has lived for over 1 million yearsThe Transfomrers: Dreamwave
+    Armada Issue 3)'
+  description: 'Longevity (Has lived for over 1 million yearsThe Transfomrers: Dreamwave
+    Armada Issue 3)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-self-sustenance-type-1-cybertronians-do-not-require-oxygen-
+  name: 'Self-Sustenance (Type 1; Cybertronians do not require oxygen in order to
+    surviveThe Transformers: Dreamwave Armada Issue'
+  description: 'Self-Sustenance (Type 1; Cybertronians do not require oxygen in order
+    to surviveThe Transformers: Dreamwave Armada Issue 9-11)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_hacking
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-inorganic-physiology-type-2
+  name: Inorganic Physiology (Type 2)
+  description: Inorganic Physiology (Type 2)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-vehicular-mastery
+  name: Vehicular Mastery
+  description: Vehicular Mastery
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-immortality-type-2-as-a-species-he-should-be-comparable-to-
+  name: Immortality (Type 2, as a species, he should be comparable to Dropshot, who
+    survived having his torso and legs separated
+  description: Immortality (Type 2, as a species, he should be comparable to Dropshot,
+    who survived having his torso and legs separatedDropshot was sliced in Armada#16
+    and re-appeared in Energon#28)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery-is-said-to-be-quite-skilled-with-his-energy-
+  name: Weapon Mastery (Is said to be quite skilled with his energy batonsMore Than
+    Meets the Eye#3 page 126)
+  description: Weapon Mastery (Is said to be quite skilled with his energy batonsMore
+    Than Meets the Eye#3 page 126)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-bodily-weaponry-explosion-manipulation-was-shown-being-able
+  name: Bodily Weaponry & Explosion Manipulation (Was shown being able to launch missiles
+    while in his alternate modeThe Transfo
+  description: 'Bodily Weaponry & Explosion Manipulation (Was shown being able to
+    launch missiles while in his alternate modeThe Transfomrers: Dreamwave Energon#30)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-statistics-amplification-when-power-linked-with-windsheer-m
+  name: Statistics Amplification when power-linked with Windsheer (Minicon enhance
+    a Cybertronian's power after being modifiedTh
+  description: 'Statistics Amplification when power-linked with Windsheer (Minicon
+    enhance a Cybertronian''s power after being modifiedThe Transformers: Dreamwave
+    Armada Issue 1)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_hacking
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
@@ -212,368 +389,30 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-wheeljack-transformers
+  secondary_disagreement_policy: warning_only
 profile_hash: 3059b7fa622b021c833d4e9544485af3fffc541c3048c0f0ab6dabcd7920cac3
 repair:
-  attempted_at: '2026-10-10T10:03:50Z'
+  attempted_at: '2026-10-25T06:07:34Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-wheeljack-transformers
-    url: https://vsbattles.fandom.com/wiki/Wheeljack_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Wheeljack (Dreamwave Unicron Trilogy)
-    source_type: mediawiki
-    revision_id: '9275026'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 6251
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{7-B}}, higher while power-linked with Windsheer'
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Superhuman Physical Characteristics, Large Size (Type 0 Should be comparable
-        to Hot Shot, who is over 16 feet tallThe Transfomrers: Armada PS2 game''s
-        booklet), Transformation (Into a gullwing-doored supercar), Space Survival
-        (As a species, should be comparable to his fellow Decepticons, who were able
-        to stay for a prolonged amount of time in the moon without showing any side
-        effectsThe Transformers: Dreamwave Armada Issue 9-11), Longevity (Has lived
-        for over 1 million yearsThe Transfomrers: Dreamwave Armada Issue 3), Self-Sustenance
-        (Type 1; Cybertronians do not require oxygen in order to surviveThe Transformers:
-        Dreamwave Armada Issue 9-11), Inorganic Physiology (Type 2), Vehicular Mastery,
-        Immortality (Type 2, as a species, he should be comparable to Dropshot, who
-        survived having his torso and legs separatedDropshot was sliced in Armada#16
-        and re-appeared in Energon#28), Weapon Mastery (Is said to be quite skilled
-        with his energy batonsMore Than Meets the Eye#3 page 126), Bodily Weaponry
-        & Explosion Manipulation (Was shown being able to launch missiles while in
-        his alternate modeThe Transfomrers: Dreamwave Energon#30), Statistics Amplification
-        when power-linked with Windsheer (Minicon enhance a Cybertronian''s power
-        after being modifiedThe Transformers: Dreamwave Armada Issue 1)'
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: City level+ (Stated to be incredibly strongMore Than Meets the Eye#3
-        page 12654.0559 Megatons of TNT), higher while power-linked with Windsheer
-        (Minicons enhance a Cybertronian's strength while Power-linked, which shouldn't
-        be far behind the amp Overload gives to Optimus Prime97.30062 Megatons of
-        TNT)
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: 'Subsonic movement speed (His top speed in his alt mode is 285 miles
-        per hourMore Than Meets the Eye#3 page 126) with Massively Hypersonic+ reaction
-        and combat speed (Should be comparable to his Decepticon allies, who could
-        travel from Earth to the Moon in a matter of minutesThe Transformers: Dreamwave
-        Armada Issue 9-11Mach 3735.66569)'
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: City level+, higher while power-linked with Windsheer
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (No Cybertronian has ever shown fatigue in their battles)
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Several Meters via sheer size and Energy Bastons; at least Hundreds of
-        Meters with his ranged weapons (Should be comparable, if not, superior to
-        real life guns)
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: 'left|200px *Windsheer: Windsheer was once an Autobot alongside his partner
-        and best friend Wheeljack that, after seeing his friend change sides, he went
-        with him. Windsheer shows more doubts about the change then his partner, but
-        as long as Wheeljack serves the Decepticons, the Mini-con will also serve
-        them. *Energy Bastons: Wheeljack has two energy bastons that he uses to face
-        his opponents, being rather skilled with them'
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: At least Above Average (Is said to be incredibly intelligentMore Than
-        Meets the Eye#3 page 126)
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} ==Notes/Explanations== {{Scroll box |content=
-        }} Category:Decepticons Category:Transformers Category:Comic Book Characters
-        Category:Large Sized Characters Category:Transformation Users Category:Space
-        Survival Users Category:Longevity Users Category:Self-Sustenance Users Category:Inorganic
-        Beings Category:Vehicular Masters Category:Immortals Category:Weapon Masters
-        Category:Weapon Users Category:Statistics Amplification Users Category:Male
-        Characters Category:Robots Category:Bodily Weaponry Users Category:Explosion
-        Users'
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|wheeljack dreamwave unicron trilogy|9275026
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-wheeljack-transformers
-    url: https://character-stats-and-profiles.fandom.com/wiki/Wheeljack_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Optimus Prime (Fanon, Transformers Phoenix)/Heisei Anguirus
-      5468
-    source_type: mediawiki
-    revision_id: '494739'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 16863
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers & Stats
-    - Powers & Abilities
-    - Stats
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{7-A}}, Far Higher with the Ion Gun | {{Low 5-B}}, Far Higher with
-        Star Saber | {{5-A}} | {{Low 5-B}}, up to {{5-A}} with Star Saber | {{5-A}},
-        Far Higher with Star Saber | {{4-A}}, at most {{High 3-A}}'
-      source_id: character-stats-profiles-wheeljack-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Scroll box |content= * Superhuman Physical Characteristics ** Inorganic
-        Physiology (Type 2; is a mechanical organism) ** Large Size (Type 0; stands
-        7.72 Meters tall) ** Immortality (Type 1, 2, 3, 4, & 8; Naturally, Optimus
-        can does not age, can withstand near-endless amounts of pain, and can regenerate
-        from being blown to bits; via the Matrix of Leadership, Optimus can resurrect
-        indefinitely, though if it is lost or destroyed, Optimus loses this ability)
-        *** Resurrection (After dying, Optimus can resurrect into a new identical
-        body) *** Regeneration (High-Mid; Regenerated from being blown to pieces by
-        Shockwave''s antimatter bomb) ** Enhanced Senses (Sight, Hearing, Touch, &
-        Electroreception) ** Martial Arts ** Self-Sustenance (Type 1 & Type 3) ***
-        Space Survival ** Acrobatics (All-Terrain Movement, Self-Momentum, & Mid-Air
-        Jump) ** Flight * Transformation (Can transform into a semi-truck cab) * Weapon
-        Mastery (via Ion Gun & Star Saber) * Acausality (Type 1; Even if the past
-        is altered, Optimus'' is left the same) * Metal Manipulation & Magnetism Manipulation
-        (via his Metalloid Pads, which can move metallic objects via magnetism, as
-        well as control and create metal) ** Radiation Manipulation & Transmutation
-        (His Metalloid Pads can open up to release particles accelerators, that are
-        shown to be able convert iron to radium and helium to thorium) * Energy Manipulation,
-        Energy Projection, & Absorption (Optimus can manipulate and project blasts
-        of various energy, such as electricity and plasma, as well as absorb electricity
-        from reactors to to fuel his Energon) ** Electricity Manipulation (Can shoot
-        blasts of lightning from his eyes) ** Plasma Manipulation & Heat Manipulation
-        (Optimus can shoot beams and balls of plasma from his hands, which cause the
-        area impacted to increase in heat by twenty-five times) ** Matter Manipulation
-        (Sub-Particular; Can manipulate absorbed energy on a gluon and or quark level)
-        * Social Influencing (via being the Autobot Commander and the one who wields
-        the Matrix of Leadership) * Indomitable Will * Extrasensory Perception (Can
-        detect the location of energon via special waves) ** Clairvoyance (Via the
-        Matrix of Leadership, Optimus can detect the location of all other Cybertronians
-        via his mind) *** Cosmic Awareness (Can detect the presence of threats from
-        galaxies away) *** Memory Manipulation & Emotional Manipulation (Through his
-        clairvoyance, Optimus can create waves that impact the memories & emotions
-        of any and all Transformers) ** Precognition & Astral Projection (Can detect
-        and project himself into events and as far in the future as the heat death
-        of the universe) * Rage Power & Heat Manipulation (Optimus Prime can enter
-        a rage-induced state, which his rage causes the environment around him in
-        a ten meter radius to double in temperature) * Speed Manipulation * Adaptation
-        & Reactive Evolution (Can adapt to new disguises, as well as if a disguise
-        is destroyed, adapt a new one immune to and superior to what the prior was
-        affected by) * Light Manipulation (Can project light from his eyes and hands
-        to gain more vision and blight opponents) * Accelerated Development (Battle;
-        Physical Stats & Abilities; over the course of battles, Optimus increases
-        exponentially in power) * Genius Intelligence * Probability Manipulation Durability
-        Negation & Resistance Negation (Can manipulate odds to guarantee him a victory
-        via the Matrix of Leadership) * Statistics Amplification }} {{!}}-{{!}}Resistances=
-        {{Scroll box |content= * Heat & Fire * Radiation Manipulation * Ice Manipulation
-        ** Water Manipulation * Explosion Manipulation & Antimatter Manipulation (Withstood
-        the affects of Shockwave''s Antimatter bombs) * Electricity Manipulation &
-        Plasma Manipulation (Can withstand his own energy attacks) * Soul Manipulation
-        & Technology Manipulation (Optimus'' soul is protected by an armor that prevents
-        tampering with it; the mechanisms are immune to outside impacts) * Poison
-        Manipulation (Is entirely unaffected by toxins) * Bone Manipulation (As a
-        Transformer, Optimus does not have bones) * Durability Negation & Void Manipulation
-        (No-Sold Soundwave''s Void Reactor) * Air Manipulation & Speed Manipulation
-        (Immune to affects from the wind & speed alterations) * Metal Manipulation
-        & Magnetism Manipulation (Was able to tank Magnetism-based weaponry from the
-        likes of Shockwave, Trypticon, and Sentinel Prime) * Matter Manipulation &
-        Transmutation * Mind Manipulation * Sound Manipulation & Vibration Manipulation
-        (Was completely unfazed by Soundwaves sonar blasts) * Mind Manipulation, Emotional
-        Manipulation, & Memory Manipulation (Resisted Unicron''s Mental Blasts) }}
-        }} |-|Jetpower= {{Scroll box |content= All previous abilities amplified, as
-        well as: * Enhanced Flight & Speed Manipulation * Smoke Manipulation & Vibration
-        Manipulation (Via Smoke Bombs) ** Invisibility (His Smoke Bombs can make Optimus
-        entirely invisible) * Fire Manipulation & Poison Manipulation (via his Exhaust-Pipe
-        Flamethrowers) }} |-|Supercharge'
-      source_id: character-stats-profiles-wheeljack-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Mountain Level (Easily defeated Blitzwing, who destroyed a mountain just
-        by flying through it300.344 Megatons), Far Higher with the Ion Gun (His Gun
-        is 50% more powerful than before450.516 Megatons)
-      source_id: character-stats-profiles-wheeljack-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic+ (Can keep up with Elita-One, who travels at Mach 0.75), Massively
-        Hypersonic Flight Speed (Traveled from CT-66 to Cybertron in just one hour277778
-        m/ps) Sub-Relativistic Attack & Reaction Speeds (Can hit Blitzwing in flight,
-        who could circle around Cybertron in a mere minute13350000 m/ps)
-      source_id: character-stats-profiles-wheeljack-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Mountain Level (Tanked attacks from Blitzwing and Megatron) |-|Pre-Apotheosis
-      source_id: character-stats-profiles-wheeljack-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None notable ==Notes/Explanations== {{Scroll box |content= }} Category:Heisei
-        Anguirus 5468
-      source_id: character-stats-profiles-wheeljack-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|optimus prime fanon transformers
-      phoenix heisei anguirus 5468|494739
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-wheeljack-transformers
     url: https://vsbattles.fandom.com/wiki/Wheeljack_%28Transformers%29
     ok: true
@@ -588,7 +427,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Wheeljack (Dreamwave Unicron Trilogy)
     source_type: mediawiki
     revision_id: '9275026'
@@ -633,7 +471,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{7-B}}, higher while power-linked with Windsheer'
+      value: higher while power-linked with Windsheer
       source_id: vsbattles-wheeljack-transformers
       provider_id: vsbattles
       authority: high
@@ -701,11 +539,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: 'left|200px *Windsheer: Windsheer was once an Autobot alongside his partner
-        and best friend Wheeljack that, after seeing his friend change sides, he went
-        with him. Windsheer shows more doubts about the change then his partner, but
-        as long as Wheeljack serves the Decepticons, the Mini-con will also serve
-        them. *Energy Bastons: Wheeljack has two energy bastons that he uses to face
+      value: 'left, 200px, Windsheer: Windsheer was once an Autobot alongside his
+        partner and best friend Wheeljack that, after seeing his friend change sides,
+        he went with him. Windsheer shows more doubts about the change then his partner,
+        but as long as Wheeljack serves the Decepticons, the Mini-con will also serve
+        them., Energy Bastons: Wheeljack has two energy bastons that he uses to face
         his opponents, being rather skilled with them'
       source_id: vsbattles-wheeljack-transformers
       provider_id: vsbattles
@@ -714,20 +552,6 @@ repair:
     - field: intelligence
       value: At least Above Average (Is said to be incredibly intelligentMore Than
         Meets the Eye#3 page 126)
-      source_id: vsbattles-wheeljack-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} ==Notes/Explanations== {{Scroll box |content=
-        }} Category:Decepticons Category:Transformers Category:Comic Book Characters
-        Category:Large Sized Characters Category:Transformation Users Category:Space
-        Survival Users Category:Longevity Users Category:Self-Sustenance Users Category:Inorganic
-        Beings Category:Vehicular Masters Category:Immortals Category:Weapon Masters
-        Category:Weapon Users Category:Statistics Amplification Users Category:Male
-        Characters Category:Robots Category:Bodily Weaponry Users Category:Explosion
-        Users'
       source_id: vsbattles-wheeljack-transformers
       provider_id: vsbattles
       authority: high
@@ -752,10 +576,8 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Optimus Prime (Fanon, Transformers Phoenix)/Heisei Anguirus
       5468
     source_type: mediawiki
@@ -786,7 +608,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -801,79 +623,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{7-A}}, Far Higher with the Ion Gun | {{Low 5-B}}, Far Higher with
-        Star Saber | {{5-A}} | {{Low 5-B}}, up to {{5-A}} with Star Saber | {{5-A}},
-        Far Higher with Star Saber | {{4-A}}, at most {{High 3-A}}'
-      source_id: character-stats-profiles-wheeljack-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Scroll box |content= * Superhuman Physical Characteristics ** Inorganic
-        Physiology (Type 2; is a mechanical organism) ** Large Size (Type 0; stands
-        7.72 Meters tall) ** Immortality (Type 1, 2, 3, 4, & 8; Naturally, Optimus
-        can does not age, can withstand near-endless amounts of pain, and can regenerate
-        from being blown to bits; via the Matrix of Leadership, Optimus can resurrect
-        indefinitely, though if it is lost or destroyed, Optimus loses this ability)
-        *** Resurrection (After dying, Optimus can resurrect into a new identical
-        body) *** Regeneration (High-Mid; Regenerated from being blown to pieces by
-        Shockwave''s antimatter bomb) ** Enhanced Senses (Sight, Hearing, Touch, &
-        Electroreception) ** Martial Arts ** Self-Sustenance (Type 1 & Type 3) ***
-        Space Survival ** Acrobatics (All-Terrain Movement, Self-Momentum, & Mid-Air
-        Jump) ** Flight * Transformation (Can transform into a semi-truck cab) * Weapon
-        Mastery (via Ion Gun & Star Saber) * Acausality (Type 1; Even if the past
-        is altered, Optimus'' is left the same) * Metal Manipulation & Magnetism Manipulation
-        (via his Metalloid Pads, which can move metallic objects via magnetism, as
-        well as control and create metal) ** Radiation Manipulation & Transmutation
-        (His Metalloid Pads can open up to release particles accelerators, that are
-        shown to be able convert iron to radium and helium to thorium) * Energy Manipulation,
-        Energy Projection, & Absorption (Optimus can manipulate and project blasts
-        of various energy, such as electricity and plasma, as well as absorb electricity
-        from reactors to to fuel his Energon) ** Electricity Manipulation (Can shoot
-        blasts of lightning from his eyes) ** Plasma Manipulation & Heat Manipulation
-        (Optimus can shoot beams and balls of plasma from his hands, which cause the
-        area impacted to increase in heat by twenty-five times) ** Matter Manipulation
-        (Sub-Particular; Can manipulate absorbed energy on a gluon and or quark level)
-        * Social Influencing (via being the Autobot Commander and the one who wields
-        the Matrix of Leadership) * Indomitable Will * Extrasensory Perception (Can
-        detect the location of energon via special waves) ** Clairvoyance (Via the
-        Matrix of Leadership, Optimus can detect the location of all other Cybertronians
-        via his mind) *** Cosmic Awareness (Can detect the presence of threats from
-        galaxies away) *** Memory Manipulation & Emotional Manipulation (Through his
-        clairvoyance, Optimus can create waves that impact the memories & emotions
-        of any and all Transformers) ** Precognition & Astral Projection (Can detect
-        and project himself into events and as far in the future as the heat death
-        of the universe) * Rage Power & Heat Manipulation (Optimus Prime can enter
-        a rage-induced state, which his rage causes the environment around him in
-        a ten meter radius to double in temperature) * Speed Manipulation * Adaptation
-        & Reactive Evolution (Can adapt to new disguises, as well as if a disguise
-        is destroyed, adapt a new one immune to and superior to what the prior was
-        affected by) * Light Manipulation (Can project light from his eyes and hands
-        to gain more vision and blight opponents) * Accelerated Development (Battle;
-        Physical Stats & Abilities; over the course of battles, Optimus increases
-        exponentially in power) * Genius Intelligence * Probability Manipulation Durability
-        Negation & Resistance Negation (Can manipulate odds to guarantee him a victory
-        via the Matrix of Leadership) * Statistics Amplification }} {{!}}-{{!}}Resistances=
-        {{Scroll box |content= * Heat & Fire * Radiation Manipulation * Ice Manipulation
-        ** Water Manipulation * Explosion Manipulation & Antimatter Manipulation (Withstood
-        the affects of Shockwave''s Antimatter bombs) * Electricity Manipulation &
-        Plasma Manipulation (Can withstand his own energy attacks) * Soul Manipulation
-        & Technology Manipulation (Optimus'' soul is protected by an armor that prevents
-        tampering with it; the mechanisms are immune to outside impacts) * Poison
-        Manipulation (Is entirely unaffected by toxins) * Bone Manipulation (As a
-        Transformer, Optimus does not have bones) * Durability Negation & Void Manipulation
-        (No-Sold Soundwave''s Void Reactor) * Air Manipulation & Speed Manipulation
-        (Immune to affects from the wind & speed alterations) * Metal Manipulation
-        & Magnetism Manipulation (Was able to tank Magnetism-based weaponry from the
-        likes of Shockwave, Trypticon, and Sentinel Prime) * Matter Manipulation &
-        Transmutation * Mind Manipulation * Sound Manipulation & Vibration Manipulation
-        (Was completely unfazed by Soundwaves sonar blasts) * Mind Manipulation, Emotional
-        Manipulation, & Memory Manipulation (Resisted Unicron''s Mental Blasts) }}
-        }} |-|Jetpower= {{Scroll box |content= All previous abilities amplified, as
-        well as: * Enhanced Flight & Speed Manipulation * Smoke Manipulation & Vibration
-        Manipulation (Via Smoke Bombs) ** Invisibility (His Smoke Bombs can make Optimus
-        entirely invisible) * Fire Manipulation & Poison Manipulation (via his Exhaust-Pipe
-        Flamethrowers) }} |-|Supercharge'
+      value: Far Higher with the Ion Gun | , Far Higher with Star Saber | | , up to
+        with Star Saber | , Far Higher with Star Saber | , at most
       source_id: character-stats-profiles-wheeljack-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -896,14 +647,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: Mountain Level (Tanked attacks from Blitzwing and Megatron) |-|Pre-Apotheosis
-      source_id: character-stats-profiles-wheeljack-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None notable ==Notes/Explanations== {{Scroll box |content= }} Category:Heisei
-        Anguirus 5468
+      value: Mountain Level (Tanked attacks from Blitzwing and Megatron)
       source_id: character-stats-profiles-wheeljack-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -913,7 +657,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -922,8 +666,8 @@ repair:
       phoenix heisei anguirus 5468|494739
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-wheeljack
-    url: https://vsbattles.fandom.com/wiki/Wheeljack
+  - source_id: vsbattles-wheeljack-transformers
+    url: https://vsbattles.fandom.com/wiki/Wheeljack_Transformers
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -936,7 +680,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Wheeljack (Dreamwave Unicron Trilogy)
     source_type: mediawiki
     revision_id: '9275026'
@@ -981,7 +724,260 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{7-B}}, higher while power-linked with Windsheer'
+      value: higher while power-linked with Windsheer
+      source_id: vsbattles-wheeljack-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Large Size (Type 0 Should be comparable
+        to Hot Shot, who is over 16 feet tallThe Transfomrers: Armada PS2 game''s
+        booklet), Transformation (Into a gullwing-doored supercar), Space Survival
+        (As a species, should be comparable to his fellow Decepticons, who were able
+        to stay for a prolonged amount of time in the moon without showing any side
+        effectsThe Transformers: Dreamwave Armada Issue 9-11), Longevity (Has lived
+        for over 1 million yearsThe Transfomrers: Dreamwave Armada Issue 3), Self-Sustenance
+        (Type 1; Cybertronians do not require oxygen in order to surviveThe Transformers:
+        Dreamwave Armada Issue 9-11), Inorganic Physiology (Type 2), Vehicular Mastery,
+        Immortality (Type 2, as a species, he should be comparable to Dropshot, who
+        survived having his torso and legs separatedDropshot was sliced in Armada#16
+        and re-appeared in Energon#28), Weapon Mastery (Is said to be quite skilled
+        with his energy batonsMore Than Meets the Eye#3 page 126), Bodily Weaponry
+        & Explosion Manipulation (Was shown being able to launch missiles while in
+        his alternate modeThe Transfomrers: Dreamwave Energon#30), Statistics Amplification
+        when power-linked with Windsheer (Minicon enhance a Cybertronian''s power
+        after being modifiedThe Transformers: Dreamwave Armada Issue 1)'
+      source_id: vsbattles-wheeljack-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: City level+ (Stated to be incredibly strongMore Than Meets the Eye#3
+        page 12654.0559 Megatons of TNT), higher while power-linked with Windsheer
+        (Minicons enhance a Cybertronian's strength while Power-linked, which shouldn't
+        be far behind the amp Overload gives to Optimus Prime97.30062 Megatons of
+        TNT)
+      source_id: vsbattles-wheeljack-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Subsonic movement speed (His top speed in his alt mode is 285 miles
+        per hourMore Than Meets the Eye#3 page 126) with Massively Hypersonic+ reaction
+        and combat speed (Should be comparable to his Decepticon allies, who could
+        travel from Earth to the Moon in a matter of minutesThe Transformers: Dreamwave
+        Armada Issue 9-11Mach 3735.66569)'
+      source_id: vsbattles-wheeljack-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: City level+, higher while power-linked with Windsheer
+      source_id: vsbattles-wheeljack-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (No Cybertronian has ever shown fatigue in their battles)
+      source_id: vsbattles-wheeljack-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Several Meters via sheer size and Energy Bastons; at least Hundreds of
+        Meters with his ranged weapons (Should be comparable, if not, superior to
+        real life guns)
+      source_id: vsbattles-wheeljack-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: 'left, 200px, Windsheer: Windsheer was once an Autobot alongside his
+        partner and best friend Wheeljack that, after seeing his friend change sides,
+        he went with him. Windsheer shows more doubts about the change then his partner,
+        but as long as Wheeljack serves the Decepticons, the Mini-con will also serve
+        them., Energy Bastons: Wheeljack has two energy bastons that he uses to face
+        his opponents, being rather skilled with them'
+      source_id: vsbattles-wheeljack-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: At least Above Average (Is said to be incredibly intelligentMore Than
+        Meets the Eye#3 page 126)
+      source_id: vsbattles-wheeljack-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|wheeljack dreamwave unicron trilogy|9275026
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-wheeljack-transformers
+    url: https://character-stats-and-profiles.fandom.com/wiki/Wheeljack_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - tier
+    normalized_page_title: Optimus Prime (Fanon, Transformers Phoenix)/Heisei Anguirus
+      5468
+    source_type: mediawiki
+    revision_id: '494739'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16863
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers & Stats
+    - Powers & Abilities
+    - Stats
+    - Notes/Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Far Higher with the Ion Gun | , Far Higher with Star Saber | | , up to
+        with Star Saber | , Far Higher with Star Saber | , at most
+      source_id: character-stats-profiles-wheeljack-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Mountain Level (Easily defeated Blitzwing, who destroyed a mountain just
+        by flying through it300.344 Megatons), Far Higher with the Ion Gun (His Gun
+        is 50% more powerful than before450.516 Megatons)
+      source_id: character-stats-profiles-wheeljack-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic+ (Can keep up with Elita-One, who travels at Mach 0.75), Massively
+        Hypersonic Flight Speed (Traveled from CT-66 to Cybertron in just one hour277778
+        m/ps) Sub-Relativistic Attack & Reaction Speeds (Can hit Blitzwing in flight,
+        who could circle around Cybertron in a mere minute13350000 m/ps)
+      source_id: character-stats-profiles-wheeljack-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Mountain Level (Tanked attacks from Blitzwing and Megatron)
+      source_id: character-stats-profiles-wheeljack-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|optimus prime fanon transformers
+      phoenix heisei anguirus 5468|494739
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-wheeljack
+    url: https://vsbattles.fandom.com/wiki/Wheeljack
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    normalized_page_title: Wheeljack (Dreamwave Unicron Trilogy)
+    source_type: mediawiki
+    revision_id: '9275026'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6251
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    - Notes/Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: higher while power-linked with Windsheer
       source_id: vsbattles-wheeljack
       provider_id: vsbattles
       authority: high
@@ -1049,11 +1045,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: 'left|200px *Windsheer: Windsheer was once an Autobot alongside his partner
-        and best friend Wheeljack that, after seeing his friend change sides, he went
-        with him. Windsheer shows more doubts about the change then his partner, but
-        as long as Wheeljack serves the Decepticons, the Mini-con will also serve
-        them. *Energy Bastons: Wheeljack has two energy bastons that he uses to face
+      value: 'left, 200px, Windsheer: Windsheer was once an Autobot alongside his
+        partner and best friend Wheeljack that, after seeing his friend change sides,
+        he went with him. Windsheer shows more doubts about the change then his partner,
+        but as long as Wheeljack serves the Decepticons, the Mini-con will also serve
+        them., Energy Bastons: Wheeljack has two energy bastons that he uses to face
         his opponents, being rather skilled with them'
       source_id: vsbattles-wheeljack
       provider_id: vsbattles
@@ -1062,20 +1058,6 @@ repair:
     - field: intelligence
       value: At least Above Average (Is said to be incredibly intelligentMore Than
         Meets the Eye#3 page 126)
-      source_id: vsbattles-wheeljack
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} ==Notes/Explanations== {{Scroll box |content=
-        }} Category:Decepticons Category:Transformers Category:Comic Book Characters
-        Category:Large Sized Characters Category:Transformation Users Category:Space
-        Survival Users Category:Longevity Users Category:Self-Sustenance Users Category:Inorganic
-        Beings Category:Vehicular Masters Category:Immortals Category:Weapon Masters
-        Category:Weapon Users Category:Statistics Amplification Users Category:Male
-        Characters Category:Robots Category:Bodily Weaponry Users Category:Explosion
-        Users'
       source_id: vsbattles-wheeljack
       provider_id: vsbattles
       authority: high
@@ -1100,10 +1082,8 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Optimus Prime (Fanon, Transformers Phoenix)/Heisei Anguirus
       5468
     source_type: mediawiki
@@ -1134,7 +1114,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1149,79 +1129,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{7-A}}, Far Higher with the Ion Gun | {{Low 5-B}}, Far Higher with
-        Star Saber | {{5-A}} | {{Low 5-B}}, up to {{5-A}} with Star Saber | {{5-A}},
-        Far Higher with Star Saber | {{4-A}}, at most {{High 3-A}}'
-      source_id: character-stats-profiles-wheeljack
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Scroll box |content= * Superhuman Physical Characteristics ** Inorganic
-        Physiology (Type 2; is a mechanical organism) ** Large Size (Type 0; stands
-        7.72 Meters tall) ** Immortality (Type 1, 2, 3, 4, & 8; Naturally, Optimus
-        can does not age, can withstand near-endless amounts of pain, and can regenerate
-        from being blown to bits; via the Matrix of Leadership, Optimus can resurrect
-        indefinitely, though if it is lost or destroyed, Optimus loses this ability)
-        *** Resurrection (After dying, Optimus can resurrect into a new identical
-        body) *** Regeneration (High-Mid; Regenerated from being blown to pieces by
-        Shockwave''s antimatter bomb) ** Enhanced Senses (Sight, Hearing, Touch, &
-        Electroreception) ** Martial Arts ** Self-Sustenance (Type 1 & Type 3) ***
-        Space Survival ** Acrobatics (All-Terrain Movement, Self-Momentum, & Mid-Air
-        Jump) ** Flight * Transformation (Can transform into a semi-truck cab) * Weapon
-        Mastery (via Ion Gun & Star Saber) * Acausality (Type 1; Even if the past
-        is altered, Optimus'' is left the same) * Metal Manipulation & Magnetism Manipulation
-        (via his Metalloid Pads, which can move metallic objects via magnetism, as
-        well as control and create metal) ** Radiation Manipulation & Transmutation
-        (His Metalloid Pads can open up to release particles accelerators, that are
-        shown to be able convert iron to radium and helium to thorium) * Energy Manipulation,
-        Energy Projection, & Absorption (Optimus can manipulate and project blasts
-        of various energy, such as electricity and plasma, as well as absorb electricity
-        from reactors to to fuel his Energon) ** Electricity Manipulation (Can shoot
-        blasts of lightning from his eyes) ** Plasma Manipulation & Heat Manipulation
-        (Optimus can shoot beams and balls of plasma from his hands, which cause the
-        area impacted to increase in heat by twenty-five times) ** Matter Manipulation
-        (Sub-Particular; Can manipulate absorbed energy on a gluon and or quark level)
-        * Social Influencing (via being the Autobot Commander and the one who wields
-        the Matrix of Leadership) * Indomitable Will * Extrasensory Perception (Can
-        detect the location of energon via special waves) ** Clairvoyance (Via the
-        Matrix of Leadership, Optimus can detect the location of all other Cybertronians
-        via his mind) *** Cosmic Awareness (Can detect the presence of threats from
-        galaxies away) *** Memory Manipulation & Emotional Manipulation (Through his
-        clairvoyance, Optimus can create waves that impact the memories & emotions
-        of any and all Transformers) ** Precognition & Astral Projection (Can detect
-        and project himself into events and as far in the future as the heat death
-        of the universe) * Rage Power & Heat Manipulation (Optimus Prime can enter
-        a rage-induced state, which his rage causes the environment around him in
-        a ten meter radius to double in temperature) * Speed Manipulation * Adaptation
-        & Reactive Evolution (Can adapt to new disguises, as well as if a disguise
-        is destroyed, adapt a new one immune to and superior to what the prior was
-        affected by) * Light Manipulation (Can project light from his eyes and hands
-        to gain more vision and blight opponents) * Accelerated Development (Battle;
-        Physical Stats & Abilities; over the course of battles, Optimus increases
-        exponentially in power) * Genius Intelligence * Probability Manipulation Durability
-        Negation & Resistance Negation (Can manipulate odds to guarantee him a victory
-        via the Matrix of Leadership) * Statistics Amplification }} {{!}}-{{!}}Resistances=
-        {{Scroll box |content= * Heat & Fire * Radiation Manipulation * Ice Manipulation
-        ** Water Manipulation * Explosion Manipulation & Antimatter Manipulation (Withstood
-        the affects of Shockwave''s Antimatter bombs) * Electricity Manipulation &
-        Plasma Manipulation (Can withstand his own energy attacks) * Soul Manipulation
-        & Technology Manipulation (Optimus'' soul is protected by an armor that prevents
-        tampering with it; the mechanisms are immune to outside impacts) * Poison
-        Manipulation (Is entirely unaffected by toxins) * Bone Manipulation (As a
-        Transformer, Optimus does not have bones) * Durability Negation & Void Manipulation
-        (No-Sold Soundwave''s Void Reactor) * Air Manipulation & Speed Manipulation
-        (Immune to affects from the wind & speed alterations) * Metal Manipulation
-        & Magnetism Manipulation (Was able to tank Magnetism-based weaponry from the
-        likes of Shockwave, Trypticon, and Sentinel Prime) * Matter Manipulation &
-        Transmutation * Mind Manipulation * Sound Manipulation & Vibration Manipulation
-        (Was completely unfazed by Soundwaves sonar blasts) * Mind Manipulation, Emotional
-        Manipulation, & Memory Manipulation (Resisted Unicron''s Mental Blasts) }}
-        }} |-|Jetpower= {{Scroll box |content= All previous abilities amplified, as
-        well as: * Enhanced Flight & Speed Manipulation * Smoke Manipulation & Vibration
-        Manipulation (Via Smoke Bombs) ** Invisibility (His Smoke Bombs can make Optimus
-        entirely invisible) * Fire Manipulation & Poison Manipulation (via his Exhaust-Pipe
-        Flamethrowers) }} |-|Supercharge'
+      value: Far Higher with the Ion Gun | , Far Higher with Star Saber | | , up to
+        with Star Saber | , Far Higher with Star Saber | , at most
       source_id: character-stats-profiles-wheeljack
       provider_id: character_stats_profiles
       authority: high
@@ -1244,14 +1153,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: Mountain Level (Tanked attacks from Blitzwing and Megatron) |-|Pre-Apotheosis
-      source_id: character-stats-profiles-wheeljack
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None notable ==Notes/Explanations== {{Scroll box |content= }} Category:Heisei
-        Anguirus 5468
+      value: Mountain Level (Tanked attacks from Blitzwing and Megatron)
       source_id: character-stats-profiles-wheeljack
       provider_id: character_stats_profiles
       authority: high
@@ -1261,7 +1163,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1283,7 +1185,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Optimus Prime (IDW Movie Comics)
     source_type: mediawiki
@@ -1328,12 +1229,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{7-B}} | At least {{7-B}}'
-      source_id: vsbattles-wheeljack-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts, Weapon Mastery (In
         both firearms and close combat weapons), Transformation (Can transform into
@@ -1342,7 +1237,7 @@ repair:
         from his wrists at will, and also keeps his Ion Blaster stored in his back),
         Self-Sustenance (Type 1 and 3), Immortality (Type 2), Explosion Manipulation
         (With his grenade launcher), Energy Projection, Longevity, Enhanced Senses,
-        Cosmic Awareness, Fire Manipulation, limited Precognition, Limited resistance
+        Cosmic Awareness, Fire Manipulation, limited Precognition, Limited, resistance
         to Ice Manipulation and Fire Manipulation, Genius Intelligence, Resurrection
         and Life Manipulation with the Matrix
       source_id: vsbattles-wheeljack-comics
@@ -1385,7 +1280,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: '*Dual Energon Swords *Dual Energon Hooks *Ion Blaster *Barrage Cannon'
+      value: Dual Energon Swords, Dual Energon Hooks, Ion Blaster, Barrage Cannon
       source_id: vsbattles-wheeljack-comics
       provider_id: vsbattles
       authority: high
@@ -1398,18 +1293,10 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None Notable Note: Despite having similar appearances, Optimus Prime
-        is not the same character as The Last Prime. Optimus was stated to be an orphan
-        who was kept away during the Fallen''s rampage while we see The Last Prime
-        sacrifice himself to build a tomb during the same period of time. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{discussions|Optimus Prime IDW
-        Movie Comics|Optimus Prime (IDW Movie Comics)}} Category:Transformers Category:Comic
-        Book Characters Category:Transformation Users Category:Self-Sustenance Users
-        Category:Immortals Category:Gun Users Category:Explosion Users Category:Cosmic
-        Awareness Users Category:Longevity Users Category:Enhanced Senses Users Category:Robots
-        Category:Large Sized Characters Category:Weapon Masters Category:Weapon Users
-        Category:Fire Users Category:Regeneration Users Category:Martial Artists Category:Sword
-        Users Category:Geniuses Category:Characters Category:Primary Protagonists'
+      value: Optimus Prime is not the same character as The Last Prime. Optimus was
+        stated to be an orphan who was kept away during the Fallen's rampage while
+        we see The Last Prime sacrifice himself to build a tomb during the same period
+        of time.
       source_id: vsbattles-wheeljack-comics
       provider_id: vsbattles
       authority: high
@@ -1437,7 +1324,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Grimlock (Canon, Composite)/WAYNE.BORG
     source_type: mediawiki
     revision_id: '177650'
@@ -1539,12 +1425,6 @@ repair:
         | Dwarf Star level (No sold multiple beams from Megatron's fusion canon) |
         Low Multiverse level (Tanked a shot from Optimus Prime, tanked a punch from
         Shockwave ).
-      source_id: character-stats-profiles-wheeljack-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None
       source_id: character-stats-profiles-wheeljack-comics
       provider_id: character_stats_profiles
       authority: high

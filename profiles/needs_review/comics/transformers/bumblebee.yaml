@@ -4,25 +4,14 @@ name: Bumblebee
 franchise: Transformers
 category: comics
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-10-10T07:11:36Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Bumblebee
   franchise: Transformers
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-bumblebee-transformers
   provider_id: vsbattles
   source_type: mediawiki
-  title: Bumblebee Transformers
-  url: https://vsbattles.fandom.com/wiki/Bumblebee_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-bumblebee-transformers
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Bumblebee Transformers
-  url: https://character-stats-and-profiles.fandom.com/wiki/Bumblebee_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-bumblebee-transformers
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Bumblebee (Transformers)
   url: https://vsbattles.fandom.com/wiki/Bumblebee_%28Transformers%29
   authority: high
@@ -164,13 +117,20 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At most Mountain level (Killed Skyquake while in midair, who could hold
+      his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
+      and Wheeljack, with one punch. Defeated Knockout. Knocked Starscream flat)
+    source_ids:
+    - vsbattles-bumblebee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Subsonic movement speed with Massively Hypersonic Reaction and Combat speed
+      (Dodged cannon fire from Shockwave; a very fast driver)
+    source_ids:
+    - vsbattles-bumblebee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,9 +140,11 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At most Mountain level (Took hits from Shockwave and a blast from Starscream)
+    source_ids:
+    - vsbattles-bumblebee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
     text: null
     source_ids: []
@@ -192,15 +154,33 @@ power_scale:
     source_ids: []
     confidence: 0.0
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Gifted (Excellent scout, capable fighter, capable trickster)
+    source_ids:
+    - vsbattles-bumblebee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
 abilities: []
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-young-and-somewhat-immature
+  name: Young and somewhat immature.
+  description: Young and somewhat immature.
+  source_ids:
+  - vsbattles-bumblebee-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -212,13 +192,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-bumblebee-transformers
+  secondary_disagreement_policy: warning_only
 profile_hash: d4e69cfec296a100e64c57da81e834fde92e1f72c6d5369bdaebce748b32a9cb
 repair:
-  attempted_at: '2026-10-10T09:19:12Z'
+  attempted_at: '2026-10-23T01:56:44Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -226,310 +220,6 @@ repair:
   - durability
   - abilities
   source_attempts:
-  - source_id: vsbattles-bumblebee-transformers
-    url: https://vsbattles.fandom.com/wiki/Bumblebee_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: 'Bumblebee (Transformers: Prime)'
-    source_type: mediawiki
-    revision_id: '9341242'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4225
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At most {{7-A}}
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Bumblebee= {{Border|Scroll=Yes|Visible=No|Content= * Superhuman Physical
-        Characteristics ** Transformation (Into a car) ** Large Size (Type 0) ** Extreme
-        Longevity ** Self-Sustenance (Type 1) * Martial Arts ** Weapon Mastery * Combination
-        (Combine with Strangarm, Sideswipe and Grimlock to form Ultra Bee) }} |-|Ultra
-        Bea={{Border|Scroll=Yes|Visible=No|Content=All previous abilities, plus: *
-        Enhanced Large Size (Type 1) }}'
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At most Mountain level (Killed Skyquake while in midair, who could hold
-        his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
-        and Wheeljack, with one punch. Defeated Knockout. Knocked Starscream flat)
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic movement speed with Massively Hypersonic Reaction and Combat
-        speed (Dodged cannon fire from Shockwave; a very fast driver)
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At most Mountain level (Took hits from Shockwave and a blast from Starscream)
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Unknown
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Energon Blasters
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Gifted (Excellent scout, capable fighter, capable trickster)
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Young and somewhat immature. ==Gallery== TFP Bee2.jpg TFP Bee4.jpg ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions|Bumblebee Transformers
-        Prime|Bumblebee (Transformers: Prime)}} Category:Characters Category:Transformers
-        Category:Aliens Category:Autobots Category:Brawlers Category:Cartoon Characters
-        Category:Energy Weapon Users Category:Good Characters Category:Gun Users Category:Heroes
-        Category:Land Vehicles Category:Large Sized Characters Category:Longevity
-        Users Category:Fusionism Users Category:Male Characters Category:Primary Protagonists
-        Category:Protagonists Category:Robots Category:Transformation Users Category:Tricksters
-        Category:Vehicles Category:Weapon Masters'
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|bumblebee transformers prime|9341242
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-bumblebee-transformers
-    url: https://character-stats-and-profiles.fandom.com/wiki/Bumblebee_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Optimus Prime (Canon, Knightverse)/Incredible bacon
-    source_type: mediawiki
-    revision_id: '570696'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 9101
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: High 4-C, likely Low 2-C, higher with his weapons
-      source_id: character-stats-profiles-bumblebee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '* Superhuman Physical Characteristics * Transformation and Vehicular
-        Mastery (Into a Freightliner truck) * Inorganic Physiology (Type 2) * Longevity
-        (Cybertronians can live for thousands of years) * Immortality (Type 2; Survived
-        multiple stab wounds through the chest) * Self-Sustenance (Type 1 and 3; By
-        virtue of his Cybertronian physiology, Optimus has no need for sleep or oxygen)
-        * Large Size (19 feet and 10 inches tall) * Enhanced Senses and Information
-        Analysis (Should have the same abilities just like Bumblebee) * Adaptation
-        (Cybertronians are capable of scanning nearby vehicles they can transform
-        into) * Regeneration (Mid-Low; Regenerated from minor wounds and a hole in
-        his chest and bicep) * Body Control (Should be capable of mid-transforming
-        his body like Bumblebee) * Weapon Mastery (Wields a variety of weapons, ranging
-        from his Blades, Axe and Guns) * Energy Projection (With his arm cannon) *
-        Temperature Manipulation (With his Axe and Energon Blade) * Genius Intelligence
-        * Martial Arts (Shown to be a very capable fighter on Cybertron, taking on
-        multiple Decepticons while alone. Has fought on par with Scourge. Superior
-        to Bumblebee. According to producers, his fighting style is a combination
-        of Mike Tyson and Muhammad Ali) * Acrobatics Following Resistances to: * Temperature
-        Manipulation (Should be comparable to the Scorponok drones, who can survive
-        the heat of re-entry, which would have a 3000 temperature of degrees F) **
-        Radiation Manipulation (Should be comparable to the likes of Shatter and Dropkick,
-        who can move through cold space with little issue. Resisted the explosion
-        from the Transwarp key, which has energy equivalent to a supernova) *** Ice
-        Manipulation *** Space-Time Manipulation (Survived the explosion of the Transwarp
-        Key, which can open space-time portals to reach planets across the universe)
-        * Biological Manipulation, Disease Manipulation and Poison Manipulation (By
-        virtue of his physiology)'
-      source_id: character-stats-profiles-bumblebee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Large Star level, likely Universe level+ (Claimed that he will and even
-        did destroy the Transwarp Key with no difficulty, whose explosion was powerful
-        enough to push back Unicron, who feeds on planets, the Transwarp key has more
-        energy than a Supernova, which was explained by Optimus Primal, the leader
-        of the Maximals, who are knowledgable about the Transwarp key and are it's
-        users (Primal also says if the key falls into wrong hands, many other lives
-        on Earth will be taken out), a supernova has enough energy to "outshine" the
-        Milky Way, or in other words, if it exploded, the blast would be vastly large
-        that even the Milky Way seem darker than it and this is consistent due to
-        previous statements from Primal and the fact Optimus took the explosion from
-        the key and the key can also open space time portals to reach planets across
-        the universe. Capable of killing the Scorponok drones. Superior than Dropkick
-        and Shatter who were able to one-shot Cliffjumper and no-sold they're re-entry
-        explosions of this56.592451104 to 69.644841541 Kilotons of TNT, up to 557.158732328
-        kilotons of TNT due to one-shotting Cliffjumper who should do the same feat
-        yield. While inferior, capable of fighting against Scourge, and eventually
-        kills him in their rematch and rips of his spine. Harmed and greatly injured
-        Battletrap. Superior to the likes of Bumblebee. Easily defeated hordes of
-        Seekers, who can do this25.1789716667 Tons of TNT. Dropkick was afraid at
-        the mention of him travelling to Earth), higher with his weapons
-      source_id: character-stats-profiles-bumblebee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL to Massively FTL+ (Notably faster than regular Decepticons,
-        whom should all compare to Dropkick and Shatter who are this fast. Comparable
-        to Arcee, who can swiftly avoid missles)
-      source_id: character-stats-profiles-bumblebee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Large Star level, likely Universe level+ (Tanked the explosion of the
-        Transwarp Key, which even pushed back Unicron. Took multiple stabs to his
-        chest from Scourge)
-      source_id: character-stats-profiles-bumblebee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable. == Gallery == File:Bumblebee movie optimus prime.webp|Bumblebee
-        movie render File:New ROTB Optimus rend.webp|Rise of The Beasts movie render
-        File:Optimus prime render png 2 by jurassicworldcards dg35dsh.png|Close look
-        up render File:ROTB optimus battle.webp|Optimus'' battle axe == Notable Matchups
-        == Victories: Losses: Inconclusive: == Statistics Values == Category:Tier
-        4 Category:Tier High 4-C Category:Tier 2 Category:Tier Low 2-C Category:Incredible
-        bacon'
-      source_id: character-stats-profiles-bumblebee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|optimus prime canon knightverse
-      incredible bacon|570696
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-bumblebee-transformers
     url: https://vsbattles.fandom.com/wiki/Bumblebee_%28Transformers%29
     ok: true
@@ -539,12 +229,8 @@ repair:
     - durability
     - intelligence
     - powers_and_abilities
-    - range
     - speed
-    - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: 'Bumblebee (Transformers: Prime)'
     source_type: mediawiki
     revision_id: '9341242'
@@ -587,23 +273,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: At most {{7-A}}
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Bumblebee= {{Border|Scroll=Yes|Visible=No|Content= * Superhuman Physical
-        Characteristics ** Transformation (Into a car) ** Large Size (Type 0) ** Extreme
-        Longevity ** Self-Sustenance (Type 1) * Martial Arts ** Weapon Mastery * Combination
-        (Combine with Strangarm, Sideswipe and Grimlock to form Ultra Bee) }} |-|Ultra
-        Bea={{Border|Scroll=Yes|Visible=No|Content=All previous abilities, plus: *
-        Enhanced Large Size (Type 1) }}'
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: attack_potency
       value: At most Mountain level (Killed Skyquake while in midair, who could hold
         his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
@@ -625,18 +294,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Unknown
-      source_id: vsbattles-bumblebee-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: standard_equipment
       value: Energon Blasters
       source_id: vsbattles-bumblebee-transformers
@@ -649,16 +306,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Young and somewhat immature. ==Gallery== TFP Bee2.jpg TFP Bee4.jpg ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions|Bumblebee Transformers
-        Prime|Bumblebee (Transformers: Prime)}} Category:Characters Category:Transformers
-        Category:Aliens Category:Autobots Category:Brawlers Category:Cartoon Characters
-        Category:Energy Weapon Users Category:Good Characters Category:Gun Users Category:Heroes
-        Category:Land Vehicles Category:Large Sized Characters Category:Longevity
-        Users Category:Fusionism Users Category:Male Characters Category:Primary Protagonists
-        Category:Protagonists Category:Robots Category:Transformation Users Category:Tricksters
-        Category:Vehicles Category:Weapon Masters'
+    - field: powers_and_abilities
+      value: Bumblebee=, Ultra Bea
       source_id: vsbattles-bumblebee-transformers
       provider_id: vsbattles
       authority: high
@@ -686,7 +335,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Optimus Prime (Canon, Knightverse)/Incredible bacon
     source_type: mediawiki
     revision_id: '570696'
@@ -737,32 +385,31 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '* Superhuman Physical Characteristics * Transformation and Vehicular
-        Mastery (Into a Freightliner truck) * Inorganic Physiology (Type 2) * Longevity
-        (Cybertronians can live for thousands of years) * Immortality (Type 2; Survived
-        multiple stab wounds through the chest) * Self-Sustenance (Type 1 and 3; By
-        virtue of his Cybertronian physiology, Optimus has no need for sleep or oxygen)
-        * Large Size (19 feet and 10 inches tall) * Enhanced Senses and Information
-        Analysis (Should have the same abilities just like Bumblebee) * Adaptation
-        (Cybertronians are capable of scanning nearby vehicles they can transform
-        into) * Regeneration (Mid-Low; Regenerated from minor wounds and a hole in
-        his chest and bicep) * Body Control (Should be capable of mid-transforming
-        his body like Bumblebee) * Weapon Mastery (Wields a variety of weapons, ranging
-        from his Blades, Axe and Guns) * Energy Projection (With his arm cannon) *
-        Temperature Manipulation (With his Axe and Energon Blade) * Genius Intelligence
-        * Martial Arts (Shown to be a very capable fighter on Cybertron, taking on
-        multiple Decepticons while alone. Has fought on par with Scourge. Superior
-        to Bumblebee. According to producers, his fighting style is a combination
-        of Mike Tyson and Muhammad Ali) * Acrobatics Following Resistances to: * Temperature
-        Manipulation (Should be comparable to the Scorponok drones, who can survive
-        the heat of re-entry, which would have a 3000 temperature of degrees F) **
-        Radiation Manipulation (Should be comparable to the likes of Shatter and Dropkick,
-        who can move through cold space with little issue. Resisted the explosion
-        from the Transwarp key, which has energy equivalent to a supernova) *** Ice
-        Manipulation *** Space-Time Manipulation (Survived the explosion of the Transwarp
-        Key, which can open space-time portals to reach planets across the universe)
-        * Biological Manipulation, Disease Manipulation and Poison Manipulation (By
-        virtue of his physiology)'
+      value: 'Superhuman Physical Characteristics, Transformation and Vehicular Mastery
+        (Into a Freightliner truck), Inorganic Physiology (Type 2), Longevity (Cybertronians
+        can live for thousands of years), Immortality (Type 2; Survived multiple stab
+        wounds through the chest), Self-Sustenance (Type 1 and 3; By virtue of his
+        Cybertronian physiology, Optimus has no need for sleep or oxygen), Large Size
+        (19 feet and 10 inches tall), Enhanced Senses and Information Analysis (Should
+        have the same abilities just like Bumblebee), Adaptation (Cybertronians are
+        capable of scanning nearby vehicles they can transform into), Regeneration
+        (Mid-Low; Regenerated from minor wounds and a hole in his chest and bicep),
+        Body Control (Should be capable of mid-transforming his body like Bumblebee),
+        Weapon Mastery (Wields a variety of weapons, ranging from his Blades, Axe
+        and Guns), Energy Projection (With his arm cannon), Temperature Manipulation
+        (With his Axe and Energon Blade), Genius Intelligence, Martial Arts (Shown
+        to be a very capable fighter on Cybertron, taking on multiple Decepticons
+        while alone. Has fought on par with Scourge. Superior to Bumblebee. According
+        to producers, his fighting style is a combination of Mike Tyson and Muhammad
+        Ali), Acrobatics Following, Resistances to: * Temperature Manipulation (Should
+        be comparable to the Scorponok drones, who can survive the heat of re-entry,
+        which would have a 3000 temperature of degrees F) ** Radiation Manipulation
+        (Should be comparable to the likes of Shatter and Dropkick, who can move through
+        cold space with little issue. Resisted the explosion from the Transwarp key,
+        which has energy equivalent to a supernova) *** Ice Manipulation *** Space-Time
+        Manipulation (Survived the explosion of the Transwarp Key, which can open
+        space-time portals to reach planets across the universe) * Biological Manipulation,
+        Disease Manipulation and Poison Manipulation (By virtue of his physiology)'
       source_id: character-stats-profiles-bumblebee-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -808,18 +455,6 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'None notable. == Gallery == File:Bumblebee movie optimus prime.webp|Bumblebee
-        movie render File:New ROTB Optimus rend.webp|Rise of The Beasts movie render
-        File:Optimus prime render png 2 by jurassicworldcards dg35dsh.png|Close look
-        up render File:ROTB optimus battle.webp|Optimus'' battle axe == Notable Matchups
-        == Victories: Losses: Inconclusive: == Statistics Values == Category:Tier
-        4 Category:Tier High 4-C Category:Tier 2 Category:Tier Low 2-C Category:Incredible
-        bacon'
-      source_id: character-stats-profiles-bumblebee-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 0
@@ -834,8 +469,8 @@ repair:
       incredible bacon|570696
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-bumblebee
-    url: https://vsbattles.fandom.com/wiki/Bumblebee
+  - source_id: vsbattles-bumblebee-transformers
+    url: https://vsbattles.fandom.com/wiki/Bumblebee_Transformers
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -843,12 +478,8 @@ repair:
     - durability
     - intelligence
     - powers_and_abilities
-    - range
     - speed
-    - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: 'Bumblebee (Transformers: Prime)'
     source_type: mediawiki
     revision_id: '9341242'
@@ -891,23 +522,255 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: At most {{7-A}}
-      source_id: vsbattles-bumblebee
+    - field: attack_potency
+      value: At most Mountain level (Killed Skyquake while in midair, who could hold
+        his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
+        and Wheeljack, with one punch. Defeated Knockout. Knocked Starscream flat)
+      source_id: vsbattles-bumblebee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic movement speed with Massively Hypersonic Reaction and Combat
+        speed (Dodged cannon fire from Shockwave; a very fast driver)
+      source_id: vsbattles-bumblebee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At most Mountain level (Took hits from Shockwave and a blast from Starscream)
+      source_id: vsbattles-bumblebee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Energon Blasters
+      source_id: vsbattles-bumblebee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted (Excellent scout, capable fighter, capable trickster)
+      source_id: vsbattles-bumblebee-transformers
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Bumblebee= {{Border|Scroll=Yes|Visible=No|Content= * Superhuman Physical
-        Characteristics ** Transformation (Into a car) ** Large Size (Type 0) ** Extreme
-        Longevity ** Self-Sustenance (Type 1) * Martial Arts ** Weapon Mastery * Combination
-        (Combine with Strangarm, Sideswipe and Grimlock to form Ultra Bee) }} |-|Ultra
-        Bea={{Border|Scroll=Yes|Visible=No|Content=All previous abilities, plus: *
-        Enhanced Large Size (Type 1) }}'
-      source_id: vsbattles-bumblebee
+      value: Bumblebee=, Ultra Bea
+      source_id: vsbattles-bumblebee-transformers
       provider_id: vsbattles
       authority: high
       confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|bumblebee transformers prime|9341242
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-bumblebee-transformers
+    url: https://character-stats-and-profiles.fandom.com/wiki/Bumblebee_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: Optimus Prime (Canon, Knightverse)/Incredible bacon
+    source_type: mediawiki
+    revision_id: '570696'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 9101
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 4-C, likely Low 2-C, higher with his weapons
+      source_id: character-stats-profiles-bumblebee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Transformation and Vehicular Mastery
+        (Into a Freightliner truck), Inorganic Physiology (Type 2), Longevity (Cybertronians
+        can live for thousands of years), Immortality (Type 2; Survived multiple stab
+        wounds through the chest), Self-Sustenance (Type 1 and 3; By virtue of his
+        Cybertronian physiology, Optimus has no need for sleep or oxygen), Large Size
+        (19 feet and 10 inches tall), Enhanced Senses and Information Analysis (Should
+        have the same abilities just like Bumblebee), Adaptation (Cybertronians are
+        capable of scanning nearby vehicles they can transform into), Regeneration
+        (Mid-Low; Regenerated from minor wounds and a hole in his chest and bicep),
+        Body Control (Should be capable of mid-transforming his body like Bumblebee),
+        Weapon Mastery (Wields a variety of weapons, ranging from his Blades, Axe
+        and Guns), Energy Projection (With his arm cannon), Temperature Manipulation
+        (With his Axe and Energon Blade), Genius Intelligence, Martial Arts (Shown
+        to be a very capable fighter on Cybertron, taking on multiple Decepticons
+        while alone. Has fought on par with Scourge. Superior to Bumblebee. According
+        to producers, his fighting style is a combination of Mike Tyson and Muhammad
+        Ali), Acrobatics Following, Resistances to: * Temperature Manipulation (Should
+        be comparable to the Scorponok drones, who can survive the heat of re-entry,
+        which would have a 3000 temperature of degrees F) ** Radiation Manipulation
+        (Should be comparable to the likes of Shatter and Dropkick, who can move through
+        cold space with little issue. Resisted the explosion from the Transwarp key,
+        which has energy equivalent to a supernova) *** Ice Manipulation *** Space-Time
+        Manipulation (Survived the explosion of the Transwarp Key, which can open
+        space-time portals to reach planets across the universe) * Biological Manipulation,
+        Disease Manipulation and Poison Manipulation (By virtue of his physiology)'
+      source_id: character-stats-profiles-bumblebee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Large Star level, likely Universe level+ (Claimed that he will and even
+        did destroy the Transwarp Key with no difficulty, whose explosion was powerful
+        enough to push back Unicron, who feeds on planets, the Transwarp key has more
+        energy than a Supernova, which was explained by Optimus Primal, the leader
+        of the Maximals, who are knowledgable about the Transwarp key and are it's
+        users (Primal also says if the key falls into wrong hands, many other lives
+        on Earth will be taken out), a supernova has enough energy to "outshine" the
+        Milky Way, or in other words, if it exploded, the blast would be vastly large
+        that even the Milky Way seem darker than it and this is consistent due to
+        previous statements from Primal and the fact Optimus took the explosion from
+        the key and the key can also open space time portals to reach planets across
+        the universe. Capable of killing the Scorponok drones. Superior than Dropkick
+        and Shatter who were able to one-shot Cliffjumper and no-sold they're re-entry
+        explosions of this56.592451104 to 69.644841541 Kilotons of TNT, up to 557.158732328
+        kilotons of TNT due to one-shotting Cliffjumper who should do the same feat
+        yield. While inferior, capable of fighting against Scourge, and eventually
+        kills him in their rematch and rips of his spine. Harmed and greatly injured
+        Battletrap. Superior to the likes of Bumblebee. Easily defeated hordes of
+        Seekers, who can do this25.1789716667 Tons of TNT. Dropkick was afraid at
+        the mention of him travelling to Earth), higher with his weapons
+      source_id: character-stats-profiles-bumblebee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL to Massively FTL+ (Notably faster than regular Decepticons,
+        whom should all compare to Dropkick and Shatter who are this fast. Comparable
+        to Arcee, who can swiftly avoid missles)
+      source_id: character-stats-profiles-bumblebee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Large Star level, likely Universe level+ (Tanked the explosion of the
+        Transwarp Key, which even pushed back Unicron. Took multiple stabs to his
+        chest from Scourge)
+      source_id: character-stats-profiles-bumblebee-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|optimus prime canon knightverse
+      incredible bacon|570696
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-bumblebee
+    url: https://vsbattles.fandom.com/wiki/Bumblebee
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - speed
+    - standard_equipment
+    normalized_page_title: 'Bumblebee (Transformers: Prime)'
+    source_type: mediawiki
+    revision_id: '9341242'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4225
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
     - field: attack_potency
       value: At most Mountain level (Killed Skyquake while in midair, who could hold
         his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
@@ -929,18 +792,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-bumblebee
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Unknown
-      source_id: vsbattles-bumblebee
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: standard_equipment
       value: Energon Blasters
       source_id: vsbattles-bumblebee
@@ -953,16 +804,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Young and somewhat immature. ==Gallery== TFP Bee2.jpg TFP Bee4.jpg ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions|Bumblebee Transformers
-        Prime|Bumblebee (Transformers: Prime)}} Category:Characters Category:Transformers
-        Category:Aliens Category:Autobots Category:Brawlers Category:Cartoon Characters
-        Category:Energy Weapon Users Category:Good Characters Category:Gun Users Category:Heroes
-        Category:Land Vehicles Category:Large Sized Characters Category:Longevity
-        Users Category:Fusionism Users Category:Male Characters Category:Primary Protagonists
-        Category:Protagonists Category:Robots Category:Transformation Users Category:Tricksters
-        Category:Vehicles Category:Weapon Masters'
+    - field: powers_and_abilities
+      value: Bumblebee=, Ultra Bea
       source_id: vsbattles-bumblebee
       provider_id: vsbattles
       authority: high
@@ -990,7 +833,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Optimus Prime (Canon, Knightverse)/Incredible bacon
     source_type: mediawiki
     revision_id: '570696'
@@ -1041,32 +883,31 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '* Superhuman Physical Characteristics * Transformation and Vehicular
-        Mastery (Into a Freightliner truck) * Inorganic Physiology (Type 2) * Longevity
-        (Cybertronians can live for thousands of years) * Immortality (Type 2; Survived
-        multiple stab wounds through the chest) * Self-Sustenance (Type 1 and 3; By
-        virtue of his Cybertronian physiology, Optimus has no need for sleep or oxygen)
-        * Large Size (19 feet and 10 inches tall) * Enhanced Senses and Information
-        Analysis (Should have the same abilities just like Bumblebee) * Adaptation
-        (Cybertronians are capable of scanning nearby vehicles they can transform
-        into) * Regeneration (Mid-Low; Regenerated from minor wounds and a hole in
-        his chest and bicep) * Body Control (Should be capable of mid-transforming
-        his body like Bumblebee) * Weapon Mastery (Wields a variety of weapons, ranging
-        from his Blades, Axe and Guns) * Energy Projection (With his arm cannon) *
-        Temperature Manipulation (With his Axe and Energon Blade) * Genius Intelligence
-        * Martial Arts (Shown to be a very capable fighter on Cybertron, taking on
-        multiple Decepticons while alone. Has fought on par with Scourge. Superior
-        to Bumblebee. According to producers, his fighting style is a combination
-        of Mike Tyson and Muhammad Ali) * Acrobatics Following Resistances to: * Temperature
-        Manipulation (Should be comparable to the Scorponok drones, who can survive
-        the heat of re-entry, which would have a 3000 temperature of degrees F) **
-        Radiation Manipulation (Should be comparable to the likes of Shatter and Dropkick,
-        who can move through cold space with little issue. Resisted the explosion
-        from the Transwarp key, which has energy equivalent to a supernova) *** Ice
-        Manipulation *** Space-Time Manipulation (Survived the explosion of the Transwarp
-        Key, which can open space-time portals to reach planets across the universe)
-        * Biological Manipulation, Disease Manipulation and Poison Manipulation (By
-        virtue of his physiology)'
+      value: 'Superhuman Physical Characteristics, Transformation and Vehicular Mastery
+        (Into a Freightliner truck), Inorganic Physiology (Type 2), Longevity (Cybertronians
+        can live for thousands of years), Immortality (Type 2; Survived multiple stab
+        wounds through the chest), Self-Sustenance (Type 1 and 3; By virtue of his
+        Cybertronian physiology, Optimus has no need for sleep or oxygen), Large Size
+        (19 feet and 10 inches tall), Enhanced Senses and Information Analysis (Should
+        have the same abilities just like Bumblebee), Adaptation (Cybertronians are
+        capable of scanning nearby vehicles they can transform into), Regeneration
+        (Mid-Low; Regenerated from minor wounds and a hole in his chest and bicep),
+        Body Control (Should be capable of mid-transforming his body like Bumblebee),
+        Weapon Mastery (Wields a variety of weapons, ranging from his Blades, Axe
+        and Guns), Energy Projection (With his arm cannon), Temperature Manipulation
+        (With his Axe and Energon Blade), Genius Intelligence, Martial Arts (Shown
+        to be a very capable fighter on Cybertron, taking on multiple Decepticons
+        while alone. Has fought on par with Scourge. Superior to Bumblebee. According
+        to producers, his fighting style is a combination of Mike Tyson and Muhammad
+        Ali), Acrobatics Following, Resistances to: * Temperature Manipulation (Should
+        be comparable to the Scorponok drones, who can survive the heat of re-entry,
+        which would have a 3000 temperature of degrees F) ** Radiation Manipulation
+        (Should be comparable to the likes of Shatter and Dropkick, who can move through
+        cold space with little issue. Resisted the explosion from the Transwarp key,
+        which has energy equivalent to a supernova) *** Ice Manipulation *** Space-Time
+        Manipulation (Survived the explosion of the Transwarp Key, which can open
+        space-time portals to reach planets across the universe) * Biological Manipulation,
+        Disease Manipulation and Poison Manipulation (By virtue of his physiology)'
       source_id: character-stats-profiles-bumblebee
       provider_id: character_stats_profiles
       authority: high
@@ -1108,18 +949,6 @@ repair:
       value: Large Star level, likely Universe level+ (Tanked the explosion of the
         Transwarp Key, which even pushed back Unicron. Took multiple stabs to his
         chest from Scourge)
-      source_id: character-stats-profiles-bumblebee
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable. == Gallery == File:Bumblebee movie optimus prime.webp|Bumblebee
-        movie render File:New ROTB Optimus rend.webp|Rise of The Beasts movie render
-        File:Optimus prime render png 2 by jurassicworldcards dg35dsh.png|Close look
-        up render File:ROTB optimus battle.webp|Optimus'' battle axe == Notable Matchups
-        == Victories: Losses: Inconclusive: == Statistics Values == Category:Tier
-        4 Category:Tier High 4-C Category:Tier 2 Category:Tier Low 2-C Category:Incredible
-        bacon'
       source_id: character-stats-profiles-bumblebee
       provider_id: character_stats_profiles
       authority: high
@@ -1151,8 +980,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Bumblebee (IDW Movie Comics)
     source_type: mediawiki
     revision_id: '9489862'
@@ -1196,12 +1023,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{Low 7-B}}'
-      source_id: vsbattles-bumblebee-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Transformation (Into a Chevy Camaro),
         Weapon Mastery, Skilled hand-to-hand fighter, Regeneration (Mid-Low, Cybertronians
@@ -1258,17 +1079,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Immature and headstrong ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{Discussions|Bumblebee IDW Movie Comics|Bumblebee (IDW Movie Comics)}} Category:Transformation
-        Users Category:Transformers Category:Weapon Masters Category:Robots Category:Martial
-        Artists Category:Comic Book Characters Category:Self-Sustenance Users Category:Immortals
-        Category:Regeneration Users Category:Energy Users Category:Longevity Users
-        Category:Large Sized Characters Category:Characters'
-      source_id: vsbattles-bumblebee-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -1292,7 +1102,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Black Adam (Canon, Post-Crisis)/Piccolo823
     source_type: mediawiki
     revision_id: '191184'
@@ -1355,7 +1164,7 @@ repair:
         Martial Arts, Enhanced Senses (Compares his sense of sight to that of an eagle's.
         He is stated to have heightened hearing. Has super hearing and smelling),
         Social Influencing (People regard him as the most dangerous man in the planet.
-        Stated to be an alpha male personified). Resistance to Paralysis Inducement,
+        Stated to be an alpha male personified)., Resistance to Paralysis Inducement,
         Electricity Manipulation (Laughs off Doctor Fate's lightning. Took electricity
         meant to make him immobile by short circuiting him), Energy Projection (Takes
         Bumblebee's energy blasts), Fire Manipulation (Survives fire from Firestorm),
@@ -1411,13 +1220,6 @@ repair:
       confidence: 0.75
     - field: durability
       value: At least Universe level+
-      source_id: character-stats-profiles-bumblebee-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Will turn back into his human form if he is forced to say "Shazam" Category:Tier
-        2 Category:Piccolo823
       source_id: character-stats-profiles-bumblebee-comics
       provider_id: character_stats_profiles
       authority: high

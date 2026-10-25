@@ -4,25 +4,14 @@ name: Rodimus Prime
 franchise: Transformers
 category: comics
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-10-10T07:28:44Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Rodimus Prime
   franchise: Transformers
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-rodimus-prime-transformers
   provider_id: vsbattles
   source_type: mediawiki
-  title: Rodimus Prime Transformers
-  url: https://vsbattles.fandom.com/wiki/Rodimus_Prime_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-rodimus-prime-transformers
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Rodimus Prime Transformers
-  url: https://character-stats-and-profiles.fandom.com/wiki/Rodimus_Prime_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-rodimus-prime-transformers
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Rodimus Prime (Transformers)
   url: https://vsbattles.fandom.com/wiki/Rodimus_Prime_%28Transformers%29
   authority: high
@@ -164,13 +117,27 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'At least Brown Dwarf level (Has consistently fought against Galvatron,
+      and easily defeated him on their first encounterThe Transformers: The Movie.
+      Fought against Optimus Prime though the latter was weakened and holding backThe
+      Transformers: Generation One Episode 73, and fought him again while infected
+      by the hate plagueAt least 323.4 Ronnatons of TNT), far higher with the Matrix
+      of Leadership (The Matrix was capable of destroying Unicron, with Unicron fearing
+      the Artifact''s power, and sought to have his heralds destroy itThe Transformers:
+      The Movie)'
+    source_ids:
+    - vsbattles-rodimus-prime-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Subsonic movement speed with Massively FTL+ flight, reaction and combat
+      speed (Should be superior than before, and can consistently keep pace with Galvatron.
+      Threw Galvatron to another Solar SystemThe Transformers: The Movie988 Billion
+      c). Likely High Hypersonic+ flight speed (Same as before)'
+    source_ids:
+    - vsbattles-rodimus-prime-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,17 +147,25 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Brown Dwarf level (Stronger than before)
+    source_ids:
+    - vsbattles-rodimus-prime-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
     text: null
     source_ids: []
     confidence: 0.0
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Several Meters via sheer size. Hundreds of KilometersThe Transformers:
+      Generation One Episode 13 with the weaponry (Should have comparable range to
+      Optimus Prime''s Ion Blaster. Galactic with the Matrix of Leadership (Erased
+      the Hate Plague which infected the entire galaxyThe Transformers: Generation
+      One Episode 95)'
+    source_ids:
+    - vsbattles-rodimus-prime-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
     text: null
     source_ids: []
@@ -200,7 +175,40 @@ abilities: []
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-rodimus-bears-heavy-amounts-of-self-doubt-and-insecurity-over-his-pos
+  name: Rodimus bears heavy amounts of self-doubt and insecurity over his position
+    as leader
+  description: Rodimus bears heavy amounts of self-doubt and insecurity over his position
+    as leader
+  source_ids: &id002
+  - vsbattles-rodimus-prime-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-rodimus-prime-will-revert-back-to-hot-rod
+  name: Rodimus Prime will revert back to Hot Rod.
+  description: Rodimus Prime will revert back to Hot Rod.
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -212,13 +220,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
-profile_hash: 17fe4ebec8a2855c9c611a07ffb50213d3d950263a29819ef6a20c76f2f1316c
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-rodimus-prime-transformers
+  secondary_disagreement_policy: warning_only
+profile_hash: 4a5574525f21a2a4d20464b6f45c9481009dae1eb9fc01ed082d222620117078
 repair:
-  attempted_at: '2026-10-10T09:43:49Z'
+  attempted_at: '2026-10-23T02:03:25Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -227,14 +249,13 @@ repair:
   - abilities
   source_attempts:
   - source_id: vsbattles-rodimus-prime-transformers
-    url: https://vsbattles.fandom.com/wiki/Rodimus_Prime_Transformers
+    url: https://vsbattles.fandom.com/wiki/Rodimus_Prime_%28Transformers%29
     ok: true
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
@@ -243,10 +264,10 @@ repair:
     - weaknesses
     normalized_page_title: Rodimus Prime (G1 Cartoon)
     source_type: mediawiki
-    revision_id: '9679351'
+    revision_id: '9702048'
     fetch_status: fetched
     http_status: 200
-    content_length: 22278
+    content_length: 22047
     content_kind: api_json
     headings_detected:
     - Summary
@@ -270,7 +291,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -285,15 +306,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{High 5-A}} | At least {{High 5-A}}, far higher with the Matrix of
-        Leadership'
-      source_id: vsbattles-rodimus-prime-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Hot Rod= {{#tag:tabber|
-        {{!}}-{{!}}'
+      value: At least , far higher with the Matrix of Leadership
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
@@ -332,11 +345,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: 'Brown Dwarf level (Can survive the recoil of his own attacks and attacks
-        from Megatron. Superior to the likes of Soundwave and Starscream, who survived
-        shots from the Orbit disruptor cannon, which can knock the Moon out of orbitThe
-        Transformers: Generation One Episode 49) | At least Brown Dwarf level (Stronger
-        than before)'
+      value: Brown Dwarf level (Can tank the recoil of his own attacks) | At least
+        Brown Dwarf level (Stronger than before)
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
@@ -362,12 +372,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: 'Hot Rod= *Dual Photon Blasters: If not utilizing his forearm blasters,
-        Hot Rod can switch to using his dual Photon Blasters in combat for additional
-        fire power. *Sawblade: Hot Rod can deploy his hand into a sawblade to help
-        get himself out of trouble and to cut through enemies. *Welding Torch: Hot
-        Rod''s own healing tool, used to repair any smaller wounds or to weld severed
-        limbs back together. Optional'
+      value: 'Dual Photon Blasters: If not utilizing his forearm blasters, Hot Rod
+        can switch to using his dual Photon Blasters in combat for additional fire
+        power., Sawblade: Hot Rod can deploy his hand into a sawblade to help get
+        himself out of trouble and to cut through enemies., Welding Torch: Hot Rod''s
+        own healing tool, used to repair any smaller wounds or to weld severed limbs
+        back together. Optional'
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
@@ -386,7 +396,7 @@ repair:
         Galvatron and his Decepticon forces, and is capable of holding his own against
         much more experienced combatants like Optimus Prime or Galvatron. Rodimus
         is a capable diplomat and has established peace relations with the rest of
-        the galaxy and Earth]The Transformers: Generation One Episode 66The Transformers:
+        the galaxy and EarthThe Transformers: Generation One Episode 66The Transformers:
         Generation One Episode 77The Transformers: Generation One Episode 83) Standard
         tactics: Hot Rod is often impulsive and quick to action, usually choosing
         to start battles with ranged weaponry. Hot Rod will evade enemy tactics through
@@ -395,37 +405,23 @@ repair:
         enemies, or heal himself if need be. Despite his impulsivity, Hot Rod has
         been shown to be fairly creative in getting out of tight situations. | Same
         as before, but Rodimus is much more tempered and level headed. If all options
-        faisl, Rodimus can unleash the Matrix of Leadership as a final trump card
-        or if truly necesarry.'
+        fail, Rodimus can unleash the Matrix of Leadership as a final trump card or
+        if truly necesarry.'
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Brash, impulsive and arrogant. Hot Rod has a habit of jumping into situations
-        without much thought, and can often get him in trouble. | Rodimus bears heavy
-        amounts of self-doubt and insecurity over his position as leader, feeling
-        he don''t ever live up to Optimus Prime. Without the Matrix of Leadership,
-        Rodimus Prime will revert back to Hot Rod. Notable Attacks/Techniques: 375px-Matrix.jpg|The
-        Matrix of Leadership *Sawblade: Hot Rod can deploy his hand into a sawblade
-        to help get himself out of trouble and to cut through enemies. *Welding Torch:
-        Hot Rod''s own healing tool, used to repair any smaller wounds or to weld
-        severed limbs back together. *Matrix of Leadership: The Matrix is a powerful
-        artifact, capable of storing the memories of all of its past users, as well
-        as eradicating forces of evil. Such examples of this is it healing the Hate
-        Plague, and killing Unicron. ==Notable Matchups== Victories: Losses: Inconclusive:
-        ==References== {{Scroll box|{{Reflist|2}}}} ==Notes/Explanations== {{Scroll
-        box}} {{Discussions}} Category:Characters Category:Transformers (G1 Cartoon)
-        Category:Heroes Category:Robots Category:Immortals Category:Longevity Users
-        Category:Transformation Users Category:Existence Erasure Users Category:Astral
-        Projection Users Category:Weapon Users Category:Weapon Masters Category:Healers
-        Category:Martial Artists Category:Acrobats Category:Social Influencers Category:Regeneration
-        Users Category:Large Sized Characters Category:Space Users Category:Self-Sustenance
-        Users Category:Information Analysis Users Category:Enhanced Senses Users Category:Dimensional
-        Storage Users Category:Data Users Category:Memory Users Category:Energy Projection
-        Users Category:Retrocognition Users Category:Purification Users Category:Light
-        Users Category:Aura Users Category:Illusionists Category:Sound Users Category:Power
-        Bestowal Users Category:Empathic Manipulation Users'
+      value: 'impulsive and arrogant. Hot Rod has a habit of jumping into situations
+        without much thought, Rodimus bears heavy amounts of self-doubt and insecurity
+        over his position as leader, feeling he don''t ever live up to Optimus Prime.
+        Without the Matrix of Leadership, The Matrix of Leadership, Sawblade: Hot
+        Rod can deploy his hand into a sawblade to help get himself out of trouble
+        and to cut through enemies., Welding Torch: Hot Rod''s own healing tool, used
+        to repair any smaller wounds or to weld severed limbs back together., Matrix
+        of Leadership: The Matrix is a powerful artifact, capable of storing the memories
+        of all of its past users, as well as eradicating forces of evil. Such examples
+        of this is it healing the Hate Plague'
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
@@ -435,22 +431,21 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|rodimus prime g1 cartoon|9679351
+    duplicate_key: vsbattles.fandom.com|rodimus prime g1 cartoon|9702048
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-rodimus-prime-transformers
-    url: https://character-stats-and-profiles.fandom.com/wiki/Rodimus_Prime_Transformers
+    url: https://character-stats-and-profiles.fandom.com/wiki/Rodimus_Prime_%28Transformers%29
     ok: true
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
     - powers_and_abilities
-    - speed
     - tier
     normalized_page_title: Optimus Prime (Canon, Generation One)/Heisei Anguirus 5468
     source_type: mediawiki
@@ -475,7 +470,7 @@ repair:
     - striking_strength
     - tier
     extraction_failure_reason: ''
-    rank: 65
+    rank: 50
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -490,7 +485,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: at least {{4-B}}
+      value: at least
       source_id: character-stats-profiles-rodimus-prime-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -503,30 +498,18 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: speed
-      value: Notes/Explanations== {{Scroll box |content= }} Category:Heisei Anguirus
-        5468
-      source_id: character-stats-profiles-rodimus-prime-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: '* Superhuman Physical Characteristics ** Inorganic Physiology (Type
-        2; Is a living mecha) ** Self-Sustenance (Type 1 & Type 3) *** Space Survival
-        ** Large Size (Type 0; Stands 6 Meter Tall) ** Immortality (Type 1 and Type
-        2) ** Regeneration (High-Low) ** Acrobatics (Hypermobility) ** Martial Arts
-        * Transformation (Self explanatory; transforms into a Freightliner FLT-9664T
-        cab) * Weapon Mastery (With his Ion Blaster) * Energy Manipulation & Energy
-        Projection (Is capable of shooting laser beams from his eyes and Ion blaster)
-        * Explosion Manipulation (with weaponry) * Social Influencing (as the leader
-        of the Autobots and holder of the Matrix of Leadership, Optimus has significant
-        sway over other Transformers) * Flight * Dimensional Storage (can keep his
-        equipment in a small-dimensional pocket) * Body Control (can control his body
-        parts wven while separated) Resistant to: * Heat, Fire, & Magma (can resist
-        extreme temperatures, such as from magma flows) * Biological Manipulation,
-        Poison Manipulation, Disease Manipulation, & Bone Manipulation (as a Cybertronian,
-        he should be immune to these natural abilities) * Antimatter Manipulation
-        (comparable to others who survived antimatter attacks) ===Stats'
+      value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2; Is
+        a living mecha), Self-Sustenance (Type 1 & Type 3), Space Survival, Large
+        Size (Type 0; Stands 6 Meter Tall), Immortality (Type 1 and Type 2), Regeneration
+        (High-Low), Acrobatics (Hypermobility), Martial Arts, Transformation (Self
+        explanatory; transforms into a Freightliner FLT-9664T cab), Weapon Mastery
+        (With his Ion Blaster), Energy Manipulation & Energy Projection (Is capable
+        of shooting laser beams from his eyes and Ion blaster), Explosion Manipulation
+        (with weaponry), Social Influencing (as the leader of the Autobots and holder
+        of the Matrix of Leadership, Optimus has significant sway over other Transformers),
+        Flight, Dimensional Storage (can keep his equipment in a small-dimensional
+        pocket), Body Control (can control his body parts wven while separated)
       source_id: character-stats-profiles-rodimus-prime-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -535,7 +518,7 @@ repair:
     identity_score: 20
     variant_score: 0
     provider_priority: 120
-    core_field_count: 2
+    core_field_count: 1
     ability_count: 1
     exact_name_match: false
     alias_match: false
@@ -546,14 +529,13 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: vsbattles-rodimus-prime-transformers
-    url: https://vsbattles.fandom.com/wiki/Rodimus_Prime_%28Transformers%29
+    url: https://vsbattles.fandom.com/wiki/Rodimus_Prime_Transformers
     ok: true
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
@@ -562,10 +544,10 @@ repair:
     - weaknesses
     normalized_page_title: Rodimus Prime (G1 Cartoon)
     source_type: mediawiki
-    revision_id: '9679351'
+    revision_id: '9702048'
     fetch_status: fetched
     http_status: 200
-    content_length: 22278
+    content_length: 22047
     content_kind: api_json
     headings_detected:
     - Summary
@@ -589,7 +571,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -604,15 +586,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{High 5-A}} | At least {{High 5-A}}, far higher with the Matrix of
-        Leadership'
-      source_id: vsbattles-rodimus-prime-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Hot Rod= {{#tag:tabber|
-        {{!}}-{{!}}'
+      value: At least , far higher with the Matrix of Leadership
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
@@ -651,11 +625,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: 'Brown Dwarf level (Can survive the recoil of his own attacks and attacks
-        from Megatron. Superior to the likes of Soundwave and Starscream, who survived
-        shots from the Orbit disruptor cannon, which can knock the Moon out of orbitThe
-        Transformers: Generation One Episode 49) | At least Brown Dwarf level (Stronger
-        than before)'
+      value: Brown Dwarf level (Can tank the recoil of his own attacks) | At least
+        Brown Dwarf level (Stronger than before)
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
@@ -681,12 +652,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: 'Hot Rod= *Dual Photon Blasters: If not utilizing his forearm blasters,
-        Hot Rod can switch to using his dual Photon Blasters in combat for additional
-        fire power. *Sawblade: Hot Rod can deploy his hand into a sawblade to help
-        get himself out of trouble and to cut through enemies. *Welding Torch: Hot
-        Rod''s own healing tool, used to repair any smaller wounds or to weld severed
-        limbs back together. Optional'
+      value: 'Dual Photon Blasters: If not utilizing his forearm blasters, Hot Rod
+        can switch to using his dual Photon Blasters in combat for additional fire
+        power., Sawblade: Hot Rod can deploy his hand into a sawblade to help get
+        himself out of trouble and to cut through enemies., Welding Torch: Hot Rod''s
+        own healing tool, used to repair any smaller wounds or to weld severed limbs
+        back together. Optional'
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
@@ -705,7 +676,7 @@ repair:
         Galvatron and his Decepticon forces, and is capable of holding his own against
         much more experienced combatants like Optimus Prime or Galvatron. Rodimus
         is a capable diplomat and has established peace relations with the rest of
-        the galaxy and Earth]The Transformers: Generation One Episode 66The Transformers:
+        the galaxy and EarthThe Transformers: Generation One Episode 66The Transformers:
         Generation One Episode 77The Transformers: Generation One Episode 83) Standard
         tactics: Hot Rod is often impulsive and quick to action, usually choosing
         to start battles with ranged weaponry. Hot Rod will evade enemy tactics through
@@ -714,37 +685,23 @@ repair:
         enemies, or heal himself if need be. Despite his impulsivity, Hot Rod has
         been shown to be fairly creative in getting out of tight situations. | Same
         as before, but Rodimus is much more tempered and level headed. If all options
-        faisl, Rodimus can unleash the Matrix of Leadership as a final trump card
-        or if truly necesarry.'
+        fail, Rodimus can unleash the Matrix of Leadership as a final trump card or
+        if truly necesarry.'
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Brash, impulsive and arrogant. Hot Rod has a habit of jumping into situations
-        without much thought, and can often get him in trouble. | Rodimus bears heavy
-        amounts of self-doubt and insecurity over his position as leader, feeling
-        he don''t ever live up to Optimus Prime. Without the Matrix of Leadership,
-        Rodimus Prime will revert back to Hot Rod. Notable Attacks/Techniques: 375px-Matrix.jpg|The
-        Matrix of Leadership *Sawblade: Hot Rod can deploy his hand into a sawblade
-        to help get himself out of trouble and to cut through enemies. *Welding Torch:
-        Hot Rod''s own healing tool, used to repair any smaller wounds or to weld
-        severed limbs back together. *Matrix of Leadership: The Matrix is a powerful
-        artifact, capable of storing the memories of all of its past users, as well
-        as eradicating forces of evil. Such examples of this is it healing the Hate
-        Plague, and killing Unicron. ==Notable Matchups== Victories: Losses: Inconclusive:
-        ==References== {{Scroll box|{{Reflist|2}}}} ==Notes/Explanations== {{Scroll
-        box}} {{Discussions}} Category:Characters Category:Transformers (G1 Cartoon)
-        Category:Heroes Category:Robots Category:Immortals Category:Longevity Users
-        Category:Transformation Users Category:Existence Erasure Users Category:Astral
-        Projection Users Category:Weapon Users Category:Weapon Masters Category:Healers
-        Category:Martial Artists Category:Acrobats Category:Social Influencers Category:Regeneration
-        Users Category:Large Sized Characters Category:Space Users Category:Self-Sustenance
-        Users Category:Information Analysis Users Category:Enhanced Senses Users Category:Dimensional
-        Storage Users Category:Data Users Category:Memory Users Category:Energy Projection
-        Users Category:Retrocognition Users Category:Purification Users Category:Light
-        Users Category:Aura Users Category:Illusionists Category:Sound Users Category:Power
-        Bestowal Users Category:Empathic Manipulation Users'
+      value: 'impulsive and arrogant. Hot Rod has a habit of jumping into situations
+        without much thought, Rodimus bears heavy amounts of self-doubt and insecurity
+        over his position as leader, feeling he don''t ever live up to Optimus Prime.
+        Without the Matrix of Leadership, The Matrix of Leadership, Sawblade: Hot
+        Rod can deploy his hand into a sawblade to help get himself out of trouble
+        and to cut through enemies., Welding Torch: Hot Rod''s own healing tool, used
+        to repair any smaller wounds or to weld severed limbs back together., Matrix
+        of Leadership: The Matrix is a powerful artifact, capable of storing the memories
+        of all of its past users, as well as eradicating forces of evil. Such examples
+        of this is it healing the Hate Plague'
       source_id: vsbattles-rodimus-prime-transformers
       provider_id: vsbattles
       authority: high
@@ -754,22 +711,21 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|rodimus prime g1 cartoon|9679351
+    duplicate_key: vsbattles.fandom.com|rodimus prime g1 cartoon|9702048
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-rodimus-prime-transformers
-    url: https://character-stats-and-profiles.fandom.com/wiki/Rodimus_Prime_%28Transformers%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/Rodimus_Prime_Transformers
     ok: true
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
     - powers_and_abilities
-    - speed
     - tier
     normalized_page_title: Optimus Prime (Canon, Generation One)/Heisei Anguirus 5468
     source_type: mediawiki
@@ -794,7 +750,7 @@ repair:
     - striking_strength
     - tier
     extraction_failure_reason: ''
-    rank: 65
+    rank: 50
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -809,7 +765,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: at least {{4-B}}
+      value: at least
       source_id: character-stats-profiles-rodimus-prime-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -822,30 +778,18 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: speed
-      value: Notes/Explanations== {{Scroll box |content= }} Category:Heisei Anguirus
-        5468
-      source_id: character-stats-profiles-rodimus-prime-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: '* Superhuman Physical Characteristics ** Inorganic Physiology (Type
-        2; Is a living mecha) ** Self-Sustenance (Type 1 & Type 3) *** Space Survival
-        ** Large Size (Type 0; Stands 6 Meter Tall) ** Immortality (Type 1 and Type
-        2) ** Regeneration (High-Low) ** Acrobatics (Hypermobility) ** Martial Arts
-        * Transformation (Self explanatory; transforms into a Freightliner FLT-9664T
-        cab) * Weapon Mastery (With his Ion Blaster) * Energy Manipulation & Energy
-        Projection (Is capable of shooting laser beams from his eyes and Ion blaster)
-        * Explosion Manipulation (with weaponry) * Social Influencing (as the leader
-        of the Autobots and holder of the Matrix of Leadership, Optimus has significant
-        sway over other Transformers) * Flight * Dimensional Storage (can keep his
-        equipment in a small-dimensional pocket) * Body Control (can control his body
-        parts wven while separated) Resistant to: * Heat, Fire, & Magma (can resist
-        extreme temperatures, such as from magma flows) * Biological Manipulation,
-        Poison Manipulation, Disease Manipulation, & Bone Manipulation (as a Cybertronian,
-        he should be immune to these natural abilities) * Antimatter Manipulation
-        (comparable to others who survived antimatter attacks) ===Stats'
+      value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2; Is
+        a living mecha), Self-Sustenance (Type 1 & Type 3), Space Survival, Large
+        Size (Type 0; Stands 6 Meter Tall), Immortality (Type 1 and Type 2), Regeneration
+        (High-Low), Acrobatics (Hypermobility), Martial Arts, Transformation (Self
+        explanatory; transforms into a Freightliner FLT-9664T cab), Weapon Mastery
+        (With his Ion Blaster), Energy Manipulation & Energy Projection (Is capable
+        of shooting laser beams from his eyes and Ion blaster), Explosion Manipulation
+        (with weaponry), Social Influencing (as the leader of the Autobots and holder
+        of the Matrix of Leadership, Optimus has significant sway over other Transformers),
+        Flight, Dimensional Storage (can keep his equipment in a small-dimensional
+        pocket), Body Control (can control his body parts wven while separated)
       source_id: character-stats-profiles-rodimus-prime-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -854,7 +798,7 @@ repair:
     identity_score: 20
     variant_score: 0
     provider_priority: 120
-    core_field_count: 2
+    core_field_count: 1
     ability_count: 1
     exact_name_match: false
     alias_match: false
@@ -872,7 +816,6 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
@@ -881,10 +824,10 @@ repair:
     - weaknesses
     normalized_page_title: Rodimus Prime (G1 Cartoon)
     source_type: mediawiki
-    revision_id: '9679351'
+    revision_id: '9702048'
     fetch_status: fetched
     http_status: 200
-    content_length: 22278
+    content_length: 22047
     content_kind: api_json
     headings_detected:
     - Summary
@@ -908,7 +851,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -923,15 +866,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{High 5-A}} | At least {{High 5-A}}, far higher with the Matrix of
-        Leadership'
-      source_id: vsbattles-rodimus-prime
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Hot Rod= {{#tag:tabber|
-        {{!}}-{{!}}'
+      value: At least , far higher with the Matrix of Leadership
       source_id: vsbattles-rodimus-prime
       provider_id: vsbattles
       authority: high
@@ -970,11 +905,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: 'Brown Dwarf level (Can survive the recoil of his own attacks and attacks
-        from Megatron. Superior to the likes of Soundwave and Starscream, who survived
-        shots from the Orbit disruptor cannon, which can knock the Moon out of orbitThe
-        Transformers: Generation One Episode 49) | At least Brown Dwarf level (Stronger
-        than before)'
+      value: Brown Dwarf level (Can tank the recoil of his own attacks) | At least
+        Brown Dwarf level (Stronger than before)
       source_id: vsbattles-rodimus-prime
       provider_id: vsbattles
       authority: high
@@ -1000,12 +932,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: 'Hot Rod= *Dual Photon Blasters: If not utilizing his forearm blasters,
-        Hot Rod can switch to using his dual Photon Blasters in combat for additional
-        fire power. *Sawblade: Hot Rod can deploy his hand into a sawblade to help
-        get himself out of trouble and to cut through enemies. *Welding Torch: Hot
-        Rod''s own healing tool, used to repair any smaller wounds or to weld severed
-        limbs back together. Optional'
+      value: 'Dual Photon Blasters: If not utilizing his forearm blasters, Hot Rod
+        can switch to using his dual Photon Blasters in combat for additional fire
+        power., Sawblade: Hot Rod can deploy his hand into a sawblade to help get
+        himself out of trouble and to cut through enemies., Welding Torch: Hot Rod''s
+        own healing tool, used to repair any smaller wounds or to weld severed limbs
+        back together. Optional'
       source_id: vsbattles-rodimus-prime
       provider_id: vsbattles
       authority: high
@@ -1024,7 +956,7 @@ repair:
         Galvatron and his Decepticon forces, and is capable of holding his own against
         much more experienced combatants like Optimus Prime or Galvatron. Rodimus
         is a capable diplomat and has established peace relations with the rest of
-        the galaxy and Earth]The Transformers: Generation One Episode 66The Transformers:
+        the galaxy and EarthThe Transformers: Generation One Episode 66The Transformers:
         Generation One Episode 77The Transformers: Generation One Episode 83) Standard
         tactics: Hot Rod is often impulsive and quick to action, usually choosing
         to start battles with ranged weaponry. Hot Rod will evade enemy tactics through
@@ -1033,37 +965,23 @@ repair:
         enemies, or heal himself if need be. Despite his impulsivity, Hot Rod has
         been shown to be fairly creative in getting out of tight situations. | Same
         as before, but Rodimus is much more tempered and level headed. If all options
-        faisl, Rodimus can unleash the Matrix of Leadership as a final trump card
-        or if truly necesarry.'
+        fail, Rodimus can unleash the Matrix of Leadership as a final trump card or
+        if truly necesarry.'
       source_id: vsbattles-rodimus-prime
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Brash, impulsive and arrogant. Hot Rod has a habit of jumping into situations
-        without much thought, and can often get him in trouble. | Rodimus bears heavy
-        amounts of self-doubt and insecurity over his position as leader, feeling
-        he don''t ever live up to Optimus Prime. Without the Matrix of Leadership,
-        Rodimus Prime will revert back to Hot Rod. Notable Attacks/Techniques: 375px-Matrix.jpg|The
-        Matrix of Leadership *Sawblade: Hot Rod can deploy his hand into a sawblade
-        to help get himself out of trouble and to cut through enemies. *Welding Torch:
-        Hot Rod''s own healing tool, used to repair any smaller wounds or to weld
-        severed limbs back together. *Matrix of Leadership: The Matrix is a powerful
-        artifact, capable of storing the memories of all of its past users, as well
-        as eradicating forces of evil. Such examples of this is it healing the Hate
-        Plague, and killing Unicron. ==Notable Matchups== Victories: Losses: Inconclusive:
-        ==References== {{Scroll box|{{Reflist|2}}}} ==Notes/Explanations== {{Scroll
-        box}} {{Discussions}} Category:Characters Category:Transformers (G1 Cartoon)
-        Category:Heroes Category:Robots Category:Immortals Category:Longevity Users
-        Category:Transformation Users Category:Existence Erasure Users Category:Astral
-        Projection Users Category:Weapon Users Category:Weapon Masters Category:Healers
-        Category:Martial Artists Category:Acrobats Category:Social Influencers Category:Regeneration
-        Users Category:Large Sized Characters Category:Space Users Category:Self-Sustenance
-        Users Category:Information Analysis Users Category:Enhanced Senses Users Category:Dimensional
-        Storage Users Category:Data Users Category:Memory Users Category:Energy Projection
-        Users Category:Retrocognition Users Category:Purification Users Category:Light
-        Users Category:Aura Users Category:Illusionists Category:Sound Users Category:Power
-        Bestowal Users Category:Empathic Manipulation Users'
+      value: 'impulsive and arrogant. Hot Rod has a habit of jumping into situations
+        without much thought, Rodimus bears heavy amounts of self-doubt and insecurity
+        over his position as leader, feeling he don''t ever live up to Optimus Prime.
+        Without the Matrix of Leadership, The Matrix of Leadership, Sawblade: Hot
+        Rod can deploy his hand into a sawblade to help get himself out of trouble
+        and to cut through enemies., Welding Torch: Hot Rod''s own healing tool, used
+        to repair any smaller wounds or to weld severed limbs back together., Matrix
+        of Leadership: The Matrix is a powerful artifact, capable of storing the memories
+        of all of its past users, as well as eradicating forces of evil. Such examples
+        of this is it healing the Hate Plague'
       source_id: vsbattles-rodimus-prime
       provider_id: vsbattles
       authority: high
@@ -1073,12 +991,12 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|rodimus prime g1 cartoon|9679351
+    duplicate_key: vsbattles.fandom.com|rodimus prime g1 cartoon|9702048
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-rodimus-prime
@@ -1088,7 +1006,6 @@ repair:
     extracted_fields:
     - attack_potency
     - powers_and_abilities
-    - speed
     - tier
     normalized_page_title: Optimus Prime (Canon, Generation One)/Heisei Anguirus 5468
     source_type: mediawiki
@@ -1113,7 +1030,7 @@ repair:
     - striking_strength
     - tier
     extraction_failure_reason: ''
-    rank: 65
+    rank: 50
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1128,7 +1045,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: at least {{4-B}}
+      value: at least
       source_id: character-stats-profiles-rodimus-prime
       provider_id: character_stats_profiles
       authority: high
@@ -1141,30 +1058,18 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: speed
-      value: Notes/Explanations== {{Scroll box |content= }} Category:Heisei Anguirus
-        5468
-      source_id: character-stats-profiles-rodimus-prime
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: '* Superhuman Physical Characteristics ** Inorganic Physiology (Type
-        2; Is a living mecha) ** Self-Sustenance (Type 1 & Type 3) *** Space Survival
-        ** Large Size (Type 0; Stands 6 Meter Tall) ** Immortality (Type 1 and Type
-        2) ** Regeneration (High-Low) ** Acrobatics (Hypermobility) ** Martial Arts
-        * Transformation (Self explanatory; transforms into a Freightliner FLT-9664T
-        cab) * Weapon Mastery (With his Ion Blaster) * Energy Manipulation & Energy
-        Projection (Is capable of shooting laser beams from his eyes and Ion blaster)
-        * Explosion Manipulation (with weaponry) * Social Influencing (as the leader
-        of the Autobots and holder of the Matrix of Leadership, Optimus has significant
-        sway over other Transformers) * Flight * Dimensional Storage (can keep his
-        equipment in a small-dimensional pocket) * Body Control (can control his body
-        parts wven while separated) Resistant to: * Heat, Fire, & Magma (can resist
-        extreme temperatures, such as from magma flows) * Biological Manipulation,
-        Poison Manipulation, Disease Manipulation, & Bone Manipulation (as a Cybertronian,
-        he should be immune to these natural abilities) * Antimatter Manipulation
-        (comparable to others who survived antimatter attacks) ===Stats'
+      value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2; Is
+        a living mecha), Self-Sustenance (Type 1 & Type 3), Space Survival, Large
+        Size (Type 0; Stands 6 Meter Tall), Immortality (Type 1 and Type 2), Regeneration
+        (High-Low), Acrobatics (Hypermobility), Martial Arts, Transformation (Self
+        explanatory; transforms into a Freightliner FLT-9664T cab), Weapon Mastery
+        (With his Ion Blaster), Energy Manipulation & Energy Projection (Is capable
+        of shooting laser beams from his eyes and Ion blaster), Explosion Manipulation
+        (with weaponry), Social Influencing (as the leader of the Autobots and holder
+        of the Matrix of Leadership, Optimus has significant sway over other Transformers),
+        Flight, Dimensional Storage (can keep his equipment in a small-dimensional
+        pocket), Body Control (can control his body parts wven while separated)
       source_id: character-stats-profiles-rodimus-prime
       provider_id: character_stats_profiles
       authority: high
@@ -1173,7 +1078,7 @@ repair:
     identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 2
+    core_field_count: 1
     ability_count: 1
     exact_name_match: false
     alias_match: false
@@ -1191,7 +1096,6 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
@@ -1227,7 +1131,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 65
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1244,14 +1148,8 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{Low 5-B}}, likely higher, far higher with Flame Out. {{1-B}}, possibly
-        {{1-A}} with the Matrix of Leadership'
-      source_id: vsbattles-rodimus-prime-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|{{!}}-{{!}}'
+      value: ', likely higher, far higher with Flame Out. , possibly with the Matrix
+        of Leadership'
       source_id: vsbattles-rodimus-prime-comics
       provider_id: vsbattles
       authority: high
@@ -1318,20 +1216,15 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: 'Rodimus arm blasters idw.png|Arm Blasters Rodimus normal blaster idw.png|Energy
-        Blaster Rodimus knife.jpg|Knife Rodimus hacking device idw.png|Hacking Device
-        Holographic emblem IDW.png|Holographic emblem IDW 2481213-matrix of leadership
-        edited tf all hail megatron 6.jpg|Matrix of Leaership SpotlightHotRod_Magnificence_idw.jpg|The
-        Magnificence The rodpod idw.jpg|The Rodpod * Arm-mounted blasters: Triple
-        barreled blasters attached on both of his forearms. These weapons are Rodimus''
-        primary form of attack * Energy Blaster: On occasion, Rodimus will sometimes
-        use a larger energy blaster in combat. * Knife: A small knife primarily used
-        for sketching on his own table. * Hacking Device: A device that can be thrown
-        and stuck onto metal surfaces, primarily used for stealth missions to disrupt
-        enemy surveillance. * Holographs: Primarily use for undercover missions, Rodimus
-        can utilize his holographs to disguise himself as other Decepticons, or use
-        a long range version known as a Holomatter, in order to blend in with alien
-        species. Optional'
+      value: 'The Rodpod, Arm-mounted blasters: Triple barreled blasters attached
+        on both of his forearms. These weapons are Rodimus'' primary form of attack,
+        Energy Blaster: On occasion, Rodimus will sometimes use a larger energy blaster
+        in combat., Knife: A small knife primarily used for sketching on his own table.,
+        Hacking Device: A device that can be thrown and stuck onto metal surfaces,
+        primarily used for stealth missions to disrupt enemy surveillance., Holographs:
+        Primarily use for undercover missions, Rodimus can utilize his holographs
+        to disguise himself as other Decepticons, or use a long range version known
+        as a Holomatter, in order to blend in with alien species. Optional'
       source_id: vsbattles-rodimus-prime-comics
       provider_id: vsbattles
       authority: high
@@ -1366,31 +1259,15 @@ repair:
       value: 'Rodimus has a tendency to act immaturely and act brash, leading him
         to make reckless decisions. Rodimus is also somewhat of a narcissist and often
         begins to act recklessly when his massive ego is being attacked. Flame out
-        drains a majority of Rodimus'' stamina, and cannot be used much consecutively.
-        Notable Attacks/Techniques: RageRage RodimusFlameOut.jpg|Flame Out Rodimus
-        opens the Matrix with mouth.png|The Matrix of Leadership Rodimus human holoform.jpg|Human
-        Holoform Rodimus sneak attack.jpg|Hologram disguise * Flame Out: With Flame
-        Out, Rodimus can unleash a large wave of fire surrounding himself, capable
-        of incinerating enemies almost completely. * Matrix of Leadership: The Matrix
+        drains a majority of Rodimus'' stamina, Hologram disguise, Flame Out: With
+        Flame Out, Rodimus can unleash a large wave of fire surrounding himself, capable
+        of incinerating enemies almost completely., Matrix of Leadership: The Matrix
         grants Rodimus a few abilities such as self healing. Most notable is that
         with it, Rodimus used it to overload functionist Cybertron and completely
-        destroy the functionist council. * Holograms: With holographic technology,
-        Rodimus can disguise himself as other Decepticons for stealth missions. Note:
-        While Rodimus has possessed the Matrix of Leadership on two occasions, his
+        destroy the functionist council., Holograms: With holographic technology,
+        Rodimus can disguise himself as other Decepticons for stealth missions, his
         experience with it is significantly lesser than Optimus Prime''s, with Rodimus
-        having only used it once in combat. Thus, the Matrix of Leadership is listed
-        under optional equipment rather than standard equipment. ==Notable Matchups==
-        Victories: Losses: Inconclusive: ==References== {{scroll box|content={{reflist|2}}}}
-        ==Notes/Explanations== {{Scroll box |content= }} {{Discussions|Rodimus IDW|Rodimus
-        (IDW 2005)}} Category:Leaders Category:Autobots Category:Transformers Category:Large
-        Sized Characters Category:Robots Category:Existence Erasure Users Category:Concept
-        Users Category:Social Influencers Category:Martial Artists Category:Transformation
-        Users Category:Vehicle Users Category:Vehicular Masters Category:Fire Users
-        Category:Temperature Users Category:Healers Category:Acrobats Category:Stealth
-        Masters Category:Hackers Category:Nigh-Omniscient Beings Category:Inorganic
-        Beings Category:Illusionists Category:Aura Users Category:Bodily Weaponry
-        Users Category:Automatic Translation Users Category:Explosion Users Category:Aliens
-        Category:Characters'
+        having only used it once in combat. Thus'
       source_id: vsbattles-rodimus-prime-comics
       provider_id: vsbattles
       authority: high
@@ -1400,7 +1277,7 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
@@ -1413,10 +1290,7 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - attack_potency
-    - durability
     - powers_and_abilities
-    - speed
     - tier
     - weaknesses
     normalized_page_title: Optimus prime (Idw comics)/Zennnnnnnnnn13
@@ -1451,7 +1325,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 35
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1478,39 +1352,11 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: attack_potency
-      value: The character's attack power or destructive capacity (in bold; add any
-        explanations using brackets, not in bold).
-      source_id: character-stats-profiles-rodimus-prime-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Most generally used for "Combat Speed" (in bold)
-      source_id: character-stats-profiles-rodimus-prime-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: The amount of attack power the character can withstand before being overwhelmed
-        (in bold).
-      source_id: character-stats-profiles-rodimus-prime-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: weaknesses
-      value: 'Self-explanatory Feats: List all of the character''s amazing feats.
-        Strength feats, speed feats, durability feats, etc. You can judge a person''s
-        power by their feats. Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: Self-explanatory == Explanations (Optional)
-        == This section can be used to explain the reasons for the assigned power
-        level of a certain character more in-depth, as well as how the powers and
-        nature of the character fundamentally work. This is particularly useful for
-        more high-tiered characters. However, it is very important that you make sure
-        that the text has good grammar/sentence structure, and is easy to understand.
-        == Gallery == Put other pictures of the character here. == Others == Notable
-        Victories: Notable Losses: Inconclusive Matches: == Categories == == Other
-        Standard Formats == Verse Pages Weapon Profiles Category Names == Notes'
+      value: as well as how the powers and nature of the character fundamentally work.
+        This is particularly useful for more high-tiered characters. However, it is
+        very important that you make sure that the text has good grammar/sentence
+        structure
       source_id: character-stats-profiles-rodimus-prime-comics
       provider_id: character_stats_profiles
       authority: high
@@ -1519,7 +1365,7 @@ repair:
     identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 0
     ability_count: 1
     exact_name_match: false
     alias_match: false

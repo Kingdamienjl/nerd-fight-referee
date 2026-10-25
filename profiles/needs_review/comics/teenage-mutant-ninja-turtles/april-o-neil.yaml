@@ -10,19 +10,8 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-10T06:39:44Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: April O'Neil
   franchise: Teenage Mutant Ninja Turtles
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
   provider_id: vsbattles
   source_type: mediawiki
-  title: April O'Neil Teenage Mutant Ninja Turtles
-  url: https://vsbattles.fandom.com/wiki/April_O%27Neil_Teenage_Mutant_Ninja_Turtles
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: April O'Neil Teenage Mutant Ninja Turtles
-  url: https://character-stats-and-profiles.fandom.com/wiki/April_O%27Neil_Teenage_Mutant_Ninja_Turtles
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-  provider_id: vsbattles
-  source_type: mediawiki
   title: April O'Neil (Teenage Mutant Ninja Turtles)
   url: https://vsbattles.fandom.com/wiki/April_O%27Neil_%28Teenage_Mutant_Ninja_Turtles%29
   authority: high
@@ -164,13 +117,18 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level (She can fight Slash, who destroyed a large boulder)
+    source_ids:
+    - vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Subsonic (She is able to spin at speeds so fast, they leave behind afterimages.
+      In a combo, she is able to attack in blurs)
+    source_ids:
+    - vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,23 +138,135 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level (She can take hits from Slash)
+    source_ids:
+    - vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman (She is able to fight nonstop in a day's time against the Foot
+      Clan and several bosses. She is able to get back up after being frozen solid,
+      flattened, electrocuted by high voltage electricity, and burnt by magma)
+    source_ids:
+    - vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range, Extended Melee Range with Boom Mic
+    source_ids:
+    - vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average (She is able to keep up in combat with the Turtles and their
+      enemies, the former of which undergo rigorous ninja training)
+    source_ids:
+    - vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-martial-arts-she-is-proficient-in-hand-to-hand-combat-and-a
+  name: Martial Arts (She is proficient in hand-to-hand combat and able to take down
+    legions of Foot Clan soldiers)
+  description: Martial Arts (She is proficient in hand-to-hand combat and able to
+    take down legions of Foot Clan soldiers)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-mic-mastery-she-can-competently-use-a-boom-mic-as-a-weapon-
+  name: Mic Mastery (She can competently use a boom mic as a weapon against the likes
+    of the Foot Clan)
+  description: Mic Mastery (She can competently use a boom mic as a weapon against
+    the likes of the Foot Clan)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-acrobatics-she-can-perform-handspring-flips-she-can-attack-
+  name: Acrobatics (She can perform handspring flips. She can attack and juggle enemies
+    in midair)
+  description: Acrobatics (She can perform handspring flips. She can attack and juggle
+    enemies in midair)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-hammerspace-she-is-able-to-pull-out-a-boom-mic-headgear-and
+  name: Hammerspace (She is able to pull out a boom mic, headgear and a giant camera
+    out of nowhere)
+  description: Hammerspace (She is able to pull out a boom mic, headgear and a giant
+    camera out of nowhere)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-toon-force-and-elasticity-she-can-get-back-up-after-being-f
+  name: Toon Force and Elasticity (She can get back up after being flattened. Her
+    eyes hover in midair after she falls)
+  description: Toon Force and Elasticity (She can get back up after being flattened.
+    Her eyes hover in midair after she falls)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
@@ -212,297 +282,30 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+  secondary_disagreement_policy: warning_only
 profile_hash: 2d0713b3535bd3aba525a38ce208700f4902bb2dbac2f8fe61a36fd24c48f72c
 repair:
-  attempted_at: '2026-10-10T08:48:51Z'
+  attempted_at: '2026-10-25T06:11:53Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-    url: https://vsbattles.fandom.com/wiki/April_O%27Neil_Teenage_Mutant_Ninja_Turtles
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: April O'Neil (Shredder's Revenge)
-    source_type: mediawiki
-    revision_id: '8688578'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4157
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Martial Arts (She is proficient
-        in hand-to-hand combat and able to take down legions of Foot Clan soldiers)
-        *Mic Mastery (She can competently use a boom mic as a weapon against the likes
-        of the Foot Clan) *Acrobatics (She can perform handspring flips. She can attack
-        and juggle enemies in midair) *Hammerspace (She is able to pull out a boom
-        mic, headgear and a giant camera out of nowhere) *Toon Force and Elasticity
-        (She can get back up after being flattened. Her eyes hover in midair after
-        she falls)'
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level (She can fight Slash, who destroyed a large boulder)
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (She is able to spin at speeds so fast, they leave behind afterimages.
-        In a combo, she is able to attack in blurs)
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building level (She can take hits from Slash)
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (She is able to fight nonstop in a day's time against the
-        Foot Clan and several bosses. She is able to get back up after being frozen
-        solid, flattened, electrocuted by high voltage electricity, and burnt by magma)
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Extended Melee Range with Boom Mic
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Boom Mic, Camera
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average (She is able to keep up in combat with the Turtles and
-        their enemies, the former of which undergo rigorous ninja training)
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|April
-        O''Neil Shredder''s Revenge|April O''Neil (Shredder''s Revenge)}} Category:Characters
-        Category:Video Game Characters Category:Teenage Mutant Ninja Turtles Category:Adults
-        Category:Brawlers Category:Microphone Users Category:Martial Artists Category:Female
-        Characters Category:Playable Characters Category:Acrobats Category:Dimensional
-        Storage Users Category:Toon Force Users Category:Good Characters Category:Heroes
-        Category:Protagonists Category:Humans Category:Journalists Category:Camera
-        Users Category:Weapon Masters Category:Weapon Users Category:Game Characters
-        Category:Elasticity Users'
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|april o neil shredder s revenge|8688578
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
-    url: https://character-stats-and-profiles.fandom.com/wiki/April_O%27Neil_Teenage_Mutant_Ninja_Turtles
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: April O'neil (Canon, TMNT 2012)/TaiLung5000
-    source_type: mediawiki
-    revision_id: '617576'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 5587
-    content_kind: api_json
-    headings_detected: []
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 9-B physically. 8-C with her powers
-      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Prowess, Martial Arts (Ninjutsu), Acrobatics Weapon
-        Mastery, Skilled in stealth, Natural sensitivity to universal vibrations,
-        Mind Manipulation, Extrasensory Perception (Able to mentally detect the auras
-        of others, which allows her to detect emotions and see through deception),
-        Telekinesis, Telepathy, Psionic Energy Projection (Able to project telekinetic
-        blasts that can damage, repel, crush, or destroy targets), Shock Wave Generation,
-        Forcefield Creation, Levitation (Via telekinesis), Explosion Inducement, Durability
-        Negation (By disassembling opponents on a molecular level or suffocating them),
-        Limited Precognition, Astral Projection, Status Effect Inducement (Used blinding
-        powder to disorient Tiger Claw), Resistance to Biological Manipulation (Unaffected
-        by Mutagen)
-      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Building level (Can defeat hordes of Footbots and Kraang droids, which
-        can bash through and apart concrete walls with the barest of effort. Comparable
-        to Casey Jones). Higher with her powers and Aeon Crystal (Is comparable to
-        if not superior to the Turtles and possibly even Splinter. Contended with
-        Super Shredder), can bypass conventional durability in several ways
-      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Hypersonic+ with Massively Hypersonic+ reaction speed. Higher with her
-        powers and Aeon Crystal (Scaling from Leonardo, who dodged lightning. Has
-        kept pace with the turtles on several occasions.)
-      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Building level (Withstood an extended beating from Karai who is equal
-        to Leonardo. Has withstood blows from other Mutants comparable to the Turtles).
-        Higher with her powers and Aeon Crystal.
-      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Poor control over her emotions in certain situations. Has had trouble
-        accessing the full extent of the powers available to her. Category:Tier 9
-        Category:Tier 8 Category:TaiLung5000 Category:Female Characters Category:Superhuman
-        Physical Characteristics Users Category:Geniuses Category:Aliens Category:Humans
-        Category:Hybrids Category:Superheroes Category:Teenagers Category:Good Characters
-        Category:Science Fantasy Characters Category:Martial Artists Category:Telekinesis
-        Users Category:Science Fantasy Category:Vigilantes Category:Acrobats Category:Class
-        5 Category:Genius Intelligence Category:Ninjas Category:Blade Users Category:Weapon
-        Masters Category:Comic Book Characters Category:Tragic Characters Category:Enhanced
-        Senses Users Category:Energy Projection Users Category:Energy Users Category:Mind
-        Users Category:Mind Manipulators Category:Mind Manipulation Users Category:Flight
-        Users Category:Warriors Category:Forcefield Users Category:Sword Users Category:Teenage
-        Mutant Ninja Turtles Category:Mutants Category:Speed Users Category:Superhuman
-        (Speed) Category:Pilots
-      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|april o neil canon tmnt
-      2012 tailung5000|617576
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
     url: https://vsbattles.fandom.com/wiki/April_O%27Neil_%28Teenage_Mutant_Ninja_Turtles%29
     ok: true
@@ -516,8 +319,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: April O'Neil (Shredder's Revenge)
     source_type: mediawiki
     revision_id: '8688578'
@@ -559,21 +360,15 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-A}}'
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Martial Arts (She is proficient
-        in hand-to-hand combat and able to take down legions of Foot Clan soldiers)
-        *Mic Mastery (She can competently use a boom mic as a weapon against the likes
-        of the Foot Clan) *Acrobatics (She can perform handspring flips. She can attack
-        and juggle enemies in midair) *Hammerspace (She is able to pull out a boom
-        mic, headgear and a giant camera out of nowhere) *Toon Force and Elasticity
+      value: Superhuman Physical Characteristics, Martial Arts (She is proficient
+        in hand-to-hand combat and able to take down legions of Foot Clan soldiers),
+        Mic Mastery (She can competently use a boom mic as a weapon against the likes
+        of the Foot Clan), Acrobatics (She can perform handspring flips. She can attack
+        and juggle enemies in midair), Hammerspace (She is able to pull out a boom
+        mic, headgear and a giant camera out of nowhere), Toon Force and Elasticity
         (She can get back up after being flattened. Her eyes hover in midair after
-        she falls)'
+        she falls)
       source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
       provider_id: vsbattles
       authority: high
@@ -620,20 +415,6 @@ repair:
     - field: intelligence
       value: Above Average (She is able to keep up in combat with the Turtles and
         their enemies, the former of which undergo rigorous ninja training)
-      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|April
-        O''Neil Shredder''s Revenge|April O''Neil (Shredder''s Revenge)}} Category:Characters
-        Category:Video Game Characters Category:Teenage Mutant Ninja Turtles Category:Adults
-        Category:Brawlers Category:Microphone Users Category:Martial Artists Category:Female
-        Characters Category:Playable Characters Category:Acrobats Category:Dimensional
-        Storage Users Category:Toon Force Users Category:Good Characters Category:Heroes
-        Category:Protagonists Category:Humans Category:Journalists Category:Camera
-        Users Category:Weapon Masters Category:Weapon Users Category:Game Characters
-        Category:Elasticity Users'
       source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
       provider_id: vsbattles
       authority: high
@@ -661,7 +442,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: April O'neil (Canon, TMNT 2012)/TaiLung5000
     source_type: mediawiki
     revision_id: '617576'
@@ -747,21 +527,237 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: Poor control over her emotions in certain situations. Has had trouble
-        accessing the full extent of the powers available to her. Category:Tier 9
-        Category:Tier 8 Category:TaiLung5000 Category:Female Characters Category:Superhuman
-        Physical Characteristics Users Category:Geniuses Category:Aliens Category:Humans
-        Category:Hybrids Category:Superheroes Category:Teenagers Category:Good Characters
-        Category:Science Fantasy Characters Category:Martial Artists Category:Telekinesis
-        Users Category:Science Fantasy Category:Vigilantes Category:Acrobats Category:Class
-        5 Category:Genius Intelligence Category:Ninjas Category:Blade Users Category:Weapon
-        Masters Category:Comic Book Characters Category:Tragic Characters Category:Enhanced
-        Senses Users Category:Energy Projection Users Category:Energy Users Category:Mind
-        Users Category:Mind Manipulators Category:Mind Manipulation Users Category:Flight
-        Users Category:Warriors Category:Forcefield Users Category:Sword Users Category:Teenage
-        Mutant Ninja Turtles Category:Mutants Category:Speed Users Category:Superhuman
-        (Speed) Category:Pilots
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|april o neil canon tmnt
+      2012 tailung5000|617576
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+    url: https://vsbattles.fandom.com/wiki/April_O%27Neil_Teenage_Mutant_Ninja_Turtles
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    normalized_page_title: April O'Neil (Shredder's Revenge)
+    source_type: mediawiki
+    revision_id: '8688578'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4157
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Martial Arts (She is proficient
+        in hand-to-hand combat and able to take down legions of Foot Clan soldiers),
+        Mic Mastery (She can competently use a boom mic as a weapon against the likes
+        of the Foot Clan), Acrobatics (She can perform handspring flips. She can attack
+        and juggle enemies in midair), Hammerspace (She is able to pull out a boom
+        mic, headgear and a giant camera out of nowhere), Toon Force and Elasticity
+        (She can get back up after being flattened. Her eyes hover in midair after
+        she falls)
+      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level (She can fight Slash, who destroyed a large boulder)
+      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic (She is able to spin at speeds so fast, they leave behind afterimages.
+        In a combo, she is able to attack in blurs)
+      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level (She can take hits from Slash)
+      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (She is able to fight nonstop in a day's time against the
+        Foot Clan and several bosses. She is able to get back up after being frozen
+        solid, flattened, electrocuted by high voltage electricity, and burnt by magma)
+      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, Extended Melee Range with Boom Mic
+      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Boom Mic, Camera
+      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average (She is able to keep up in combat with the Turtles and
+        their enemies, the former of which undergo rigorous ninja training)
+      source_id: vsbattles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|april o neil shredder s revenge|8688578
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
+    url: https://character-stats-and-profiles.fandom.com/wiki/April_O%27Neil_Teenage_Mutant_Ninja_Turtles
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: April O'neil (Canon, TMNT 2012)/TaiLung5000
+    source_type: mediawiki
+    revision_id: '617576'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 5587
+    content_kind: api_json
+    headings_detected: []
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-B physically. 8-C with her powers
+      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Prowess, Martial Arts (Ninjutsu), Acrobatics Weapon
+        Mastery, Skilled in stealth, Natural sensitivity to universal vibrations,
+        Mind Manipulation, Extrasensory Perception (Able to mentally detect the auras
+        of others, which allows her to detect emotions and see through deception),
+        Telekinesis, Telepathy, Psionic Energy Projection (Able to project telekinetic
+        blasts that can damage, repel, crush, or destroy targets), Shock Wave Generation,
+        Forcefield Creation, Levitation (Via telekinesis), Explosion Inducement, Durability
+        Negation (By disassembling opponents on a molecular level or suffocating them),
+        Limited Precognition, Astral Projection, Status Effect Inducement (Used blinding
+        powder to disorient Tiger Claw), Resistance to Biological Manipulation (Unaffected
+        by Mutagen)
+      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Building level (Can defeat hordes of Footbots and Kraang droids, which
+        can bash through and apart concrete walls with the barest of effort. Comparable
+        to Casey Jones). Higher with her powers and Aeon Crystal (Is comparable to
+        if not superior to the Turtles and possibly even Splinter. Contended with
+        Super Shredder), can bypass conventional durability in several ways
+      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Hypersonic+ with Massively Hypersonic+ reaction speed. Higher with her
+        powers and Aeon Crystal (Scaling from Leonardo, who dodged lightning. Has
+        kept pace with the turtles on several occasions.)
+      source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Building level (Withstood an extended beating from Karai who is equal
+        to Leonardo. Has withstood blows from other Mutants comparable to the Turtles).
+        Higher with her powers and Aeon Crystal.
       source_id: character-stats-profiles-april-o-neil-teenage-mutant-ninja-turtles
       provider_id: character_stats_profiles
       authority: high
@@ -836,7 +832,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically. At least {{9-A}} with her powers'
+      value: physically. At least with her powers
       source_id: vsbattles-april-o-neil
       provider_id: vsbattles
       authority: high
@@ -908,20 +904,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Poor control over her emotions in certain situations. Has had trouble
-        accessing the full extent of the powers available to her. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions|April O27Neil 2012|April O''Neil
-        (2012)}} Category:Characters Category:Teenage Mutant Ninja Turtles Category:Astral
-        Projection Users Category:Brawlers Category:Cartoon Characters Category:Durability
-        Negation Users Category:Energy Users Category:Enhanced Senses Users Category:Explosion
-        Users Category:Extrasensory Perception Users Category:Fan Users Category:Female
-        Characters Category:Flight Users Category:Forcefield Users Category:Good Characters
-        Category:Heroes Category:Humans Category:Hybrids Category:Martial Artists
-        Category:Matter Users Category:Mind Users Category:Mutants Category:Ninjas
-        Category:Precognition Users Category:Protagonists Category:Psychics Category:Shockwave
-        Users Category:Status Effect Users Category:Stealth Masters Category:Sword
-        Users Category:Teenagers Category:Telekinesis Users Category:Telepaths Category:Vibration
-        Users Category:Weapon Masters'
+      value: Poor control over her emotions in certain situations. Has had trouble
+        accessing the full extent of the powers available to her.
       source_id: vsbattles-april-o-neil
       provider_id: vsbattles
       authority: high
@@ -949,7 +933,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: April O'neil (Canon, TMNT 2012)/TaiLung5000
     source_type: mediawiki
     revision_id: '617576'
@@ -1031,25 +1014,6 @@ repair:
       value: Building level (Withstood an extended beating from Karai who is equal
         to Leonardo. Has withstood blows from other Mutants comparable to the Turtles).
         Higher with her powers and Aeon Crystal.
-      source_id: character-stats-profiles-april-o-neil
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Poor control over her emotions in certain situations. Has had trouble
-        accessing the full extent of the powers available to her. Category:Tier 9
-        Category:Tier 8 Category:TaiLung5000 Category:Female Characters Category:Superhuman
-        Physical Characteristics Users Category:Geniuses Category:Aliens Category:Humans
-        Category:Hybrids Category:Superheroes Category:Teenagers Category:Good Characters
-        Category:Science Fantasy Characters Category:Martial Artists Category:Telekinesis
-        Users Category:Science Fantasy Category:Vigilantes Category:Acrobats Category:Class
-        5 Category:Genius Intelligence Category:Ninjas Category:Blade Users Category:Weapon
-        Masters Category:Comic Book Characters Category:Tragic Characters Category:Enhanced
-        Senses Users Category:Energy Projection Users Category:Energy Users Category:Mind
-        Users Category:Mind Manipulators Category:Mind Manipulation Users Category:Flight
-        Users Category:Warriors Category:Forcefield Users Category:Sword Users Category:Teenage
-        Mutant Ninja Turtles Category:Mutants Category:Speed Users Category:Superhuman
-        (Speed) Category:Pilots
       source_id: character-stats-profiles-april-o-neil
       provider_id: character_stats_profiles
       authority: high
@@ -1126,7 +1090,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically. At least {{9-A}} with her powers'
+      value: physically. At least with her powers
       source_id: vsbattles-april-o-neil-comics
       provider_id: vsbattles
       authority: high
@@ -1198,20 +1162,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Poor control over her emotions in certain situations. Has had trouble
-        accessing the full extent of the powers available to her. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions|April O27Neil 2012|April O''Neil
-        (2012)}} Category:Characters Category:Teenage Mutant Ninja Turtles Category:Astral
-        Projection Users Category:Brawlers Category:Cartoon Characters Category:Durability
-        Negation Users Category:Energy Users Category:Enhanced Senses Users Category:Explosion
-        Users Category:Extrasensory Perception Users Category:Fan Users Category:Female
-        Characters Category:Flight Users Category:Forcefield Users Category:Good Characters
-        Category:Heroes Category:Humans Category:Hybrids Category:Martial Artists
-        Category:Matter Users Category:Mind Users Category:Mutants Category:Ninjas
-        Category:Precognition Users Category:Protagonists Category:Psychics Category:Shockwave
-        Users Category:Status Effect Users Category:Stealth Masters Category:Sword
-        Users Category:Teenagers Category:Telekinesis Users Category:Telepaths Category:Vibration
-        Users Category:Weapon Masters'
+      value: Poor control over her emotions in certain situations. Has had trouble
+        accessing the full extent of the powers available to her.
       source_id: vsbattles-april-o-neil-comics
       provider_id: vsbattles
       authority: high
@@ -1239,7 +1191,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: April O'neil (Canon, TMNT 2012)/TaiLung5000
     source_type: mediawiki
     revision_id: '617576'
@@ -1319,25 +1270,6 @@ repair:
       value: Building level (Withstood an extended beating from Karai who is equal
         to Leonardo. Has withstood blows from other Mutants comparable to the Turtles).
         Higher with her powers and Aeon Crystal.
-      source_id: character-stats-profiles-april-o-neil-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Poor control over her emotions in certain situations. Has had trouble
-        accessing the full extent of the powers available to her. Category:Tier 9
-        Category:Tier 8 Category:TaiLung5000 Category:Female Characters Category:Superhuman
-        Physical Characteristics Users Category:Geniuses Category:Aliens Category:Humans
-        Category:Hybrids Category:Superheroes Category:Teenagers Category:Good Characters
-        Category:Science Fantasy Characters Category:Martial Artists Category:Telekinesis
-        Users Category:Science Fantasy Category:Vigilantes Category:Acrobats Category:Class
-        5 Category:Genius Intelligence Category:Ninjas Category:Blade Users Category:Weapon
-        Masters Category:Comic Book Characters Category:Tragic Characters Category:Enhanced
-        Senses Users Category:Energy Projection Users Category:Energy Users Category:Mind
-        Users Category:Mind Manipulators Category:Mind Manipulation Users Category:Flight
-        Users Category:Warriors Category:Forcefield Users Category:Sword Users Category:Teenage
-        Mutant Ninja Turtles Category:Mutants Category:Speed Users Category:Superhuman
-        (Speed) Category:Pilots
       source_id: character-stats-profiles-april-o-neil-comics
       provider_id: character_stats_profiles
       authority: high

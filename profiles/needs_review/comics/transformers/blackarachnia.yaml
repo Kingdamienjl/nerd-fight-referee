@@ -10,19 +10,8 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-10T07:11:36Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Blackarachnia
   franchise: Transformers
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-blackarachnia-transformers
   provider_id: vsbattles
   source_type: mediawiki
-  title: Blackarachnia Transformers
-  url: https://vsbattles.fandom.com/wiki/Blackarachnia_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-blackarachnia-transformers
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Blackarachnia Transformers
-  url: https://character-stats-and-profiles.fandom.com/wiki/Blackarachnia_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-blackarachnia-transformers
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Blackarachnia (Transformers)
   url: https://vsbattles.fandom.com/wiki/Blackarachnia_%28Transformers%29
   authority: high
@@ -164,13 +117,19 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At most City level+, possibly far higher (Easily defeated Bumblebee, Prowl,
+      Bulkhead and has contended against Optimus several times), Her venom bypasses
+      durability
+    source_ids:
+    - vsbattles-blackarachnia-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Hypersonic (Blizted Bumblebee and Prowl)
+    source_ids:
+    - vsbattles-blackarachnia-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,27 +139,314 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At most City level+, possibly far higher (As Elita-1 she survived an explosion
+      that destroyed a gigantic cavern that put Optimus and Sentinel Prime in danger,
+      has taken hits from Optimus several times)
+    source_ids:
+    - vsbattles-blackarachnia-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman
+    source_ids:
+    - vsbattles-blackarachnia-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Tens of Meters
+    source_ids:
+    - vsbattles-blackarachnia-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average (Very manipulative and strategic in combat. Dabbled in scientific
+      equipment in an attempt to reverse her mutation, and was responsible for Waspinator's
+      creation.)
+    source_ids:
+    - vsbattles-blackarachnia-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-blackarachnia-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-inorganic-physiology-type-2
+  name: Inorganic Physiology (Type 2)
+  description: Inorganic Physiology (Type 2)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-biological-manipulation-can-shoot-some-kind-of-spider-silk-
+  name: Biological Manipulation (Can shoot some kind of spider-silk like substance)
+  description: Biological Manipulation (Can shoot some kind of spider-silk like substance)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transformation-into-a-spider
+  name: Transformation (Into a spider)
+  description: Transformation (Into a spider)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-poison-manipulation-can-paralyze-or-kill-her-foes
+  name: Poison Manipulation (Can paralyze or kill her foes)
+  description: Poison Manipulation (Can paralyze or kill her foes)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-power-mimicry-of-machines
+  name: Power Mimicry (Of Machines)
+  description: Power Mimicry (Of Machines)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_dependency
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-stealth-mastery
+  name: Stealth Mastery
+  description: Stealth Mastery
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-self-sustenance-types-1-3
+  name: Self-Sustenance (Types 1 & 3)
+  description: Self-Sustenance (Types 1 & 3)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transmutation
+  name: Transmutation
+  description: Transmutation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-energy-projection
+  name: Energy Projection
+  description: Energy Projection
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-electricity-manipulation-can-stun-opponents-with-electrical
+  name: Electricity Manipulation (Can stun opponents with electrical attacks)
+  description: Electricity Manipulation (Can stun opponents with electrical attacks)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery
+  name: Weapon Mastery
+  description: Weapon Mastery
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-longevity
+  name: Longevity
+  description: Longevity
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-expert-hand-to-hand-combatant-trained-at-the-elite-guard-an
+  name: Expert Hand-to-Hand Combatant (Trained at the elite guard, and should be an
+    expert fighter)
+  description: Expert Hand-to-Hand Combatant (Trained at the elite guard, and should
+    be an expert fighter)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-large-size-type-0
+  name: Large Size (Type 0)
+  description: Large Size (Type 0)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-enhanced-senses
+  name: Enhanced Senses
+  description: Enhanced Senses
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-social-influencing-and-surface-scaling
+  name: Social Influencing and Surface Scaling
+  description: Social Influencing and Surface Scaling
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-overconfident-from-time-to-time
+  name: Overconfident from time to time
+  description: Overconfident from time to time
+  source_ids:
+  - vsbattles-blackarachnia-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -212,271 +458,30 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
-profile_hash: 17a4c647ebb7b1c3eb2e3f9ec372e2aa69446735cea4c9e638a2e64f2ed2675f
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-blackarachnia-transformers
+  secondary_disagreement_policy: warning_only
+profile_hash: e8344d528bb97a9e213ba4f0a21bc8d855dd3a72f3ab8f3d75ccc17ba925da14
 repair:
-  attempted_at: '2026-10-10T09:19:01Z'
+  attempted_at: '2026-10-25T06:03:57Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-blackarachnia-transformers
-    url: https://vsbattles.fandom.com/wiki/Blackarachnia_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Blackarachnia (Transformers Animated)
-    source_type: mediawiki
-    revision_id: '9356760'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3502
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At most {{7-B}}, possibly far higher
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2), Biological
-        Manipulation (Can shoot some kind of spider-silk like substance), Transformation
-        (Into a spider), Poison Manipulation (Can paralyze or kill her foes), Power
-        Mimicry (Of Machines), Stealth Mastery, Self-Sustenance (Types 1 & 3), Transmutation,
-        Energy Projection, Electricity Manipulation (Can stun opponents with electrical
-        attacks), Weapon Mastery, Longevity, Expert Hand-to-Hand Combatant (Trained
-        at the elite guard, and should be an expert fighter), Large Size (Type 0),
-        Enhanced Senses, Social Influencing and Surface Scaling
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At most City level+, possibly far higher (Easily defeated Bumblebee,
-        Prowl, Bulkhead and has contended against Optimus several times), Her venom
-        bypasses durability
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Hypersonic (Blizted Bumblebee and Prowl)
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At most City level+, possibly far higher (As Elita-1 she survived an
-        explosion that destroyed a gigantic cavern that put Optimus and Sentinel Prime
-        in danger, has taken hits from Optimus several times)
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Tens of Meters
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Her spider silk she can shoot from her arms or mouth (In beast form)
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average (Very manipulative and strategic in combat. Dabbled in
-        scientific equipment in an attempt to reverse her mutation, and was responsible
-        for Waspinator's creation.)
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Overconfident from time to time, insane and is very self loathing. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{discussions|Blackarachnia Transformers
-        Animated|Blackarachnia (Transformers Animated)}} Category:Characters Category:Cartoon
-        Characters Category:Female Characters Category:Robots Category:Aliens Category:Cyborgs
-        Category:Monsters Category:Transformers Category:Transformation Users Category:Poison
-        Users Category:Biology Users Category:Decepticons Category:Power Mimicry Users
-        Category:Technology Users Category:Scientists'
-      source_id: vsbattles-blackarachnia-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|blackarachnia transformers animated|9356760
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-blackarachnia-transformers
-    url: https://character-stats-and-profiles.fandom.com/wiki/Blackarachnia_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    normalized_page_title: Arceus (Canon)/Plant234
-    source_type: mediawiki
-    revision_id: '535322'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 39509
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - 'Stats:'
-    - 'References:'
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{Low 1-C}} | {{1-A}}'
-      source_id: character-stats-profiles-blackarachnia-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Avatars= {{#tag:tabber
-      source_id: character-stats-profiles-blackarachnia-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Low Complex Multiverse level (Arceus is trancends everything, whose realm
-        is beyond space and time. Being further than Giratina's reach. The realms
-        of the creation trio also exist without the concepts of space and timeNintendo
-        official website. Palkia has control over the parallel dimensions and the
-        directions, with members of the creation trio being their own realm themselves)
-        | Outerverse level (The Heart exists in a state beyond space and time, in
-        which the distinction between the two, and between all parts of material reality,
-        does not exist, with them being abolished and unified as part of its singular
-        consciousness, thus standing above all physical, spatiotemporal differentiation)
-      source_id: character-stats-profiles-blackarachnia-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (Can exist beyond space and time) | Irrelevant
-      source_id: character-stats-profiles-blackarachnia-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Complex Multiverse level (Comparable to his own attack power) | Outerverse
-        level
-      source_id: character-stats-profiles-blackarachnia-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|arceus canon plant234|535322
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-blackarachnia-transformers
     url: https://vsbattles.fandom.com/wiki/Blackarachnia_%28Transformers%29
     ok: true
@@ -534,7 +539,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{7-B}}, possibly far higher
+      value: At most , possibly far higher
       source_id: vsbattles-blackarachnia-transformers
       provider_id: vsbattles
       authority: high
@@ -601,13 +606,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Overconfident from time to time, insane and is very self loathing. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{discussions|Blackarachnia Transformers
-        Animated|Blackarachnia (Transformers Animated)}} Category:Characters Category:Cartoon
-        Characters Category:Female Characters Category:Robots Category:Aliens Category:Cyborgs
-        Category:Monsters Category:Transformers Category:Transformation Users Category:Poison
-        Users Category:Biology Users Category:Decepticons Category:Power Mimicry Users
-        Category:Technology Users Category:Scientists'
+      value: Overconfident from time to time, insane and is very self loathing.
       source_id: vsbattles-blackarachnia-transformers
       provider_id: vsbattles
       authority: high
@@ -634,7 +633,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
     normalized_page_title: Arceus (Canon)/Plant234
     source_type: mediawiki
     revision_id: '535322'
@@ -676,14 +674,282 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{Low 1-C}} | {{1-A}}'
+    - field: powers_and_abilities
+      value: "immune to them), Information Manipulation (Upscaled from Uxie who holds\
+        \ the domain of knowledge), Danmaku (Judgement is a move that fires dozens\
+        \ of bolts of energy), Emotional Manipulation (Upscaled from Mesprit who can\
+        \ throw emotions into dissray, upscaled from Inkay who can make opponents\
+        \ lose the will to fightPok\xE9mon: X & Y, upscaled form attract which can\
+        \ make pok\xE9mon of the opposite gender fall in love with the userPok\xE9\
+        mon XY Episode 13: Kindergarten Chaos!), Madness Manipulation (Type 3, Arceus\
+        \ can drive other out of there mindsPok\xE9mon Conquest), Purification (All\
+        \ types, with refresh can remove burn and paralysis status effects, upscaled\
+        \ form Shaymin who can dissolve toxins in the airPok\xE9mon Diamond & Pearl\
+        \ and Celebi who can purrify shadow pok\xE9mon), Resurrection (Upscaled form\
+        \ Dialga who resurrected someone that was erased from timePok\xE9mon Mystery\
+        \ Dungeon: Explorers of Time), Spatial Manipulation, Time Manipulation, Time\
+        \ Travel & Time Stop (Stopped a wave of spatial distortions that was destroying\
+        \ anything in its pathPok\xE9mon: Hoopa and the Clash of Ages, upscaled form\
+        \ Dialga who can warp, destroy and create time, aswell as slow it down and\
+        \ speed it upPok\xE9mon Go, can also negate time travel, upscaled from Palkia\
+        \ who can warp, destroy and create space, Dialga and Palkia can create space-time\
+        \ distortions where the past became the pres"
       source_id: character-stats-profiles-blackarachnia-transformers
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
+    - field: attack_potency
+      value: Low Complex Multiverse level (Arceus is trancends everything, whose realm
+        is beyond space and time. Being further than Giratina's reach. The realms
+        of the creation trio also exist without the concepts of space and timeNintendo
+        official website. Palkia has control over the parallel dimensions and the
+        directions, with members of the creation trio being their own realm themselves)
+        | Outerverse level (The Heart exists in a state beyond space and time, in
+        which the distinction between the two, and between all parts of material reality,
+        does not exist, with them being abolished and unified as part of its singular
+        consciousness, thus standing above all physical, spatiotemporal differentiation)
+      source_id: character-stats-profiles-blackarachnia-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (Can exist beyond space and time) | Irrelevant
+      source_id: character-stats-profiles-blackarachnia-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Complex Multiverse level (Comparable to his own attack power) | Outerverse
+        level
+      source_id: character-stats-profiles-blackarachnia-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|arceus canon plant234|535322
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-blackarachnia-transformers
+    url: https://vsbattles.fandom.com/wiki/Blackarachnia_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Blackarachnia (Transformers Animated)
+    source_type: mediawiki
+    revision_id: '9356760'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3502
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At most , possibly far higher
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     - field: powers_and_abilities
-      value: Avatars= {{#tag:tabber
+      value: Superhuman Physical Characteristics, Inorganic Physiology (Type 2), Biological
+        Manipulation (Can shoot some kind of spider-silk like substance), Transformation
+        (Into a spider), Poison Manipulation (Can paralyze or kill her foes), Power
+        Mimicry (Of Machines), Stealth Mastery, Self-Sustenance (Types 1 & 3), Transmutation,
+        Energy Projection, Electricity Manipulation (Can stun opponents with electrical
+        attacks), Weapon Mastery, Longevity, Expert Hand-to-Hand Combatant (Trained
+        at the elite guard, and should be an expert fighter), Large Size (Type 0),
+        Enhanced Senses, Social Influencing and Surface Scaling
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At most City level+, possibly far higher (Easily defeated Bumblebee,
+        Prowl, Bulkhead and has contended against Optimus several times), Her venom
+        bypasses durability
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Hypersonic (Blizted Bumblebee and Prowl)
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At most City level+, possibly far higher (As Elita-1 she survived an
+        explosion that destroyed a gigantic cavern that put Optimus and Sentinel Prime
+        in danger, has taken hits from Optimus several times)
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Tens of Meters
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Her spider silk she can shoot from her arms or mouth (In beast form)
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average (Very manipulative and strategic in combat. Dabbled in
+        scientific equipment in an attempt to reverse her mutation, and was responsible
+        for Waspinator's creation.)
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Overconfident from time to time, insane and is very self loathing.
+      source_id: vsbattles-blackarachnia-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|blackarachnia transformers animated|9356760
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-blackarachnia-transformers
+    url: https://character-stats-and-profiles.fandom.com/wiki/Blackarachnia_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    normalized_page_title: Arceus (Canon)/Plant234
+    source_type: mediawiki
+    revision_id: '535322'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 39509
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - 'Stats:'
+    - 'References:'
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: "immune to them), Information Manipulation (Upscaled from Uxie who holds\
+        \ the domain of knowledge), Danmaku (Judgement is a move that fires dozens\
+        \ of bolts of energy), Emotional Manipulation (Upscaled from Mesprit who can\
+        \ throw emotions into dissray, upscaled from Inkay who can make opponents\
+        \ lose the will to fightPok\xE9mon: X & Y, upscaled form attract which can\
+        \ make pok\xE9mon of the opposite gender fall in love with the userPok\xE9\
+        mon XY Episode 13: Kindergarten Chaos!), Madness Manipulation (Type 3, Arceus\
+        \ can drive other out of there mindsPok\xE9mon Conquest), Purification (All\
+        \ types, with refresh can remove burn and paralysis status effects, upscaled\
+        \ form Shaymin who can dissolve toxins in the airPok\xE9mon Diamond & Pearl\
+        \ and Celebi who can purrify shadow pok\xE9mon), Resurrection (Upscaled form\
+        \ Dialga who resurrected someone that was erased from timePok\xE9mon Mystery\
+        \ Dungeon: Explorers of Time), Spatial Manipulation, Time Manipulation, Time\
+        \ Travel & Time Stop (Stopped a wave of spatial distortions that was destroying\
+        \ anything in its pathPok\xE9mon: Hoopa and the Clash of Ages, upscaled form\
+        \ Dialga who can warp, destroy and create time, aswell as slow it down and\
+        \ speed it upPok\xE9mon Go, can also negate time travel, upscaled from Palkia\
+        \ who can warp, destroy and create space, Dialga and Palkia can create space-time\
+        \ distortions where the past became the pres"
       source_id: character-stats-profiles-blackarachnia-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -741,8 +1007,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Blackarachnia (IDW Beast Wars 2021)
     source_type: mediawiki
     revision_id: '9189559'
@@ -786,12 +1050,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: At least {{9-B}}, likely {{9-A}}
-      source_id: vsbattles-blackarachnia
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Transformation (Into a Spider),
         Information Analysis (All Maximals and Predacons stranded in Time have access
@@ -813,7 +1071,7 @@ repair:
         IDW Beast Wars (2021) Issue 7), Self-Sustenance (Type 1; Did not show the
         need to breath when pulled underwaterTransformers IDW Beast Wars (2021) Issue
         7), Inorganic Physiology (Type 2), Regeneration (Low, as a species, should
-        be comparable to Optimus Primal), limited Resistance to Empathic Manipulation
+        be comparable to Optimus Primal), limited, Resistance to Empathic Manipulation
         (Should be comparable to Scorponok, Waspinator and Dinobot, who were unaffected
         by the rage indulcement effects of the Red Energon LodeTransformers IDW Beast
         Wars (2021) Issue 14)
@@ -873,24 +1131,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: *Tarantula (Luis Alvarez)
-        (Marvel Comics) Tarantula''s Profile (Blackarachnia was 9-B and speed was
-        equalised) Losses: Inconclusive: ==References== {{scroll box|content={{reflist|2}}}}
-        ==Notes/Explanations== {{Scroll box |content= }} {{Discussions|Blackarachnia
-        IDW Beast Wars 2021|Blackarachnia (IDW Beast Wars 2021)}} Category:Transformers
-        Category:Transformation Users Category:Predacons Category:Martial Artists
-        Category:Weapon Masters Category:Stealth Masters Category:Weapon Users Category:Bodily
-        Weaponry Users Category:Self-Sustenance Users Category:Inorganic Beings Category:Energy
-        Projection Users Category:Comic Book Characters Category:Female Characters
-        Category:Evil Characters Category:Gun Users Category:Beast Wars Category:Information
-        Analysis Users Category:Regeneration Users Category:Paralysis Users Category:Web
-        Users Category:Thread Users Category:Surface Scalers Category:Robots Category:Acrobats
-        Category:Antagonists'
-      source_id: vsbattles-blackarachnia
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -913,7 +1153,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
     normalized_page_title: Arceus (Canon)/Plant234
     source_type: mediawiki
     revision_id: '535322'
@@ -955,14 +1194,26 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{Low 1-C}} | {{1-A}}'
-      source_id: character-stats-profiles-blackarachnia
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: Avatars= {{#tag:tabber
+      value: "immune to them), Information Manipulation (Upscaled from Uxie who holds\
+        \ the domain of knowledge), Danmaku (Judgement is a move that fires dozens\
+        \ of bolts of energy), Emotional Manipulation (Upscaled from Mesprit who can\
+        \ throw emotions into dissray, upscaled from Inkay who can make opponents\
+        \ lose the will to fightPok\xE9mon: X & Y, upscaled form attract which can\
+        \ make pok\xE9mon of the opposite gender fall in love with the userPok\xE9\
+        mon XY Episode 13: Kindergarten Chaos!), Madness Manipulation (Type 3, Arceus\
+        \ can drive other out of there mindsPok\xE9mon Conquest), Purification (All\
+        \ types, with refresh can remove burn and paralysis status effects, upscaled\
+        \ form Shaymin who can dissolve toxins in the airPok\xE9mon Diamond & Pearl\
+        \ and Celebi who can purrify shadow pok\xE9mon), Resurrection (Upscaled form\
+        \ Dialga who resurrected someone that was erased from timePok\xE9mon Mystery\
+        \ Dungeon: Explorers of Time), Spatial Manipulation, Time Manipulation, Time\
+        \ Travel & Time Stop (Stopped a wave of spatial distortions that was destroying\
+        \ anything in its pathPok\xE9mon: Hoopa and the Clash of Ages, upscaled form\
+        \ Dialga who can warp, destroy and create time, aswell as slow it down and\
+        \ speed it upPok\xE9mon Go, can also negate time travel, upscaled from Palkia\
+        \ who can warp, destroy and create space, Dialga and Palkia can create space-time\
+        \ distortions where the past became the pres"
       source_id: character-stats-profiles-blackarachnia
       provider_id: character_stats_profiles
       authority: high
@@ -1020,8 +1271,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Blackarachnia (IDW Beast Wars 2021)
     source_type: mediawiki
     revision_id: '9189559'
@@ -1067,12 +1316,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: At least {{9-B}}, likely {{9-A}}
-      source_id: vsbattles-blackarachnia-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Transformation (Into a Spider),
         Information Analysis (All Maximals and Predacons stranded in Time have access
@@ -1094,7 +1337,7 @@ repair:
         IDW Beast Wars (2021) Issue 7), Self-Sustenance (Type 1; Did not show the
         need to breath when pulled underwaterTransformers IDW Beast Wars (2021) Issue
         7), Inorganic Physiology (Type 2), Regeneration (Low, as a species, should
-        be comparable to Optimus Primal), limited Resistance to Empathic Manipulation
+        be comparable to Optimus Primal), limited, Resistance to Empathic Manipulation
         (Should be comparable to Scorponok, Waspinator and Dinobot, who were unaffected
         by the rage indulcement effects of the Red Energon LodeTransformers IDW Beast
         Wars (2021) Issue 14)
@@ -1154,24 +1397,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: *Tarantula (Luis Alvarez)
-        (Marvel Comics) Tarantula''s Profile (Blackarachnia was 9-B and speed was
-        equalised) Losses: Inconclusive: ==References== {{scroll box|content={{reflist|2}}}}
-        ==Notes/Explanations== {{Scroll box |content= }} {{Discussions|Blackarachnia
-        IDW Beast Wars 2021|Blackarachnia (IDW Beast Wars 2021)}} Category:Transformers
-        Category:Transformation Users Category:Predacons Category:Martial Artists
-        Category:Weapon Masters Category:Stealth Masters Category:Weapon Users Category:Bodily
-        Weaponry Users Category:Self-Sustenance Users Category:Inorganic Beings Category:Energy
-        Projection Users Category:Comic Book Characters Category:Female Characters
-        Category:Evil Characters Category:Gun Users Category:Beast Wars Category:Information
-        Analysis Users Category:Regeneration Users Category:Paralysis Users Category:Web
-        Users Category:Thread Users Category:Surface Scalers Category:Robots Category:Acrobats
-        Category:Antagonists'
-      source_id: vsbattles-blackarachnia-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -1190,7 +1415,6 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - powers_and_abilities
     - speed
     - tier
     normalized_page_title: Arceus (Canon)/Juanitos0912
@@ -1217,7 +1441,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 50
+    rank: 35
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1229,84 +1453,6 @@ repair:
     - abilities
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{High 1-A}} | {{1-S}}'
-      source_id: character-stats-profiles-blackarachnia-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Immortality (Types 1, 3 and 9),\
-        \ Intangibility (Appeared to the player as light throughout the opening sequence\
-        \ of PLA), Conceptual Manipulation, Non-Physical Interaction (Pok\xE9mon can\
-        \ affect ghosts with a vast majority of their attacks.), Incorporeality and\
-        \ Illusion Negation, Existence Erasure, Dream Manipulation, Creation, Dimensional\
-        \ Travel, Healing (Can heal HP and PP to max under player request in Eternal\
-        \ Battle Reverie. Scales vastly above Mew who could easily heal a large number\
-        \ of Pok\xE9mon., Reality Warping (With Unown's power, one can make anything\
-        \ and can be anything. They're capable of making new realities, altering the\
-        \ world using thoughts and dreams of others), Cosmic Awareness, (Arceus always\
-        \ watches over humans and Pok\xE9mon), Technology Manipulation (Created the\
-        \ Arc Phone for the player), Limited Higher-Dimensional Existence (Is the\
-        \ physical manifestation of the Heart, through which it views and interacts\
-        \ with the world), Self-Sustenance (Types 1 and 3; it can survive in space,\
-        \ can fight the player indefinitely in the Eternal Battle Reverie), Energy\
-        \ Projection (Can be used for various ranged attacks), Incorporeality and\
-        \ Illusion Negation, Madness Manipulation(Type 2 & 3. Arceus can drive others\
-        \ out of their minds, Resurrection (Dialga, an aspect of Arceus brings back\
-        \ to life someone who had been been erased from time), Space-Time Manipulation,\
-        \ Time Travel, Time Stop (Stops a wave of spatial distortion in its tracks\
-        \ that was annihilating all matter in its path, not even the Creation Trio\
-        \ could stop it.), Age Manipulation, Telekinesis (Stops several falling people\
-        \ and Pok\xE9mon in midair), Power Absorption (Can absorb the essence of someone's\
-        \ powers as he did with Giants in mythology), Purification (Type 1, 2 and\
-        \ 3 via Refresh, which removes burn, paralysis or poison from the user.),\
-        \ Earth Manipulation (Via Earth Power), Status Effect Inducement (Can inflict\
-        \ status condition on Pok\xE9mon regardless of whether its Type makes them\
-        \ Immune), Resistance Negation (Via Miracle Eye, which negates Dark type immunity\
-        \ to psychic attacks.), Emotional Manipulation, Danmaku (via judgement), Power\
-        \ Bestowal (Plates holds the essence of each type and are the origin of all\
-        \ the Pok\xE9mon powers), True Flight, Information Manipulation (Type 1. Upscaled\
-        \ from Uxie, who has dominion over knowledge), Acausality (Types 1. Unaffected\
-        \ by changes in history unless he allows them and 4. Giratina is an aspect\
-        \ of Arceus who exists beyond the concepts of time and space. It runs on different\
-        \ logic and laws with distorted causality. With Plates: Probability Manipulation,\
-        \ Fate Manipulation (via Destiny Bond, which links the opponents fate with\
-        \ your own such that if the user goes down, the opponent goes down with it),\
-        \ Pain Manipulation (Whismur, Hatterene and Alakazam can induce headaches),\
-        \ Soul Manipulation (Upscaled to Ghost Type Pok\xE9mon like Gengar, who can\
-        \ interact and remove souls from others. Upscaled from Calyrex, who can use\
-        \ Spectrier's Aura into a large, black, mist-like mass which absorbs the life-force\
-        \ and the souls of the nearby living things like a black hole.), Weather Manipulation\
-        \ (Via hail, rain dance, sunny day, sandstorms, defog and many others that\
-        \ can cause rain, summon the sun, cause sandstorms or remove weather effects),\
-        \ Statistics Amplification (Upscaled from Opportunist, which boosts stats\
-        \ as much and as long as the opponent boosts theirs), Summoning (Upscaled\
-        \ to Hoopa Unbound, who can summon Pok\xE9mon under his control, Statistics\
-        \ Reduction (Via Baby-Doll-Eyes, Leer, Captivate and many more which can decrease\
-        \ opponents attack power, defense, speed and accuracy. Upscaled from Spectral\
-        \ Thief, which returns the target\u2019s raised stats to normal and raises\
-        \ the user\u2019s stats by the same amount), Power Modification (Upscaled\
-        \ from Psychic Inver, who can make resistances weaknesses and weaknesses resistances),\
-        \ Damage Transferral (Upscaled From Pain Split Users, who divide user's damage\
-        \ between themselves and opponents), Disease Manipulation (Upscaled From Mimikyu,\
-        \ seeing his true form can cause one to die of unknown disease), Petrification\
-        \ (Upscaled from Yveltal, who can absorb the life of others, petrifying them\
-        \ in the process), Damage Boost(Pok\xE9mon that use a move, whose type is\
-        \ identical to their own, will deal much more damage than usual), Supernatural\
-        \ Luck (upscaled from Kadabra, who's presence infests Tvs with shadows that\
-        \ bring bad luck), Attack Reflection (Upscaled From Mewtwo who can reflect\
-        \ attacks), Law Manipulation (Has the power to control the natural order of\
-        \ things.), Physics Manipulation (Created The Distortion world where the logic\
-        \ of the Pok\xE9mon world does not apply, physics don't make any sense and\
-        \ the entire world is under the complete control of Giratina.), Abstract Existence\
-        \ (Type 1. Upscaled from Unown, who could merge with Larvitar's mind and sent\
-        \ Ash and his friends into it), Precognition and Retrocognition (Upscaled\
-        \ from Calyrex, who can see the past and future), Fo"
-      source_id: character-stats-profiles-blackarachnia-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: speed
       value: "Arceus immediately strikes the foes with great force, which is virtually\
         \ impossible to properly react to. * Gravity: Arceus pins its foe down by\
@@ -1333,12 +1479,13 @@ repair:
         \ Arceus rampages and attacks for a while. If there are multiple opponents\
         \ each series of attacks will be directed at a random one. This leaves Arceus\
         \ confused afterwards. * Shadow Claw: Arceus slashes at its opponent with\
-        \ a sharp claw made from shadows. ---- == Gallery: == File:Arceus.jpg|Arceus\
-        \ all types File:ArceusTwister.gif|Arceus Twister File:ArceusBlizzard.gif|Arceus\
-        \ Blizzard File:ArceusFlamethrower.gif|Arceus Flamethrower File:ArceusJudgment.gif|Arceus\
-        \ Judgement File:Arceus M18.png|Arceus == Thank you for reading! Check out\
-        \ my other pages: == - Mewtwo (Canon)/Juanitos0912 - Darkrai (Canon)/Juanitos0912\
-        \ - Hoopa (Canon)/Juanitos0912 Category:Juanitos0912"
+        \ a sharp claw made from shadows. ----"
+      source_id: character-stats-profiles-blackarachnia-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: High 1-A | 1-S
       source_id: character-stats-profiles-blackarachnia-comics
       provider_id: character_stats_profiles
       authority: high
@@ -1348,7 +1495,7 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 1
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false

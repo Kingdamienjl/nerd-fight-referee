@@ -4,25 +4,14 @@ name: Galvatron
 franchise: Transformers
 category: comics
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-10-10T07:11:36Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Galvatron
   franchise: Transformers
@@ -89,42 +78,6 @@ sources:
 - id: vsbattles-galvatron-transformers
   provider_id: vsbattles
   source_type: mediawiki
-  title: Galvatron Transformers
-  url: https://vsbattles.fandom.com/wiki/Galvatron_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-galvatron-transformers
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Galvatron Transformers
-  url: https://character-stats-and-profiles.fandom.com/wiki/Galvatron_Transformers
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-galvatron-transformers
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Galvatron (Transformers)
   url: https://vsbattles.fandom.com/wiki/Galvatron_%28Transformers%29
   authority: high
@@ -164,13 +117,23 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Brown Dwarf level (Could contend with Optimus Prime, but ultimately
+      loss in their final fight. Ripped Megatron in half, although Megatron was off
+      guard and weakenedAt least 161.47 Ronnatons of TNT), higher with the Heart of
+      Darkness (Stated to be more powerful than before. Was able to overwhelm Optimus
+      and was able to wound him in their second fight, albeit Optimus was off guard),
+      can negate conventional durability with the D-Void's power.
+    source_ids:
+    - vsbattles-galvatron-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Supersonic movement speed, Massively FTL+ reactions and combat speed (Comparable
+      to Arcee and Optimus Prime29.9 Million c)
+    source_ids:
+    - vsbattles-galvatron-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,27 +143,295 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Brown Dwarf level, higher with the Heart of Darkness
+    source_ids:
+    - vsbattles-galvatron-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman (Can fight and move, even with ridiculous injuries, cannot tire
+      physically)
+    source_ids:
+    - vsbattles-galvatron-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Extended Melee Range. At least Tens of Meters with his Fusion Cannon
+    source_ids:
+    - vsbattles-galvatron-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Gifted. While he may seem like an insane, rather thoughtless warrior at
+      first glance, Galvatron is actually an adept strategist, a capable leader, a
+      cunning warrior, and a master of most, if not all Cybertronian martial arts.
+      As one one of the oldest living Cybertronians, he's accumulated a vast degree
+      of knowledge in various fields over his some eight million years of existence.
+    source_ids:
+    - vsbattles-galvatron-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-galvatron-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-immortality-type-1-and-2-cybertronians-consistently-shrug-o
+  name: 'Immortality (Type 1 and 2; Cybertronians consistently shrug off wounds that
+    should be deadly, such as bisection or even '
+  description: Immortality (Type 1 and 2; Cybertronians consistently shrug off wounds
+    that should be deadly, such as bisection or even worse)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_hacking
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-large-size-type-1
+  name: Large Size (Type 1)
+  description: Large Size (Type 1)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transformation-into-a-cannon-or-a-tank
+  name: Transformation (Into a cannon or a tank)
+  description: Transformation (Into a cannon or a tank)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-martial-artist
+  name: Martial Artist
+  description: Martial Artist
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight
+  name: Flight
+  description: Flight
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery
+  name: Weapon Mastery
+  description: Weapon Mastery
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-enhanced-senses
+  name: Enhanced Senses
+  description: Enhanced Senses
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-social-influencing
+  name: Social Influencing
+  description: Social Influencing
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-rage-power
+  name: Rage Power
+  description: Rage Power
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-self-sustenance-types-1-and-3
+  name: Self-Sustenance (Types 1 and 3)
+  description: Self-Sustenance (Types 1 and 3)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-energy-manipulation
+  name: Energy Manipulation
+  description: Energy Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-regeneration-low-can-heal-from-small-wounds
+  name: Regeneration (Low, can heal from small wounds)
+  description: Regeneration (Low, can heal from small wounds)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight
+  name: Flight
+  description: Flight
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-resistances-to-fire-manipulation-ice-manipulation-and-acid-
+  name: Resistances to Fire Manipulation, Ice Manipulation and Acid Manipulation With
+    the D-Void's Power=Death Manipulation, (Ca
+  description: Resistances to Fire Manipulation, Ice Manipulation and Acid Manipulation
+    With the D-Void's Power=Death Manipulation, (Can kill beings by simply touching
+    them), Corruption (Type 1), Mind Manipulation, Necromancy, Cosmic Awareness and
+    Resurrection (Can revive dead Transformers)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_contact
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-overconfidence-coupled-with-insanity-makes-him-liable-to-do-almost-an
+  name: Overconfidence coupled with insanity makes him liable to do almost anything
+    in a fight
+  description: Overconfidence coupled with insanity makes him liable to do almost
+    anything in a fight
+  source_ids:
+  - vsbattles-galvatron-transformers
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -212,13 +443,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
-profile_hash: 81a7cd9182c79f1102d11dc322158efc8afb8185deeaf1d12982f3820b376cf6
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-galvatron-transformers
+  secondary_disagreement_policy: warning_only
+profile_hash: 69497a9433dd9e5f06275091a4c6cccc73938d63b279032b684e0033724154f7
 repair:
-  attempted_at: '2026-10-10T09:19:34Z'
+  attempted_at: '2026-10-23T02:00:43Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -226,402 +471,6 @@ repair:
   - durability
   - abilities
   source_attempts:
-  - source_id: vsbattles-galvatron-transformers
-    url: https://vsbattles.fandom.com/wiki/Galvatron_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Galvatron (IDW 2005)
-    source_type: mediawiki
-    revision_id: '9632225'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 5330
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{High 5-A}}, higher with the Heart of Darkness
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base=Superhuman Physical Characteristics, Immortality (Type 1 and 2;
-        Cybertronians consistently shrug off wounds that should be deadly, such as
-        bisection or even worse), Large Size (Type 1), Transformation (Into a cannon
-        or a tank), Martial Artist, Flight, Weapon Mastery, Enhanced Senses, Social
-        Influencing, Rage Power, Self-Sustenance (Types 1 and 3), Energy Manipulation,
-        Regeneration (Low, can heal from small wounds), Flight, Resistances to Fire
-        Manipulation, Ice Manipulation and Acid Manipulation |-|With the D-Void's
-        Power=Death Manipulation, (Can kill beings by simply touching them), Corruption
-        (Type 1), Mind Manipulation, Necromancy, Cosmic Awareness and Resurrection
-        (Can revive dead Transformers)
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Brown Dwarf level (Could contend with Optimus Prime, but ultimately
-        loss in their final fight. Ripped Megatron in half, although Megatron was
-        off guard and weakenedAt least 161.47 Ronnatons of TNT), higher with the Heart
-        of Darkness (Stated to be more powerful than before. Was able to overwhelm
-        Optimus and was able to wound him in their second fight, albeit Optimus was
-        off guard), can negate conventional durability with the D-Void's power.
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Supersonic movement speed, Massively FTL+ reactions and combat speed
-        (Comparable to Arcee and Optimus Prime29.9 Million c)
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Brown Dwarf level, higher with the Heart of Darkness
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Can fight and move, even with ridiculous injuries, cannot
-        tire physically)
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range. At least Tens of Meters with his Fusion Cannon
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: '*Fusion Cannon The Fusion Cannon Galvatron uses appears to be a different
-        model than Megatron''s, but is roughly equal in power. *Axe Galvatron''s preferred
-        weapon, however, is a simple battle axe that he''s brandished in battle for
-        millions of years.'
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Gifted. While he may seem like an insane, rather thoughtless warrior
-        at first glance, Galvatron is actually an adept strategist, a capable leader,
-        a cunning warrior, and a master of most, if not all Cybertronian martial arts.
-        As one one of the oldest living Cybertronians, he's accumulated a vast degree
-        of knowledge in various fields over his some eight million years of existence.
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Overconfidence coupled with insanity makes him liable to do almost anything
-        in a fight ==Notable Matchups== Victories: Losses: Inconclusive: ==Notes/Explanations==
-        {{Scroll box |content= }} {{discussions}} Category:Transformers Category:Decepticons
-        Category:Comic Book Characters Category:Characters Category:Male Characters
-        Category:Axe Users Category:Gun Users Category:Gladiators Category:Warriors
-        Category:Evil Characters Category:Villains Category:Antagonists Category:Primary
-        Antagonists Category:Transformation Users Category:Flight Users Category:Large
-        Sized Characters Category:Enhanced Senses Users Category:Martial Artists Category:Weapon
-        Masters Category:Energy Users Category:Self-Sustenance Users Category:Immortals'
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|galvatron idw 2005|9632225
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-galvatron-transformers
-    url: https://character-stats-and-profiles.fandom.com/wiki/Galvatron_Transformers
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Optimus Prime (Canon, Bayverse)/Incredible bacon
-    source_type: mediawiki
-    revision_id: '530612'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 15947
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least 1-B | At least 1-B | 1-B, higher with Stealth Force, even higher
-        with Weaponry and Flight Tech
-      source_id: character-stats-profiles-galvatron-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '2007-RoTF: * Superhuman Physical Characteristics * Transformation and
-        Vehicular Mastery (Capable of transforming into a Peterbilt Truck) * Inorganic
-        Physiology (Type 2) * Large Size (Type 0; Is 28 feet tall) * Body Control
-        (Capable of shedding his outer armor to become a protoform for interstellar
-        purposes, becoming a protoform) * Self-Sustenance (Types 1 & 3; Cybertronians
-        do not need oxygen due to their physiology, and can''t tire physically) *
-        Immortality (Type 2; Optimus has survived being shot through the chest twice,
-        as well as survive having a sword plunged through him) * Regeneration (Mid-Low;
-        Optimus can heal from more minor injuries and was able to heal from the hole
-        in his chest overtime) * Longevity (Optimus has been alive for thousands of
-        years) * Space Survival * Martial Arts (Optimus has been shown to be a very
-        capable combatant, taking on hordes of decepticons on his own, as well as
-        using several Earth based Martial Arts moves. Optimus was trained by Sentinel
-        Prime, who is considered one of Cybertron''s greatest warriors) * Weapon Mastery
-        (Optimus is capable of utilizing a wide array of weapons, ranging from different
-        types of guns to melee weapons like Axes, Swords and Chainsaws) * Temperature
-        Manipulation (Via Optimus prime''s heat based weaponry) * Explosion Manipulation
-        (With weaponry) * Acrobatics (All-Terrain Mobility & Hypermobility; Shown
-        to be quite agile, with him often being able to perform several parkour stunts,
-        such as here) * Enhanced Senses & Information Analysis (Cybertronians can
-        typically scan and analyse their surroundings) * Adaptation (Can scan new
-        vehicles for disguises) * Social Influencing ** Charisma, Social Position
-        and Leadership (Optimus is an inspiring leader, being able to inspire even
-        the more pessimistic Autobots like Crosshairs) * Extrasensory Perception (Optimus
-        sensed the presence of Megatron within Galvatron''s body) Following Resistances
-        on: * Biological Manipulation, Poison Manipulation & Disease Manipulation
-        (Due to his Cybertronian physiology, he should be immune to biological attacks)
-        * Temperature Manipulation (Capable of tanking Earth''s re-entry, which would
-        have a temperature of 3000 degrees F) * Cosmic Radiations (Cybertronians can
-        easily move through the harsh vacuum of space undeterred) Jetpower Mode: All
-        previous abilities on an enhanced scale including the following: * Fusionism
-        (Merged with Jetfire) * Flight (Capable of flying due to Jetfire''s parts)
-        * Enhanced Large Size (Type 0; With his added armor, Optimus is now 40 feet)
-        * Bodily Weaponry (Artificial; His back thrusters function as cannons) DoTM-TLK:
-        All previous abilities without Jetpower Mode on an enhanced scale including
-        the following: * Forcefield Creation (Capable of creating a forcefield around
-        himself) * Statistics Amplification (Via Stealth Force; Also able to mount
-        several weapons or the Flight Tech upon himself to add onto his power) * Flight
-        (With the Flight Tech. As of AoE, Optimus now has rocket boosters that allow
-        him flight to space) * Resurrection & Life Manipulation (With the Matrix of
-        Leadership; It was capable of reviving both Optimus Prime and Sentinel Prime)
-        * Transformation (Transforms into a Western Star Truck as of Age of Extinction)
-        * Enhanced Large Size (Type 0; As of Age of Extinction, Optimus is 29 feet
-        tall) Following Resistances on: All of previous resistances on a higher scale
-        including the following: * Paralysis Inducement & Absorption (Energy & Life;
-        With his forcefield, he can resist Megatron''s life drain)'
-      source_id: character-stats-profiles-galvatron-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Hyperverse level29-D (Even in base with the power level of 10,
-        he is superior than The Fallen who has the power level of 5+. Fought and held
-        his own against Megatron, Starscream and Grindor. Overpowered Devastator with
-        Iron Hide with ease) | At least Hyperverse level, likely higher (Albeit the
-        Jetpower upgrade didn't do much damage to The Fallen, Optimus physically overpowered
-        and ripped off The Fallens face and finished him off brutally) | Hyperverse
-        level (Is stated to have become far stronger than before. One-shot an 800+
-        tonne Grimlock with ease, sending him flying), higher with Stealth Force,
-        even higher with Weaponry and Flight Tech (Forced Shockwave and The Driller
-        to retreat. His Temenos sword completely cut through Lockdown and sliced through
-        The Last Knight Megatron's arm. His brass knuckles completely ripped through
-        Shockwave's armor. His axe easily ripped off Dark of the Moon Megatron's head)
-      source_id: character-stats-profiles-galvatron-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (Can keep up with the Autobots like Jazz, should be much
-        faster than the Jetpower upgrade, who can tag and keep up with The Fallen,
-        a being that can hop between dimensions with sheer speed, which is consistent
-        since he has shown to be able to create maneuvers while flying with his jets)
-        | Immeasurable (Blitzed Megatron and mauled him completely, kept up with The
-        Fallen) | Immeasurable (Faster than before)
-      source_id: character-stats-profiles-galvatron-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Hyperverse level | At least Hyperverse level (Was unphased from
-        Megatron's attacks and shrugged off The Fallen smashing his face with a jet
-        thruster) | Hyperverse level (Tanked Quintessa's powers, who is capable to
-        of moving Cybertron8.9482207e+28 Joules), higher with Forcefield (DoTM Megatron
-        was unable to break through his forcefield)
-      source_id: character-stats-profiles-galvatron-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Optimus sometimes holds back | None notable | His forcefield can be
-        weakened by cryostasis Notable Attacks/Tehniques: * Hand-To-Hand Combat Expirience
-        and Skills ** Salat (As seen in The Last Knight) ** Medival Styled Combat
-        ** Wrestling ** Grappeling ** Judo ** Metallikato * Heat-Based Weaponry (Optimus
-        possesses multiple heat based weaponry, ranging from swords to hooks. These
-        weapons are hot enough to slice through Cybertronian armor) * Long ranged
-        Weaponry (ptimus can either dual wield or single wield Ion Blasters as his
-        primary form of long range attack) * Parachutes (Optimus can deploy parachutes
-        when falling from tall heights) * Protoforming (Optimus can shed his outer
-        armor as a means of travelling through space as a protoform) * Jet Thrusters
-        (Within Jetpower Mode; Capable of being used not only for flight, but as shoulder
-        mounted blasters against opponents) * Trailer Weapons Pack (Optimus now possesses
-        a far greater variety of weapons, ranging from knuckle dusters, chainsaws
-        and shoulder mounted guns. Also possesses more variety of long range weaponry
-        * Forcefield (Possesses a powerful Forcefield that not even DoTM Megatron
-        could break through, capable of even resisting his Life Drain The Forcefield
-        completely wraps his entire body * Flight Tech (When up against opponents
-        stronger or much larger than himself, Optimus will deploy the Flight Tech,
-        granting him flight and increasing his attack power) * Matrix of Leadership
-        (An ancient relic designed to power a star harvester. It is also capable of
-        reviving other Transformers) * Temenos Sword (A weapon belonging to the Knights
-        of Cybertrons, strong enough to cut through opponents as strong if not stronger
-        than Optimus) * Heat-Based Weaponry (Optimus possesses heat based weaponry
-        such as arm mounted blades. These weapons are hot enough to slice through
-        Cybertronian armor) * Vector Shield (Used primarily as Optimus main form of
-        defense and long range weapon. Has a built in blaster that can be used against
-        opponents from a distance) Notes: - "Base Prime does not scale to The Fallen,
-        the Jetpower upgrade was easily toren apart" first of all, he does, Optimus
-        was barely phased by his attacks and The Fallen only mananged to knock him
-        back and not to mention he was being jumped by The Fallen AND Megatron all
-        at same time, second, Jetpower''s arsenal was rendered useless to The Fallen
-        as he tanked every gunfire from it and yes he did tore it apart, that wouldn''t
-        mean nothing as of my previous statement, third, the movie databook already
-        confirms their power levels, fourth, The Fallen feared coming to Earth with
-        Prime on it, b4 you say he was just catious, that is just a stupid claim,
-        The Fallen knew very well of what Prime is capable of (As he casually ripped
-        off The Fallen''s face and pierced through him like Omni-Man did to Immortal)
-        and all other Primes aswell, that is pretty much a bloodlinked conclusion.
-        "Jetpower received no damage and was sent at least 2 meters away by Megatron''s
-        blaster cannon, yet in the forest fight before Jetpower upgrade and RoTF,
-        OP was sent flying multiple meters away by that same cannon", do I need to
-        mention OP was literally 3v1-ing some of the strongest Decepticons and was
-        heavily weakened when he received the shot?- - Strength of the verses Cybertronians''
-        and Decepticons'' weaponry aren''t linearly ranked and that''s consistent.
-        Optimus'' blasters which have a yield of 3 kilotons of TNT and Iron Hide''s
-        blasters have yield strength of 10 to 12 kilotons of TNT, that would mean
-        Iron Hide''s blasters are stronger than Prime''s even tho Iron Hide is far
-        inferior than Prime. Strength of the weapons isn''t stated to be so linear,
-        weapons can be stronger or weaker than the wielder of a different rank, the
-        gaps between other guns can be wide in comparison. There''s also no reason
-        for standard weaponry even beyond your average Cybertronian gun to be stronger
-        than Prime himself, unless it''s explicitly stated to be on another caliber.
-        Also, Prime''s Energon Blades seem to be of Prime''s known speciality, hell
-        even the Blades to more significantly more damage than his blasters, this
-        is for 2007/DoTM Optimus, also it''s important to point out that characters
-        like Demolisher could be killed by 10-12 kilotons of TNT of firepower, making
-        him a low tier of the verse. B4 you say "Well why did such a high tier being
-        like OP struggled against an such a weak opponent? Surely they''re not as
-        strong as you claim." that is just false af, considering the strength of the
-        characters from a narrative standpoint, OP and IH never struggled with Demolisher,
-        bro ran the moment he was interrogated and was also MASSIVE in height, yet
-        was put down by guns that scale significatly less than their wielders, that
-        is not an anti-feat to high tier characters, neither is it a flaw in the scale.
-        == Gallery == File:Transformers-one-origin-film-reportedly-in-the-wor uzfr.1280cvbd.webp|Close
-        look up File:The-manoharan-brothers-artstation-optimus-2007-frontwefwe.jpg|Face
-        File:C3fd965d8'
-      source_id: character-stats-profiles-galvatron-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|optimus prime canon bayverse
-      incredible bacon|530612
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-galvatron-transformers
     url: https://vsbattles.fandom.com/wiki/Galvatron_%28Transformers%29
     ok: true
@@ -636,7 +485,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Galvatron (IDW 2005)
     source_type: mediawiki
     revision_id: '9632225'
@@ -680,22 +528,21 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{High 5-A}}, higher with the Heart of Darkness
+      value: At least , higher with the Heart of Darkness
       source_id: vsbattles-galvatron-transformers
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base=Superhuman Physical Characteristics, Immortality (Type 1 and 2;
-        Cybertronians consistently shrug off wounds that should be deadly, such as
-        bisection or even worse), Large Size (Type 1), Transformation (Into a cannon
-        or a tank), Martial Artist, Flight, Weapon Mastery, Enhanced Senses, Social
-        Influencing, Rage Power, Self-Sustenance (Types 1 and 3), Energy Manipulation,
-        Regeneration (Low, can heal from small wounds), Flight, Resistances to Fire
-        Manipulation, Ice Manipulation and Acid Manipulation |-|With the D-Void's
-        Power=Death Manipulation, (Can kill beings by simply touching them), Corruption
-        (Type 1), Mind Manipulation, Necromancy, Cosmic Awareness and Resurrection
-        (Can revive dead Transformers)
+      value: Superhuman Physical Characteristics, Immortality (Type 1 and 2; Cybertronians
+        consistently shrug off wounds that should be deadly, such as bisection or
+        even worse), Large Size (Type 1), Transformation (Into a cannon or a tank),
+        Martial Artist, Flight, Weapon Mastery, Enhanced Senses, Social Influencing,
+        Rage Power, Self-Sustenance (Types 1 and 3), Energy Manipulation, Regeneration
+        (Low, can heal from small wounds), Flight, Resistances to Fire Manipulation,
+        Ice Manipulation and Acid Manipulation With the D-Void's Power=Death Manipulation,
+        (Can kill beings by simply touching them), Corruption (Type 1), Mind Manipulation,
+        Necromancy, Cosmic Awareness and Resurrection (Can revive dead Transformers)
       source_id: vsbattles-galvatron-transformers
       provider_id: vsbattles
       authority: high
@@ -738,10 +585,10 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: '*Fusion Cannon The Fusion Cannon Galvatron uses appears to be a different
-        model than Megatron''s, but is roughly equal in power. *Axe Galvatron''s preferred
-        weapon, however, is a simple battle axe that he''s brandished in battle for
-        millions of years.'
+      value: Fusion Cannon The Fusion Cannon Galvatron uses appears to be a different
+        model than Megatron's, but is roughly equal in power., Axe Galvatron's preferred
+        weapon, however, is a simple battle axe that he's brandished in battle for
+        millions of years.
       source_id: vsbattles-galvatron-transformers
       provider_id: vsbattles
       authority: high
@@ -752,20 +599,6 @@ repair:
         a cunning warrior, and a master of most, if not all Cybertronian martial arts.
         As one one of the oldest living Cybertronians, he's accumulated a vast degree
         of knowledge in various fields over his some eight million years of existence.
-      source_id: vsbattles-galvatron-transformers
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Overconfidence coupled with insanity makes him liable to do almost anything
-        in a fight ==Notable Matchups== Victories: Losses: Inconclusive: ==Notes/Explanations==
-        {{Scroll box |content= }} {{discussions}} Category:Transformers Category:Decepticons
-        Category:Comic Book Characters Category:Characters Category:Male Characters
-        Category:Axe Users Category:Gun Users Category:Gladiators Category:Warriors
-        Category:Evil Characters Category:Villains Category:Antagonists Category:Primary
-        Antagonists Category:Transformation Users Category:Flight Users Category:Large
-        Sized Characters Category:Enhanced Senses Users Category:Martial Artists Category:Weapon
-        Masters Category:Energy Users Category:Self-Sustenance Users Category:Immortals'
       source_id: vsbattles-galvatron-transformers
       provider_id: vsbattles
       authority: high
@@ -790,10 +623,8 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Optimus Prime (Canon, Bayverse)/Incredible bacon
     source_type: mediawiki
     revision_id: '530612'
@@ -823,7 +654,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -840,57 +671,6 @@ repair:
     - field: tier
       value: At least 1-B | At least 1-B | 1-B, higher with Stealth Force, even higher
         with Weaponry and Flight Tech
-      source_id: character-stats-profiles-galvatron-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '2007-RoTF: * Superhuman Physical Characteristics * Transformation and
-        Vehicular Mastery (Capable of transforming into a Peterbilt Truck) * Inorganic
-        Physiology (Type 2) * Large Size (Type 0; Is 28 feet tall) * Body Control
-        (Capable of shedding his outer armor to become a protoform for interstellar
-        purposes, becoming a protoform) * Self-Sustenance (Types 1 & 3; Cybertronians
-        do not need oxygen due to their physiology, and can''t tire physically) *
-        Immortality (Type 2; Optimus has survived being shot through the chest twice,
-        as well as survive having a sword plunged through him) * Regeneration (Mid-Low;
-        Optimus can heal from more minor injuries and was able to heal from the hole
-        in his chest overtime) * Longevity (Optimus has been alive for thousands of
-        years) * Space Survival * Martial Arts (Optimus has been shown to be a very
-        capable combatant, taking on hordes of decepticons on his own, as well as
-        using several Earth based Martial Arts moves. Optimus was trained by Sentinel
-        Prime, who is considered one of Cybertron''s greatest warriors) * Weapon Mastery
-        (Optimus is capable of utilizing a wide array of weapons, ranging from different
-        types of guns to melee weapons like Axes, Swords and Chainsaws) * Temperature
-        Manipulation (Via Optimus prime''s heat based weaponry) * Explosion Manipulation
-        (With weaponry) * Acrobatics (All-Terrain Mobility & Hypermobility; Shown
-        to be quite agile, with him often being able to perform several parkour stunts,
-        such as here) * Enhanced Senses & Information Analysis (Cybertronians can
-        typically scan and analyse their surroundings) * Adaptation (Can scan new
-        vehicles for disguises) * Social Influencing ** Charisma, Social Position
-        and Leadership (Optimus is an inspiring leader, being able to inspire even
-        the more pessimistic Autobots like Crosshairs) * Extrasensory Perception (Optimus
-        sensed the presence of Megatron within Galvatron''s body) Following Resistances
-        on: * Biological Manipulation, Poison Manipulation & Disease Manipulation
-        (Due to his Cybertronian physiology, he should be immune to biological attacks)
-        * Temperature Manipulation (Capable of tanking Earth''s re-entry, which would
-        have a temperature of 3000 degrees F) * Cosmic Radiations (Cybertronians can
-        easily move through the harsh vacuum of space undeterred) Jetpower Mode: All
-        previous abilities on an enhanced scale including the following: * Fusionism
-        (Merged with Jetfire) * Flight (Capable of flying due to Jetfire''s parts)
-        * Enhanced Large Size (Type 0; With his added armor, Optimus is now 40 feet)
-        * Bodily Weaponry (Artificial; His back thrusters function as cannons) DoTM-TLK:
-        All previous abilities without Jetpower Mode on an enhanced scale including
-        the following: * Forcefield Creation (Capable of creating a forcefield around
-        himself) * Statistics Amplification (Via Stealth Force; Also able to mount
-        several weapons or the Flight Tech upon himself to add onto his power) * Flight
-        (With the Flight Tech. As of AoE, Optimus now has rocket boosters that allow
-        him flight to space) * Resurrection & Life Manipulation (With the Matrix of
-        Leadership; It was capable of reviving both Optimus Prime and Sentinel Prime)
-        * Transformation (Transforms into a Western Star Truck as of Age of Extinction)
-        * Enhanced Large Size (Type 0; As of Age of Extinction, Optimus is 29 feet
-        tall) Following Resistances on: All of previous resistances on a higher scale
-        including the following: * Paralysis Inducement & Absorption (Energy & Life;
-        With his forcefield, he can resist Megatron''s life drain)'
       source_id: character-stats-profiles-galvatron-transformers
       provider_id: character_stats_profiles
       authority: high
@@ -933,83 +713,12 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Optimus sometimes holds back | None notable | His forcefield can be
-        weakened by cryostasis Notable Attacks/Tehniques: * Hand-To-Hand Combat Expirience
-        and Skills ** Salat (As seen in The Last Knight) ** Medival Styled Combat
-        ** Wrestling ** Grappeling ** Judo ** Metallikato * Heat-Based Weaponry (Optimus
-        possesses multiple heat based weaponry, ranging from swords to hooks. These
-        weapons are hot enough to slice through Cybertronian armor) * Long ranged
-        Weaponry (ptimus can either dual wield or single wield Ion Blasters as his
-        primary form of long range attack) * Parachutes (Optimus can deploy parachutes
-        when falling from tall heights) * Protoforming (Optimus can shed his outer
-        armor as a means of travelling through space as a protoform) * Jet Thrusters
-        (Within Jetpower Mode; Capable of being used not only for flight, but as shoulder
-        mounted blasters against opponents) * Trailer Weapons Pack (Optimus now possesses
-        a far greater variety of weapons, ranging from knuckle dusters, chainsaws
-        and shoulder mounted guns. Also possesses more variety of long range weaponry
-        * Forcefield (Possesses a powerful Forcefield that not even DoTM Megatron
-        could break through, capable of even resisting his Life Drain The Forcefield
-        completely wraps his entire body * Flight Tech (When up against opponents
-        stronger or much larger than himself, Optimus will deploy the Flight Tech,
-        granting him flight and increasing his attack power) * Matrix of Leadership
-        (An ancient relic designed to power a star harvester. It is also capable of
-        reviving other Transformers) * Temenos Sword (A weapon belonging to the Knights
-        of Cybertrons, strong enough to cut through opponents as strong if not stronger
-        than Optimus) * Heat-Based Weaponry (Optimus possesses heat based weaponry
-        such as arm mounted blades. These weapons are hot enough to slice through
-        Cybertronian armor) * Vector Shield (Used primarily as Optimus main form of
-        defense and long range weapon. Has a built in blaster that can be used against
-        opponents from a distance) Notes: - "Base Prime does not scale to The Fallen,
-        the Jetpower upgrade was easily toren apart" first of all, he does, Optimus
-        was barely phased by his attacks and The Fallen only mananged to knock him
-        back and not to mention he was being jumped by The Fallen AND Megatron all
-        at same time, second, Jetpower''s arsenal was rendered useless to The Fallen
-        as he tanked every gunfire from it and yes he did tore it apart, that wouldn''t
-        mean nothing as of my previous statement, third, the movie databook already
-        confirms their power levels, fourth, The Fallen feared coming to Earth with
-        Prime on it, b4 you say he was just catious, that is just a stupid claim,
-        The Fallen knew very well of what Prime is capable of (As he casually ripped
-        off The Fallen''s face and pierced through him like Omni-Man did to Immortal)
-        and all other Primes aswell, that is pretty much a bloodlinked conclusion.
-        "Jetpower received no damage and was sent at least 2 meters away by Megatron''s
-        blaster cannon, yet in the forest fight before Jetpower upgrade and RoTF,
-        OP was sent flying multiple meters away by that same cannon", do I need to
-        mention OP was literally 3v1-ing some of the strongest Decepticons and was
-        heavily weakened when he received the shot?- - Strength of the verses Cybertronians''
-        and Decepticons'' weaponry aren''t linearly ranked and that''s consistent.
-        Optimus'' blasters which have a yield of 3 kilotons of TNT and Iron Hide''s
-        blasters have yield strength of 10 to 12 kilotons of TNT, that would mean
-        Iron Hide''s blasters are stronger than Prime''s even tho Iron Hide is far
-        inferior than Prime. Strength of the weapons isn''t stated to be so linear,
-        weapons can be stronger or weaker than the wielder of a different rank, the
-        gaps between other guns can be wide in comparison. There''s also no reason
-        for standard weaponry even beyond your average Cybertronian gun to be stronger
-        than Prime himself, unless it''s explicitly stated to be on another caliber.
-        Also, Prime''s Energon Blades seem to be of Prime''s known speciality, hell
-        even the Blades to more significantly more damage than his blasters, this
-        is for 2007/DoTM Optimus, also it''s important to point out that characters
-        like Demolisher could be killed by 10-12 kilotons of TNT of firepower, making
-        him a low tier of the verse. B4 you say "Well why did such a high tier being
-        like OP struggled against an such a weak opponent? Surely they''re not as
-        strong as you claim." that is just false af, considering the strength of the
-        characters from a narrative standpoint, OP and IH never struggled with Demolisher,
-        bro ran the moment he was interrogated and was also MASSIVE in height, yet
-        was put down by guns that scale significatly less than their wielders, that
-        is not an anti-feat to high tier characters, neither is it a flaw in the scale.
-        == Gallery == File:Transformers-one-origin-film-reportedly-in-the-wor uzfr.1280cvbd.webp|Close
-        look up File:The-manoharan-brothers-artstation-optimus-2007-frontwefwe.jpg|Face
-        File:C3fd965d8'
-      source_id: character-stats-profiles-galvatron-transformers
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1018,8 +727,8 @@ repair:
       incredible bacon|530612
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-galvatron
-    url: https://vsbattles.fandom.com/wiki/Galvatron
+  - source_id: vsbattles-galvatron-transformers
+    url: https://vsbattles.fandom.com/wiki/Galvatron_Transformers
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -1032,7 +741,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Galvatron (IDW 2005)
     source_type: mediawiki
     revision_id: '9632225'
@@ -1076,22 +784,277 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{High 5-A}}, higher with the Heart of Darkness
+      value: At least , higher with the Heart of Darkness
+      source_id: vsbattles-galvatron-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Type 1 and 2; Cybertronians
+        consistently shrug off wounds that should be deadly, such as bisection or
+        even worse), Large Size (Type 1), Transformation (Into a cannon or a tank),
+        Martial Artist, Flight, Weapon Mastery, Enhanced Senses, Social Influencing,
+        Rage Power, Self-Sustenance (Types 1 and 3), Energy Manipulation, Regeneration
+        (Low, can heal from small wounds), Flight, Resistances to Fire Manipulation,
+        Ice Manipulation and Acid Manipulation With the D-Void's Power=Death Manipulation,
+        (Can kill beings by simply touching them), Corruption (Type 1), Mind Manipulation,
+        Necromancy, Cosmic Awareness and Resurrection (Can revive dead Transformers)
+      source_id: vsbattles-galvatron-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Brown Dwarf level (Could contend with Optimus Prime, but ultimately
+        loss in their final fight. Ripped Megatron in half, although Megatron was
+        off guard and weakenedAt least 161.47 Ronnatons of TNT), higher with the Heart
+        of Darkness (Stated to be more powerful than before. Was able to overwhelm
+        Optimus and was able to wound him in their second fight, albeit Optimus was
+        off guard), can negate conventional durability with the D-Void's power.
+      source_id: vsbattles-galvatron-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Supersonic movement speed, Massively FTL+ reactions and combat speed
+        (Comparable to Arcee and Optimus Prime29.9 Million c)
+      source_id: vsbattles-galvatron-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Brown Dwarf level, higher with the Heart of Darkness
+      source_id: vsbattles-galvatron-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Can fight and move, even with ridiculous injuries, cannot
+        tire physically)
+      source_id: vsbattles-galvatron-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range. At least Tens of Meters with his Fusion Cannon
+      source_id: vsbattles-galvatron-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Fusion Cannon The Fusion Cannon Galvatron uses appears to be a different
+        model than Megatron's, but is roughly equal in power., Axe Galvatron's preferred
+        weapon, however, is a simple battle axe that he's brandished in battle for
+        millions of years.
+      source_id: vsbattles-galvatron-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted. While he may seem like an insane, rather thoughtless warrior
+        at first glance, Galvatron is actually an adept strategist, a capable leader,
+        a cunning warrior, and a master of most, if not all Cybertronian martial arts.
+        As one one of the oldest living Cybertronians, he's accumulated a vast degree
+        of knowledge in various fields over his some eight million years of existence.
+      source_id: vsbattles-galvatron-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|galvatron idw 2005|9632225
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-galvatron-transformers
+    url: https://character-stats-and-profiles.fandom.com/wiki/Galvatron_Transformers
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - tier
+    normalized_page_title: Optimus Prime (Canon, Bayverse)/Incredible bacon
+    source_type: mediawiki
+    revision_id: '530612'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 15947
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 65
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least 1-B | At least 1-B | 1-B, higher with Stealth Force, even higher
+        with Weaponry and Flight Tech
+      source_id: character-stats-profiles-galvatron-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Hyperverse level29-D (Even in base with the power level of 10,
+        he is superior than The Fallen who has the power level of 5+. Fought and held
+        his own against Megatron, Starscream and Grindor. Overpowered Devastator with
+        Iron Hide with ease) | At least Hyperverse level, likely higher (Albeit the
+        Jetpower upgrade didn't do much damage to The Fallen, Optimus physically overpowered
+        and ripped off The Fallens face and finished him off brutally) | Hyperverse
+        level (Is stated to have become far stronger than before. One-shot an 800+
+        tonne Grimlock with ease, sending him flying), higher with Stealth Force,
+        even higher with Weaponry and Flight Tech (Forced Shockwave and The Driller
+        to retreat. His Temenos sword completely cut through Lockdown and sliced through
+        The Last Knight Megatron's arm. His brass knuckles completely ripped through
+        Shockwave's armor. His axe easily ripped off Dark of the Moon Megatron's head)
+      source_id: character-stats-profiles-galvatron-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (Can keep up with the Autobots like Jazz, should be much
+        faster than the Jetpower upgrade, who can tag and keep up with The Fallen,
+        a being that can hop between dimensions with sheer speed, which is consistent
+        since he has shown to be able to create maneuvers while flying with his jets)
+        | Immeasurable (Blitzed Megatron and mauled him completely, kept up with The
+        Fallen) | Immeasurable (Faster than before)
+      source_id: character-stats-profiles-galvatron-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Hyperverse level | At least Hyperverse level (Was unphased from
+        Megatron's attacks and shrugged off The Fallen smashing his face with a jet
+        thruster) | Hyperverse level (Tanked Quintessa's powers, who is capable to
+        of moving Cybertron8.9482207e+28 Joules), higher with Forcefield (DoTM Megatron
+        was unable to break through his forcefield)
+      source_id: character-stats-profiles-galvatron-transformers
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|optimus prime canon bayverse
+      incredible bacon|530612
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-galvatron
+    url: https://vsbattles.fandom.com/wiki/Galvatron
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    normalized_page_title: Galvatron (IDW 2005)
+    source_type: mediawiki
+    revision_id: '9632225'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 5330
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Notes/Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least , higher with the Heart of Darkness
       source_id: vsbattles-galvatron
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base=Superhuman Physical Characteristics, Immortality (Type 1 and 2;
-        Cybertronians consistently shrug off wounds that should be deadly, such as
-        bisection or even worse), Large Size (Type 1), Transformation (Into a cannon
-        or a tank), Martial Artist, Flight, Weapon Mastery, Enhanced Senses, Social
-        Influencing, Rage Power, Self-Sustenance (Types 1 and 3), Energy Manipulation,
-        Regeneration (Low, can heal from small wounds), Flight, Resistances to Fire
-        Manipulation, Ice Manipulation and Acid Manipulation |-|With the D-Void's
-        Power=Death Manipulation, (Can kill beings by simply touching them), Corruption
-        (Type 1), Mind Manipulation, Necromancy, Cosmic Awareness and Resurrection
-        (Can revive dead Transformers)
+      value: Superhuman Physical Characteristics, Immortality (Type 1 and 2; Cybertronians
+        consistently shrug off wounds that should be deadly, such as bisection or
+        even worse), Large Size (Type 1), Transformation (Into a cannon or a tank),
+        Martial Artist, Flight, Weapon Mastery, Enhanced Senses, Social Influencing,
+        Rage Power, Self-Sustenance (Types 1 and 3), Energy Manipulation, Regeneration
+        (Low, can heal from small wounds), Flight, Resistances to Fire Manipulation,
+        Ice Manipulation and Acid Manipulation With the D-Void's Power=Death Manipulation,
+        (Can kill beings by simply touching them), Corruption (Type 1), Mind Manipulation,
+        Necromancy, Cosmic Awareness and Resurrection (Can revive dead Transformers)
       source_id: vsbattles-galvatron
       provider_id: vsbattles
       authority: high
@@ -1134,10 +1097,10 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: '*Fusion Cannon The Fusion Cannon Galvatron uses appears to be a different
-        model than Megatron''s, but is roughly equal in power. *Axe Galvatron''s preferred
-        weapon, however, is a simple battle axe that he''s brandished in battle for
-        millions of years.'
+      value: Fusion Cannon The Fusion Cannon Galvatron uses appears to be a different
+        model than Megatron's, but is roughly equal in power., Axe Galvatron's preferred
+        weapon, however, is a simple battle axe that he's brandished in battle for
+        millions of years.
       source_id: vsbattles-galvatron
       provider_id: vsbattles
       authority: high
@@ -1148,20 +1111,6 @@ repair:
         a cunning warrior, and a master of most, if not all Cybertronian martial arts.
         As one one of the oldest living Cybertronians, he's accumulated a vast degree
         of knowledge in various fields over his some eight million years of existence.
-      source_id: vsbattles-galvatron
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Overconfidence coupled with insanity makes him liable to do almost anything
-        in a fight ==Notable Matchups== Victories: Losses: Inconclusive: ==Notes/Explanations==
-        {{Scroll box |content= }} {{discussions}} Category:Transformers Category:Decepticons
-        Category:Comic Book Characters Category:Characters Category:Male Characters
-        Category:Axe Users Category:Gun Users Category:Gladiators Category:Warriors
-        Category:Evil Characters Category:Villains Category:Antagonists Category:Primary
-        Antagonists Category:Transformation Users Category:Flight Users Category:Large
-        Sized Characters Category:Enhanced Senses Users Category:Martial Artists Category:Weapon
-        Masters Category:Energy Users Category:Self-Sustenance Users Category:Immortals'
       source_id: vsbattles-galvatron
       provider_id: vsbattles
       authority: high
@@ -1237,9 +1186,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Shockwave=Superhuman Physical Characteristics, Transformation, Enhanced
-        Senses, Weapon Mastery, Energy Projection (via his arm cannon), Flight, Martial
-        Arts, Extreme Longevity, Large Size (Type 1), Genius Intelligence, Preparation,
+      value: Superhuman Physical Characteristics, Transformation, Enhanced Senses,
+        Weapon Mastery, Energy Projection (via his arm cannon), Flight, Martial Arts,
+        Extreme Longevity, Large Size (Type 1), Genius Intelligence, Preparation,
         Rage Power and Reactive Evolution (When cornered by the Dinobots, Shockwave
         could evolve and become even more powerful), Self-Sustenance (Types 1 and
         3), Immortality (Types 1 and 2; Cybertronians consistently shrug off wounds
@@ -1249,8 +1198,8 @@ repair:
         Information Analysis, Information Manipulation, Data Manipulation, Hacking,
         Shapeshifting, Resistances to Fire Manipulation, Ice Manipulation, Acid Manipulation,
         Telepathy (Soundwave could not read his mind) and Mind Manipulation (Resisted
-        the control of the D-Void) |-|Shockwave (Regenesis)=Same as before (But to
-        a greater extent, due to Ore-13), Time Manipulation, Time Travel, BFR through
+        the control of the D-Void) Shockwave (Regenesis)=Same as before (But to a
+        greater extent, due to Ore-13), Time Manipulation, Time Travel, BFR through
         time (With Ore-1, Shockwave can travel anywhere in time within an instant.
         Has complete control over time), Death Manipulation and Deconstruction (With
         Ore-2), Size Manipulation (With Ore-3), Gravity Manipulation, Light Manipulation,
@@ -1343,63 +1292,57 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "None notable Notable Attacks/Techniques: |-|Shockwave= Shockwave has\
-        \ been shown to turn off all higher functions of his brain during a situation\
-        \ he deems completely illogical. The only functions that remain are anger\
-        \ and knowledge of fighting. While this \"rage\" protocol was active, he was\
-        \ able to make short work of Grimlock, and the other Dinobots. |-|Shockwave\
-        \ (Regenesis)= *Ore-1 Ore-1 grants Shockwave absolute control over time itself,\
-        \ allowing him to travel towards all points in time as well as shift others\
-        \ through time, reverse and forward time and warp reality to his will. Shockwave\
-        \ used the power of Ore 1 to forward the universe to its death. *Ore-2 Ore-2\
-        \ grants Shockwave the power over death. It causes a localized decaying effect\
-        \ and anything it comes into contact with will instantly drain the life off\
-        \ of its targets. It also functions similarly to the death powers of Nova\
-        \ Prime, Galvatron and the D-Void. *Ore-3 Launched some 600,000 years ago,\
-        \ Ore-3 landed on the planet Prion and took root, seeding the planet with\
-        \ its unique ore. Exactly what the ore does is unclear, but it may have some\
-        \ control over mass shifting, and allows Shockwave to change its size. *Ore-4\
-        \ As part of his Regenesis project, Shockwave seeded Caminus with Ore-4 600,000\
-        \ years ago. Ore-4 is capable of controlling gravity, allowing Shockwave to\
-        \ increase it to crush opponents or use it as a means of levitation. Shockwave\
-        \ can also use Ore-4 to bend light in order to make himself invisible. *Ore-5\
-        \ One of Shockwave's Regenesis ores, Ore-5, \"Combination\", was seeded on\
-        \ the planet Devisiun. Exactly what the ore does is unclear, but it presumably\
-        \ involves combining things in some fashion, likely merging with other bots.\
-        \ *Ore-6 Ore 6 allows Shockwave to absorb heat and energy on a planetary scale,\
-        \ being able to reduce a planet into a cold, freezing state. Ore 6 and Ore\
-        \ 8 allows Shockwave full control of all potential energy sources in the universe.\
-        \ Absorbed massive amounts of energy from the dead universe. *Ore-7 Ore-7\
-        \ is a variety of energon possessed with mysterious powers of transmutation.\
-        \ This allows Shockwave to convert materials into another form, such as converting\
-        \ organic matter into metal and raw energy. It also allows him to heal himself\
-        \ from grievous wounds, and create immunities to diseases. *Ore-8 Ore 8 emits\
-        \ highly unstable radioactive energy, allowing anyone who is exposed to it\
-        \ be driven insane by it. It can also cause illusions to those affected by\
-        \ it. It is very unstable and highly explosive. Ore 6 and Ore 8 allows Shockwave\
-        \ full control of all potential energy sources in the universe. *Ore-9 Ore-9\
-        \ is capable of warping space. This allows Shockwave to move anywhere he wants\
-        \ throughout the universe, as well as warp objects through space and to different\
-        \ locations. *Ore-10 Ore-10 is a crystalline energon derivative, capable of\
-        \ literally \"fueling deception\" by reprogramming the minds of Cybertronians.\
-        \ This allows Shockwave to bend minds to his own will. *Ore-11 One of Shockwave's\
-        \ Regenesis ores, Ore-11, \"Evolution\", generated on the planet Eukaris.\
-        \ Exposure to the ore is capable of mutating the Cybertronian body into a\
-        \ monstrous\u2014but highly resilient and versatile\u2014new form. This would\
-        \ allow Shockwave to adapt to a new situation as he sees fit. *Ore-12 Ore-12,\
-        \ \"Protection,\" is a variety of energon. When properly \"bonded\" to the\
+      value: "he was able to make short work of Grimlock, Ore-1 Ore-1 grants Shockwave\
+        \ absolute control over time itself, allowing him to travel towards all points\
+        \ in time as well as shift others through time, reverse and forward time and\
+        \ warp reality to his will. Shockwave used the power of Ore 1 to forward the\
+        \ universe to its death., Ore-2 Ore-2 grants Shockwave the power over death.\
+        \ It causes a localized decaying effect and anything it comes into contact\
+        \ with will instantly drain the life off of its targets. It also functions\
+        \ similarly to the death powers of Nova Prime, Galvatron and the D-Void.,\
+        \ Ore-3 Launched some 600, 000 years ago, Ore-3 landed on the planet Prion\
+        \ and took root, seeding the planet with its unique ore. Exactly what the\
+        \ ore does is unclear, but it may have some control over mass shifting, Ore-4\
+        \ As part of his Regenesis project, Shockwave seeded Caminus with Ore-4 600,\
+        \ 000 years ago. Ore-4 is capable of controlling gravity, allowing Shockwave\
+        \ to increase it to crush opponents or use it as a means of levitation. Shockwave\
+        \ can also use Ore-4 to bend light in order to make himself invisible., Ore-5\
+        \ One of Shockwave's Regenesis ores, Ore-5, was seeded on the planet Devisiun.\
+        \ Exactly what the ore does is unclear, but it presumably involves combining\
+        \ things in some fashion, likely merging with other bots., Ore-6 Ore 6 allows\
+        \ Shockwave to absorb heat and energy on a planetary scale, being able to\
+        \ reduce a planet into a cold, freezing state. Ore 6 and Ore 8 allows Shockwave\
+        \ full control of all potential energy sources in the universe. Absorbed massive\
+        \ amounts of energy from the dead universe., Ore-7 Ore-7 is a variety of energon\
+        \ possessed with mysterious powers of transmutation. This allows Shockwave\
+        \ to convert materials into another form, such as converting organic matter\
+        \ into metal and raw energy. It also allows him to heal himself from grievous\
+        \ wounds, Ore-8 Ore 8 emits highly unstable radioactive energy, allowing anyone\
+        \ who is exposed to it be driven insane by it. It can also cause illusions\
+        \ to those affected by it. It is very unstable and highly explosive. Ore 6\
+        \ and Ore 8 allows Shockwave full control of all potential energy sources\
+        \ in the universe., Ore-9 Ore-9 is capable of warping space. This allows Shockwave\
+        \ to move anywhere he wants throughout the universe, as well as warp objects\
+        \ through space and to different locations., Ore-10 Ore-10 is a crystalline\
+        \ energon derivative, capable of literally \"fueling deception\" by reprogramming\
+        \ the minds of Cybertronians. This allows Shockwave to bend minds to his own\
+        \ will., Ore-11 One of Shockwave's Regenesis ores, Ore-11, generated on the\
+        \ planet Eukaris. Exposure to the ore is capable of mutating the Cybertronian\
+        \ body into a monstrous\u2014but highly resilient and versatile\u2014new form.\
+        \ This would allow Shockwave to adapt to a new situation as he sees fit.,\
+        \ Ore-12 Ore-12, \" is a variety of energon. When properly \"bonded\" to the\
         \ body of a living being, it becomes a symbiotic suit of crystalline armor,\
         \ capable of changing shape to accommodate the needs of its wearer while providing\
-        \ protection from even the harshest of environments. *Ore-13 Ore-13 is the\
+        \ protection from even the harshest of environments., Ore-13 Ore-13 is the\
         \ last of a series of artificially-created energon-derived ores seeded throughout\
         \ the galaxy by Decepticon scientist Shockwave as part of his Regenesis project.\
         \ Taking root on the planet Earth, Ore-13 boosts the power of The Transformers\
         \ to extreme levels, leading those who later discovered it to term it \"Ultra-Energon\"\
-        ; Shockwave favored the more prosaic name of \"Power Itself\" when christening\
+        , Shockwave favored the more prosaic name of \"Power Itself\" when christening\
         \ the various ores after their different effects. It is not without drawbacks,\
         \ however: while it will grant a user massively enhanced strength and durability,\
         \ the more its power is drawn upon, the faster it burns out, leaving a user\
-        \ at risk of sudden de-powering in mid-combat. *Ore-14 Ore-14 is a variety\
+        \ at risk of sudden de-powering in mid-combat., Ore-14 Ore-14 is a variety\
         \ of energon. It has the power to \"resurrect\" The Transformers and even\
         \ entire cities, as well as heal others and himself from the most grievous\
         \ of wounds."
@@ -1435,7 +1378,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Galvatron (IDW 2005)
     source_type: mediawiki
     revision_id: '9632225'
@@ -1481,22 +1423,21 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: At least {{High 5-A}}, higher with the Heart of Darkness
+      value: At least , higher with the Heart of Darkness
       source_id: vsbattles-galvatron-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base=Superhuman Physical Characteristics, Immortality (Type 1 and 2;
-        Cybertronians consistently shrug off wounds that should be deadly, such as
-        bisection or even worse), Large Size (Type 1), Transformation (Into a cannon
-        or a tank), Martial Artist, Flight, Weapon Mastery, Enhanced Senses, Social
-        Influencing, Rage Power, Self-Sustenance (Types 1 and 3), Energy Manipulation,
-        Regeneration (Low, can heal from small wounds), Flight, Resistances to Fire
-        Manipulation, Ice Manipulation and Acid Manipulation |-|With the D-Void's
-        Power=Death Manipulation, (Can kill beings by simply touching them), Corruption
-        (Type 1), Mind Manipulation, Necromancy, Cosmic Awareness and Resurrection
-        (Can revive dead Transformers)
+      value: Superhuman Physical Characteristics, Immortality (Type 1 and 2; Cybertronians
+        consistently shrug off wounds that should be deadly, such as bisection or
+        even worse), Large Size (Type 1), Transformation (Into a cannon or a tank),
+        Martial Artist, Flight, Weapon Mastery, Enhanced Senses, Social Influencing,
+        Rage Power, Self-Sustenance (Types 1 and 3), Energy Manipulation, Regeneration
+        (Low, can heal from small wounds), Flight, Resistances to Fire Manipulation,
+        Ice Manipulation and Acid Manipulation With the D-Void's Power=Death Manipulation,
+        (Can kill beings by simply touching them), Corruption (Type 1), Mind Manipulation,
+        Necromancy, Cosmic Awareness and Resurrection (Can revive dead Transformers)
       source_id: vsbattles-galvatron-comics
       provider_id: vsbattles
       authority: high
@@ -1539,10 +1480,10 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: '*Fusion Cannon The Fusion Cannon Galvatron uses appears to be a different
-        model than Megatron''s, but is roughly equal in power. *Axe Galvatron''s preferred
-        weapon, however, is a simple battle axe that he''s brandished in battle for
-        millions of years.'
+      value: Fusion Cannon The Fusion Cannon Galvatron uses appears to be a different
+        model than Megatron's, but is roughly equal in power., Axe Galvatron's preferred
+        weapon, however, is a simple battle axe that he's brandished in battle for
+        millions of years.
       source_id: vsbattles-galvatron-comics
       provider_id: vsbattles
       authority: high
@@ -1553,20 +1494,6 @@ repair:
         a cunning warrior, and a master of most, if not all Cybertronian martial arts.
         As one one of the oldest living Cybertronians, he's accumulated a vast degree
         of knowledge in various fields over his some eight million years of existence.
-      source_id: vsbattles-galvatron-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Overconfidence coupled with insanity makes him liable to do almost anything
-        in a fight ==Notable Matchups== Victories: Losses: Inconclusive: ==Notes/Explanations==
-        {{Scroll box |content= }} {{discussions}} Category:Transformers Category:Decepticons
-        Category:Comic Book Characters Category:Characters Category:Male Characters
-        Category:Axe Users Category:Gun Users Category:Gladiators Category:Warriors
-        Category:Evil Characters Category:Villains Category:Antagonists Category:Primary
-        Antagonists Category:Transformation Users Category:Flight Users Category:Large
-        Sized Characters Category:Enhanced Senses Users Category:Martial Artists Category:Weapon
-        Masters Category:Energy Users Category:Self-Sustenance Users Category:Immortals'
       source_id: vsbattles-galvatron-comics
       provider_id: vsbattles
       authority: high
@@ -1591,7 +1518,6 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
     - tier
     - weaknesses
@@ -1622,7 +1548,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1639,63 +1565,6 @@ repair:
         5-B with weaponry | At least 9-B to 5-B, likely higher | At least 9-B, higher
         with weaponry, possibly 5-B | At least 9-B to High 3-A to Low 1-C, High 3-A
         to Low 1-C with weaponry
-      source_id: character-stats-profiles-galvatron-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Original Body= *Superhuman Physical Characteristics *Inorganic Physiology\
-        \ (Type 2; Is a robot, or a Mechanoid, in his own words) *Preparation (Environmental;\
-        \ In High Noon Tex, he was able to prepare an explosive dummy of himself for\
-        \ Tex and trick him with it) *Social Influencing (Deception; is completely\
-        \ willing to trick his enemies just to defeat them) *Large Size (Type 0; is\
-        \ thirty feet tall) *Enhanced Senses (Enhanced Sight; has 360\xB0 vision *Martial\
-        \ Arts (Extremely skilled in hand-to-hand combat;) *Weapon Mastery (Close\
-        \ Weapon Mastery, Firearms Mastery, Explosives Mastery, and High-Tech Weapons\
-        \ Mastery; Can use his weapons with ease, and can even improvise weapons on\
-        \ the fly) *Acrobatics (Stated to be an acrobat) *Natural Weaponry (Horns,\
-        \ tusks, fists, Multi-Use Hand) *Fourth Wall Awareness (In one of his comic\
-        \ book covers, he directly speaks to the reader) *Energy Manipulation (Energy\
-        \ Projection; has a laser cutter built into his hand) *Explosion Manipulation\
-        \ (Missile Launcher Hand, Mine Launcher Hand) *Information Analysis (Has a\
-        \ built-in scanner) *Dimensional Travel (Consistently hops between dimensions)\
-        \ *Time Manipulation (Time Travel; travelled back in time to kill Galvatron)\
-        \ *Immortality (Type 2; survived being decapitated) *Fire Manipulation (Flamethrower\
-        \ Hand) *Flight (Jet Boots allow him to fly) *Sleep Manipulation and Smoke\
-        \ Manipulation (Via knockout gas) *Pressure Point Strikes (Could find Galvatron's\
-        \ weak spot and exploit it to his advantage (in combat)) *Teleportation (Has\
-        \ access to a teleportation device and uses it whenever he needs a quick escape)\
-        \ *Hacking *Resistance to: **Standard forms of Mind Manipulation (Has a non-organic\
-        \ brain) **Hacking (States that his brain is armed with several anti-hacking\
-        \ locks) |-| Rebuilt= *All previous abilities excluding Large Size *Possible\
-        \ Size Manipulation (His size seemingly varies from seven feet to thirty feet\
-        \ with no apparent explanation) |-| Death's Head II= *Superhuman Physical\
-        \ Characteristics *Inorganic Physiology (Type 2; Minion's body is robotic)\
-        \ *Genius Intelligence (Minion is able to download his opponents' minds, something\
-        \ he refers to as Cranial Disruption. As such, he gains his opponents' experience\
-        \ and intelligence, effectively getting smarter over time; has once killed\
-        \ Reed Richards) *Martial Arts (A master of all forms of combat) *Enhanced\
-        \ Senses (Enhanced Hearing, Enhanced Vision, and Enhanced Smell) *Possession/Mind\
-        \ Manipulation (Was able to take over Minion's mind after his personality\
-        \ was assimilated into him) *Multiple Personalities *Natural Weaponry/Limited\
-        \ Transformation (His arm can turn into either a razor-sharp blade, a large\
-        \ hand, or a plasma-fusion cannon; has horns as well) *Energy Projection (Cannon\
-        \ hand) *Regeneration (Low-Mid; Minion's body was built to regenerate severed\
-        \ limbs in under a minute) *Time Manipulation and Dimensional Travel (Time\
-        \ Travel; via his A.I.M. Time Belt; claims to have been on adventures across\
-        \ time and space) *Resistance to: **Heat Manipulation **Energy Projection\
-        \ |-| What If...Death's Head Had Lived?= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Martial Arts *Weapon Mastery (Of his axe,\
-        \ spear, large gun, etc.) *Natural Weaponry *Social Influencing (Trust; despite\
-        \ his position as a mercenary, he was able to recruit superheroes to fight\
-        \ Charnel/Minion) *Dimensional Travel/Time Manipulation (Time Travel; should\
-        \ just be an alternate version of base Death's Head) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head |-| Destroy All Robots!= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Natural Weaponry (Fists, horns, tusks, Multi-Use\
-        \ Hand) *Weapon Mastery (Close Weapon Mastery) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head"
       source_id: character-stats-profiles-galvatron-comics
       provider_id: character_stats_profiles
       authority: high
@@ -1747,16 +1616,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Water can cause him to short out. His weapons can be broken. If his
-        head is impaled, he will die. Refuses to kill unless it is for profit. | All
-        previous weaknesses. | Vulnerable to telepathic attacks. Refuses to kill unless
-        it is for profit. | None notable, likely all previous weaknesses from the
-        first and second keys. | Can be killed, likely all previous weaknesses from
-        the first and second keys. == Others == Notable Victories: Notable Losses:
-        Inconclusive Matches: Category:Tier 9 Category:Tier 9-B Category:Tier 9-A
-        Category:Tier 8 Category:Tier 8-C Category:Tier 5 Category:Tier 5-B Category:Tier
-        1 Category:Tier Low 1-C Category:MisterNobodyVulAdvAoyll Category:Tier 3 Category:Tier
-        High 3-A'
+      value: Water can cause him to short out. His weapons can be broken. If his head
+        is impaled, he will die. Refuses to kill unless it is for profit., All previous
+        weaknesses., Vulnerable to telepathic attacks. Refuses to kill unless it is
+        for profit., likely all previous weaknesses from the first and second keys.,
+        Can be killed
       source_id: character-stats-profiles-galvatron-comics
       provider_id: character_stats_profiles
       authority: high
@@ -1766,7 +1630,7 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
