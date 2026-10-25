@@ -3838,14 +3838,22 @@ def _page_disclaimer(value: str, lowered: str) -> bool:
 # such as Storm's emotional-dependence and Thor's holding-back
 # statements). The gate decides whether the lead clause re-merges.
 _SHARD_CONJ_OPENERS = (
-    "but ", "and ", "so ", "yet ", "however ", "although ",
+    "but ", "and ", "or ", "so ", "yet ", "however ", "although ",
     "though ", "rather than ",
 )
 _SHARD_PREP_OPENERS = (
     "during ", "after ", "before ", "with ", "without ", "by ",
     "through ", "despite ", "because of ", "due to ", "in spite of ",
-    "instead of ",
+    "instead of ", "like ",
 )
+# Adverb openers (frag-9): "even" leads the same continuation shape
+# as a conjunction ("even in the eminence of a battle."). "or" was
+# simply missing from the frag-8 conjunction set (the gate-50l venom
+# item "or by anything that can pass through the symbiote..." slipped
+# through on exactly that gap); "like" is a prepositional opener
+# ("like all others of its kind"). All three are extensions of this
+# same reason, not new reasons: same spares, same calibration base.
+_SHARD_ADV_OPENERS = ("even ",)
 _SHARD_TRAILING_LEADIN = ("for example", "for instance", "such as", "e.g.")
 # First tokens ending in -ing that are names or nouns, not gerunds
 # ("Lightning slapping Fang..." is a character name, not a verb).
@@ -4002,6 +4010,18 @@ def _shard_subject_led(tokens: list[str]) -> bool:
     for idx, token in enumerate(tokens):
         if token not in _SHARD_SUBJECTS:
             continue
+        # A relative pronoun attached to a preceding noun ("anything
+        # that can pass...", "the suit that protects...") is not a
+        # main-clause subject: it opens a relative clause, so a verb
+        # after it must not count as a subject-led main clause. A
+        # leading relative pronoun, or one after a function word,
+        # still counts ("that he cannot control" is subject-led).
+        if (
+            token in ("that", "who", "which")
+            and idx > 0
+            and tokens[idx - 1] not in _SHARD_FUNCTION
+        ):
+            continue
         for nxt in tokens[idx + 1: idx + 3]:
             if _shard_is_verb(nxt):
                 return True
@@ -4035,6 +4055,11 @@ def _prose_sentence_shard(value: str, lowered: str) -> bool:
             if stripped.startswith(op):
                 opener = "preposition"
                 break
+    if opener is None:
+        for op in _SHARD_ADV_OPENERS:
+            if stripped.startswith(op):
+                opener = "adverb"
+                break
     toks = re.findall(r"[a-z]+(?:'[a-z]+)?", lowered)
     if not toks:
         return False
@@ -4052,9 +4077,15 @@ def _prose_sentence_shard(value: str, lowered: str) -> bool:
         return False
     # "without" + a noun phrase is a conditional weakness ("Without
     # his armor"); "without" + a gerund ("without discussing the
-    # method") is a continuation and fires.
-    if opener == "preposition" and stripped.startswith("without "):
-        rest = toks[1:]
+    # method") is a continuation and fires. Same for "even without"
+    # ("even without her horn" is a real limitation statement).
+    without_rest: list[str] | None = None
+    if stripped.startswith("without "):
+        without_rest = toks[1:]
+    elif stripped.startswith("even without "):
+        without_rest = toks[2:]
+    if without_rest is not None:
+        rest = without_rest
         while rest and rest[0] in _SHARD_DETERMINERS:
             rest = rest[1:]
         if rest and not rest[0].endswith("ing"):
@@ -4067,6 +4098,190 @@ def _prose_sentence_shard(value: str, lowered: str) -> bool:
     if _shard_comma_main_clause(text):
         return False
     return True
+
+
+# Relative-pronoun opener screen (ninth debris generation, weaknesses
+# only): an item that OPENS on a relative pronoun (which/that/who/
+# whom/whose/what) is a continuation of a sentence whose head stayed
+# on the page -- "which has causes drastic shifts in his personality.",
+# "which can weaken or nullify the suit's healing powers." (gate 50l,
+# venom-earth-616). The frag-8 headed-clause spare does NOT apply
+# here: the relative pronoun is itself the subject of its clause, so
+# "which bounces upon hitting the ground" looks headed while still
+# being a fragment with no antecedent. An item is whole only if it
+# carries a MAIN clause of its own: a main clause after a comma, or a
+# second independent clause after a sentence boundary. No limitation
+# spare either: the relative clause's own verb ("weaken") does not
+# make the item whole. One spare, and it is load-bearing: a PAST-
+# TENSE relative clause narrates a completed event (a documented
+# exploit), which the frag-5 long-clause calibration deliberately
+# protects -- "which allowed Denji to successfully ambush her in
+# their final confrontation" is a pinned zero-reason control, so the
+# screen spares relative clauses whose main verb is past tense
+# (-ed, irregular past, was/were/had). The gate-50l items are
+# present-tense/modal property statements ("has causes", "can
+# weaken") and still fire. Calibration (68,315 stored weakness items,
+# frag-9 calib1 with the frag-8 spares): 131 residual; the true hit
+# count under this screen's own completeness test is measured by
+# calib3 (the frag-8 headed spare hid ~1,250 "which" continuations
+# from that count). Sampled residual hits are fragment-class
+# throughout (narrative/ability continuations).
+_REL_PRONOUNS = (
+    "which ", "that ", "who ", "whom ", "whose ", "what ",
+)
+
+
+def _rel_has_main_clause(text: str) -> bool:
+    if _shard_comma_main_clause(text):
+        return True
+    parts = re.split(r"[.!?]\s+", text.strip())
+    for tail in parts[1:]:
+        toks = re.findall(r"[a-z]+(?:'[a-z]+)?", tail.casefold())
+        expanded = _shard_expand_contractions(toks)
+        if _shard_headed(expanded) or _shard_subject_led(expanded):
+            return True
+    return False
+
+
+_REL_PAST_AUX = frozenset({"was", "were", "had"})
+
+
+def _rel_clause_is_past(tokens: list[str]) -> bool:
+    """True when the relative clause's main verb is past tense: it
+    narrates a completed event, which the frag-5 calibration protects.
+    The first verb decides: an auxiliary / 3rd-person -s verb is
+    present tense (fire), an -ed form, irregular past, or was/were/had
+    is past tense (spare). No verb at all means present/fragment."""
+    for token in tokens:
+        if token in _REL_PAST_AUX:
+            return True
+        if len(token) >= 4 and token.endswith("ed"):
+            return True
+        if token in _SHARD_IRREGULAR_PAST:
+            return True
+        if token in _SHARD_AUX or _looks_like_finite_verb(token):
+            return False
+    return False
+
+
+def _relative_pronoun_opener(value: str, lowered: str) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    stripped = lowered.strip().lstrip("([\"'* ")
+    if not any(stripped.startswith(p) for p in _REL_PRONOUNS):
+        return False
+    if _rel_has_main_clause(text):
+        return False
+    toks = re.findall(r"[a-z]+(?:'[a-z]+)?", lowered)
+    if _rel_clause_is_past(toks):
+        return False
+    return True
+
+
+# Numeric-split fragment screen (ninth debris generation, weaknesses
+# only): the second half of a number split at its thousands comma --
+# "000 hertz" (gate 50l, venom-mcu). The first half is prevented at
+# the source by the split_listish thousands-comma guard; this is the
+# backstop for halves already split in stored data or arriving by
+# another path. An item opening with exactly three digits (fourth
+# character not a digit) and carrying no clause of its own is a split
+# half or an image-size fragment ("335 px", "250 pxthumb", "688").
+# Calibration (68,315 stored weakness items): 190 items open with
+# exactly three digits, all debris in the sampled 25; the limitation
+# spare protects real numeric limits ("180 degree blind spot"). No
+# rule on items ENDING in a bare digit: 1,172 such items, including
+# legit "Season 3" / "White & Red #3" shapes.
+_NUMERIC_SPLIT_RE = re.compile(r"^\d{3}(?!\d)")
+
+
+def _numeric_split_fragment(value: str, lowered: str) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    if not _NUMERIC_SPLIT_RE.match(text.lstrip("([\"'* ")):
+        return False
+    if _SHARD_LIMITATION_RE.search(text):
+        return False
+    toks = re.findall(r"[a-z]+(?:'[a-z]+)?", lowered)
+    expanded = _shard_expand_contractions(toks)
+    if _shard_headed(expanded) or _shard_subject_led(expanded):
+        return False
+    if _shard_comma_main_clause(text):
+        return False
+    return True
+
+
+# Header + cut-off clause screen (ninth debris generation, weaknesses
+# only): an item of the form "Header: <rest>" where the post-colon
+# text is a cut-off fragment -- "Sonic and Heat: The Venom symbiote",
+# "Darkforce: As Anti-Venom is formed from the Lightforce",
+# "Antibody Overuse: If Anti-Venom overuses his healing powers"
+# (gate 50l, venom-earth-616). Three firing shapes, in order:
+#   1. subordinate-only rest: opens As/If/When/Because/While/After/
+#      Before/Although/Though/Since/Unless/Once/Until with no main
+#      clause after a comma and no limitation marker. The subordinate
+#      check runs BEFORE the headed check: "If Anti-Venom overuses
+#      his healing powers" has a finite verb inside the subordinate
+#      clause, which must not count as a clause of its own.
+#   2. shard rest: the post-colon text itself trips the prose-shard
+#      screens ("Through the Force", "Drawing power from the moon",
+#      "Like all Ainur").
+#   3. short definite-NP rest: "The " + 2-4 words, no verb
+#      ("The Venom symbiote"). Calibrated: 7 such items corpus-wide.
+# A rest that is whole -- subject-led finite clause, main clause
+# after a comma, leading finite verb ("Burns on contact"), or a
+# limitation marker anywhere -- survives, as do longer definitions
+# ("Ki Blast: The most basic form of energy wave."). "A "/"An "
+# definitions are deliberately NOT caught (187 items, technique
+# definitions, no verbatim failure) and neither is the 1,610-item
+# other-bare-NP class: accepted residual, the gate decides.
+_HEADER_SUBORD_OPENERS = (
+    "as ", "if ", "when ", "because ", "while ", "after ", "before ",
+    "although ", "though ", "since ", "unless ", "once ", "until ",
+)
+_HEADER_CUTOFF_RE = re.compile(r"^(.{1,80}?):\s+(.+)$")
+
+
+def _header_rest_complete(rest: str) -> bool:
+    if _SHARD_LIMITATION_RE.search(rest):
+        return True
+    toks = re.findall(r"[a-z]+(?:'[a-z]+)?", rest.casefold())
+    expanded = _shard_expand_contractions(toks)
+    if _shard_headed(expanded) or _shard_subject_led(expanded):
+        return True
+    if _shard_comma_main_clause(rest):
+        return True
+    if toks and (toks[0] in _SHARD_AUX or _looks_like_finite_verb(toks[0])):
+        return True
+    return False
+
+
+def _header_cutoff(value: str, lowered: str) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    m = _HEADER_CUTOFF_RE.match(text)
+    if not m or not (1 <= len(m.group(1).split()) <= 6):
+        return False
+    rest = m.group(2).strip()
+    if not rest:
+        return False
+    rest_low = rest.casefold()
+    if any(rest_low.startswith(op) for op in _HEADER_SUBORD_OPENERS):
+        if _shard_comma_main_clause(rest):
+            return False
+        if _SHARD_LIMITATION_RE.search(rest):
+            return False
+        return True
+    if _header_rest_complete(rest):
+        return False
+    if _prose_sentence_shard(rest, rest_low):
+        return True
+    words = rest.split()
+    if rest_low.startswith("the ") and 2 <= len(words) <= 4:
+        return True
+    return False
 
 
 def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
@@ -4125,6 +4340,12 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         reasons.append("page_disclaimer")
     if section == "weaknesses" and _prose_sentence_shard(value, lowered):
         reasons.append("prose_sentence_shard")
+    if section == "weaknesses" and _relative_pronoun_opener(value, lowered):
+        reasons.append("relative_pronoun_opener")
+    if section == "weaknesses" and _numeric_split_fragment(value, lowered):
+        reasons.append("numeric_split_fragment")
+    if section == "weaknesses" and _header_cutoff(value, lowered):
+        reasons.append("header_cutoff")
     return reasons
 
 

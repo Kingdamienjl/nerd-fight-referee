@@ -10,6 +10,7 @@ from battlebot.harvest.auto_profile_harvester import (
     profile_output_path,
     row_fingerprint,
     select_queue_rows,
+    split_listish,
 )
 
 
@@ -241,6 +242,49 @@ class ExplicitNoneExtractionTests(unittest.TestCase):
             "Attacks/Techniques: * Doom Fist * Doom Kick"
         )
         self.assertEqual(fields["weaknesses"], "Sunlight kills him")
+
+
+class ThousandsCommaSplitTests(unittest.TestCase):
+    """Frag-9: split_listish must not split a thousands-grouped
+    number at its comma ("radiation up to 4,000 hertz" split into
+    "radiation up to 4" / "000 hertz" in gate 50l)."""
+
+    def test_thousands_comma_kept_whole(self):
+        self.assertEqual(
+            split_listish("radiation up to 4,000 hertz, fire, ice"),
+            ["radiation up to 4,000 hertz", "fire", "ice"],
+        )
+
+    def test_millions_kept_whole(self):
+        self.assertEqual(
+            split_listish("deals 1,000,000 damage, fire"),
+            ["deals 1,000,000 damage", "fire"],
+        )
+
+    def test_number_list_still_splits(self):
+        # The comma BETWEEN two thousands numbers is a real
+        # separator (followed by a space, not three digits).
+        self.assertEqual(
+            split_listish("1,000, 2,000"),
+            ["1,000", "2,000"],
+        )
+
+    def test_ordinary_list_commas_still_split(self):
+        self.assertEqual(
+            split_listish("Strength 4, Speed 5"),
+            ["Strength 4", "Speed 5"],
+        )
+        self.assertEqual(
+            split_listish("fire, ice, lightning"),
+            ["fire", "ice", "lightning"],
+        )
+
+    def test_short_digit_runs_still_split(self):
+        # "4,00" is not a thousands grouping (two digits after).
+        self.assertEqual(
+            split_listish("level 4,00, fire"),
+            ["level 4", "00", "fire"],
+        )
 
 
 if __name__ == "__main__":

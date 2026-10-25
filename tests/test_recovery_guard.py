@@ -2332,5 +2332,190 @@ class EighthGenFrag8Tests(unittest.TestCase):
         self.assertIn("prose_sentence_shard", reasons)
 
 
+class NinthGenFrag9Tests(unittest.TestCase):
+    """Frag-9: relative-pronoun openers + or/even/like leading markers
+    + numeric-split fragments + header + cut-off clauses (gate 50l,
+    venom-earth-616 + venom-marvel-cinematic-universe)."""
+
+    def test_verbatim_relative_pronouns_flagged(self):
+        for text in (
+            "which has causes drastic shifts in his personality.",
+            "which can weaken or nullify the suit's healing powers.",
+        ):
+            self.assertIn(
+                "relative_pronoun_opener",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_relative_pronoun_controls_survive(self):
+        # A relative clause WITH a main clause of its own (after a
+        # comma, or after a sentence boundary) is a whole item. So is
+        # a past-tense relative clause narrating a completed event:
+        # the frag-5 long-clause calibration pins "which allowed
+        # Denji..." as a zero-reason control, and the screen respects
+        # it -- only present-tense/modal property continuations fire.
+        for text in (
+            "which he fears, so he avoids it",
+            "which broke his arm. He never recovered.",
+            "that he cannot control, and it burns him",
+            "which allowed Denji to successfully ambush her in their "
+            "final confrontation",
+        ):
+            self.assertNotIn(
+                "relative_pronoun_opener",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_relative_pronoun_is_weaknesses_only(self):
+        self.assertNotIn(
+            "relative_pronoun_opener",
+            fragment_item_reasons(
+                "which can weaken or nullify the suit's healing powers.",
+                section="powers_and_abilities",
+            ),
+        )
+
+    def test_verbatim_or_even_like_flagged(self):
+        for text in (
+            "or by anything that can pass through the symbiote in "
+            "large amounts of energy.",
+            "even in the eminence of a battle.",
+            "like all others of its kind",
+        ):
+            self.assertIn(
+                "prose_sentence_shard",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_or_even_like_controls_survive(self):
+        # "or" + a headed clause, "even without" + a noun phrase (a
+        # conditional weakness, mirroring the "without" spare), and a
+        # "like" simile with a main clause after a comma.
+        for text in (
+            "or he can fly",
+            "even without her horn",
+            "like a human, he needs sleep",
+        ):
+            self.assertNotIn(
+                "prose_sentence_shard",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_verbatim_numeric_split_flagged(self):
+        self.assertIn(
+            "numeric_split_fragment",
+            fragment_item_reasons("000 hertz", section="weaknesses"),
+        )
+
+    def test_numeric_controls_survive(self):
+        # The limitation spare protects real numeric limits ("180
+        # degree blind spot"); one- and two-digit openers never fire.
+        for text in (
+            "180 degree blind spot",
+            "up to 1000 degrees",
+            "4 minutes",
+        ):
+            self.assertNotIn(
+                "numeric_split_fragment",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_verbatim_header_cutoff_flagged(self):
+        for text in (
+            "Sonic and Heat: The Venom symbiote",
+            "Darkforce: As Anti-Venom is formed from the Lightforce",
+            "Antibody Overuse: If Anti-Venom overuses his healing powers",
+        ):
+            self.assertIn(
+                "header_cutoff",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_header_controls_survive(self):
+        # Whole post-colon text: subject-led clause, main clause
+        # after a comma, leading finite verb, and a longer definition
+        # (the 2-4 word definite-NP bound spares 6-word definitions).
+        for text in (
+            "Fire: it burns him",
+            "Fire: When exposed, he weakens",
+            "Sonic: Burns on contact",
+            "Flight: The ability to fly with his wings.",
+            "Ki Blast: The most basic form of energy wave.",
+            "Kryptonite: The green mineral from his homeworld",
+        ):
+            self.assertNotIn(
+                "header_cutoff",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_header_is_weaknesses_only(self):
+        self.assertNotIn(
+            "header_cutoff",
+            fragment_item_reasons(
+                "Sonic and Heat: The Venom symbiote",
+                section="powers_and_abilities",
+            ),
+        )
+
+    def test_filter_drops_frag9_debris_keeps_real_weakness(self):
+        kept, dropped = filter_list_field_items(
+            "which has causes drastic shifts in his personality., "
+            "which can weaken or nullify the suit's healing powers., "
+            "Sonic and Heat: The Venom symbiote, "
+            "Darkforce: As Anti-Venom is formed from the Lightforce, "
+            "Antibody Overuse: If Anti-Venom overuses his healing "
+            "powers, like all others of its kind, radiation up to "
+            "4,000 hertz, 000 hertz, or by anything that can pass "
+            "through the symbiote in large amounts of energy., even "
+            "in the eminence of a battle., Is weak to fire",
+            section="weaknesses",
+        )
+        self.assertEqual(
+            kept, "radiation up to 4,000 hertz, Is weak to fire"
+        )
+        reasons = [r for d in dropped for r in d["reasons"]]
+        for reason in (
+            "relative_pronoun_opener",
+            "header_cutoff",
+            "numeric_split_fragment",
+            "prose_sentence_shard",
+        ):
+            self.assertIn(reason, reasons)
+
+    def test_repair_attempt_drops_frag9_debris(self):
+        prof = comic_profile("Venom", "Marvel Comics")
+        fields = dict(SixthGenRepairPathTests.FIELDS)
+        fields["weaknesses"] = (
+            "which has causes drastic shifts in his personality., "
+            "Sonic and Heat: The Venom symbiote, radiation up to "
+            "4,000 hertz, 000 hertz, or by anything that can pass "
+            "through the symbiote in large amounts of energy., "
+            "Is weak to fire"
+        )
+        attempt = SixthGenRepairPathTests()._attempt(prof, fields)
+        self.assertEqual(
+            attempt_field_map(attempt)["weaknesses"],
+            "radiation up to 4,000 hertz, Is weak to fire",
+        )
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        reasons = [r for d in dropped for r in d["reasons"]]
+        for reason in (
+            "relative_pronoun_opener",
+            "header_cutoff",
+            "numeric_split_fragment",
+            "prose_sentence_shard",
+        ):
+            self.assertIn(reason, reasons)
+
+
 if __name__ == "__main__":
     unittest.main()

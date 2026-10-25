@@ -1520,6 +1520,26 @@ def list_items_from_text(
     ]
 
 
+def _is_thousands_comma(text: str, index: int) -> bool:
+    """A comma inside a thousands-grouped number (4,000 / 1,000,000):
+    digit immediately before, exactly three digits immediately after,
+    then a non-digit (or end of string). Such a comma is part of the
+    number, not a list separator -- splitting it sheds fragment
+    halves like "radiation up to 4" / "000 hertz" (gate 50l), which
+    then merge as two bogus weakness items. Ordinary list commas
+    ("Strength 4, Speed 5", "1,000, 2,000") fail the test: the comma
+    after "1,000" is followed by a space, and the comma inside
+    "2,000" is a thousands comma of its own number."""
+    if index == 0 or not text[index - 1].isdigit():
+        return False
+    after = text[index + 1:index + 4]
+    if len(after) != 3 or not after.isdigit():
+        return False
+    if index + 4 < len(text) and text[index + 4].isdigit():
+        return False
+    return True
+
+
 def split_listish(text: str | None) -> list[str]:
     if not text:
         return []
@@ -1542,6 +1562,8 @@ def split_listish(text: str | None) -> list[str]:
                 return []
             depth -= 1
         elif depth == 0 and char in '|;,\n\u2022*':
+            if char == ',' and _is_thousands_comma(text, index):
+                continue
             parts.append(text[start:index])
             start = index + 1
     if depth:
