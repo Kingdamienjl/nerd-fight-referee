@@ -11,7 +11,7 @@ generation:
   generated_at: '2026-10-10T08:00:45Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id002
+  ineligible_reasons:
   - confidence_below_0_55
   - missing_attack_potency
   - missing_clean_linked_ability
@@ -73,42 +73,6 @@ sources:
   source_type: mediawiki
   title: Shanoa
   url: https://character-stats-and-profiles.fandom.com/wiki/Shanoa
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-shanoa-castlevania
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Shanoa Castlevania
-  url: https://vsbattles.fandom.com/wiki/Shanoa_Castlevania
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-shanoa-castlevania
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Shanoa Castlevania
-  url: https://character-stats-and-profiles.fandom.com/wiki/Shanoa_Castlevania
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -196,17 +160,32 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 2-C, higher with Dominus
+    source_ids:
+    - vsbattles-shanoa-castlevania
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Low Multiverse level (Is capable of defeating Maria, Is stated to have
+      powers comparable to a Belmont,CastlevaniaL Judgement Maria True Story Mode
+      and is stronger than the Time Reaper, who threatenedCastlevania Judgement Aeon''s
+      True Story Mode to eraseCastlevania Judgement Sypha''s True Story Mode all theCastlevania
+      Judgement Alucard''s True Story Mode Castlevania timelines,Castlevania Judgement
+      Golem''s True Story Mode which would include all the Grimoires,Castlevania:
+      Grimoire of Souls which are confirmed alternate worldsCastlevania: Grimoire
+      of Souls chapter 7: Death''s Reign), higher with Dominus (Is capable of defeating
+      Dracula with Dominus)'
+    source_ids:
+    - vsbattles-shanoa-castlevania
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Infinite (Can keep up with Death, Is able to kill distance itself to attack
+      his enemies instantlyDemon Castle Dracula: Reminiscence of the Divine Abyss)'
+    source_ids:
+    - vsbattles-shanoa-castlevania
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -216,27 +195,68 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Low Multiverse level (Can withstand blows from characters like Maria Renard)
+    source_ids:
+    - vsbattles-shanoa-castlevania
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
     text: null
     source_ids: []
     confidence: 0.0
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range. Low Multiversal with magic (Can go to other realms
+      like the Abyss)
+    source_ids:
+    - vsbattles-shanoa-castlevania
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Genius (Is an expert on multiple types of magic, which requires one to
+      understand Quantum Physics to utilize it to its fullest.Castlevania: Portrait
+      of Ruin)'
+    source_ids:
+    - vsbattles-shanoa-castlevania
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
 abilities: []
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-using-dominus-glyphs-excessively-can-drain-her-health
+  name: Using Dominus Glyphs excessively can drain her health
+  description: Using Dominus Glyphs excessively can drain her health
+  source_ids: &id002
+  - vsbattles-shanoa-castlevania
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-though-she-can-mitigate-this-with-albus-soul-and-other-healing-items
+  name: though she can mitigate this with Albus' soul and other healing items.
+  description: though she can mitigate this with Albus' soul and other healing items.
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -248,13 +268,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-shanoa-castlevania
+  secondary_disagreement_policy: warning_only
 profile_hash: 0466e229aae7b3ca29eb63fa4416e74d3bbeb9743c60244ce3206f9c622c325d
 repair:
-  attempted_at: '2026-10-10T10:28:27Z'
+  attempted_at: '2026-10-23T02:21:26Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -263,520 +297,6 @@ repair:
   - abilities
   source_attempts:
   - source_id: vsbattles-shanoa-castlevania
-    url: https://vsbattles.fandom.com/wiki/Shanoa_Castlevania
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Shanoa (Castlevania)
-    source_type: mediawiki
-    revision_id: '9473567'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 30877
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-C}}, higher with Dominus'
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Dark Lord abilities (4-D - 6 Layers, possibly higher Has access to Dracula''s
-        magic,), Enhanced Senses (via Eye for DecayCastlevania: Order of Ecclesia
-        Brady Games strategy guide page 122), Weapon Mastery (Is skilled with numerous
-        different weapons), Accelerated Development (via Hierophant RingCastlevania:
-        Order of Ecclesia Brady Games strategy guide page 125), Natural Weaponry (via
-        Cat form), Shapeshifting (Should be able to shapeshift like other vampiresCastlevania:
-        Legacy of Darkness), Intangibility (via Mist FormCastlevania 64), Dream Manipulation
-        (via SuccubusCastlevania: Symphony of the Night), Martial Arts, Underwater
-        Breathing (Type 2; Can naturally breathe underwaterCastlevania: Grimoire of
-        Souls chapter 4: That Witch Writhes), Social Influencing (Can convince creatures
-        of other species to aid her in combatCastlevania: Order of Ecclesia Brady
-        Games strategy guide page 6), Extrasensory Perception (Can sense other beings),
-        Regeneration Negation (Low-High), Resurrection and Immortality Negation (Type
-        2, 3, 4, 6 and 7; Can permanently kill the Time Reaper, who has Death''s Regeneration
-        level, which can bring itself back after being erased from existence while
-        being the abstract concept of Death. And scales off from other Creatures of
-        Chaos which can survive lethal blows easily,Castlevania The Belmont Legacy
-        Issue 3 Can revive endlessly, are beyond life and death,Demon Castle Dracula:
-        Demon''s Blood, Bloody Nightmare page 44, 126, 202 can possess other objects
-        to exist, most of them are undead, some of them are souls and evil spirits,
-        are abstract embodiments, and they all are reliant onCastlevania: Portrait
-        of Ruins BradyGames strategy guide page 2 the Chaos Entity, and bounded by
-        it, always returning after being killed,Castlevania: Lament of Innocence with
-        Chaos existing in an alternate dimension beyond the normal world), Explosion
-        Manipulation (via Universitas), Statistics Amplification and Supernatural
-        Luck (with numerous Glyphs and WeegieCastlevania: Grimoire of Souls), Reactive
-        Power Level (via Arma Custos), Elemental Manipulation, Ice Manipulation and
-        Absolute Zero (via Grando, Ice spells are are shown to reach absolute zero
-        across numerous different creatures and is deemed a normal ability even by
-        creatures of the night) Electricity Manipulation (via Fulgur), Fire Manipulation
-        (via Ignis), Air Manipulation (via Pneuma), Earth Manipulation (via Lapiste),
-        Power Absorption and Information Analysis (Can absorb the powers of others
-        and the environment through her glyph absorption), Danmaku (via Thousand Knives),
-        Energy Projection (via Pulsus), Magma Manipulation (via Dominus Anger), Magnetism
-        Manipulation (From Magnes which allows her to boost her self to locations
-        through metalCastlevania: Order of Ecclesia Brady Games strategy guide page
-        113), Damage Transferal (via Heart CuirassCastlevania: Order of Ecclesia Brady
-        Games strategy guide page 121), Vibration Manipulation (via Rapidus Fio),
-        Homing Attack (via Vol Luminatio), Weapon Creation (Glyphs allow her to create
-        weaponsCastlevania: Order of Ecclesia Brady Games strategy guide page 111),
-        Creation (Can create blocks of stone), Sealing and Crystal Manipulation (via
-        Torpor), Light Manipulation (via Luminatio), Holy Manipulation, Darkness Manipulation
-        (via Umbra), Summoning (Can summon numerous creatures to fight), Astral Projection
-        (via Cerberus Glyphs), Necromancy (via Umbra), Energy Manipulation (With numerousCastlevania:
-        Order of Ecclesia glyphs), Time Manipulation (via Right Eye of Devil), Death
-        Manipulation (Can inflict death on her targets when absorbing their powersCastlevania:
-        Order of Ecclesia Brady Games strategy guide page 74), Flight (via Volacitus),
-        Petrification (Can use gorgon heads in combatCastlevania: Order of Ecclesia
-        Brady Games strategy guide page 8), Poison Manipulation, Corrosion Inducement
-        and Acid Manipulation (Is capable of inflicting Poison with the Skull Spider,Castlevania:
-        Order of Ecclesia BradyGames strategy guide page 9 which can rot flesh on
-        contact and is AcidicCastlevania: Portrait of Ruins BradyGames strategy guide
-        page 111), Curse Manipulation, Energy Absorption and Power Nullification (Can
-        inflict the Curse status effect, which can drain one''s Magic and nullify
-        their ability to attackCastlevania: Portrait of Ruins BradyGames strategy
-        guide page 17), Statistics Reduction (The Curse and Poison effects can make
-        one far weaker than normalCastlevania: Order of Ecclesia Brady Games Strategy
-        Guide page 96) |-|Resistances= Dark Lord resistances (4-D - 6 Layers, possibly
-        higher), Attack Reflection (Can harm Dracula with projectiles despite being
-        able to passively reflect attacks back with his ribsCastlevania II: Simon''s
-        Quest), Fire Manipulation (Can resist fire attacksCastlevania: Order of Ecclesia
-        Brady Games strategy guide page 123), Illusion Creation (Can resist the effects
-        of the castle which can create illusionsCastlevania: Harmony of Dissonance),
-        Electricity Manipulation (Can resist Lightning attacks), Holy Manipulat'
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Low Multiverse level (Is capable of defeating Maria, Is stated to have
-        powers comparable to a Belmont,CastlevaniaL Judgement Maria True Story Mode
-        and is stronger than the Time Reaper, who threatenedCastlevania Judgement
-        Aeon''s True Story Mode to eraseCastlevania Judgement Sypha''s True Story
-        Mode all theCastlevania Judgement Alucard''s True Story Mode Castlevania timelines,Castlevania
-        Judgement Golem''s True Story Mode which would include all the Grimoires,Castlevania:
-        Grimoire of Souls which are confirmed alternate worldsCastlevania: Grimoire
-        of Souls chapter 7: Death''s Reign), higher with Dominus (Is capable of defeating
-        Dracula with Dominus)'
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: 'Infinite (Can keep up with Death, Is able to kill distance itself to
-        attack his enemies instantlyDemon Castle Dracula: Reminiscence of the Divine
-        Abyss)'
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Multiverse level (Can withstand blows from characters like Maria
-        Renard)
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range. Low Multiversal with magic (Can go to other realms
-        like the Abyss)
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Glyphs and Armor (Order of Ecclesia Inventory)
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Genius (Is an expert on multiple types of magic, which requires one
-        to understand Quantum Physics to utilize it to its fullest.Castlevania: Portrait
-        of Ruin)'
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Using Dominus Glyphs excessively can drain her health, while using the
-        full power of Dominus can take her soul, though she can mitigate this with
-        Albus'' soul and other healing items. Notable Attacks/Techniques: |-|Arm Glyphs=
-        Shanoa Melio Confodere.gif|Melio Confodere Shanoa Melio Secare.gif|Melio Secare
-        Shanoa Melio Hasta.gif|Melio Hasta Shanoa Melio Macir.gif|Melio Macir Shanoa
-        Melio Arcus.gif|Melio Arcus Shanoa Melio Ascia.gif|Melio Ascia Shanoa Melio
-        Falcis.gif|Melio Falcis Shanoa Melio Culter.gif|Melio Culter Shanoa Melio
-        Scutum.gif|Melio Scutum Shanoa Redire.gif|Redire Shanoa Cubus.gif|Cubus Shanoa
-        Torpor.gif|Torpor Shanoa Lapiste.gif|Lapiste Shanoa Vol Pneuma.gif|Vol Pneuma
-        Shanoa Vol Ignis.gif|Vol Ignis Shanoa Vol Grando.gif|Vol Grando Shanoa Vol
-        Fulgur.gif|Vol Fulgur Shanoa Vol Luminatio.gif|Vol Luminatio Shanoa Vol Umbra.gif|Vol
-        Umbra Shanoa Morbus.gif|Morbus Shanoa Nitesco.gif|Nitesco Shanoa Acerbatus.gif|Acerbatus
-        Shanoa Globus.gif|Globus Shanoa Dextro Custos.gif|Dextro Custos Shanoa Sinestro
-        Custos.gif|Sinestro Custos Shanoa Dominus Hatred.gif|Dominus Hatred Shanoa
-        Dominus Anger.gif|Dominus Anger *Melio Confodere: Shanoa creates a rapier
-        to strike her foes down. *Melio Secare: Shanoa creates a sword to strike her
-        foes down. *Melio Hasta: Shanoa creates a lance to strike her foes down. *Melio
-        Macir: Shanoa creates a hammer to strike her foes down. *Melio Arcus: Shanoa
-        creates a crossbow that locks on to targets and fires. *Melio Ascia: Shanoa
-        creates an axe to throw in an arc to hit airborne foes. *Melio Falcis: Shanoa
-        creates a sickle to strike her foes down. *Melio Culter: Shanoa creates numerous
-        knives to throw from a distance. *Melio Scutum: Shanoa creates a shield to
-        protect herself from harm. *Redire: Shanoa throws a magnetic blade that she
-        can ride on while striking foes along the way. *Cubus: Shanoa creates a block
-        to get out of tight situations. *Torpor: Shanoa seals her foes inside a crystal,
-        rendering them incapable of moving in the process. *Lapiste: Shanoa creates
-        a giant fist made of stone to harm her foes. *Vol Pneuma: Shanoa with a gesture
-        creates a current of wind to strike foes from a distance. *Vol Ignis: Shanoa
-        creates a pillar of fire to harm her foes. *Vol Grando: Shanoa creates pillars
-        of ice to harm her foes. *Vol Fulgur: Shanoa releases lightning from her hands
-        to harm her foes. *Vol Luminatio: Shanoa shoots out balls of light that tracks
-        their targets to harm them. *Vol Umbra: Shanoa shoots out balls of darkness
-        to harm her foes. *Morbus: Shanoa creates a deadly curse on her target. *Nitesco:
-        Shanoa shoots out an energy beam from her hands to attack everyone in front
-        of her. *Acerbatus: Shanoa creates a dark ball of energy that curses anyone
-        who touches it. *Globus: Shanoa shoots several energy balls that bounces everywhere
-        and hit everything in its path. *Dextro Custos: Shanoa unleashes the right
-        head of Cerberus to consume her foes. *Sinestro Custos: Shanoa unleashes the
-        left head of Cerberus to consume her foes. *Dominus Hatred: Shanoa fires a
-        ray of light that scatters into numerous other light beams to hit everywhere.
-        *Dominus Anger: Shanoa shoots out a ball of dark magic to hit anyone in its
-        path. |-|Back Glyphs= Shanoa Magnes.gif|Magnes Shanoa Paries.gif|Paries Shanoa
-        Volaticus.gif|Volaticus Shanoa Rapidus Fio.gif|Rapidus Fio Shanoa Vis Fio.gif|Vis
-        Fio Shanoa Fortis Fio.gif|Fortis Fio Shanoa Sapiens Fio.gif|Sapiens Fio Shanoa
-        Fides Fio.gif|Fides Fio Shanoa Felicem Fio.gif|Felicem Fio Shanoa Inire Pecunia.gif|Inire
-        Pecunia Shanoa Arma Felix.gif|Arma Felix Shanoa Arma Chiroptera.gif|Arma Chiroptera
-        Shanoa Arma Machina.gif|Arma Machina Shanoa Refectio.gif|Refectio Shanoa Arma
-        Custos.gif|Arma Custos Shanoa Fidelis Caries.gif|Fidelis Caries Shanoa Fidelis
-        Alate.gif|Fidelis Alate Shanoa Fidelis Polkir.gif|Fidelis Polkir Shanoa Fidelis
-        Noctua.gif|Fidelis Noctua Shanoa Fidelis Medusa.gif|Fidelis Medusa Shanoa
-        Fidelis Aranea.gif|Fidelis Aranea Shanoa Fidelis Mortus.gif|Fidelis Mortus
-        Shanoa Dominus Agony.gif|Dominus Agony *Magnes: Shanoa magnetically attaches
-        herself to metallic objects to reach great height. *Paries: Shanoa phases
-        through walls to get to secret areas and avoid harm. *Volacitus: Shanoa creates
-        a pair of wings to make her fly anywhere. *Rapidus Fio: Shanoa increases her
-        speed. *Vis Fio: Shanoa''s strength is increased. *Fortis Fio: Shanoa''s defense
-        is increased. *Sapiens Fio: Shanoa''s magical power is increased. *Fides Fio:
-        Shanoa''s magical defense is increased. *Felicem Fio: Shanoa''s Luck increases.
-        *Inire Pecunia: Shanoa gains more money from fallen enemies than before. *Arma
-        Felix: Shanoa turns into a cat lady, granting her increased agility and razor
-        sharp claws. *Arma Chiroptera: Shanoa turns into a Succubus, granting her
-        the powers of one in the process. *Arma Machina: Shanoa turns into an automaton,
-        making her invulnerable to any harm. *Reflectio: Shanoa regenerates her health
-        at a faster rate than normal. *Arma Custos: Shanoa is blessed by the Cerbe'
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|shanoa castlevania|9473567
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-shanoa-castlevania
-    url: https://character-stats-and-profiles.fandom.com/wiki/Shanoa_Castlevania
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Dracula (Canon, Castlevania)/TyranoDoom30
-    source_type: mediawiki
-    revision_id: '406832'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 59864
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats'''
-    - Gallery
-    - Other
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{Low 1-C}}, higher with each Resurrection'
-      source_id: character-stats-profiles-shanoa-castlevania
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Genius Intelligence, Fusionism
-        (Can fuse with Death), Blessed (Vampires are loved by the night, which grants
-        them power), Madness Manipulation (Vampires can make someone completely mad,
-        and the sight of one can drive one to insanity), Intangibility (As his soul),
-        Non-Corporeal (Scales to Death, who has an intangible form not even beings
-        who can interact with intangible beings can interact with), Self-Sustenance
-        (Type 1: Vampires and other Creatures of Chaos can breath in space), Transformation
-        (Can transform into many monstrous forms), Animal Manipulation and Creation
-        (He can unleash many bats at his opponent), Breath Attack (Can unleash attacks
-        out of his mouth), Fire Manipulation (Consistenly shoots fire attacks), Weapon
-        Mastery and Creation (Can create and shoot out swords at his opponent), Sealing
-        and Crystal Manipulation (Scales to Death, who can create a crystal to trap
-        opponents), Adaptation (Power of Dominance allows it''s user to adapt and
-        copy any Creature''s ability), Reactive Power Level (Dracula''s power grows
-        stronger with each resurrection), Possession (Can possess others), Regeneration
-        (True-Godly: Scales from Death, who has came back from getting completely
-        destroyed many times, while being the conceptual embodiment of death and nonexistant
-        at the same time. Scales from Shaft, who came back after getting his ghost
-        form destroyed and also got his own soul destroyed and came back), Vibration
-        Manipulation (Can create shockwaves), Telekinesis (Can telekinetically move
-        blocks around), Afterimage Creation (Can create afterimages), Soul Manipulation
-        (With Soul Steal, he was capable of absorbing Death and his soul. Also scales
-        to Death who took away Walter''s soul), Inorganic Physiology (Type 1: Is a
-        painting), Healing (Soul Steal allows healing), Power Mimicry and Absorption
-        (Upscales from Dmitrii, who can copy magic attacks by simply coming in touch
-        with him. Power of Dominance allows him to absorb souls and their powers),
-        Bone Manipulation (Can attack with bones), Duplication (Can duplicate himself),
-        Attack Reflection (Dracula''s Rib can deflect attacks), Blood Manipulation
-        (Can attack using blood pellets and can create a massive blood rain), Absolute
-        Zero Ice (Can use ice attacks. Ice attacks in Castlevania can reach Absolute
-        Zero), Conceptual Manipulation (Scales to Death, who can kill the very concepts
-        of sound and distance and has full control over the concept of death), Death
-        Manipulation (Scales to Death who has full control over death), Light Manipulation
-        (Can create light beams both as attacks and teleportation), Invulnerability
-        (Creatures of Chaos are invincible when drawing Chaos'' power, and can''t
-        be killed normally, and only weapons made to specifically harm them can actually
-        harm them), Smoke Manipulation and Poison Manipulation (With Poisonous Blow,
-        Dracula creates a smoke of poisonous gas. He can also create blood bubbles
-        which can give Poison), Earth Manipulation (With Jagged Earth, Dracula summons
-        out rock spikes out from the ground. Can shoot meteors), Pocket Reality Manipulation
-        (Created his own pocket reality), Statistics Amplification (The power of Chaos
-        is capable of making creatures stronger), Black Hole Creation (Created out
-        a massive black hole which could suck entire stars. Also scales to Death who
-        can create a black hole), Invisibility (Scales to Death who can become invisible
-        to beings who can even sense invisible beings already), Fate Manipulation
-        (Scales to Death who is able to choose the fate of all living beings and control
-        it), Cosmic Awareness (Scales to Death, who is aware of the existence of alternate
-        timelines and what''s happening in them), Portal Creation (Created a light
-        beam which also serves as a portal), Sleep Manipulation (Scales from Walter,
-        who can cast a sleeping spell), Size Manipulation (Seemingly shown here),
-        Aura (Has an aura around himself), Acausality (Types 1 and 5: Unnafected by
-        the events in Castlevania Judgement. Creatures of Chaos run on a completely
-        different set of rules from the Human World, whose laws don''t apply to them,
-        incluiding time, pain and existence itself, the three of them being meaningless
-        to them), Glyph Creation (Can create glyphs), Absorption (Dracula''s power
-        can absorb beings), Information Analysis (Upscales from Dmitrii, who was capable
-        of scanning through Soma''s memories of his past life), Telepathy (Scales
-        from Alucard, who can telepathically communicate with Soma), Corrosion Inducement
-        and Acid Manipulation (Poison is acidic in nature), Homing Attack (Can create
-        attacks which home in into it''s targets), Danmaku (Can create several attacks
-        at his opponent), Necromancy (Can revive the dead), Matter Manipulation (Devil
-        Forging comes from Dracula''s magic, which can control matter), Energy Manipulation
-        and Projection (Can use various forms of energy attacks), Holy Manipulation
-        (Demonic Megiddo is made of holy flames), Extrasensory Perception and Enhanced
-        Senses (Can see, sense and figh'
-      source_id: character-stats-profiles-shanoa-castlevania
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Low Complex Multiverse level (Should be superior to Menace, whose defeat
-        started to collapse the Abyss, which is shown to be separated into 6 dimensions,
-        which are infinite in size while containing multiple galaxies and stars. Can
-        fight and kill the Time Reaper and is superior to Galamoth who controls it,
-        with the Time Reaper being capable of destroying all the Castlevania timelines,
-        which has over millions of worlds. Can create enormous black holes which are
-        capable of sucking out multiple stars into it's center. His sheer influence
-        can mess with the flow of time itself, with his power manifesting in the form
-        of a whole alternate dimension which is his castle, and could sustain both
-        it and the Inverted Castle, both of which are entire worlds with another dimension
-        below it. Superior to Death, who is death itself, a projection of an unconscious
-        fear, the primal fear of the inevitable, flowing across reality as an unbound
-        idea and who can project itself inside the thoughts of others, existing beyond
-        the confines of space, a creature shaped from a realm of raw consciousness
-        and chaos, which exists across all of the multiverse and is beyond the Human
-        World, being completely unnacessible to anyone but Dracula, additionally,
-        this realm can be time stopped, meaning that time exists in it and thus adds
-        a temporal dimension to a fifth dimensional structure, making it 6-D), higher
-        with each Resurrection (Dracula's power grows stronger with each resurrection)
-      source_id: character-stats-profiles-shanoa-castlevania
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Irrelevant (Superior to Death and Olrox, the latter of which was capable
-        of reacting to the former's instant attack which involved him killing the
-        concept of distance to attack instantly)
-      source_id: character-stats-profiles-shanoa-castlevania
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Complex Multiverse level ()
-      source_id: character-stats-profiles-shanoa-castlevania
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Notable Attacks/Techniques: File:6752034-dracula ability hellfire (104).gif|Teleporting
-        & using Hellfire File:6752010-dracula ability dark inferno (101).gif|Dark
-        Inferno File:6752145-dracula ability soul steal (102).gif|Soul Steal/Power
-        of Dominance File:6752050-dracula ability fatal ray (103).gif|Fatal Ray File:J
-        Dark Void Dracula.gif|Dark Void File:6752229-dracula ability soul steal (101).gif|Dark
-        Metamorphosis File:Demonic-Meggido.gif|Demonic Meggido File:6752166-dracula
-        feat manipulate castle (102).gif|Transforming *Teleportation: Dracula''s favored
-        strategy, used to confuse his enemy while he casts a myriad of offensive spells.
-        Some versions of his teleporting has him blending to black lights, others
-        turns him into many bats, but the function and strategy is one and the same.
-        *Hellfire: Fires a wall of fireballs from his cape. Another version causes
-        flames to erupt from the floor. *Power of Dominance: Dracula''s primary ability
-        allows him to absorb defeated monster''s souls and enslave them. This power
-        was the one that Soma Cruz, Dracula''s incarnation, inherited along with Dracula''s
-        soul. While Soma can only summon monsters for a short amount of time due to
-        his low magical power, Dracula can fully utilize this ability with infinite
-        power from the stream of Chaos he commands. *Dark Inferno: Fires magma fireballs
-        from his cape. Unlike Hellfire, the meteors produced by this spell cannot
-        be destroyed. *Dark Metamorphosis: Boosts Dracula''s Blood draining ability.
-        He can bite an enemy or grasp them and drain their life. He rarely does the
-        latter though *Soul Steal: : A spell that many fear. Soul Steal is used by
-        Dracula and to kill and absorb their energy for Dracula''s use. The one version
-        of the spell has an area of effect around the caster. It can effect multiple
-        victims multiple times in one cast. Another version drains the life out of
-        Dracula''s victims by a mere touch, which is why many fear this spell. It
-        is also referred to as Life Steal. *Blood Storm: Perhaps as a way of mocking
-        of the Belmonts'' powers, Dracula, when facing Richter Belmont, could make
-        it rain blood, and being caught in it causes heavy damage. *Meteors: During
-        the events in Circle of The Moon, Dracula displayed various powerful magic
-        spells, one of which summons a barrage of flaming meteors to rain down from
-        the sky onto his enemy. *Dominus Hatred / Fatal Ray: Dracula summons seven
-        green rays of dark energy that fly upward from his body. After a moment, the
-        rays fall, covering the entire area although leaving some spaces between where
-        the player can dodge them. He uses this attack in various games, including
-        Castlevania Chronicles and Castlevania: Portrait of Ruin, and is commonly
-        used by his true form, although its most prominent appearance is in Castlevania:
-        Order of Ecclesia. **Destruction Ray: A dire version of the Fatal Ray. Dracula
-        summons seven purple rays of dark energy that fly upward from his body, but
-        this time they fall following the player''s movement. *Dark Void: Dracula''s
-        favored move. He teleports becoming a black mist and many bats appearing anywhere
-        he desires. Its best to do multiple Dark Voids to confuse enemies. *Demonic
-        Meggido: Dracula''s ultimate dark spell. Two version of this attack are in
-        existence. The first, and more common version has a shorter charging time
-        and allows Dracula to charge demonic runes that become a giant black fireball.
-        Dracula can throw it to his victim and will incinerate his victims with demonic
-        fire. The second version is a gigantic explosion, with Dracula as its nucleus.
-        The explosion radiates from him, dealing heavy damage with high likelihood
-        of killing his opponent. However, the second version requires a longer time
-        to charge, giving enough time to either escape or defeat him before he can
-        use it while draining Dracula''s health. On Order of Ecclesia it is shown
-        that Dracula can sustain it for as long as desires, while in Harmony of Despair
-        its effect is shown to cease. Note: Everything considered "non-canon" in the
-        series is simply treated as a parallel universe or an alternative timeline,
-        with locations such as Brauner''s paintings appearing in the animated series
-        and are treated as alternative worlds, which they are. ==Gallery== File:Kojima
-        concept dracs.png|Dracula in Chronicles File:Castlevania 1 dracula.png|Dracula
-        in the first Castlevania File:67dracula.jpg|Dracula in Super Castlevania IV
-        File:Rob-offart2.jpg|Dracula in Rondo of Blood File:Akumajo Dracula XX Art
-        Dracula 2.jpg|Dracula in Dracula X File:Dracula-Bloodlines-Art.png|Dracula
-        in Bloodlines File:DraculaCircle.jpg|Dracula in Circle of the Moon File:CoD
-        Dracula.jpg|Dracula in Curse of Darkness File:DraculaPortrait.jpg|Dracula
-        in Portrait of Ruin File:Dracula from Dracula X Chronicles.jpg|Dracula in
-        Dracula X Chronicles File:DraculaPortraitEcclesia.png|Dracula in Order of
-        Ecclesia File:Castlevaniajudgementdracula.jpeg.jpg|Dracula in Judgement ==Other==
-        Notable Victories: Notable Losses: Inconclusive Matches: Category:TyranoDoo'
-      source_id: character-stats-profiles-shanoa-castlevania
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|dracula canon castlevania
-      tyranodoom30|406832
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-shanoa-castlevania
     url: https://vsbattles.fandom.com/wiki/Shanoa_%28Castlevania%29
     ok: true
     note: extracted_core_fields
@@ -784,7 +304,6 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - standard_equipment
@@ -818,7 +337,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -833,76 +352,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{2-C}}, higher with Dominus'
-      source_id: vsbattles-shanoa-castlevania
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Dark Lord abilities (4-D - 6 Layers, possibly higher Has access to Dracula''s
-        magic,), Enhanced Senses (via Eye for DecayCastlevania: Order of Ecclesia
-        Brady Games strategy guide page 122), Weapon Mastery (Is skilled with numerous
-        different weapons), Accelerated Development (via Hierophant RingCastlevania:
-        Order of Ecclesia Brady Games strategy guide page 125), Natural Weaponry (via
-        Cat form), Shapeshifting (Should be able to shapeshift like other vampiresCastlevania:
-        Legacy of Darkness), Intangibility (via Mist FormCastlevania 64), Dream Manipulation
-        (via SuccubusCastlevania: Symphony of the Night), Martial Arts, Underwater
-        Breathing (Type 2; Can naturally breathe underwaterCastlevania: Grimoire of
-        Souls chapter 4: That Witch Writhes), Social Influencing (Can convince creatures
-        of other species to aid her in combatCastlevania: Order of Ecclesia Brady
-        Games strategy guide page 6), Extrasensory Perception (Can sense other beings),
-        Regeneration Negation (Low-High), Resurrection and Immortality Negation (Type
-        2, 3, 4, 6 and 7; Can permanently kill the Time Reaper, who has Death''s Regeneration
-        level, which can bring itself back after being erased from existence while
-        being the abstract concept of Death. And scales off from other Creatures of
-        Chaos which can survive lethal blows easily,Castlevania The Belmont Legacy
-        Issue 3 Can revive endlessly, are beyond life and death,Demon Castle Dracula:
-        Demon''s Blood, Bloody Nightmare page 44, 126, 202 can possess other objects
-        to exist, most of them are undead, some of them are souls and evil spirits,
-        are abstract embodiments, and they all are reliant onCastlevania: Portrait
-        of Ruins BradyGames strategy guide page 2 the Chaos Entity, and bounded by
-        it, always returning after being killed,Castlevania: Lament of Innocence with
-        Chaos existing in an alternate dimension beyond the normal world), Explosion
-        Manipulation (via Universitas), Statistics Amplification and Supernatural
-        Luck (with numerous Glyphs and WeegieCastlevania: Grimoire of Souls), Reactive
-        Power Level (via Arma Custos), Elemental Manipulation, Ice Manipulation and
-        Absolute Zero (via Grando, Ice spells are are shown to reach absolute zero
-        across numerous different creatures and is deemed a normal ability even by
-        creatures of the night) Electricity Manipulation (via Fulgur), Fire Manipulation
-        (via Ignis), Air Manipulation (via Pneuma), Earth Manipulation (via Lapiste),
-        Power Absorption and Information Analysis (Can absorb the powers of others
-        and the environment through her glyph absorption), Danmaku (via Thousand Knives),
-        Energy Projection (via Pulsus), Magma Manipulation (via Dominus Anger), Magnetism
-        Manipulation (From Magnes which allows her to boost her self to locations
-        through metalCastlevania: Order of Ecclesia Brady Games strategy guide page
-        113), Damage Transferal (via Heart CuirassCastlevania: Order of Ecclesia Brady
-        Games strategy guide page 121), Vibration Manipulation (via Rapidus Fio),
-        Homing Attack (via Vol Luminatio), Weapon Creation (Glyphs allow her to create
-        weaponsCastlevania: Order of Ecclesia Brady Games strategy guide page 111),
-        Creation (Can create blocks of stone), Sealing and Crystal Manipulation (via
-        Torpor), Light Manipulation (via Luminatio), Holy Manipulation, Darkness Manipulation
-        (via Umbra), Summoning (Can summon numerous creatures to fight), Astral Projection
-        (via Cerberus Glyphs), Necromancy (via Umbra), Energy Manipulation (With numerousCastlevania:
-        Order of Ecclesia glyphs), Time Manipulation (via Right Eye of Devil), Death
-        Manipulation (Can inflict death on her targets when absorbing their powersCastlevania:
-        Order of Ecclesia Brady Games strategy guide page 74), Flight (via Volacitus),
-        Petrification (Can use gorgon heads in combatCastlevania: Order of Ecclesia
-        Brady Games strategy guide page 8), Poison Manipulation, Corrosion Inducement
-        and Acid Manipulation (Is capable of inflicting Poison with the Skull Spider,Castlevania:
-        Order of Ecclesia BradyGames strategy guide page 9 which can rot flesh on
-        contact and is AcidicCastlevania: Portrait of Ruins BradyGames strategy guide
-        page 111), Curse Manipulation, Energy Absorption and Power Nullification (Can
-        inflict the Curse status effect, which can drain one''s Magic and nullify
-        their ability to attackCastlevania: Portrait of Ruins BradyGames strategy
-        guide page 17), Statistics Reduction (The Curse and Poison effects can make
-        one far weaker than normalCastlevania: Order of Ecclesia Brady Games Strategy
-        Guide page 96) |-|Resistances= Dark Lord resistances (4-D - 6 Layers, possibly
-        higher), Attack Reflection (Can harm Dracula with projectiles despite being
-        able to passively reflect attacks back with his ribsCastlevania II: Simon''s
-        Quest), Fire Manipulation (Can resist fire attacksCastlevania: Order of Ecclesia
-        Brady Games strategy guide page 123), Illusion Creation (Can resist the effects
-        of the castle which can create illusionsCastlevania: Harmony of Dissonance),
-        Electricity Manipulation (Can resist Lightning attacks), Holy Manipulat'
+      value: ', higher with Dominus'
       source_id: vsbattles-shanoa-castlevania
       provider_id: vsbattles
       authority: high
@@ -959,69 +409,46 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: 'Using Dominus Glyphs excessively can drain her health, while using the
-        full power of Dominus can take her soul, though she can mitigate this with
-        Albus'' soul and other healing items. Notable Attacks/Techniques: |-|Arm Glyphs=
-        Shanoa Melio Confodere.gif|Melio Confodere Shanoa Melio Secare.gif|Melio Secare
-        Shanoa Melio Hasta.gif|Melio Hasta Shanoa Melio Macir.gif|Melio Macir Shanoa
-        Melio Arcus.gif|Melio Arcus Shanoa Melio Ascia.gif|Melio Ascia Shanoa Melio
-        Falcis.gif|Melio Falcis Shanoa Melio Culter.gif|Melio Culter Shanoa Melio
-        Scutum.gif|Melio Scutum Shanoa Redire.gif|Redire Shanoa Cubus.gif|Cubus Shanoa
-        Torpor.gif|Torpor Shanoa Lapiste.gif|Lapiste Shanoa Vol Pneuma.gif|Vol Pneuma
-        Shanoa Vol Ignis.gif|Vol Ignis Shanoa Vol Grando.gif|Vol Grando Shanoa Vol
-        Fulgur.gif|Vol Fulgur Shanoa Vol Luminatio.gif|Vol Luminatio Shanoa Vol Umbra.gif|Vol
-        Umbra Shanoa Morbus.gif|Morbus Shanoa Nitesco.gif|Nitesco Shanoa Acerbatus.gif|Acerbatus
-        Shanoa Globus.gif|Globus Shanoa Dextro Custos.gif|Dextro Custos Shanoa Sinestro
-        Custos.gif|Sinestro Custos Shanoa Dominus Hatred.gif|Dominus Hatred Shanoa
-        Dominus Anger.gif|Dominus Anger *Melio Confodere: Shanoa creates a rapier
-        to strike her foes down. *Melio Secare: Shanoa creates a sword to strike her
-        foes down. *Melio Hasta: Shanoa creates a lance to strike her foes down. *Melio
-        Macir: Shanoa creates a hammer to strike her foes down. *Melio Arcus: Shanoa
-        creates a crossbow that locks on to targets and fires. *Melio Ascia: Shanoa
-        creates an axe to throw in an arc to hit airborne foes. *Melio Falcis: Shanoa
-        creates a sickle to strike her foes down. *Melio Culter: Shanoa creates numerous
-        knives to throw from a distance. *Melio Scutum: Shanoa creates a shield to
-        protect herself from harm. *Redire: Shanoa throws a magnetic blade that she
-        can ride on while striking foes along the way. *Cubus: Shanoa creates a block
-        to get out of tight situations. *Torpor: Shanoa seals her foes inside a crystal,
-        rendering them incapable of moving in the process. *Lapiste: Shanoa creates
-        a giant fist made of stone to harm her foes. *Vol Pneuma: Shanoa with a gesture
-        creates a current of wind to strike foes from a distance. *Vol Ignis: Shanoa
-        creates a pillar of fire to harm her foes. *Vol Grando: Shanoa creates pillars
-        of ice to harm her foes. *Vol Fulgur: Shanoa releases lightning from her hands
-        to harm her foes. *Vol Luminatio: Shanoa shoots out balls of light that tracks
-        their targets to harm them. *Vol Umbra: Shanoa shoots out balls of darkness
-        to harm her foes. *Morbus: Shanoa creates a deadly curse on her target. *Nitesco:
-        Shanoa shoots out an energy beam from her hands to attack everyone in front
-        of her. *Acerbatus: Shanoa creates a dark ball of energy that curses anyone
-        who touches it. *Globus: Shanoa shoots several energy balls that bounces everywhere
-        and hit everything in its path. *Dextro Custos: Shanoa unleashes the right
-        head of Cerberus to consume her foes. *Sinestro Custos: Shanoa unleashes the
-        left head of Cerberus to consume her foes. *Dominus Hatred: Shanoa fires a
-        ray of light that scatters into numerous other light beams to hit everywhere.
-        *Dominus Anger: Shanoa shoots out a ball of dark magic to hit anyone in its
-        path. |-|Back Glyphs= Shanoa Magnes.gif|Magnes Shanoa Paries.gif|Paries Shanoa
-        Volaticus.gif|Volaticus Shanoa Rapidus Fio.gif|Rapidus Fio Shanoa Vis Fio.gif|Vis
-        Fio Shanoa Fortis Fio.gif|Fortis Fio Shanoa Sapiens Fio.gif|Sapiens Fio Shanoa
-        Fides Fio.gif|Fides Fio Shanoa Felicem Fio.gif|Felicem Fio Shanoa Inire Pecunia.gif|Inire
-        Pecunia Shanoa Arma Felix.gif|Arma Felix Shanoa Arma Chiroptera.gif|Arma Chiroptera
-        Shanoa Arma Machina.gif|Arma Machina Shanoa Refectio.gif|Refectio Shanoa Arma
-        Custos.gif|Arma Custos Shanoa Fidelis Caries.gif|Fidelis Caries Shanoa Fidelis
-        Alate.gif|Fidelis Alate Shanoa Fidelis Polkir.gif|Fidelis Polkir Shanoa Fidelis
-        Noctua.gif|Fidelis Noctua Shanoa Fidelis Medusa.gif|Fidelis Medusa Shanoa
-        Fidelis Aranea.gif|Fidelis Aranea Shanoa Fidelis Mortus.gif|Fidelis Mortus
-        Shanoa Dominus Agony.gif|Dominus Agony *Magnes: Shanoa magnetically attaches
-        herself to metallic objects to reach great height. *Paries: Shanoa phases
-        through walls to get to secret areas and avoid harm. *Volacitus: Shanoa creates
-        a pair of wings to make her fly anywhere. *Rapidus Fio: Shanoa increases her
-        speed. *Vis Fio: Shanoa''s strength is increased. *Fortis Fio: Shanoa''s defense
-        is increased. *Sapiens Fio: Shanoa''s magical power is increased. *Fides Fio:
-        Shanoa''s magical defense is increased. *Felicem Fio: Shanoa''s Luck increases.
-        *Inire Pecunia: Shanoa gains more money from fallen enemies than before. *Arma
-        Felix: Shanoa turns into a cat lady, granting her increased agility and razor
-        sharp claws. *Arma Chiroptera: Shanoa turns into a Succubus, granting her
-        the powers of one in the process. *Arma Machina: Shanoa turns into an automaton,
-        making her invulnerable to any harm. *Reflectio: Shanoa regenerates her health
-        at a faster rate than normal. *Arma Custos: Shanoa is blessed by the Cerbe'
+        full power of Dominus can take her soul, Dominus Anger, Melio Confodere: Shanoa
+        creates a rapier to strike her foes down., Melio Secare: Shanoa creates a
+        sword to strike her foes down., Melio Hasta: Shanoa creates a lance to strike
+        her foes down., Melio Macir: Shanoa creates a hammer to strike her foes down.,
+        Melio Arcus: Shanoa creates a crossbow that locks on to targets and fires.,
+        Melio Ascia: Shanoa creates an axe to throw in an arc to hit airborne foes.,
+        Melio Falcis: Shanoa creates a sickle to strike her foes down., Melio Culter:
+        Shanoa creates numerous knives to throw from a distance., Melio Scutum: Shanoa
+        creates a shield to protect herself from harm., Redire: Shanoa throws a magnetic
+        blade that she can ride on while striking foes along the way., Cubus: Shanoa
+        creates a block to get out of tight situations., Torpor: Shanoa seals her
+        foes inside a crystal, rendering them incapable of moving in the process.,
+        Lapiste: Shanoa creates a giant fist made of stone to harm her foes., Vol
+        Pneuma: Shanoa with a gesture creates a current of wind to strike foes from
+        a distance., Vol Ignis: Shanoa creates a pillar of fire to harm her foes.,
+        Vol Grando: Shanoa creates pillars of ice to harm her foes., Vol Fulgur: Shanoa
+        releases lightning from her hands to harm her foes., Vol Luminatio: Shanoa
+        shoots out balls of light that tracks their targets to harm them., Vol Umbra:
+        Shanoa shoots out balls of darkness to harm her foes., Morbus: Shanoa creates
+        a deadly curse on her target., Nitesco: Shanoa shoots out an energy beam from
+        her hands to attack everyone in front of her., Acerbatus: Shanoa creates a
+        dark ball of energy that curses anyone who touches it., Globus: Shanoa shoots
+        several energy balls that bounces everywhere and hit everything in its path.,
+        Dextro Custos: Shanoa unleashes the right head of Cerberus to consume her
+        foes., Sinestro Custos: Shanoa unleashes the left head of Cerberus to consume
+        her foes., Dominus Hatred: Shanoa fires a ray of light that scatters into
+        numerous other light beams to hit everywhere., Dominus Agony, Magnes: Shanoa
+        magnetically attaches herself to metallic objects to reach great height.,
+        Paries: Shanoa phases through walls to get to secret areas and avoid harm.,
+        Volacitus: Shanoa creates a pair of wings to make her fly anywhere., Rapidus
+        Fio: Shanoa increases her speed., Vis Fio: Shanoa''s strength is increased.,
+        Fortis Fio: Shanoa''s defense is increased., Sapiens Fio: Shanoa''s magical
+        power is increased., Fides Fio: Shanoa''s magical defense is increased., Felicem
+        Fio: Shanoa''s Luck increases., Inire Pecunia: Shanoa gains more money from
+        fallen enemies than before., Arma Felix: Shanoa turns into a cat lady, granting
+        her increased agility and razor sharp claws., Arma Chiroptera: Shanoa turns
+        into a Succubus, granting her the powers of one in the process., Arma Machina:
+        Shanoa turns into an automaton, making her invulnerable to any harm., Reflectio:
+        Shanoa regenerates her health at a faster rate than normal., Arma Custos:
+        Shanoa is blessed by the Cerberus'' power, getting stronger th'
       source_id: vsbattles-shanoa-castlevania
       provider_id: vsbattles
       authority: high
@@ -1031,7 +458,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1046,7 +473,6 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
     - tier
     - weaknesses
@@ -1078,7 +504,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1093,77 +519,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 1-C}}, higher with each Resurrection'
-      source_id: character-stats-profiles-shanoa-castlevania
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Genius Intelligence, Fusionism
-        (Can fuse with Death), Blessed (Vampires are loved by the night, which grants
-        them power), Madness Manipulation (Vampires can make someone completely mad,
-        and the sight of one can drive one to insanity), Intangibility (As his soul),
-        Non-Corporeal (Scales to Death, who has an intangible form not even beings
-        who can interact with intangible beings can interact with), Self-Sustenance
-        (Type 1: Vampires and other Creatures of Chaos can breath in space), Transformation
-        (Can transform into many monstrous forms), Animal Manipulation and Creation
-        (He can unleash many bats at his opponent), Breath Attack (Can unleash attacks
-        out of his mouth), Fire Manipulation (Consistenly shoots fire attacks), Weapon
-        Mastery and Creation (Can create and shoot out swords at his opponent), Sealing
-        and Crystal Manipulation (Scales to Death, who can create a crystal to trap
-        opponents), Adaptation (Power of Dominance allows it''s user to adapt and
-        copy any Creature''s ability), Reactive Power Level (Dracula''s power grows
-        stronger with each resurrection), Possession (Can possess others), Regeneration
-        (True-Godly: Scales from Death, who has came back from getting completely
-        destroyed many times, while being the conceptual embodiment of death and nonexistant
-        at the same time. Scales from Shaft, who came back after getting his ghost
-        form destroyed and also got his own soul destroyed and came back), Vibration
-        Manipulation (Can create shockwaves), Telekinesis (Can telekinetically move
-        blocks around), Afterimage Creation (Can create afterimages), Soul Manipulation
-        (With Soul Steal, he was capable of absorbing Death and his soul. Also scales
-        to Death who took away Walter''s soul), Inorganic Physiology (Type 1: Is a
-        painting), Healing (Soul Steal allows healing), Power Mimicry and Absorption
-        (Upscales from Dmitrii, who can copy magic attacks by simply coming in touch
-        with him. Power of Dominance allows him to absorb souls and their powers),
-        Bone Manipulation (Can attack with bones), Duplication (Can duplicate himself),
-        Attack Reflection (Dracula''s Rib can deflect attacks), Blood Manipulation
-        (Can attack using blood pellets and can create a massive blood rain), Absolute
-        Zero Ice (Can use ice attacks. Ice attacks in Castlevania can reach Absolute
-        Zero), Conceptual Manipulation (Scales to Death, who can kill the very concepts
-        of sound and distance and has full control over the concept of death), Death
-        Manipulation (Scales to Death who has full control over death), Light Manipulation
-        (Can create light beams both as attacks and teleportation), Invulnerability
-        (Creatures of Chaos are invincible when drawing Chaos'' power, and can''t
-        be killed normally, and only weapons made to specifically harm them can actually
-        harm them), Smoke Manipulation and Poison Manipulation (With Poisonous Blow,
-        Dracula creates a smoke of poisonous gas. He can also create blood bubbles
-        which can give Poison), Earth Manipulation (With Jagged Earth, Dracula summons
-        out rock spikes out from the ground. Can shoot meteors), Pocket Reality Manipulation
-        (Created his own pocket reality), Statistics Amplification (The power of Chaos
-        is capable of making creatures stronger), Black Hole Creation (Created out
-        a massive black hole which could suck entire stars. Also scales to Death who
-        can create a black hole), Invisibility (Scales to Death who can become invisible
-        to beings who can even sense invisible beings already), Fate Manipulation
-        (Scales to Death who is able to choose the fate of all living beings and control
-        it), Cosmic Awareness (Scales to Death, who is aware of the existence of alternate
-        timelines and what''s happening in them), Portal Creation (Created a light
-        beam which also serves as a portal), Sleep Manipulation (Scales from Walter,
-        who can cast a sleeping spell), Size Manipulation (Seemingly shown here),
-        Aura (Has an aura around himself), Acausality (Types 1 and 5: Unnafected by
-        the events in Castlevania Judgement. Creatures of Chaos run on a completely
-        different set of rules from the Human World, whose laws don''t apply to them,
-        incluiding time, pain and existence itself, the three of them being meaningless
-        to them), Glyph Creation (Can create glyphs), Absorption (Dracula''s power
-        can absorb beings), Information Analysis (Upscales from Dmitrii, who was capable
-        of scanning through Soma''s memories of his past life), Telepathy (Scales
-        from Alucard, who can telepathically communicate with Soma), Corrosion Inducement
-        and Acid Manipulation (Poison is acidic in nature), Homing Attack (Can create
-        attacks which home in into it''s targets), Danmaku (Can create several attacks
-        at his opponent), Necromancy (Can revive the dead), Matter Manipulation (Devil
-        Forging comes from Dracula''s magic, which can control matter), Energy Manipulation
-        and Projection (Can use various forms of energy attacks), Holy Manipulation
-        (Demonic Megiddo is made of holy flames), Extrasensory Perception and Enhanced
-        Senses (Can see, sense and figh'
+      value: ', higher with each Resurrection'
       source_id: character-stats-profiles-shanoa-castlevania
       provider_id: character_stats_profiles
       authority: high
@@ -1207,71 +563,51 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Notable Attacks/Techniques: File:6752034-dracula ability hellfire (104).gif|Teleporting
-        & using Hellfire File:6752010-dracula ability dark inferno (101).gif|Dark
-        Inferno File:6752145-dracula ability soul steal (102).gif|Soul Steal/Power
-        of Dominance File:6752050-dracula ability fatal ray (103).gif|Fatal Ray File:J
-        Dark Void Dracula.gif|Dark Void File:6752229-dracula ability soul steal (101).gif|Dark
-        Metamorphosis File:Demonic-Meggido.gif|Demonic Meggido File:6752166-dracula
-        feat manipulate castle (102).gif|Transforming *Teleportation: Dracula''s favored
-        strategy, used to confuse his enemy while he casts a myriad of offensive spells.
-        Some versions of his teleporting has him blending to black lights, others
-        turns him into many bats, but the function and strategy is one and the same.
-        *Hellfire: Fires a wall of fireballs from his cape. Another version causes
-        flames to erupt from the floor. *Power of Dominance: Dracula''s primary ability
-        allows him to absorb defeated monster''s souls and enslave them. This power
-        was the one that Soma Cruz, Dracula''s incarnation, inherited along with Dracula''s
-        soul. While Soma can only summon monsters for a short amount of time due to
-        his low magical power, Dracula can fully utilize this ability with infinite
-        power from the stream of Chaos he commands. *Dark Inferno: Fires magma fireballs
-        from his cape. Unlike Hellfire, the meteors produced by this spell cannot
-        be destroyed. *Dark Metamorphosis: Boosts Dracula''s Blood draining ability.
-        He can bite an enemy or grasp them and drain their life. He rarely does the
-        latter though *Soul Steal: : A spell that many fear. Soul Steal is used by
-        Dracula and to kill and absorb their energy for Dracula''s use. The one version
-        of the spell has an area of effect around the caster. It can effect multiple
-        victims multiple times in one cast. Another version drains the life out of
-        Dracula''s victims by a mere touch, which is why many fear this spell. It
-        is also referred to as Life Steal. *Blood Storm: Perhaps as a way of mocking
-        of the Belmonts'' powers, Dracula, when facing Richter Belmont, could make
-        it rain blood, and being caught in it causes heavy damage. *Meteors: During
-        the events in Circle of The Moon, Dracula displayed various powerful magic
-        spells, one of which summons a barrage of flaming meteors to rain down from
-        the sky onto his enemy. *Dominus Hatred / Fatal Ray: Dracula summons seven
-        green rays of dark energy that fly upward from his body. After a moment, the
-        rays fall, covering the entire area although leaving some spaces between where
-        the player can dodge them. He uses this attack in various games, including
-        Castlevania Chronicles and Castlevania: Portrait of Ruin, and is commonly
-        used by his true form, although its most prominent appearance is in Castlevania:
-        Order of Ecclesia. **Destruction Ray: A dire version of the Fatal Ray. Dracula
-        summons seven purple rays of dark energy that fly upward from his body, but
-        this time they fall following the player''s movement. *Dark Void: Dracula''s
-        favored move. He teleports becoming a black mist and many bats appearing anywhere
-        he desires. Its best to do multiple Dark Voids to confuse enemies. *Demonic
-        Meggido: Dracula''s ultimate dark spell. Two version of this attack are in
-        existence. The first, and more common version has a shorter charging time
-        and allows Dracula to charge demonic runes that become a giant black fireball.
-        Dracula can throw it to his victim and will incinerate his victims with demonic
-        fire. The second version is a gigantic explosion, with Dracula as its nucleus.
-        The explosion radiates from him, dealing heavy damage with high likelihood
-        of killing his opponent. However, the second version requires a longer time
-        to charge, giving enough time to either escape or defeat him before he can
-        use it while draining Dracula''s health. On Order of Ecclesia it is shown
-        that Dracula can sustain it for as long as desires, while in Harmony of Despair
-        its effect is shown to cease. Note: Everything considered "non-canon" in the
-        series is simply treated as a parallel universe or an alternative timeline,
-        with locations such as Brauner''s paintings appearing in the animated series
-        and are treated as alternative worlds, which they are. ==Gallery== File:Kojima
-        concept dracs.png|Dracula in Chronicles File:Castlevania 1 dracula.png|Dracula
-        in the first Castlevania File:67dracula.jpg|Dracula in Super Castlevania IV
-        File:Rob-offart2.jpg|Dracula in Rondo of Blood File:Akumajo Dracula XX Art
-        Dracula 2.jpg|Dracula in Dracula X File:Dracula-Bloodlines-Art.png|Dracula
-        in Bloodlines File:DraculaCircle.jpg|Dracula in Circle of the Moon File:CoD
-        Dracula.jpg|Dracula in Curse of Darkness File:DraculaPortrait.jpg|Dracula
-        in Portrait of Ruin File:Dracula from Dracula X Chronicles.jpg|Dracula in
-        Dracula X Chronicles File:DraculaPortraitEcclesia.png|Dracula in Order of
-        Ecclesia File:Castlevaniajudgementdracula.jpeg.jpg|Dracula in Judgement ==Other==
-        Notable Victories: Notable Losses: Inconclusive Matches: Category:TyranoDoo'
+      value: 'Teleportation: Dracula''s favored strategy, used to confuse his enemy
+        while he casts a myriad of offensive spells. Some versions of his teleporting
+        has him blending to black lights, others turns him into many bats, but the
+        function and strategy is one and the same., Hellfire: Fires a wall of fireballs
+        from his cape. Another version causes flames to erupt from the floor., Power
+        of Dominance: Dracula''s primary ability allows him to absorb defeated monster''s
+        souls and enslave them. This power was the one that Soma Cruz, Dracula''s
+        incarnation, inherited along with Dracula''s soul. While Soma can only summon
+        monsters for a short amount of time due to his low magical power, Dracula
+        can fully utilize this ability with infinite power from the stream of Chaos
+        he commands., Dark Inferno: Fires magma fireballs from his cape. Unlike Hellfire,
+        the meteors produced by this spell cannot be destroyed., Dark Metamorphosis:
+        Boosts Dracula''s Blood draining ability. He can bite an enemy or grasp them
+        and drain their life. He rarely does the latter though, Soul Steal: : A spell
+        that many fear. Soul Steal is used by Dracula and to kill and absorb their
+        energy for Dracula''s use. The one version of the spell has an area of effect
+        around the caster. It can effect multiple victims multiple times in one cast.
+        Another version drains the life out of Dracula''s victims by a mere touch,
+        which is why many fear this spell. It is also referred to as Life Steal.,
+        Blood Storm: Perhaps as a way of mocking of the Belmonts'' powers, could make
+        it rain blood, Meteors: During the events in Circle of The Moon, Dracula displayed
+        various powerful magic spells, one of which summons a barrage of flaming meteors
+        to rain down from the sky onto his enemy., Dominus Hatred / Fatal Ray: Dracula
+        summons seven green rays of dark energy that fly upward from his body. After
+        a moment, the rays fall, covering the entire area although leaving some spaces
+        between where the player can dodge them. He uses this attack in various games,
+        including Castlevania Chronicles and Castlevania: Portrait of Ruin, although
+        its most prominent appearance is in Castlevania: Order of Ecclesia., Destruction
+        Ray: A dire version of the Fatal Ray. Dracula summons seven purple rays of
+        dark energy that fly upward from his body, but this time they fall following
+        the player''s movement., Dark Void: Dracula''s favored move. He teleports
+        becoming a black mist and many bats appearing anywhere he desires. Its best
+        to do multiple Dark Voids to confuse enemies., Demonic Meggido: Dracula''s
+        ultimate dark spell. Two version of this attack are in existence. The first,
+        and more common version has a shorter charging time and allows Dracula to
+        charge demonic runes that become a giant black fireball. Dracula can throw
+        it to his victim and will incinerate his victims with demonic fire. The second
+        version is a gigantic explosion, with Dracula as its nucleus. The explosion
+        radiates from him, dealing heavy damage with high likelihood of killing his
+        opponent. However, the second version requires a longer time to charge, giving
+        enough time to either escape or defeat him before he can use it while draining
+        Dracula''s health. On Order of Ecclesia it is shown that Dracula can sustain
+        it for as long as desires, while in Harmony of Despair its effect is shown
+        to cease, with locations such as Brauner''s paintings appearing in the animated
+        series and are treated as alternative worlds'
       source_id: character-stats-profiles-shanoa-castlevania
       provider_id: character_stats_profiles
       authority: high
@@ -1281,7 +617,337 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|dracula canon castlevania
+      tyranodoom30|406832
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-shanoa-castlevania
+    url: https://vsbattles.fandom.com/wiki/Shanoa_Castlevania
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - range
+    - speed
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Shanoa (Castlevania)
+    source_type: mediawiki
+    revision_id: '9473567'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 30877
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 115
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: ', higher with Dominus'
+      source_id: vsbattles-shanoa-castlevania
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Low Multiverse level (Is capable of defeating Maria, Is stated to have
+        powers comparable to a Belmont,CastlevaniaL Judgement Maria True Story Mode
+        and is stronger than the Time Reaper, who threatenedCastlevania Judgement
+        Aeon''s True Story Mode to eraseCastlevania Judgement Sypha''s True Story
+        Mode all theCastlevania Judgement Alucard''s True Story Mode Castlevania timelines,Castlevania
+        Judgement Golem''s True Story Mode which would include all the Grimoires,Castlevania:
+        Grimoire of Souls which are confirmed alternate worldsCastlevania: Grimoire
+        of Souls chapter 7: Death''s Reign), higher with Dominus (Is capable of defeating
+        Dracula with Dominus)'
+      source_id: vsbattles-shanoa-castlevania
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Infinite (Can keep up with Death, Is able to kill distance itself to
+        attack his enemies instantlyDemon Castle Dracula: Reminiscence of the Divine
+        Abyss)'
+      source_id: vsbattles-shanoa-castlevania
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Multiverse level (Can withstand blows from characters like Maria
+        Renard)
+      source_id: vsbattles-shanoa-castlevania
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range. Low Multiversal with magic (Can go to other realms
+        like the Abyss)
+      source_id: vsbattles-shanoa-castlevania
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Glyphs and Armor (Order of Ecclesia Inventory)
+      source_id: vsbattles-shanoa-castlevania
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Genius (Is an expert on multiple types of magic, which requires one
+        to understand Quantum Physics to utilize it to its fullest.Castlevania: Portrait
+        of Ruin)'
+      source_id: vsbattles-shanoa-castlevania
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Using Dominus Glyphs excessively can drain her health, while using the
+        full power of Dominus can take her soul, Dominus Anger, Melio Confodere: Shanoa
+        creates a rapier to strike her foes down., Melio Secare: Shanoa creates a
+        sword to strike her foes down., Melio Hasta: Shanoa creates a lance to strike
+        her foes down., Melio Macir: Shanoa creates a hammer to strike her foes down.,
+        Melio Arcus: Shanoa creates a crossbow that locks on to targets and fires.,
+        Melio Ascia: Shanoa creates an axe to throw in an arc to hit airborne foes.,
+        Melio Falcis: Shanoa creates a sickle to strike her foes down., Melio Culter:
+        Shanoa creates numerous knives to throw from a distance., Melio Scutum: Shanoa
+        creates a shield to protect herself from harm., Redire: Shanoa throws a magnetic
+        blade that she can ride on while striking foes along the way., Cubus: Shanoa
+        creates a block to get out of tight situations., Torpor: Shanoa seals her
+        foes inside a crystal, rendering them incapable of moving in the process.,
+        Lapiste: Shanoa creates a giant fist made of stone to harm her foes., Vol
+        Pneuma: Shanoa with a gesture creates a current of wind to strike foes from
+        a distance., Vol Ignis: Shanoa creates a pillar of fire to harm her foes.,
+        Vol Grando: Shanoa creates pillars of ice to harm her foes., Vol Fulgur: Shanoa
+        releases lightning from her hands to harm her foes., Vol Luminatio: Shanoa
+        shoots out balls of light that tracks their targets to harm them., Vol Umbra:
+        Shanoa shoots out balls of darkness to harm her foes., Morbus: Shanoa creates
+        a deadly curse on her target., Nitesco: Shanoa shoots out an energy beam from
+        her hands to attack everyone in front of her., Acerbatus: Shanoa creates a
+        dark ball of energy that curses anyone who touches it., Globus: Shanoa shoots
+        several energy balls that bounces everywhere and hit everything in its path.,
+        Dextro Custos: Shanoa unleashes the right head of Cerberus to consume her
+        foes., Sinestro Custos: Shanoa unleashes the left head of Cerberus to consume
+        her foes., Dominus Hatred: Shanoa fires a ray of light that scatters into
+        numerous other light beams to hit everywhere., Dominus Agony, Magnes: Shanoa
+        magnetically attaches herself to metallic objects to reach great height.,
+        Paries: Shanoa phases through walls to get to secret areas and avoid harm.,
+        Volacitus: Shanoa creates a pair of wings to make her fly anywhere., Rapidus
+        Fio: Shanoa increases her speed., Vis Fio: Shanoa''s strength is increased.,
+        Fortis Fio: Shanoa''s defense is increased., Sapiens Fio: Shanoa''s magical
+        power is increased., Fides Fio: Shanoa''s magical defense is increased., Felicem
+        Fio: Shanoa''s Luck increases., Inire Pecunia: Shanoa gains more money from
+        fallen enemies than before., Arma Felix: Shanoa turns into a cat lady, granting
+        her increased agility and razor sharp claws., Arma Chiroptera: Shanoa turns
+        into a Succubus, granting her the powers of one in the process., Arma Machina:
+        Shanoa turns into an automaton, making her invulnerable to any harm., Reflectio:
+        Shanoa regenerates her health at a faster rate than normal., Arma Custos:
+        Shanoa is blessed by the Cerberus'' power, getting stronger th'
+      source_id: vsbattles-shanoa-castlevania
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|shanoa castlevania|9473567
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-shanoa-castlevania
+    url: https://character-stats-and-profiles.fandom.com/wiki/Shanoa_Castlevania
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Dracula (Canon, Castlevania)/TyranoDoom30
+    source_type: mediawiki
+    revision_id: '406832'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 59864
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats'''
+    - Gallery
+    - Other
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: ', higher with each Resurrection'
+      source_id: character-stats-profiles-shanoa-castlevania
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Low Complex Multiverse level (Should be superior to Menace, whose defeat
+        started to collapse the Abyss, which is shown to be separated into 6 dimensions,
+        which are infinite in size while containing multiple galaxies and stars. Can
+        fight and kill the Time Reaper and is superior to Galamoth who controls it,
+        with the Time Reaper being capable of destroying all the Castlevania timelines,
+        which has over millions of worlds. Can create enormous black holes which are
+        capable of sucking out multiple stars into it's center. His sheer influence
+        can mess with the flow of time itself, with his power manifesting in the form
+        of a whole alternate dimension which is his castle, and could sustain both
+        it and the Inverted Castle, both of which are entire worlds with another dimension
+        below it. Superior to Death, who is death itself, a projection of an unconscious
+        fear, the primal fear of the inevitable, flowing across reality as an unbound
+        idea and who can project itself inside the thoughts of others, existing beyond
+        the confines of space, a creature shaped from a realm of raw consciousness
+        and chaos, which exists across all of the multiverse and is beyond the Human
+        World, being completely unnacessible to anyone but Dracula, additionally,
+        this realm can be time stopped, meaning that time exists in it and thus adds
+        a temporal dimension to a fifth dimensional structure, making it 6-D), higher
+        with each Resurrection (Dracula's power grows stronger with each resurrection)
+      source_id: character-stats-profiles-shanoa-castlevania
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Irrelevant (Superior to Death and Olrox, the latter of which was capable
+        of reacting to the former's instant attack which involved him killing the
+        concept of distance to attack instantly)
+      source_id: character-stats-profiles-shanoa-castlevania
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Complex Multiverse level ()
+      source_id: character-stats-profiles-shanoa-castlevania
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Teleportation: Dracula''s favored strategy, used to confuse his enemy
+        while he casts a myriad of offensive spells. Some versions of his teleporting
+        has him blending to black lights, others turns him into many bats, but the
+        function and strategy is one and the same., Hellfire: Fires a wall of fireballs
+        from his cape. Another version causes flames to erupt from the floor., Power
+        of Dominance: Dracula''s primary ability allows him to absorb defeated monster''s
+        souls and enslave them. This power was the one that Soma Cruz, Dracula''s
+        incarnation, inherited along with Dracula''s soul. While Soma can only summon
+        monsters for a short amount of time due to his low magical power, Dracula
+        can fully utilize this ability with infinite power from the stream of Chaos
+        he commands., Dark Inferno: Fires magma fireballs from his cape. Unlike Hellfire,
+        the meteors produced by this spell cannot be destroyed., Dark Metamorphosis:
+        Boosts Dracula''s Blood draining ability. He can bite an enemy or grasp them
+        and drain their life. He rarely does the latter though, Soul Steal: : A spell
+        that many fear. Soul Steal is used by Dracula and to kill and absorb their
+        energy for Dracula''s use. The one version of the spell has an area of effect
+        around the caster. It can effect multiple victims multiple times in one cast.
+        Another version drains the life out of Dracula''s victims by a mere touch,
+        which is why many fear this spell. It is also referred to as Life Steal.,
+        Blood Storm: Perhaps as a way of mocking of the Belmonts'' powers, could make
+        it rain blood, Meteors: During the events in Circle of The Moon, Dracula displayed
+        various powerful magic spells, one of which summons a barrage of flaming meteors
+        to rain down from the sky onto his enemy., Dominus Hatred / Fatal Ray: Dracula
+        summons seven green rays of dark energy that fly upward from his body. After
+        a moment, the rays fall, covering the entire area although leaving some spaces
+        between where the player can dodge them. He uses this attack in various games,
+        including Castlevania Chronicles and Castlevania: Portrait of Ruin, although
+        its most prominent appearance is in Castlevania: Order of Ecclesia., Destruction
+        Ray: A dire version of the Fatal Ray. Dracula summons seven purple rays of
+        dark energy that fly upward from his body, but this time they fall following
+        the player''s movement., Dark Void: Dracula''s favored move. He teleports
+        becoming a black mist and many bats appearing anywhere he desires. Its best
+        to do multiple Dark Voids to confuse enemies., Demonic Meggido: Dracula''s
+        ultimate dark spell. Two version of this attack are in existence. The first,
+        and more common version has a shorter charging time and allows Dracula to
+        charge demonic runes that become a giant black fireball. Dracula can throw
+        it to his victim and will incinerate his victims with demonic fire. The second
+        version is a gigantic explosion, with Dracula as its nucleus. The explosion
+        radiates from him, dealing heavy damage with high likelihood of killing his
+        opponent. However, the second version requires a longer time to charge, giving
+        enough time to either escape or defeat him before he can use it while draining
+        Dracula''s health. On Order of Ecclesia it is shown that Dracula can sustain
+        it for as long as desires, while in Harmony of Despair its effect is shown
+        to cease, with locations such as Brauner''s paintings appearing in the animated
+        series and are treated as alternative worlds'
+      source_id: character-stats-profiles-shanoa-castlevania
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1298,7 +964,6 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - standard_equipment
@@ -1332,7 +997,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1347,76 +1012,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{2-C}}, higher with Dominus'
-      source_id: vsbattles-shanoa
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Dark Lord abilities (4-D - 6 Layers, possibly higher Has access to Dracula''s
-        magic,), Enhanced Senses (via Eye for DecayCastlevania: Order of Ecclesia
-        Brady Games strategy guide page 122), Weapon Mastery (Is skilled with numerous
-        different weapons), Accelerated Development (via Hierophant RingCastlevania:
-        Order of Ecclesia Brady Games strategy guide page 125), Natural Weaponry (via
-        Cat form), Shapeshifting (Should be able to shapeshift like other vampiresCastlevania:
-        Legacy of Darkness), Intangibility (via Mist FormCastlevania 64), Dream Manipulation
-        (via SuccubusCastlevania: Symphony of the Night), Martial Arts, Underwater
-        Breathing (Type 2; Can naturally breathe underwaterCastlevania: Grimoire of
-        Souls chapter 4: That Witch Writhes), Social Influencing (Can convince creatures
-        of other species to aid her in combatCastlevania: Order of Ecclesia Brady
-        Games strategy guide page 6), Extrasensory Perception (Can sense other beings),
-        Regeneration Negation (Low-High), Resurrection and Immortality Negation (Type
-        2, 3, 4, 6 and 7; Can permanently kill the Time Reaper, who has Death''s Regeneration
-        level, which can bring itself back after being erased from existence while
-        being the abstract concept of Death. And scales off from other Creatures of
-        Chaos which can survive lethal blows easily,Castlevania The Belmont Legacy
-        Issue 3 Can revive endlessly, are beyond life and death,Demon Castle Dracula:
-        Demon''s Blood, Bloody Nightmare page 44, 126, 202 can possess other objects
-        to exist, most of them are undead, some of them are souls and evil spirits,
-        are abstract embodiments, and they all are reliant onCastlevania: Portrait
-        of Ruins BradyGames strategy guide page 2 the Chaos Entity, and bounded by
-        it, always returning after being killed,Castlevania: Lament of Innocence with
-        Chaos existing in an alternate dimension beyond the normal world), Explosion
-        Manipulation (via Universitas), Statistics Amplification and Supernatural
-        Luck (with numerous Glyphs and WeegieCastlevania: Grimoire of Souls), Reactive
-        Power Level (via Arma Custos), Elemental Manipulation, Ice Manipulation and
-        Absolute Zero (via Grando, Ice spells are are shown to reach absolute zero
-        across numerous different creatures and is deemed a normal ability even by
-        creatures of the night) Electricity Manipulation (via Fulgur), Fire Manipulation
-        (via Ignis), Air Manipulation (via Pneuma), Earth Manipulation (via Lapiste),
-        Power Absorption and Information Analysis (Can absorb the powers of others
-        and the environment through her glyph absorption), Danmaku (via Thousand Knives),
-        Energy Projection (via Pulsus), Magma Manipulation (via Dominus Anger), Magnetism
-        Manipulation (From Magnes which allows her to boost her self to locations
-        through metalCastlevania: Order of Ecclesia Brady Games strategy guide page
-        113), Damage Transferal (via Heart CuirassCastlevania: Order of Ecclesia Brady
-        Games strategy guide page 121), Vibration Manipulation (via Rapidus Fio),
-        Homing Attack (via Vol Luminatio), Weapon Creation (Glyphs allow her to create
-        weaponsCastlevania: Order of Ecclesia Brady Games strategy guide page 111),
-        Creation (Can create blocks of stone), Sealing and Crystal Manipulation (via
-        Torpor), Light Manipulation (via Luminatio), Holy Manipulation, Darkness Manipulation
-        (via Umbra), Summoning (Can summon numerous creatures to fight), Astral Projection
-        (via Cerberus Glyphs), Necromancy (via Umbra), Energy Manipulation (With numerousCastlevania:
-        Order of Ecclesia glyphs), Time Manipulation (via Right Eye of Devil), Death
-        Manipulation (Can inflict death on her targets when absorbing their powersCastlevania:
-        Order of Ecclesia Brady Games strategy guide page 74), Flight (via Volacitus),
-        Petrification (Can use gorgon heads in combatCastlevania: Order of Ecclesia
-        Brady Games strategy guide page 8), Poison Manipulation, Corrosion Inducement
-        and Acid Manipulation (Is capable of inflicting Poison with the Skull Spider,Castlevania:
-        Order of Ecclesia BradyGames strategy guide page 9 which can rot flesh on
-        contact and is AcidicCastlevania: Portrait of Ruins BradyGames strategy guide
-        page 111), Curse Manipulation, Energy Absorption and Power Nullification (Can
-        inflict the Curse status effect, which can drain one''s Magic and nullify
-        their ability to attackCastlevania: Portrait of Ruins BradyGames strategy
-        guide page 17), Statistics Reduction (The Curse and Poison effects can make
-        one far weaker than normalCastlevania: Order of Ecclesia Brady Games Strategy
-        Guide page 96) |-|Resistances= Dark Lord resistances (4-D - 6 Layers, possibly
-        higher), Attack Reflection (Can harm Dracula with projectiles despite being
-        able to passively reflect attacks back with his ribsCastlevania II: Simon''s
-        Quest), Fire Manipulation (Can resist fire attacksCastlevania: Order of Ecclesia
-        Brady Games strategy guide page 123), Illusion Creation (Can resist the effects
-        of the castle which can create illusionsCastlevania: Harmony of Dissonance),
-        Electricity Manipulation (Can resist Lightning attacks), Holy Manipulat'
+      value: ', higher with Dominus'
       source_id: vsbattles-shanoa
       provider_id: vsbattles
       authority: high
@@ -1473,69 +1069,46 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: 'Using Dominus Glyphs excessively can drain her health, while using the
-        full power of Dominus can take her soul, though she can mitigate this with
-        Albus'' soul and other healing items. Notable Attacks/Techniques: |-|Arm Glyphs=
-        Shanoa Melio Confodere.gif|Melio Confodere Shanoa Melio Secare.gif|Melio Secare
-        Shanoa Melio Hasta.gif|Melio Hasta Shanoa Melio Macir.gif|Melio Macir Shanoa
-        Melio Arcus.gif|Melio Arcus Shanoa Melio Ascia.gif|Melio Ascia Shanoa Melio
-        Falcis.gif|Melio Falcis Shanoa Melio Culter.gif|Melio Culter Shanoa Melio
-        Scutum.gif|Melio Scutum Shanoa Redire.gif|Redire Shanoa Cubus.gif|Cubus Shanoa
-        Torpor.gif|Torpor Shanoa Lapiste.gif|Lapiste Shanoa Vol Pneuma.gif|Vol Pneuma
-        Shanoa Vol Ignis.gif|Vol Ignis Shanoa Vol Grando.gif|Vol Grando Shanoa Vol
-        Fulgur.gif|Vol Fulgur Shanoa Vol Luminatio.gif|Vol Luminatio Shanoa Vol Umbra.gif|Vol
-        Umbra Shanoa Morbus.gif|Morbus Shanoa Nitesco.gif|Nitesco Shanoa Acerbatus.gif|Acerbatus
-        Shanoa Globus.gif|Globus Shanoa Dextro Custos.gif|Dextro Custos Shanoa Sinestro
-        Custos.gif|Sinestro Custos Shanoa Dominus Hatred.gif|Dominus Hatred Shanoa
-        Dominus Anger.gif|Dominus Anger *Melio Confodere: Shanoa creates a rapier
-        to strike her foes down. *Melio Secare: Shanoa creates a sword to strike her
-        foes down. *Melio Hasta: Shanoa creates a lance to strike her foes down. *Melio
-        Macir: Shanoa creates a hammer to strike her foes down. *Melio Arcus: Shanoa
-        creates a crossbow that locks on to targets and fires. *Melio Ascia: Shanoa
-        creates an axe to throw in an arc to hit airborne foes. *Melio Falcis: Shanoa
-        creates a sickle to strike her foes down. *Melio Culter: Shanoa creates numerous
-        knives to throw from a distance. *Melio Scutum: Shanoa creates a shield to
-        protect herself from harm. *Redire: Shanoa throws a magnetic blade that she
-        can ride on while striking foes along the way. *Cubus: Shanoa creates a block
-        to get out of tight situations. *Torpor: Shanoa seals her foes inside a crystal,
-        rendering them incapable of moving in the process. *Lapiste: Shanoa creates
-        a giant fist made of stone to harm her foes. *Vol Pneuma: Shanoa with a gesture
-        creates a current of wind to strike foes from a distance. *Vol Ignis: Shanoa
-        creates a pillar of fire to harm her foes. *Vol Grando: Shanoa creates pillars
-        of ice to harm her foes. *Vol Fulgur: Shanoa releases lightning from her hands
-        to harm her foes. *Vol Luminatio: Shanoa shoots out balls of light that tracks
-        their targets to harm them. *Vol Umbra: Shanoa shoots out balls of darkness
-        to harm her foes. *Morbus: Shanoa creates a deadly curse on her target. *Nitesco:
-        Shanoa shoots out an energy beam from her hands to attack everyone in front
-        of her. *Acerbatus: Shanoa creates a dark ball of energy that curses anyone
-        who touches it. *Globus: Shanoa shoots several energy balls that bounces everywhere
-        and hit everything in its path. *Dextro Custos: Shanoa unleashes the right
-        head of Cerberus to consume her foes. *Sinestro Custos: Shanoa unleashes the
-        left head of Cerberus to consume her foes. *Dominus Hatred: Shanoa fires a
-        ray of light that scatters into numerous other light beams to hit everywhere.
-        *Dominus Anger: Shanoa shoots out a ball of dark magic to hit anyone in its
-        path. |-|Back Glyphs= Shanoa Magnes.gif|Magnes Shanoa Paries.gif|Paries Shanoa
-        Volaticus.gif|Volaticus Shanoa Rapidus Fio.gif|Rapidus Fio Shanoa Vis Fio.gif|Vis
-        Fio Shanoa Fortis Fio.gif|Fortis Fio Shanoa Sapiens Fio.gif|Sapiens Fio Shanoa
-        Fides Fio.gif|Fides Fio Shanoa Felicem Fio.gif|Felicem Fio Shanoa Inire Pecunia.gif|Inire
-        Pecunia Shanoa Arma Felix.gif|Arma Felix Shanoa Arma Chiroptera.gif|Arma Chiroptera
-        Shanoa Arma Machina.gif|Arma Machina Shanoa Refectio.gif|Refectio Shanoa Arma
-        Custos.gif|Arma Custos Shanoa Fidelis Caries.gif|Fidelis Caries Shanoa Fidelis
-        Alate.gif|Fidelis Alate Shanoa Fidelis Polkir.gif|Fidelis Polkir Shanoa Fidelis
-        Noctua.gif|Fidelis Noctua Shanoa Fidelis Medusa.gif|Fidelis Medusa Shanoa
-        Fidelis Aranea.gif|Fidelis Aranea Shanoa Fidelis Mortus.gif|Fidelis Mortus
-        Shanoa Dominus Agony.gif|Dominus Agony *Magnes: Shanoa magnetically attaches
-        herself to metallic objects to reach great height. *Paries: Shanoa phases
-        through walls to get to secret areas and avoid harm. *Volacitus: Shanoa creates
-        a pair of wings to make her fly anywhere. *Rapidus Fio: Shanoa increases her
-        speed. *Vis Fio: Shanoa''s strength is increased. *Fortis Fio: Shanoa''s defense
-        is increased. *Sapiens Fio: Shanoa''s magical power is increased. *Fides Fio:
-        Shanoa''s magical defense is increased. *Felicem Fio: Shanoa''s Luck increases.
-        *Inire Pecunia: Shanoa gains more money from fallen enemies than before. *Arma
-        Felix: Shanoa turns into a cat lady, granting her increased agility and razor
-        sharp claws. *Arma Chiroptera: Shanoa turns into a Succubus, granting her
-        the powers of one in the process. *Arma Machina: Shanoa turns into an automaton,
-        making her invulnerable to any harm. *Reflectio: Shanoa regenerates her health
-        at a faster rate than normal. *Arma Custos: Shanoa is blessed by the Cerbe'
+        full power of Dominus can take her soul, Dominus Anger, Melio Confodere: Shanoa
+        creates a rapier to strike her foes down., Melio Secare: Shanoa creates a
+        sword to strike her foes down., Melio Hasta: Shanoa creates a lance to strike
+        her foes down., Melio Macir: Shanoa creates a hammer to strike her foes down.,
+        Melio Arcus: Shanoa creates a crossbow that locks on to targets and fires.,
+        Melio Ascia: Shanoa creates an axe to throw in an arc to hit airborne foes.,
+        Melio Falcis: Shanoa creates a sickle to strike her foes down., Melio Culter:
+        Shanoa creates numerous knives to throw from a distance., Melio Scutum: Shanoa
+        creates a shield to protect herself from harm., Redire: Shanoa throws a magnetic
+        blade that she can ride on while striking foes along the way., Cubus: Shanoa
+        creates a block to get out of tight situations., Torpor: Shanoa seals her
+        foes inside a crystal, rendering them incapable of moving in the process.,
+        Lapiste: Shanoa creates a giant fist made of stone to harm her foes., Vol
+        Pneuma: Shanoa with a gesture creates a current of wind to strike foes from
+        a distance., Vol Ignis: Shanoa creates a pillar of fire to harm her foes.,
+        Vol Grando: Shanoa creates pillars of ice to harm her foes., Vol Fulgur: Shanoa
+        releases lightning from her hands to harm her foes., Vol Luminatio: Shanoa
+        shoots out balls of light that tracks their targets to harm them., Vol Umbra:
+        Shanoa shoots out balls of darkness to harm her foes., Morbus: Shanoa creates
+        a deadly curse on her target., Nitesco: Shanoa shoots out an energy beam from
+        her hands to attack everyone in front of her., Acerbatus: Shanoa creates a
+        dark ball of energy that curses anyone who touches it., Globus: Shanoa shoots
+        several energy balls that bounces everywhere and hit everything in its path.,
+        Dextro Custos: Shanoa unleashes the right head of Cerberus to consume her
+        foes., Sinestro Custos: Shanoa unleashes the left head of Cerberus to consume
+        her foes., Dominus Hatred: Shanoa fires a ray of light that scatters into
+        numerous other light beams to hit everywhere., Dominus Agony, Magnes: Shanoa
+        magnetically attaches herself to metallic objects to reach great height.,
+        Paries: Shanoa phases through walls to get to secret areas and avoid harm.,
+        Volacitus: Shanoa creates a pair of wings to make her fly anywhere., Rapidus
+        Fio: Shanoa increases her speed., Vis Fio: Shanoa''s strength is increased.,
+        Fortis Fio: Shanoa''s defense is increased., Sapiens Fio: Shanoa''s magical
+        power is increased., Fides Fio: Shanoa''s magical defense is increased., Felicem
+        Fio: Shanoa''s Luck increases., Inire Pecunia: Shanoa gains more money from
+        fallen enemies than before., Arma Felix: Shanoa turns into a cat lady, granting
+        her increased agility and razor sharp claws., Arma Chiroptera: Shanoa turns
+        into a Succubus, granting her the powers of one in the process., Arma Machina:
+        Shanoa turns into an automaton, making her invulnerable to any harm., Reflectio:
+        Shanoa regenerates her health at a faster rate than normal., Arma Custos:
+        Shanoa is blessed by the Cerberus'' power, getting stronger th'
       source_id: vsbattles-shanoa
       provider_id: vsbattles
       authority: high
@@ -1545,7 +1118,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1600,7 +1173,7 @@ repair:
     - intelligence
     field_candidates:
     - field: powers_and_abilities
-      value: 'Superhuman Physical Characteristics Invulnerability Plot Manipulation
+      value: Superhuman Physical Characteristics Invulnerability Plot Manipulation
         Reality Warping Subjective Reality Spatial Manipulation Time Manipulation
         Mind Manipulation Soul Manipulation Matter Manipulation Transmutation and
         Corruption(Types 1 and 2 ) Existence Erasure Conceptual Manipulation (Type
@@ -1613,58 +1186,7 @@ repair:
         Curse Manipulation Disease Manipulation Summoning intangability (Via Mist
         ) Deconstruction information Analysis Power Mimicry Power Absorption Power
         Nullification Fate Manipulation Attack Reflection Body Puppetry Madness Manipulation
-        (types 1 2 and 3 ) and many more abilities . Resistance to the Following:
-        Petrification (Can resist being Petrified), Illusion Creation (can resist
-        the effects of the castle which can create illusions,), Ice Manipulation and
-        Absolute Zero (Can resist ice based attacks, Ice abilities are shown to reach
-        absolute zero across numerous different creatures and is deemed a normal ability
-        even by creatures of the night), Antimatter Manipulation (Can withstand attacks
-        from the Positron rifle, which fires Positive electrons), Curse Manipulation,
-        Energy Absorption and Power Nullification (Can resist the effects of the Curse
-        status effect, which can drain one''s Magic and nullify their ability to attack),
-        Statistics Reduction (Can resist the Curse and Poison effects making one far
-        weaker than normal), Extrasensory Perception (Is unable to be sensed by Death
-        through Brauner), Regeneration Negation (High-Godly; Upscales from Dario,
-        who''s unable to have his immortality and regeneration nulled by Julius''
-        powers), Immortality Negation (Type 2, 3, 4, 5, 6, 7, 8, 9; is unable to die
-        from any of the Belmonts or Alucard''s powers as he always resurrects through
-        the chaos within man), Mind Manipulation and Disease Manipulation (Can resist
-        the mental effects of a werewolf bite, which can inflict diseases upon others),
-        possibly Sleep Manipulation (Upscales from Alucard, who could break out of
-        the Succubus'' coffin which puts the victims to sleep), Poison Manipulation,
-        Corrosion Inducement and Acid Manipulation (Is capable of resisting Poison,
-        which can rot flesh on contact and is Acidic), Life Manipulation (Upscales
-        from Alucard, who''s unfazed by Death and Olrox''s magic to drain the life
-        of those near it and fight off the Succubus trying to drain his life), BFR
-        (Can resist the Castle''s power to send one to another dimension), Perception
-        Manipulation (Can resist the castle''s power to warp one''s senses), Void
-        Manipulation, Conceptual Manipulation (Type 1), Time Manipulation, Gravity
-        Manipulation, Chaos Manipulation, Pain Manipulation and Forced Duplication
-        (Is able to resist the influence of the castle''s Void and Chaos powers, which
-        can forcefully duplicate one''s being and conceptually removed from concepts
-        of Pain, Time, and Existence, and affect Gravity related limitations, and
-        is unfazed by the gravitational effects of the castle, unaffected by Charlotte''s
-        Dark Rift spell), Morality Manipulation (Can resist the effects of the castle,
-        which can turn allies against each other), Magic (can resist magic), Quantum
-        Manipulation and Spatial Manipulation (Can resist the effects of magic, which
-        can warp Quantum Space barriers, which is stated to be a paranormal Phenomena,
-        which makes it common for even creatures of the night), Electricity Manipulation
-        (via Bugbear), Soul Manipulation (Can resist the effects of magic, which is
-        capable of attacking/ affecting the soul in the series), Technology Manipulation
-        (Can resist the castle''s influence, which can mess with satellite images),
-        Law Manipulation (Can resist the inverted castle''s warpings on the laws of
-        everything that functions in the castle), Fate Manipulation (Can resist the
-        influence of the castle, which is capable of binding the Lost Soul, which
-        is literal Fate itself, which is capable of working on Type 4 Acausals), Precognition
-        and Clairvoyance (is outside of Saint Germain''s vision through Death), Darkness
-        Manipulation and Unholy Manipulation (via Arc Demon), Transmutation and Corruption
-        (Type 2; Is able to resist the effects of the castle which transmutate one
-        into a soul and corrupt the victims), Biological Manipulation and Size Manipulation
-        (Can resist the effects of the castle mutating the targets and growing them
-        in size), Existence Erasure (Upscales from Alucard, who can resist the effects
-        of Dracula''s magic being able to erase beings from existence), Empathic Manipulation,
-        and Memory Manipulation (Upscales from Alucard, who can resist Dracula''s
-        magic, which can devour the victim''s mind, and affec'
+        (types 1 2 and 3 ) and many more abilities .
       source_id: character-stats-profiles-shanoa
       provider_id: character_stats_profiles
       authority: high
@@ -1718,12 +1240,10 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Albus (Castlevania)
     source_type: mediawiki
@@ -1753,7 +1273,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1767,30 +1287,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{2-C}}'
-      source_id: vsbattles-shanoa-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Belmont Bloodline (Has access to the Belmont blood,Castlevania: Order
-        of Ecclesia which lets him survive Dominus), Expert Marksman, Expert Martial
-        Artist, Power Absorption and Information Analysis (Can absorb the powers of
-        others and the environment through glyphs), Darkness Manipulation and Unholy
-        Manipulation (Dominus Agony is Dracula''s magic, granting him access to demonic
-        and dark magic), Teleportation and Intangibility (Can warp though solid objects
-        like walls, regular enemies and attacks), Sealing (via Torpor), Light Manipulation
-        (via Optical ShotCastlevania: Order of Ecclesia Brady Games strategy guide
-        page 108), Fire Manipulation, Ice Manipulation, Electricity Manipulation Curse
-        Manipulation, Energy Absorption and Power Nullification (via Max Shot,), which
-        can drain one''s Magic and nullify their ability to attackCastlevania: Portrait
-        of Ruins BradyGames strategy guide page 17) Dark Lord abilities (4-D - 6 Layers
-        possibly higher) |-|Resistance=Standard Belmont Resistances'
-      source_id: vsbattles-shanoa-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: attack_potency
       value: Low Multiverse level (Can keep up with Shanoa)
       source_id: vsbattles-shanoa-game
@@ -1824,7 +1320,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Agartha, and several glyphs like Dominus
+      value: Agartha
       source_id: vsbattles-shanoa-game
       provider_id: vsbattles
       authority: high
@@ -1837,54 +1333,31 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Dominus Agony can take him over, though he can resist the effects of
-        its magic thanks to the Belmont Bloodline he gained through the villagers.
-        Notable Attacks/Techniques: Albus Torpor.gif|Torpor Albus Particle Shot.gif|Optical
-        Albus Max Shot.gif|Max Shot *Agartha: Albus main way of attacking and using
-        his various Glyphs are through his gun Agartha. It can shoot rapidly and indefinitely
-        as long as Albus has enough magic to support it, it doesn''t need bullets
-        or projectiles as it is mainly powered through Magic. Albus can also combine
-        his Glyphs and shoot them out from Agartha, though this is not limited by
-        the gun as he can use Glyphs independently from it **Glyph Mastery: Albus
-        can fire a variety of Glyphs from Agartha the same way as Shanoa fires her
-        Glyph from her arms, though Albus prefers Acerbatus, Torpor, and other types
-        of shots suitable for Agartha. **Torpor: Agartha can fire a Torpor Glyph that
-        incapacitates its victim in a crystal cage. It has the longest cooldown in
-        Albus''s arsenal. It is an Ice based Glyph. **Optical Shot: Agartha can also
-        fire a magic wave of black and white. The light wave will spiral into where
-        Agartha marks before released as an outward spiral in an opposite direction.
-        The black and white light waves do either light or dark damage, depending
-        on the opponent. Along with Max Shot, it has the second longest cooldown.
-        It is also called Vertical Shot. **Max Shot: A powerful Glyph. Agartha can
-        fire an Acerbatus Glyph that curses the victim, shocks with electrical damage,
-        and consumes the enemy in darkness. Albus inserts the Acerbatus Glyph into
-        Agartha''s barrel, and fires Agartha, launching a large black ball of darkness
-        with yellowish skulls. Along with Optical Shot, it has the second longest
-        cooldown. It is also called Casper Shot. While battling him, he says " Glyph
-        in Bullet!" **Quad Ignis: Albus also masters a spinning flame kick which does
-        a ton of damage and is easily one of his strongest attacks, though it is entirely
-        melee based and has almost no horizontal range. **Warp: Possibly his best
-        ability in the game, Albus can warp to wherever he chooses in an area and
-        however many times he desires, as long as he has the Magic to do so. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions}} ==References==
-        {{scroll box|content={{reflist|2}}}} Category:Characters Category:Castlevania
-        Category:Absorption Users Category:BFR Users Category:Biology Users Category:Body
-        Puppetry Users Category:Chaos Users Category:Concept Users Category:Corruption
-        Users Category:Curse Users Category:Darkness Users Category:Dimensional Manipulation
-        Users Category:Duplication Users Category:Electricity Users Category:Empathic
-        Manipulation Users Category:Existence Erasure Users Category:Fate Users Category:Fear
-        Users Category:Fire Users Category:Gravity Users Category:Hunters Category:Ice
-        Users Category:Illusionists Category:Information Analysis Users Category:Intangibility
-        Users Category:Law Users Category:Light Users Category:Magic Users Category:Martial
-        Artists Category:Memory Users Category:Mind Users Category:Morality Users
-        Category:Non-Physical Interaction Users Category:Pain Users Category:Perception
-        Users Category:Petrification Users Category:Physics Users Category:Plot Manipulation
-        Users Category:Power Mimicry Users Category:Power Nullification Users Category:Possession
-        Users Category:Reality Warpers Category:Size Users Category:Soul Users Category:Statistics
-        Reduction Users Category:Subjective Reality Users Category:Technology Users
-        Category:Teleportation Users Category:Text Users Category:Time Users Category:Transmutation
-        Users Category:Void Users Category:Weapon Masters Category:Fantasy Characters
-        Category:Horror Characters'
+      value: 'Dominus Agony can take him over, Max Shot, Agartha: Albus main way of
+        attacking and using his various Glyphs are through his gun Agartha. It can
+        shoot rapidly and indefinitely as long as Albus has enough magic to support
+        it, it doesn''t need bullets or projectiles as it is mainly powered through
+        Magic. Albus can also combine his Glyphs and shoot them out from Agartha,
+        though this is not limited by the gun as he can use Glyphs independently from
+        it, Glyph Mastery: Albus can fire a variety of Glyphs from Agartha the same
+        way as Shanoa fires her Glyph from her arms, though Albus prefers Acerbatus,
+        Torpor: Agartha can fire a Torpor Glyph that incapacitates its victim in a
+        crystal cage. It has the longest cooldown in Albus''s arsenal. It is an Ice
+        based Glyph., Optical Shot: Agartha can also fire a magic wave of black and
+        white. The light wave will spiral into where Agartha marks before released
+        as an outward spiral in an opposite direction. The black and white light waves
+        do either light or dark damage, depending on the opponent. Along with Max
+        Shot, it has the second longest cooldown. It is also called Vertical Shot.,
+        Max Shot: A powerful Glyph. Agartha can fire an Acerbatus Glyph that curses
+        the victim, shocks with electrical damage, and consumes the enemy in darkness.
+        Albus inserts the Acerbatus Glyph into Agartha''s barrel, launching a large
+        black ball of darkness with yellowish skulls. Along with Optical Shot, it
+        has the second longest cooldown. It is also called Casper Shot. While battling
+        him, he says " Glyph in Bullet!", Quad Ignis: Albus also masters a spinning
+        flame kick which does a ton of damage and is easily one of his strongest attacks,
+        though it is entirely melee based and has almost no horizontal range., Warp:
+        Possibly his best ability in the game, Albus can warp to wherever he chooses
+        in an area and however many times he desires'
       source_id: vsbattles-shanoa-game
       provider_id: vsbattles
       authority: high
@@ -1894,7 +1367,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1909,7 +1382,6 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
     - tier
     - weaknesses
@@ -1941,7 +1413,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1956,77 +1428,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 1-C}}, higher with each Resurrection'
-      source_id: character-stats-profiles-shanoa-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Genius Intelligence, Fusionism
-        (Can fuse with Death), Blessed (Vampires are loved by the night, which grants
-        them power), Madness Manipulation (Vampires can make someone completely mad,
-        and the sight of one can drive one to insanity), Intangibility (As his soul),
-        Non-Corporeal (Scales to Death, who has an intangible form not even beings
-        who can interact with intangible beings can interact with), Self-Sustenance
-        (Type 1: Vampires and other Creatures of Chaos can breath in space), Transformation
-        (Can transform into many monstrous forms), Animal Manipulation and Creation
-        (He can unleash many bats at his opponent), Breath Attack (Can unleash attacks
-        out of his mouth), Fire Manipulation (Consistenly shoots fire attacks), Weapon
-        Mastery and Creation (Can create and shoot out swords at his opponent), Sealing
-        and Crystal Manipulation (Scales to Death, who can create a crystal to trap
-        opponents), Adaptation (Power of Dominance allows it''s user to adapt and
-        copy any Creature''s ability), Reactive Power Level (Dracula''s power grows
-        stronger with each resurrection), Possession (Can possess others), Regeneration
-        (True-Godly: Scales from Death, who has came back from getting completely
-        destroyed many times, while being the conceptual embodiment of death and nonexistant
-        at the same time. Scales from Shaft, who came back after getting his ghost
-        form destroyed and also got his own soul destroyed and came back), Vibration
-        Manipulation (Can create shockwaves), Telekinesis (Can telekinetically move
-        blocks around), Afterimage Creation (Can create afterimages), Soul Manipulation
-        (With Soul Steal, he was capable of absorbing Death and his soul. Also scales
-        to Death who took away Walter''s soul), Inorganic Physiology (Type 1: Is a
-        painting), Healing (Soul Steal allows healing), Power Mimicry and Absorption
-        (Upscales from Dmitrii, who can copy magic attacks by simply coming in touch
-        with him. Power of Dominance allows him to absorb souls and their powers),
-        Bone Manipulation (Can attack with bones), Duplication (Can duplicate himself),
-        Attack Reflection (Dracula''s Rib can deflect attacks), Blood Manipulation
-        (Can attack using blood pellets and can create a massive blood rain), Absolute
-        Zero Ice (Can use ice attacks. Ice attacks in Castlevania can reach Absolute
-        Zero), Conceptual Manipulation (Scales to Death, who can kill the very concepts
-        of sound and distance and has full control over the concept of death), Death
-        Manipulation (Scales to Death who has full control over death), Light Manipulation
-        (Can create light beams both as attacks and teleportation), Invulnerability
-        (Creatures of Chaos are invincible when drawing Chaos'' power, and can''t
-        be killed normally, and only weapons made to specifically harm them can actually
-        harm them), Smoke Manipulation and Poison Manipulation (With Poisonous Blow,
-        Dracula creates a smoke of poisonous gas. He can also create blood bubbles
-        which can give Poison), Earth Manipulation (With Jagged Earth, Dracula summons
-        out rock spikes out from the ground. Can shoot meteors), Pocket Reality Manipulation
-        (Created his own pocket reality), Statistics Amplification (The power of Chaos
-        is capable of making creatures stronger), Black Hole Creation (Created out
-        a massive black hole which could suck entire stars. Also scales to Death who
-        can create a black hole), Invisibility (Scales to Death who can become invisible
-        to beings who can even sense invisible beings already), Fate Manipulation
-        (Scales to Death who is able to choose the fate of all living beings and control
-        it), Cosmic Awareness (Scales to Death, who is aware of the existence of alternate
-        timelines and what''s happening in them), Portal Creation (Created a light
-        beam which also serves as a portal), Sleep Manipulation (Scales from Walter,
-        who can cast a sleeping spell), Size Manipulation (Seemingly shown here),
-        Aura (Has an aura around himself), Acausality (Types 1 and 5: Unnafected by
-        the events in Castlevania Judgement. Creatures of Chaos run on a completely
-        different set of rules from the Human World, whose laws don''t apply to them,
-        incluiding time, pain and existence itself, the three of them being meaningless
-        to them), Glyph Creation (Can create glyphs), Absorption (Dracula''s power
-        can absorb beings), Information Analysis (Upscales from Dmitrii, who was capable
-        of scanning through Soma''s memories of his past life), Telepathy (Scales
-        from Alucard, who can telepathically communicate with Soma), Corrosion Inducement
-        and Acid Manipulation (Poison is acidic in nature), Homing Attack (Can create
-        attacks which home in into it''s targets), Danmaku (Can create several attacks
-        at his opponent), Necromancy (Can revive the dead), Matter Manipulation (Devil
-        Forging comes from Dracula''s magic, which can control matter), Energy Manipulation
-        and Projection (Can use various forms of energy attacks), Holy Manipulation
-        (Demonic Megiddo is made of holy flames), Extrasensory Perception and Enhanced
-        Senses (Can see, sense and figh'
+      value: ', higher with each Resurrection'
       source_id: character-stats-profiles-shanoa-game
       provider_id: character_stats_profiles
       authority: high
@@ -2070,71 +1472,51 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Notable Attacks/Techniques: File:6752034-dracula ability hellfire (104).gif|Teleporting
-        & using Hellfire File:6752010-dracula ability dark inferno (101).gif|Dark
-        Inferno File:6752145-dracula ability soul steal (102).gif|Soul Steal/Power
-        of Dominance File:6752050-dracula ability fatal ray (103).gif|Fatal Ray File:J
-        Dark Void Dracula.gif|Dark Void File:6752229-dracula ability soul steal (101).gif|Dark
-        Metamorphosis File:Demonic-Meggido.gif|Demonic Meggido File:6752166-dracula
-        feat manipulate castle (102).gif|Transforming *Teleportation: Dracula''s favored
-        strategy, used to confuse his enemy while he casts a myriad of offensive spells.
-        Some versions of his teleporting has him blending to black lights, others
-        turns him into many bats, but the function and strategy is one and the same.
-        *Hellfire: Fires a wall of fireballs from his cape. Another version causes
-        flames to erupt from the floor. *Power of Dominance: Dracula''s primary ability
-        allows him to absorb defeated monster''s souls and enslave them. This power
-        was the one that Soma Cruz, Dracula''s incarnation, inherited along with Dracula''s
-        soul. While Soma can only summon monsters for a short amount of time due to
-        his low magical power, Dracula can fully utilize this ability with infinite
-        power from the stream of Chaos he commands. *Dark Inferno: Fires magma fireballs
-        from his cape. Unlike Hellfire, the meteors produced by this spell cannot
-        be destroyed. *Dark Metamorphosis: Boosts Dracula''s Blood draining ability.
-        He can bite an enemy or grasp them and drain their life. He rarely does the
-        latter though *Soul Steal: : A spell that many fear. Soul Steal is used by
-        Dracula and to kill and absorb their energy for Dracula''s use. The one version
-        of the spell has an area of effect around the caster. It can effect multiple
-        victims multiple times in one cast. Another version drains the life out of
-        Dracula''s victims by a mere touch, which is why many fear this spell. It
-        is also referred to as Life Steal. *Blood Storm: Perhaps as a way of mocking
-        of the Belmonts'' powers, Dracula, when facing Richter Belmont, could make
-        it rain blood, and being caught in it causes heavy damage. *Meteors: During
-        the events in Circle of The Moon, Dracula displayed various powerful magic
-        spells, one of which summons a barrage of flaming meteors to rain down from
-        the sky onto his enemy. *Dominus Hatred / Fatal Ray: Dracula summons seven
-        green rays of dark energy that fly upward from his body. After a moment, the
-        rays fall, covering the entire area although leaving some spaces between where
-        the player can dodge them. He uses this attack in various games, including
-        Castlevania Chronicles and Castlevania: Portrait of Ruin, and is commonly
-        used by his true form, although its most prominent appearance is in Castlevania:
-        Order of Ecclesia. **Destruction Ray: A dire version of the Fatal Ray. Dracula
-        summons seven purple rays of dark energy that fly upward from his body, but
-        this time they fall following the player''s movement. *Dark Void: Dracula''s
-        favored move. He teleports becoming a black mist and many bats appearing anywhere
-        he desires. Its best to do multiple Dark Voids to confuse enemies. *Demonic
-        Meggido: Dracula''s ultimate dark spell. Two version of this attack are in
-        existence. The first, and more common version has a shorter charging time
-        and allows Dracula to charge demonic runes that become a giant black fireball.
-        Dracula can throw it to his victim and will incinerate his victims with demonic
-        fire. The second version is a gigantic explosion, with Dracula as its nucleus.
-        The explosion radiates from him, dealing heavy damage with high likelihood
-        of killing his opponent. However, the second version requires a longer time
-        to charge, giving enough time to either escape or defeat him before he can
-        use it while draining Dracula''s health. On Order of Ecclesia it is shown
-        that Dracula can sustain it for as long as desires, while in Harmony of Despair
-        its effect is shown to cease. Note: Everything considered "non-canon" in the
-        series is simply treated as a parallel universe or an alternative timeline,
-        with locations such as Brauner''s paintings appearing in the animated series
-        and are treated as alternative worlds, which they are. ==Gallery== File:Kojima
-        concept dracs.png|Dracula in Chronicles File:Castlevania 1 dracula.png|Dracula
-        in the first Castlevania File:67dracula.jpg|Dracula in Super Castlevania IV
-        File:Rob-offart2.jpg|Dracula in Rondo of Blood File:Akumajo Dracula XX Art
-        Dracula 2.jpg|Dracula in Dracula X File:Dracula-Bloodlines-Art.png|Dracula
-        in Bloodlines File:DraculaCircle.jpg|Dracula in Circle of the Moon File:CoD
-        Dracula.jpg|Dracula in Curse of Darkness File:DraculaPortrait.jpg|Dracula
-        in Portrait of Ruin File:Dracula from Dracula X Chronicles.jpg|Dracula in
-        Dracula X Chronicles File:DraculaPortraitEcclesia.png|Dracula in Order of
-        Ecclesia File:Castlevaniajudgementdracula.jpeg.jpg|Dracula in Judgement ==Other==
-        Notable Victories: Notable Losses: Inconclusive Matches: Category:TyranoDoo'
+      value: 'Teleportation: Dracula''s favored strategy, used to confuse his enemy
+        while he casts a myriad of offensive spells. Some versions of his teleporting
+        has him blending to black lights, others turns him into many bats, but the
+        function and strategy is one and the same., Hellfire: Fires a wall of fireballs
+        from his cape. Another version causes flames to erupt from the floor., Power
+        of Dominance: Dracula''s primary ability allows him to absorb defeated monster''s
+        souls and enslave them. This power was the one that Soma Cruz, Dracula''s
+        incarnation, inherited along with Dracula''s soul. While Soma can only summon
+        monsters for a short amount of time due to his low magical power, Dracula
+        can fully utilize this ability with infinite power from the stream of Chaos
+        he commands., Dark Inferno: Fires magma fireballs from his cape. Unlike Hellfire,
+        the meteors produced by this spell cannot be destroyed., Dark Metamorphosis:
+        Boosts Dracula''s Blood draining ability. He can bite an enemy or grasp them
+        and drain their life. He rarely does the latter though, Soul Steal: : A spell
+        that many fear. Soul Steal is used by Dracula and to kill and absorb their
+        energy for Dracula''s use. The one version of the spell has an area of effect
+        around the caster. It can effect multiple victims multiple times in one cast.
+        Another version drains the life out of Dracula''s victims by a mere touch,
+        which is why many fear this spell. It is also referred to as Life Steal.,
+        Blood Storm: Perhaps as a way of mocking of the Belmonts'' powers, could make
+        it rain blood, Meteors: During the events in Circle of The Moon, Dracula displayed
+        various powerful magic spells, one of which summons a barrage of flaming meteors
+        to rain down from the sky onto his enemy., Dominus Hatred / Fatal Ray: Dracula
+        summons seven green rays of dark energy that fly upward from his body. After
+        a moment, the rays fall, covering the entire area although leaving some spaces
+        between where the player can dodge them. He uses this attack in various games,
+        including Castlevania Chronicles and Castlevania: Portrait of Ruin, although
+        its most prominent appearance is in Castlevania: Order of Ecclesia., Destruction
+        Ray: A dire version of the Fatal Ray. Dracula summons seven purple rays of
+        dark energy that fly upward from his body, but this time they fall following
+        the player''s movement., Dark Void: Dracula''s favored move. He teleports
+        becoming a black mist and many bats appearing anywhere he desires. Its best
+        to do multiple Dark Voids to confuse enemies., Demonic Meggido: Dracula''s
+        ultimate dark spell. Two version of this attack are in existence. The first,
+        and more common version has a shorter charging time and allows Dracula to
+        charge demonic runes that become a giant black fireball. Dracula can throw
+        it to his victim and will incinerate his victims with demonic fire. The second
+        version is a gigantic explosion, with Dracula as its nucleus. The explosion
+        radiates from him, dealing heavy damage with high likelihood of killing his
+        opponent. However, the second version requires a longer time to charge, giving
+        enough time to either escape or defeat him before he can use it while draining
+        Dracula''s health. On Order of Ecclesia it is shown that Dracula can sustain
+        it for as long as desires, while in Harmony of Despair its effect is shown
+        to cease, with locations such as Brauner''s paintings appearing in the animated
+        series and are treated as alternative worlds'
       source_id: character-stats-profiles-shanoa-game
       provider_id: character_stats_profiles
       authority: high
@@ -2144,7 +1526,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true

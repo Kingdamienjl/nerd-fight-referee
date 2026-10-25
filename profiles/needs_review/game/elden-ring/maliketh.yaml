@@ -11,7 +11,7 @@ generation:
   generated_at: '2026-09-22T18:10:36Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id002
+  ineligible_reasons:
   - confidence_below_0_55
   - missing_attack_potency
   - missing_clean_linked_ability
@@ -73,42 +73,6 @@ sources:
   source_type: mediawiki
   title: Maliketh
   url: https://character-stats-and-profiles.fandom.com/wiki/Maliketh
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-maliketh-elden-ring
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Maliketh Elden Ring
-  url: https://vsbattles.fandom.com/wiki/Maliketh_Elden_Ring
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-maliketh-elden-ring
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Maliketh Elden Ring
-  url: https://character-stats-and-profiles.fandom.com/wiki/Maliketh_Elden_Ring
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -200,13 +164,20 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Mountain Level, Multi-Solar (Scales a late game Tarnished who scales to
+      Ranni who created a pocket dimension with a moon and star systems) and "There
+      was not one demigod who feared him" this includes Radahn who held up the stars
+    source_ids:
+    - character-stats-profiles-maliketh-elden-ring
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least FTL to FTL+ Is far faster than the tarnished who can dodge this
+      attack
+    source_ids:
+    - character-stats-profiles-maliketh-elden-ring
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -216,23 +187,164 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Mountain Level, Multi-Solar
+    source_ids:
+    - character-stats-profiles-maliketh-elden-ring
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: likely Inexhaustible (Can fight a late game Tarnished for a long time and
+      doesn't seem to run out of stamina)
+    source_ids:
+    - character-stats-profiles-maliketh-elden-ring
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Extended Melee Range with Bestial Sling
+    source_ids:
+    - character-stats-profiles-maliketh-elden-ring
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average (Predates the Shattering, which was implied to be ages ago,
+      holds great knowledge and wisdom, is a skilled fighter that has knowledge of
+      many techniques)
+    source_ids:
+    - character-stats-profiles-maliketh-elden-ring
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-human-characteristics
+  name: Superhuman Human Characteristics
+  description: Superhuman Human Characteristics
+  source_ids: &id002
+  - character-stats-profiles-maliketh-elden-ring
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-superhuman-athleticism-can-preform-flips-and-leap-around-hi
+  name: Superhuman Athleticism (Can Preform flips, and leap around his arena)
+  description: Superhuman Athleticism (Can Preform flips, and leap around his arena)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-large-size
+  name: Large Size
+  description: Large Size
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-conceptual-manipulation-type-1-can-manipulate-destined-deat
+  name: Conceptual Manipulation (Type 1; Can manipulate destined death which was implied
+    to be the principle of death within the
+  description: Conceptual Manipulation (Type 1; Can manipulate destined death which
+    was implied to be the principle of death within the Elden Ring universe)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - dimensional_scope
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-immortality-negation-can-kill-immortals-such-as-marika
+  name: Immortality Negation Can kill immortals such as Marika
+  description: Immortality Negation Can kill immortals such as Marika
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-sound-manipulation-maliketh-s-roars-can-damage-and-knock-do
+  name: Sound Manipulation Maliketh's roars can damage and knock down the player.
+  description: Sound Manipulation Maliketh's roars can damage and knock down the player.
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-soul-manipulation-even-a-small-fragment-of-destined-death-d
+  name: Soul Manipulation Even a small fragment of Destined Death destroyed Godwyn's
+    soul.
+  description: Soul Manipulation Even a small fragment of Destined Death destroyed
+    Godwyn's soul.
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-energy-manipulation-can-fire-red-energy-out-of-his-black-bl
+  name: Energy Manipulation Can fire red energy out of his Black Blade.
+  description: Energy Manipulation Can fire red energy out of his Black Blade.
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
@@ -248,13 +360,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: character-stats-profiles-maliketh-elden-ring
+  secondary_disagreement_policy: warning_only
 profile_hash: d8b6c6168fc029e58bda178d79117d17fcaf5589e6a2f586543bc6553d2ba6e8
 repair:
-  attempted_at: '2026-09-25T06:40:38Z'
+  attempted_at: '2026-10-21T03:48:53Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -321,13 +447,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{4-A}}, possibly {{3-B}}
-      source_id: vsbattles-maliketh-elden-ring
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content='
+      value: At most , possibly
       source_id: vsbattles-maliketh-elden-ring
       provider_id: vsbattles
       authority: high
@@ -399,15 +519,20 @@ repair:
         can be used multiple times in combination. *Destined Death: Plunges the Black
         Blade into the ground, creating a large field which emits many Destined Death
         attacks. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{Scroll box|{{Reflist|2}} }} ==Notes and Explanations== {{Scroll box| }}
-        {{Discussions|Maliketh the Black Blade|Maliketh, the Black Blade}} Category:Elden
-        Ring Category:Characters Category:Male Characters Category:Weapon Masters
-        Category:Video Game Characters Category:Acrobats Category:Game Bosses Category:Antagonists
-        Category:Sound Users Category:Power Nullification Users Category:Immortals
-        Category:Durability Negation Users Category:Energy Projection Users Category:Fantasy
-        Characters Category:Blind Characters Category:Tragic Characters Category:Death
-        Users Category:Concept Users Category:Rune Users Category:Guardians Category:Monsters
-        Category:Wolves Category:Disabled Characters'
+        ==Notes and Explanations== Category:Elden Ring Category:Characters Category:Male
+        Characters Category:Weapon Masters Category:Video Game Characters Category:Acrobats
+        Category:Game Bosses Category:Antagonists Category:Sound Users Category:Power
+        Nullification Users Category:Immortals Category:Durability Negation Users
+        Category:Energy Projection Users Category:Fantasy Characters Category:Blind
+        Characters Category:Tragic Characters Category:Death Users Category:Concept
+        Users Category:Rune Users Category:Guardians Category:Monsters Category:Wolves
+        Category:Disabled Characters'
+      source_id: vsbattles-maliketh-elden-ring
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: vsbattles-maliketh-elden-ring
       provider_id: vsbattles
       authority: high
@@ -606,13 +731,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{4-A}}, possibly {{3-B}}
-      source_id: vsbattles-maliketh-elden-ring
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content='
+      value: At most , possibly
       source_id: vsbattles-maliketh-elden-ring
       provider_id: vsbattles
       authority: high
@@ -684,15 +803,20 @@ repair:
         can be used multiple times in combination. *Destined Death: Plunges the Black
         Blade into the ground, creating a large field which emits many Destined Death
         attacks. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{Scroll box|{{Reflist|2}} }} ==Notes and Explanations== {{Scroll box| }}
-        {{Discussions|Maliketh the Black Blade|Maliketh, the Black Blade}} Category:Elden
-        Ring Category:Characters Category:Male Characters Category:Weapon Masters
-        Category:Video Game Characters Category:Acrobats Category:Game Bosses Category:Antagonists
-        Category:Sound Users Category:Power Nullification Users Category:Immortals
-        Category:Durability Negation Users Category:Energy Projection Users Category:Fantasy
-        Characters Category:Blind Characters Category:Tragic Characters Category:Death
-        Users Category:Concept Users Category:Rune Users Category:Guardians Category:Monsters
-        Category:Wolves Category:Disabled Characters'
+        ==Notes and Explanations== Category:Elden Ring Category:Characters Category:Male
+        Characters Category:Weapon Masters Category:Video Game Characters Category:Acrobats
+        Category:Game Bosses Category:Antagonists Category:Sound Users Category:Power
+        Nullification Users Category:Immortals Category:Durability Negation Users
+        Category:Energy Projection Users Category:Fantasy Characters Category:Blind
+        Characters Category:Tragic Characters Category:Death Users Category:Concept
+        Users Category:Rune Users Category:Guardians Category:Monsters Category:Wolves
+        Category:Disabled Characters'
+      source_id: vsbattles-maliketh-elden-ring
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: vsbattles-maliketh-elden-ring
       provider_id: vsbattles
       authority: high
@@ -891,13 +1015,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{4-A}}, possibly {{3-B}}
-      source_id: vsbattles-maliketh
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content='
+      value: At most , possibly
       source_id: vsbattles-maliketh
       provider_id: vsbattles
       authority: high
@@ -969,15 +1087,20 @@ repair:
         can be used multiple times in combination. *Destined Death: Plunges the Black
         Blade into the ground, creating a large field which emits many Destined Death
         attacks. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{Scroll box|{{Reflist|2}} }} ==Notes and Explanations== {{Scroll box| }}
-        {{Discussions|Maliketh the Black Blade|Maliketh, the Black Blade}} Category:Elden
-        Ring Category:Characters Category:Male Characters Category:Weapon Masters
-        Category:Video Game Characters Category:Acrobats Category:Game Bosses Category:Antagonists
-        Category:Sound Users Category:Power Nullification Users Category:Immortals
-        Category:Durability Negation Users Category:Energy Projection Users Category:Fantasy
-        Characters Category:Blind Characters Category:Tragic Characters Category:Death
-        Users Category:Concept Users Category:Rune Users Category:Guardians Category:Monsters
-        Category:Wolves Category:Disabled Characters'
+        ==Notes and Explanations== Category:Elden Ring Category:Characters Category:Male
+        Characters Category:Weapon Masters Category:Video Game Characters Category:Acrobats
+        Category:Game Bosses Category:Antagonists Category:Sound Users Category:Power
+        Nullification Users Category:Immortals Category:Durability Negation Users
+        Category:Energy Projection Users Category:Fantasy Characters Category:Blind
+        Characters Category:Tragic Characters Category:Death Users Category:Concept
+        Users Category:Rune Users Category:Guardians Category:Monsters Category:Wolves
+        Category:Disabled Characters'
+      source_id: vsbattles-maliketh
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: vsbattles-maliketh
       provider_id: vsbattles
       authority: high
@@ -1176,13 +1299,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{4-A}}, possibly {{3-B}}
-      source_id: vsbattles-maliketh-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content='
+      value: At most , possibly
       source_id: vsbattles-maliketh-game
       provider_id: vsbattles
       authority: high
@@ -1254,15 +1371,20 @@ repair:
         can be used multiple times in combination. *Destined Death: Plunges the Black
         Blade into the ground, creating a large field which emits many Destined Death
         attacks. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{Scroll box|{{Reflist|2}} }} ==Notes and Explanations== {{Scroll box| }}
-        {{Discussions|Maliketh the Black Blade|Maliketh, the Black Blade}} Category:Elden
-        Ring Category:Characters Category:Male Characters Category:Weapon Masters
-        Category:Video Game Characters Category:Acrobats Category:Game Bosses Category:Antagonists
-        Category:Sound Users Category:Power Nullification Users Category:Immortals
-        Category:Durability Negation Users Category:Energy Projection Users Category:Fantasy
-        Characters Category:Blind Characters Category:Tragic Characters Category:Death
-        Users Category:Concept Users Category:Rune Users Category:Guardians Category:Monsters
-        Category:Wolves Category:Disabled Characters'
+        ==Notes and Explanations== Category:Elden Ring Category:Characters Category:Male
+        Characters Category:Weapon Masters Category:Video Game Characters Category:Acrobats
+        Category:Game Bosses Category:Antagonists Category:Sound Users Category:Power
+        Nullification Users Category:Immortals Category:Durability Negation Users
+        Category:Energy Projection Users Category:Fantasy Characters Category:Blind
+        Characters Category:Tragic Characters Category:Death Users Category:Concept
+        Users Category:Rune Users Category:Guardians Category:Monsters Category:Wolves
+        Category:Disabled Characters'
+      source_id: vsbattles-maliketh-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: vsbattles-maliketh-game
       provider_id: vsbattles
       authority: high
