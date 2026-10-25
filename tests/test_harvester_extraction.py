@@ -287,5 +287,46 @@ class ThousandsCommaSplitTests(unittest.TestCase):
         )
 
 
+class TierRatingTemplateTests(unittest.TestCase):
+    """Frag-10: VSB tier ratings are TEMPLATES, not bold text --
+    {{Low 5-B}} / {{High 5-A}} render as bold linked ratings on the
+    page, and every template stripper deleted them, so "Low 5-B,
+    likely higher. High 5-A with swords" arrived as "likely higher.
+    with swords" (gate 50m, all five Transformers tiers). A rating
+    template's NAME is its value: preserve it as plain text, remove
+    every other template."""
+
+    def test_arcee_verbatim_tier_keeps_both_ratings(self):
+        fields = extract_vsbattles_fields(
+            "'''[[Tiering System|Tier]]:''' {{Low 5-B}}, likely "
+            "'''higher'''. {{High 5-A}} with swords"
+        )
+        self.assertEqual(
+            fields["tier"], "Low 5-B, likely higher. High 5-A with swords"
+        )
+
+    def test_plain_rating_template_preserved(self):
+        fields = extract_vsbattles_fields("'''Tier:''' {{9-C}}")
+        self.assertEqual(fields["tier"], "9-C")
+
+    def test_qualified_rating_template_preserved(self):
+        fields = extract_vsbattles_fields(
+            "'''Tier:''' {{At least 8-C}}, likely higher"
+        )
+        self.assertEqual(fields["tier"], "At least 8-C, likely higher")
+
+    def test_plus_rating_template_preserved(self):
+        fields = extract_vsbattles_fields(
+            "'''Tier:''' {{9-A+}} with the sword"
+        )
+        self.assertEqual(fields["tier"], "9-A+ with the sword")
+
+    def test_non_rating_templates_still_removed(self):
+        fields = extract_vsbattles_fields(
+            "'''Tier:''' {{Low 5-B}} {{SomeOther|foo}}"
+        )
+        self.assertEqual(fields["tier"], "Low 5-B")
+
+
 if __name__ == "__main__":
     unittest.main()

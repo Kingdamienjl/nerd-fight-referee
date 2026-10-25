@@ -9,6 +9,7 @@ import unittest
 
 from battlebot.review.auto_repair import (
     _guard_name_match,
+    apply_primary_profile_state,
     attempt_field_map,
     attempt_from_result,
     bare_qualifier_reasons,
@@ -2515,6 +2516,344 @@ class NinthGenFrag9Tests(unittest.TestCase):
             "prose_sentence_shard",
         ):
             self.assertIn(reason, reasons)
+
+
+class TenthGenFrag10Tests(unittest.TestCase):
+    """Frag-10: subordinate-opener + lowercase-predicate + trailing-
+    fragment screens, the yet/thus/where/to/rather/agreement fixes to
+    the frag-8/9 spares, the qualifier-only tier backstop, the
+    media-filename stat screen, and the drain demotion fix (gate 50m,
+    casey-jones / leatherhead / shredder / blackarachnia / devastator
+    / ironhide / rodimus-prime / soundwave / starscream /
+    ultra-magnus / arcee / galvatron / predaking)."""
+
+    def test_verbatim_subordinate_openers_flagged(self):
+        for text in (
+            "as he passes up a chance to kill Wheeljack in order to "
+            "save Laserbeak.",
+            "As Ironhide ages",
+            "especially when anything related to the Kraang is brought up",
+        ):
+            self.assertIn(
+                "subordinate_opener",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_subordinate_opener_controls_survive(self):
+        # A subordinate opener WITH a main clause of its own (after a
+        # comma, a sentence boundary, or a second subject+verb pair)
+        # is whole; so are the excluded openers "once"/"until"
+        # (legit limitations / version labels) and "though"/"although"
+        # (the frag-8 pinned concessive controls).
+        for text in (
+            "after Noon his power will begin to decline.",
+            "when the incantation is uttered its effect is the "
+            "equivalent of a wish.",
+            "Before Crisis, normally Sephiroth lacks a true weakness.",
+            "Once per day, he must rest to recover his strength.",
+            "If his ring is destroyed, he loses all of his power.",
+            "though he manages to gain some control over this as time "
+            "goes on.",
+            "though this weakness was overcome, he still fears fire.",
+        ):
+            self.assertEqual(
+                fragment_item_reasons(text, section="weaknesses"), [], text
+            )
+
+    def test_verbatim_yet_rather_to_flagged(self):
+        for text, reason in (
+            (
+                "yet believes himself to be and thus can be overwhelmed "
+                "by the stronger mutants they may face. In general",
+                "prose_sentence_shard",
+            ),
+            (
+                "to the point where it could potentially impede his judgement",
+                "prose_sentence_shard",
+            ),
+            (
+                "rather easy to outmaneuver. His lacking intelligence "
+                "offers little combat adaptability. As the Constructicons'",
+                "trailing_fragment",
+            ),
+        ):
+            self.assertIn(
+                reason,
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_verbatim_where_flagged(self):
+        self.assertIn(
+            "relative_pronoun_opener",
+            fragment_item_reasons(
+                "where he is ticklish.", section="weaknesses"
+            ),
+        )
+
+    def test_verbatim_lowercase_predicates_flagged(self):
+        for text in (
+            "insane and is very self loathing.",
+            "very short tempered (If something doesn't go his way he "
+            "will throw a tantrum). If the allspark shard in his head "
+            "is removed",
+        ):
+            self.assertIn(
+                "lowercase_predicate",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_lowercase_predicate_controls_survive(self):
+        # A lowercase predicate WITH a main clause is whole, and a
+        # real limitation statement never fires.
+        for text in (
+            "very strong, he can lift a mountain.",
+            "He is very short tempered and throws tantrums.",
+            "completely healed, he returns to the fight.",
+        ):
+            self.assertEqual(
+                fragment_item_reasons(text, section="weaknesses"), [], text
+            )
+
+    def test_verbatim_trailing_fragments_flagged(self):
+        for text in (
+            "Devastator is hardly slow. He is",
+            "rather easy to outmaneuver. His lacking intelligence "
+            "offers little combat adaptability. As the Constructicons'",
+            "very short tempered (If something doesn't go his way he "
+            "will throw a tantrum). If the allspark shard in his head "
+            "is removed",
+        ):
+            self.assertIn(
+                "trailing_fragment",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_trailing_fragment_controls_survive(self):
+        # A multi-sentence item whose final sentence is whole, and a
+        # single-sentence item (the screen needs a tail to judge).
+        for text in (
+            "Devastator is hardly slow. He is still the strongest.",
+            "He is weak to fire. When exposed, he burns.",
+            "As Ironhide ages",
+        ):
+            self.assertNotIn(
+                "trailing_fragment",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_verbatim_agreement_gerund_flagged(self):
+        self.assertIn(
+            "prose_sentence_shard",
+            fragment_item_reasons(
+                "feeling he don't ever live up to Optimus Prime. "
+                "Without the Matrix of Leadership",
+                section="weaknesses",
+            ),
+        )
+
+    def test_agreement_controls_survive(self):
+        # Standard agreement still counts as a headed/subject-led
+        # clause: "he does", "they do". (A gerund-led item never
+        # survives on agreement alone -- "feeling he does..." is
+        # still a gerund continuation -- and a base-form plural verb
+        # like "they live" is not recognized by the headed test, so
+        # neither shape is used as a control here.)
+        for text in (
+            "yet they do face stronger mutants.",
+            "yet he does face stronger mutants.",
+            "he does not fear him.",
+        ):
+            self.assertNotIn(
+                "prose_sentence_shard",
+                fragment_item_reasons(text, section="weaknesses"),
+                text,
+            )
+
+    def test_frag10_screens_are_weaknesses_only(self):
+        for reason, text in (
+            ("subordinate_opener", "as he passes up a chance to kill Wheeljack."),
+            ("lowercase_predicate", "insane and is very self loathing."),
+            ("trailing_fragment", "Devastator is hardly slow. He is"),
+        ):
+            self.assertNotIn(
+                reason,
+                fragment_item_reasons(text, section="powers_and_abilities"),
+                text,
+            )
+
+    def test_verbatim_tiers_flagged(self):
+        for text in (
+            "likely higher. with swords",
+            "At most, possibly far higher",
+            "At least, higher with the Heart of Darkness",
+            "At most. higher with Stealth Force, even higher with "
+            "Heavy Iron 2.0",
+            "At least, likely higher, even higher with Beast Mode",
+        ):
+            self.assertIn(
+                "qualifier_only_stat",
+                boilerplate_reasons(text, scalar=True),
+                text,
+            )
+            self.assertIn(
+                "qualifier_only_stat",
+                fragment_scalar_reasons(text),
+                text,
+            )
+            self.assertIn(
+                "qualifier_only_stat",
+                stat_field_rejection_reasons(text),
+                text,
+            )
+
+    def test_tier_backstop_controls_survive(self):
+        # A rating token, a level phrase, or no qualifier at all
+        # means the value is real; version digits are not ratings
+        # but "Heavy Iron 2.0" only fires as part of a qualifier-only
+        # tail, never on its own.
+        for text in (
+            "At least 8-C",
+            "At least Small Building level",
+            "Unknown",
+            "Varies",
+            "8-C, higher with the Moon",
+            "Building level, higher with weapons",
+            "High 5-A with swords",
+            "Low 5-B, likely higher",
+        ):
+            self.assertNotIn(
+                "qualifier_only_stat",
+                boilerplate_reasons(text, scalar=True),
+                text,
+            )
+
+    def test_verbatim_media_range_flagged(self):
+        text = (
+            "Hundreds of Meters with guns. "
+            "SolarBeamRifleDevastation.png "
+            "DrillMisslesDevastation.jpg DrillsDevastation.jpg"
+        )
+        self.assertIn("media_fragment", boilerplate_reasons(text, scalar=True))
+        self.assertIn(
+            "media_fragment", stat_field_rejection_reasons(text)
+        )
+        self.assertIn("media_fragment", fragment_scalar_reasons(text))
+
+    def test_media_controls_survive(self):
+        # Citation links legitimately contain ".jpg" inside their
+        # URLs; only bare filenames fire.
+        for text in (
+            "City level+ ([https://imgur.com/a/54gVkly Considered one "
+            "of the most powerful Jedi by the beginning of the Clone "
+            "Wars].",
+            "City level ([https://gallery.missdream.org/albums/"
+            "scanlation_smoon/smoon_act01/038.jpg Did not seem "
+            "impressed by Sailor Moon's Ultimate Attack].",
+            "Hundreds of Meters to Kilometres with guns",
+        ):
+            self.assertNotIn(
+                "media_fragment",
+                boilerplate_reasons(text, scalar=True),
+                text,
+            )
+
+    def test_filter_drops_frag10_debris_keeps_real_weakness(self):
+        kept, dropped = filter_list_field_items(
+            "yet believes himself to be and thus can be overwhelmed "
+            "by the stronger mutants they may face. In general, "
+            "especially when anything related to the Kraang is brought "
+            "up, where he is ticklish., insane and is very self "
+            "loathing., Devastator is hardly slow. He is, As Ironhide "
+            "ages, feeling he don't ever live up to Optimus Prime. "
+            "Without the Matrix of Leadership, as he passes up a "
+            "chance to kill Wheeljack in order to save Laserbeak., "
+            "very short tempered (If something doesn't go his way he "
+            "will throw a tantrum). If the allspark shard in his head "
+            "is removed, to the point where it could potentially "
+            "impede his judgement, Is weak to fire",
+            section="weaknesses",
+        )
+        self.assertEqual(kept, "Is weak to fire")
+        reasons = [r for d in dropped for r in d["reasons"]]
+        for reason in (
+            "prose_sentence_shard",
+            "subordinate_opener",
+            "relative_pronoun_opener",
+            "lowercase_predicate",
+            "trailing_fragment",
+        ):
+            self.assertIn(reason, reasons)
+
+    def test_repair_attempt_drops_frag10_debris(self):
+        prof = comic_profile("Casey Jones", "Teenage Mutant Ninja Turtles")
+        fields = dict(SixthGenRepairPathTests.FIELDS)
+        fields["weaknesses"] = (
+            "yet believes himself to be and thus can be overwhelmed "
+            "by the stronger mutants they may face. In general, "
+            "especially when anything related to the Kraang is brought "
+            "up, Is weak to fire"
+        )
+        fields["tier"] = "likely higher. with swords"
+        fields["range"] = (
+            "Hundreds of Meters with guns. "
+            "SolarBeamRifleDevastation.png"
+        )
+        attempt = SixthGenRepairPathTests()._attempt(prof, fields)
+        mapped = attempt_field_map(attempt)
+        self.assertEqual(mapped["weaknesses"], "Is weak to fire")
+        self.assertNotIn("tier", mapped)
+        self.assertNotIn("range", mapped)
+        dropped = (attempt.metadata.get("dropped_items") or {}).get(
+            "weaknesses"
+        ) or []
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("prose_sentence_shard", reasons)
+        self.assertIn("subordinate_opener", reasons)
+        dropped_scalar = attempt.metadata.get("dropped_scalar_fields") or {}
+        self.assertIn("qualifier_only_stat", dropped_scalar.get("tier", []))
+        self.assertIn("media_fragment", dropped_scalar.get("range", []))
+
+    def test_demotion_restores_ineligible_reasons(self):
+        # Frag-10 drain fix: a profile demoted by
+        # apply_primary_profile_state after a promotion had
+        # ineligible_reasons=[] left over, which fails schema
+        # validation ("ineligible profile requires
+        # generation.ineligible_reasons"). Demotion restores the
+        # generic reason; a non-empty list is left alone.
+        prof = {
+            "generation": {"ineligible_reasons": [], "confidence": 0.8},
+            "review": {},
+        }
+        apply_primary_profile_state(prof, primary=None, corroborated=False)
+        self.assertEqual(prof["status"], "needs_review")
+        self.assertFalse(prof["battle_eligible"])
+        self.assertEqual(
+            prof["generation"]["ineligible_reasons"], ["needs_review"]
+        )
+        prof = {
+            "generation": {"ineligible_reasons": ["needs_review"]},
+            "review": {},
+        }
+        apply_primary_profile_state(prof, primary=None, corroborated=False)
+        self.assertEqual(
+            prof["generation"]["ineligible_reasons"], ["needs_review"]
+        )
+
+    def test_promotion_still_clears_ineligible_reasons(self):
+        prof = {
+            "generation": {"ineligible_reasons": ["needs_review"]},
+            "review": {},
+        }
+        apply_primary_profile_state(
+            prof, primary=None, corroborated=True, force_promotable=True
+        )
+        self.assertTrue(prof["battle_eligible"])
+        self.assertEqual(prof["generation"]["ineligible_reasons"], [])
 
 
 if __name__ == "__main__":

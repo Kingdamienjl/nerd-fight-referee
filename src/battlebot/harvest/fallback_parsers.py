@@ -170,6 +170,10 @@ def parse_with_wikitextparser(wikitext: str) -> dict[str, str]:
     aph = _aph()
     fields: dict[str, str] = {}
 
+    # Tier ratings are templates ({{Low 5-B}}) whose name is the value;
+    # wikitextparser's plain_text() drops template bodies, so substitute
+    # the rating text up front -- same preservation as the mwparse path.
+    wikitext = aph._preserve_tier_rating_templates(wikitext)
     parsed = wtp.parse(_expand_tabber_tags(wikitext))
 
     # Pass A: template arguments via wikitextparser's argument model.

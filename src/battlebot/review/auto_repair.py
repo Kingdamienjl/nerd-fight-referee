@@ -1380,7 +1380,16 @@ def apply_primary_profile_state(
         profile["battle_eligible"] = False
         review["readiness_state"] = "needs_review"
         profile["review"] = review
-        generation.setdefault("ineligible_reasons", ["needs_review"])
+        # Frag-10: the old setdefault() no-opped on the empty list the
+        # promotion branch had just written, so a demoted profile
+        # kept ineligible_reasons=[] and failed schema validation
+        # ("ineligible profile requires generation.ineligible_reasons").
+        # 136 stored profiles were invalid from exactly this defect
+        # (frag-10 calib1). An empty or missing list is restored to
+        # the generic reason before blockers are unioned in; a
+        # non-empty list is left alone.
+        if not generation.get("ineligible_reasons"):
+            generation["ineligible_reasons"] = ["needs_review"]
         if content_blockers:
             generation["ineligible_reasons"] = sorted(set(generation.get("ineligible_reasons") or []) | set(content_blockers))
     profile["generation"] = generation
@@ -2818,6 +2827,90 @@ def bare_qualifier_reasons(text: Any) -> list[str]:
     return []
 
 
+# ---------------------------------------------------------------------------
+# Qualifier-only tier backstop (tenth debris generation, scalars). The
+# frag-4 bare_qualifier screen only fires on values of <=3 qualifier
+# tokens, so the gate-50m rating-stripped tiers slipped through:
+# "likely higher. with swords" (arcee), "At most, possibly far
+# higher" (blackarachnia), "At least, higher with the Heart of
+# Darkness" (galvatron), "At most. higher with Stealth Force, even
+# higher with Heavy Iron 2.0" (ironhide), "At least, likely higher,
+# even higher with Beast Mode" (predaking). The source tier is "Low
+# 5-B, likely higher. High 5-A with swords" -- the parser drops the
+# bold-marked rating tokens ({{Low 5-B}}, {{High 5-A}}) and keeps the
+# plain-text qualifiers, so the value carries qualifiers but no
+# rating at all. The backstop fires when a value has >=1 qualifier
+# token, NO tier-rating token (\b\d+-[A-C]\b), and -- clause by
+# clause (split on , . ; | and " and ", with-tails truncated, and
+# subordinate clauses stripped) -- nothing substantive remains.
+# Controls that survive: "At least 8-C" (rating token), "At least
+# Small Building level" ("level" is substantive), "Unknown"/"Varies"
+# (no qualifier token), "8-C, higher with the Moon" (rating token).
+# Version digits do NOT count as ratings ("Heavy Iron 2.0").
+# Wiring: boilerplate_reasons(scalar=True) -- hence the recovery axes
+# branch and, via stat_field_rejection_reasons, the repair path's
+# attempt_from_result choke point -- and fragment_scalar_reasons for
+# audit parity. Calibrated (frag-10 calib1): 1,654 of 5,519 stored
+# tier values carry no rating token; the stored corpus is heavily
+# rating-stripped, which is why the parser fix (harvester) is the
+# real repair and this screen is only the backstop.
+# ---------------------------------------------------------------------------
+
+_TIER_RATING_RE = re.compile(r"\b\d+-[A-C]\b")
+_TIER_QUALIFIER_TOKENS = _BARE_QUALIFIER_TOKENS | frozenset(
+    {"even", "physically", "up", "to", "or"}
+)
+
+
+def _qualifier_only_stat(value: str) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    if _TIER_RATING_RE.search(text):
+        return False
+    toks = re.findall(r"[a-z]+", text.casefold())
+    if not any(token in _TIER_QUALIFIER_TOKENS for token in toks):
+        return False
+    for clause in re.split(r"[,.;|]|\band\b", text.casefold()):
+        clause = clause.strip()
+        if not clause:
+            continue
+        ctoks = re.findall(r"[a-z]+(?:'[a-z]+)?", clause)
+        if not ctoks:
+            continue
+        if ctoks[0] == "with":
+            continue
+        if "with" in ctoks:
+            ctoks = ctoks[: ctoks.index("with")]
+        stripped = _strip_subordinate_clauses(ctoks)
+        if stripped and all(
+            token in _TIER_QUALIFIER_TOKENS for token in stripped
+        ):
+            continue
+        return False
+    return True
+
+
+# Media-filename stat screen (tenth debris generation, scalars): a
+# stat value carrying bare image filenames -- devastator's range
+# ("...SolarBeamRifleDevastation.png DrillMisslesDevastation.jpg
+# DrillsDevastation.jpg", gate 50m). Citation links legitimately
+# contain ".jpg" inside their URLs, so URLs are stripped before the
+# filename test; a bare "Name.png" token with no URL around it is
+# gallery residue, not a stat. Calibrated (frag-10 calib1): 110 raw
+# stat values match a naive extension test, nearly all of them URL
+# citations that the strip-then-test rule spares.
+_MEDIA_FILENAME_RE = re.compile(
+    r"\b[\w\-.]+\.(?:png|jpe?g|gif|webp|svg|bmp|tiff)\b", re.I
+)
+_MEDIA_URL_RE = re.compile(r"https?://[^\s\]\)]+")
+
+
+def _media_filename_value(value: str) -> bool:
+    stripped = _MEDIA_URL_RE.sub("", str(value or ""))
+    return bool(_MEDIA_FILENAME_RE.search(stripped))
+
+
 def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
     """Template-residue checks for one recovered field's text.
 
@@ -2845,6 +2938,10 @@ def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
         for reason in bare_qualifier_reasons(value):
             if reason not in reasons:
                 reasons.append(reason)
+        if _qualifier_only_stat(value):
+            reasons.append("qualifier_only_stat")
+        if _media_filename_value(value):
+            reasons.append("media_fragment")
         cleaned = re.sub(r"[^a-z0-9]+", " ", lowered).strip()
         if len(cleaned) < 8 or cleaned in _INSUBSTANTIVE_SCALAR_EXACT:
             reasons.append("insubstantive")
@@ -3347,6 +3444,16 @@ _PROSE_CONT_FUNCTION = _PROSE_SHARD_AUX | frozenset(
         "as", "so", "if", "when", "while", "not", "no",
         "sometimes", "always", "often", "usually", "still", "already",
         "even", "also", "just", "now", "then", "simply", "quickly",
+        # Frag-10: "yet" and "thus" head continuations, not clauses --
+        # "yet believes himself to be and thus can be overwhelmed..."
+        # (gate 50m, casey-jones) miscounted "believes"/"can" as
+        # headed because neither word was in this set. "however" and
+        # the other conjunctive adverbs join them: "however this can
+        # be negated..." (frag-8 control) is a main clause, and its
+        # subject must not be read as clause-internal.
+        "yet", "thus", "however", "therefore", "meanwhile", "instead",
+        "otherwise", "furthermore", "moreover", "nevertheless",
+        "nonetheless", "consequently", "accordingly",
     }
 )
 
@@ -3839,12 +3946,18 @@ def _page_disclaimer(value: str, lowered: str) -> bool:
 # statements). The gate decides whether the lead clause re-merges.
 _SHARD_CONJ_OPENERS = (
     "but ", "and ", "or ", "so ", "yet ", "however ", "although ",
-    "though ", "rather than ",
+    # Frag-10: bare "rather " ("rather easy to outmaneuver.",
+    # gate 50m devastator); "rather than " was already here.
+    "though ", "rather than ", "rather ",
 )
 _SHARD_PREP_OPENERS = (
     "during ", "after ", "before ", "with ", "without ", "by ",
     "through ", "despite ", "because of ", "due to ", "in spite of ",
-    "instead of ", "like ",
+    # Frag-10: "to " leads prepositional continuations ("to the
+    # point where it could potentially impede his judgement",
+    # gate 50m ultra-magnus). The limitation and comma spares in
+    # _prose_sentence_shard still protect real "to ..." items.
+    "instead of ", "like ", "to ",
 )
 # Adverb openers (frag-9): "even" leads the same continuation shape
 # as a conjunction ("even in the eminence of a battle."). "or" was
@@ -3853,7 +3966,7 @@ _SHARD_PREP_OPENERS = (
 # through on exactly that gap); "like" is a prepositional opener
 # ("like all others of its kind"). All three are extensions of this
 # same reason, not new reasons: same spares, same calibration base.
-_SHARD_ADV_OPENERS = ("even ",)
+_SHARD_ADV_OPENERS = ("even ", "especially ",)
 _SHARD_TRAILING_LEADIN = ("for example", "for instance", "such as", "e.g.")
 # First tokens ending in -ing that are names or nouns, not gerunds
 # ("Lightning slapping Fang..." is a character name, not a verb).
@@ -3903,6 +4016,20 @@ _SHARD_NOUN_HEADS = frozenset({
     "ruthless", "relentless", "tireless", "unstoppable",
     "unbreakable", "invincible", "invulnerable", "undying",
     "deathless",
+    # Frag-10: comparative/superlative forms of the same adjectives --
+    # "the stronger mutants they may face" (gate 50m, casey-jones)
+    # counted "mutants" as a headed -s verb because "stronger" was
+    # not in this set. A plural noun after a comparative adjective
+    # is a noun, never a verb.
+    "stronger", "strongest", "weaker", "weakest", "greater",
+    "greatest", "darker", "darkest", "higher", "highest", "lower",
+    "lowest", "longer", "longest", "shorter", "shortest", "bigger",
+    "biggest", "smaller", "smallest", "larger", "largest", "better",
+    "best", "worse", "worst", "older", "oldest", "newer", "newest",
+    "faster", "fastest", "slower", "slowest", "quicker", "quickest",
+    "harder", "hardest", "tougher", "toughest", "brighter",
+    "brightest", "heavier", "heaviest", "deadlier", "deadliest",
+    "smarter", "smartest", "lighter", "lightest",
 })
 _SHARD_FUNCTION = _PROSE_CONT_FUNCTION | _SHARD_NOUN_HEADS
 _SHARD_IRREGULAR_PAST = frozenset({
@@ -3939,6 +4066,12 @@ _SHARD_LIMITATION_RE = re.compile(
     r"unable|ineffective\w*|dependent\w*|addict\w*|fear\w*|afraid|"
     r"blind\w*|deaf\w*|loses|losing|loss of|lost (?:his|her|their|its)|"
     r"sick\w*|ill\b|incapab\w*|lack\w*|requir\w*|cost\w*|"
+    # Frag-10: a stat-lowering statement is a limitation ("as the
+    # Attack Forme lowers durability" is a pinned corpus control),
+    # which is what separates it from the narrative as-clauses the
+    # subordinate-opener screen drops ("as he passes up a chance to
+    # kill Wheeljack...").
+    r"lower\w*|"
     r"suffer\w* from|open to (?:attack|harm|damage))\b",
     re.I,
 )
@@ -3972,6 +4105,133 @@ _SHARD_DETERMINERS = frozenset({
 })
 
 
+# Subordinate/relative clause markers (frag-10). A clause that opens
+# on one of these is not a main clause, however complete its
+# subject+verb pair looks: "when the incantation is uttered its
+# effect is..." is whole only because of the clause AFTER the comma.
+_SUBORD_MARKERS = frozenset({
+    "as", "if", "when", "because", "while", "since", "unless",
+    "although", "though", "where", "that", "who", "which", "whom",
+    "whose",
+})
+
+
+# Prepositions (frag-10): a noun inside a prepositional phrase is the
+# phrase's object, not a relative-clause head -- "with his sword he
+# cuts through anything" (frag-8 control) has a main clause after the
+# PP, while "the dog they saw" (that-less relative) does not.
+_SHARD_PREPS = frozenset({
+    "with", "by", "in", "on", "at", "of", "for", "from", "to",
+    "through", "despite", "after", "before", "during", "without",
+    "into", "onto", "upon", "against", "per", "via", "under", "over",
+    "between", "among",
+})
+
+
+def _subject_is_clause_internal(tokens: list[str], idx: int) -> bool:
+    """True when the subject pronoun at `idx` heads a subordinate,
+    relative, or gerund phrase rather than a main clause -- so a verb
+    after it must not count as a subject-led (or headed) main clause.
+
+    The frag-9 headed/subject-led spares fired on clause-internal
+    verbs: "the stronger mutants they may face" (gate 50m,
+    casey-jones) counted "may" as headed because "they" precedes it,
+    and "feeling he don't ever live up to Optimus Prime" (gate 50m,
+    rodimus-prime) counted "do" the same way. A subject is internal
+    when the token before it is a content word that is itself the head
+    of a noun phrase (preceded by another content word, not a subject
+    or function word -- "stronger mutants they"), a gerund ("feeling
+    he"), or a subordinate marker ("where it", "that he"); a relative
+    pronoun attached to a preceding noun ("anything that can pass")
+    is internal by the frag-9 rule this generalizes. A leading subject
+    ("He is...") or one after a verb ("said they may face") still
+    counts as a main-clause subject.
+    """
+    if idx <= 0:
+        return False
+    token = tokens[idx]
+    prev = tokens[idx - 1]
+    if prev in _SHARD_FUNCTION:
+        return False
+    if token in ("that", "who", "which", "whom", "whose"):
+        return True
+    if prev in _SUBORD_MARKERS and prev not in ("though", "although"):
+        # Concessive "though"/"although" are excluded: the frag-8
+        # calibration pins though-led clauses as survivable controls
+        # ("though he manages to gain some control over this as time
+        # goes on.", "though he eventually recovered"), present and
+        # past tense alike -- a concessive clause narrates a completed
+        # or ongoing state, not a fragment continuation.
+        return True
+    # NOTE: no gerund branch here. A gerund followed by a subject+verb
+    # ("meaning he'll occasionally slide along the ground", a frag-8
+    # control) is a legitimate participial clause, and the rodimus
+    # case ("feeling he don't...") is already handled by the
+    # agreement guard in _shard_headed / _shard_subject_led, which
+    # refuses "do" after "he". Treating gerund-led subjects as
+    # internal would drop the control.
+    if (
+        idx >= 2
+        and not prev.endswith("ly")
+        and not _shard_is_verb(prev)
+    ):
+        # prev is a content noun, not a verb: the subject opens a
+        # that-less relative clause ("the dog they saw", "his power
+        # they stole") rather than a main clause. The -ly guard keeps
+        # manner adverbs out ("silently they crept" is a main clause);
+        # -s plural nouns ("mutants") look like verbs and fall
+        # through to the noun-phrase branch below. The idx>=2 guard
+        # keeps sentence adverbs out: "however this can be negated..."
+        # (frag-8 control) has its subject at idx 1 with no noun
+        # phrase before it, so it is a main-clause subject. And a noun
+        # inside a prepositional phrase is the phrase's object, not a
+        # relative-clause head: "with his sword he cuts through
+        # anything" (frag-8 control) is a main clause after the PP.
+        if not any(t in _SHARD_PREPS for t in tokens[max(0, idx - 4): idx - 1]):
+            return True
+    if (
+        idx >= 2
+        and tokens[idx - 2] not in _SHARD_SUBJECTS
+        and tokens[idx - 2] not in _SHARD_DETERMINERS
+        and not _shard_is_verb(tokens[idx - 2])
+    ):
+        # The word before the noun is another content word, not a
+        # verb, a subject, or a determiner: a noun phrase ("stronger
+        # mutants they", "the dog they" via the noun branch), not
+        # verb+subject ("said they"). The determiner exclusion matters:
+        # "with his sword he cuts" (frag-8 control) has "his" before
+        # "sword", and the subject after the noun phrase is the main
+        # clause's subject, not a relative-clause subject.
+        return True
+    return False
+
+
+_SINGULAR_SUBJECTS = frozenset({"he", "she", "it", "this", "that"})
+_PLURAL_SUBJECTS = frozenset({"they", "we", "you", "i"})
+
+
+def _subject_verb_agrees(subject: str, verb: str) -> bool:
+    """Nonstandard-agreement guard (frag-10): "he don't" is not a
+    subject-led finite clause. "do" after a singular subject and
+    "does" (or any 3rd-person -s verb) after a plural subject do not
+    count as the subject's verb -- the gate-50m rodimus-prime item
+    ("feeling he don't ever live up to Optimus Prime") survived on
+    exactly that miscount. Ambiguous subjects ("who", "there") and
+    past-tense forms are untouched.
+    """
+    if verb == "do" and subject in _SINGULAR_SUBJECTS:
+        return False
+    if verb == "does" and subject in _PLURAL_SUBJECTS:
+        return False
+    if (
+        verb not in _SHARD_AUX
+        and _looks_like_finite_verb(verb)
+        and subject in _PLURAL_SUBJECTS
+    ):
+        return False
+    return True
+
+
 def _shard_expand_contractions(tokens: list[str]) -> list[str]:
     expanded: list[str] = []
     for token in tokens:
@@ -3998,12 +4258,25 @@ def _shard_headed(tokens: list[str]) -> bool:
     # Narrower verb test: an auxiliary or a 3rd-person -s verb.
     # A plural noun or a participle must not count as a verb here;
     # the noun-head words in _SHARD_FUNCTION keep those cases out.
-    return any(
-        (token in _SHARD_AUX or _looks_like_finite_verb(token))
-        and idx > 0
-        and tokens[idx - 1] not in _SHARD_FUNCTION
-        for idx, token in enumerate(tokens)
-    )
+    # Frag-10: a verb whose preceding subject pronoun is itself
+    # clause-internal (see _subject_is_clause_internal) or whose
+    # subject-verb agreement is nonstandard ("he don't") does not
+    # count as a headed main clause either.
+    for idx, token in enumerate(tokens):
+        if not (token in _SHARD_AUX or _looks_like_finite_verb(token)):
+            continue
+        if idx <= 0:
+            continue
+        prev = tokens[idx - 1]
+        if prev in _SHARD_FUNCTION:
+            continue
+        if prev in _SHARD_SUBJECTS:
+            if _subject_is_clause_internal(tokens, idx - 1):
+                continue
+            if not _subject_verb_agrees(prev, token):
+                continue
+        return True
+    return False
 
 
 def _shard_subject_led(tokens: list[str]) -> bool:
@@ -4016,14 +4289,15 @@ def _shard_subject_led(tokens: list[str]) -> bool:
         # after it must not count as a subject-led main clause. A
         # leading relative pronoun, or one after a function word,
         # still counts ("that he cannot control" is subject-led).
-        if (
-            token in ("that", "who", "which")
-            and idx > 0
-            and tokens[idx - 1] not in _SHARD_FUNCTION
-        ):
+        # Frag-10 generalizes the exclusion to every subject pronoun
+        # via _subject_is_clause_internal (gerund-led "feeling he",
+        # noun-phrase "mutants they", subordinate "where it"), and
+        # nonstandard agreement ("he don't") no longer counts as a
+        # subject-led verb.
+        if _subject_is_clause_internal(tokens, idx):
             continue
         for nxt in tokens[idx + 1: idx + 3]:
-            if _shard_is_verb(nxt):
+            if _shard_is_verb(nxt) and _subject_verb_agrees(token, nxt):
                 return True
         return False
     return False
@@ -4128,6 +4402,9 @@ def _prose_sentence_shard(value: str, lowered: str) -> bool:
 # throughout (narrative/ability continuations).
 _REL_PRONOUNS = (
     "which ", "that ", "who ", "whom ", "whose ", "what ",
+    # Frag-10: "where " opens the same relative continuation
+    # ("where he is ticklish.", gate 50m shredder).
+    "where ",
 )
 
 
@@ -4284,6 +4561,221 @@ def _header_cutoff(value: str, lowered: str) -> bool:
     return False
 
 
+# ---------------------------------------------------------------------------
+# Tenth debris generation (frag-10): clause-aware main-clause test and
+# the three screens built on it. The frag-9 spares (_shard_headed /
+# _shard_subject_led) fire on ANY subject+verb pair in the item,
+# including verbs inside subordinate and relative clauses -- "when
+# anything related to the Kraang is brought up" looked headed because
+# of the "is" inside the when-clause, and "to the point where it
+# could potentially impede his judgement" looked headed because of
+# the "could" inside the where-clause. The test below strips
+# subordinate/relative clauses (marker ... first finite verb) and
+# and-coordinated clause continuations before asking whether a main
+# clause remains, so a subordinate clause alone never counts as one.
+# ---------------------------------------------------------------------------
+
+
+def _strip_subordinate_clauses(tokens: list[str]) -> list[str]:
+    """Remove subordinate/relative clauses (marker ... first finite
+    verb) from a token list, repeatedly, so main-clause detection is
+    not fooled by subordinate verbs. A marker with no verb after it
+    drops everything from the marker on."""
+    toks = list(tokens)
+    while True:
+        midx = None
+        for i, t in enumerate(toks):
+            if t in _SUBORD_MARKERS:
+                midx = i
+                break
+        if midx is None:
+            break
+        # Narrow verb test on purpose: the broad _shard_is_verb counts
+        # -ed participles, so "when anything related to the Kraang is
+        # brought up" stopped the strip at the adjective "related" and
+        # left "is" looking like a main-clause verb. An auxiliary or
+        # 3rd-person -s verb is the subordinate clause's finite verb;
+        # a clause with only a participle verb has no finite verb at
+        # all and drops from the marker on, which is the correct
+        # outcome for a fragment either way.
+        vidx = None
+        for j in range(midx + 1, len(toks)):
+            if toks[j] in _SHARD_AUX or _looks_like_finite_verb(toks[j]):
+                vidx = j
+                break
+        if vidx is None:
+            toks = toks[:midx]
+            break
+        toks = toks[:midx] + toks[vidx + 1:]
+    # Coordinated continuations of a stripped subordinate clause
+    # ("while the latter was on a Star Destroyer and Vader was on
+    # Cymoon 1"): "and/or/but <word> <verb>" is a clause of its own,
+    # not a main clause. Removing one can only remove its verb; a
+    # real main clause elsewhere in the item survives the removal.
+    changed = True
+    while changed:
+        changed = False
+        for i, t in enumerate(toks):
+            if t not in ("and", "or", "but") or i + 2 >= len(toks):
+                continue
+            for j in range(i + 1, min(i + 4, len(toks))):
+                if toks[j] in _SHARD_AUX or _looks_like_finite_verb(toks[j]):
+                    if toks[j - 1] not in _SHARD_FUNCTION:
+                        toks = toks[:i] + toks[j + 1:]
+                        changed = True
+                    break
+            if changed:
+                break
+    return toks
+
+
+def _main_clause_present(text: str) -> bool:
+    """True when the text carries a main clause of its own: a
+    limitation statement, or any comma/sentence segment whose
+    subordinate clauses stripped away still leaves a headed or
+    subject-led finite clause. Parenthetical asides are stripped
+    first -- a clause inside parens must not rescue a fragmentary
+    item ("very short tempered (If ... he will throw a tantrum)").
+    """
+    if _SHARD_LIMITATION_RE.search(text):
+        return True
+    stripped = re.sub(r"\([^)]*\)", " ", str(text or ""))
+    stripped = re.sub(r"\[[^\]]*\]", " ", stripped)
+    for sentence in re.split(r"[.!?]\s+", stripped.strip()):
+        for segment in sentence.split(","):
+            toks = re.findall(r"[a-z]+(?:'[a-z]+)?", segment.casefold())
+            toks = _shard_expand_contractions(toks)
+            toks = _strip_subordinate_clauses(toks)
+            if _shard_headed(toks) or _shard_subject_led(toks):
+                return True
+    return False
+
+
+# Subordinate-opener screen (frag-10, weaknesses only): an item that
+# OPENS on a subordinate conjunction and carries no main clause of
+# its own -- "as he passes up a chance to kill Wheeljack in order to
+# save Laserbeak." (soundwave), "As Ironhide ages" (ironhide),
+# "especially when anything related to the Kraang is brought up"
+# (leatherhead; the leading adverb is stripped before the opener
+# test). Calibrated over 7,840 stored profiles / 68,345 weakness
+# items (frag-10 calib1): as 1,065 raw / 907 residual, if 316/306,
+# when 175/139, because 36/28, while 307/238, since 52/51, unless
+# 26/26. "once" and "until" are deliberately EXCLUDED: their samples
+# are legit limitations ("Once per day", "once a month on the night
+# of the full moon") or version labels ("Until Multiverse of
+# Madness"). "though"/"although" are excluded too -- the frag-8
+# pinned concessive controls ("though he manages to gain some
+# control over this as time goes on.") must keep surviving. A main
+# clause after a comma, a sentence boundary, or a second
+# subject+verb pair inside the item spares it ("after Noon his power
+# will begin to decline.", "when the incantation is uttered its
+# effect is the equivalent of a wish").
+_SUBORD_CLAUSE_OPENERS = (
+    "as ", "if ", "when ", "because ", "while ", "since ", "unless ",
+)
+_SUBORD_LEAD_ADVERBS = frozenset({
+    "especially", "particularly", "notably", "specifically", "even",
+    "also", "just", "simply", "very", "really", "quite", "so", "too",
+})
+
+
+def _subordinate_opener(value: str, lowered: str) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    if _SHARD_LIMITATION_RE.search(text):
+        return False
+    stripped = lowered.strip().lstrip("([\"'* ")
+    words = stripped.split()
+    while words and words[0] in _SUBORD_LEAD_ADVERBS:
+        words = words[1:]
+    if not words:
+        return False
+    rest = " ".join(words)
+    if not any(rest.startswith(op) for op in _SUBORD_CLAUSE_OPENERS):
+        return False
+    return not _main_clause_present(text)
+
+
+# Lowercase-predicate screen (frag-10, weaknesses only): a lowercase
+# item opening on a degree adverb or bare predicate adjective with no
+# main clause -- "insane and is very self loathing."
+# (blackarachnia), "very short tempered (...)" (starscream). The
+# first-token set is calibrated, not open-ended: degree/emphasis
+# adverbs and the predicate adjectives the corpus actually opens on
+# (very 16, completely 11, particularly 9, extremely/highly 6,
+# incredibly 5, simply/quite 2, plus "so" 310 / "just" 68, whose
+# main-clause items the completeness test spares). "nearly"/"almost"
+# are deliberately excluded ("nearly indestructible" is a real
+# limitation statement), and relative pronouns are excluded -- they
+# belong to the relative-pronoun screen with its past-tense spare.
+_LOWER_PRED_FIRST = frozenset({
+    "very", "so", "too", "quite", "just", "really", "insane",
+    "short", "rather", "completely", "particularly", "extremely",
+    "highly", "incredibly", "simply", "utterly", "remarkably",
+    "surprisingly", "notably", "specifically", "especially",
+    "basically", "literally", "absolutely", "totally", "entirely",
+    "mostly", "largely", "merely", "barely", "hardly", "scarcely",
+})
+
+
+def _lowercase_predicate(value: str, lowered: str) -> bool:
+    text = str(value or "").strip()
+    if not text or not text[:1].islower():
+        return False
+    if _SHARD_LIMITATION_RE.search(text):
+        return False
+    toks = re.findall(r"[a-z]+(?:'[a-z]+)?", lowered)
+    if not toks:
+        return False
+    first = toks[0]
+    if first in ("which", "that", "who", "whom", "whose", "what", "where"):
+        return False
+    if first not in _LOWER_PRED_FIRST:
+        return False
+    return not _main_clause_present(text)
+
+
+# Trailing-fragment screen (frag-10, weaknesses only): a
+# multi-sentence item whose FINAL sentence is a fragment -- "He is"
+# (devastator, dangling auxiliary), "As the Constructicons'"
+# (devastator, subordinate tail), "If the allspark shard in his
+# head is removed" (starscream). Calibrated (frag-10 calib1):
+# subordinate-led final sentences 1,562, dangling-aux finals 27.
+# The generic short-no-verb-tail class (6,555 items) is deliberately
+# NOT screened: hand review showed it mixes real fragments with
+# legitimate short closes, so the screen fires only on the two
+# narrow shapes below.
+def _trailing_fragment(value: str, lowered: str) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    sentences = [
+        s.strip() for s in re.split(r"[.!?]\s+", text) if s.strip()
+    ]
+    if len(sentences) < 2:
+        return False
+    final = sentences[-1]
+    # The limitation spare is scoped to the FINAL sentence, not the
+    # whole item: "His lacking intelligence offers little combat
+    # adaptability" is a real limitation statement, but it does not
+    # rescue the fragment tail "As the Constructicons'" (devastator).
+    if _SHARD_LIMITATION_RE.search(final):
+        return False
+    final_low = final.casefold()
+    if any(final_low.startswith(op) for op in _SUBORD_CLAUSE_OPENERS):
+        if not _main_clause_present(final):
+            return True
+    if final_low.startswith("to "):
+        if not _main_clause_present(final):
+            return True
+    toks = re.findall(r"[a-z]+(?:'[a-z]+)?", final_low)
+    toks = _shard_expand_contractions(toks)
+    if len(toks) == 2 and toks[0] in _SHARD_SUBJECTS and toks[1] in _SHARD_AUX:
+        return True
+    return False
+
+
 def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
     """Fragment-debris checks for one recovered list item.
 
@@ -4346,6 +4838,12 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         reasons.append("numeric_split_fragment")
     if section == "weaknesses" and _header_cutoff(value, lowered):
         reasons.append("header_cutoff")
+    if section == "weaknesses" and _subordinate_opener(value, lowered):
+        reasons.append("subordinate_opener")
+    if section == "weaknesses" and _lowercase_predicate(value, lowered):
+        reasons.append("lowercase_predicate")
+    if section == "weaknesses" and _trailing_fragment(value, lowered):
+        reasons.append("trailing_fragment")
     return reasons
 
 
@@ -4372,6 +4870,10 @@ def fragment_scalar_reasons(text: Any) -> list[str]:
     for reason in bare_qualifier_reasons(value):
         if reason not in reasons:
             reasons.append(reason)
+    if _qualifier_only_stat(value):
+        reasons.append("qualifier_only_stat")
+    if _media_filename_value(value):
+        reasons.append("media_fragment")
     return reasons
 
 

@@ -1313,6 +1313,29 @@ def _expand_tabber_mwparse(code) -> str:
     return str(code)
 
 
+# VSB tier ratings are TEMPLATES, not bold text: {{Low 5-B}}, {{High 5-A}},
+# {{9-C}} render as bold linked ratings on the page. Every template
+# stripper in this module deleted them, so a tier of "Low 5-B, likely
+# higher. High 5-A with swords" arrived as "likely higher. with swords"
+# (gate 50m, all five Transformers tiers). A rating template's NAME is
+# its value: preserve it as plain text, remove every other template.
+_TIER_RATING_TEMPLATE_RE = re.compile(
+    r"\{\{\s*((?:Low|High|At least|At most)?\s*\d+-[A-C](?:\+)?)\s*\}\}"
+)
+_TIER_RATING_NAME_RE = re.compile(
+    r"^(?:Low|High|At least|At most)?\s*\d+-[A-C](?:\+)?$"
+)
+
+
+def _preserve_tier_rating_templates(text: str) -> str:
+    """Replace tier-rating templates with their name text.
+
+    {{Low 5-B}} -> "Low 5-B". Every other template is left for the
+    caller's own removal step.
+    """
+    return _TIER_RATING_TEMPLATE_RE.sub(r"\1", text or "")
+
+
 def unpack_mediawiki_templates(text: str) -> str:
     if not text:
         return ""
@@ -1330,10 +1353,15 @@ def unpack_mediawiki_templates(text: str) -> str:
                         code.replace(tmpl, "|")
                     except ValueError:
                         pass
-            # Remove all remaining templates
+            # Remove all remaining templates -- except tier-rating
+            # templates, whose name IS the value (see above).
             for tmpl in list(code.filter_templates()):
                 try:
-                    code.replace(tmpl, "")
+                    name = str(tmpl.name).strip()
+                    if _TIER_RATING_NAME_RE.match(name):
+                        code.replace(tmpl, name)
+                    else:
+                        code.replace(tmpl, "")
                 except ValueError:
                     pass
             text = str(code)
@@ -1348,6 +1376,7 @@ def unpack_mediawiki_templates(text: str) -> str:
     if content_match:
         text = content_match.group(1)
     text = re.sub(r"\b(?:Border|Scroll|Visible|Padding|Header|Title|Width)\s*=\s*[^|\n}]*", "", text, flags=re.IGNORECASE)
+    text = _preserve_tier_rating_templates(text)
     for _ in range(5):
         prev = text
         text = re.sub(r"\{\{[^{}]*\}\}", "", text)
@@ -1362,6 +1391,7 @@ def strip_markup(content: str) -> str:
     text = re.sub(r"</(?:p|li|tr|div|h[1-6])>", "\n", text, flags=re.IGNORECASE)
     text = re.sub(r"<[^>]+>", "", text)
     text = re.sub(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]", r"\1", text)
+    text = _preserve_tier_rating_templates(text)
     text = re.sub(r"\{\{[^{}]*\}\}", "", text)
     text = text.replace("'''", "").replace("''", "")
     return text
