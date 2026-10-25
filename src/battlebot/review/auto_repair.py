@@ -1347,6 +1347,23 @@ def has_independent_corroboration(primary: SourceAttempt, other_attempts: list[S
     return False
 
 
+def _has_revision_metadata(profile: dict[str, Any]) -> bool:
+    """Mirror of schemas/profile.py CharacterProfile._has_revision_metadata:
+    some mediawiki source carrying both revision_id and
+    revision_timestamp. The schema's eligibility contract requires it
+    for every battle-eligible profile."""
+    for source in profile.get("sources") or []:
+        if not isinstance(source, dict):
+            continue
+        if (
+            source.get("source_type") == "mediawiki"
+            and bool(source.get("revision_id"))
+            and bool(source.get("revision_timestamp"))
+        ):
+            return True
+    return False
+
+
 def apply_primary_profile_state(
     profile: dict[str, Any],
     *,
@@ -1360,14 +1377,34 @@ def apply_primary_profile_state(
     generation = profile.get("generation") if isinstance(profile.get("generation"), dict) else {}
     review = profile.get("review") if isinstance(profile.get("review"), dict) else {}
     content_blockers = evidence_quality_blockers(profile)
-    if (primary or force_promotable) and not content_blockers:
+    # Frag-11: the promotion branch used to fire on
+    # evidence_quality_blockers alone -- a usable-text check that does
+    # NOT check completeness or revision metadata -- writing
+    # battle_eligible=True + ineligible_reasons=[] + provisional
+    # stamps to disk, after which the approval gate refused and the
+    # file was left eligible-but-invalid (gate 50n: 5 of 6 profiles).
+    # The branch now requires the schema's full eligibility contract
+    # evaluated on the state it would write: no approval_blockers
+    # (which covers attack_potency/speed/durability text, usable
+    # abilities, and linked sources), a mediawiki source with revision
+    # metadata, and effective confidence >= 0.55 (the boost the branch
+    # itself applies, i.e. the value the schema sees on the written
+    # file). On refusal the else branch writes the needs_review state,
+    # so a refused profile is never left eligible.
+    effective_confidence = max(
+        float(generation.get("confidence") or 0),
+        0.80 if corroborated else 0.60,
+    )
+    contract_ok = (
+        not service.approval_blockers(profile)
+        and _has_revision_metadata(profile)
+        and effective_confidence >= 0.55
+    )
+    if (primary or force_promotable) and not content_blockers and contract_ok:
         profile["profile_type"] = "auto_evidence_profile"
         profile["status"] = "verified" if corroborated else "provisional"
         profile["battle_eligible"] = True
-        generation["confidence"] = max(
-            float(generation.get("confidence") or 0),
-            0.80 if corroborated else 0.60,
-        )
+        generation["confidence"] = effective_confidence
         generation["ineligible_reasons"] = []
         review["readiness_state"] = "verified" if corroborated else "provisional"
         review["profile_state"] = "verified" if corroborated else "auto_evidence_profile"
@@ -2911,6 +2948,51 @@ def _media_filename_value(value: str) -> bool:
     return bool(_MEDIA_FILENAME_RE.search(stripped))
 
 
+# Label-bleed stat screen (eleventh debris generation, scalars). The
+# CSPW infobox leaves empty stat fields blank, so the parser takes the
+# next field's value as everything up to the following field -- which
+# is just the following fields' LABELS: oryx's speed
+# ("Lifting Strength: Striking Strength:") and range ("Standard
+# Equipment: Intelligence: Above Average", gate 50n). Vsbattles does
+# not produce this shape (its Oryx page carries real speed/range
+# values); it is CSPW-only. The rule fires when the value is
+# LABEL-LED -- it opens with a stat-field label (after leading
+# separators) -- and carries >= 2 distinct stat-field labels. The
+# label-led requirement is the precision guard: calibrated (frag-11
+# calib1b), 6 stored values carry >= 2 stat labels with colons, but
+# 5 of them carry real content FIRST ("High Hypersonic ... Lifting
+# Strength: ...") and only the label-led oryx shape is debris. A
+# single-label value ("Lifting Strength: Class M" sitting in speed)
+# is wrong-field content but substantive, and is not fired on.
+# Wiring: boilerplate_reasons(scalar=True) -- hence the recovery axes
+# branch and, via stat_field_rejection_reasons, the repair path's
+# attempt_from_result choke point -- and fragment_scalar_reasons for
+# audit parity (via stat_field_rejection_reasons in the audit).
+_STAT_FIELD_LABELS = (
+    "attack potency", "lifting strength", "striking strength",
+    "standard equipment", "intelligence", "speed", "durability",
+    "stamina", "range", "tier",
+)
+
+
+def _label_bleed_stat(value: str) -> bool:
+    text = str(value or "").strip()
+    if not text:
+        return False
+    lowered = re.sub(r"^[\s|,;]+", "", text.casefold())
+    if not any(
+        lowered.startswith(f"{label}:") or lowered.startswith(f"{label} :")
+        for label in _STAT_FIELD_LABELS
+    ):
+        return False
+    hits = {
+        label
+        for label in _STAT_FIELD_LABELS
+        if re.search(rf"(?<![a-z]){re.escape(label)}\s*:", lowered)
+    }
+    return len(hits) >= 2
+
+
 def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
     """Template-residue checks for one recovered field's text.
 
@@ -2942,6 +3024,8 @@ def boilerplate_reasons(text: Any, *, scalar: bool) -> list[str]:
             reasons.append("qualifier_only_stat")
         if _media_filename_value(value):
             reasons.append("media_fragment")
+        if _label_bleed_stat(value):
+            reasons.append("label_bleed_stat")
         cleaned = re.sub(r"[^a-z0-9]+", " ", lowered).strip()
         if len(cleaned) < 8 or cleaned in _INSUBSTANTIVE_SCALAR_EXACT:
             reasons.append("insubstantive")
@@ -3119,17 +3203,27 @@ def filter_list_field_items_detailed(
     kept: list[str] = []
     dropped: list[dict[str, Any]] = []
     stripped: list[dict[str, Any]] = []
+    # Frag-11 sequential orphan-tail rule: a bare subject+aux+
+    # participle tail ("he was limited.") is the continuation of the
+    # sentence whose conjunction-led head ("but after the Night of the
+    # black knives") was just dropped. The flag tracks only the
+    # IMMEDIATELY preceding piece, and only when it was dropped as a
+    # conjunction orphan.
+    prev_conj_orphan = False
     for piece in pieces:
         cleaned, tail_reasons = clean_item_tails(piece)
         if not cleaned:
             dropped.append(
                 {"item": piece[:120], "reasons": tail_reasons or ["empty_item"]}
             )
+            prev_conj_orphan = False
             continue
         reasons = placeholder_item_reasons(cleaned)
         for reason in fragment_item_reasons(cleaned, section=section):
             if reason not in reasons:
                 reasons.append(reason)
+        if prev_conj_orphan and "orphan_tail_clause" not in reasons and _orphan_tail_seq(cleaned):
+            reasons.append("orphan_tail_clause")
         if reasons:
             dropped.append({"item": piece[:120], "reasons": reasons})
         else:
@@ -3142,6 +3236,7 @@ def filter_list_field_items_detailed(
                         "reasons": tail_reasons,
                     }
                 )
+        prev_conj_orphan = bool(reasons and "conjunction_orphan" in reasons)
     return ", ".join(kept), dropped, stripped
 
 
@@ -4776,6 +4871,425 @@ def _trailing_fragment(value: str, lowered: str) -> bool:
     return False
 
 
+# Bare "<X> ID Types" tab keys (eleventh debris generation, items).
+# The vsbattles tabber labels the Innocent Devil type tabs "Battle ID
+# Types" / "Bird ID Types" / "Mage ID Types" (isaac, gate 50n); the
+# colon form ("Fairy ID Type:") was already caught by the endswith-
+# colon rule, but the bare plural form is not. Calibrated (frag-11
+# calib1): exactly the 3 isaac items in the whole stored corpus carry
+# this shape; real abilities containing "ID" ("Public Safety ID
+# Badge...", "his ID", "Electromagnetic Spectrum Vision: ... identify")
+# never end in "ID Type(s)" and are untouched.
+_ID_TYPES_BARE_RE = re.compile(r"(?i)^\s*[a-z][\w '\-]*\bid types?\s*\.?\s*$")
+
+# Section-header-as-item / description-bleed markers (eleventh debris
+# generation, items). The vsbattles tabber header "<X> abilities
+# (<tier> - Baseline)" / "<X> (<tier> - Baseline)" itemizes as if it
+# were a power (isaac: "Dark Lord abilities (4-D - Baseline)",
+# "Creatures of Chaos (4-D - Baseline)"; the broad form without a
+# closing paren -- death's "... Baseline Has access to..." and
+# dracula/alucard's "... Baseline in Dracula's Curse ..." -- is the
+# same header, 9 stored hits, all Castlevania). The key is the header
+# PATTERN, never name==desc alone: 131,416 stored items have
+# name==desc (Immortality, Flight, ...). The same pattern in a
+# DESCRIPTION is section bleed: the Forcefield description ends with
+# the next tab's header ("Dark Lord resistances (4-D - Baseline)").
+# A "Feats:" marker mid-item is the same bleed in the weaknesses
+# field: maliketh's "Frost Damage and the Blasphemous Claw Feats: Can
+# utilize Destined Death..." is feats content filed as a weakness
+# (476 stored items carry "Feats:", all the same glue shape).
+_TIER_BASELINE_RE = re.compile(
+    r"\(\s*\d+\s*-?\s*[A-D]?\s*-\s*Baseline\b", re.I
+)
+_FEATS_MARKER_RE = re.compile(r"\bfeats\s*:", re.I)
+
+# Orphaned-tail clauses (eleventh debris generation, items). The
+# comma-splitter cut "Maliketh could manipulate Death, but after the
+# Night of the black knives, he was limited." into three pieces: the
+# glued composite, the but-led half, and the bare tail "he was
+# limited." -- a subject + auxiliary + participle clause with no
+# complement. Calibrated (frag-11 calib1): exactly ONE stored item
+# matches the bare pattern ("it was destroyed."), so the standalone
+# rule is safe; the sequential form (in filter_list_field_items_detailed)
+# drops a slightly broader tail only when it directly follows a
+# dropped conjunction-led fragment.
+_ORPHAN_TAIL_RE = re.compile(
+    r"(?i)^(he|she|it|they)\s+(was|were|is|are|has|have|had)\s+"
+    r"[a-z]+(?:ed|en)\s*[.!]?\s*$"
+)
+_ORPHAN_TAIL_SEQ_RE = re.compile(
+    r"(?i)^(he|she|it|they)\s+(was|were|is|are|has|have|had)\s+"
+    r"[a-z]+(?:ed|en)\b"
+)
+
+
+def _orphan_tail_seq(value: str) -> bool:
+    """Broader tail shape, sequential use only: bare subject+aux+
+    participle with an optional short complement (<= 8 words)."""
+    text = str(value or "").strip()
+    if not _ORPHAN_TAIL_SEQ_RE.match(text):
+        return False
+    return _fragment_word_count(text.casefold()) <= 8
+
+
+# Glued composites (eleventh debris generation, items): two
+# ability-name heads each followed by its own clause in one item --
+# maliketh's "Durability Negation Destined Death lowers and burns HP.
+# Death Manipulation Maliketh could manipulate Death". Each sentence
+# must open with two capitalized tokens whose first or second token
+# is an ability-operation noun, and carry >= 5 tokens (a clause, not
+# a bare head pair: "Metal Manipulation [Metagross]. Rock Manipulation"
+# has no clause after its heads). Calibrated (frag-11 calib1b): 0 hits
+# in 167,486 stored items, verbatim caught. Must NOT fire on
+# "&"-joined heads ("Soul Manipulation & Energy Manipulation", one
+# sentence, no split) or on multi-sentence descriptions whose later
+# sentences start with pronouns ("He can...", "All Souls taken..." --
+# "Souls" is not an operation noun) or move names ("Searing Sunraze
+# Smash", "Desolate Land", "Flare Blitz" -- terminal nouns outside
+# the set).
+_GLUED_OP_NOUNS = frozenset(
+    {
+        "manipulation", "negation", "creation", "destruction",
+        "control", "physiology", "projection", "generation",
+        "absorption", "resistance", "immunity", "nullification",
+        "erasure", "sealing", "summoning", "teleportation",
+        "telekinesis", "telepathy", "clairvoyance", "precognition",
+        "regeneration", "immortality", "invulnerability",
+        "intangibility", "invisibility", "duplication",
+        "shapeshifting", "transformation", "transmutation",
+        "possession", "empowerment", "amplification", "reduction",
+        "mimicry", "bending", "kinesis", "analysis", "perception",
+        "awareness", "sensing", "travel",
+    }
+)
+
+
+def _glued_composite(value: str) -> bool:
+    sents = [
+        s.strip()
+        for s in re.split(r"(?<=[.!?])\s+", str(value or "").strip())
+        if s.strip()
+    ]
+    if len(sents) < 2:
+        return False
+    good = 0
+    for sent in sents:
+        toks = re.findall(r"[A-Za-z][A-Za-z'\-]*", sent)
+        if len(toks) < 5:
+            continue
+        if not (toks[0][:1].isupper() and toks[1][:1].isupper()):
+            continue
+        if (
+            toks[1].casefold() not in _GLUED_OP_NOUNS
+            and toks[0].casefold() not in _GLUED_OP_NOUNS
+        ):
+            continue
+        good += 1
+    return good >= 2
+
+
+# Bare character-name abilities (eleventh debris generation, items).
+# A single-token item that is a CHARACTER's name, not a power --
+# maliketh's "Radagon", comma-split out of "Marika, Radagon, and Elden
+# Beast". The audit flags it (insubstantive via
+# stat_field_rejection_reasons) but the merge-time item filter did not
+# wire that reason in -- and must not: the scalar insubstantive test
+# fires on any short value, which would drop legit bare abilities
+# (Flight / Magic / Immortality). The discriminator is a
+# known-ability vocabulary: EVERY distinct single-token item name in
+# the stored corpus (1,913 case-sensitive names from frag-11 calib1e,
+# 1,762 casefolded entries + "hax", below). The first cut used a freq>=2 floor (616 words, calib1c),
+# but calib3 showed it drops legit hapax abilities (Immaterial,
+# Extrasensory, Defog, Whirlwind, Hurricane, Plant, Avatar, Death --
+# all 480 stored hits carry a description, i.e. they are real items,
+# not name fragments). The rule therefore keys on NEVER-SEEN tokens:
+# a single capitalized token that has never been an item label in
+# 167k stored items is a proper name, not a power. One control-driven
+# addition: "hax" is a vsbattles term for durability-bypassing
+# abilities (TabKeyCompositeTests pins it legit); it never occurs as
+# a single-token item name. The residual risk is a brand-new legit
+# ability name (0 stored occurrences) -- the gate's manual review of
+# dropped items is the backstop. The verse-cast cross-check was
+# rejected as a discriminator: 89 single-token names match a profile
+# file-stem, including legit abilities (Aura, Death, Beast, Blade).
+_KNOWN_BARE_ABILITIES = frozenset(
+    {
+    "a", "abilities", "absorb", "absorption", "abstract", "aby", "acid", "acrobatics",
+    "acupuncture", "adaptability", "adaptation", "additionally", "admission", "advanced", "aerosmith", "afterimage",
+    "age", "aggressive", "agility", "agumon", "aiki", "aikido", "aim", "air",
+    "airbending", "alchemy", "alcohol", "alcoholic", "alfred", "alive", "alkhema", "almace",
+    "alphamon", "although", "alvis", "amane", "ambitions", "amesha", "amogussusfunni", "amon",
+    "amplifying", "anakin", "and", "andúril", "angel", "animals", "animate", "animation",
+    "anime", "ankhseram", "ansem", "antisocial", "antitoxins", "anvil", "apostle", "appearance",
+    "apples", "aramis", "aria", "ariados", "arial", "armor", "armored", "armour",
+    "arms", "aro", "arondight", "arpeggio", "arrancars", "arrival", "arrogance", "arrogant",
+    "arrogante", "arrows", "arsenal", "artillery", "as", "ash", "ashurira", "attack",
+    "august", "aura", "autobomb", "avacyn", "avatar", "avoiding", "awakened", "ax",
+    "axe", "axes", "azrael", "backflips", "bala", "balance", "ball", "balloons",
+    "balls", "balmung", "baneling", "barbas", "bark", "barley", "barriers", "base",
+    "basic", "batarangs", "battle", "battleaxe", "bazookas", "beam", "beams", "bean",
+    "bears", "beast", "belle", "bend", "benevolence", "benihime", "benihimebleach", "berserk",
+    "bfr", "bigger", "binding", "binoculars", "biofoam", "bioluminescence", "birds", "bisharp",
+    "bites", "black", "blade", "blades", "blaster", "blasters", "bleach", "bleed",
+    "bleeding", "blessed", "blind", "blinded", "blinding", "blindness", "blizzard", "blocks",
+    "blood", "blowdart", "blowgun", "blue", "bobsleds", "body", "bokken", "bombs",
+    "boomstick", "boost", "bouffalant", "bounce", "bow", "bows", "braig", "brainwash",
+    "brainwashing", "brash", "bravery", "break", "broadcast", "broadsword", "broadswords", "brock",
+    "bronze", "broom", "brother", "brown", "bubbler", "buffs", "bug", "buildings",
+    "bulbasaur", "bull", "bullets", "burden", "burnt", "busters", "but", "byakugan",
+    "böhme", "cactaur", "cagliostro", "calamity", "caledfwilch", "caltrops", "camera", "camouflage",
+    "cane", "canes", "cannons", "canvas", "capabilities", "cape", "capoeira", "capture",
+    "carbuncle", "cars", "catapult", "center", "centre", "cephalazord", "cesti", "chad",
+    "chains", "chainsaw", "chakrams", "changing", "charge", "charisma", "charizard", "charm",
+    "cheetu", "chemical", "chest", "chi", "childish", "chiyo", "chromastone", "chrysalimon",
+    "chrysaor", "cla", "clairvoyance", "clark", "claw", "claws", "claymore", "clean",
+    "climb", "cloning", "clothe", "clothing", "clouds", "clubs", "clumsy", "cocky",
+    "codex", "cofagrigus", "cojuring", "cold", "collapse", "colossus", "colt", "compassion",
+    "computer", "concentrate", "confuse", "confusion", "conjured", "consequently", "contracted", "control",
+    "conversely", "cooking", "corrupted", "corruption", "counter", "courage", "cowardly", "craftmanship",
+    "create", "creation", "creature", "crobat", "crossbow", "crossbowmanship", "crowbars", "crush",
+    "crybaby", "cryokinesis", "crystals", "cuisseau", "cupcake", "curse", "cut", "cutters",
+    "cutting", "cyanide", "cyborgization", "daggars", "dagger", "daggers", "damages", "dangerous",
+    "danmaku", "daredevil", "dark", "darkstorm", "darts", "data", "dealing", "death",
+    "debbie", "decay", "deceive", "deception", "deck", "deconstruction", "deer", "defend",
+    "defense", "defenses", "defensive", "deflecting", "deflection", "defog", "delay", "delta",
+    "demigod", "demon", "depression", "desire", "despair", "destructive", "detect", "detonator",
+    "diaboromon", "dialga", "digivice", "dimetrozord", "direct", "directed", "dirt", "disarming",
+    "discs", "diseas", "diseases", "distance", "ditto", "diverting", "dna", "do",
+    "donald", "donphan", "doom", "doomsday", "downwards", "dragon", "dragonfruit", "dragons",
+    "drapion", "dreamstone", "drink", "drinking", "drones", "drugs", "drunk", "duplication",
+    "dura", "durability", "durable", "duration", "durendal", "dynamax", "dynamike", "dynas",
+    "earth", "earthbending", "earthquakes", "echoes", "ecology", "economic", "ect", "edgeshot",
+    "eelektross", "effectiveness", "ehrgeiz", "elasticity", "elazar", "elbows", "electric", "electricity",
+    "electro", "electrocuted", "electrokinesis", "electronics", "elemental", "elf", "elijah", "elytron",
+    "emotion", "emotional", "emotions", "emp", "empathy", "empowerment", "emps", "enchantment",
+    "endless", "endurance", "energies", "energy", "enhanced", "enhancing", "equipment", "esp",
+    "espadon", "esper", "espio", "etc", "eternal", "ethers", "evasion", "events",
+    "eventually", "evidently", "evil", "example", "excalibur", "excitable", "exploding", "explosion",
+    "explosions", "explosive", "explosives", "expression", "extrasensory", "extraterrestrial", "extreme", "eyes",
+    "eyesight", "fairy", "faith", "familiars", "fang", "fangs", "fans", "faster",
+    "fatibal", "fear", "february", "fighting", "finally", "fingers", "fire", "firearms",
+    "fireball", "fireballs", "firebending", "fires", "first", "flamberge", "flame", "flamethrower",
+    "flamethrowers", "flanchet", "flashbangs", "flashlight", "flexibility", "flexible", "flight", "flightpack",
+    "flinching", "flips", "float", "floatation", "floor", "flute", "flying", "focus",
+    "food", "force", "forcefield", "forcefields", "formerly", "foudre", "frameless", "freezing",
+    "friction", "friend", "frogs", "frost", "frostboost", "frozen", "fujin", "fujitora",
+    "fung", "furthermore", "fusionism", "gabumon", "gains", "gaku", "galatine", "galleom",
+    "gamahiro", "gamaken", "game", "ganon", "garuda", "garurumon", "gas", "gases",
+    "gauntlet", "gems", "gender", "general", "genjutsu", "gentle", "geppou", "ghost",
+    "ghosts", "ginger", "giru", "gjallarhorn", "glacier", "glasses", "gliding", "glock",
+    "gloves", "godfrey", "godot", "godslayer", "golbat", "golden", "golisopod", "goofy",
+    "goshinki", "gotenks", "grab", "grant", "grass", "greathelm", "greatsword", "greatswords",
+    "green", "grenades", "greymon", "griever", "grimoires", "gringolet", "groot", "ground",
+    "guitar", "gun", "gunarm", "gunblades", "gungnir", "gunpowder", "guns", "gunshots",
+    "gus", "guts", "gyarados", "gymnast", "haboob", "hachimontonkō", "hacking", "hades",
+    "hail", "hair", "hairpin", "hairspray", "hallucinations", "hallucinogenics", "halo", "hammer",
+    "hammers", "hammerspace", "handgun", "hands", "hanki", "harbinger", "hassaikai", "haste",
+    "hat", "hatchet", "hate", "hatred", "hattori", "hauteclaire", "hawks", "hax",
+    "he", "head", "headsets", "heal", "healing", "health", "hear", "heard",
+    "hearing", "heat", "hedges", "helmet", "helvetica", "heracro", "hero", "himself",
+    "history", "hodgson", "hoffnung", "hogyoku", "holger", "holy", "homing", "honchkrow",
+    "hook", "hope", "horizontal", "horn", "horns", "houndoom", "hovercraft", "however",
+    "hulk", "human", "humans", "hunger", "hunter", "hurricane", "hurricanes", "husk",
+    "hustlers", "hydralisk", "hydreigon", "hydrophobia", "hyness", "ice", "icebending", "idealism",
+    "idols", "ifrit", "ignjatovic", "ik", "ikaros", "illinois", "illusions", "immaterial",
+    "immersion", "immobile", "immobilization", "immortal", "immortality", "immortus", "impaled", "impalements",
+    "implant", "impulsive", "in", "incapacitate", "incompetent", "incorporeality", "inexperienced", "infection",
+    "infermon", "inferno", "infestor", "infiltration", "inflate", "information", "initially", "inkstrike",
+    "innate", "innocence", "insanity", "insecurities", "insights", "instead", "instincts", "instructions",
+    "instruments", "intangibility", "intelligence", "intents", "interdiction", "interfering", "internal", "invisibility",
+    "invulnerability", "iona", "irkalla", "irritable", "islands", "items", "itzal", "itzli",
+    "izanagi", "japan", "jarret", "jealousy", "jellyshade", "jessie", "jetpack", "jetpacks",
+    "jiji", "joints", "joybuzzers", "judge", "judo", "julius", "july", "jump",
+    "jumped", "jumps", "jumpsuit", "june", "juzutsunagi", "jūken", "kaburamaru", "kadaj",
+    "kagura", "kali", "kamehameha", "kamo", "karate", "karen", "katana", "katanas",
+    "katars", "keramon", "ketchup", "keyboards", "khopeshes", "ki", "kiai", "kiba",
+    "kick", "kicks", "kikoku", "kill", "killers", "kills", "kilowog", "kim",
+    "kindness", "kingler", "kirby", "kiryu", "kisuke", "kizaru", "knife", "knives",
+    "knowledge", "knuckles", "koch", "kochva", "kon", "kones", "konir", "konira",
+    "konka", "konza", "korean", "koromon", "korose", "kryptonite", "kua", "kubikiribōchō",
+    "kunai", "kunais", "kunoichi", "kuruppu", "kusabimaru", "kusakabe", "kusarigama", "labrys",
+    "lamp", "lances", "land", "large", "larva", "larvitar", "laser", "lasers",
+    "lasso", "lavabending", "law", "laxatives", "lazy", "leadership", "lean", "ledges",
+    "left", "leg", "legs", "leonard", "levante", "leveling", "leviathan", "levitate",
+    "levitation", "lexus", "lifesphere", "light", "lightbloom", "lighter", "lightning", "lights",
+    "lightsaber", "lightsphere", "limited", "lmgs", "locate", "location", "lockjaw", "locust",
+    "longbow", "longe", "longevity", "longsword", "longword", "lostvayne", "louder", "luiginoids",
+    "lunatic", "m", "mace", "maces", "machete", "machetes", "madness", "magatsuhi",
+    "magic", "magical", "magma", "magnetism", "maim", "main", "maleficent", "malfested",
+    "malice", "malladus", "mallet", "mana", "mandarin", "maneuverability", "manhole", "manifestation",
+    "manipulation", "manoeuvre", "manus", "marabelle", "march", "marcus", "marin", "marksman",
+    "marksmanship", "marlene", "marx", "masayume", "mask", "masquerain", "mastery", "matches",
+    "matching", "material", "matois", "matrix", "maul", "may", "mayfly", "meaning",
+    "mechanics", "medallion", "medical", "megicula", "meili", "meito", "memories", "memorize",
+    "memory", "mercurious", "messages", "metal", "metalbending", "metalgarurumon", "metalgreymon", "metalia",
+    "metallica", "meteorain", "microphone", "midnight", "mienfoo", "mienshao", "minazuki", "mind",
+    "minds", "mine", "minecarts", "mines", "miniguns", "minor", "miracles", "miscellaneous",
+    "missiles", "mista", "mitsuri", "mjöllnir", "mjölnir", "mobility", "modified", "mods",
+    "mon", "monsoon", "monsters", "monstropolis", "mop", "moray", "mortars", "moths",
+    "motionless", "mouth", "mud", "mug", "muk", "multilinguism", "murasame", "murciélago",
+    "murkrow", "muscles", "muscular", "mushrooms", "musician", "muspel", "mʔ", "nacht",
+    "naginata", "nails", "naive", "namely", "namor", "nanotechnology", "narancia", "naruto",
+    "necklace", "necromancy", "necroswords", "needles", "negation", "nemesis", "nenya", "nevertheless",
+    "nicholas", "nicky", "nicolas", "nightstick", "nightvision", "nihongo", "nimbus", "ninjatō",
+    "ninjutsu", "nita", "nobume", "noctowl", "noise", "none", "normal", "normally",
+    "norman", "nostalgia", "notably", "november", "now", "nuclear", "nulshock", "nunchakus",
+    "nunchucks", "obsession", "occasionally", "octaslash", "odonata", "oh", "olive", "omen",
+    "omnipresence", "omnislash", "onelings", "open", "optional", "or", "orb", "origin",
+    "original", "orihime", "orochimaru", "other", "otherwise", "overconfidence", "overconfident", "overeating",
+    "overlord", "overprotective", "ovomorph", "paintbrush", "palanquin", "pandaemonium", "paper", "paralysis",
+    "paralyze", "paralyzed", "paraplegic", "parries", "peach", "penny", "people", "performer",
+    "person", "personal", "petrification", "petrify", "pets", "phasing", "phenomenon", "pheromones",
+    "phone", "photokinesis", "photon", "physical", "physiology", "physique", "pickaxe", "pickaxes",
+    "pidgeot", "piedmon", "pike", "piloting", "pinsir", "pistol", "pistols", "pizza",
+    "planes", "planet", "plant", "plants", "plasma", "plunging", "plus", "poco",
+    "pod", "poison", "poisoned", "poisons", "pokédex", "pokémon", "polymorph", "popo",
+    "porsche", "porthos", "possession", "possibly", "posture", "potioncraft", "potions", "power",
+    "practice", "prayers", "precieuse", "precognition", "preognition", "preparation", "presence", "present",
+    "pressure", "pressurised", "prideful", "primordials", "primus", "princely", "prinz", "prisoner",
+    "prisoners", "probes", "produce", "projection", "prosthetics", "protect", "psychic", "psychokinesis",
+    "psychokinetic", "psychological", "psychometry", "psychotic", "punches", "punctured", "puppets", "purgatorio",
+    "purification", "pyroar", "pyrokinesis", "qrow", "qualitative", "quality", "quantum", "quanxi",
+    "quasi", "queue", "quick", "quicksand", "quilava", "rabbit", "radar", "radiation",
+    "radio", "rage", "rails", "rainfell", "ramjan", "range", "rankyaku", "rapier",
+    "rapiers", "ratatöskr", "rathalos", "rats", "rattler", "reaction", "reckless", "recommendations",
+    "recruitment", "redirect", "reflex", "reflexes", "regen", "regeneration", "regular", "remnant",
+    "remove", "removing", "rené", "repair", "reputation", "research", "resilient", "resistance",
+    "resistances", "resonance", "rest", "restrain", "resurrection", "retrieve", "retrocognition", "revert",
+    "reviveplants", "revolver", "revolvers", "reze", "richardson", "rico", "ricochet", "rifle",
+    "rifles", "right", "rika", "rings", "roach", "robin", "robonoids", "robots",
+    "robyn", "rock", "rocket", "rocks", "rodin", "rods", "rokureichū", "rolling",
+    "roofs", "roots", "rope", "ropecaster", "ropes", "rosa", "rot", "rubik",
+    "ruby", "rufus", "russian", "sabretooth", "sail", "saix", "salvation", "salves",
+    "same", "samehada", "sand", "sandbending", "sandman", "sandstorms", "sanemi", "sangan",
+    "sanglamore", "sanjaya", "santana", "sasha", "sauria", "savate", "saws", "say",
+    "scalpels", "scent", "scheib", "science", "scimitar", "scrolls", "scrying", "scythe",
+    "sealing", "secrets", "seismitoad", "seizures", "senbons", "senses", "sensing", "sentient",
+    "sento", "sephiroth", "september", "serenity", "server", "shades", "shadow", "shadowblade",
+    "shalnark", "shape", "shapeshifting", "sharpshooter", "shell", "shelly", "shield", "shields",
+    "shigan", "shikai", "shinobi", "shins", "shinsō", "shiva", "shortsword", "shot",
+    "shotgun", "shotguns", "shovel", "shown", "shuriken", "shurikens", "shy", "shōki",
+    "signs", "silat", "silence", "sillyfox", "silver", "simoon", "sineya", "singing",
+    "sirocco", "size", "skill", "skills", "skull", "skullgreymon", "sky", "slam",
+    "sleep", "sling", "slow", "smell", "smells", "smgs", "smoke", "smokescreen",
+    "snakes", "sneak", "sneasel", "snipers", "snowboards", "so", "soberness", "soil",
+    "solid", "solution", "some", "sometimes", "sonar", "song", "soru", "soul",
+    "souls", "sound", "sounds", "space", "spaceflight", "spanish", "spark", "sparrow",
+    "speakers", "spear", "spears", "specials", "speechcraft", "speed", "spel", "spiderwebs",
+    "spiked", "spikes", "spin", "spindash", "spirit", "spirits", "splashdown", "sprig",
+    "squid", "squirtle", "staff", "staffs", "stakebords", "stalk", "stamina", "standard",
+    "star", "stars", "starsphere", "statements", "staves", "stealth", "steel", "stegozord",
+    "steven", "stolen", "stomach", "stomp", "stone", "stop", "stormbreaker", "stormfall",
+    "stormy", "straws", "strenght", "strength", "striking", "stubborn", "stun", "stunning",
+    "stupid", "sub", "subterfuge", "suiken", "suit", "suitotsu", "sumida", "summerhayes",
+    "summoning", "summons", "sunglasses", "sunlight", "super", "superego", "superhuman", "superman",
+    "supreme", "susie", "sweat", "swell", "swing", "swipes", "switchblade", "sword",
+    "swords", "swordsman", "swordsmanship", "syringes", "taekwondo", "tail", "tails", "talent",
+    "talismans", "talk", "tanimura", "tantō", "tardis", "taser", "tasers", "taste",
+    "tauriner", "tearblaster", "techniques", "technomagic", "technopathy", "teeth", "teez", "tekkai",
+    "telekinesis", "telepathy", "teleportation", "temperature", "ten", "tendrils", "tendron", "tentōken",
+    "terrestrial", "that", "the", "then", "theoretically", "therefore", "though", "thread",
+    "throwing", "throws", "thrud", "thumb", "thunderbolt", "thunderclaps", "thus", "tiara",
+    "tigra", "time", "timing", "tiny", "title", "tomahawks", "tomes", "tonfas",
+    "tongue", "tools", "torpedo", "torrent", "torso", "totodile", "toughness", "toxicroak",
+    "toxins", "tracking", "tracksuit", "training", "tramontane", "tranquilizers", "transformation", "transformations",
+    "transmutation", "transparent", "traps", "treasures", "trees", "tricking", "trident", "trinkets",
+    "tripcaster", "troupples", "true", "truncheons", "tsunade", "tsunomon", "turtle", "tusks",
+    "twice", "twirls", "typical", "tyro", "ultimatrix", "ultralisk", "umibouzo", "unaware",
+    "unchanging", "unconscious", "unconventional", "unfortunately", "unique", "unit", "universal", "unknown",
+    "unpredictability", "urvan", "usually", "vain", "valkyrie", "vampires", "vanishing", "vanitas",
+    "vapor", "varies", "vehicles", "vera", "vermin", "veronica", "vi", "vibration",
+    "vibrations", "vibroknife", "vidal", "vikavolt", "violent", "visor", "vitality", "voice",
+    "voids", "vonk", "vulneraries", "wait", "wallcrawling", "wand", "wands", "wargreymon",
+    "warp", "warpath", "warsuit", "wasureyuki", "watch", "water", "waterbending", "watermelon",
+    "weaponry", "weapons", "weather", "weave", "weavile", "webnovel", "webshooters", "weight",
+    "weiss", "welcome", "welfin", "weregarurumon", "which", "whip", "whips", "whipsword",
+    "whirling", "whirlwind", "white", "whitebeard", "whitesnake", "who", "will", "willpower",
+    "wind", "windows", "wing", "wings", "wire", "wires", "wise", "wish",
+    "with", "within", "wolfgang", "wolfheart", "wolves", "worlds", "wrench", "wrists",
+    "wushu", "x", "xemnas", "xerneas", "yamato", "yamcha", "yang", "yannick",
+    "yellow", "yixuan", "yoruichi", "yveltal", "yūshirō", "zangetsu", "zatanna", "zavok",
+    "zephyr", "zergling", "zero", "zoddqref", "zombie", "zombification", "zuko", "zweihanders",
+    "ōzaru", "々", "えんruby", "かruby", "かのruby", "かめはめruby", "きruby", "きょうruby",
+    "くろきruby", "けっruby", "こうruby", "さばきのruby", "さめruby", "ざんruby", "しつruby", "しょうきゃくruby",
+    "しんruby", "じゅruby", "せいruby", "ぜったいのruby", "ついruby", "とざruby", "の", "ひruby",
+    "びruby", "ふんのruby", "へんruby", "ほうruby", "らいruby", "エネルギruby", "ダブルruby", "ノ",
+    "フォトンゲイザー", "ブレイクruby", "プリズムレーザー", "プロジェクトシャドウ", "メダリオン", "メテオリックバースト", "不", "丸",
+    "人", "体", "兎", "八", "八卦六十四掌", "八卦掌回天", "八卦空壁掌", "八卦空掌",
+    "八斎戒", "共", "内", "円", "処", "凰輪", "刃", "刑",
+    "前", "剣", "劃", "化", "十", "博", "厳", "反膜の匪",
+    "吸", "呪", "呼", "囲", "坐", "域", "報", "変",
+    "大猿", "大鎌", "天焦がす滅亡の光", "姿", "子", "安", "定", "尾",
+    "展", "希", "希望の剣", "帯", "弾", "徒", "必", "怒",
+    "性", "悲", "情", "憎", "憤", "打", "操", "斬",
+    "日", "星屑", "時", "月墜蹴", "月頭鋏", "望", "木", "木ノ葉旋風",
+    "朶", "朽", "柔拳", "柔拳法一撃身", "根", "森", "棺", "極",
+    "殺", "毬", "気", "法", "波", "液", "溶", "火",
+    "火龍皇", "炎", "炎皇", "爛", "王", "瓦", "畑", "番",
+    "癒す親指の鎖", "白眼", "真", "砲", "礫", "示", "神", "神裂斬",
+    "禁", "種", "空", "空転送", "竜", "筋", "簪", "納",
+    "絶対", "絶対時間", "縛", "羅", "翅", "肉", "腐", "花",
+    "芻霊呪法", "菜", "落", "蒼", "蓋", "蜉", "蝕", "蝣",
+    "蟲", "血", "術", "表蓮華", "裁", "裏蓮華", "解", "質",
+    "赫", "踵半月輪", "踵月輪", "輪", "追", "連", "遁", "遊雲",
+    "酔拳", "釈", "重", "鉄", "錄霊", "鏑", "開", "防",
+    "隕", "雷", "雷犂熱刀", "音", "領", "飛", "骨", "魂刀",
+    "鳴", "黒閃",
+    }
+)
+
+def _bare_proper_name(value: str) -> bool:
+    text = str(value or "").strip().rstrip(".:!").strip()
+    toks = text.split()
+    if len(toks) != 1:
+        return False
+    tok = toks[0]
+    if not tok.isalpha() or len(tok) < 2 or not tok[:1].isupper():
+        return False
+    return tok.casefold() not in _KNOWN_BARE_ABILITIES
+
+
+# Mid-word truncated items (eleventh debris generation, items). The
+# SOURCE page itself truncates the word: isaac's vsbattles wikitext
+# reads "[... '''Deadly Absorp''']", so the item "Absorption (With
+# Healing Drop and Deadly Absorp)" is ~45 chars -- not the 120-char
+# name cap. No parser fix can recover the missing letters, so the
+# screen must recognize a cut word. Word-validity alone does not
+# discriminate: the same head-prefix shape covers complete words
+# ("Teleportation (Can teleport)", "Healing (Can heal...)", "Water-
+# bending (With any phase of water)", "Regeneration (Mid-Low via
+# Regen)" -- 84 stored items, essentially all legitimate). The precise
+# shape is the trailing "(With ... and <LastWord>)" list whose last
+# element is the head word cut short: the clause re-mentions the
+# ability, and the re-mention is truncated. Calibrated (frag-11
+# calib1d): the rule fires on the verbatim and on no other stored
+# item. The 120-char cap's own truncations are the accepted FP class
+# and are excluded by the length guard.
+_TRUNCATED_WITH_LIST_RE = re.compile(
+    r"\(\s*With\b[^)]*\band\s+.*\b([A-Za-z]+)\)\s*$"
+)
+
+
+def _midword_truncated(value: str) -> bool:
+    text = str(value or "").strip()
+    if len(text) >= 120:
+        return False
+    match = _TRUNCATED_WITH_LIST_RE.search(text)
+    if not match:
+        return False
+    last = match.group(1)
+    if len(last) < 4:
+        return False
+    toks = re.findall(r"[A-Za-z]+", text)
+    if not toks:
+        return False
+    head = toks[0]
+    return (
+        head.casefold().startswith(last.casefold())
+        and len(head) >= len(last) + 2
+    )
+
+
 def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
     """Fragment-debris checks for one recovered list item.
 
@@ -4798,20 +5312,40 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
             for pattern in _FRAGMENT_SECTION_HEADER_PATTERNS
         )
         or _FRAGMENT_BARE_HEADER.match(value)
+        or _ID_TYPES_BARE_RE.match(value)
+        or _TIER_BASELINE_RE.search(value)
+        or _FEATS_MARKER_RE.search(value)
         or (value.strip().endswith(":") and words <= 5)
     ):
         # A short item that ENDS in a colon is a sub-header or a
         # label introducing a list ("The True Fate:"), never a whole
         # item; colon-bearing names ("Straw Doll Technique:
         # Resonance") do not end in a colon and are untouched.
+        # Frag-11: the bare "<X> ID Types" tab key, the "(<tier> -
+        # Baseline)" tabber header (as item or as description bleed),
+        # and a "Feats:" section marker mid-item join this reason.
         reasons.append("section_header")
     if value.count("(") != value.count(")"):
         reasons.append("unbalanced_parenthesis")
     if words <= _FRAGMENT_ORPHAN_MAX_WORDS and (
-        re.match(r"and\s+", lowered.strip())
+        re.match(r"(?:and|but|yet|so|nor)\s+", lowered.strip())
         or re.search(r"\b(?:and|or)\s*[.,;]?\s*$", lowered)
     ):
+        # Frag-11: "but" joins the conjunction-orphan set (the
+        # "and"-led equivalents were dropped, the "but"-led half was
+        # not -- maliketh, gate 50n); "yet"/"so"/"nor" are the same
+        # shape, calibrated: 285/22/39/14 short stored items,
+        # fragment-class throughout. The <= 8-word cap keeps long
+        # prose clauses out.
         reasons.append("conjunction_orphan")
+    if _ORPHAN_TAIL_RE.match(value.strip()):
+        reasons.append("orphan_tail_clause")
+    if _glued_composite(value):
+        reasons.append("glued_composite")
+    if _bare_proper_name(value):
+        reasons.append("bare_proper_name")
+    if _midword_truncated(value):
+        reasons.append("truncated_item")
     if re.match(r"\s*resistance to\s*:", lowered):
         reasons.append("glued_fragment")
     if _tab_key_composite(value):
@@ -5176,6 +5710,29 @@ async def recover_profile_evidence(
                 continue
             via = verdict["via"]
             fetched_title = verdict["fetched_title"] or fetched_title
+            # Frag-11: stamp the fetched revision metadata into the
+            # profile's recorded source entry, exactly as the repair
+            # path does for its primary attempt (apply_source_metadata).
+            # Recovery never did this, so no freshly fetched source
+            # could satisfy the schema's revision-metadata clause and
+            # the promotion branch's eligibility contract was
+            # unreachable for recovered profiles -- half of why the
+            # old branch fired on usable-text alone. Only the fetched
+            # revision facts are stamped (no raw_content / headings
+            # bloat); dry_run still writes nothing to disk, and the
+            # file is only rewritten when something was recovered.
+            if meta.get("revision_id"):
+                apply_source_metadata(
+                    profile,
+                    source,
+                    {
+                        "revision_id": str(meta.get("revision_id") or ""),
+                        "revision_timestamp": meta.get("revision_timestamp"),
+                        "title": fetched_title,
+                        "url": url,
+                        "source_type": "mediawiki",
+                    },
+                )
 
             wikitext = str(meta.get("raw_content") or "")
             fields = fields0

@@ -41,6 +41,47 @@ def profile(name, franchise, category="anime"):
     }
 
 
+def promotable_profile(**overrides):
+    """A profile satisfying the schema eligibility contract: core stats
+    with linked source ids, a usable linked ability, and a mediawiki
+    source carrying revision metadata. Frag-11: the promotion branch
+    requires this contract, so guard tests for promotion must build
+    from here, not from a bare generation dict."""
+    prof = {
+        "name": "Test Hero",
+        "franchise": "Testverse",
+        "profile_type": "needs_review",
+        "status": "needs_review",
+        "battle_eligible": False,
+        "power_scale": {
+            "attack_potency": {"text": "Building level", "source_ids": ["src1"]},
+            "speed": {"text": "Supersonic", "source_ids": ["src1"]},
+            "durability": {"text": "Building level", "source_ids": ["src1"]},
+        },
+        "abilities": [
+            {"name": "Flight", "description": "Can fly", "source_ids": ["src1"]}
+        ],
+        "sources": [
+            {
+                "id": "src1",
+                "source_type": "mediawiki",
+                "title": "Test Hero",
+                "url": "https://vsbattles.fandom.com/wiki/Test_Hero",
+                "revision_id": "123",
+                "revision_timestamp": "2026-01-01T00:00:00Z",
+            }
+        ],
+        "generation": {"ineligible_reasons": ["needs_review"], "confidence": 0.6},
+        "review": {},
+    }
+    for key, value in overrides.items():
+        if isinstance(value, dict) and isinstance(prof.get(key), dict):
+            prof[key] = {**prof[key], **value}
+        else:
+            prof[key] = value
+    return prof
+
+
 def verdict(prof, source_title, fetched_title, *, origin="", categories=(), wikitext="", url=""):
     source = {"id": "src", "title": source_title, "url": url or f"https://vsbattles.fandom.com/wiki/{source_title.replace(' ', '_')}"}
     fields = {"origin": origin} if origin else {}
@@ -2845,15 +2886,336 @@ class TenthGenFrag10Tests(unittest.TestCase):
         )
 
     def test_promotion_still_clears_ineligible_reasons(self):
-        prof = {
-            "generation": {"ineligible_reasons": ["needs_review"]},
-            "review": {},
-        }
+        # Frag-11: promotion now requires the schema eligibility
+        # contract, so the fixture must satisfy it (core stats,
+        # usable ability, revision metadata) -- a bare generation
+        # dict no longer promotes, by design.
+        prof = promotable_profile()
         apply_primary_profile_state(
             prof, primary=None, corroborated=True, force_promotable=True
         )
         self.assertTrue(prof["battle_eligible"])
         self.assertEqual(prof["generation"]["ineligible_reasons"], [])
+
+
+class EleventhGenFrag11PromotionTests(unittest.TestCase):
+    """Frag-11 workstream B: the promotion branch must require the
+    schema's full eligibility contract, not usable-text alone."""
+
+    def test_fully_recovered_profile_still_promotes(self):
+        prof = promotable_profile()
+        apply_primary_profile_state(
+            prof, primary=None, corroborated=False, force_promotable=True
+        )
+        self.assertTrue(prof["battle_eligible"])
+        self.assertEqual(prof["status"], "provisional")
+        self.assertEqual(prof["profile_type"], "auto_evidence_profile")
+        self.assertEqual(prof["generation"]["ineligible_reasons"], [])
+        self.assertGreaterEqual(prof["generation"]["confidence"], 0.55)
+
+    def test_promotion_blocked_without_revision_metadata(self):
+        # Maliketh shape: approval_blockers=[] yet the CSPW source
+        # carries no revision metadata, so the schema contract fails
+        # on missing_source_revision_metadata alone. The profile must
+        # stay needs_review with non-empty reasons, never eligible.
+        prof = promotable_profile()
+        for source in prof["sources"]:
+            source.pop("revision_id", None)
+            source.pop("revision_timestamp", None)
+        apply_primary_profile_state(
+            prof, primary=None, corroborated=False, force_promotable=True
+        )
+        self.assertFalse(prof["battle_eligible"])
+        self.assertEqual(prof["status"], "needs_review")
+        self.assertEqual(prof["profile_type"], "needs_review")
+        self.assertTrue(prof["generation"]["ineligible_reasons"])
+
+    def test_promotion_blocked_when_approval_blockers(self):
+        # Missing durability text: approval_blockers is non-empty, so
+        # no promotion even with revision metadata present.
+        prof = promotable_profile()
+        prof["power_scale"]["durability"] = {"text": "", "source_ids": []}
+        apply_primary_profile_state(
+            prof, primary=None, corroborated=False, force_promotable=True
+        )
+        self.assertFalse(prof["battle_eligible"])
+        self.assertTrue(prof["generation"]["ineligible_reasons"])
+
+    def test_tier_only_recovery_not_eligible(self):
+        # A tier-only recovery (core stats still missing) must NOT
+        # leave the profile eligible, even though tier text merged.
+        prof = promotable_profile()
+        prof["power_scale"] = {
+            "tier": {"text": "9-A", "source_ids": ["src1"]},
+        }
+        apply_primary_profile_state(
+            prof, primary=None, corroborated=False, force_promotable=True
+        )
+        self.assertFalse(prof["battle_eligible"])
+        self.assertEqual(prof["status"], "needs_review")
+        self.assertTrue(prof["generation"]["ineligible_reasons"])
+
+    def test_promotion_blocked_when_primary_absent(self):
+        # No primary attempt and no force flag: the else branch, as
+        # before -- now also the contract-failure path.
+        prof = promotable_profile()
+        apply_primary_profile_state(prof, primary=None, corroborated=False)
+        self.assertFalse(prof["battle_eligible"])
+        self.assertEqual(prof["status"], "needs_review")
+
+
+class EleventhGenFrag11ScreenTests(unittest.TestCase):
+    """Frag-11 workstream A: the six gate-50n debris families."""
+
+    # -- (1) label-bleed stats ---------------------------------------
+    def test_label_bleed_stat_oryx_verbatim(self):
+        for value in (
+            "Lifting Strength: Striking Strength:",
+            "Standard Equipment: Intelligence: Above Average",
+        ):
+            self.assertIn(
+                "label_bleed_stat",
+                boilerplate_reasons(value, scalar=True),
+                value,
+            )
+            self.assertIn(
+                "label_bleed_stat",
+                stat_field_rejection_reasons(value),
+                value,
+            )
+
+    def test_label_bleed_stat_spares_real_content_first(self):
+        # Calib1b: 5 of 6 stored >=2-label values carry real content
+        # before the first label; only the label-led shape is debris.
+        for value in (
+            "Massively Hypersonic+ (Blitzed a Level 4 Akuma) "
+            "Lifting Strength: Class M",
+            "Extended Melee Range via sword; Tens of Meters via sword "
+            "beams Standard Equipment: The Crissword",
+            "Lifting Strength: Class M",
+        ):
+            self.assertNotIn(
+                "label_bleed_stat",
+                boilerplate_reasons(value, scalar=True),
+                value,
+            )
+
+    # -- (2) bare "<X> ID Types" tab keys ----------------------------
+    def test_bare_id_types(self):
+        for item in ("Battle ID Types", "Bird ID Types", "Mage ID Types"):
+            self.assertIn(
+                "section_header", fragment_item_reasons(item), item
+            )
+
+    def test_id_types_controls(self):
+        for item in (
+            "Public Safety ID Badge and Controlled Minions",
+            "Fairy ID Type:",
+            "Flight",
+        ):
+            if item == "Fairy ID Type:":
+                self.assertIn(
+                    "section_header", fragment_item_reasons(item), item
+                )
+            else:
+                self.assertNotIn(
+                    "section_header", fragment_item_reasons(item), item
+                )
+
+    # -- (3) section headers as items --------------------------------
+    def test_tier_baseline_header_items(self):
+        for item in (
+            "Dark Lord abilities (4-D - Baseline)",
+            "Creatures of Chaos (4-D - Baseline)",
+            "Dark Lord abilities (4-D - Baseline Has access to "
+            "Dracula's magic due to his powers being a part of the "
+            "castle)",
+        ):
+            self.assertIn(
+                "section_header", fragment_item_reasons(item), item
+            )
+
+    def test_baseline_controls(self):
+        # name==desc alone must never fire: 131,416 stored items.
+        for item in ("Immortality", "Flight", "Large Size"):
+            self.assertNotIn(
+                "section_header", fragment_item_reasons(item), item
+            )
+
+    # -- (4) mid-word truncated items ------------------------------
+    def test_midword_truncated_verbatim(self):
+        self.assertIn(
+            "truncated_item",
+            fragment_item_reasons(
+                "Absorption (With Healing Drop and Deadly Absorp)"
+            ),
+        )
+
+    def test_midword_truncated_controls(self):
+        for item in (
+            "Homing Attack (With Homing Eye and Homing)",
+            "Teleportation (Can teleport)",
+            "Healing (Can heal allies by cheering on them)",
+            "Waterbending (With any phase of water)",
+            "Regeneration (Mid-Low via Regen)",
+            "Absorption (With Healing Drop and Deadly Absorption)",
+        ):
+            self.assertNotIn(
+                "truncated_item", fragment_item_reasons(item), item
+            )
+
+    # -- (5) bare character-name abilities ---------------------------
+    def test_bare_proper_name(self):
+        self.assertIn(
+            "bare_proper_name", fragment_item_reasons("Radagon")
+        )
+
+    def test_bare_proper_name_controls(self):
+        # Legit bare CSPW ability names (the known FP class) survive.
+        for item in ("Flight", "Magic", "Immortality", "Acrobatics", "Teleportation"):
+            self.assertNotIn(
+                "bare_proper_name", fragment_item_reasons(item), item
+            )
+
+    # -- (6i) conjunction orphans: but / yet / so / nor ---------------
+    def test_conjunction_orphan_but(self):
+        self.assertIn(
+            "conjunction_orphan",
+            fragment_item_reasons("but after the Night of the black knives"),
+        )
+        for item in ("yet injured", "so it can reform itself)", "nor air in his armored form"):
+            self.assertIn(
+                "conjunction_orphan",
+                fragment_item_reasons(item),
+                item,
+            )
+
+    def test_conjunction_orphan_controls(self):
+        for item in ("Soul Manipulation", "Flight", "Butcher's Blade"):
+            self.assertNotIn(
+                "conjunction_orphan",
+                fragment_item_reasons(item),
+                item,
+            )
+
+    # -- (6ii) orphaned tails ----------------------------------------
+    def test_orphan_tail_standalone(self):
+        for item in ("he was limited.", "it was destroyed."):
+            self.assertIn(
+                "orphan_tail_clause",
+                fragment_item_reasons(item),
+                item,
+            )
+
+    def test_orphan_tail_controls(self):
+        for item in (
+            "he was stripped of most of his magic",
+            "He is physically blind",
+            "He is weak to fire",
+        ):
+            self.assertNotIn(
+                "orphan_tail_clause",
+                fragment_item_reasons(item),
+                item,
+            )
+
+    def test_orphan_tail_sequential(self):
+        # The tail drops when it directly follows a dropped
+        # conjunction-led fragment, even with a short complement the
+        # standalone rule spares.
+        kept, dropped, _ = filter_list_field_items_detailed(
+            "but after the Night of the black knives, "
+            "he was limited to one attack",
+            section="powers_and_abilities",
+        )
+        self.assertEqual(kept, "")
+        reasons = [r for d in dropped for r in d["reasons"]]
+        self.assertIn("conjunction_orphan", reasons)
+        self.assertIn("orphan_tail_clause", reasons)
+
+    # -- (6iii) glued composites -------------------------------------
+    def test_glued_composite_verbatim(self):
+        self.assertIn(
+            "glued_composite",
+            fragment_item_reasons(
+                "Durability Negation Destined Death lowers and burns HP. "
+                "Death Manipulation Maliketh could manipulate Death"
+            ),
+        )
+
+    def test_glued_composite_controls(self):
+        for item in (
+            "Soul Manipulation & Energy Manipulation (With the Grand "
+            "Wave and Glow Soul)",
+            "Sound Manipulation Maliketh's roars can damage and knock "
+            "down the player.",
+            "Soul Manipulation Even a small fragment of Destined Death "
+            "destroyed Godwyn's soul.",
+            "Energy Manipulation Can fire red energy out of his Black "
+            "Blade.",
+        ):
+            self.assertNotIn(
+                "glued_composite", fragment_item_reasons(item), item
+            )
+
+    # -- (6iv) description bleed -------------------------------------
+    def test_section_header_bleed(self):
+        for item in (
+            "Frost Damage and the Blasphemous Claw Feats: Can utilize "
+            "Destined Death to kill Immortals",
+            "Forcefield Creation (Via Protective FieldCastlevania: "
+            "Curse of Darkness Bradygames official strategy guide "
+            "page 102) Dark Lord resistances (4-D - Baseline)",
+        ):
+            self.assertIn(
+                "section_header", fragment_item_reasons(item), item
+            )
+
+    def test_section_header_bleed_controls(self):
+        for item in (
+            "Weak to Dragon and Fairy-type moves.",
+            "Psychic Abilities (Telekinesis, Telepathy)",
+            "Forcefield Creation (Via Guard)",
+        ):
+            self.assertNotIn(
+                "section_header", fragment_item_reasons(item), item
+            )
+
+    # -- verbatim families end-to-end at the merge choke point -------
+    def test_maliketh_pieces_filtered(self):
+        kept, dropped, _ = filter_list_field_items_detailed(
+            "Immortality Negation Can kill immortals such as Marika, "
+            "Radagon, and Elden Beast (Via Destined Death) | Sound "
+            "Manipulation Maliketh's roars can damage and knock down "
+            "the player. | Durability Negation Destined Death lowers "
+            "and burns HP. Death Manipulation Maliketh could "
+            "manipulate Death, but after the Night of the black "
+            "knives, he was limited. | Soul Manipulation Even a small "
+            "fragment of Destined Death destroyed Godwyn's soul.",
+            section="powers_and_abilities",
+        )
+        self.assertNotIn("Radagon", kept)
+        self.assertNotIn("but after the Night", kept)
+        self.assertNotIn("he was limited", kept)
+        self.assertNotIn("Durability Negation Destined Death", kept)
+        self.assertIn("Sound Manipulation", kept)
+        self.assertIn("Soul Manipulation", kept)
+
+    def test_isaac_pieces_filtered(self):
+        kept, dropped, _ = filter_list_field_items_detailed(
+            "Dark Lord abilities (4-D - Baseline), Extrasensory "
+            "Perception (Can sense Demonic Energy), Immortality, "
+            "Absorption (With Healing Drop and Deadly Absorp), "
+            "Battle ID Types, Bird ID Types, Mage ID Types",
+            section="powers_and_abilities",
+        )
+        self.assertNotIn("Dark Lord abilities", kept)
+        self.assertNotIn("Deadly Absorp", kept)
+        self.assertNotIn("Battle ID Types", kept)
+        self.assertNotIn("Bird ID Types", kept)
+        self.assertNotIn("Mage ID Types", kept)
+        self.assertIn("Extrasensory Perception", kept)
+        self.assertIn("Immortality", kept)
 
 
 if __name__ == "__main__":
