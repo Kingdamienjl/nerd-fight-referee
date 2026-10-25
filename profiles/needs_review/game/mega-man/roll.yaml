@@ -11,7 +11,7 @@ generation:
   generated_at: '2026-10-10T08:49:44Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id002
+  ineligible_reasons: &id004
   - confidence_below_0_55
   - missing_attack_potency
   - missing_clean_linked_ability
@@ -89,42 +89,6 @@ sources:
 - id: vsbattles-roll-mega-man
   provider_id: vsbattles
   source_type: mediawiki
-  title: Roll Mega Man
-  url: https://vsbattles.fandom.com/wiki/Roll_Mega_Man
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-roll-mega-man
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Roll Mega Man
-  url: https://character-stats-and-profiles.fandom.com/wiki/Roll_Mega_Man
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-roll-mega-man
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Roll (Mega Man)
   url: https://vsbattles.fandom.com/wiki/Roll_%28Mega_Man%29
   authority: high
@@ -140,6 +104,8 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9674150'
+  revision_timestamp: '2026-09-14T05:07:03Z'
 - id: character-stats-profiles-roll-mega-man
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -196,17 +162,26 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: High 5-A, higher with Pop'n Beat
+    source_ids:
+    - vsbattles-roll-mega-man
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Brown Dwarf level (Can damage the likes of Cut Man and Wily Machine 130
+      Ronnatons as seen in Mega Man Powered Up), higher with Pop'n Beat (The car's
+      spin attack can damage Battle & Chase Rush)
+    source_ids:
+    - vsbattles-roll-mega-man
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Massively FTL+ (Can keep up with Mega Man and other of Dr. Light's Robot
+      Masters8.367 Billion c) with higher teleportation speed
+    source_ids:
+    - vsbattles-roll-mega-man
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -216,27 +191,316 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Brown Dwarf level (Can take damage from Bomb Man's Hyper Bomb, Yellow Devil
+      and Wily Machine 1), higher with Pop'n Beat (It can take hits from Battle &
+      Chase Rush)
+    source_ids:
+    - vsbattles-roll-mega-man
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Superhuman (Due to being a Robot Master)
+    source_ids:
+    - vsbattles-roll-mega-man
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range with her broomstick, higher with various weapons
+    source_ids:
+    - vsbattles-roll-mega-man
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average (Made the items Mega Man can buy from her in Mega Man 8 and
+      replaced him as Doctor Light's lab assistant when he was converted into a combat
+      robot. In Battle and Fighters, when she was captured by a random Wily Robot,
+      was able to steal back parts they had stolen without them noticing)
+    source_ids:
+    - vsbattles-roll-mega-man
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-roll-mega-man
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-inorganic-physiology-type-2
+  name: Inorganic Physiology (Type 2)
+  description: Inorganic Physiology (Type 2)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-self-sustenance-types-1-2-and-3
+  name: Self-Sustenance (Types 1, 2 and 3)
+  description: Self-Sustenance (Types 1, 2 and 3)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-teleportation-as-seen-here
+  name: Teleportation (As seen here)
+  description: Teleportation (As seen here)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  - dimensional_travel
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-immortality-non-combat-applicable-types-6-and-8-as-long-as-
+  name: 'Immortality (Non-Combat Applicable Types 6 and 8: As long as her IC chip
+    is still intact, she can be rebuilt as many tim'
+  description: 'Immortality (Non-Combat Applicable Types 6 and 8: As long as her IC
+    chip is still intact, she can be rebuilt as many times as one wants)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery
+  name: Weapon Mastery
+  description: Weapon Mastery
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-vehicular-mastery
+  name: Vehicular Mastery
+  description: Vehicular Mastery
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-forcefield-creation-she-can-create-a-shield-that-damages-an
+  name: Forcefield Creation (She can create a shield that damages anything comes into
+    contact with it with the Yashichi)
+  description: Forcefield Creation (She can create a shield that damages anything
+    comes into contact with it with the Yashichi)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_contact
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-statistics-amplification-the-yashichi-allows-her-to-increas
+  name: Statistics Amplification (The Yashichi allows her to increase her speed)
+  description: Statistics Amplification (The Yashichi allows her to increase her speed)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-explosion-manipulation
+  name: Explosion Manipulation
+  description: Explosion Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-power-nullification-she-can-nullify-opponent-abilities-with
+  name: Power Nullification (She can nullify opponent abilities with Blocker)
+  description: Power Nullification (She can nullify opponent abilities with Blocker)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transmutation-she-can-turn-small-enemies-into-mines-with-th
+  name: Transmutation (She can turn small enemies into mines with the Mine Transformer)
+  description: Transmutation (She can turn small enemies into mines with the Mine
+    Transformer)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-summoning-she-can-summon-a-kaminari-kaguro-which-strikes-th
+  name: Summoning (She can summon a Kaminari Kaguro, which strikes the target with
+    a lightning bolt and decreases their speed)
+  description: Summoning (She can summon a Kaminari Kaguro, which strikes the target
+    with a lightning bolt and decreases their speed)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - summoning
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_summon
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-resistance-to-ice-manipulation-she-can-shrug-off-the-effect
+  name: 'Resistance to Ice Manipulation (She can shrug off the effects of Ice Man''s
+    Ice Slasher, which reaches 200 degrees below '
+  description: Resistance to Ice Manipulation (She can shrug off the effects of Ice
+    Man's Ice Slasher, which reaches 200 degrees below zero) and Corruption (Type
+    2; She was unaffected by the side effects of the Roboenza Virus, which causes
+    robots to go berserk), Immunity to Soul Manipulation and Mind Manipulation (Lacks
+    the soul of an organic being as a robot, and can't be manipulated through typical
+    mind manipulation techniques)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-has-limited-combat-experience
+  name: Has limited combat experience
+  description: Has limited combat experience
+  source_ids: &id003
+  - vsbattles-roll-mega-man
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-can-be-cowardly-and-timid
+  name: can be cowardly and timid
+  description: can be cowardly and timid
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-she-lacks-the-combat-experience-she-should-have-gotten-in-said-game
+  name: she lacks the combat experience she should have gotten in said game.
+  description: she lacks the combat experience she should have gotten in said game.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -248,349 +512,16 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons: *id004
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: 1a81f91e938a37d9a38a1cb8abe6ae293089cda0ef828296dc794658311b9ddf
 repair:
-  attempted_at: '2026-10-10T12:19:20Z'
+  attempted_at: '2026-10-25T09:47:51Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-roll-mega-man
-    url: https://vsbattles.fandom.com/wiki/Roll_Mega_Man
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Roll (Mega Man)
-    source_type: mediawiki
-    revision_id: '9674150'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 5975
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{High 5-A}}, higher with Pop''n Beat'
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Superhuman Physical Characteristics, Inorganic Physiology (Type 2),
-        Self-Sustenance (Types 1, 2 and 3), Teleportation (As seen here), Immortality
-        (Non-Combat Applicable Types 6 and 8: As long as her IC chip is still intact,
-        she can be rebuilt as many times as one wants), Weapon Mastery, Vehicular
-        Mastery, Forcefield Creation (She can create a shield that damages anything
-        comes into contact with it with the Yashichi), Statistics Amplification (The
-        Yashichi allows her to increase her speed), Explosion Manipulation, Power
-        Nullification (She can nullify opponent abilities with Blocker), Transmutation
-        (She can turn small enemies into mines with the Mine Transformer), Summoning
-        (She can summon a Kaminari Kaguro, which strikes the target with a lightning
-        bolt and decreases their speed), Resistance to Ice Manipulation (She can shrug
-        off the effects of Ice Man''s Ice Slasher, which reaches 200 degrees below
-        zero) and Corruption (Type 2; She was unaffected by the side effects of the
-        Roboenza Virus, which causes robots to go berserk), Immunity to Soul Manipulation
-        and Mind Manipulation (Lacks the soul of an organic being as a robot, and
-        can''t be manipulated through typical mind manipulation techniques)'
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Brown Dwarf level (Can damage the likes of Cut Man and Wily Machine 130
-        Ronnatons as seen in Mega Man Powered Up), higher with Pop'n Beat (The car's
-        spin attack can damage Battle & Chase Rush)
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ (Can keep up with Mega Man and other of Dr. Light's Robot
-        Masters8.367 Billion c) with higher teleportation speed
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Brown Dwarf level (Can take damage from Bomb Man's Hyper Bomb, Yellow
-        Devil and Wily Machine 1), higher with Pop'n Beat (It can take hits from Battle
-        & Chase Rush)
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: At least Superhuman (Due to being a Robot Master)
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range with her broomstick, higher with various weapons
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Cleaning equipment, flag (Sports), lance (Knight), umbrella (Rainy Day),
-        net (Straw), parasol (Vacation), hammer (Summer), salmon (Alley Cat), candy
-        cane (Santa), sword (Ninja), box of chocolates (Valentine) * Optional
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average (Made the items Mega Man can buy from her in Mega Man 8
-        and replaced him as Doctor Light's lab assistant when he was converted into
-        a combat robot. In Battle and Fighters, when she was captured by a random
-        Wily Robot, was able to steal back parts they had stolen without them noticing)
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Has limited combat experience, can be cowardly and timid. {{scroll box|content=}}
-        Notes: Roll''s role as a protagonist in Mega Man Powered Up is only a what-if
-        scenario. As such, she lacks the combat experience she should have gotten
-        in said game. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Roll
-        Mega Man|Roll (Mega Man)}} Category:Characters Category:Mega Man Category:Female
-        Characters Category:Game Characters Category:Robots Category:Protagonists
-        Category:Heroes Category:Good Characters Category:Sidekicks Category:Playable
-        Characters Category:Witches Category:Knights Category:Ninjas Category:Weapon
-        Masters Category:Vehicular Masters Category:Flight Users Category:Fire Users
-        Category:Explosion Users Category:Energy Users Category:Air Users Category:Summoners
-        Category:Water Users Category:Fusionism Users Category:Sword Users Category:Hammer
-        Users Category:Lance Users Category:Parasol Users Category:Self-Sustenance
-        Users Category:Teleportation Users Category:Inorganic Beings Category:Cane
-        Users Category:Video Game Characters Category:Artificial Characters Category:Vehicle
-        Users Category:Energy Projection Users Category:Energy Weapon Users Category:Healers
-        Category:Robot Masters (Mega Man) Category:Forcefield Users Category:Statistics
-        Amplification Users Category:Power Nullification Users Category:Transmutation
-        Users Category:Flag Users Category:Net Users Category:Food Users'
-      source_id: vsbattles-roll-mega-man
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|roll mega man|9674150
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-roll-mega-man
-    url: https://character-stats-and-profiles.fandom.com/wiki/Roll_Mega_Man
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Roll (Canon)/TyranoDoom30
-    source_type: mediawiki
-    revision_id: '468130'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 9607
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Power and Stats
-    - Gallery
-    - Other
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-C}}'
-      source_id: character-stats-profiles-roll-mega-man
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Data Physiology, Self-Sustenance
-        (All Types: Is a robot. All Robot Masters can breath in both underwater and
-        space and don''t require food. Robot Masters are also empowered by Solar Energy
-        which makes them have limitless energy), Inorganic Physiology (Type 2: Is
-        a robot), Accelerated Development and Reactive Evolution (Fought and defeated
-        Copy Robot, who upon immediately copying his foe becomes twice as strong as
-        them), Regeneration Negation (High-Mid: Can kill Yellow Devil, who can regenerate
-        after splitting himself into multiple blocks), Body Control and Natural Weaponry
-        (Is equipped with a buster just like her brother), Power Absorption and Bestowal
-        (She can absorb the abilities of the Robot Masters and then give them to Rock),
-        Energy Manipulation and Projection (With the Roll Buster), Danmaku (Can fire
-        out multiple shots from her buster at will), Stealth Mastery (Was able to
-        steal parts from Dr. Wily''s Robots when she was captured), Damage Boost (Can
-        charge her attacks), Underwater Breathing (Robot Masters can breath underwater),
-        Transformation, Dimensional Travel, Light Manipulation, Teleportation and
-        Intangibility (Robot Masters are capable of transforming themselves into a
-        beam of light which allows him to teleport into somewhere else, which includes
-        interplanetary distances. This is also combat applicable and Robot Masters
-        while in this state are completely invulnerable), Weapon Mastery (She can
-        use her own broom as a weapon, using it to fight and defeat formidable enemies
-        such as Wily Machine no. 1), Pain Suppression (Robot Masters can easily survive
-        being bisected in half, with the likes of Proto Man merely calling it a "scretch"),
-        Vehicular Mastery (Can ride the Pop ''n Beat to race), Resistance to Extreme
-        Cold and Cosmic Radiations (Robot Masters are shown multiple times to be unnafected
-        by space), Transmutation (1 Layer: Robot Masters are completely invulnerable
-        to the effects of the Mystery Tank, despite the fact it can completely turn
-        Mets into 1Ups, with they coming back shortly after being transformed into
-        mines), Gravity Manipulation (Robot Masters can tank Gravity Hold even if
-        they are damaged), Acid Manipulation and Corrosion Inducement (Robot Masters
-        can tank attacks such as Rain Flush which creates an acid rain), Petrification
-        (1 Layer: Robot Masters are unnafected by Concrete Shot), Absolute Zero Ice
-        (Robot Masters like Astro Man can tank hits from ice attacks such as Freezing
-        Cracker and Chill Spike, and even with ice as cold as absolute zero), Extreme
-        Heat (Robot Masters can tank attacks such as Heat Man''s Atomic Fire and Solar
-        Man''s Solar Blaze and survive it), Black Holes (Robot Masters are completely
-        unnafected by Galaxy Man''s black holes), Paralysis Inducement and Technopathy
-        (Robot Masters can tank hits from Shadow Blade, which has a liquid which is
-        capable of breaking mechanical functions of a robot), Spatial Manipulation
-        and BFR (Robot Masters can tank hits from Centaur Flash, which warps space
-        entirely and sends enemies into a dimensional hole), Mind Manipulation, Madness
-        Manipulation (Type 2) and Corruption (Type 2: Was unnafected by the side effects
-        of the Roboenza, a virus that makes robots malfunction and eventually takes
-        over their minds and turns them into violent robots hellbent on destruction)
-        |-|Battle & Chase= Power Nullification (Blocker can prevent any Robot Master
-        from using a Special Item), Explosion Manipulation (With bombs), Invulnerability
-        (Power Nitro makes Mega Man completely invulnerable to attacks and greatly
-        increases his power), Statistics Amplification (Threefold Chance greatly increases
-        the effects that items have), Electricity Manipulation and Invulnerability
-        Negation (Lighting Bolt can negate the effects that the Power Nitro grants,
-        allowing it to damage invulnerable enemies), Summoning (She can summon a Kaminari
-        Kaguro, which strikes the target with a lightning bolt and decreases their
-        speed), Transmutation (Smaller characters can be turned into mines which can
-        explode)'
-      source_id: character-stats-profiles-roll-mega-man
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Low Multiverse level (Can fight many of the Robot Masters of the first
-        game and defeat them alongside Wily Machine no.1, all of which can put up
-        a good fight against her brother)
-      source_id: character-stats-profiles-roll-mega-man
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (Can keep up with the Robot Masters)
-      source_id: character-stats-profiles-roll-mega-man
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Multiverse level (Can tank several hits from the Robot Masters, alongside
-        Wily Machine no.1)
-      source_id: character-stats-profiles-roll-mega-man
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Notable Attacks/Techniques: ==Gallery== ==Other== Notable Victories:
-        Notable Losses: Inconclusive Matches: Category:TyranoDoom30'
-      source_id: character-stats-profiles-roll-mega-man
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|roll canon tyranodoom30|468130
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-roll-mega-man
     url: https://vsbattles.fandom.com/wiki/Roll_%28Mega_Man%29
     ok: true
@@ -648,7 +579,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{High 5-A}}, higher with Pop''n Beat'
+      value: High 5-A, higher with Pop'n Beat
       source_id: vsbattles-roll-mega-man
       provider_id: vsbattles
       authority: high
@@ -712,7 +643,7 @@ repair:
     - field: standard_equipment
       value: Cleaning equipment, flag (Sports), lance (Knight), umbrella (Rainy Day),
         net (Straw), parasol (Vacation), hammer (Summer), salmon (Alley Cat), candy
-        cane (Santa), sword (Ninja), box of chocolates (Valentine) * Optional
+        cane (Santa), sword (Ninja), box of chocolates (Valentine), Optional
       source_id: vsbattles-roll-mega-man
       provider_id: vsbattles
       authority: high
@@ -727,24 +658,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Has limited combat experience, can be cowardly and timid. {{scroll box|content=}}
-        Notes: Roll''s role as a protagonist in Mega Man Powered Up is only a what-if
-        scenario. As such, she lacks the combat experience she should have gotten
-        in said game. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Roll
-        Mega Man|Roll (Mega Man)}} Category:Characters Category:Mega Man Category:Female
-        Characters Category:Game Characters Category:Robots Category:Protagonists
-        Category:Heroes Category:Good Characters Category:Sidekicks Category:Playable
-        Characters Category:Witches Category:Knights Category:Ninjas Category:Weapon
-        Masters Category:Vehicular Masters Category:Flight Users Category:Fire Users
-        Category:Explosion Users Category:Energy Users Category:Air Users Category:Summoners
-        Category:Water Users Category:Fusionism Users Category:Sword Users Category:Hammer
-        Users Category:Lance Users Category:Parasol Users Category:Self-Sustenance
-        Users Category:Teleportation Users Category:Inorganic Beings Category:Cane
-        Users Category:Video Game Characters Category:Artificial Characters Category:Vehicle
-        Users Category:Energy Projection Users Category:Energy Weapon Users Category:Healers
-        Category:Robot Masters (Mega Man) Category:Forcefield Users Category:Statistics
-        Amplification Users Category:Power Nullification Users Category:Transmutation
-        Users Category:Flag Users Category:Net Users Category:Food Users'
+      value: Has limited combat experience, can be cowardly and timid, she lacks the
+        combat experience she should have gotten in said game.
       source_id: vsbattles-roll-mega-man
       provider_id: vsbattles
       authority: high
@@ -771,8 +686,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Roll (Canon)/TyranoDoom30
     source_type: mediawiki
     revision_id: '468130'
@@ -815,14 +728,8 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{2-C}}'
-      source_id: character-stats-profiles-roll-mega-man
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Data Physiology, Self-Sustenance
+      value: 'Superhuman Physical Characteristics, Data Physiology, Self-Sustenance
         (All Types: Is a robot. All Robot Masters can breath in both underwater and
         space and don''t require food. Robot Masters are also empowered by Solar Energy
         which makes them have limitless energy), Inorganic Physiology (Type 2: Is
@@ -865,16 +772,15 @@ repair:
         Manipulation (Type 2) and Corruption (Type 2: Was unnafected by the side effects
         of the Roboenza, a virus that makes robots malfunction and eventually takes
         over their minds and turns them into violent robots hellbent on destruction)
-        |-|Battle & Chase= Power Nullification (Blocker can prevent any Robot Master
-        from using a Special Item), Explosion Manipulation (With bombs), Invulnerability
-        (Power Nitro makes Mega Man completely invulnerable to attacks and greatly
-        increases his power), Statistics Amplification (Threefold Chance greatly increases
-        the effects that items have), Electricity Manipulation and Invulnerability
-        Negation (Lighting Bolt can negate the effects that the Power Nitro grants,
-        allowing it to damage invulnerable enemies), Summoning (She can summon a Kaminari
-        Kaguro, which strikes the target with a lightning bolt and decreases their
-        speed), Transmutation (Smaller characters can be turned into mines which can
-        explode)'
+        Power Nullification (Blocker can prevent any Robot Master from using a Special
+        Item), Explosion Manipulation (With bombs), Invulnerability (Power Nitro makes
+        Mega Man completely invulnerable to attacks and greatly increases his power),
+        Statistics Amplification (Threefold Chance greatly increases the effects that
+        items have), Electricity Manipulation and Invulnerability Negation (Lighting
+        Bolt can negate the effects that the Power Nitro grants, allowing it to damage
+        invulnerable enemies), Summoning (She can summon a Kaminari Kaguro, which
+        strikes the target with a lightning bolt and decreases their speed), Transmutation
+        (Smaller characters can be turned into mines which can explode)'
       source_id: character-stats-profiles-roll-mega-man
       provider_id: character_stats_profiles
       authority: high
@@ -900,9 +806,299 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|roll canon tyranodoom30|468130
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-roll-mega-man
+    url: https://vsbattles.fandom.com/wiki/Roll_Mega_Man
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Roll (Mega Man)
+    source_type: mediawiki
+    revision_id: '9674150'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 5975
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 5-A, higher with Pop'n Beat
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Inorganic Physiology (Type 2),
+        Self-Sustenance (Types 1, 2 and 3), Teleportation (As seen here), Immortality
+        (Non-Combat Applicable Types 6 and 8: As long as her IC chip is still intact,
+        she can be rebuilt as many times as one wants), Weapon Mastery, Vehicular
+        Mastery, Forcefield Creation (She can create a shield that damages anything
+        comes into contact with it with the Yashichi), Statistics Amplification (The
+        Yashichi allows her to increase her speed), Explosion Manipulation, Power
+        Nullification (She can nullify opponent abilities with Blocker), Transmutation
+        (She can turn small enemies into mines with the Mine Transformer), Summoning
+        (She can summon a Kaminari Kaguro, which strikes the target with a lightning
+        bolt and decreases their speed), Resistance to Ice Manipulation (She can shrug
+        off the effects of Ice Man''s Ice Slasher, which reaches 200 degrees below
+        zero) and Corruption (Type 2; She was unaffected by the side effects of the
+        Roboenza Virus, which causes robots to go berserk), Immunity to Soul Manipulation
+        and Mind Manipulation (Lacks the soul of an organic being as a robot, and
+        can''t be manipulated through typical mind manipulation techniques)'
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Brown Dwarf level (Can damage the likes of Cut Man and Wily Machine 130
+        Ronnatons as seen in Mega Man Powered Up), higher with Pop'n Beat (The car's
+        spin attack can damage Battle & Chase Rush)
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ (Can keep up with Mega Man and other of Dr. Light's Robot
+        Masters8.367 Billion c) with higher teleportation speed
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Brown Dwarf level (Can take damage from Bomb Man's Hyper Bomb, Yellow
+        Devil and Wily Machine 1), higher with Pop'n Beat (It can take hits from Battle
+        & Chase Rush)
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: At least Superhuman (Due to being a Robot Master)
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range with her broomstick, higher with various weapons
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Cleaning equipment, flag (Sports), lance (Knight), umbrella (Rainy Day),
+        net (Straw), parasol (Vacation), hammer (Summer), salmon (Alley Cat), candy
+        cane (Santa), sword (Ninja), box of chocolates (Valentine), Optional
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average (Made the items Mega Man can buy from her in Mega Man 8
+        and replaced him as Doctor Light's lab assistant when he was converted into
+        a combat robot. In Battle and Fighters, when she was captured by a random
+        Wily Robot, was able to steal back parts they had stolen without them noticing)
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     - field: weaknesses
-      value: 'Notable Attacks/Techniques: ==Gallery== ==Other== Notable Victories:
-        Notable Losses: Inconclusive Matches: Category:TyranoDoom30'
+      value: Has limited combat experience, can be cowardly and timid, she lacks the
+        combat experience she should have gotten in said game.
+      source_id: vsbattles-roll-mega-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|roll mega man|9674150
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-roll-mega-man
+    url: https://character-stats-and-profiles.fandom.com/wiki/Roll_Mega_Man
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    normalized_page_title: Roll (Canon)/TyranoDoom30
+    source_type: mediawiki
+    revision_id: '468130'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 9607
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Power and Stats
+    - Gallery
+    - Other
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Data Physiology, Self-Sustenance
+        (All Types: Is a robot. All Robot Masters can breath in both underwater and
+        space and don''t require food. Robot Masters are also empowered by Solar Energy
+        which makes them have limitless energy), Inorganic Physiology (Type 2: Is
+        a robot), Accelerated Development and Reactive Evolution (Fought and defeated
+        Copy Robot, who upon immediately copying his foe becomes twice as strong as
+        them), Regeneration Negation (High-Mid: Can kill Yellow Devil, who can regenerate
+        after splitting himself into multiple blocks), Body Control and Natural Weaponry
+        (Is equipped with a buster just like her brother), Power Absorption and Bestowal
+        (She can absorb the abilities of the Robot Masters and then give them to Rock),
+        Energy Manipulation and Projection (With the Roll Buster), Danmaku (Can fire
+        out multiple shots from her buster at will), Stealth Mastery (Was able to
+        steal parts from Dr. Wily''s Robots when she was captured), Damage Boost (Can
+        charge her attacks), Underwater Breathing (Robot Masters can breath underwater),
+        Transformation, Dimensional Travel, Light Manipulation, Teleportation and
+        Intangibility (Robot Masters are capable of transforming themselves into a
+        beam of light which allows him to teleport into somewhere else, which includes
+        interplanetary distances. This is also combat applicable and Robot Masters
+        while in this state are completely invulnerable), Weapon Mastery (She can
+        use her own broom as a weapon, using it to fight and defeat formidable enemies
+        such as Wily Machine no. 1), Pain Suppression (Robot Masters can easily survive
+        being bisected in half, with the likes of Proto Man merely calling it a "scretch"),
+        Vehicular Mastery (Can ride the Pop ''n Beat to race), Resistance to Extreme
+        Cold and Cosmic Radiations (Robot Masters are shown multiple times to be unnafected
+        by space), Transmutation (1 Layer: Robot Masters are completely invulnerable
+        to the effects of the Mystery Tank, despite the fact it can completely turn
+        Mets into 1Ups, with they coming back shortly after being transformed into
+        mines), Gravity Manipulation (Robot Masters can tank Gravity Hold even if
+        they are damaged), Acid Manipulation and Corrosion Inducement (Robot Masters
+        can tank attacks such as Rain Flush which creates an acid rain), Petrification
+        (1 Layer: Robot Masters are unnafected by Concrete Shot), Absolute Zero Ice
+        (Robot Masters like Astro Man can tank hits from ice attacks such as Freezing
+        Cracker and Chill Spike, and even with ice as cold as absolute zero), Extreme
+        Heat (Robot Masters can tank attacks such as Heat Man''s Atomic Fire and Solar
+        Man''s Solar Blaze and survive it), Black Holes (Robot Masters are completely
+        unnafected by Galaxy Man''s black holes), Paralysis Inducement and Technopathy
+        (Robot Masters can tank hits from Shadow Blade, which has a liquid which is
+        capable of breaking mechanical functions of a robot), Spatial Manipulation
+        and BFR (Robot Masters can tank hits from Centaur Flash, which warps space
+        entirely and sends enemies into a dimensional hole), Mind Manipulation, Madness
+        Manipulation (Type 2) and Corruption (Type 2: Was unnafected by the side effects
+        of the Roboenza, a virus that makes robots malfunction and eventually takes
+        over their minds and turns them into violent robots hellbent on destruction)
+        Power Nullification (Blocker can prevent any Robot Master from using a Special
+        Item), Explosion Manipulation (With bombs), Invulnerability (Power Nitro makes
+        Mega Man completely invulnerable to attacks and greatly increases his power),
+        Statistics Amplification (Threefold Chance greatly increases the effects that
+        items have), Electricity Manipulation and Invulnerability Negation (Lighting
+        Bolt can negate the effects that the Power Nitro grants, allowing it to damage
+        invulnerable enemies), Summoning (She can summon a Kaminari Kaguro, which
+        strikes the target with a lightning bolt and decreases their speed), Transmutation
+        (Smaller characters can be turned into mines which can explode)'
+      source_id: character-stats-profiles-roll-mega-man
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Low Multiverse level (Can fight many of the Robot Masters of the first
+        game and defeat them alongside Wily Machine no.1, all of which can put up
+        a good fight against her brother)
+      source_id: character-stats-profiles-roll-mega-man
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (Can keep up with the Robot Masters)
+      source_id: character-stats-profiles-roll-mega-man
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Multiverse level (Can tank several hits from the Robot Masters, alongside
+        Wily Machine no.1)
       source_id: character-stats-profiles-roll-mega-man
       provider_id: character_stats_profiles
       authority: high
@@ -977,7 +1173,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{High 5-A}}, higher with Pop''n Beat'
+      value: High 5-A, higher with Pop'n Beat
       source_id: vsbattles-roll
       provider_id: vsbattles
       authority: high
@@ -1041,7 +1237,7 @@ repair:
     - field: standard_equipment
       value: Cleaning equipment, flag (Sports), lance (Knight), umbrella (Rainy Day),
         net (Straw), parasol (Vacation), hammer (Summer), salmon (Alley Cat), candy
-        cane (Santa), sword (Ninja), box of chocolates (Valentine) * Optional
+        cane (Santa), sword (Ninja), box of chocolates (Valentine), Optional
       source_id: vsbattles-roll
       provider_id: vsbattles
       authority: high
@@ -1056,24 +1252,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Has limited combat experience, can be cowardly and timid. {{scroll box|content=}}
-        Notes: Roll''s role as a protagonist in Mega Man Powered Up is only a what-if
-        scenario. As such, she lacks the combat experience she should have gotten
-        in said game. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Roll
-        Mega Man|Roll (Mega Man)}} Category:Characters Category:Mega Man Category:Female
-        Characters Category:Game Characters Category:Robots Category:Protagonists
-        Category:Heroes Category:Good Characters Category:Sidekicks Category:Playable
-        Characters Category:Witches Category:Knights Category:Ninjas Category:Weapon
-        Masters Category:Vehicular Masters Category:Flight Users Category:Fire Users
-        Category:Explosion Users Category:Energy Users Category:Air Users Category:Summoners
-        Category:Water Users Category:Fusionism Users Category:Sword Users Category:Hammer
-        Users Category:Lance Users Category:Parasol Users Category:Self-Sustenance
-        Users Category:Teleportation Users Category:Inorganic Beings Category:Cane
-        Users Category:Video Game Characters Category:Artificial Characters Category:Vehicle
-        Users Category:Energy Projection Users Category:Energy Weapon Users Category:Healers
-        Category:Robot Masters (Mega Man) Category:Forcefield Users Category:Statistics
-        Amplification Users Category:Power Nullification Users Category:Transmutation
-        Users Category:Flag Users Category:Net Users Category:Food Users'
+      value: Has limited combat experience, can be cowardly and timid, she lacks the
+        combat experience she should have gotten in said game.
       source_id: vsbattles-roll
       provider_id: vsbattles
       authority: high
@@ -1100,8 +1280,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Roll (Canon)/TyranoDoom30
     source_type: mediawiki
     revision_id: '468130'
@@ -1144,14 +1322,8 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{2-C}}'
-      source_id: character-stats-profiles-roll
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Data Physiology, Self-Sustenance
+      value: 'Superhuman Physical Characteristics, Data Physiology, Self-Sustenance
         (All Types: Is a robot. All Robot Masters can breath in both underwater and
         space and don''t require food. Robot Masters are also empowered by Solar Energy
         which makes them have limitless energy), Inorganic Physiology (Type 2: Is
@@ -1194,16 +1366,15 @@ repair:
         Manipulation (Type 2) and Corruption (Type 2: Was unnafected by the side effects
         of the Roboenza, a virus that makes robots malfunction and eventually takes
         over their minds and turns them into violent robots hellbent on destruction)
-        |-|Battle & Chase= Power Nullification (Blocker can prevent any Robot Master
-        from using a Special Item), Explosion Manipulation (With bombs), Invulnerability
-        (Power Nitro makes Mega Man completely invulnerable to attacks and greatly
-        increases his power), Statistics Amplification (Threefold Chance greatly increases
-        the effects that items have), Electricity Manipulation and Invulnerability
-        Negation (Lighting Bolt can negate the effects that the Power Nitro grants,
-        allowing it to damage invulnerable enemies), Summoning (She can summon a Kaminari
-        Kaguro, which strikes the target with a lightning bolt and decreases their
-        speed), Transmutation (Smaller characters can be turned into mines which can
-        explode)'
+        Power Nullification (Blocker can prevent any Robot Master from using a Special
+        Item), Explosion Manipulation (With bombs), Invulnerability (Power Nitro makes
+        Mega Man completely invulnerable to attacks and greatly increases his power),
+        Statistics Amplification (Threefold Chance greatly increases the effects that
+        items have), Electricity Manipulation and Invulnerability Negation (Lighting
+        Bolt can negate the effects that the Power Nitro grants, allowing it to damage
+        invulnerable enemies), Summoning (She can summon a Kaminari Kaguro, which
+        strikes the target with a lightning bolt and decreases their speed), Transmutation
+        (Smaller characters can be turned into mines which can explode)'
       source_id: character-stats-profiles-roll
       provider_id: character_stats_profiles
       authority: high
@@ -1225,13 +1396,6 @@ repair:
     - field: durability
       value: Low Multiverse level (Can tank several hits from the Robot Masters, alongside
         Wily Machine no.1)
-      source_id: character-stats-profiles-roll
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Notable Attacks/Techniques: ==Gallery== ==Other== Notable Victories:
-        Notable Losses: Inconclusive Matches: Category:TyranoDoom30'
       source_id: character-stats-profiles-roll
       provider_id: character_stats_profiles
       authority: high
@@ -1306,7 +1470,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{High 5-A}}, higher with Pop''n Beat'
+      value: High 5-A, higher with Pop'n Beat
       source_id: vsbattles-roll-game
       provider_id: vsbattles
       authority: high
@@ -1370,7 +1534,7 @@ repair:
     - field: standard_equipment
       value: Cleaning equipment, flag (Sports), lance (Knight), umbrella (Rainy Day),
         net (Straw), parasol (Vacation), hammer (Summer), salmon (Alley Cat), candy
-        cane (Santa), sword (Ninja), box of chocolates (Valentine) * Optional
+        cane (Santa), sword (Ninja), box of chocolates (Valentine), Optional
       source_id: vsbattles-roll-game
       provider_id: vsbattles
       authority: high
@@ -1385,24 +1549,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Has limited combat experience, can be cowardly and timid. {{scroll box|content=}}
-        Notes: Roll''s role as a protagonist in Mega Man Powered Up is only a what-if
-        scenario. As such, she lacks the combat experience she should have gotten
-        in said game. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Roll
-        Mega Man|Roll (Mega Man)}} Category:Characters Category:Mega Man Category:Female
-        Characters Category:Game Characters Category:Robots Category:Protagonists
-        Category:Heroes Category:Good Characters Category:Sidekicks Category:Playable
-        Characters Category:Witches Category:Knights Category:Ninjas Category:Weapon
-        Masters Category:Vehicular Masters Category:Flight Users Category:Fire Users
-        Category:Explosion Users Category:Energy Users Category:Air Users Category:Summoners
-        Category:Water Users Category:Fusionism Users Category:Sword Users Category:Hammer
-        Users Category:Lance Users Category:Parasol Users Category:Self-Sustenance
-        Users Category:Teleportation Users Category:Inorganic Beings Category:Cane
-        Users Category:Video Game Characters Category:Artificial Characters Category:Vehicle
-        Users Category:Energy Projection Users Category:Energy Weapon Users Category:Healers
-        Category:Robot Masters (Mega Man) Category:Forcefield Users Category:Statistics
-        Amplification Users Category:Power Nullification Users Category:Transmutation
-        Users Category:Flag Users Category:Net Users Category:Food Users'
+      value: Has limited combat experience, can be cowardly and timid, she lacks the
+        combat experience she should have gotten in said game.
       source_id: vsbattles-roll-game
       provider_id: vsbattles
       authority: high
@@ -1429,8 +1577,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Roll (Canon)/TyranoDoom30
     source_type: mediawiki
     revision_id: '468130'
@@ -1473,14 +1619,8 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{2-C}}'
-      source_id: character-stats-profiles-roll-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Data Physiology, Self-Sustenance
+      value: 'Superhuman Physical Characteristics, Data Physiology, Self-Sustenance
         (All Types: Is a robot. All Robot Masters can breath in both underwater and
         space and don''t require food. Robot Masters are also empowered by Solar Energy
         which makes them have limitless energy), Inorganic Physiology (Type 2: Is
@@ -1523,16 +1663,15 @@ repair:
         Manipulation (Type 2) and Corruption (Type 2: Was unnafected by the side effects
         of the Roboenza, a virus that makes robots malfunction and eventually takes
         over their minds and turns them into violent robots hellbent on destruction)
-        |-|Battle & Chase= Power Nullification (Blocker can prevent any Robot Master
-        from using a Special Item), Explosion Manipulation (With bombs), Invulnerability
-        (Power Nitro makes Mega Man completely invulnerable to attacks and greatly
-        increases his power), Statistics Amplification (Threefold Chance greatly increases
-        the effects that items have), Electricity Manipulation and Invulnerability
-        Negation (Lighting Bolt can negate the effects that the Power Nitro grants,
-        allowing it to damage invulnerable enemies), Summoning (She can summon a Kaminari
-        Kaguro, which strikes the target with a lightning bolt and decreases their
-        speed), Transmutation (Smaller characters can be turned into mines which can
-        explode)'
+        Power Nullification (Blocker can prevent any Robot Master from using a Special
+        Item), Explosion Manipulation (With bombs), Invulnerability (Power Nitro makes
+        Mega Man completely invulnerable to attacks and greatly increases his power),
+        Statistics Amplification (Threefold Chance greatly increases the effects that
+        items have), Electricity Manipulation and Invulnerability Negation (Lighting
+        Bolt can negate the effects that the Power Nitro grants, allowing it to damage
+        invulnerable enemies), Summoning (She can summon a Kaminari Kaguro, which
+        strikes the target with a lightning bolt and decreases their speed), Transmutation
+        (Smaller characters can be turned into mines which can explode)'
       source_id: character-stats-profiles-roll-game
       provider_id: character_stats_profiles
       authority: high
@@ -1554,13 +1693,6 @@ repair:
     - field: durability
       value: Low Multiverse level (Can tank several hits from the Robot Masters, alongside
         Wily Machine no.1)
-      source_id: character-stats-profiles-roll-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Notable Attacks/Techniques: ==Gallery== ==Other== Notable Victories:
-        Notable Losses: Inconclusive Matches: Category:TyranoDoom30'
       source_id: character-stats-profiles-roll-game
       provider_id: character_stats_profiles
       authority: high

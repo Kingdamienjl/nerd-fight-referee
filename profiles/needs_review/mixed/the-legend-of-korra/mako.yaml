@@ -11,7 +11,7 @@ generation:
   generated_at: '2026-09-22T19:21:11Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.35
-  ineligible_reasons: &id002
+  ineligible_reasons: &id003
   - confidence_below_0_55
   - missing_attack_potency
   - missing_clean_linked_ability
@@ -98,8 +98,8 @@ sources:
 - id: vsbattles-mako-the-legend-of-korra
   provider_id: vsbattles
   source_type: mediawiki
-  title: Mako The Legend of Korra
-  url: https://vsbattles.fandom.com/wiki/Mako_The_Legend_of_Korra
+  title: Mako (Avatar)
+  url: https://vsbattles.fandom.com/wiki/Mako_%28The_Legend_of_Korra%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -113,11 +113,13 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9709117'
+  revision_timestamp: '2026-10-17T11:52:01Z'
 - id: character-stats-profiles-mako-the-legend-of-korra
   provider_id: character_stats_profiles
   source_type: mediawiki
-  title: Mako The Legend of Korra
-  url: https://character-stats-and-profiles.fandom.com/wiki/Mako_The_Legend_of_Korra
+  title: Mako (The Legend of Korra)
+  url: https://character-stats-and-profiles.fandom.com/wiki/Mako_%28The_Legend_of_Korra%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -149,37 +151,28 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: character-stats-profiles-mako-the-legend-of-korra
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Mako (The Legend of Korra)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Mako_%28The_Legend_of_Korra%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 8-A, likely 7-C
+    source_ids:
+    - vsbattles-mako-the-legend-of-korra
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Multi-City Block level, likely Town level with bending (Comparable to Korra
+      and Bolin, while he is inferior, he could still keep up with and somewhat contend
+      with fighters like Unalaq and Ming Hua)
+    source_ids:
+    - vsbattles-mako-the-legend-of-korra
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Massively Hypersonic+ combat speed and reactions (Should not be significantly
+      slower than Korra. Can generate lightning)
+    source_ids:
+    - vsbattles-mako-the-legend-of-korra
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -189,27 +182,228 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Multi-City Block level, likely Town level with bending (Tanked attacks from
+      Ming, including being slammed into a building by her. Tanked attacks from Esna,
+      Deska and Unalaq)
+    source_ids:
+    - vsbattles-mako-the-legend-of-korra
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
     text: null
     source_ids: []
     confidence: 0.0
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Several Meters
+    source_ids:
+    - vsbattles-mako-the-legend-of-korra
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average
+    source_ids:
+    - vsbattles-mako-the-legend-of-korra
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-mako-the-legend-of-korra
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-expert-martial-artist
+  name: Expert Martial Artist
+  description: Expert Martial Artist
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-chi-manipulation-chi-is-the-source-of-a-user-s-bending
+  name: Chi Manipulation (Chi is the source of a user's bending)
+  description: Chi Manipulation (Chi is the source of a user's bending)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-firebending
+  name: Firebending
+  description: Firebending
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-lightning-projection
+  name: Lightning Projection
+  description: Lightning Projection
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-empowerment-firebenders-are-enhanced-during-sozin-s-comet
+  name: Empowerment (Firebenders are enhanced during Sozin's Comet)
+  description: Empowerment (Firebenders are enhanced during Sozin's Comet)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-limited-flight
+  name: Limited Flight
+  description: Limited Flight
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-breath-attack-can-breathe-fire
+  name: Breath Attack (Can breathe fire)
+  description: Breath Attack (Can breathe fire)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-non-physical-interaction-bending-can-interact-with-spirits
+  name: Non-Physical Interaction (Bending can interact with spirits)
+  description: Non-Physical Interaction (Bending can interact with spirits)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-limited-attack-reflection
+  name: Limited Attack Reflection
+  description: Limited Attack Reflection
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-resistance-to-blood-manipulation-and-body-puppetry-every-hu
+  name: 'Resistance to Blood Manipulation and Body Puppetry (Every human has a chi
+    field that makes taking control of their body '
+  description: Resistance to Blood Manipulation and Body Puppetry (Every human has
+    a chi field that makes taking control of their body difficult to accomplish).
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-rather-stubborn-and-he-loses-his-firebending-during-a-solar-eclipse
+  name: Rather stubborn and he loses his firebending during a solar eclipse
+  description: Rather stubborn and he loses his firebending during a solar eclipse
+  source_ids:
+  - vsbattles-mako-the-legend-of-korra
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -221,19 +415,15 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons: *id003
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: d0029ab7852e0c85ac590df375e7c3aadf1f4aa6513cd4ae6cc69c03de4b91cf
 repair:
-  attempted_at: '2026-09-25T09:13:38Z'
+  attempted_at: '2026-10-25T11:12:53Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
   - source_id: mediawiki-622798
     url: https://vsbattles.fandom.com/wiki/Mako
@@ -249,13 +439,12 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
-    normalized_page_title: Mako (Image Comics)
+    normalized_page_title: Mako (Shinjuku Swan)
     source_type: mediawiki
-    revision_id: '8756471'
+    revision_id: '9630709'
     fetch_status: fetched
     http_status: 200
-    content_length: 4368
+    content_length: 3470
     content_kind: api_json
     headings_detected:
     - Summary
@@ -294,83 +483,61 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: At least {{High 8-C}}
+      value: 9-B, higher with weapons
       source_id: mediawiki-622798
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Underwater Breathing (Type 2), Enhanced
-        Senses, Stealth Mastery, Social Influencing (Motivated some supervillains
-        to stand up for themselves and fight a common foe, becoming their leader),
-        Regeneration (High-Low, was shot by guns that cut through his internal organs
-        and was somewhat fine less than an hour later)
+      value: Superhuman Physical Characteristics, Martial Arts, Weapon Mastery (Uses
+        different guns with silencers), Master Manipulator (Manipulated Burst, Hound
+        and Minerva into doing his bidding), Stealth Mastery (Followed and killed
+        Takeru Yamashiro before without being noticed beforehand), Fear Inducement
+        (Visibly terrified Hayama when asked if he killed Jin Yamashiro), Genius Intelligence
       source_id: mediawiki-622798
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: At least Large Building level (Has repeatedly fought the Savage Dragon
-        over the years, with their battles often ending in stalemates or with Mako
-        winning and running away, and has caused this amount of destruction quite
-        a few times)
+      value: Wall level (Superior to Tatsuhiko)
       source_id: mediawiki-622798
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: At least Transonic (Comparable to Savage Dragon, if not faster) possibly
-        higher (Snuck up on Mirage Splinter), likely Athletic Human to Peak Human
-        swimming speed
+      value: Superhuman travel speed, Supersonic with weaponry
       source_id: mediawiki-622798
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: At least Large Building level (Has shrugged off multiple punches from
-        Savage Dragon and others on his level or stronger, and possibly survived a
-        punch from Solar Man)
+      value: Wall level (Superior to Tatsuhiko)
       source_id: mediawiki-622798
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: Superhuman
+      value: Peak Human
       source_id: mediawiki-622798
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: Extended Melee Range
+      value: Standard Melee Range, Hundreds of Meters with guns
       source_id: mediawiki-622798
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: None notable
+      value: Beretta M9, Glock
       source_id: mediawiki-622798
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Above Average (Though he's normally just your average thug, he's actually
-        fairly intelligent, being able to pilot a jet made by Mirage Donatello and
-        whatever this is from Atlantis. He tricked the king and people of Atlantis
-        into trusting him, before Mako backstabbed him (saving the world in the process)
-        and became the ruler of Atlantis in an alternate timeline. In the main timeline
-        he took over by force, assassinating the king)
-      source_id: mediawiki-622798
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'A bit deranged but otherwise, none notable ==Notable Matchups== Victories:
-        Losses: Inconclusive: {{Discussions|Mako Image Comics|Mako (Image Comics)}}
-        Category:Characters Category:Male Characters Category:Villains Category:Evil
-        Characters Category:Antagonists Category:Savage Dragon Category:Criminals
-        Category:Sharks Category:Regeneration Users Category:Underwater Breathing
-        Users Category:Stealth Masters Category:Enhanced Senses Users Category:Social
-        Influencers Category:Humans'
+      value: At least Above Average (Mako is the smartest character in the manga.
+        He manipulated and schemed behind the scenes to gain power over the Scout
+        businesses)
       source_id: mediawiki-622798
       provider_id: vsbattles
       authority: high
@@ -385,266 +552,7 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: false
-    duplicate_key: vsbattles.fandom.com|mako image comics|8756471
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-mako-the-legend-of-korra
-    url: https://vsbattles.fandom.com/wiki/Mako_The_Legend_of_Korra
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Mako (Avatar)
-    source_type: mediawiki
-    revision_id: '9615909'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 2681
-    content_kind: api_json
-    headings_detected:
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{8-A}}, likely {{7-C}}'
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Expert Martial Artist, Chi Manipulation
-        (Chi is the source of a user's bending), Firebending, Lightning Projection,
-        Empowerment (Firebenders are enhanced during Sozin's Comet), Limited Flight,
-        Breath Attack (Can breathe fire), Non-Physical Interaction (Bending can interact
-        with spirits), Limited Attack Reflection, Resistance to Blood Manipulation
-        and Body Puppetry (Every human has a chi field that makes taking control of
-        their body difficult to accomplish).
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multi-City Block level, likely Town level with bending (Comparable to
-        Korra and Bolin, while he is inferior, he could still keep up with and somewhat
-        contend with fighters like Unalaq and Ming Hua)
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively Hypersonic+ combat speed and reactions (Should not be significantly
-        slower than Korra. Can generate lightning)
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multi-City Block level, likely Town level with bending (Tanked attacks
-        from Ming, including being slammed into a building by her. Tanked attacks
-        from Esna, Deska and Unalaq)
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Several Meters
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: "Sometimes one of the Equalist\xB4s gloves"
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Rather stubborn and he loses his firebending during a solar eclipse
-        ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions|Mako Avatar|Mako
-        (Avatar)}} Category:Characters Category:Male Characters Category:Cartoon Characters
-        Category:Avatar: The Last Airbender Category:Chi Users Category:Fire Users
-        Category:Electricity Users Category:Empowerment Users Category:Protagonists
-        Category:Heroes Category:Good Characters Category:Orphans Category:Teenagers
-        Category:Martial Artists Category:Police Officers'
-      source_id: vsbattles-mako-the-legend-of-korra
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: vsbattles.fandom.com|mako avatar|9615909
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-mako-the-legend-of-korra
-    url: https://character-stats-and-profiles.fandom.com/wiki/Mako_The_Legend_of_Korra
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    normalized_page_title: Mako (Canon)/Compile Fan
-    source_type: mediawiki
-    revision_id: '569080'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3463
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers & Stats
-    - Notes
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - origin
-    - powers_and_abilities
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 1-S
-      source_id: character-stats-profiles-mako-the-legend-of-korra
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Fourth Wall Awareness, Beyond-Dimensional\
-        \ Physiology, Acausality (Type 5), Transduality (Type 4), Abstract Existence\
-        \ (Type 1), Nonexistent Physiology (Type 2), Incorporeality, Intangibility,\
-        \ Invisibility, Reality Warping, Conceptual Manipulation, Metaphysics Manipulation,\
-        \ Duality Manipulation, Definition Manipulation, Logic Manipulation, Paradox\
-        \ Manipulation, Possibility Manipulation, Impossibility Manipulation, Mathematics\
-        \ Manipulation, Law Manipulation, Chaos Manipulation, Void Manipulation, Space\
-        \ Manipulation, Time Manipulation, Causality Manipulation, Fate Manipulation,\
-        \ Plot Manipulation, Ontological Property Manipulation (Mako is the embodiment\
-        \ of the Noumenon from The Critique Of Pure Reason. The Noumenon transcends\
-        \ all of Kant\u2019s 12 categories that the Phenomenal world contains; Unity,\
-        \ Plurality, Totality, Reality, Negation, Limitation, Substance, Causality,\
-        \ Community, Possibility, Existence, Necessity)"
-      source_id: character-stats-profiles-mako-the-legend-of-korra
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: "Extraversal (Mako is the embodiment of the Noumenon from The Critique\
-        \ Of Pure Reason. The Noumenon transcends all of Kant\u2019s 12 categories\
-        \ that the Phenomenal world contains; Unity, Plurality, Totality, Reality,\
-        \ Negation, Limitation, Substance, Causality, Community, Possibility, Existence,\
-        \ Necessity)"
-      source_id: character-stats-profiles-mako-the-legend-of-korra
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: "Irrelevant (Mako is the embodiment of the Noumenon from The Critique\
-        \ Of Pure Reason. The Noumenon transcends all of Kant\u2019s 12 categories\
-        \ that the Phenomenal world contains; Unity, Plurality, Totality, Reality,\
-        \ Negation, Limitation, Substance, Causality, Community, Possibility, Existence,\
-        \ Necessity)"
-      source_id: character-stats-profiles-mako-the-legend-of-korra
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: "Extraversal (Mako is the embodiment of the Noumenon from The Critique\
-        \ Of Pure Reason. The Noumenon transcends all of Kant\u2019s 12 categories\
-        \ that the Phenomenal world contains; Unity, Plurality, Totality, Reality,\
-        \ Negation, Limitation, Substance, Causality, Community, Possibility, Existence,\
-        \ Necessity)"
-      source_id: character-stats-profiles-mako-the-legend-of-korra
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|mako canon compile fan|569080
+    duplicate_key: vsbattles.fandom.com|mako shinjuku swan|9630709
     retryable: false
     exception_class: ''
   - source_id: vsbattles-mako-the-legend-of-korra
@@ -658,16 +566,15 @@ repair:
     - powers_and_abilities
     - range
     - speed
-    - stamina
     - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Mako (Avatar)
     source_type: mediawiki
-    revision_id: '9615909'
+    revision_id: '9709117'
     fetch_status: fetched
     http_status: 200
-    content_length: 2681
+    content_length: 2669
     content_kind: api_json
     headings_detected:
     - Powers and Stats
@@ -703,7 +610,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-A}}, likely {{7-C}}'
+      value: 8-A, likely 7-C
       source_id: vsbattles-mako-the-legend-of-korra
       provider_id: vsbattles
       authority: high
@@ -743,8 +650,363 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: stamina
-      value: Unknown
+    - field: range
+      value: Several Meters
+      source_id: vsbattles-mako-the-legend-of-korra
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: "Sometimes one of the Equalist\xB4s gloves"
+      source_id: vsbattles-mako-the-legend-of-korra
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average
+      source_id: vsbattles-mako-the-legend-of-korra
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Rather stubborn and he loses his firebending during a solar eclipse
+      source_id: vsbattles-mako-the-legend-of-korra
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|mako avatar|9709117
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-mako-the-legend-of-korra
+    url: https://character-stats-and-profiles.fandom.com/wiki/Mako_%28The_Legend_of_Korra%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Mako (Canon)/DJthisben10guy
+    source_type: mediawiki
+    revision_id: '622104'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 18965
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notes
+    - Statistic Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-A, with bending, up to Low 7-C | 9-A, with bending, up to High 7-C
+      source_id: character-stats-profiles-mako-the-legend-of-korra
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Small Building level (Could threw a chi-blocker several meters away,\
+        \ who can physically keep up with Korra0.0497 Tons), Varies with bending (Bending\
+        \ attacks' output is not fixed because the chi output, intent, and technique\
+        \ vary per attack, meaning characters do not consistently strike with their\
+        \ maximum power, surviving or blocking a minor bending attack scales only\
+        \ to that specific attack's energy, rather than automatically upscaling to\
+        \ the bender's strongest attacksBending AP is not fixed, as the amount of\
+        \ chi invested into each attack varies depending on the bender\u2019s intent,\
+        \ objective, and technique. Since bending is a martial art, benders can adjust\
+        \ their output depending on the situation, meaning their attacks do not consistently\
+        \ possess the same potency. This is consistently demonstrated throughout the\
+        \ series, as bending attacks from the same character can produce vastly different\
+        \ effects depending on their application. During Aang\u2019s fight against\
+        \ Ozai, some bending attacks primarily serve to knock Ozai back, while others\
+        \ can cause significantly greater damage or be lethal, meaning Ozai\u2019\
+        s durability should not automatically scale to the Avatar State\u2019s AP,\
+        \ and remains a Glass Cannon. Likewise, Azula\u2019s lightning can pierce\
+        \ Toph\u2019s earth wall, while other attacks can be blocked by her earthbending,\
+        \ demonstrating that neither her attacks nor Toph\u2019s defenses operate\
+        \ at a fixed level of effectiveness. Toph lifting the library is still a valid\
+        \ 7-C feat, but it does not mean every small rock she throws afterward carries\
+        \ equivalent energy. Furthermore, scaling a material\u2019s durability from\
+        \ an attack it survived, then using that durability to upscale other destruction\
+        \ feats involving the same material, risks circular scaling. AP \u2260 DC,\
+        \ but this does not mean every bending attack possesses the same AP regardless\
+        \ of its demonstrated effects. Rather, chi expenditure and intent provide\
+        \ an in-universe explanation for why attack potency varies between attacls.\
+        \ While characters can scale to one another through consistently matching\
+        \ comparable attacks, such as Zuko and Azula, blocking, destroying, or surviving\
+        \ an isolated, relatively weak bending attack does not automatically scale\
+        \ a character to the bender\u2019s maximum output. Each attack should therefore\
+        \ be evaluated according to its own demonstrated potency and circumstances,\
+        \ with its AP calculated individually where possible (For example, the kinetic\
+        \ energy of this specific attack by Toph is about 9-B. Therefore, if a character\
+        \ survives or overpowers that particular blast, it only qualifies as a 9-B\
+        \ feat. It does not scale to 7-C simply because Toph is capable of outputting\
+        \ that higher level of energy in other scenarios).), up to Small Town level\
+        \ (Mako is a champion pro-bender, a title he won alongside Bolin and Korra,\
+        \ placing him among the world's most combat-skilled benders. Because modern\
+        \ casual benders are comparable to top-tier benders from Aang's eraThe Legend\
+        \ of Korra takes place roughly 70 years after Avatar: The Last Airbender,\
+        \ during which both technology and bending techniques advanced dramatically.\
+        \ Previously rare and highly exclusive abilities such as metalbending and\
+        \ lightning generation, which were once limited to prodigies like Toph or\
+        \ members of the Fire Nation royal family, became common skills taught to\
+        \ police officers, soldiers, and even factory workers. Not only are these\
+        \ techniques more widespread, but they are also performed far more efficiently\
+        \ than in Aang's era. This advancement suggests that the average bender in\
+        \ Korra's time is significantly more skilled, versatile, and technically refined\
+        \ than the average bender during Aang's era, with even ordinary modern benders\
+        \ often displaying feats comparable to or superior to many high-level benders\
+        \ from the past, Mako's skill shall be above pre-Sun Warrior Zuko and Aang\
+        \ who could block combustionbending attacks2.174 Kilotons. He also should\
+        \ be superior to EOS Azula by being able to instant-lightningbend which she\
+        \ can not do, he should be comparable to Korra's casual hits that could knock\
+        \ Amon unconcious, and he heavily injured Amon himself) | Small Building level,\
+        \ Varies with bending, up to Large Town level (Constantly comparable to and\
+        \ arguably stronger than his brother Bolin, Mako was able to keep up with\
+        \ and ultimately kill Ming-Hua, a Red Lotus member among the strongest in\
+        \ the world. He also continuously absorbed, redirected, and projected lightning\
+        \ to overload Kuvira's power plant, which shattered her 25-story-tall platinum\
+        \ mecha suit323.12 Kilotons)"
+      source_id: character-stats-profiles-mako-the-legend-of-korra
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Sub-Relativistic, likely FTL combat and reactions (Can constantly keep
+        up with pro-benders, who can keep up with Korra, he could tag Amon who has
+        previously dodged lightning point blank0.029c, likely 3.3890c) | Sub-Relativistic,
+        likely FTL combat and reactions (Can constantly keep up with even the fastest
+        benders like Ming-Hua, who can constantly blitz people like Eska and Desna)
+      source_id: character-stats-profiles-mako-the-legend-of-korra
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level, likely Small Town level (Can constantly take minor
+        bending attacks, superior to adult Sokka or Zuko), Varies with bending shields,
+        up to Small Town level | Small Building level, likely Small Town level (Could
+        survive all the energy needed to destroy the colossus through his body), Varies
+        with bending shields, up to Large Town level
+      source_id: character-stats-profiles-mako-the-legend-of-korra
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: The solar eclipse makes him incapable of firebending
+      source_id: character-stats-profiles-mako-the-legend-of-korra
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "Superhuman Physical Characteristics (Can casually throw people meters\
+        \ away, as well constantly resist electricity), Acrobatics & Martial Arts\
+        \ (Mako exhibits impressive physical capabilities and sharp tactical awareness,\
+        \ demonstrating notable close-range, bare-handed combat skills like his expert\
+        \ shoulder-throw. His extreme agility allows him to leap long distances and\
+        \ perform flips, making him an exceptionally difficult target to hit from\
+        \ afar. He possesses immense raw strength, effortlessly tossing Equalist agents,\
+        \ hoisting opponents with a single hand, and casually carrying both Bolin\
+        \ and Korra. Under the severe duress of Amon\u2019s bloodbending, Mako's superior\
+        \ physical and mental resilience allowed him to retain more bodily control\
+        \ than others, enabling him to surprise the masked leader with a targeted\
+        \ bolt of lightning. Ultimately, his quick-witted, level-headed nature in\
+        \ dire situations is what defines his strategic survival, highlighted by his\
+        \ swift formulation of a successful plan to rescue his brother during Amon\u2019\
+        s public revelation), Vehicular Mastery (As a police officer, Mako used a\
+        \ motorcycle as his vehicle of choice, displaying great skill with maneuvering\
+        \ it over slick terrain and even incorporating his firebending as a booster\
+        \ to extend the distance of his jumps and to stabilize after a near crash.\
+        \ He was also capable of piloting an airship, though was an amateur at landing\
+        \ the vehicle), Detective Skills & Stealth Mastery (Mako was also a skilled\
+        \ detective, as demonstrated when he figured out that Varrick was trying to\
+        \ kidnap President Raiko and when he discovered that Aiwei was working with\
+        \ the Red Lotus, Mako was also good at reading maps, as he figured out where\
+        \ the Equalist rally was located by looking at the maps he and Korra obtained\
+        \ from the Equalist protester. Mako demonstrated this ability again when he\
+        \ discovered where the Equalist airfield was hidden), Firebending (Mako is\
+        \ a highly skilled firebender who blends a modern, agile pro-bending style\
+        \ with powerful traditional techniques. In the arena, he utilizes a distinct\
+        \ \"cool under fire\" strategy, relying on defensive weaving and quick dodging\
+        \ patterns followed by rapid offensive spurts to defeat entire teams single-handedly.\
+        \ Outside of the sport, his traditional firebending mastery allows him to\
+        \ propel himself through the air with sustained fire streams, perform advanced\
+        \ techniques like the breath of fire, and control his flames precisely enough\
+        \ to form a sleek dagger. Furthermore, Mako possesses immense raw power, enabling\
+        \ him to withstand a massive, point-blank explosion completely unharmed),\
+        \ Non-Physical Interaction (Bending can interract with spirits), Chi Manipulation\
+        \ (Bending is a practice of manipulation inner chi), Electricity Manipulation\
+        \ & Attack Reflection (Mako is also highly proficient in lightning generation\
+        \ and redirection, skills he learned from his former boss, Lightning Bolt\
+        \ Zolt. He can generate lightning from either hand incredibly fast with almost\
+        \ no charging time or arm movement, and can maintain the bolt for several\
+        \ seconds. His precise aim allows him to hit speeding targets or control the\
+        \ charge to merely stun them, a skill he even used commercially at a Republic\
+        \ City power plant. In combat, Mako effectively redirected electricity through\
+        \ the metal cables of Equalist mecha-tanks to disable them and later electrocuted\
+        \ Ming-Hua by targeting her own water tendrils. His remarkable focus and calmness\
+        \ of mind even allowed him to strike Amon while restrained by bloodbending,\
+        \ earning praise from the Equalist leader himself. He could also actively\
+        \ absorb, redirect, and project a massive amount of electricity to overload\
+        \ Kuvira's mech, and destroy it), Pseudo-Flight (Firebenders can use fire\
+        \ propulsion for flight), Fire Weaponry (Comparable to Zuko, who can create\
+        \ fire daggers, and weaker firebenders have been shown mimicking animals with\
+        \ fire), Fire Reflection (Firebenders can redirect fire attacks), Surface\
+        \ Scaling (Thanks to jet propulsion, he can run on walls), Breath Attack (He\
+        \ can sneeze fire), Explosion Manipulation (Firebenders' attacks are often\
+        \ explosive), Heat Manipulation (Firebenders can manipulate heat without generating\
+        \ fire, that includes heating their own body to not get a frostbite), Forcefield\
+        \ Creation (It can be used for shielding), Empowerment (Firebenders become\
+        \ stronger during the daytime), Resistance, Electricity (Can resist electricity\
+        \ via redirection)"
+      source_id: character-stats-profiles-mako-the-legend-of-korra
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: character-stats-and-profiles.fandom.com|mako canon djthisben10guy|622104
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-mako-the-legend-of-korra
+    url: https://vsbattles.fandom.com/wiki/Mako_The_Legend_of_Korra
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Mako (Avatar)
+    source_type: mediawiki
+    revision_id: '9709117'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 2669
+    content_kind: api_json
+    headings_detected:
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 8-A, likely 7-C
+      source_id: vsbattles-mako-the-legend-of-korra
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Expert Martial Artist, Chi Manipulation
+        (Chi is the source of a user's bending), Firebending, Lightning Projection,
+        Empowerment (Firebenders are enhanced during Sozin's Comet), Limited Flight,
+        Breath Attack (Can breathe fire), Non-Physical Interaction (Bending can interact
+        with spirits), Limited Attack Reflection, Resistance to Blood Manipulation
+        and Body Puppetry (Every human has a chi field that makes taking control of
+        their body difficult to accomplish).
+      source_id: vsbattles-mako-the-legend-of-korra
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multi-City Block level, likely Town level with bending (Comparable to
+        Korra and Bolin, while he is inferior, he could still keep up with and somewhat
+        contend with fighters like Unalaq and Ming Hua)
+      source_id: vsbattles-mako-the-legend-of-korra
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic+ combat speed and reactions (Should not be significantly
+        slower than Korra. Can generate lightning)
+      source_id: vsbattles-mako-the-legend-of-korra
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multi-City Block level, likely Town level with bending (Tanked attacks
+        from Ming, including being slammed into a building by her. Tanked attacks
+        from Esna, Deska and Unalaq)
       source_id: vsbattles-mako-the-legend-of-korra
       provider_id: vsbattles
       authority: high
@@ -768,13 +1030,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Rather stubborn and he loses his firebending during a solar eclipse
-        ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions|Mako Avatar|Mako
-        (Avatar)}} Category:Characters Category:Male Characters Category:Cartoon Characters
-        Category:Avatar: The Last Airbender Category:Chi Users Category:Fire Users
-        Category:Electricity Users Category:Empowerment Users Category:Protagonists
-        Category:Heroes Category:Good Characters Category:Orphans Category:Teenagers
-        Category:Martial Artists Category:Police Officers'
+      value: Rather stubborn and he loses his firebending during a solar eclipse
       source_id: vsbattles-mako-the-legend-of-korra
       provider_id: vsbattles
       authority: high
@@ -789,11 +1045,11 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: false
-    duplicate_key: vsbattles.fandom.com|mako avatar|9615909
+    duplicate_key: vsbattles.fandom.com|mako avatar|9709117
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-mako-the-legend-of-korra
-    url: https://character-stats-and-profiles.fandom.com/wiki/Mako_%28The_Legend_of_Korra%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/Mako_The_Legend_of_Korra
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -802,28 +1058,33 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    normalized_page_title: Mako (Canon)/Compile Fan
+    - weaknesses
+    normalized_page_title: Mako (Canon)/DJthisben10guy
     source_type: mediawiki
-    revision_id: '569080'
+    revision_id: '622104'
     fetch_status: fetched
     http_status: 200
-    content_length: 3463
+    content_length: 18965
     content_kind: api_json
     headings_detected:
     - Summary
-    - Powers & Stats
+    - Powers and Stats
     - Notes
+    - Statistic Values
     stat_labels_detected:
     - attack_potency
     - durability
     - intelligence
     - keys
+    - lifting_strength
     - origin
     - powers_and_abilities
+    - range
     - speed
-    - standard_equipment
+    - stamina
     - striking_strength
     - tier
+    - weaknesses
     extraction_failure_reason: ''
     rank: 105
     provider_id: character_stats_profiles
@@ -840,55 +1101,165 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 1-S
-      source_id: character-stats-profiles-mako-the-legend-of-korra
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Fourth Wall Awareness, Beyond-Dimensional\
-        \ Physiology, Acausality (Type 5), Transduality (Type 4), Abstract Existence\
-        \ (Type 1), Nonexistent Physiology (Type 2), Incorporeality, Intangibility,\
-        \ Invisibility, Reality Warping, Conceptual Manipulation, Metaphysics Manipulation,\
-        \ Duality Manipulation, Definition Manipulation, Logic Manipulation, Paradox\
-        \ Manipulation, Possibility Manipulation, Impossibility Manipulation, Mathematics\
-        \ Manipulation, Law Manipulation, Chaos Manipulation, Void Manipulation, Space\
-        \ Manipulation, Time Manipulation, Causality Manipulation, Fate Manipulation,\
-        \ Plot Manipulation, Ontological Property Manipulation (Mako is the embodiment\
-        \ of the Noumenon from The Critique Of Pure Reason. The Noumenon transcends\
-        \ all of Kant\u2019s 12 categories that the Phenomenal world contains; Unity,\
-        \ Plurality, Totality, Reality, Negation, Limitation, Substance, Causality,\
-        \ Community, Possibility, Existence, Necessity)"
+      value: 9-A, with bending, up to Low 7-C | 9-A, with bending, up to High 7-C
       source_id: character-stats-profiles-mako-the-legend-of-korra
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: "Extraversal (Mako is the embodiment of the Noumenon from The Critique\
-        \ Of Pure Reason. The Noumenon transcends all of Kant\u2019s 12 categories\
-        \ that the Phenomenal world contains; Unity, Plurality, Totality, Reality,\
-        \ Negation, Limitation, Substance, Causality, Community, Possibility, Existence,\
-        \ Necessity)"
+      value: "Small Building level (Could threw a chi-blocker several meters away,\
+        \ who can physically keep up with Korra0.0497 Tons), Varies with bending (Bending\
+        \ attacks' output is not fixed because the chi output, intent, and technique\
+        \ vary per attack, meaning characters do not consistently strike with their\
+        \ maximum power, surviving or blocking a minor bending attack scales only\
+        \ to that specific attack's energy, rather than automatically upscaling to\
+        \ the bender's strongest attacksBending AP is not fixed, as the amount of\
+        \ chi invested into each attack varies depending on the bender\u2019s intent,\
+        \ objective, and technique. Since bending is a martial art, benders can adjust\
+        \ their output depending on the situation, meaning their attacks do not consistently\
+        \ possess the same potency. This is consistently demonstrated throughout the\
+        \ series, as bending attacks from the same character can produce vastly different\
+        \ effects depending on their application. During Aang\u2019s fight against\
+        \ Ozai, some bending attacks primarily serve to knock Ozai back, while others\
+        \ can cause significantly greater damage or be lethal, meaning Ozai\u2019\
+        s durability should not automatically scale to the Avatar State\u2019s AP,\
+        \ and remains a Glass Cannon. Likewise, Azula\u2019s lightning can pierce\
+        \ Toph\u2019s earth wall, while other attacks can be blocked by her earthbending,\
+        \ demonstrating that neither her attacks nor Toph\u2019s defenses operate\
+        \ at a fixed level of effectiveness. Toph lifting the library is still a valid\
+        \ 7-C feat, but it does not mean every small rock she throws afterward carries\
+        \ equivalent energy. Furthermore, scaling a material\u2019s durability from\
+        \ an attack it survived, then using that durability to upscale other destruction\
+        \ feats involving the same material, risks circular scaling. AP \u2260 DC,\
+        \ but this does not mean every bending attack possesses the same AP regardless\
+        \ of its demonstrated effects. Rather, chi expenditure and intent provide\
+        \ an in-universe explanation for why attack potency varies between attacls.\
+        \ While characters can scale to one another through consistently matching\
+        \ comparable attacks, such as Zuko and Azula, blocking, destroying, or surviving\
+        \ an isolated, relatively weak bending attack does not automatically scale\
+        \ a character to the bender\u2019s maximum output. Each attack should therefore\
+        \ be evaluated according to its own demonstrated potency and circumstances,\
+        \ with its AP calculated individually where possible (For example, the kinetic\
+        \ energy of this specific attack by Toph is about 9-B. Therefore, if a character\
+        \ survives or overpowers that particular blast, it only qualifies as a 9-B\
+        \ feat. It does not scale to 7-C simply because Toph is capable of outputting\
+        \ that higher level of energy in other scenarios).), up to Small Town level\
+        \ (Mako is a champion pro-bender, a title he won alongside Bolin and Korra,\
+        \ placing him among the world's most combat-skilled benders. Because modern\
+        \ casual benders are comparable to top-tier benders from Aang's eraThe Legend\
+        \ of Korra takes place roughly 70 years after Avatar: The Last Airbender,\
+        \ during which both technology and bending techniques advanced dramatically.\
+        \ Previously rare and highly exclusive abilities such as metalbending and\
+        \ lightning generation, which were once limited to prodigies like Toph or\
+        \ members of the Fire Nation royal family, became common skills taught to\
+        \ police officers, soldiers, and even factory workers. Not only are these\
+        \ techniques more widespread, but they are also performed far more efficiently\
+        \ than in Aang's era. This advancement suggests that the average bender in\
+        \ Korra's time is significantly more skilled, versatile, and technically refined\
+        \ than the average bender during Aang's era, with even ordinary modern benders\
+        \ often displaying feats comparable to or superior to many high-level benders\
+        \ from the past, Mako's skill shall be above pre-Sun Warrior Zuko and Aang\
+        \ who could block combustionbending attacks2.174 Kilotons. He also should\
+        \ be superior to EOS Azula by being able to instant-lightningbend which she\
+        \ can not do, he should be comparable to Korra's casual hits that could knock\
+        \ Amon unconcious, and he heavily injured Amon himself) | Small Building level,\
+        \ Varies with bending, up to Large Town level (Constantly comparable to and\
+        \ arguably stronger than his brother Bolin, Mako was able to keep up with\
+        \ and ultimately kill Ming-Hua, a Red Lotus member among the strongest in\
+        \ the world. He also continuously absorbed, redirected, and projected lightning\
+        \ to overload Kuvira's power plant, which shattered her 25-story-tall platinum\
+        \ mecha suit323.12 Kilotons)"
       source_id: character-stats-profiles-mako-the-legend-of-korra
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: "Irrelevant (Mako is the embodiment of the Noumenon from The Critique\
-        \ Of Pure Reason. The Noumenon transcends all of Kant\u2019s 12 categories\
-        \ that the Phenomenal world contains; Unity, Plurality, Totality, Reality,\
-        \ Negation, Limitation, Substance, Causality, Community, Possibility, Existence,\
-        \ Necessity)"
+      value: Sub-Relativistic, likely FTL combat and reactions (Can constantly keep
+        up with pro-benders, who can keep up with Korra, he could tag Amon who has
+        previously dodged lightning point blank0.029c, likely 3.3890c) | Sub-Relativistic,
+        likely FTL combat and reactions (Can constantly keep up with even the fastest
+        benders like Ming-Hua, who can constantly blitz people like Eska and Desna)
       source_id: character-stats-profiles-mako-the-legend-of-korra
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
-      value: "Extraversal (Mako is the embodiment of the Noumenon from The Critique\
-        \ Of Pure Reason. The Noumenon transcends all of Kant\u2019s 12 categories\
-        \ that the Phenomenal world contains; Unity, Plurality, Totality, Reality,\
-        \ Negation, Limitation, Substance, Causality, Community, Possibility, Existence,\
-        \ Necessity)"
+      value: Small Building level, likely Small Town level (Can constantly take minor
+        bending attacks, superior to adult Sokka or Zuko), Varies with bending shields,
+        up to Small Town level | Small Building level, likely Small Town level (Could
+        survive all the energy needed to destroy the colossus through his body), Varies
+        with bending shields, up to Large Town level
+      source_id: character-stats-profiles-mako-the-legend-of-korra
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: The solar eclipse makes him incapable of firebending
+      source_id: character-stats-profiles-mako-the-legend-of-korra
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "Superhuman Physical Characteristics (Can casually throw people meters\
+        \ away, as well constantly resist electricity), Acrobatics & Martial Arts\
+        \ (Mako exhibits impressive physical capabilities and sharp tactical awareness,\
+        \ demonstrating notable close-range, bare-handed combat skills like his expert\
+        \ shoulder-throw. His extreme agility allows him to leap long distances and\
+        \ perform flips, making him an exceptionally difficult target to hit from\
+        \ afar. He possesses immense raw strength, effortlessly tossing Equalist agents,\
+        \ hoisting opponents with a single hand, and casually carrying both Bolin\
+        \ and Korra. Under the severe duress of Amon\u2019s bloodbending, Mako's superior\
+        \ physical and mental resilience allowed him to retain more bodily control\
+        \ than others, enabling him to surprise the masked leader with a targeted\
+        \ bolt of lightning. Ultimately, his quick-witted, level-headed nature in\
+        \ dire situations is what defines his strategic survival, highlighted by his\
+        \ swift formulation of a successful plan to rescue his brother during Amon\u2019\
+        s public revelation), Vehicular Mastery (As a police officer, Mako used a\
+        \ motorcycle as his vehicle of choice, displaying great skill with maneuvering\
+        \ it over slick terrain and even incorporating his firebending as a booster\
+        \ to extend the distance of his jumps and to stabilize after a near crash.\
+        \ He was also capable of piloting an airship, though was an amateur at landing\
+        \ the vehicle), Detective Skills & Stealth Mastery (Mako was also a skilled\
+        \ detective, as demonstrated when he figured out that Varrick was trying to\
+        \ kidnap President Raiko and when he discovered that Aiwei was working with\
+        \ the Red Lotus, Mako was also good at reading maps, as he figured out where\
+        \ the Equalist rally was located by looking at the maps he and Korra obtained\
+        \ from the Equalist protester. Mako demonstrated this ability again when he\
+        \ discovered where the Equalist airfield was hidden), Firebending (Mako is\
+        \ a highly skilled firebender who blends a modern, agile pro-bending style\
+        \ with powerful traditional techniques. In the arena, he utilizes a distinct\
+        \ \"cool under fire\" strategy, relying on defensive weaving and quick dodging\
+        \ patterns followed by rapid offensive spurts to defeat entire teams single-handedly.\
+        \ Outside of the sport, his traditional firebending mastery allows him to\
+        \ propel himself through the air with sustained fire streams, perform advanced\
+        \ techniques like the breath of fire, and control his flames precisely enough\
+        \ to form a sleek dagger. Furthermore, Mako possesses immense raw power, enabling\
+        \ him to withstand a massive, point-blank explosion completely unharmed),\
+        \ Non-Physical Interaction (Bending can interract with spirits), Chi Manipulation\
+        \ (Bending is a practice of manipulation inner chi), Electricity Manipulation\
+        \ & Attack Reflection (Mako is also highly proficient in lightning generation\
+        \ and redirection, skills he learned from his former boss, Lightning Bolt\
+        \ Zolt. He can generate lightning from either hand incredibly fast with almost\
+        \ no charging time or arm movement, and can maintain the bolt for several\
+        \ seconds. His precise aim allows him to hit speeding targets or control the\
+        \ charge to merely stun them, a skill he even used commercially at a Republic\
+        \ City power plant. In combat, Mako effectively redirected electricity through\
+        \ the metal cables of Equalist mecha-tanks to disable them and later electrocuted\
+        \ Ming-Hua by targeting her own water tendrils. His remarkable focus and calmness\
+        \ of mind even allowed him to strike Amon while restrained by bloodbending,\
+        \ earning praise from the Equalist leader himself. He could also actively\
+        \ absorb, redirect, and project a massive amount of electricity to overload\
+        \ Kuvira's mech, and destroy it), Pseudo-Flight (Firebenders can use fire\
+        \ propulsion for flight), Fire Weaponry (Comparable to Zuko, who can create\
+        \ fire daggers, and weaker firebenders have been shown mimicking animals with\
+        \ fire), Fire Reflection (Firebenders can redirect fire attacks), Surface\
+        \ Scaling (Thanks to jet propulsion, he can run on walls), Breath Attack (He\
+        \ can sneeze fire), Explosion Manipulation (Firebenders' attacks are often\
+        \ explosive), Heat Manipulation (Firebenders can manipulate heat without generating\
+        \ fire, that includes heating their own body to not get a frostbite), Forcefield\
+        \ Creation (It can be used for shielding), Empowerment (Firebenders become\
+        \ stronger during the daytime), Resistance, Electricity (Can resist electricity\
+        \ via redirection)"
       source_id: character-stats-profiles-mako-the-legend-of-korra
       provider_id: character_stats_profiles
       authority: high
@@ -903,7 +1274,7 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|mako canon compile fan|569080
+    duplicate_key: character-stats-and-profiles.fandom.com|mako canon djthisben10guy|622104
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-mako
@@ -915,7 +1286,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
     normalized_page_title: Mako (Canon)/Compile Fan
     source_type: mediawiki
     revision_id: '569080'
@@ -953,12 +1323,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 1-S
-      source_id: character-stats-profiles-mako
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: "Superhuman Physical Characteristics, Fourth Wall Awareness, Beyond-Dimensional\
         \ Physiology, Acausality (Type 5), Transduality (Type 4), Abstract Existence\
@@ -1035,18 +1399,19 @@ repair:
     - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: "Ry\u016Bko Matoi"
+    normalized_page_title: Reno (Remake)
     source_type: mediawiki
-    revision_id: '9640859'
+    revision_id: '9668242'
     fetch_status: fetched
     http_status: 200
-    content_length: 39344
+    content_length: 15644
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
+    - Explanations
+    - Gallery
     - Notable Matchups
-    - References
     stat_labels_detected:
     - attack_potency
     - durability
@@ -1080,180 +1445,130 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{High 8-C}}, At least {{Low 2-C}} with the Scissor Blade | {{High 7-C}},
-        {{Low 7-B}} in Berserk Mode, Higher via Accelerated Development, At least
-        {{Low 2-C}} with the Scissor Blade | At least {{Low 7-B}}, likely {{7-B}},
-        Higher via Accelerated Development, At least {{Low 2-C}} with the Scissor
-        Blade | {{Low 2-C}}, Higher via Accelerated Development and Reality Interference,
-        At least {{Low 2-C}} with the Scissor Blade | At least {{Low 2-C}}, Higher
-        via Accelerated Development and Reality Interference, At least {{Low 2-C}}
-        with the Scissor Blade | At least {{Low 2-C}}, Higher via Life Fiber Absorption,
-        Accelerated Development, and Reality Interference, At least {{Low 2-C}} with
-        the Scissor Blade | At least {{Low 2-C}}, Higher via Accelerated Development
-        and Reality Interference, Higher with the Scissor Blade'
+      value: At least High 6-A, likely higher
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'BoS= {{#tag:tabber| {{!}}-{{!}}Base= *Superhuman Physical Characteristics
-        *Martial Arts (Expert Hand-to-Hand Combatant) *Weapon Mastery (Expert Swordswoman)
-        *Empowerment (Life Fibers passively empower the user''s physical abilities
-        even in an inactive state) *Absorption (Can absorb Life Fibers to make herself
-        and Senketsu stronger) *Immortality (Type 3) *Regeneration (High-Mid: not
-        combat applicable in this form) *Reactive Power Level, Accelerated Development,
-        and Statistics Amplification (Gains significant boosts to her physical stats
-        every time she regenerates from a wound that would have otherwise been fatal
-        to a normal person, such as being impaled, ripped to shreds, decapitated,
-        or bisected, as well as gain boosts to her power, speed, and durability the
-        more in-sync she is with Senketsu) *Enhanced Senses and Limited Cosmic Awareness
-        (Senketsu is able to sense people''s emotions as well as discern how powerful
-        someone is just from being near them.Kill la Kill Episode 3 Senketsu is also
-        able to monitor every aspect of Ryuko''s biology and physiology and immediately
-        spot any change in it, including things such as her weight and BMI, and can
-        read her emotional state through the temperature and salinity of her bloodKill
-        la Kill Episode 5. Senketsu can also sense distortions in time and realityKill
-        la Kill: IF. Ryuko while in a blind rage was able to spot Aikuro hiding several
-        hundreds of meters away.) *Acrobatics *Surface Scaling *Self-Sustenance (Type
-        1. Able to survive in the vacuum of space both with and without Senketsu)
-        *Rage Power *Power Nullification (Ryuko is a ''Singularity'', a being whose
-        existence passively overrides and nullifies the Reality Interference of other
-        Life Fiber users, rendering the abilities granted by Reality Interference
-        useless when in direct conflict with her.) Resistance to: *Extreme Cold and
-        Cosmic Radiation (Able to survive in space with no issueKill la Kill Episode
-        24.) *Mind Manipulation, Memory Manipulation, Empathic Manipulation and Morality
-        Manipulation (Resisted Ragyo''s Mental Refitting on multiple occasions. Completely
-        unaffected by wearing Senketsu constantly as well as absorbing multiple extra
-        Life Fibers, when even normal Life Fibers have mind and memory manipulation
-        [As stated by Inumuta, anyone in Japan who hadn''t been consumed by COVERS
-        had their minds taken control of by the Life Fibers in their clothing and
-        had parts of their memories eaten, so that word of Life Fibers taking over
-        Japan wouldn''t spread]. Able to wear a Kamui, which is 100% Life Fibers,
-        without any ill effects, when a normal person wearing clothing made of only
-        50% Life Fibers gets overwhelmed to the point of becoming a berserk monster)
-        *Heat Manipulation (Able to endure standing in fire, her blood boiling, her
-        body being subjected to enough energy to make her flesh boil, heat enough
-        to melt stone, and grabbing the Scissor Blades which were on fire and burning
-        from reentering the atmosphereKill la Kill Episode 25) *Pain (Has an extremely
-        high pain tolerance, able to shrug off extensive beatings, impalement, bisection,
-        and skinning herself alive) {{!}}-{{!}}Pre-Synchronization= *Multiple Selves
-        (Type 3) *Smoke Manipulation (Able to vent steam from Senketsu as a smokescreenKill
-        la Kill Episode 2) *Heat Manipulation (The heat she gives off from getting
-        fired up or angry can melt stone and burned Mako on contact) *Supernatural
-        Willpower and Shockwaves Creation (Can create shockwaves with her willpower
-        alone) }} |-|Synchronized= All previous abilities plus: *Reactive Evolution
-        (Senketsu is able to rapidly evolve to gain new abilities in the heat of battle,
-        including but not limited to being able to turn himself into blades, gain
-        flight, and create forcefields) *Shapeshifting (Senketsu is able to change
-        his form at will) *Size Manipulation (Able to redistribute parts of Senketsu''s
-        body into a single part to dramatically increase the size of one part of him)
-        *Cloth Manipulation, Weapon Creation, and Bodily Weaponry (Senketsu Senjin
-        is able to create blades all over Ryuko''s body which can function as chainsaws,
-        claws, and grappling hooks, as well as turn his sleeves into swords) *Flight
-        (With Senketsu Shippu) *Sound Manipulation, Forcefield Creation and Attack
-        Reflection (With Senketsu Mubyoshi, Able to create forcefields of sound, as
-        well as redirect energy and sound based attacks using her own natural frequency)
-        *Afterimage Creation (Able to create afterimages fast enough to appear in
-        dozens of places simultaneously as well as solid afterimages) *Berserk Mode
-        *Hair Manipulation |-|Berserk= All previous abilities minus: *Martial Arts
-        and Weapon Mastery |-|Post-3-Star= All previous abilities plus: *Regeneration
-        (High-Mid: Able to regenerate from wounds such as being torn to shreds, bisected,
-        and skinning herself alive. Stated to have the same level of regeneration
-        as Ragyo due to inheriting it from her. Nui also attributed her regeneration
-        to her biology, which she stated Ryuko''s was almost the same as her'
+      value: 'Superhuman Physical Characteristics, Acrobatics (Hypermobility and Self-Momentum.
+        Reno is a very acrobatic fighterFinal Fantasy VII Remake (2020), with most
+        of his style relying on his speed to perform complex jumps and maneuvers,
+        as well as quickly moving around the battlefield, to deliver barrages of attacks
+        to the opponent or quickly evade and counter), Martial Arts and Weapon Mastery
+        (Reno is shown to be an expert close range fighter, mixing up kicks with his
+        use of the metal batonFinal Fantasy VII Remake (2020) to deliver powerful
+        combos and easily keep up with other skilled fighters of different styles,
+        such as Cloud''s swordsmanship or Tifa''s own martial arts), Vehicular Mastery
+        (Is a skilled helicopter pilot and shot with the vehicle''s weapons), Stealth
+        Mastery (All Turks are trained in infiltration and espionage. Though their
+        capability depends on the specific individual, Reno at least is capable of
+        following undetectedBefore Crisis -Final Fantasy VII- (2004) Rude, another
+        Turk, and Avalanche membersBefore Crisis -Final Fantasy VII- (2004), who are
+        also trained warriors), Spirit Energy Manipulation (Can use his Spirit Energy
+        to perform special abilities with it), Non-Physical Interaction (Spirit Energy
+        allows users to interact with non-corporeal beings like ghosts or Summons,
+        the latter whom trascend physicalCrisis Core -Final Fantasy VII-: The Complete
+        Guide (2007) matter), Electricity Manipulation (Reno specializes in electrical
+        attacks, being able to perform several different types of techniques such
+        as ranged projectiles, charge his own attacks, create traps or create bursts
+        of electricity. Additionally, Reno carries EM Mines with him), Paralysis Inducement
+        (The EM Mines, EM Shot and Binding Current paralyze the target), Statistics
+        Amplification (Speed. FlashfootFinal Fantasy VII Remake (2020) allows Reno
+        to charge and shift directions much faster than normal, allowing him to outspeedFinal
+        Fantasy VII Remake (2020) enemies that normally are as quick as him), Homing
+        Attack (EM Shot and Triple EM Shot track the opponent, the EM Mines slowly
+        approach the enemy), Sealing (Via Pyramid, which traps an enemy within an
+        energy construct which must be destroyed for them to be free) Resistances:'
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: "Large Building level (Made a large crater by attacking Omiko Hakodate.\
-        \ Casually stomped Takaharu Fukuroda.Kill la Kill Episode 1 Caused a shockwave\
-        \ this powerful from her willpower alone clashing with Satsuki's), At least\
-        \ Universe level+ with the Scissor Blades (The Scissor Blade is able to cut\
-        \ Ragy\u014D Kiry\u016Bin to pieces and can cut Nui Harime even when wielded\
-        \ by a normal human like Soichiro Kiryuin)"
+      value: At least Multi-Continent level, likely higher (Fought Cloud in a duel,
+        though he was defeated. Cloud had already beaten and earned control of Shiva.
+        Later, Reno, alongside Rude, would fight Cloud, Tifa and Barret at once and
+        even their Summons like Ifrit and Shiva. This second encounter was shortly
+        before the party defeated and gained control of Bahamut)
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Sub-Relativistic (Able to move this fast)
+      value: Sub-Relativistic+ (Reno's is ackowledged for his speed, even making Cloud
+        wary of it. Can keep up with Cloud, Tifa and Barret at once for a while. Cloud
+        just a while later would show to be fast enough to dodge Rufus' Bright Lights),
+        higher with Flashfoot (This technique allows Reno to dash aroundFinal Fantasy
+        VII Remake (2020) at speeds the party cannot keep up with)
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Large Building level (Takaharu was physically incapable of harming her
-        to the point where she didnt feel any of his punches and his strongest attack
-        shattered on contact with herKill la Kill Episode 1) |-|Synchronized
+      value: At least Multi-Continent level, likely higher (Fought Cloud, Tifa and
+        Barret and even their Summons, including the likes Ifrit and Shiva, withstanding
+        their attacks for a while before being defeated)
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: "Pre-Synchronization/Berserk= Average (Able to wear a Kamui, which is\
-        \ 100% Life Fibers, without any ill effects, when an ordinary person wearing\
-        \ clothing made of only 50% Life Fibers gets overwhelmed to the point of becoming\
-        \ a crazed monster. When Senketsu is active, however, she can only fight for\
-        \ approximately an hour before she passes out from blood loss) |-|Life Fiber\
-        \ Synchronized - End of Series= Superhuman (Withstood a day-long beating in\
-        \ her base form from Mako. Fought all four of the Elite Four back to back\
-        \ without a break. Without Senketsu, she crossed Japan in a day to collect\
-        \ all of his pieces, taking out all of Honn\u014Dji Academy's students in\
-        \ the process. Took down an entire army of COVERS singlehandedly without Senketsu.\
-        \ Able to shrug off injuries such as being bisected, being impaled, being\
-        \ torn to shreds, having her heart ripped out, losing several gallons of blood,\
-        \ and skinning herself alive [a feat which was marked as something that should\
-        \ have killed her as she snapped her own Life Fibers]. Shrugged off being\
-        \ impaled hundreds of times in her fight with Ragyo despite going through\
-        \ a protracted battle before it.)"
+      value: Superhuman (Quickly recovered from his first defeat against Cloud, where
+        he had trouble standing due to injury, and returned to his duties. It took
+        being beaten to the point of having to crawl to finally stop Reno and even
+        then it was merely from direct combat rather than active service)
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: 'Extended Melee Range, Kilometers with Shockwaves and Air Slashes, Tens
-        of Kilometers with Scissor Blade: Final Address Mode and Scissor Blade: Decommission
-        Mode, Hundreds of Kilometers with Kisaragi, Planetary with Absolute Domination,
-        Multiversal with Reality Interference and Life Fiber Absorption'
+      value: Standard Melee Range with physical attacks, Tens of Meters with some
+        lightning techniques.
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Senketsu, Scissor Blades
+      value: 'Shinra Military Helicopter, Security Baton: A retractable steel baton
+        provided by the Shinra company, this is Reno''s weapon of choice, which aside
+        using it for melee combat, also is used to channel electricy for his attacks
+        and perform most of his techniques. It''s sturdy enough to withstand clashes
+        with Cloud''s swords., EM Mines: These devices, when activated, will float
+        and slowly approach the enemy while producing a strong electrical current
+        that can paralyze those who come in contact with it. If several EM Mines are
+        used at once, they will connect with each other through a a string of electricity,
+        effectively creating a net of sorts., Shinra Military Helicopter: The Shinra
+        company provides the necessary vehicles to SOLDIER and the Turks for their
+        missions. The Turks in particular are commonly seen piloting helicopters when
+        they need a means of transport. These come equipped with a gatling machine
+        gun on the front and napalm missiles at the sides., Phone: Reno, like all
+        Shinra personnel, carries a mobile phone to contact his colleagues or his
+        teammates during missions and plan properly his next course of action. Though
+        Reno''s phone is never seen directly, Rude is shown receiving a call from
+        Reno on his own.'
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: "Gifted (Although she is brash, hot-blooded, and hard-headed, Ry\u016B\
-        ko possesses years of experience fighting foes of all kinds in both hand-to-hand\
-        \ combats and with her Scissor Blades. She is ingeniously resourceful in combat,\
-        \ frequently using her opponent's weaknesses and specialties against them\
-        \ such as using pieces of Senketsu's fabric to blind Sanageyama, allowing\
-        \ herself to be restrained by Gamagori's Shackle Regalia in order to bypass\
-        \ his armor and attack him from the inside, and even cutting herself in half\
-        \ to exploit her innate ability to become stronger as she approaches death.\
-        \ She has demonstrated the ability to fight with extreme precision, able to\
-        \ easily weave her way through Takaharu's danmaku of left jabs, slice a volley\
-        \ of thousands of tennis balls with enough precision to reduce them each individually\
-        \ to threads, and making precise cuts to take all the pieces of Senketsu off\
-        \ of an army of students while she was riding a motorcycle while also not\
-        \ destroying their uniforms entirely in the process. However, she is fiercely\
-        \ independent, often choosing to rely on her instincts to defeat her opponent\
-        \ as soon as possible rather than study them first.)"
+      value: Above Average (As a trained Turk, Reno is skilled in a variety of fields
+        like combat, espionage, information gathering, the use of many kinds of weapons
+        and vehicles, as well as planning and coordination with his teammates. Having
+        been nominated as the second in command after Tseng,m and the number 3 while
+        Veld was still part of the department, all of which speaks of how efficient
+        and accomplished Reno is in the eyes of his comrades and the trust that he
+        has earned within Shinra in his many years of service in all sort of missions)
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Can only fight for a short time before she passes out from blood loss
-        [Pre-Synchronization and Berserk Only]. She becomes more vulnerable to damage
-        should her opponent manage to cut Senketsu''s Banshi threads [This does not
-        apply to Kisaragi or End of Series]. If any part of her body is cut from both
-        sides simultaneously, she cannot regenerate [This does not apply to Kisaragi].
-        Notable Attacks/Techniques: |-|Life Fiber'
+      value: Reno is very cocky and confrontational, which in turn makes him hold
+        deep grudges when he has been defeated or feels humilliated. His second defeat
+        at the Sector 7 pillar almost compromised his mission as he seemed more focused
+        on picking a fight with Cloud to get back at him for their first encounter
+        which ended in Reno's defeat. This led to him get badly injured and the mission
+        being successful solely because of Rude's help and the Whispers of Fate intervention.
       source_id: vsbattles-mako-mixed
       provider_id: vsbattles
       authority: high
@@ -1268,7 +1583,7 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: false
-    duplicate_key: vsbattles.fandom.com|ryuko matoi|9640859
+    duplicate_key: vsbattles.fandom.com|reno remake|9668242
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-mako-mixed
@@ -1282,16 +1597,18 @@ repair:
     - speed
     - tier
     - weaknesses
-    normalized_page_title: Toppo (Canon)/Paleomario66
+    normalized_page_title: Rom (Canon, Composite)/GlaceonGamez471
     source_type: mediawiki
-    revision_id: '119913'
+    revision_id: '237871'
     fetch_status: fetched
     http_status: 200
-    content_length: 7711
+    content_length: 22053
     content_kind: api_json
     headings_detected:
-    - '''''''Summary'''''''
-    - '''''''Powers and Stats'''''''
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Others
     stat_labels_detected:
     - attack_potency
     - durability
@@ -1321,86 +1638,114 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: 2-B | 2-B
+      value: 1-A | Varies, 1-A with low to average shares, 1-A with high shares
       source_id: character-stats-profiles-mako-mixed
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Master Hand-to-Hand Combatant, Afterimage
-        Creation, Ki Manipulation, Power Nullification (Completely disintegrated a
-        stray ki blast), Resistant to Empathic Manipulation, Possibly Portal Creation
-        (Any character equal to or stronger than Buu Saga top tiers can perform the
-        Vice Shout with sheer power) | Existence Erasure (Which can harm intangible
-        beings and destroy souls), Cannot be sensed by beings lesser than a God, Void
-        Manipulation via Energy of Destruction Aura, likely limited Telekinesis (Should
-        be comparable to other GoD's), Spatial Manipulation, Danmaku via Justice Flash
-        (It is far faster and more effective than before, tracking targets with incredible
-        speed and precision) and limited Reality Warping (Warped the entirety of the
-        World of Void)
+      value: 'Base= Superhuman Physical Characteristics, Weapon Mastery (Primarily
+        wields staves to use magic. Wields a katana in 4GO), Adept in martial arts,
+        Transformation (Into White Sister Rom with HDD [Hard Drive Divinity]), Fourth
+        Wall Awareness, Acrobatics, Healing (Transforming into her goddess form fully
+        restores her HP and SP. Also with "I''ll Heal You" and "You''re Okay"), Acausality
+        (Types 1, 3, and 4; Was unaffected by having the entirety of Hyper Dimension''s
+        history itself being rewritten and even normal citizens kept their memories
+        after the world was rewritten. It''s explained by Histoire that time and causality
+        splits people''s past and future into multiple timelines to protect them from
+        paradoxes and causal changes), Flight, Immortality (Types 1, 3, 4, 8; As a
+        goddess, Rom cannot age, as age does not apply to goddesses. The Player can
+        simply resurrect her or reload a save file if she loses at all. CPUs are reliant
+        upon Share Energy and so long as there are shares, they can indefinitely revive
+        themselves. Auto-Raise [should have it from scaling to Neptune] automatically
+        resurrects her whenever she dies or is knocked out in battle.), Large Size
+        (Type 11), Beyond-Dimensional Physiology (As with all other entities in the
+        Neptunia series, her existence is beyond the concept of numerical dimensionality,
+        as all beings evolved alongside Gamindustri into beyond dimensional existences),
+        Fate and Plot Manipulation (Passive; Scaling from Neptune, as any protagonists
+        should have it based on Neptune''s statements and showings [Rom was one of
+        the protagonists for a period of time in Megadimension]. Should have similar
+        capabilities to that of Blanc and Noire, whom prevented a boss battle so the
+        player didn''t have to waste their time with it), Forcefield Creation, Self-Sustenance
+        (Types 1, 2, and likely 3; CPUs have repeatedly displayed a lack of need for
+        breathing in several continuities. As noted and displayed in Victory/RB3,
+        CPUs do not require sustenance to stay alive and cannot starve to death. CPUs
+        can remain in active combat with no rest for billions of years with no sign
+        of tiredness, as displayed in the original Hyperdimension Neptunia, where
+        the four CPUs have fought for eons.), Abstract Existence (Type 2; Goddesses
+        are born from and are embodiments of Share Energy and won''t perish so long
+        as they have it), Conceptual Manipulation (Share Energy wielders can freely
+        manipulate it to their whim. Share Energy is directly stated to be the concepts
+        of will, faith, emotion, and desire. Share Energy can erase the true form
+        of the Deity of Sin from existence by killing its manifestation, with the
+        True Deity of Sin being abstract and conceptual in nature.), Hammerspace,
+        Blessed (The Player can grant her the ability to One Shot opponents, give
+        her Invulnerability, and/or weaken the opponent), Share Energy Manipulation
+        (Lower End Applications), Information Analysis (The Observation Scope and
+        Analyser allow her to analyze information of a foe, including but not limited
+        to: heart rate, temperature, item drops, held items, health, stamina, statistics,
+        and resistances), Weapon Creation (Can create her weapons out of nothing on
+        the fly in just a couple of seconds), Extrasensory Perception (Can sense various
+        forms of energy, including share energy and negative energy), Positive Emotion
+        Empowerment (As a goddess she gains strength from share energy, which is consistently
+        regarded to as positive emotions like hopes, desires, prayers, and faith.
+        Share energy has also been referred to as the opposite to negative energy.),
+        Non-Physical Interaction (Regular enemies include ghosts and beings made of
+        data), Durability Negation, Damage Boost (Via Critical hits), Enhanced Senses
+        (Sneaking Eye shows what the enemies can see), Perception Manipulation (Thanks
+        to the White Orb, enemies won''t attack unless they''re attacked first), Regeneration
+        (High-Godly; She can passively heal off damage from the remade Dark CPUs,
+        which have Conceptual Manipulation due to possessing the abilities of the
+        Next Form users.), Status Effect Inducement (In the form of Paralysis, Poison
+        and Power Nullification), Magic (via various attacks), Elemental Manipulation
+        (Of Water, Fire, Ice, Electricity, Earth, Poison, Air, Light, and Darkness
+        through various attacks. She has the option of infusing one or more of these
+        elements into her every attack [Scaling off of Neptune].), Absolute Zero Ice
+        (Was taught to use Absolute Zero ice attacks by her older sister), Limiter
+        Removal (Through Game Discs or The Player), Power Modification (With patches,
+        which can modify what type of damage her weapon does), Glyph Creation, Resurrection
+        (When she is knocked out or killed, she can resurrect via Auto-Raise. Also
+        via "Come Back" and "Energy!"), Power Bestowal (everyone in RB2''s ending
+        gave their powers to Nepgear to fight the Deity of Sin.), Energy Manipulation
+        and Projection (via various attacks), Life Manipulation (With the Dark Ring,
+        Rom can manipulate the life force of all creatures)'
       source_id: character-stats-profiles-mako-mixed
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Multiverse level (Fought competitively with Goku in his Super Saiyan
-        Blue form and even forced Goku into using his Kaioken after getting angry
-        and powering up. In the Tournament of Power, he was equally matched with Super
-        Saiyan Blue Vegeta. He also managed to overwhelm Potential Unleashed Gohan
-        and push Android 17 back) | Multiverse level (As a God of Destruction Candidate,
-        Toppo was stated to have become equal in power to a God of Destruction by
-        the Supreme Kai, which was confirmed by Belmod in that only a GoD can access
-        that level of power, with the narrator outright calling Toppo a GoD. When
-        attacking, his energy shattered the the ToP stage and warped the entirety
-        of the World of Void, a dimension of infinite size, while also undoing the
-        visual effects created by the Grand Priest, and he was stated to have become
-        vastly superior to both Golden Frieza and Android 17 at full power. Later
-        on, he matched a Beyond Super Saiyan Blue Vegeta in strength for a time, but
-        was eventually defeated), can negate conventional durability by destroying
-        one's soul and erasing them from existence.
+      value: Outerverse level (Should be comparable to other CPU Candidates like Nepgear)
+        | Varies, Outerverse level with low to average shares (Should be far stronger
+        than her base form), Outerverse level with high shares (Comparable to high
+        shares Black Heart)
       source_id: character-stats-profiles-mako-mixed
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Massively FTL+ (Could keep up with Goku and Vegeta) | Inaccessible (Far
-        faster than before. Able to speedblitz both Golden Frieza and Android 17,
-        and is likely on par with a God of Destruction. Overwhelmed SSB Evolution
-        Vegeta at first)
+      value: Irrelevant (Her sheer existence is beyond the concept of numerical dimensionality
+        and by extension she and her speed cannot be defined by the speed formula.
+        Comparable to Noire.) | Irrelevant (Faster than before, should be comparable
+        to Purple Sister)
       source_id: character-stats-profiles-mako-mixed
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Multiverse level (Goku's Warp Kamehameha simply tore his clothes) | Multiverse
-        level (Equal to a God of Destruction in attack as well as defense. Neither
-        Android 17 nor Frieza were able to do any significant damage to him, and he
-        should be at least as durable as the likes of Belmod, his superior), his Energy
-        of Destruction barrier which can erase attacks that touch it makes him hard
-        to directly damage.
+      value: Outerverse level | Varies, Outerverse level with low to average shares,
+        Outerverse level with high shares (Could take hits from HDD Rei, who was about
+        to destroy the Ultra Dimension, affecting the Hyper Dimension as well in the
+        process, only to show off and lure the other CPUs.)
       source_id: character-stats-profiles-mako-mixed
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable | His Energy of Destruction barrier can be bypassed with
-        overwhelming power that surpasses his own such as Vegeta''s Notable Attacks/Techniques:
-        * Justice On and Justice Tornado: After jumping onto his opponent''s shoulder
-        (Justice On) Toppo begins spinning at an extremely high speed to disorientate
-        them (Justice Tornado). * Justice Crusher: While his adversary is distracted
-        Toppo grabs their arm and dislocates their shoulder. * Justice Flash: Toppo
-        extends one arm, grabs it with another then unleashes a barrage of Ki blasts
-        from his finger tips. * Justice Rear Naked Choke: Toppo grapples his opponent
-        from behind and starts to squeeze them until all of their bones are broken
-        or until they are rendered unconscious. * Destruction: Due to his status as
-        a God of Destruction Candidate, possessing a God of Destruction''s full power,
-        Toppo is capable of erasing nearly anything with little effort, although he
-        must charge this energy before using it. By extending one of his hands in
-        front of him and uttering "Destroy", Toppo causes the object he focuses on
-        to disintegrate, potentially erasing them from existence entirely. This is
-        even shown to work on spirits/souls, as it was used to kill Dr. Mashirito,
-        who was a ghost. Toppo can also use this energy to form an aura, erasing any
-        attacks that get near him and making him extremely difficult to damage.'
+      value: Extremely shy and cannot fight at her full potential without Ram. Her
+        Goddess Powers are powered by the Share Energy of her Continent Lowee (Share
+        Energy is basically the amount of Faith the people put into the Goddess).
+        So if her Share Energy were to be drained then her transformation will be
+        cancelled out.
       source_id: character-stats-profiles-mako-mixed
       provider_id: character_stats_profiles
       authority: high
@@ -1415,7 +1760,7 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|toppo canon paleomario66|119913
+    duplicate_key: character-stats-and-profiles.fandom.com|rom canon composite glaceongamez471|237871
     retryable: false
     exception_class: ''
   needs_human_source_choice: false

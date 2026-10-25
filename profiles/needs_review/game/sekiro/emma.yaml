@@ -4,23 +4,14 @@ name: Emma
 franchise: Sekiro
 category: game
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-09-22T19:02:15Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.35
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_powers_and_abilities
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Emma
   franchise: Sekiro
@@ -98,43 +89,7 @@ sources:
 - id: vsbattles-emma-sekiro
   provider_id: vsbattles
   source_type: mediawiki
-  title: Emma Sekiro
-  url: https://vsbattles.fandom.com/wiki/Emma_Sekiro
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-emma-sekiro
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Emma Sekiro
-  url: https://character-stats-and-profiles.fandom.com/wiki/Emma_Sekiro
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-emma-sekiro
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Emma (Sekiro)
+  title: 'Emma (Sekiro: Shadows Die Twice)'
   url: https://vsbattles.fandom.com/wiki/Emma_%28Sekiro%29
   authority: high
   notes: enrich_sources_candidate
@@ -149,6 +104,8 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9613784'
+  revision_timestamp: '2026-07-30T20:55:44Z'
 - id: character-stats-profiles-emma-sekiro
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -205,17 +162,25 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Likely 7-C
+    source_ids:
+    - vsbattles-emma-sekiro
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Likely Town level (Can fight somewhat evenly with Shura Wolf, trained specifically
+      to kill The Demon of Hatred49.22 Kilotons of Tnt)
+    source_ids:
+    - vsbattles-emma-sekiro
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Massively Hypersonic+ (Can dodge attacks from Shura Wolf, deflected a surprise
+      attack from Great Shinobi Owl)
+    source_ids:
+    - vsbattles-emma-sekiro
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -225,23 +190,96 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Likely Town level (Can take hits from Wolf, albeit she is more frail compared
+      to most other bosses)
+    source_ids:
+    - vsbattles-emma-sekiro
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman (Emma was able to stand her ground against a bloodlusted Wolf)
+    source_ids:
+    - vsbattles-emma-sekiro
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Extended Melee Range
+    source_ids:
+    - vsbattles-emma-sekiro
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Genius (Is a highly skilled doctor and swordfighter. She created the Healing
+      Gourds and, with the help of Wolf, found a cure to Dragonrot, something that
+      not even Dougen could achieve. She has also mastered the Ashina Arts, though
+      not on the same level as Isshin)
+    source_ids:
+    - vsbattles-emma-sekiro
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-emma-sekiro
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-skilled-swordfighter
+  name: Skilled Swordfighter
+  description: Skilled Swordfighter
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-master-of-the-ashina-arts
+  name: Master of the Ashina Arts
+  description: Master of the Ashina Arts
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-healing-is-a-skilled-doctor-and-created-the-healing-gourds
+  name: Healing (Is a skilled doctor and created the Healing Gourds)
+  description: Healing (Is a skilled doctor and created the Healing Gourds)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
@@ -257,13 +295,25 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_powers_and_abilities
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-emma-sekiro
+  secondary_disagreement_policy: warning_only
 profile_hash: 792b58d2ed20e337c33302710e55a3a9ea2c86ff00469b4cda1538d23d00805a
 repair:
-  attempted_at: '2026-09-25T08:23:01Z'
+  attempted_at: '2026-10-22T04:32:36Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -330,7 +380,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{10-B}}, at least {{9-C}} with weapons'
+      value: ', at least with weapons'
       source_id: mediawiki-4977529
       provider_id: vsbattles
       authority: high
@@ -397,8 +447,7 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: 'Normal human weaknesses, she is a little naive, and is still only 11
-        years old. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Emma
-        The Promised Neverland|Emma (The Promised Neverland)}} Category:Characters
+        years old. ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
         Category:The Promised Neverland Category:Good Characters Category:Heroes Category:Female
         Characters Category:Manga Characters Category:Orphans Category:Primary Protagonists
         Category:Protagonists Category:Geniuses Category:Kids Category:Weapon Masters
@@ -420,198 +469,6 @@ repair:
     franchise_match: false
     variant_match: true
     duplicate_key: vsbattles.fandom.com|emma the promised neverland|9544855
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-emma-sekiro
-    url: https://vsbattles.fandom.com/wiki/Emma_Sekiro
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: 'Emma (Sekiro: Shadows Die Twice)'
-    source_type: mediawiki
-    revision_id: '9613784'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3757
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: Likely {{7-C}}
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Skilled Swordfighter, Master of
-        the Ashina Arts, Healing (Is a skilled doctor and created the Healing Gourds)
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Likely Town level (Can fight somewhat evenly with Shura Wolf, trained
-        specifically to kill The Demon of Hatred49.22 Kilotons of Tnt)
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively Hypersonic+ (Can dodge attacks from Shura Wolf, deflected a
-        surprise attack from Great Shinobi Owl)
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Likely Town level (Can take hits from Wolf, albeit she is more frail
-        compared to most other bosses)
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Emma was able to stand her ground against a bloodlusted Wolf)
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Katana.
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Genius (Is a highly skilled doctor and swordfighter. She created the
-        Healing Gourds and, with the help of Wolf, found a cure to Dragonrot, something
-        that not even Dougen could achieve. She has also mastered the Ashina Arts,
-        though not on the same level as Isshin)
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable. ==Notable Matchups== Victories: Yamamura, the Wanderer
-        (Bloodborne) Yamamura''s Profile (Starting distance was 10 meters and speed
-        was equalized) Losses: Inconclusive: ==Statistics Values== {{Scroll box |content=
-        }} {{Discussions|Emma Sekiro Shadows Die Twice|Emma (Sekiro: Shadows Die Twice)}}
-        Category:Characters Category:Sekiro: Shadows Die Twice Category:Adults Category:Female
-        Characters Category:Game Bosses Category:Game Characters Category:Video Game
-        Characters'
-      source_id: vsbattles-emma-sekiro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|emma sekiro shadows die twice|9613784
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-emma-sekiro
-    url: https://character-stats-and-profiles.fandom.com/wiki/Emma_Sekiro
-    ok: false
-    note: fields_blocked_by_provider_allowed_fields
-    extracted_fields: []
-    normalized_page_title: 'Sekiro: Shadows Die Twice (Canon, Universe)/Lordhesperus'
-    source_type: mediawiki
-    revision_id: '538327'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 9884
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Power of the Verse
-    - Characters
-    - Weapons
-    stat_labels_detected:
-    - attack_potency
-    - standard_equipment
-    - striking_strength
-    extraction_failure_reason: fields_blocked_by_provider_allowed_fields
-    rank: 45
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|sekiro shadows die twice
-      canon universe lordhesperus|538327
     retryable: false
     exception_class: ''
   - source_id: vsbattles-emma-sekiro
@@ -671,7 +528,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: Likely {{7-C}}
+      value: Likely
       source_id: vsbattles-emma-sekiro
       provider_id: vsbattles
       authority: high
@@ -734,11 +591,9 @@ repair:
     - field: weaknesses
       value: 'None notable. ==Notable Matchups== Victories: Yamamura, the Wanderer
         (Bloodborne) Yamamura''s Profile (Starting distance was 10 meters and speed
-        was equalized) Losses: Inconclusive: ==Statistics Values== {{Scroll box |content=
-        }} {{Discussions|Emma Sekiro Shadows Die Twice|Emma (Sekiro: Shadows Die Twice)}}
-        Category:Characters Category:Sekiro: Shadows Die Twice Category:Adults Category:Female
-        Characters Category:Game Bosses Category:Game Characters Category:Video Game
-        Characters'
+        was equalized) Losses: Inconclusive: ==Statistics Values== Category:Characters
+        Category:Sekiro: Shadows Die Twice Category:Adults Category:Female Characters
+        Category:Game Bosses Category:Game Characters Category:Video Game Characters'
       source_id: vsbattles-emma-sekiro
       provider_id: vsbattles
       authority: high
@@ -766,7 +621,197 @@ repair:
     revision_id: '538327'
     fetch_status: fetched
     http_status: 200
-    content_length: 9884
+    content_length: 9984
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Power of the Verse
+    - Characters
+    - Weapons
+    stat_labels_detected:
+    - attack_potency
+    - standard_equipment
+    - striking_strength
+    extraction_failure_reason: fields_blocked_by_provider_allowed_fields
+    rank: 45
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates: []
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 0
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|sekiro shadows die twice
+      canon universe lordhesperus|538327
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-emma-sekiro
+    url: https://vsbattles.fandom.com/wiki/Emma_Sekiro
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: 'Emma (Sekiro: Shadows Die Twice)'
+    source_type: mediawiki
+    revision_id: '9613784'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3757
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Likely
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Skilled Swordfighter, Master of
+        the Ashina Arts, Healing (Is a skilled doctor and created the Healing Gourds)
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Likely Town level (Can fight somewhat evenly with Shura Wolf, trained
+        specifically to kill The Demon of Hatred49.22 Kilotons of Tnt)
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic+ (Can dodge attacks from Shura Wolf, deflected a
+        surprise attack from Great Shinobi Owl)
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Likely Town level (Can take hits from Wolf, albeit she is more frail
+        compared to most other bosses)
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Emma was able to stand her ground against a bloodlusted Wolf)
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Katana.
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Genius (Is a highly skilled doctor and swordfighter. She created the
+        Healing Gourds and, with the help of Wolf, found a cure to Dragonrot, something
+        that not even Dougen could achieve. She has also mastered the Ashina Arts,
+        though not on the same level as Isshin)
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None notable. ==Notable Matchups== Victories: Yamamura, the Wanderer
+        (Bloodborne) Yamamura''s Profile (Starting distance was 10 meters and speed
+        was equalized) Losses: Inconclusive: ==Statistics Values== Category:Characters
+        Category:Sekiro: Shadows Die Twice Category:Adults Category:Female Characters
+        Category:Game Bosses Category:Game Characters Category:Video Game Characters'
+      source_id: vsbattles-emma-sekiro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|emma sekiro shadows die twice|9613784
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-emma-sekiro
+    url: https://character-stats-and-profiles.fandom.com/wiki/Emma_Sekiro
+    ok: false
+    note: fields_blocked_by_provider_allowed_fields
+    extracted_fields: []
+    normalized_page_title: 'Sekiro: Shadows Die Twice (Canon, Universe)/Lordhesperus'
+    source_type: mediawiki
+    revision_id: '538327'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 9984
     content_kind: api_json
     headings_detected:
     - Summary
@@ -864,9 +909,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Emma Millstein=Superhuman Physical Characteristics, Weapon Mastery (Emma
-        is a master of using Orbal Staffs), Information Analysis (With Detector, Emma
-        is able to scan an opponent for their stats and their weaknesses), Fire Manipulation
+      value: Superhuman Physical Characteristics, Weapon Mastery (Emma is a master
+        of using Orbal Staffs), Information Analysis (With Detector, Emma is able
+        to scan an opponent for their stats and their weaknesses), Fire Manipulation
         (With Aster Flare, Emma can launch a ball of blue flames at the opponent),
         Forcefield Creation, Attack Reflection (With Crescent Shell, Emma can make
         a forcefield around herself and her allies that bounces back attack back at
@@ -876,10 +921,10 @@ repair:
         in the sky that leads to the stars), Mind Control, Teleportation, Non-Physical
         Interaction (Is able to see and harm spirits and ghosts), Accelerated Development
         (Went from being easily stomped by Sara Valestein to being able to beat her
-        in a fair fight in the span of a few months of training) |-|With Quartz=Elemental
-        Manipulation, Fire Manipulation, Ice Manipulation, Water Manipulation, Air
-        Manipulation, Electricity Manipulation, Earth Manipulation, Illusion Manipulation,
-        Time Manipulation, Spatial Manipulation (Emma is able to use all element types
+        in a fair fight in the span of a few months of training) Elemental Manipulation,
+        Fire Manipulation, Ice Manipulation, Water Manipulation, Air Manipulation,
+        Electricity Manipulation, Earth Manipulation, Illusion Manipulation, Time
+        Manipulation, Spatial Manipulation (Emma is able to use all element types
         of Quartz which include Earth, Water, Fire, Air, Time, Space and Mirage),
         Light Manipulation, Death Manipulation, Soul Manipulation, Black Hole Generation
         (Can create a black hole that swallows up time and space with Lost Genesis),
@@ -892,39 +937,38 @@ repair:
         Butterfly), Fear Manipulation, Petrification, Poison Manipulation, Statistics
         Reduction, Power Nullification, Perception Manipulation, Healing, Causality
         Manipulation (Higher Elemental Quartz like Space, Time and Mirage can influence
-        and distort causality itself) |-|Resistances=Resistance to Elemental Manipulation,
-        Fire Manipulation, Ice Manipulation, Water Manipulation, Air Manipulation,
-        Electricity Manipulation, Earth Manipulation, Time Manipulation, Light Manipulation,
-        Spatial Manipulation, Death Manipulation, Status Effect Inducement, Emotional
-        Manipulation, Fear Manipulation, Poison Manipulation, Statistics Reduction,
-        Power Nullification, Perception Manipulation, Causality Manipulation, Acid
-        Manipulation (Can fight against the Dissolution Slug which uses its stomach
-        acid to dissolve its prey), Madness Manipulation (Can fight against the Acerbic
-        Tomartian which spews out tomato juices that are so bitter it drives people
-        insane and the Shadow Spirit who gives an opponent a maddening nightmare if
-        they hear it), Soul Manipulation (Can fight against the Hell Rabbit who can
-        steal an opponent's soul when it stabs them with its spines and Nosferatu
-        who has the authority over souls which it devours), Existence Erasure (Can
-        fight against the Orderbelisk which uses powerful space arts to erase opponents
-        from existence), Sleep Manipulation (Can fight against the Ghost Soul and
-        the Pit Demon which can both lull an opponent into an eternal sleep), Illusion
-        Creation (Can fight against the Fate Spinner which able to make an opponent
-        experience hallucinations after attacking them with its poisonous liquid),
-        Fragrance Manipulation (Can fight against the Platinum Bug which is able to
-        produce a horrid stench that can make an opponent faint), Disease Manipulation
-        (Can fight against the Zesvia which is believed to be the cause of countless
-        plagues), Perception Manipulation (Can fight against the Pit Cerberus which
-        can use deadly miasma which removes an opponents vision), Petrification (Can
-        fight against the Polyjelly which can turn an opponent to stone with just
-        a touch), Fire Manipulation, Heat Manipulation (Can fight against the Surtr
-        which has a sword so hot that it can boil steel), Ice Manipulation (Can fight
-        against the Frost Biter who can turn an opponent to ice with just a touch),
-        Paralysis Inducement, Fear Manipulation (Can fight against the Double Sickle
-        which can paralyse people in fear by howling and the Basilisk Starer which
-        is able to generate so much fear in a person that they die just with its stare),
-        Petrification, Corrosion Inducement, Matter Manipulation (Can take hits from
-        Unsurtr Maris which has breath that petrifies people and a howl that corrodes
-        away matter)
+        and distort causality itself) Resistance to Elemental Manipulation, Fire Manipulation,
+        Ice Manipulation, Water Manipulation, Air Manipulation, Electricity Manipulation,
+        Earth Manipulation, Time Manipulation, Light Manipulation, Spatial Manipulation,
+        Death Manipulation, Status Effect Inducement, Emotional Manipulation, Fear
+        Manipulation, Poison Manipulation, Statistics Reduction, Power Nullification,
+        Perception Manipulation, Causality Manipulation, Acid Manipulation (Can fight
+        against the Dissolution Slug which uses its stomach acid to dissolve its prey),
+        Madness Manipulation (Can fight against the Acerbic Tomartian which spews
+        out tomato juices that are so bitter it drives people insane and the Shadow
+        Spirit who gives an opponent a maddening nightmare if they hear it), Soul
+        Manipulation (Can fight against the Hell Rabbit who can steal an opponent's
+        soul when it stabs them with its spines and Nosferatu who has the authority
+        over souls which it devours), Existence Erasure (Can fight against the Orderbelisk
+        which uses powerful space arts to erase opponents from existence), Sleep Manipulation
+        (Can fight against the Ghost Soul and the Pit Demon which can both lull an
+        opponent into an eternal sleep), Illusion Creation (Can fight against the
+        Fate Spinner which able to make an opponent experience hallucinations after
+        attacking them with its poisonous liquid), Fragrance Manipulation (Can fight
+        against the Platinum Bug which is able to produce a horrid stench that can
+        make an opponent faint), Disease Manipulation (Can fight against the Zesvia
+        which is believed to be the cause of countless plagues), Perception Manipulation
+        (Can fight against the Pit Cerberus which can use deadly miasma which removes
+        an opponents vision), Petrification (Can fight against the Polyjelly which
+        can turn an opponent to stone with just a touch), Fire Manipulation, Heat
+        Manipulation (Can fight against the Surtr which has a sword so hot that it
+        can boil steel), Ice Manipulation (Can fight against the Frost Biter who can
+        turn an opponent to ice with just a touch), Paralysis Inducement, Fear Manipulation
+        (Can fight against the Double Sickle which can paralyse people in fear by
+        howling and the Basilisk Starer which is able to generate so much fear in
+        a person that they die just with its stare), Petrification, Corrosion Inducement,
+        Matter Manipulation (Can take hits from Unsurtr Maris which has breath that
+        petrifies people and a howl that corrodes away matter)
       source_id: character-stats-profiles-emma
       provider_id: character_stats_profiles
       authority: high
@@ -957,24 +1001,22 @@ repair:
         will allow her to use special Arts. Arts are separated into seven categories,
         Earth, Water, Fire, Wind, Time, Space and Mirage each of which has Arts that
         can deal damage to opponents, increase Emma''s stats, buff up allies and inflict
-        status effects on opponents. |-|Earth Quartz= {{#tag:tabber| Arts Quartz=
-        :* Needle Shoot: Emma forms a big rock spike which stabs into the opponent.
-        :* Earth Lance: Emma forms multiple rock spikes to shoot out of the ground
-        to stab the opponent. :* Grand Press: Emma creates a small isolated earthquake
-        where the opponent is standing. :* Yggdrasil: Emma creates a tree that stabs
-        the opponent with its roots. :* Ancient Glyph: Emma drops a large stone slab
-        on top of the opponent. :* Earth Pulse: Emma makes the Earth heal an ally
-        that repeatedly activates every so often. :* Crest: Emma raises the defence
-        of one ally by using the Earth. :* La Crest: Emma raises the defence of everyone
-        in an area by using the power of the Earth. :* Adamantine Shield: Emma creates
-        a rock forcefield that protects an ally from one attack. {{!}}-{{!}} Stat
-        Quartz= :* Defence 1: Emma''s defence is increased by a little. :* Defence
-        2: Emma''s defence is increased by a bit. :* Defence 3: Emma''s defence is
-        increased by a lot. {{!}}-{{!}} Status Quartz= :* Poison: Emma poisons the
-        opponent making them take damage every so often. :* Petrify: Emma turns the
-        opponent to stone and prevents them from being able to act. :* Shield Breaker:
-        Emma lowers the defence of the opponent by twenty-five percent. }} |-|Water
-        Quartz= {{#tag:tabber| Arts Quartz= :* Aqua Bleed: Emma fires a small stream
+        status effects on opponents. :* Needle Shoot: Emma forms a big rock spike
+        which stabs into the opponent. :* Earth Lance: Emma forms multiple rock spikes
+        to shoot out of the ground to stab the opponent. :* Grand Press: Emma creates
+        a small isolated earthquake where the opponent is standing. :* Yggdrasil:
+        Emma creates a tree that stabs the opponent with its roots. :* Ancient Glyph:
+        Emma drops a large stone slab on top of the opponent. :* Earth Pulse: Emma
+        makes the Earth heal an ally that repeatedly activates every so often. :*
+        Crest: Emma raises the defence of one ally by using the Earth. :* La Crest:
+        Emma raises the defence of everyone in an area by using the power of the Earth.
+        :* Adamantine Shield: Emma creates a rock forcefield that protects an ally
+        from one attack. :* Defence 1: Emma''s defence is increased by a little. :*
+        Defence 2: Emma''s defence is increased by a bit. :* Defence 3: Emma''s defence
+        is increased by a lot. :* Poison: Emma poisons the opponent making them take
+        damage every so often. :* Petrify: Emma turns the opponent to stone and prevents
+        them from being able to act. :* Shield Breaker: Emma lowers the defence of
+        the opponent by twenty-five percent. :* Aqua Bleed: Emma fires a small stream
         of water at the opponent. :* Frost Edge: Emma creates a group of ice shards
         that fly into the opponent to stab them. :* Hydro Cannon: Emma fires a massive
         amount of water in a compressed stream at the opponent. :* Crystal Flood:
@@ -984,40 +1026,42 @@ repair:
         :* Tearal: Emma heals a lot of an ally''s health. :* Thelas: Emma revives
         an ally and recovers a small amount of health. :* Athelas: Emma revives an
         ally and recovers a large amount of health. :* Curia: Emma heals an ally of
-        any negative status effect they are suffering from. {{!}}-{{!}} Stat Quartz=
-        :* HP 1: Emma''s health is increased by a little. :* HP 2: Emma''s health
-        is increased by a lot. :* Shield 1: Emma''s magical defence is increased by
-        a little. :* Shield 2: Emma''s magical defence is increased by a bit. :* Shield
-        3: Emma''s magical defence is increased by a lot. {{!}}-{{!}} Status Quartz=
-        :* Mute: Emma mutes the opponent that prevents them from using magic. :* Freeze:
-        Emma freezes the opponent in a block of ice which harms them. :* Spirit Breaker:
-        Emma lowers the special attack of the opponent by twenty-five percent. }}
-        |-|Fire Quartz= {{#tag:tabber| Art Quartz= :* Fire Bolt: Emma fires a fireball
-        at the opponent. :* Heat Wave: Emma creates a wall of fire which harms the
-        opponent. :* Flame Tongue: Emma creates a fire eruption from the ground which
-        harms the opponent. :* Volcanic Rain: Emma rains down balls of fire on top
-        of the opponent. :* Flare Bomb: Emma launches a giant fireball at the opponent
-        which explodes. :* Purgatorial Flame: Emma creates a giant pillar of fire
-        to burn the opponent. :* Impassion: Emma raises an ally''s spirit which restores
-        their stamina every so often. :* Heat Up: Emma removes a debuff from one ally
-        and restores a small part of their stamina. :* Forte: Emma raises an ally''s
-        attack. :* La Forte: Emma raises the attack of everyone in an area. {{!}}-{{!}}
-        Stat Quartz= :* Attack 1: Emma''s attack is increased by a little. :* Attack
-        2: Emma''s attack is increased by a bit. :* Attack 3: Emma''s attack is increased
-        by a lot. {{!}}-{{!}} Status Quartz= :* Seal: Emma prevents the opponent from
-        using any special skills. :* Burn: Emma sets the opponent on fire. :* Sword
-        Breaker: Emma lowers the attack of the opponent by twenty-five percent. }}
-        |-|Wind Quartz= {{#tag:tabber| Arts Quartz= :* Air Strike: Emma fires a gust
-        of wind at the opponent. :* Spark Arrow: Emma fires a bolt of lightning at
-        the opponent. :* Aerial: Emma creates a small isolated tornado that attacks
-        the opponent. :* Judgement Bolt: Emma fires a bolt of electricity at the opponent.
-        :* Ragna Vortex: Emma creates a massive tornado that harms the opponent. :*
-        Breath: Emma creates a wind of air which slowly heals anyone in an area by
-        a little. :* Holy Breath: Emma creates a wind of air which slowly heals anyone
-        in an area by a lot. :* Recuria: Emma cures an ally of any status effects.
-        {{!}}-{{!}} Stat Quartz= :* Evade 1: Emma''s evasion is increased by a little.
-        :* Evade 2: Emma''s evasion is increased by a lot. :* Move 1: Emma''s movement
-        is increa'
+        any negative status effect they are suffering from. :* HP 1: Emma''s health
+        is increased by a little. :* HP 2: Emma''s health is increased by a lot. :*
+        Shield 1: Emma''s magical defence is increased by a little. :* Shield 2: Emma''s
+        magical defence is increased by a bit. :* Shield 3: Emma''s magical defence
+        is increased by a lot. :* Mute: Emma mutes the opponent that prevents them
+        from using magic. :* Freeze: Emma freezes the opponent in a block of ice which
+        harms them. :* Spirit Breaker: Emma lowers the special attack of the opponent
+        by twenty-five percent. :* Fire Bolt: Emma fires a fireball at the opponent.
+        :* Heat Wave: Emma creates a wall of fire which harms the opponent. :* Flame
+        Tongue: Emma creates a fire eruption from the ground which harms the opponent.
+        :* Volcanic Rain: Emma rains down balls of fire on top of the opponent. :*
+        Flare Bomb: Emma launches a giant fireball at the opponent which explodes.
+        :* Purgatorial Flame: Emma creates a giant pillar of fire to burn the opponent.
+        :* Impassion: Emma raises an ally''s spirit which restores their stamina every
+        so often. :* Heat Up: Emma removes a debuff from one ally and restores a small
+        part of their stamina. :* Forte: Emma raises an ally''s attack. :* La Forte:
+        Emma raises the attack of everyone in an area. :* Attack 1: Emma''s attack
+        is increased by a little. :* Attack 2: Emma''s attack is increased by a bit.
+        :* Attack 3: Emma''s attack is increased by a lot. :* Seal: Emma prevents
+        the opponent from using any special skills. :* Burn: Emma sets the opponent
+        on fire. :* Sword Breaker: Emma lowers the attack of the opponent by twenty-five
+        percent. :* Air Strike: Emma fires a gust of wind at the opponent. :* Spark
+        Arrow: Emma fires a bolt of lightning at the opponent. :* Aerial: Emma creates
+        a small isolated tornado that attacks the opponent. :* Judgement Bolt: Emma
+        fires a bolt of electricity at the opponent. :* Ragna Vortex: Emma creates
+        a massive tornado that harms the opponent. :* Breath: Emma creates a wind
+        of air which slowly heals anyone in an area by a little. :* Holy Breath: Emma
+        creates a wind of air which slowly heals anyone in an area by a lot. :* Recuria:
+        Emma cures an ally of any status effects. :* Evade 1: Emma''s evasion is increased
+        by a little. :* Evade 2: Emma''s evasion is increased by a lot. :* Move 1:
+        Emma''s movement is increased by a little. :* Move 2: Emma''s movement is
+        increased by a bit. :* Move 3: Emma''s movement is increased by a lot. :*
+        Blind: Emma blinds the opponent making it impossible for them to hit him.
+        :* Sleep: Emma puts the opponent to sleep. :* Leg Breaker: Emma lowers the
+        movement of the opponent by twenty-five percent. :* Soul Blur: Emma shoots
+        a ball that shakes time'
       source_id: character-stats-profiles-emma
       provider_id: character_stats_profiles
       authority: high
@@ -1092,12 +1136,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-B}}'
-      source_id: vsbattles-emma-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Inorganic Physiology (Type 1. Is
         a robot used as a host for Emma's body which contains her spirit), Immortality
@@ -1162,11 +1200,18 @@ repair:
         the target. *Flamethrower: Breathes a stream of fire that gradually spreads
         outward the further it goes. Usually will tend to sweep the surrounding area
         with this attack. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        ==Statistics Value== {{Discussions}} Category:Camping (Roblox) Category:Characters
-        Category:Game Characters Category:Video Game Characters Category:Female Characters
-        Category:Antagonists Category:Villains Category:Immortals Category:Inorganic
-        Beings Category:Ghosts Category:Robots Category:Breath Attack Users Category:Explosion
-        Users Category:Fire Users'
+        ==Statistics Value== Category:Camping (Roblox) Category:Characters Category:Game
+        Characters Category:Video Game Characters Category:Female Characters Category:Antagonists
+        Category:Villains Category:Immortals Category:Inorganic Beings Category:Ghosts
+        Category:Robots Category:Breath Attack Users Category:Explosion Users Category:Fire
+        Users'
+      source_id: vsbattles-emma-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Emma Logan, Monster, Limbo. Origin: Camping (Roblox) Gender: Female
+        Age: Likely 8 or 9 before her death. Classification: Ghost, Killer Robot.'
       source_id: vsbattles-emma-game
       provider_id: vsbattles
       authority: high
@@ -1195,17 +1240,17 @@ repair:
     - speed
     - tier
     - weaknesses
-    normalized_page_title: Emma Frost (Lego Games, Canon)/Gamehost0007
+    normalized_page_title: Emma Magorobi (Canon)/Unbacked0
     source_type: mediawiki
-    revision_id: '114885'
+    revision_id: '145039'
     fetch_status: fetched
     http_status: 200
-    content_length: 1473
+    content_length: 2818
     content_kind: api_json
     headings_detected:
     - Summary
-    - Powers and stats
-    - Other
+    - Powers and Stats
+    - Others
     stat_labels_detected:
     - attack_potency
     - durability
@@ -1217,6 +1262,7 @@ repair:
     - range
     - speed
     - stamina
+    - standard_equipment
     - striking_strength
     - tier
     - weaknesses
@@ -1236,38 +1282,55 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 6-B
+      value: 8-B, Varies with Divine Luck
       source_id: character-stats-profiles-emma-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Mind Manipulation, Regeneration (mid), Mind Control
+      value: Superhuman Physical Characteristics, Stealth Mastery (She perfectly disguised
+        herself as Kokoro), Supernatural Luck, Probability Manipulation, Blessed (Was
+        gifted Divine Luck by Utsuro), Information Manipulation, Weather Manipulation,
+        Earth Manipulation, Martial Arts, Healing, Biological Manipulation, Possible
+        Fire Manipulation, Resistance to Disease Manipulation
       source_id: character-stats-profiles-emma-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Country as she scales to the hulk who hurt the statue of liberty
+      value: City Block Level (Should be able to harm Teruya and Shobai who have both
+        been hit by Mikado's fire magic which can destroy a large cruise ship), Varies
+        with Divine Luck (Anything that Emma wants to happen will happen which includes
+        a building being destroyed by explosions and a bridge being destroyed by an
+        earthquake)
       source_id: character-stats-profiles-emma-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Massively hypersonic as she scales to Hulk who can move at that speed
+      value: Supersonic (Is comparable to Tsurugi who dodged gunfire)
       source_id: character-stats-profiles-emma-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Country. Higher with diamond form
+      value: City Block Level (Is comparable to Teruya who survived being blasted
+        by Mikado and sent flying into the sky, Scales to Utsuro who survived a building
+        falling on top of him)
       source_id: character-stats-profiles-emma-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None noted. ==Other== Notable Victories: Notable Losses: Inconclusive
-        Matches: Category:Tier 6 Category:Gamehost0007'
+      value: 'None Notable Notable Attacks/Techniques: * Ultimate Actress: Emma is
+        considered the world''s greatest actress. Emma''s acting skills have allowed
+        her to act in any way that she desires, she can act to the point that she
+        could be fooled for someone else. * Divine Fortune: After Emma met Utsuro,
+        Emma gained a portion of his Divine Luck. This Divine Luck has been used by
+        Emma to get wealth and to become the Ultimate Actress. Note: Super Danganronpa
+        Another 2''s final chapter has not been fully translated yet so this profile
+        is unfinished. == Others == Notable Victories: Notable Losses: Inconclusive
+        Matches: Category:Unbacked0 Category:Tier 8 Category:Variable Tier'
       source_id: character-stats-profiles-emma-game
       provider_id: character_stats_profiles
       authority: high
@@ -1282,8 +1345,7 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|emma frost lego games canon
-      gamehost0007|114885
+    duplicate_key: character-stats-and-profiles.fandom.com|emma magorobi canon unbacked0|145039
     retryable: false
     exception_class: ''
   needs_human_source_choice: false

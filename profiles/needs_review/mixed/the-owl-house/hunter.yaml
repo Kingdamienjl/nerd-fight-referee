@@ -11,7 +11,7 @@ generation:
   generated_at: '2026-09-22T21:03:50Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.35
-  ineligible_reasons: &id002
+  ineligible_reasons: &id003
   - confidence_below_0_55
   - missing_attack_potency
   - missing_clean_linked_ability
@@ -98,42 +98,6 @@ sources:
 - id: vsbattles-hunter-the-owl-house
   provider_id: vsbattles
   source_type: mediawiki
-  title: Hunter The Owl House
-  url: https://vsbattles.fandom.com/wiki/Hunter_The_Owl_House
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-hunter-the-owl-house
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Hunter The Owl House
-  url: https://character-stats-and-profiles.fandom.com/wiki/Hunter_The_Owl_House
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-hunter-the-owl-house
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Hunter (The Owl House)
   url: https://vsbattles.fandom.com/wiki/Hunter_%28The_Owl_House%29
   authority: high
@@ -149,6 +113,8 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '8672028'
+  revision_timestamp: '2024-08-03T14:58:55Z'
 - id: character-stats-profiles-hunter-the-owl-house
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -169,17 +135,31 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 9-A physically, 8-B, up to 7-C with Magic
+    source_ids:
+    - vsbattles-hunter-the-owl-house
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level physically (Harmed Amity with a leg sweep. Should be
+      comparable to Luz and Eda), City Block level, up to Small Town level with Magic
+      (Tore through Willow's vines. Should be comparable, if not superior to Luz and
+      Amity)
+    source_ids:
+    - vsbattles-hunter-the-owl-house
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Athletic Human combat, reaction & travel speed by himself (Easily dodged
+      multiple attacks from Luz and Eda), higher combat speed via Pseudo Teleportation
+      (This ability has shown to allow Hunter to catch characters normally comparable
+      to him off guard) and flight speed with Palisman (Can ride it for transportation).
+      Up to Subsonic flight speed with staff (Can accelerate this fast, without facing
+      obstacles)
+    source_ids:
+    - vsbattles-hunter-the-owl-house
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -189,27 +169,221 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level (Took a direct strike from Amity)
+    source_ids:
+    - vsbattles-hunter-the-owl-house
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Athletic
+    source_ids:
+    - vsbattles-hunter-the-owl-house
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Tens of Meters with magic
+    source_ids:
+    - vsbattles-hunter-the-owl-house
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Above Average (Has been described as a child prodigy among the members
+      of the Emperor''s Coven. The Emperor''s Coven is a coven that only excepts the
+      most skilled and prestigious witches. Once they enter the Emperor''s coven,
+      witches are they subjected to intense training for their magic skills. Matched
+      Amity in combat, despite using a new staff and being very tired. Despite his
+      young age, is easily able to contend with adult witches) Standard Tactics: Hunter
+      typically battles by repeatedly using his Pseudo Teleportation to avoid attacks
+      and get close to targets. Once he gets close, he then attempts to strike the
+      target with his staff. He also occasionally uses ranged magic attacks.'
+    source_ids:
+    - vsbattles-hunter-the-owl-house
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-hunter-the-owl-house
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-acrobatics
+  name: Acrobatics
+  description: Acrobatics
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-skilled-staff-user
+  name: Skilled Staff User
+  description: Skilled Staff User
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-vehicular-mastery-has-shown-to-be-a-proficient-staff-rider-
+  name: Vehicular Mastery (Has shown to be a proficient staff rider and ship pilot)
+  description: Vehicular Mastery (Has shown to be a proficient staff rider and ship
+    pilot)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - pilot_dependency
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-summoning-could-summon-flapjack
+  name: Summoning (Could summon Flapjack)
+  description: Summoning (Could summon Flapjack)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - summoning
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_summon
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-pseudo-teleportation-he-can-envelop-his-body-in-a-gold-ligh
+  name: Pseudo Teleportation (He can envelop his body in a gold light to gain a short
+    burst of speed) Electricity Manipulation
+  description: Pseudo Teleportation (He can envelop his body in a gold light to gain
+    a short burst of speed) Electricity Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  - dimensional_travel
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-earth-manipulation
+  name: Earth Manipulation
+  description: Earth Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-forcefield-negation-should-have-all-of-flapjack-s-abilities
+  name: Forcefield Negation (Should have all of Flapjack's abilities)
+  description: Forcefield Negation (Should have all of Flapjack's abilities)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-resistance-to-the-following-memory-manipulation-withstood-t
+  name: 'Resistance to the following: Memory Manipulation (Withstood the effects of
+    Gus''s memory powers without being incapacitat'
+  description: 'Resistance to the following: Memory Manipulation (Withstood the effects
+    of Gus''s memory powers without being incapacitated), Possession (Broke free of
+    Emperor Belos'' possession), Possible Resistance to Extreme Heat (Was seemingly
+    unaffected by the heat of the Boiling Sea, which is hot enough to induce third
+    degree burns with just it''s steam. Though the method of withstanding the heat
+    is unknown) All Innate Abilities, Magic, Flight, Energy Projection, Telekinesis,
+    Pseudo Teleportation (He can envelop his body in a red light to dash short distances),
+    Sand Manipulation, Water Manipulation, Weapon Creation (Created a sword using
+    magic), Thread Manipulation (Created a thread to bind Luz), Attack Reflection
+    (Deflected a fire blast from Kikimora with his staff)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  - biological_possession
+  - dimensional_travel
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - range_limit
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-fear-of-emperor-belos-sometimes-act-irrationally-whenever-he-s-in-pan
+  name: "Fear of Emperor Belos. Sometimes act irrationally whenever he\u2019s in panic\
+    \ mood."
+  description: "Fear of Emperor Belos. Sometimes act irrationally whenever he\u2019\
+    s in panic mood."
+  source_ids:
+  - vsbattles-hunter-the-owl-house
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -221,22 +395,18 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons: *id003
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: 18652f218c16a4a5ac2c7bf303525b5f10fe50ab5a40f07b5659275a120e773b
 repair:
-  attempted_at: '2026-09-25T13:27:03Z'
+  attempted_at: '2026-10-25T11:13:25Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: mediawiki-3823581
-    url: https://vsbattles.fandom.com/wiki/Hunter
+  - source_id: vsbattles-hunter-the-owl-house
+    url: https://vsbattles.fandom.com/wiki/Hunter_%28The_Owl_House%29
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -250,17 +420,16 @@ repair:
     - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: The Hunter (Monster Hunter)
+    normalized_page_title: Hunter (The Owl House)
     source_type: mediawiki
-    revision_id: '9658490'
+    revision_id: '8672028'
     fetch_status: fetched
     http_status: 200
-    content_length: 12888
+    content_length: 6085
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
-    - Gallery
     - Notable Matchups
     stat_labels_detected:
     - attack_potency
@@ -278,7 +447,166 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-A physically, 8-B, up to 7-C with Magic
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Acrobatics, Skilled Staff User,
+        Vehicular Mastery (Has shown to be a proficient staff rider and ship pilot),
+        Summoning (Could summon Flapjack), Pseudo Teleportation (He can envelop his
+        body in a gold light to gain a short burst of speed) Electricity Manipulation,
+        Earth Manipulation, Forcefield Negation (Should have all of Flapjack''s abilities),
+        Resistance to the following: Memory Manipulation (Withstood the effects of
+        Gus''s memory powers without being incapacitated), Possession (Broke free
+        of Emperor Belos'' possession), Possible Resistance to Extreme Heat (Was seemingly
+        unaffected by the heat of the Boiling Sea, which is hot enough to induce third
+        degree burns with just it''s steam. Though the method of withstanding the
+        heat is unknown) All Innate Abilities, Magic, Flight, Energy Projection, Telekinesis,
+        Pseudo Teleportation (He can envelop his body in a red light to dash short
+        distances), Sand Manipulation, Water Manipulation, Weapon Creation (Created
+        a sword using magic), Thread Manipulation (Created a thread to bind Luz),
+        Attack Reflection (Deflected a fire blast from Kikimora with his staff)'
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level physically (Harmed Amity with a leg sweep. Should
+        be comparable to Luz and Eda), City Block level, up to Small Town level with
+        Magic (Tore through Willow's vines. Should be comparable, if not superior
+        to Luz and Amity)
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Athletic Human combat, reaction & travel speed by himself (Easily dodged
+        multiple attacks from Luz and Eda), higher combat speed via Pseudo Teleportation
+        (This ability has shown to allow Hunter to catch characters normally comparable
+        to him off guard) and flight speed with Palisman (Can ride it for transportation).
+        Up to Subsonic flight speed with staff (Can accelerate this fast, without
+        facing obstacles)
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level (Took a direct strike from Amity)
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Athletic
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Tens of Meters with magic
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Optional
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Above Average (Has been described as a child prodigy among the members
+        of the Emperor''s Coven. The Emperor''s Coven is a coven that only excepts
+        the most skilled and prestigious witches. Once they enter the Emperor''s coven,
+        witches are they subjected to intense training for their magic skills. Matched
+        Amity in combat, despite using a new staff and being very tired. Despite his
+        young age, is easily able to contend with adult witches) Standard Tactics:
+        Hunter typically battles by repeatedly using his Pseudo Teleportation to avoid
+        attacks and get close to targets. Once he gets close, he then attempts to
+        strike the target with his staff. He also occasionally uses ranged magic attacks.'
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "Fear of Emperor Belos. Sometimes act irrationally whenever he\u2019\
+        s in panic mood."
+      source_id: vsbattles-hunter-the-owl-house
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|hunter the owl house|8672028
+    retryable: false
+    exception_class: ''
+  - source_id: mediawiki-3823581
+    url: https://vsbattles.fandom.com/wiki/Hunter
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    normalized_page_title: The Hunter (Bloodborne)
+    source_type: mediawiki
+    revision_id: '9647964'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 127813
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -295,172 +623,182 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: At least {{High 8-C}}, possibly far higher | At least {{High 6-C}}, likely
-        {{Low 6-B}} | At least {{Low 6-B}}
-      source_id: mediawiki-3823581
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Enhanced Senses (Scoutflies can
-        track monsters across entire ecosystems. Paintballs allow the Hunter to track
-        the target), Extrasensory Perception (Autotracker can sense monsters without
-        having to mark it), Weapon Mastery, Lightning Manipulation, Fire Manipulation,
-        Ice Manipulation, Water Manipulation, Explosion Manipulation (via Blast, Slime,
-        Explosive Barrels), Presence Concealment (via Ghillie Mantle), Self-Sustenance
-        (Type 1), Flight (via Glide Mantle and weapons like Airship Hammer), Empathic
-        Manipulation (via Challenger Mantle and weapons like Fatalis Menace and Aladdin's
-        Wand), Life Manipulation (Able to double his own life by Vitality Mantle),
-        Stealth Mastery, Healing (Various items such as potions can restore health),
-        Mind Attacks (Dragon Element attacks the mind, dealing damage the more intelligent
-        the target is), Power Nullification (via Dragon Element and Elderseal), Poison
-        Manipulation, Insect Manipulation (Can use the Kinsect which can sap essence
-        of the target and use it to strengthen the Hunter, as well as produce dust
-        that can apply Status effects when attacked), Sound Manipulation (via Scream
-        pods and Hunting Horn), Information Analysis (via Psychic Vision), Light Manipulation
-        (via flash pods), Statistics Amplification, Damage Reduction (Via Divine Blessing),
-        Status Effect Inducement (Such as Paralysis, Sleep, Stun, Poison, Blast),
-        Regeneration (Low, can slowly regain some health over time during a hunt;
-        Mid-Low, via Super Recovery and Recovery Speed), Probability Manipulation
-        (Via Good Luck, various specialized tools and skills), Minor Physics Manipulation
-        (Weapons like Arachnoscale reduces friction), Creation (Via Alchemy Style),
-        Smoke Manipulation (Weapons like Anubis can create large pillar of smoke,
-        can create poison fog with a poison smoke bomb), Energy Projection (Able to
-        fire Dragon Element blasts by weapons like Altheos Alteria), Magnetism Manipulation
-        (Able to propel himself to the opponent by Magnet Spike), Pain Negation (Able
-        to negate the pain of his attacks by Aloe Stenyo), limited Duplication, Aura
-        (Able to create dangerous aura by utilizing equipments like Aim of Magic),
-        Sleep Manipulation (Weapons like Addled Beers can put enemies to sleep), Vibration
-        Manipulation (Weapons like Accursed Wail can create destructive impulses),
-        Earth Manipulation (Weapons like Accursed Striker can create earthquakes),
-        Shockwave Generation (Weapons like Accursed Slicers can create shockwaves),
-        Summoning (Can summon Grimalkynes to the battle to aid himself with various
-        commands), Invulnerability (To Fire, Water, Ice, Thunder, Tremor, Sound, Blunt
-        Force and Wind depending on the tool being used), Instinctive Reaction (via
-        Temporal Mantle). |-|Resistances=Resistance to Mind Manipulation (Immune to
-        the mind controlling properties of Effluvium and the Frenzy Virus), Hunger
-        (via Hunger Resistance), Matter Manipulation, Elements, Sound (via Earplugs),
-        Wind (via Wind Proof), Tremor (Tremor Resistance prevents the Hunter from
-        losing his footing when the earth quakes), Debuffs and Blights (Blight Resistance
-        makes the Hunter resistant to blights, which are Status Effects, Iron Skin
-        protects from defense down), Biological Manipulation (With certain armor.
-        Resisted the Effilivium of Vaal Hazak), Sleep Manipulation (with energy drink
-        and certain armor), Extreme Heat, Disease Manipulation (can overcome Shagaru
-        and Gore Magala's Frenzy Virus), Blunt Force Injury (some accessories grants
-        resistance to stunning), Perception Manipulation (can wear confusion, dark
-        and bubbleblight off over time), Telepathy, BFR, Death Manipulation, Absorption,
-        Dream Manipulation, Possession, Illusion Creation, Memory Manipulation, Darkness
-        Manipulation, Soul Manipulation (Able to resist the effects of the Fatalis
-        armor), Poison Manipulation (Able to wear out poisons), Statistics Reduction
-        (Able to resist the effects of various effects like Fatigue by various items
-        and armory), Empathic Manipulation (Able to resist the effects of the sounds
-        of weaponry like Fatalis Menace and effects of Confusion), Magnetism Manipulation
-        (Able to resist the effects of the magnetic effects of Gougarf by Laviente
-        Blood), Acid Manipulation (Able to stand in a pool of acid for a period of
-        time), Light Manipulation (Able to withstand light that can blind monsters
-        without going blind), Bleeding (Via Bleeding Resistance), Power Nullification
-        (Via Dragon Resistance and Nulberries), Stealing (Some skill grant resistance
-        to Chameleos' stealing), Spatial and Temporal Attacks (Able to take safe hits
-        from Alatreon, whose wings and horn can cut through space and time)
+      value: At least 8-A | 7-C | High 6-C | At least High 6-C, likely 5-A | 5-A
       source_id: mediawiki-3823581
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: At least Large Building level+ (Can take on the likes of Agnaktor, Barroth,
-        Diablos, and Rathian), possibly far higher (Contributed in the fight against
-        Zorah Magdaros, and managed repel Nergigante. Fought against Gore Magala and
-        Shagaru Magala) | At least Large Island level (Defeated Kushala Daora, who
-        can disperse a snowstorm in an instant), likely Small Country level (Killed
-        newborn Xeno'Jiiva. Able to destroy Zorah's magmacores and killed Dalamadur)
-        | At least Small Country level+ (Strong enough to slay Dangerous First-Class
-        monsters, such as Fatalis, Alatreon and Dire Miralis)
+      value: At least Multi-City Block level (Capable of fighting and killing Henryk,
+        the Old Hunter, who can withstand the meteors of the Fluorescent Flower, which
+        are this strong. Able to fight and kill Father Gascoigne as well as weaker
+        Beasts such as the Cleric Beast, Blood-Starved Beast, and Vicar Amelia) |
+        Town level (Can fight and kill the Living Failures, who are capable of this,
+        as well as Darkbeast Paarl and the Abhorrent Beast) | Large Island level+
+        (Has access to equipment such as A Call Beyond, which is this powerful, the
+        Augur of Ebrietas, which summons part of Ebrietas to wield as an attack, the
+        Amygdalan Arm, which is the severed still-living arm of a lesser Amygdala,
+        and the Kos Parasite, which is able to transform The Hunter into a fully fledged
+        Kin. Can fight and defeat Great Ones such as Ebrietas, Rom, Amygdala, and
+        the Celestial Emissary, as well as other users of A Call Beyond and Augur
+        of Ebrietas such as Yurie, Imposter Iosefka, Micolash, and Forgotten Madman)
+        | At least Large Island level+, likely Large Planet level (Can defeat Great
+        Ones such as The Orphan of Kos, and Mergo's Wet Nurse, as well as Gehrman,
+        the First Hunter and Lady Maria of the Astral Clocktower) | Large Planet level
+        (After consuming 3 Third Umbilical Cords, The Hunter transcends The Hunt entirely
+        and becomes one of the most powerful Great Ones, surpassing the likes of Mergo,
+        who moved the moon and created the Nightmare of Mensis. Fought, defeated,
+        and usurped the Moon Presence, which created the Hunter's Dream and moved
+        the moon, and took control of the Hunter's Dream as a result)
       source_id: mediawiki-3823581
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Supersonic (Capable of dodging Malfestio's sonic beams and evading roars.
-        Capable of keeping up with Rathalos and Astalos who are this fast) | Massively
-        Hypersonic+ (Can hit Kirin who is capable of moving as lightning, as well
-        as dodge their lighting bolts) with Massively FTL+ reaction speed (Able to
-        react to Dalamadur's meteors and dodge Valstrax' homing blasts) | Massively
-        FTL+ (Able to keep up with the Dangerous First-Class Monsters such as Fatalis
-        and Alatreon)
+      value: High Hypersonic Combat Speed and Reactions (Able to dodge the meteors
+        of the Fluorescent Flower as well as keep up with Henryk who can do the same.
+        Can easily dodge point-blank gunfire from flintlock rifles and Victorian-era
+        gatling guns) | Massively Hypersonic Combat Speed and Reactions (Faster than
+        before. Capable of dodging lightning as well as the meteors of the Living
+        Failures and Blacksky Eye) | At least Massively Hypersonic, likely higher
+        Combat Speed and Reactions (Faster than before. Can react to the projectiles
+        of A Call Beyond) | At least Massively Hypersonic, likely higher Combat Speed
+        and Reactions (Faster than before. Able to react to Amygdala's lasers) | At
+        least Massively Hypersonic, likely Massively Hypersonic+ Combat Speed and
+        Reactions (Faster than before. Can react to the cloud-to-ground lightning
+        attack of the Orphan of Kos. Can keep up with Gehrman) | Massively Hypersonic+
+        combat speed and Reactions (Can keep up with the Moon Presence, who can move
+        from the moon in seconds)
       source_id: mediawiki-3823581
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: At least Large Building level+ (Can take hits from Agnaktor, Barroth,
-        Diablos, and Rathian), possibly far higher | At least Large Island level,
-        likely Small Country level (Can take hits from Hellblade Glavenus, Kushala
-        Daora, Zorah Magdaros and other comparable Elder Dragons) | At least Small
-        Country level+ (Can take hits from Fatalis and other Dangerous First-Class
-        monsters)
+      value: At least Multi-City Block level (Can take hits from weaker Beasts and
+        other Hunters as well as the meteors of the Fluorescent Flower) | Town level
+        (Can withstand being hit by the Living Failures' meteors) | Large Island level+
+        (Can withstand being hit by A Call Beyond from users such as Ebrietas, Yurie,
+        Imposter Iosefka, and Forgotten Madman. Can take hits from Amygdala and Rom's
+        magic) | At least Large Island level+, likely Large Planet level (Can take
+        hits from Great Ones, Gehrman, and Lady Maria) | Large Planet level (Can take
+        hits from the Moon Presence)
       source_id: mediawiki-3823581
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: Superhuman. A Monster Hunter can fight for what appears to be days. Endless
-        with Dash Juice.
-      source_id: mediawiki-3823581
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Up to Hundreds of Meters with weapons, Hundreds of Kilometers with Scoutflies
+      value: Superhuman (Able to take on hordes upon hordes of enemies with little
+        to no rest in-between without any signs of exhaustion. Constantly shrugs off
+        being stabbed, slashed, crushed, thrown, bitten, shot, poisoned, electrocuted,
+        burned, and impaled. Unfazed by injuries as severe as having their eyes gauged
+        out, being impaled through the torso, having organs ripped out, and having
+        their skull pierced. Can shrug off the effects of Frenzy, which causes those
+        affected to have their blood violently erupt out of multiple points on their
+        body in solidified spears of Frenzied Coldblood. Can outlast characters such
+        as the Amygdala, who can rip its own arms off and use them as weapons and
+        not even flinch, and Lady Maria, who can stab herself through the torso twice,
+        letting out vast quantities of her own blood in the process, and continue
+        fighting as though uninjured. The Hunter also possesses numerous items and
+        runes that significantly bolster their stamina)
       source_id: mediawiki-3823581
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: A full list of his weapons can be found here and items can be found here.
-        Scoutflies, Mantles
+      value: 'Whirligig Saw, Hunter Axe: One of the trick weapons of the workshop,
+        commonly used on the hunt. Retains the qualities of an axe, but offers a wider
+        palette of attacks by transforming. Boasts a heavy blunt attack, leading to
+        high rally potential., Kirkhammer: A trick weapon typically used by Healing
+        Church hunters. On the one side, an easily handled silver sword, on the other,
+        a giant obtuse stone weapon, characterized by a blunt strike and extreme force
+        of impact., Ludwig''s Holy Blade: A trick weapon typically used by Healing
+        Church hunters. It is said that the silver sword was employed by Ludwig, the
+        first hunter of the church. When transformed, it combines with its sheath
+        to form a greatsword., Rifle Spear: A trick weapon crafted by the workshop
+        heretics, the Powder Kegs. A prototype weapon serving as a simple firearm
+        and spear, possibly created in imitation of a lost Cainhurst weapon. Lacks
+        any notable functions, saving that it is the only trick weapon with an attached
+        gun., Saw Cleaver: One of the trick weapons of the workshop, commonly used
+        in the hunting business. This saw, effective at drawing the blood of beasts,
+        transforms into a long cleaver that makes use of centrifugal force. The saw,
+        with its set of blood-letting teeth, has become a symbol of the hunt, and
+        only grows in effectiveness the more grotesquely transformed the beast., Saw
+        Spear: One of the trick weapons of the workshop, commonly used by those who
+        dedicate themselves to the hunt. This saw, effective at drawing the blood
+        of beasts, transforms into a medium-range spear. The saw, with its set of
+        blood-letting teeth, has become a symbol of the hunt, and only grows in effectiveness
+        the more grotesquely transformed the beast., Stake Driver: A trick weapon
+        fashioned by the workshop heretics, the Powder Kegs. Favored by the retired
+        hunter Djura. The stake driver, with its queerly complex design, violently
+        drives thick stakes into the flesh of foes. The stake driver allows for high-damage
+        critical attacks, but is difficult to use and leaves its wielder wide open,
+        but none of this should bother a mere Powder Keg., Threaded Cane: One of the
+        trick weapons of the workshop, commonly used by hunters on their duties. Sufficiently
+        deadly as a rigid bladed cane, but also serves as a whip when its blade is
+        split into many. Concealing the weapon inside the cane and flogging the beasts
+        with the whip is partly an act of ceremony, an attempt to demonstrate to oneself
+        that the bloodlust of the hunt will never encroach upon their soul., Tonitrus:
+        A unique trick weapon contrived by Archibald, the infamous eccentric of the
+        Healing Church workshop. Striking this peculiar iron morning star flail like
+        a match generates the same blue sparks that blanket a darkbeast., Beast Claw:
+        A beastly weapon originally wielded by Irreverent Izzy. Crafted by chiseling
+        the long bones of an undead darkbeast and fastening them to the weapon, the
+        bones are still alive, grant its wielder a spurt of beastly power. As flesh
+        is flayed and blood is sprayed, the beast within awakens, the wielder of this
+        weapon surges with both strength and feverish reverie., Beast Cutter: A trick
+        weapon used by Old Hunters. This thick iron cleaver slices through the toughest
+        of beast, allowing one to lash it in the fashion of a heavy whip. This crude
+        weapon relies on brute force and is regrettably inelegant, suggesting that
+        the hunts of the earliest hunters made for horrific affairs, painted in sanguine
+        black and reds., Beasthunter Saif: A trick weapon used by the old hunters.
+        A second blade is found inside the curve of the main one. In its initial form
+        the saif can be wielded like a long curved sword, its blade is contracted
+        allowing for quick, repeated stabs. Although this trick weapon allows for
+        adaptive combat, it was later replaced by saws and similar weapons that were
+        more effective at disposing of beasts., Bloodletter: The demented hunter weapon
+        brandished by Brador, the Healing Church assassin. The Bloodletter assumes
+        its true and terrifying form after it draws upon blood from the inner reaches
+        of one''s body and soul. This is the o'
       source_id: mediawiki-3823581
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Extraordinary Genius; very skilled at hunting many types of monsters
-        and knowledge of crafting a wide assortment of tools and items. Able to outwit
-        the Elder Dragons, who are much, much more smarter than humans and has hundreds
-        if not thousands of years of experience. Fought against the Black Dragons
-        and thus, outskilled the entirety of Hunters and Knights of Schrade, as they
-        were easily outmatched by the Black Dragons skill and power.
-      source_id: mediawiki-3823581
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Depends on the Armor. Heavily reliant on equipment and items. Note:
-        Armor Skill List, Specialized Tools ==Gallery== TeoFem.png DDO-Rathalos Armor
-        Render 001.png Image00204.png Image329(2).png IMG 20141020 0012.png S&s.png
-        KushalaArm.png 1477030572437.png KaiserX.png ==Notable Matchups== Victories:
-        Seath the Scaleless (Dark Souls) Seath''s Profile (Fight took place in Seath''s
-        boss room, Speed Equalized, High Rank Hunter, Hunter had no prior knowledge)
-        Losses: Inconclusive: {{Discussions|The Hunter Monster Hunter|The Hunter (Monster
-        Hunter)}} Category:Characters Category:Monster Hunter Category:Air Users Category:Animal
-        Users Category:Axe Users Category:Aura Users Category:Bow Users Category:Creation
-        Users Category:Damage Reduction Users Category:Duplication Users Category:Earth
-        Users Category:Electricity Users Category:Element Users Category:Empathic
-        Manipulation Users Category:Energy Users Category:Enhanced Senses Users Category:Explosion
-        Users Category:Extrasensory Perception Users Category:Female Characters Category:Fire
-        Users Category:Flight Users Category:Game Characters Category:Gun Users Category:Hammer
-        Users Category:Healers Category:Heroes Category:Humans Category:Hunters Category:Ice
-        Users Category:Information Analysis Users Category:Instinctive Action Users
-        Category:Invulnerability Users Category:Lance Users Category:Light Users Category:Magnetism
-        Users Category:Male Characters Category:Mind Users Category:Musicians Category:Physics
-        Users Category:Playable Characters Category:Primary Protagonists Category:Probability
-        Users Category:Poison Users Category:Power Nullification Users Category:Protagonists
-        Category:Regeneration Users Category:Sealing Users Category:Self-Sustenance
-        Users Category:Shield Users Category:Shockwave Users Category:Sleep Users
-        Category:Slingshot Users Category:Smoke Users Category:Soul Users Category:Sound
-        Users Category:Staff Users Category:Statistics Amplification Users Category:Status
-        Effect Users Category:Stealth Masters Category:Summoners Category:Sword Users
-        Category:Vibration Users Category:Video Game Characters Category:Water Users
-        Category:Weapon Masters Category:Weapon Users Category:Blade Users'
+      value: At least Genius (Having accumulated massive amounts of Insight throughout
+        their journey, The Hunter is a veritable genius intelligence-wise, obtaining
+        wisdom about reality and the Eldritch Truth that the Choir, Byrgenwerth scholars,
+        The Healing Church, and the School of Mensis combined were never able to achieve
+        without going collectively mad, devolving into beasts, mutating into nightmarish
+        abominations, or becoming brain dead. Their level of Insight is such that
+        by the end of their journey their mind has reached the point of ascending
+        to a higher plane of thought and transcending the human mind entirely, becoming
+        that of a Great One. In addition they demonstrate a high degree of knowledge
+        regarding the various tools of the Workshop, including being able to conduct
+        numerous ancient chalice rituals, extract arcane essence from artifacts, and
+        repair and upgrade all of their highly complex trick weapons despite having
+        no prior knowledge on how to do any of these things) Gifted (The Hunter is
+        a highly skilled and experienced combatant, able to wield a wide variety of
+        weapons, each with their own unique combat styles, to their maximum efficiency
+        even after just obtaining them, including weapons that are traditionally considered
+        too awkward or cumbersome for most Hunters to use such as the Gatling Gun
+        and Church Cannon, and bizarre nontraditional weapons, such as the Logarius
+        Wheel, Amygdalan Arm, and Kos Parasite. They can equally wield weapons that
+        statistically require a high degree of skill to wield properly such as the
+        Rakuyo and Simon's Bowblade, as well as utilize a wide variety of arcane Hunter
+        Tools despite having no prior arcane knowledge. The Hunter is even capable
+        of fighting unhindered when their vision is completely obstructed by headpieces
+        such as the Blindfold Cap, Gold Ardeo, Enlarged Head, and Harrowed Hood, and
+        are skilled enough with the weapons in their arsenal that they can even use
+        the transformations of their weapons as lethal forms of attack. Throughout
+        their journey The Hunter displays the capacity to outmatch numerous veteran
+        Hunters including Simon, Seeker of Secrets, Brador, the Church Assassin, Valtr,
+        Master of the League, Retired Hunter Djura, Eileen the Crow, Alfred, Hunter
+        of Vilebloods, Henryk, the Old Hunter, Bloody Crow of Cainhurst, and Lady
+        Maria of the Astral Clocktower, all of whom are recognized as highly skilled
+        fighters in their own right with decades of combat experience under their
+        belt. The Hunter is skilled to the point of being able to best Gehrman, the
+        First Hunter, whose skill in combat and fighting style is the basis for the
+        fighting styles used by all Hunters, in single combat)
       source_id: mediawiki-3823581
       provider_id: vsbattles
       authority: high
@@ -470,12 +808,88 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: false
-    duplicate_key: vsbattles.fandom.com|the hunter monster hunter|9658490
+    duplicate_key: vsbattles.fandom.com|the hunter bloodborne|9647964
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-hunter-the-owl-house
+    url: https://character-stats-and-profiles.fandom.com/wiki/Hunter_%28The_Owl_House%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - tier
+    normalized_page_title: The Collector (Canon, The Owl House)/MemeLordGamer Trap
+    source_type: mediawiki
+    revision_id: '396833'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 50381
+    content_kind: api_json
+    headings_detected:
+    - '[[File:Summary_SU.png|215px]]'
+    - '[[File:Notable_Powers_SU_Text.png|703px]]'
+    - '[[File:Attack_Potency.png|703px]]'
+    - '[[File:Speed.png|703px]]'
+    - '[[File:Lifting_Strength.png|703px]]'
+    - '[[File:Striking_Strength.png|703px]]'
+    - '[[File:Durability.png|703px]]'
+    - '[[File:Mariostamina.png]]'
+    - '[[File:Range.png|703px]]'
+    - '[[File:Intelligence.png|703px]]'
+    - '[[File:Weaknesses.png|703px]]'
+    - '''''''Key:'''''''
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 45
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Unknown | 5-A, 4-A, possibly 2-C
+      source_id: character-stats-profiles-hunter-the-owl-house
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 0
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|the collector canon the
+      owl house memelordgamer trap|396833
     retryable: false
     exception_class: ''
   - source_id: vsbattles-hunter-the-owl-house
@@ -535,13 +949,27 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-A}} physically, {{8-B}}, up to {{7-C}} with Magic'
+      value: 9-A physically, 8-B, up to 7-C with Magic
       source_id: vsbattles-hunter-the-owl-house
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Innate
+      value: 'Superhuman Physical Characteristics, Acrobatics, Skilled Staff User,
+        Vehicular Mastery (Has shown to be a proficient staff rider and ship pilot),
+        Summoning (Could summon Flapjack), Pseudo Teleportation (He can envelop his
+        body in a gold light to gain a short burst of speed) Electricity Manipulation,
+        Earth Manipulation, Forcefield Negation (Should have all of Flapjack''s abilities),
+        Resistance to the following: Memory Manipulation (Withstood the effects of
+        Gus''s memory powers without being incapacitated), Possession (Broke free
+        of Emperor Belos'' possession), Possible Resistance to Extreme Heat (Was seemingly
+        unaffected by the heat of the Boiling Sea, which is hot enough to induce third
+        degree burns with just it''s steam. Though the method of withstanding the
+        heat is unknown) All Innate Abilities, Magic, Flight, Energy Projection, Telekinesis,
+        Pseudo Teleportation (He can envelop his body in a red light to dash short
+        distances), Sand Manipulation, Water Manipulation, Weapon Creation (Created
+        a sword using magic), Thread Manipulation (Created a thread to bind Luz),
+        Attack Reflection (Deflected a fire blast from Kikimora with his staff)'
       source_id: vsbattles-hunter-the-owl-house
       provider_id: vsbattles
       authority: high
@@ -585,7 +1013,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: None notable *Optional
+      value: Optional
       source_id: vsbattles-hunter-the-owl-house
       provider_id: vsbattles
       authority: high
@@ -606,15 +1034,7 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: "Fear of Emperor Belos. Sometimes act irrationally whenever he\u2019\
-        s in panic mood. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Hunter\
-        \ The Owl House|Hunter (The Owl House)}} Category:Characters Category:The\
-        \ Owl House Category:Acrobats Category:Attack Reflection Users Category:Cartoon\
-        \ Characters Category:Clones Category:Earth Users Category:Electricity Users\
-        \ Category:Energy Users Category:Flight Users Category:Magic Users Category:Male\
-        \ Characters Category:Power Nullification Users Category:Sand Users Category:Summoners\
-        \ Category:Teenagers Category:Teleportation Users Category:Thread Users Category:Vehicular\
-        \ Masters Category:Water Users Category:Weapon Creation Users Category:Weapon\
-        \ Masters Category:Tragic Characters"
+        s in panic mood."
       source_id: vsbattles-hunter-the-owl-house
       provider_id: vsbattles
       authority: high
@@ -637,14 +1057,13 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - powers_and_abilities
     - tier
     normalized_page_title: The Collector (Canon, The Owl House)/MemeLordGamer Trap
     source_type: mediawiki
     revision_id: '396833'
     fetch_status: fetched
     http_status: 200
-    content_length: 50056
+    content_length: 50381
     content_kind: api_json
     headings_detected:
     - '[[File:Summary_SU.png|215px]]'
@@ -675,7 +1094,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 60
+    rank: 45
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -695,267 +1114,12 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: powers_and_abilities
-      value: 703px== Genius (Created and taught Emperor Belos the most powerful spells
-        in the Demon Realm, including the Draining Spell, a spell capable of draining
-        magic and life force from all witches with coven sigils. Created the Owl Curse,
-        a curse that slowly drains magic from the victim and turns them into the Owl
-        Beast. Has a cult of Titan Trappers) ==703px== Titan magic like the Glyphs
-        nullifies out Collector magic. Extremely gullible, being tricked by both Belos
-        and King, respectively and falling for the same trick twice.
-      source_id: character-stats-profiles-hunter-the-owl-house
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
     provider_priority: 120
     core_field_count: 0
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the collector canon the
-      owl house memelordgamer trap|396833
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-hunter-the-owl-house
-    url: https://vsbattles.fandom.com/wiki/Hunter_%28The_Owl_House%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Hunter (The Owl House)
-    source_type: mediawiki
-    revision_id: '8672028'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 6085
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}} physically, {{8-B}}, up to {{7-C}} with Magic'
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Innate
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level physically (Harmed Amity with a leg sweep. Should
-        be comparable to Luz and Eda), City Block level, up to Small Town level with
-        Magic (Tore through Willow's vines. Should be comparable, if not superior
-        to Luz and Amity)
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Athletic Human combat, reaction & travel speed by himself (Easily dodged
-        multiple attacks from Luz and Eda), higher combat speed via Pseudo Teleportation
-        (This ability has shown to allow Hunter to catch characters normally comparable
-        to him off guard) and flight speed with Palisman (Can ride it for transportation).
-        Up to Subsonic flight speed with staff (Can accelerate this fast, without
-        facing obstacles)
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building level (Took a direct strike from Amity)
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Athletic
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Tens of Meters with magic
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable *Optional
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Above Average (Has been described as a child prodigy among the members
-        of the Emperor''s Coven. The Emperor''s Coven is a coven that only excepts
-        the most skilled and prestigious witches. Once they enter the Emperor''s coven,
-        witches are they subjected to intense training for their magic skills. Matched
-        Amity in combat, despite using a new staff and being very tired. Despite his
-        young age, is easily able to contend with adult witches) Standard Tactics:
-        Hunter typically battles by repeatedly using his Pseudo Teleportation to avoid
-        attacks and get close to targets. Once he gets close, he then attempts to
-        strike the target with his staff. He also occasionally uses ranged magic attacks.'
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Fear of Emperor Belos. Sometimes act irrationally whenever he\u2019\
-        s in panic mood. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Hunter\
-        \ The Owl House|Hunter (The Owl House)}} Category:Characters Category:The\
-        \ Owl House Category:Acrobats Category:Attack Reflection Users Category:Cartoon\
-        \ Characters Category:Clones Category:Earth Users Category:Electricity Users\
-        \ Category:Energy Users Category:Flight Users Category:Magic Users Category:Male\
-        \ Characters Category:Power Nullification Users Category:Sand Users Category:Summoners\
-        \ Category:Teenagers Category:Teleportation Users Category:Thread Users Category:Vehicular\
-        \ Masters Category:Water Users Category:Weapon Creation Users Category:Weapon\
-        \ Masters Category:Tragic Characters"
-      source_id: vsbattles-hunter-the-owl-house
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|hunter the owl house|8672028
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-hunter-the-owl-house
-    url: https://character-stats-and-profiles.fandom.com/wiki/Hunter_%28The_Owl_House%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - powers_and_abilities
-    - tier
-    normalized_page_title: The Collector (Canon, The Owl House)/MemeLordGamer Trap
-    source_type: mediawiki
-    revision_id: '396833'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 50056
-    content_kind: api_json
-    headings_detected:
-    - '[[File:Summary_SU.png|215px]]'
-    - '[[File:Notable_Powers_SU_Text.png|703px]]'
-    - '[[File:Attack_Potency.png|703px]]'
-    - '[[File:Speed.png|703px]]'
-    - '[[File:Lifting_Strength.png|703px]]'
-    - '[[File:Striking_Strength.png|703px]]'
-    - '[[File:Durability.png|703px]]'
-    - '[[File:Mariostamina.png]]'
-    - '[[File:Range.png|703px]]'
-    - '[[File:Intelligence.png|703px]]'
-    - '[[File:Weaknesses.png|703px]]'
-    - '''''''Key:'''''''
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 60
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: Unknown | 5-A, 4-A, possibly 2-C
-      source_id: character-stats-profiles-hunter-the-owl-house
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 703px== Genius (Created and taught Emperor Belos the most powerful spells
-        in the Demon Realm, including the Draining Spell, a spell capable of draining
-        magic and life force from all witches with coven sigils. Created the Owl Curse,
-        a curse that slowly drains magic from the victim and turns them into the Owl
-        Beast. Has a cult of Titan Trappers) ==703px== Titan magic like the Glyphs
-        nullifies out Collector magic. Extremely gullible, being tricked by both Belos
-        and King, respectively and falling for the same trick twice.
-      source_id: character-stats-profiles-hunter-the-owl-house
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1023,7 +1187,54 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base
+      value: 'Superhuman Physical Characteristics, Weapon Mastery and Martial Arts,
+        Acrobatics, Immortality (Type 2: Can survive injuries that would be instantly
+        fatal to a normal human, such as massive falls and impalement; Type 4: Upon
+        death, the Hunter''s consciousness awakens back in the Hunter''s Dream, allowing
+        them to resurrect indefinitely; Type 8: This immortality is entirely reliant
+        on their connection to the Hunter''s Dream, and can be severed), Resurrection,
+        Accelerated Development (Grows stronger by absorbing the Blood Echoes of slain
+        foes, a form of leveling up), Non-Physical Interaction (Can harm and kill
+        incorporeal spirits and ghosts), Soul Manipulation (Consumes Blood Echoes,
+        the literal remnants and power of slain beings, to bolster their own strength),
+        Psychometry (Can perceive the final memories of powerful beings by touching
+        their remains, as shown with the Skull of Laurence), Dimensional Travel &
+        Teleportation (Uses Lanterns as conduits to travel between the Waking World
+        and the metaphysical planes of the Hunter''s Dream and Nightmares), Indomitable
+        Will, Blood Manipulation (Can create Quicksilver Bullets from their own blood),
+        Resistance to Madness Manipulation (Gains Insight, the very concept of eldritch
+        comprehension, which allows them to withstand the mind-breaking presence of
+        the Great Ones) and Poison Manipulation |All previous abilities enhanced.
+        Pocket Reality Manipulation (Uses Chalice Rituals and materials to generate
+        and access Chalice Dungeons, which are described as a "labyrinth of peeling,
+        fragmented realities"), Mind Manipulation and Morality Manipulation (via the
+        Shaman Bone Blade, which turns enemies into temporary allies by numbing their
+        senses), Power Nullification (via the Numbing Mist, which explicitly prevents
+        all forms of healing, including innate regeneration), Healing & Regeneration
+        (Low-Mid; via Blood Vials and Runes), BFR (via Hunter''s Mark), Explosion
+        Manipulation, Fire Manipulation, Electricity Manipulation, and Magic (via
+        Papers and Hunter Tools), Homing Attack & Energy Projection (via A Call Beyond),
+        Summoning, Illusion Creation (via Messenger''s Gift), Attack Reflection &
+        Sound Manipulation (via Beast Roar), Conceptual Manipulation (Type 3; The
+        Hunter fundamentally alters their own capacity to perceive and interact with
+        higher realities by gaining Insight. This is a self-directed conceptual change
+        that allows them to see conceptually-cloaked beings like Amygdala), Resistance
+        to Physics Manipulation (via the Lead Elixir) |All previous abilities to an
+        immeasurably greater degree. Beyond-Dimensional Physiology, Abstract Existence
+        (Type 1; Ascended to become a being of pure thought and concept, existing
+        on the same "higher plane" as other Great Ones who attack with "visceral thoughts"),
+        Acausality (Type 5; By transcending the Hunt and its architect, the Hunter
+        places themselves outside the entire cosmological system and its native laws
+        of cause and effect), Conceptual Manipulation (Type 1), Reality Warping (As
+        the new dominant Great One, they should be capable of shaping reality on a
+        whim, far surpassing the Moon Presence''s feat of creating the Hunter''s Dream),
+        Void Manipulation, Plot Manipulation (By slaying the Moon Presence, the architect
+        of the Hunt, the Hunter broke free from their assigned narrative role and
+        seized control of the plot''s direction for all of humanity), Transduality
+        (Type 3), Omnipresence (Inherited the role of the Moon Presence, whose conceptual
+        influence was present throughout the entire domain of the Hunt. The Hunter
+        becomes the new metaphysical nexus of their reality, a form of conceptual
+        omnipresence)'
       source_id: character-stats-profiles-hunter
       provider_id: character_stats_profiles
       authority: high
@@ -1097,9 +1308,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
     normalized_page_title: Supreme Hunter
     source_type: mediawiki
     revision_id: '9581912'
@@ -1143,80 +1351,45 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{9-A}} | {{8-A}}'
-      source_id: vsbattles-hunter-mixed
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Regeneration (Low-High, Can restore\
-        \ himself from a puddle. Should have regeneration somewhat comparable to Alex\
-        \ Mercer's, although did not regenerate under the same circumstances as him),\
-        \ Hive Mind (Type 2), Adaptation and Reactive Evolution (Should be comparable\
-        \ to Alex Mercer due to possessing the same shapeshifting capabilities granted\
-        \ by the Blacklight Virus as he does), Creates new abilities from consuming\
-        \ other lifeforms, Immortality (Types 1, 2, 3, 6; Is \"immortal\". Can move\
-        \ his fingers and hand even as a puddle that is still in the middle of regenerating.\
-        \ Should be comparable to Elizabeth Greene, who is un-aging. Should be comparable\
-        \ to Alex Mercer, who is \"effectively immortal\" and can operate without\
-        \ needing the brain or other internal organs, such as operating with a large\
-        \ hole in his head and being able to sit up with a regenerating hand on the\
-        \ ground and with upper body and neck in upright position even before the\
-        \ top half of his skull and brain was reformed. Is the same Parasite that\
-        \ previously infected Alex Mercer that got refashioned into the Supreme Hunter,\
-        \ thus it can live off its host\u2019s body as the Parasite), Self-Sustenance\
-        \ (Types 1, 2 and 3; Should be comparable to Elizabeth Greene, who is able\
-        \ to wait by staying in the exact same position for thirty-nine to forty years\
-        \ and being consciously aware of her surroundings while deceiving other Blackwatch\
-        \ soldiers by having a \"fried brain\" with no indication that water, food\
-        \ or other nutrients was provided to her while she was waiting. Is comprised\
-        \ of the Blacklight Virus that should be comparable to the Redlight Virus,\
-        \ which is capable of residing inside water tanks, along with the Blacklight\
-        \ Virus being able to spread through waterworks and should be comparable to\
-        \ Alex Mercer, who is capable of jumping into water and switch disguises to\
-        \ successfully stay underwater and hide for a possibly indefinite period of\
-        \ time; due to his body being created from the same Blacklight Virus as Alex\
-        \ Mercer and is an inhuman creature, he should be comparable to Alex Mercer,\
-        \ who is able to reside in water and lack the need for oxygen), Elasticity\
-        \ (Amorphous body structure renders it virtually immune to bullets as they'll\
-        \ cause holes that heal quickly, Immune to fall damage and extremely resistant\
-        \ to blunt force impacts due to the lack of a solid bone structure), Surface\
-        \ Scaling (Can run up walls and other vertical surfaces), Skilled Hand-to-Hand\
-        \ Combatant, Shapeshifting (He is able to transform into anyone he's consumed,\
-        \ and can also modify his body's proportions and form them into weapons at\
-        \ will. Comparable to Alex Mercer, who has every portion of his body being\
-        \ under his conscious control, to the extent that he is able to become a repository\
-        \ of genetic ability, where he can mix the best version of any creature into\
-        \ a single, super-effective form and even reconfigure his molecular structure\
-        \ to become something else with his control of his body, and so he is able\
-        \ to control every molecule of his body. Is a a duplicate of Alex Mercer that\
-        \ has the capacity to consume and become anything living. His level of shapeshifting\
-        \ should be comparable to other shapeshifters of the Blacklight Virus, and\
-        \ is such as his disguise is able to deceive Alex Mercer and with James Heller\
-        \ not being able to spot that one of the Evolved has superhuman capabilities,\
-        \ thus allowing him to become a perfect copy of one of his previously absorbed\
-        \ targets that even other shapeshifters of the Blacklight Virus aren\u2019\
-        t able to discern without prior knowledge), Immortality Negation via Absorption\
-        \ (Types 2 and 3 \u2013 Up to Mid-High; Should be comparable to Alex Mercer,\
-        \ who could kill a Hunter just by absorbing its brain, despite a Hunter being\
-        \ able to survive and operate without a brain unless sufficiently damaged,\
-        \ along with Alex Mercer being able absorb the Evolved, who should have comparable\
-        \ regenerative abilities and immortality to his own. Should be comparable\
-        \ to James Heller, who is able to absorb Alex Mercer after heavily battering\
-        \ him with the same Blacklight Virus that he has granted to James Heller),\
-        \ Power Mimicry, Transmutation and Absorption (Absorbs the powers, abilities,\
-        \ memories, skills, and experiences of any living thing, with any part of\
-        \ his biomass via his Consume ability without the need to weaken or batter\
-        \ them. This also allows him to negate his target's regeneration capabilities.\
-        \ Every living being that he absorbs makes him stronger. The Blacklight Virus\
-        \ is capable of mimicking and storing genetic information from infected organisms\
-        \ and more, and can duplicate copies of its infected host\u2019s genetic structure,\
-        \ and is able to copy and combine genetic traits to the extent that it results\
-        \ in him being a repository of genetic ability, where he can mix the best\
-        \ version of any creature into a single, super-effective form. Can absorb\
-        \ even inorganic materials such as Radio transceivers and clothing, to the\
-        \ extent that both the radio transceivers and"
+      value: "immune to bullets as they'll cause holes that heal quickly, Immune to\
+        \ fall damage and extremely resistant to blunt force impacts due to the lack\
+        \ of a solid bone structure), Surface Scaling (Can run up walls and other\
+        \ vertical surfaces), Skilled Hand-to-Hand Combatant, Shapeshifting (He is\
+        \ able to transform into anyone he's consumed, and can also modify his body's\
+        \ proportions and form them into weapons at will. Comparable to Alex Mercer,\
+        \ who has every portion of his body being under his conscious control, to\
+        \ the extent that he is able to become a repository of genetic ability, where\
+        \ he can mix the best version of any creature into a single, super-effective\
+        \ form and even reconfigure his molecular structure to become something else\
+        \ with his control of his body, and so he is able to control every molecule\
+        \ of his body. Is a a duplicate of Alex Mercer that has the capacity to consume\
+        \ and become anything living. His level of shapeshifting should be comparable\
+        \ to other shapeshifters of the Blacklight Virus, and is such as his disguise\
+        \ is able to deceive Alex Mercer and with James Heller not being able to spot\
+        \ that one of the Evolved has superhuman capabilities, thus allowing him to\
+        \ become a perfect copy of one of his previously absorbed targets that even\
+        \ other shapeshifters of the Blacklight Virus aren\u2019t able to discern\
+        \ without prior knowledge), Immortality Negation via Absorption (Types 2 and\
+        \ 3 \u2013 Up to Mid-High; Should be comparable to Alex Mercer, who could\
+        \ kill a Hunter just by absorbing its brain, despite a Hunter being able to\
+        \ survive and operate without a brain unless sufficiently damaged, along with\
+        \ Alex Mercer being able absorb the Evolved, who should have comparable regenerative\
+        \ abilities and immortality to his own. Should be comparable to James Heller,\
+        \ who is able to absorb Alex Mercer after heavily battering him with the same\
+        \ Blacklight Virus that he has granted to James Heller), Power Mimicry, Transmutation\
+        \ and Absorption (Absorbs the powers, abilities, memories, skills, and experiences\
+        \ of any living thing, with any part of his biomass via his Consume ability\
+        \ without the need to weaken or batter them. This also allows him to negate\
+        \ his target's regeneration capabilities. Every living being that he absorbs\
+        \ makes him stronger. The Blacklight Virus is capable of mimicking and storing\
+        \ genetic information from infected organisms and more, and can duplicate\
+        \ copies of its infected host\u2019s genetic structure, and is able to copy\
+        \ and combine genetic traits to the extent that it results in him being a\
+        \ repository of genetic ability, where he can mix the best version of any\
+        \ creature into a single, super-effective form. Can absorb even inorganic\
+        \ materials such as Radio transceivers and clothing, to the extent that both\
+        \ the radio transceivers and"
       source_id: vsbattles-hunter-mixed
       provider_id: vsbattles
       authority: high
@@ -1271,12 +1444,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-hunter-mixed
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Prior to absorbing Cross, The Supreme Hunter's intelligence was unknown,
         Though despite being born not just a few seconds it already knew how to control
@@ -1284,48 +1451,6 @@ repair:
         absorbing Cross, it gained knowledge on military operations and tactics and
         even formulated various plans that revolved around manipulating Alex Mercer
         to do his bidding.
-      source_id: vsbattles-hunter-mixed
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "None notable. Notable Attacks/Techniques: *Groundspikes: By shoving\
-        \ either of his hands deep into the earth, it can shift it's mass underground\
-        \ an attack targets with a handful of spikes from bellow. *Tendril Barrage:\
-        \ The Supreme Hunter sends hundreds of tendrils in all directions, impaling\
-        \ living things in all directions. The effective area of this attack is wide\
-        \ enough to cover all portion of USS Reagan. *Consume: The process which those\
-        \ with Shapeshifting capabilities granted by the Blacklight Virus are able\
-        \ to absorb their targets, assimilating the targets\u2019 biomass, genetics\
-        \ and minds to their own; allowing them to collect their living targets minds\
-        \ like a child collects moths and gain access to everything their targets\
-        \ have ever seen, done and heard, along with their intelligence growing as\
-        \ they consume more people, memories and skills, and that every living being\
-        \ they have absorbed makes them stronger. Despite how it seems, this ability\
-        \ is not limited to organic matter, being capable of assimilating inorganic\
-        \ matter and mimicking all their properties and functions with the same efficacy\
-        \ as they do with organic matter; being able to absorb and mimic clothing,\
-        \ Radio transceivers, LED masks, Hazmat suits and many more by converting\
-        \ these inorganic matter into biomass and replicate these same inorganic materials\
-        \ to the extent that the Blacklight Virus within their bodies can assimilate\
-        \ ANYTHING, including metal, and that the properties and functionality of\
-        \ the mimicked inorganic equipment are the same as the original\u2019s. This\
-        \ ability can also be used to absorb one\u2019s targets upon the user\u2019\
-        s biomass touching their targets, without the need to either weaken or batter\
-        \ their targets and could even absorb multiple targets at once simultaneously;\
-        \ however, this ability has only ever been demonstrated by Alex Mercer without\
-        \ any implication that this feat can be replicated by other Shapeshifting\
-        \ carriers of the Blacklight Virus, thus this doesn\u2019t necessarily apply\
-        \ to other Shapeshifters infected with the Blacklight Virus and that they\
-        \ may need to weaken or severely batter their targets before the targets can\
-        \ be absorbed. Note: *Supreme Hunter is a duplicate of Alex Mercer, so he\
-        \ should theoretically have all of Alex\u2019s abilities as of the first [PROTOTYPE]\
-        \ game. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}\
-        \ Category:Characters Category:Monsters Category:Mutants Category:Prototype\
-        \ Category:Regeneration Users Category:Brawlers Category:Sword Users Category:Villains\
-        \ Category:Antagonists Category:Shapeshifters Category:Absorption Users Category:Immortals\
-        \ Category:Power Nullification Users Category:Science Fiction Characters Category:Video\
-        \ Game Characters Category:Horror Characters Category:Genderless Characters"
       source_id: vsbattles-hunter-mixed
       provider_id: vsbattles
       authority: high
@@ -1412,20 +1537,19 @@ repair:
         of his usual Z-Saber techniques), Time Stop (Dark Hold is a time stop.), Elemental
         Manipulation (Via his many techniques he learns from defeating Mavericks),
         Fire Manipulation, Ice Manipulation, Absolute Zero, Inorganic Physiology,
-        and thus,Immortality Types 1, 2, (Zero is a robot and cannot die of natural
-        causes), Limited Flight (Can air-dash. As Awakened Zero, this limitation very
-        likely does not apply, as he is shown to be hovering in cutscenes and before
-        the Awakened Zero boss fight in X5), Teleportation (Not applicable in combat.
-        Zero, and most Mega Man characters, teleport to the stages or areas that they
-        will be going through), Danmaku (Via Rakuhouha, Messenkou/C-Flasher, and Rekkoha),
+        Immortality Types 1, (Zero is a robot and cannot die of natural causes), Limited
+        Flight (Can air-dash. As Awakened Zero, this limitation very likely does not
+        apply, as he is shown to be hovering in cutscenes and before the Awakened
+        Zero boss fight in X5), Teleportation (Not applicable in combat. Zero, and
+        most Mega Man characters, teleport to the stages or areas that they will be
+        going through), Danmaku (Via Rakuhouha, Messenkou/C-Flasher, and Rekkoha),
         Dimensional Travel (Can teleport in and out of Cyberspace), Non-Physical Interaction,
         Soul Manipulation, and Information Manipulation (Can collect Nightmare Souls
         upon defeating Nightmare viruses. DNA souls are the DNA Data of reploids manifested
         as a soul, which are likened to that of a human soul), Accelerated Development
         (Keeps up with X, who has the capability to become stronger through combat),
         Surface Scaling (Can slowly slide down walls as opposed to falling down, certain
-        parts allow him to fall even slower), One Hit Kill with Genmu Zero, More to
-        be added. |-|Resistances= Resists the Sigma Virus, in full.
+        parts allow him to fall even slower), One Hit Kill with Genmu Zero, in full.
       source_id: character-stats-profiles-hunter-mixed
       provider_id: character_stats_profiles
       authority: high
@@ -1468,34 +1592,10 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Zero is overconfident and hates relying on power-ups, making him hesitant
-        to use his Black Zero form. While this doesn''t typically impede on his fighting
-        capabilities, mentioning Zero''s past can anger or disturb him, as Zero is
-        fully aware of his original purpose as Wily''s final creation. Zero also holds
-        some regret over having killed Iris in the past, but he seems to eventually
-        heal from that, now only being jaded as a result of the Maverick Wars. Notable
-        Attacks/Techniques ==Notes and Possible FAQ== The Day of Sigma''s Canonicity:
-        While the Day of Sigma isn''t consistent with the original X series, it can
-        be watched in the Mega Man X Legacy Collections and is described as an animated
-        short feature exploring the beginning of Sigma''s rebellion. It''s likely
-        that Capcom put this in the Legacy Collections to give some further background
-        behind how the X series began, as Maverick Hunter X is a remake of X1. For
-        the purposes of this page, however, it is assumed that events play out very
-        similarly, and that we are expected to ignore inconsistencies like the fate
-        of Doctor Cain, and how Sigma got his scars. Any information from the Day
-        of Sigma can be ignored however, if you wish to do so. This is merely part
-        of the page creator''s interpretation. Wait, why''s DiVE mentioned here? DiVE
-        is... Somehow canon. The game''s plot revolves around restoring the franchise''s
-        canon after the Robot Destroy Program begins screwing the plot of the franchise
-        up and the original characters such as RiCO, ViA, and iCO trying to find their
-        place as characters in the Mega Man series. Additionally, staff from Capcom
-        Japan such as illustrator Keisuke Mizuno supervised the game and intended
-        to expand the world of the X series. Many characters featured in the game''s
-        story are also basically just their canon counterparts, and it doesn''t disturb
-        the canon of the series by having everything undone in the end since the Player
-        corrected the Deep Log''s errors and returned the world to its normal state
-        (ala Sonic ''06). ==Gallery== To be added. ==Others== Notable Victories: Notable
-        Losses: Inconclusive Matches:'
+      value: Zero is overconfident and hates relying on power-ups, making him hesitant
+        to use his Black Zero form. While this doesn't typically impede on his fighting
+        capabilities, mentioning Zero's past can anger or disturb him, now only being
+        jaded as a result of the Maverick Wars.
       source_id: character-stats-profiles-hunter-mixed
       provider_id: character_stats_profiles
       authority: high

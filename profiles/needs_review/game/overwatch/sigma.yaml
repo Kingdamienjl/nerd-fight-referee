@@ -4,23 +4,14 @@ name: Sigma
 franchise: Overwatch
 category: game
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-09-22T23:24:12Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.35
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_powers_and_abilities
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Sigma
   franchise: Overwatch
@@ -98,42 +89,6 @@ sources:
 - id: vsbattles-sigma-overwatch
   provider_id: vsbattles
   source_type: mediawiki
-  title: Sigma Overwatch
-  url: https://vsbattles.fandom.com/wiki/Sigma_Overwatch
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-sigma-overwatch
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Sigma Overwatch
-  url: https://character-stats-and-profiles.fandom.com/wiki/Sigma_Overwatch
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-sigma-overwatch
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Sigma (Overwatch)
   url: https://vsbattles.fandom.com/wiki/Sigma_%28Overwatch%29
   authority: high
@@ -149,6 +104,8 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9678396'
+  revision_timestamp: '2026-09-18T13:56:24Z'
 - id: character-stats-profiles-sigma-overwatch
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -205,17 +162,28 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least High 8-C, likely higher
+    source_ids:
+    - vsbattles-sigma-overwatch
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Large Building level, likely higher (As the most powerful weapon
+      at Talon's disposal, Sigma should be significantly more powerful than the likes
+      of Doomfist and Reaper)
+    source_ids:
+    - vsbattles-sigma-overwatch
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Subsonic travel speed (Able to move this fast), Hypersonic+ reaction and
+      combat speed (Despite his lack of formal military training, he is still able
+      to tag Overwatch's fastest heroes in combat. Able to casually react to Helix
+      Rockets)
+    source_ids:
+    - vsbattles-sigma-overwatch
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -225,27 +193,189 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Large Building level, likely higher
+    source_ids:
+    - vsbattles-sigma-overwatch
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Athletic
+    source_ids:
+    - vsbattles-sigma-overwatch
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Tens of Meters with Hyperspheres and Gravity Manipulation
+    source_ids:
+    - vsbattles-sigma-overwatch
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Extraordinary Genius (Despite having severe psychological damage as a result
+      of his mind being fragmented due to temporary exposure to a black hole, Sigma
+      is a brilliant scientist, widely considered a pioneer in the field of astrophysics
+      due to his groundbreaking research. Having spent his entire life devising a
+      way to harness the power of gravity he developed an experimental method to control
+      the power of a black hole, though this failed due to an unforeseen error. Even
+      after this though his brilliance was recognized by Talon as a means of weaponizing
+      his abilities and intelligence to further their plans. Under Talon his mind
+      was allowed to expand freely, giving him the opportunity to not only gain control
+      over his gravitational abilities but use them to develop his research even further
+      in hopes of unlocking the secrets of the universeSigma Origin Story)
+    source_ids:
+    - vsbattles-sigma-overwatch
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-sigma-overwatch
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-genius-intelligence
+  name: Genius Intelligence
+  description: Genius Intelligence
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-multiple-selves
+  name: Multiple Selves
+  description: Multiple Selves
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-cosmic-awareness-sigma-possesses-expanded-senses-capable-of
+  name: Cosmic Awareness (Sigma possesses expanded senses capable of viewing the entire
+    universe simultaneously,SigmaOverwatch 2
+  description: Cosmic Awareness (Sigma possesses expanded senses capable of viewing
+    the entire universe simultaneously,SigmaOverwatch 2 Sigma InteractionsOverwatch
+    Sigma Interactions as well as fluctuations in space-time)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - biological_possession
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - dimensional_scope
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-gravity-manipulation
+  name: Gravity Manipulation
+  description: Gravity Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-black-hole-creation-able-to-create-pseudo-black-holes-for-b
+  name: Black Hole Creation (Able to create pseudo-black holes for both offensive
+    and defensive purposes)
+  description: Black Hole Creation (Able to create pseudo-black holes for both offensive
+    and defensive purposes)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight-via-gravity-manipulation
+  name: Flight (Via Gravity Manipulation)
+  description: Flight (Via Gravity Manipulation)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-forcefield-creation-via-experimental-barrier
+  name: Forcefield Creation (Via Experimental Barrier)
+  description: Forcefield Creation (Via Experimental Barrier)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-his-fractured-mental-state-makes-him-unstable-at-times
+  name: His fractured mental state makes him unstable at times
+  description: His fractured mental state makes him unstable at times
+  source_ids:
+  - vsbattles-sigma-overwatch
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -257,13 +387,25 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_powers_and_abilities
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-sigma-overwatch
+  secondary_disagreement_policy: warning_only
 profile_hash: 63cea6df8f673adc481e45592bd35e412b1ee8cb24f4c6c9cfda225b825ab959
 repair:
-  attempted_at: '2026-09-25T16:09:49Z'
+  attempted_at: '2026-10-22T06:36:48Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -331,39 +473,38 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: At least {{2-C}}
+      value: At least
       source_id: mediawiki-4460564
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "Reploid Physiology= *Superhuman Physical Characteristics *Inorganic\
-        \ Physiology (Type 2) *Self-Sustenance (All Types) *Space Survival *Immortality\
-        \ **Type 1 (Reploids can live for centuries without any problem) **Type 2\
-        \ (Combat Applicable. Mid; Reploids can survive and fight even after being\
-        \ severely damaged) **Type 3 & Regeneration (Low-Godly; as long as their souls\
-        \ still exist, Reploids can regenerate their entire bodies even after complete\
-        \ destruction) *Non-Physical Interaction **(Data; Reploids can interact with\
-        \ data) **(Elemental\u3014Type 7 & 8\u3015; Reploids can physically interact\
-        \ with Cyber Elves, beings made of energy and electrons) **(Souls; Reploids\
-        \ can interact with Nightmare Souls) *Accelerated Development (Reploids have\
-        \ limitless potential) *Damage Reduction (Reploids are modeled after X, whose\
-        \ body possesses an inner reactive armor skeleton that reduces damage by 93%)\
-        \ *Extrasensory Perception (Enhanced Sight\u30141 Layer\u3015; Reploids can\
-        \ sense the Sigma Virus, which cannot be sensed like normal data) *Enhanced\
-        \ Senses **(Enhanced Vision) ***(Soul Vision; Reploids can see Nightmare Souls)\
-        \ ***(Neutral Vision; all Reploids are able to see Cyber Elves, beings invisible\
-        \ to humans) ***(Telescopic Vision; all Reploids are superior to Rock, who\
-        \ can see the Wily Star from this distance) *Absorption (Energy), Statistics\
-        \ Amplification & Invulnerability (Type 2;Reploids can enter an Overdrive\
-        \ state, which greatly increases their power through energy absorption and\
-        \ can even render them invulnerable) *Teleportation & Dimensional Travel (Reploids\
-        \ can transform into light beams to teleport and travel across dimensions)\
-        \ |-|Skills & Abilites= *Genius Intelligence *Large Size (Type 0 for some\
-        \ forms, Type 3 as Final Sigma W and Type 4 as Colossus Sigma) *Expert Sword,\
-        \ Claw and Scythe User *Hand to Hand Combatant *Pressure Points (Can plow\
-        \ through mobs of Maverick Hunters by hitting each and every single weak spot\
-        \ in each Hunter) *Flight *Energy Manipulation *Energy Projection *Weather\
+      value: "*Superhuman Physical Characteristics *Inorganic Physiology (Type 2)\
+        \ *Self-Sustenance (All Types) *Space Survival *Immortality **Type 1 (Reploids\
+        \ can live for centuries without any problem) **Type 2 (Combat Applicable.\
+        \ Mid; Reploids can survive and fight even after being severely damaged) **Type\
+        \ 3 & Regeneration (Low-Godly; as long as their souls still exist, Reploids\
+        \ can regenerate their entire bodies even after complete destruction) *Non-Physical\
+        \ Interaction **(Data; Reploids can interact with data) **(Elemental\u3014\
+        Type 7 & 8\u3015; Reploids can physically interact with Cyber Elves, beings\
+        \ made of energy and electrons) **(Souls; Reploids can interact with Nightmare\
+        \ Souls) *Accelerated Development (Reploids have limitless potential) *Damage\
+        \ Reduction (Reploids are modeled after X, whose body possesses an inner reactive\
+        \ armor skeleton that reduces damage by 93%) *Extrasensory Perception (Enhanced\
+        \ Sight\u30141 Layer\u3015; Reploids can sense the Sigma Virus, which cannot\
+        \ be sensed like normal data) *Enhanced Senses **(Enhanced Vision) ***(Soul\
+        \ Vision; Reploids can see Nightmare Souls) ***(Neutral Vision; all Reploids\
+        \ are able to see Cyber Elves, beings invisible to humans) ***(Telescopic\
+        \ Vision; all Reploids are superior to Rock, who can see the Wily Star from\
+        \ this distance) *Absorption (Energy), Statistics Amplification & Invulnerability\
+        \ (Type 2;Reploids can enter an Overdrive state, which greatly increases their\
+        \ power through energy absorption and can even render them invulnerable) *Teleportation\
+        \ & Dimensional Travel (Reploids can transform into light beams to teleport\
+        \ and travel across dimensions) *Genius Intelligence *Large Size (Type 0 for\
+        \ some forms, Type 3 as Final Sigma W and Type 4 as Colossus Sigma) *Expert\
+        \ Sword, Claw and Scythe User *Hand to Hand Combatant *Pressure Points (Can\
+        \ plow through mobs of Maverick Hunters by hitting each and every single weak\
+        \ spot in each Hunter) *Flight *Energy Manipulation *Energy Projection *Weather\
         \ Manipulation *Electricity Manipulation *Fire Manipulation *Absolute Zero\
         \ (His ice weapons are far superior to Mega Man and Tundra Man) *Air Manipulation\
         \ *Soul Manipulation *Mind Manipulation *Incorporeality *Aura *Intangibility\
@@ -374,8 +515,8 @@ repair:
         \ later. Though, he can only regen his consciousness and needs to possess\
         \ a new body to fight) *Immortality (Types 3, 6 and 8: As long as Zero's original\
         \ body and the Maverick Virus are around, Sigma will never truly die) *Reactive\
-        \ Evolution *Resurrection (Can resurrect other Reploids) |-|Resistence= Resistance\
-        \ to: *Absolute Zero *Soul Manipulation *Spatial Manipulation *Time Manipulation"
+        \ Evolution *Resurrection (Can resurrect other Reploids) Resistance to: *Absolute\
+        \ Zero *Soul Manipulation *Spatial Manipulation *Time Manipulation"
       source_id: mediawiki-4460564
       provider_id: vsbattles
       authority: high
@@ -452,31 +593,25 @@ repair:
         as time goes by, especially in his sixth form, where he acts like a mindless
         beast, Intangibility can be bypassed by weapons tuned to his virus matrix
         (Which is constantly mutating and changing, making this difficult to exploit)
-        {{scroll box|content=}} Notable Attacks/Techniques: *Possession: After merging
-        with the Maverick Virus, Sigma exists as an incorporeal being that uses physical
-        bodies to interact with the world directly (But can still fire energy and
-        virus blasts to damage foes). As a result, he''s nearly impossible to kill
-        without a weapon specifically designed for eradicating the Maverick Virus
-        and even then those weapons couldn''t put him down permanently. Even more
-        fearsome is the fact that he is able to influence the minds of anyone on Planet
-        Earth, even humans despite his nature as a computer virus. He is able to do
-        this on a planetary scale, ensuring that he would not be put down until the
-        advent of the Mother Elf. ==Gallery== {{Scroll box|content= Wolf Sigma.png|Wolf
-        Sigma. Green Sigma Virus.png|The Maverick Virus. Kaizer Sigma.png|Kaiser Sigma.
-        megaman_x4__reaper_sigma_by_toastieman-da95i0t.png|Reaper Sigma. Laser Sigma.gif|Alien
-        Laser Sigma. Head SIgma.png|Disfigured Sigma Head. Final SigmaW.gif|Final
-        Sigma W. Hell Sigma.png|Hell Sigma. Colossus Sigma.png|Colossus Sigma. MMX8Sigma2.png|Sigma
-        Copy. }} ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Sigma
-        Mega Man|Sigma (Mega Man)}} Category:Characters Category:Mega Man Category:Antagonists
-        Category:Primary Antagonists Category:Electricity Users Category:Flight Users
-        Category:Mind Users Category:Soul Users Category:Reactive Evolution Users
-        Category:Possession Users Category:Possessed/Brainwashed Characters Category:Scythe
-        Users Category:Fire Users Category:Martial Artists Category:Sword Users Category:Intangibility
-        Users Category:Gun Users Category:Energy Users Category:Incorporeal Characters
-        Category:Robots Category:Evil Characters Category:Weapon Masters Category:Immortals
-        Category:Game Bosses Category:Final Bosses Category:Teleportation Users Category:Ice
-        Users Category:Air Users Category:Invisibility Users Category:Forcefield Users
-        Category:Aura Users Category:Villains Category:Technology Users Category:Claw
+        Notable Attacks/Techniques: *Possession: After merging with the Maverick Virus,
+        Sigma exists as an incorporeal being that uses physical bodies to interact
+        with the world directly (But can still fire energy and virus blasts to damage
+        foes). As a result, he''s nearly impossible to kill without a weapon specifically
+        designed for eradicating the Maverick Virus and even then those weapons couldn''t
+        put him down permanently. Even more fearsome is the fact that he is able to
+        influence the minds of anyone on Planet Earth, even humans despite his nature
+        as a computer virus. He is able to do this on a planetary scale, ensuring
+        that he would not be put down until the advent of the Mother Elf. ==Gallery==
+        ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Mega Man Category:Antagonists Category:Primary Antagonists Category:Electricity
+        Users Category:Flight Users Category:Mind Users Category:Soul Users Category:Reactive
+        Evolution Users Category:Possession Users Category:Possessed/Brainwashed Characters
+        Category:Scythe Users Category:Fire Users Category:Martial Artists Category:Sword
+        Users Category:Intangibility Users Category:Gun Users Category:Energy Users
+        Category:Incorporeal Characters Category:Robots Category:Evil Characters Category:Weapon
+        Masters Category:Immortals Category:Game Bosses Category:Final Bosses Category:Teleportation
+        Users Category:Ice Users Category:Air Users Category:Invisibility Users Category:Forcefield
+        Users Category:Aura Users Category:Villains Category:Technology Users Category:Claw
         Users Category:Shield Users Category:Weather Users Category:Corruption Users
         Category:Large Sized Characters Category:Geniuses Category:Self-Sustenance
         Users Category:Resurrection Users Category:Absolute Zero Users Category:Reploids
@@ -503,347 +638,6 @@ repair:
     franchise_match: false
     variant_match: true
     duplicate_key: vsbattles.fandom.com|sigma mega man|9684957
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-sigma-overwatch
-    url: https://vsbattles.fandom.com/wiki/Sigma_Overwatch
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Sigma (Overwatch)
-    source_type: mediawiki
-    revision_id: '9678396'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 7325
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{High 8-C}}, likely higher
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Genius Intelligence *Multiple
-        Selves *Cosmic Awareness (Sigma possesses expanded senses capable of viewing
-        the entire universe simultaneously,SigmaOverwatch 2 Sigma InteractionsOverwatch
-        Sigma Interactions as well as fluctuations in space-time) *Gravity Manipulation
-        *Black Hole Creation (Able to create pseudo-black holes for both offensive
-        and defensive purposes) *Flight (Via Gravity Manipulation) *Forcefield Creation
-        (Via Experimental Barrier)'
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Large Building level, likely higher (As the most powerful weapon
-        at Talon's disposal, Sigma should be significantly more powerful than the
-        likes of Doomfist and Reaper)
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic travel speed (Able to move this fast), Hypersonic+ reaction
-        and combat speed (Despite his lack of formal military training, he is still
-        able to tag Overwatch's fastest heroes in combat. Able to casually react to
-        Helix Rockets)
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Large Building level, likely higher
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Athletic
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Tens of Meters with Hyperspheres and Gravity Manipulation
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Hyperspheres
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Extraordinary Genius (Despite having severe psychological damage as a
-        result of his mind being fragmented due to temporary exposure to a black hole,
-        Sigma is a brilliant scientist, widely considered a pioneer in the field of
-        astrophysics due to his groundbreaking research. Having spent his entire life
-        devising a way to harness the power of gravity he developed an experimental
-        method to control the power of a black hole, though this failed due to an
-        unforeseen error. Even after this though his brilliance was recognized by
-        Talon as a means of weaponizing his abilities and intelligence to further
-        their plans. Under Talon his mind was allowed to expand freely, giving him
-        the opportunity to not only gain control over his gravitational abilities
-        but use them to develop his research even further in hopes of unlocking the
-        secrets of the universeSigma Origin Story)
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'His fractured mental state makes him unstable at times Notable Attacks/Techniques:
-        *Hyperspheres: Sigma''s primary weapon, a pair of gravitational charges which
-        bounce off walls and implode after a short duration, damaging enemies within
-        a sizable radius. Sigma is able to create an indefinite number of these at
-        will. *Experimental Barrier: Sigma propels a floating barrier to a location
-        of his choosing. He can retrieve the barrier at any time. *Kinetic Grasp:
-        Sigma freezes incoming projectiles in midair, converting them into shields.
-        *Accretion: Sigma gathers a mass of debris and flings it at an enemy to knock
-        them down. *Gravitic Flux: Unleashing his full powers, Sigma takes flight,
-        lifts enemies in a targeted area, and launches them into the sky before slamming
-        them back down *Hyper Strike: Sigma punches the enemy, which levitates and
-        knocks away enemies. *Levitation: Sigma briefly levitates up to 5 meter height.
-        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== {{scroll
-        box|content={{reflist|2}}}} {{Discussions|Sigma Overwatch|Sigma (Overwatch)}}
-        Category:Characters Category:Overwatch Category:Adults Category:Armor Users
-        Category:Black Hole Users Category:Cosmic Awareness Users Category:Flight
-        Users Category:Forcefield Users Category:Game Characters Category:Geniuses
-        Category:Gravity Users Category:Humans Category:Male Characters Category:Multiple
-        Selves Users Category:Playable Characters Category:Scientists Category:Video
-        Game Characters'
-      source_id: vsbattles-sigma-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|sigma overwatch|9678396
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-sigma-overwatch
-    url: https://character-stats-and-profiles.fandom.com/wiki/Sigma_Overwatch
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: BenJammins (Canon)/Peterpiper588
-    source_type: mediawiki
-    revision_id: '595016'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 48151
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Categories
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: Varies from 10-A (Can fight professional wrestlers) to 5-B (Destroyed
-        the planet) | Low 2-C via time-machine physiology
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Abstract Existence (Type 2: BenJammins has a GIF for everything, existing
-        across several GIFs made every day used by billions.), Acausality (Type 1,
-        5: Can exist unaffected outside the universe and multiverse. Type 3: Exists
-        across multiple GIFs with several clones and an endless ability to do so),
-        Accelerated Development (Makes GIFs so fast that he was unaffected by his
-        Instagram ban and can gain infinite aura in a matter of seconds), Limited
-        Acid Manipulation (Had such bad acid reflux he breathed fire and farted a
-        large green cloud), Acrobatics (Can perform a wide array of acrobatic moves),
-        Acupuncture (Can inject people with hope or despair, as well as shoot with
-        his cupid bow or finger gun), Adaptation (Can evolve into his "Final Form",
-        breathe underwater, survive in Egypt, etc.), Multiple Limbs (Via his clones),
-        Adhesive Manipulation (Can make his own webs and has tacky glue), Afterimage
-        Creation (Can create them with the Borse and As Blue-collar SpongeBean), Age
-        Manipulation (Can make himself younger), Air Manipulation (Can create storms
-        and bursts of air when sigma), Analytical Prediction (Can predict and see
-        percentages of things happening), Animal Manipulation (Can summon the Borse
-        as well as the staring animals and several of the Italian Brainrots), Astral
-        Projection (His soul can leave his body), Astroremkinesis (Made the entire
-        Earth Ohio, can hold Earth in the palm of his hand), Athletic Human Physical
-        Characteristics (Plays professional basketball and can wrestle), Attack Negation
-        (He lives in pain, isn''t affected by the boom attack), Attack Reflection
-        (Can reflext/deflect all the haters), Aura (Has max aura), Automatic Translation
-        (Can understand other languages instantly with his translate tweet scope,
-        and animal languages), Avatar Creation (Via GIFs and clones), Berserker Mode
-        (Gets so angry with Ohio Anger he drastically speeds up and becomes very aggressive),
-        BFR (Has a very impressive throwing range and can even throw shadows. Can
-        make you go under the water with his spit), Biology Manipulation (Can become
-        a goat), Black Hole Generation (Time-travelling allows him to create black
-        holes), Blessed (Can be Rizz-urrected), Blood Manipulation (High blood-sugar
-        allows him to enter a wormhole-like state), Body Control (Can have his head
-        upside-down, stretch his forehead to space and dislocate it), Body Puppetry
-        (Can have people say stuff for him, in a manner similar to his own puppet
-        self), Bone Manipulation (Can show his skull), Breath Attack (Can breathe
-        fire), Broadway Force (Can make things trippy among other effects when dancing),
-        Burrowing (Can dig tunnels underground), Camouflage (Can barely fit in with
-        the kids and hide in bushes), Causality Manipulation (Can map out and manipulate
-        the angle of his ball going in the hoop), Limited Chain Manipulation (Can
-        create chains), Chaos Manipulation (Caused an explosion in the water with
-        chaos), Chi Manipulation (Can create lasers from his fingers), Clairvoyance
-        (Knows the future), Cloth Manipulation (Changes his clothes when transforming),
-        Corrosion Inducement (Can make himself fade away), Corruption (His sheer existence
-        has led to several people hating him in unreasonably bizzare manners), Cosmic
-        Awareness (Is described ass "all-knowing"), Creation (Creates all his GIFs),
-        Curse Manipulation (As a zombie he can turn others into zombies) Cursed (Can
-        spawn in hell), Cyborgization (Can download opinions), Damage Boost (Via Ohio
-        Anger), Damage Reduction (Via always living in pain), Damage Transferral (Always
-        has a comeback for a hater), Danmaku (Can produce lots of electric), Darkness
-        Manipulation (Can pull out and shrow shadows), Data Manipulation (Can download
-        things), Death Manipulation (As a zombie), Decoy Creation (Can create distractions
-        with his clones),Density Manipulation (Can become heavier), Dimensional Storage
-        (Via his GIFs), Dimensional Travel (Has a Nether Portal), Disassembly (Can
-        remove parts of his body), Dream Manipulation (Can manifest his dreams into
-        reality), Duplication (Has an established consistent ability to duplicate),
-        Durability Negation (Easily took down someone considerably larger than him),
-        Earth Manipulation (Can spin the Earth and [https://tenor.com/en-GB/view/all-ohio-always-been-always-has-been-astronaut-astronaut-meme-gif-16239799906713567251]
-        make it all Ohio), Elasticity (Can stretch his forehead to space), Electricity
-        Manipulation (Can create electricity), Elemental Manipulation, Emotional Manipulation
-        (Can inject people with hope or despair, as well as shoot with his cupid bow),
-        Empowerment (Can become a God in Minecraft), Energy Manipulation (Via high
-        blood sugar), Energy Projection (Can create lasers from his fingers), Enhanced
-        Bodily Fluids (Can make you go under the water via his spit), Enhanced Metabolism
-        (Type 1: Can survive in space. Type 2, 3: GIFs go on infinitely), Enhanced
-        Senses (Can see the viewer), Enhanced Swimming (Can outswim a shark), Existence
-        Erasure (Can erase himself from existence and make'
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Varies from 10-A (Can fight professional wrestlers) to 5-B (Destroyed
-        the planet) | Low 2-C via time-machine physiology
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Varies from Athletic human (Can keep up and play with professional basketball
-        players) to MFTL (Can expand his forehead outside the galaxy in a matter of
-        seconds), faster with Ohio Anger. At least Inaccessible (Was able to exist
-        outside the multiverse). Possibly Far Higher
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Varies from 10-A (Can fight professional wrestlers) to 5-B (Survived
-        the destruction of the planet)
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None-Notable
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|benjammins canon peterpiper588|595016
     retryable: false
     exception_class: ''
   - source_id: vsbattles-sigma-overwatch
@@ -904,7 +698,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{High 8-C}}, likely higher
+      value: At least , likely higher
       source_id: vsbattles-sigma-overwatch
       provider_id: vsbattles
       authority: high
@@ -992,14 +786,12 @@ repair:
         lifts enemies in a targeted area, and launches them into the sky before slamming
         them back down *Hyper Strike: Sigma punches the enemy, which levitates and
         knocks away enemies. *Levitation: Sigma briefly levitates up to 5 meter height.
-        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== {{scroll
-        box|content={{reflist|2}}}} {{Discussions|Sigma Overwatch|Sigma (Overwatch)}}
-        Category:Characters Category:Overwatch Category:Adults Category:Armor Users
-        Category:Black Hole Users Category:Cosmic Awareness Users Category:Flight
-        Users Category:Forcefield Users Category:Game Characters Category:Geniuses
-        Category:Gravity Users Category:Humans Category:Male Characters Category:Multiple
-        Selves Users Category:Playable Characters Category:Scientists Category:Video
-        Game Characters'
+        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:Characters
+        Category:Overwatch Category:Adults Category:Armor Users Category:Black Hole
+        Users Category:Cosmic Awareness Users Category:Flight Users Category:Forcefield
+        Users Category:Game Characters Category:Geniuses Category:Gravity Users Category:Humans
+        Category:Male Characters Category:Multiple Selves Users Category:Playable
+        Characters Category:Scientists Category:Video Game Characters'
       source_id: vsbattles-sigma-overwatch
       provider_id: vsbattles
       authority: high
@@ -1019,26 +811,73 @@ repair:
     exception_class: ''
   - source_id: character-stats-profiles-sigma-overwatch
     url: https://character-stats-and-profiles.fandom.com/wiki/Sigma_%28Overwatch%29
+    ok: false
+    note: provider_search_no_results
+    extracted_fields: []
+    normalized_page_title: Sigma (Overwatch)
+    source_type: mediawiki
+    revision_id: ''
+    fetch_status: failed
+    http_status: null
+    content_length: 0
+    content_kind: unknown
+    headings_detected: []
+    stat_labels_detected: []
+    extraction_failure_reason: provider_search_no_results
+    rank: 70
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates: []
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 0
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|sigma overwatch
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-sigma-overwatch
+    url: https://vsbattles.fandom.com/wiki/Sigma_Overwatch
     ok: true
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
     - durability
+    - intelligence
     - powers_and_abilities
+    - range
     - speed
+    - stamina
+    - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: BenJammins (Canon)/Peterpiper588
+    normalized_page_title: Sigma (Overwatch)
     source_type: mediawiki
-    revision_id: '595016'
+    revision_id: '9678396'
     fetch_status: fetched
     http_status: 200
-    content_length: 48151
+    content_length: 7325
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
-    - Categories
+    - Notable Matchups
+    - References
     stat_labels_detected:
     - attack_potency
     - durability
@@ -1055,8 +894,8 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
+    rank: 130
+    provider_id: vsbattles
     authority: high
     promotion_allowed: true
     allowed_fields:
@@ -1070,113 +909,107 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: Varies from 10-A (Can fight professional wrestlers) to 5-B (Destroyed
-        the planet) | Low 2-C via time-machine physiology
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
+      value: At least , likely higher
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Abstract Existence (Type 2: BenJammins has a GIF for everything, existing
-        across several GIFs made every day used by billions.), Acausality (Type 1,
-        5: Can exist unaffected outside the universe and multiverse. Type 3: Exists
-        across multiple GIFs with several clones and an endless ability to do so),
-        Accelerated Development (Makes GIFs so fast that he was unaffected by his
-        Instagram ban and can gain infinite aura in a matter of seconds), Limited
-        Acid Manipulation (Had such bad acid reflux he breathed fire and farted a
-        large green cloud), Acrobatics (Can perform a wide array of acrobatic moves),
-        Acupuncture (Can inject people with hope or despair, as well as shoot with
-        his cupid bow or finger gun), Adaptation (Can evolve into his "Final Form",
-        breathe underwater, survive in Egypt, etc.), Multiple Limbs (Via his clones),
-        Adhesive Manipulation (Can make his own webs and has tacky glue), Afterimage
-        Creation (Can create them with the Borse and As Blue-collar SpongeBean), Age
-        Manipulation (Can make himself younger), Air Manipulation (Can create storms
-        and bursts of air when sigma), Analytical Prediction (Can predict and see
-        percentages of things happening), Animal Manipulation (Can summon the Borse
-        as well as the staring animals and several of the Italian Brainrots), Astral
-        Projection (His soul can leave his body), Astroremkinesis (Made the entire
-        Earth Ohio, can hold Earth in the palm of his hand), Athletic Human Physical
-        Characteristics (Plays professional basketball and can wrestle), Attack Negation
-        (He lives in pain, isn''t affected by the boom attack), Attack Reflection
-        (Can reflext/deflect all the haters), Aura (Has max aura), Automatic Translation
-        (Can understand other languages instantly with his translate tweet scope,
-        and animal languages), Avatar Creation (Via GIFs and clones), Berserker Mode
-        (Gets so angry with Ohio Anger he drastically speeds up and becomes very aggressive),
-        BFR (Has a very impressive throwing range and can even throw shadows. Can
-        make you go under the water with his spit), Biology Manipulation (Can become
-        a goat), Black Hole Generation (Time-travelling allows him to create black
-        holes), Blessed (Can be Rizz-urrected), Blood Manipulation (High blood-sugar
-        allows him to enter a wormhole-like state), Body Control (Can have his head
-        upside-down, stretch his forehead to space and dislocate it), Body Puppetry
-        (Can have people say stuff for him, in a manner similar to his own puppet
-        self), Bone Manipulation (Can show his skull), Breath Attack (Can breathe
-        fire), Broadway Force (Can make things trippy among other effects when dancing),
-        Burrowing (Can dig tunnels underground), Camouflage (Can barely fit in with
-        the kids and hide in bushes), Causality Manipulation (Can map out and manipulate
-        the angle of his ball going in the hoop), Limited Chain Manipulation (Can
-        create chains), Chaos Manipulation (Caused an explosion in the water with
-        chaos), Chi Manipulation (Can create lasers from his fingers), Clairvoyance
-        (Knows the future), Cloth Manipulation (Changes his clothes when transforming),
-        Corrosion Inducement (Can make himself fade away), Corruption (His sheer existence
-        has led to several people hating him in unreasonably bizzare manners), Cosmic
-        Awareness (Is described ass "all-knowing"), Creation (Creates all his GIFs),
-        Curse Manipulation (As a zombie he can turn others into zombies) Cursed (Can
-        spawn in hell), Cyborgization (Can download opinions), Damage Boost (Via Ohio
-        Anger), Damage Reduction (Via always living in pain), Damage Transferral (Always
-        has a comeback for a hater), Danmaku (Can produce lots of electric), Darkness
-        Manipulation (Can pull out and shrow shadows), Data Manipulation (Can download
-        things), Death Manipulation (As a zombie), Decoy Creation (Can create distractions
-        with his clones),Density Manipulation (Can become heavier), Dimensional Storage
-        (Via his GIFs), Dimensional Travel (Has a Nether Portal), Disassembly (Can
-        remove parts of his body), Dream Manipulation (Can manifest his dreams into
-        reality), Duplication (Has an established consistent ability to duplicate),
-        Durability Negation (Easily took down someone considerably larger than him),
-        Earth Manipulation (Can spin the Earth and [https://tenor.com/en-GB/view/all-ohio-always-been-always-has-been-astronaut-astronaut-meme-gif-16239799906713567251]
-        make it all Ohio), Elasticity (Can stretch his forehead to space), Electricity
-        Manipulation (Can create electricity), Elemental Manipulation, Emotional Manipulation
-        (Can inject people with hope or despair, as well as shoot with his cupid bow),
-        Empowerment (Can become a God in Minecraft), Energy Manipulation (Via high
-        blood sugar), Energy Projection (Can create lasers from his fingers), Enhanced
-        Bodily Fluids (Can make you go under the water via his spit), Enhanced Metabolism
-        (Type 1: Can survive in space. Type 2, 3: GIFs go on infinitely), Enhanced
-        Senses (Can see the viewer), Enhanced Swimming (Can outswim a shark), Existence
-        Erasure (Can erase himself from existence and make'
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
+      value: '*Superhuman Physical Characteristics *Genius Intelligence *Multiple
+        Selves *Cosmic Awareness (Sigma possesses expanded senses capable of viewing
+        the entire universe simultaneously,SigmaOverwatch 2 Sigma InteractionsOverwatch
+        Sigma Interactions as well as fluctuations in space-time) *Gravity Manipulation
+        *Black Hole Creation (Able to create pseudo-black holes for both offensive
+        and defensive purposes) *Flight (Via Gravity Manipulation) *Forcefield Creation
+        (Via Experimental Barrier)'
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Varies from 10-A (Can fight professional wrestlers) to 5-B (Destroyed
-        the planet) | Low 2-C via time-machine physiology
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
+      value: At least Large Building level, likely higher (As the most powerful weapon
+        at Talon's disposal, Sigma should be significantly more powerful than the
+        likes of Doomfist and Reaper)
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Varies from Athletic human (Can keep up and play with professional basketball
-        players) to MFTL (Can expand his forehead outside the galaxy in a matter of
-        seconds), faster with Ohio Anger. At least Inaccessible (Was able to exist
-        outside the multiverse). Possibly Far Higher
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
+      value: Subsonic travel speed (Able to move this fast), Hypersonic+ reaction
+        and combat speed (Despite his lack of formal military training, he is still
+        able to tag Overwatch's fastest heroes in combat. Able to casually react to
+        Helix Rockets)
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Varies from 10-A (Can fight professional wrestlers) to 5-B (Survived
-        the destruction of the planet)
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
+      value: At least Large Building level, likely higher
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Athletic
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Tens of Meters with Hyperspheres and Gravity Manipulation
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Hyperspheres
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Extraordinary Genius (Despite having severe psychological damage as a
+        result of his mind being fragmented due to temporary exposure to a black hole,
+        Sigma is a brilliant scientist, widely considered a pioneer in the field of
+        astrophysics due to his groundbreaking research. Having spent his entire life
+        devising a way to harness the power of gravity he developed an experimental
+        method to control the power of a black hole, though this failed due to an
+        unforeseen error. Even after this though his brilliance was recognized by
+        Talon as a means of weaponizing his abilities and intelligence to further
+        their plans. Under Talon his mind was allowed to expand freely, giving him
+        the opportunity to not only gain control over his gravitational abilities
+        but use them to develop his research even further in hopes of unlocking the
+        secrets of the universeSigma Origin Story)
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: None-Notable
-      source_id: character-stats-profiles-sigma-overwatch
-      provider_id: character_stats_profiles
+      value: 'His fractured mental state makes him unstable at times Notable Attacks/Techniques:
+        *Hyperspheres: Sigma''s primary weapon, a pair of gravitational charges which
+        bounce off walls and implode after a short duration, damaging enemies within
+        a sizable radius. Sigma is able to create an indefinite number of these at
+        will. *Experimental Barrier: Sigma propels a floating barrier to a location
+        of his choosing. He can retrieve the barrier at any time. *Kinetic Grasp:
+        Sigma freezes incoming projectiles in midair, converting them into shields.
+        *Accretion: Sigma gathers a mass of debris and flings it at an enemy to knock
+        them down. *Gravitic Flux: Unleashing his full powers, Sigma takes flight,
+        lifts enemies in a targeted area, and launches them into the sky before slamming
+        them back down *Hyper Strike: Sigma punches the enemy, which levitates and
+        knocks away enemies. *Levitation: Sigma briefly levitates up to 5 meter height.
+        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:Characters
+        Category:Overwatch Category:Adults Category:Armor Users Category:Black Hole
+        Users Category:Cosmic Awareness Users Category:Flight Users Category:Forcefield
+        Users Category:Game Characters Category:Geniuses Category:Gravity Users Category:Humans
+        Category:Male Characters Category:Multiple Selves Users Category:Playable
+        Characters Category:Scientists Category:Video Game Characters'
+      source_id: vsbattles-sigma-overwatch
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 0
+    variant_score: 25
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
@@ -1184,7 +1017,49 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|benjammins canon peterpiper588|595016
+    duplicate_key: vsbattles.fandom.com|sigma overwatch|9678396
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-sigma-overwatch
+    url: https://character-stats-and-profiles.fandom.com/wiki/Sigma_Overwatch
+    ok: false
+    note: provider_search_no_results
+    extracted_fields: []
+    normalized_page_title: Sigma Overwatch
+    source_type: mediawiki
+    revision_id: ''
+    fetch_status: failed
+    http_status: null
+    content_length: 0
+    content_kind: unknown
+    headings_detected: []
+    stat_labels_detected: []
+    extraction_failure_reason: provider_search_no_results
+    rank: 70
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates: []
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 0
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|sigma overwatch
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-sigma
@@ -1366,12 +1241,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{High 6-A}} | {{5-C}} | {{1-C}}'
-      source_id: vsbattles-sigma-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: '*Superhuman Physical Characteristics **Self-Sustenance (Types 1, 2,
         and 3) **Large Size (Type 4; As Sigma-2) *Weapon Mastery *Incorporeality *Technology
@@ -1438,14 +1307,21 @@ repair:
         Sigma is only exclusive to Worlds Unite as the crossover was retconned to
         the point where it never happened and as such never existed. ==Gallery== File:MegaManArchieC040-2.jpg|Archie
         Sigma prior the Worlds Unite. File:Archie Sigma Forms.jpg File:Sigma Semi-Final.png
-        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== {{reflist}}
-        {{discussions|Sigma Archie Comics|Sigma (Archie Comics)}} Category:Characters
+        ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:Characters
         Category:Archie Sonic Category:Acausal Characters Category:Antagonists Category:Comic
         Book Characters Category:Duplication Users Category:Evil Characters Category:Flight
         Users Category:Incorporeal Characters Category:Large Sized Characters Category:Male
         Characters Category:Mega Man Category:Mind Users Category:Portal Users Category:Primary
         Antagonists Category:Robots Category:Self-Sustenance Users Category:Technology
         Users Category:Villains'
+      source_id: vsbattles-sigma-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: '| Key: Sigma-1 | Sigma-2 | Sigma-3 Name: Sigma Origin: Sonic & Mega
+        Man: When Worlds Unite Gender: Male Age: Dozens of years old Classification:
+        Reploid, Maverick, Virus'
       source_id: vsbattles-sigma-game
       provider_id: vsbattles
       authority: high
@@ -1594,5 +1470,6 @@ repair:
   candidate_sources: []
   chosen_source_id: null
   failure_reasons:
-    fetched: 8
+    fetched: 6
+    provider_search_no_results: 2
   confidence: 0.0

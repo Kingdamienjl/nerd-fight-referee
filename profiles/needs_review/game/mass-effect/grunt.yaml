@@ -4,23 +4,14 @@ name: Grunt
 franchise: Mass Effect
 category: game
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-09-22T22:46:29Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.35
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_powers_and_abilities
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Grunt
   franchise: Mass Effect
@@ -49,13 +40,13 @@ forms:
   source_field: null
 sources:
 - id: mediawiki-5068516
-  title: Grunt
+  title: Grunt (Mass Effect)
   url: https://vsbattles.fandom.com/wiki/Grunt
   source_type: mediawiki
   source_tier: C
   page_id: '5068516'
-  revision_id: '9636062'
-  revision_timestamp: '2026-08-16T00:33:24Z'
+  revision_id: '9643762'
+  revision_timestamp: '2026-08-21T23:00:13Z'
   retrieved_at: '2026-09-10T13:08:53Z'
   raw_cache_key: 0093e27f514e9ea0507dceddbc4ca6bc527d7a6aafd5871bc0e7eaf3dcd6d7ee
   origin: null
@@ -82,42 +73,6 @@ sources:
   source_type: mediawiki
   title: Grunt
   url: https://character-stats-and-profiles.fandom.com/wiki/Grunt
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-grunt-mass-effect
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Grunt Mass Effect
-  url: https://vsbattles.fandom.com/wiki/Grunt_Mass_Effect
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-grunt-mass-effect
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Grunt Mass Effect
-  url: https://character-stats-and-profiles.fandom.com/wiki/Grunt_Mass_Effect
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -205,17 +160,26 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 9-A physically, 9-B to 9-A with weaponry, 8-B with high explosives rounds/grenades
+    source_ids:
+    - mediawiki-5068516
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level physically (Able to contend with Commander Shepard),
+      Wall level+ to Small Building level with weaponry, City Block Level+ with high
+      explosives rounds/grenades
+    source_ids:
+    - mediawiki-5068516
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Massively Hypersonic Combat Speed and Reactions (Comparable to James Vega),
+      Relativistic Attack Speed with mass accelerator weaponry
+    source_ids:
+    - mediawiki-5068516
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -225,27 +189,213 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level physically (Can tank gunfire at point blank range),
+      City Block level with kinetic barriers (Scaling from Urdnot Wrex)
+    source_ids:
+    - mediawiki-5068516
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman
+    source_ids:
+    - mediawiki-5068516
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range physically, Hundreds of Meters with mass accelerator
+      weaponry
+    source_ids:
+    - mediawiki-5068516
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Gifted, has the cunning of a perfect Krogan warrior, he was implanted by
+      all the tactics of past Krogan and information about various cultures, events,
+      etc.
+    source_ids:
+    - mediawiki-5068516
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - mediawiki-5068516
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-longevity-krogan-can-live-to-over-a-thousand-years-of-age
+  name: Longevity (Krogan can live to over a thousand years of age)
+  description: Longevity (Krogan can live to over a thousand years of age)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-regeneration-low
+  name: Regeneration (Low)
+  description: Regeneration (Low)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-expert-hand-to-hand-combatant
+  name: Expert Hand-to-Hand Combatant
+  description: Expert Hand-to-Hand Combatant
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery-expert-marksman-and-grenadier
+  name: Weapon Mastery (Expert marksman and grenadier)
+  description: Weapon Mastery (Expert marksman and grenadier)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-forcefield-creation-in-the-form-of-kinetic-barriers
+  name: Forcefield Creation (In the form of Kinetic Barriers)
+  description: Forcefield Creation (In the form of Kinetic Barriers)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-fire-manipulation-with-incendiary-ammo
+  name: Fire Manipulation (With Incendiary Ammo)
+  description: Fire Manipulation (With Incendiary Ammo)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-explosion-manipulation-via-frag-grenade
+  name: Explosion Manipulation (Via Frag Grenade)
+  description: Explosion Manipulation (Via Frag Grenade)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-damage-reduction-and-damage-boost-with-fortification
+  name: Damage Reduction and Damage Boost (With Fortification)
+  description: Damage Reduction and Damage Boost (With Fortification)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-kinetic-barriers-are-activated-based-on-the-speed-of-an-attack-a-mele
+  name: Kinetic barriers are activated based on the speed of an attack. A melee attack
+    is not fast enough to set it off. In addi
+  description: Kinetic barriers are activated based on the speed of an attack. A melee
+    attack is not fast enough to set it off. In addition
+  source_ids: &id003
+  - mediawiki-5068516
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-the-shielding-afforded-by-kinetic-barriers-does-not-protect-against-e
+  name: the shielding afforded by kinetic barriers does not protect against extremes
+    of temperature
+  description: the shielding afforded by kinetic barriers does not protect against
+    extremes of temperature
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -257,13 +407,25 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_powers_and_abilities
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: mediawiki-5068516
+  secondary_disagreement_policy: warning_only
 profile_hash: 2137bd7cf235778a6cf358ace20261a5a1a0388933fca7c8ed7c6aa48999d662
 repair:
-  attempted_at: '2026-09-25T15:52:03Z'
+  attempted_at: '2026-10-23T07:20:47Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -273,152 +435,6 @@ repair:
   source_attempts:
   - source_id: mediawiki-5068516
     url: https://vsbattles.fandom.com/wiki/Grunt
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Grunt (Madness Combat)
-    source_type: mediawiki
-    revision_id: '9152679'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3613
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - tier
-    - attack_potency
-    - speed
-    - durability
-    - range
-    - stamina
-    - intelligence
-    - abilities
-    - equipment
-    - weaknesses
-    field_candidates:
-    - field: tier
-      value: '{{9-C}}, up to {{9-B}} with Optional Equipment'
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Nevadean Physiology **Peak Human Physical Characteristics *Explosion
-        Manipulation (With grenadesMadness Combat 2: Redeemer)'
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Street level+Scales to 7796 joules (Can tear off heads with their bare
-        hands), up to Wall level with Optional Equipment (Weapons such as grenades
-        are around this level)
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At most Relativistic (Noticeably slower than NEXUS Soldats, who can move
-        simultaneously with concentrated photon lasers)
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Street level+
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: 'Average, possibly Athletic Human (While having no military training
-        at all, grunts have been shown to go through at least some physical training,Madness
-        Combat 7: Consternation although it''s unknown how much they actually go through
-        before going into combat)'
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Extended Melee Range to Hundreds of Meters with
-        optional equipment
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: N/A *Optional
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Average (Stated to lack any skills and tactical knowledge. Are more than
-        likely regular denizens who were drafted into the A.A.H.W.A.A.H.W. Recruitment
-        Posters)
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Grunts are cannon fodder and have little to no training. ==Notable Matchups==
-        Victories: Losses: Inconclusive: == References == {{Reflist|2}} ==Statistics
-        Values== {{scroll box|content=}} {{discussions|Grunt Madness Combat|Grunt
-        (Madness Combat)}} Category:Madness Combat Category:Soldiers Category:Explosion
-        Users Category:Characters'
-      source_id: mediawiki-5068516
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|grunt madness combat|9152679
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-grunt-mass-effect
-    url: https://vsbattles.fandom.com/wiki/Grunt_Mass_Effect
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -464,19 +480,20 @@ repair:
     authority: high
     promotion_allowed: true
     allowed_fields:
+    - tier
     - attack_potency
     - speed
     - durability
-    - powers_and_abilities
-    - weaknesses
     - range
     - stamina
     - intelligence
+    - abilities
+    - equipment
+    - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-A}} physically, {{9-B}} to {{9-A}} with weaponry, {{8-B}} with high
-        explosives rounds/grenades'
-      source_id: vsbattles-grunt-mass-effect
+      value: physically, to with weaponry, with high explosives rounds/grenades
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -486,7 +503,7 @@ repair:
         Weapon Mastery (Expert marksman and grenadier), Forcefield Creation (In the
         form of Kinetic Barriers), Fire Manipulation (With Incendiary Ammo), Explosion
         Manipulation (Via Frag Grenade), Damage Reduction and Damage Boost (With Fortification)
-      source_id: vsbattles-grunt-mass-effect
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -494,40 +511,40 @@ repair:
       value: Small Building level physically (Able to contend with Commander Shepard),
         Wall level+ to Small Building level with weaponry, City Block Level+ with
         high explosives rounds/grenades
-      source_id: vsbattles-grunt-mass-effect
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
       value: Massively Hypersonic Combat Speed and Reactions (Comparable to James
         Vega), Relativistic Attack Speed with mass accelerator weaponry
-      source_id: vsbattles-grunt-mass-effect
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
       value: Small Building level physically (Can tank gunfire at point blank range),
         City Block level with kinetic barriers (Scaling from Urdnot Wrex)
-      source_id: vsbattles-grunt-mass-effect
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
       value: Superhuman
-      source_id: vsbattles-grunt-mass-effect
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
       value: Standard Melee Range physically, Hundreds of Meters with mass accelerator
         weaponry
-      source_id: vsbattles-grunt-mass-effect
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: An assault rifle, A shotgun, an omni-tool, and some grenades
-      source_id: vsbattles-grunt-mass-effect
+      value: An assault rifle, A shotgun, an omni-tool
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -535,29 +552,20 @@ repair:
       value: Gifted, has the cunning of a perfect Krogan warrior, he was implanted
         by all the tactics of past Krogan and information about various cultures,
         events, etc.
-      source_id: vsbattles-grunt-mass-effect
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
       value: 'Kinetic barriers are activated based on the speed of an attack. A melee
         attack is not fast enough to set it off. In addition, the shielding afforded
-        by kinetic barriers does not protect against extremes of temperature, toxins,
-        or radiation. Notable Attacks/Techniques: *Concussive Shot: Flattens an enemy
-        with a precise blast at short or long range, effective against barriers. *Incendiary
-        Ammo: Shoots and the target enemies will burst into flames. *Fortification:
-        Reinforces his armor using protective Foucault currents. He can purge the
-        current and send its charge to his gauntlets for increased melee damage. *Frag
-        Grenade: Throws a shrapnel-packed grenade to rip apart his enemies. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{discussions}} Category:Characters
-        Category:Male Characters Category:Super Soldiers Category:Aliens Category:Gun
-        Users Category:Regeneration Users Category:Mass Effect Category:Leaders Category:Warriors
-        Category:Game Characters Category:Video Game Characters Category:Protagonists
-        Category:Forcefield Users Category:Brawlers Category:Martial Artists Category:Weapon
-        Masters Category:Thrown Weapon Users Category:Longevity Users Category:Fire
-        Users Category:Explosion Users Category:Damage Reduction Users Category:Damage
-        Boost Users Category:Science Fiction Characters'
-      source_id: vsbattles-grunt-mass-effect
+        by kinetic barriers does not protect against extremes of temperature, Concussive
+        Shot: Flattens an enemy with a precise blast at short or long range, effective
+        against barriers., Incendiary Ammo: Shoots and the target enemies will burst
+        into flames., Fortification: Reinforces his armor using protective Foucault
+        currents. He can purge the current and send its charge to his gauntlets for
+        increased melee damage.'
+      source_id: mediawiki-5068516
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -572,148 +580,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|grunt mass effect|9643762
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-grunt-mass-effect
-    url: https://character-stats-and-profiles.fandom.com/wiki/Grunt_Mass_Effect
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Gill Grunt (Canon, Skylanders)/StoneKillerz12
-    source_type: mediawiki
-    revision_id: '243798'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 5486
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 2-A | 2-A | 2-A | 2-A
-      source_id: character-stats-profiles-grunt-mass-effect
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Water Manipulation (Summons tidal
-        waves, and has an unlimited amount of water to hover and shoot at enemies),
-        Explosion Manipulation via Summoning (Can summon a starfish that explodes
-        on contact), Skilled with his Harpoon Gun | Superhuman Physical Characteristics,
-        Water Manipulation (Can summon whirlpools), Electricity Manipulation (Can
-        shoot lightning), Weather Manipulation (Can make lightning storms), Skilled
-        with his Trident
-      source_id: character-stats-profiles-grunt-mass-effect
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level+ (Comparable to other Skylanders such as Spyro and Cynder)
-        | Multiverse level+ (Eon's Elite are described as Eon's top line of defense,
-        acting as the most powerful Skylanders of all time. About 3x stronger than
-        base form) | Multiverse level+ (Empowered by a Rift Engine, which enpowered
-        the Sky Eater Armor and made SuperCharger vehicles powerful enough to defeat
-        The Darkness) | Multiverse level+ (Superior to Deep Dive form)
-      source_id: character-stats-profiles-grunt-mass-effect
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively Hypersonic+, likely Relativistic+ (Comparable to Skylanders
-        like Whirlwind who uses real light based attacks and can reach the speed of
-        light in short bursts) with Infinite combat speed and reactions (Comparable
-        to a SuperChargers) | At least Massively Hypersonic+, likely Relativistic+
-        with Infinite reactions and combat speed (Capable of piloting SuperCharger
-        vehicles, and can keep up with other Skylanders who can tag him), Infinite
-        with Reef Ripper (Comparable to other SuperChargers)
-      source_id: character-stats-profiles-grunt-mass-effect
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level+ | Multiverse level+ | Multiverse level+ | Multiverse
-        level+
-      source_id: character-stats-profiles-grunt-mass-effect
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None Notable Notable Attacks/Techniques: Harpoon Gun: Shoots high-velocity
-        harpoons at his enemies. *Barbed Harpoons: Harpoons do increased damage. *Harpoon
-        Repeater: Harpoons reload faster. * Quadent Harpoons: Harpoons do even more
-        increased damage. *Piercing Harpoons: Harpoons travel straight through enemies
-        and hit new targets. *Tripleshot Harpoon: Shoots three harpoons at once. *Anchor
-        Cannon: Shoots an anchor at his opponents * Anchor''s Away: Releases to fire
-        three giant anchors. Power Hose: Sprays water at his enemies to knock them
-        back. *High Pressure Power Hose: Power hose attack does extra damage and knocks
-        enemies back further. *Reserve Water Tank: The Power Hose and Water Jetpack
-        never run out of water. *Boiling Water Hose: Power Hose attack does even more
-        damage. *Neptune Gun: When using the Power Hose, they launch an exploding
-        starfish. Water Jetpack: Fly until the water jetpack runs out. Trident Thrust:
-        Attacks enemies with his trident. *Trident True: Rapidly attacks nearby enemies.
-        * Trident Unleashed: Trident attacks do more damage. *Lightning Strikes: Rapidly
-        attacks nearby enemies with lightning. Power of the Seas: Attacks enemies
-        with a long range lightning attack. *Lightning Build-Up Lightning attacks
-        do more damage. Typhoon Turbine Jetpack Can hover with his jetpack, can also
-        dash forward, and send out tidal waves while hovering. *Wave Jumper: Entering
-        or exiting Jetpack mode causes a water explosion that damages nearby enemies.
-        *Tubular Tidal Wave: Shoots out three large waves in Jetpack mode. *Drive
-        the Wave: While in Jetpack mode they can ride a huge tidal wave! *Shocking
-        Transition: Entering Jetpack mode causes a lightning explosion that damages
-        nearby enemies. Storm of the Seas: Summons a powerful lightning storm!'
-      source_id: character-stats-profiles-grunt-mass-effect
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|gill grunt canon skylanders
-      stonekillerz12|243798
     retryable: false
     exception_class: ''
   - source_id: vsbattles-grunt-mass-effect
@@ -773,8 +639,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-A}} physically, {{9-B}} to {{9-A}} with weaponry, {{8-B}} with high
-        explosives rounds/grenades'
+      value: physically, to with weaponry, with high explosives rounds/grenades
       source_id: vsbattles-grunt-mass-effect
       provider_id: vsbattles
       authority: high
@@ -825,7 +690,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: An assault rifle, A shotgun, an omni-tool, and some grenades
+      value: An assault rifle, A shotgun, an omni-tool
       source_id: vsbattles-grunt-mass-effect
       provider_id: vsbattles
       authority: high
@@ -841,21 +706,12 @@ repair:
     - field: weaknesses
       value: 'Kinetic barriers are activated based on the speed of an attack. A melee
         attack is not fast enough to set it off. In addition, the shielding afforded
-        by kinetic barriers does not protect against extremes of temperature, toxins,
-        or radiation. Notable Attacks/Techniques: *Concussive Shot: Flattens an enemy
-        with a precise blast at short or long range, effective against barriers. *Incendiary
-        Ammo: Shoots and the target enemies will burst into flames. *Fortification:
-        Reinforces his armor using protective Foucault currents. He can purge the
-        current and send its charge to his gauntlets for increased melee damage. *Frag
-        Grenade: Throws a shrapnel-packed grenade to rip apart his enemies. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{discussions}} Category:Characters
-        Category:Male Characters Category:Super Soldiers Category:Aliens Category:Gun
-        Users Category:Regeneration Users Category:Mass Effect Category:Leaders Category:Warriors
-        Category:Game Characters Category:Video Game Characters Category:Protagonists
-        Category:Forcefield Users Category:Brawlers Category:Martial Artists Category:Weapon
-        Masters Category:Thrown Weapon Users Category:Longevity Users Category:Fire
-        Users Category:Explosion Users Category:Damage Reduction Users Category:Damage
-        Boost Users Category:Science Fiction Characters'
+        by kinetic barriers does not protect against extremes of temperature, Concussive
+        Shot: Flattens an enemy with a precise blast at short or long range, effective
+        against barriers., Incendiary Ammo: Shoots and the target enemies will burst
+        into flames., Fortification: Reinforces his armor using protective Foucault
+        currents. He can purge the current and send its charge to his gauntlets for
+        increased melee damage.'
       source_id: vsbattles-grunt-mass-effect
       provider_id: vsbattles
       authority: high
@@ -884,17 +740,16 @@ repair:
     - speed
     - tier
     - weaknesses
-    normalized_page_title: Gill Grunt (Canon, Skylanders)/StoneKillerz12
+    normalized_page_title: Gill Grunt (Canon)/AdamGregory03
     source_type: mediawiki
-    revision_id: '243798'
+    revision_id: '120356'
     fetch_status: fetched
     http_status: 200
-    content_length: 5486
+    content_length: 7910
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
-    - Others
     stat_labels_detected:
     - attack_potency
     - durability
@@ -906,7 +761,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - striking_strength
     - tier
     - weaknesses
@@ -926,77 +780,63 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 2-A | 2-A | 2-A | 2-A
+      value: High 7-C, higher as Eon's Elite | High 7-C, higher when paired with Reef
+        Ripper | At least 6-C, likely higher | At least High 7-C
       source_id: character-stats-profiles-grunt-mass-effect
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Water Manipulation (Summons tidal
-        waves, and has an unlimited amount of water to hover and shoot at enemies),
-        Explosion Manipulation via Summoning (Can summon a starfish that explodes
-        on contact), Skilled with his Harpoon Gun | Superhuman Physical Characteristics,
-        Water Manipulation (Can summon whirlpools), Electricity Manipulation (Can
-        shoot lightning), Weather Manipulation (Can make lightning storms), Skilled
-        with his Trident
+      value: Superhuman Physical Characteristics, Weapon Mastery with his Harpoon
+        Gun, Water Manipulation, Limited Flight with his Water Jetpack, Superhuman
+        Physical Characteristics, Weapon Mastery with his Trident, Water Manipulation,
+        Electricity Manipulation, Flight via Typhoon Turbine Jetpack, Statistics Amplification
+        when paired with the Reef Ripper
       source_id: character-stats-profiles-grunt-mass-effect
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Multiverse level+ (Comparable to other Skylanders such as Spyro and Cynder)
-        | Multiverse level+ (Eon's Elite are described as Eon's top line of defense,
-        acting as the most powerful Skylanders of all time. About 3x stronger than
-        base form) | Multiverse level+ (Empowered by a Rift Engine, which enpowered
-        the Sky Eater Armor and made SuperCharger vehicles powerful enough to defeat
-        The Darkness) | Multiverse level+ (Superior to Deep Dive form)
+      value: Large Town level+ (Can damage Kaos, who survived the eruption of Mt.
+        Cloudbreak, and the Doom Raiders, who survived Cloudcracker Prison blowing
+        up while inside it. Capable of defeating and fighting alongside Wolfgang,
+        who split a small moon in half.), higher as Eon's Elite (Elite Skylanders
+        have their stats greatly enhanced.) | Large Town level+ (Supercharger Skylanders
+        are comparable to the Cores.), higher when paired with Reef Ripper (When paired
+        with their assigned Supercharger vehicle, Superchargers gain enhanced damage
+        outputs.) | At least Island level, likely higher (The Reef Ripper should be
+        comparable to other Supercharger vehicles. Land Supercharger vehicles are
+        required to defeat the Darkness, which should be above the Giants and Malefor
+        in terms of power.) | At least Large Town level+ (Stronger than base)
       source_id: character-stats-profiles-grunt-mass-effect
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Massively Hypersonic+, likely Relativistic+ (Comparable to Skylanders
-        like Whirlwind who uses real light based attacks and can reach the speed of
-        light in short bursts) with Infinite combat speed and reactions (Comparable
-        to a SuperChargers) | At least Massively Hypersonic+, likely Relativistic+
-        with Infinite reactions and combat speed (Capable of piloting SuperCharger
-        vehicles, and can keep up with other Skylanders who can tag him), Infinite
-        with Reef Ripper (Comparable to other SuperChargers)
+      value: Massively Hypersonic+ (Comparable to other Core Skylanders such as Lightning
+        Rod, Zap, and Punk Shock, as well as fodder enemies such as the Bad Jujus,
+        all of which use natural lightning in combat.), possibly Relativistic+ (Can
+        fight on par with Luminous and other Skylanders like Aurora, who use natural
+        light in combat.). Higher as Eon's Elite | At least Massively Hypersonic+,
+        possibly Relativistic+ | Speed of Light (Comparable to the Sun Runner, which
+        is described as capable of reaching light speed.) | At least Massively Hypersonc+,
+        possibly Relativistic+
       source_id: character-stats-profiles-grunt-mass-effect
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Multiverse level+ | Multiverse level+ | Multiverse level+ | Multiverse
-        level+
+      value: Large Town level+ (Tanked Kaos' Hydra destroying the Core of Light, and
+        can take attacks from Wolfgang and the other Doom Raiders.) higher as Eon's
+        Elite | Large Town level+ | At least Island level, likely higher (Comparable
+        to other Supercharger vehicles, which can take attacks from the Darkness.)
+        | At least Large Town level+
       source_id: character-stats-profiles-grunt-mass-effect
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None Notable Notable Attacks/Techniques: Harpoon Gun: Shoots high-velocity
-        harpoons at his enemies. *Barbed Harpoons: Harpoons do increased damage. *Harpoon
-        Repeater: Harpoons reload faster. * Quadent Harpoons: Harpoons do even more
-        increased damage. *Piercing Harpoons: Harpoons travel straight through enemies
-        and hit new targets. *Tripleshot Harpoon: Shoots three harpoons at once. *Anchor
-        Cannon: Shoots an anchor at his opponents * Anchor''s Away: Releases to fire
-        three giant anchors. Power Hose: Sprays water at his enemies to knock them
-        back. *High Pressure Power Hose: Power hose attack does extra damage and knocks
-        enemies back further. *Reserve Water Tank: The Power Hose and Water Jetpack
-        never run out of water. *Boiling Water Hose: Power Hose attack does even more
-        damage. *Neptune Gun: When using the Power Hose, they launch an exploding
-        starfish. Water Jetpack: Fly until the water jetpack runs out. Trident Thrust:
-        Attacks enemies with his trident. *Trident True: Rapidly attacks nearby enemies.
-        * Trident Unleashed: Trident attacks do more damage. *Lightning Strikes: Rapidly
-        attacks nearby enemies with lightning. Power of the Seas: Attacks enemies
-        with a long range lightning attack. *Lightning Build-Up Lightning attacks
-        do more damage. Typhoon Turbine Jetpack Can hover with his jetpack, can also
-        dash forward, and send out tidal waves while hovering. *Wave Jumper: Entering
-        or exiting Jetpack mode causes a water explosion that damages nearby enemies.
-        *Tubular Tidal Wave: Shoots out three large waves in Jetpack mode. *Drive
-        the Wave: While in Jetpack mode they can ride a huge tidal wave! *Shocking
-        Transition: Entering Jetpack mode causes a lightning explosion that damages
-        nearby enemies. Storm of the Seas: Summons a powerful lightning storm!'
+      value: Flight is still and can't turn. Lacks melee options.
       source_id: character-stats-profiles-grunt-mass-effect
       provider_id: character_stats_profiles
       authority: high
@@ -1011,8 +851,279 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|gill grunt canon skylanders
-      stonekillerz12|243798
+    duplicate_key: character-stats-and-profiles.fandom.com|gill grunt canon adamgregory03|120356
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-grunt-mass-effect
+    url: https://vsbattles.fandom.com/wiki/Grunt_Mass_Effect
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Grunt (Mass Effect)
+    source_type: mediawiki
+    revision_id: '9643762'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4747
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: physically, to with weaponry, with high explosives rounds/grenades
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Longevity (Krogan can live to over
+        a thousand years of age), Regeneration (Low), Expert Hand-to-Hand Combatant,
+        Weapon Mastery (Expert marksman and grenadier), Forcefield Creation (In the
+        form of Kinetic Barriers), Fire Manipulation (With Incendiary Ammo), Explosion
+        Manipulation (Via Frag Grenade), Damage Reduction and Damage Boost (With Fortification)
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level physically (Able to contend with Commander Shepard),
+        Wall level+ to Small Building level with weaponry, City Block Level+ with
+        high explosives rounds/grenades
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic Combat Speed and Reactions (Comparable to James
+        Vega), Relativistic Attack Speed with mass accelerator weaponry
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level physically (Can tank gunfire at point blank range),
+        City Block level with kinetic barriers (Scaling from Urdnot Wrex)
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range physically, Hundreds of Meters with mass accelerator
+        weaponry
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: An assault rifle, A shotgun, an omni-tool
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted, has the cunning of a perfect Krogan warrior, he was implanted
+        by all the tactics of past Krogan and information about various cultures,
+        events, etc.
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Kinetic barriers are activated based on the speed of an attack. A melee
+        attack is not fast enough to set it off. In addition, the shielding afforded
+        by kinetic barriers does not protect against extremes of temperature, Concussive
+        Shot: Flattens an enemy with a precise blast at short or long range, effective
+        against barriers., Incendiary Ammo: Shoots and the target enemies will burst
+        into flames., Fortification: Reinforces his armor using protective Foucault
+        currents. He can purge the current and send its charge to his gauntlets for
+        increased melee damage.'
+      source_id: vsbattles-grunt-mass-effect
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|grunt mass effect|9643762
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-grunt-mass-effect
+    url: https://character-stats-and-profiles.fandom.com/wiki/Grunt_Mass_Effect
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Gill Grunt (Canon)/AdamGregory03
+    source_type: mediawiki
+    revision_id: '120356'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 7910
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 7-C, higher as Eon's Elite | High 7-C, higher when paired with Reef
+        Ripper | At least 6-C, likely higher | At least High 7-C
+      source_id: character-stats-profiles-grunt-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Weapon Mastery with his Harpoon
+        Gun, Water Manipulation, Limited Flight with his Water Jetpack, Superhuman
+        Physical Characteristics, Weapon Mastery with his Trident, Water Manipulation,
+        Electricity Manipulation, Flight via Typhoon Turbine Jetpack, Statistics Amplification
+        when paired with the Reef Ripper
+      source_id: character-stats-profiles-grunt-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Large Town level+ (Can damage Kaos, who survived the eruption of Mt.
+        Cloudbreak, and the Doom Raiders, who survived Cloudcracker Prison blowing
+        up while inside it. Capable of defeating and fighting alongside Wolfgang,
+        who split a small moon in half.), higher as Eon's Elite (Elite Skylanders
+        have their stats greatly enhanced.) | Large Town level+ (Supercharger Skylanders
+        are comparable to the Cores.), higher when paired with Reef Ripper (When paired
+        with their assigned Supercharger vehicle, Superchargers gain enhanced damage
+        outputs.) | At least Island level, likely higher (The Reef Ripper should be
+        comparable to other Supercharger vehicles. Land Supercharger vehicles are
+        required to defeat the Darkness, which should be above the Giants and Malefor
+        in terms of power.) | At least Large Town level+ (Stronger than base)
+      source_id: character-stats-profiles-grunt-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic+ (Comparable to other Core Skylanders such as Lightning
+        Rod, Zap, and Punk Shock, as well as fodder enemies such as the Bad Jujus,
+        all of which use natural lightning in combat.), possibly Relativistic+ (Can
+        fight on par with Luminous and other Skylanders like Aurora, who use natural
+        light in combat.). Higher as Eon's Elite | At least Massively Hypersonic+,
+        possibly Relativistic+ | Speed of Light (Comparable to the Sun Runner, which
+        is described as capable of reaching light speed.) | At least Massively Hypersonc+,
+        possibly Relativistic+
+      source_id: character-stats-profiles-grunt-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Large Town level+ (Tanked Kaos' Hydra destroying the Core of Light, and
+        can take attacks from Wolfgang and the other Doom Raiders.) higher as Eon's
+        Elite | Large Town level+ | At least Island level, likely higher (Comparable
+        to other Supercharger vehicles, which can take attacks from the Darkness.)
+        | At least Large Town level+
+      source_id: character-stats-profiles-grunt-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Flight is still and can't turn. Lacks melee options.
+      source_id: character-stats-profiles-grunt-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|gill grunt canon adamgregory03|120356
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-grunt
@@ -1074,7 +1185,7 @@ repair:
       confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Weapon Mastery with his Harpoon
-        Gun, Water Manipulation, Limited Flight with his Water Jetpack | Superhuman
+        Gun, Water Manipulation, Limited Flight with his Water Jetpack, Superhuman
         Physical Characteristics, Weapon Mastery with his Trident, Water Manipulation,
         Electricity Manipulation, Flight via Typhoon Turbine Jetpack, Statistics Amplification
         when paired with the Reef Ripper
@@ -1122,8 +1233,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Flight is still and can''t turn. Lacks melee options. | None notable.
-        Attacks & Techniques: Gill Grunt= *Default'
+      value: Flight is still and can't turn. Lacks melee options.
       source_id: character-stats-profiles-grunt
       provider_id: character_stats_profiles
       authority: high
@@ -1154,7 +1264,6 @@ repair:
     - speed
     - stamina
     - tier
-    - weaknesses
     normalized_page_title: Grunt (Attack of the Earthlings)
     source_type: mediawiki
     revision_id: '9653750'
@@ -1197,7 +1306,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{9-B}}, possibly higher
+      value: At least , possibly higher
       source_id: vsbattles-grunt-game
       provider_id: vsbattles
       authority: high
@@ -1252,17 +1361,6 @@ repair:
       value: Average to Above Average (Has human-like intelligence. The Swarmers also
         understand human technology and like to goof around with it, and can disable
         entire floors and sections of a futuristic space ship if given the time.)
-      source_id: vsbattles-grunt-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable. ==Gallery== AotE Grunt Intro.png AotE Banners (1).png
-        Grunts Credits.png ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions|Grunt
-        Attack of the Earthlings|Grunt (Attack of the Earthlings)}} Category:Attack
-        of the Earthlings Category:Aliens Category:Video Game Characters Category:Protagonists
-        Category:Video Game Characters Category:Transformation Users Category:Adaptation
-        Users Category:Absorption Users Category:Telepaths Category:Characters'
       source_id: vsbattles-grunt-game
       provider_id: vsbattles
       authority: high
@@ -1342,7 +1440,7 @@ repair:
       value: Superhuman Physical Characteristics, Water Manipulation (Summons tidal
         waves, and has an unlimited amount of water to hover and shoot at enemies),
         Explosion Manipulation via Summoning (Can summon a starfish that explodes
-        on contact), Skilled with his Harpoon Gun | Superhuman Physical Characteristics,
+        on contact), Skilled with his Harpoon Gun, Superhuman Physical Characteristics,
         Water Manipulation (Can summon whirlpools), Electricity Manipulation (Can
         shoot lightning), Weather Manipulation (Can make lightning storms), Skilled
         with his Trident
@@ -1381,27 +1479,25 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None Notable Notable Attacks/Techniques: Harpoon Gun: Shoots high-velocity
-        harpoons at his enemies. *Barbed Harpoons: Harpoons do increased damage. *Harpoon
-        Repeater: Harpoons reload faster. * Quadent Harpoons: Harpoons do even more
-        increased damage. *Piercing Harpoons: Harpoons travel straight through enemies
-        and hit new targets. *Tripleshot Harpoon: Shoots three harpoons at once. *Anchor
-        Cannon: Shoots an anchor at his opponents * Anchor''s Away: Releases to fire
-        three giant anchors. Power Hose: Sprays water at his enemies to knock them
-        back. *High Pressure Power Hose: Power hose attack does extra damage and knocks
-        enemies back further. *Reserve Water Tank: The Power Hose and Water Jetpack
-        never run out of water. *Boiling Water Hose: Power Hose attack does even more
-        damage. *Neptune Gun: When using the Power Hose, they launch an exploding
-        starfish. Water Jetpack: Fly until the water jetpack runs out. Trident Thrust:
-        Attacks enemies with his trident. *Trident True: Rapidly attacks nearby enemies.
-        * Trident Unleashed: Trident attacks do more damage. *Lightning Strikes: Rapidly
-        attacks nearby enemies with lightning. Power of the Seas: Attacks enemies
-        with a long range lightning attack. *Lightning Build-Up Lightning attacks
-        do more damage. Typhoon Turbine Jetpack Can hover with his jetpack, can also
-        dash forward, and send out tidal waves while hovering. *Wave Jumper: Entering
-        or exiting Jetpack mode causes a water explosion that damages nearby enemies.
-        *Tubular Tidal Wave: Shoots out three large waves in Jetpack mode. *Drive
-        the Wave: While in Jetpack mode they can ride a huge tidal wave! *Shocking
+      value: 'Barbed Harpoons: Harpoons do increased damage., Harpoon Repeater: Harpoons
+        reload faster., Quadent Harpoons: Harpoons do even more increased damage.,
+        Piercing Harpoons: Harpoons travel straight through enemies and hit new targets.,
+        Tripleshot Harpoon: Shoots three harpoons at once., Anchor Cannon: Shoots
+        an anchor at his opponents, Anchor''s Away: Releases to fire three giant anchors.
+        Power Hose: Sprays water at his enemies to knock them back., High Pressure
+        Power Hose: Power hose attack does extra damage and knocks enemies back further.,
+        Reserve Water Tank: The Power Hose and Water Jetpack never run out of water.,
+        Boiling Water Hose: Power Hose attack does even more damage., Neptune Gun:
+        When using the Power Hose, they launch an exploding starfish. Water Jetpack:
+        Fly until the water jetpack runs out. Trident Thrust: Attacks enemies with
+        his trident., Trident True: Rapidly attacks nearby enemies., Trident Unleashed:
+        Trident attacks do more damage., Lightning Strikes: Rapidly attacks nearby
+        enemies with lightning. Power of the Seas: Attacks enemies with a long range
+        lightning attack., Lightning Build-Up Lightning attacks do more damage. Typhoon
+        Turbine Jetpack Can hover with his jetpack, can also dash forward, Wave Jumper:
+        Entering or exiting Jetpack mode causes a water explosion that damages nearby
+        enemies., Tubular Tidal Wave: Shoots out three large waves in Jetpack mode.,
+        Drive the Wave: While in Jetpack mode they can ride a huge tidal wave!, Shocking
         Transition: Entering Jetpack mode causes a lightning explosion that damages
         nearby enemies. Storm of the Seas: Summons a powerful lightning storm!'
       source_id: character-stats-profiles-grunt-game

@@ -4,25 +4,14 @@ name: Monster Girl
 franchise: Invincible
 category: mixed
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-09-22T18:29:20Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Monster Girl
   franchise: Invincible
@@ -89,43 +78,7 @@ sources:
 - id: vsbattles-monster-girl-invincible
   provider_id: vsbattles
   source_type: mediawiki
-  title: Monster Girl Invincible
-  url: https://vsbattles.fandom.com/wiki/Monster_Girl_Invincible
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-monster-girl-invincible
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Monster Girl Invincible
-  url: https://character-stats-and-profiles.fandom.com/wiki/Monster_Girl_Invincible
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-monster-girl-invincible
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Monster Girl (Invincible)
+  title: Monster Girl (Comics)
   url: https://vsbattles.fandom.com/wiki/Monster_Girl_%28Invincible%29
   authority: high
   notes: enrich_sources_candidate
@@ -140,6 +93,8 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9682121'
+  revision_timestamp: '2026-09-21T20:51:10Z'
 - id: character-stats-profiles-monster-girl-invincible
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -160,17 +115,23 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: High 6-B
+    source_ids:
+    - vsbattles-monster-girl-invincible
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Large Country level (Mutilated Octoboss with a single punch)
+    source_ids:
+    - vsbattles-monster-girl-invincible
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Massively Hypersonic+ (Comparable to Bulletproof and Yeti)
+    source_ids:
+    - vsbattles-monster-girl-invincible
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -180,27 +141,129 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Large Country level (Tanked blows from her son Monax)
+    source_ids:
+    - vsbattles-monster-girl-invincible
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman
+    source_ids:
+    - vsbattles-monster-girl-invincible
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range
+    source_ids:
+    - vsbattles-monster-girl-invincible
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: "Above Average (An experienced superheroine. Has once utilized Brit\u2019\
+      s invulnerability to make a path through an army of Rudy\u2019s drones)"
+    source_ids:
+    - vsbattles-monster-girl-invincible
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-skilled-hand-to-hand-combatant
+  name: Skilled Hand-to-Hand Combatant
+  description: Skilled Hand-to-Hand Combatant
+  source_ids: &id002
+  - vsbattles-monster-girl-invincible
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transformation
+  name: Transformation
+  description: Transformation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-reactive-evolution
+  name: Reactive Evolution
+  description: Reactive Evolution
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-cannot-survive-the-vacuum-of-space-before-having-access-to-her-de-agi
+  name: Cannot survive the vacuum of space. Before having access to her de-aging belt
+  description: Cannot survive the vacuum of space. Before having access to her de-aging
+    belt
+  source_ids: &id003
+  - vsbattles-monster-girl-invincible
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-she-continued-to-reverse-age-due-to-the-nature-of-her-curse
+  name: she continued to reverse age due to the nature of her curse.
+  description: she continued to reverse age due to the nature of her curse.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -212,13 +275,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-monster-girl-invincible
+  secondary_disagreement_policy: warning_only
 profile_hash: c50654e44061bd7d85ebda7cbbfa0a66a394c83876d0999c408b3fd3083e13ba
 repair:
-  attempted_at: '2026-09-25T07:14:47Z'
+  attempted_at: '2026-10-22T04:07:41Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -226,298 +303,6 @@ repair:
   - durability
   - abilities
   source_attempts:
-  - source_id: vsbattles-monster-girl-invincible
-    url: https://vsbattles.fandom.com/wiki/Monster_Girl_Invincible
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Monster Girl (Comics)
-    source_type: mediawiki
-    revision_id: '9682121'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3968
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Power and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{High 6-B}}'
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Skilled Hand-to-Hand Combatant, Transformation, Superhuman Physical Characteristics,
-        Reactive Evolution
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Large Country level (Mutilated Octoboss with a single punch)
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively Hypersonic+ (Comparable to Bulletproof and Yeti)
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Large Country level (Tanked blows from her son Monax)
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: De-aging belt
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: "Above Average (An experienced superheroine. Has once utilized Brit\u2019\
-        s invulnerability to make a path through an army of Rudy\u2019s drones)"
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Cannot survive the vacuum of space. Before having access to her de-aging
-        belt, she continued to reverse age due to the nature of her curse. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{discussions|Monster Girl Image
-        Comics|Monster Girl (Image Comics)}} Category:Characters Category:Invincible
-        (Verse) Category:Superheroes Category:Adults Category:Heroes Category:Good
-        Characters Category:Comic Book Characters Category:Martial Artists Category:Brawlers
-        Category:Transformation Users Category:Reactive Evolution Users Category:Parents
-        Category:Rulers Category:Tragic Characters Category:Humans Category:Monsters
-        Category:Female Characters Category:Freedom Fighters'
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: vsbattles.fandom.com|monster girl comics|9682121
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-monster-girl-invincible
-    url: https://character-stats-and-profiles.fandom.com/wiki/Monster_Girl_Invincible
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - speed
-    normalized_page_title: Invincible (Canon, Comics)/FusionPrime0
-    source_type: mediawiki
-    revision_id: '614840'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 22197
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers of the Verse
-    - Calculations
-    - Explanations
-    - Scaling
-    - Characters
-    - Viltrumites
-    - Guardians of The Globe
-    - 'Other Earth Mutates:'
-    - 'Other Species:'
-    - Weapons
-    - Vehicles
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 90
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: attack_potency
-      value: +
-      source_id: character-stats-profiles-monster-girl-invincible
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: '* Universa''s Base'
-      source_id: character-stats-profiles-monster-girl-invincible
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: "* Robot's Hover Bike Speed- Mach 0.606 (Subsonic+) * Japandroid Dodges\
-        \ Gunfire- Mach 0.9673 (Transonic) * Le Bruiser Runs to a City- Mach 1.275\
-        \ (Supersonic) * Bulletproof Perception Speed- Mach 1.38 (Supersonic) * Rex\
-        \ Catches Killcanon's Attack- Mach 1.694 (Supersonic) * Eve's Flight Speed-\
-        \ Mach 2.228 (Supersonic) * Outrun Runs from New York to Iowa- Mach 120.268\
-        \ (Massively Hypersonic) * Brit Flies from Big Ben to Upstate New York with\
-        \ his Jet Gloves- Mach 258.908 (Massively Hypersonic) * Outrun Travels to\
-        \ Salisbury- Mach 265.749 (Massively Hypersonic) * Immortal's Orbital Air\
-        \ Strike- Mach 2045.8309 (Massively Hypersonic+) * Outrun runs from LA to\
-        \ Utah in a second- Mach 3227.41 (Massively Hypersonic+) * Immortal Flies\
-        \ to Space- Mach 6373.177843 (Massively Hypersonic+) * Mark Flies to Earth-\
-        \ 0.02114662938 c (Sub Relativistic) * Thragg, Mark, and Nolan Combat Past\
-        \ Viltrum's Ring- 0.045731637452 c (Sub Relativistic) * Nolan Flies to Saudi\
-        \ Arabia and back- 0.07903 c (Sub Relativistic+) * Green Ghost and Martian\
-        \ Man Fly from the Moon to Earth- 0.128 c (Relativistic) * El Chupacabra dodges\
-        \ Kurst's Electricity- 0.18186140165 c (Relativistic) * Mark and Nolan Fly\
-        \ to Saudi Arabia- 0.2595 c (Relativistic) * Invincible Slams Allen the Alien\
-        \ into the Moon- 0.319 c (Relativistic) * Kurst Lightning Speed- 0.32209163\
-        \ c (Relativistic) * Invincible and Conquest's Perceptions Being 300x Greater\
-        \ than Satellite Detection- 18.94 c (FTL+) * Tech Jacket Throws a Space Ship\
-        \ into The Sun- 99.8 c (FTL+) * Cho Blitzes Immortal to Antartica- 115.02\
-        \ c (Massively FTL) * Allen Travels Through the Solar System in 12 Minutes\
-        \ - 69,492.52 c (Massively FTL+) * Allen Flies From Talescria to Earth - 1,499,886\
-        \ c (Massively FTL+) * Tech Jacket Flies to another Solar System - 26,801,868\
-        \ c (Massively FTL+) * Geldarian Spaceship Speed - 65,086,351 c (Massively\
-        \ FTL+) * Omni Man Flies to Another Planet with Life - 130,446,428 c (Massively\
-        \ FTL+) * Geldarian Scout Ship Speed - 913,125,006 c (Massively FTL+) |-|Lifting\
-        \ Strength \u25BE= * Outrun Pushes Dinosaurus's Bomb - 1.588 Tons (Class 5)\
-        \ * Black Sampson and Robot Bend Metal Flaxan suits with their hands - 2.121e+6\
-        \ to 9.575e+6 kg (Class M) * Immortal Throws a Man into Space - 1.4277e+8\
-        \ kg (Class M) * Mark and Anisa lift a Cruise Ship - 3.26e+7 Tons (Class G)\
-        \ * Null Lifts a Town - 6.99e+11 kg (Class G) * Allen pushes a spaceship out\
-        \ of a star's gravitational influence - 5.5557e+10 kg (Class G) * Viltrumites\
-        \ and Tech Jacket throw a warship off planet - 4.85e+17N (Class P) * Slams\
-        \ Allen the Alien into the Moon- 1.3908264e+19N (Class E) * Mark Chucks Half\
-        \ a Meteor to The Moon - 3.48e+25N (Class Y) * Nolan, Thaedus and Mark Exit\
-        \ Viltrums Core - 1.77e+29N (Pre-Stellar) * Invincible and Tick Push a Martian\
-        \ Moon- 7.19e+29N (Pre-Stellar) * Thragg States 37 Viltrumites Could Tear\
-        \ the Earth in Half- 2.788e+30 N (Stellar) * Jacket Throws a Space Ship Into\
-        \ the Sun - 2.332e+35N (Multi-Stellar) == Explanations == *The Invincible\
-        \ Verse contains an unknown number of infinite 3-Dimensional universes with\
-        \ 4-D spacetime, with each universe containing possibly up to 3 universe sized\
-        \ space-time continuums. Angstrom levy gathered 1000's of doppelgangers from\
-        \ other universes putting the cosmology at Multiverse level+ but no individual\
-        \ scales to the entire cosmology. *It is stated that characters have reactions\
-        \ directly proportional to their flight speed so they would scale to one another,\
-        \ there are also many examples in verse of characters reacting to each others\
-        \ flight speed- reaction speed feats *Tech Jacket Chain Scaling *Upscaling\
-        \ the Sun Disk *Viltrumite Heat Resistance/Weakness Explanation *Speed and\
-        \ Holding Back Explanation ==== Scaling ==== *Low tiers like Black Sampson\
-        \ scale to at least 7-B from being stronger than a suit capable of leveling\
-        \ a city. *The Immortal, beginning of series Invincible, Bulletproof, the\
-        \ Mauler Twins, and pre-power up Allen the Alien are scaled to Invincible\
-        \ creating a dust cloud on the moon. (1.27781 Exatons of TNT) *The 5-A's like\
-        \ Military Geldarian Tech Jackets and The Kresh Military are scaled 100x lower\
-        \ than beginning of series Tech Jacket. (1.880378 Ninatons of TNT) and possibly\
-        \ scaled to (597.5 Tenatons of TNT) *Any full blooded Viltrumite should scale\
-        \ to AT LEAST the tier above based on the weapon used to destroy the sun disk\
-        \ not even being considered to be used against Viltrumites when the coalition\
-        \ was actively seeking them out *The High 5-A's like Beginning of Series Tech\
-        \ Jacket would downscale 20x from the tier above (188.0378 Ninatons of TNT)\
-        \ and possibly scaled to (2.5 Foe) *The higher High 5-A+'s like Post Invincible\
-        \ War Tech Jacket, Omni-Man, Invincible, Viltrum War Arc Battle Beast, General\
-        \ Kreeg, Thula, Anissa, and Thaedus are scaled to the destruction of the Solar\
-        \ Disk (3.760756 Tenatons of TNT) and possibly scaled to 1/3 of Nolan, Thaedus\
-        \ and Mark Destroying Viltrum (50 Foe) *The at least 4-C's, likely far higher\
-        \ like Post-Colossus Amp Tech Jacket, Thragg, End of Series Invinc"
-      source_id: character-stats-profiles-monster-girl-invincible
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|invincible canon comics
-      fusionprime0|614840
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-monster-girl-invincible
     url: https://vsbattles.fandom.com/wiki/Monster_Girl_%28Invincible%29
     ok: true
@@ -574,12 +359,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{High 6-B}}'
-      source_id: vsbattles-monster-girl-invincible
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Skilled Hand-to-Hand Combatant, Transformation, Superhuman Physical Characteristics,
         Reactive Evolution
@@ -633,13 +412,21 @@ repair:
     - field: weaknesses
       value: 'Cannot survive the vacuum of space. Before having access to her de-aging
         belt, she continued to reverse age due to the nature of her curse. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{discussions|Monster Girl Image
-        Comics|Monster Girl (Image Comics)}} Category:Characters Category:Invincible
+        Matchups== Victories: Losses: Inconclusive: Category:Characters Category:Invincible
         (Verse) Category:Superheroes Category:Adults Category:Heroes Category:Good
         Characters Category:Comic Book Characters Category:Martial Artists Category:Brawlers
         Category:Transformation Users Category:Reactive Evolution Users Category:Parents
         Category:Rulers Category:Tragic Characters Category:Humans Category:Monsters
         Category:Female Characters Category:Freedom Fighters'
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Amanda Origin: Invincible Gender: Female, but her monster form
+        is confirmed to be male Age: 29 years old in her debut (Early teens physically).
+        Over 700 years old near the end of the series (Physically in her 30s) Classification:
+        Cursed superheroine'
       source_id: vsbattles-monster-girl-invincible
       provider_id: vsbattles
       authority: high
@@ -667,10 +454,10 @@ repair:
     - speed
     normalized_page_title: Invincible (Canon, Comics)/FusionPrime0
     source_type: mediawiki
-    revision_id: '614840'
+    revision_id: '621351'
     fetch_status: fetched
     http_status: 200
-    content_length: 22197
+    content_length: 24101
     content_kind: api_json
     headings_detected:
     - Summary
@@ -680,11 +467,22 @@ repair:
     - Scaling
     - Characters
     - Viltrumites
+    - GDA
     - Guardians of The Globe
-    - 'Other Earth Mutates:'
+    - Original
+    - New
+    - Other
+    - Capes
+    - Current
+    - Former
+    - The Order
+    - Lizard Leauge
+    - 'Other Earth Heroes:'
+    - Other Earth Villains
     - 'Other Species:'
     - Weapons
     - Vehicles
+    - Planetary Organizations
     stat_labels_detected:
     - attack_potency
     - durability
@@ -719,79 +517,100 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: '* Universa''s Base'
+      value: '* [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Universa%27s_Planet_GBE
+        Universa''s Base AP] - 5916.6985J (Street level) * [https://vsbattles.fandom.com/wiki/User_blog:Rynizenz/Invincible_Feats_1
+        Rex Explodes a Gate] - 0.00099807 Tons of TNT (Wall level) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Chupacabra_is_punched_with_enough_force_to_collapse_the_upper_floor_of_a_building
+        Chupacabra is punched with enough force to collapse the upper floor of a building]
+        - 0.0022151 Tons of TNT (Wall level) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Donald_Survives_Helicopter_Crash
+        Donald Survives a Helicopter Crash] - 0.0113 Tons of TNT (Small Building level)
+        * [https://vsbattles.fandom.com/wiki/User_blog:AbaddonTheDisappointment/Robot_blows_up_a_mech
+        Robot blows up a Mech] - 0.0115 Tons of TNT (Small Building level) * [https://vsbattles.fandom.com/wiki/User_blog:AbaddonTheDisappointment/Angstrom_Levy_Explosion
+        Angstrom Levy Survives a Warehouse Explosion] - 0.0347 Tons of TNT (Small
+        Building level) * [https://vsbattles.fandom.com/wiki/User_blog:Breadbear83/Invincible_Comics:_Lethan_knocks_out_the_Depth_Dweller
+        Lethan Knocks out the Depth Dweller] - 0.1548 Tons of TNT (Small Building
+        level+) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Atom_Eve%27s_Construct_Survives_the_Explosion_of_an_Entire_Spaceship
+        Atom Eve''s Construct survives the explosion of an entire spaceship] - 0.3213
+        Tons of TNT (Building level) * [https://vsbattles.fandom.com/wiki/User_blog:Jasonsith/Image_Comics_-_Invincible_-_Rex_Destroys_a_Large_House
+        Rex Blows Up a Mansion] - 0.716 Tons of TNT (Building level) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Brit%27s_Nuke_Vest
+        Brit Detonates and Survives a Nuke] - 1.835 Kilotons of TNT (Small Town level)
+        * Anissa Shakes an Island - 38.88 Kilotons of TNT (Town level) * [https://vsbattles.fandom.com/wiki/User_blog:ReturnofKhadz/Viltrumites_and_Tech_Jacket_throw_a_warship_off-planet_calc
+        Viltrumites and Tech Jacket throw a Viltrumite warship off planet] - 57.92
+        Megatons of TNT (City level+) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Brit%27s_Blaster_being_able_to_Destroy_Half_of_Anchorage
+        Brit''s Blaster/Military Weaponry Being Able to Destroy Half of Anchorage]
+        - 1.4995 Gigatons of TNT (Large Mountain level) * Dinosaurus'' Greenland Bombs
+        - 160.66 Gigatons of TNT to 2.89 Teratons of TNT (Large Island level to Small
+        Country level) * [https://vsbattles.fandom.com/wiki/User_blog:Jasonsith/Image_Comics_-_Invincible_-_Immortal_And_Bulletproof_Meteor-Proof_Feat
+        2 Guys Tank a meteor] - 2.41 Teratons of TNT (Small Country level) * Omega
+        Tech Jacket''s Plasma Waves Calc - 5.54 Petatons of TNT (Multi-Continent level)
+        * Invincible Survives a Nuke - 23.9 Petatons of TNT (Multi-Continent level)
+        * Mark Chucks Half a Meteor to The Moon - 40.13 Petatons of TNT (Multi-Continent
+        level) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Mark_Slams_Allen_into_The_Moon
+        Invincible Slams Allen the Alien into the Moon] - 127.6 Petatons of TNT (Multi-Continent
+        level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Mark_and_Thragg_Eject_Solar_Material
+        Mark and Thragg Eject Solar Material] - 150.79 Exatons of TNT (Moon level)
+        * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Universa%27s_Civilization_Ending_Burst
+        Universa''s Civilization Ending Burst]- 329.83 Exatons of TNT (Moon level+)
+        * Thragg States 37 Viltrumites Could Tear the Earth in Half- 1.61 Zettatons
+        of TNT (Small Planet level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Viltrumites_Blow_Up_Allen%27s_Homeworld_(Comics)
+        Viltrumites Blow Up Unopa]- 19.81 Zettatons of TNT (Small Planet level) *
+        [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Colossal_Dimensions#GBE
+        Colossal Scout Ship Durability] - 255.317 Zettatons of TNT (Planet level)
+        * Nolan, Thaedus and Mark Exit Viltrums Core - 52.63 Yottatons of TNT possibly
+        150.1437 Foe (Large Planet level possibly Solar System level) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Tech_Jacket_Throws_a_Space_Ship_Into_the_Sun
+        Tech Jacket Throws a Space Ship Into the Sun] - 226.65 Yottatons of TNT (Large
+        Planet level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Universa%27s_Planet_GBE
+        Universa''s Planet GBE] - 1.755 Ninatons of TNT (Large Planet level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Colossal_Dimensions#KE_2
+        Colossal Tech Jacket KE] - 307.56 Ninatons of TNT (Brown Dwarf level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Destroying_the_Solar_Disk#Disc_Fragment_KE
+        Solar Disk Destruction] - 3.21 Tenatons of TNT (Brown Dwarf level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Destroying_the_Solar_Disk#Rognarr_Planet_Dimensions_+_GBE
+        Rognarr P'
       source_id: character-stats-profiles-monster-girl-invincible
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: "* Robot's Hover Bike Speed- Mach 0.606 (Subsonic+) * Japandroid Dodges\
-        \ Gunfire- Mach 0.9673 (Transonic) * Le Bruiser Runs to a City- Mach 1.275\
-        \ (Supersonic) * Bulletproof Perception Speed- Mach 1.38 (Supersonic) * Rex\
-        \ Catches Killcanon's Attack- Mach 1.694 (Supersonic) * Eve's Flight Speed-\
-        \ Mach 2.228 (Supersonic) * Outrun Runs from New York to Iowa- Mach 120.268\
-        \ (Massively Hypersonic) * Brit Flies from Big Ben to Upstate New York with\
-        \ his Jet Gloves- Mach 258.908 (Massively Hypersonic) * Outrun Travels to\
-        \ Salisbury- Mach 265.749 (Massively Hypersonic) * Immortal's Orbital Air\
-        \ Strike- Mach 2045.8309 (Massively Hypersonic+) * Outrun runs from LA to\
-        \ Utah in a second- Mach 3227.41 (Massively Hypersonic+) * Immortal Flies\
-        \ to Space- Mach 6373.177843 (Massively Hypersonic+) * Mark Flies to Earth-\
-        \ 0.02114662938 c (Sub Relativistic) * Thragg, Mark, and Nolan Combat Past\
-        \ Viltrum's Ring- 0.045731637452 c (Sub Relativistic) * Nolan Flies to Saudi\
-        \ Arabia and back- 0.07903 c (Sub Relativistic+) * Green Ghost and Martian\
-        \ Man Fly from the Moon to Earth- 0.128 c (Relativistic) * El Chupacabra dodges\
-        \ Kurst's Electricity- 0.18186140165 c (Relativistic) * Mark and Nolan Fly\
-        \ to Saudi Arabia- 0.2595 c (Relativistic) * Invincible Slams Allen the Alien\
-        \ into the Moon- 0.319 c (Relativistic) * Kurst Lightning Speed- 0.32209163\
-        \ c (Relativistic) * Invincible and Conquest's Perceptions Being 300x Greater\
-        \ than Satellite Detection- 18.94 c (FTL+) * Tech Jacket Throws a Space Ship\
-        \ into The Sun- 99.8 c (FTL+) * Cho Blitzes Immortal to Antartica- 115.02\
-        \ c (Massively FTL) * Allen Travels Through the Solar System in 12 Minutes\
-        \ - 69,492.52 c (Massively FTL+) * Allen Flies From Talescria to Earth - 1,499,886\
-        \ c (Massively FTL+) * Tech Jacket Flies to another Solar System - 26,801,868\
-        \ c (Massively FTL+) * Geldarian Spaceship Speed - 65,086,351 c (Massively\
-        \ FTL+) * Omni Man Flies to Another Planet with Life - 130,446,428 c (Massively\
-        \ FTL+) * Geldarian Scout Ship Speed - 913,125,006 c (Massively FTL+) |-|Lifting\
-        \ Strength \u25BE= * Outrun Pushes Dinosaurus's Bomb - 1.588 Tons (Class 5)\
-        \ * Black Sampson and Robot Bend Metal Flaxan suits with their hands - 2.121e+6\
-        \ to 9.575e+6 kg (Class M) * Immortal Throws a Man into Space - 1.4277e+8\
-        \ kg (Class M) * Mark and Anisa lift a Cruise Ship - 3.26e+7 Tons (Class G)\
-        \ * Null Lifts a Town - 6.99e+11 kg (Class G) * Allen pushes a spaceship out\
-        \ of a star's gravitational influence - 5.5557e+10 kg (Class G) * Viltrumites\
-        \ and Tech Jacket throw a warship off planet - 4.85e+17N (Class P) * Slams\
-        \ Allen the Alien into the Moon- 1.3908264e+19N (Class E) * Mark Chucks Half\
-        \ a Meteor to The Moon - 3.48e+25N (Class Y) * Nolan, Thaedus and Mark Exit\
-        \ Viltrums Core - 1.77e+29N (Pre-Stellar) * Invincible and Tick Push a Martian\
-        \ Moon- 7.19e+29N (Pre-Stellar) * Thragg States 37 Viltrumites Could Tear\
-        \ the Earth in Half- 2.788e+30 N (Stellar) * Jacket Throws a Space Ship Into\
-        \ the Sun - 2.332e+35N (Multi-Stellar) == Explanations == *The Invincible\
-        \ Verse contains an unknown number of infinite 3-Dimensional universes with\
-        \ 4-D spacetime, with each universe containing possibly up to 3 universe sized\
-        \ space-time continuums. Angstrom levy gathered 1000's of doppelgangers from\
-        \ other universes putting the cosmology at Multiverse level+ but no individual\
-        \ scales to the entire cosmology. *It is stated that characters have reactions\
-        \ directly proportional to their flight speed so they would scale to one another,\
-        \ there are also many examples in verse of characters reacting to each others\
-        \ flight speed- reaction speed feats *Tech Jacket Chain Scaling *Upscaling\
-        \ the Sun Disk *Viltrumite Heat Resistance/Weakness Explanation *Speed and\
-        \ Holding Back Explanation ==== Scaling ==== *Low tiers like Black Sampson\
-        \ scale to at least 7-B from being stronger than a suit capable of leveling\
-        \ a city. *The Immortal, beginning of series Invincible, Bulletproof, the\
-        \ Mauler Twins, and pre-power up Allen the Alien are scaled to Invincible\
-        \ creating a dust cloud on the moon. (1.27781 Exatons of TNT) *The 5-A's like\
-        \ Military Geldarian Tech Jackets and The Kresh Military are scaled 100x lower\
-        \ than beginning of series Tech Jacket. (1.880378 Ninatons of TNT) and possibly\
-        \ scaled to (597.5 Tenatons of TNT) *Any full blooded Viltrumite should scale\
-        \ to AT LEAST the tier above based on the weapon used to destroy the sun disk\
-        \ not even being considered to be used against Viltrumites when the coalition\
-        \ was actively seeking them out *The High 5-A's like Beginning of Series Tech\
-        \ Jacket would downscale 20x from the tier above (188.0378 Ninatons of TNT)\
-        \ and possibly scaled to (2.5 Foe) *The higher High 5-A+'s like Post Invincible\
-        \ War Tech Jacket, Omni-Man, Invincible, Viltrum War Arc Battle Beast, General\
-        \ Kreeg, Thula, Anissa, and Thaedus are scaled to the destruction of the Solar\
-        \ Disk (3.760756 Tenatons of TNT) and possibly scaled to 1/3 of Nolan, Thaedus\
-        \ and Mark Destroying Viltrum (50 Foe) *The at least 4-C's, likely far higher\
-        \ like Post-Colossus Amp Tech Jacket, Thragg, End of Series Invinc"
+      value: "* [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Robot%27s_Hover_Bike_Speed\
+        \ Robot's Hover Bike Speed]- Mach 0.606 (Subsonic+) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Japandroid_Dodges_Gunfire\
+        \ Japandroid Dodges Gunfire]- Mach 0.9673 (Transonic) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Le_Bruiser_Runs_to_a_City\
+        \ Le Bruiser Runs to a City]- Mach 1.275 (Supersonic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Bulletproof_Speed\
+        \ Bulletproof's Perception Speed]- Mach 1.38 (Supersonic) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Rex_Catches_Killcannon%27s_Attack\
+        \ Rex Catches Killcanon's Attack]- Mach 1.694 (Supersonic) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Eve%27s_Flight_Speed\
+        \ Eve's Flight Speed]- Mach 2.228 (Supersonic) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Outrun_Runs_from_New_York_to_Iowa\
+        \ Outrun Runs from New York to Iowa]- Mach 120.268 (Massively Hypersonic)\
+        \ * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Brit_Flies_from_Big_Ben_to_Upstate_New_York_with_his_Jet_Gloves\
+        \ Brit Flies from Big Ben to Upstate New York with his Jet Gloves]- Mach 258.908\
+        \ (Massively Hypersonic) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Guardians_of_the_Globe_Feats\
+        \ Outrun Travels to Salisbury]- Mach 265.749 (Massively Hypersonic) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Immortal%27s_Orbital_Air_Strike\
+        \ Immortal's Orbital Air Strike]- Mach 2045.8309 (Massively Hypersonic+) *\
+        \ [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Outrun_runs_from_LA_to_Utah_in_a_second\
+        \ Outrun runs from LA to Utah in a second]- Mach 3227.41 (Massively Hypersonic+)\
+        \ * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Immortal_Flies_to_Space\
+        \ Immortal Flies to Space]- Mach 6373.177843 (Massively Hypersonic+) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Mark_Flies_to_Earth\
+        \ Mark Flies to Earth]- 0.02114662938 c (Sub Relativistic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Thragg,_Mark,_and_Nolan_Combat_past_Viltrum%27s_Ring\
+        \ Thragg, Mark, and Nolan Combat Past Viltrum's Ring]- 0.045731637452 c (Sub\
+        \ Relativistic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Mark_and_Nolan_Fly_to_Saudi_Arabia\
+        \ Nolan Flies to Saudi Arabia and back]- 0.07903 c (Sub Relativistic+) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Green_Ghost_and_Martian_Man_Fly_from_the_Moon_to_Earth\
+        \ Green Ghost and Martian Man Fly from the Moon to Earth]- 0.128 c (Relativistic)\
+        \ * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/El_Chupacabra_Dodges_Kursk%27s_Electricity\
+        \ El Chupacabra dodges Kursk's Electricity]- 0.18186140165 c (Relativistic)\
+        \ * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Mark_and_Nolan_Fly_to_Saudi_Arabia\
+        \ Mark and Nolan Fly to Saudi Arabia]- 0.2595 c (Relativistic) * Invincible\
+        \ Slams Allen the Alien into the Moon- 0.319 c (Relativistic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Kurst_Lightning_Speed\
+        \ Kursk's Lightning Speed]- 0.32209163 c (Relativistic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Invincible_and_Conquest_Fight_too_Fast_for_GDA_Satellites_to_Track\
+        \ Invincible and Conquest's Perceptions Being 300x Greater than Satellite\
+        \ Detection]- 18.94 c (FTL+) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Tech_Jacket_Throws_a_Space_Ship_Into_the_Sun#Speed\
+        \ Tech Jacket Throws a Space Ship into The Sun]- 99.8 c (FTL+) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Cho_Blitzes_Immortal_to_Antarctica\
+        \ Cho Blitzes Immortal to Antartica]- 115.02 c (Massively FTL) * Allen Travels\
+        \ Through the Solar System in 12 Minutes - 69,492.52 c (Massively FTL+) *\
+        \ [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Allen_Flies_From_Talescria_to_Earth\
+        \ Allen Flies From Talescria to Earth] - 1,499,886 c (Massively FTL+) * Tech\
+        \ Jacket Flies to another Solar System - 26,801,868 c (Massively FTL+) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Geldarian_Space_Ship_Speed\
+        \ Geldarian Spaceship Speed] - 65,086,351 c (Massively FTL+) * Omni Man Flies\
+        \ to Another Planet with Life - 130,446,428 c (Massively FTL+) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Geldarian_Spaceship_Speed\
+        \ Geldarian Scout Ship Speed] - 913,125,006 c (Massively FTL+) |-|Lifting\
+        \ Strength \u25BE= * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Outrun_Pushes_Dinosaurus%27_Bomb\
+        \ Outrun Pushes Dinosaurus's Bomb] - 1.588 Tons (Class 5) * [https://vsbattles.fandom.com/wiki/User_blog:Da3ggman/Invincible:_Alien_Metal_ain%27t_Shit\
+        \ Black Sampson and Robot Bend Metal Flaxan suits with their hands] - 2.121e+6\
+        \ t"
       source_id: character-stats-profiles-monster-girl-invincible
       provider_id: character_stats_profiles
       authority: high
@@ -807,7 +626,333 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|invincible canon comics
-      fusionprime0|614840
+      fusionprime0|621351
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-monster-girl-invincible
+    url: https://vsbattles.fandom.com/wiki/Monster_Girl_Invincible
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Monster Girl (Comics)
+    source_type: mediawiki
+    revision_id: '9682121'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3968
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Power and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Skilled Hand-to-Hand Combatant, Transformation, Superhuman Physical Characteristics,
+        Reactive Evolution
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Large Country level (Mutilated Octoboss with a single punch)
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic+ (Comparable to Bulletproof and Yeti)
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Large Country level (Tanked blows from her son Monax)
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: De-aging belt
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: "Above Average (An experienced superheroine. Has once utilized Brit\u2019\
+        s invulnerability to make a path through an army of Rudy\u2019s drones)"
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Cannot survive the vacuum of space. Before having access to her de-aging
+        belt, she continued to reverse age due to the nature of her curse. ==Notable
+        Matchups== Victories: Losses: Inconclusive: Category:Characters Category:Invincible
+        (Verse) Category:Superheroes Category:Adults Category:Heroes Category:Good
+        Characters Category:Comic Book Characters Category:Martial Artists Category:Brawlers
+        Category:Transformation Users Category:Reactive Evolution Users Category:Parents
+        Category:Rulers Category:Tragic Characters Category:Humans Category:Monsters
+        Category:Female Characters Category:Freedom Fighters'
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Amanda Origin: Invincible Gender: Female, but her monster form
+        is confirmed to be male Age: 29 years old in her debut (Early teens physically).
+        Over 700 years old near the end of the series (Physically in her 30s) Classification:
+        Cursed superheroine'
+      source_id: vsbattles-monster-girl-invincible
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|monster girl comics|9682121
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-monster-girl-invincible
+    url: https://character-stats-and-profiles.fandom.com/wiki/Monster_Girl_Invincible
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    normalized_page_title: Invincible (Canon, Comics)/FusionPrime0
+    source_type: mediawiki
+    revision_id: '621351'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 24101
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers of the Verse
+    - Calculations
+    - Explanations
+    - Scaling
+    - Characters
+    - Viltrumites
+    - GDA
+    - Guardians of The Globe
+    - Original
+    - New
+    - Other
+    - Capes
+    - Current
+    - Former
+    - The Order
+    - Lizard Leauge
+    - 'Other Earth Heroes:'
+    - Other Earth Villains
+    - 'Other Species:'
+    - Weapons
+    - Vehicles
+    - Planetary Organizations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: attack_potency
+      value: +
+      source_id: character-stats-profiles-monster-girl-invincible
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: '* [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Universa%27s_Planet_GBE
+        Universa''s Base AP] - 5916.6985J (Street level) * [https://vsbattles.fandom.com/wiki/User_blog:Rynizenz/Invincible_Feats_1
+        Rex Explodes a Gate] - 0.00099807 Tons of TNT (Wall level) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Chupacabra_is_punched_with_enough_force_to_collapse_the_upper_floor_of_a_building
+        Chupacabra is punched with enough force to collapse the upper floor of a building]
+        - 0.0022151 Tons of TNT (Wall level) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Donald_Survives_Helicopter_Crash
+        Donald Survives a Helicopter Crash] - 0.0113 Tons of TNT (Small Building level)
+        * [https://vsbattles.fandom.com/wiki/User_blog:AbaddonTheDisappointment/Robot_blows_up_a_mech
+        Robot blows up a Mech] - 0.0115 Tons of TNT (Small Building level) * [https://vsbattles.fandom.com/wiki/User_blog:AbaddonTheDisappointment/Angstrom_Levy_Explosion
+        Angstrom Levy Survives a Warehouse Explosion] - 0.0347 Tons of TNT (Small
+        Building level) * [https://vsbattles.fandom.com/wiki/User_blog:Breadbear83/Invincible_Comics:_Lethan_knocks_out_the_Depth_Dweller
+        Lethan Knocks out the Depth Dweller] - 0.1548 Tons of TNT (Small Building
+        level+) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Atom_Eve%27s_Construct_Survives_the_Explosion_of_an_Entire_Spaceship
+        Atom Eve''s Construct survives the explosion of an entire spaceship] - 0.3213
+        Tons of TNT (Building level) * [https://vsbattles.fandom.com/wiki/User_blog:Jasonsith/Image_Comics_-_Invincible_-_Rex_Destroys_a_Large_House
+        Rex Blows Up a Mansion] - 0.716 Tons of TNT (Building level) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Brit%27s_Nuke_Vest
+        Brit Detonates and Survives a Nuke] - 1.835 Kilotons of TNT (Small Town level)
+        * Anissa Shakes an Island - 38.88 Kilotons of TNT (Town level) * [https://vsbattles.fandom.com/wiki/User_blog:ReturnofKhadz/Viltrumites_and_Tech_Jacket_throw_a_warship_off-planet_calc
+        Viltrumites and Tech Jacket throw a Viltrumite warship off planet] - 57.92
+        Megatons of TNT (City level+) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Brit%27s_Blaster_being_able_to_Destroy_Half_of_Anchorage
+        Brit''s Blaster/Military Weaponry Being Able to Destroy Half of Anchorage]
+        - 1.4995 Gigatons of TNT (Large Mountain level) * Dinosaurus'' Greenland Bombs
+        - 160.66 Gigatons of TNT to 2.89 Teratons of TNT (Large Island level to Small
+        Country level) * [https://vsbattles.fandom.com/wiki/User_blog:Jasonsith/Image_Comics_-_Invincible_-_Immortal_And_Bulletproof_Meteor-Proof_Feat
+        2 Guys Tank a meteor] - 2.41 Teratons of TNT (Small Country level) * Omega
+        Tech Jacket''s Plasma Waves Calc - 5.54 Petatons of TNT (Multi-Continent level)
+        * Invincible Survives a Nuke - 23.9 Petatons of TNT (Multi-Continent level)
+        * Mark Chucks Half a Meteor to The Moon - 40.13 Petatons of TNT (Multi-Continent
+        level) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Mark_Slams_Allen_into_The_Moon
+        Invincible Slams Allen the Alien into the Moon] - 127.6 Petatons of TNT (Multi-Continent
+        level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Mark_and_Thragg_Eject_Solar_Material
+        Mark and Thragg Eject Solar Material] - 150.79 Exatons of TNT (Moon level)
+        * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Universa%27s_Civilization_Ending_Burst
+        Universa''s Civilization Ending Burst]- 329.83 Exatons of TNT (Moon level+)
+        * Thragg States 37 Viltrumites Could Tear the Earth in Half- 1.61 Zettatons
+        of TNT (Small Planet level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Viltrumites_Blow_Up_Allen%27s_Homeworld_(Comics)
+        Viltrumites Blow Up Unopa]- 19.81 Zettatons of TNT (Small Planet level) *
+        [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Colossal_Dimensions#GBE
+        Colossal Scout Ship Durability] - 255.317 Zettatons of TNT (Planet level)
+        * Nolan, Thaedus and Mark Exit Viltrums Core - 52.63 Yottatons of TNT possibly
+        150.1437 Foe (Large Planet level possibly Solar System level) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Tech_Jacket_Throws_a_Space_Ship_Into_the_Sun
+        Tech Jacket Throws a Space Ship Into the Sun] - 226.65 Yottatons of TNT (Large
+        Planet level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Universa%27s_Planet_GBE
+        Universa''s Planet GBE] - 1.755 Ninatons of TNT (Large Planet level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Colossal_Dimensions#KE_2
+        Colossal Tech Jacket KE] - 307.56 Ninatons of TNT (Brown Dwarf level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Destroying_the_Solar_Disk#Disc_Fragment_KE
+        Solar Disk Destruction] - 3.21 Tenatons of TNT (Brown Dwarf level) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Destroying_the_Solar_Disk#Rognarr_Planet_Dimensions_+_GBE
+        Rognarr P'
+      source_id: character-stats-profiles-monster-girl-invincible
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: "* [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Robot%27s_Hover_Bike_Speed\
+        \ Robot's Hover Bike Speed]- Mach 0.606 (Subsonic+) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Japandroid_Dodges_Gunfire\
+        \ Japandroid Dodges Gunfire]- Mach 0.9673 (Transonic) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Le_Bruiser_Runs_to_a_City\
+        \ Le Bruiser Runs to a City]- Mach 1.275 (Supersonic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Bulletproof_Speed\
+        \ Bulletproof's Perception Speed]- Mach 1.38 (Supersonic) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Rex_Catches_Killcannon%27s_Attack\
+        \ Rex Catches Killcanon's Attack]- Mach 1.694 (Supersonic) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Eve%27s_Flight_Speed\
+        \ Eve's Flight Speed]- Mach 2.228 (Supersonic) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Outrun_Runs_from_New_York_to_Iowa\
+        \ Outrun Runs from New York to Iowa]- Mach 120.268 (Massively Hypersonic)\
+        \ * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Brit_Flies_from_Big_Ben_to_Upstate_New_York_with_his_Jet_Gloves\
+        \ Brit Flies from Big Ben to Upstate New York with his Jet Gloves]- Mach 258.908\
+        \ (Massively Hypersonic) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Guardians_of_the_Globe_Feats\
+        \ Outrun Travels to Salisbury]- Mach 265.749 (Massively Hypersonic) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Immortal%27s_Orbital_Air_Strike\
+        \ Immortal's Orbital Air Strike]- Mach 2045.8309 (Massively Hypersonic+) *\
+        \ [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Outrun_runs_from_LA_to_Utah_in_a_second\
+        \ Outrun runs from LA to Utah in a second]- Mach 3227.41 (Massively Hypersonic+)\
+        \ * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Immortal_Flies_to_Space\
+        \ Immortal Flies to Space]- Mach 6373.177843 (Massively Hypersonic+) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Mark_Flies_to_Earth\
+        \ Mark Flies to Earth]- 0.02114662938 c (Sub Relativistic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Thragg,_Mark,_and_Nolan_Combat_past_Viltrum%27s_Ring\
+        \ Thragg, Mark, and Nolan Combat Past Viltrum's Ring]- 0.045731637452 c (Sub\
+        \ Relativistic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Mark_and_Nolan_Fly_to_Saudi_Arabia\
+        \ Nolan Flies to Saudi Arabia and back]- 0.07903 c (Sub Relativistic+) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Green_Ghost_and_Martian_Man_Fly_from_the_Moon_to_Earth\
+        \ Green Ghost and Martian Man Fly from the Moon to Earth]- 0.128 c (Relativistic)\
+        \ * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/El_Chupacabra_Dodges_Kursk%27s_Electricity\
+        \ El Chupacabra dodges Kursk's Electricity]- 0.18186140165 c (Relativistic)\
+        \ * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Mark_and_Nolan_Fly_to_Saudi_Arabia\
+        \ Mark and Nolan Fly to Saudi Arabia]- 0.2595 c (Relativistic) * Invincible\
+        \ Slams Allen the Alien into the Moon- 0.319 c (Relativistic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Kurst_Lightning_Speed\
+        \ Kursk's Lightning Speed]- 0.32209163 c (Relativistic) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Invincible_and_Conquest_Fight_too_Fast_for_GDA_Satellites_to_Track\
+        \ Invincible and Conquest's Perceptions Being 300x Greater than Satellite\
+        \ Detection]- 18.94 c (FTL+) * [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Tech_Jacket_Throws_a_Space_Ship_Into_the_Sun#Speed\
+        \ Tech Jacket Throws a Space Ship into The Sun]- 99.8 c (FTL+) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Cho_Blitzes_Immortal_to_Antarctica\
+        \ Cho Blitzes Immortal to Antartica]- 115.02 c (Massively FTL) * Allen Travels\
+        \ Through the Solar System in 12 Minutes - 69,492.52 c (Massively FTL+) *\
+        \ [https://vsbattles.fandom.com/wiki/User_blog:FusionPrime0/Allen_Flies_From_Talescria_to_Earth\
+        \ Allen Flies From Talescria to Earth] - 1,499,886 c (Massively FTL+) * Tech\
+        \ Jacket Flies to another Solar System - 26,801,868 c (Massively FTL+) * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Geldarian_Space_Ship_Speed\
+        \ Geldarian Spaceship Speed] - 65,086,351 c (Massively FTL+) * Omni Man Flies\
+        \ to Another Planet with Life - 130,446,428 c (Massively FTL+) * [https://character-stats-and-profiles.fandom.com/wiki/User_blog:FusionPrime0/Geldarian_Spaceship_Speed\
+        \ Geldarian Scout Ship Speed] - 913,125,006 c (Massively FTL+) |-|Lifting\
+        \ Strength \u25BE= * [https://vsbattles.fandom.com/wiki/User_blog:That_moron2/Invincible:_Outrun_Pushes_Dinosaurus%27_Bomb\
+        \ Outrun Pushes Dinosaurus's Bomb] - 1.588 Tons (Class 5) * [https://vsbattles.fandom.com/wiki/User_blog:Da3ggman/Invincible:_Alien_Metal_ain%27t_Shit\
+        \ Black Sampson and Robot Bend Metal Flaxan suits with their hands] - 2.121e+6\
+        \ t"
+      source_id: character-stats-profiles-monster-girl-invincible
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|invincible canon comics
+      fusionprime0|621351
     retryable: false
     exception_class: ''
   - source_id: vsbattles-monster-girl
@@ -866,12 +1011,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{High 6-B}}'
-      source_id: vsbattles-monster-girl
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Skilled Hand-to-Hand Combatant, Transformation, Superhuman Physical Characteristics,
         Reactive Evolution
@@ -925,13 +1064,21 @@ repair:
     - field: weaknesses
       value: 'Cannot survive the vacuum of space. Before having access to her de-aging
         belt, she continued to reverse age due to the nature of her curse. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{discussions|Monster Girl Image
-        Comics|Monster Girl (Image Comics)}} Category:Characters Category:Invincible
+        Matchups== Victories: Losses: Inconclusive: Category:Characters Category:Invincible
         (Verse) Category:Superheroes Category:Adults Category:Heroes Category:Good
         Characters Category:Comic Book Characters Category:Martial Artists Category:Brawlers
         Category:Transformation Users Category:Reactive Evolution Users Category:Parents
         Category:Rulers Category:Tragic Characters Category:Humans Category:Monsters
         Category:Female Characters Category:Freedom Fighters'
+      source_id: vsbattles-monster-girl
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Amanda Origin: Invincible Gender: Female, but her monster form
+        is confirmed to be male Age: 29 years old in her debut (Early teens physically).
+        Over 700 years old near the end of the series (Physically in her 30s) Classification:
+        Cursed superheroine'
       source_id: vsbattles-monster-girl
       provider_id: vsbattles
       authority: high
@@ -1119,12 +1266,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{High 6-B}}'
-      source_id: vsbattles-monster-girl-mixed
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Skilled Hand-to-Hand Combatant, Transformation, Superhuman Physical Characteristics,
         Reactive Evolution
@@ -1178,13 +1319,21 @@ repair:
     - field: weaknesses
       value: 'Cannot survive the vacuum of space. Before having access to her de-aging
         belt, she continued to reverse age due to the nature of her curse. ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{discussions|Monster Girl Image
-        Comics|Monster Girl (Image Comics)}} Category:Characters Category:Invincible
+        Matchups== Victories: Losses: Inconclusive: Category:Characters Category:Invincible
         (Verse) Category:Superheroes Category:Adults Category:Heroes Category:Good
         Characters Category:Comic Book Characters Category:Martial Artists Category:Brawlers
         Category:Transformation Users Category:Reactive Evolution Users Category:Parents
         Category:Rulers Category:Tragic Characters Category:Humans Category:Monsters
         Category:Female Characters Category:Freedom Fighters'
+      source_id: vsbattles-monster-girl-mixed
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Amanda Origin: Invincible Gender: Female, but her monster form
+        is confirmed to be male Age: 29 years old in her debut (Early teens physically).
+        Over 700 years old near the end of the series (Physically in her 30s) Classification:
+        Cursed superheroine'
       source_id: vsbattles-monster-girl-mixed
       provider_id: vsbattles
       authority: high
