@@ -5290,6 +5290,235 @@ def _midword_truncated(value: str) -> bool:
     )
 
 
+# ---------------------------------------------------------------------------
+# Frag-12 (G-series) screens: the frag-11-quarantined debris families.
+# Calibration: bottlenecks/frag12_calib1.py (7,901 profiles / 167,770
+# items), frag12_calib2.py, frag12_calib3.py. Log:
+# /opt/referee/data/frag12_20261025/calib{1,2,3}.log.
+#   G1 label/header fragments: label-only 638 residual (abilities 404 /
+#      weaknesses 229 / equipment 5); quoted-title-tail narrowed after
+#      calib1 showed the broad form fires on legit quoted names
+#      ('"Tsubakuro" shuriken', '"Last Breath" Sword'); label-prefix
+#      remainder is genuinely ambiguous at 3-9 words (real content with
+#      a glued label vs title soup), so only the <=2-prose-word
+#      remainder is blocked.
+#   G2 list-intro: 8/8 genuine ('X has the following').
+#   G3 equipment fragment: exactly 1 match corpus-wide
+#      ("Amethyst's upgraded whip.").
+#   G4 wrong-section powers passage: G4a refined with page-structure
+#      exclusions (calib2's 'Victories/Losses/Inconclusive' FP is gone;
+#      residual 940, samples all true positives); G4b full-text hand
+#      judgment 19/20 debris, 1 borderline (hermione 'However' cut by
+#      the 120-char cap). Limitation list deliberately excludes
+#      but/however/despite (contrastives, not limitations).
+#   G5 placeholder: 99 residual ('None', 'N/A', 'Unknown', 'None
+#      noted.') -- _explicit_none_item covers 'None notable/known' only.
+#   G6 long and-led: NO CODE -- 5,077 long and-led items corpus-wide,
+#      samples overwhelmingly legit continuations; the <=8-word cap
+#      stands, and the asmoday long and-led debris is caught by G4.
+#   G7 whole-section glue: NO CODE -- composites are coarse-but-correct
+#      (resistance_colon 249, paren_capitalized_label 180,
+#      paren_trailing_label 99); splitting is cosmetic with real
+#      mis-split risk. Deferred.
+#   'The Boys' (bare series name as a weakness item) has NO generic
+#      screen: it needs franchise context, and neither the dispatcher
+#      nor filter_list_field_items_detailed takes the profile. The
+#      mass-run manual audit is the backstop for a recurrence.
+# ---------------------------------------------------------------------------
+
+_LABEL_ONLY_RE = re.compile(
+    r"(?i)^\s*(?:chapter|act|scene|part|volume|book|season|episode)\s+"
+    r"(?:[ivxlcdm]+|[0-9]+)\s*[:.]?\s*$"
+)
+_LABEL_TITLE_RE = re.compile(
+    r"(?i)^\s*(?:chapter|act|scene|part|volume|book|season|episode)\s+"
+    r"(?:[ivxlcdm]+|[0-9]+)\s*[:.]\s+"
+    r"[A-Z][\w'\u2019-]*(?:\s+[A-Z][\w'\u2019-]*){0,3}\s*\.?\s*$"
+)
+_LABEL_PREFIX_RE = re.compile(
+    r"(?i)^\s*(?:chapter|act|scene|part|volume|book|season|episode)\s+"
+    r"(?:[ivxlcdm]+|[0-9]+)\b[:.\-]?\s*(.*)$",
+    re.DOTALL,
+)
+_QUOTED_TITLE_TAIL_RE = re.compile(r'^\s*"([^"]+)"\s+([A-Za-z]+)\.?\s*$')
+_QUOTED_TITLE_CONNECTIVES = frozenset(
+    {
+        "additionally", "also", "furthermore", "however", "moreover",
+        "similarly", "meanwhile", "therefore", "consequently", "instead",
+    }
+)
+_QUOTED_TITLE_SEASON_RE = re.compile(r"(?i)season|episode|finale|chapter")
+_LIST_INTRO_RE = re.compile(
+    r"(?i)^\s*[A-Z][\w'\u2019-]+(?:\s+[A-Z][\w'\u2019-]+){0,2}"
+    r"\s+has the following\.?\s*$"
+)
+_EQUIP_NOUNS = frozenset(
+    {
+        "whip", "whips", "sword", "swords", "blade", "blades", "shield",
+        "shields", "armor", "armour", "gun", "guns", "staff", "bow",
+        "hammer", "dagger", "spear", "axe", "katana", "scythe", "wand",
+        "rifle", "pistol", "knife", "claws", "gauntlet", "helmet",
+        "boots", "cloak", "ring", "amulet", "orb", "lance", "mace",
+        "flail",
+    }
+)
+_EQUIP_FRAGMENT_RE = re.compile(
+    r"(?i)^\s*[A-Z][\w'\u2019-]+'s\s+"
+    r"(?:upgraded\s+|new\s+|enchanted\s+|improved\s+)?"
+    r"([a-z]+(?:\s+[a-z]+){0,2})\.?\s*$"
+)
+_PLACEHOLDER_ITEM_RE = re.compile(
+    r"(?i)^\s*(none\s+(noted|listed)|n/?a\.?|unknown|none)\.?\s*$"
+)
+_ABILITY_HDR_RE = re.compile(r"\b([A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+){0,3}):\s")
+_ABILITY_HDR_EXCLUDED = frozenset(
+    {
+        "note", "notes", "notable", "attacks", "techniques", "weaknesses",
+        "weakness", "powers", "stats", "abilities", "equipment", "see",
+        "ref", "victories", "losses", "inconclusive", "draws", "matchups",
+        "matchup", "references", "reference", "discussions", "discussion",
+    }
+)
+_CAPABILITY_RE = re.compile(
+    r"(?i)\b(?:can\s+(?:summon|create|expand|generate|use|throw|run|"
+    r"fly|breathe|withstand|manipulate|transform|shoot|fire|produce|"
+    r"form|project|emit|control|heal|absorb|reflect)|is\s+able\s+to|"
+    r"able\s+to)\b"
+)
+_LIMITATION_RE = re.compile(
+    r"(?i)\b(?:cannot|can't|can\s+not|only|unable|not\s+work|"
+    r"not\s+able|takes\s+time|needs\s+to|afraid|fear|disadvantage|"
+    r"drawback|cost|risk|slow|pain\w*|limit\w*|weak\w*|vulnerab\w*|"
+    r"strain\w*|lose\s+control|loses\s+control|little\s+control|"
+    r"no\s+control|fail\w*|restrict\w*|prevent\w*|suffer\w*|"
+    r"susceptib\w*|exhaust\w*|drain\w*|tir\w*)\b"
+)
+
+
+def _label_fragment(value: str) -> bool:
+    """G1: a bare series/season/episode/chapter/act label as a list item.
+
+    Label-only ('Season 1', 'Chapter VII'), label + short Title Case
+    title ('Act III: Night White'), or label + a remainder of at most
+    two prose words ('Episode 2 "ARC Troopers" While defeated').
+    A label glued to substantive prose ('Episode 9 "Grievous
+    Intrigue" likely helped by ...') is kept -- the label is noise,
+    the content is real.
+    """
+    text = str(value or "").strip()
+    if not text:
+        return False
+    if _LABEL_ONLY_RE.match(text) or _LABEL_TITLE_RE.match(text):
+        return True
+    match = _LABEL_PREFIX_RE.match(text)
+    if not match:
+        return False
+    rest = re.sub(r'"[^"]*"', "", match.group(1) or "")
+    rest = re.sub(r"[^A-Za-z0-9]+", " ", rest).strip()
+    return 0 < len(rest.split()) <= 2
+
+
+def _quoted_title_fragment(value: str) -> bool:
+    """G1b: a quoted title plus a trailing connective word, or a quoted
+    season/episode/finale/chapter title plus one word ('"Season Four
+    Finale" Additionally'). Quoted names + a noun ('"Tsubakuro"
+    shuriken', '"Last Breath" Sword') are legitimate items and pass.
+    """
+    match = _QUOTED_TITLE_TAIL_RE.match(str(value or "").strip())
+    if not match:
+        return False
+    quoted, tail = match.group(1), match.group(2)
+    return (
+        tail.casefold() in _QUOTED_TITLE_CONNECTIVES
+        or bool(_QUOTED_TITLE_SEASON_RE.search(quoted))
+    )
+
+
+def _placeholder_item(value: str) -> bool:
+    """G5: a bare placeholder as a list item ('None noted.', 'N/A',
+    'Unknown', 'None'). 'None notable/known' is already caught by
+    _explicit_none_item and is excluded here."""
+    return bool(_PLACEHOLDER_ITEM_RE.match(str(value or "").strip()))
+
+
+def _list_intro_fragment(value: str) -> bool:
+    """G2: a list-intro sentence filed as a weakness ('Black Noir has
+    the following')."""
+    return bool(_LIST_INTRO_RE.match(str(value or "").strip()))
+
+
+def _equipment_in_weaknesses(value: str) -> bool:
+    """G3: a bare possessive equipment mention as a weakness
+    ("Amethyst's upgraded whip.") -- no weakness language at all."""
+    match = _EQUIP_FRAGMENT_RE.match(str(value or "").strip())
+    if not match:
+        return False
+    return match.group(1).strip().split()[-1] in _EQUIP_NOUNS
+
+
+def _ability_header_in_weaknesses(value: str, lowered: str) -> bool:
+    """G4a: ability-name headers inside a weakness item ('*Dark
+    Barrier: Rugal can create a barrier...') -- a powers passage
+    misfiled as a weakness. Page-structure headers (Victories /
+    Losses / Inconclusive, Notable Attacks, Notes) are excluded, and
+    any limitation language anywhere in the item spares it ('Fire:
+    weak to fire. Ice: weak to ice.')."""
+    headers = [
+        header
+        for header in _ABILITY_HDR_RE.findall(value)
+        if header.split()[0].casefold() not in _ABILITY_HDR_EXCLUDED
+    ]
+    if not headers:
+        return False
+    if _LIMITATION_RE.search(lowered):
+        return False
+    if _CAPABILITY_RE.search(lowered):
+        return True
+    return len(headers) >= 2
+
+
+_PRONOUN_OBJECTS = frozenset(
+    {"them", "it", "him", "her", "us", "those", "they"}
+)
+
+
+def _capability_pronoun_object(lowered: str) -> bool:
+    """True when every capability match in the item takes a pronoun
+    object ('Whitesnake can control them'). Such an item is
+    uninterpretable without its antecedent -- the established control
+    test_headed_clauses_ending_on_pronouns_pass treats whole clauses
+    ending on pronouns as legit weaknesses -- so the screen cannot
+    judge it a power description. Any concrete object ('fire',
+    "Rose's shield") defeats the exemption."""
+    found = False
+    for match in _CAPABILITY_RE.finditer(lowered):
+        found = True
+        tail = lowered[match.end():].strip()
+        words = re.findall(r"[a-z']+", tail)[:3]
+        if not words:
+            continue
+        if words[0] in _PRONOUN_OBJECTS:
+            continue
+        return False
+    return found
+
+
+def _capability_in_weaknesses(value: str, lowered: str) -> bool:
+    """G4b: a weakness item that only describes what the character CAN
+    do, with no limitation language anywhere ('Iori can control fire.
+    He can create a bright purple fire from thin air'). Genuine
+    limitations ('he can only do this for a certain amount of time',
+    'his half-human nature means he cannot use...', 'Steven had
+    little control over his powers') pass via the limitation list,
+    and pronoun-object capabilities ('Whitesnake can control them')
+    are exempt -- see _capability_pronoun_object."""
+    if not _CAPABILITY_RE.search(lowered):
+        return False
+    if _LIMITATION_RE.search(lowered):
+        return False
+    return not _capability_pronoun_object(lowered)
+
+
 def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]:
     """Fragment-debris checks for one recovered list item.
 
@@ -5378,6 +5607,20 @@ def fragment_item_reasons(item: Any, *, section: str | None = None) -> list[str]
         reasons.append("lowercase_predicate")
     if section == "weaknesses" and _trailing_fragment(value, lowered):
         reasons.append("trailing_fragment")
+    if _label_fragment(value):
+        reasons.append("label_fragment")
+    if _quoted_title_fragment(value):
+        reasons.append("quoted_title_fragment")
+    if _placeholder_item(value):
+        reasons.append("placeholder_item")
+    if section == "weaknesses" and _list_intro_fragment(value):
+        reasons.append("list_intro_fragment")
+    if section == "weaknesses" and _equipment_in_weaknesses(value):
+        reasons.append("equipment_in_weaknesses")
+    if section == "weaknesses" and _ability_header_in_weaknesses(value, lowered):
+        reasons.append("ability_header_in_weaknesses")
+    if section == "weaknesses" and _capability_in_weaknesses(value, lowered):
+        reasons.append("capability_in_weaknesses")
     return reasons
 
 

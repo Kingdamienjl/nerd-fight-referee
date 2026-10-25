@@ -3218,5 +3218,264 @@ class EleventhGenFrag11ScreenTests(unittest.TestCase):
         self.assertIn("Immortality", kept)
 
 
+class TwelfthGenFrag12ScreenTests(unittest.TestCase):
+    """Frag-12 workstream: the frag-11-quarantined debris families.
+
+    Verbatim items come from the frag-11 audit corpus
+    (/opt/referee/data/frag12_20261025/corpus.json) and the calibration
+    rounds (bottlenecks/frag12_calib{1,2,3}.py). Controls are the
+    legit items calibration showed must survive.
+    """
+
+    # -- G1a/G1c label fragments --------------------------------------
+    def test_label_fragment_verbatim(self):
+        for item in (
+            "Chapter VII",
+            "Act III: Night White",
+            "Season 1",
+            "Season 4",
+            "Episode 2",
+            "Episode 8",
+            'Episode 2 "ARC Troopers" While defeated',
+            "chapter 1",
+            "chapter 3",
+        ):
+            self.assertIn(
+                "label_fragment", fragment_item_reasons(item), item
+            )
+
+    def test_label_fragment_controls_survive(self):
+        # A label glued to substantive prose is kept -- the label is
+        # noise, the content is real (grievous Episode 9, jiji Ch. 40,
+        # nanami Ch. 120, sauron Ch. 19).
+        for item in (
+            'Episode 9 "Grievous Intrigue" likely helped by the '
+            "unpredictability of this contortion.",
+            "Chapter 40 When he uses The Evil Gun technique",
+            "Chapter 120 after his body was stabbed several times",
+            "Chapter 19: OF BEREN AND LÚTHIEN It is even described "
+            "that Sauron eventually achieved Morgoth's feat",
+            "he is highly susceptible to the Scourge Virus."
+            "Invincible Season 4",
+        ):
+            self.assertNotIn(
+                "label_fragment",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+    # -- G1b quoted-title tail ----------------------------------------
+    def test_quoted_title_fragment_verbatim(self):
+        self.assertIn(
+            "quoted_title_fragment",
+            fragment_item_reasons('"Season Four Finale" Additionally'),
+        )
+
+    def test_quoted_title_controls_survive(self):
+        # Quoted names + a noun are legitimate items (calib1 FPs).
+        for item in (
+            '"Tsubakuro" shuriken',
+            '"Last Breath" Sword',
+            '"the legendary hitman" himself',
+        ):
+            self.assertNotIn(
+                "quoted_title_fragment", fragment_item_reasons(item), item
+            )
+
+    # -- G2 list intro -------------------------------------------------
+    def test_list_intro_verbatim(self):
+        for item in (
+            "Black Noir has the following",
+            "Starlight has the following",
+            "Stormfront has the following",
+            "Kimiko has the following",
+        ):
+            self.assertIn(
+                "list_intro_fragment",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+    def test_list_intro_controls_survive(self):
+        # A real weakness sentence that merely contains the phrase.
+        self.assertNotIn(
+            "list_intro_fragment",
+            fragment_item_reasons(
+                "He has the following weaknesses: fire and ice.",
+                section="weaknesses",
+            ),
+        )
+
+    # -- G3 equipment fragment -----------------------------------------
+    def test_equipment_fragment_verbatim(self):
+        self.assertIn(
+            "equipment_in_weaknesses",
+            fragment_item_reasons(
+                "Amethyst's upgraded whip.", section="weaknesses"
+            ),
+        )
+
+    def test_equipment_controls_survive(self):
+        self.assertNotIn(
+            "equipment_in_weaknesses",
+            fragment_item_reasons(
+                "Superman's cape can be used against him.",
+                section="weaknesses",
+            ),
+        )
+
+    # -- G4a ability headers in weaknesses -----------------------------
+    def test_ability_header_verbatim(self):
+        for item in (
+            "Rugal can create a ball of electricity around his body "
+            "and then fires it. *Dark Barrier: Rugal can create a "
+            "barrier that",
+            "Vega is able to adhere on a wall for a brief moment and "
+            "gain an additional jump. *Back Slash: Vega somersaults "
+            "backwards",
+            "she can use multiple shards to revolve around herself. "
+            "*Thundaga: Celes calls down contracting Lightning Bolts "
+            "around her",
+        ):
+            self.assertIn(
+                "ability_header_in_weaknesses",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+    def test_ability_header_controls_survive(self):
+        # A legit structured weakness list: element headers with
+        # limitation language. Page-structure headers are excluded.
+        self.assertNotIn(
+            "ability_header_in_weaknesses",
+            fragment_item_reasons(
+                "Fire: weak to fire. Ice: weak to ice.",
+                section="weaknesses",
+            ),
+        )
+        self.assertNotIn(
+            "ability_header_in_weaknesses",
+            fragment_item_reasons(
+                "Victories: Losses: Inconclusive:", section="weaknesses"
+            ),
+        )
+
+    # -- G4b capability without limitation -------------------------------
+    def test_capability_verbatim(self):
+        for item in (
+            "Iori can control fire. He can create a bright purple "
+            "fire from thin air",
+            "Dialga can control time. Examples include causing time "
+            "loops",
+            "he's able to take their form and use any of their "
+            "abilities. For example",
+            "Steven can summon Rose's shield and can expand his "
+            "bubble to protect others",
+        ):
+            self.assertIn(
+                "capability_in_weaknesses",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+    def test_capability_controls_survive(self):
+        # The four genuine-limitation steven items: each carries a
+        # limitation marker (little control / not work / cannot /
+        # only + strain) and must pass.
+        for item in (
+            "Steven had little control over his powers",
+            "causing his abilities to not work properly",
+            "his half-human nature means he cannot use his gem "
+            "powers fully",
+            "he can only do this for a certain amount of time and "
+            "his half-human nature puts more of a strain on his "
+            "body than it would a Gem",
+            "He can regenerate, but the process is slow and painful",
+            "He is bound to the Underworld",
+            "and will die if he stays in the mortal realm for long",
+            "he is vulnerable to high-frequency sounds",
+        ):
+            self.assertNotIn(
+                "capability_in_weaknesses",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+    # -- G5 placeholder --------------------------------------------------
+    def test_capability_pronoun_object_exempt(self):
+        # Established control: whole clauses ending on a pronoun
+        # object are legit weaknesses (test_headed_clauses_ending_on_
+        # pronouns_pass). A concrete object anywhere defeats it.
+        self.assertNotIn(
+            "capability_in_weaknesses",
+            fragment_item_reasons(
+                "Whitesnake can control them", section="weaknesses"
+            ),
+        )
+        self.assertIn(
+            "capability_in_weaknesses",
+            fragment_item_reasons(
+                "Whitesnake can control them and can create discs "
+                "from people's souls",
+                section="weaknesses",
+            ),
+        )
+
+    def test_placeholder_verbatim(self):
+        for item in ("None noted.", "N/A", "Unknown", "None"):
+            self.assertIn(
+                "placeholder_item", fragment_item_reasons(item), item
+            )
+
+    def test_placeholder_controls_survive(self):
+        self.assertNotIn(
+            "placeholder_item",
+            fragment_item_reasons("None notable", section="weaknesses"),
+        )
+        self.assertNotIn(
+            "placeholder_item",
+            fragment_item_reasons(
+                "Unknown energy source", section="weaknesses"
+            ),
+        )
+
+    # -- G screens are section-scoped correctly -------------------------
+    def test_g4_screens_are_weaknesses_only(self):
+        # The same capability sentence as an ABILITY is legitimate.
+        self.assertNotIn(
+            "capability_in_weaknesses",
+            fragment_item_reasons(
+                "Iori can control fire. He can create a bright "
+                "purple fire from thin air",
+                section="abilities",
+            ),
+        )
+        self.assertNotIn(
+            "ability_header_in_weaknesses",
+            fragment_item_reasons(
+                "Rugal can create a ball of electricity. *Dark "
+                "Barrier: Rugal can create a barrier",
+                section="abilities",
+            ),
+        )
+
+    def test_filter_drops_frag12_debris_keeps_real_weakness(self):
+        kept, dropped, _ = filter_list_field_items_detailed(
+            "Season 1 | Black Noir has the following | Amethyst's "
+            "upgraded whip. | None noted. | Iori can control fire. "
+            "He can create a bright purple fire from thin air | "
+            "he is vulnerable to high-frequency sounds | Steven had "
+            "little control over his powers",
+            section="weaknesses",
+        )
+        self.assertNotIn("Season 1", kept)
+        self.assertNotIn("has the following", kept)
+        self.assertNotIn("upgraded whip", kept)
+        self.assertNotIn("None noted", kept)
+        self.assertNotIn("bright purple fire", kept)
+        self.assertIn("high-frequency sounds", kept)
+        self.assertIn("little control", kept)
+
+
 if __name__ == "__main__":
     unittest.main()
