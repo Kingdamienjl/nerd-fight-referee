@@ -45,6 +45,7 @@ async def requeue_needs_human_source_choice(
     providers: str = batch_promote.DEFAULT_PROVIDERS,
     priority: int = 10,
     dry_run: bool = False,
+    limit: int | None = None,
 ) -> RequeueSummary:
     matched = int(
         await connection.fetchval(
@@ -59,9 +60,34 @@ WHERE {SOURCE_CHOICE_FILTER_SQL}
     if dry_run or matched == 0:
         return RequeueSummary(matched=matched, requeued=0, dry_run=dry_run)
 
-    requeued = int(
-        await connection.fetchval(
-            f"""
+    # With a limit, requeue only the lowest-id matches, so a batch can be
+    # measured before the next one is released. Without one, the whole
+    # matched set is requeued exactly as before.
+    if limit is not None:
+        update_sql = f"""
+WITH candidates AS (
+    SELECT id FROM profile_jobs
+    WHERE {SOURCE_CHOICE_FILTER_SQL}
+    ORDER BY id ASC
+    LIMIT $3
+), updated AS (
+    UPDATE profile_jobs
+SET status = 'pending',
+    providers = $1,
+    priority = $2,
+    next_attempt_at = now(),
+    locked_at = NULL,
+    worker_id = NULL,
+    last_error = NULL,
+    updated_at = now()
+WHERE id IN (SELECT id FROM candidates)
+    RETURNING 1
+)
+SELECT count(*) FROM updated
+"""
+        update_args: tuple[Any, ...] = (providers, priority, limit)
+    else:
+        update_sql = f"""
 WITH updated AS (
     UPDATE profile_jobs
 SET status = 'pending',
@@ -76,12 +102,10 @@ WHERE {SOURCE_CHOICE_FILTER_SQL}
     RETURNING 1
 )
 SELECT count(*) FROM updated
-""",
-            providers,
-            priority,
-        )
-        or 0
-    )
+"""
+        update_args = (providers, priority)
+
+    requeued = int(await connection.fetchval(update_sql, *update_args) or 0)
     return RequeueSummary(matched=matched, requeued=requeued, dry_run=False)
 
 
@@ -90,6 +114,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--database-url")
     parser.add_argument("--providers", default=batch_promote.DEFAULT_PROVIDERS)
     parser.add_argument("--priority", type=int, default=10)
+    parser.add_argument("--limit", type=int, default=None,
+                        help="requeue at most this many matches (lowest id first); default is all matches")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--json", action="store_true")
     return parser
@@ -103,6 +129,7 @@ async def async_main(args: argparse.Namespace) -> int:
             providers=args.providers,
             priority=args.priority,
             dry_run=args.dry_run,
+            limit=args.limit,
         )
     if args.json:
         print(json.dumps(summary.as_dict(), indent=2, sort_keys=True))

@@ -251,6 +251,26 @@ class ProfileQueueTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("last_error = NULL", update_sql)
         self.assertEqual(update_args, ("vsbattles", 5))
 
+    async def test_requeue_source_choice_limit_requeues_only_that_many(self):
+        connection = FakeConnection()
+        connection.fetch_values = [1076, 50]
+
+        result = await requeue_needs_human_source_choice(
+            connection,
+            providers="vsbattles",
+            priority=5,
+            limit=50,
+        )
+
+        self.assertEqual(result.matched, 1076)
+        self.assertEqual(result.requeued, 50)
+        update_sql, update_args = connection.executed[-1]
+        self.assertIn("needs_human_source_choice", update_sql)
+        self.assertIn("status = 'needs_review'", update_sql)
+        self.assertIn("ORDER BY id ASC", update_sql)
+        self.assertIn("LIMIT $3", update_sql)
+        self.assertEqual(update_args, ("vsbattles", 5, 50))
+
     async def test_requeue_source_choice_dry_run_does_not_update(self):
         connection = FakeConnection()
         connection.fetch_values = [2]
