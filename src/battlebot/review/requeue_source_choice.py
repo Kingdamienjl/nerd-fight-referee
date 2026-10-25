@@ -46,13 +46,23 @@ async def requeue_needs_human_source_choice(
     priority: int = 10,
     dry_run: bool = False,
     limit: int | None = None,
+    max_attempts: int | None = None,
 ) -> RequeueSummary:
+    # With max_attempts, only jobs that have never been retried are
+    # eligible: re-parked jobs still match the source-choice filter (the
+    # flag survives the failed attempt), so without this every later
+    # batch would re-select earlier batches' known failures instead of
+    # fresh jobs. The value is an int from our own CLI, inlined as a
+    # literal so the $1/$2/$3 parameter numbering stays unchanged.
+    filter_sql = SOURCE_CHOICE_FILTER_SQL
+    if max_attempts is not None:
+        filter_sql += f"\nAND attempts <= {int(max_attempts)}"
     matched = int(
         await connection.fetchval(
             f"""
 SELECT count(*)
 FROM profile_jobs
-WHERE {SOURCE_CHOICE_FILTER_SQL}
+WHERE {filter_sql}
 """
         )
         or 0
@@ -67,7 +77,7 @@ WHERE {SOURCE_CHOICE_FILTER_SQL}
         update_sql = f"""
 WITH candidates AS (
     SELECT id FROM profile_jobs
-    WHERE {SOURCE_CHOICE_FILTER_SQL}
+    WHERE {filter_sql}
     ORDER BY id ASC
     LIMIT $3
 ), updated AS (
@@ -98,7 +108,7 @@ SET status = 'pending',
     worker_id = NULL,
     last_error = NULL,
     updated_at = now()
-WHERE {SOURCE_CHOICE_FILTER_SQL}
+WHERE {filter_sql}
     RETURNING 1
 )
 SELECT count(*) FROM updated
@@ -116,6 +126,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--priority", type=int, default=10)
     parser.add_argument("--limit", type=int, default=None,
                         help="requeue at most this many matches (lowest id first); default is all matches")
+    parser.add_argument("--max-attempts", type=int, default=None,
+                        help="only requeue jobs with attempts <= this (excludes jobs already retried by this tool)")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--json", action="store_true")
     return parser
@@ -130,6 +142,7 @@ async def async_main(args: argparse.Namespace) -> int:
             priority=args.priority,
             dry_run=args.dry_run,
             limit=args.limit,
+            max_attempts=args.max_attempts,
         )
     if args.json:
         print(json.dumps(summary.as_dict(), indent=2, sort_keys=True))
