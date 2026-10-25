@@ -1,3 +1,4 @@
+import time
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -7,6 +8,7 @@ from battlebot.harvest.auto_profile_harvester import (
     build_profile,
     explicit_none_value,
     extract_vsbattles_fields,
+    normalize_extracted_value,
     profile_output_path,
     row_fingerprint,
     select_queue_rows,
@@ -28,6 +30,23 @@ class HarvesterExtractionTests(unittest.TestCase):
         self.assertEqual(fields["tier"], "4-B")
         self.assertEqual(fields["attack_potency"], "Solar System level")
         self.assertEqual(fields["powers_and_abilities"], "Flight, Ki Manipulation")
+
+    def test_normalize_extracted_value_no_backtracking(self):
+        # SpongeBob frag-12: a long separator run mid-value made the
+        # nested-quantifier strip patterns backtrack exponentially
+        # (22 '=' chars took 0.76s; 30+ is minutes). The fixed patterns
+        # are linear; a 40-char run must return in well under a second,
+        # and leading/trailing separator runs are still stripped.
+        value = "x " + "=" * 40 + " more text after the run " + "word " * 50
+        started = time.monotonic()
+        result = normalize_extracted_value(value)
+        self.assertLess(time.monotonic() - started, 2.0)
+        self.assertIn("=" * 40, result)
+        self.assertEqual(
+            normalize_extracted_value("=" * 40 + " content " + "-" * 40),
+            "content",
+        )
+        self.assertEqual(normalize_extracted_value("=== title ==="), "title")
 
     def test_bold_label_extraction(self):
         fields = extract_vsbattles_fields(

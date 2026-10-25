@@ -1437,8 +1437,14 @@ def normalize_text(value: str) -> str:
 
 def normalize_extracted_value(value: str) -> str:
     value = normalize_text(value)
-    value = re.sub(r"^\s*(?:[-|=]+|▾)+\s*", "", value)
-    value = re.sub(r"\s*(?:[-|=]+|▾)+\s*$", "", value)
+    # Linear-time separator strip: the old nested quantifiers
+    # (?:[-|=]+|▾)+ partitioned a separator run in 2**(N-1) ways
+    # whenever the trailing $ failed -- a 22-char '=' run took
+    # 0.76s, 30+ chars is minutes (SpongeBob frag-12 hang, faulthandler
+    # stack at re.sub in this function). The single char class
+    # matches exactly the same language (runs of -, |, =, ▾).
+    value = re.sub(r"^\s*[-|=▾]+\s*", "", value)
+    value = re.sub(r"\s*[-|=▾]+\s*$", "", value)
     return value[:5000].strip()
 
 
