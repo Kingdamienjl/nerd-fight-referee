@@ -11,7 +11,8 @@ generation:
   generated_at: '2026-10-04T07:00:32Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.6
-  ineligible_reasons: []
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Beast Boy (Post-Crisis)
   franchise: DC
@@ -79,7 +80,7 @@ sources:
 - id: vsbattles-beast-boy-post-crisis-dc
   provider_id: vsbattles
   source_type: mediawiki
-  title: Beast Boy (Post-Crisis) DC
+  title: Beast Boy (DC Animated Movies)
   url: https://vsbattles.fandom.com/wiki/Beast_Boy_%28Post-Crisis%29_DC
   authority: high
   notes: enrich_sources_candidate
@@ -94,10 +95,12 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9710911'
+  revision_timestamp: '2026-10-19T00:31:55Z'
 - id: character-stats-profiles-beast-boy-post-crisis-dc
   provider_id: character_stats_profiles
   source_type: mediawiki
-  title: Beast Boy (Post-Crisis) DC
+  title: Beast Boy (Infinite Frontiers, Canon)/DapperLoona
   url: https://character-stats-and-profiles.fandom.com/wiki/Beast_Boy_%28Post-Crisis%29_DC
   authority: high
   notes: enrich_sources_candidate
@@ -112,6 +115,8 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '501049'
+  revision_timestamp: '2025-09-13T20:04:30Z'
 - id: vsbattles-beast-boy-post-crisis-dc-comics
   provider_id: vsbattles
   source_type: mediawiki
@@ -304,11 +309,49 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+- id: vsbattles-beast-boy-post-crisis-dc
+  provider_id: vsbattles
+  source_type: mediawiki
+  title: Beast Boy (Post-Crisis) DC
+  url: https://vsbattles.fandom.com/wiki/Beast_Boy_%28Post-Crisis%29_DC
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
+- id: character-stats-profiles-beast-boy-post-crisis-dc
+  provider_id: character_stats_profiles
+  source_type: mediawiki
+  title: Beast Boy (Post-Crisis) DC
+  url: https://character-stats-and-profiles.fandom.com/wiki/Beast_Boy_%28Post-Crisis%29_DC
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 9-A, higher as Werebeast
+    source_ids:
+    - vsbattles-beast-boy-post-crisis-dc
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
     text: Small Building level (Restrained Terra during their spar. Able to harm strong
       foes like Brother Blood, the latter had the powers of all the Titans), higher
@@ -364,7 +407,25 @@ abilities: []
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-it-takes-time-for-him-to-shapeshift-into-different-animals-and-can-t-
+  name: It takes time for him to shapeshift into different animals and can't do so
+    simultaneously
+  description: It takes time for him to shapeshift into different animals and can't
+    do so simultaneously
+  source_ids:
+  - vsbattles-beast-boy-post-crisis-dc
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -396,7 +457,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: b3150dad8ec3fda8ddbad399ae36f6533625cd8a7e58fc553c7ca4c18b0e0744
 repair:
-  attempted_at: '2026-10-22T18:38:10Z'
+  attempted_at: '2026-10-26T02:46:27Z'
   repaired_fields: []
   unresolved_fields:
   - abilities
@@ -409,11 +470,9 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Beast Boy (DC Animated Movies)
@@ -443,7 +502,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -458,16 +517,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: ', higher as Werebeast'
-      source_id: vsbattles-beast-boy-post-crisis-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Shapeshifting (Can turn into any
-        creature he is familiar with, including Earth animals and even demons. This
-        can grant him Flight, Enhanced Senses, Poison Manipulation, and Resistance
-        to Extreme Temperatures), Berserk Mode (Via Werebeast)
+      value: 9-A, higher as Werebeast
       source_id: vsbattles-beast-boy-post-crisis-dc
       provider_id: vsbattles
       authority: high
@@ -507,12 +557,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-beast-boy-post-crisis-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average (Was able to learn and use the skills of a Werebeast despite
         shapeshifting into it for the first time)
@@ -521,11 +565,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'It takes time for him to shapeshift into different animals and can''t
-        do so simultaneously ==Notable Matchups== Victories: Losses: Inconclusive:
-        Category:DC Animated Movies Category:Male Characters Category:Teenagers Category:Shapeshifters
-        Category:Flight Users Category:Enhanced Senses Users Category:Poison Users
-        Category:Berserkers Category:Characters'
+      value: It takes time for him to shapeshift into different animals and can't
+        do so simultaneously
       source_id: vsbattles-beast-boy-post-crisis-dc
       provider_id: vsbattles
       authority: high
@@ -535,141 +576,12 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|beast boy dc animated movies|9710911
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-beast-boy-post-crisis-dc
-    url: https://character-stats-and-profiles.fandom.com/wiki/Beast_Boy_%28Post-Crisis%29_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Beast Boy (Infinite Frontiers, Canon)/DapperLoona
-    source_type: mediawiki
-    revision_id: '501049'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4312
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: Varies between 10-C and 9-A up to 8-C | At least 4-B | 2-A | 2-A
-      source_id: character-stats-profiles-beast-boy-post-crisis-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Shapeshifting (Beast Boy's genetic
-        code contains a "metagene" that allows him to tap into The Red, which allows
-        for a genetic sense memory as well as a propensity for replication and transmutation
-        of his own body.), Size Manipulation, Power Mimicry (Upon turning into an
-        animal, Beast Boy will gain access to all of that animal's powers.), Enhanced
-        Senses, Underwater Breathing (As Animals Such as Fish and Sharks), Flight
-        (Can turn into many different animals capable of flying), Surface Scaling,
-        Poison Manipulation (Via Snakes, Frogs, Many types of Spiders, and bugs),
-        Electricity Manipulation (Via Electric Eel), Regeneration (Low-Mid; Via Axolotl),
-        Paralysis Inducement (Via Animals such as Komodo Dragon), Camouflage, limited
-        Blood Manipulation (Can shoot it's own blood by increasing blood pressure,
-        via Horned Lizard), Fragrance Manipulation (Via animals like Skunk), Statistics
-        Amplification
-      source_id: character-stats-profiles-beast-boy-post-crisis-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Varies between Below Average Human level (Beast Boy can turn into small
-        animals, such as a fly, or a mouse), and Small Building level+ (Beast Boy's
-        stronger forms should be comparable to Nightwing and Batman), up to Building
-        level (he can transform into a Blue Whale which are on this level) | At least
-        Solar system level (Was capable of damaging Rankor who had captured and charged
-        himself with the power of multiple titans including Kid Flash, Wonder Girl
-        and a Weakened Superboy) | Multiverse level+ (Can Transform into the likes
-        of Kong, and damage him) | Multiverse level+ (As Garro he was capable of fighting
-        Starro and is directly comparable to Starro, Starro has and fought the likes
-        of Post Crisis Superman)
-      source_id: character-stats-profiles-beast-boy-post-crisis-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Varies up to Subsonic Movement Speed, Hypersonic+ reaction and combat
-        speed (Comparable to Nightwing) | Massively FTL+ Reaction Speed (Dodged Attacks
-        from Rankor) | At least Massively FTL+ Combat and Reaction Speed | At least
-        Massively FTL+ Reaction and Combat Speed
-      source_id: character-stats-profiles-beast-boy-post-crisis-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Varies between Below Average Human level and Small Building level+, up
-        to Building level | At least Solar system level | Multiverse level+ (Should
-        be Comparable to Kong, who was capable of taking casual attacks from Supergirl
-        | Multiverse level+
-      source_id: character-stats-profiles-beast-boy-post-crisis-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Beast Boy can get headache if he changes between different species too
-        fast, he is immature and childish which can make him predictable Category:DapperLoona
-      source_id: character-stats-profiles-beast-boy-post-crisis-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|beast boy infinite frontiers
-      canon dapperloona|501049
     retryable: false
     exception_class: ''
   - source_id: vsbattles-beast-boy-post-crisis-dc-comics
@@ -680,7 +592,6 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
@@ -714,7 +625,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -790,15 +701,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Normal human weaknesses. Refuses to kill. Feats: *Strength: **Throws
-        the KGBeast **Punches Barry Pierce through a brick wall **Bends a newspaper
-        stand over **OHKO Pteradon *'
-      source_id: vsbattles-beast-boy-post-crisis-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: ''''''''
+      value: Throws the KGBeast, Punches Barry Pierce through a brick wall, Bends
+        a newspaper stand over, OHKO Pteradon
       source_id: vsbattles-beast-boy-post-crisis-dc-comics
       provider_id: vsbattles
       authority: high
@@ -808,7 +712,7 @@ repair:
     variant_score: 30
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -926,7 +830,7 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: Beast Boy can get headache if he changes between different species too
-        fast, he is immature and childish which can make him predictable Category:DapperLoona
+        fast
       source_id: character-stats-profiles-beast-boy-post-crisis-dc-comics
       provider_id: character_stats_profiles
       authority: high
@@ -953,11 +857,9 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Beast Boy (DC Animated Movies)
@@ -987,7 +889,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1002,16 +904,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: ', higher as Werebeast'
-      source_id: vsbattles-beast-boy-post-crisis-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Shapeshifting (Can turn into any
-        creature he is familiar with, including Earth animals and even demons. This
-        can grant him Flight, Enhanced Senses, Poison Manipulation, and Resistance
-        to Extreme Temperatures), Berserk Mode (Via Werebeast)
+      value: 9-A, higher as Werebeast
       source_id: vsbattles-beast-boy-post-crisis-dc
       provider_id: vsbattles
       authority: high
@@ -1051,12 +944,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-beast-boy-post-crisis-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average (Was able to learn and use the skills of a Werebeast despite
         shapeshifting into it for the first time)
@@ -1065,11 +952,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'It takes time for him to shapeshift into different animals and can''t
-        do so simultaneously ==Notable Matchups== Victories: Losses: Inconclusive:
-        Category:DC Animated Movies Category:Male Characters Category:Teenagers Category:Shapeshifters
-        Category:Flight Users Category:Enhanced Senses Users Category:Poison Users
-        Category:Berserkers Category:Characters'
+      value: It takes time for him to shapeshift into different animals and can't
+        do so simultaneously
       source_id: vsbattles-beast-boy-post-crisis-dc
       provider_id: vsbattles
       authority: high
@@ -1079,7 +963,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1197,7 +1081,7 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: Beast Boy can get headache if he changes between different species too
-        fast, he is immature and childish which can make him predictable Category:DapperLoona
+        fast
       source_id: character-stats-profiles-beast-boy-post-crisis-dc
       provider_id: character_stats_profiles
       authority: high
@@ -1224,11 +1108,9 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Beast Boy (Teen Titans)
@@ -1259,7 +1141,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 65
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1274,16 +1156,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: ', higher as a Werebeast'
-      source_id: vsbattles-beast-boy-post-crisis
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Shapeshifting (Can turn into any
-        creature he is familiar with, including Earth animals and even alien species.
-        This can grant him Flight, Enhanced Senses, Poison Manipulation, and Resistance
-        to Extreme Temperatures), Berserk Mode
+      value: Low 7-C, higher as a Werebeast
       source_id: vsbattles-beast-boy-post-crisis
       provider_id: vsbattles
       authority: high
@@ -1324,12 +1197,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-beast-boy-post-crisis
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average (Has demonstrated great combat prowess and is naturally
         knowledgeable on a majority of the animal kingdom as well as some supernatural
@@ -1342,11 +1209,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Can be impatient and generally immature at times, is highly susceptible
+      value: Can be impatient and generally immature at times, is highly susceptible
         to hypnosis, transforming ability can be negated if forced to wear a very
         tight suit or in a small area, is just a regular boy without his shapeshifting
         powers if this happens (as was the case when Mother Mae Eye made him wear
-        a bunny suit) Notable Attacks/Techniques: *A list of his most common'
+        a bunny suit)
       source_id: vsbattles-beast-boy-post-crisis
       provider_id: vsbattles
       authority: high
@@ -1356,7 +1223,7 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
@@ -1474,7 +1341,7 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: Beast Boy can get headache if he changes between different species too
-        fast, he is immature and childish which can make him predictable Category:DapperLoona
+        fast
       source_id: character-stats-profiles-beast-boy-post-crisis
       provider_id: character_stats_profiles
       authority: high
@@ -1488,6 +1355,135 @@ repair:
     exact_name_match: false
     alias_match: false
     franchise_match: false
+    variant_match: false
+    duplicate_key: character-stats-and-profiles.fandom.com|beast boy infinite frontiers
+      canon dapperloona|501049
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-beast-boy-post-crisis-dc
+    url: https://character-stats-and-profiles.fandom.com/wiki/Beast_Boy_%28Post-Crisis%29_DC
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Beast Boy (Infinite Frontiers, Canon)/DapperLoona
+    source_type: mediawiki
+    revision_id: '501049'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4312
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Varies between 10-C and 9-A up to 8-C | At least 4-B | 2-A | 2-A
+      source_id: character-stats-profiles-beast-boy-post-crisis-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Shapeshifting (Beast Boy's genetic
+        code contains a "metagene" that allows him to tap into The Red, which allows
+        for a genetic sense memory as well as a propensity for replication and transmutation
+        of his own body.), Size Manipulation, Power Mimicry (Upon turning into an
+        animal, Beast Boy will gain access to all of that animal's powers.), Enhanced
+        Senses, Underwater Breathing (As Animals Such as Fish and Sharks), Flight
+        (Can turn into many different animals capable of flying), Surface Scaling,
+        Poison Manipulation (Via Snakes, Frogs, Many types of Spiders, and bugs),
+        Electricity Manipulation (Via Electric Eel), Regeneration (Low-Mid; Via Axolotl),
+        Paralysis Inducement (Via Animals such as Komodo Dragon), Camouflage, limited
+        Blood Manipulation (Can shoot it's own blood by increasing blood pressure,
+        via Horned Lizard), Fragrance Manipulation (Via animals like Skunk), Statistics
+        Amplification
+      source_id: character-stats-profiles-beast-boy-post-crisis-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Varies between Below Average Human level (Beast Boy can turn into small
+        animals, such as a fly, or a mouse), and Small Building level+ (Beast Boy's
+        stronger forms should be comparable to Nightwing and Batman), up to Building
+        level (he can transform into a Blue Whale which are on this level) | At least
+        Solar system level (Was capable of damaging Rankor who had captured and charged
+        himself with the power of multiple titans including Kid Flash, Wonder Girl
+        and a Weakened Superboy) | Multiverse level+ (Can Transform into the likes
+        of Kong, and damage him) | Multiverse level+ (As Garro he was capable of fighting
+        Starro and is directly comparable to Starro, Starro has and fought the likes
+        of Post Crisis Superman)
+      source_id: character-stats-profiles-beast-boy-post-crisis-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Varies up to Subsonic Movement Speed, Hypersonic+ reaction and combat
+        speed (Comparable to Nightwing) | Massively FTL+ Reaction Speed (Dodged Attacks
+        from Rankor) | At least Massively FTL+ Combat and Reaction Speed | At least
+        Massively FTL+ Reaction and Combat Speed
+      source_id: character-stats-profiles-beast-boy-post-crisis-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Varies between Below Average Human level and Small Building level+, up
+        to Building level | At least Solar system level | Multiverse level+ (Should
+        be Comparable to Kong, who was capable of taking casual attacks from Supergirl
+        | Multiverse level+
+      source_id: character-stats-profiles-beast-boy-post-crisis-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Beast Boy can get headache if he changes between different species too
+        fast
+      source_id: character-stats-profiles-beast-boy-post-crisis-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
     variant_match: false
     duplicate_key: character-stats-and-profiles.fandom.com|beast boy infinite frontiers
       canon dapperloona|501049

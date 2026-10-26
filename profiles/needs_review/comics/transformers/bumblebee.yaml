@@ -4,14 +4,25 @@ name: Bumblebee
 franchise: Transformers
 category: comics
 aliases: &id001 []
-profile_type: auto_evidence_profile
-status: provisional
-battle_eligible: true
+profile_type: needs_review
+status: needs_review
+battle_eligible: false
 generation:
   generated_at: '2026-10-10T07:11:36Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.6
-  ineligible_reasons: []
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
 identity:
   canonical_name: Bumblebee
   franchise: Transformers
@@ -42,7 +53,7 @@ sources:
 - id: vsbattles-bumblebee
   provider_id: vsbattles
   source_type: mediawiki
-  title: Bumblebee
+  title: 'Bumblebee (Transformers: Prime)'
   url: https://vsbattles.fandom.com/wiki/Bumblebee
   authority: high
   notes: enrich_sources_candidate
@@ -57,11 +68,69 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9341242'
+  revision_timestamp: '2026-01-18T11:36:13Z'
 - id: character-stats-profiles-bumblebee
   provider_id: character_stats_profiles
   source_type: mediawiki
   title: Bumblebee
   url: https://character-stats-and-profiles.fandom.com/wiki/Bumblebee
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
+- id: vsbattles-bumblebee-transformers
+  provider_id: vsbattles
+  source_type: mediawiki
+  title: 'Bumblebee (Transformers: Prime)'
+  url: https://vsbattles.fandom.com/wiki/Bumblebee_%28Transformers%29
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
+  revision_id: '9341242'
+  revision_timestamp: '2026-01-18T11:36:13Z'
+- id: character-stats-profiles-bumblebee-transformers
+  provider_id: character_stats_profiles
+  source_type: mediawiki
+  title: Bumblebee (Transformers)
+  url: https://character-stats-and-profiles.fandom.com/wiki/Bumblebee_%28Transformers%29
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
+- id: vsbattles-bumblebee
+  provider_id: vsbattles
+  source_type: mediawiki
+  title: Bumblebee
+  url: https://vsbattles.fandom.com/wiki/Bumblebee
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -93,29 +162,13 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: character-stats-profiles-bumblebee-transformers
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Bumblebee (Transformers)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Bumblebee_%28Transformers%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At most 7-A
+    source_ids:
+    - vsbattles-bumblebee-transformers
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
     text: At most Mountain level (Killed Skyquake while in midair, who could hold
       his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
@@ -206,22 +259,19 @@ review:
   - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: provisional
+  readiness_state: needs_review
   profile_state: auto_evidence_profile
   primary_source_id: vsbattles-bumblebee-transformers
   secondary_disagreement_policy: warning_only
 profile_hash: d4e69cfec296a100e64c57da81e834fde92e1f72c6d5369bdaebce748b32a9cb
 repair:
-  attempted_at: '2026-10-23T01:56:44Z'
+  attempted_at: '2026-10-26T03:31:14Z'
   repaired_fields: []
   unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
   - abilities
   source_attempts:
-  - source_id: vsbattles-bumblebee-transformers
-    url: https://vsbattles.fandom.com/wiki/Bumblebee_%28Transformers%29
+  - source_id: vsbattles-bumblebee
+    url: https://vsbattles.fandom.com/wiki/Bumblebee
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -231,6 +281,8 @@ repair:
     - powers_and_abilities
     - speed
     - standard_equipment
+    - tier
+    - weaknesses
     normalized_page_title: 'Bumblebee (Transformers: Prime)'
     source_type: mediawiki
     revision_id: '9341242'
@@ -273,6 +325,131 @@ repair:
     - stamina
     - intelligence
     field_candidates:
+    - field: tier
+      value: At most 7-A
+      source_id: vsbattles-bumblebee
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At most Mountain level (Killed Skyquake while in midair, who could hold
+        his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
+        and Wheeljack, with one punch. Defeated Knockout. Knocked Starscream flat)
+      source_id: vsbattles-bumblebee
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic movement speed with Massively Hypersonic Reaction and Combat
+        speed (Dodged cannon fire from Shockwave; a very fast driver)
+      source_id: vsbattles-bumblebee
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At most Mountain level (Took hits from Shockwave and a blast from Starscream)
+      source_id: vsbattles-bumblebee
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Energon Blasters
+      source_id: vsbattles-bumblebee
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted (Excellent scout, capable fighter, capable trickster)
+      source_id: vsbattles-bumblebee
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Young and somewhat immature.
+      source_id: vsbattles-bumblebee
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Bumblebee=, Ultra Bea
+      source_id: vsbattles-bumblebee
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|bumblebee transformers prime|9341242
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-bumblebee-transformers
+    url: https://vsbattles.fandom.com/wiki/Bumblebee_%28Transformers%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - speed
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: 'Bumblebee (Transformers: Prime)'
+    source_type: mediawiki
+    revision_id: '9341242'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4225
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At most 7-A
+      source_id: vsbattles-bumblebee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     - field: attack_potency
       value: At most Mountain level (Killed Skyquake while in midair, who could hold
         his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
@@ -302,6 +479,12 @@ repair:
       confidence: 0.75
     - field: intelligence
       value: Gifted (Excellent scout, capable fighter, capable trickster)
+      source_id: vsbattles-bumblebee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Young and somewhat immature.
       source_id: vsbattles-bumblebee-transformers
       provider_id: vsbattles
       authority: high
@@ -480,6 +663,8 @@ repair:
     - powers_and_abilities
     - speed
     - standard_equipment
+    - tier
+    - weaknesses
     normalized_page_title: 'Bumblebee (Transformers: Prime)'
     source_type: mediawiki
     revision_id: '9341242'
@@ -522,6 +707,12 @@ repair:
     - stamina
     - intelligence
     field_candidates:
+    - field: tier
+      value: At most 7-A
+      source_id: vsbattles-bumblebee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     - field: attack_potency
       value: At most Mountain level (Killed Skyquake while in midair, who could hold
         his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
@@ -551,6 +742,12 @@ repair:
       confidence: 0.75
     - field: intelligence
       value: Gifted (Excellent scout, capable fighter, capable trickster)
+      source_id: vsbattles-bumblebee-transformers
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Young and somewhat immature.
       source_id: vsbattles-bumblebee-transformers
       provider_id: vsbattles
       authority: high
@@ -718,111 +915,6 @@ repair:
       incredible bacon|570696
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-bumblebee
-    url: https://vsbattles.fandom.com/wiki/Bumblebee
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - speed
-    - standard_equipment
-    normalized_page_title: 'Bumblebee (Transformers: Prime)'
-    source_type: mediawiki
-    revision_id: '9341242'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4225
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: attack_potency
-      value: At most Mountain level (Killed Skyquake while in midair, who could hold
-        his own against Optimus Prime. Took down Shockwave, who could hold off Bulkhead
-        and Wheeljack, with one punch. Defeated Knockout. Knocked Starscream flat)
-      source_id: vsbattles-bumblebee
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic movement speed with Massively Hypersonic Reaction and Combat
-        speed (Dodged cannon fire from Shockwave; a very fast driver)
-      source_id: vsbattles-bumblebee
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At most Mountain level (Took hits from Shockwave and a blast from Starscream)
-      source_id: vsbattles-bumblebee
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Energon Blasters
-      source_id: vsbattles-bumblebee
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Gifted (Excellent scout, capable fighter, capable trickster)
-      source_id: vsbattles-bumblebee
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Bumblebee=, Ultra Bea
-      source_id: vsbattles-bumblebee
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|bumblebee transformers prime|9341242
-    retryable: false
-    exception_class: ''
   - source_id: character-stats-profiles-bumblebee
     url: https://character-stats-and-profiles.fandom.com/wiki/Bumblebee
     ok: true
@@ -980,6 +1072,7 @@ repair:
     - speed
     - stamina
     - standard_equipment
+    - weaknesses
     normalized_page_title: Bumblebee (IDW Movie Comics)
     source_type: mediawiki
     revision_id: '9489862'
@@ -1079,6 +1172,12 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
+    - field: weaknesses
+      value: Immature and headstrong
+      source_id: vsbattles-bumblebee-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -1147,44 +1246,43 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Acausality, Immortality (Type 1),
-        Healing, Dimensional Travel, Time Travel, Blessed (Blessed with the powers
-        of Egyptian Gods), Flight, Self-Sustenance (Type 1 and 2), Magic (Black Adam's
-        lightning is magic), Indomitable Will (Was granted courage by the Platonic
-        form of courage as gods are concepts in DC), Reality Warping, Subjective Reality
-        (Magic is the act of using one's will to change reality. Magic in DC is just
-        imagining things and making them real), Reactive Power Level (The power of
-        magic is dependent on one's belief and will), Electricity Manipulation (Black
-        Adam can badly harm Death with his lightning. His lightning is strong enough
-        to injure Martian Manhunter), Transformation, Power Bestowal (Grants Amon
-        his powers. Grants Mary Marvel her powers), Non-Physical Interaction, Conceptual
-        Manipulation (Can harm the Spectre, who is the embodiment of God's wrath and
-        is an idea born from God's mind), Sound Manipulation (His thunderclaps deafen
-        Hawkman), Vibration Manipulation (His thunderclaps knock back Power Girl),
-        Martial Arts, Enhanced Senses (Compares his sense of sight to that of an eagle's.
-        He is stated to have heightened hearing. Has super hearing and smelling),
-        Social Influencing (People regard him as the most dangerous man in the planet.
-        Stated to be an alpha male personified)., Resistance to Paralysis Inducement,
-        Electricity Manipulation (Laughs off Doctor Fate's lightning. Took electricity
-        meant to make him immobile by short circuiting him), Energy Projection (Takes
-        Bumblebee's energy blasts), Fire Manipulation (Survives fire from Firestorm),
-        Heat Manipulation (Tanks heat vision from Power Girl. Took J'onn's Martian
-        Vision), Matter Manipulation (Took Martian Vision which can match beams that
-        attack on a quark level and could scramble The Ray's atoms), Radiation Manipulation,
-        Ice Manipulation (Black Adam can survive in space without getting frozen),
-        Sound Manipulation (Unaffected by Silver Swan's sonic attacks, which could
-        work on Martian Manhunter. Martian Manhunter took a sonic attack powerful
-        enough to shatter windows and KO people), Pain Manipulation (Fought through
-        torture and pain from Sivana, and was fine right afterwards), Emotional Manipulation,
-        Mind Manipulation (Shows a limited resistance to Psycho Pirate's mind control,
-        which is considered to be manipulating emotions. Black Adam was stated to
-        have a very strong mind by Martian Manhunter and shows J'onn negative images
-        during the telepathic link to torture his mind while very briefly resisting
-        it, although Martian Manhunter was holding back and mindhaxed him later on),
-        Causality Manipulation, Fate Manipulation, Time Manipulation (Can move in
-        the Tower of Fate without repeatedly getting his actions reset), Magic (Consistently
-        takes hits from Shazam who can KO an off guard Superman with magic), Death
-        Manipulation
+      value: Superhuman Physical Characteristics, Immortality (Type 1), Healing, Dimensional
+        Travel, Time Travel, Blessed (Blessed with the powers of Egyptian Gods), Flight,
+        Self-Sustenance (Type 1 and 2), Magic (Black Adam's lightning is magic), Indomitable
+        Will (Was granted courage by the Platonic form of courage as gods are concepts
+        in DC), Reality Warping, Subjective Reality (Magic is the act of using one's
+        will to change reality. Magic in DC is just imagining things and making them
+        real), Reactive Power Level (The power of magic is dependent on one's belief
+        and will), Electricity Manipulation (Black Adam can badly harm Death with
+        his lightning. His lightning is strong enough to injure Martian Manhunter),
+        Transformation, Power Bestowal (Grants Amon his powers. Grants Mary Marvel
+        her powers), Non-Physical Interaction, Conceptual Manipulation (Can harm the
+        Spectre, who is the embodiment of God's wrath and is an idea born from God's
+        mind), Sound Manipulation (His thunderclaps deafen Hawkman), Vibration Manipulation
+        (His thunderclaps knock back Power Girl), Martial Arts, Enhanced Senses (Compares
+        his sense of sight to that of an eagle's. He is stated to have heightened
+        hearing. Has super hearing and smelling), Social Influencing (People regard
+        him as the most dangerous man in the planet. Stated to be an alpha male personified).,
+        Resistance to Paralysis Inducement, Electricity Manipulation (Laughs off Doctor
+        Fate's lightning. Took electricity meant to make him immobile by short circuiting
+        him), Energy Projection (Takes Bumblebee's energy blasts), Fire Manipulation
+        (Survives fire from Firestorm), Heat Manipulation (Tanks heat vision from
+        Power Girl. Took J'onn's Martian Vision), Matter Manipulation (Took Martian
+        Vision which can match beams that attack on a quark level and could scramble
+        The Ray's atoms), Radiation Manipulation, Ice Manipulation (Black Adam can
+        survive in space without getting frozen), Sound Manipulation (Unaffected by
+        Silver Swan's sonic attacks, which could work on Martian Manhunter. Martian
+        Manhunter took a sonic attack powerful enough to shatter windows and KO people),
+        Pain Manipulation (Fought through torture and pain from Sivana, and was fine
+        right afterwards), Emotional Manipulation, Mind Manipulation (Shows a limited
+        resistance to Psycho Pirate's mind control, which is considered to be manipulating
+        emotions. Black Adam was stated to have a very strong mind by Martian Manhunter
+        and shows J'onn negative images during the telepathic link to torture his
+        mind while very briefly resisting it, although Martian Manhunter was holding
+        back and mindhaxed him later on), Causality Manipulation, Fate Manipulation,
+        Time Manipulation (Can move in the Tower of Fate without repeatedly getting
+        his actions reset), Magic (Consistently takes hits from Shazam who can KO
+        an off guard Superman with magic), Death Manipulation
       source_id: character-stats-profiles-bumblebee-comics
       provider_id: character_stats_profiles
       authority: high
