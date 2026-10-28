@@ -3477,5 +3477,105 @@ class TwelfthGenFrag12ScreenTests(unittest.TestCase):
         self.assertIn("little control", kept)
 
 
+class ThirteenthGenFrag13ScreenTests(unittest.TestCase):
+    """Frag-13 workstream: the expand-gate H1/H2 merges + the uncovered
+    quarantined verbatim items.
+
+    Verbatim items come from the expand-gate revert
+    (/opt/referee/data/expand_20261025/) and the calibration rounds
+    (/opt/referee/data/frag13_20261027/frag13_calib{1,2,3}.py:
+    8,376 profiles / 174,710 items). Controls are the legit items
+    calibration showed must survive.
+    """
+
+    # -- H1 footer instructional sentence -------------------------------
+    def test_footer_instruction_verbatim(self):
+        for item in (
+            "etc. You can judge a person's power by their feats.",
+            "etc. You can judge a person's power by their feats. "
+            "Notable Attacks/Techniques: A list of some abilities "
+            "the character has",
+        ):
+            self.assertIn(
+                "footer_instruction",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+    def test_footer_instruction_controls_survive(self):
+        # The exact footer sentence is the signal; looser "judge by
+        # feats" phrasing is real prose and passes.
+        for item in (
+            "You can judge his power by his feats in battle.",
+            "Feats determine a character's power level.",
+            "His strength is judged by his victories.",
+        ):
+            self.assertNotIn(
+                "footer_instruction", fragment_item_reasons(item), item
+            )
+
+    # -- H2 unfinished-profile editor note ------------------------------
+    def test_editor_note_unfinished_verbatim(self):
+        for item in (
+            "This profile is so far from done but i am sleepy "
+            "(Last issue recorded Issue #14 of Animal Man 1988)",
+            "A powerful mage whom in his regular form could combat "
+            "Nezha) This is so far from done but i am sleepy "
+            "(Last issue recorded Issue #14 of Animal Man 1988)",
+        ):
+            self.assertIn(
+                "editor_note_unfinished",
+                fragment_item_reasons(item, section="abilities"),
+                item,
+            )
+
+    def test_editor_note_unfinished_controls_survive(self):
+        for item in (
+            "He has not finished his training.",
+            "His technique is incomplete.",
+            "His mastery is far from complete.",
+        ):
+            self.assertNotIn(
+                "editor_note_unfinished",
+                fragment_item_reasons(item, section="weaknesses"),
+                item,
+            )
+
+    # -- H5 episode title, hyphen separator ----------------------------
+    def test_episode_hyphen_title_verbatim(self):
+        for item in (
+            "Episode 2 - I'll Give You The Grand Tour",
+            "Episode 7 - Don't Do Anything Rash",
+            "Chapter 6 - A New Kind of Fear",
+            "Chapter 5 - An Unexpected StrengthDragon Ball Z",
+            "Act 11 - Reunion",
+        ):
+            self.assertIn(
+                "episode_hyphen_title", fragment_item_reasons(item), item
+            )
+
+    def test_episode_hyphen_title_controls_survive(self):
+        # Colon form is G1's, not H5's; a label glued to substantive
+        # prose is kept; a title past the 6-word cap is kept.
+        self.assertNotIn(
+            "episode_hyphen_title",
+            fragment_item_reasons("Episode 2: The Beginning"),
+        )
+        self.assertNotIn(
+            "episode_hyphen_title",
+            fragment_item_reasons(
+                'Episode 9 "Grievous Intrigue" likely helped by the '
+                "unpredictability of this contortion."
+            ),
+        )
+        self.assertNotIn(
+            "episode_hyphen_title",
+            fragment_item_reasons(
+                "Episode 2 - The Long And Winding Road To The Very "
+                "Distant Future"
+            ),
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
