@@ -159,7 +159,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Red_Tornado_(Post-Crisis)
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -197,34 +197,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-red-tornado-more-dc
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Red Tornado More DC
-  url: https://character-stats-and-profiles.fandom.com/wiki/Red_Tornado_More_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-red-tornado-more-dc
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Red Tornado (More DC)
-  url: https://vsbattles.fandom.com/wiki/Red_Tornado_%28More_DC%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-red-tornado-more-dc
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -293,7 +265,7 @@ sources:
   - weaknesses
 power_scale:
   tier:
-    text: '{{Unknown}} physically, {{Low 1-C}} with Air Manipulation'
+    text: physically, with Air Manipulation
     source_ids:
     - vsbattles-red-tornado-more-dc
     confidence: 0.6
@@ -316,12 +288,12 @@ power_scale:
     notes: auto_repair source extraction
   lifting_strength:
     text: Unknown
-    source_ids: &id003
+    source_ids: &id002
     - mediawiki-1642269
     confidence: 0.95
   striking_strength:
     text: Unknown
-    source_ids: *id003
+    source_ids: *id002
     confidence: 0.95
   durability:
     text: Low Complex Multiverse level (Survived a beating from Despero, can take
@@ -356,7 +328,7 @@ claims:
   section: power_scale
   axis: other
   text: '{{Unknown}} physically, {{Low 1-C}} with Air Manipulation'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-1642269
   decisive: false
   status: unverified
@@ -369,7 +341,7 @@ claims:
     winds too powerful for an Amazo with the powers of the entire main Justice League
     to overcome, blasted the entire Crime Syndicate away with one attack, overpowered
     Despero with his air blasts)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -379,7 +351,7 @@ claims:
   axis: speed
   text: Massively FTL+ (Outsped Black Racer and stated by Jay Garrick to be faster
     than himself)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -388,7 +360,7 @@ claims:
   section: power_scale
   axis: other
   text: Unknown
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -397,7 +369,7 @@ claims:
   section: power_scale
   axis: other
   text: Unknown
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -407,7 +379,7 @@ claims:
   axis: durability
   text: Low Complex Multiverse level (Survived a beating from Despero, can take attacks
     from Superman and Superboy)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -416,7 +388,7 @@ claims:
   section: power_scale
   axis: stamina
   text: Superhuman due to being an android
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -425,7 +397,7 @@ claims:
   section: power_scale
   axis: range
   text: Hundreds of Kilometers with air manipulation; Planetary as the Wind Elemental
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -434,7 +406,7 @@ claims:
   section: equipment
   axis: equipment
   text: None
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -446,7 +418,7 @@ claims:
     terabytes worth of information, including such from the Justice League's databanks
     and records. He was also able to reverse-engineer technology that functioned based
     on different laws of physics than the regular universe)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -467,7 +439,7 @@ claims:
     Reflection Users Category:Possession Users Category:Forcefield Users Category:Self-Sustenance
     Users Category:Justice League Members Category:Young Justice Members Category:Electricity
     Users Category:Geniuses'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -485,7 +457,7 @@ claims:
     Resistance to Telepathy (Resisted Despero's telepathy), Weather Manipulation,
     Air Manipulation and Electricity Manipulation (As he is one with the air and lightning,
     he should have resistance to these)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -494,7 +466,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id005
+  source_ids: &id004
   - vsbattles-red-tornado-more-dc
   source_claim_ids: []
   confidence: 0.85
@@ -510,7 +482,7 @@ abilities:
 - id: powers-and-abilities-air-manipulation
   name: Air Manipulation
   description: Air Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -527,7 +499,7 @@ abilities:
     control the wind lightning and rain at will
   description: Electricity Manipulation and Weather Manipulation in his elemental
     form (Can control the wind lightning and rain at will)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -542,7 +514,7 @@ abilities:
 - id: powers-and-abilities-flight
   name: Flight
   description: Flight
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -557,7 +529,7 @@ abilities:
 - id: powers-and-abilities-forcefield-creation
   name: Forcefield Creation
   description: Forcefield Creation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -572,7 +544,7 @@ abilities:
 - id: powers-and-abilities-enhanced-senses
   name: Enhanced Senses
   description: Enhanced Senses
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -587,7 +559,7 @@ abilities:
 - id: powers-and-abilities-extrasensory-perception
   name: Extrasensory Perception
   description: Extrasensory Perception
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -602,7 +574,7 @@ abilities:
 - id: powers-and-abilities-elemental-intangibility-can-form-a-body-made-of-nothing-but
   name: Elemental Intangibility (Can form a body made of nothing but air)
   description: Elemental Intangibility (Can form a body made of nothing but air)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -617,7 +589,7 @@ abilities:
 - id: powers-and-abilities-technology-manipulation
   name: Technology Manipulation
   description: Technology Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -633,7 +605,7 @@ abilities:
 - id: powers-and-abilities-hacking
   name: Hacking
   description: Hacking
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -649,7 +621,7 @@ abilities:
 - id: powers-and-abilities-transformation
   name: Transformation
   description: Transformation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -664,7 +636,7 @@ abilities:
 - id: powers-and-abilities-invisibility
   name: Invisibility
   description: Invisibility
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -679,7 +651,7 @@ abilities:
 - id: powers-and-abilities-attack-reflection
   name: Attack Reflection
   description: Attack Reflection
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -696,7 +668,7 @@ abilities:
     and spirit still exist)
   description: Regeneration (Low-Godly; Can form a new body from air so long as his
     mind and spirit still exist)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -713,7 +685,7 @@ abilities:
 - id: powers-and-abilities-self-sustenance-types-1-and-2
   name: Self-Sustenance (Types 1 and 2)
   description: Self-Sustenance (Types 1 and 2)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -728,7 +700,7 @@ abilities:
 - id: powers-and-abilities-possession-of-machines
   name: Possession of machines
   description: Possession of machines
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -748,7 +720,7 @@ abilities:
   description: Resistance to Telepathy (Resisted Despero's telepathy), Weather Manipulation,
     Air Manipulation and Electricity Manipulation (As he is one with the air and lightning,
     he should have resistance to these)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -765,7 +737,7 @@ equipment:
 - id: standard-equipment-none
   name: None
   description: None
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -785,7 +757,7 @@ resistances:
   description: Resistance to Telepathy (Resisted Despero's telepathy), Weather Manipulation,
     Air Manipulation and Electricity Manipulation (As he is one with the air and lightning,
     he should have resistance to these)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -802,7 +774,7 @@ weaknesses:
 - id: weaknesses-can-be-shut-down-if-a-fail-safe-device-on-his-neck-is-hit-hard-enough
   name: Can be shut down if a fail-safe device on his neck is hit hard enough
   description: Can be shut down if a fail-safe device on his neck is hit hard enough
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-red-tornado-more-dc
   source_claim_ids: []
   confidence: 0.85
@@ -821,7 +793,7 @@ weaknesses:
     elemental form. Note: Before making any chang'
   description: 'vulnerable to being hacked and reprogrammed. Loses these weaknesses
     in his elemental form. Note: Before making any changes to this page'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -847,7 +819,7 @@ weaknesses:
     Reflection Users Category:Possession Users Category:Forcefield Users Category:Self-Sustenance
     Users Category:Justice League Members Category:Young Justice Members Category:Electricity
     Users Category:Geniuses'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -893,7 +865,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: e9aa7dd63ad6f94defc4c60cd5f0df533bab721ad7821bf19d4c917514e4d9d5
 repair:
-  attempted_at: '2026-10-10T21:29:06Z'
+  attempted_at: '2026-10-21T10:31:15Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -910,7 +882,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Red_Tornado_(Post-Crisis)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -952,7 +924,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -965,7 +937,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{Unknown}} physically, {{Low 1-C}} with Air Manipulation'
+      value: physically, with Air Manipulation
       source_id: mediawiki-1642269
       provider_id: vsbattles
       authority: high
@@ -1040,8 +1012,7 @@ repair:
         vulnerable to being hacked and reprogrammed. Loses these weaknesses in his
         elemental form. Note: Before making any changes to this page, please read
         and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions|Red Tornado Post-Crisis|Red
-        Tornado (Post-Crisis)}} Category:Characters Category:DC Comics Category:Comic
+        Victories: Losses: Inconclusive: Category:Characters Category:DC Comics Category:Comic
         Book Characters Category:Good Characters Category:Heroes Category:Androids
         Category:Technopaths Category:Air Users Category:Flight Users Category:Weather
         Users Category:Technology Users Category:Invisibility Users Category:Regeneration
@@ -1067,11 +1038,125 @@ repair:
     duplicate_key: vsbattles.fandom.com|red tornado post crisis|9577778
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-red-tornado-more-dc
+    url: https://character-stats-and-profiles.fandom.com/wiki/Red_Tornado_%28More_DC%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Red Tornado (Canon, Post-Crisis)/SteelAvenger99
+    source_type: mediawiki
+    revision_id: '297572'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3502
+    content_kind: api_json
+    headings_detected: []
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 2-C, likely far higher
+      source_id: character-stats-profiles-red-tornado-more-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Air Manipulation, Electricity Manipulation
+        and Weather Manipulation in his elemental form (Can control the wind lightning
+        and rain at will), Flight, Forcefield Creation, Enhanced Senses, Extrasensory
+        Perception, Elemental Intangibility (Can form a body made of nothing but air),
+        Technology Manipulation, Hacking, Transformation, Invisibility, Attack Reflection,
+        Regeneration (Low-Godly. Can form a new body from air so long as his mind
+        and spirit still exist), Self-Sustenance (Types 1, 2 & 3), Possession of machines,
+        Resistance to Telepathy (Resisted Despero's telepathy), Weather Manipulation,
+        Air Manipulation and Electricity Manipulation (As he is one with the air and
+        lightning, he should have resistance to these)
+      source_id: character-stats-profiles-red-tornado-more-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Low Multiverse level, likely far higher (Created winds too powerful for
+        an Amazo with the powers of the entire main Justice League to overcome, has
+        overhelmed Despero, overhelmed Ultraman and Super Woman, restrained Cyborg)
+      source_id: character-stats-profiles-red-tornado-more-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable flight speed (Outflies The Black Racer and stated by Jay
+        Garrick to be faster than him)
+      source_id: character-stats-profiles-red-tornado-more-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Multiverse level, likely far higher (Tanked hits from Despero), Regeneration
+        makes him extremely difficult to kill.
+      source_id: character-stats-profiles-red-tornado-more-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Can be shut down if a fail-safe device on his neck is hit hard enough,
+        vulnerable to being hacked and reprogrammed, though loses these weaknesses
+        in his elemental form Category:SteelAvenger99 Category:Tier 2
+      source_id: character-stats-profiles-red-tornado-more-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|red tornado canon post
+      crisis steelavenger99|297572
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-red-tornado-more-dc
     url: https://vsbattles.fandom.com/wiki/Red_Tornado_More_DC
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields: &id008
     - attack_potency
     - durability
     - intelligence
@@ -1113,7 +1198,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -1124,7 +1209,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Unknown}} physically, {{Low 1-C}} with Air Manipulation'
+      value: physically, with Air Manipulation
       source_id: vsbattles-red-tornado-more-dc
       provider_id: vsbattles
       authority: high
@@ -1199,8 +1284,7 @@ repair:
         vulnerable to being hacked and reprogrammed. Loses these weaknesses in his
         elemental form. Note: Before making any changes to this page, please read
         and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions|Red Tornado Post-Crisis|Red
-        Tornado (Post-Crisis)}} Category:Characters Category:DC Comics Category:Comic
+        Victories: Losses: Inconclusive: Category:Characters Category:DC Comics Category:Comic
         Book Characters Category:Good Characters Category:Heroes Category:Androids
         Category:Technopaths Category:Air Users Category:Flight Users Category:Weather
         Users Category:Technology Users Category:Invisibility Users Category:Regeneration
@@ -1344,7 +1428,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Red_Tornado_%28More_DC%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id010
     - attack_potency
     - durability
     - intelligence
@@ -1386,7 +1470,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id011
     - attack_potency
     - speed
     - durability
@@ -1397,7 +1481,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Unknown}} physically, {{Low 1-C}} with Air Manipulation'
+      value: physically, with Air Manipulation
       source_id: vsbattles-red-tornado-more-dc
       provider_id: vsbattles
       authority: high
@@ -1472,8 +1556,7 @@ repair:
         vulnerable to being hacked and reprogrammed. Loses these weaknesses in his
         elemental form. Note: Before making any changes to this page, please read
         and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions|Red Tornado Post-Crisis|Red
-        Tornado (Post-Crisis)}} Category:Characters Category:DC Comics Category:Comic
+        Victories: Losses: Inconclusive: Category:Characters Category:DC Comics Category:Comic
         Book Characters Category:Good Characters Category:Heroes Category:Androids
         Category:Technopaths Category:Air Users Category:Flight Users Category:Weather
         Users Category:Technology Users Category:Invisibility Users Category:Regeneration
@@ -1495,279 +1578,6 @@ repair:
     exact_name_match: false
     alias_match: false
     franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|red tornado post crisis|9577778
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-red-tornado-more-dc
-    url: https://character-stats-and-profiles.fandom.com/wiki/Red_Tornado_%28More_DC%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Red Tornado (Canon, Post-Crisis)/SteelAvenger99
-    source_type: mediawiki
-    revision_id: '297572'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3502
-    content_kind: api_json
-    headings_detected: []
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 2-C, likely far higher
-      source_id: character-stats-profiles-red-tornado-more-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Air Manipulation, Electricity Manipulation
-        and Weather Manipulation in his elemental form (Can control the wind lightning
-        and rain at will), Flight, Forcefield Creation, Enhanced Senses, Extrasensory
-        Perception, Elemental Intangibility (Can form a body made of nothing but air),
-        Technology Manipulation, Hacking, Transformation, Invisibility, Attack Reflection,
-        Regeneration (Low-Godly. Can form a new body from air so long as his mind
-        and spirit still exist), Self-Sustenance (Types 1, 2 & 3), Possession of machines,
-        Resistance to Telepathy (Resisted Despero's telepathy), Weather Manipulation,
-        Air Manipulation and Electricity Manipulation (As he is one with the air and
-        lightning, he should have resistance to these)
-      source_id: character-stats-profiles-red-tornado-more-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Low Multiverse level, likely far higher (Created winds too powerful for
-        an Amazo with the powers of the entire main Justice League to overcome, has
-        overhelmed Despero, overhelmed Ultraman and Super Woman, restrained Cyborg)
-      source_id: character-stats-profiles-red-tornado-more-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable flight speed (Outflies The Black Racer and stated by Jay
-        Garrick to be faster than him)
-      source_id: character-stats-profiles-red-tornado-more-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Multiverse level, likely far higher (Tanked hits from Despero), Regeneration
-        makes him extremely difficult to kill.
-      source_id: character-stats-profiles-red-tornado-more-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Can be shut down if a fail-safe device on his neck is hit hard enough,
-        vulnerable to being hacked and reprogrammed, though loses these weaknesses
-        in his elemental form Category:SteelAvenger99 Category:Tier 2
-      source_id: character-stats-profiles-red-tornado-more-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|red tornado canon post
-      crisis steelavenger99|297572
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-red-tornado
-    url: https://vsbattles.fandom.com/wiki/Red_Tornado
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Red Tornado (Post-Crisis)
-    source_type: mediawiki
-    revision_id: '9577778'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4741
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{Unknown}} physically, {{Low 1-C}} with Air Manipulation'
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Air Manipulation, Electricity Manipulation
-        and Weather Manipulation in his elemental form (Can control the wind lightning
-        and rain at will), Flight, Forcefield Creation, Enhanced Senses, Extrasensory
-        Perception, Elemental Intangibility (Can form a body made of nothing but air),
-        Technology Manipulation, Hacking, Transformation, Invisibility, Attack Reflection,
-        Regeneration (Low-Godly; Can form a new body from air so long as his mind
-        and spirit still exist), Self-Sustenance (Types 1 and 2), Possession of machines,
-        Resistance to Telepathy (Resisted Despero's telepathy), Weather Manipulation,
-        Air Manipulation and Electricity Manipulation (As he is one with the air and
-        lightning, he should have resistance to these)
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Unknown physically, Low Complex Multiverse level with Air Manipulation
-        (Created winds too powerful for an Amazo with the powers of the entire main
-        Justice League to overcome, blasted the entire Crime Syndicate away with one
-        attack, overpowered Despero with his air blasts)
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ (Outsped Black Racer and stated by Jay Garrick to be faster
-        than himself)
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Complex Multiverse level (Survived a beating from Despero, can take
-        attacks from Superman and Superboy)
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman due to being an android
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Hundreds of Kilometers with air manipulation; Planetary as the Wind Elemental
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Extraordinary Genius (His memory contains at least hundreds of millions
-        of terabytes worth of information, including such from the Justice League's
-        databanks and records. He was also able to reverse-engineer technology that
-        functioned based on different laws of physics than the regular universe)
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Can be shut down if a fail-safe device on his neck is hit hard enough,
-        vulnerable to being hacked and reprogrammed. Loses these weaknesses in his
-        elemental form. Note: Before making any changes to this page, please read
-        and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions|Red Tornado Post-Crisis|Red
-        Tornado (Post-Crisis)}} Category:Characters Category:DC Comics Category:Comic
-        Book Characters Category:Good Characters Category:Heroes Category:Androids
-        Category:Technopaths Category:Air Users Category:Flight Users Category:Weather
-        Users Category:Technology Users Category:Invisibility Users Category:Regeneration
-        Users Category:Superheroes Category:Enhanced Senses Users Category:Extrasensory
-        Perception Users Category:Hackers Category:Transformation Users Category:Attack
-        Reflection Users Category:Possession Users Category:Forcefield Users Category:Self-Sustenance
-        Users Category:Justice League Members Category:Young Justice Members Category:Electricity
-        Users Category:Geniuses'
-      source_id: vsbattles-red-tornado
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: true
-    identity_score: 100
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
     variant_match: true
     duplicate_key: vsbattles.fandom.com|red tornado post crisis|9577778
     retryable: false
@@ -1886,11 +1696,11 @@ repair:
       crisis steelavenger99|297572
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-red-tornado-comics
-    url: https://vsbattles.fandom.com/wiki/Red_Tornado_%28comics%29
+  - source_id: vsbattles-red-tornado
+    url: https://vsbattles.fandom.com/wiki/Red_Tornado
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id015
+    extracted_fields: &id012
     - attack_potency
     - durability
     - intelligence
@@ -1932,7 +1742,165 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id016
+    allowed_fields: &id013
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: physically, with Air Manipulation
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Air Manipulation, Electricity Manipulation
+        and Weather Manipulation in his elemental form (Can control the wind lightning
+        and rain at will), Flight, Forcefield Creation, Enhanced Senses, Extrasensory
+        Perception, Elemental Intangibility (Can form a body made of nothing but air),
+        Technology Manipulation, Hacking, Transformation, Invisibility, Attack Reflection,
+        Regeneration (Low-Godly; Can form a new body from air so long as his mind
+        and spirit still exist), Self-Sustenance (Types 1 and 2), Possession of machines,
+        Resistance to Telepathy (Resisted Despero's telepathy), Weather Manipulation,
+        Air Manipulation and Electricity Manipulation (As he is one with the air and
+        lightning, he should have resistance to these)
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Unknown physically, Low Complex Multiverse level with Air Manipulation
+        (Created winds too powerful for an Amazo with the powers of the entire main
+        Justice League to overcome, blasted the entire Crime Syndicate away with one
+        attack, overpowered Despero with his air blasts)
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ (Outsped Black Racer and stated by Jay Garrick to be faster
+        than himself)
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Complex Multiverse level (Survived a beating from Despero, can take
+        attacks from Superman and Superboy)
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman due to being an android
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Hundreds of Kilometers with air manipulation; Planetary as the Wind Elemental
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: None
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Extraordinary Genius (His memory contains at least hundreds of millions
+        of terabytes worth of information, including such from the Justice League's
+        databanks and records. He was also able to reverse-engineer technology that
+        functioned based on different laws of physics than the regular universe)
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Can be shut down if a fail-safe device on his neck is hit hard enough,
+        vulnerable to being hacked and reprogrammed. Loses these weaknesses in his
+        elemental form. Note: Before making any changes to this page, please read
+        and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
+        Victories: Losses: Inconclusive: Category:Characters Category:DC Comics Category:Comic
+        Book Characters Category:Good Characters Category:Heroes Category:Androids
+        Category:Technopaths Category:Air Users Category:Flight Users Category:Weather
+        Users Category:Technology Users Category:Invisibility Users Category:Regeneration
+        Users Category:Superheroes Category:Enhanced Senses Users Category:Extrasensory
+        Perception Users Category:Hackers Category:Transformation Users Category:Attack
+        Reflection Users Category:Possession Users Category:Forcefield Users Category:Self-Sustenance
+        Users Category:Justice League Members Category:Young Justice Members Category:Electricity
+        Users Category:Geniuses'
+      source_id: vsbattles-red-tornado
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 100
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|red tornado post crisis|9577778
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-red-tornado-comics
+    url: https://vsbattles.fandom.com/wiki/Red_Tornado_%28comics%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id014
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Red Tornado (Post-Crisis)
+    source_type: mediawiki
+    revision_id: '9577778'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4741
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id015
     - tier
     - attack_potency
     - speed
@@ -1945,7 +1913,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{Unknown}} physically, {{Low 1-C}} with Air Manipulation'
+      value: physically, with Air Manipulation
       source_id: vsbattles-red-tornado-comics
       provider_id: vsbattles
       authority: high
@@ -2020,8 +1988,7 @@ repair:
         vulnerable to being hacked and reprogrammed. Loses these weaknesses in his
         elemental form. Note: Before making any changes to this page, please read
         and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions|Red Tornado Post-Crisis|Red
-        Tornado (Post-Crisis)}} Category:Characters Category:DC Comics Category:Comic
+        Victories: Losses: Inconclusive: Category:Characters Category:DC Comics Category:Comic
         Book Characters Category:Good Characters Category:Heroes Category:Androids
         Category:Technopaths Category:Air Users Category:Flight Users Category:Weather
         Users Category:Technology Users Category:Invisibility Users Category:Regeneration
@@ -2053,11 +2020,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Red_Tornado_(Post-Crisis)
     title: Red Tornado (Post-Crisis)
     rank: 105
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2074,11 +2041,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Red_Tornado_More_DC
     title: Red Tornado (Post-Crisis)
     rank: 105
-    extracted_fields: *id009
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2095,11 +2062,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Red_Tornado_%28More_DC%29
     title: Red Tornado (Post-Crisis)
     rank: 105
-    extracted_fields: *id011
+    extracted_fields: *id010
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id011
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2116,11 +2083,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Red_Tornado
     title: Red Tornado (Post-Crisis)
     rank: 105
-    extracted_fields: *id013
+    extracted_fields: *id012
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id014
+    allowed_fields: *id013
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2137,11 +2104,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Red_Tornado_%28comics%29
     title: Red Tornado (Post-Crisis)
     rank: 105
-    extracted_fields: *id015
+    extracted_fields: *id014
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id016
+    allowed_fields: *id015
     rejection_reason: ''
     identity_match: true
     identity_score: 100

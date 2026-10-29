@@ -4,23 +4,14 @@ name: Shin
 franchise: Dorohedoro
 category: anime
 aliases: &id001 []
-profile_type: needs_review
-status: needs_review
-battle_eligible: false
+profile_type: auto_evidence_profile
+status: provisional
+battle_eligible: true
 generation:
   generated_at: '2026-09-22T20:07:34Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.35
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_powers_and_abilities
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons: []
 identity:
   canonical_name: Shin
   franchise: Dorohedoro
@@ -107,42 +98,6 @@ sources:
 - id: vsbattles-shin-dorohedoro
   provider_id: vsbattles
   source_type: mediawiki
-  title: Shin Dorohedoro
-  url: https://vsbattles.fandom.com/wiki/Shin_Dorohedoro
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-shin-dorohedoro
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Shin Dorohedoro
-  url: https://character-stats-and-profiles.fandom.com/wiki/Shin_Dorohedoro
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-shin-dorohedoro
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Shin (Dorohedoro)
   url: https://vsbattles.fandom.com/wiki/Shin_%28Dorohedoro%29
   authority: high
@@ -178,17 +133,25 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least physically, with magic
+    source_ids:
+    - vsbattles-shin-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least Wall level physically (Able to kill and rip apart humans with ease,
+      overpowered Kaimen and ripped his head off), Unknown with magic
+    source_ids:
+    - vsbattles-shin-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Peak Human with Subsonic combat speeds and reactions (Can easily evade point-blank
+      gunfire and could react to Kai, though Kai was going easy)
+    source_ids:
+    - vsbattles-shin-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -198,27 +161,264 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Wall level
+    source_ids:
+    - vsbattles-shin-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Very High
+    source_ids:
+    - vsbattles-shin-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Extended Melee (with Hammer), Tens of Kilometers (via magic)
+    source_ids:
+    - vsbattles-shin-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Tactically Gifted, was able to single-handedly force the Hole's Militia
+      to dissolve in a matter of 2 years and is very gifted in sizing up opponents,
+      often working as the voice of reason to balance his partner, Noi. Was capable
+      of outsmarting Crosseyes, an organization of people who train to counter magic
+      users.
+    source_ids:
+    - vsbattles-shin-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-shin-dorohedoro
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-durability-negation-via-magic
+  name: Durability Negation (via Magic)
+  description: Durability Negation (via Magic)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-martial-arts
+  name: Martial Arts
+  description: Martial Arts
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-regeneration-mid-low
+  name: Regeneration (Mid-Low)
+  description: Regeneration (Mid-Low)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-telepathy-only-with-someone-who-has-made-a-partnership-with
+  name: Telepathy (Only with someone who has made a partnership with him)
+  description: Telepathy (Only with someone who has made a partnership with him)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - mind_control
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-magic-contact-with-the-smoke-cuts-anything-to-pieces-and-ig
+  name: Magic (Contact with the smoke cuts anything to pieces and ignores durability)
+  description: Magic (Contact with the smoke cuts anything to pieces and ignores durability)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_contact
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight-via-broom
+  name: Flight (via broom)
+  description: Flight (via broom)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-life-manipulation-low-end-can-mutilate-people-and-inflict-n
+  name: Life Manipulation (Low end, can mutilate people and inflict normally fatal
+    wounds without killing them)
+  description: Life Manipulation (Low end, can mutilate people and inflict normally
+    fatal wounds without killing them)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-like-all-magic-users
+  name: Like all magic users
+  description: Like all magic users
+  source_ids: &id003
+  - vsbattles-shin-dorohedoro
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-shin-s-vulnerable-if-left-in-hole-s-rain-for-extended-periods-of-time
+  name: Shin's vulnerable if left in Hole's Rain for extended periods of time
+  description: Shin's vulnerable if left in Hole's Rain for extended periods of time
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-though-he-won-t-die-because-he-s-half-human
+  name: though he won't die because he's half-human
+  description: though he won't die because he's half-human
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-becoming-greatly-weakened-instead-notable-attacks-techniques
+  name: 'becoming greatly weakened instead. Notable Attacks/Techniques:'
+  description: 'becoming greatly weakened instead. Notable Attacks/Techniques:'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-magic-smoke-his-magic-allows-him-to-slice-people-and-objects-into-man
+  name: 'Magic Smoke: His magic allows him to slice people and objects into many different
+    pieces. Though this doesn''t kill the t'
+  description: 'Magic Smoke: His magic allows him to slice people and objects into
+    many different pieces. Though this doesn''t kill the target'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-it-nonetheless-leaves-them-unable-to-fight-back-notable-matchups-vict
+  name: 'it nonetheless leaves them unable to fight back. ==Notable Matchups== Victories:
+    Losses: Inconclusive: Category:Characte'
+  description: 'it nonetheless leaves them unable to fight back. ==Notable Matchups==
+    Victories: Losses: Inconclusive: Category:Characters Category:Dorohedoro Category:Male
+    Characters Category:Manga Characters Category:Magic Users Category:Life Users
+    Category:Durability Negation Users Category:Martial Artists Category:Regeneration
+    Users Category:Telepaths Category:Flight Users'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -230,10 +430,22 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_powers_and_abilities
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: needs_review
+  readiness_state: provisional
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-shin-dorohedoro
+  secondary_disagreement_policy: warning_only
 profile_hash: 1d2a16ef5ec47264fb0738927fa7fe70af131779dfcbb322e973b6dda4fc1ede
 repair:
   attempted_at: '2026-09-25T10:54:54Z'
@@ -1367,18 +1579,6 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Self-explanatory Feats: List all of the character''s amazing feats.
-        Strength feats, speed feats, durability feats, etc. You can judge a person''s
-        power by their feats. Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: Self-explanatory == Explanations (Optional)
-        == Category:Tier 5 Category:Tier 5-A Category:Tier 2 Category:Tier Low 2-C
-        Category:Variable Tier Category:Tier 1 Category:Tier Low 1-C Category:PaperPrince2'
-      source_id: character-stats-profiles-shin-anime
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
     identity_score: 0
     variant_score: 0
     provider_priority: 120

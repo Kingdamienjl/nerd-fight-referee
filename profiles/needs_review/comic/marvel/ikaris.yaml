@@ -4,14 +4,15 @@ name: Ikaris
 franchise: Marvel
 category: comic
 aliases: &id001 []
-profile_type: auto_evidence_profile
-status: provisional
-battle_eligible: true
+profile_type: needs_review
+status: needs_review
+battle_eligible: false
 generation:
   generated_at: '2026-09-22T19:00:39Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.6
-  ineligible_reasons: []
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Ikaris
   franchise: Marvel
@@ -82,7 +83,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Ikaris_(Marvel_Comics)
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -120,42 +121,22 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-ikaris-marvel
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Ikaris Marvel
-  url: https://character-stats-and-profiles.fandom.com/wiki/Ikaris_Marvel
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-ikaris-marvel
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Ikaris (Marvel)
-  url: https://vsbattles.fandom.com/wiki/Ikaris_%28Marvel%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
+  dropped_scalar_fields:
+    tier:
+    - insubstantive
+  dropped_items:
+    standard_equipment:
+    - item: None notable
+      reasons:
+      - explicit_none
+      - placeholder_instruction
+  stripped_items:
+    weaknesses:
+    - item: 'Needs to concentrate in order to activate his Immortality and Regeneration
+        Notes: Before making any changes to this page'
+      kept: Needs to concentrate in order to activate his Immortality and Regeneration
+      reasons:
+      - editor_note_tail
 - id: character-stats-profiles-ikaris-marvel
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -221,6 +202,22 @@ sources:
   - striking_strength
   - tier
   - weaknesses
+  dropped_scalar_fields:
+    tier:
+    - insubstantive
+  dropped_items:
+    standard_equipment:
+    - item: None notable
+      reasons:
+      - explicit_none
+      - placeholder_instruction
+  stripped_items:
+    weaknesses:
+    - item: 'Needs to concentrate in order to activate his Immortality and Regeneration
+        Notes: Before making any changes to this page'
+      kept: Needs to concentrate in order to activate his Immortality and Regeneration
+      reasons:
+      - editor_note_tail
 - id: character-stats-profiles-ikaris-marvel-comics
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -302,37 +299,10 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-ikaris-marvel
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Ikaris Marvel
-  url: https://vsbattles.fandom.com/wiki/Ikaris_Marvel
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-ikaris-earth-616
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Ikaris (Earth-616)
-  url: https://vsbattles.fandom.com/wiki/Ikaris_%28Earth-616%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 power_scale:
   tier:
-    text: '{{5-B}}'
+    text: 'Name: Ikaris, Sovereign Origin: Marvel Comics Gender: Male Age: 20,000
+      years Classification: Prime Eternal'
     source_ids:
     - vsbattles-ikaris-marvel
     confidence: 0.6
@@ -389,7 +359,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id003
+  source_ids: &id002
   - vsbattles-ikaris-marvel
   source_claim_ids: []
   confidence: 0.85
@@ -405,7 +375,7 @@ abilities:
 - id: powers-and-abilities-immortality-type-1
   name: Immortality (Type 1)
   description: Immortality (Type 1)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -420,7 +390,7 @@ abilities:
 - id: powers-and-abilities-regeneration-at-least-mid-low
   name: Regeneration (At least Mid-Low)
   description: Regeneration (At least Mid-Low)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -436,7 +406,7 @@ abilities:
 - id: powers-and-abilities-flight
   name: Flight
   description: Flight
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -451,7 +421,7 @@ abilities:
 - id: powers-and-abilities-energy-projection-from-his-eyes-and-hands
   name: Energy Projection (from his eyes and hands)
   description: Energy Projection (from his eyes and hands)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -466,7 +436,7 @@ abilities:
 - id: powers-and-abilities-enhanced-senses
   name: Enhanced Senses
   description: Enhanced Senses
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -481,7 +451,7 @@ abilities:
 - id: powers-and-abilities-underwater-breathing
   name: Underwater Breathing
   description: Underwater Breathing
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -496,7 +466,7 @@ abilities:
 - id: powers-and-abilities-matter-manipulation
   name: Matter Manipulation
   description: Matter Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -511,7 +481,7 @@ abilities:
 - id: powers-and-abilities-heat-manipulation
   name: Heat Manipulation
   description: Heat Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -528,7 +498,7 @@ abilities:
 - id: powers-and-abilities-explosion-manipulation
   name: Explosion Manipulation
   description: Explosion Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -543,7 +513,7 @@ abilities:
 - id: powers-and-abilities-forcefield-creation-via-matter-manipulation-telekinesis
   name: Forcefield Creation (via matter manipulation) Telekinesis
   description: Forcefield Creation (via matter manipulation) Telekinesis
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -558,7 +528,7 @@ abilities:
 - id: powers-and-abilities-cloth-manipulation-shown-here
   name: Cloth Manipulation (shown here)
   description: Cloth Manipulation (shown here)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -573,7 +543,7 @@ abilities:
 - id: powers-and-abilities-teleportation-shown-here
   name: Teleportation (shown here)
   description: Teleportation (shown here)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -590,7 +560,7 @@ abilities:
 - id: powers-and-abilities-telepathy
   name: Telepathy
   description: Telepathy
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -606,7 +576,7 @@ abilities:
 - id: powers-and-abilities-mind-control-shown-here-aura-and-invisibility-shown-here
   name: Mind Control (shown here) Aura and Invisibility (shown here).
   description: Mind Control (shown here) Aura and Invisibility (shown here).
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -624,7 +594,7 @@ abilities:
     and Heat Manipulation
   description: Resistance to Disease Manipulation, Poison Manipulation, Acid Manipulation
     and Heat Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -643,11 +613,9 @@ summons: []
 resistances: []
 weaknesses:
 - id: weaknesses-needs-to-concentrate-in-order-to-activate-his-immortality-and-regener
-  name: 'Needs to concentrate in order to activate his Immortality and Regeneration
-    Notes: Before making any changes to this page'
-  description: 'Needs to concentrate in order to activate his Immortality and Regeneration
-    Notes: Before making any changes to this page'
-  source_ids: &id004
+  name: Needs to concentrate in order to activate his Immortality and Regeneration
+  description: Needs to concentrate in order to activate his Immortality and Regeneration
+  source_ids: &id003
   - vsbattles-ikaris-marvel
   source_claim_ids: []
   confidence: 0.85
@@ -662,26 +630,12 @@ weaknesses:
     method: deterministic_keyword_rules
     metadata_only: true
 - id: weaknesses-please-read-and-follow-the-power-scaling-rules-for-marvel-and-dc-comi
-  name: 'please read and follow the Power-scaling Rules for Marvel and DC Comics.
-    ==Notable Matchups== Victories: Losses: Inconcl'
-  description: 'please read and follow the Power-scaling Rules for Marvel and DC Comics.
-    ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:Characters
-    Category:Marvel Comics Category:Adults Category:Aura Users Category:Cloth Users
-    Category:Comic Book Characters Category:Energy Users Category:Enhanced Senses
-    Users Category:Eternals Category:Explosion Users Category:Flight Users Category:Forcefield
-    Users Category:Good Characters Category:Heroes Category:Immortals Category:Invisibility
-    Users Category:Leaders Category:Male Characters Category:Married Characters Category:Mind
-    Users Category:Parents Category:Primary Protagonists Category:Protagonists Category:Regeneration
-    Users Category:Telekinesis Users Category:Telepaths Category:Teleportation Users
-    Category:Temperature Users Category:Underwater Breathing Users Category:Warriors
-    Category:Widowed Characters'
-  source_ids: *id004
+  name: please read and follow the Power-scaling Rules for Marvel and DC Comics.
+  description: please read and follow the Power-scaling Rules for Marvel and DC Comics.
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
-  tags:
-  - battlefield_relocation
-  - dimensional_travel
-  - regeneration
+  tags: []
   targets: []
   activation_requirements: []
   counters: []
@@ -715,13 +669,13 @@ review:
   - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: provisional
+  readiness_state: needs_review
   profile_state: auto_evidence_profile
   primary_source_id: vsbattles-ikaris-marvel
   secondary_disagreement_policy: warning_only
 profile_hash: fed311852a64afd17830ccf81a15b6ec75080e620a6248ad16150af800747920
 repair:
-  attempted_at: '2026-09-25T23:24:59Z'
+  attempted_at: '2026-10-25T17:33:19Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -730,7 +684,6 @@ repair:
   - range
   - speed
   - stamina
-  - tier
   - weaknesses
   unresolved_fields: []
   source_attempts:
@@ -738,7 +691,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Ikaris_(Marvel_Comics)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id005
+    extracted_fields: &id004
     - attack_potency
     - durability
     - intelligence
@@ -746,8 +699,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Ikaris (Marvel Comics)
     source_type: mediawiki
@@ -780,7 +731,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id006
+    allowed_fields: &id005
     - attack_potency
     - speed
     - durability
@@ -790,19 +741,13 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{5-B}}'
-      source_id: vsbattles-ikaris-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Immortality (Type 1), Regeneration
         (At least Mid-Low), Flight, Energy Projection (from his eyes and hands), Enhanced
         Senses, Underwater Breathing, Matter Manipulation, Heat Manipulation, Explosion
         Manipulation, Forcefield Creation (via matter manipulation) Telekinesis, Cloth
-        Manipulation (shown here),Teleportation (shown here), Telepathy, Mind Control
-        (shown here) Aura and Invisibility (shown here). Resistance to Disease Manipulation,
+        Manipulation (shown here), Teleportation (shown here), Telepathy, Mind Control
+        (shown here) Aura and Invisibility (shown here)., Resistance to Disease Manipulation,
         Poison Manipulation, Acid Manipulation and Heat Manipulation
       source_id: vsbattles-ikaris-marvel
       provider_id: vsbattles
@@ -842,12 +787,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-ikaris-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Likely Above Average (Lived for over 20,000 years, is a Prime Eternal)
       source_id: vsbattles-ikaris-marvel
@@ -855,20 +794,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Needs to concentrate in order to activate his Immortality and Regeneration
-        Notes: Before making any changes to this page, please read and follow the
-        Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{discussions|Ikaris Marvel Comics|Ikaris
-        (Marvel Comics)}} Category:Characters Category:Marvel Comics Category:Adults
-        Category:Aura Users Category:Cloth Users Category:Comic Book Characters Category:Energy
-        Users Category:Enhanced Senses Users Category:Eternals Category:Explosion
-        Users Category:Flight Users Category:Forcefield Users Category:Good Characters
-        Category:Heroes Category:Immortals Category:Invisibility Users Category:Leaders
-        Category:Male Characters Category:Married Characters Category:Mind Users Category:Parents
-        Category:Primary Protagonists Category:Protagonists Category:Regeneration
-        Users Category:Telekinesis Users Category:Telepaths Category:Teleportation
-        Users Category:Temperature Users Category:Underwater Breathing Users Category:Warriors
-        Category:Widowed Characters'
+      value: Needs to concentrate in order to activate his Immortality and Regeneration,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics.
       source_id: vsbattles-ikaris-marvel
       provider_id: vsbattles
       authority: high
@@ -896,275 +823,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
-    normalized_page_title: Apocalypse (Canon, Marvel Comics)/SteelAvenger99
-    source_type: mediawiki
-    revision_id: '282537'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4912
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 2-C, likely far higher | 2-A, possibly High 1-B
-      source_id: character-stats-profiles-ikaris-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Genius Intelligence, Regeneration
-        (Low-Mid), Immortality (Type 1 and 3), Self-Sustenance (Types 1, 2 & 3), Psychic
-        Abilities (Flight, Telepathy, Mind Control and Manipulation, Telekinesis,
-        Barrier Creation), Can control his body on a molecular scale (Granting him
-        Shapeshifting and Size Manipulation), Energy Manipulation, Absorption, Teleportation,
-        Technology Manipulation, Resurrection, Corruption
-      source_id: character-stats-profiles-ikaris-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: "Low Multiverse level\u200B, likely far higher (Harmed young Thor and\
-        \ nearly removed his head from his spine, has harmed the Hulk and brings him\
-        \ to his knees, defeated savage Hulk, who could harm Onslaught, beats Ikaris,\
-        \ who is nearly comparable to Thor) | Multiverse level+, possibly High Hyperverse\
-        \ level (Said to have increased power to rival or exceed a Celestial's after\
-        \ absorbing some of Earth's strongest mutants)"
-      source_id: character-stats-profiles-ikaris-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Likely Immeasurable (Via Scaling from Thor), with Massively FTL+ reaction
-        speed (Easily caught Quicksilver)
-      source_id: character-stats-profiles-ikaris-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Multiverse level, likely far higher, Immortality and regeneration
-        make him difficult to kill | Multiverse level+, possibly High Hyperverse level
-      source_id: character-stats-profiles-ikaris-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Jarnbjorn can cut through Celestial technology, otherwise none notable
-        Category:Tier 2 Category:Tier 1 Category:SteelAvenger99
-      source_id: character-stats-profiles-ikaris-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|apocalypse canon marvel
-      comics steelavenger99|282537
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-ikaris-marvel-comics
-    url: https://vsbattles.fandom.com/wiki/Ikaris_%28Marvel_Comics%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Ikaris (Marvel Comics)
-    source_type: mediawiki
-    revision_id: '8571969'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4635
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 155
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id008
-    - tier
-    - attack_potency
-    - speed
-    - durability
-    - range
-    - stamina
-    - intelligence
-    - abilities
-    - equipment
-    - weaknesses
-    field_candidates:
-    - field: tier
-      value: '{{5-B}}'
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Immortality (Type 1), Regeneration
-        (At least Mid-Low), Flight, Energy Projection (from his eyes and hands), Enhanced
-        Senses, Underwater Breathing, Matter Manipulation, Heat Manipulation, Explosion
-        Manipulation, Forcefield Creation (via matter manipulation) Telekinesis, Cloth
-        Manipulation (shown here),Teleportation (shown here), Telepathy, Mind Control
-        (shown here) Aura and Invisibility (shown here). Resistance to Disease Manipulation,
-        Poison Manipulation, Acid Manipulation and Heat Manipulation
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Planet level (Can damage the likes of the Hulk, Red Hulk, Hyperion and
-        Apocalypse. Stated himself to be comparable to Gilgamesh, who was stated to
-        have lifted the Earth,Incredible Hercules #116, June 2008 and a held-back
-        Thor)'
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ combat speed and reactions (Comparable to Apocalypse and
-        Hyperion) with likely Supersonic flight speed (As stated in Marvel Handbooks)
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Planet level (Can take hits from those he harms)
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Unknown with powers
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Likely Above Average (Lived for over 20,000 years, is a Prime Eternal)
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Needs to concentrate in order to activate his Immortality and Regeneration
-        Notes: Before making any changes to this page, please read and follow the
-        Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{discussions|Ikaris Marvel Comics|Ikaris
-        (Marvel Comics)}} Category:Characters Category:Marvel Comics Category:Adults
-        Category:Aura Users Category:Cloth Users Category:Comic Book Characters Category:Energy
-        Users Category:Enhanced Senses Users Category:Eternals Category:Explosion
-        Users Category:Flight Users Category:Forcefield Users Category:Good Characters
-        Category:Heroes Category:Immortals Category:Invisibility Users Category:Leaders
-        Category:Male Characters Category:Married Characters Category:Mind Users Category:Parents
-        Category:Primary Protagonists Category:Protagonists Category:Regeneration
-        Users Category:Telekinesis Users Category:Telepaths Category:Teleportation
-        Users Category:Temperature Users Category:Underwater Breathing Users Category:Warriors
-        Category:Widowed Characters'
-      source_id: vsbattles-ikaris-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: true
-    identity_score: 120
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|ikaris marvel comics|8571969
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-ikaris-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Ikaris_Marvel
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
     normalized_page_title: Makkari (Canon, Marvel Cinematic Universe)/Z's Universe
     source_type: mediawiki
     revision_id: '212678'
@@ -1208,7 +866,7 @@ repair:
     field_candidates:
     - field: tier
       value: At Least 6-A, Possibly Low 5-B to 5-A
-      source_id: character-stats-profiles-ikaris-marvel
+      source_id: character-stats-profiles-ikaris-marvel-comics
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1216,7 +874,7 @@ repair:
       value: Superhuman Physical Characteristics, Inorganic Physiology (Type 1), Air
         Manipulation (via shockwaves), Immortality (Type 1), Regeneration (Low), Energy
         Manipulation, Martial Arts, Resistance to Diseases and Extreme Temperatures
-      source_id: character-stats-profiles-ikaris-marvel
+      source_id: character-stats-profiles-ikaris-marvel-comics
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1227,7 +885,7 @@ repair:
         who could transmute Tiamat even without the Unimind. Whose emergence was causing
         catastrophic worldwide earthquakes, Was going to destroy Earth, and is possibly
         this powerful)
-      source_id: character-stats-profiles-ikaris-marvel
+      source_id: character-stats-profiles-ikaris-marvel-comics
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1238,33 +896,14 @@ repair:
         Which should logically make her faster than Ikaris' travel speed, which can
         fly from the Earth's atmosphere to the sun in seconds. On a higher end, this
         could make her faster than Captain Marvels flight speed, and even Ego's speed.)
-      source_id: character-stats-profiles-ikaris-marvel
+      source_id: character-stats-profiles-ikaris-marvel-comics
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
       value: At Least Continent Level, Possibly Small Planet Level to Large Planet
         Level+ (Survived attacks from Ikaris, who was blood lusted.)
-      source_id: character-stats-profiles-ikaris-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "None Notable Notable Attacks/Techniques: *Shockwave Generation: Makkari\
-        \ is capable of generating sonic booms due to her being able to break the\
-        \ sound barrier. She can also use this offensively, as when during the fight\
-        \ with the Deviants, Makkari's charge and sudden halt generated a strong enough\
-        \ shockwave that she didn\u2019t even touch the Deviant and still it was able\
-        \ to sent it flying a considerable distance. Note: Sersi was able to transmute\
-        \ Tiamat even before he added his power to the Unimind. Evidenced by him making\
-        \ noises indicating he was in pain. The Unimind wasn't active at this point,\
-        \ as when it is active we see them glow, and the Eternals start to levitate,\
-        \ meaning that Sersi was able to transmute Tiamat with only the energy from\
-        \ the initial Unimind, if not by herself since it was Druig that was receiving\
-        \ the amp. All Tiamat did was speed up the process. he was not the sole reason\
-        \ they were able to do it. ==Others== Notable Victories: Notable Losses: Inconclusive\
-        \ Matches: Category:Z's Universe Category:Tier 6 Category:Tier 5"
-      source_id: character-stats-profiles-ikaris-marvel
+      source_id: character-stats-profiles-ikaris-marvel-comics
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1282,11 +921,11 @@ repair:
       universe z s universe|212678
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-ikaris-marvel
-    url: https://vsbattles.fandom.com/wiki/Ikaris_%28Marvel%29
+  - source_id: vsbattles-ikaris-marvel-comics
+    url: https://vsbattles.fandom.com/wiki/Ikaris_%28Marvel_Comics%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -1294,8 +933,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Ikaris (Marvel Comics)
     source_type: mediawiki
@@ -1328,31 +965,27 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields: &id007
+    - tier
     - attack_potency
     - speed
     - durability
-    - powers_and_abilities
-    - weaknesses
     - range
     - stamina
     - intelligence
+    - abilities
+    - equipment
+    - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{5-B}}'
-      source_id: vsbattles-ikaris-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Immortality (Type 1), Regeneration
         (At least Mid-Low), Flight, Energy Projection (from his eyes and hands), Enhanced
         Senses, Underwater Breathing, Matter Manipulation, Heat Manipulation, Explosion
         Manipulation, Forcefield Creation (via matter manipulation) Telekinesis, Cloth
-        Manipulation (shown here),Teleportation (shown here), Telepathy, Mind Control
-        (shown here) Aura and Invisibility (shown here). Resistance to Disease Manipulation,
+        Manipulation (shown here), Teleportation (shown here), Telepathy, Mind Control
+        (shown here) Aura and Invisibility (shown here)., Resistance to Disease Manipulation,
         Poison Manipulation, Acid Manipulation and Heat Manipulation
-      source_id: vsbattles-ikaris-marvel
+      source_id: vsbattles-ikaris-marvel-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1361,63 +994,45 @@ repair:
         Apocalypse. Stated himself to be comparable to Gilgamesh, who was stated to
         have lifted the Earth,Incredible Hercules #116, June 2008 and a held-back
         Thor)'
-      source_id: vsbattles-ikaris-marvel
+      source_id: vsbattles-ikaris-marvel-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
       value: Massively FTL+ combat speed and reactions (Comparable to Apocalypse and
         Hyperion) with likely Supersonic flight speed (As stated in Marvel Handbooks)
-      source_id: vsbattles-ikaris-marvel
+      source_id: vsbattles-ikaris-marvel-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
       value: Planet level (Can take hits from those he harms)
-      source_id: vsbattles-ikaris-marvel
+      source_id: vsbattles-ikaris-marvel-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
       value: Superhuman
-      source_id: vsbattles-ikaris-marvel
+      source_id: vsbattles-ikaris-marvel-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
       value: Standard Melee Range, Unknown with powers
-      source_id: vsbattles-ikaris-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-ikaris-marvel
+      source_id: vsbattles-ikaris-marvel-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
       value: Likely Above Average (Lived for over 20,000 years, is a Prime Eternal)
-      source_id: vsbattles-ikaris-marvel
+      source_id: vsbattles-ikaris-marvel-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Needs to concentrate in order to activate his Immortality and Regeneration
-        Notes: Before making any changes to this page, please read and follow the
-        Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{discussions|Ikaris Marvel Comics|Ikaris
-        (Marvel Comics)}} Category:Characters Category:Marvel Comics Category:Adults
-        Category:Aura Users Category:Cloth Users Category:Comic Book Characters Category:Energy
-        Users Category:Enhanced Senses Users Category:Eternals Category:Explosion
-        Users Category:Flight Users Category:Forcefield Users Category:Good Characters
-        Category:Heroes Category:Immortals Category:Invisibility Users Category:Leaders
-        Category:Male Characters Category:Married Characters Category:Mind Users Category:Parents
-        Category:Primary Protagonists Category:Protagonists Category:Regeneration
-        Users Category:Telekinesis Users Category:Telepaths Category:Teleportation
-        Users Category:Temperature Users Category:Underwater Breathing Users Category:Warriors
-        Category:Widowed Characters'
-      source_id: vsbattles-ikaris-marvel
+      value: Needs to concentrate in order to activate his Immortality and Regeneration,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics.
+      source_id: vsbattles-ikaris-marvel-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1444,7 +1059,6 @@ repair:
     - powers_and_abilities
     - speed
     - tier
-    - weaknesses
     normalized_page_title: Makkari (Canon, Marvel Cinematic Universe)/Z's Universe
     source_type: mediawiki
     revision_id: '212678'
@@ -1525,25 +1139,6 @@ repair:
     - field: durability
       value: At Least Continent Level, Possibly Small Planet Level to Large Planet
         Level+ (Survived attacks from Ikaris, who was blood lusted.)
-      source_id: character-stats-profiles-ikaris-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "None Notable Notable Attacks/Techniques: *Shockwave Generation: Makkari\
-        \ is capable of generating sonic booms due to her being able to break the\
-        \ sound barrier. She can also use this offensively, as when during the fight\
-        \ with the Deviants, Makkari's charge and sudden halt generated a strong enough\
-        \ shockwave that she didn\u2019t even touch the Deviant and still it was able\
-        \ to sent it flying a considerable distance. Note: Sersi was able to transmute\
-        \ Tiamat even before he added his power to the Unimind. Evidenced by him making\
-        \ noises indicating he was in pain. The Unimind wasn't active at this point,\
-        \ as when it is active we see them glow, and the Eternals start to levitate,\
-        \ meaning that Sersi was able to transmute Tiamat with only the energy from\
-        \ the initial Unimind, if not by herself since it was Druig that was receiving\
-        \ the amp. All Tiamat did was speed up the process. he was not the sole reason\
-        \ they were able to do it. ==Others== Notable Victories: Notable Losses: Inconclusive\
-        \ Matches: Category:Z's Universe Category:Tier 6 Category:Tier 5"
       source_id: character-stats-profiles-ikaris-marvel
       provider_id: character_stats_profiles
       authority: high
@@ -1608,7 +1203,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Ikaris_Marvel
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id008
     - attack_potency
     - durability
     - intelligence
@@ -1616,8 +1211,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Ikaris (Marvel Comics)
     source_type: mediawiki
@@ -1650,7 +1243,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -1660,19 +1253,13 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{5-B}}'
-      source_id: vsbattles-ikaris-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Immortality (Type 1), Regeneration
         (At least Mid-Low), Flight, Energy Projection (from his eyes and hands), Enhanced
         Senses, Underwater Breathing, Matter Manipulation, Heat Manipulation, Explosion
         Manipulation, Forcefield Creation (via matter manipulation) Telekinesis, Cloth
-        Manipulation (shown here),Teleportation (shown here), Telepathy, Mind Control
-        (shown here) Aura and Invisibility (shown here). Resistance to Disease Manipulation,
+        Manipulation (shown here), Teleportation (shown here), Telepathy, Mind Control
+        (shown here) Aura and Invisibility (shown here)., Resistance to Disease Manipulation,
         Poison Manipulation, Acid Manipulation and Heat Manipulation
       source_id: vsbattles-ikaris-marvel
       provider_id: vsbattles
@@ -1712,8 +1299,236 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
+    - field: intelligence
+      value: Likely Above Average (Lived for over 20,000 years, is a Prime Eternal)
+      source_id: vsbattles-ikaris-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Needs to concentrate in order to activate his Immortality and Regeneration,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics.
+      source_id: vsbattles-ikaris-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 120
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|ikaris marvel comics|8571969
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-ikaris-marvel
+    url: https://character-stats-and-profiles.fandom.com/wiki/Ikaris_Marvel
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: Makkari (Canon, Marvel Cinematic Universe)/Z's Universe
+    source_type: mediawiki
+    revision_id: '212678'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4989
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At Least 6-A, Possibly Low 5-B to 5-A
+      source_id: character-stats-profiles-ikaris-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Inorganic Physiology (Type 1), Air
+        Manipulation (via shockwaves), Immortality (Type 1), Regeneration (Low), Energy
+        Manipulation, Martial Arts, Resistance to Diseases and Extreme Temperatures
+      source_id: character-stats-profiles-ikaris-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At Least Continent Level, Possibly Small Planet Level to Large Planet
+        Level+ (Comparable to the other Eternals, managed to harm Ikaris, with Ikaris
+        being the most powerful Eternal still alive at that point. Comparable to Sersi,
+        who could transmute Tiamat even without the Unimind. Whose emergence was causing
+        catastrophic worldwide earthquakes, Was going to destroy Earth, and is possibly
+        this powerful)
+      source_id: character-stats-profiles-ikaris-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least FTL+, Possibly Massively FTL+ (Blitzed Ikaris, and easily avoided
+        his heat vision. Casually ran around the Earth. Travelled from Rio de Janeiro
+        to Glenfinnan in 3 seconds. Stated to be the fastest person in the universe.
+        Which should logically make her faster than Ikaris' travel speed, which can
+        fly from the Earth's atmosphere to the sun in seconds. On a higher end, this
+        could make her faster than Captain Marvels flight speed, and even Ego's speed.)
+      source_id: character-stats-profiles-ikaris-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At Least Continent Level, Possibly Small Planet Level to Large Planet
+        Level+ (Survived attacks from Ikaris, who was blood lusted.)
+      source_id: character-stats-profiles-ikaris-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|makkari canon marvel cinematic
+      universe z s universe|212678
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-ikaris-marvel
+    url: https://vsbattles.fandom.com/wiki/Ikaris_%28Marvel%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id010
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - weaknesses
+    normalized_page_title: Ikaris (Marvel Comics)
+    source_type: mediawiki
+    revision_id: '8571969'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4635
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 155
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id011
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Type 1), Regeneration
+        (At least Mid-Low), Flight, Energy Projection (from his eyes and hands), Enhanced
+        Senses, Underwater Breathing, Matter Manipulation, Heat Manipulation, Explosion
+        Manipulation, Forcefield Creation (via matter manipulation) Telekinesis, Cloth
+        Manipulation (shown here), Teleportation (shown here), Telepathy, Mind Control
+        (shown here) Aura and Invisibility (shown here)., Resistance to Disease Manipulation,
+        Poison Manipulation, Acid Manipulation and Heat Manipulation
+      source_id: vsbattles-ikaris-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Planet level (Can damage the likes of the Hulk, Red Hulk, Hyperion and
+        Apocalypse. Stated himself to be comparable to Gilgamesh, who was stated to
+        have lifted the Earth,Incredible Hercules #116, June 2008 and a held-back
+        Thor)'
+      source_id: vsbattles-ikaris-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ combat speed and reactions (Comparable to Apocalypse and
+        Hyperion) with likely Supersonic flight speed (As stated in Marvel Handbooks)
+      source_id: vsbattles-ikaris-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Planet level (Can take hits from those he harms)
+      source_id: vsbattles-ikaris-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-ikaris-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, Unknown with powers
       source_id: vsbattles-ikaris-marvel
       provider_id: vsbattles
       authority: high
@@ -1725,20 +1540,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Needs to concentrate in order to activate his Immortality and Regeneration
-        Notes: Before making any changes to this page, please read and follow the
-        Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{discussions|Ikaris Marvel Comics|Ikaris
-        (Marvel Comics)}} Category:Characters Category:Marvel Comics Category:Adults
-        Category:Aura Users Category:Cloth Users Category:Comic Book Characters Category:Energy
-        Users Category:Enhanced Senses Users Category:Eternals Category:Explosion
-        Users Category:Flight Users Category:Forcefield Users Category:Good Characters
-        Category:Heroes Category:Immortals Category:Invisibility Users Category:Leaders
-        Category:Male Characters Category:Married Characters Category:Mind Users Category:Parents
-        Category:Primary Protagonists Category:Protagonists Category:Regeneration
-        Users Category:Telekinesis Users Category:Telepaths Category:Teleportation
-        Users Category:Temperature Users Category:Underwater Breathing Users Category:Warriors
-        Category:Widowed Characters'
+      value: Needs to concentrate in order to activate his Immortality and Regeneration,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics.
       source_id: vsbattles-ikaris-marvel
       provider_id: vsbattles
       authority: high
@@ -1762,11 +1565,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Ikaris_(Marvel_Comics)
     title: Ikaris (Marvel Comics)
     rank: 155
-    extracted_fields: *id005
+    extracted_fields: *id004
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id006
+    allowed_fields: *id005
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -1778,16 +1581,18 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|ikaris marvel comics|8571969
   - source_id: vsbattles-ikaris-marvel-comics
     url: https://vsbattles.fandom.com/wiki/Ikaris_%28Marvel_Comics%29
     title: Ikaris (Marvel Comics)
     rank: 155
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -1799,37 +1604,18 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|ikaris marvel comics|8571969
-  - source_id: vsbattles-ikaris-marvel
-    url: https://vsbattles.fandom.com/wiki/Ikaris_%28Marvel%29
-    title: Ikaris (Marvel Comics)
-    rank: 155
-    extracted_fields: *id009
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: true
-    identity_score: 120
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|ikaris marvel comics|8571969
   - source_id: vsbattles-ikaris-marvel
     url: https://vsbattles.fandom.com/wiki/Ikaris_Marvel
     title: Ikaris (Marvel Comics)
     rank: 155
-    extracted_fields: *id011
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -1841,6 +1627,31 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|ikaris marvel comics|8571969
+  - source_id: vsbattles-ikaris-marvel
+    url: https://vsbattles.fandom.com/wiki/Ikaris_%28Marvel%29
+    title: Ikaris (Marvel Comics)
+    rank: 155
+    extracted_fields: *id010
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id011
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 120
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|ikaris marvel comics|8571969
   chosen_source_id: null
   failure_reasons:

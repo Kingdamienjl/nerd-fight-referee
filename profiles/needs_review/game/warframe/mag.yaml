@@ -4,14 +4,15 @@ name: Mag
 franchise: Warframe
 category: game
 aliases: &id001 []
-profile_type: auto_evidence_profile
-status: provisional
-battle_eligible: true
+profile_type: needs_review
+status: needs_review
+battle_eligible: false
 generation:
   generated_at: '2026-09-22T19:19:35Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.8
-  ineligible_reasons: []
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Mag
   franchise: Warframe
@@ -93,6 +94,22 @@ sources:
   - abilities
   - equipment
   - weaknesses
+  dropped_scalar_fields:
+    range:
+    - markup_residue
+  dropped_items:
+    standard_equipment:
+    - item: and many other abilities granted by its mods.
+      reasons:
+      - conjunction_orphan
+    weaknesses:
+    - item: Advanced
+      reasons:
+      - weakness_fragment
+    powers_and_abilities:
+    - item: and many other abilities granted by its mods.
+      reasons:
+      - conjunction_orphan
 - id: vsbattles-mag
   provider_id: vsbattles
   source_type: mediawiki
@@ -136,7 +153,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Mag
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -175,42 +192,22 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-mag-warframe
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Mag Warframe
-  url: https://character-stats-and-profiles.fandom.com/wiki/Mag_Warframe
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-mag-warframe
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Mag (Warframe)
-  url: https://vsbattles.fandom.com/wiki/Mag_%28Warframe%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
+  dropped_scalar_fields:
+    range:
+    - markup_residue
+  dropped_items:
+    standard_equipment:
+    - item: and many other abilities granted by its mods.
+      reasons:
+      - conjunction_orphan
+    weaknesses:
+    - item: Advanced
+      reasons:
+      - weakness_fragment
+    powers_and_abilities:
+    - item: and many other abilities granted by its mods.
+      reasons:
+      - conjunction_orphan
 - id: character-stats-profiles-mag-warframe
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -265,21 +262,10 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-mag-warframe
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Mag Warframe
-  url: https://vsbattles.fandom.com/wiki/Mag_Warframe
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 power_scale:
   tier:
-    text: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher with
-      Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes,
-      far higher with Tauron Strikes'
+    text: Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with Tauron
+      Strikes
     source_ids:
     - vsbattles-mag-warframe
     confidence: 0.6
@@ -305,9 +291,7 @@ power_scale:
       schools created by mixing their techniques with Sentient teachings, resulting
       in a massive power increase. Tauron Strikes can completely destroy the makvos
       cannon in a single hit, while even fully modded weapons needed to target the
-      cannons weak-points in order to do any damageWarframe: The Old Peace(2025))
-      | Small Town level+, Likely City level (Stronger than their base variant), higher
-      with Mods and Arcanes, far higher with Tauron Strikes (Same as before)'
+      cannons weak-points in order to do any damageWarframe: The Old Peace(2025))'
     source_ids:
     - vsbattles-mag-warframe
     confidence: 0.6
@@ -316,8 +300,7 @@ power_scale:
     text: Massively Hypersonic (Can fight evenly against Volt), possibly Relativistic+
       or higher reactions/combat speed (Can deflect weapons such as Opticor and Glaxion
       at a close distance, the former stated to be able to fire a blast of "light
-      energy") | Massively Hypersonic, at least Relativistic+ or higher reactions/combat
-      speed (Superior to their normal counterparts)
+      energy")
     source_ids:
     - vsbattles-mag-warframe
     confidence: 0.6
@@ -327,21 +310,19 @@ power_scale:
       directly into the capacitor towers around it''s arena. Should be comparable
       to Excalibur Prime who could withstand the force of the Hunhullus stomping him
       into the groundWarframe: The Old Peace(2025)1,746,445.32 metric tons)'
-    source_ids: &id003
+    source_ids: &id002
     - mediawiki-315599
     confidence: 0.8
   striking_strength:
     text: Small Town level+, likely City level (Can harm those comparable to themselves
-      with punches and kicks) | Small Town level+, Likely City level (Stronger than
-      their base variant), higher with Mods and Arcanes
-    source_ids: *id003
+      with punches and kicks)
+    source_ids: *id002
     confidence: 0.8
   durability:
     text: 'Small Town level+, likely City level (Can trade blows with Sentients like
       Eidolons or the Ropalolyst. Comparable to Excalibur Prime, who survived multiple
       hits from the HunhullusWarframe: The Old Peace(2025)), higher with Mods and
-      Arcanes | Small Town level+, Likely City level (More durable than their base
-      variant), higher with Mods and Arcanes'
+      Arcanes'
     source_ids:
     - vsbattles-mag-warframe
     confidence: 0.6
@@ -366,20 +347,20 @@ power_scale:
     confidence: 0.6
     notes: auto_repair source extraction
   intelligence:
-    text: 'In General= Mindless (Without their Operator piloting them the warframes
-      are simply empty husks), Gifted (While Their Operator is piloting them. Capable
-      of easily completing the numerous missions they receive regardless of the complexity
-      of the task. Additionally, they are able to solve the hall of ascension puzzles,
+    text: 'Mindless (Without their Operator piloting them the warframes are simply
+      empty husks), Gifted (While Their Operator is piloting them. Capable of easily
+      completing the numerous missions they receive regardless of the complexity of
+      the task. Additionally, they are able to solve the hall of ascension puzzles,
       Complex tests made to gauge the agility,power and cunning of the challengers)
-      |-|Combat= The Tenno are immensely skilled warriors, having been made solely
-      to face off against the constantly evolving SentientsWarframe: The Sacrifice(2018)
-      by utilizing not only their many abilities but the numerous weapons they have
-      mastered. Warframes were described as "miracles" on the battlefield, having
-      devastated many sentient strongholdsfrom Browse.wf, a website that compiles
-      and displays internal game data from Warframe. and were the singular reason
-      the empire survived the war. Individual Warframes were also capable of defeating
-      armies of Orokin soldiers,Warframe: Awakening(2020) all of whom would be equipped
-      with the same mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
+      The Tenno are immensely skilled warriors, having been made solely to face off
+      against the constantly evolving SentientsWarframe: The Sacrifice(2018) by utilizing
+      not only their many abilities but the numerous weapons they have mastered. Warframes
+      were described as "miracles" on the battlefield, having devastated many sentient
+      strongholdsfrom Browse.wf, a website that compiles and displays internal game
+      data from Warframe. and were the singular reason the empire survived the war.
+      Individual Warframes were also capable of defeating armies of Orokin soldiers,Warframe:
+      Awakening(2020) all of whom would be equipped with the same mods that made Tenno
+      weapons so powerful.Warframe: The Teacher(2025)'
     source_ids:
     - vsbattles-mag-warframe
     confidence: 0.6
@@ -391,7 +372,7 @@ claims:
   text: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher with
     Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far
     higher with Tauron Strikes'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-315599
   decisive: false
   status: unverified
@@ -423,7 +404,7 @@ claims:
     The Old Peace(2025)) | Small Town level+, Likely City level (Stronger than their
     base variant), higher with Mods and Arcanes, far higher with Tauron Strikes (Same
     as before)'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -436,7 +417,7 @@ claims:
     at a close distance, the former stated to be able to fire a blast of "light energy")
     | Massively Hypersonic, at least Relativistic+ or higher reactions/combat speed
     (Superior to their normal counterparts)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -448,7 +429,7 @@ claims:
     into the capacitor towers around it''s arena. Should be comparable to Excalibur
     Prime who could withstand the force of the Hunhullus stomping him into the groundWarframe:
     The Old Peace(2025)1,746,445.32 metric tons)'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -459,7 +440,7 @@ claims:
   text: Small Town level+, likely City level (Can harm those comparable to themselves
     with punches and kicks) | Small Town level+, Likely City level (Stronger than
     their base variant), higher with Mods and Arcanes
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -472,7 +453,7 @@ claims:
     hits from the HunhullusWarframe: The Old Peace(2025)), higher with Mods and Arcanes
     | Small Town level+, Likely City level (More durable than their base variant),
     higher with Mods and Arcanes'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -482,7 +463,7 @@ claims:
   axis: stamina
   text: Infinite (As a machine she does not experience fatigue, only in the destruction
     of the body is the Operator's link broken)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -497,7 +478,7 @@ claims:
     weapons used by the Tenno have ranges that vary of 300 meters up to 1000 meters
     and their beam weapons typically vary from 10 to 30 meters), Higher with Mods
     {| class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment |-
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -533,7 +514,7 @@ claims:
     produces a concussive burst of energy that stuns anyone in range) **Elytron ***Explosion
     Manipulation (All of Elytron''s abilities fires various explosives of varying
     strength) }}'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -555,7 +536,7 @@ claims:
     the war. Individual Warframes were also capable of defeating armies of Orokin
     soldiers,Warframe: Awakening(2020) all of whom would be equipped with the same
     mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -592,7 +573,7 @@ claims:
     Users Category:Space Survival Users Category:Technology Users Category:Purification
     Users Category:Absorption Users Category:Thread Users Category:Gravity Users Category:Forcefield
     Users Category:Energy Projection Users'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -602,19 +583,345 @@ claims:
   axis: hax
   text: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|
     {{!}}-{{!}}Base'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
   - fan_wiki_single_source
-abilities: []
+abilities:
+- id: powers-and-abilities-warframe-abilities-vary-in-their-effective-range-but-can-be
+  name: (Warframe abilities vary in their effective range but can be increased with
+    use of range mods)
+  description: (Warframe abilities vary in their effective range but can be increased
+    with use of range mods)
+  source_ids: &id004
+  - vsbattles-mag-warframe
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - range_limit
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-varies-from-tens-of-meters-up-to-hundreds-of-meters-with-pr
+  name: Varies from Tens of Meters up to Hundreds of Meters with Primary and Secondary
+    weapons (All ranged ballistic weapons use
+  description: Varies from Tens of Meters up to Hundreds of Meters with Primary and
+    Secondary weapons (All ranged ballistic weapons used by the Tenno have ranges
+    that vary of 300 meters up to 1000 meters and their beam weapons typically vary
+    from 10 to 30 meters)
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - range_limit
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-higher-with-mods
+  name: Higher with Mods {
+  description: Higher with Mods {
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-class-wikitable-mw-collapsible-mw-collapsed-standard-equipm
+  name: class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment
+  description: class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapons-warframes-always-come-equipped-with-a-primary-weapo
+  name: 'Weapons: Warframes always come equipped with a primary weapon'
+  description: 'Weapons: Warframes always come equipped with a primary weapon'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-a-secondary-sidearm
+  name: a secondary sidearm
+  description: a secondary sidearm
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-and-a-melee-weapon-their-weapons-can-vary-wildly-in-form-an
+  name: and a melee weapon. Their weapons can vary wildly in form and function
+  description: and a melee weapon. Their weapons can vary wildly in form and function
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-allowing-warframes-to-always-be-equipped-with-weapons-that-
+  name: 'allowing warframes to always be equipped with weapons that match the threats
+    they have to face. Mods: Mods can be used t'
+  description: 'allowing warframes to always be equipped with weapons that match the
+    threats they have to face. Mods: Mods can be used to increase/alter the function
+    of both a Warframe and their weapons'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-damage-reduction
+  name: Damage reduction
+  description: Damage reduction
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-elemental-resistances
+  name: Elemental resistances
+  description: Elemental resistances
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-and-stat-increases-are-all-benefits-mods-commonly-give-to-a
+  name: 'and Stat increases are all benefits mods commonly give to a Warframe. When
+    weapons can have multiple elements at a time '
+  description: 'and Stat increases are all benefits mods commonly give to a Warframe.
+    When weapons can have multiple elements at a time but some elements will fuse
+    to create more complex forces. 10 mods can be installed at a time on warframes
+    while weapons can only equip 8. Arcanes: Arcanes serve a similar purpose to mods
+    as both provide boosts to Warframe and weapon stats but unlike mods who give their
+    buffs immediately arcanes have conditions that will need to be met before the
+    buff starts. Warframes can equip 2 Arcanes and weapons only get 1. Parazon: The
+    Parazon is a deadly blade concealed in a Warframes wrist that allows them to instantly
+    interface and hack any electronic system'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_hacking
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-official-warframe-wiki
+  name: Official warframe wiki
+  description: Official warframe wiki
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-lotus-jackal-boss-fight-dialogue-grapple-onto-far-off-objec
+  name: Lotus Jackal Boss fight dialogue grapple onto far off objects
+  description: Lotus Jackal Boss fight dialogue grapple onto far off objects
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-intelligence-mindless-without-their-operator-piloting-them-
+  name: '} Intelligence: Mindless (Without their Operator piloting them the warframes
+    are simply empty husks)'
+  description: '} Intelligence: Mindless (Without their Operator piloting them the
+    warframes are simply empty husks)'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - pilot_dependency
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-gifted-while-their-operator-is-piloting-them-capable-of-eas
+  name: Gifted (While Their Operator is piloting them. Capable of easily completing
+    the numerous missions they receive regardles
+  description: Gifted (While Their Operator is piloting them. Capable of easily completing
+    the numerous missions they receive regardless of the complexity of the task. Additionally,
+    they are able to solve the hall of ascension puzzles, Complex tests made to gauge
+    the agility,power and cunning of the challengers) The Tenno are immensely skilled
+    warriors
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - pilot_dependency
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-having-been-made-solely-to-face-off-against-the-constantly-
+  name: 'having been made solely to face off against the constantly evolving SentientsWarframe:
+    The Sacrifice(2018) by utilizing '
+  description: 'having been made solely to face off against the constantly evolving
+    SentientsWarframe: The Sacrifice(2018) by utilizing not only their many abilities
+    but the numerous weapons they have mastered. Warframes were described as "miracles"
+    on the battlefield'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-having-devastated-many-sentient-strongholdsfrom-browse-wf
+  name: having devastated many sentient strongholdsfrom Browse.wf
+  description: having devastated many sentient strongholdsfrom Browse.wf
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-a-website-that-compiles-and-displays-internal-game-data-fro
+  name: 'a website that compiles and displays internal game data from Warframe. and
+    were the singular reason the empire survived '
+  description: a website that compiles and displays internal game data from Warframe.
+    and were the singular reason the empire survived the war. Individual Warframes
+    were also capable of defeating armies of Orokin soldiers
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-warframe-awakening-2020-all-of-whom-would-be-equipped-with-
+  name: 'Warframe: Awakening(2020) all of whom would be equipped with the same mods
+    that made Tenno weapons so powerful.Warframe:'
+  description: 'Warframe: Awakening(2020) all of whom would be equipped with the same
+    mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment:
 - id: standard-equipment-information-analysis-scanners-allow-the-tenno-to-scan-objects
   name: Information Analysis (Scanners allow the tenno to scan objects and creature
     for later analysis)
   description: Information Analysis (Scanners allow the tenno to scan objects and
     creature for later analysis)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -632,7 +939,7 @@ equipment:
   description: Duplication (By deploying a specter the tenno can create a preset clone
     of any warframe. Warframe specters have only the base power of the original and
     will disappear when destroyed)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -649,7 +956,7 @@ equipment:
     for several seconds)
   description: Paralysis Inducement (kinetic siphon traps can halt a target movements
     completely for several seconds)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -664,7 +971,7 @@ equipment:
 - id: standard-equipment-flight
   name: Flight
   description: Flight
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -684,7 +991,7 @@ equipment:
     with their own unique form and function but all are capable of providing the warframe
     with the means to survive in the vacuum of space for long periods and teleportation
     with a range of 800 meters)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -704,7 +1011,7 @@ equipment:
 - id: standard-equipment-amesha
   name: Amesha
   description: Amesha
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -721,7 +1028,7 @@ equipment:
     that draw enemy fire to themselves)
   description: Technology Manipulation (Amesha's 1st and 2nd abilities creates decoy
     drones that draw enemy fire to themselves)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -741,7 +1048,7 @@ equipment:
     a 400 meter radius)
   description: Purification ((Type 3 ;)Amesha's Warding Grace prevents status effects
     in a 400 meter radius)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -759,7 +1066,7 @@ equipment:
   description: Statistics Amplification & Absorption (Amesha's Vengeful Rush absorbs
     damage done to it and convert it to energy that is used to boost its other abilities
     strength, range, and duration)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -775,7 +1082,7 @@ equipment:
 - id: standard-equipment-itzal
   name: Itzal
   description: Itzal
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -793,7 +1100,7 @@ equipment:
   description: Thread Manipulation (Itzal's 1st ability launches a grappling line
     that either drags enemies towards the warframe or pulls the wearer to a stationary
     object)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -810,7 +1117,7 @@ equipment:
     stationary objects invisible)
   description: Invisibility (Itzal's 2nd ability creates a 76 meter cloaking field
     that renders stationary objects invisible)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -827,7 +1134,7 @@ equipment:
     and crushes enemies in a 140 meter radius b
   description: Gravity Manipulation (Itzal's 3rd ability launches a gravity well that
     pulls and crushes enemies in a 140 meter radius before exploding)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -844,7 +1151,7 @@ equipment:
     will attack enemies before exploding when d
   description: Explosion Manipulation (Fighter escort deploys a swarm of small drones
     which will attack enemies before exploding when destroyed)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -859,7 +1166,7 @@ equipment:
 - id: standard-equipment-odonata
   name: Odonata
   description: Odonata
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -877,7 +1184,7 @@ equipment:
   description: Forcefield Creation & Fire Manipulation (Odonata's 1st ability creates
     an energy shield that blocks projectiles. Guns fired from behind the shield will
     do additional heat damage)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -894,7 +1201,7 @@ equipment:
 - id: standard-equipment-explosion-manipulation-odonata-s-3rd-ability-fires-homing-mis
   name: Explosion Manipulation (Odonata's 3rd ability fires homing missiles)
   description: Explosion Manipulation (Odonata's 3rd ability fires homing missiles)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -913,7 +1220,7 @@ equipment:
     that stuns anyone in range)
   description: Energy Projection (Odonata's 4th ability produces a concussive burst
     of energy that stuns anyone in range)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -929,7 +1236,7 @@ equipment:
 - id: standard-equipment-elytron
   name: Elytron
   description: Elytron
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -946,7 +1253,7 @@ equipment:
     of varying strength)
   description: Explosion Manipulation (All of Elytron's abilities fires various explosives
     of varying strength)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -963,229 +1270,14 @@ equipment:
 summons: []
 resistances: []
 weaknesses:
-- id: weaknesses-advanced
-  name: Advanced
-  description: Advanced
-  source_ids: &id005
+- id: weaknesses-concentrated-emps-can-restrict-the-use-of-her-powers
+  name: concentrated EMPs can restrict the use of her powers.
+  description: concentrated EMPs can restrict the use of her powers.
+  source_ids:
   - vsbattles-mag-warframe
   source_claim_ids: []
   confidence: 0.85
   tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-concentrated-emps-can-restrict-the-use-of-her-powers-notable-attacks-
-  name: 'concentrated EMPs can restrict the use of her powers. Notable Attacks/Techniques:'
-  description: 'concentrated EMPs can restrict the use of her powers. Notable Attacks/Techniques:'
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-pull-mag-pulls-her-enemies-towards-her-with-a-strong-magnetic-force-t
-  name: Pull - Mag pulls her enemies towards her with a strong magnetic force to bring
-    them into melee range
-  description: Pull - Mag pulls her enemies towards her with a strong magnetic force
-    to bring them into melee range
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations:
-  - range_limit
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-stunning-and-possibly-incapacitating-them-in-the-process
-  name: stunning and possibly incapacitating them in the process.
-  description: stunning and possibly incapacitating them in the process.
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-polarize-mag-emits-an-energy-pulse-that-depletes-enemy-shields-and-ar
-  name: Polarize - Mag emits an energy pulse that depletes enemy shields and armor
-  description: Polarize - Mag emits an energy pulse that depletes enemy shields and
-    armor
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-creating-deadly-shards-within-the-radius-of-the-pulse
-  name: creating deadly shards within the radius of the pulse
-  description: creating deadly shards within the radius of the pulse
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-allies-who-come-in-contact-with-this-pulse-will-have-their-shields-re
-  name: allies who come in contact with this pulse will have their shields restored.
-  description: allies who come in contact with this pulse will have their shields
-    restored.
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies:
-  - requires_contact
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-magnetize-mag-creates-a-strong-magnetic-field-around-the-target
-  name: Magnetize - Mag creates a strong magnetic field around the target
-  description: Magnetize - Mag creates a strong magnetic field around the target
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-encompassing-them-and-anchoring-them-in-place
-  name: encompassing them and anchoring them in place
-  description: encompassing them and anchoring them in place
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-the-field-will-drag-bullets-and-shards-created-by-polarize-into-the-t
-  name: the field will drag bullets and shards created by Polarize into the target.
-    Upon the death of the target
-  description: the field will drag bullets and shards created by Polarize into the
-    target. Upon the death of the target
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-the-field-destabilizes-and-causes-a-large-explosion
-  name: the field destabilizes and causes a large explosion.
-  description: the field destabilizes and causes a large explosion.
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-crush-mag-magnetizes-the-bones-of-enemies-within-a-radius-and-suspend
-  name: Crush - Mag magnetizes the bones of enemies within a radius and suspends them
-    in the air
-  description: Crush - Mag magnetizes the bones of enemies within a radius and suspends
-    them in the air
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-forcefully-compressing-their-bodies-and-making-them-collapse-on-thems
-  name: 'forcefully compressing their bodies and making them collapse on themselves.
-    ==Notable Matchups== Victories: Losses: Inco'
-  description: 'forcefully compressing their bodies and making them collapse on themselves.
-    ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:Characters
-    Category:Warframe Category:Cyborgs Category:Energy Users Category:Female Characters
-    Category:Flight Users Category:Game Characters Category:Gun Users Category:Immortals
-    Category:Invisibility Users Category:Magnetism Users Category:Martial Artists
-    Category:Matter Users Category:Protagonists Category:Regeneration Users Category:Sword
-    Users Category:Weapon Masters Category:Video Game Characters Category:Weapon Users
-    Category:Vehicular Masters Category:Attack Reflection Users Category:Hackers Category:Stealth
-    Masters Category:Statistics Amplification Users Category:Damage Reduction Users
-    Category:Extrasensory Perception Users Category:Healers Category:Resurrection
-    Users Category:Fire Users Category:Ice Users Category:Poison Users Category:Electricity
-    Users Category:Damage Boost Users Category:Weapon Control Users Category:Power
-    Nullification Users Category:Status Effect Users Category:Explosion Users Category:Corrosion
-    Users Category:Radiation Users Category:Disease Users Category:Information Analysis
-    Users Category:Paralysis Users Category:Duplication Users Category:Teleportation
-    Users Category:Space Survival Users Category:Technology Users Category:Purification
-    Users Category:Absorption Users Category:Thread Users Category:Gravity Users Category:Forcefield
-    Users Category:Energy Projection Users'
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags:
-  - battlefield_relocation
-  - dimensional_travel
-  - heat_attack
-  - regeneration
-  - sonic_or_heat_interaction
-  - technology_dependency
-  - technology_hacking
   targets: []
   activation_requirements: []
   counters: []
@@ -1228,35 +1320,33 @@ review:
   - unresolved_version_scope:speed
   source_errors: []
   notes: []
-  readiness_state: provisional
+  readiness_state: needs_review
   profile_state: auto_evidence_profile
   primary_source_id: vsbattles-mag-warframe
   secondary_disagreement_policy: warning_only
 profile_hash: 94fa4f36587ef1d91fab6cd8c249aabbe6ee2435b49ed938f7481828c55bafa4
 repair:
-  attempted_at: '2026-09-25T21:30:46Z'
+  attempted_at: '2026-10-25T17:39:50Z'
   repaired_fields:
+  - abilities
   - attack_potency
   - durability
   - intelligence
-  - range
   - speed
   - stamina
   - tier
   - weaknesses
-  unresolved_fields:
-  - abilities
+  unresolved_fields: []
   source_attempts:
   - source_id: mediawiki-315599
     url: https://vsbattles.fandom.com/wiki/Mag
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields: &id005
     - attack_potency
     - durability
     - intelligence
     - powers_and_abilities
-    - range
     - speed
     - stamina
     - standard_equipment
@@ -1294,7 +1384,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields: &id006
     - tier
     - attack_potency
     - speed
@@ -1307,50 +1397,9 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher
-        with Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes,
-        far higher with Tauron Strikes'
-      source_id: mediawiki-315599
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|
-        {{!}}-{{!}}Base'
-      source_id: mediawiki-315599
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: '*Information Analysis (Scanners allow the tenno to scan objects and
-        creature for later analysis) *Duplication (By deploying a specter the tenno
-        can create a preset clone of any warframe. Warframe specters have only the
-        base power of the original and will disappear when destroyed) *Paralysis Inducement
-        (kinetic siphon traps can halt a target movements completely for several seconds)
-        *Flight , Teleportation & Space Survival (Archwings are flight harnesses that
-        a warframe can summon in open spaces; there are multiple archwing models each
-        with their own unique form and function but all are capable of providing the
-        warframe with the means to survive in the vacuum of space for long periods
-        and teleportation with a range of 800 meters) **Amesha ***Technology Manipulation
-        (Amesha''s 1st and 2nd abilities creates decoy drones that draw enemy fire
-        to themselves) ***Purification ((Type 3 ;)Amesha''s Warding Grace prevents
-        status effects in a 400 meter radius) ***Statistics Amplification & Absorption
-        (Amesha''s Vengeful Rush absorbs damage done to it and convert it to energy
-        that is used to boost its other abilities strength, range, and duration) **Itzal
-        ***Thread Manipulation (Itzal''s 1st ability launches a grappling line that
-        either drags enemies towards the warframe or pulls the wearer to a stationary
-        object) ***Invisibility (Itzal''s 2nd ability creates a 76 meter cloaking
-        field that renders stationary objects invisible) ***Gravity Manipulation (Itzal''s
-        3rd ability launches a gravity well that pulls and crushes enemies in a 140
-        meter radius before exploding) ***Explosion Manipulation (Fighter escort deploys
-        a swarm of small drones which will attack enemies before exploding when destroyed)
-        **Odonata ***Forcefield Creation & Fire Manipulation (Odonata''s 1st ability
-        creates an energy shield that blocks projectiles. Guns fired from behind the
-        shield will do additional heat damage) ***Explosion Manipulation (Odonata''s
-        3rd ability fires homing missiles) ***Energy Projection (Odonata''s 4th ability
-        produces a concussive burst of energy that stuns anyone in range) **Elytron
-        ***Explosion Manipulation (All of Elytron''s abilities fires various explosives
-        of varying strength) }}'
+      value: Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with Tauron
+        Strikes | Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with
+        Tauron Strikes
       source_id: mediawiki-315599
       provider_id: vsbattles
       authority: high
@@ -1411,69 +1460,87 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Melee weapons; Varies from Tens of Meters up
-        to Hundreds of Meters with Abilities (Warframe abilities vary in their effective
-        range but can be increased with use of range mods), Varies from Tens of Meters
-        up to Hundreds of Meters with Primary and Secondary weapons (All ranged ballistic
-        weapons used by the Tenno have ranges that vary of 300 meters up to 1000 meters
-        and their beam weapons typically vary from 10 to 30 meters), Higher with Mods
-        {| class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment |-
+    - field: standard_equipment
+      value: 'Warframes always come equipped with a primary weapon, a secondary sidearm,
+        and a melee weapon. Their weapons can vary wildly in form and function, allowing
+        warframes to always be equipped with weapons that match the threats they have
+        to face. Mods: Mods can be used to increase/alter the function of both a Warframe
+        and their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects'
       source_id: mediawiki-315599
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: 'In General= Mindless (Without their Operator piloting them the warframes
-        are simply empty husks), Gifted (While Their Operator is piloting them. Capable
-        of easily completing the numerous missions they receive regardless of the
-        complexity of the task. Additionally, they are able to solve the hall of ascension
-        puzzles, Complex tests made to gauge the agility,power and cunning of the
-        challengers) |-|Combat= The Tenno are immensely skilled warriors, having been
-        made solely to face off against the constantly evolving SentientsWarframe:
-        The Sacrifice(2018) by utilizing not only their many abilities but the numerous
-        weapons they have mastered. Warframes were described as "miracles" on the
-        battlefield, having devastated many sentient strongholdsfrom Browse.wf, a
-        website that compiles and displays internal game data from Warframe. and were
-        the singular reason the empire survived the war. Individual Warframes were
-        also capable of defeating armies of Orokin soldiers,Warframe: Awakening(2020)
-        all of whom would be equipped with the same mods that made Tenno weapons so
-        powerful.Warframe: The Teacher(2025)'
+      value: 'Mindless (Without their Operator piloting them the warframes are simply
+        empty husks), Gifted (While Their Operator is piloting them. Capable of easily
+        completing the numerous missions they receive regardless of the complexity
+        of the task. Additionally, they are able to solve the hall of ascension puzzles,
+        Complex tests made to gauge the agility,power and cunning of the challengers)
+        The Tenno are immensely skilled warriors, having been made solely to face
+        off against the constantly evolving SentientsWarframe: The Sacrifice(2018)
+        by utilizing not only their many abilities but the numerous weapons they have
+        mastered. Warframes were described as "miracles" on the battlefield, having
+        devastated many sentient strongholdsfrom Browse.wf, a website that compiles
+        and displays internal game data from Warframe. and were the singular reason
+        the empire survived the war. Individual Warframes were also capable of defeating
+        armies of Orokin soldiers,Warframe: Awakening(2020) all of whom would be equipped
+        with the same mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: mediawiki-315599
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Advanced, concentrated EMPs can restrict the use of her powers. Notable
-        Attacks/Techniques: *Pull - Mag pulls her enemies towards her with a strong
-        magnetic force to bring them into melee range, stunning and possibly incapacitating
-        them in the process. *Polarize - Mag emits an energy pulse that depletes enemy
-        shields and armor, creating deadly shards within the radius of the pulse,
-        allies who come in contact with this pulse will have their shields restored.
-        *Magnetize - Mag creates a strong magnetic field around the target, encompassing
-        them and anchoring them in place, the field will drag bullets and shards created
-        by Polarize into the target. Upon the death of the target, the field destabilizes
-        and causes a large explosion. *Crush - Mag magnetizes the bones of enemies
-        within a radius and suspends them in the air, forcefully compressing their
-        bodies and making them collapse on themselves. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{Scroll box|Content={{Reflist|3}}}}
-        {{Scroll box|Content=}} {{discussions}} Category:Characters Category:Warframe
-        Category:Cyborgs Category:Energy Users Category:Female Characters Category:Flight
-        Users Category:Game Characters Category:Gun Users Category:Immortals Category:Invisibility
-        Users Category:Magnetism Users Category:Martial Artists Category:Matter Users
-        Category:Protagonists Category:Regeneration Users Category:Sword Users Category:Weapon
-        Masters Category:Video Game Characters Category:Weapon Users Category:Vehicular
-        Masters Category:Attack Reflection Users Category:Hackers Category:Stealth
-        Masters Category:Statistics Amplification Users Category:Damage Reduction
-        Users Category:Extrasensory Perception Users Category:Healers Category:Resurrection
-        Users Category:Fire Users Category:Ice Users Category:Poison Users Category:Electricity
-        Users Category:Damage Boost Users Category:Weapon Control Users Category:Power
-        Nullification Users Category:Status Effect Users Category:Explosion Users
-        Category:Corrosion Users Category:Radiation Users Category:Disease Users Category:Information
-        Analysis Users Category:Paralysis Users Category:Duplication Users Category:Teleportation
-        Users Category:Space Survival Users Category:Technology Users Category:Purification
-        Users Category:Absorption Users Category:Thread Users Category:Gravity Users
-        Category:Forcefield Users Category:Energy Projection Users'
+      value: concentrated EMPs can restrict the use of her powers.
+      source_id: mediawiki-315599
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '(Warframe abilities vary in their effective range but can be increased
+        with use of range mods), Varies from Tens of Meters up to Hundreds of Meters
+        with Primary and Secondary weapons (All ranged ballistic weapons used by the
+        Tenno have ranges that vary of 300 meters up to 1000 meters and their beam
+        weapons typically vary from 10 to 30 meters), Higher with Mods {, class="wikitable
+        mw-collapsible mw-collapsed" ! Standard Equipment, Weapons: Warframes always
+        come equipped with a primary weapon, a secondary sidearm, and a melee weapon.
+        Their weapons can vary wildly in form and function, allowing warframes to
+        always be equipped with weapons that match the threats they have to face.
+        Mods: Mods can be used to increase/alter the function of both a Warframe and
+        their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects, } Intelligence: Mindless (Without
+        their Operator piloting them the warframes are simply empty husks), Gifted
+        (While Their Operator is piloting them. Capable of easily completing the numerous
+        missions they receive regardless of the complexity of the task. Additionally,
+        they are able to solve the hall of ascension puzzles, Complex tests made to
+        gauge the agility,power and cunning of the challengers) The Tenno are immensely
+        skilled warriors, having been made solely to face off against the constantly
+        evolving SentientsWarframe: The Sacrifice(2018) by utilizing not only their
+        many abilities but the numerous weapons they have mastered. Warframes were
+        described as "miracles" on the battlefield, having devastated many sentient
+        strongholdsfrom Browse.wf, a website that compiles and displays internal game
+        data from Warframe. and were the singular reason the empire survived the war.
+        Individual Warframes were also capable of defeating armies of Orokin soldiers,
+        Warframe: Awakening(2020) all of whom would be equipped with the same mods
+        that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: mediawiki-315599
       provider_id: vsbattles
       authority: high
@@ -1492,43 +1559,21 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-mag-warframe
-    url: https://character-stats-and-profiles.fandom.com/wiki/Mag_Warframe
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: The Auditor (Canon, Madness Combat)/Christian Higdon
+    url: https://character-stats-and-profiles.fandom.com/wiki/Mag_%28Warframe%29
+    ok: false
+    note: provider_search_no_results
+    extracted_fields: []
+    normalized_page_title: Mag (Warframe)
     source_type: mediawiki
-    revision_id: '81697'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 2807
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
+    revision_id: ''
+    fetch_status: failed
+    http_status: null
+    content_length: 0
+    content_kind: unknown
+    headings_detected: []
+    stat_labels_detected: []
+    extraction_failure_reason: provider_search_no_results
+    rank: 70
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1541,79 +1586,29 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates:
-    - field: tier
-      value: High 8-C, possibly higher with powers
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Master Marksman, Flight, Shapeshifting,
-        Elemental Intangibility, Teleportation, Reality Warping, Probability Manipulation,
-        Disease Manipulation, Summoning, Creation, and others with the Improbability
-        Drive, Statistics Amplification (Can increase the strength of his agents.
-        Likely increased Hank's strength in MC 11), Portal Creation, Power Bestowal,
-        Energy Projection, Telekinesis, Forcefield Creation, Absorption, Size Manipulation,
-        Necromancy, Regeneration (Mid), Corruption (Type 2), Statistics Amplification
-        (Increases in power as he absorbs people), Mind Manipulation (Can corrupt
-        others, which amplifies them to the level of Hank, Sanford and Deimos)
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Large Building level (Raised a large building up with his telekinesis.
-        Can fight Mag Hank), possibly higher with powers
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (Can fight on par with Hank)
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Large Building level+ (Can take hits from Mag Hank casually)
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'The Auditor must absorb others constantly to keep himself stable. Also,
-        The Improbability Drive is extremely unpredictable and not for combat use.
-        Cannot absorb Tricky ==Others== Notable Victories: Notable Losses: Inconclusive
-        Matches: Category:Christian Higdon Category:Tier 8'
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
+    field_candidates: []
     identity_match: false
     identity_score: 20
-    variant_score: 0
+    variant_score: 25
     provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
+    core_field_count: 0
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the auditor canon madness
-      combat christian higdon|81697
+    duplicate_key: character-stats-and-profiles.fandom.com|mag warframe
     retryable: false
     exception_class: ''
   - source_id: vsbattles-mag-warframe
-    url: https://vsbattles.fandom.com/wiki/Mag_%28Warframe%29
+    url: https://vsbattles.fandom.com/wiki/Mag_Warframe
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id008
+    extracted_fields: &id007
     - attack_potency
     - durability
     - intelligence
     - powers_and_abilities
-    - range
     - speed
     - stamina
     - standard_equipment
@@ -1651,7 +1646,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id009
+    allowed_fields: &id008
     - attack_potency
     - speed
     - durability
@@ -1662,50 +1657,9 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher
-        with Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes,
-        far higher with Tauron Strikes'
-      source_id: vsbattles-mag-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|
-        {{!}}-{{!}}Base'
-      source_id: vsbattles-mag-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: '*Information Analysis (Scanners allow the tenno to scan objects and
-        creature for later analysis) *Duplication (By deploying a specter the tenno
-        can create a preset clone of any warframe. Warframe specters have only the
-        base power of the original and will disappear when destroyed) *Paralysis Inducement
-        (kinetic siphon traps can halt a target movements completely for several seconds)
-        *Flight , Teleportation & Space Survival (Archwings are flight harnesses that
-        a warframe can summon in open spaces; there are multiple archwing models each
-        with their own unique form and function but all are capable of providing the
-        warframe with the means to survive in the vacuum of space for long periods
-        and teleportation with a range of 800 meters) **Amesha ***Technology Manipulation
-        (Amesha''s 1st and 2nd abilities creates decoy drones that draw enemy fire
-        to themselves) ***Purification ((Type 3 ;)Amesha''s Warding Grace prevents
-        status effects in a 400 meter radius) ***Statistics Amplification & Absorption
-        (Amesha''s Vengeful Rush absorbs damage done to it and convert it to energy
-        that is used to boost its other abilities strength, range, and duration) **Itzal
-        ***Thread Manipulation (Itzal''s 1st ability launches a grappling line that
-        either drags enemies towards the warframe or pulls the wearer to a stationary
-        object) ***Invisibility (Itzal''s 2nd ability creates a 76 meter cloaking
-        field that renders stationary objects invisible) ***Gravity Manipulation (Itzal''s
-        3rd ability launches a gravity well that pulls and crushes enemies in a 140
-        meter radius before exploding) ***Explosion Manipulation (Fighter escort deploys
-        a swarm of small drones which will attack enemies before exploding when destroyed)
-        **Odonata ***Forcefield Creation & Fire Manipulation (Odonata''s 1st ability
-        creates an energy shield that blocks projectiles. Guns fired from behind the
-        shield will do additional heat damage) ***Explosion Manipulation (Odonata''s
-        3rd ability fires homing missiles) ***Energy Projection (Odonata''s 4th ability
-        produces a concussive burst of energy that stuns anyone in range) **Elytron
-        ***Explosion Manipulation (All of Elytron''s abilities fires various explosives
-        of varying strength) }}'
+      value: Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with Tauron
+        Strikes | Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with
+        Tauron Strikes
       source_id: vsbattles-mag-warframe
       provider_id: vsbattles
       authority: high
@@ -1766,69 +1720,87 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Melee weapons; Varies from Tens of Meters up
-        to Hundreds of Meters with Abilities (Warframe abilities vary in their effective
-        range but can be increased with use of range mods), Varies from Tens of Meters
-        up to Hundreds of Meters with Primary and Secondary weapons (All ranged ballistic
-        weapons used by the Tenno have ranges that vary of 300 meters up to 1000 meters
-        and their beam weapons typically vary from 10 to 30 meters), Higher with Mods
-        {| class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment |-
+    - field: standard_equipment
+      value: 'Warframes always come equipped with a primary weapon, a secondary sidearm,
+        and a melee weapon. Their weapons can vary wildly in form and function, allowing
+        warframes to always be equipped with weapons that match the threats they have
+        to face. Mods: Mods can be used to increase/alter the function of both a Warframe
+        and their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects'
       source_id: vsbattles-mag-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: 'In General= Mindless (Without their Operator piloting them the warframes
-        are simply empty husks), Gifted (While Their Operator is piloting them. Capable
-        of easily completing the numerous missions they receive regardless of the
-        complexity of the task. Additionally, they are able to solve the hall of ascension
-        puzzles, Complex tests made to gauge the agility,power and cunning of the
-        challengers) |-|Combat= The Tenno are immensely skilled warriors, having been
-        made solely to face off against the constantly evolving SentientsWarframe:
-        The Sacrifice(2018) by utilizing not only their many abilities but the numerous
-        weapons they have mastered. Warframes were described as "miracles" on the
-        battlefield, having devastated many sentient strongholdsfrom Browse.wf, a
-        website that compiles and displays internal game data from Warframe. and were
-        the singular reason the empire survived the war. Individual Warframes were
-        also capable of defeating armies of Orokin soldiers,Warframe: Awakening(2020)
-        all of whom would be equipped with the same mods that made Tenno weapons so
-        powerful.Warframe: The Teacher(2025)'
+      value: 'Mindless (Without their Operator piloting them the warframes are simply
+        empty husks), Gifted (While Their Operator is piloting them. Capable of easily
+        completing the numerous missions they receive regardless of the complexity
+        of the task. Additionally, they are able to solve the hall of ascension puzzles,
+        Complex tests made to gauge the agility,power and cunning of the challengers)
+        The Tenno are immensely skilled warriors, having been made solely to face
+        off against the constantly evolving SentientsWarframe: The Sacrifice(2018)
+        by utilizing not only their many abilities but the numerous weapons they have
+        mastered. Warframes were described as "miracles" on the battlefield, having
+        devastated many sentient strongholdsfrom Browse.wf, a website that compiles
+        and displays internal game data from Warframe. and were the singular reason
+        the empire survived the war. Individual Warframes were also capable of defeating
+        armies of Orokin soldiers,Warframe: Awakening(2020) all of whom would be equipped
+        with the same mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: vsbattles-mag-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Advanced, concentrated EMPs can restrict the use of her powers. Notable
-        Attacks/Techniques: *Pull - Mag pulls her enemies towards her with a strong
-        magnetic force to bring them into melee range, stunning and possibly incapacitating
-        them in the process. *Polarize - Mag emits an energy pulse that depletes enemy
-        shields and armor, creating deadly shards within the radius of the pulse,
-        allies who come in contact with this pulse will have their shields restored.
-        *Magnetize - Mag creates a strong magnetic field around the target, encompassing
-        them and anchoring them in place, the field will drag bullets and shards created
-        by Polarize into the target. Upon the death of the target, the field destabilizes
-        and causes a large explosion. *Crush - Mag magnetizes the bones of enemies
-        within a radius and suspends them in the air, forcefully compressing their
-        bodies and making them collapse on themselves. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{Scroll box|Content={{Reflist|3}}}}
-        {{Scroll box|Content=}} {{discussions}} Category:Characters Category:Warframe
-        Category:Cyborgs Category:Energy Users Category:Female Characters Category:Flight
-        Users Category:Game Characters Category:Gun Users Category:Immortals Category:Invisibility
-        Users Category:Magnetism Users Category:Martial Artists Category:Matter Users
-        Category:Protagonists Category:Regeneration Users Category:Sword Users Category:Weapon
-        Masters Category:Video Game Characters Category:Weapon Users Category:Vehicular
-        Masters Category:Attack Reflection Users Category:Hackers Category:Stealth
-        Masters Category:Statistics Amplification Users Category:Damage Reduction
-        Users Category:Extrasensory Perception Users Category:Healers Category:Resurrection
-        Users Category:Fire Users Category:Ice Users Category:Poison Users Category:Electricity
-        Users Category:Damage Boost Users Category:Weapon Control Users Category:Power
-        Nullification Users Category:Status Effect Users Category:Explosion Users
-        Category:Corrosion Users Category:Radiation Users Category:Disease Users Category:Information
-        Analysis Users Category:Paralysis Users Category:Duplication Users Category:Teleportation
-        Users Category:Space Survival Users Category:Technology Users Category:Purification
-        Users Category:Absorption Users Category:Thread Users Category:Gravity Users
-        Category:Forcefield Users Category:Energy Projection Users'
+      value: concentrated EMPs can restrict the use of her powers.
+      source_id: vsbattles-mag-warframe
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '(Warframe abilities vary in their effective range but can be increased
+        with use of range mods), Varies from Tens of Meters up to Hundreds of Meters
+        with Primary and Secondary weapons (All ranged ballistic weapons used by the
+        Tenno have ranges that vary of 300 meters up to 1000 meters and their beam
+        weapons typically vary from 10 to 30 meters), Higher with Mods {, class="wikitable
+        mw-collapsible mw-collapsed" ! Standard Equipment, Weapons: Warframes always
+        come equipped with a primary weapon, a secondary sidearm, and a melee weapon.
+        Their weapons can vary wildly in form and function, allowing warframes to
+        always be equipped with weapons that match the threats they have to face.
+        Mods: Mods can be used to increase/alter the function of both a Warframe and
+        their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects, } Intelligence: Mindless (Without
+        their Operator piloting them the warframes are simply empty husks), Gifted
+        (While Their Operator is piloting them. Capable of easily completing the numerous
+        missions they receive regardless of the complexity of the task. Additionally,
+        they are able to solve the hall of ascension puzzles, Complex tests made to
+        gauge the agility,power and cunning of the challengers) The Tenno are immensely
+        skilled warriors, having been made solely to face off against the constantly
+        evolving SentientsWarframe: The Sacrifice(2018) by utilizing not only their
+        many abilities but the numerous weapons they have mastered. Warframes were
+        described as "miracles" on the battlefield, having devastated many sentient
+        strongholdsfrom Browse.wf, a website that compiles and displays internal game
+        data from Warframe. and were the singular reason the empire survived the war.
+        Individual Warframes were also capable of defeating armies of Orokin soldiers,
+        Warframe: Awakening(2020) all of whom would be equipped with the same mods
+        that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: vsbattles-mag-warframe
       provider_id: vsbattles
       authority: high
@@ -1847,43 +1819,21 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-mag-warframe
-    url: https://character-stats-and-profiles.fandom.com/wiki/Mag_%28Warframe%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: The Auditor (Canon, Madness Combat)/Christian Higdon
+    url: https://character-stats-and-profiles.fandom.com/wiki/Mag_Warframe
+    ok: false
+    note: provider_search_no_results
+    extracted_fields: []
+    normalized_page_title: Mag Warframe
     source_type: mediawiki
-    revision_id: '81697'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 2807
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
+    revision_id: ''
+    fetch_status: failed
+    http_status: null
+    content_length: 0
+    content_kind: unknown
+    headings_detected: []
+    stat_labels_detected: []
+    extraction_failure_reason: provider_search_no_results
+    rank: 70
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1896,79 +1846,29 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates:
-    - field: tier
-      value: High 8-C, possibly higher with powers
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Master Marksman, Flight, Shapeshifting,
-        Elemental Intangibility, Teleportation, Reality Warping, Probability Manipulation,
-        Disease Manipulation, Summoning, Creation, and others with the Improbability
-        Drive, Statistics Amplification (Can increase the strength of his agents.
-        Likely increased Hank's strength in MC 11), Portal Creation, Power Bestowal,
-        Energy Projection, Telekinesis, Forcefield Creation, Absorption, Size Manipulation,
-        Necromancy, Regeneration (Mid), Corruption (Type 2), Statistics Amplification
-        (Increases in power as he absorbs people), Mind Manipulation (Can corrupt
-        others, which amplifies them to the level of Hank, Sanford and Deimos)
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Large Building level (Raised a large building up with his telekinesis.
-        Can fight Mag Hank), possibly higher with powers
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (Can fight on par with Hank)
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Large Building level+ (Can take hits from Mag Hank casually)
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'The Auditor must absorb others constantly to keep himself stable. Also,
-        The Improbability Drive is extremely unpredictable and not for combat use.
-        Cannot absorb Tricky ==Others== Notable Victories: Notable Losses: Inconclusive
-        Matches: Category:Christian Higdon Category:Tier 8'
-      source_id: character-stats-profiles-mag-warframe
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
+    field_candidates: []
     identity_match: false
     identity_score: 20
-    variant_score: 0
+    variant_score: 25
     provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
+    core_field_count: 0
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the auditor canon madness
-      combat christian higdon|81697
+    duplicate_key: character-stats-and-profiles.fandom.com|mag warframe
     retryable: false
     exception_class: ''
   - source_id: vsbattles-mag-warframe
-    url: https://vsbattles.fandom.com/wiki/Mag_Warframe
+    url: https://vsbattles.fandom.com/wiki/Mag_%28Warframe%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id010
+    extracted_fields: &id009
     - attack_potency
     - durability
     - intelligence
     - powers_and_abilities
-    - range
     - speed
     - stamina
     - standard_equipment
@@ -2006,7 +1906,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id011
+    allowed_fields: &id010
     - attack_potency
     - speed
     - durability
@@ -2017,50 +1917,9 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher
-        with Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes,
-        far higher with Tauron Strikes'
-      source_id: vsbattles-mag-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|
-        {{!}}-{{!}}Base'
-      source_id: vsbattles-mag-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: '*Information Analysis (Scanners allow the tenno to scan objects and
-        creature for later analysis) *Duplication (By deploying a specter the tenno
-        can create a preset clone of any warframe. Warframe specters have only the
-        base power of the original and will disappear when destroyed) *Paralysis Inducement
-        (kinetic siphon traps can halt a target movements completely for several seconds)
-        *Flight , Teleportation & Space Survival (Archwings are flight harnesses that
-        a warframe can summon in open spaces; there are multiple archwing models each
-        with their own unique form and function but all are capable of providing the
-        warframe with the means to survive in the vacuum of space for long periods
-        and teleportation with a range of 800 meters) **Amesha ***Technology Manipulation
-        (Amesha''s 1st and 2nd abilities creates decoy drones that draw enemy fire
-        to themselves) ***Purification ((Type 3 ;)Amesha''s Warding Grace prevents
-        status effects in a 400 meter radius) ***Statistics Amplification & Absorption
-        (Amesha''s Vengeful Rush absorbs damage done to it and convert it to energy
-        that is used to boost its other abilities strength, range, and duration) **Itzal
-        ***Thread Manipulation (Itzal''s 1st ability launches a grappling line that
-        either drags enemies towards the warframe or pulls the wearer to a stationary
-        object) ***Invisibility (Itzal''s 2nd ability creates a 76 meter cloaking
-        field that renders stationary objects invisible) ***Gravity Manipulation (Itzal''s
-        3rd ability launches a gravity well that pulls and crushes enemies in a 140
-        meter radius before exploding) ***Explosion Manipulation (Fighter escort deploys
-        a swarm of small drones which will attack enemies before exploding when destroyed)
-        **Odonata ***Forcefield Creation & Fire Manipulation (Odonata''s 1st ability
-        creates an energy shield that blocks projectiles. Guns fired from behind the
-        shield will do additional heat damage) ***Explosion Manipulation (Odonata''s
-        3rd ability fires homing missiles) ***Energy Projection (Odonata''s 4th ability
-        produces a concussive burst of energy that stuns anyone in range) **Elytron
-        ***Explosion Manipulation (All of Elytron''s abilities fires various explosives
-        of varying strength) }}'
+      value: Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with Tauron
+        Strikes | Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with
+        Tauron Strikes
       source_id: vsbattles-mag-warframe
       provider_id: vsbattles
       authority: high
@@ -2121,69 +1980,87 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Melee weapons; Varies from Tens of Meters up
-        to Hundreds of Meters with Abilities (Warframe abilities vary in their effective
-        range but can be increased with use of range mods), Varies from Tens of Meters
-        up to Hundreds of Meters with Primary and Secondary weapons (All ranged ballistic
-        weapons used by the Tenno have ranges that vary of 300 meters up to 1000 meters
-        and their beam weapons typically vary from 10 to 30 meters), Higher with Mods
-        {| class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment |-
+    - field: standard_equipment
+      value: 'Warframes always come equipped with a primary weapon, a secondary sidearm,
+        and a melee weapon. Their weapons can vary wildly in form and function, allowing
+        warframes to always be equipped with weapons that match the threats they have
+        to face. Mods: Mods can be used to increase/alter the function of both a Warframe
+        and their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects'
       source_id: vsbattles-mag-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: 'In General= Mindless (Without their Operator piloting them the warframes
-        are simply empty husks), Gifted (While Their Operator is piloting them. Capable
-        of easily completing the numerous missions they receive regardless of the
-        complexity of the task. Additionally, they are able to solve the hall of ascension
-        puzzles, Complex tests made to gauge the agility,power and cunning of the
-        challengers) |-|Combat= The Tenno are immensely skilled warriors, having been
-        made solely to face off against the constantly evolving SentientsWarframe:
-        The Sacrifice(2018) by utilizing not only their many abilities but the numerous
-        weapons they have mastered. Warframes were described as "miracles" on the
-        battlefield, having devastated many sentient strongholdsfrom Browse.wf, a
-        website that compiles and displays internal game data from Warframe. and were
-        the singular reason the empire survived the war. Individual Warframes were
-        also capable of defeating armies of Orokin soldiers,Warframe: Awakening(2020)
-        all of whom would be equipped with the same mods that made Tenno weapons so
-        powerful.Warframe: The Teacher(2025)'
+      value: 'Mindless (Without their Operator piloting them the warframes are simply
+        empty husks), Gifted (While Their Operator is piloting them. Capable of easily
+        completing the numerous missions they receive regardless of the complexity
+        of the task. Additionally, they are able to solve the hall of ascension puzzles,
+        Complex tests made to gauge the agility,power and cunning of the challengers)
+        The Tenno are immensely skilled warriors, having been made solely to face
+        off against the constantly evolving SentientsWarframe: The Sacrifice(2018)
+        by utilizing not only their many abilities but the numerous weapons they have
+        mastered. Warframes were described as "miracles" on the battlefield, having
+        devastated many sentient strongholdsfrom Browse.wf, a website that compiles
+        and displays internal game data from Warframe. and were the singular reason
+        the empire survived the war. Individual Warframes were also capable of defeating
+        armies of Orokin soldiers,Warframe: Awakening(2020) all of whom would be equipped
+        with the same mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: vsbattles-mag-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Advanced, concentrated EMPs can restrict the use of her powers. Notable
-        Attacks/Techniques: *Pull - Mag pulls her enemies towards her with a strong
-        magnetic force to bring them into melee range, stunning and possibly incapacitating
-        them in the process. *Polarize - Mag emits an energy pulse that depletes enemy
-        shields and armor, creating deadly shards within the radius of the pulse,
-        allies who come in contact with this pulse will have their shields restored.
-        *Magnetize - Mag creates a strong magnetic field around the target, encompassing
-        them and anchoring them in place, the field will drag bullets and shards created
-        by Polarize into the target. Upon the death of the target, the field destabilizes
-        and causes a large explosion. *Crush - Mag magnetizes the bones of enemies
-        within a radius and suspends them in the air, forcefully compressing their
-        bodies and making them collapse on themselves. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{Scroll box|Content={{Reflist|3}}}}
-        {{Scroll box|Content=}} {{discussions}} Category:Characters Category:Warframe
-        Category:Cyborgs Category:Energy Users Category:Female Characters Category:Flight
-        Users Category:Game Characters Category:Gun Users Category:Immortals Category:Invisibility
-        Users Category:Magnetism Users Category:Martial Artists Category:Matter Users
-        Category:Protagonists Category:Regeneration Users Category:Sword Users Category:Weapon
-        Masters Category:Video Game Characters Category:Weapon Users Category:Vehicular
-        Masters Category:Attack Reflection Users Category:Hackers Category:Stealth
-        Masters Category:Statistics Amplification Users Category:Damage Reduction
-        Users Category:Extrasensory Perception Users Category:Healers Category:Resurrection
-        Users Category:Fire Users Category:Ice Users Category:Poison Users Category:Electricity
-        Users Category:Damage Boost Users Category:Weapon Control Users Category:Power
-        Nullification Users Category:Status Effect Users Category:Explosion Users
-        Category:Corrosion Users Category:Radiation Users Category:Disease Users Category:Information
-        Analysis Users Category:Paralysis Users Category:Duplication Users Category:Teleportation
-        Users Category:Space Survival Users Category:Technology Users Category:Purification
-        Users Category:Absorption Users Category:Thread Users Category:Gravity Users
-        Category:Forcefield Users Category:Energy Projection Users'
+      value: concentrated EMPs can restrict the use of her powers.
+      source_id: vsbattles-mag-warframe
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '(Warframe abilities vary in their effective range but can be increased
+        with use of range mods), Varies from Tens of Meters up to Hundreds of Meters
+        with Primary and Secondary weapons (All ranged ballistic weapons used by the
+        Tenno have ranges that vary of 300 meters up to 1000 meters and their beam
+        weapons typically vary from 10 to 30 meters), Higher with Mods {, class="wikitable
+        mw-collapsible mw-collapsed" ! Standard Equipment, Weapons: Warframes always
+        come equipped with a primary weapon, a secondary sidearm, and a melee weapon.
+        Their weapons can vary wildly in form and function, allowing warframes to
+        always be equipped with weapons that match the threats they have to face.
+        Mods: Mods can be used to increase/alter the function of both a Warframe and
+        their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects, } Intelligence: Mindless (Without
+        their Operator piloting them the warframes are simply empty husks), Gifted
+        (While Their Operator is piloting them. Capable of easily completing the numerous
+        missions they receive regardless of the complexity of the task. Additionally,
+        they are able to solve the hall of ascension puzzles, Complex tests made to
+        gauge the agility,power and cunning of the challengers) The Tenno are immensely
+        skilled warriors, having been made solely to face off against the constantly
+        evolving SentientsWarframe: The Sacrifice(2018) by utilizing not only their
+        many abilities but the numerous weapons they have mastered. Warframes were
+        described as "miracles" on the battlefield, having devastated many sentient
+        strongholdsfrom Browse.wf, a website that compiles and displays internal game
+        data from Warframe. and were the singular reason the empire survived the war.
+        Individual Warframes were also capable of defeating armies of Orokin soldiers,
+        Warframe: Awakening(2020) all of whom would be equipped with the same mods
+        that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: vsbattles-mag-warframe
       provider_id: vsbattles
       authority: high
@@ -2299,10 +2176,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Hank''s immortality is not reliable, as sometimes the Higher Powers
-        don''t resurrect him at all, and takes time, regardless. ==Others== Notable
-        Victories: Notable Losses: Inconclusive Matches: Category:Christian Higdon
-        Category:Tier 8'
+      value: Hank's immortality is not reliable, as sometimes the Higher Powers don't
+        resurrect him at all
       source_id: character-stats-profiles-mag
       provider_id: character_stats_profiles
       authority: high
@@ -2328,27 +2203,26 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - intelligence
     - powers_and_abilities
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Mag Bandit
+    normalized_page_title: Mag'ladroth the Void Dragon
     source_type: mediawiki
-    revision_id: '9571036'
+    revision_id: '8539934'
     fetch_status: fetched
     http_status: 200
-    content_length: 5955
+    content_length: 17764
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
+    - Shard powers
+    - Gallery
     - Notable Matchups
     - References
-    - Statistics Values
     stat_labels_detected:
     - attack_potency
     - durability
@@ -2380,95 +2254,136 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{High 8-C}}, likely {{8-A}}, higher with Rage Power
+      value: At least High 4-C, likely far higher. 1-A via Environmental Destruction
+        | 4-B. 1-A via Environmental Destruction
       source_id: vsbattles-mag-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= * Nevadean Physiology
-        (Mag-Agent) **Superhuman Physical Characteristics **Immortality (Type; 2 &
-        3), Regeneration (Mid-low; He survived an extremely brutal damage that would
-        have killed a normal person, such as large chunks of his bodies missing. Later
-        regenerated after being horribly wounded and nearly killed by Hank J. Wimbleton,
-        but it seemingly took a lot of timeMadness: Project Nexus - The OutskirtsMadness:
-        Project Nexus - The Scenic Route) }}'
+      value: 'Superhuman Physical Characteristics, Enhanced Senses, Immortality (Types
+        1, 3, and 8; Existed since the birth of the universe itself and stated to
+        be agelessCodex: Necron (3rd Edition); pg 26. The body of a C''tan is forged
+        from NecrodermisCodex: Necron (5th Edition); pg 6. Necrodermis has the ability
+        to regenerate itself, though Codex: Necron (9th Edition); pg 80. The C''tan
+        are also fundamental aspects of reality and as such can''t be fully killedCodex:
+        Necron (9th Edition); pg 11), Regeneration (Mid; Should have comparable regeneration
+        to the necrodermis of the Necrons that can heal from crushed skulls), Self-Sustenance
+        (Types 1 and 3), Inorganic Physiology (Type 1), Body Control (The C''tan are
+        capable of manipulating their necrodermis shells and manipulating themThe
+        Infinite and The Divine; Act Four; Chapter Five), Incorporeality (Though the
+        Necrodermis shell can be affected, the true form of a C''tan is that of pure
+        energyCodex: Necron (8th Edition); pg 6), Flight (C''tan are able to naturally
+        flyCodex: Necron (3rd Edition); pg 27), Intangibility (Capable of making itself
+        intangible to dodge attacksSons of the Hydra), Telekinesis and Deconstruction
+        (Capable of tearing apart and pulling objects togetherCodex: Necron (9th Edition);
+        pg 99), Reality Warping and Law Manipulation (The very presence of a C''tan
+        shard can cause the physical laws of reality to break apartCodex: Necron (5th
+        Edition); pg 41. C''tan also have mastery over reality and can warp it to
+        varying degrees), Spatial Manipulation and Time Manipulation, Causality Manipulation
+        and Existence Erasure (C''tan are capable of manipulating the flow of causality,
+        using that to even erase individuals from the timestreamCodex: Necron (9th
+        Edition); pg 68), Black Hole Creation (Able to form black holesThe Infinite
+        and The Divine; Act Four; Chapter Six), Antimatter Manipulation (Capable of
+        creating orbs of antimatter) Dimensional Travel (C''tan are capable of travelling
+        through dimensions to reach their intended destination), Absorption, Energy
+        Manipulation and Mind Manipulation (Even the most basic of C''tan shards can
+        still fire energy blasts and control the minds of othersCodex: Necron (8th
+        Edition); pg 68), Soul Manipulation (Consumed the souls of the Necrontyr during
+        the BiotransferenceCodex: Necron (9th Edition); pg 6), Matter Manipulation
+        (Capable of tearing apart matter with a glanceCodex: Necron (9th Edition);
+        pg 57), Non-Physical Interaction (Capable of grasping the energy cords of
+        its tesseract vaultThe Infinite and The Divine; Act Four; Chapter Three),
+        Temperature Manipulation (Capable of melting objects with a wave. Can superheat
+        the necrodermis of its body), Pain Manipulation (Capable of forcing others
+        to experience pain, even those who are incapable of doing so), Attack Reflection
+        (Can send an attacker''s own energy blast back at them), Biological Manipulation
+        and Death Manipulation (Capable of causing rapid cell death), Corruption (Type
+        2), Disease Manipulation (Capable of inflicting the Flayer Curse onto Necrons),
+        Darkness Manipulation (Can produce clouds of darkness), Fear Manipulation
+        and Aura (A C''tan''s sheer presence can cause fear in others), Earth Manipulation
+        (Capable of summoning and manipulating boulders), Fire Manipulation (Capable
+        of controlling and creating flames), Physics Manipulation, Gravity Manipulation,
+        Technology Manipulation, and Power Nullification (A C''tan''s presence can
+        disrupt gravity and technology), Illusion Creation and Perception Manipulation
+        (C''tan shards can manipulate the perception of its opponents and create illusions),
+        Life Manipulation (Capable of draining life with a glance), Magma Manipulation
+        (Able to pull the magma of a planet), Weather Manipulation and Electricity
+        Manipulation (Capable of summoning large storms of emerald lightning), Technology
+        Manipulation (All technology of the Mechanicum of Mars originated from the
+        Dragon of MarsMechanicum), Resistance to Soul Manipulation and Corruption
+        (The Warp is anathema to the C''tan due to their lack of a soul), Radiation
+        Manipulation, Temperature Manipulation, Life Manipulation, Death Manipulation,
+        Disease Manipulation, Poison Manipulation, Organic Manipulation, and Biological
+        Manipulation (The C''tan lack biological bodies, being comprised of pure energy
+        housed in necrodermis shells)'
       source_id: vsbattles-mag-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'At least Large Building level,2.9577 tons likely Multi-City Block level+
-        (Very casually pulled this,Madness: Project Nexus - The Outskirts and this,Madness:
-        Project Nexus - The Scenic Route with him also being explicitly heavily weakened
-        when performing the former one. He is far stronger than Hank, Sanford and
-        Deimos, but is presumably weaker than the average mag agent as a result of
-        his savage life style and starvation), higher with Rage Power'
+      value: 'At least Large Star level (Should be superior to the C''tan Shard which
+        powered the Breath of the Gods which was said to be able to reignite dead
+        suns and craft entire star systems with its powerGods of Mars), likely far
+        higher (Fought against The Emperor. While the exact nature of the fight is
+        unknown, based on what the Dragon remembers, it was a mostly even fight).
+        Outerverse level via Environmental Destruction (The C''tan shard that powered
+        the Breath of the Gods was capable of undoing the laws of the universe, warping
+        space-time on a fundamental level, and was causing the end of the past, present,
+        and future through misuse. Was causing the Skein to unravel. The Skein was
+        formed by the abstract forms of Chaos Gods to hold the rules of the Great
+        Game they abide by, and the source of the concepts which their avatars embody.
+        Without the skein limiting their power, a Chaos God may simply manifest their
+        entire personal realm into the MateriumBlack Crusade RPG: The Tome of Fate).
+        Ignores durability with many of its attacks. | Solar System level (Stated
+        to have destroyed entire systemsCodex: Necrons (8th Edition); pg 9 with their
+        attacks. Stated to be the strongest of the C''tan and was able to battle the
+        Aeldari Gods). Outerverse level via Environmental Destruction'
       source_id: vsbattles-mag-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: 'Relativistic (Can react and fight with Hank, Sanford and Deimos, but
-        he is slower than them25.531914893% SoLMadness: Project Nexus - The OutskirtsMadness:
-        Project Nexus - The Scenic Route)'
+      value: At least Hypersonic, likely far higher combat and reaction speed (Capable
+        of keeping up with the Emperor in their fight). Massively FTL+ flight speed
+        (Far superior to a single shard of the Nightbringer who, when heavily weakened,
+        flew seventy thousand light years in under three monthsNightbringer; Epilogue)
+        | At least Hypersonic, likely far higher combat and reaction speed. Massively
+        FTL+ flight speed (The complete form of a C'tan is vastly superior to any
+        of its shards)
       source_id: vsbattles-mag-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: 'At least Large Building level,2.9577 tons likely Multi-City Block level+
-        (Did this and this without receiving any damage whatsoever even while weakened,
-        though the first feat did knock him down for a while. Superior to Hank, Sanford
-        and DeimosMADNESS: Project Nexus - MADNESS: Project Nexus - Flood Control637.5491259
-        Tons of TNT)'
+      value: At least Large Building level, likely far higher (Took hits from the
+        Emperor during their duel. While the exact nature of the fight is unknown,
+        the Emperor likely would've used his psychic abilities to defeat him. Was
+        stated by the Emperor to be beyond his ability to kill) | Planet level
       source_id: vsbattles-mag-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: 'Superhuman (He was capable of easily enduring a lot of attacks from
-        Hank, Sanford and Deimos for a long time before collapsing. After Hank left
-        his body with severe wounds and missing portions of body first time, he not
-        only managed to quickly wake up and cause a big explosion without taking a
-        visible damage, but also will later completely recover and regenerate his
-        injuries and assault Sanford with DeimosMadness: Project Nexus - The OutskirtsMadness:
-        Project Nexus - The Scenic Route)'
+      value: Superhuman | Infinite
       source_id: vsbattles-mag-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: Standard Melee Range, Extended Melee Range with a lamppost, Tens of meters
-        while throwing debris
-      source_id: vsbattles-mag-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-mag-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Below Average (Appears to possess a borderline child like state of mind
-        and generally behaves very irrational, rashy and even erratic, his most complex
-        strategies amount to using lampposts as a weapon and trying to throw environmental
-        debris into his enemiesMadness: Project Nexus - The OutskirtsMadness: Project
-        Nexus - The Scenic Route)'
+      value: Extended Melee Range, Up to Galactic with Reality-Warping abilities.
+        Outerversal via Environmental Destruction
       source_id: vsbattles-mag-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Is dim-witted and awkward. ==Notable Matchups== Victories: * Spider-Punk
-        (Spider-Verse) Spider-Punk''s Profile (Both were High 8-C, speed was equalized,
-        combatants started ~5 meters apart from one another, fight took place in the
-        Mortal Kombat 1 courtyard) Losses: Inconclusive: ==References== {{scroll box|content={{reflist|2}}}}
-        ==Statistics Values== {{scroll box|content=}} {{Discussions}} Category:Characters
-        Category:Madness Combat Category:Regeneration Users Category:Cannibals Category:Antagonists
-        Category:Video Game Characters Category:Bosses'
+      value: The primary weakness of the C'tan is their inability to comprehend the
+        Warp. It is speculated that they find it impossible to survive in it and are
+        particularly susceptible as a result to Warp-spawned psychic powers and the
+        psykers that wield them. It is also speculated that they have set up the networks
+        of pylons on Cadia, thus cutting off the Chaos Gods' influence and starving
+        them.
       source_id: vsbattles-mag-game
       provider_id: vsbattles
       authority: high
@@ -2483,7 +2398,7 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|mag bandit|9571036
+    duplicate_key: vsbattles.fandom.com|mag ladroth the void dragon|8539934
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-mag-game
@@ -2497,19 +2412,18 @@ repair:
     - speed
     - tier
     - weaknesses
-    normalized_page_title: Deimos (Madness Combat, Canon)
+    normalized_page_title: Hank (Canon, Madness Combat)/DHZ3
     source_type: mediawiki
-    revision_id: '452868'
+    revision_id: '608371'
     fetch_status: fetched
     http_status: 200
-    content_length: 19357
+    content_length: 9395
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
-    - Notable Matchups
-    - References
-    - Notes/Explanations
+    - 'MAG:'
+    - 'Resistances:'
     stat_labels_detected:
     - attack_potency
     - durability
@@ -2541,119 +2455,60 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 8-C, higher with weapons | At least 8-C, higher with weapons
+      value: At least 8-C | 7-A | Low 1-C as MAG Hank
       source_id: character-stats-profiles-mag-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base= *Superhuman Physical Characteristics **Nevadean Physiology (Nevadean)
-        **Acrobatics (Displayed incredible acrobatic movesMadness Combat 5.5, and
-        can perform astounding jumps and dodges/rolls to elude from a barrage of any
-        attacks, including fast flying projectiles,MADNESS: Project Nexus (Classic)
-        - Whole Episode 1.0MADNESS: Project Nexus - Whole gamewhilst being least war
-        hardened protagonist) *Immense Willpower (Even while without allies physically
-        present around, grievously injured, slowly dying and getting further dismoral
-        by the environment of The Other Place, he still was able to continue his path
-        and fiercely yet intelligently fight against hordes of enemiesDedmos Adventures)
-        *Expert Close-Quarter FIghter (Has bested several trained soldiers at once
-        and disarmed themMadness Combat 5.5, was able to takedown an intensively trained
-        Engineer armed with a revolver, all by himself and clear handsMadness Combat
-        6.5) and Weapon Master (Can shoot, throw and use any weapons or tools to exist,
-        ranging from torches, junks and rocks to modern weaponry of all typesMADNESS:
-        Project Nexus (Classic) - Whole Episode 1.0MADNESS: Project Nexus - Whole
-        game. With Sanford, he triumphed over a bloodlusted Hank J. WimbletonMADNESS:
-        Project Nexus - The Rush) *Stealth Mastery (Silently cleared enemies'' positions
-        in the episodesMadness Combat 7.5, and can consistently stealth kill most
-        of his enemies through game story if he puts his mind into it, both with hands
-        and weaponsMADNESS: Project Nexus - Whole game) *Expert Pilot and Driver (Has
-        shown proficiency with both helicoptersMadness Combat 6.5 and trucksMadness
-        Combat 9) *Hacking & Information Analysis (With his electronics, can analyse
-        and receive information about own missionMadness Combat 7.5 or several other
-        objects, like Improbability DriveMadness Combat 9. Hacked into a robot and
-        was able retrieve a key-card using himMADNESS: Project Nexus - Shakedown.
-        On constant capable of hacking virtually any stuff and programs during storyMADNESS:
-        Project Nexus - Whole game) *Accelerated Development (Battle: Abilities. Seemingly
-        managed adapt to a proper usage of his new abilities of summoning rocks and
-        chains in the short span of time after receiving them, despite initially frankly
-        struggling with itDedmos Adventures) *Healing (Mid-low with means he carries
-        or finds. Can provide the first medical aid to allies via injectors, waking
-        them from immobile positions after what are supposed to be weapon injuriesMADNESS:
-        Project Nexus - Whole game. Can heal himself with bandages and same injectors
-        from med-kitsMADNESS: Project Nexus - Whole game.) *Instinctive Reaction (Via
-        the Tac Bar, which allows someone to automatically evade bulletsMADNESS: Project
-        Nexus - Whole game) *Light Manipulation (Has and can use a flashlightMADNESS:
-        Project Nexus - Whole game) *Statistics Amplification/Afterimage Creation/Perception
-        Manipulation (He can amplify his reactions and speeds to respond to attacks
-        faster and kill groups of enemies before they can fight backMADNESS: Project
-        Nexus (Classic) - Whole Episode 1.0) *Minor Fire Manipulation (Can create
-        a small flame with his fingerWhole series) *Explosion Manipulation (Via GrenadeMadness
-        Combat 6.5 and Rocket LaunchersMADNESS: Project Nexus - The Rush level Phobos
-        boss fight) *Light Manipulation & Status Effect Inducement (Usually wears
-        and throws flashbangsMADNESS: Project Nexus - Whole game) |-|Resistance= *Smoke
-        Manipulation/Poison Manipulation (Carries along a respirator, which allows
-        to him survive dangerous poisonous smokeMADNESS: Project Nexus - Inner City)
-        *Reality Warping, Matter Manipulation, Durability Negation, Mind Manipulation/Madness
-        Manipulation/Corruption (Types 3 and 1) and Radiation Manipulation (Is merely
-        damaged by dissonant attacks from Director Phobos but still can resist its
-        effect even when dissonant reality literally fueled most of an arena, which
-        is a corrupting force that can warp reality, deconstruct Matter, and distort
-        the mind of others. Dissonance is also described as radiation. Dissonance
-        energy can also negate Project: Gestalt''s shielding and weaken his statsMADNESS:
-        Project Nexus - The Rush level Phobos boss fight. Dissonance can completely
-        destroy targetsMADNESS: Project Nexus - Whole game. His own ally Jebediah
-        Christoff seemingly became corrupted from usage of dissonant reality and it
-        even changed his appearance, and he himself still not protected from its power
-        nullification abilities) |-|Dedmos= All previous enhanced, minus explosives
-        and flashbangs, plus: *Immortality (Type 7, is a revived bodyDedmos Adventures)
-        *Partial Inorganic Physiology (Type 1. Solid part of his body was replaced
-        with rocks, including hands and a half of headDedmos Adventures) *Earth Manipulation
-        and Possibly Durability Negation (Can summon big chunks of stone in the enemies,
-        likely doing it into their insides, thus negating durabilityDedmos Adventures)
-        *Chain Manipulation (Can spawn bladed chains from nowhereDedmos Adventures)
-        *Size Ma'
+      value: Superhuman Physical Characteristics, Nevadean Physiology (Nevadean),
+        Acrobatics (Can stay in the air for some time and consistently pull off backflips),
+        Non-Physical Interaction (Incorpereal and Conceptual, Can interact with S-3LFs,
+        which contain your mind, concept, soul, energy, and power), Martial Arts,
+        Extrasensory Perception (Dodged an attack that he couldn't see), Weapon Mastery,
+        Plot Armor (Said to have "massive plot armor" due to stronger cognitive endurance),
+        Stealth Mastery (Snuck into the Sheriff's base), Healing (With medkits), Regeneration
+        (Mid-Godly, Nevadeans can revive after dissolving as S-3LF energy in The Other
+        Place), Blessed with Immortality (Types 4 and 8, The Higher Powers will revive
+        Hank should they find his fight entertaining enough), Instinctive Reaction
+        (Via Tac-Bar), Social Influencing (Will sometimes taunt his opponents into
+        attacking him), Empowerment (Nevadeans become stronger by feeling certain
+        emotions, can become 113x faster via Bullet Time), Supernatural Willpower
+        (Could still fight after suffering many injuries, protagonists are specifically
+        noted to have stronger constitutions and endurance), Possession (seen here)
       source_id: character-stats-profiles-mag-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'Building level (Overall weaker, but still can fight Hank and hurt Mag
-        Bandit, who while nearly dead can do thisMADNESS: Project Nexus - Road to
-        Nexus), higher with weapons (Did this explosion) | At least Building level
-        (Casually brutalizes Mag-sized AgentsDedmos Adventures, something that even
-        Hank at his strongest can''t do with normal attacks. Did thisDedmos Adventures),
-        higher with weapons'
+      value: At Least Building Level (Superior to Sanford and Deimos who did this,
+        fought Tricky and Jebus on multiple occasions) Mountain Level (Can harm Project
+        Gestalt who survived this dissonance blast) | Low Complex Multiverse Level
+        as MAG Hank (Permanently killed post-auditor absorption Tricky)
       source_id: character-stats-profiles-mag-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: 'Relativistic (Comparable to Nexus-Soldats who can move simultaneously
-        with SoL lasersMADNESS: Project Nexus - Whole game [0.25c]. Albeit slower,
-        still was able to tag Apothic Gestalt, who after gaining wings was able to
-        outspeed lasersMADNESS: Project Nexus - The Rush level Phobos boss fight),
-        far higher with bullet time (Can amp own reaction and combat speed with bullet
-        time by multiplying it on 113MADNESS: Project Nexus Classic - Episode 1) |
-        Relativistic (Same as before), far higher with bullet time'
+      value: At least Hypersonic+ (Deflected a bullet at point blank range) FTL+ (Tagged
+        and killed the sun, who jumped from it's location to Nevada in a split second)
       source_id: character-stats-profiles-mag-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Building level (Survived a small explosion of a car) | At least Building
-        level (Attacks from and being thrown around by Mag Agents and other Mag-sized
-        foes never actually harmed him, simply scratching up the rocks that covered
-        his body instead)
+      value: Large Building Level+ (Superior to Sanford and Deimos who survived a
+        building falling on top of them, can trade blows with Jebus who casually tore
+        apart a ceiling) Mountain Level (Can survive dissonance blasts)
       source_id: character-stats-profiles-mag-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Sometimes does not takes situations seriously at all, slightly confusing
-        his partners. Is a smoker and often starts to smoke in the very inconvenient
-        periods. | Destruction of rocks on his body will actually hurt him, but he
-        is unable to smoke anymore. ==Notable Matchups== Victories: Losses: Inconclusive:
-        Category:Blog posts ==References== {{scroll box|content={{reflist|2}}}} ==Notes/Explanations'
+      value: Can sometimes be overconfident, such as when he tried to deflect the
+        bullets of a zombie within melee range instead of just killing him, though
+        he seems to have learned from this later. The Higher Powers will not revive
+        him if they don't find his conflict entertaining enough. Standard/Optional
       source_id: character-stats-profiles-mag-game
       provider_id: character_stats_profiles
       authority: high
@@ -2668,7 +2523,8 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|deimos madness combat canon|452868
+    duplicate_key: character-stats-and-profiles.fandom.com|hank canon madness combat
+      dhz3|608371
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
@@ -2677,11 +2533,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Mag
     title: Mag
     rank: 120
-    extracted_fields: *id006
+    extracted_fields: *id005
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id007
+    allowed_fields: *id006
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2693,37 +2549,18 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|mag|9620350
-  - source_id: vsbattles-mag-warframe
-    url: https://vsbattles.fandom.com/wiki/Mag_%28Warframe%29
-    title: Mag
-    rank: 120
-    extracted_fields: *id008
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id009
-    rejection_reason: ''
-    identity_match: true
-    identity_score: 120
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: true
-    alias_match: false
-    franchise_match: true
-    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|mag|9620350
   - source_id: vsbattles-mag-warframe
     url: https://vsbattles.fandom.com/wiki/Mag_Warframe
     title: Mag
     rank: 120
-    extracted_fields: *id010
+    extracted_fields: *id007
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id011
+    allowed_fields: *id008
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2735,8 +2572,55 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|mag|9620350
+  - source_id: vsbattles-mag-warframe
+    url: https://vsbattles.fandom.com/wiki/Mag_%28Warframe%29
+    title: Mag
+    rank: 120
+    extracted_fields: *id009
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id010
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 120
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: true
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|mag|9620350
   chosen_source_id: null
   failure_reasons:
-    fetched: 8
+    fetched: 6
+    provider_search_no_results: 2
   confidence: 0.75
+version_scope:
+  evidence_scoped: false
+  scoped_key: Mag
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-25T17:39:50Z'
+  key_origin: primary_form_position
+  axes:
+    tier:
+      method: positional
+      segments: 2
+    attack_potency:
+      method: positional
+      segments: 2
+    speed:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+  remaining_piped_axes:
+  - range

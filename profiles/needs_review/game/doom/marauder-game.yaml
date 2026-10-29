@@ -11,13 +11,15 @@ generation:
   generated_at: '2026-06-10T03:36:16Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id006
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:abilities
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Marauder (Game)
   franchise: Doom
@@ -174,42 +176,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-marauder-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Marauder Game
-  url: https://vsbattles.fandom.com/wiki/Marauder_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-marauder-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Marauder Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Marauder_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-marauder-game-doom
   provider_id: vsbattles
   source_type: mediawiki
@@ -217,7 +183,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Marauder_(DOOM)
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -261,7 +227,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Wandering_of_Doom_(Canon,_Garry%27s_Mod)/Greatgorilangaqil
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -296,62 +262,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-marauder-game-doom
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Marauder (Game) Doom
-  url: https://vsbattles.fandom.com/wiki/Marauder_%28Game%29_Doom
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-marauder-game-doom
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Marauder (Game) Doom
-  url: https://character-stats-and-profiles.fandom.com/wiki/Marauder_%28Game%29_Doom
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-marauder-game-doom
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Marauder (Game) (Doom)
-  url: https://vsbattles.fandom.com/wiki/Marauder_%28Game%29_%28Doom%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-marauder-game-doom
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Marauder (Game) (Doom)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Marauder_%28Game%29_%28Doom%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-marauder-game-game
   provider_id: vsbattles
   source_type: mediawiki
@@ -492,7 +402,7 @@ abilities:
 - id: powers-and-abilities-border
   name: '{{Border'
   description: '{{Border'
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-marauder-game-doom
   source_claim_ids: []
   confidence: 0.85
@@ -508,7 +418,7 @@ abilities:
 - id: powers-and-abilities-scroll-yes
   name: Scroll=Yes
   description: Scroll=Yes
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -523,7 +433,7 @@ abilities:
 - id: powers-and-abilities-visible-yes
   name: Visible=Yes
   description: Visible=Yes
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -538,7 +448,7 @@ abilities:
 - id: powers-and-abilities-padding-yes
   name: Padding=Yes
   description: Padding=Yes
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -556,7 +466,7 @@ abilities:
   description: Content= *Superhuman Physical Characteristics *Acrobatics (Can double
     jump and dash in the air) *Weapon Mastery (Is a former Night Sentinel who were
     an elite fighting force specialized in killing demons
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -571,7 +481,7 @@ abilities:
 - id: powers-and-abilities-renowned-for-their-fearlessness-and-skill-combat
   name: renowned for their fearlessness and skill combat
   description: renowned for their fearlessness and skill combat
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -586,7 +496,7 @@ abilities:
 - id: powers-and-abilities-as-they-had-a-lifetime-of-constant
   name: as they had a lifetime of constant
   description: as they had a lifetime of constant
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -604,7 +514,7 @@ abilities:
   description: strenuous training) *Summoning (Can summon a wolf spirit to home into
     enemies and bite them. Marauders can also summon weaker demons or a Baron of Hell
     and to the fight alongside them
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -624,7 +534,7 @@ abilities:
     Reduction (The "Best Friend" perk
   description: although there's a cooldown before they can be summoned again) *Statistics
     Reduction (The "Best Friend" perk
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -644,7 +554,7 @@ abilities:
   description: grants 25% damage reduction for three seconds when the Marauders wolf
     lands an attack. The "Armored" perk cuts damage taken by 50% for 4 seconds) *Healing
     (Mid-low
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -665,7 +575,7 @@ abilities:
     a direct hit with a thrown axe. Haste doubles the users speed for 2 seconds. Demonic
     Onslaught boosts the users damage by 25% for 10 seconds) *Immortality (Types 2
     and 7
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -688,7 +598,7 @@ abilities:
     (Argent Energy - Their Crucible weaponry is made of Argent energy. Essence - Demons
     are capable of devouring souls. Hell's Essence -The demons with their presence
     bring their reality with them
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -707,7 +617,7 @@ abilities:
 - id: powers-and-abilities-hellifying-the-environment-this-can-lead-to-many-destructiv
   name: '"hellifying" the environment. This can lead to many destructive events'
   description: '"hellifying" the environment. This can lead to many destructive events'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -724,7 +634,7 @@ abilities:
     or infecting the atmosphere
   description: all of which benefit them on conquering worlds. Whether that be creating
     Hellgrowths or infecting the atmosphere
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -741,7 +651,7 @@ abilities:
     *Limited BFR (Whatever a demon kil
   description: making it poisonous) *Forcefield Creation (Can create a plasma shield
     nigh-instantly) *Limited BFR (Whatever a demon kills
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -757,7 +667,7 @@ abilities:
 - id: powers-and-abilities-it-gets-sent-to-hell-resistance-to
   name: it gets sent to Hell) Resistance to
   description: it gets sent to Hell) Resistance to
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -772,7 +682,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation-unaffected-by-the-doom-slayer-s-flame-bel
   name: '*Fire Manipulation (Unaffected by the Doom Slayer''s Flame Belch'
   description: '*Fire Manipulation (Unaffected by the Doom Slayer''s Flame Belch'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -795,7 +705,7 @@ abilities:
     \ (Can thaw out of the Slayer's flash freeze instantaneously) *Electricity Manipulation\
     \ (Demons can stand on electrified water with no damage taken) *Poison Manipulation\
     \ (Should be comparable to other demons"
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -814,7 +724,7 @@ abilities:
     (Demons can stand on toxic waste without much issue) *Mind Manipulation (Resists
     the effects of the Arch-vile and buff totems) *Disease Manipulation (Unaffected
     by the Disease filled air of the Blood Swamps) Immunity to
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -830,7 +740,7 @@ abilities:
   name: '*Soul Manipulation (All demons have their souls ripped away from them) }}'
   description: '*Soul Manipulation (All demons have their souls ripped away from them)
     }}'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -853,7 +763,7 @@ weaknesses:
   description: He's briefly vulnerable when his eyes flash green and he must lower
     his shield when attacking an enemy. His Healing Zone lasts for only 8 seconds.
     Haste/Armored has a 30 second cooldown while Demonic Onslaught
-  source_ids: &id005
+  source_ids: &id003
   - vsbattles-marauder-game-doom
   source_claim_ids: []
   confidence: 0.85
@@ -869,7 +779,7 @@ weaknesses:
 - id: weaknesses-team-heal
   name: Team Heal
   description: Team Heal
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -887,7 +797,7 @@ weaknesses:
   description: 'and Baron Summoning have a 45 second cooldown. ==Notable Matchups==
     Victories: Master Chief (Halo) Master Chief''s Profile (Master Chief had his equipment
     up to 8-C key'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -906,7 +816,7 @@ weaknesses:
     \ (Marauder had prior knowledge on Teen Lucy\u2019s v"
   description: "fight took place in a spaceship) Losses: Lucy (Elfen Lied) Lucy\u2019\
     s Profile (Marauder had prior knowledge on Teen Lucy\u2019s vectors"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -923,7 +833,7 @@ weaknesses:
     Profile (Kokichi had Exisals'
   description: 'and speed was equalized) Kokichi Oma (Danganronpa V3: Killing Harmony)
     Kokichi''s Profile (Kokichi had Exisals'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -938,7 +848,7 @@ weaknesses:
 - id: weaknesses-combatants-start-5-meters-apart
   name: combatants start ~5 meters apart
   description: combatants start ~5 meters apart
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -956,7 +866,7 @@ weaknesses:
     {{Discussions'
   description: 'fight took place at the MK1 Palace Gates stage. Speed was equalized)
     Inconclusive: {{Discussions'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -971,7 +881,7 @@ weaknesses:
 - id: weaknesses-marauder-doom
   name: Marauder DOOM
   description: Marauder DOOM
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -996,7 +906,7 @@ weaknesses:
     Category:Weapon Masters Category:Thrown Weapon Users Category:Forcefield Users
     Category:Male Characters Category:Energy Projection Users Category:Reality Warpers
     Category:BFR Users
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1021,640 +931,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id006
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: 63301f428312af9778d22f5948a8458f63e3bd5ce7d686b955fffd9cee281178
 repair:
-  attempted_at: '2026-06-19T07:34:10Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T18:57:51Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-marauder-game-doom
-    url: https://vsbattles.fandom.com/wiki/Marauder_%28Game%29_Doom
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Marauder (DOOM)
-    source_type: mediawiki
-    revision_id: '9523890'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 9799
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id008
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 'At least {{8-C}}, possibly far higher Name: Marauder Origin: DOOM Gender:
-        Male Age: Unknown Classification: Resurrected Former Night Sentinel'
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= *Superhuman Physical\
-        \ Characteristics *Acrobatics (Can double jump and dash in the air) *Weapon\
-        \ Mastery (Is a former Night Sentinel who were an elite fighting force specialized\
-        \ in killing demons, renowned for their fearlessness and skill combat, as\
-        \ they had a lifetime of constant, strenuous training) *Summoning (Can summon\
-        \ a wolf spirit to home into enemies and bite them. Marauders can also summon\
-        \ weaker demons or a Baron of Hell and to the fight alongside them, although\
-        \ there's a cooldown before they can be summoned again) *Statistics Reduction\
-        \ (The \"Best Friend\" perk, grants 25% damage reduction for three seconds\
-        \ when the Marauders wolf lands an attack. The \"Armored\" perk cuts damage\
-        \ taken by 50% for 4 seconds) *Healing (Mid-low, with Team Heal or Healing\
-        \ Zone which heals the user and allies and helps them recover from bullet\
-        \ and explosion damage) *Statistics Amplification (The \"Bury the Hatchet\"\
-        \ perk increases movement speed by 50% for 3 seconds upon a direct hit with\
-        \ a thrown axe. Haste doubles the users speed for 2 seconds. Demonic Onslaught\
-        \ boosts the users damage by 25% for 10 seconds) *Immortality (Types 2 and\
-        \ 7; is an undead demon that can have large chunks of flesh ripped away and\
-        \ still fight. Demons are frequently referred to as mortally challenged and\
-        \ are referred as an army of the undead) *Explosion Manipulation (The Marauder's\
-        \ throwing axe explodes on contact with foe or shortly after hitting a surface)\
-        \ *Energy Projection (His axe can fire a beam of energy when swung) *Essence\
-        \ Manipulation (Argent Energy - Their Crucible weaponry is made of Argent\
-        \ energy. Essence - Demons are capable of devouring souls. Hell's Essence\
-        \ -The demons with their presence bring their reality with them, \"hellifying\"\
-        \ the environment. This can lead to many destructive events, all of which\
-        \ benefit them on conquering worlds. Whether that be creating Hellgrowths\
-        \ or infecting the atmosphere, making it poisonous) *Forcefield Creation (Can\
-        \ create a plasma shield nigh-instantly) *Limited BFR (Whatever a demon kills,\
-        \ it gets sent to Hell) Resistance to; *Fire Manipulation (Unaffected by the\
-        \ Doom Slayer's Flame Belch, which burns at temperatures exceeding 1000\xB0\
-        \ Celsius) *Essence Manipulation (Hell's Essence - Demons fight eachother\
-        \ for extended period of times all the time which includes using their abilities)\
-        \ *Acid Manipulation *Ice Manipulation (Can thaw out of the Slayer's flash\
-        \ freeze instantaneously) *Electricity Manipulation (Demons can stand on electrified\
-        \ water with no damage taken) *Poison Manipulation (Should be comparable to\
-        \ other demons, who can walk through toxic fog with no issue) *Radiation Manipulation\
-        \ (Demons can stand on toxic waste without much issue) *Mind Manipulation\
-        \ (Resists the effects of the Arch-vile and buff totems) *Disease Manipulation\
-        \ (Unaffected by the Disease filled air of the Blood Swamps) Immunity to;\
-        \ *Soul Manipulation (All demons have their souls ripped away from them) }}"
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Building level, possibly far higher (Far superior to Heavy Demons,
-        who can do this)
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Supersonic+ movement speed (Can physically keep up with other
-        Demons) with at least Hypersonic, likely higher reaction speed (Can react
-        to the Doom Slayer's weapons.)
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Building level physically, possibly far higher, Multi-City Block
-        level with his Argent shield (The shield can block all weaponry in game, which
-        includes shots from the BFG9000)
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (The demons of Hell have limitless aggression and are tireless
-        beings)
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range, Tens of Meters with shotguns and thrown axes
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: A Crucible Axe and shield, with a Double Barrel Shotgun
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: At least Above Average. He is comparable to high ranking Night Sentinels,
-        who are trained from birth in the ways of combat and command armies proficiently
-        enough to take down entire hordes of demons with far fewer numbers. Extremely
-        capable in combat and should not be too inferior compared to Doomguy in terms
-        of skill. With high ranking sentinels being able to take on hordes of demons
-        for days on end.
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "He's briefly vulnerable when his eyes flash green and he must lower\
-        \ his shield when attacking an enemy. His Healing Zone lasts for only 8 seconds.\
-        \ Haste/Armored has a 30 second cooldown while Demonic Onslaught, Team Heal,\
-        \ and Baron Summoning have a 45 second cooldown. ==Notable Matchups== Victories:\
-        \ Master Chief (Halo) Master Chief's Profile (Master Chief had his equipment\
-        \ up to 8-C key, fight took place in a spaceship) Losses: Lucy (Elfen Lied)\
-        \ Lucy\u2019s Profile (Marauder had prior knowledge on Teen Lucy\u2019s vectors,\
-        \ and speed was equalized) Kokichi Oma (Danganronpa V3: Killing Harmony) Kokichi's\
-        \ Profile (Kokichi had Exisals, combatants start ~5 meters apart, fight took\
-        \ place at the MK1 Palace Gates stage. Speed was equalized) Inconclusive:\
-        \ {{Discussions|Marauder DOOM|Marauder (DOOM)}} Category:Doom Category:Demons\
-        \ Category:Video Game Characters Category:Axe Users Category:Acrobats Category:Summoners\
-        \ Category:Animal Users Category:Gun Users Category:Shield Users Category:Villains\
-        \ Category:Energy Weapon Users Category:Undead Category:Statistics Amplification\
-        \ Users Category:Statistics Reduction Users Category:Immortals Category:Temperature\
-        \ Users Category:Explosion Users Category:Characters Category:Game Characters\
-        \ Category:Playable Characters Category:Antagonists Category:Evil Characters\
-        \ Category:Revived Characters Category:Warriors Category:Weapon Masters Category:Thrown\
-        \ Weapon Users Category:Forcefield Users Category:Male Characters Category:Energy\
-        \ Projection Users Category:Reality Warpers Category:BFR Users"
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|marauder doom|9523890
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-marauder-game-doom
-    url: https://character-stats-and-profiles.fandom.com/wiki/Marauder_%28Game%29_Doom
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Wandering of Doom (Canon, Garry's Mod)/Greatgorilangaqil
-    source_type: mediawiki
-    revision_id: '449940'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 1907
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{7-C}} Name: Wandering of Doom, Day 18 Origin: Garry''s Mod Age: Unknown
-        Gender: Unknown Classifications: Giants'
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Large Size (Type 3) *Energy Projection
-        & Statistics Amplification (Discharged an energy projections (Alike to Sky
-        Tentacles projectiles) whenever its health points diminished to a certain
-        point and multiply the damage) *Death Manipulation & Durability Negation via
-        Execute (A specific mechanic cause an immediate death upon the target)'
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Town level (Is one of the most strongest giant amongst others [Limited
-        on the depending years and dates]. Superior to Sky Tentacles and Bird Watcher),
-        Durability Negation via Execute
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Athletic Human
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None Notable Category:Greatgorilangaqil
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Negation via Execute (A specific mechanic cause an immediate death upon
-        the target)
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|wandering of doom canon
-      garry s mod greatgorilangaqil|449940
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-marauder-game-doom
-    url: https://vsbattles.fandom.com/wiki/Marauder_%28Game%29_%28Doom%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id011
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Marauder (DOOM)
-    source_type: mediawiki
-    revision_id: '9523890'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 9799
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id012
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 'At least {{8-C}}, possibly far higher Name: Marauder Origin: DOOM Gender:
-        Male Age: Unknown Classification: Resurrected Former Night Sentinel'
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= *Superhuman Physical\
-        \ Characteristics *Acrobatics (Can double jump and dash in the air) *Weapon\
-        \ Mastery (Is a former Night Sentinel who were an elite fighting force specialized\
-        \ in killing demons, renowned for their fearlessness and skill combat, as\
-        \ they had a lifetime of constant, strenuous training) *Summoning (Can summon\
-        \ a wolf spirit to home into enemies and bite them. Marauders can also summon\
-        \ weaker demons or a Baron of Hell and to the fight alongside them, although\
-        \ there's a cooldown before they can be summoned again) *Statistics Reduction\
-        \ (The \"Best Friend\" perk, grants 25% damage reduction for three seconds\
-        \ when the Marauders wolf lands an attack. The \"Armored\" perk cuts damage\
-        \ taken by 50% for 4 seconds) *Healing (Mid-low, with Team Heal or Healing\
-        \ Zone which heals the user and allies and helps them recover from bullet\
-        \ and explosion damage) *Statistics Amplification (The \"Bury the Hatchet\"\
-        \ perk increases movement speed by 50% for 3 seconds upon a direct hit with\
-        \ a thrown axe. Haste doubles the users speed for 2 seconds. Demonic Onslaught\
-        \ boosts the users damage by 25% for 10 seconds) *Immortality (Types 2 and\
-        \ 7; is an undead demon that can have large chunks of flesh ripped away and\
-        \ still fight. Demons are frequently referred to as mortally challenged and\
-        \ are referred as an army of the undead) *Explosion Manipulation (The Marauder's\
-        \ throwing axe explodes on contact with foe or shortly after hitting a surface)\
-        \ *Energy Projection (His axe can fire a beam of energy when swung) *Essence\
-        \ Manipulation (Argent Energy - Their Crucible weaponry is made of Argent\
-        \ energy. Essence - Demons are capable of devouring souls. Hell's Essence\
-        \ -The demons with their presence bring their reality with them, \"hellifying\"\
-        \ the environment. This can lead to many destructive events, all of which\
-        \ benefit them on conquering worlds. Whether that be creating Hellgrowths\
-        \ or infecting the atmosphere, making it poisonous) *Forcefield Creation (Can\
-        \ create a plasma shield nigh-instantly) *Limited BFR (Whatever a demon kills,\
-        \ it gets sent to Hell) Resistance to; *Fire Manipulation (Unaffected by the\
-        \ Doom Slayer's Flame Belch, which burns at temperatures exceeding 1000\xB0\
-        \ Celsius) *Essence Manipulation (Hell's Essence - Demons fight eachother\
-        \ for extended period of times all the time which includes using their abilities)\
-        \ *Acid Manipulation *Ice Manipulation (Can thaw out of the Slayer's flash\
-        \ freeze instantaneously) *Electricity Manipulation (Demons can stand on electrified\
-        \ water with no damage taken) *Poison Manipulation (Should be comparable to\
-        \ other demons, who can walk through toxic fog with no issue) *Radiation Manipulation\
-        \ (Demons can stand on toxic waste without much issue) *Mind Manipulation\
-        \ (Resists the effects of the Arch-vile and buff totems) *Disease Manipulation\
-        \ (Unaffected by the Disease filled air of the Blood Swamps) Immunity to;\
-        \ *Soul Manipulation (All demons have their souls ripped away from them) }}"
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Building level, possibly far higher (Far superior to Heavy Demons,
-        who can do this)
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Supersonic+ movement speed (Can physically keep up with other
-        Demons) with at least Hypersonic, likely higher reaction speed (Can react
-        to the Doom Slayer's weapons.)
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Building level physically, possibly far higher, Multi-City Block
-        level with his Argent shield (The shield can block all weaponry in game, which
-        includes shots from the BFG9000)
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (The demons of Hell have limitless aggression and are tireless
-        beings)
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range, Tens of Meters with shotguns and thrown axes
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: A Crucible Axe and shield, with a Double Barrel Shotgun
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: At least Above Average. He is comparable to high ranking Night Sentinels,
-        who are trained from birth in the ways of combat and command armies proficiently
-        enough to take down entire hordes of demons with far fewer numbers. Extremely
-        capable in combat and should not be too inferior compared to Doomguy in terms
-        of skill. With high ranking sentinels being able to take on hordes of demons
-        for days on end.
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "He's briefly vulnerable when his eyes flash green and he must lower\
-        \ his shield when attacking an enemy. His Healing Zone lasts for only 8 seconds.\
-        \ Haste/Armored has a 30 second cooldown while Demonic Onslaught, Team Heal,\
-        \ and Baron Summoning have a 45 second cooldown. ==Notable Matchups== Victories:\
-        \ Master Chief (Halo) Master Chief's Profile (Master Chief had his equipment\
-        \ up to 8-C key, fight took place in a spaceship) Losses: Lucy (Elfen Lied)\
-        \ Lucy\u2019s Profile (Marauder had prior knowledge on Teen Lucy\u2019s vectors,\
-        \ and speed was equalized) Kokichi Oma (Danganronpa V3: Killing Harmony) Kokichi's\
-        \ Profile (Kokichi had Exisals, combatants start ~5 meters apart, fight took\
-        \ place at the MK1 Palace Gates stage. Speed was equalized) Inconclusive:\
-        \ {{Discussions|Marauder DOOM|Marauder (DOOM)}} Category:Doom Category:Demons\
-        \ Category:Video Game Characters Category:Axe Users Category:Acrobats Category:Summoners\
-        \ Category:Animal Users Category:Gun Users Category:Shield Users Category:Villains\
-        \ Category:Energy Weapon Users Category:Undead Category:Statistics Amplification\
-        \ Users Category:Statistics Reduction Users Category:Immortals Category:Temperature\
-        \ Users Category:Explosion Users Category:Characters Category:Game Characters\
-        \ Category:Playable Characters Category:Antagonists Category:Evil Characters\
-        \ Category:Revived Characters Category:Warriors Category:Weapon Masters Category:Thrown\
-        \ Weapon Users Category:Forcefield Users Category:Male Characters Category:Energy\
-        \ Projection Users Category:Reality Warpers Category:BFR Users"
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|marauder doom|9523890
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-marauder-game-doom
-    url: https://character-stats-and-profiles.fandom.com/wiki/Marauder_%28Game%29_%28Doom%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Wandering of Doom (Canon, Garry's Mod)/Greatgorilangaqil
-    source_type: mediawiki
-    revision_id: '449940'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 1907
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{7-C}} Name: Wandering of Doom, Day 18 Origin: Garry''s Mod Age: Unknown
-        Gender: Unknown Classifications: Giants'
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Large Size (Type 3) *Energy Projection
-        & Statistics Amplification (Discharged an energy projections (Alike to Sky
-        Tentacles projectiles) whenever its health points diminished to a certain
-        point and multiply the damage) *Death Manipulation & Durability Negation via
-        Execute (A specific mechanic cause an immediate death upon the target)'
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Town level (Is one of the most strongest giant amongst others [Limited
-        on the depending years and dates]. Superior to Sky Tentacles and Bird Watcher),
-        Durability Negation via Execute
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Athletic Human
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None Notable Category:Greatgorilangaqil
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Negation via Execute (A specific mechanic cause an immediate death upon
-        the target)
-      source_id: character-stats-profiles-marauder-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|wandering of doom canon
-      garry s mod greatgorilangaqil|449940
-    retryable: false
-    exception_class: ''
   - source_id: mediawiki-marauder-game
-    url: https://vsbattles.fandom.com/wiki/Marauder_(Game)
+    url: https://vsbattles.fandom.com/wiki/Marauder_(DOOM)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id015
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1682,6 +979,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1695,7 +993,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id016
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -1708,53 +1006,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: 'At least {{8-C}}, possibly far higher Name: Marauder Origin: DOOM Gender:
-        Male Age: Unknown Classification: Resurrected Former Night Sentinel'
-      source_id: mediawiki-marauder-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= *Superhuman Physical\
-        \ Characteristics *Acrobatics (Can double jump and dash in the air) *Weapon\
-        \ Mastery (Is a former Night Sentinel who were an elite fighting force specialized\
-        \ in killing demons, renowned for their fearlessness and skill combat, as\
-        \ they had a lifetime of constant, strenuous training) *Summoning (Can summon\
-        \ a wolf spirit to home into enemies and bite them. Marauders can also summon\
-        \ weaker demons or a Baron of Hell and to the fight alongside them, although\
-        \ there's a cooldown before they can be summoned again) *Statistics Reduction\
-        \ (The \"Best Friend\" perk, grants 25% damage reduction for three seconds\
-        \ when the Marauders wolf lands an attack. The \"Armored\" perk cuts damage\
-        \ taken by 50% for 4 seconds) *Healing (Mid-low, with Team Heal or Healing\
-        \ Zone which heals the user and allies and helps them recover from bullet\
-        \ and explosion damage) *Statistics Amplification (The \"Bury the Hatchet\"\
-        \ perk increases movement speed by 50% for 3 seconds upon a direct hit with\
-        \ a thrown axe. Haste doubles the users speed for 2 seconds. Demonic Onslaught\
-        \ boosts the users damage by 25% for 10 seconds) *Immortality (Types 2 and\
-        \ 7; is an undead demon that can have large chunks of flesh ripped away and\
-        \ still fight. Demons are frequently referred to as mortally challenged and\
-        \ are referred as an army of the undead) *Explosion Manipulation (The Marauder's\
-        \ throwing axe explodes on contact with foe or shortly after hitting a surface)\
-        \ *Energy Projection (His axe can fire a beam of energy when swung) *Essence\
-        \ Manipulation (Argent Energy - Their Crucible weaponry is made of Argent\
-        \ energy. Essence - Demons are capable of devouring souls. Hell's Essence\
-        \ -The demons with their presence bring their reality with them, \"hellifying\"\
-        \ the environment. This can lead to many destructive events, all of which\
-        \ benefit them on conquering worlds. Whether that be creating Hellgrowths\
-        \ or infecting the atmosphere, making it poisonous) *Forcefield Creation (Can\
-        \ create a plasma shield nigh-instantly) *Limited BFR (Whatever a demon kills,\
-        \ it gets sent to Hell) Resistance to; *Fire Manipulation (Unaffected by the\
-        \ Doom Slayer's Flame Belch, which burns at temperatures exceeding 1000\xB0\
-        \ Celsius) *Essence Manipulation (Hell's Essence - Demons fight eachother\
-        \ for extended period of times all the time which includes using their abilities)\
-        \ *Acid Manipulation *Ice Manipulation (Can thaw out of the Slayer's flash\
-        \ freeze instantaneously) *Electricity Manipulation (Demons can stand on electrified\
-        \ water with no damage taken) *Poison Manipulation (Should be comparable to\
-        \ other demons, who can walk through toxic fog with no issue) *Radiation Manipulation\
-        \ (Demons can stand on toxic waste without much issue) *Mind Manipulation\
-        \ (Resists the effects of the Arch-vile and buff totems) *Disease Manipulation\
-        \ (Unaffected by the Disease filled air of the Blood Swamps) Immunity to;\
-        \ *Soul Manipulation (All demons have their souls ripped away from them) }}"
+      value: At least , possibly far higher
       source_id: mediawiki-marauder-game
       provider_id: vsbattles
       authority: high
@@ -1823,16 +1075,22 @@ repair:
         \ and speed was equalized) Kokichi Oma (Danganronpa V3: Killing Harmony) Kokichi's\
         \ Profile (Kokichi had Exisals, combatants start ~5 meters apart, fight took\
         \ place at the MK1 Palace Gates stage. Speed was equalized) Inconclusive:\
-        \ {{Discussions|Marauder DOOM|Marauder (DOOM)}} Category:Doom Category:Demons\
-        \ Category:Video Game Characters Category:Axe Users Category:Acrobats Category:Summoners\
-        \ Category:Animal Users Category:Gun Users Category:Shield Users Category:Villains\
-        \ Category:Energy Weapon Users Category:Undead Category:Statistics Amplification\
-        \ Users Category:Statistics Reduction Users Category:Immortals Category:Temperature\
-        \ Users Category:Explosion Users Category:Characters Category:Game Characters\
-        \ Category:Playable Characters Category:Antagonists Category:Evil Characters\
-        \ Category:Revived Characters Category:Warriors Category:Weapon Masters Category:Thrown\
-        \ Weapon Users Category:Forcefield Users Category:Male Characters Category:Energy\
-        \ Projection Users Category:Reality Warpers Category:BFR Users"
+        \ Category:Doom Category:Demons Category:Video Game Characters Category:Axe\
+        \ Users Category:Acrobats Category:Summoners Category:Animal Users Category:Gun\
+        \ Users Category:Shield Users Category:Villains Category:Energy Weapon Users\
+        \ Category:Undead Category:Statistics Amplification Users Category:Statistics\
+        \ Reduction Users Category:Immortals Category:Temperature Users Category:Explosion\
+        \ Users Category:Characters Category:Game Characters Category:Playable Characters\
+        \ Category:Antagonists Category:Evil Characters Category:Revived Characters\
+        \ Category:Warriors Category:Weapon Masters Category:Thrown Weapon Users Category:Forcefield\
+        \ Users Category:Male Characters Category:Energy Projection Users Category:Reality\
+        \ Warpers Category:BFR Users"
+      source_id: mediawiki-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: mediawiki-marauder-game
       provider_id: vsbattles
       authority: high
@@ -1850,38 +1108,33 @@ repair:
     duplicate_key: vsbattles.fandom.com|marauder doom|9523890
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-marauder-game
-    url: https://vsbattles.fandom.com/wiki/Marauder_%28Game%29
+  - source_id: character-stats-profiles-marauder-game-doom
+    url: https://character-stats-and-profiles.fandom.com/wiki/Wandering_of_Doom_(Canon,_Garry%27s_Mod)/Greatgorilangaqil
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id017
+    extracted_fields:
     - attack_potency
     - durability
-    - intelligence
     - powers_and_abilities
-    - range
     - speed
-    - stamina
-    - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Marauder (DOOM)
+    normalized_page_title: Wandering of Doom (Canon, Garry's Mod)/Greatgorilangaqil
     source_type: mediawiki
-    revision_id: '9523890'
+    revision_id: '449940'
     fetch_status: fetched
     http_status: 200
-    content_length: 9799
+    content_length: 1907
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
-    - Notable Matchups
     stat_labels_detected:
     - attack_potency
     - durability
     - intelligence
-    - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1892,10 +1145,10 @@ repair:
     - weaknesses
     extraction_failure_reason: ''
     rank: 105
-    provider_id: vsbattles
+    provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id018
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1905,134 +1158,48 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 'At least {{8-C}}, possibly far higher Name: Marauder Origin: DOOM Gender:
-        Male Age: Unknown Classification: Resurrected Former Night Sentinel'
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: "{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= *Superhuman Physical\
-        \ Characteristics *Acrobatics (Can double jump and dash in the air) *Weapon\
-        \ Mastery (Is a former Night Sentinel who were an elite fighting force specialized\
-        \ in killing demons, renowned for their fearlessness and skill combat, as\
-        \ they had a lifetime of constant, strenuous training) *Summoning (Can summon\
-        \ a wolf spirit to home into enemies and bite them. Marauders can also summon\
-        \ weaker demons or a Baron of Hell and to the fight alongside them, although\
-        \ there's a cooldown before they can be summoned again) *Statistics Reduction\
-        \ (The \"Best Friend\" perk, grants 25% damage reduction for three seconds\
-        \ when the Marauders wolf lands an attack. The \"Armored\" perk cuts damage\
-        \ taken by 50% for 4 seconds) *Healing (Mid-low, with Team Heal or Healing\
-        \ Zone which heals the user and allies and helps them recover from bullet\
-        \ and explosion damage) *Statistics Amplification (The \"Bury the Hatchet\"\
-        \ perk increases movement speed by 50% for 3 seconds upon a direct hit with\
-        \ a thrown axe. Haste doubles the users speed for 2 seconds. Demonic Onslaught\
-        \ boosts the users damage by 25% for 10 seconds) *Immortality (Types 2 and\
-        \ 7; is an undead demon that can have large chunks of flesh ripped away and\
-        \ still fight. Demons are frequently referred to as mortally challenged and\
-        \ are referred as an army of the undead) *Explosion Manipulation (The Marauder's\
-        \ throwing axe explodes on contact with foe or shortly after hitting a surface)\
-        \ *Energy Projection (His axe can fire a beam of energy when swung) *Essence\
-        \ Manipulation (Argent Energy - Their Crucible weaponry is made of Argent\
-        \ energy. Essence - Demons are capable of devouring souls. Hell's Essence\
-        \ -The demons with their presence bring their reality with them, \"hellifying\"\
-        \ the environment. This can lead to many destructive events, all of which\
-        \ benefit them on conquering worlds. Whether that be creating Hellgrowths\
-        \ or infecting the atmosphere, making it poisonous) *Forcefield Creation (Can\
-        \ create a plasma shield nigh-instantly) *Limited BFR (Whatever a demon kills,\
-        \ it gets sent to Hell) Resistance to; *Fire Manipulation (Unaffected by the\
-        \ Doom Slayer's Flame Belch, which burns at temperatures exceeding 1000\xB0\
-        \ Celsius) *Essence Manipulation (Hell's Essence - Demons fight eachother\
-        \ for extended period of times all the time which includes using their abilities)\
-        \ *Acid Manipulation *Ice Manipulation (Can thaw out of the Slayer's flash\
-        \ freeze instantaneously) *Electricity Manipulation (Demons can stand on electrified\
-        \ water with no damage taken) *Poison Manipulation (Should be comparable to\
-        \ other demons, who can walk through toxic fog with no issue) *Radiation Manipulation\
-        \ (Demons can stand on toxic waste without much issue) *Mind Manipulation\
-        \ (Resists the effects of the Arch-vile and buff totems) *Disease Manipulation\
-        \ (Unaffected by the Disease filled air of the Blood Swamps) Immunity to;\
-        \ *Soul Manipulation (All demons have their souls ripped away from them) }}"
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
+      value: '*Superhuman Physical Characteristics *Large Size (Type 3) *Energy Projection
+        & Statistics Amplification (Discharged an energy projections (Alike to Sky
+        Tentacles projectiles) whenever its health points diminished to a certain
+        point and multiply the damage) *Death Manipulation & Durability Negation via
+        Execute (A specific mechanic cause an immediate death upon the target)'
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: At least Building level, possibly far higher (Far superior to Heavy Demons,
-        who can do this)
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
+      value: Town level (Is one of the most strongest giant amongst others [Limited
+        on the depending years and dates]. Superior to Sky Tentacles and Bird Watcher),
+        Durability Negation via Execute
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: At least Supersonic+ movement speed (Can physically keep up with other
-        Demons) with at least Hypersonic, likely higher reaction speed (Can react
-        to the Doom Slayer's weapons.)
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Building level physically, possibly far higher, Multi-City Block
-        level with his Argent shield (The shield can block all weaponry in game, which
-        includes shots from the BFG9000)
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (The demons of Hell have limitless aggression and are tireless
-        beings)
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range, Tens of Meters with shotguns and thrown axes
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: A Crucible Axe and shield, with a Double Barrel Shotgun
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: At least Above Average. He is comparable to high ranking Night Sentinels,
-        who are trained from birth in the ways of combat and command armies proficiently
-        enough to take down entire hordes of demons with far fewer numbers. Extremely
-        capable in combat and should not be too inferior compared to Doomguy in terms
-        of skill. With high ranking sentinels being able to take on hordes of demons
-        for days on end.
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
+      value: Athletic Human
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "He's briefly vulnerable when his eyes flash green and he must lower\
-        \ his shield when attacking an enemy. His Healing Zone lasts for only 8 seconds.\
-        \ Haste/Armored has a 30 second cooldown while Demonic Onslaught, Team Heal,\
-        \ and Baron Summoning have a 45 second cooldown. ==Notable Matchups== Victories:\
-        \ Master Chief (Halo) Master Chief's Profile (Master Chief had his equipment\
-        \ up to 8-C key, fight took place in a spaceship) Losses: Lucy (Elfen Lied)\
-        \ Lucy\u2019s Profile (Marauder had prior knowledge on Teen Lucy\u2019s vectors,\
-        \ and speed was equalized) Kokichi Oma (Danganronpa V3: Killing Harmony) Kokichi's\
-        \ Profile (Kokichi had Exisals, combatants start ~5 meters apart, fight took\
-        \ place at the MK1 Palace Gates stage. Speed was equalized) Inconclusive:\
-        \ {{Discussions|Marauder DOOM|Marauder (DOOM)}} Category:Doom Category:Demons\
-        \ Category:Video Game Characters Category:Axe Users Category:Acrobats Category:Summoners\
-        \ Category:Animal Users Category:Gun Users Category:Shield Users Category:Villains\
-        \ Category:Energy Weapon Users Category:Undead Category:Statistics Amplification\
-        \ Users Category:Statistics Reduction Users Category:Immortals Category:Temperature\
-        \ Users Category:Explosion Users Category:Characters Category:Game Characters\
-        \ Category:Playable Characters Category:Antagonists Category:Evil Characters\
-        \ Category:Revived Characters Category:Warriors Category:Weapon Masters Category:Thrown\
-        \ Weapon Users Category:Forcefield Users Category:Male Characters Category:Energy\
-        \ Projection Users Category:Reality Warpers Category:BFR Users"
-      source_id: vsbattles-marauder-game
-      provider_id: vsbattles
+      value: None Notable Category:Greatgorilangaqil
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Wandering of Doom, Day 18 Origin: Garry''s Mod Age: Unknown Gender:
+        Unknown Classifications: Giants'
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Negation via Execute (A specific mechanic cause an immediate death upon
+        the target)
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     identity_match: false
@@ -2045,14 +1212,15 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|marauder doom|9523890
+    duplicate_key: character-stats-and-profiles.fandom.com|wandering of doom canon
+      garry s mod greatgorilangaqil|449940
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-marauder-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Marauder_%28Game%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/The_One_Giver_(Canon)/Udlmaster
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id021
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -2075,6 +1243,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2088,7 +1257,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id022
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2099,11 +1268,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 'High 1-A | Varies, up to High 1-A Name: The One Giver, God, Goddess
-        | YHVH, Jehovah, Ein Soph, The Unmoved Mover, Ra, and many more Origin: World
-        of Darkness Gender: Not applicable, however, is called Female | Varies Age:
-        Existed before Time Classification: Monotheistic Deity, God, Supreme Deity
-        | ELOHIM, Earthly Deities, Creator of the Angels, Godheads |-| The One Giver'
+      value: High 1-A | Varies, up to High 1-A
       source_id: character-stats-profiles-marauder-game
       provider_id: character_stats_profiles
       authority: high
@@ -2229,10 +1394,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: vsbattles-marauder-game-doom
-    url: https://vsbattles.fandom.com/wiki/Marauder_Game_Doom
+    url: https://vsbattles.fandom.com/wiki/Marauder_%28Game%29_Doom
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id019
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2260,6 +1425,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2273,7 +1439,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id020
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2284,53 +1450,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 'At least {{8-C}}, possibly far higher Name: Marauder Origin: DOOM Gender:
-        Male Age: Unknown Classification: Resurrected Former Night Sentinel'
-      source_id: vsbattles-marauder-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= *Superhuman Physical\
-        \ Characteristics *Acrobatics (Can double jump and dash in the air) *Weapon\
-        \ Mastery (Is a former Night Sentinel who were an elite fighting force specialized\
-        \ in killing demons, renowned for their fearlessness and skill combat, as\
-        \ they had a lifetime of constant, strenuous training) *Summoning (Can summon\
-        \ a wolf spirit to home into enemies and bite them. Marauders can also summon\
-        \ weaker demons or a Baron of Hell and to the fight alongside them, although\
-        \ there's a cooldown before they can be summoned again) *Statistics Reduction\
-        \ (The \"Best Friend\" perk, grants 25% damage reduction for three seconds\
-        \ when the Marauders wolf lands an attack. The \"Armored\" perk cuts damage\
-        \ taken by 50% for 4 seconds) *Healing (Mid-low, with Team Heal or Healing\
-        \ Zone which heals the user and allies and helps them recover from bullet\
-        \ and explosion damage) *Statistics Amplification (The \"Bury the Hatchet\"\
-        \ perk increases movement speed by 50% for 3 seconds upon a direct hit with\
-        \ a thrown axe. Haste doubles the users speed for 2 seconds. Demonic Onslaught\
-        \ boosts the users damage by 25% for 10 seconds) *Immortality (Types 2 and\
-        \ 7; is an undead demon that can have large chunks of flesh ripped away and\
-        \ still fight. Demons are frequently referred to as mortally challenged and\
-        \ are referred as an army of the undead) *Explosion Manipulation (The Marauder's\
-        \ throwing axe explodes on contact with foe or shortly after hitting a surface)\
-        \ *Energy Projection (His axe can fire a beam of energy when swung) *Essence\
-        \ Manipulation (Argent Energy - Their Crucible weaponry is made of Argent\
-        \ energy. Essence - Demons are capable of devouring souls. Hell's Essence\
-        \ -The demons with their presence bring their reality with them, \"hellifying\"\
-        \ the environment. This can lead to many destructive events, all of which\
-        \ benefit them on conquering worlds. Whether that be creating Hellgrowths\
-        \ or infecting the atmosphere, making it poisonous) *Forcefield Creation (Can\
-        \ create a plasma shield nigh-instantly) *Limited BFR (Whatever a demon kills,\
-        \ it gets sent to Hell) Resistance to; *Fire Manipulation (Unaffected by the\
-        \ Doom Slayer's Flame Belch, which burns at temperatures exceeding 1000\xB0\
-        \ Celsius) *Essence Manipulation (Hell's Essence - Demons fight eachother\
-        \ for extended period of times all the time which includes using their abilities)\
-        \ *Acid Manipulation *Ice Manipulation (Can thaw out of the Slayer's flash\
-        \ freeze instantaneously) *Electricity Manipulation (Demons can stand on electrified\
-        \ water with no damage taken) *Poison Manipulation (Should be comparable to\
-        \ other demons, who can walk through toxic fog with no issue) *Radiation Manipulation\
-        \ (Demons can stand on toxic waste without much issue) *Mind Manipulation\
-        \ (Resists the effects of the Arch-vile and buff totems) *Disease Manipulation\
-        \ (Unaffected by the Disease filled air of the Blood Swamps) Immunity to;\
-        \ *Soul Manipulation (All demons have their souls ripped away from them) }}"
+      value: At least , possibly far higher
       source_id: vsbattles-marauder-game-doom
       provider_id: vsbattles
       authority: high
@@ -2399,16 +1519,22 @@ repair:
         \ and speed was equalized) Kokichi Oma (Danganronpa V3: Killing Harmony) Kokichi's\
         \ Profile (Kokichi had Exisals, combatants start ~5 meters apart, fight took\
         \ place at the MK1 Palace Gates stage. Speed was equalized) Inconclusive:\
-        \ {{Discussions|Marauder DOOM|Marauder (DOOM)}} Category:Doom Category:Demons\
-        \ Category:Video Game Characters Category:Axe Users Category:Acrobats Category:Summoners\
-        \ Category:Animal Users Category:Gun Users Category:Shield Users Category:Villains\
-        \ Category:Energy Weapon Users Category:Undead Category:Statistics Amplification\
-        \ Users Category:Statistics Reduction Users Category:Immortals Category:Temperature\
-        \ Users Category:Explosion Users Category:Characters Category:Game Characters\
-        \ Category:Playable Characters Category:Antagonists Category:Evil Characters\
-        \ Category:Revived Characters Category:Warriors Category:Weapon Masters Category:Thrown\
-        \ Weapon Users Category:Forcefield Users Category:Male Characters Category:Energy\
-        \ Projection Users Category:Reality Warpers Category:BFR Users"
+        \ Category:Doom Category:Demons Category:Video Game Characters Category:Axe\
+        \ Users Category:Acrobats Category:Summoners Category:Animal Users Category:Gun\
+        \ Users Category:Shield Users Category:Villains Category:Energy Weapon Users\
+        \ Category:Undead Category:Statistics Amplification Users Category:Statistics\
+        \ Reduction Users Category:Immortals Category:Temperature Users Category:Explosion\
+        \ Users Category:Characters Category:Game Characters Category:Playable Characters\
+        \ Category:Antagonists Category:Evil Characters Category:Revived Characters\
+        \ Category:Warriors Category:Weapon Masters Category:Thrown Weapon Users Category:Forcefield\
+        \ Users Category:Male Characters Category:Energy Projection Users Category:Reality\
+        \ Warpers Category:BFR Users"
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: vsbattles-marauder-game-doom
       provider_id: vsbattles
       authority: high
@@ -2426,39 +1552,199 @@ repair:
     duplicate_key: vsbattles.fandom.com|marauder doom|9523890
     retryable: false
     exception_class: ''
-  needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-marauder-game-doom
-    url: https://vsbattles.fandom.com/wiki/Marauder_%28Game%29_Doom
-    title: Marauder (DOOM)
-    rank: 105
-    extracted_fields: *id007
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|marauder doom|9523890
   - source_id: character-stats-profiles-marauder-game-doom
     url: https://character-stats-and-profiles.fandom.com/wiki/Marauder_%28Game%29_Doom
-    title: Wandering of Doom (Canon, Garry's Mod)/Greatgorilangaqil
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Doomguy (Canon)/Drowzy-E
+    source_type: mediawiki
+    revision_id: '219043'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 79962
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 105
-    extracted_fields: *id009
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-A, higher with the BFG-9000, 7-B to 7-A with the Unmaker | At least
+        High 6-A, possibly High 2-A
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Genius Intelligence, Weapon Mastery
+        (He can use Hell technology when he finds it), Dimensional Storage, Immortality
+        (Type 6. He can push past certain death, sickness and exhaustion. Possibly
+        type 3), Blessed (The Maykrs bolster the souls of Sentinels and the Elemental
+        Wraiths empower their attacks), Enhanced Senses (He picked up on every demon
+        in this unlit room. Via the Light Amplification Visors), Extrasensory Perception
+        (He can see evil spirits and Lost Souls), Soul Manipulation, Mind Manipulation
+        (He can destroy Spiritual Armor. He can battle evil spirits and Lost Souls.
+        He can use Spiritual Armor), Forcefield Creation (He can use Spiritual Armor),
+        Power Scream (He leveled a building with his scream), Explosion Manipulation
+        (Via the Rocket Launcher), Plasma Manipulation & Energy Manipulation (The
+        Plasma Rifle and BFG-9000 fire plasma energy), Heat Manipulation (The Plasma
+        Rifle can fry demons), Healing (Via a Health Potion, Medikit, Stimpack, Soul
+        Sphere, Megasphere or Berserk Pack), Magic (Via a Health Potion), Statistics
+        Amplification (The Berserk Pack makes him 10x stronger), Curing (The Medikit
+        uses antitoxins), Invisibility (The Blur Artifact makes him nigh-invisible
+        to demons, which can see Lost Souls), Invulnerability (Via the Invulnerability
+        Artifact), Hell Energy & Light Manipulation (The Unmaker is described as a
+        hell laser weapon), Biological Manipulation (The Stimpack uses enzymes), Immortality
+        Negation (Types 6 and 7. He can kill other Doomguys and zombies. Possibly
+        type 3 via killing Doomguys), Argent Energy (The Ballista fires a twin beam
+        of superheated Argent Energy), with the Crucibles: Power Nullification (It
+        can shut down the Well and close off Hell portals), Power Absorption (It''s
+        known for absorbing the Well''s power), Portal Creation (It can create portals
+        to Hell when powering the Fortress of Doom. Non-combat applicable), limited
+        Technological Manipulation (It can power the Fortress of Doom and its abilities),
+        Fire Manipulation (It''s a fire sword), Energy Manipulation (It''s an energy
+        sword), Resurrection Negation (The Crucible can consistently prevent the Titans
+        from resurrecting), Heat Manipulation (It burns through demons it slices),
+        Wraith Energy (Wraith-Fire forms the Crucible''s blade) Superhuman Physical
+        Characteristics, Weapon Mastery, (He could use the UAC EMG Sidearm as soon
+        as he picked it up; same thing with the Plasma Rifle), Vehicular Mastery (He
+        could operate various UAC machines as soon as he got in them, and he could
+        use a Revenant skillfully after possessing it), Genius Intelligence, Non-Physical
+        Interaction, Dimensional Storage, Absorption (He canonically absorbs enemy
+        drops as part of the Praetor Suit), Immortality (Types 3 and 6. He can return
+        via Eternal Life After Death. His rage lets him push past mortal wounds and
+        certain death on a consistent basis), Regeneration (Mid-Godly. Via Eternal
+        Life After Death. See note), Fate Manipulation (Passive. Due to the eternal
+        struggle between good and evil, there will always be demons and the Slayer,
+        their battle forever eternal. To the demons, he always has come, and always
+        will. His fight against demons made him fight against the souls of the doomed,
+        and the demons were made the slaves of doom. They were made the army of doom,
+        and he brings certain doom upon them. This happens because he is the right
+        hand of doom itself, he''s the god of it; he is doom. He was fated to encounter
+        the Icon of Sin. The Khan Maykr and all Maykrs are fated to be destroyed by
+        him in every single possible future timeline across infinite possibilities.
+        This encompasses the entire cosmology, and his existence is entirely different
+        from the endless changing variable data, as he is a singular constant that
+        cannot be altered), Abstract Existence (Type 4. He is the right hand of doom
+        itself, he''s the god of it; he is doom), Metaphysics Manipulation (He can
+        kill Maykrs, which interact over the Singularity. When he harmed Deag Nilox
+        he harmed soul directly. He can fight evil spirits. He can destroy other Doomguys''
+        spiritual armor. By damaging enemies he staggers them, and staggered enemies
+        are mentally dazed and confused, meaning he affects them metaphysically with
+        his attacks. He consistently instills fear within all of the demons. When
+        he kills another Doom Slayer he can take his soul, sometimes multiple. Him
+        killing demons makes him a soul taker, implying he takes their soul upon killing
+        them. He even harvests five souls on killing them. He fought against souls
+        in his conquest against Hell. He destroyed the shield of the Gladiator, which
+        contains its soul. He can destroy Buff Totems, which are incarnal manifestations
+        of human suffering, formed from the tortured resonance of the once living),
+        Guided (The souls of fallen Night Sentinels appeared before the threat of
+        the Spider Mastermind. He is assisted by VEGA in combat. The Sentinel Wolf
+        guides his path and is both comparable to and shares instincts with Sentinels'
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level (He can kill Imps. Imps can destroy titanium armor
+        and air tanks, and they are superior to Implings. Implings can flatten humans
+        which requires this energy. Implings can harm Stan Blazkowicz who can smash
+        military equipment. Doomguy scales to the Ranger, who killed Shub-Niggurath.
+        Shub-Niggurath is stronger than her minions, including the Shamblers, which
+        are superior to Imps. Other Quake soldiers can kill Shamblers easily and mutilate
+        Death Knights, which are also superior to Imps. Both Doomguy and the Ranger
+        scale to Bitterman, who views Strogg that survive atmospheric entry as weak
+        and has received Strogg enhancements to become stronger. Bitterman also tanked
+        crashing into a planet, and he also withstood a collision that destroyed his
+        ship, which is capable of destroying large meteors), higher with the BFG-9000
+        (The BFG does 4x to 20x more damage than the Berserk Pack. The Berserk Pack
+        makes Doomguy 10x stronger, allowing him to oneshot himself), City level to
+        Mountain level with the Unmaker (The Unmaker easily destroys the Mother of
+        All Demons, whereas she is far superior to the Icon of Sin. The Icon of Sin
+        thrashed untold miles of Hell) | At least Multi-Continent level (He one-shot
+        the Hell Priests. Each Hell Priest sustained part of Earth's consumption across
+        continents. He killed the Gladiator, whereas the Gladiator is the guardian
+        of Deag Grav and also had to be killed to stop Earth's consumption. He killed
+        the Titan, which is this powerful. Titans are also comparable to Ancestrals,
+        which tore apart the land of Argent D'Nur by moving. He broke some chains
+        that Titans couldn't. The Elemental Wraiths are gods whereas the Ancestrals
+        are not, and they brought life to Argent D'Nur, creating its biosphere. He
+        is also a god just as the Elemental Wraiths. He killed the Khan Maykr, who
+        is also a god like the Elemental Wraiths. He mutilated the Icon of Sin into
+        submission, whereas it was a Titan, was going to devastate Earth, and was
+        out of the Khan Maykr's control), possibly High Multiverse level+ (He imploded
+        Hell and Urdak realms, whereas they both transcend space-time and there are
+        infinite timelines. He's comparable to Davoth via being a Primeval, and Davoth
+        corrupted all of Hell. Davoth also shook Urdak with his scream. He killed
+        the Khan Maykr, who created a storm across Urdak. He mutilated the Icon of
+        Sin, and the Icon was creating a black hole that would bind the universe to
+        Hell via a pathway of darkness transcending space-time. The Icon of Sin was
+        also far superior to the Khan Maykr. He has since absorbed the power of all
+        those he has defeated)
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (He is called a time walker and has fought through time.
+        Maykrs can move through time and space. Maykrs are composed of the same dimensions
+        as Urdak. He scales to the Khan Maykr's ability. He can move across realms
+        that transcend space-time)
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level | At least Multi-Continent level, possibly High
+        Multiverse level+
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: He mainly uses whatever does the most damage. He has to restock his ammo
+        via pickups. | He isn't blessed by the Maykrs. He has to restock his ammo
+        via pickups or killing enemies.
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
@@ -2469,18 +1755,155 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|wandering of doom canon
-      garry s mod greatgorilangaqil|449940
+    duplicate_key: character-stats-and-profiles.fandom.com|doomguy canon drowzy e|219043
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-marauder-game-doom
     url: https://vsbattles.fandom.com/wiki/Marauder_%28Game%29_%28Doom%29
-    title: Marauder (DOOM)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Marauder (DOOM)
+    source_type: mediawiki
+    revision_id: '9523890'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 9799
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 105
-    extracted_fields: *id011
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least , possibly far higher
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Building level, possibly far higher (Far superior to Heavy Demons,
+        who can do this)
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Supersonic+ movement speed (Can physically keep up with other
+        Demons) with at least Hypersonic, likely higher reaction speed (Can react
+        to the Doom Slayer's weapons.)
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Building level physically, possibly far higher, Multi-City Block
+        level with his Argent shield (The shield can block all weaponry in game, which
+        includes shots from the BFG9000)
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (The demons of Hell have limitless aggression and are tireless
+        beings)
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range, Tens of Meters with shotguns and thrown axes
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: A Crucible Axe and shield, with a Double Barrel Shotgun
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: At least Above Average. He is comparable to high ranking Night Sentinels,
+        who are trained from birth in the ways of combat and command armies proficiently
+        enough to take down entire hordes of demons with far fewer numbers. Extremely
+        capable in combat and should not be too inferior compared to Doomguy in terms
+        of skill. With high ranking sentinels being able to take on hordes of demons
+        for days on end.
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "He's briefly vulnerable when his eyes flash green and he must lower\
+        \ his shield when attacking an enemy. His Healing Zone lasts for only 8 seconds.\
+        \ Haste/Armored has a 30 second cooldown while Demonic Onslaught, Team Heal,\
+        \ and Baron Summoning have a 45 second cooldown. ==Notable Matchups== Victories:\
+        \ Master Chief (Halo) Master Chief's Profile (Master Chief had his equipment\
+        \ up to 8-C key, fight took place in a spaceship) Losses: Lucy (Elfen Lied)\
+        \ Lucy\u2019s Profile (Marauder had prior knowledge on Teen Lucy\u2019s vectors,\
+        \ and speed was equalized) Kokichi Oma (Danganronpa V3: Killing Harmony) Kokichi's\
+        \ Profile (Kokichi had Exisals, combatants start ~5 meters apart, fight took\
+        \ place at the MK1 Palace Gates stage. Speed was equalized) Inconclusive:\
+        \ Category:Doom Category:Demons Category:Video Game Characters Category:Axe\
+        \ Users Category:Acrobats Category:Summoners Category:Animal Users Category:Gun\
+        \ Users Category:Shield Users Category:Villains Category:Energy Weapon Users\
+        \ Category:Undead Category:Statistics Amplification Users Category:Statistics\
+        \ Reduction Users Category:Immortals Category:Temperature Users Category:Explosion\
+        \ Users Category:Characters Category:Game Characters Category:Playable Characters\
+        \ Category:Antagonists Category:Evil Characters Category:Revived Characters\
+        \ Category:Warriors Category:Weapon Masters Category:Thrown Weapon Users Category:Forcefield\
+        \ Users Category:Male Characters Category:Energy Projection Users Category:Reality\
+        \ Warpers Category:BFR Users"
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
+      source_id: vsbattles-marauder-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
@@ -2492,16 +1915,201 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|marauder doom|9523890
+    retryable: false
+    exception_class: ''
   - source_id: character-stats-profiles-marauder-game-doom
     url: https://character-stats-and-profiles.fandom.com/wiki/Marauder_%28Game%29_%28Doom%29
-    title: Wandering of Doom (Canon, Garry's Mod)/Greatgorilangaqil
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Doomguy (Canon)/Drowzy-E
+    source_type: mediawiki
+    revision_id: '219043'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 79962
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 105
-    extracted_fields: *id013
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-A, higher with the BFG-9000, 7-B to 7-A with the Unmaker | At least
+        High 6-A, possibly High 2-A
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Genius Intelligence, Weapon Mastery
+        (He can use Hell technology when he finds it), Dimensional Storage, Immortality
+        (Type 6. He can push past certain death, sickness and exhaustion. Possibly
+        type 3), Blessed (The Maykrs bolster the souls of Sentinels and the Elemental
+        Wraiths empower their attacks), Enhanced Senses (He picked up on every demon
+        in this unlit room. Via the Light Amplification Visors), Extrasensory Perception
+        (He can see evil spirits and Lost Souls), Soul Manipulation, Mind Manipulation
+        (He can destroy Spiritual Armor. He can battle evil spirits and Lost Souls.
+        He can use Spiritual Armor), Forcefield Creation (He can use Spiritual Armor),
+        Power Scream (He leveled a building with his scream), Explosion Manipulation
+        (Via the Rocket Launcher), Plasma Manipulation & Energy Manipulation (The
+        Plasma Rifle and BFG-9000 fire plasma energy), Heat Manipulation (The Plasma
+        Rifle can fry demons), Healing (Via a Health Potion, Medikit, Stimpack, Soul
+        Sphere, Megasphere or Berserk Pack), Magic (Via a Health Potion), Statistics
+        Amplification (The Berserk Pack makes him 10x stronger), Curing (The Medikit
+        uses antitoxins), Invisibility (The Blur Artifact makes him nigh-invisible
+        to demons, which can see Lost Souls), Invulnerability (Via the Invulnerability
+        Artifact), Hell Energy & Light Manipulation (The Unmaker is described as a
+        hell laser weapon), Biological Manipulation (The Stimpack uses enzymes), Immortality
+        Negation (Types 6 and 7. He can kill other Doomguys and zombies. Possibly
+        type 3 via killing Doomguys), Argent Energy (The Ballista fires a twin beam
+        of superheated Argent Energy), with the Crucibles: Power Nullification (It
+        can shut down the Well and close off Hell portals), Power Absorption (It''s
+        known for absorbing the Well''s power), Portal Creation (It can create portals
+        to Hell when powering the Fortress of Doom. Non-combat applicable), limited
+        Technological Manipulation (It can power the Fortress of Doom and its abilities),
+        Fire Manipulation (It''s a fire sword), Energy Manipulation (It''s an energy
+        sword), Resurrection Negation (The Crucible can consistently prevent the Titans
+        from resurrecting), Heat Manipulation (It burns through demons it slices),
+        Wraith Energy (Wraith-Fire forms the Crucible''s blade) Superhuman Physical
+        Characteristics, Weapon Mastery, (He could use the UAC EMG Sidearm as soon
+        as he picked it up; same thing with the Plasma Rifle), Vehicular Mastery (He
+        could operate various UAC machines as soon as he got in them, and he could
+        use a Revenant skillfully after possessing it), Genius Intelligence, Non-Physical
+        Interaction, Dimensional Storage, Absorption (He canonically absorbs enemy
+        drops as part of the Praetor Suit), Immortality (Types 3 and 6. He can return
+        via Eternal Life After Death. His rage lets him push past mortal wounds and
+        certain death on a consistent basis), Regeneration (Mid-Godly. Via Eternal
+        Life After Death. See note), Fate Manipulation (Passive. Due to the eternal
+        struggle between good and evil, there will always be demons and the Slayer,
+        their battle forever eternal. To the demons, he always has come, and always
+        will. His fight against demons made him fight against the souls of the doomed,
+        and the demons were made the slaves of doom. They were made the army of doom,
+        and he brings certain doom upon them. This happens because he is the right
+        hand of doom itself, he''s the god of it; he is doom. He was fated to encounter
+        the Icon of Sin. The Khan Maykr and all Maykrs are fated to be destroyed by
+        him in every single possible future timeline across infinite possibilities.
+        This encompasses the entire cosmology, and his existence is entirely different
+        from the endless changing variable data, as he is a singular constant that
+        cannot be altered), Abstract Existence (Type 4. He is the right hand of doom
+        itself, he''s the god of it; he is doom), Metaphysics Manipulation (He can
+        kill Maykrs, which interact over the Singularity. When he harmed Deag Nilox
+        he harmed soul directly. He can fight evil spirits. He can destroy other Doomguys''
+        spiritual armor. By damaging enemies he staggers them, and staggered enemies
+        are mentally dazed and confused, meaning he affects them metaphysically with
+        his attacks. He consistently instills fear within all of the demons. When
+        he kills another Doom Slayer he can take his soul, sometimes multiple. Him
+        killing demons makes him a soul taker, implying he takes their soul upon killing
+        them. He even harvests five souls on killing them. He fought against souls
+        in his conquest against Hell. He destroyed the shield of the Gladiator, which
+        contains its soul. He can destroy Buff Totems, which are incarnal manifestations
+        of human suffering, formed from the tortured resonance of the once living),
+        Guided (The souls of fallen Night Sentinels appeared before the threat of
+        the Spider Mastermind. He is assisted by VEGA in combat. The Sentinel Wolf
+        guides his path and is both comparable to and shares instincts with Sentinels'
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level (He can kill Imps. Imps can destroy titanium armor
+        and air tanks, and they are superior to Implings. Implings can flatten humans
+        which requires this energy. Implings can harm Stan Blazkowicz who can smash
+        military equipment. Doomguy scales to the Ranger, who killed Shub-Niggurath.
+        Shub-Niggurath is stronger than her minions, including the Shamblers, which
+        are superior to Imps. Other Quake soldiers can kill Shamblers easily and mutilate
+        Death Knights, which are also superior to Imps. Both Doomguy and the Ranger
+        scale to Bitterman, who views Strogg that survive atmospheric entry as weak
+        and has received Strogg enhancements to become stronger. Bitterman also tanked
+        crashing into a planet, and he also withstood a collision that destroyed his
+        ship, which is capable of destroying large meteors), higher with the BFG-9000
+        (The BFG does 4x to 20x more damage than the Berserk Pack. The Berserk Pack
+        makes Doomguy 10x stronger, allowing him to oneshot himself), City level to
+        Mountain level with the Unmaker (The Unmaker easily destroys the Mother of
+        All Demons, whereas she is far superior to the Icon of Sin. The Icon of Sin
+        thrashed untold miles of Hell) | At least Multi-Continent level (He one-shot
+        the Hell Priests. Each Hell Priest sustained part of Earth's consumption across
+        continents. He killed the Gladiator, whereas the Gladiator is the guardian
+        of Deag Grav and also had to be killed to stop Earth's consumption. He killed
+        the Titan, which is this powerful. Titans are also comparable to Ancestrals,
+        which tore apart the land of Argent D'Nur by moving. He broke some chains
+        that Titans couldn't. The Elemental Wraiths are gods whereas the Ancestrals
+        are not, and they brought life to Argent D'Nur, creating its biosphere. He
+        is also a god just as the Elemental Wraiths. He killed the Khan Maykr, who
+        is also a god like the Elemental Wraiths. He mutilated the Icon of Sin into
+        submission, whereas it was a Titan, was going to devastate Earth, and was
+        out of the Khan Maykr's control), possibly High Multiverse level+ (He imploded
+        Hell and Urdak realms, whereas they both transcend space-time and there are
+        infinite timelines. He's comparable to Davoth via being a Primeval, and Davoth
+        corrupted all of Hell. Davoth also shook Urdak with his scream. He killed
+        the Khan Maykr, who created a storm across Urdak. He mutilated the Icon of
+        Sin, and the Icon was creating a black hole that would bind the universe to
+        Hell via a pathway of darkness transcending space-time. The Icon of Sin was
+        also far superior to the Khan Maykr. He has since absorbed the power of all
+        those he has defeated)
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (He is called a time walker and has fought through time.
+        Maykrs can move through time and space. Maykrs are composed of the same dimensions
+        as Urdak. He scales to the Khan Maykr's ability. He can move across realms
+        that transcend space-time)
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level | At least Multi-Continent level, possibly High
+        Multiverse level+
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: He mainly uses whatever does the most damage. He has to restock his ammo
+        via pickups. | He isn't blessed by the Maykrs. He has to restock his ammo
+        via pickups or killing enemies.
+      source_id: character-stats-profiles-marauder-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
@@ -2512,39 +2120,155 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|wandering of doom canon
-      garry s mod greatgorilangaqil|449940
-  - source_id: mediawiki-marauder-game
-    url: https://vsbattles.fandom.com/wiki/Marauder_(Game)
-    title: Marauder (DOOM)
-    rank: 105
-    extracted_fields: *id015
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|marauder doom|9523890
+    duplicate_key: character-stats-and-profiles.fandom.com|doomguy canon drowzy e|219043
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-marauder-game
     url: https://vsbattles.fandom.com/wiki/Marauder_%28Game%29
-    title: Marauder (DOOM)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Marauder (DOOM)
+    source_type: mediawiki
+    revision_id: '9523890'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 9799
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 105
-    extracted_fields: *id017
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id018
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least , possibly far higher
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Building level, possibly far higher (Far superior to Heavy Demons,
+        who can do this)
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Supersonic+ movement speed (Can physically keep up with other
+        Demons) with at least Hypersonic, likely higher reaction speed (Can react
+        to the Doom Slayer's weapons.)
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Building level physically, possibly far higher, Multi-City Block
+        level with his Argent shield (The shield can block all weaponry in game, which
+        includes shots from the BFG9000)
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (The demons of Hell have limitless aggression and are tireless
+        beings)
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range, Tens of Meters with shotguns and thrown axes
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: A Crucible Axe and shield, with a Double Barrel Shotgun
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: At least Above Average. He is comparable to high ranking Night Sentinels,
+        who are trained from birth in the ways of combat and command armies proficiently
+        enough to take down entire hordes of demons with far fewer numbers. Extremely
+        capable in combat and should not be too inferior compared to Doomguy in terms
+        of skill. With high ranking sentinels being able to take on hordes of demons
+        for days on end.
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "He's briefly vulnerable when his eyes flash green and he must lower\
+        \ his shield when attacking an enemy. His Healing Zone lasts for only 8 seconds.\
+        \ Haste/Armored has a 30 second cooldown while Demonic Onslaught, Team Heal,\
+        \ and Baron Summoning have a 45 second cooldown. ==Notable Matchups== Victories:\
+        \ Master Chief (Halo) Master Chief's Profile (Master Chief had his equipment\
+        \ up to 8-C key, fight took place in a spaceship) Losses: Lucy (Elfen Lied)\
+        \ Lucy\u2019s Profile (Marauder had prior knowledge on Teen Lucy\u2019s vectors,\
+        \ and speed was equalized) Kokichi Oma (Danganronpa V3: Killing Harmony) Kokichi's\
+        \ Profile (Kokichi had Exisals, combatants start ~5 meters apart, fight took\
+        \ place at the MK1 Palace Gates stage. Speed was equalized) Inconclusive:\
+        \ Category:Doom Category:Demons Category:Video Game Characters Category:Axe\
+        \ Users Category:Acrobats Category:Summoners Category:Animal Users Category:Gun\
+        \ Users Category:Shield Users Category:Villains Category:Energy Weapon Users\
+        \ Category:Undead Category:Statistics Amplification Users Category:Statistics\
+        \ Reduction Users Category:Immortals Category:Temperature Users Category:Explosion\
+        \ Users Category:Characters Category:Game Characters Category:Playable Characters\
+        \ Category:Antagonists Category:Evil Characters Category:Revived Characters\
+        \ Category:Warriors Category:Weapon Masters Category:Thrown Weapon Users Category:Forcefield\
+        \ Users Category:Male Characters Category:Energy Projection Users Category:Reality\
+        \ Warpers Category:BFR Users"
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
+      source_id: vsbattles-marauder-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
@@ -2556,49 +2280,11 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|marauder doom|9523890
-  - source_id: vsbattles-marauder-game-doom
-    url: https://vsbattles.fandom.com/wiki/Marauder_Game_Doom
-    title: Marauder (DOOM)
-    rank: 105
-    extracted_fields: *id019
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id020
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|marauder doom|9523890
-  - source_id: character-stats-profiles-marauder-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Marauder_%28Game%29
-    title: The One Giver (Canon)/Udlmaster
-    rank: 80
-    extracted_fields: *id021
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id022
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the one giver canon udlmaster|158297
+    retryable: false
+    exception_class: ''
+  needs_human_source_choice: false
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

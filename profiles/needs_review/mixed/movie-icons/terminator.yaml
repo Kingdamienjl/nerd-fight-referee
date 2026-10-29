@@ -57,7 +57,6 @@ sources:
   content_length: 11992
   content_kind: api_json
   search_attempted_titles:
-  - Terminator
   - T-800
   headings_detected:
   - Summary
@@ -96,47 +95,11 @@ sources:
 - id: vsbattles-terminator
   provider_id: vsbattles
   source_type: mediawiki
-  title: Terminator
-  url: https://vsbattles.fandom.com/wiki/Terminator
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-terminator
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Terminator
-  url: https://character-stats-and-profiles.fandom.com/wiki/Terminator
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-terminator-movie-icons
-  provider_id: vsbattles
-  source_type: mediawiki
   title: T-800
   url: https://vsbattles.fandom.com/wiki/T-800
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -176,11 +139,11 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-terminator-movie-icons
+- id: character-stats-profiles-terminator
   provider_id: character_stats_profiles
   source_type: mediawiki
-  title: Terminator Movie Icons
-  url: https://character-stats-and-profiles.fandom.com/wiki/Terminator_Movie_Icons
+  title: Terminator
+  url: https://character-stats-and-profiles.fandom.com/wiki/Terminator
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -197,13 +160,50 @@ sources:
 - id: vsbattles-terminator-movie-icons
   provider_id: vsbattles
   source_type: mediawiki
-  title: Terminator (Movie Icons)
-  url: https://vsbattles.fandom.com/wiki/Terminator_%28Movie_Icons%29
+  title: T-800
+  url: https://vsbattles.fandom.com/wiki/T-800
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: *id002
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9234217'
+  revision_timestamp: '2025-10-25T07:35:49Z'
+  fetch_status: fetched
+  http_status: 200
+  content_length: 11992
+  content_kind: api_json
+  search_attempted_titles:
+  - Terminator
+  - T-800
+  headings_detected:
+  - Summary
+  - Powers and Stats
+  - Notable Matchups
+  - References
+  stat_labels_detected:
+  - attack_potency
+  - durability
+  - intelligence
+  - keys
+  - lifting_strength
+  - origin
+  - powers_and_abilities
+  - range
+  - speed
+  - stamina
+  - standard_equipment
+  - striking_strength
+  - tier
+  - weaknesses
 - id: character-stats-profiles-terminator-movie-icons
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -296,7 +296,7 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: '{{9-B}} | At least {{9-B}}, at least {{9-A}} by detonating fuel cells'
+    text: At least , at least by detonating fuel cells
     source_ids:
     - vsbattles-terminator-movie-icons
     confidence: 0.6
@@ -383,7 +383,7 @@ weaknesses:
 - id: weaknesses-water
   name: Water
   description: Water
-  source_ids: &id003
+  source_ids: &id002
   - vsbattles-terminator-movie-icons
   source_claim_ids: []
   confidence: 0.85
@@ -401,7 +401,7 @@ weaknesses:
     a high amount of technological and mechanical '
   description: as the Terminators cannot swim. Its sensors can be distracted if there
     is a high amount of technological and mechanical actions in their area.
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -437,7 +437,7 @@ weaknesses:
     Users Category:Vehicular Masters Category:Video Game Characters Category:Villains
     Category:Weapon Masters Category:Horror Characters Category:Magnetism Users Category:Arnold
     Schwarzenegger characters Category:Geniuses'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -482,7 +482,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: 97bddf4472127a4b3886f7ab2cd0058c14fe5f395538d804d040ea1585a1efd1
 repair:
-  attempted_at: '2026-10-04T04:45:50Z'
+  attempted_at: '2026-10-21T19:50:02Z'
   repaired_fields:
   - attack_potency
   - durability
@@ -496,10 +496,10 @@ repair:
   - abilities
   source_attempts:
   - source_id: mediawiki-6465
-    url: https://vsbattles.fandom.com/wiki/Terminator
+    url: https://vsbattles.fandom.com/wiki/T-800
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id004
+    extracted_fields: &id003
     - attack_potency
     - durability
     - intelligence
@@ -542,7 +542,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id005
+    allowed_fields: &id004
     - tier
     - attack_potency
     - speed
@@ -555,31 +555,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} | At least {{9-B}}, at least {{9-A}} by detonating fuel cells'
-      source_id: mediawiki-6465
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Content= |-|T-800= {{Border|Scroll=Yes|Visible=No|Content=
-        *Superhuman Physical Characteristics **Inorganic Physiology (Type 2) **Self-Sustenance
-        (Type 1 & 3) **Enhanced Senses (Vision [Infrared & X-Ray], Hearing & Extra
-        https://terminator.fandom.com/wiki/Head-up_display Termovision; Can hear through
-        a soundproof room. Its HUD has a compass,The Terminator targeting systems,
-        can see in infrared, see through one-sided mirrors, can detect polyalloy,
-        has X-Ray visionTerminator Salvation) **Longevity *Genius Intelligence *Martial
-        Arts *Weapon Mastery (Master in the use of all kinds of weapons. Is accurate
-        enough to miss with a minigun on purpose) *Vehicular Mastery (Can navigate
-        a busy highway, Can navigate a parking garage in reverse while firing at a
-        T-1000) *Flight (With helicopter packs) *Electro-Magnetic Pulse (Can emit
-        EMPs) *Vocal Replication (As shown here) Resistance to: *Electricity Manipulation
-        (As shown here) *Heat Manipulation (As shown here) *Acid Manipulation (As
-        shown hereTerminator: Genisys) *Electro-Magnetic Pulse (EMPs do nothing to
-        him) Immunity to Pain Manipulation (Terminators do not feel pain) }} |-|T-850=
-        {{Border|Scroll=Yes|Visible=No|Content= All previous abilities enhanced, plus,
-        *Further Enhanced Senses (Can hear gunshots miles away. Now has an audio wave
-        in its HUD) *Body Language Analysis Resistance to Technology Manipulation
-        (Reboots itself to override the T-X''s control of it) }} }}'
+      value: At least , at least by detonating fuel cells
       source_id: mediawiki-6465
       provider_id: vsbattles
       authority: high
@@ -665,12 +641,11 @@ repair:
         and the T-800 key were used and speed was equalized) Inconclusive: The Thing
         (John Carpenter''s The Thing) The Thing''s Profile (9-A Terminator was used,
         Speed was equalized, The Thing had assimilated 10 people, and the Fight took
-        place in New York) ==References== {{Reflist}} {{discussions|The Terminator
-        T-800|The Terminator (T-800)}} Category:Characters Category:Terminator Category:Acid
-        Users Category:Androids Category:Antagonists Category:Assassins Category:Bikers
-        Category:Book Characters Category:Brawlers Category:Comic Book Characters
-        Category:Drivers Category:Electricity Users Category:Emotionless Characters
-        Category:Energy Weapon Users Category:Enhanced Senses Users Category:Explosion
+        place in New York) ==References== Category:Characters Category:Terminator
+        Category:Acid Users Category:Androids Category:Antagonists Category:Assassins
+        Category:Bikers Category:Book Characters Category:Brawlers Category:Comic
+        Book Characters Category:Drivers Category:Electricity Users Category:Emotionless
+        Characters Category:Energy Weapon Users Category:Enhanced Senses Users Category:Explosion
         Users Category:Flight Users Category:Game Characters Category:Genderless Characters
         Category:Gun Users Category:Heroes Category:Hunters Category:Information Analysis
         Users Category:Inorganic Beings Category:Live-Action Characters Category:Longevity
@@ -682,6 +657,19 @@ repair:
         Category:Video Game Characters Category:Villains Category:Weapon Masters Category:Horror
         Characters Category:Magnetism Users Category:Arnold Schwarzenegger characters
         Category:Geniuses'
+      source_id: mediawiki-6465
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Content= |-|T-800= {{Border|Scroll=Yes|Visible=No|Content=
+        *Superhuman Physical Characteristics **Inorganic Physiology (Type 2) **Self-Sustenance
+        (Type 1 & 3) **Enhanced Senses (Vision [Infrared & X-Ray], Hearing & Extra
+        https://terminator.fandom.com/wiki/Head-up_display Termovision; Can hear through
+        a soundproof room [http://i.imgur.com/2KssYqH.png targeting systems],) *Electro-Magnetic
+        Pulse ([https://imgur.com/a/eyj7JhM EMPs do nothing to him]) Immunity to Pain
+        Manipulation ([https://streamable.com/5jq54 Terminators do not feel pain]
+        Can function with the lower body blown off)'
       source_id: mediawiki-6465
       provider_id: vsbattles
       authority: high
@@ -699,11 +687,124 @@ repair:
     duplicate_key: vsbattles.fandom.com|t 800|9234217
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-terminator-movie-icons
+    url: https://character-stats-and-profiles.fandom.com/wiki/Terminator_%28Movie_Icons%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Terminator (Canon, Death Battle)/Unbacked0
+    source_type: mediawiki
+    revision_id: '88999'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 2471
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-B, Higher with Hydrogen Fuel Cells
+      source_id: character-stats-profiles-terminator-movie-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Type 1), Weapon Mastery,
+        Martial Arts (Has all the knowledge from Skynet which includes tons of knowledge
+        about weapons and martial arts from humans and every piece of knowledge that
+        every T-800 has), Explosion Manipulation (With M79 Grenade Launcher), Energy
+        Projection (With M-27 Plasma Rifle), Resistance to Fire Manipulation and Heat
+        Manipulation (Is made of Coltan which has a high melting point)
+      source_id: character-stats-profiles-terminator-movie-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Wall Level (Can punch through someone, Can harm those who can harm him),
+        Higher with Hydrogen Fuel Cells
+      source_id: character-stats-profiles-terminator-movie-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Unknown
+      source_id: character-stats-profiles-terminator-movie-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Wall Level (Survived being punched through a wall)
+      source_id: character-stats-profiles-terminator-movie-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Is easy to hack Note: This profile is based on what is in Death Battles
+        video, any information displayed on any profile based on Death Battle are
+        solely based on whatever is said in their videos and not my own opinion. So
+        if a character is weaker or stronger on a profile than they actually are then
+        it isn''t my fault. == Others == Notable Victories: Notable Losses: Inconclusive
+        Matches: Category:Unbacked0 Category:Tier 9'
+      source_id: character-stats-profiles-terminator-movie-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: false
+    duplicate_key: character-stats-and-profiles.fandom.com|terminator canon death
+      battle unbacked0|88999
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-terminator-movie-icons
     url: https://vsbattles.fandom.com/wiki/Terminator_Movie_Icons
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields: &id005
     - attack_potency
     - durability
     - intelligence
@@ -746,7 +847,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields: &id006
     - attack_potency
     - speed
     - durability
@@ -757,31 +858,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} | At least {{9-B}}, at least {{9-A}} by detonating fuel cells'
-      source_id: vsbattles-terminator-movie-icons
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Content= |-|T-800= {{Border|Scroll=Yes|Visible=No|Content=
-        *Superhuman Physical Characteristics **Inorganic Physiology (Type 2) **Self-Sustenance
-        (Type 1 & 3) **Enhanced Senses (Vision [Infrared & X-Ray], Hearing & Extra
-        https://terminator.fandom.com/wiki/Head-up_display Termovision; Can hear through
-        a soundproof room. Its HUD has a compass,The Terminator targeting systems,
-        can see in infrared, see through one-sided mirrors, can detect polyalloy,
-        has X-Ray visionTerminator Salvation) **Longevity *Genius Intelligence *Martial
-        Arts *Weapon Mastery (Master in the use of all kinds of weapons. Is accurate
-        enough to miss with a minigun on purpose) *Vehicular Mastery (Can navigate
-        a busy highway, Can navigate a parking garage in reverse while firing at a
-        T-1000) *Flight (With helicopter packs) *Electro-Magnetic Pulse (Can emit
-        EMPs) *Vocal Replication (As shown here) Resistance to: *Electricity Manipulation
-        (As shown here) *Heat Manipulation (As shown here) *Acid Manipulation (As
-        shown hereTerminator: Genisys) *Electro-Magnetic Pulse (EMPs do nothing to
-        him) Immunity to Pain Manipulation (Terminators do not feel pain) }} |-|T-850=
-        {{Border|Scroll=Yes|Visible=No|Content= All previous abilities enhanced, plus,
-        *Further Enhanced Senses (Can hear gunshots miles away. Now has an audio wave
-        in its HUD) *Body Language Analysis Resistance to Technology Manipulation
-        (Reboots itself to override the T-X''s control of it) }} }}'
+      value: At least , at least by detonating fuel cells
       source_id: vsbattles-terminator-movie-icons
       provider_id: vsbattles
       authority: high
@@ -867,12 +944,11 @@ repair:
         and the T-800 key were used and speed was equalized) Inconclusive: The Thing
         (John Carpenter''s The Thing) The Thing''s Profile (9-A Terminator was used,
         Speed was equalized, The Thing had assimilated 10 people, and the Fight took
-        place in New York) ==References== {{Reflist}} {{discussions|The Terminator
-        T-800|The Terminator (T-800)}} Category:Characters Category:Terminator Category:Acid
-        Users Category:Androids Category:Antagonists Category:Assassins Category:Bikers
-        Category:Book Characters Category:Brawlers Category:Comic Book Characters
-        Category:Drivers Category:Electricity Users Category:Emotionless Characters
-        Category:Energy Weapon Users Category:Enhanced Senses Users Category:Explosion
+        place in New York) ==References== Category:Characters Category:Terminator
+        Category:Acid Users Category:Androids Category:Antagonists Category:Assassins
+        Category:Bikers Category:Book Characters Category:Brawlers Category:Comic
+        Book Characters Category:Drivers Category:Electricity Users Category:Emotionless
+        Characters Category:Energy Weapon Users Category:Enhanced Senses Users Category:Explosion
         Users Category:Flight Users Category:Game Characters Category:Genderless Characters
         Category:Gun Users Category:Heroes Category:Hunters Category:Information Analysis
         Users Category:Inorganic Beings Category:Live-Action Characters Category:Longevity
@@ -884,6 +960,19 @@ repair:
         Category:Video Game Characters Category:Villains Category:Weapon Masters Category:Horror
         Characters Category:Magnetism Users Category:Arnold Schwarzenegger characters
         Category:Geniuses'
+      source_id: vsbattles-terminator-movie-icons
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Content= |-|T-800= {{Border|Scroll=Yes|Visible=No|Content=
+        *Superhuman Physical Characteristics **Inorganic Physiology (Type 2) **Self-Sustenance
+        (Type 1 & 3) **Enhanced Senses (Vision [Infrared & X-Ray], Hearing & Extra
+        https://terminator.fandom.com/wiki/Head-up_display Termovision; Can hear through
+        a soundproof room [http://i.imgur.com/2KssYqH.png targeting systems],) *Electro-Magnetic
+        Pulse ([https://imgur.com/a/eyj7JhM EMPs do nothing to him]) Immunity to Pain
+        Manipulation ([https://streamable.com/5jq54 Terminators do not feel pain]
+        Can function with the lower body blown off)'
       source_id: vsbattles-terminator-movie-icons
       provider_id: vsbattles
       authority: high
@@ -1018,7 +1107,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Terminator_%28Movie_Icons%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id008
+    extracted_fields: &id007
     - attack_potency
     - durability
     - intelligence
@@ -1061,7 +1150,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id009
+    allowed_fields: &id008
     - attack_potency
     - speed
     - durability
@@ -1072,31 +1161,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} | At least {{9-B}}, at least {{9-A}} by detonating fuel cells'
-      source_id: vsbattles-terminator-movie-icons
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Content= |-|T-800= {{Border|Scroll=Yes|Visible=No|Content=
-        *Superhuman Physical Characteristics **Inorganic Physiology (Type 2) **Self-Sustenance
-        (Type 1 & 3) **Enhanced Senses (Vision [Infrared & X-Ray], Hearing & Extra
-        https://terminator.fandom.com/wiki/Head-up_display Termovision; Can hear through
-        a soundproof room. Its HUD has a compass,The Terminator targeting systems,
-        can see in infrared, see through one-sided mirrors, can detect polyalloy,
-        has X-Ray visionTerminator Salvation) **Longevity *Genius Intelligence *Martial
-        Arts *Weapon Mastery (Master in the use of all kinds of weapons. Is accurate
-        enough to miss with a minigun on purpose) *Vehicular Mastery (Can navigate
-        a busy highway, Can navigate a parking garage in reverse while firing at a
-        T-1000) *Flight (With helicopter packs) *Electro-Magnetic Pulse (Can emit
-        EMPs) *Vocal Replication (As shown here) Resistance to: *Electricity Manipulation
-        (As shown here) *Heat Manipulation (As shown here) *Acid Manipulation (As
-        shown hereTerminator: Genisys) *Electro-Magnetic Pulse (EMPs do nothing to
-        him) Immunity to Pain Manipulation (Terminators do not feel pain) }} |-|T-850=
-        {{Border|Scroll=Yes|Visible=No|Content= All previous abilities enhanced, plus,
-        *Further Enhanced Senses (Can hear gunshots miles away. Now has an audio wave
-        in its HUD) *Body Language Analysis Resistance to Technology Manipulation
-        (Reboots itself to override the T-X''s control of it) }} }}'
+      value: At least , at least by detonating fuel cells
       source_id: vsbattles-terminator-movie-icons
       provider_id: vsbattles
       authority: high
@@ -1182,12 +1247,11 @@ repair:
         and the T-800 key were used and speed was equalized) Inconclusive: The Thing
         (John Carpenter''s The Thing) The Thing''s Profile (9-A Terminator was used,
         Speed was equalized, The Thing had assimilated 10 people, and the Fight took
-        place in New York) ==References== {{Reflist}} {{discussions|The Terminator
-        T-800|The Terminator (T-800)}} Category:Characters Category:Terminator Category:Acid
-        Users Category:Androids Category:Antagonists Category:Assassins Category:Bikers
-        Category:Book Characters Category:Brawlers Category:Comic Book Characters
-        Category:Drivers Category:Electricity Users Category:Emotionless Characters
-        Category:Energy Weapon Users Category:Enhanced Senses Users Category:Explosion
+        place in New York) ==References== Category:Characters Category:Terminator
+        Category:Acid Users Category:Androids Category:Antagonists Category:Assassins
+        Category:Bikers Category:Book Characters Category:Brawlers Category:Comic
+        Book Characters Category:Drivers Category:Electricity Users Category:Emotionless
+        Characters Category:Energy Weapon Users Category:Enhanced Senses Users Category:Explosion
         Users Category:Flight Users Category:Game Characters Category:Genderless Characters
         Category:Gun Users Category:Heroes Category:Hunters Category:Information Analysis
         Users Category:Inorganic Beings Category:Live-Action Characters Category:Longevity
@@ -1199,6 +1263,19 @@ repair:
         Category:Video Game Characters Category:Villains Category:Weapon Masters Category:Horror
         Characters Category:Magnetism Users Category:Arnold Schwarzenegger characters
         Category:Geniuses'
+      source_id: vsbattles-terminator-movie-icons
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Content= |-|T-800= {{Border|Scroll=Yes|Visible=No|Content=
+        *Superhuman Physical Characteristics **Inorganic Physiology (Type 2) **Self-Sustenance
+        (Type 1 & 3) **Enhanced Senses (Vision [Infrared & X-Ray], Hearing & Extra
+        https://terminator.fandom.com/wiki/Head-up_display Termovision; Can hear through
+        a soundproof room [http://i.imgur.com/2KssYqH.png targeting systems],) *Electro-Magnetic
+        Pulse ([https://imgur.com/a/eyj7JhM EMPs do nothing to him]) Immunity to Pain
+        Manipulation ([https://streamable.com/5jq54 Terminators do not feel pain]
+        Can function with the lower body blown off)'
       source_id: vsbattles-terminator-movie-icons
       provider_id: vsbattles
       authority: high
@@ -1216,28 +1293,33 @@ repair:
     duplicate_key: vsbattles.fandom.com|t 800|9234217
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-terminator-movie-icons
-    url: https://character-stats-and-profiles.fandom.com/wiki/Terminator_%28Movie_Icons%29
+  - source_id: vsbattles-terminator
+    url: https://vsbattles.fandom.com/wiki/Terminator
     ok: true
     note: extracted_core_fields
-    extracted_fields:
+    extracted_fields: &id009
     - attack_potency
     - durability
+    - intelligence
     - powers_and_abilities
+    - range
     - speed
+    - stamina
+    - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Terminator (Canon, Death Battle)/Unbacked0
+    normalized_page_title: T-800
     source_type: mediawiki
-    revision_id: '88999'
+    revision_id: '9234217'
     fetch_status: fetched
     http_status: 200
-    content_length: 2471
+    content_length: 11992
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
-    - Others
+    - Notable Matchups
+    - References
     stat_labels_detected:
     - attack_potency
     - durability
@@ -1254,11 +1336,11 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
+    rank: 80
+    provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id010
     - attack_potency
     - speed
     - durability
@@ -1269,64 +1351,136 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 9-B, Higher with Hydrogen Fuel Cells
-      source_id: character-stats-profiles-terminator-movie-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Immortality (Type 1), Weapon Mastery,
-        Martial Arts (Has all the knowledge from Skynet which includes tons of knowledge
-        about weapons and martial arts from humans and every piece of knowledge that
-        every T-800 has), Explosion Manipulation (With M79 Grenade Launcher), Energy
-        Projection (With M-27 Plasma Rifle), Resistance to Fire Manipulation and Heat
-        Manipulation (Is made of Coltan which has a high melting point)
-      source_id: character-stats-profiles-terminator-movie-icons
-      provider_id: character_stats_profiles
+      value: At least , at least by detonating fuel cells
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Wall Level (Can punch through someone, Can harm those who can harm him),
-        Higher with Hydrogen Fuel Cells
-      source_id: character-stats-profiles-terminator-movie-icons
-      provider_id: character_stats_profiles
+      value: Wall level (Smashed the T-3000 into a van, punched a steel door across
+        a room which should be at least this strong, rammed through concrete which
+        would yield this much energy, launched Rev-9 into a concrete pillar, and punched
+        through steel grates. Can harm models with similar durability to himself),
+        Wall level+ with plasma rifle | At least Wall level (Increased physical abilities),
+        Wall level+ with plasma rifle, at least Small Building level by detonating
+        fuel cells (Its fuel cells created an explosion that could be felt from a
+        thousand feet away)
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Unknown
-      source_id: character-stats-profiles-terminator-movie-icons
-      provider_id: character_stats_profiles
+      value: At least Superhuman combat and travel speed (Faster than the T-600 which
+        can move at 75 km/h for short periods of time), possibly Supersonic reaction
+        speed (Caught a bullet with his teeth point-blank)
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Wall Level (Survived being punched through a wall)
-      source_id: character-stats-profiles-terminator-movie-icons
-      provider_id: character_stats_profiles
+      value: Wall level (Was in a massive semi-truck explosion and only its flesh
+        was burned away. Was rammed against a divider and ran over by a semi-truck
+        and only received a limp and some optical damage. Was shot 10 times by an
+        Ithaca 37 shotgun and was only momentarily knocked down. A car fuel tank exploding
+        right next to it does no damage to it. A high-speed car crash only jammed
+        its forearm, which it easily repaired. Can tank grenade launchers) | At least
+        Wall level (Rammed through a building and into an ambulance. Withstood dozens
+        of hits from the T-X without notable damage. Survived a plasma blast that
+        launched it through a building)
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: 'Superhuman (As a robot, the T-800 can operate continuously on a single
+        power cell for 120 years.Terminator 2: Judgment Day Can function with the
+        lower body blown off)'
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, higher with various weapons
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: AMT Hardballer .45 Longslide, Franchi SPAS-12 Shotgun, M79 Grenade Launcher,
+        Handheld GE M134 Minigun, M-27 Phased Plasma Rifle, Uzi
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Genius (A T-800's learning aptitude is restricted, but when set to "write"
+        instead of "read" mode, they can adapt to and develop almost human personalities.
+        They are also able to quickly adapt to and use technology/weapons/vehicles.
+        Can Identify targets. Can scan the environment to use it to its advantage.
+        Can scan for vulnerabilities. Can identify vehicle models. Can predict actions.
+        It can also repair itself. Can reroute power to reactivate itself. Knows how
+        to start a car by manually turning the ignition. Can replicate voices for
+        use in deception. Can calculate the success rate of a situation. Has detailed
+        files on human anatomy to make it a more efficient killer.) | Genius (All
+        previous abilities, Can read someones biological functions to know if they
+        are bluffing. Knows basic psychology.)
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Is easy to hack Note: This profile is based on what is in Death Battles
-        video, any information displayed on any profile based on Death Battle are
-        solely based on whatever is said in their videos and not my own opinion. So
-        if a character is weaker or stronger on a profile than they actually are then
-        it isn''t my fault. == Others == Notable Victories: Notable Losses: Inconclusive
-        Matches: Category:Unbacked0 Category:Tier 9'
-      source_id: character-stats-profiles-terminator-movie-icons
-      provider_id: character_stats_profiles
+      value: 'Water, as the Terminators cannot swim. Its sensors can be distracted
+        if there is a high amount of technological and mechanical actions in their
+        area. | Similar weaknesses to the T-1000. Feats: ==Notable Matchups== Victories:
+        Agent 47 (Hitman) 47''s Profile (47 had equipment up to 9-B, T-800 key was
+        used) Losses: Xenomorph (Alien) Xenomorph''s Profile (The Adult Xenomorph
+        and the T-800 key were used and speed was equalized) Inconclusive: The Thing
+        (John Carpenter''s The Thing) The Thing''s Profile (9-A Terminator was used,
+        Speed was equalized, The Thing had assimilated 10 people, and the Fight took
+        place in New York) ==References== Category:Characters Category:Terminator
+        Category:Acid Users Category:Androids Category:Antagonists Category:Assassins
+        Category:Bikers Category:Book Characters Category:Brawlers Category:Comic
+        Book Characters Category:Drivers Category:Electricity Users Category:Emotionless
+        Characters Category:Energy Weapon Users Category:Enhanced Senses Users Category:Explosion
+        Users Category:Flight Users Category:Game Characters Category:Genderless Characters
+        Category:Gun Users Category:Heroes Category:Hunters Category:Information Analysis
+        Users Category:Inorganic Beings Category:Live-Action Characters Category:Longevity
+        Users Category:Machines Category:Male Characters Category:Martial Artists
+        Category:Movie Characters Category:Neutral Characters Category:Primary Antagonists
+        Category:Protagonists Category:Regeneration Users Category:Robots Category:Science
+        Fiction Characters Category:Self-Sustenance Users Category:Sound Users Category:Temperature
+        Users Category:Time Travelers Category:Vehicle Users Category:Vehicular Masters
+        Category:Video Game Characters Category:Villains Category:Weapon Masters Category:Horror
+        Characters Category:Magnetism Users Category:Arnold Schwarzenegger characters
+        Category:Geniuses'
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
       authority: high
       confidence: 0.75
-    identity_match: false
-    identity_score: 20
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Content= |-|T-800= {{Border|Scroll=Yes|Visible=No|Content=
+        *Superhuman Physical Characteristics **Inorganic Physiology (Type 2) **Self-Sustenance
+        (Type 1 & 3) **Enhanced Senses (Vision [Infrared & X-Ray], Hearing & Extra
+        https://terminator.fandom.com/wiki/Head-up_display Termovision; Can hear through
+        a soundproof room [http://i.imgur.com/2KssYqH.png targeting systems],) *Electro-Magnetic
+        Pulse ([https://imgur.com/a/eyj7JhM EMPs do nothing to him]) Immunity to Pain
+        Manipulation ([https://streamable.com/5jq54 Terminators do not feel pain]
+        Can function with the lower body blown off)'
+      source_id: vsbattles-terminator
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 90
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
     exact_name_match: false
-    alias_match: false
-    franchise_match: true
+    alias_match: true
+    franchise_match: false
     variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|terminator canon death
-      battle unbacked0|88999
+    duplicate_key: vsbattles.fandom.com|t 800|9234217
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-terminator
@@ -1501,12 +1655,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{9-B}}'
-      source_id: vsbattles-terminator-mixed
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Expert Marksman (Should be comparable
         to the T-800), Self-Sustenance (Type 3), Inorganic Physiology (Type 2), Shapeshifting,
@@ -1600,18 +1748,26 @@ repair:
         kill it, although shattering it will cause numerous glitches to occur afterwards
         that impair its shapeshifting abilities to look less than perfect. ==Gallery==
         File:T-1000_True_Form.png File:Terminator-genisys-t1000-poster.jpg ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions}} Category:Characters
-        Category:Terminator Category:Additional Limbs Users Category:Androids Category:Antagonists
-        Category:Assassins Category:Blade Users Category:Body Control Users Category:Emotionless
-        Characters Category:Evil Characters Category:Genderless Characters Category:Gun
-        Users Category:Hook Users Category:Inorganic Beings Category:Intangibility
-        Users Category:Live-Action Characters Category:Machines Category:Male Characters
+        Matchups== Victories: Losses: Inconclusive: Category:Characters Category:Terminator
+        Category:Additional Limbs Users Category:Androids Category:Antagonists Category:Assassins
+        Category:Blade Users Category:Body Control Users Category:Emotionless Characters
+        Category:Evil Characters Category:Genderless Characters Category:Gun Users
+        Category:Hook Users Category:Inorganic Beings Category:Intangibility Users
+        Category:Live-Action Characters Category:Machines Category:Male Characters
         Category:Movie Characters Category:Primary Antagonists Category:Regeneration
         Users Category:Resurrection Users Category:Robots Category:Science Fiction
         Characters Category:Self-Sustenance Users Category:Shapeshifters Category:Sound
         Users Category:Spear Users Category:Villains Category:Weapon Creation Users
         Category:Weapon Masters Category:Weapon Users Category:Time Travelers Category:Horror
         Characters Category:Misanthropes Category:Sadists'
+      source_id: vsbattles-terminator-mixed
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: T-1000 Origin: Terminator Gender: N/A (Appears as male) Age: Unknown
+        Classification: Highly advanced robotic assassin/killing machine, interfaced
+        with living tissue.'
       source_id: vsbattles-terminator-mixed
       provider_id: vsbattles
       authority: high
@@ -1629,142 +1785,17 @@ repair:
     duplicate_key: vsbattles.fandom.com|t 1000|9692822
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-terminator-mixed
-    url: https://character-stats-and-profiles.fandom.com/wiki/Terminator_%28mixed%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Pamela Isley (Canon, DC Comics, Prime Earth)/ItsSoba
-    source_type: mediawiki
-    revision_id: '333184'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 8574
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Explanations (Optional)
-    - Related Galleries
-    - Others
-    - Categories
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - tier
-    - attack_potency
-    - speed
-    - durability
-    - abilities
-    - weaknesses
-    field_candidates:
-    - field: tier
-      value: "The tier(s) of the character (with the individual tier ratings themselves\
-        \ enclosed within curly brackets, for example {{7-A}}, {{3-C}} or {{Unknown}}).\
-        \ Creator Notes: Swapping from my Desktop to my Laptop give me a moment \U0001F35C\
-        !"
-      source_id: character-stats-profiles-terminator-mixed
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Superhuman Physical Characteristics, Plant Manipulation, Resistances:
-        Resistances to Poison Manipulation (Poison Ivy''s stated to be immune to chemicals
-        and toxins),'
-      source_id: character-stats-profiles-terminator-mixed
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: The character's attack power or destructive capacity (in bold; add any
-        explanations using brackets, not in bold).
-      source_id: character-stats-profiles-terminator-mixed
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: It is generally "Combat Speed" (in bold)
-      source_id: character-stats-profiles-terminator-mixed
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: The amount of attack power the character can withstand before being overwhelmed
-        (in bold).
-      source_id: character-stats-profiles-terminator-mixed
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Self-explanatory Feats: List all of the character''s amazing feats.
-        Strength feats, speed feats, durability feats, etc. You can judge a person''s
-        power by their feats. Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: Self-explanatory ==Explanations (Optional)==
-        This section can be used to explain the reasons for the assigned power level
-        of a certain character more in-depth, as well as how the powers and nature
-        of the character fundamentally work. This is particularly useful for more
-        high-tiered characters. However, it is very important that you make sure that
-        the text has good grammar/sentence structure, and is easy to understand. ==Related
-        Galleries== *346 Appearances of Pamela Isley (Prime Earth) *288 Images featuring
-        Pamela Isley (Prime Earth) *37 Quotations by or about Pamela Isley (Prime
-        Earth) *Character Gallery: Pamela Isley (Prime Earth) ==Others== Put some
-        minor information about the character here. Notable Victories: Put some notable/good
-        matches that result in the character''s victory. Notable Losses: Put some
-        notable/good matches that result in the character''s loss. Inconclusive Matches:
-        Put some notable/good matches with the results still unclear. ==Categories'
-      source_id: character-stats-profiles-terminator-mixed
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|pamela isley canon dc comics
-      prime earth itssoba|333184
-    retryable: false
-    exception_class: ''
   needs_human_source_choice: false
   candidate_sources:
   - source_id: mediawiki-6465
-    url: https://vsbattles.fandom.com/wiki/Terminator
+    url: https://vsbattles.fandom.com/wiki/T-800
     title: T-800
     rank: 80
-    extracted_fields: *id004
+    extracted_fields: *id003
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id005
+    allowed_fields: *id004
     rejection_reason: ''
     identity_match: true
     identity_score: 90
@@ -1781,11 +1812,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Terminator_Movie_Icons
     title: T-800
     rank: 80
-    extracted_fields: *id006
+    extracted_fields: *id005
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id007
+    allowed_fields: *id006
     rejection_reason: ''
     identity_match: true
     identity_score: 110
@@ -1802,11 +1833,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Terminator_%28Movie_Icons%29
     title: T-800
     rank: 80
-    extracted_fields: *id008
+    extracted_fields: *id007
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id009
+    allowed_fields: *id008
     rejection_reason: ''
     identity_match: true
     identity_score: 110
@@ -1817,6 +1848,27 @@ repair:
     exact_name_match: false
     alias_match: true
     franchise_match: true
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|t 800|9234217
+  - source_id: vsbattles-terminator
+    url: https://vsbattles.fandom.com/wiki/Terminator
+    title: T-800
+    rank: 80
+    extracted_fields: *id009
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id010
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 90
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: true
+    franchise_match: false
     variant_match: false
     duplicate_key: vsbattles.fandom.com|t 800|9234217
   chosen_source_id: null

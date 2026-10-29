@@ -138,7 +138,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Pinhead
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -179,34 +179,6 @@ sources:
 - id: character-stats-profiles-pinhead-horror-icons
   provider_id: character_stats_profiles
   source_type: mediawiki
-  title: Pinhead Horror Icons
-  url: https://character-stats-and-profiles.fandom.com/wiki/Pinhead_Horror_Icons
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-pinhead-horror-icons
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Pinhead (Horror Icons)
-  url: https://vsbattles.fandom.com/wiki/Pinhead_%28Horror_Icons%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-pinhead-horror-icons
-  provider_id: character_stats_profiles
-  source_type: mediawiki
   title: Pinhead (Horror Icons)
   url: https://character-stats-and-profiles.fandom.com/wiki/Pinhead_%28Horror_Icons%29
   authority: high
@@ -224,7 +196,7 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: '{{9-B}} | {{High 6-A}} | {{Unknown}}, at least {{7-B}} to {{High 6-A}}'
+    text: '| , at least to'
     source_ids:
     - vsbattles-pinhead-horror-icons
     confidence: 0.6
@@ -232,40 +204,28 @@ power_scale:
   attack_potency:
     text: Wall level (Far superior to the Pseudo Cenobites, one of whom busted through
       a wall. Should be comparable to Angelique, who can punch through concrete, can
-      break through stone and cut apart trains with his chains) | Up to Multi-Continent
-      level (When his armor was fully charged he fought Lucifer, who destroyed the
-      sky-stone, which was the size of a small planet) | City level (After meeting
-      the ancient deity, he gained strength beyond a normal human and after absorbing
-      his artifact, he generated a giant explosion that is larger than a 100 megaton
-      nuclear bomb) to Multi-Continent level (At the peak of his strength he was able
-      too grow to giant sizes. Grew large enough to be comparable in Earth and caused
-      planetary devastation)
+      break through stone and cut apart trains with his chains)
     source_ids:
     - vsbattles-pinhead-horror-icons
     confidence: 0.6
     notes: auto_repair source extraction
   speed:
     text: Superhuman with Supersonic reactions (Caught three bullets in his mouth)
-      | Unknown | Up to Sub-Relativistic+
     source_ids:
     - vsbattles-pinhead-horror-icons
     confidence: 0.6
     notes: auto_repair source extraction
   lifting_strength:
-    text: Superhuman physically, Class 5 with chains (Can easily lift cars) | Unknown
-      | Likely Class 25 normally, up to Class Y via sheer size
-    source_ids: &id003
+    text: Superhuman physically, Class 5 with chains (Can easily lift cars)
+    source_ids: &id002
     - mediawiki-1774237
     confidence: 0.95
   striking_strength:
-    text: Wall level | Up to Multi-Continent level | Unknown, likely at least City
-      level to Multi-Continent level
-    source_ids: *id003
+    text: Wall level
+    source_ids: *id002
     confidence: 0.95
   durability:
-    text: Wall level (Can tank futuristic plasma gunfire) | Up to Multi-Continent
-      level (Survived hits from Lucifer when the armor was fully charged) | Unknown,
-      likely at least City level to Multi-Continent level
+    text: Wall level (Can tank futuristic plasma gunfire)
     source_ids:
     - vsbattles-pinhead-horror-icons
     confidence: 0.6
@@ -295,7 +255,7 @@ claims:
   section: power_scale
   axis: other
   text: '{{9-B}} | {{High 6-A}} | {{Unknown}}, at least {{7-B}} to {{High 6-A}}'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-1774237
   decisive: false
   status: unverified
@@ -314,7 +274,7 @@ claims:
     to Multi-Continent level (At the peak of his strength he was able too grow to
     giant sizes. Grew large enough to be comparable in Earth and caused planetary
     devastation)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -324,7 +284,7 @@ claims:
   axis: speed
   text: Superhuman with Supersonic reactions (Caught three bullets in his mouth) |
     Unknown | Up to Sub-Relativistic+
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -334,7 +294,7 @@ claims:
   axis: other
   text: Superhuman physically, Class 5 with chains (Can easily lift cars) | Unknown
     | Likely Class 25 normally, up to Class Y via sheer size
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -344,7 +304,7 @@ claims:
   axis: other
   text: Wall level | Up to Multi-Continent level | Unknown, likely at least City level
     to Multi-Continent level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -355,7 +315,7 @@ claims:
   text: Wall level (Can tank futuristic plasma gunfire) | Up to Multi-Continent level
     (Survived hits from Lucifer when the armor was fully charged) | Unknown, likely
     at least City level to Multi-Continent level
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -364,7 +324,7 @@ claims:
   section: power_scale
   axis: stamina
   text: Superhuman
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -374,7 +334,7 @@ claims:
   axis: range
   text: Standard Melee Range; Several Meters with his powers and chains, likely far
     higher
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -384,7 +344,7 @@ claims:
   axis: equipment
   text: His chains and the Lament Configuration, a wide variety of blades hanging
     from his wrist
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -394,7 +354,7 @@ claims:
   axis: battle_iq
   text: Gifted (Is an intelligent, eloquent demon and is greatly skilled in manipulating
     others and leading his own Cenobites)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -420,7 +380,7 @@ claims:
     Users Category:Soldiers Category:Soul Users Category:Summoners Category:Telekinesis
     Users Category:Telepaths Category:Teleportation Users Category:Temperature Users
     Category:Villains Category:Weapon Masters'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -448,7 +408,7 @@ claims:
     of pure energy), Immunity to Pain (Cenobites perceive pain and pleasure as one
     and the same, further experimenting with it through the mutilation of others and
     themselves), Age Manipulation and Diseases
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -457,7 +417,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id005
+  source_ids: &id004
   - vsbattles-pinhead-horror-icons
   source_claim_ids: []
   confidence: 0.85
@@ -473,7 +433,7 @@ abilities:
 - id: powers-and-abilities-weapon-mastery-via-his-blades
   name: Weapon Mastery (Via his blades)
   description: Weapon Mastery (Via his blades)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -488,7 +448,7 @@ abilities:
 - id: powers-and-abilities-magic
   name: Magic
   description: Magic
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -503,7 +463,7 @@ abilities:
 - id: powers-and-abilities-reality-warping
   name: Reality Warping
   description: Reality Warping
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -519,7 +479,7 @@ abilities:
 - id: powers-and-abilities-chain-manipulation
   name: Chain Manipulation
   description: Chain Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -534,7 +494,7 @@ abilities:
 - id: powers-and-abilities-limited-invulnerability-as-seen-here
   name: Limited Invulnerability (As seen here)
   description: Limited Invulnerability (As seen here)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -549,7 +509,7 @@ abilities:
 - id: powers-and-abilities-electricity-manipulation-chains-can-send-off-electric-pulse
   name: Electricity Manipulation (Chains can send off electric pulses)
   description: Electricity Manipulation (Chains can send off electric pulses)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -566,7 +526,7 @@ abilities:
     proton explosions larger than a 100-megaton a
   description: Explosion Manipulation (Can cause seemingly random explosions and generate
     proton explosions larger than a 100-megaton atomic bomb)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -581,7 +541,7 @@ abilities:
 - id: powers-and-abilities-temperature-manipulation-melted-a-cross
   name: Temperature Manipulation (Melted a cross)
   description: Temperature Manipulation (Melted a cross)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -596,7 +556,7 @@ abilities:
 - id: powers-and-abilities-ice-manipulation-turned-water-to-ice
   name: Ice Manipulation (Turned water to ice)
   description: Ice Manipulation (Turned water to ice)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -612,7 +572,7 @@ abilities:
   name: Illusion Creation (Can produce and control illusions while in Hell or Limbo)
   description: Illusion Creation (Can produce and control illusions while in Hell
     or Limbo)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -627,7 +587,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation-as-seen-here
   name: Fire Manipulation (As seen here)
   description: Fire Manipulation (As seen here)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -646,7 +606,7 @@ abilities:
     of energy to the orbit in seconds)
   description: Energy Manipulation (Can convert his body into pure energy and launch
     rays of energy to the orbit in seconds)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -661,7 +621,7 @@ abilities:
 - id: powers-and-abilities-soul-manipulation-can-harvest-the-souls-of-his-victims
   name: Soul Manipulation (Can harvest the souls of his victims)
   description: Soul Manipulation (Can harvest the souls of his victims)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -677,7 +637,7 @@ abilities:
 - id: powers-and-abilities-necromancy-can-turn-the-dead-into-cenobites
   name: Necromancy (Can turn the dead into Cenobites)
   description: Necromancy (Can turn the dead into Cenobites)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -692,7 +652,7 @@ abilities:
 - id: powers-and-abilities-shapeshifting
   name: Shapeshifting
   description: Shapeshifting
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -707,7 +667,7 @@ abilities:
 - id: powers-and-abilities-body-control-can-transform-his-body-parts-such-as-nails-int
   name: Body Control (Can transform his body parts such as nails into hooks)
   description: Body Control (Can transform his body parts such as nails into hooks)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -722,7 +682,7 @@ abilities:
 - id: powers-and-abilities-summoning-can-summon-his-fellow-cenobites
   name: Summoning (Can summon his fellow Cenobites)
   description: Summoning (Can summon his fellow Cenobites)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -739,7 +699,7 @@ abilities:
 - id: powers-and-abilities-creation-can-create-objects-out-of-thin-air
   name: Creation (Can create objects out of thin air)
   description: Creation (Can create objects out of thin air)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -755,7 +715,7 @@ abilities:
   name: Portal Creation and Dimensional Travel (Can open portals from Earth to Hell)
   description: Portal Creation and Dimensional Travel (Can open portals from Earth
     to Hell)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -774,7 +734,7 @@ abilities:
   name: Astral Projection (Comparable to Cenobites such as Priscilla, who did this)
   description: Astral Projection (Comparable to Cenobites such as Priscilla, who did
     this)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -789,7 +749,7 @@ abilities:
 - id: powers-and-abilities-memory-absorption-like-kirsty-could-remove-memories
   name: Memory Absorption (Like Kirsty, could remove memories)
   description: Memory Absorption (Like Kirsty, could remove memories)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -804,7 +764,7 @@ abilities:
 - id: powers-and-abilities-telekinesis
   name: Telekinesis
   description: Telekinesis
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -819,7 +779,7 @@ abilities:
 - id: powers-and-abilities-telepathy-can-read-the-fear-and-sins-of-others
   name: Telepathy (Can read the fear and sins of others)
   description: Telepathy (Can read the fear and sins of others)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -835,7 +795,7 @@ abilities:
 - id: powers-and-abilities-teleportation
   name: Teleportation
   description: Teleportation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -853,7 +813,7 @@ abilities:
   name: Size Manipulation and Large Size (Type 5; Can grow taller than the Earth)
   description: Size Manipulation and Large Size (Type 5; Can grow taller than the
     Earth)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -868,7 +828,7 @@ abilities:
 - id: powers-and-abilities-immortality-type-1
   name: Immortality (Type 1)
   description: Immortality (Type 1)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -883,7 +843,7 @@ abilities:
 - id: powers-and-abilities-incorporeality-is-an-incorporeal-being-made-of-pure-energy
   name: Incorporeality (Is an incorporeal being made of pure energy)
   description: Incorporeality (Is an incorporeal being made of pure energy)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -901,7 +861,7 @@ abilities:
   description: Immunity to Pain (Cenobites perceive pain and pleasure as one and the
     same, further experimenting with it through the mutilation of others and themselves),
     Age Manipulation and Diseases
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -917,7 +877,7 @@ equipment:
 - id: standard-equipment-his-chains-and-the-lament-configuration
   name: His chains and the Lament Configuration
   description: His chains and the Lament Configuration
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -932,7 +892,7 @@ equipment:
 - id: standard-equipment-a-wide-variety-of-blades-hanging-from-his-wrist
   name: a wide variety of blades hanging from his wrist
   description: a wide variety of blades hanging from his wrist
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -952,7 +912,7 @@ resistances:
   description: Immunity to Pain (Cenobites perceive pain and pleasure as one and the
     same, further experimenting with it through the mutilation of others and themselves),
     Age Manipulation and Diseases
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -969,7 +929,7 @@ weaknesses:
 - id: weaknesses-pinhead-must-be-summoned-by-the-lament-configuration-to-act-normally
   name: Pinhead must be summoned by the Lament Configuration to act normally
   description: Pinhead must be summoned by the Lament Configuration to act normally
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-pinhead-horror-icons
   source_claim_ids: []
   confidence: 0.85
@@ -988,7 +948,7 @@ weaknesses:
   name: and is generally only interested in targeting those who wished to summon him
   description: and is generally only interested in targeting those who wished to summon
     him
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1021,7 +981,7 @@ weaknesses:
     Users Category:Soldiers Category:Soul Users Category:Summoners Category:Telekinesis
     Users Category:Telepaths Category:Teleportation Users Category:Temperature Users
     Category:Villains Category:Weapon Masters'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1080,7 +1040,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: ae955bbfa5fd8213223c78ad44c69e9c4e4ce6924b0abed741e9ac5e68a21dd9
 repair:
-  attempted_at: '2026-10-10T18:35:06Z'
+  attempted_at: '2026-10-21T21:37:11Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -1097,7 +1057,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pinhead
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -1139,7 +1099,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -1152,7 +1112,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} | {{High 6-A}} | {{Unknown}}, at least {{7-B}} to {{High 6-A}}'
+      value: '| , at least to'
       source_id: mediawiki-1774237
       provider_id: vsbattles
       authority: high
@@ -1245,21 +1205,21 @@ repair:
         and is generally only interested in targeting those who wished to summon him,
         regardless of who solved the puzzle. The Lament Configuration can be used
         to banish him to Hell ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{Discussions}} Category:Characters Category:Hellraiser Category:Absorption
-        Users Category:Antagonists Category:Astral Projection Users Category:Blade
-        Users Category:Body Control Users Category:Book Characters Category:Chain
-        Users Category:Comic Book Characters Category:Creation Users Category:Demons
-        Category:Dimensional Travel Users Category:Electricity Users Category:Energy
-        Users Category:Evil Characters Category:Explosion Users Category:Fire Users
-        Category:Hook Users Category:Horror Characters Category:Ice Users Category:Illusionists
-        Category:Immortals Category:Incorporeal Characters Category:Invulnerability
-        Users Category:Large Sized Characters Category:Leaders Category:Live-Action
-        Characters Category:Magic Users Category:Memory Users Category:Movie Characters
-        Category:Murderers Category:Necromancers Category:Portal Users Category:Priests
-        Category:Primary Antagonists Category:Reality Warpers Category:Sadists Category:Shapeshifters
-        Category:Size Users Category:Soldiers Category:Soul Users Category:Summoners
-        Category:Telekinesis Users Category:Telepaths Category:Teleportation Users
-        Category:Temperature Users Category:Villains Category:Weapon Masters'
+        Category:Characters Category:Hellraiser Category:Absorption Users Category:Antagonists
+        Category:Astral Projection Users Category:Blade Users Category:Body Control
+        Users Category:Book Characters Category:Chain Users Category:Comic Book Characters
+        Category:Creation Users Category:Demons Category:Dimensional Travel Users
+        Category:Electricity Users Category:Energy Users Category:Evil Characters
+        Category:Explosion Users Category:Fire Users Category:Hook Users Category:Horror
+        Characters Category:Ice Users Category:Illusionists Category:Immortals Category:Incorporeal
+        Characters Category:Invulnerability Users Category:Large Sized Characters
+        Category:Leaders Category:Live-Action Characters Category:Magic Users Category:Memory
+        Users Category:Movie Characters Category:Murderers Category:Necromancers Category:Portal
+        Users Category:Priests Category:Primary Antagonists Category:Reality Warpers
+        Category:Sadists Category:Shapeshifters Category:Size Users Category:Soldiers
+        Category:Soul Users Category:Summoners Category:Telekinesis Users Category:Telepaths
+        Category:Teleportation Users Category:Temperature Users Category:Villains
+        Category:Weapon Masters'
       source_id: mediawiki-1774237
       provider_id: vsbattles
       authority: high
@@ -1277,11 +1237,105 @@ repair:
     duplicate_key: vsbattles.fandom.com|pinhead|9661674
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-pinhead-horror-icons
+    url: https://character-stats-and-profiles.fandom.com/wiki/Pinhead_%28Horror_Icons%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: Leviathan (Canon, Hellraiser)/TheOnryo
+    source_type: mediawiki
+    revision_id: '508720'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 15755
+    content_kind: api_json
+    headings_detected:
+    - '''''''Summary'''''''
+    - '''''''Powers and Stats'''''''
+    stat_labels_detected:
+    - attack_potency
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 65
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 1-A | At least 1-S
+      source_id: character-stats-profiles-pinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: High Outerverse level (Leviathan exist beyond Hell where time is meaning
+        nothing and is a nirvana type transcendent of our world. Easily one shot Cosmic
+        Pinhead, who becoming a astral deity and represents the collectives of pain
+        with he stand in The Dream Sea which contains the narratives, stories, beliefs
+        and the works of fictions. Superior to most of The Cenobites, that is able
+        and showns to splitting the universes by playing the musical notes, created
+        massive void realities, hold the lightning, easily and casually kill people
+        and interact with nonexistent materials by simply touching it. Stated will
+        bring death all of the gods by the use of The Cenobites and being described
+        as an End of All Things capable to dissolves everything into chaos) | At least
+        Extraverse level (Is a perfect state of being came from The Final Void where
+        The Dark God is represents some form of enlightenment, viewing Hellraiser
+        Cosmology as nothing but a mere ideas or stories)
+      source_id: character-stats-profiles-pinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immobile
+      source_id: character-stats-profiles-pinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
+      source_id: character-stats-profiles-pinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 2
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|leviathan canon hellraiser
+      theonryo|508720
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-pinhead-horror-icons
     url: https://vsbattles.fandom.com/wiki/Pinhead_Horror_Icons
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields: &id008
     - attack_potency
     - durability
     - intelligence
@@ -1323,7 +1377,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -1334,7 +1388,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} | {{High 6-A}} | {{Unknown}}, at least {{7-B}} to {{High 6-A}}'
+      value: '| , at least to'
       source_id: vsbattles-pinhead-horror-icons
       provider_id: vsbattles
       authority: high
@@ -1427,21 +1481,21 @@ repair:
         and is generally only interested in targeting those who wished to summon him,
         regardless of who solved the puzzle. The Lament Configuration can be used
         to banish him to Hell ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{Discussions}} Category:Characters Category:Hellraiser Category:Absorption
-        Users Category:Antagonists Category:Astral Projection Users Category:Blade
-        Users Category:Body Control Users Category:Book Characters Category:Chain
-        Users Category:Comic Book Characters Category:Creation Users Category:Demons
-        Category:Dimensional Travel Users Category:Electricity Users Category:Energy
-        Users Category:Evil Characters Category:Explosion Users Category:Fire Users
-        Category:Hook Users Category:Horror Characters Category:Ice Users Category:Illusionists
-        Category:Immortals Category:Incorporeal Characters Category:Invulnerability
-        Users Category:Large Sized Characters Category:Leaders Category:Live-Action
-        Characters Category:Magic Users Category:Memory Users Category:Movie Characters
-        Category:Murderers Category:Necromancers Category:Portal Users Category:Priests
-        Category:Primary Antagonists Category:Reality Warpers Category:Sadists Category:Shapeshifters
-        Category:Size Users Category:Soldiers Category:Soul Users Category:Summoners
-        Category:Telekinesis Users Category:Telepaths Category:Teleportation Users
-        Category:Temperature Users Category:Villains Category:Weapon Masters'
+        Category:Characters Category:Hellraiser Category:Absorption Users Category:Antagonists
+        Category:Astral Projection Users Category:Blade Users Category:Body Control
+        Users Category:Book Characters Category:Chain Users Category:Comic Book Characters
+        Category:Creation Users Category:Demons Category:Dimensional Travel Users
+        Category:Electricity Users Category:Energy Users Category:Evil Characters
+        Category:Explosion Users Category:Fire Users Category:Hook Users Category:Horror
+        Characters Category:Ice Users Category:Illusionists Category:Immortals Category:Incorporeal
+        Characters Category:Invulnerability Users Category:Large Sized Characters
+        Category:Leaders Category:Live-Action Characters Category:Magic Users Category:Memory
+        Users Category:Movie Characters Category:Murderers Category:Necromancers Category:Portal
+        Users Category:Priests Category:Primary Antagonists Category:Reality Warpers
+        Category:Sadists Category:Shapeshifters Category:Size Users Category:Soldiers
+        Category:Soul Users Category:Summoners Category:Telekinesis Users Category:Telepaths
+        Category:Teleportation Users Category:Temperature Users Category:Villains
+        Category:Weapon Masters'
       source_id: vsbattles-pinhead-horror-icons
       provider_id: vsbattles
       authority: high
@@ -1509,28 +1563,6 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Content= * Superhuman Physical Characteristics
-        * Beyond-Dimensional Physiology (Type 2; Leviathan encompasses Hell who is
-        stated to be a place where time doesn''t exists and is a nirvana type that
-        beyond of our world) ** Large Size (Type 10; It exists far beyond The Dream
-        Sea and The Void, which beyond even Heaven and Hell and can produce narratives
-        beyond narratives that are created and destroyed eternally. Even Cosmic Pinhead,
-        who embodying the collective of pain and becoming a astral deity is nothing
-        more but just a baby) * Nonexistent Physiology (Nature Type 2; All Aspects;
-        Is originate in The Final Void that beyond The Void where beings like Pinhead
-        came from * Abstract Existence * Immortality (Types 1, 5, 8 & 9;) * Reality
-        Warping, Clairvoyance, BFR, Portal Creation, Cosmic Manipulation, Space-Time
-        Manipulation & Causality Manipulation (Sent the Lament Configurations by made
-        cracks across all of space and time. Is possibly the one who brought one of
-        the puzzle boxes into The Entity''s realms and can access a portal from The
-        Labyrinth to the other dimensions. Edward has stated if left unchecked, *
-        Darkness Manipulation * Absorption * Summoning (Can summon The Cenobites at
-        practically any time with the mere existence of Leviathan) }}'
-      source_id: character-stats-profiles-pinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: attack_potency
       value: High Outerverse level (Leviathan exist beyond Hell where time is meaning
         nothing and is a nirvana type transcendent of our world. Easily one shot Cosmic
@@ -1555,6 +1587,12 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
+      source_id: character-stats-profiles-pinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 0
@@ -1573,7 +1611,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pinhead_%28Horror_Icons%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id010
     - attack_potency
     - durability
     - intelligence
@@ -1615,7 +1653,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id011
     - attack_potency
     - speed
     - durability
@@ -1626,7 +1664,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} | {{High 6-A}} | {{Unknown}}, at least {{7-B}} to {{High 6-A}}'
+      value: '| , at least to'
       source_id: vsbattles-pinhead-horror-icons
       provider_id: vsbattles
       authority: high
@@ -1719,21 +1757,21 @@ repair:
         and is generally only interested in targeting those who wished to summon him,
         regardless of who solved the puzzle. The Lament Configuration can be used
         to banish him to Hell ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{Discussions}} Category:Characters Category:Hellraiser Category:Absorption
-        Users Category:Antagonists Category:Astral Projection Users Category:Blade
-        Users Category:Body Control Users Category:Book Characters Category:Chain
-        Users Category:Comic Book Characters Category:Creation Users Category:Demons
-        Category:Dimensional Travel Users Category:Electricity Users Category:Energy
-        Users Category:Evil Characters Category:Explosion Users Category:Fire Users
-        Category:Hook Users Category:Horror Characters Category:Ice Users Category:Illusionists
-        Category:Immortals Category:Incorporeal Characters Category:Invulnerability
-        Users Category:Large Sized Characters Category:Leaders Category:Live-Action
-        Characters Category:Magic Users Category:Memory Users Category:Movie Characters
-        Category:Murderers Category:Necromancers Category:Portal Users Category:Priests
-        Category:Primary Antagonists Category:Reality Warpers Category:Sadists Category:Shapeshifters
-        Category:Size Users Category:Soldiers Category:Soul Users Category:Summoners
-        Category:Telekinesis Users Category:Telepaths Category:Teleportation Users
-        Category:Temperature Users Category:Villains Category:Weapon Masters'
+        Category:Characters Category:Hellraiser Category:Absorption Users Category:Antagonists
+        Category:Astral Projection Users Category:Blade Users Category:Body Control
+        Users Category:Book Characters Category:Chain Users Category:Comic Book Characters
+        Category:Creation Users Category:Demons Category:Dimensional Travel Users
+        Category:Electricity Users Category:Energy Users Category:Evil Characters
+        Category:Explosion Users Category:Fire Users Category:Hook Users Category:Horror
+        Characters Category:Ice Users Category:Illusionists Category:Immortals Category:Incorporeal
+        Characters Category:Invulnerability Users Category:Large Sized Characters
+        Category:Leaders Category:Live-Action Characters Category:Magic Users Category:Memory
+        Users Category:Movie Characters Category:Murderers Category:Necromancers Category:Portal
+        Users Category:Priests Category:Primary Antagonists Category:Reality Warpers
+        Category:Sadists Category:Shapeshifters Category:Size Users Category:Soldiers
+        Category:Soul Users Category:Summoners Category:Telekinesis Users Category:Telepaths
+        Category:Teleportation Users Category:Temperature Users Category:Villains
+        Category:Weapon Masters'
       source_id: vsbattles-pinhead-horror-icons
       provider_id: vsbattles
       authority: high
@@ -1749,116 +1787,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|pinhead|9661674
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-pinhead-horror-icons
-    url: https://character-stats-and-profiles.fandom.com/wiki/Pinhead_%28Horror_Icons%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - powers_and_abilities
-    - speed
-    - tier
-    normalized_page_title: Leviathan (Canon, Hellraiser)/TheOnryo
-    source_type: mediawiki
-    revision_id: '508720'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 15755
-    content_kind: api_json
-    headings_detected:
-    - '''''''Summary'''''''
-    - '''''''Powers and Stats'''''''
-    stat_labels_detected:
-    - attack_potency
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - speed
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 65
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: High 1-A | At least 1-S
-      source_id: character-stats-profiles-pinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Content= * Superhuman Physical Characteristics
-        * Beyond-Dimensional Physiology (Type 2; Leviathan encompasses Hell who is
-        stated to be a place where time doesn''t exists and is a nirvana type that
-        beyond of our world) ** Large Size (Type 10; It exists far beyond The Dream
-        Sea and The Void, which beyond even Heaven and Hell and can produce narratives
-        beyond narratives that are created and destroyed eternally. Even Cosmic Pinhead,
-        who embodying the collective of pain and becoming a astral deity is nothing
-        more but just a baby) * Nonexistent Physiology (Nature Type 2; All Aspects;
-        Is originate in The Final Void that beyond The Void where beings like Pinhead
-        came from * Abstract Existence * Immortality (Types 1, 5, 8 & 9;) * Reality
-        Warping, Clairvoyance, BFR, Portal Creation, Cosmic Manipulation, Space-Time
-        Manipulation & Causality Manipulation (Sent the Lament Configurations by made
-        cracks across all of space and time. Is possibly the one who brought one of
-        the puzzle boxes into The Entity''s realms and can access a portal from The
-        Labyrinth to the other dimensions. Edward has stated if left unchecked, *
-        Darkness Manipulation * Absorption * Summoning (Can summon The Cenobites at
-        practically any time with the mere existence of Leviathan) }}'
-      source_id: character-stats-profiles-pinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: High Outerverse level (Leviathan exist beyond Hell where time is meaning
-        nothing and is a nirvana type transcendent of our world. Easily one shot Cosmic
-        Pinhead, who becoming a astral deity and represents the collectives of pain
-        with he stand in The Dream Sea which contains the narratives, stories, beliefs
-        and the works of fictions. Superior to most of The Cenobites, that is able
-        and showns to splitting the universes by playing the musical notes, created
-        massive void realities, hold the lightning, easily and casually kill people
-        and interact with nonexistent materials by simply touching it. Stated will
-        bring death all of the gods by the use of The Cenobites and being described
-        as an End of All Things capable to dissolves everything into chaos) | At least
-        Extraverse level (Is a perfect state of being came from The Final Void where
-        The Dark God is represents some form of enlightenment, viewing Hellraiser
-        Cosmology as nothing but a mere ideas or stories)
-      source_id: character-stats-profiles-pinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immobile
-      source_id: character-stats-profiles-pinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 2
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|leviathan canon hellraiser
-      theonryo|508720
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-pinhead
@@ -1911,28 +1839,6 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Content= * Superhuman Physical Characteristics
-        * Beyond-Dimensional Physiology (Type 2; Leviathan encompasses Hell who is
-        stated to be a place where time doesn''t exists and is a nirvana type that
-        beyond of our world) ** Large Size (Type 10; It exists far beyond The Dream
-        Sea and The Void, which beyond even Heaven and Hell and can produce narratives
-        beyond narratives that are created and destroyed eternally. Even Cosmic Pinhead,
-        who embodying the collective of pain and becoming a astral deity is nothing
-        more but just a baby) * Nonexistent Physiology (Nature Type 2; All Aspects;
-        Is originate in The Final Void that beyond The Void where beings like Pinhead
-        came from * Abstract Existence * Immortality (Types 1, 5, 8 & 9;) * Reality
-        Warping, Clairvoyance, BFR, Portal Creation, Cosmic Manipulation, Space-Time
-        Manipulation & Causality Manipulation (Sent the Lament Configurations by made
-        cracks across all of space and time. Is possibly the one who brought one of
-        the puzzle boxes into The Entity''s realms and can access a portal from The
-        Labyrinth to the other dimensions. Edward has stated if left unchecked, *
-        Darkness Manipulation * Absorption * Summoning (Can summon The Cenobites at
-        practically any time with the mere existence of Leviathan) }}'
-      source_id: character-stats-profiles-pinhead
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: attack_potency
       value: High Outerverse level (Leviathan exist beyond Hell where time is meaning
         nothing and is a nirvana type transcendent of our world. Easily one shot Cosmic
@@ -1953,6 +1859,12 @@ repair:
       confidence: 0.75
     - field: speed
       value: Immobile
+      source_id: character-stats-profiles-pinhead
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: character-stats-profiles-pinhead
       provider_id: character_stats_profiles
       authority: high
@@ -2200,11 +2112,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pinhead
     title: Pinhead
     rank: 120
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2221,11 +2133,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pinhead_Horror_Icons
     title: Pinhead
     rank: 120
-    extracted_fields: *id009
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2242,11 +2154,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pinhead_%28Horror_Icons%29
     title: Pinhead
     rank: 120
-    extracted_fields: *id011
+    extracted_fields: *id010
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id011
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2264,3 +2176,21 @@ repair:
     fetched: 7
     provider_search_no_results: 1
   confidence: 0.75
+version_scope:
+  evidence_scoped: false
+  scoped_key: Base
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T21:37:11Z'
+  key_origin: primary_form_position
+  axes:
+    attack_potency:
+      method: positional
+      segments: 3
+    speed:
+      method: positional
+      segments: 3
+    durability:
+      method: positional
+      segments: 3
+  remaining_piped_axes:
+  - tier

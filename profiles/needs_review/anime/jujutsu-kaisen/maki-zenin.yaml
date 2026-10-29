@@ -146,7 +146,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Maki_Zenin
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -186,42 +186,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-maki-zenin-jujutsu-kaisen
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Maki Zenin Jujutsu Kaisen
-  url: https://character-stats-and-profiles.fandom.com/wiki/Maki_Zenin_Jujutsu_Kaisen
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-maki-zenin-jujutsu-kaisen
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Maki Zenin (Jujutsu Kaisen)
-  url: https://vsbattles.fandom.com/wiki/Maki_Zenin_%28Jujutsu_Kaisen%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-maki-zenin-jujutsu-kaisen
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -290,19 +254,9 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-maki-zenin-jujutsu-kaisen
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Maki Zenin Jujutsu Kaisen
-  url: https://vsbattles.fandom.com/wiki/Maki_Zenin_Jujutsu_Kaisen
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 power_scale:
   tier:
-    text: '{{8-C}}, at least {{8-B}} with Playful Cloud | At least {{High 7-C}}'
+    text: ', at least with Playful Cloud'
     source_ids:
     - vsbattles-maki-zenin-jujutsu-kaisen
     confidence: 0.6
@@ -327,37 +281,29 @@ power_scale:
       though later on it was stated Hanami was intentionally holding back.Jujutsu
       Kaisen, Chapter 47 Took off a part of Dagon''s arm and sent him flying with
       a single strike, and warded off his Shikigami.Jujutsu Kaisen, Chapter 109: "The
-      Shibuya Incident, Part 27") |-|Complete Heavenly Restriction'
+      Shibuya Incident, Part 27")'
     source_ids:
     - vsbattles-maki-zenin-jujutsu-kaisen
     confidence: 0.6
     notes: auto_repair source extraction
   speed:
-    text: Subsonic combat speed and reactions (Can cut and dodge rubber bullets) |
-      Supersonic+ combat speedsMach 2.79 and reactionsMach 4.6 after her sumo training
-      (Was able to keep up with a Sukuna who was able to keep up with Yuji and is
-      narratively comparable to other characters such as Yuta and Hakari. Is equal
-      to Toji. Intercepted Naoya while he was moving at his top speed and has completely
-      blitzed Ogi who had outsped her prior. Able to fight the Kukuru Unit altogether)
+    text: Subsonic combat speed and reactions (Can cut and dodge rubber bullets)
     source_ids:
     - vsbattles-maki-zenin-jujutsu-kaisen
     confidence: 0.6
     notes: auto_repair source extraction
   lifting_strength:
-    text: Class 5 (Comparable to Yuji) | At least Class M (Able to effortlessly break
-      free from Chojuro's stone arms.>125,959.27947 Metric Tons)
-    source_ids: &id003
+    text: Class 5 (Comparable to Yuji)
+    source_ids: &id002
     - mediawiki-4673397
     confidence: 0.8
   striking_strength:
-    text: Building level, higher with cursed tools | At least Large Town level
-    source_ids: *id003
+    text: Building level, higher with cursed tools
+    source_ids: *id002
     confidence: 0.8
   durability:
     text: Building level (She is the most physically fit character in the whole school,
-      so she is much more durable than Megumi and Nobara) | At least Large Town level
-      (Far more durable than before. Stated to be on par with Toji. Withstood attacks
-      from Jinichi, Chojuro, and Naoya.)
+      so she is much more durable than Megumi and Nobara)
     source_ids:
     - vsbattles-maki-zenin-jujutsu-kaisen
     confidence: 0.6
@@ -409,7 +355,7 @@ claims:
   section: power_scale
   axis: other
   text: '{{8-C}}, at least {{8-B}} with Playful Cloud | At least {{High 7-C}}'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-4673397
   decisive: false
   status: unverified
@@ -438,7 +384,7 @@ claims:
     Took off a part of Dagon''s arm and sent him flying with a single strike, and
     warded off his Shikigami.Jujutsu Kaisen, Chapter 109: "The Shibuya Incident, Part
     27") |-|Complete Heavenly Restriction'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -452,7 +398,7 @@ claims:
     comparable to other characters such as Yuta and Hakari. Is equal to Toji. Intercepted
     Naoya while he was moving at his top speed and has completely blitzed Ogi who
     had outsped her prior. Able to fight the Kukuru Unit altogether)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -462,7 +408,7 @@ claims:
   axis: other
   text: Class 5 (Comparable to Yuji) | At least Class M (Able to effortlessly break
     free from Chojuro's stone arms.>125,959.27947 Metric Tons)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -471,7 +417,7 @@ claims:
   section: power_scale
   axis: other
   text: Building level, higher with cursed tools | At least Large Town level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -483,7 +429,7 @@ claims:
     so she is much more durable than Megumi and Nobara) | At least Large Town level
     (Far more durable than before. Stated to be on par with Toji. Withstood attacks
     from Jinichi, Chojuro, and Naoya.)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -495,7 +441,7 @@ claims:
     and Mai. Fought Dagon despite all her injuries from being slashed and bitten into
     by his shikigami. Her constitution allowed her to survive being ignited into flames
     by Jogo)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -504,7 +450,7 @@ claims:
   section: power_scale
   axis: range
   text: Standard Melee Range physically, Extended Melee Range with Cursed Tools
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -525,7 +471,7 @@ claims:
     \u5200|\u3053\u3093\u3068\u3046}}|Shakukon T\u014D}}: A large Japanese broadsword\
     \ with a fur tsuba and a dark handle. It bypasses physical toughness and cuts\
     \ directly at the soul."
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -554,7 +500,7 @@ claims:
     within the world, to the point her skill has improved allowing her to singlehandedly
     fight Sukuna, driving him to try much harder than with his prior opponentsJujutsu
     Kaisen, Chapter 253)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -579,7 +525,7 @@ claims:
     Category:Female Characters Category:Humans Category:Manga Characters Category:Martial
     Artists Category:Non-Physical Interaction Users Category:Preparation Users Category:Regeneration
     Users Category:Shockwave Users Category:Teenagers Category:Weapon Masters Category:Twins'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -589,7 +535,7 @@ claims:
   axis: hax
   text: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Pre-Culling Games=
     {{#tag:tabber| {{!}}-{{!}}'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -601,7 +547,7 @@ equipment:
     the handle and the spearhead and gold rings '
   description: A long polearm with a black cursed tool blade decorated with fur in-between
     the handle and the spearhead and gold rings on the opposite end.
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -619,7 +565,7 @@ equipment:
   description: ': Retrieved from Suguru Geto after his defeat and stored at Jujutsu
     High. A three-section staff that increases the user''s physical strength with
     cursed energy. Megumi keeps it within his shadow until the Goodwill Event'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -634,7 +580,7 @@ equipment:
 - id: standard-equipment-where-maki-uses-it-extremely-effectively
   name: where Maki uses it extremely effectively.
   description: where Maki uses it extremely effectively.
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -649,7 +595,7 @@ equipment:
 - id: standard-equipment-it-can-accumulate-force-and-cursed-energy
   name: ': It can accumulate force and cursed energy'
   description: ': It can accumulate force and cursed energy'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -666,7 +612,7 @@ equipment:
     will.
   description: as well as eject it out of the back of the blade in accordance with
     the user's will.
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -683,7 +629,7 @@ equipment:
     physical toughness and cuts directly at th'
   description: ': A large Japanese broadsword with a fur tsuba and a dark handle.
     It bypasses physical toughness and cuts directly at the soul.'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -702,7 +648,7 @@ weaknesses:
 - id: weaknesses-requires-her-glasses-to-see-cursed-spirits
   name: Requires her glasses to see cursed spirits
   description: Requires her glasses to see cursed spirits
-  source_ids: &id005
+  source_ids: &id004
   - vsbattles-maki-zenin-jujutsu-kaisen
   source_claim_ids: []
   confidence: 0.85
@@ -719,7 +665,7 @@ weaknesses:
 - id: weaknesses-none-notablejujutsu-kaisen
   name: None notableJujutsu Kaisen
   description: None notableJujutsu Kaisen
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -741,7 +687,7 @@ weaknesses:
     Category:Humans Category:Manga Characters Category:Martial Artists Category:Non-Physical
     Interaction Users Category:Preparation Users Category:Regeneration Users Category:Shockwave
     Users Category:Teenagers Category:Weapon Masters Category:Twins
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -788,7 +734,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: 5449ecbd5929614082807ca3f23f462cc47fe64d31cea73a8214008e613aa363
 repair:
-  attempted_at: '2026-09-25T21:36:50Z'
+  attempted_at: '2026-10-21T20:16:54Z'
   repaired_fields:
   - attack_potency
   - durability
@@ -805,7 +751,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Maki_Zenin
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields: &id005
     - attack_potency
     - durability
     - intelligence
@@ -849,7 +795,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields: &id006
     - tier
     - attack_potency
     - speed
@@ -862,14 +808,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{8-C}}, at least {{8-B}} with Playful Cloud | At least {{High 7-C}}'
-      source_id: mediawiki-4673397
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Pre-Culling Games=
-        {{#tag:tabber| {{!}}-{{!}}'
+      value: ', at least with Playful Cloud | At least'
       source_id: mediawiki-4673397
       provider_id: vsbattles
       authority: high
@@ -894,8 +833,7 @@ repair:
         complemented by Hanami afterwards, though later on it was stated Hanami was
         intentionally holding back.Jujutsu Kaisen, Chapter 47 Took off a part of Dagon''s
         arm and sent him flying with a single strike, and warded off his Shikigami.Jujutsu
-        Kaisen, Chapter 109: "The Shibuya Incident, Part 27") |-|Complete Heavenly
-        Restriction'
+        Kaisen, Chapter 109: "The Shibuya Incident, Part 27")'
       source_id: mediawiki-4673397
       provider_id: vsbattles
       authority: high
@@ -937,19 +875,15 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: "*A long polearm with a black cursed tool blade decorated with fur in-between\
-        \ the handle and the spearhead and gold rings on the opposite end. *{{Nihongo|Playful\
-        \ Cloud|{{Ruby|\u904A\u96F2|\u3086\u3046\u3046\u3093}}|Y\u016B-un}}: Retrieved\
-        \ from Suguru Geto after his defeat and stored at Jujutsu High. A three-section\
-        \ staff that increases the user's physical strength with cursed energy. Megumi\
-        \ keeps it within his shadow until the Goodwill Event, where Maki uses it\
-        \ extremely effectively. *{{Nihongo|Dragon Bone|{{Ruby|\u7ADC|\u308A\u3085\
-        \u3046}}{{Ruby|\u9AA8|\u3053\u3064}}|Ry\u016Bkotsu}}: It can accumulate force\
-        \ and cursed energy, as well as eject it out of the back of the blade in accordance\
-        \ with the user's will. *{{Nihongo|Split Soul Katana|{{Ruby|\u91C8|\u3057\u3083\
-        \u304F}}{{Ruby|\u9B42\u5200|\u3053\u3093\u3068\u3046}}|Shakukon T\u014D}}:\
-        \ A large Japanese broadsword with a fur tsuba and a dark handle. It bypasses\
-        \ physical toughness and cuts directly at the soul."
+      value: '*A long polearm with a black cursed tool blade decorated with fur in-between
+        the handle and the spearhead and gold rings on the opposite end. *: Retrieved
+        from Suguru Geto after his defeat and stored at Jujutsu High. A three-section
+        staff that increases the user''s physical strength with cursed energy. Megumi
+        keeps it within his shadow until the Goodwill Event, where Maki uses it extremely
+        effectively. *: It can accumulate force and cursed energy, as well as eject
+        it out of the back of the blade in accordance with the user''s will. *: A
+        large Japanese broadsword with a fur tsuba and a dark handle. It bypasses
+        physical toughness and cuts directly at the soul.'
       source_id: mediawiki-4673397
       provider_id: vsbattles
       authority: high
@@ -982,25 +916,22 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Requires her glasses to see cursed spirits | None notableJujutsu Kaisen,
-        Chapter 197 == Notable Matchups == {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        |-|Victories=Victories: |-|Losses=Losses: *Red Hood (Post-Crisis) (DC Comics)
-        Red Hood''s Profile ("Incomplete Heavenly Restriction" Maki and "Post-Death
-        in the Family" Jason were being used. Maki had her polearm, Jason had his
-        standard equipment. They started 50 meters apart and Speed was Equalized)
-        *Toji Fushiguro (Jujutsu Kaisen) Toji''s Profile (Fully Heavenly Restricted
-        Maki was used) |-|Inconclusive=Inconclusive: *Tanjiro Kamado (Demon Slayer)
-        Tanjiro''s Profile (Complete Heavenly Restriction Maki and Post-Type Zero
-        Training Tanjiro were used; Match was in MHA verse''s Musutafu, Japan, where
-        they started 10m apart; Speed was equalized) }} == References == {{Scroll
-        box|content={{Reflist|2}}}} == Notes/Explanations == {{Scroll box|Content=}}
-        {{Discussions}} Category:Characters Category:Jujutsu Kaisen Category:Acausal
-        Characters Category:Accelerated Development Users Category:Anime Characters
-        Category:Damage Boost Users Category:Enhanced Senses Users Category:Extrasensory
-        Perception Users Category:Female Characters Category:Humans Category:Manga
-        Characters Category:Martial Artists Category:Non-Physical Interaction Users
-        Category:Preparation Users Category:Regeneration Users Category:Shockwave
-        Users Category:Teenagers Category:Weapon Masters Category:Twins'
+      value: Requires her glasses to see cursed spirits | None notableJujutsu Kaisen,
+        Chapter 197 == Notable Matchups == == References == == Notes/Explanations
+        == Category:Characters Category:Jujutsu Kaisen Category:Acausal Characters
+        Category:Accelerated Development Users Category:Anime Characters Category:Damage
+        Boost Users Category:Enhanced Senses Users Category:Extrasensory Perception
+        Users Category:Female Characters Category:Humans Category:Manga Characters
+        Category:Martial Artists Category:Non-Physical Interaction Users Category:Preparation
+        Users Category:Regeneration Users Category:Shockwave Users Category:Teenagers
+        Category:Weapon Masters Category:Twins
+      source_id: mediawiki-4673397
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Pre-Culling Games=
+        {{#tag:tabber|'
       source_id: mediawiki-4673397
       provider_id: vsbattles
       authority: high
@@ -1019,7 +950,7 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
-    url: https://character-stats-and-profiles.fandom.com/wiki/Maki_Zenin_Jujutsu_Kaisen
+    url: https://character-stats-and-profiles.fandom.com/wiki/Maki_Zenin_%28Jujutsu_Kaisen%29
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -1031,10 +962,10 @@ repair:
     - weaknesses
     normalized_page_title: Maki Zenin (Canon)/KaaydoManic
     source_type: mediawiki
-    revision_id: '607759'
+    revision_id: '621672'
     fetch_status: fetched
     http_status: 200
-    content_length: 14297
+    content_length: 14230
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1071,44 +1002,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-C}}, {{6-C}} with Playful Cloud | {{6-B}}'
-      source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Incomplete Heavenly
-        Restriction= Passive: * Superhuman Physical Characteristics * Regeneration
-        [Low Mid]: able to regenerate her internal organs. Skills: * Martial Arts
-        * Weapon Mastery * Acrobatics * Preparation: has access to the Zen''in Clan''s
-        cursed tools storage. * Accelerated Development [Battle]: Sorcerers are stated
-        to improve when there are consequences to suffer. Also stated here a person
-        can change thanks to the slightest of events. |-|Complete Heavenly Restriction=
-        All previous abilities but massively enhanced, as Maki is equal to Toji, she
-        has in addition: Passive: * Acausality [Type 2]: having zero Cursed Energy
-        makes you escape fate. * Instinctive Soul Manipulation Negation: Equal to
-        Toji who''s body naturally overwrite any souls that doesn''t belong to its
-        original body. Skills: * Statistics Amplification: By revealing the functioning
-        of her Heavenly Restriction, she can increase its power. * Acrobatics [All
-        Types]: can grab to strings of space; can dodge in mid air. * Enhanced Senses,
-        Extrasensory Perception: should be comparable to Toji who with his enhanced
-        five senses can perceive Cursed Spirits, is able to see the contour of soul
-        as well as the distortions of space. As she can "feel everything" about herself
-        and her opponent based on the distortions of the air, she can predict her
-        opponents'' movements. * Stealth Mastery: Because she has zero Cursed Energy,
-        no one can sense her presence besides the Six Eyes and effectively becomes
-        "invisible". * Shockwave Creation: Can send a shockwave through materials,
-        to hit those on the other side precisely. * Information Analysis: After getting
-        rid of her mental limitations, she extended her perception range vastly beyond
-        her bodies'' natural range to sense through her entire environment which resulted
-        in an ability of "seeing the souls of inanimate objects". * Regeneration [Low]:
-        Can heal internal damages in five minutes. Resistances: * Limited Homing Attack
-        & Forcefield Creation: due to having no Cursed energy, closed-barrier domains
-        treat Maki as a building allowing her to ignore their homing capability and
-        also makes it so she''s able to move in and out of a domain''s barrier. *
-        Possession * Limited Analytical Prediction & Extrasensory Perception: Maki
-        has zero cursed energy similar to Toji, therefore making it harder to read
-        her moves in combat as it shown with Gojo against Toji.'
+      value: ', with Playful Cloud'
       source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
       provider_id: character_stats_profiles
       authority: high
@@ -1116,24 +1010,24 @@ repair:
     - field: attack_potency
       value: Building level (Implied to be confident into killing a Cursed Spirit
         who destroyed a structure. Highly seen and recommended as a Grade 2 Sorcerer),
-        Island level with Playful Cloud83.4 Gigatons (Can injure Dagon who was amplified
+        Island level+ with Playful Cloud83.4 Gigatons (Can injure Dagon who was amplified
         by his Domain Expansion and was considered the strongest among Kento Nanami,
         Megumi Fushiguro, and Naobito Zenin. Also damaged Hanami which she couldn't
-        do with a regular sword) | Country level34.6 Teratons (Overwhelmingly far
-        stronger than Naoya Zenin who flattened mountains with his raw movements;
-        repeatedly stated and shown to be equal to Toji Fushiguro who could've killed
-        Suguru Geto and is equal to Enlightened Satoru Gojo who has previously stated
-        to easily be able to destroy a mountain and comparable to 4 Fingers Ryomen
-        Sukuna; considered a greater threat than Culling Game Yuji Itadori as Uraume
-        needed to focus their Cursed Energy on her. Narratively comparable to Yuta
-        Okkotsu and Kinji Hakari. Is a threat to Kenjaku. Cleared the sky from its
-        cloud with a single strikeJujutsu Kaisen, Season 3 Episode 4 which is visibly
-        and statistically more impressive than Sukuna's Dismantle which cut the sky
-        in halfJujutsu Kaisen, Season 2 Episode 17; furthermore, she is able to keep
-        up with 16 Fingers Sukuna with only 10% of his maximum output.Jujutsu Kaisen,
-        Chapter 215 Managed to get True Form Sukuna in a ecstatic stateJujutsu Kaisen,
-        Chapter 253 unlike the other Sorcerers like Yuta Okkotsu who was just an appetizerJujutsu
-        Kaisen, Chapter 251 when his Cursed Energy varies depending on his interest.Jujutsu
+        do with a regular sword) | Island level+ (Overwhelmingly far stronger than
+        Naoya Zenin who flattened mountains with his raw movements; repeatedly stated
+        and shown to be equal to Toji Fushiguro who could've killed Suguru Geto and
+        is equal to Enlightened Satoru Gojo who has previously stated to easily be
+        able to destroy a mountain and comparable to 4 Fingers Ryomen Sukuna; considered
+        a greater threat than Culling Game Yuji Itadori as Uraume needed to focus
+        their Cursed Energy on her. Narratively comparable to Yuta Okkotsu and Kinji
+        Hakari. Is a threat to Kenjaku. Cleared the sky from its cloud with a single
+        strikeJujutsu Kaisen, Season 3 Episode 4 which is visibly and statistically
+        more impressive than Sukuna's Dismantle which cut the sky in halfJujutsu Kaisen,
+        Season 2 Episode 17; furthermore, she is able to keep up with 16 Fingers Sukuna
+        with only 10% of his maximum output.Jujutsu Kaisen, Chapter 215 Managed to
+        get True Form Sukuna in a ecstatic stateJujutsu Kaisen, Chapter 253 unlike
+        the other Sorcerers like Yuta Okkotsu who was just an appetizerJujutsu Kaisen,
+        Chapter 251 when his Cursed Energy varies depending on his interest.Jujutsu
         Kaisen, Chapter 252)
       source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
       provider_id: character_stats_profiles
@@ -1158,7 +1052,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: Building level | Country level (Survived Jinicho's strike barrage, Naoya
+      value: Building level | Island level+ (Survived Jinicho's strike barrage, Naoya
         Zenin's attack has done no damage to her. Physically comparable to 4 Fingers
         Ryomen Sukuna. Survived a Black Flash from Sukuna)
       source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
@@ -1171,8 +1065,13 @@ repair:
         as unlike them she had the interest of Ryomen Sukuna and managed to keep up
         with him in a ecstatic state when he was previously hyped up to hold back
         implying that Maki has fought a stronger version of Ryomen Sukuna than what
-        Yuta and Yuji went through. {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        Statistics Values: Speed Values: Lifting Values: }} Category:KaaydoManic'
+        Yuta and Yuji went through. Category:KaaydoManic'
+      source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
       provider_id: character_stats_profiles
       authority: high
@@ -1187,14 +1086,14 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|maki zenin canon kaaydomanic|607759
+    duplicate_key: character-stats-and-profiles.fandom.com|maki zenin canon kaaydomanic|621672
     retryable: false
     exception_class: ''
   - source_id: vsbattles-maki-zenin-jujutsu-kaisen
-    url: https://vsbattles.fandom.com/wiki/Maki_Zenin_%28Jujutsu_Kaisen%29
+    url: https://vsbattles.fandom.com/wiki/Maki_Zenin_Jujutsu_Kaisen
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id008
+    extracted_fields: &id007
     - attack_potency
     - durability
     - intelligence
@@ -1238,7 +1137,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id009
+    allowed_fields: &id008
     - attack_potency
     - speed
     - durability
@@ -1249,14 +1148,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-C}}, at least {{8-B}} with Playful Cloud | At least {{High 7-C}}'
-      source_id: vsbattles-maki-zenin-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Pre-Culling Games=
-        {{#tag:tabber| {{!}}-{{!}}'
+      value: ', at least with Playful Cloud | At least'
       source_id: vsbattles-maki-zenin-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -1281,8 +1173,7 @@ repair:
         complemented by Hanami afterwards, though later on it was stated Hanami was
         intentionally holding back.Jujutsu Kaisen, Chapter 47 Took off a part of Dagon''s
         arm and sent him flying with a single strike, and warded off his Shikigami.Jujutsu
-        Kaisen, Chapter 109: "The Shibuya Incident, Part 27") |-|Complete Heavenly
-        Restriction'
+        Kaisen, Chapter 109: "The Shibuya Incident, Part 27")'
       source_id: vsbattles-maki-zenin-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -1324,19 +1215,15 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: "*A long polearm with a black cursed tool blade decorated with fur in-between\
-        \ the handle and the spearhead and gold rings on the opposite end. *{{Nihongo|Playful\
-        \ Cloud|{{Ruby|\u904A\u96F2|\u3086\u3046\u3046\u3093}}|Y\u016B-un}}: Retrieved\
-        \ from Suguru Geto after his defeat and stored at Jujutsu High. A three-section\
-        \ staff that increases the user's physical strength with cursed energy. Megumi\
-        \ keeps it within his shadow until the Goodwill Event, where Maki uses it\
-        \ extremely effectively. *{{Nihongo|Dragon Bone|{{Ruby|\u7ADC|\u308A\u3085\
-        \u3046}}{{Ruby|\u9AA8|\u3053\u3064}}|Ry\u016Bkotsu}}: It can accumulate force\
-        \ and cursed energy, as well as eject it out of the back of the blade in accordance\
-        \ with the user's will. *{{Nihongo|Split Soul Katana|{{Ruby|\u91C8|\u3057\u3083\
-        \u304F}}{{Ruby|\u9B42\u5200|\u3053\u3093\u3068\u3046}}|Shakukon T\u014D}}:\
-        \ A large Japanese broadsword with a fur tsuba and a dark handle. It bypasses\
-        \ physical toughness and cuts directly at the soul."
+      value: '*A long polearm with a black cursed tool blade decorated with fur in-between
+        the handle and the spearhead and gold rings on the opposite end. *: Retrieved
+        from Suguru Geto after his defeat and stored at Jujutsu High. A three-section
+        staff that increases the user''s physical strength with cursed energy. Megumi
+        keeps it within his shadow until the Goodwill Event, where Maki uses it extremely
+        effectively. *: It can accumulate force and cursed energy, as well as eject
+        it out of the back of the blade in accordance with the user''s will. *: A
+        large Japanese broadsword with a fur tsuba and a dark handle. It bypasses
+        physical toughness and cuts directly at the soul.'
       source_id: vsbattles-maki-zenin-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -1369,25 +1256,22 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Requires her glasses to see cursed spirits | None notableJujutsu Kaisen,
-        Chapter 197 == Notable Matchups == {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        |-|Victories=Victories: |-|Losses=Losses: *Red Hood (Post-Crisis) (DC Comics)
-        Red Hood''s Profile ("Incomplete Heavenly Restriction" Maki and "Post-Death
-        in the Family" Jason were being used. Maki had her polearm, Jason had his
-        standard equipment. They started 50 meters apart and Speed was Equalized)
-        *Toji Fushiguro (Jujutsu Kaisen) Toji''s Profile (Fully Heavenly Restricted
-        Maki was used) |-|Inconclusive=Inconclusive: *Tanjiro Kamado (Demon Slayer)
-        Tanjiro''s Profile (Complete Heavenly Restriction Maki and Post-Type Zero
-        Training Tanjiro were used; Match was in MHA verse''s Musutafu, Japan, where
-        they started 10m apart; Speed was equalized) }} == References == {{Scroll
-        box|content={{Reflist|2}}}} == Notes/Explanations == {{Scroll box|Content=}}
-        {{Discussions}} Category:Characters Category:Jujutsu Kaisen Category:Acausal
-        Characters Category:Accelerated Development Users Category:Anime Characters
-        Category:Damage Boost Users Category:Enhanced Senses Users Category:Extrasensory
-        Perception Users Category:Female Characters Category:Humans Category:Manga
-        Characters Category:Martial Artists Category:Non-Physical Interaction Users
-        Category:Preparation Users Category:Regeneration Users Category:Shockwave
-        Users Category:Teenagers Category:Weapon Masters Category:Twins'
+      value: Requires her glasses to see cursed spirits | None notableJujutsu Kaisen,
+        Chapter 197 == Notable Matchups == == References == == Notes/Explanations
+        == Category:Characters Category:Jujutsu Kaisen Category:Acausal Characters
+        Category:Accelerated Development Users Category:Anime Characters Category:Damage
+        Boost Users Category:Enhanced Senses Users Category:Extrasensory Perception
+        Users Category:Female Characters Category:Humans Category:Manga Characters
+        Category:Martial Artists Category:Non-Physical Interaction Users Category:Preparation
+        Users Category:Regeneration Users Category:Shockwave Users Category:Teenagers
+        Category:Weapon Masters Category:Twins
+      source_id: vsbattles-maki-zenin-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Pre-Culling Games=
+        {{#tag:tabber|'
       source_id: vsbattles-maki-zenin-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -1406,7 +1290,7 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
-    url: https://character-stats-and-profiles.fandom.com/wiki/Maki_Zenin_%28Jujutsu_Kaisen%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/Maki_Zenin_Jujutsu_Kaisen
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -1418,10 +1302,10 @@ repair:
     - weaknesses
     normalized_page_title: Maki Zenin (Canon)/KaaydoManic
     source_type: mediawiki
-    revision_id: '607759'
+    revision_id: '621672'
     fetch_status: fetched
     http_status: 200
-    content_length: 14297
+    content_length: 14230
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1458,44 +1342,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-C}}, {{6-C}} with Playful Cloud | {{6-B}}'
-      source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Incomplete Heavenly
-        Restriction= Passive: * Superhuman Physical Characteristics * Regeneration
-        [Low Mid]: able to regenerate her internal organs. Skills: * Martial Arts
-        * Weapon Mastery * Acrobatics * Preparation: has access to the Zen''in Clan''s
-        cursed tools storage. * Accelerated Development [Battle]: Sorcerers are stated
-        to improve when there are consequences to suffer. Also stated here a person
-        can change thanks to the slightest of events. |-|Complete Heavenly Restriction=
-        All previous abilities but massively enhanced, as Maki is equal to Toji, she
-        has in addition: Passive: * Acausality [Type 2]: having zero Cursed Energy
-        makes you escape fate. * Instinctive Soul Manipulation Negation: Equal to
-        Toji who''s body naturally overwrite any souls that doesn''t belong to its
-        original body. Skills: * Statistics Amplification: By revealing the functioning
-        of her Heavenly Restriction, she can increase its power. * Acrobatics [All
-        Types]: can grab to strings of space; can dodge in mid air. * Enhanced Senses,
-        Extrasensory Perception: should be comparable to Toji who with his enhanced
-        five senses can perceive Cursed Spirits, is able to see the contour of soul
-        as well as the distortions of space. As she can "feel everything" about herself
-        and her opponent based on the distortions of the air, she can predict her
-        opponents'' movements. * Stealth Mastery: Because she has zero Cursed Energy,
-        no one can sense her presence besides the Six Eyes and effectively becomes
-        "invisible". * Shockwave Creation: Can send a shockwave through materials,
-        to hit those on the other side precisely. * Information Analysis: After getting
-        rid of her mental limitations, she extended her perception range vastly beyond
-        her bodies'' natural range to sense through her entire environment which resulted
-        in an ability of "seeing the souls of inanimate objects". * Regeneration [Low]:
-        Can heal internal damages in five minutes. Resistances: * Limited Homing Attack
-        & Forcefield Creation: due to having no Cursed energy, closed-barrier domains
-        treat Maki as a building allowing her to ignore their homing capability and
-        also makes it so she''s able to move in and out of a domain''s barrier. *
-        Possession * Limited Analytical Prediction & Extrasensory Perception: Maki
-        has zero cursed energy similar to Toji, therefore making it harder to read
-        her moves in combat as it shown with Gojo against Toji.'
+      value: ', with Playful Cloud'
       source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
       provider_id: character_stats_profiles
       authority: high
@@ -1503,24 +1350,24 @@ repair:
     - field: attack_potency
       value: Building level (Implied to be confident into killing a Cursed Spirit
         who destroyed a structure. Highly seen and recommended as a Grade 2 Sorcerer),
-        Island level with Playful Cloud83.4 Gigatons (Can injure Dagon who was amplified
+        Island level+ with Playful Cloud83.4 Gigatons (Can injure Dagon who was amplified
         by his Domain Expansion and was considered the strongest among Kento Nanami,
         Megumi Fushiguro, and Naobito Zenin. Also damaged Hanami which she couldn't
-        do with a regular sword) | Country level34.6 Teratons (Overwhelmingly far
-        stronger than Naoya Zenin who flattened mountains with his raw movements;
-        repeatedly stated and shown to be equal to Toji Fushiguro who could've killed
-        Suguru Geto and is equal to Enlightened Satoru Gojo who has previously stated
-        to easily be able to destroy a mountain and comparable to 4 Fingers Ryomen
-        Sukuna; considered a greater threat than Culling Game Yuji Itadori as Uraume
-        needed to focus their Cursed Energy on her. Narratively comparable to Yuta
-        Okkotsu and Kinji Hakari. Is a threat to Kenjaku. Cleared the sky from its
-        cloud with a single strikeJujutsu Kaisen, Season 3 Episode 4 which is visibly
-        and statistically more impressive than Sukuna's Dismantle which cut the sky
-        in halfJujutsu Kaisen, Season 2 Episode 17; furthermore, she is able to keep
-        up with 16 Fingers Sukuna with only 10% of his maximum output.Jujutsu Kaisen,
-        Chapter 215 Managed to get True Form Sukuna in a ecstatic stateJujutsu Kaisen,
-        Chapter 253 unlike the other Sorcerers like Yuta Okkotsu who was just an appetizerJujutsu
-        Kaisen, Chapter 251 when his Cursed Energy varies depending on his interest.Jujutsu
+        do with a regular sword) | Island level+ (Overwhelmingly far stronger than
+        Naoya Zenin who flattened mountains with his raw movements; repeatedly stated
+        and shown to be equal to Toji Fushiguro who could've killed Suguru Geto and
+        is equal to Enlightened Satoru Gojo who has previously stated to easily be
+        able to destroy a mountain and comparable to 4 Fingers Ryomen Sukuna; considered
+        a greater threat than Culling Game Yuji Itadori as Uraume needed to focus
+        their Cursed Energy on her. Narratively comparable to Yuta Okkotsu and Kinji
+        Hakari. Is a threat to Kenjaku. Cleared the sky from its cloud with a single
+        strikeJujutsu Kaisen, Season 3 Episode 4 which is visibly and statistically
+        more impressive than Sukuna's Dismantle which cut the sky in halfJujutsu Kaisen,
+        Season 2 Episode 17; furthermore, she is able to keep up with 16 Fingers Sukuna
+        with only 10% of his maximum output.Jujutsu Kaisen, Chapter 215 Managed to
+        get True Form Sukuna in a ecstatic stateJujutsu Kaisen, Chapter 253 unlike
+        the other Sorcerers like Yuta Okkotsu who was just an appetizerJujutsu Kaisen,
+        Chapter 251 when his Cursed Energy varies depending on his interest.Jujutsu
         Kaisen, Chapter 252)
       source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
       provider_id: character_stats_profiles
@@ -1545,7 +1392,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: Building level | Country level (Survived Jinicho's strike barrage, Naoya
+      value: Building level | Island level+ (Survived Jinicho's strike barrage, Naoya
         Zenin's attack has done no damage to her. Physically comparable to 4 Fingers
         Ryomen Sukuna. Survived a Black Flash from Sukuna)
       source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
@@ -1558,8 +1405,13 @@ repair:
         as unlike them she had the interest of Ryomen Sukuna and managed to keep up
         with him in a ecstatic state when he was previously hyped up to hold back
         implying that Maki has fought a stronger version of Ryomen Sukuna than what
-        Yuta and Yuji went through. {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        Statistics Values: Speed Values: Lifting Values: }} Category:KaaydoManic'
+        Yuta and Yuji went through. Category:KaaydoManic'
+      source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: character-stats-profiles-maki-zenin-jujutsu-kaisen
       provider_id: character_stats_profiles
       authority: high
@@ -1574,14 +1426,14 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|maki zenin canon kaaydomanic|607759
+    duplicate_key: character-stats-and-profiles.fandom.com|maki zenin canon kaaydomanic|621672
     retryable: false
     exception_class: ''
   - source_id: vsbattles-maki-zenin-jujutsu-kaisen
-    url: https://vsbattles.fandom.com/wiki/Maki_Zenin_Jujutsu_Kaisen
+    url: https://vsbattles.fandom.com/wiki/Maki_Zenin_%28Jujutsu_Kaisen%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id010
+    extracted_fields: &id009
     - attack_potency
     - durability
     - intelligence
@@ -1625,7 +1477,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id011
+    allowed_fields: &id010
     - attack_potency
     - speed
     - durability
@@ -1636,14 +1488,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-C}}, at least {{8-B}} with Playful Cloud | At least {{High 7-C}}'
-      source_id: vsbattles-maki-zenin-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Pre-Culling Games=
-        {{#tag:tabber| {{!}}-{{!}}'
+      value: ', at least with Playful Cloud | At least'
       source_id: vsbattles-maki-zenin-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -1668,8 +1513,7 @@ repair:
         complemented by Hanami afterwards, though later on it was stated Hanami was
         intentionally holding back.Jujutsu Kaisen, Chapter 47 Took off a part of Dagon''s
         arm and sent him flying with a single strike, and warded off his Shikigami.Jujutsu
-        Kaisen, Chapter 109: "The Shibuya Incident, Part 27") |-|Complete Heavenly
-        Restriction'
+        Kaisen, Chapter 109: "The Shibuya Incident, Part 27")'
       source_id: vsbattles-maki-zenin-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -1711,19 +1555,15 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: "*A long polearm with a black cursed tool blade decorated with fur in-between\
-        \ the handle and the spearhead and gold rings on the opposite end. *{{Nihongo|Playful\
-        \ Cloud|{{Ruby|\u904A\u96F2|\u3086\u3046\u3046\u3093}}|Y\u016B-un}}: Retrieved\
-        \ from Suguru Geto after his defeat and stored at Jujutsu High. A three-section\
-        \ staff that increases the user's physical strength with cursed energy. Megumi\
-        \ keeps it within his shadow until the Goodwill Event, where Maki uses it\
-        \ extremely effectively. *{{Nihongo|Dragon Bone|{{Ruby|\u7ADC|\u308A\u3085\
-        \u3046}}{{Ruby|\u9AA8|\u3053\u3064}}|Ry\u016Bkotsu}}: It can accumulate force\
-        \ and cursed energy, as well as eject it out of the back of the blade in accordance\
-        \ with the user's will. *{{Nihongo|Split Soul Katana|{{Ruby|\u91C8|\u3057\u3083\
-        \u304F}}{{Ruby|\u9B42\u5200|\u3053\u3093\u3068\u3046}}|Shakukon T\u014D}}:\
-        \ A large Japanese broadsword with a fur tsuba and a dark handle. It bypasses\
-        \ physical toughness and cuts directly at the soul."
+      value: '*A long polearm with a black cursed tool blade decorated with fur in-between
+        the handle and the spearhead and gold rings on the opposite end. *: Retrieved
+        from Suguru Geto after his defeat and stored at Jujutsu High. A three-section
+        staff that increases the user''s physical strength with cursed energy. Megumi
+        keeps it within his shadow until the Goodwill Event, where Maki uses it extremely
+        effectively. *: It can accumulate force and cursed energy, as well as eject
+        it out of the back of the blade in accordance with the user''s will. *: A
+        large Japanese broadsword with a fur tsuba and a dark handle. It bypasses
+        physical toughness and cuts directly at the soul.'
       source_id: vsbattles-maki-zenin-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -1756,25 +1596,22 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Requires her glasses to see cursed spirits | None notableJujutsu Kaisen,
-        Chapter 197 == Notable Matchups == {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        |-|Victories=Victories: |-|Losses=Losses: *Red Hood (Post-Crisis) (DC Comics)
-        Red Hood''s Profile ("Incomplete Heavenly Restriction" Maki and "Post-Death
-        in the Family" Jason were being used. Maki had her polearm, Jason had his
-        standard equipment. They started 50 meters apart and Speed was Equalized)
-        *Toji Fushiguro (Jujutsu Kaisen) Toji''s Profile (Fully Heavenly Restricted
-        Maki was used) |-|Inconclusive=Inconclusive: *Tanjiro Kamado (Demon Slayer)
-        Tanjiro''s Profile (Complete Heavenly Restriction Maki and Post-Type Zero
-        Training Tanjiro were used; Match was in MHA verse''s Musutafu, Japan, where
-        they started 10m apart; Speed was equalized) }} == References == {{Scroll
-        box|content={{Reflist|2}}}} == Notes/Explanations == {{Scroll box|Content=}}
-        {{Discussions}} Category:Characters Category:Jujutsu Kaisen Category:Acausal
-        Characters Category:Accelerated Development Users Category:Anime Characters
-        Category:Damage Boost Users Category:Enhanced Senses Users Category:Extrasensory
-        Perception Users Category:Female Characters Category:Humans Category:Manga
-        Characters Category:Martial Artists Category:Non-Physical Interaction Users
-        Category:Preparation Users Category:Regeneration Users Category:Shockwave
-        Users Category:Teenagers Category:Weapon Masters Category:Twins'
+      value: Requires her glasses to see cursed spirits | None notableJujutsu Kaisen,
+        Chapter 197 == Notable Matchups == == References == == Notes/Explanations
+        == Category:Characters Category:Jujutsu Kaisen Category:Acausal Characters
+        Category:Accelerated Development Users Category:Anime Characters Category:Damage
+        Boost Users Category:Enhanced Senses Users Category:Extrasensory Perception
+        Users Category:Female Characters Category:Humans Category:Manga Characters
+        Category:Martial Artists Category:Non-Physical Interaction Users Category:Preparation
+        Users Category:Regeneration Users Category:Shockwave Users Category:Teenagers
+        Category:Weapon Masters Category:Twins
+      source_id: vsbattles-maki-zenin-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Pre-Culling Games=
+        {{#tag:tabber|'
       source_id: vsbattles-maki-zenin-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -1805,10 +1642,10 @@ repair:
     - weaknesses
     normalized_page_title: Maki Zenin (Canon)/KaaydoManic
     source_type: mediawiki
-    revision_id: '607759'
+    revision_id: '621672'
     fetch_status: fetched
     http_status: 200
-    content_length: 14297
+    content_length: 14230
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1845,44 +1682,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-C}}, {{6-C}} with Playful Cloud | {{6-B}}'
-      source_id: character-stats-profiles-maki-zenin
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Incomplete Heavenly
-        Restriction= Passive: * Superhuman Physical Characteristics * Regeneration
-        [Low Mid]: able to regenerate her internal organs. Skills: * Martial Arts
-        * Weapon Mastery * Acrobatics * Preparation: has access to the Zen''in Clan''s
-        cursed tools storage. * Accelerated Development [Battle]: Sorcerers are stated
-        to improve when there are consequences to suffer. Also stated here a person
-        can change thanks to the slightest of events. |-|Complete Heavenly Restriction=
-        All previous abilities but massively enhanced, as Maki is equal to Toji, she
-        has in addition: Passive: * Acausality [Type 2]: having zero Cursed Energy
-        makes you escape fate. * Instinctive Soul Manipulation Negation: Equal to
-        Toji who''s body naturally overwrite any souls that doesn''t belong to its
-        original body. Skills: * Statistics Amplification: By revealing the functioning
-        of her Heavenly Restriction, she can increase its power. * Acrobatics [All
-        Types]: can grab to strings of space; can dodge in mid air. * Enhanced Senses,
-        Extrasensory Perception: should be comparable to Toji who with his enhanced
-        five senses can perceive Cursed Spirits, is able to see the contour of soul
-        as well as the distortions of space. As she can "feel everything" about herself
-        and her opponent based on the distortions of the air, she can predict her
-        opponents'' movements. * Stealth Mastery: Because she has zero Cursed Energy,
-        no one can sense her presence besides the Six Eyes and effectively becomes
-        "invisible". * Shockwave Creation: Can send a shockwave through materials,
-        to hit those on the other side precisely. * Information Analysis: After getting
-        rid of her mental limitations, she extended her perception range vastly beyond
-        her bodies'' natural range to sense through her entire environment which resulted
-        in an ability of "seeing the souls of inanimate objects". * Regeneration [Low]:
-        Can heal internal damages in five minutes. Resistances: * Limited Homing Attack
-        & Forcefield Creation: due to having no Cursed energy, closed-barrier domains
-        treat Maki as a building allowing her to ignore their homing capability and
-        also makes it so she''s able to move in and out of a domain''s barrier. *
-        Possession * Limited Analytical Prediction & Extrasensory Perception: Maki
-        has zero cursed energy similar to Toji, therefore making it harder to read
-        her moves in combat as it shown with Gojo against Toji.'
+      value: ', with Playful Cloud'
       source_id: character-stats-profiles-maki-zenin
       provider_id: character_stats_profiles
       authority: high
@@ -1890,24 +1690,24 @@ repair:
     - field: attack_potency
       value: Building level (Implied to be confident into killing a Cursed Spirit
         who destroyed a structure. Highly seen and recommended as a Grade 2 Sorcerer),
-        Island level with Playful Cloud83.4 Gigatons (Can injure Dagon who was amplified
+        Island level+ with Playful Cloud83.4 Gigatons (Can injure Dagon who was amplified
         by his Domain Expansion and was considered the strongest among Kento Nanami,
         Megumi Fushiguro, and Naobito Zenin. Also damaged Hanami which she couldn't
-        do with a regular sword) | Country level34.6 Teratons (Overwhelmingly far
-        stronger than Naoya Zenin who flattened mountains with his raw movements;
-        repeatedly stated and shown to be equal to Toji Fushiguro who could've killed
-        Suguru Geto and is equal to Enlightened Satoru Gojo who has previously stated
-        to easily be able to destroy a mountain and comparable to 4 Fingers Ryomen
-        Sukuna; considered a greater threat than Culling Game Yuji Itadori as Uraume
-        needed to focus their Cursed Energy on her. Narratively comparable to Yuta
-        Okkotsu and Kinji Hakari. Is a threat to Kenjaku. Cleared the sky from its
-        cloud with a single strikeJujutsu Kaisen, Season 3 Episode 4 which is visibly
-        and statistically more impressive than Sukuna's Dismantle which cut the sky
-        in halfJujutsu Kaisen, Season 2 Episode 17; furthermore, she is able to keep
-        up with 16 Fingers Sukuna with only 10% of his maximum output.Jujutsu Kaisen,
-        Chapter 215 Managed to get True Form Sukuna in a ecstatic stateJujutsu Kaisen,
-        Chapter 253 unlike the other Sorcerers like Yuta Okkotsu who was just an appetizerJujutsu
-        Kaisen, Chapter 251 when his Cursed Energy varies depending on his interest.Jujutsu
+        do with a regular sword) | Island level+ (Overwhelmingly far stronger than
+        Naoya Zenin who flattened mountains with his raw movements; repeatedly stated
+        and shown to be equal to Toji Fushiguro who could've killed Suguru Geto and
+        is equal to Enlightened Satoru Gojo who has previously stated to easily be
+        able to destroy a mountain and comparable to 4 Fingers Ryomen Sukuna; considered
+        a greater threat than Culling Game Yuji Itadori as Uraume needed to focus
+        their Cursed Energy on her. Narratively comparable to Yuta Okkotsu and Kinji
+        Hakari. Is a threat to Kenjaku. Cleared the sky from its cloud with a single
+        strikeJujutsu Kaisen, Season 3 Episode 4 which is visibly and statistically
+        more impressive than Sukuna's Dismantle which cut the sky in halfJujutsu Kaisen,
+        Season 2 Episode 17; furthermore, she is able to keep up with 16 Fingers Sukuna
+        with only 10% of his maximum output.Jujutsu Kaisen, Chapter 215 Managed to
+        get True Form Sukuna in a ecstatic stateJujutsu Kaisen, Chapter 253 unlike
+        the other Sorcerers like Yuta Okkotsu who was just an appetizerJujutsu Kaisen,
+        Chapter 251 when his Cursed Energy varies depending on his interest.Jujutsu
         Kaisen, Chapter 252)
       source_id: character-stats-profiles-maki-zenin
       provider_id: character_stats_profiles
@@ -1932,7 +1732,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: Building level | Country level (Survived Jinicho's strike barrage, Naoya
+      value: Building level | Island level+ (Survived Jinicho's strike barrage, Naoya
         Zenin's attack has done no damage to her. Physically comparable to 4 Fingers
         Ryomen Sukuna. Survived a Black Flash from Sukuna)
       source_id: character-stats-profiles-maki-zenin
@@ -1945,8 +1745,13 @@ repair:
         as unlike them she had the interest of Ryomen Sukuna and managed to keep up
         with him in a ecstatic state when he was previously hyped up to hold back
         implying that Maki has fought a stronger version of Ryomen Sukuna than what
-        Yuta and Yuji went through. {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        Statistics Values: Speed Values: Lifting Values: }} Category:KaaydoManic'
+        Yuta and Yuji went through. Category:KaaydoManic'
+      source_id: character-stats-profiles-maki-zenin
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: character-stats-profiles-maki-zenin
       provider_id: character_stats_profiles
       authority: high
@@ -1961,14 +1766,14 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|maki zenin canon kaaydomanic|607759
+    duplicate_key: character-stats-and-profiles.fandom.com|maki zenin canon kaaydomanic|621672
     retryable: false
     exception_class: ''
   - source_id: vsbattles-maki-zenin-anime
     url: https://vsbattles.fandom.com/wiki/Maki_Zenin_%28anime%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id012
+    extracted_fields: &id011
     - attack_potency
     - durability
     - intelligence
@@ -2012,7 +1817,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id013
+    allowed_fields: &id012
     - tier
     - attack_potency
     - speed
@@ -2025,14 +1830,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{8-C}}, at least {{8-B}} with Playful Cloud | At least {{High 7-C}}'
-      source_id: vsbattles-maki-zenin-anime
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Pre-Culling Games=
-        {{#tag:tabber| {{!}}-{{!}}'
+      value: ', at least with Playful Cloud | At least'
       source_id: vsbattles-maki-zenin-anime
       provider_id: vsbattles
       authority: high
@@ -2057,8 +1855,7 @@ repair:
         complemented by Hanami afterwards, though later on it was stated Hanami was
         intentionally holding back.Jujutsu Kaisen, Chapter 47 Took off a part of Dagon''s
         arm and sent him flying with a single strike, and warded off his Shikigami.Jujutsu
-        Kaisen, Chapter 109: "The Shibuya Incident, Part 27") |-|Complete Heavenly
-        Restriction'
+        Kaisen, Chapter 109: "The Shibuya Incident, Part 27")'
       source_id: vsbattles-maki-zenin-anime
       provider_id: vsbattles
       authority: high
@@ -2100,19 +1897,15 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: "*A long polearm with a black cursed tool blade decorated with fur in-between\
-        \ the handle and the spearhead and gold rings on the opposite end. *{{Nihongo|Playful\
-        \ Cloud|{{Ruby|\u904A\u96F2|\u3086\u3046\u3046\u3093}}|Y\u016B-un}}: Retrieved\
-        \ from Suguru Geto after his defeat and stored at Jujutsu High. A three-section\
-        \ staff that increases the user's physical strength with cursed energy. Megumi\
-        \ keeps it within his shadow until the Goodwill Event, where Maki uses it\
-        \ extremely effectively. *{{Nihongo|Dragon Bone|{{Ruby|\u7ADC|\u308A\u3085\
-        \u3046}}{{Ruby|\u9AA8|\u3053\u3064}}|Ry\u016Bkotsu}}: It can accumulate force\
-        \ and cursed energy, as well as eject it out of the back of the blade in accordance\
-        \ with the user's will. *{{Nihongo|Split Soul Katana|{{Ruby|\u91C8|\u3057\u3083\
-        \u304F}}{{Ruby|\u9B42\u5200|\u3053\u3093\u3068\u3046}}|Shakukon T\u014D}}:\
-        \ A large Japanese broadsword with a fur tsuba and a dark handle. It bypasses\
-        \ physical toughness and cuts directly at the soul."
+      value: '*A long polearm with a black cursed tool blade decorated with fur in-between
+        the handle and the spearhead and gold rings on the opposite end. *: Retrieved
+        from Suguru Geto after his defeat and stored at Jujutsu High. A three-section
+        staff that increases the user''s physical strength with cursed energy. Megumi
+        keeps it within his shadow until the Goodwill Event, where Maki uses it extremely
+        effectively. *: It can accumulate force and cursed energy, as well as eject
+        it out of the back of the blade in accordance with the user''s will. *: A
+        large Japanese broadsword with a fur tsuba and a dark handle. It bypasses
+        physical toughness and cuts directly at the soul.'
       source_id: vsbattles-maki-zenin-anime
       provider_id: vsbattles
       authority: high
@@ -2145,25 +1938,22 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Requires her glasses to see cursed spirits | None notableJujutsu Kaisen,
-        Chapter 197 == Notable Matchups == {{Border|Scroll=No|Visible=Yes|Padding=Yes|Content=
-        |-|Victories=Victories: |-|Losses=Losses: *Red Hood (Post-Crisis) (DC Comics)
-        Red Hood''s Profile ("Incomplete Heavenly Restriction" Maki and "Post-Death
-        in the Family" Jason were being used. Maki had her polearm, Jason had his
-        standard equipment. They started 50 meters apart and Speed was Equalized)
-        *Toji Fushiguro (Jujutsu Kaisen) Toji''s Profile (Fully Heavenly Restricted
-        Maki was used) |-|Inconclusive=Inconclusive: *Tanjiro Kamado (Demon Slayer)
-        Tanjiro''s Profile (Complete Heavenly Restriction Maki and Post-Type Zero
-        Training Tanjiro were used; Match was in MHA verse''s Musutafu, Japan, where
-        they started 10m apart; Speed was equalized) }} == References == {{Scroll
-        box|content={{Reflist|2}}}} == Notes/Explanations == {{Scroll box|Content=}}
-        {{Discussions}} Category:Characters Category:Jujutsu Kaisen Category:Acausal
-        Characters Category:Accelerated Development Users Category:Anime Characters
-        Category:Damage Boost Users Category:Enhanced Senses Users Category:Extrasensory
-        Perception Users Category:Female Characters Category:Humans Category:Manga
-        Characters Category:Martial Artists Category:Non-Physical Interaction Users
-        Category:Preparation Users Category:Regeneration Users Category:Shockwave
-        Users Category:Teenagers Category:Weapon Masters Category:Twins'
+      value: Requires her glasses to see cursed spirits | None notableJujutsu Kaisen,
+        Chapter 197 == Notable Matchups == == References == == Notes/Explanations
+        == Category:Characters Category:Jujutsu Kaisen Category:Acausal Characters
+        Category:Accelerated Development Users Category:Anime Characters Category:Damage
+        Boost Users Category:Enhanced Senses Users Category:Extrasensory Perception
+        Users Category:Female Characters Category:Humans Category:Manga Characters
+        Category:Martial Artists Category:Non-Physical Interaction Users Category:Preparation
+        Users Category:Regeneration Users Category:Shockwave Users Category:Teenagers
+        Category:Weapon Masters Category:Twins
+      source_id: vsbattles-maki-zenin-anime
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Pre-Culling Games=
+        {{#tag:tabber|'
       source_id: vsbattles-maki-zenin-anime
       provider_id: vsbattles
       authority: high
@@ -2194,10 +1984,10 @@ repair:
     - weaknesses
     normalized_page_title: Maki Zenin (Canon)/KaaydoManic
     source_type: mediawiki
-    revision_id: '607759'
+    revision_id: '621672'
     fetch_status: fetched
     http_status: 200
-    content_length: 14297
+    content_length: 14230
     content_kind: api_json
     headings_detected:
     - Summary
@@ -2232,44 +2022,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{8-C}}, {{6-C}} with Playful Cloud | {{6-B}}'
-      source_id: character-stats-profiles-maki-zenin-anime
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Incomplete Heavenly
-        Restriction= Passive: * Superhuman Physical Characteristics * Regeneration
-        [Low Mid]: able to regenerate her internal organs. Skills: * Martial Arts
-        * Weapon Mastery * Acrobatics * Preparation: has access to the Zen''in Clan''s
-        cursed tools storage. * Accelerated Development [Battle]: Sorcerers are stated
-        to improve when there are consequences to suffer. Also stated here a person
-        can change thanks to the slightest of events. |-|Complete Heavenly Restriction=
-        All previous abilities but massively enhanced, as Maki is equal to Toji, she
-        has in addition: Passive: * Acausality [Type 2]: having zero Cursed Energy
-        makes you escape fate. * Instinctive Soul Manipulation Negation: Equal to
-        Toji who''s body naturally overwrite any souls that doesn''t belong to its
-        original body. Skills: * Statistics Amplification: By revealing the functioning
-        of her Heavenly Restriction, she can increase its power. * Acrobatics [All
-        Types]: can grab to strings of space; can dodge in mid air. * Enhanced Senses,
-        Extrasensory Perception: should be comparable to Toji who with his enhanced
-        five senses can perceive Cursed Spirits, is able to see the contour of soul
-        as well as the distortions of space. As she can "feel everything" about herself
-        and her opponent based on the distortions of the air, she can predict her
-        opponents'' movements. * Stealth Mastery: Because she has zero Cursed Energy,
-        no one can sense her presence besides the Six Eyes and effectively becomes
-        "invisible". * Shockwave Creation: Can send a shockwave through materials,
-        to hit those on the other side precisely. * Information Analysis: After getting
-        rid of her mental limitations, she extended her perception range vastly beyond
-        her bodies'' natural range to sense through her entire environment which resulted
-        in an ability of "seeing the souls of inanimate objects". * Regeneration [Low]:
-        Can heal internal damages in five minutes. Resistances: * Limited Homing Attack
-        & Forcefield Creation: due to having no Cursed energy, closed-barrier domains
-        treat Maki as a building allowing her to ignore their homing capability and
-        also makes it so she''s able to move in and out of a domain''s barrier. *
-        Possession * Limited Analytical Prediction & Extrasensory Perception: Maki
-        has zero cursed energy similar to Toji, therefore making it harder to read
-        her moves in combat as it shown with Gojo against Toji.'
+      value: ', with Playful Cloud'
       source_id: character-stats-profiles-maki-zenin-anime
       provider_id: character_stats_profiles
       authority: high
@@ -2277,24 +2030,24 @@ repair:
     - field: attack_potency
       value: Building level (Implied to be confident into killing a Cursed Spirit
         who destroyed a structure. Highly seen and recommended as a Grade 2 Sorcerer),
-        Island level with Playful Cloud83.4 Gigatons (Can injure Dagon who was amplified
+        Island level+ with Playful Cloud83.4 Gigatons (Can injure Dagon who was amplified
         by his Domain Expansion and was considered the strongest among Kento Nanami,
         Megumi Fushiguro, and Naobito Zenin. Also damaged Hanami which she couldn't
-        do with a regular sword) | Country level34.6 Teratons (Overwhelmingly far
-        stronger than Naoya Zenin who flattened mountains with his raw movements;
-        repeatedly stated and shown to be equal to Toji Fushiguro who could've killed
-        Suguru Geto and is equal to Enlightened Satoru Gojo who has previously stated
-        to easily be able to destroy a mountain and comparable to 4 Fingers Ryomen
-        Sukuna; considered a greater threat than Culling Game Yuji Itadori as Uraume
-        needed to focus their Cursed Energy on her. Narratively comparable to Yuta
-        Okkotsu and Kinji Hakari. Is a threat to Kenjaku. Cleared the sky from its
-        cloud with a single strikeJujutsu Kaisen, Season 3 Episode 4 which is visibly
-        and statistically more impressive than Sukuna's Dismantle which cut the sky
-        in halfJujutsu Kaisen, Season 2 Episode 17; furthermore, she is able to keep
-        up with 16 Fingers Sukuna with only 10% of his maximum output.Jujutsu Kaisen,
-        Chapter 215 Managed to get True Form Sukuna in a ecstatic stateJujutsu Kaisen,
-        Chapter 253 unlike the other Sorcerers like Yuta Okkotsu who was just an appetizerJujutsu
-        Kaisen, Chapter 251 when his Cursed Energy varies depending on his interest.Jujutsu
+        do with a regular sword) | Island level+ (Overwhelmingly far stronger than
+        Naoya Zenin who flattened mountains with his raw movements; repeatedly stated
+        and shown to be equal to Toji Fushiguro who could've killed Suguru Geto and
+        is equal to Enlightened Satoru Gojo who has previously stated to easily be
+        able to destroy a mountain and comparable to 4 Fingers Ryomen Sukuna; considered
+        a greater threat than Culling Game Yuji Itadori as Uraume needed to focus
+        their Cursed Energy on her. Narratively comparable to Yuta Okkotsu and Kinji
+        Hakari. Is a threat to Kenjaku. Cleared the sky from its cloud with a single
+        strikeJujutsu Kaisen, Season 3 Episode 4 which is visibly and statistically
+        more impressive than Sukuna's Dismantle which cut the sky in halfJujutsu Kaisen,
+        Season 2 Episode 17; furthermore, she is able to keep up with 16 Fingers Sukuna
+        with only 10% of his maximum output.Jujutsu Kaisen, Chapter 215 Managed to
+        get True Form Sukuna in a ecstatic stateJujutsu Kaisen, Chapter 253 unlike
+        the other Sorcerers like Yuta Okkotsu who was just an appetizerJujutsu Kaisen,
+        Chapter 251 when his Cursed Energy varies depending on his interest.Jujutsu
         Kaisen, Chapter 252)
       source_id: character-stats-profiles-maki-zenin-anime
       provider_id: character_stats_profiles
@@ -2319,7 +2072,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: Building level | Country level (Survived Jinicho's strike barrage, Naoya
+      value: Building level | Island level+ (Survived Jinicho's strike barrage, Naoya
         Zenin's attack has done no damage to her. Physically comparable to 4 Fingers
         Ryomen Sukuna. Survived a Black Flash from Sukuna)
       source_id: character-stats-profiles-maki-zenin-anime
@@ -2332,8 +2085,13 @@ repair:
         as unlike them she had the interest of Ryomen Sukuna and managed to keep up
         with him in a ecstatic state when he was previously hyped up to hold back
         implying that Maki has fought a stronger version of Ryomen Sukuna than what
-        Yuta and Yuji went through. {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        Statistics Values: Speed Values: Lifting Values: }} Category:KaaydoManic'
+        Yuta and Yuji went through. Category:KaaydoManic'
+      source_id: character-stats-profiles-maki-zenin-anime
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
       source_id: character-stats-profiles-maki-zenin-anime
       provider_id: character_stats_profiles
       authority: high
@@ -2348,7 +2106,7 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|maki zenin canon kaaydomanic|607759
+    duplicate_key: character-stats-and-profiles.fandom.com|maki zenin canon kaaydomanic|621672
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
@@ -2357,11 +2115,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Maki_Zenin
     title: Maki Zenin
     rank: 120
-    extracted_fields: *id006
+    extracted_fields: *id005
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id007
+    allowed_fields: *id006
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2375,14 +2133,14 @@ repair:
     variant_match: true
     duplicate_key: vsbattles.fandom.com|maki zenin|9636550
   - source_id: vsbattles-maki-zenin-jujutsu-kaisen
-    url: https://vsbattles.fandom.com/wiki/Maki_Zenin_%28Jujutsu_Kaisen%29
+    url: https://vsbattles.fandom.com/wiki/Maki_Zenin_Jujutsu_Kaisen
     title: Maki Zenin
     rank: 120
-    extracted_fields: *id008
+    extracted_fields: *id007
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id009
+    allowed_fields: *id008
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2396,14 +2154,14 @@ repair:
     variant_match: true
     duplicate_key: vsbattles.fandom.com|maki zenin|9636550
   - source_id: vsbattles-maki-zenin-jujutsu-kaisen
-    url: https://vsbattles.fandom.com/wiki/Maki_Zenin_Jujutsu_Kaisen
+    url: https://vsbattles.fandom.com/wiki/Maki_Zenin_%28Jujutsu_Kaisen%29
     title: Maki Zenin
     rank: 120
-    extracted_fields: *id010
+    extracted_fields: *id009
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id011
+    allowed_fields: *id010
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2420,11 +2178,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Maki_Zenin_%28anime%29
     title: Maki Zenin
     rank: 120
-    extracted_fields: *id012
+    extracted_fields: *id011
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id013
+    allowed_fields: *id012
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2441,3 +2199,20 @@ repair:
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: true
+  scoped_key: Incomplete Heavenly Restriction
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T20:16:54Z'
+  key_origin: primary_form_position
+  axes:
+    tier:
+      method: positional
+      segments: 2
+    speed:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+  remaining_piped_axes: []

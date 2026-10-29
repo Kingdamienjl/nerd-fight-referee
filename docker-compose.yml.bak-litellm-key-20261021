@@ -1,0 +1,138 @@
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-battlebot}
+      POSTGRES_USER: ${POSTGRES_USER:-battlebot}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./src/battlebot/db/schema.sql:/docker-entrypoint-initdb.d/001_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $ -d $"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  litellm:
+    image: docker.litellm.ai/berriai/litellm:main-latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4000:4000"
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_API_KEY:-sk-local-dev}
+    volumes:
+      - ./config/litellm_config.yaml:/app/config.yaml:ro
+    command: ["--config", "/app/config.yaml", "--port", "4000", "--host", "0.0.0.0"]
+
+  bot:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN:-}
+      DISCORD_APPLICATION_ID: ${DISCORD_APPLICATION_ID:-}
+      DISCORD_GUILD_SYNC_ID: ${DISCORD_GUILD_SYNC_ID:-}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      LITELLM_BASE_URL: ${LITELLM_BASE_URL:-http://litellm:4000}
+      LITELLM_API_KEY: ${LITELLM_API_KEY:-sk-local-dev}
+      REFEREE_MODEL: ${REFEREE_MODEL:-referee-default}
+    secrets:
+      - discord_token
+    command: ["python", "-m", "battlebot.bot.main"]
+
+  worker:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      litellm:
+        condition: service_started
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      LITELLM_BASE_URL: ${LITELLM_BASE_URL:-http://litellm:4000}
+      LITELLM_API_KEY: ${LITELLM_API_KEY:-sk-local-dev}
+      REFEREE_MODEL: ${REFEREE_MODEL:-referee-default}
+    volumes:
+      - ./profiles:/app/profiles:ro
+      - ./data:/app/data
+    command: ["python", "-m", "battlebot.worker.main"]
+
+  harvester:
+    build: .
+    profiles: ["harvest"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      IGDB_CLIENT_ID: ${IGDB_CLIENT_ID:-}
+      IGDB_CLIENT_SECRET: ${IGDB_CLIENT_SECRET:-}
+      HARVEST_USER_AGENT: ${HARVEST_USER_AGENT:-ai-nerd-fight-bot/0.1}
+      HARVEST_MIN_INTERVAL_SECONDS: ${HARVEST_MIN_INTERVAL_SECONDS:-2}
+      # Parse fallback chain (LLM last resort). Off by default; set to 1 to enable.
+      HARVEST_LLM_FALLBACK: ${HARVEST_LLM_FALLBACK:-0}
+      HARVEST_OLLAMA_URL: ${HARVEST_OLLAMA_URL:-http://192.168.1.207:11434}
+      HARVEST_OLLAMA_MODEL: ${HARVEST_OLLAMA_MODEL:-qwen2.5:3b}
+      HARVEST_LLM_MAX_CHARS: ${HARVEST_LLM_MAX_CHARS:-6000}
+      HARVEST_LLM_TIMEOUT: ${HARVEST_LLM_TIMEOUT:-600}
+    volumes:
+      - ./profiles:/app/profiles
+      - ./data:/app/data
+    command: ["python", "-m", "battlebot.harvest.auto_profile_harvester"]
+
+  profile-importer:
+    build: .
+    profiles: ["import"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://battlebot:change_me@postgres:5432/battlebot}
+    volumes:
+      - ./profiles:/app/profiles:ro
+      - ./data:/app/data:ro
+    command: ["python", "-m", "battlebot.ingest.import_profiles", "profiles/generated"]
+
+  review-ui:
+    build: .
+    profiles: ["review"]
+    ports:
+      - "127.0.0.1:8090:8090"
+    volumes:
+      - ./profiles:/app/profiles
+      - ./data:/app/data:ro
+    command: ["python", "-m", "battlebot.review.app", "--host", "0.0.0.0", "--port", "8090"]
+
+volumes:
+  pgdata:
+  redisdata:
+
+secrets:
+  discord_token:
+    file: ./secrets/discord_token.txt

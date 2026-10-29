@@ -11,13 +11,15 @@ generation:
   generated_at: '2026-06-10T03:40:53Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id006
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:abilities
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Magni (Game)
   franchise: God of War
@@ -178,42 +180,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-magni-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Magni Game
-  url: https://vsbattles.fandom.com/wiki/Magni_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-magni-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Magni Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Magni_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-magni-game-god-of-war
   provider_id: vsbattles
   source_type: mediawiki
@@ -221,7 +187,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Magni_(God_of_War)
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -266,7 +232,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/The_Terrarian_(Canon,_Composite)/G-Toasty
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -304,62 +270,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-magni-game-god-of-war
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Magni (Game) God of War
-  url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29_God_of_War
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-magni-game-god-of-war
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Magni (Game) God of War
-  url: https://character-stats-and-profiles.fandom.com/wiki/Magni_%28Game%29_God_of_War
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-magni-game-god-of-war
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Magni (Game) (God of War)
-  url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29_%28God_of_War%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-magni-game-god-of-war
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Magni (Game) (God of War)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Magni_%28Game%29_%28God_of_War%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-magni-game-game
   provider_id: vsbattles
   source_type: mediawiki
@@ -501,7 +411,7 @@ abilities:
   description: Magni= *Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
     (Type 1) *Electricity Manipulation *Paralysis Inducement and Status Effect Inducement
     (Shares the same lightning-based powers as his father
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-magni-game-god-of-war
   source_claim_ids: []
   confidence: 0.85
@@ -522,7 +432,7 @@ abilities:
     Mastery (Is a skilled and experienced warrior who wields a huge sword in battle)
     *Light Manipulation and Weather Manipulation (Could perform the Snowblind by striking
     Modi's shield
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -537,7 +447,7 @@ abilities:
 - id: powers-and-abilities-which-creates-a-blinding-flash-of-light-and-a-small-storm
   name: which creates a blinding flash of light and a small storm)
   description: which creates a blinding flash of light and a small storm)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -552,7 +462,7 @@ abilities:
 - id: powers-and-abilities
   name: '-'
   description: '-'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -569,7 +479,7 @@ abilities:
     properties of their magics)'
   description: 'Resistances= Resistance to the following: *Runic Magic (Gods resist
     the innate properties of their magics)'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -590,7 +500,7 @@ weaknesses:
     * Snowblind: Magni strikes Modi''s shiel'
   description: 'Noted by Kratos to be arrogant until his last breath Notable Attacks/Techniques:
     * Snowblind: Magni strikes Modi''s shield with his sword'
-  source_ids: &id005
+  source_ids: &id003
   - vsbattles-magni-game-god-of-war
   source_claim_ids: []
   confidence: 0.85
@@ -609,7 +519,7 @@ weaknesses:
   description: 'creating a blinding flash of light and a small storm around the enemy.
     ==Notable Matchups== Victories: Losses: Inconclusive: ==References== {{reflist}}
     {{discussions'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -624,7 +534,7 @@ weaknesses:
 - id: weaknesses-magni-god-of-war
   name: Magni God of War
   description: Magni God of War
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -646,7 +556,7 @@ weaknesses:
     Category:Status Effect Users Category:Magic Users Category:Light Users Category:Weather
     Users Category:Antagonists Category:Demigods Category:Narcissists Category:Psychopaths
     Category:Princes Category:Royal Characters
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -669,792 +579,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id006
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: ed56e69dfeec80116b6da4707f0ab1877ef832570656d10d97463432dc88bfe4
 repair:
-  attempted_at: '2026-06-19T11:33:28Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T19:06:23Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-magni-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29_God_of_War
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Magni (God of War)
-    source_type: mediawiki
-    revision_id: '9542343'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4269
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id008
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{1-C}} Name: Magni Origin: God of War Gender: Male Age: Over 200 years
-        old (Killed the Vanir goddess Nerthus together with Modi during the Aesir-Vanir
-        war, which begun before Mjolnir was created, which was 200 years prior to
-        the events of God of War: Lore and Legends) Classification: Minor Aesir, Demigod,
-        God of Strength and Thunder'
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Magni= *Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
-        (Type 1) *Electricity Manipulation *Paralysis Inducement and Status Effect
-        Inducement (Shares the same lightning-based powers as his father, having caused
-        an ogre to convulse and paralyze) *Martial Arts and Weapon Mastery (Is a skilled
-        and experienced warrior who wields a huge sword in battle) *Light Manipulation
-        and Weather Manipulation (Could perform the Snowblind by striking Modi''s
-        shield, which creates a blinding flash of light and a small storm) |-|Resistances=
-        Resistance to the following: *Runic Magic (Gods resist the innate properties
-        of their magics)'
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Complex Multiverse level (Held his own against Kratos, although he was
-        ultimately overpowered and killed by him. Stronger than his siblings)
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (Could keep up with Kratos in combat)
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level (Endured blows from Kratos, although he was
-        eventually killed by the latter)
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended melee range. Tens of meters with lightning attacks and Snowblind
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Sword hardened by cyclonic thunder
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Average normally, Gifted in combat (He and Modi were referred to as idiots
-        by Baldur and Sindri. However, Magni is still a skilled and experienced warrior,
-        having participated in the Aesir-Vanir War, as well as able to hold his own
-        against Kratos for some time before ultimately being outmatched and killed
-        by the Ghost of Sparta)
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Noted by Kratos to be arrogant until his last breath Notable Attacks/Techniques:
-        * Snowblind: Magni strikes Modi''s shield with his sword, creating a blinding
-        flash of light and a small storm around the enemy. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{reflist}} {{discussions|Magni God of
-        War|Magni (God of War)}} Category:Gods Category:Norse Gods Category:God of
-        War Category:Male Characters Category:Game Characters Category:Game Bosses
-        Category:Evil Characters Category:Electricity Users Category:Immortals Category:Martial
-        Artists Category:Weapon Masters Category:Sword Users Category:Paralysis Users
-        Category:Status Effect Users Category:Magic Users Category:Light Users Category:Weather
-        Users Category:Antagonists Category:Demigods Category:Narcissists Category:Psychopaths
-        Category:Princes Category:Royal Characters'
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-magni-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Magni_%28Game%29_God_of_War
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id017
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: The Terrarian (Canon, Composite)/G-Toasty
-    source_type: mediawiki
-    revision_id: '584657'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 239184
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notes/Explanations
-    - Gallery
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id018
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{3-A}}, likely {{Low 2-C}} Name: Varies on player Origin: Terraria
-        Gender: Varies, can change via Gender Change Potion Age: Unknown, likely an
-        adult Classification: Human (usually), Terrarian, "Immortal God", The World''s
-        Champion, "brave adventurer"'
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base \u25BE=\
-        \ {{#tag:tabber| {{!}}-{{!}}"
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Universe level1e+31 QuettaexaFoe (Uses Solar Fragments to craft weapons
-        and armor, with them containing the "fury of the universe" within each fragment,
-        likely referring to the heat of solar flares happening in the universe within
-        context, which is this powerful. Creates weapons and armor out of several
-        Nebula Fragments, each of which stated to have a power of an entire galaxy
-        within them which is very powerful), likely Universe level+ (Defeats Moon
-        Lord, and the mechanical bosses plus Mechdusa. Moon Lord at his peak who is
-        stated to seemingly threaten the very fabric of the universe itself. The mechanical
-        bosses were created as organ replicas for Moon Lord to power him back to full
-        power, due to his organs being torn out by Dryad civilization using their
-        accumulated powers. By the time the Terrarian fights Moon Lord however, Moon
-        Lord appears to have healed back his eyes, spine, skull, and brain back when
-        he was regaining power back. This heavily suggests that the Terrarian fought
-        Moon Lord when he was at the same power as Cthulhu. Stardust Pillar's summons
-        are stated to use limitless energy. Moon Lord is stated to have unlimited
-        power. Can survive light and fire-based attacks from the Torch God, a being
-        stated to be the source of the endless, eternal light given by torches. Moon
-        Lord drops Luminite, which is stated to "come from the heavens", with materials
-        made with Luminite stated to be "from beyond". Luminite is used to craft the
-        Void Monolith, which uses a small portion of the Void's power to make the
-        background black akin to Moon Lord's fight, implying Moon Lord is amplified
-        by the power of the Void, which may be a pocket dimension)
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+45093c - 1.76e+20c (Comparable to the Martians who are
-        able to pilot their space ship at immense speeds, and come from a world far
-        from the planet, and likely gets the car keys to a very similar space ship
-        upon destroying the Martian ship, which the Terrarian can move faster than,
-        which is shown to be the same ship as the Martian saucer. Can keep up with
-        enemies amplified by an abundant amount of the Celestial Pillars' energy.
-        A small amount of which was used to pull down exoplanets close to the planet
-        within seconds, and Terrarian is implied to pull moons down at a similar speed
-        with the Lunar Hook. Can dodge and move faster than the Empress of Light's
-        light projectiles, and dodge Last Prism, which is far faster than light. Can
-        control a literal rainbow projectile. Can dodge attacks from the Beam Sword
-        and Gastropods. Defeated Moon Lord, who drops the S.D.M.G., an item stated
-        to have come from the edge of space)
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Universe level1e+31 QuettaexaFoe (Uses Solar Fragments to craft weapons
-        and armor, with them containing the "fury of the universe" within each fragment,
-        likely referring to the heat of solar flares happening in the universe within
-        context, which is this powerful. Creates weapons and armor out of several
-        Nebula Fragments, each of which stated to have a power of an entire galaxy
-        within them which is very powerful), likely Universe level+ (End-game gear
-        is capable of protecting the Terrarian from Moon Lord. Defeats Moon Lord,
-        and the mechanical bosses plus Mechdusa. Moon Lord at his peak is stated to
-        seemingly threaten the very fabric of the universe itself. The mechanical
-        bosses were created as organ replicas for Moon Lord to power him back to full
-        power, due to his organs being torn out by Dryad civilization using their
-        accumulated powers. By the time the Terrarian fights Moon Lord however, Moon
-        Lord appears to have healed back his eyes, spine, skull, and brain back when
-        he was regaining power back. This heavily suggests that the Terrarian fought
-        Moon Lord when he was at the same power as Cthulhu. Stardust Pillar's summons
-        are stated to use limitless energy. Moon Lord is stated to have unlimited
-        power. Can survive light and fire-based attacks from the Torch God, a being
-        stated to be the source of the endless, eternal light given by torches. Moon
-        Lord drops Luminite, which is stated to "come from the heavens", with materials
-        made with Luminite stated to be "from beyond". Luminite is used to craft the
-        Void Monolith, which uses a small portion of the Void's power to make the
-        background black akin to Moon Lord's fight, implying Moon Lord is amplified
-        by the power of the Void, which may be a pocket dimension)
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Without the Blood Moon, Corruption only infects those who have any sins,
-        or capacity for sin. Otherwise, fully pure beings will be rendered immune
-        to it. The Blood Moon''s corrupting effect only works for as long as the Blood
-        Moon lasts for. == Notes/Explanations == * Media used for this profile are:
-        ** Terraria (2011 video game) *** Old-gen console version (2013) *** Old Chinese
-        version (2018) *** New Chinese version (2021) ** Official Merchandise ** Terraria:
-        The Animated Series (2014 web animation) ** DC: Terraria Issue #1 (2015 comic)
-        ** Terraria LORE (2019 web novel) ** Terraria (2022 graphic novel) *** Issue
-        1 (2022) *** Issue 2 (2022) *** Issue 3 (2022) *** Issue 4 (2022) *** Issue
-        5 (2023) *** Issue 6 (2024) *** Issue 7 (2024) ** Terraria: The Board Game
-        (2025 board game) * It should be noted that "Terraria", in the context of
-        this statement, is likely referring to the universe (saying it''s referring
-        to the planet isn''t a phrase that is very commonly used as opposed to the
-        "fabric of reality", and using "Terraria" to refer to the universe is commonly
-        seen in the pages). As a bonus, the Terraria wiki also subscribes to this
-        interpretation, with the text saying the same thing on the .gg official wiki
-        that is promoted on the official website to the game, and is promoted by Redigit
-        himself. It also logically makes the most sense, given the Dryads had only
-        waged war against Cthulhu when he was threatening reality itself, when hope
-        seemed lost. It begs to question, "why would the Dryads, the beings consistently
-        referred to being one with nature, only show up to stop Moon Lord when he
-        was nearing his goal if his only intent was to threaten the planet specifically?"
-        In addition, the fight the Dryads had with Moon Lord is referred to as "the
-        Great Celestial War", confirming that it is a war the Dryads had waged against
-        Moon Lord after he threatened reality. In addition, the lore is said to only
-        exist to aid the protagonist in defeating Moon Lord and saving the world,
-        and the lore then continues explaining the universe, aspects that are not
-        utilized by the player to complete the game. It thematically makes more sense
-        for Moon Lord to threaten the universe if the universe itself was to be primarily
-        mentioned in an important scripture to aid the hero. * Terraria the Animated
-        Series is an official licensed webseries, and according to the creative director
-        of the game, since day 1, was a partnership between Element Animation and
-        Jazwares in order to sell officially licensed Terraria toys later that year.
-        * Due to the immense inconsistencies and vagueness of what constitutes as
-        a "melee", "ranged", "magic" and "summon" damage (Flying Knife is a melee
-        weapon but Throwing Knives being a ranged weapon. Plasma, fire, boomerangs,
-        flesh, ice, spores, explosives, energy blasts all vary on their damage type.
-        Some weapons that can be used as melee weapons aren''t "melee" weapons), it
-        can be assumed that the damage type of weapons are only applicable to weapons
-        and enemies in Terraria, and classifying weapons and attacks from outside
-        the game as such would be questionable, akin to how Types in Pokemon are treated.
-        * Tooltips that intentionally reference a quote from another media were questioned
-        in the making of this profile. The Lunar Hook however, likely is literal in
-        its tooltip despite its reference, since the original quote is changed from
-        "You want the moon? Just say the word and I''ll throw a lasso around it and
-        pull it down!" to, "You want the moon? Just grapple it and pull it down!".
-        The developers had intentionally changed the dialogue to fit in with the game
-        itself. Given the name of the hook, and the fact that it requires ultra-powerful
-        fragments to create, this is likely meant to suggest that it has the capacity
-        to literally pull down the Moon. ** Similarly, the S.D.M.G.''s tooltip was
-        also considered, despite the tooltip being a reference. The name of the game
-        it is referencing is named Edge of Space, and the tooltip states, "It came
-        from the edge of space". The lack of capitalization and the purposeful addition
-        of the item being said to come from there, suggests that it is both a reference,
-        and intended that the item literally came from the edge of space, which is
-        backed up by it being dropped by Moon Lord, who was able to move to the blind
-        spot of the universe to reach the Terrarian''s world. ==Gallery== File:TerrarianOfficial1.jpg|The
-        four endgame classes File:TerrariaOfficial2.jpg|Various Terrarians in different
-        armors File:TerrariaOfficial3.jpg|Endgame Ranger riding a minecart File:TerrariaOfficial4.webp|Palworld
-        player wearing Silver armor from Terraria File:TerrariaOfficial5.jpg|Palworld
-        player and Terrarian "dapping up" File:TerrariaOfficial6.png|Endgame Ranger
-        sitting down File:TerrariaOfficial7.png|Silver armor Terrarian playing with
-        a yo-yo (as seen on the TerrariaOfficial Twitch channel) File:TerrarianOfficial2.jpg|Molten
-        armor Terrarian as seen on the "Molten Armor: T-Shirt" design File:TerrarianOffici'
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the terrarian canon composite
-      g toasty|584657
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-magni-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29_%28God_of_War%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Magni (God of War)
-    source_type: mediawiki
-    revision_id: '9542343'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4269
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{1-C}} Name: Magni Origin: God of War Gender: Male Age: Over 200 years
-        old (Killed the Vanir goddess Nerthus together with Modi during the Aesir-Vanir
-        war, which begun before Mjolnir was created, which was 200 years prior to
-        the events of God of War: Lore and Legends) Classification: Minor Aesir, Demigod,
-        God of Strength and Thunder'
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Magni= *Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
-        (Type 1) *Electricity Manipulation *Paralysis Inducement and Status Effect
-        Inducement (Shares the same lightning-based powers as his father, having caused
-        an ogre to convulse and paralyze) *Martial Arts and Weapon Mastery (Is a skilled
-        and experienced warrior who wields a huge sword in battle) *Light Manipulation
-        and Weather Manipulation (Could perform the Snowblind by striking Modi''s
-        shield, which creates a blinding flash of light and a small storm) |-|Resistances=
-        Resistance to the following: *Runic Magic (Gods resist the innate properties
-        of their magics)'
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Complex Multiverse level (Held his own against Kratos, although he was
-        ultimately overpowered and killed by him. Stronger than his siblings)
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (Could keep up with Kratos in combat)
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level (Endured blows from Kratos, although he was
-        eventually killed by the latter)
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended melee range. Tens of meters with lightning attacks and Snowblind
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Sword hardened by cyclonic thunder
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Average normally, Gifted in combat (He and Modi were referred to as idiots
-        by Baldur and Sindri. However, Magni is still a skilled and experienced warrior,
-        having participated in the Aesir-Vanir War, as well as able to hold his own
-        against Kratos for some time before ultimately being outmatched and killed
-        by the Ghost of Sparta)
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Noted by Kratos to be arrogant until his last breath Notable Attacks/Techniques:
-        * Snowblind: Magni strikes Modi''s shield with his sword, creating a blinding
-        flash of light and a small storm around the enemy. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{reflist}} {{discussions|Magni God of
-        War|Magni (God of War)}} Category:Gods Category:Norse Gods Category:God of
-        War Category:Male Characters Category:Game Characters Category:Game Bosses
-        Category:Evil Characters Category:Electricity Users Category:Immortals Category:Martial
-        Artists Category:Weapon Masters Category:Sword Users Category:Paralysis Users
-        Category:Status Effect Users Category:Magic Users Category:Light Users Category:Weather
-        Users Category:Antagonists Category:Demigods Category:Narcissists Category:Psychopaths
-        Category:Princes Category:Royal Characters'
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-magni-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Magni_%28Game%29_%28God_of_War%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id019
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: The Terrarian (Canon, Composite)/G-Toasty
-    source_type: mediawiki
-    revision_id: '584657'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 239184
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notes/Explanations
-    - Gallery
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id020
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{3-A}}, likely {{Low 2-C}} Name: Varies on player Origin: Terraria
-        Gender: Varies, can change via Gender Change Potion Age: Unknown, likely an
-        adult Classification: Human (usually), Terrarian, "Immortal God", The World''s
-        Champion, "brave adventurer"'
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base \u25BE=\
-        \ {{#tag:tabber| {{!}}-{{!}}"
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Universe level1e+31 QuettaexaFoe (Uses Solar Fragments to craft weapons
-        and armor, with them containing the "fury of the universe" within each fragment,
-        likely referring to the heat of solar flares happening in the universe within
-        context, which is this powerful. Creates weapons and armor out of several
-        Nebula Fragments, each of which stated to have a power of an entire galaxy
-        within them which is very powerful), likely Universe level+ (Defeats Moon
-        Lord, and the mechanical bosses plus Mechdusa. Moon Lord at his peak who is
-        stated to seemingly threaten the very fabric of the universe itself. The mechanical
-        bosses were created as organ replicas for Moon Lord to power him back to full
-        power, due to his organs being torn out by Dryad civilization using their
-        accumulated powers. By the time the Terrarian fights Moon Lord however, Moon
-        Lord appears to have healed back his eyes, spine, skull, and brain back when
-        he was regaining power back. This heavily suggests that the Terrarian fought
-        Moon Lord when he was at the same power as Cthulhu. Stardust Pillar's summons
-        are stated to use limitless energy. Moon Lord is stated to have unlimited
-        power. Can survive light and fire-based attacks from the Torch God, a being
-        stated to be the source of the endless, eternal light given by torches. Moon
-        Lord drops Luminite, which is stated to "come from the heavens", with materials
-        made with Luminite stated to be "from beyond". Luminite is used to craft the
-        Void Monolith, which uses a small portion of the Void's power to make the
-        background black akin to Moon Lord's fight, implying Moon Lord is amplified
-        by the power of the Void, which may be a pocket dimension)
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+45093c - 1.76e+20c (Comparable to the Martians who are
-        able to pilot their space ship at immense speeds, and come from a world far
-        from the planet, and likely gets the car keys to a very similar space ship
-        upon destroying the Martian ship, which the Terrarian can move faster than,
-        which is shown to be the same ship as the Martian saucer. Can keep up with
-        enemies amplified by an abundant amount of the Celestial Pillars' energy.
-        A small amount of which was used to pull down exoplanets close to the planet
-        within seconds, and Terrarian is implied to pull moons down at a similar speed
-        with the Lunar Hook. Can dodge and move faster than the Empress of Light's
-        light projectiles, and dodge Last Prism, which is far faster than light. Can
-        control a literal rainbow projectile. Can dodge attacks from the Beam Sword
-        and Gastropods. Defeated Moon Lord, who drops the S.D.M.G., an item stated
-        to have come from the edge of space)
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Universe level1e+31 QuettaexaFoe (Uses Solar Fragments to craft weapons
-        and armor, with them containing the "fury of the universe" within each fragment,
-        likely referring to the heat of solar flares happening in the universe within
-        context, which is this powerful. Creates weapons and armor out of several
-        Nebula Fragments, each of which stated to have a power of an entire galaxy
-        within them which is very powerful), likely Universe level+ (End-game gear
-        is capable of protecting the Terrarian from Moon Lord. Defeats Moon Lord,
-        and the mechanical bosses plus Mechdusa. Moon Lord at his peak is stated to
-        seemingly threaten the very fabric of the universe itself. The mechanical
-        bosses were created as organ replicas for Moon Lord to power him back to full
-        power, due to his organs being torn out by Dryad civilization using their
-        accumulated powers. By the time the Terrarian fights Moon Lord however, Moon
-        Lord appears to have healed back his eyes, spine, skull, and brain back when
-        he was regaining power back. This heavily suggests that the Terrarian fought
-        Moon Lord when he was at the same power as Cthulhu. Stardust Pillar's summons
-        are stated to use limitless energy. Moon Lord is stated to have unlimited
-        power. Can survive light and fire-based attacks from the Torch God, a being
-        stated to be the source of the endless, eternal light given by torches. Moon
-        Lord drops Luminite, which is stated to "come from the heavens", with materials
-        made with Luminite stated to be "from beyond". Luminite is used to craft the
-        Void Monolith, which uses a small portion of the Void's power to make the
-        background black akin to Moon Lord's fight, implying Moon Lord is amplified
-        by the power of the Void, which may be a pocket dimension)
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Without the Blood Moon, Corruption only infects those who have any sins,
-        or capacity for sin. Otherwise, fully pure beings will be rendered immune
-        to it. The Blood Moon''s corrupting effect only works for as long as the Blood
-        Moon lasts for. == Notes/Explanations == * Media used for this profile are:
-        ** Terraria (2011 video game) *** Old-gen console version (2013) *** Old Chinese
-        version (2018) *** New Chinese version (2021) ** Official Merchandise ** Terraria:
-        The Animated Series (2014 web animation) ** DC: Terraria Issue #1 (2015 comic)
-        ** Terraria LORE (2019 web novel) ** Terraria (2022 graphic novel) *** Issue
-        1 (2022) *** Issue 2 (2022) *** Issue 3 (2022) *** Issue 4 (2022) *** Issue
-        5 (2023) *** Issue 6 (2024) *** Issue 7 (2024) ** Terraria: The Board Game
-        (2025 board game) * It should be noted that "Terraria", in the context of
-        this statement, is likely referring to the universe (saying it''s referring
-        to the planet isn''t a phrase that is very commonly used as opposed to the
-        "fabric of reality", and using "Terraria" to refer to the universe is commonly
-        seen in the pages). As a bonus, the Terraria wiki also subscribes to this
-        interpretation, with the text saying the same thing on the .gg official wiki
-        that is promoted on the official website to the game, and is promoted by Redigit
-        himself. It also logically makes the most sense, given the Dryads had only
-        waged war against Cthulhu when he was threatening reality itself, when hope
-        seemed lost. It begs to question, "why would the Dryads, the beings consistently
-        referred to being one with nature, only show up to stop Moon Lord when he
-        was nearing his goal if his only intent was to threaten the planet specifically?"
-        In addition, the fight the Dryads had with Moon Lord is referred to as "the
-        Great Celestial War", confirming that it is a war the Dryads had waged against
-        Moon Lord after he threatened reality. In addition, the lore is said to only
-        exist to aid the protagonist in defeating Moon Lord and saving the world,
-        and the lore then continues explaining the universe, aspects that are not
-        utilized by the player to complete the game. It thematically makes more sense
-        for Moon Lord to threaten the universe if the universe itself was to be primarily
-        mentioned in an important scripture to aid the hero. * Terraria the Animated
-        Series is an official licensed webseries, and according to the creative director
-        of the game, since day 1, was a partnership between Element Animation and
-        Jazwares in order to sell officially licensed Terraria toys later that year.
-        * Due to the immense inconsistencies and vagueness of what constitutes as
-        a "melee", "ranged", "magic" and "summon" damage (Flying Knife is a melee
-        weapon but Throwing Knives being a ranged weapon. Plasma, fire, boomerangs,
-        flesh, ice, spores, explosives, energy blasts all vary on their damage type.
-        Some weapons that can be used as melee weapons aren''t "melee" weapons), it
-        can be assumed that the damage type of weapons are only applicable to weapons
-        and enemies in Terraria, and classifying weapons and attacks from outside
-        the game as such would be questionable, akin to how Types in Pokemon are treated.
-        * Tooltips that intentionally reference a quote from another media were questioned
-        in the making of this profile. The Lunar Hook however, likely is literal in
-        its tooltip despite its reference, since the original quote is changed from
-        "You want the moon? Just say the word and I''ll throw a lasso around it and
-        pull it down!" to, "You want the moon? Just grapple it and pull it down!".
-        The developers had intentionally changed the dialogue to fit in with the game
-        itself. Given the name of the hook, and the fact that it requires ultra-powerful
-        fragments to create, this is likely meant to suggest that it has the capacity
-        to literally pull down the Moon. ** Similarly, the S.D.M.G.''s tooltip was
-        also considered, despite the tooltip being a reference. The name of the game
-        it is referencing is named Edge of Space, and the tooltip states, "It came
-        from the edge of space". The lack of capitalization and the purposeful addition
-        of the item being said to come from there, suggests that it is both a reference,
-        and intended that the item literally came from the edge of space, which is
-        backed up by it being dropped by Moon Lord, who was able to move to the blind
-        spot of the universe to reach the Terrarian''s world. ==Gallery== File:TerrarianOfficial1.jpg|The
-        four endgame classes File:TerrariaOfficial2.jpg|Various Terrarians in different
-        armors File:TerrariaOfficial3.jpg|Endgame Ranger riding a minecart File:TerrariaOfficial4.webp|Palworld
-        player wearing Silver armor from Terraria File:TerrariaOfficial5.jpg|Palworld
-        player and Terrarian "dapping up" File:TerrariaOfficial6.png|Endgame Ranger
-        sitting down File:TerrariaOfficial7.png|Silver armor Terrarian playing with
-        a yo-yo (as seen on the TerrariaOfficial Twitch channel) File:TerrarianOfficial2.jpg|Molten
-        armor Terrarian as seen on the "Molten Armor: T-Shirt" design File:TerrarianOffici'
-      source_id: character-stats-profiles-magni-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the terrarian canon composite
-      g toasty|584657
-    retryable: false
-    exception_class: ''
   - source_id: mediawiki-magni-game
-    url: https://vsbattles.fandom.com/wiki/Magni_(Game)
+    url: https://vsbattles.fandom.com/wiki/Magni_(God_of_War)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1467,10 +612,10 @@ repair:
     - weaknesses
     normalized_page_title: Magni (God of War)
     source_type: mediawiki
-    revision_id: '9542343'
+    revision_id: '9571946'
     fetch_status: fetched
     http_status: 200
-    content_length: 4269
+    content_length: 4290
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1483,6 +628,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1496,7 +642,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -1508,26 +654,16 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{1-C}} Name: Magni Origin: God of War Gender: Male Age: Over 200 years
-        old (Killed the Vanir goddess Nerthus together with Modi during the Aesir-Vanir
-        war, which begun before Mjolnir was created, which was 200 years prior to
-        the events of God of War: Lore and Legends) Classification: Minor Aesir, Demigod,
-        God of Strength and Thunder'
-      source_id: mediawiki-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Magni= *Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
+      value: '*Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
         (Type 1) *Electricity Manipulation *Paralysis Inducement and Status Effect
         Inducement (Shares the same lightning-based powers as his father, having caused
         an ogre to convulse and paralyze) *Martial Arts and Weapon Mastery (Is a skilled
         and experienced warrior who wields a huge sword in battle) *Light Manipulation
         and Weather Manipulation (Could perform the Snowblind by striking Modi''s
-        shield, which creates a blinding flash of light and a small storm) |-|Resistances=
-        Resistance to the following: *Runic Magic (Gods resist the innate properties
-        of their magics)'
+        shield, which creates a blinding flash of light and a small storm) Resistance
+        to the following: *Runic Magic (Gods resist the innate properties of their
+        magics)'
       source_id: mediawiki-magni-game
       provider_id: vsbattles
       authority: high
@@ -1584,14 +720,23 @@ repair:
       value: 'Noted by Kratos to be arrogant until his last breath Notable Attacks/Techniques:
         * Snowblind: Magni strikes Modi''s shield with his sword, creating a blinding
         flash of light and a small storm around the enemy. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{reflist}} {{discussions|Magni God of
-        War|Magni (God of War)}} Category:Gods Category:Norse Gods Category:God of
-        War Category:Male Characters Category:Game Characters Category:Game Bosses
+        Losses: Inconclusive: ==References== Category:Gods Category:Norse Gods Category:God
+        of War Category:Male Characters Category:Game Characters Category:Game Bosses
         Category:Evil Characters Category:Electricity Users Category:Immortals Category:Martial
         Artists Category:Weapon Masters Category:Sword Users Category:Paralysis Users
         Category:Status Effect Users Category:Magic Users Category:Light Users Category:Weather
         Users Category:Antagonists Category:Demigods Category:Narcissists Category:Psychopaths
-        Category:Princes Category:Royal Characters'
+        Category:Princes Category:Royal Characters Category:Vikings'
+      source_id: mediawiki-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Magni Origin: God of War Gender: Male Age: Over 200 years old
+        (Killed the Vanir goddess Nerthus together with Modi during the Aesir-Vanir
+        war, which begun before Mjolnir was created, which was 200 years prior to
+        the events of God of War: Lore and Legends) Classification: Minor Aesir, Demigod,
+        God of Strength and Thunder'
       source_id: mediawiki-magni-game
       provider_id: vsbattles
       authority: high
@@ -1606,171 +751,14 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-magni-game
-    url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Magni (God of War)
-    source_type: mediawiki
-    revision_id: '9542343'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4269
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{1-C}} Name: Magni Origin: God of War Gender: Male Age: Over 200 years
-        old (Killed the Vanir goddess Nerthus together with Modi during the Aesir-Vanir
-        war, which begun before Mjolnir was created, which was 200 years prior to
-        the events of God of War: Lore and Legends) Classification: Minor Aesir, Demigod,
-        God of Strength and Thunder'
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Magni= *Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
-        (Type 1) *Electricity Manipulation *Paralysis Inducement and Status Effect
-        Inducement (Shares the same lightning-based powers as his father, having caused
-        an ogre to convulse and paralyze) *Martial Arts and Weapon Mastery (Is a skilled
-        and experienced warrior who wields a huge sword in battle) *Light Manipulation
-        and Weather Manipulation (Could perform the Snowblind by striking Modi''s
-        shield, which creates a blinding flash of light and a small storm) |-|Resistances=
-        Resistance to the following: *Runic Magic (Gods resist the innate properties
-        of their magics)'
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Complex Multiverse level (Held his own against Kratos, although he was
-        ultimately overpowered and killed by him. Stronger than his siblings)
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (Could keep up with Kratos in combat)
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level (Endured blows from Kratos, although he was
-        eventually killed by the latter)
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended melee range. Tens of meters with lightning attacks and Snowblind
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Sword hardened by cyclonic thunder
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Average normally, Gifted in combat (He and Modi were referred to as idiots
-        by Baldur and Sindri. However, Magni is still a skilled and experienced warrior,
-        having participated in the Aesir-Vanir War, as well as able to hold his own
-        against Kratos for some time before ultimately being outmatched and killed
-        by the Ghost of Sparta)
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Noted by Kratos to be arrogant until his last breath Notable Attacks/Techniques:
-        * Snowblind: Magni strikes Modi''s shield with his sword, creating a blinding
-        flash of light and a small storm around the enemy. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{reflist}} {{discussions|Magni God of
-        War|Magni (God of War)}} Category:Gods Category:Norse Gods Category:God of
-        War Category:Male Characters Category:Game Characters Category:Game Bosses
-        Category:Evil Characters Category:Electricity Users Category:Immortals Category:Martial
-        Artists Category:Weapon Masters Category:Sword Users Category:Paralysis Users
-        Category:Status Effect Users Category:Magic Users Category:Light Users Category:Weather
-        Users Category:Antagonists Category:Demigods Category:Narcissists Category:Psychopaths
-        Category:Princes Category:Royal Characters'
-      source_id: vsbattles-magni-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
+    duplicate_key: vsbattles.fandom.com|magni god of war|9571946
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-magni-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Magni_%28Game%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/The_Terrarian_(Canon,_Composite)/G-Toasty
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id021
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -1779,10 +767,10 @@ repair:
     - weaknesses
     normalized_page_title: The Terrarian (Canon, Composite)/G-Toasty
     source_type: mediawiki
-    revision_id: '584657'
+    revision_id: '607586'
     fetch_status: fetched
     http_status: 200
-    content_length: 239184
+    content_length: 250722
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1795,6 +783,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1808,7 +797,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id022
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1819,44 +808,53 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{3-A}}, likely {{Low 2-C}} Name: Varies on player Origin: Terraria
-        Gender: Varies, can change via Gender Change Potion Age: Unknown, likely an
-        adult Classification: Human (usually), Terrarian, "Immortal God", The World''s
-        Champion, "brave adventurer"'
-      source_id: character-stats-profiles-magni-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base \u25BE=\
-        \ {{#tag:tabber| {{!}}-{{!}}"
+      value: At least to , likely
       source_id: character-stats-profiles-magni-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Universe level1e+31 QuettaexaFoe (Uses Solar Fragments to craft weapons
-        and armor, with them containing the "fury of the universe" within each fragment,
-        likely referring to the heat of solar flares happening in the universe within
-        context, which is this powerful. Creates weapons and armor out of several
-        Nebula Fragments, each of which stated to have a power of an entire galaxy
-        within them which is very powerful), likely Universe level+ (Defeats Moon
-        Lord, and the mechanical bosses plus Mechdusa. Moon Lord at his peak who is
-        stated to seemingly threaten the very fabric of the universe itself. The mechanical
-        bosses were created as organ replicas for Moon Lord to power him back to full
-        power, due to his organs being torn out by Dryad civilization using their
-        accumulated powers. By the time the Terrarian fights Moon Lord however, Moon
-        Lord appears to have healed back his eyes, spine, skull, and brain back when
-        he was regaining power back. This heavily suggests that the Terrarian fought
-        Moon Lord when he was at the same power as Cthulhu. Stardust Pillar's summons
-        are stated to use limitless energy. Moon Lord is stated to have unlimited
-        power. Can survive light and fire-based attacks from the Torch God, a being
-        stated to be the source of the endless, eternal light given by torches. Moon
-        Lord drops Luminite, which is stated to "come from the heavens", with materials
-        made with Luminite stated to be "from beyond". Luminite is used to craft the
-        Void Monolith, which uses a small portion of the Void's power to make the
-        background black akin to Moon Lord's fight, implying Moon Lord is amplified
-        by the power of the Void, which may be a pocket dimension)
+      value: At least Large Planet level to Solar System level9.225 Yottatons of TNT
+        - 13 GigaFoe (Uses Solar Fragments to craft weapons and armor, with them containing
+        the "fury of the universe" within each fragment. Creates weapons and armor
+        out of several Nebula Fragments, each of which stated to have a power of an
+        entire galaxy within them which is very powerful. The Lunar Pillars are capable
+        of moving planets closer to the Terraria planet, and also get rid of the Sun
+        in the process, and the Terrarian can use pieces of them to make armor and
+        weapons with their power. The Night's Edge is stated to cut any object in
+        half), likely Universe level+ (Defeats Moon Lord, and the mechanical bosses
+        plus Mechdusa. Moon Lord at his peak who is stated to seemingly threaten the
+        very fabric of the universe itselfIt should be noted that "Terraria", in the
+        context of this statement, is likely referring to the universe (saying it's
+        referring to the planet isn't a phrase that is very commonly used as opposed
+        to the "fabric of reality", and using "Terraria" to refer to the universe
+        is commonly seen in the pages). As a bonus, the Terraria wiki also subscribes
+        to this interpretation, with the text saying the same thing on the .gg official
+        wiki that is promoted on the official website to the game, and is promoted
+        by Redigit himself. It also logically makes the most sense, given the Dryads
+        had only waged war against Cthulhu when he was threatening reality itself,
+        when hope seemed lost. It begs to question, "why would the Dryads, the beings
+        consistently referred to being one with nature, only show up to stop Moon
+        Lord when he was nearing his goal if his only intent was to threaten the planet
+        specifically?" In addition, the fight the Dryads had with Moon Lord is referred
+        to as "the Great Celestial War", confirming that it is a war the Dryads had
+        waged against Moon Lord after he threatened reality. In addition, the lore
+        is said to only exist to aid the protagonist in defeating Moon Lord and saving
+        the world, and the lore then continues explaining the universe, aspects that
+        are not utilized by the player to complete the game. It thematically makes
+        more sense for Moon Lord to threaten the universe if the universe itself was
+        to be primarily mentioned in an important scripture to aid the hero.. The
+        mechanical bosses were created as organ replicas for Moon Lord to power him
+        back to full power, due to his organs being torn out by Dryad civilization
+        using their accumulated powers. By the time the Terrarian fights Moon Lord
+        however, Moon Lord appears to have healed back his eyes, spine, skull, and
+        brain back when he was regaining power back. This heavily suggests that the
+        Terrarian fought Moon Lord when he was at the same power as Cthulhu. Stardust
+        Pillar's summons are stated to use limitless energy. Moon Lord is stated to
+        have unlimited power. Can survive light and fire-based attacks from the Torch
+        God, a being stated to be the source of the endless, eternal light given by
+        torches. Moon Lord drops Luminite, which is stated to "come from the heavens",
+        with materials made with Luminite stated to be "from beyond")
       source_id: character-stats-profiles-magni-game
       provider_id: character_stats_profiles
       authority: high
@@ -1866,43 +864,59 @@ repair:
         able to pilot their space ship at immense speeds, and come from a world far
         from the planet, and likely gets the car keys to a very similar space ship
         upon destroying the Martian ship, which the Terrarian can move faster than,
-        which is shown to be the same ship as the Martian saucer. Can keep up with
-        enemies amplified by an abundant amount of the Celestial Pillars' energy.
-        A small amount of which was used to pull down exoplanets close to the planet
-        within seconds, and Terrarian is implied to pull moons down at a similar speed
-        with the Lunar Hook. Can dodge and move faster than the Empress of Light's
-        light projectiles, and dodge Last Prism, which is far faster than light. Can
-        control a literal rainbow projectile. Can dodge attacks from the Beam Sword
-        and Gastropods. Defeated Moon Lord, who drops the S.D.M.G., an item stated
-        to have come from the edge of space)
+        which is shown to be the same ship as the Martian saucer. Terrarian can also
+        intercept the Martian Probes which can perform the same feat. Can dodge and
+        move faster than Lunar Flares. Can keep up with enemies amplified by an abundant
+        amount of the Celestial Pillars' energy. A small amount of which was used
+        to move exoplanets close to the planet within seconds, and Terrarian is implied
+        to pull moons down at a similar speed with the Lunar Hook. Can dodge and move
+        faster than the Empress of Light's light projectiles, and dodge Last Prism,
+        which is far faster than light. Can control a literal rainbow projectile.
+        Can dodge attacks from the Beam Sword and Gastropods. Defeated Moon Lord,
+        who drops the S.D.M.G., an item stated to have come from the edge of spaceTooltips
+        that intentionally reference a quote from another media were questioned in
+        the making of this profile. The Lunar Hook however, likely is literal in its
+        tooltip despite its reference, since the original quote is changed from "You
+        want the moon? Just say the word and I'll throw a lasso around it and pull
+        it down!" to, "You want the moon? Just grapple it and pull it down!". The
+        developers had intentionally changed the dialogue to fit in with the game
+        itself. Given the name of the hook, and the fact that it requires ultra-powerful
+        fragments to create, this is likely meant to suggest that it has the capacity
+        to literally pull down the Moon. Similarly, the S.D.M.G.'s tooltip was also
+        considered, despite the tooltip being a reference. The name of the game it
+        is referencing is named Edge of Space, and the tooltip states, "It came from
+        the edge of space". The lack of capitalization and the purposeful addition
+        of the item being said to come from there, suggests that it is both a reference,
+        and intended that the item literally came from the edge of space, which is
+        backed up by it being dropped by Moon Lord, who was able to move to the blind
+        spot of the universe to reach the Terrarian's world.. Can dodge and fight
+        enemies who dodge and deflect bullets, meteors and lightspeed lasers)
       source_id: character-stats-profiles-magni-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Universe level1e+31 QuettaexaFoe (Uses Solar Fragments to craft weapons
-        and armor, with them containing the "fury of the universe" within each fragment,
-        likely referring to the heat of solar flares happening in the universe within
-        context, which is this powerful. Creates weapons and armor out of several
-        Nebula Fragments, each of which stated to have a power of an entire galaxy
-        within them which is very powerful), likely Universe level+ (End-game gear
-        is capable of protecting the Terrarian from Moon Lord. Defeats Moon Lord,
-        and the mechanical bosses plus Mechdusa. Moon Lord at his peak is stated to
-        seemingly threaten the very fabric of the universe itself. The mechanical
-        bosses were created as organ replicas for Moon Lord to power him back to full
-        power, due to his organs being torn out by Dryad civilization using their
-        accumulated powers. By the time the Terrarian fights Moon Lord however, Moon
-        Lord appears to have healed back his eyes, spine, skull, and brain back when
-        he was regaining power back. This heavily suggests that the Terrarian fought
-        Moon Lord when he was at the same power as Cthulhu. Stardust Pillar's summons
-        are stated to use limitless energy. Moon Lord is stated to have unlimited
-        power. Can survive light and fire-based attacks from the Torch God, a being
-        stated to be the source of the endless, eternal light given by torches. Moon
-        Lord drops Luminite, which is stated to "come from the heavens", with materials
-        made with Luminite stated to be "from beyond". Luminite is used to craft the
-        Void Monolith, which uses a small portion of the Void's power to make the
-        background black akin to Moon Lord's fight, implying Moon Lord is amplified
-        by the power of the Void, which may be a pocket dimension)
+      value: At least Large Planet level to Solar System level (Uses Solar Fragments
+        to craft weapons and armor, with them containing the "fury of the universe"
+        within each fragment. Creates weapons and armor out of several Nebula Fragments,
+        each of which stated to have a power of an entire galaxy within them which
+        is very powerful. The Lunar Pillars are capable of moving planets closer to
+        the Terraria planet, and also get rid of the Sun in the process, and the Terrarian
+        can use pieces of them to make armor and weapons with their power), likely
+        Universe level+ (End-game gear is capable of protecting the Terrarian from
+        Moon Lord. Defeats Moon Lord, and the mechanical bosses plus Mechdusa. Moon
+        Lord at his peak is stated to seemingly threaten the very fabric of the universe
+        itself. The mechanical bosses were created as organ replicas for Moon Lord
+        to power him back to full power, due to his organs being torn out by Dryad
+        civilization using their accumulated powers. By the time the Terrarian fights
+        Moon Lord however, Moon Lord appears to have healed back his eyes, spine,
+        skull, and brain back when he was regaining power back. This heavily suggests
+        that the Terrarian fought Moon Lord when he was at the same power as Cthulhu.
+        Stardust Pillar's summons are stated to use limitless energy. Moon Lord is
+        stated to have unlimited power. Can survive light and fire-based attacks from
+        the Torch God, a being stated to be the source of the endless, eternal light
+        given by torches. Moon Lord drops Luminite, which is stated to "come from
+        the heavens", with materials made with Luminite stated to be "from beyond")
       source_id: character-stats-profiles-magni-game
       provider_id: character_stats_profiles
       authority: high
@@ -1914,64 +928,68 @@ repair:
         Moon lasts for. == Notes/Explanations == * Media used for this profile are:
         ** Terraria (2011 video game) *** Old-gen console version (2013) *** Old Chinese
         version (2018) *** New Chinese version (2021) ** Official Merchandise ** Terraria:
-        The Animated Series (2014 web animation) ** DC: Terraria Issue #1 (2015 comic)
-        ** Terraria LORE (2019 web novel) ** Terraria (2022 graphic novel) *** Issue
-        1 (2022) *** Issue 2 (2022) *** Issue 3 (2022) *** Issue 4 (2022) *** Issue
-        5 (2023) *** Issue 6 (2024) *** Issue 7 (2024) ** Terraria: The Board Game
-        (2025 board game) * It should be noted that "Terraria", in the context of
-        this statement, is likely referring to the universe (saying it''s referring
-        to the planet isn''t a phrase that is very commonly used as opposed to the
-        "fabric of reality", and using "Terraria" to refer to the universe is commonly
-        seen in the pages). As a bonus, the Terraria wiki also subscribes to this
-        interpretation, with the text saying the same thing on the .gg official wiki
-        that is promoted on the official website to the game, and is promoted by Redigit
-        himself. It also logically makes the most sense, given the Dryads had only
-        waged war against Cthulhu when he was threatening reality itself, when hope
-        seemed lost. It begs to question, "why would the Dryads, the beings consistently
-        referred to being one with nature, only show up to stop Moon Lord when he
-        was nearing his goal if his only intent was to threaten the planet specifically?"
-        In addition, the fight the Dryads had with Moon Lord is referred to as "the
-        Great Celestial War", confirming that it is a war the Dryads had waged against
-        Moon Lord after he threatened reality. In addition, the lore is said to only
-        exist to aid the protagonist in defeating Moon Lord and saving the world,
-        and the lore then continues explaining the universe, aspects that are not
-        utilized by the player to complete the game. It thematically makes more sense
-        for Moon Lord to threaten the universe if the universe itself was to be primarily
-        mentioned in an important scripture to aid the hero. * Terraria the Animated
-        Series is an official licensed webseries, and according to the creative director
-        of the game, since day 1, was a partnership between Element Animation and
-        Jazwares in order to sell officially licensed Terraria toys later that year.
-        * Due to the immense inconsistencies and vagueness of what constitutes as
-        a "melee", "ranged", "magic" and "summon" damage (Flying Knife is a melee
-        weapon but Throwing Knives being a ranged weapon. Plasma, fire, boomerangs,
-        flesh, ice, spores, explosives, energy blasts all vary on their damage type.
-        Some weapons that can be used as melee weapons aren''t "melee" weapons), it
-        can be assumed that the damage type of weapons are only applicable to weapons
-        and enemies in Terraria, and classifying weapons and attacks from outside
-        the game as such would be questionable, akin to how Types in Pokemon are treated.
-        * Tooltips that intentionally reference a quote from another media were questioned
-        in the making of this profile. The Lunar Hook however, likely is literal in
-        its tooltip despite its reference, since the original quote is changed from
-        "You want the moon? Just say the word and I''ll throw a lasso around it and
-        pull it down!" to, "You want the moon? Just grapple it and pull it down!".
-        The developers had intentionally changed the dialogue to fit in with the game
-        itself. Given the name of the hook, and the fact that it requires ultra-powerful
-        fragments to create, this is likely meant to suggest that it has the capacity
-        to literally pull down the Moon. ** Similarly, the S.D.M.G.''s tooltip was
-        also considered, despite the tooltip being a reference. The name of the game
-        it is referencing is named Edge of Space, and the tooltip states, "It came
-        from the edge of space". The lack of capitalization and the purposeful addition
-        of the item being said to come from there, suggests that it is both a reference,
-        and intended that the item literally came from the edge of space, which is
-        backed up by it being dropped by Moon Lord, who was able to move to the blind
-        spot of the universe to reach the Terrarian''s world. ==Gallery== File:TerrarianOfficial1.jpg|The
-        four endgame classes File:TerrariaOfficial2.jpg|Various Terrarians in different
-        armors File:TerrariaOfficial3.jpg|Endgame Ranger riding a minecart File:TerrariaOfficial4.webp|Palworld
-        player wearing Silver armor from Terraria File:TerrariaOfficial5.jpg|Palworld
-        player and Terrarian "dapping up" File:TerrariaOfficial6.png|Endgame Ranger
-        sitting down File:TerrariaOfficial7.png|Silver armor Terrarian playing with
-        a yo-yo (as seen on the TerrariaOfficial Twitch channel) File:TerrarianOfficial2.jpg|Molten
-        armor Terrarian as seen on the "Molten Armor: T-Shirt" design File:TerrarianOffici'
+        The Animated Series (2014 web animation)Terraria the Animated Series is an
+        official licensed webseries, and according to the creative director of the
+        game, since day 1, was a partnership between Element Animation and Jazwares
+        in order to sell officially licensed Terraria toys later that year. ** DC:
+        Terraria Issue #1 (2015 comic) ** Terraria LORE (2019 web novel) ** Terraria
+        (2022 graphic novel) *** Issue 1 (2022) *** Issue 2 (2022) *** Issue 3 (2022)
+        *** Issue 4 (2022) *** Issue 5 (2023) *** Issue 6 (2024) *** Issue 7 (2024)
+        ** Terraria: The Board Game (2025 board game) * Due to the immense inconsistencies
+        and vagueness of what constitutes as a "melee", "ranged", "magic" and "summon"
+        damage (Flying Knife is a melee weapon but Throwing Knives being a ranged
+        weapon. Plasma, fire, boomerangs, flesh, ice, spores, explosives, energy blasts
+        all vary on their damage type. Some weapons that can be used as melee weapons
+        aren''t "melee" weapons), it can be assumed that the damage type of weapons
+        are only applicable to weapons and enemies in Terraria, and classifying weapons
+        and attacks from outside the game as such would be questionable, akin to how
+        Types in Pokemon are treated. ==Gallery== File:Valve Steve vs Terrarian Skyland
+        Arts Shadow Armor figure 2D.png|Shadow Armor 2D figure concept artwork by
+        Skyland Arts File:TerrarianOfficial1.jpg|The four endgame classes File:TerrariaOfficial2.jpg|Various
+        Terrarians in different armors File:TerrariaOfficial3.jpg|Endgame Ranger riding
+        a minecart File:TerrariaOfficial4.webp|Palworld player wearing Silver armor
+        from Terraria File:TerrariaOfficial5.jpg|Palworld player and Terrarian "dapping
+        up" File:TerrariaOfficial6.png|Endgame Ranger sitting down File:TerrariaOfficial7.png|Silver
+        armor Terrarian playing with a yo-yo (as seen on the TerrariaOfficial Twitch
+        channel) File:TerrarianOfficial2.jpg|Molten armor Terrarian as seen on the
+        "Molten Armor: T-Shirt" design File:TerrarianOfficial4.jpg|Silver armor Terrarian
+        fighting a Mourning Wood as seen on the "Mourning Wood: T-Shirt" design File:TerrarianOfficial5.png|Silver
+        armor Terrarian fighting the Eater of Worlds as seen on the "Arcade Battle:
+        T-Shirt" design File:TerrarianOfficial6.png|Silver armor Terrarian weilding
+        a sword alongside the Dryad, with Moon Lord in the background File:Board_game_terraria_players.png|Various
+        selectable Terrarian avatars used for Terraria: The Board Game File:Terraria_the_board_game_cover.jpg|Three
+        different Terrarians on the cover for Terraria: The Board Game File:Terraria-explorer-poster-mockup
+        5000x.webp|The Terrarian holding an Iron Pickaxe looking out at the world,
+        as depicted on the Explorer Poster File:terraria-corruption-biome-sticker-sheet-close-up-3_2048x.webp|The
+        Terrarian wearing Shadow Armor and wielding the Light''s Bane, as depicted
+        in the Corruption Biome Sticker Sheet File:Terraria-celestial-standoff-3 5000x.webp|Vortex
+        armor Terrarian facing off against the Nebula Pillar as depicted on Celestial
+        Standoff File:D7723a195e7e022c23e11a6de6cb9cf4976bc9d7.png|Silver armor Terrarian
+        plushie File:GedQXU2XsAACptM.jpg|Shadow armor Terrarian plushie File:19-1611951744626.jpeg|The
+        Terrarian flying menacingly in the moonlight, by Suweeka, seen on the official
+        Terraria website File:12-1611951744625.jpeg|Several Terrarians facing off
+        against a group of monsters, by Suweeka, seen on the official Terraria website
+        File:11-1611951744625.jpeg|Chlorophyte armor Terrarian wielding a Dao of Pow,
+        by Suweeka, seen on the official Terraria website File:6-1611951744625.jpeg|Jungle
+        armor Terrarian, by Suweeka, seen on the official Terraria website File:5-1611951744625.png|A
+        Terrarian warning another Terrarian about eating a Vile Mushroom, by Suweeka,
+        seen on the official Terraria website File:4-1611951744625.png|Late Pre-Hardmode
+        Terrarian, by Suweeka, seen on the official Terraria website File:3-1611951744625.jpeg|The
+        Terrarian facing off against Frost Moon enemies, by Suweeka, seen on the official
+        Terraria website File:2-1611951744625.jpeg|The Terrarian''s Grappling Hook
+        breaking from one of the Wall of Flesh''s lasers, by Suweeka, seen on the
+        official Terraria website File:1-1611951744625.jpeg|Beetle armor Terrarian
+        fighting Duke Fishron, by Suweeka, seen on the official Terraria website File:0-1611951744625.png|Shadow
+        armor Terrarian facing off a Crimson armor Terrarian, by Suweeka, seen on
+        the official Terraria website File:1765241713980.png|Shadow armor Terrarian,
+        rendered from Suweeka''s artwork from the official Terraria website Category:G-Toasty'
+      source_id: character-stats-profiles-magni-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base \u25BE=\
+        \ {{#tag:tabber|"
       source_id: character-stats-profiles-magni-game
       provider_id: character_stats_profiles
       authority: high
@@ -1987,14 +1005,14 @@ repair:
     franchise_match: false
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|the terrarian canon composite
-      g toasty|584657
+      g toasty|607586
     retryable: false
     exception_class: ''
   - source_id: vsbattles-magni-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Magni_Game_God_of_War
+    url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29_God_of_War
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id015
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2007,10 +1025,10 @@ repair:
     - weaknesses
     normalized_page_title: Magni (God of War)
     source_type: mediawiki
-    revision_id: '9542343'
+    revision_id: '9571946'
     fetch_status: fetched
     http_status: 200
-    content_length: 4269
+    content_length: 4290
     content_kind: api_json
     headings_detected:
     - Summary
@@ -2023,6 +1041,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2036,7 +1055,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id016
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2046,26 +1065,16 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{1-C}} Name: Magni Origin: God of War Gender: Male Age: Over 200 years
-        old (Killed the Vanir goddess Nerthus together with Modi during the Aesir-Vanir
-        war, which begun before Mjolnir was created, which was 200 years prior to
-        the events of God of War: Lore and Legends) Classification: Minor Aesir, Demigod,
-        God of Strength and Thunder'
-      source_id: vsbattles-magni-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Magni= *Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
+      value: '*Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
         (Type 1) *Electricity Manipulation *Paralysis Inducement and Status Effect
         Inducement (Shares the same lightning-based powers as his father, having caused
         an ogre to convulse and paralyze) *Martial Arts and Weapon Mastery (Is a skilled
         and experienced warrior who wields a huge sword in battle) *Light Manipulation
         and Weather Manipulation (Could perform the Snowblind by striking Modi''s
-        shield, which creates a blinding flash of light and a small storm) |-|Resistances=
-        Resistance to the following: *Runic Magic (Gods resist the innate properties
-        of their magics)'
+        shield, which creates a blinding flash of light and a small storm) Resistance
+        to the following: *Runic Magic (Gods resist the innate properties of their
+        magics)'
       source_id: vsbattles-magni-game-god-of-war
       provider_id: vsbattles
       authority: high
@@ -2122,14 +1131,23 @@ repair:
       value: 'Noted by Kratos to be arrogant until his last breath Notable Attacks/Techniques:
         * Snowblind: Magni strikes Modi''s shield with his sword, creating a blinding
         flash of light and a small storm around the enemy. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{reflist}} {{discussions|Magni God of
-        War|Magni (God of War)}} Category:Gods Category:Norse Gods Category:God of
-        War Category:Male Characters Category:Game Characters Category:Game Bosses
+        Losses: Inconclusive: ==References== Category:Gods Category:Norse Gods Category:God
+        of War Category:Male Characters Category:Game Characters Category:Game Bosses
         Category:Evil Characters Category:Electricity Users Category:Immortals Category:Martial
         Artists Category:Weapon Masters Category:Sword Users Category:Paralysis Users
         Category:Status Effect Users Category:Magic Users Category:Light Users Category:Weather
         Users Category:Antagonists Category:Demigods Category:Narcissists Category:Psychopaths
-        Category:Princes Category:Royal Characters'
+        Category:Princes Category:Royal Characters Category:Vikings'
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Magni Origin: God of War Gender: Male Age: Over 200 years old
+        (Killed the Vanir goddess Nerthus together with Modi during the Aesir-Vanir
+        war, which begun before Mjolnir was created, which was 200 years prior to
+        the events of God of War: Lore and Legends) Classification: Minor Aesir, Demigod,
+        God of Strength and Thunder'
       source_id: vsbattles-magni-game-god-of-war
       provider_id: vsbattles
       authority: high
@@ -2144,129 +1162,245 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
+    duplicate_key: vsbattles.fandom.com|magni god of war|9571946
     retryable: false
     exception_class: ''
-  needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-magni-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29_God_of_War
-    title: Magni (God of War)
-    rank: 105
-    extracted_fields: *id007
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
-  - source_id: vsbattles-magni-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29_%28God_of_War%29
-    title: Magni (God of War)
-    rank: 105
-    extracted_fields: *id009
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
-  - source_id: mediawiki-magni-game
-    url: https://vsbattles.fandom.com/wiki/Magni_(Game)
-    title: Magni (God of War)
-    rank: 105
-    extracted_fields: *id011
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
-  - source_id: vsbattles-magni-game
-    url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29
-    title: Magni (God of War)
-    rank: 105
-    extracted_fields: *id013
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
-  - source_id: vsbattles-magni-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Magni_Game_God_of_War
-    title: Magni (God of War)
-    rank: 105
-    extracted_fields: *id015
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|magni god of war|9542343
   - source_id: character-stats-profiles-magni-game-god-of-war
     url: https://character-stats-and-profiles.fandom.com/wiki/Magni_%28Game%29_God_of_War
-    title: The Terrarian (Canon, Composite)/G-Toasty
-    rank: 80
-    extracted_fields: *id017
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - powers_and_abilities
+    - tier
+    normalized_page_title: Kratos (Canon)/Plant234
+    source_type: mediawiki
+    revision_id: '614108'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 45261
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Stats
+    stat_labels_detected:
+    - attack_potency
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 35
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id018
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 4-A, High 1-A with divine weapons | High 1-A | High 1-A | High 1-A, higher
+        with Spartan Rage | higher with Spartan Rage
+      source_id: character-stats-profiles-magni-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Demigod= -Base= Superhuman Physical Characteristics, Martial Arts (Bested
+        many Spartan WarriorsGod of War Comic (2010), knows Spartan fighting techniques
+        like his kicks which are used in real life, including many other fighting
+        techniques), Pressure Point Strikes (Attacked Cronos'' vital spotsThe Art
+        of God of War III), Enhanced Senses & Extrasensory Perception (Able to fight
+        while blinded relying on his hearing. Shortly after being depowered, rendered
+        mortal and having been stripped of his godly powers, on his journey to the
+        Island of Creation, Kratos Was able to sense the energy flow and lethality
+        of the Spear of Destiny well before realizing what the weapon was and right
+        before it was used against him, twice in a row. Sensed magical attacks, sensed
+        energy in magical objects, Lahkesis''s reddish apparition appearing before
+        him, could also sense the presence of the last spartan in complete darknessGod
+        of War II Novel and fight himGod of War II. Kratos can also sense lingering
+        magicGod of War (2018)), Information Analysis (Has shown the capability of
+        not only learning the power and properties of artifacts and weapons with a
+        glance, as he did with the Spear of Destiny and the Amulet of the Fate''s
+        compatibility with Cronos'' magic), Divine Magic (Can channel his magic into
+        his weapons, his chaos blades also amplify him. The more enemies he kills
+        the stronger and faster he becomesGod of War Novel), Immortality Negation
+        (Type 1, 2, 3, 4 & 7; Able to kill Undead Legionnaires which can survive fatal
+        wounds, as well as being able to kill resurrecting cursed Legionnaires and
+        undead Cursed RemainsGod of War: Ghost of Sparta), Non-Physical Interaction
+        ( Category:Tier 4 Category:Tier 4-A Category:Tier 1 Category:Tier 1-A Category:Plant234'
+      source_id: character-stats-profiles-magni-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 0
+    provider_priority: 120
+    core_field_count: 0
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|kratos canon plant234|614108
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-magni-game-god-of-war
+    url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29_%28God_of_War%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Magni (God of War)
+    source_type: mediawiki
+    revision_id: '9571946'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4290
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: '*Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
+        (Type 1) *Electricity Manipulation *Paralysis Inducement and Status Effect
+        Inducement (Shares the same lightning-based powers as his father, having caused
+        an ogre to convulse and paralyze) *Martial Arts and Weapon Mastery (Is a skilled
+        and experienced warrior who wields a huge sword in battle) *Light Manipulation
+        and Weather Manipulation (Could perform the Snowblind by striking Modi''s
+        shield, which creates a blinding flash of light and a small storm) Resistance
+        to the following: *Runic Magic (Gods resist the innate properties of their
+        magics)'
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Complex Multiverse level (Held his own against Kratos, although he was
+        ultimately overpowered and killed by him. Stronger than his siblings)
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (Could keep up with Kratos in combat)
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Complex Multiverse level (Endured blows from Kratos, although he was
+        eventually killed by the latter)
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended melee range. Tens of meters with lightning attacks and Snowblind
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Sword hardened by cyclonic thunder
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Average normally, Gifted in combat (He and Modi were referred to as idiots
+        by Baldur and Sindri. However, Magni is still a skilled and experienced warrior,
+        having participated in the Aesir-Vanir War, as well as able to hold his own
+        against Kratos for some time before ultimately being outmatched and killed
+        by the Ghost of Sparta)
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Noted by Kratos to be arrogant until his last breath Notable Attacks/Techniques:
+        * Snowblind: Magni strikes Modi''s shield with his sword, creating a blinding
+        flash of light and a small storm around the enemy. ==Notable Matchups== Victories:
+        Losses: Inconclusive: ==References== Category:Gods Category:Norse Gods Category:God
+        of War Category:Male Characters Category:Game Characters Category:Game Bosses
+        Category:Evil Characters Category:Electricity Users Category:Immortals Category:Martial
+        Artists Category:Weapon Masters Category:Sword Users Category:Paralysis Users
+        Category:Status Effect Users Category:Magic Users Category:Light Users Category:Weather
+        Users Category:Antagonists Category:Demigods Category:Narcissists Category:Psychopaths
+        Category:Princes Category:Royal Characters Category:Vikings'
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Magni Origin: God of War Gender: Male Age: Over 200 years old
+        (Killed the Vanir goddess Nerthus together with Modi during the Aesir-Vanir
+        war, which begun before Mjolnir was created, which was 200 years prior to
+        the events of God of War: Lore and Legends) Classification: Minor Aesir, Demigod,
+        God of Strength and Thunder'
+      source_id: vsbattles-magni-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
@@ -2274,21 +1408,245 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the terrarian canon composite
-      g toasty|584657
+    duplicate_key: vsbattles.fandom.com|magni god of war|9571946
+    retryable: false
+    exception_class: ''
   - source_id: character-stats-profiles-magni-game-god-of-war
     url: https://character-stats-and-profiles.fandom.com/wiki/Magni_%28Game%29_%28God_of_War%29
-    title: The Terrarian (Canon, Composite)/G-Toasty
-    rank: 80
-    extracted_fields: *id019
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - powers_and_abilities
+    - tier
+    normalized_page_title: Kratos (Canon)/Plant234
+    source_type: mediawiki
+    revision_id: '614108'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 45261
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Stats
+    stat_labels_detected:
+    - attack_potency
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 35
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id020
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 4-A, High 1-A with divine weapons | High 1-A | High 1-A | High 1-A, higher
+        with Spartan Rage | higher with Spartan Rage
+      source_id: character-stats-profiles-magni-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Demigod= -Base= Superhuman Physical Characteristics, Martial Arts (Bested
+        many Spartan WarriorsGod of War Comic (2010), knows Spartan fighting techniques
+        like his kicks which are used in real life, including many other fighting
+        techniques), Pressure Point Strikes (Attacked Cronos'' vital spotsThe Art
+        of God of War III), Enhanced Senses & Extrasensory Perception (Able to fight
+        while blinded relying on his hearing. Shortly after being depowered, rendered
+        mortal and having been stripped of his godly powers, on his journey to the
+        Island of Creation, Kratos Was able to sense the energy flow and lethality
+        of the Spear of Destiny well before realizing what the weapon was and right
+        before it was used against him, twice in a row. Sensed magical attacks, sensed
+        energy in magical objects, Lahkesis''s reddish apparition appearing before
+        him, could also sense the presence of the last spartan in complete darknessGod
+        of War II Novel and fight himGod of War II. Kratos can also sense lingering
+        magicGod of War (2018)), Information Analysis (Has shown the capability of
+        not only learning the power and properties of artifacts and weapons with a
+        glance, as he did with the Spear of Destiny and the Amulet of the Fate''s
+        compatibility with Cronos'' magic), Divine Magic (Can channel his magic into
+        his weapons, his chaos blades also amplify him. The more enemies he kills
+        the stronger and faster he becomesGod of War Novel), Immortality Negation
+        (Type 1, 2, 3, 4 & 7; Able to kill Undead Legionnaires which can survive fatal
+        wounds, as well as being able to kill resurrecting cursed Legionnaires and
+        undead Cursed RemainsGod of War: Ghost of Sparta), Non-Physical Interaction
+        ( Category:Tier 4 Category:Tier 4-A Category:Tier 1 Category:Tier 1-A Category:Plant234'
+      source_id: character-stats-profiles-magni-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 0
+    provider_priority: 120
+    core_field_count: 0
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|kratos canon plant234|614108
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-magni-game
+    url: https://vsbattles.fandom.com/wiki/Magni_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Magni (God of War)
+    source_type: mediawiki
+    revision_id: '9571946'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4290
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: '*Superhuman Physical Characteristics *Soul Magic (Innate) *Immortality
+        (Type 1) *Electricity Manipulation *Paralysis Inducement and Status Effect
+        Inducement (Shares the same lightning-based powers as his father, having caused
+        an ogre to convulse and paralyze) *Martial Arts and Weapon Mastery (Is a skilled
+        and experienced warrior who wields a huge sword in battle) *Light Manipulation
+        and Weather Manipulation (Could perform the Snowblind by striking Modi''s
+        shield, which creates a blinding flash of light and a small storm) Resistance
+        to the following: *Runic Magic (Gods resist the innate properties of their
+        magics)'
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Complex Multiverse level (Held his own against Kratos, although he was
+        ultimately overpowered and killed by him. Stronger than his siblings)
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (Could keep up with Kratos in combat)
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Complex Multiverse level (Endured blows from Kratos, although he was
+        eventually killed by the latter)
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended melee range. Tens of meters with lightning attacks and Snowblind
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Sword hardened by cyclonic thunder
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Average normally, Gifted in combat (He and Modi were referred to as idiots
+        by Baldur and Sindri. However, Magni is still a skilled and experienced warrior,
+        having participated in the Aesir-Vanir War, as well as able to hold his own
+        against Kratos for some time before ultimately being outmatched and killed
+        by the Ghost of Sparta)
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Noted by Kratos to be arrogant until his last breath Notable Attacks/Techniques:
+        * Snowblind: Magni strikes Modi''s shield with his sword, creating a blinding
+        flash of light and a small storm around the enemy. ==Notable Matchups== Victories:
+        Losses: Inconclusive: ==References== Category:Gods Category:Norse Gods Category:God
+        of War Category:Male Characters Category:Game Characters Category:Game Bosses
+        Category:Evil Characters Category:Electricity Users Category:Immortals Category:Martial
+        Artists Category:Weapon Masters Category:Sword Users Category:Paralysis Users
+        Category:Status Effect Users Category:Magic Users Category:Light Users Category:Weather
+        Users Category:Antagonists Category:Demigods Category:Narcissists Category:Psychopaths
+        Category:Princes Category:Royal Characters Category:Vikings'
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Magni Origin: God of War Gender: Male Age: Over 200 years old
+        (Killed the Vanir goddess Nerthus together with Modi during the Aesir-Vanir
+        war, which begun before Mjolnir was created, which was 200 years prior to
+        the events of God of War: Lore and Legends) Classification: Minor Aesir, Demigod,
+        God of Strength and Thunder'
+      source_id: vsbattles-magni-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
@@ -2296,31 +1654,55 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the terrarian canon composite
-      g toasty|584657
+    duplicate_key: vsbattles.fandom.com|magni god of war|9571946
+    retryable: false
+    exception_class: ''
   - source_id: character-stats-profiles-magni-game
     url: https://character-stats-and-profiles.fandom.com/wiki/Magni_%28Game%29
-    title: The Terrarian (Canon, Composite)/G-Toasty
-    rank: 80
-    extracted_fields: *id021
+    ok: false
+    note: provider_search_no_results
+    extracted_fields: []
+    normalized_page_title: Magni (Game)
+    source_type: mediawiki
+    revision_id: ''
+    fetch_status: failed
+    http_status: null
+    content_length: 0
+    content_kind: unknown
+    headings_detected: []
+    stat_labels_detected: []
+    extraction_failure_reason: provider_search_no_results
+    rank: 60
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id022
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates: []
+    identity_match: true
+    identity_score: 100
     variant_score: 0
     provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
+    core_field_count: 0
+    ability_count: 0
+    exact_name_match: true
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the terrarian canon composite
-      g toasty|584657
+    duplicate_key: character-stats-and-profiles.fandom.com|magni game
+    retryable: false
+    exception_class: ''
+  needs_human_source_choice: false
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
-    fetched: 8
-  confidence: 0.75
+    fetched: 7
+    provider_search_no_results: 1
+  confidence: 0.0

@@ -10,18 +10,9 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-04T03:10:24Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Sailor Galaxia
   franchise: Sailor Moon
@@ -97,42 +88,6 @@ sources:
 - id: vsbattles-sailor-galaxia-sailor-moon
   provider_id: vsbattles
   source_type: mediawiki
-  title: Sailor Galaxia Sailor Moon
-  url: https://vsbattles.fandom.com/wiki/Sailor_Galaxia_Sailor_Moon
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-sailor-galaxia-sailor-moon
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Sailor Galaxia Sailor Moon
-  url: https://character-stats-and-profiles.fandom.com/wiki/Sailor_Galaxia_Sailor_Moon
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-sailor-galaxia-sailor-moon
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Sailor Galaxia (Sailor Moon)
   url: https://vsbattles.fandom.com/wiki/Sailor_Galaxia_%28Sailor_Moon%29
   authority: high
@@ -172,13 +127,23 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Low Multiverse level (Stated to be stronger than all her previous enemies
+      by Sailor Moon, including Queen Nehellenia, destroyed the Holy Moon Chalice
+      which holds the power for Eternal Sailor Moon's Henshin, countered and overpowered
+      Eternal Sailor Moon's most powerful shown attack)
+    source_ids:
+    - vsbattles-sailor-galaxia-sailor-moon
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Massively FTL+, possibly Immeasurable combat and attack speed (Is considerably
+      faster than Sailor Moon having spread an attack throughout the universe and
+      reaching the Corridor of the Spacetime Door which is accessible only via time
+      travel)
+    source_ids:
+    - vsbattles-sailor-galaxia-sailor-moon
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -188,27 +153,832 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Low Multiverse level (Resisted the restorative power of The Holy Moon Chalice
+      after it was restoredVol 11, Act 55 Stars 6, took on the force of a full power
+      Eternal Sailor Moon's attack, survived within Chaos' grasp, was planning on
+      surviving an explosion that would have destroyed both Chaos and Eternal Sailor
+      Moon caused by both of them releasing their maximum power)
+    source_ids:
+    - vsbattles-sailor-galaxia-sailor-moon
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Likely Infinite (Galaxia was able to perform very powerful attacks, likely
+      comparable to Sailor Moon as the Sapphire Crystal is comparable to the Silver
+      Crystal)
+    source_ids:
+    - vsbattles-sailor-galaxia-sailor-moon
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Extradimensional (The Sapphire Crystal is comparable to Sailor Moon's Silver
+      Crystal, which lit up all of space and time, which can contain higher dimension
+      of unknown sized created by Sailor Mercury)
+    source_ids:
+    - vsbattles-sailor-galaxia-sailor-moon
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Genius(Very Skilled and Experienced Warrior and General. Firm grasp of
+      Tactics and Strategy. Has Hidden Wisdom understanding something intuitively
+      even Sailor Cosmos did not). Standard Tactics: Galaxia chaotically withers everything
+      away and even enters into someone''s dream, and also Transforming into her Sailor
+      Guardian form. | Sailor Galaxia points at her enemies to obliterate them leaving
+      nothing but dust and their Sailor Crystal behind. She also generates lightning
+      around herself when displaying her powers.'
+    source_ids:
+    - vsbattles-sailor-galaxia-sailor-moon
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-sailor-galaxia-sailor-moon
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-acrobatics-enhanced-condition-hypermobility-senshi-can-jump
+  name: 'Acrobatics (Enhanced Condition & Hypermobility; Senshi can jump to heights
+    that are impossible and dangerous for normal '
+  description: Acrobatics (Enhanced Condition & Hypermobility; Senshi can jump to
+    heights that are impossible and dangerous for normal humans)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight-sailor-guardians-can-fly-even-to-outer-space
+  name: Flight (Sailor Guardians can fly, even to outer space)
+  description: Flight (Sailor Guardians can fly, even to outer space)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-extrasensory-perception-sailor-guardians-can-sense-things-t
+  name: Extrasensory Perception (Sailor Guardians can sense things that other humans
+    cannot)
+  description: Extrasensory Perception (Sailor Guardians can sense things that other
+    humans cannot)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-magic-sailor-guardians-have-have-magical-powers
+  name: Magic (Sailor Guardians have have magical powers)
+  description: Magic (Sailor Guardians have have magical powers)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-telepathy-sailor-guardians-can-communicate-with-their-minds
+  name: Telepathy (Sailor Guardians can communicate with their minds)
+  description: Telepathy (Sailor Guardians can communicate with their minds)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - mind_control
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-teleportation-sailor-guardians-can-teleport
+  name: Teleportation (Sailor Guardians can teleport)
+  description: Teleportation (Sailor Guardians can teleport)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  - dimensional_travel
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-longevity-sailor-guardians-have-long-lives-and-stop-aging-a
+  name: Longevity (Sailor Guardians have long lives and stop aging after maturity)
+  description: Longevity (Sailor Guardians have long lives and stop aging after maturity)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-aura-sailor-guardians-have-aura-around-them
+  name: Aura (Sailor Guardians have aura around them)
+  description: Aura (Sailor Guardians have aura around them)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-reincarnation-sailor-guardians-will-be-reborn-in-a-new-life
+  name: Reincarnation (Sailor Guardians will be reborn in a new life after death)
+  description: Reincarnation (Sailor Guardians will be reborn in a new life after
+    death)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-precognition-sailor-guardians-tend-to-have-prophetic-dreams
+  name: Precognition (Sailor Guardians tend to have prophetic dreams)
+  description: Precognition (Sailor Guardians tend to have prophetic dreams)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-immortality-types-1-3-4-8-as-long-as-their-sailor-crystals-
+  name: Immortality (Types 1, 3,4, & 8; As long as their Sailor Crystals/Star Seeds
+    are intact they will reincarnate, regenerate
+  description: Immortality (Types 1, 3,4, & 8; As long as their Sailor Crystals/Star
+    Seeds are intact they will reincarnate, regenerate or be resurrected)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-blessed-sailor-guardians-are-protected-and-empowered-by-the
+  name: Blessed (Sailor Guardians are protected and empowered by the celestial body
+    they represent)
+  description: Blessed (Sailor Guardians are protected and empowered by the celestial
+    body they represent)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-forcefield-sailor-guardians-can-create-shields-around-thems
+  name: Forcefield (Sailor Guardians can create shields around themselves)
+  description: Forcefield (Sailor Guardians can create shields around themselves)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-transformation-all-sailor-guardians-have-henshin-that-will-
+  name: Transformation (All Sailor Guardians have Henshin that will transform them
+    to their Sailor forms)
+  description: Transformation (All Sailor Guardians have Henshin that will transform
+    them to their Sailor forms)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-regeneration-at-least-mid-possibly-up-to-mid-godly-awakenin
+  name: Regeneration (At least Mid, possibly up to Mid-Godly; Awakening as a Sailor
+    Guardian would heal Hotaru's damaged body; w
+  description: Regeneration (At least Mid, possibly up to Mid-Godly; Awakening as
+    a Sailor Guardian would heal Hotaru's damaged body; when Hotaru awakened as Sailor
+    Saturn, her body and soul were completely restored after being destroyed and consumed
+    by Pharaoh 90)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-dimensional-travel-sailor-guardians-can-teleport-to-differe
+  name: Dimensional Travel (Sailor Guardians can teleport to different dimensions)
+  description: Dimensional Travel (Sailor Guardians can teleport to different dimensions)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  - dimensional_travel
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - dimensional_scope
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-limited-perception-manipulation-can-prevent-regular-people-
+  name: Limited Perception Manipulation (Can prevent regular people from recognizing
+    her identity.)
+  description: Limited Perception Manipulation (Can prevent regular people from recognizing
+    her identity.)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-non-physical-interaction-incorporeality-intangibility-immat
+  name: Non-Physical Interaction (Incorporeality, Intangibility [Immaterial], Ghost
+    & Spirit/Soul; Sailor Guardians can interact
+  description: Non-Physical Interaction (Incorporeality, Intangibility [Immaterial],
+    Ghost & Spirit/Soul; Sailor Guardians can interact with and fight spirits, ghosts,
+    and other non-corporeal beings)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-space-survival
+  name: Space Survival
+  description: Space Survival
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-non-standard-breathing-type-2
+  name: Non-Standard Breathing (Type 2)
+  description: Non-Standard Breathing (Type 2)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-self-sustenance-type-1-senshi-can-breathe-in-the-vacuum-of-
+  name: '& Self-Sustenance (Type 1; Senshi can breathe in the vacuum of space)'
+  description: '& Self-Sustenance (Type 1; Senshi can breathe in the vacuum of space)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-telekinesis-could-remotely-control-and-move-star-seeds-as-w
+  name: Telekinesis (Could remotely control and move star seeds as well as the giant
+    star matrix)
+  description: Telekinesis (Could remotely control and move star seeds as well as
+    the giant star matrix)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-illusion-creation-showed-sailor-moon-the-death-of-her-allie
+  name: Illusion Creation (Showed Sailor Moon the death of her allies)
+  description: Illusion Creation (Showed Sailor Moon the death of her allies)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-dream-manipulation-attacked-sailor-moon-in-her-dreams-and-t
+  name: 'Dream Manipulation (Attacked Sailor Moon in her dreams and told her to come
+    find her at the Galaxy Cauldron in order to '
+  description: Dream Manipulation (Attacked Sailor Moon in her dreams and told her
+    to come find her at the Galaxy Cauldron in order to finish their battle)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-light-manipulation-produced-immense-light-with-her-power
+  name: Light Manipulation (Produced immense light with her power)
+  description: Light Manipulation (Produced immense light with her power)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weather-manipulation-her-power-created-a-storm
+  name: Weather Manipulation (Her power created a storm)
+  description: Weather Manipulation (Her power created a storm)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-existence-erasure-erased-people-from-existence
+  name: Existence Erasure (Erased people from existence)
+  description: Existence Erasure (Erased people from existence)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-stealth-mastery-able-to-enter-the-solar-system-undetected-b
+  name: Stealth Mastery (Able to enter the solar system undetected by guardians who
+    have cosmic awareness as well as bypass thei
+  description: Stealth Mastery (Able to enter the solar system undetected by guardians
+    who have cosmic awareness as well as bypass their detection program)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-forcefield-negation-via-intangibility-able-to-phase-through
+  name: Forcefield Negation via Intangibility (Able to phase through Sailor Moon's
+    forefield and disrupt her transformation; Sai
+  description: Forcefield Negation via Intangibility (Able to phase through Sailor
+    Moon's forefield and disrupt her transformation; Sailor Moon put up the forcefield
+    to protect herself from Sailor Galaxia's onslaught of energy)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-starseed-manipulation-conceptual-manipulation-type-1
+  name: 'Starseed Manipulation: Conceptual Manipulation (Type 1)'
+  description: 'Starseed Manipulation: Conceptual Manipulation (Type 1)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-information-manipulation-type-2
+  name: Information Manipulation (Type 2)
+  description: Information Manipulation (Type 2)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-existence-erasure
+  name: Existence Erasure
+  description: Existence Erasure
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-life-manipulation-soul-manipulation-her-attacks-can-bring-f
+  name: 'Life Manipulation & Soul Manipulation (Her attacks can bring forth the Star
+    Seeds of others; Star Seeds/Sailor Crystals '
+  description: Life Manipulation & Soul Manipulation (Her attacks can bring forth
+    the Star Seeds of others; Star Seeds/Sailor Crystals contain everything that makes
+    up a Sailor Guardian; by manipulating them you can change fundamental qualities
+    of person like their powers, personality, morality; Star Seeds are possibilities
+    that give form to all living things and celestial objects, no matter the name,
+    shape or size. Destruction of the form does not affect the Star Seed and its dependents
+    but the destruction of a Star Seed affects the form and all it's dependents)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-as-well-as-power-nullification-in-the-form-of-regeneration-
+  name: as well as Power Nullification in the form of Regeneration and Resurrection
+    Negation (By manipulating star seeds, Galaxi
+  description: as well as Power Nullification in the form of Regeneration and Resurrection
+    Negation (By manipulating star seeds, Galaxia prevented the guardians from regenerating
+    from their star seeds)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-electricity-manipulation-attacks-had-electrical-effects
+  name: Electricity Manipulation (Attacks had electrical effects)
+  description: Electricity Manipulation (Attacks had electrical effects)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-resurrection-resurrected-dead-senshi
+  name: Resurrection (Resurrected dead Senshi)
+  description: Resurrection (Resurrected dead Senshi)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-power-bestowal-bestowed-power-into-he-subjects
+  name: Power Bestowal (Bestowed power into he subjects)
+  description: Power Bestowal (Bestowed power into he subjects)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-statistics-amplification-can-boost-normal-entities-to-etern
+  name: Statistics Amplification (Can boost normal entities to Eternal Senshi-like
+    level and channel more power to them)
+  description: Statistics Amplification (Can boost normal entities to Eternal Senshi-like
+    level and channel more power to them)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-dimensional-storage-took-and-stored-away-the-giant-star-cry
+  name: Dimensional Storage (Took and stored away the giant star crystal)
+  description: Dimensional Storage (Took and stored away the giant star crystal)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - dimensional_travel
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - dimensional_scope
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-overconfidence
+  name: Overconfidence
+  description: Overconfidence
+  source_ids: &id003
+  - vsbattles-sailor-galaxia-sailor-moon
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-arrogance
+  name: arrogance
+  description: arrogance
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-and-complacency-in-the-way-things-went-such-as-her-plans-to-backstab-
+  name: and complacency in the way things went (such as her plans to backstab Chaos
+    but was actually the one being manipulated h
+  description: and complacency in the way things went (such as her plans to backstab
+    Chaos but was actually the one being manipulated herself). The Crystal of Destruction
+    only allows her
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-because-she-is-willing-to-destroy-anything-to-get-her-way-if-galaxia-
+  name: because she is willing to destroy anything to get her way. If Galaxia ever
+    loses faith in her mission and thinks somethi
+  description: because she is willing to destroy anything to get her way. If Galaxia
+    ever loses faith in her mission and thinks something is worth protecting
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-sailor-galaxia-kills-sailor-mars-and-venus
+  name: Sailor Galaxia kills Sailor Mars and Venus
+  description: Sailor Galaxia kills Sailor Mars and Venus
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-art-of-sailor-galaxia-from-artbook-v-notable-matchups-victories-losse
+  name: 'Art of Sailor Galaxia from Artbook V == Notable Matchups == Victories: Losses:
+    Inconclusive: ==References== Category:Cha'
+  description: 'Art of Sailor Galaxia from Artbook V == Notable Matchups == Victories:
+    Losses: Inconclusive: ==References== Category:Characters Category:Sailor Moon
+    Category:Female Characters Category:Manga Characters Category:Tyrants Category:Magical
+    Girls Category:Energy Users Category:Soul Users Category:Concept Users Category:Flight
+    Users Category:Forcefield Users Category:Immortals Category:Teleportation Users
+    Category:Antagonists Category:Primary Antagonists Category:Telekinesis Users Category:Leaders
+    Category:Telepaths Category:Evil Characters Category:Good Characters Category:Mind
+    Users Category:Villains Category:Transformation Users Category:Clairvoyance Users
+    Category:Dream Users Category:Matter Users Category:Aliens Category:Revived Characters
+    Category:Resurrection Users Category:Aura Users Category:Psychics Category:Enhanced
+    Senses Users Category:Space Users Category:Time Users Category:Stealth Masters
+    Category:Geniuses Category:Wise Characters Category:Magic Users Category:Sailor
+    Senshi Category:Destruction Users Category:Warlords Category:Illusionists Category:Stone
+    Walls Category:Power Bestowal Users Category:Statistics Amplification Users Category:Body
+    Control Users Category:Biology Users Category:Life Users Category:Status Effect
+    Users Category:Power Nullification Users Category:Light Users Category:Weather
+    Users Category:Void Users Category:Death Users Category:Precognition Users Category:Psychometry
+    Users Category:Tragic Characters Category:Creation Users Category:Reincarnation
+    Users Category:Empowerment Users Category:Regeneration Users Category:Self-Sustenance
+    Users Category:Durability Negation Users Category:Existence Erasure Users Category:Element
+    Users Category:Dimensional Travel Users Category:Cloth Users Category:Chaos Users
+    Category:Crystal Users Category:Bracelet Users Category:Adaptation Users Category:Information
+    Users Category:Non-Physical Interaction Users Category:Cosmic Awareness Users
+    Category:Reality Warpers Category:Abstract Entities Category:Acausal Characters'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - artifact_dependency
+  - battlefield_relocation
+  - dimensional_travel
+  - regeneration
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_artifact
+  scope_limitations:
+  - dimensional_scope
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -220,419 +990,29 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
-profile_hash: 28a6aa410f19a42cc10dcc8d9b7afef19051c84a8dfbbc2752eed7dc6df1fb14
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-sailor-galaxia-sailor-moon
+  secondary_disagreement_policy: warning_only
+profile_hash: 27d98ef74b5b68788193123f176ca9512284ed79be5777056752cf764714c4aa
 repair:
-  attempted_at: '2026-10-04T05:36:13Z'
+  attempted_at: '2026-10-25T17:53:39Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-sailor-galaxia-sailor-moon
-    url: https://vsbattles.fandom.com/wiki/Sailor_Galaxia_Sailor_Moon
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Sailor Galaxia (Manga)
-    source_type: mediawiki
-    revision_id: '9658315'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 18796
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-C}}'
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: General Senshi
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Low Multiverse level (Stated to be stronger than all her previous enemies
-        by Sailor Moon, including Queen Nehellenia, destroyed the Holy Moon Chalice
-        which holds the power for Eternal Sailor Moon's Henshin, countered and overpowered
-        Eternal Sailor Moon's most powerful shown attack)
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+, possibly Immeasurable combat and attack speed (Is considerably
-        faster than Sailor Moon having spread an attack throughout the universe and
-        reaching the Corridor of the Spacetime Door which is accessible only via time
-        travel)
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Multiverse level (Resisted the restorative power of The Holy Moon
-        Chalice after it was restoredVol 11, Act 55 Stars 6, took on the force of
-        a full power Eternal Sailor Moon's attack, survived within Chaos' grasp, was
-        planning on surviving an explosion that would have destroyed both Chaos and
-        Eternal Sailor Moon caused by both of them releasing their maximum power)
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Likely Infinite (Galaxia was able to perform very powerful attacks, likely
-        comparable to Sailor Moon as the Sapphire Crystal is comparable to the Silver
-        Crystal)
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extradimensional (The Sapphire Crystal is comparable to Sailor Moon's
-        Silver Crystal, which lit up all of space and time, which can contain higher
-        dimension of unknown sized created by Sailor Mercury)
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: "Items= File:Saffer Crystal.jpg|Sapphire Crystal \uFF62\u9752\u91D1\u77F3\
-        \u305B\u3044\u304D\u3093\u305B\u304D\uFF63 *Sapphire Crystal \uFF62\u9752\u91D1\
-        \u77F3\u305B\u3044\u304D\u3093\u305B\u304D\uFF63: Sailor Galaxia's Sailor\
-        \ Crystal and the ultimate force of destruction, this crystal allows Galaxia\
-        \ a vast reserve of energy, and the ability to cause destruction. As the Sailor\
-        \ Crystal of the only Sailor Senshi to ever rival Sailor Moon at full power,\
-        \ the Sapphire Crystal is among the strongest Sailor Crystals in all of the\
-        \ galaxy, second only to the power of Sailor Moon's Silver Crystal. As said\
-        \ in the manga, it is the ultimate force of destruction and supplies Galaxia\
-        \ with vast destructive abilities and enough power to easily battle Sailor\
-        \ Moon. Galaxia uses it to transform into her Sailor Senshi form but does\
-        \ not use a transformation phrase to do so. It appears only in the manga."
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Genius(Very Skilled and Experienced Warrior and General. Firm grasp
-        of Tactics and Strategy. Has Hidden Wisdom understanding something intuitively
-        even Sailor Cosmos did not). Standard Tactics: Galaxia chaotically withers
-        everything away and even enters into someone''s dream, and also Transforming
-        into her Sailor Guardian form. | Sailor Galaxia points at her enemies to obliterate
-        them leaving nothing but dust and their Sailor Crystal behind. She also generates
-        lightning around herself when displaying her powers.'
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Overconfidence, arrogance, and complacency in the way things went (such
-        as her plans to backstab Chaos but was actually the one being manipulated
-        herself). The Crystal of Destruction only allows her, because she is willing
-        to destroy anything to get her way. If Galaxia ever loses faith in her mission
-        and thinks something is worth protecting, her own Crystal will destroy her.
-        == Gallery == |-|Galaxia= File:Manga galaxia 2.png|Sailor Galaxia''s civilian
-        outfit on Earth File:Manga galaxia 3.png|Attacking Usagi and Chibi Chibi File:Manga
-        galaxia 6.png|At Galactica Palace |-|Sailor Galaxia= File:Galaxia.Act50.gif|Sailor
-        Galaxia stealing Mamoru''s Golden Crystal File:Mars-venus killed.JPG|Sailor
-        Galaxia kills Sailor Mars and Venus, stealing their star seeds File:Manga
-        galaxia 4.png|Sailor Galaxia before meeting Chaos File:Galaxia.Before.gif|Galaxia
-        in her past File:Manga galaxia 7.jpg|Sailor Galaxia transforming File:Manga
-        galaxia 9.png|Greeting Eternal Sailor Moon at Galactica Palace |-|Artbook
-        art= C3e45f08698a252730e0a541a084989c.jpg|Art of Sailor Galaxia from the Materials
-        Collection B6991c6d0ec80b06992b7ff05e02a9b4.jpg|More from the Materials Collection
-        File:Artbook sailor galaxia.jpg|Art of Sailor Galaxia from Artbook V == Notable
-        Matchups == Victories: Losses: Inconclusive: ==References== {{Scroll box|content={{reflist|2}}}}
-        {{Discussions|Sailor-Galaxia-Manga|Sailor Galaxia (manga)}} Category:Characters
-        Category:Sailor Moon Category:Female Characters Category:Manga Characters
-        Category:Tyrants Category:Magical Girls Category:Energy Users Category:Soul
-        Users Category:Concept Users Category:Flight Users Category:Forcefield Users
-        Category:Immortals Category:Teleportation Users Category:Antagonists Category:Primary
-        Antagonists Category:Telekinesis Users Category:Leaders Category:Telepaths
-        Category:Evil Characters Category:Good Characters Category:Mind Users Category:Villains
-        Category:Transformation Users Category:Clairvoyance Users Category:Dream Users
-        Category:Matter Users Category:Aliens Category:Revived Characters Category:Resurrection
-        Users Category:Aura Users Category:Psychics Category:Enhanced Senses Users
-        Category:Space Users Category:Time Users Category:Stealth Masters Category:Geniuses
-        Category:Wise Characters Category:Magic Users Category:Sailor Senshi Category:Destruction
-        Users Category:Warlords Category:Illusionists Category:Stone Walls Category:Power
-        Bestowal Users Category:Statistics Amplification Users Category:Body Control
-        Users Category:Biology Users Category:Life Users Category:Status Effect Users
-        Category:Power Nullification Users Category:Light Users Category:Weather Users
-        Category:Void Users Category:Death Users Category:Precognition Users Category:Psychometry
-        Users Category:Tragic Characters Category:Creation Users Category:Reincarnation
-        Users Category:Empowerment Users Category:Regeneration Users Category:Self-Sustenance
-        Users Category:Durability Negation Users Category:Existence Erasure Users
-        Category:Element Users Category:Dimensional Travel Users Category:Cloth Users
-        Category:Chaos Users Category:Crystal Users Category:Bracelet Users Category:Adaptation
-        Users Category:Information Users Category:Non-Physical Interaction Users Category:Cosmic
-        Awareness Users Category:Reality Warpers Category:Abstract Entities Category:Acausal
-        Characters'
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|sailor galaxia manga|9658315
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-sailor-galaxia-sailor-moon
-    url: https://character-stats-and-profiles.fandom.com/wiki/Sailor_Galaxia_Sailor_Moon
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Sailor Galaxia (Canon, Manga)/QuasarSpirit
-    source_type: mediawiki
-    revision_id: '115073'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 23968
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: Likely at least 2-C | 1-C
-      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Blessed (The Sailor Senshi are repeately
-        stated to be the chosen ones, chosen by fate because they are avatars of the
-        gods), Self-Sustenance (Type 1, Can survive in space), Magic, Transformation
-        (Sailor Senshi can transform between civilian and Sailor forms), Teleportation
-        (Sailor Senshi can teleport with their henshin), Power Nullification (Sailor
-        Senshi can nullify spells on them with their henshin and their attacks), Light
-        Manipulation/Holy Manipulation (Sailor Senshi henshin can create a holy light),
-        Regeneration (Mid-Godly. After Hotaru's body and soul were destroyed, her
-        mere awakening as a Sailor Senshi caused her to be regenerated. This is a
-        general power of Sailor Senshi), Immortality (Types 8 and 12. Sailor Senshi
-        will always reincarnate so long as their Sailor Crystal exists. These reincarnations
-        are the same entities and upon awakening as a Sailor Senshi they gain the
-        same memories as their past lives), Energy Manipulation (Energy Projection
-        and Aura), potentially can hide her aura (other Senshi have demonstrated this),
-        Past Life Awareness (Sailor Senshi are aware of their past lives and consider
-        each mortal life as just a brief disguise), Prophetic Dreams (Sailor Senshi
-        have dreams that predict the future), Enhanced Senses/Extrasensory Perception
-        (Sailor Senshi have numerous forms of enhanced senses. They can sense danger,
-        malice, or strange happenings. They can sense danger to or the suffering of
-        their allies, even across time. Sailor Venus was able to sense the transformations
-        of the Guardian Senshi while she was on Earth and they were on Nemesis at
-        the edge of the solar system and was able to sense the other Guardian Senshi
-        in another country before they had even partially awoken. Sailor Senshi can
-        see and hear souls as well as see and hear beings existing in the world of
-        dreams. Sailor Senshi can see at cosmic distances, even seeing from outside
-        spacetime to the Earth-Moon System and can hear at least thousands of lightyears
-        as the Amazon Senshi heard things at the Galactic Center from Earth. Usagi
-        could sense the conception of her daughter within her. Can see energy auras
-        and the nature of a being's energy, as well as sense energy via touch), Clairvoyance
-        (Galaxia can watch beings from a distance, saw an event in the past and thousands
-        of light years away), Cosmic Awareness (Galaxia could sense the intent of
-        Eternal Sailor Moon to come to the center of the galaxy at a cosmic distance
-        away. Likely similar to Usagi who could sense Mamoru's intent to protect her
-        despite being a cosmic distance away), Telepathy (Galaxia transmited images
-        of the deaths of the Outer Senshi into Usagi's mind), Non-Physical Interaction
-        (Sailor Senshi attacks can affect spiritual entities), Resistance to Energy
-        Manipulation, Matter Manipulation, Petrification, Space Manipulation, Time
-        Manipulation, Soul Manipulation, Mind Manipulation, Absorption, Existence
-        Erasure and Power Nullification (As a Sailor Senshi, Galaxia has the same
-        stellar protection as the other Sailor Senshi who could survive within Queen
-        Metaria, Death Phantom and Pharaoh 90), Resistance to Poison (Sailor Senshi
-        like Chibiusa were unaffected by the poisonous gas used on Crystal Tokyo),
-        Resistance to Radiation (Sailor Senshi can survive on black holes without
-        danger), Resistance to Age Manipulation (Sailor Senshi Henshin turned Usagi
-        and Chibiusa back to their proper ages. Chibiusa's Sailor Crystal kept her
-        from aging for 900 years until she was ready to awaken as a Sailor Senshi),
-        Resistance to Light Manipulation and Holy Manipulation (Resisted the power
-        of the Holy Grail), Resistance to Forcefield Creation (Can ignore and walk
-        through barriers without effort) | Flight, Forcefield Creation (Sailor Senshi
-        can create barriers), Conceptual Stealing/Existence Erasure (Galaxia can steal
-        the star seeds of beings by pointing at them which can work on whole planets.
-        Chaos has a star seed, showing that they are conceptual in nature. Removing
-        a person's star seed erases them from existence and the star seed maintains
-        a person's presence across time for instance when Mamoru's star seed was destroyed,
-        his daughter Chibiusa disappeared.), Conceptual Destruction (can destroy normal
-        Star Seeds), Creation/Matter Manipulation/Mind Manipulation (After taking
-        a Star Seed, Galaxia can recreate the entities, changing their body or mind
-        to make them loyal to her), Mind Control (Galaxia can force people to obey
-        her), Spatial Manipulation (Galactica Inflation can create a distorted space
-        around her), Electricity Manipulation (Galactica Inflation creates lightning
-        around Galaxia), Cosmic Energy Projection (Can create a surge of cosmic energy
-        with Galactica Super String), Dream Manipulation (can enter into the dreams
-        of others to attack them there, even creating dreams of places they've never
-        seen), Passive Death Manipulation (Galaxia appearing on two planets caused
-        all life to end on them), Power Bestowal (Granted her Sailor Animamates
-      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Likely at least Multi-Universe level (Had power far beyond any enemy
-        Usagi had ever fought and easily destroyed the Holy Grail which would be massively
-        above Super Sailor Moon's first henshin which created tens of thousands of
-        times the energy of Pharaoh 90 who moved Tau Nebula, a spacetime continuum
-        and a dimension. Likely more then tens of thousands of times stronger then
-        Base Sailor Saturn who was going to bring about the end of everything including
-        likely alternate dimensions and timelines and whose destruction of the Tau
-        Nebula would have threatened the main dimension if it was not sealed off by
-        Sailor Pluto) | Complex Multiverse level (The Saphir Crystal is the ultimate
-        force of destruction and Galaxia equaled Eternal Sailor Moon's strongest attack
-        with her second strongest attack showing she's stronger then Eternal Sailor
-        Moon who could have destroyed the Galaxy Cauldron which created all possibility
-        in the Sailor Moon Cosmos which is likely 8 dimensions. Relative to Chaos
-        who warped to the far reaches of spacetime passively which includes at least
-        4 dimensions of space and 3 dimension of time, as well as possibly the space-time
-        corridor which is a dimension beyond)
-      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (even in her civilian form is above the manifestations of
-        Chaos who traveled across time and space. Should be far superior to Arc 2
-        villain Black Lady who easily took Demande and Saphir to the edge of spacetime,
-        should scale to the light of the Silver Crystal which traveled to Wiseman's
-        domain at the edge of spacetime instantly and transmitted across spacetime
-        on another occasion as well as transcending time on a third occasion)
-      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Likely at least Multi-Universe level (Can tank her own energy and resisted
-        the power of the remade Holy Grail which overpowered her energy) | Complex
-        Multiverse level (easily blocked an attack from an enraged Eternal Sailor
-        Moon nearing her peak power and briefly survived Chaos' power. Eternal Sailor
-        Moon could destroy the Galaxy Cauldron which transcends an 8-D Cosmos, creating
-        all potential in it and Chaos passively warped all spacetime of an 8-D Cosmos.)
-      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'If Galaxia ever finds something worth protecting, her own crystal will
-        betray her and kill her. Notable Attacks/Techniques: * Henshin: Galaxia can
-        use a henshin to transform into her Sailor Senshi form. This henshin releases
-        a sacred light and vast amounts of energy. It can be used to travel through
-        dimensions and can restore the self, including undoing magic on the body and
-        regenerating body and soul. * Planet Power'
-      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|sailor galaxia canon manga
-      quasarspirit|115073
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-sailor-galaxia-sailor-moon
     url: https://vsbattles.fandom.com/wiki/Sailor_Galaxia_%28Sailor_Moon%29
     ok: true
@@ -646,7 +1026,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Sailor Galaxia (Manga)
     source_type: mediawiki
@@ -691,14 +1070,68 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{2-C}}'
-      source_id: vsbattles-sailor-galaxia-sailor-moon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: General Senshi
+      value: 'Superhuman Physical Characteristics, Acrobatics (Enhanced Condition
+        & Hypermobility; Senshi can jump to heights that are impossible and dangerous
+        for normal humans), Flight (Sailor Guardians can fly, even to outer space),
+        Extrasensory Perception (Sailor Guardians can sense things that other humans
+        cannot), Magic (Sailor Guardians have have magical powers), Telepathy (Sailor
+        Guardians can communicate with their minds), Teleportation (Sailor Guardians
+        can teleport), Longevity (Sailor Guardians have long lives and stop aging
+        after maturity), Aura (Sailor Guardians have aura around them), Reincarnation
+        (Sailor Guardians will be reborn in a new life after death), Precognition
+        (Sailor Guardians tend to have prophetic dreams), Immortality (Types 1, 3,4,
+        & 8; As long as their Sailor Crystals/Star Seeds are intact they will reincarnate,
+        regenerate or be resurrected), Blessed (Sailor Guardians are protected and
+        empowered by the celestial body they represent), Forcefield (Sailor Guardians
+        can create shields around themselves), Transformation (All Sailor Guardians
+        have Henshin that will transform them to their Sailor forms), Regeneration
+        (At least Mid, possibly up to Mid-Godly; Awakening as a Sailor Guardian would
+        heal Hotaru''s damaged body; when Hotaru awakened as Sailor Saturn, her body
+        and soul were completely restored after being destroyed and consumed by Pharaoh
+        90), Dimensional Travel (Sailor Guardians can teleport to different dimensions),
+        Limited Perception Manipulation (Can prevent regular people from recognizing
+        her identity.), Non-Physical Interaction (Incorporeality, Intangibility [Immaterial],
+        Ghost & Spirit/Soul; Sailor Guardians can interact with and fight spirits,
+        ghosts, and other non-corporeal beings), Space Survival, Non-Standard Breathing
+        (Type 2), & Self-Sustenance (Type 1; Senshi can breathe in the vacuum of space),
+        Telekinesis (Could remotely control and move star seeds as well as the giant
+        star matrix), Illusion Creation (Showed Sailor Moon the death of her allies),
+        Dream Manipulation (Attacked Sailor Moon in her dreams and told her to come
+        find her at the Galaxy Cauldron in order to finish their battle), Light Manipulation
+        (Produced immense light with her power), Weather Manipulation (Her power created
+        a storm), Existence Erasure (Erased people from existence), Stealth Mastery
+        (Able to enter the solar system undetected by guardians who have cosmic awareness
+        as well as bypass their detection program), Forcefield Negation via Intangibility
+        (Able to phase through Sailor Moon''s forefield and disrupt her transformation;
+        Sailor Moon put up the forcefield to protect herself from Sailor Galaxia''s
+        onslaught of energy), Starseed Manipulation: Conceptual Manipulation (Type
+        1), Information Manipulation (Type 2), Existence Erasure, Life Manipulation
+        & Soul Manipulation (Her attacks can bring forth the Star Seeds of others;
+        Star Seeds/Sailor Crystals contain everything that makes up a Sailor Guardian;
+        by manipulating them you can change fundamental qualities of person like their
+        powers, personality, morality; Star Seeds are possibilities that give form
+        to all living things and celestial objects, no matter the name, shape or size.
+        Destruction of the form does not affect the Star Seed and its dependents but
+        the destruction of a Star Seed affects the form and all it''s dependents),
+        as well as Power Nullification in the form of Regeneration and Resurrection
+        Negation (By manipulating star seeds, Galaxia prevented the guardians from
+        regenerating from their star seeds), Electricity Manipulation (Attacks had
+        electrical effects), Resurrection (Resurrected dead Senshi), Power Bestowal
+        (Bestowed power into he subjects), Statistics Amplification (Can boost normal
+        entities to Eternal Senshi-like level and channel more power to them), Dimensional
+        Storage (Took and stored away the giant star crystal), Madness Manipulation
+        (Type 3; Can stay in the presence of Chaos, Queen Metalia, an aspect of Chaos,
+        caused the people of earth to go mad), Transmutation, Light Manipulation,
+        Reality Warping, Existence Erasure, Energy Manipulation (Can withstand attacks
+        from Sailor Moon), Void Manipulation (Can withstand attacks from Sailor Saturn,
+        Chaos), Energy Manipulation, Holy Manipulation, Existence Erasure (Resisted
+        attacks from Sailor Moon), Possibly Sleep and Dream Manipulation (Scaling
+        from the other guardians whose power guardians can wake them up), Mind Manipulation
+        (Scaling from other guardians who were unaffected by Metalia''s mind manipulation),
+        Corrosion Inducement, Existence Erasure (As a Sailor Guardian she is comparable
+        to the Sailor Guardians of the Solar System who can resist the effects of
+        the Evil Black Crystal that kills people, and erases them from existence)'
       source_id: vsbattles-sailor-galaxia-sailor-moon
       provider_id: vsbattles
       authority: high
@@ -748,18 +1181,32 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: "Items= File:Saffer Crystal.jpg|Sapphire Crystal \uFF62\u9752\u91D1\u77F3\
-        \u305B\u3044\u304D\u3093\u305B\u304D\uFF63 *Sapphire Crystal \uFF62\u9752\u91D1\
-        \u77F3\u305B\u3044\u304D\u3093\u305B\u304D\uFF63: Sailor Galaxia's Sailor\
-        \ Crystal and the ultimate force of destruction, this crystal allows Galaxia\
-        \ a vast reserve of energy, and the ability to cause destruction. As the Sailor\
-        \ Crystal of the only Sailor Senshi to ever rival Sailor Moon at full power,\
-        \ the Sapphire Crystal is among the strongest Sailor Crystals in all of the\
-        \ galaxy, second only to the power of Sailor Moon's Silver Crystal. As said\
-        \ in the manga, it is the ultimate force of destruction and supplies Galaxia\
-        \ with vast destructive abilities and enough power to easily battle Sailor\
-        \ Moon. Galaxia uses it to transform into her Sailor Senshi form but does\
-        \ not use a transformation phrase to do so. It appears only in the manga."
+      value: "Sapphire Crystal \uFF62\u9752\u91D1\u77F3\u305B\u3044\u304D\u3093\u305B\
+        \u304D\uFF63, Sapphire Crystal \uFF62\u9752\u91D1\u77F3\u305B\u3044\u304D\u3093\
+        \u305B\u304D\uFF63: Sailor Galaxia's Sailor Crystal and the ultimate force\
+        \ of destruction, this crystal allows Galaxia a vast reserve of energy, and\
+        \ the ability to cause destruction. As the Sailor Crystal of the only Sailor\
+        \ Senshi to ever rival Sailor Moon at full power, the Sapphire Crystal is\
+        \ among the strongest Sailor Crystals in all of the galaxy, second only to\
+        \ the power of Sailor Moon's Silver Crystal. As said in the manga, Galactica\
+        \ Bracelets, Galactica Bracelets: Her usual weapon, bracelets worn by the\
+        \ members of Shadow Galactica. They have purple and green gems on them. Galaxia\
+        \ uses these bracelets to fire blasts of energy at an enemy. Destroying them\
+        \ entirely and allowing Galaxia to take their Sailor Crystal from them. In\
+        \ the manga, not all of the members of Shadow Galactica were originally Sailor\
+        \ Guardians. Some were individuals who had taken the Sailor Crystal of their\
+        \ respective planet's Senshi and given them to Galaxia. In return, Galaxia\
+        \ gave them the bracelets which bestowed powers similar to that of a Senshi.\
+        \ These members are known as Sailor Animamates. Other members of Shadow Galactica\
+        \ also wear the bracelets, Garden Crystal, Garden Crystal: A type of Star\
+        \ Seed that only appeared in the manga. They were large crystals that could\
+        \ contain normal-sized Star Seeds collected by servants of Sailor Galaxia\
+        \ and they were located in Star Garden, where they were farmed by Sailor Chi\
+        \ and Sailor Phi. Sailor Galaxia also kept a giant Garden Crystal inside of\
+        \ the Galactica Palace. Copies of the Crystal made up the Star Garden in front\
+        \ of the Palace. In Act 59, Sailor Galaxia cast the Garden Crystal with all\
+        \ its Sailor Crystals into the Galaxy Cauldron, allowing them to melt away\
+        \ into nothing."
       source_id: vsbattles-sailor-galaxia-sailor-moon
       provider_id: vsbattles
       authority: high
@@ -777,48 +1224,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Overconfidence, arrogance, and complacency in the way things went (such
-        as her plans to backstab Chaos but was actually the one being manipulated
-        herself). The Crystal of Destruction only allows her, because she is willing
-        to destroy anything to get her way. If Galaxia ever loses faith in her mission
-        and thinks something is worth protecting, her own Crystal will destroy her.
-        == Gallery == |-|Galaxia= File:Manga galaxia 2.png|Sailor Galaxia''s civilian
-        outfit on Earth File:Manga galaxia 3.png|Attacking Usagi and Chibi Chibi File:Manga
-        galaxia 6.png|At Galactica Palace |-|Sailor Galaxia= File:Galaxia.Act50.gif|Sailor
-        Galaxia stealing Mamoru''s Golden Crystal File:Mars-venus killed.JPG|Sailor
-        Galaxia kills Sailor Mars and Venus, stealing their star seeds File:Manga
-        galaxia 4.png|Sailor Galaxia before meeting Chaos File:Galaxia.Before.gif|Galaxia
-        in her past File:Manga galaxia 7.jpg|Sailor Galaxia transforming File:Manga
-        galaxia 9.png|Greeting Eternal Sailor Moon at Galactica Palace |-|Artbook
-        art= C3e45f08698a252730e0a541a084989c.jpg|Art of Sailor Galaxia from the Materials
-        Collection B6991c6d0ec80b06992b7ff05e02a9b4.jpg|More from the Materials Collection
-        File:Artbook sailor galaxia.jpg|Art of Sailor Galaxia from Artbook V == Notable
-        Matchups == Victories: Losses: Inconclusive: ==References== {{Scroll box|content={{reflist|2}}}}
-        {{Discussions|Sailor-Galaxia-Manga|Sailor Galaxia (manga)}} Category:Characters
-        Category:Sailor Moon Category:Female Characters Category:Manga Characters
-        Category:Tyrants Category:Magical Girls Category:Energy Users Category:Soul
-        Users Category:Concept Users Category:Flight Users Category:Forcefield Users
-        Category:Immortals Category:Teleportation Users Category:Antagonists Category:Primary
-        Antagonists Category:Telekinesis Users Category:Leaders Category:Telepaths
-        Category:Evil Characters Category:Good Characters Category:Mind Users Category:Villains
-        Category:Transformation Users Category:Clairvoyance Users Category:Dream Users
-        Category:Matter Users Category:Aliens Category:Revived Characters Category:Resurrection
-        Users Category:Aura Users Category:Psychics Category:Enhanced Senses Users
-        Category:Space Users Category:Time Users Category:Stealth Masters Category:Geniuses
-        Category:Wise Characters Category:Magic Users Category:Sailor Senshi Category:Destruction
-        Users Category:Warlords Category:Illusionists Category:Stone Walls Category:Power
-        Bestowal Users Category:Statistics Amplification Users Category:Body Control
-        Users Category:Biology Users Category:Life Users Category:Status Effect Users
-        Category:Power Nullification Users Category:Light Users Category:Weather Users
-        Category:Void Users Category:Death Users Category:Precognition Users Category:Psychometry
-        Users Category:Tragic Characters Category:Creation Users Category:Reincarnation
-        Users Category:Empowerment Users Category:Regeneration Users Category:Self-Sustenance
-        Users Category:Durability Negation Users Category:Existence Erasure Users
-        Category:Element Users Category:Dimensional Travel Users Category:Cloth Users
-        Category:Chaos Users Category:Crystal Users Category:Bracelet Users Category:Adaptation
-        Users Category:Information Users Category:Non-Physical Interaction Users Category:Cosmic
-        Awareness Users Category:Reality Warpers Category:Abstract Entities Category:Acausal
-        Characters'
+      value: and complacency in the way things went (such as her plans to backstab
+        Chaos but was actually the one being manipulated herself). The Crystal of
+        Destruction only allows her, because she is willing to destroy anything to
+        get her way. If Galaxia ever loses faith in her mission and thinks something
+        is worth protecting, her own Crystal will destroy her.
       source_id: vsbattles-sailor-galaxia-sailor-moon
       provider_id: vsbattles
       authority: high
@@ -930,36 +1340,7 @@ repair:
         away. Likely similar to Usagi who could sense Mamoru's intent to protect her
         despite being a cosmic distance away), Telepathy (Galaxia transmited images
         of the deaths of the Outer Senshi into Usagi's mind), Non-Physical Interaction
-        (Sailor Senshi attacks can affect spiritual entities), Resistance to Energy
-        Manipulation, Matter Manipulation, Petrification, Space Manipulation, Time
-        Manipulation, Soul Manipulation, Mind Manipulation, Absorption, Existence
-        Erasure and Power Nullification (As a Sailor Senshi, Galaxia has the same
-        stellar protection as the other Sailor Senshi who could survive within Queen
-        Metaria, Death Phantom and Pharaoh 90), Resistance to Poison (Sailor Senshi
-        like Chibiusa were unaffected by the poisonous gas used on Crystal Tokyo),
-        Resistance to Radiation (Sailor Senshi can survive on black holes without
-        danger), Resistance to Age Manipulation (Sailor Senshi Henshin turned Usagi
-        and Chibiusa back to their proper ages. Chibiusa's Sailor Crystal kept her
-        from aging for 900 years until she was ready to awaken as a Sailor Senshi),
-        Resistance to Light Manipulation and Holy Manipulation (Resisted the power
-        of the Holy Grail), Resistance to Forcefield Creation (Can ignore and walk
-        through barriers without effort) | Flight, Forcefield Creation (Sailor Senshi
-        can create barriers), Conceptual Stealing/Existence Erasure (Galaxia can steal
-        the star seeds of beings by pointing at them which can work on whole planets.
-        Chaos has a star seed, showing that they are conceptual in nature. Removing
-        a person's star seed erases them from existence and the star seed maintains
-        a person's presence across time for instance when Mamoru's star seed was destroyed,
-        his daughter Chibiusa disappeared.), Conceptual Destruction (can destroy normal
-        Star Seeds), Creation/Matter Manipulation/Mind Manipulation (After taking
-        a Star Seed, Galaxia can recreate the entities, changing their body or mind
-        to make them loyal to her), Mind Control (Galaxia can force people to obey
-        her), Spatial Manipulation (Galactica Inflation can create a distorted space
-        around her), Electricity Manipulation (Galactica Inflation creates lightning
-        around Galaxia), Cosmic Energy Projection (Can create a surge of cosmic energy
-        with Galactica Super String), Dream Manipulation (can enter into the dreams
-        of others to attack them there, even creating dreams of places they've never
-        seen), Passive Death Manipulation (Galaxia appearing on two planets caused
-        all life to end on them), Power Bestowal (Granted her Sailor Animamates
+        (Sailor Senshi attacks can affect spiritual entities)
       source_id: character-stats-profiles-sailor-galaxia-sailor-moon
       provider_id: character_stats_profiles
       authority: high
@@ -1008,12 +1389,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'If Galaxia ever finds something worth protecting, her own crystal will
-        betray her and kill her. Notable Attacks/Techniques: * Henshin: Galaxia can
-        use a henshin to transform into her Sailor Senshi form. This henshin releases
-        a sacred light and vast amounts of energy. It can be used to travel through
-        dimensions and can restore the self, including undoing magic on the body and
-        regenerating body and soul. * Planet Power'
+      value: her own crystal will betray her and kill her.
       source_id: character-stats-profiles-sailor-galaxia-sailor-moon
       provider_id: character_stats_profiles
       authority: high
@@ -1032,8 +1408,8 @@ repair:
       quasarspirit|115073
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-sailor-galaxia
-    url: https://vsbattles.fandom.com/wiki/Sailor_Galaxia
+  - source_id: vsbattles-sailor-galaxia-sailor-moon
+    url: https://vsbattles.fandom.com/wiki/Sailor_Galaxia_Sailor_Moon
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -1045,7 +1421,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Sailor Galaxia (Manga)
     source_type: mediawiki
@@ -1090,14 +1465,463 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{2-C}}'
-      source_id: vsbattles-sailor-galaxia
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Acrobatics (Enhanced Condition
+        & Hypermobility; Senshi can jump to heights that are impossible and dangerous
+        for normal humans), Flight (Sailor Guardians can fly, even to outer space),
+        Extrasensory Perception (Sailor Guardians can sense things that other humans
+        cannot), Magic (Sailor Guardians have have magical powers), Telepathy (Sailor
+        Guardians can communicate with their minds), Teleportation (Sailor Guardians
+        can teleport), Longevity (Sailor Guardians have long lives and stop aging
+        after maturity), Aura (Sailor Guardians have aura around them), Reincarnation
+        (Sailor Guardians will be reborn in a new life after death), Precognition
+        (Sailor Guardians tend to have prophetic dreams), Immortality (Types 1, 3,4,
+        & 8; As long as their Sailor Crystals/Star Seeds are intact they will reincarnate,
+        regenerate or be resurrected), Blessed (Sailor Guardians are protected and
+        empowered by the celestial body they represent), Forcefield (Sailor Guardians
+        can create shields around themselves), Transformation (All Sailor Guardians
+        have Henshin that will transform them to their Sailor forms), Regeneration
+        (At least Mid, possibly up to Mid-Godly; Awakening as a Sailor Guardian would
+        heal Hotaru''s damaged body; when Hotaru awakened as Sailor Saturn, her body
+        and soul were completely restored after being destroyed and consumed by Pharaoh
+        90), Dimensional Travel (Sailor Guardians can teleport to different dimensions),
+        Limited Perception Manipulation (Can prevent regular people from recognizing
+        her identity.), Non-Physical Interaction (Incorporeality, Intangibility [Immaterial],
+        Ghost & Spirit/Soul; Sailor Guardians can interact with and fight spirits,
+        ghosts, and other non-corporeal beings), Space Survival, Non-Standard Breathing
+        (Type 2), & Self-Sustenance (Type 1; Senshi can breathe in the vacuum of space),
+        Telekinesis (Could remotely control and move star seeds as well as the giant
+        star matrix), Illusion Creation (Showed Sailor Moon the death of her allies),
+        Dream Manipulation (Attacked Sailor Moon in her dreams and told her to come
+        find her at the Galaxy Cauldron in order to finish their battle), Light Manipulation
+        (Produced immense light with her power), Weather Manipulation (Her power created
+        a storm), Existence Erasure (Erased people from existence), Stealth Mastery
+        (Able to enter the solar system undetected by guardians who have cosmic awareness
+        as well as bypass their detection program), Forcefield Negation via Intangibility
+        (Able to phase through Sailor Moon''s forefield and disrupt her transformation;
+        Sailor Moon put up the forcefield to protect herself from Sailor Galaxia''s
+        onslaught of energy), Starseed Manipulation: Conceptual Manipulation (Type
+        1), Information Manipulation (Type 2), Existence Erasure, Life Manipulation
+        & Soul Manipulation (Her attacks can bring forth the Star Seeds of others;
+        Star Seeds/Sailor Crystals contain everything that makes up a Sailor Guardian;
+        by manipulating them you can change fundamental qualities of person like their
+        powers, personality, morality; Star Seeds are possibilities that give form
+        to all living things and celestial objects, no matter the name, shape or size.
+        Destruction of the form does not affect the Star Seed and its dependents but
+        the destruction of a Star Seed affects the form and all it''s dependents),
+        as well as Power Nullification in the form of Regeneration and Resurrection
+        Negation (By manipulating star seeds, Galaxia prevented the guardians from
+        regenerating from their star seeds), Electricity Manipulation (Attacks had
+        electrical effects), Resurrection (Resurrected dead Senshi), Power Bestowal
+        (Bestowed power into he subjects), Statistics Amplification (Can boost normal
+        entities to Eternal Senshi-like level and channel more power to them), Dimensional
+        Storage (Took and stored away the giant star crystal), Madness Manipulation
+        (Type 3; Can stay in the presence of Chaos, Queen Metalia, an aspect of Chaos,
+        caused the people of earth to go mad), Transmutation, Light Manipulation,
+        Reality Warping, Existence Erasure, Energy Manipulation (Can withstand attacks
+        from Sailor Moon), Void Manipulation (Can withstand attacks from Sailor Saturn,
+        Chaos), Energy Manipulation, Holy Manipulation, Existence Erasure (Resisted
+        attacks from Sailor Moon), Possibly Sleep and Dream Manipulation (Scaling
+        from the other guardians whose power guardians can wake them up), Mind Manipulation
+        (Scaling from other guardians who were unaffected by Metalia''s mind manipulation),
+        Corrosion Inducement, Existence Erasure (As a Sailor Guardian she is comparable
+        to the Sailor Guardians of the Solar System who can resist the effects of
+        the Evil Black Crystal that kills people, and erases them from existence)'
+      source_id: vsbattles-sailor-galaxia-sailor-moon
       provider_id: vsbattles
       authority: high
       confidence: 0.75
+    - field: attack_potency
+      value: Low Multiverse level (Stated to be stronger than all her previous enemies
+        by Sailor Moon, including Queen Nehellenia, destroyed the Holy Moon Chalice
+        which holds the power for Eternal Sailor Moon's Henshin, countered and overpowered
+        Eternal Sailor Moon's most powerful shown attack)
+      source_id: vsbattles-sailor-galaxia-sailor-moon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+, possibly Immeasurable combat and attack speed (Is considerably
+        faster than Sailor Moon having spread an attack throughout the universe and
+        reaching the Corridor of the Spacetime Door which is accessible only via time
+        travel)
+      source_id: vsbattles-sailor-galaxia-sailor-moon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Multiverse level (Resisted the restorative power of The Holy Moon
+        Chalice after it was restoredVol 11, Act 55 Stars 6, took on the force of
+        a full power Eternal Sailor Moon's attack, survived within Chaos' grasp, was
+        planning on surviving an explosion that would have destroyed both Chaos and
+        Eternal Sailor Moon caused by both of them releasing their maximum power)
+      source_id: vsbattles-sailor-galaxia-sailor-moon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Likely Infinite (Galaxia was able to perform very powerful attacks, likely
+        comparable to Sailor Moon as the Sapphire Crystal is comparable to the Silver
+        Crystal)
+      source_id: vsbattles-sailor-galaxia-sailor-moon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extradimensional (The Sapphire Crystal is comparable to Sailor Moon's
+        Silver Crystal, which lit up all of space and time, which can contain higher
+        dimension of unknown sized created by Sailor Mercury)
+      source_id: vsbattles-sailor-galaxia-sailor-moon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: "Sapphire Crystal \uFF62\u9752\u91D1\u77F3\u305B\u3044\u304D\u3093\u305B\
+        \u304D\uFF63, Sapphire Crystal \uFF62\u9752\u91D1\u77F3\u305B\u3044\u304D\u3093\
+        \u305B\u304D\uFF63: Sailor Galaxia's Sailor Crystal and the ultimate force\
+        \ of destruction, this crystal allows Galaxia a vast reserve of energy, and\
+        \ the ability to cause destruction. As the Sailor Crystal of the only Sailor\
+        \ Senshi to ever rival Sailor Moon at full power, the Sapphire Crystal is\
+        \ among the strongest Sailor Crystals in all of the galaxy, second only to\
+        \ the power of Sailor Moon's Silver Crystal. As said in the manga, Galactica\
+        \ Bracelets, Galactica Bracelets: Her usual weapon, bracelets worn by the\
+        \ members of Shadow Galactica. They have purple and green gems on them. Galaxia\
+        \ uses these bracelets to fire blasts of energy at an enemy. Destroying them\
+        \ entirely and allowing Galaxia to take their Sailor Crystal from them. In\
+        \ the manga, not all of the members of Shadow Galactica were originally Sailor\
+        \ Guardians. Some were individuals who had taken the Sailor Crystal of their\
+        \ respective planet's Senshi and given them to Galaxia. In return, Galaxia\
+        \ gave them the bracelets which bestowed powers similar to that of a Senshi.\
+        \ These members are known as Sailor Animamates. Other members of Shadow Galactica\
+        \ also wear the bracelets, Garden Crystal, Garden Crystal: A type of Star\
+        \ Seed that only appeared in the manga. They were large crystals that could\
+        \ contain normal-sized Star Seeds collected by servants of Sailor Galaxia\
+        \ and they were located in Star Garden, where they were farmed by Sailor Chi\
+        \ and Sailor Phi. Sailor Galaxia also kept a giant Garden Crystal inside of\
+        \ the Galactica Palace. Copies of the Crystal made up the Star Garden in front\
+        \ of the Palace. In Act 59, Sailor Galaxia cast the Garden Crystal with all\
+        \ its Sailor Crystals into the Galaxy Cauldron, allowing them to melt away\
+        \ into nothing."
+      source_id: vsbattles-sailor-galaxia-sailor-moon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Genius(Very Skilled and Experienced Warrior and General. Firm grasp
+        of Tactics and Strategy. Has Hidden Wisdom understanding something intuitively
+        even Sailor Cosmos did not). Standard Tactics: Galaxia chaotically withers
+        everything away and even enters into someone''s dream, and also Transforming
+        into her Sailor Guardian form. | Sailor Galaxia points at her enemies to obliterate
+        them leaving nothing but dust and their Sailor Crystal behind. She also generates
+        lightning around herself when displaying her powers.'
+      source_id: vsbattles-sailor-galaxia-sailor-moon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: and complacency in the way things went (such as her plans to backstab
+        Chaos but was actually the one being manipulated herself). The Crystal of
+        Destruction only allows her, because she is willing to destroy anything to
+        get her way. If Galaxia ever loses faith in her mission and thinks something
+        is worth protecting, her own Crystal will destroy her.
+      source_id: vsbattles-sailor-galaxia-sailor-moon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|sailor galaxia manga|9658315
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-sailor-galaxia-sailor-moon
+    url: https://character-stats-and-profiles.fandom.com/wiki/Sailor_Galaxia_Sailor_Moon
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Sailor Galaxia (Canon, Manga)/QuasarSpirit
+    source_type: mediawiki
+    revision_id: '115073'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 23968
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Likely at least 2-C | 1-C
+      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     - field: powers_and_abilities
-      value: General Senshi
+      value: Superhuman Physical Characteristics, Blessed (The Sailor Senshi are repeately
+        stated to be the chosen ones, chosen by fate because they are avatars of the
+        gods), Self-Sustenance (Type 1, Can survive in space), Magic, Transformation
+        (Sailor Senshi can transform between civilian and Sailor forms), Teleportation
+        (Sailor Senshi can teleport with their henshin), Power Nullification (Sailor
+        Senshi can nullify spells on them with their henshin and their attacks), Light
+        Manipulation/Holy Manipulation (Sailor Senshi henshin can create a holy light),
+        Regeneration (Mid-Godly. After Hotaru's body and soul were destroyed, her
+        mere awakening as a Sailor Senshi caused her to be regenerated. This is a
+        general power of Sailor Senshi), Immortality (Types 8 and 12. Sailor Senshi
+        will always reincarnate so long as their Sailor Crystal exists. These reincarnations
+        are the same entities and upon awakening as a Sailor Senshi they gain the
+        same memories as their past lives), Energy Manipulation (Energy Projection
+        and Aura), potentially can hide her aura (other Senshi have demonstrated this),
+        Past Life Awareness (Sailor Senshi are aware of their past lives and consider
+        each mortal life as just a brief disguise), Prophetic Dreams (Sailor Senshi
+        have dreams that predict the future), Enhanced Senses/Extrasensory Perception
+        (Sailor Senshi have numerous forms of enhanced senses. They can sense danger,
+        malice, or strange happenings. They can sense danger to or the suffering of
+        their allies, even across time. Sailor Venus was able to sense the transformations
+        of the Guardian Senshi while she was on Earth and they were on Nemesis at
+        the edge of the solar system and was able to sense the other Guardian Senshi
+        in another country before they had even partially awoken. Sailor Senshi can
+        see and hear souls as well as see and hear beings existing in the world of
+        dreams. Sailor Senshi can see at cosmic distances, even seeing from outside
+        spacetime to the Earth-Moon System and can hear at least thousands of lightyears
+        as the Amazon Senshi heard things at the Galactic Center from Earth. Usagi
+        could sense the conception of her daughter within her. Can see energy auras
+        and the nature of a being's energy, as well as sense energy via touch), Clairvoyance
+        (Galaxia can watch beings from a distance, saw an event in the past and thousands
+        of light years away), Cosmic Awareness (Galaxia could sense the intent of
+        Eternal Sailor Moon to come to the center of the galaxy at a cosmic distance
+        away. Likely similar to Usagi who could sense Mamoru's intent to protect her
+        despite being a cosmic distance away), Telepathy (Galaxia transmited images
+        of the deaths of the Outer Senshi into Usagi's mind), Non-Physical Interaction
+        (Sailor Senshi attacks can affect spiritual entities)
+      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Likely at least Multi-Universe level (Had power far beyond any enemy
+        Usagi had ever fought and easily destroyed the Holy Grail which would be massively
+        above Super Sailor Moon's first henshin which created tens of thousands of
+        times the energy of Pharaoh 90 who moved Tau Nebula, a spacetime continuum
+        and a dimension. Likely more then tens of thousands of times stronger then
+        Base Sailor Saturn who was going to bring about the end of everything including
+        likely alternate dimensions and timelines and whose destruction of the Tau
+        Nebula would have threatened the main dimension if it was not sealed off by
+        Sailor Pluto) | Complex Multiverse level (The Saphir Crystal is the ultimate
+        force of destruction and Galaxia equaled Eternal Sailor Moon's strongest attack
+        with her second strongest attack showing she's stronger then Eternal Sailor
+        Moon who could have destroyed the Galaxy Cauldron which created all possibility
+        in the Sailor Moon Cosmos which is likely 8 dimensions. Relative to Chaos
+        who warped to the far reaches of spacetime passively which includes at least
+        4 dimensions of space and 3 dimension of time, as well as possibly the space-time
+        corridor which is a dimension beyond)
+      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (even in her civilian form is above the manifestations of
+        Chaos who traveled across time and space. Should be far superior to Arc 2
+        villain Black Lady who easily took Demande and Saphir to the edge of spacetime,
+        should scale to the light of the Silver Crystal which traveled to Wiseman's
+        domain at the edge of spacetime instantly and transmitted across spacetime
+        on another occasion as well as transcending time on a third occasion)
+      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Likely at least Multi-Universe level (Can tank her own energy and resisted
+        the power of the remade Holy Grail which overpowered her energy) | Complex
+        Multiverse level (easily blocked an attack from an enraged Eternal Sailor
+        Moon nearing her peak power and briefly survived Chaos' power. Eternal Sailor
+        Moon could destroy the Galaxy Cauldron which transcends an 8-D Cosmos, creating
+        all potential in it and Chaos passively warped all spacetime of an 8-D Cosmos.)
+      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: her own crystal will betray her and kill her.
+      source_id: character-stats-profiles-sailor-galaxia-sailor-moon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|sailor galaxia canon manga
+      quasarspirit|115073
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-sailor-galaxia
+    url: https://vsbattles.fandom.com/wiki/Sailor_Galaxia
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - weaknesses
+    normalized_page_title: Sailor Galaxia (Manga)
+    source_type: mediawiki
+    revision_id: '9658315'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 18796
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Acrobatics (Enhanced Condition
+        & Hypermobility; Senshi can jump to heights that are impossible and dangerous
+        for normal humans), Flight (Sailor Guardians can fly, even to outer space),
+        Extrasensory Perception (Sailor Guardians can sense things that other humans
+        cannot), Magic (Sailor Guardians have have magical powers), Telepathy (Sailor
+        Guardians can communicate with their minds), Teleportation (Sailor Guardians
+        can teleport), Longevity (Sailor Guardians have long lives and stop aging
+        after maturity), Aura (Sailor Guardians have aura around them), Reincarnation
+        (Sailor Guardians will be reborn in a new life after death), Precognition
+        (Sailor Guardians tend to have prophetic dreams), Immortality (Types 1, 3,4,
+        & 8; As long as their Sailor Crystals/Star Seeds are intact they will reincarnate,
+        regenerate or be resurrected), Blessed (Sailor Guardians are protected and
+        empowered by the celestial body they represent), Forcefield (Sailor Guardians
+        can create shields around themselves), Transformation (All Sailor Guardians
+        have Henshin that will transform them to their Sailor forms), Regeneration
+        (At least Mid, possibly up to Mid-Godly; Awakening as a Sailor Guardian would
+        heal Hotaru''s damaged body; when Hotaru awakened as Sailor Saturn, her body
+        and soul were completely restored after being destroyed and consumed by Pharaoh
+        90), Dimensional Travel (Sailor Guardians can teleport to different dimensions),
+        Limited Perception Manipulation (Can prevent regular people from recognizing
+        her identity.), Non-Physical Interaction (Incorporeality, Intangibility [Immaterial],
+        Ghost & Spirit/Soul; Sailor Guardians can interact with and fight spirits,
+        ghosts, and other non-corporeal beings), Space Survival, Non-Standard Breathing
+        (Type 2), & Self-Sustenance (Type 1; Senshi can breathe in the vacuum of space),
+        Telekinesis (Could remotely control and move star seeds as well as the giant
+        star matrix), Illusion Creation (Showed Sailor Moon the death of her allies),
+        Dream Manipulation (Attacked Sailor Moon in her dreams and told her to come
+        find her at the Galaxy Cauldron in order to finish their battle), Light Manipulation
+        (Produced immense light with her power), Weather Manipulation (Her power created
+        a storm), Existence Erasure (Erased people from existence), Stealth Mastery
+        (Able to enter the solar system undetected by guardians who have cosmic awareness
+        as well as bypass their detection program), Forcefield Negation via Intangibility
+        (Able to phase through Sailor Moon''s forefield and disrupt her transformation;
+        Sailor Moon put up the forcefield to protect herself from Sailor Galaxia''s
+        onslaught of energy), Starseed Manipulation: Conceptual Manipulation (Type
+        1), Information Manipulation (Type 2), Existence Erasure, Life Manipulation
+        & Soul Manipulation (Her attacks can bring forth the Star Seeds of others;
+        Star Seeds/Sailor Crystals contain everything that makes up a Sailor Guardian;
+        by manipulating them you can change fundamental qualities of person like their
+        powers, personality, morality; Star Seeds are possibilities that give form
+        to all living things and celestial objects, no matter the name, shape or size.
+        Destruction of the form does not affect the Star Seed and its dependents but
+        the destruction of a Star Seed affects the form and all it''s dependents),
+        as well as Power Nullification in the form of Regeneration and Resurrection
+        Negation (By manipulating star seeds, Galaxia prevented the guardians from
+        regenerating from their star seeds), Electricity Manipulation (Attacks had
+        electrical effects), Resurrection (Resurrected dead Senshi), Power Bestowal
+        (Bestowed power into he subjects), Statistics Amplification (Can boost normal
+        entities to Eternal Senshi-like level and channel more power to them), Dimensional
+        Storage (Took and stored away the giant star crystal), Madness Manipulation
+        (Type 3; Can stay in the presence of Chaos, Queen Metalia, an aspect of Chaos,
+        caused the people of earth to go mad), Transmutation, Light Manipulation,
+        Reality Warping, Existence Erasure, Energy Manipulation (Can withstand attacks
+        from Sailor Moon), Void Manipulation (Can withstand attacks from Sailor Saturn,
+        Chaos), Energy Manipulation, Holy Manipulation, Existence Erasure (Resisted
+        attacks from Sailor Moon), Possibly Sleep and Dream Manipulation (Scaling
+        from the other guardians whose power guardians can wake them up), Mind Manipulation
+        (Scaling from other guardians who were unaffected by Metalia''s mind manipulation),
+        Corrosion Inducement, Existence Erasure (As a Sailor Guardian she is comparable
+        to the Sailor Guardians of the Solar System who can resist the effects of
+        the Evil Black Crystal that kills people, and erases them from existence)'
       source_id: vsbattles-sailor-galaxia
       provider_id: vsbattles
       authority: high
@@ -1147,18 +1971,32 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: "Items= File:Saffer Crystal.jpg|Sapphire Crystal \uFF62\u9752\u91D1\u77F3\
-        \u305B\u3044\u304D\u3093\u305B\u304D\uFF63 *Sapphire Crystal \uFF62\u9752\u91D1\
-        \u77F3\u305B\u3044\u304D\u3093\u305B\u304D\uFF63: Sailor Galaxia's Sailor\
-        \ Crystal and the ultimate force of destruction, this crystal allows Galaxia\
-        \ a vast reserve of energy, and the ability to cause destruction. As the Sailor\
-        \ Crystal of the only Sailor Senshi to ever rival Sailor Moon at full power,\
-        \ the Sapphire Crystal is among the strongest Sailor Crystals in all of the\
-        \ galaxy, second only to the power of Sailor Moon's Silver Crystal. As said\
-        \ in the manga, it is the ultimate force of destruction and supplies Galaxia\
-        \ with vast destructive abilities and enough power to easily battle Sailor\
-        \ Moon. Galaxia uses it to transform into her Sailor Senshi form but does\
-        \ not use a transformation phrase to do so. It appears only in the manga."
+      value: "Sapphire Crystal \uFF62\u9752\u91D1\u77F3\u305B\u3044\u304D\u3093\u305B\
+        \u304D\uFF63, Sapphire Crystal \uFF62\u9752\u91D1\u77F3\u305B\u3044\u304D\u3093\
+        \u305B\u304D\uFF63: Sailor Galaxia's Sailor Crystal and the ultimate force\
+        \ of destruction, this crystal allows Galaxia a vast reserve of energy, and\
+        \ the ability to cause destruction. As the Sailor Crystal of the only Sailor\
+        \ Senshi to ever rival Sailor Moon at full power, the Sapphire Crystal is\
+        \ among the strongest Sailor Crystals in all of the galaxy, second only to\
+        \ the power of Sailor Moon's Silver Crystal. As said in the manga, Galactica\
+        \ Bracelets, Galactica Bracelets: Her usual weapon, bracelets worn by the\
+        \ members of Shadow Galactica. They have purple and green gems on them. Galaxia\
+        \ uses these bracelets to fire blasts of energy at an enemy. Destroying them\
+        \ entirely and allowing Galaxia to take their Sailor Crystal from them. In\
+        \ the manga, not all of the members of Shadow Galactica were originally Sailor\
+        \ Guardians. Some were individuals who had taken the Sailor Crystal of their\
+        \ respective planet's Senshi and given them to Galaxia. In return, Galaxia\
+        \ gave them the bracelets which bestowed powers similar to that of a Senshi.\
+        \ These members are known as Sailor Animamates. Other members of Shadow Galactica\
+        \ also wear the bracelets, Garden Crystal, Garden Crystal: A type of Star\
+        \ Seed that only appeared in the manga. They were large crystals that could\
+        \ contain normal-sized Star Seeds collected by servants of Sailor Galaxia\
+        \ and they were located in Star Garden, where they were farmed by Sailor Chi\
+        \ and Sailor Phi. Sailor Galaxia also kept a giant Garden Crystal inside of\
+        \ the Galactica Palace. Copies of the Crystal made up the Star Garden in front\
+        \ of the Palace. In Act 59, Sailor Galaxia cast the Garden Crystal with all\
+        \ its Sailor Crystals into the Galaxy Cauldron, allowing them to melt away\
+        \ into nothing."
       source_id: vsbattles-sailor-galaxia
       provider_id: vsbattles
       authority: high
@@ -1176,48 +2014,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Overconfidence, arrogance, and complacency in the way things went (such
-        as her plans to backstab Chaos but was actually the one being manipulated
-        herself). The Crystal of Destruction only allows her, because she is willing
-        to destroy anything to get her way. If Galaxia ever loses faith in her mission
-        and thinks something is worth protecting, her own Crystal will destroy her.
-        == Gallery == |-|Galaxia= File:Manga galaxia 2.png|Sailor Galaxia''s civilian
-        outfit on Earth File:Manga galaxia 3.png|Attacking Usagi and Chibi Chibi File:Manga
-        galaxia 6.png|At Galactica Palace |-|Sailor Galaxia= File:Galaxia.Act50.gif|Sailor
-        Galaxia stealing Mamoru''s Golden Crystal File:Mars-venus killed.JPG|Sailor
-        Galaxia kills Sailor Mars and Venus, stealing their star seeds File:Manga
-        galaxia 4.png|Sailor Galaxia before meeting Chaos File:Galaxia.Before.gif|Galaxia
-        in her past File:Manga galaxia 7.jpg|Sailor Galaxia transforming File:Manga
-        galaxia 9.png|Greeting Eternal Sailor Moon at Galactica Palace |-|Artbook
-        art= C3e45f08698a252730e0a541a084989c.jpg|Art of Sailor Galaxia from the Materials
-        Collection B6991c6d0ec80b06992b7ff05e02a9b4.jpg|More from the Materials Collection
-        File:Artbook sailor galaxia.jpg|Art of Sailor Galaxia from Artbook V == Notable
-        Matchups == Victories: Losses: Inconclusive: ==References== {{Scroll box|content={{reflist|2}}}}
-        {{Discussions|Sailor-Galaxia-Manga|Sailor Galaxia (manga)}} Category:Characters
-        Category:Sailor Moon Category:Female Characters Category:Manga Characters
-        Category:Tyrants Category:Magical Girls Category:Energy Users Category:Soul
-        Users Category:Concept Users Category:Flight Users Category:Forcefield Users
-        Category:Immortals Category:Teleportation Users Category:Antagonists Category:Primary
-        Antagonists Category:Telekinesis Users Category:Leaders Category:Telepaths
-        Category:Evil Characters Category:Good Characters Category:Mind Users Category:Villains
-        Category:Transformation Users Category:Clairvoyance Users Category:Dream Users
-        Category:Matter Users Category:Aliens Category:Revived Characters Category:Resurrection
-        Users Category:Aura Users Category:Psychics Category:Enhanced Senses Users
-        Category:Space Users Category:Time Users Category:Stealth Masters Category:Geniuses
-        Category:Wise Characters Category:Magic Users Category:Sailor Senshi Category:Destruction
-        Users Category:Warlords Category:Illusionists Category:Stone Walls Category:Power
-        Bestowal Users Category:Statistics Amplification Users Category:Body Control
-        Users Category:Biology Users Category:Life Users Category:Status Effect Users
-        Category:Power Nullification Users Category:Light Users Category:Weather Users
-        Category:Void Users Category:Death Users Category:Precognition Users Category:Psychometry
-        Users Category:Tragic Characters Category:Creation Users Category:Reincarnation
-        Users Category:Empowerment Users Category:Regeneration Users Category:Self-Sustenance
-        Users Category:Durability Negation Users Category:Existence Erasure Users
-        Category:Element Users Category:Dimensional Travel Users Category:Cloth Users
-        Category:Chaos Users Category:Crystal Users Category:Bracelet Users Category:Adaptation
-        Users Category:Information Users Category:Non-Physical Interaction Users Category:Cosmic
-        Awareness Users Category:Reality Warpers Category:Abstract Entities Category:Acausal
-        Characters'
+      value: and complacency in the way things went (such as her plans to backstab
+        Chaos but was actually the one being manipulated herself). The Crystal of
+        Destruction only allows her, because she is willing to destroy anything to
+        get her way. If Galaxia ever loses faith in her mission and thinks something
+        is worth protecting, her own Crystal will destroy her.
       source_id: vsbattles-sailor-galaxia
       provider_id: vsbattles
       authority: high
@@ -1244,8 +2045,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Sailor Galaxia (Canon, Death Battle)/Unbacked0
     source_type: mediawiki
     revision_id: '137487'
@@ -1287,12 +2086,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 2-C
-      source_id: character-stats-profiles-sailor-galaxia
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Immortality (Type 1), Electricity
         Manipulation, Teleportation, Mind Control, Existence Erasure
@@ -1316,17 +2109,6 @@ repair:
       confidence: 0.75
     - field: durability
       value: Multi-Universe Level
-      source_id: character-stats-profiles-sailor-galaxia
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None Notable Note: This profile is based on what is in Death Battles
-        video, any information displayed on any profile based on Death Battle are
-        solely based on whatever is said in their videos and not my own opinion. So
-        if a character is weaker or stronger on a profile than they actually are then
-        it isn''t my fault. == Others == Notable Victories: Notable Losses: Inconclusive
-        Matches: Category:Unbacked0 Category:Tier 2'
       source_id: character-stats-profiles-sailor-galaxia
       provider_id: character_stats_profiles
       authority: high
@@ -1358,7 +2140,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Sailor Galaxia (Manga)
     source_type: mediawiki
@@ -1405,14 +2186,68 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{2-C}}'
-      source_id: vsbattles-sailor-galaxia-anime
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: General Senshi
+      value: 'Superhuman Physical Characteristics, Acrobatics (Enhanced Condition
+        & Hypermobility; Senshi can jump to heights that are impossible and dangerous
+        for normal humans), Flight (Sailor Guardians can fly, even to outer space),
+        Extrasensory Perception (Sailor Guardians can sense things that other humans
+        cannot), Magic (Sailor Guardians have have magical powers), Telepathy (Sailor
+        Guardians can communicate with their minds), Teleportation (Sailor Guardians
+        can teleport), Longevity (Sailor Guardians have long lives and stop aging
+        after maturity), Aura (Sailor Guardians have aura around them), Reincarnation
+        (Sailor Guardians will be reborn in a new life after death), Precognition
+        (Sailor Guardians tend to have prophetic dreams), Immortality (Types 1, 3,4,
+        & 8; As long as their Sailor Crystals/Star Seeds are intact they will reincarnate,
+        regenerate or be resurrected), Blessed (Sailor Guardians are protected and
+        empowered by the celestial body they represent), Forcefield (Sailor Guardians
+        can create shields around themselves), Transformation (All Sailor Guardians
+        have Henshin that will transform them to their Sailor forms), Regeneration
+        (At least Mid, possibly up to Mid-Godly; Awakening as a Sailor Guardian would
+        heal Hotaru''s damaged body; when Hotaru awakened as Sailor Saturn, her body
+        and soul were completely restored after being destroyed and consumed by Pharaoh
+        90), Dimensional Travel (Sailor Guardians can teleport to different dimensions),
+        Limited Perception Manipulation (Can prevent regular people from recognizing
+        her identity.), Non-Physical Interaction (Incorporeality, Intangibility [Immaterial],
+        Ghost & Spirit/Soul; Sailor Guardians can interact with and fight spirits,
+        ghosts, and other non-corporeal beings), Space Survival, Non-Standard Breathing
+        (Type 2), & Self-Sustenance (Type 1; Senshi can breathe in the vacuum of space),
+        Telekinesis (Could remotely control and move star seeds as well as the giant
+        star matrix), Illusion Creation (Showed Sailor Moon the death of her allies),
+        Dream Manipulation (Attacked Sailor Moon in her dreams and told her to come
+        find her at the Galaxy Cauldron in order to finish their battle), Light Manipulation
+        (Produced immense light with her power), Weather Manipulation (Her power created
+        a storm), Existence Erasure (Erased people from existence), Stealth Mastery
+        (Able to enter the solar system undetected by guardians who have cosmic awareness
+        as well as bypass their detection program), Forcefield Negation via Intangibility
+        (Able to phase through Sailor Moon''s forefield and disrupt her transformation;
+        Sailor Moon put up the forcefield to protect herself from Sailor Galaxia''s
+        onslaught of energy), Starseed Manipulation: Conceptual Manipulation (Type
+        1), Information Manipulation (Type 2), Existence Erasure, Life Manipulation
+        & Soul Manipulation (Her attacks can bring forth the Star Seeds of others;
+        Star Seeds/Sailor Crystals contain everything that makes up a Sailor Guardian;
+        by manipulating them you can change fundamental qualities of person like their
+        powers, personality, morality; Star Seeds are possibilities that give form
+        to all living things and celestial objects, no matter the name, shape or size.
+        Destruction of the form does not affect the Star Seed and its dependents but
+        the destruction of a Star Seed affects the form and all it''s dependents),
+        as well as Power Nullification in the form of Regeneration and Resurrection
+        Negation (By manipulating star seeds, Galaxia prevented the guardians from
+        regenerating from their star seeds), Electricity Manipulation (Attacks had
+        electrical effects), Resurrection (Resurrected dead Senshi), Power Bestowal
+        (Bestowed power into he subjects), Statistics Amplification (Can boost normal
+        entities to Eternal Senshi-like level and channel more power to them), Dimensional
+        Storage (Took and stored away the giant star crystal), Madness Manipulation
+        (Type 3; Can stay in the presence of Chaos, Queen Metalia, an aspect of Chaos,
+        caused the people of earth to go mad), Transmutation, Light Manipulation,
+        Reality Warping, Existence Erasure, Energy Manipulation (Can withstand attacks
+        from Sailor Moon), Void Manipulation (Can withstand attacks from Sailor Saturn,
+        Chaos), Energy Manipulation, Holy Manipulation, Existence Erasure (Resisted
+        attacks from Sailor Moon), Possibly Sleep and Dream Manipulation (Scaling
+        from the other guardians whose power guardians can wake them up), Mind Manipulation
+        (Scaling from other guardians who were unaffected by Metalia''s mind manipulation),
+        Corrosion Inducement, Existence Erasure (As a Sailor Guardian she is comparable
+        to the Sailor Guardians of the Solar System who can resist the effects of
+        the Evil Black Crystal that kills people, and erases them from existence)'
       source_id: vsbattles-sailor-galaxia-anime
       provider_id: vsbattles
       authority: high
@@ -1462,18 +2297,32 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: "Items= File:Saffer Crystal.jpg|Sapphire Crystal \uFF62\u9752\u91D1\u77F3\
-        \u305B\u3044\u304D\u3093\u305B\u304D\uFF63 *Sapphire Crystal \uFF62\u9752\u91D1\
-        \u77F3\u305B\u3044\u304D\u3093\u305B\u304D\uFF63: Sailor Galaxia's Sailor\
-        \ Crystal and the ultimate force of destruction, this crystal allows Galaxia\
-        \ a vast reserve of energy, and the ability to cause destruction. As the Sailor\
-        \ Crystal of the only Sailor Senshi to ever rival Sailor Moon at full power,\
-        \ the Sapphire Crystal is among the strongest Sailor Crystals in all of the\
-        \ galaxy, second only to the power of Sailor Moon's Silver Crystal. As said\
-        \ in the manga, it is the ultimate force of destruction and supplies Galaxia\
-        \ with vast destructive abilities and enough power to easily battle Sailor\
-        \ Moon. Galaxia uses it to transform into her Sailor Senshi form but does\
-        \ not use a transformation phrase to do so. It appears only in the manga."
+      value: "Sapphire Crystal \uFF62\u9752\u91D1\u77F3\u305B\u3044\u304D\u3093\u305B\
+        \u304D\uFF63, Sapphire Crystal \uFF62\u9752\u91D1\u77F3\u305B\u3044\u304D\u3093\
+        \u305B\u304D\uFF63: Sailor Galaxia's Sailor Crystal and the ultimate force\
+        \ of destruction, this crystal allows Galaxia a vast reserve of energy, and\
+        \ the ability to cause destruction. As the Sailor Crystal of the only Sailor\
+        \ Senshi to ever rival Sailor Moon at full power, the Sapphire Crystal is\
+        \ among the strongest Sailor Crystals in all of the galaxy, second only to\
+        \ the power of Sailor Moon's Silver Crystal. As said in the manga, Galactica\
+        \ Bracelets, Galactica Bracelets: Her usual weapon, bracelets worn by the\
+        \ members of Shadow Galactica. They have purple and green gems on them. Galaxia\
+        \ uses these bracelets to fire blasts of energy at an enemy. Destroying them\
+        \ entirely and allowing Galaxia to take their Sailor Crystal from them. In\
+        \ the manga, not all of the members of Shadow Galactica were originally Sailor\
+        \ Guardians. Some were individuals who had taken the Sailor Crystal of their\
+        \ respective planet's Senshi and given them to Galaxia. In return, Galaxia\
+        \ gave them the bracelets which bestowed powers similar to that of a Senshi.\
+        \ These members are known as Sailor Animamates. Other members of Shadow Galactica\
+        \ also wear the bracelets, Garden Crystal, Garden Crystal: A type of Star\
+        \ Seed that only appeared in the manga. They were large crystals that could\
+        \ contain normal-sized Star Seeds collected by servants of Sailor Galaxia\
+        \ and they were located in Star Garden, where they were farmed by Sailor Chi\
+        \ and Sailor Phi. Sailor Galaxia also kept a giant Garden Crystal inside of\
+        \ the Galactica Palace. Copies of the Crystal made up the Star Garden in front\
+        \ of the Palace. In Act 59, Sailor Galaxia cast the Garden Crystal with all\
+        \ its Sailor Crystals into the Galaxy Cauldron, allowing them to melt away\
+        \ into nothing."
       source_id: vsbattles-sailor-galaxia-anime
       provider_id: vsbattles
       authority: high
@@ -1491,48 +2340,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Overconfidence, arrogance, and complacency in the way things went (such
-        as her plans to backstab Chaos but was actually the one being manipulated
-        herself). The Crystal of Destruction only allows her, because she is willing
-        to destroy anything to get her way. If Galaxia ever loses faith in her mission
-        and thinks something is worth protecting, her own Crystal will destroy her.
-        == Gallery == |-|Galaxia= File:Manga galaxia 2.png|Sailor Galaxia''s civilian
-        outfit on Earth File:Manga galaxia 3.png|Attacking Usagi and Chibi Chibi File:Manga
-        galaxia 6.png|At Galactica Palace |-|Sailor Galaxia= File:Galaxia.Act50.gif|Sailor
-        Galaxia stealing Mamoru''s Golden Crystal File:Mars-venus killed.JPG|Sailor
-        Galaxia kills Sailor Mars and Venus, stealing their star seeds File:Manga
-        galaxia 4.png|Sailor Galaxia before meeting Chaos File:Galaxia.Before.gif|Galaxia
-        in her past File:Manga galaxia 7.jpg|Sailor Galaxia transforming File:Manga
-        galaxia 9.png|Greeting Eternal Sailor Moon at Galactica Palace |-|Artbook
-        art= C3e45f08698a252730e0a541a084989c.jpg|Art of Sailor Galaxia from the Materials
-        Collection B6991c6d0ec80b06992b7ff05e02a9b4.jpg|More from the Materials Collection
-        File:Artbook sailor galaxia.jpg|Art of Sailor Galaxia from Artbook V == Notable
-        Matchups == Victories: Losses: Inconclusive: ==References== {{Scroll box|content={{reflist|2}}}}
-        {{Discussions|Sailor-Galaxia-Manga|Sailor Galaxia (manga)}} Category:Characters
-        Category:Sailor Moon Category:Female Characters Category:Manga Characters
-        Category:Tyrants Category:Magical Girls Category:Energy Users Category:Soul
-        Users Category:Concept Users Category:Flight Users Category:Forcefield Users
-        Category:Immortals Category:Teleportation Users Category:Antagonists Category:Primary
-        Antagonists Category:Telekinesis Users Category:Leaders Category:Telepaths
-        Category:Evil Characters Category:Good Characters Category:Mind Users Category:Villains
-        Category:Transformation Users Category:Clairvoyance Users Category:Dream Users
-        Category:Matter Users Category:Aliens Category:Revived Characters Category:Resurrection
-        Users Category:Aura Users Category:Psychics Category:Enhanced Senses Users
-        Category:Space Users Category:Time Users Category:Stealth Masters Category:Geniuses
-        Category:Wise Characters Category:Magic Users Category:Sailor Senshi Category:Destruction
-        Users Category:Warlords Category:Illusionists Category:Stone Walls Category:Power
-        Bestowal Users Category:Statistics Amplification Users Category:Body Control
-        Users Category:Biology Users Category:Life Users Category:Status Effect Users
-        Category:Power Nullification Users Category:Light Users Category:Weather Users
-        Category:Void Users Category:Death Users Category:Precognition Users Category:Psychometry
-        Users Category:Tragic Characters Category:Creation Users Category:Reincarnation
-        Users Category:Empowerment Users Category:Regeneration Users Category:Self-Sustenance
-        Users Category:Durability Negation Users Category:Existence Erasure Users
-        Category:Element Users Category:Dimensional Travel Users Category:Cloth Users
-        Category:Chaos Users Category:Crystal Users Category:Bracelet Users Category:Adaptation
-        Users Category:Information Users Category:Non-Physical Interaction Users Category:Cosmic
-        Awareness Users Category:Reality Warpers Category:Abstract Entities Category:Acausal
-        Characters'
+      value: and complacency in the way things went (such as her plans to backstab
+        Chaos but was actually the one being manipulated herself). The Crystal of
+        Destruction only allows her, because she is willing to destroy anything to
+        get her way. If Galaxia ever loses faith in her mission and thinks something
+        is worth protecting, her own Crystal will destroy her.
       source_id: vsbattles-sailor-galaxia-anime
       provider_id: vsbattles
       authority: high
@@ -1642,36 +2454,7 @@ repair:
         away. Likely similar to Usagi who could sense Mamoru's intent to protect her
         despite being a cosmic distance away), Telepathy (Galaxia transmited images
         of the deaths of the Outer Senshi into Usagi's mind), Non-Physical Interaction
-        (Sailor Senshi attacks can affect spiritual entities), Resistance to Energy
-        Manipulation, Matter Manipulation, Petrification, Space Manipulation, Time
-        Manipulation, Soul Manipulation, Mind Manipulation, Absorption, Existence
-        Erasure and Power Nullification (As a Sailor Senshi, Galaxia has the same
-        stellar protection as the other Sailor Senshi who could survive within Queen
-        Metaria, Death Phantom and Pharaoh 90), Resistance to Poison (Sailor Senshi
-        like Chibiusa were unaffected by the poisonous gas used on Crystal Tokyo),
-        Resistance to Radiation (Sailor Senshi can survive on black holes without
-        danger), Resistance to Age Manipulation (Sailor Senshi Henshin turned Usagi
-        and Chibiusa back to their proper ages. Chibiusa's Sailor Crystal kept her
-        from aging for 900 years until she was ready to awaken as a Sailor Senshi),
-        Resistance to Light Manipulation and Holy Manipulation (Resisted the power
-        of the Holy Grail), Resistance to Forcefield Creation (Can ignore and walk
-        through barriers without effort) | Flight, Forcefield Creation (Sailor Senshi
-        can create barriers), Conceptual Stealing/Existence Erasure (Galaxia can steal
-        the star seeds of beings by pointing at them which can work on whole planets.
-        Chaos has a star seed, showing that they are conceptual in nature. Removing
-        a person's star seed erases them from existence and the star seed maintains
-        a person's presence across time for instance when Mamoru's star seed was destroyed,
-        his daughter Chibiusa disappeared.), Conceptual Destruction (can destroy normal
-        Star Seeds), Creation/Matter Manipulation/Mind Manipulation (After taking
-        a Star Seed, Galaxia can recreate the entities, changing their body or mind
-        to make them loyal to her), Mind Control (Galaxia can force people to obey
-        her), Spatial Manipulation (Galactica Inflation can create a distorted space
-        around her), Electricity Manipulation (Galactica Inflation creates lightning
-        around Galaxia), Cosmic Energy Projection (Can create a surge of cosmic energy
-        with Galactica Super String), Dream Manipulation (can enter into the dreams
-        of others to attack them there, even creating dreams of places they've never
-        seen), Passive Death Manipulation (Galaxia appearing on two planets caused
-        all life to end on them), Power Bestowal (Granted her Sailor Animamates
+        (Sailor Senshi attacks can affect spiritual entities)
       source_id: character-stats-profiles-sailor-galaxia-anime
       provider_id: character_stats_profiles
       authority: high
@@ -1720,12 +2503,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'If Galaxia ever finds something worth protecting, her own crystal will
-        betray her and kill her. Notable Attacks/Techniques: * Henshin: Galaxia can
-        use a henshin to transform into her Sailor Senshi form. This henshin releases
-        a sacred light and vast amounts of energy. It can be used to travel through
-        dimensions and can restore the self, including undoing magic on the body and
-        regenerating body and soul. * Planet Power'
+      value: her own crystal will betray her and kill her.
       source_id: character-stats-profiles-sailor-galaxia-anime
       provider_id: character_stats_profiles
       authority: high

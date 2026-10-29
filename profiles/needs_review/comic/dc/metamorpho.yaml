@@ -10,19 +10,9 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-04T17:17:51Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Metamorpho
   franchise: DC
@@ -73,42 +63,6 @@ sources:
   source_type: mediawiki
   title: Metamorpho
   url: https://character-stats-and-profiles.fandom.com/wiki/Metamorpho
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-metamorpho-dc
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Metamorpho DC
-  url: https://vsbattles.fandom.com/wiki/Metamorpho_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-metamorpho-dc
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Metamorpho DC
-  url: https://character-stats-and-profiles.fandom.com/wiki/Metamorpho_DC
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -308,13 +262,21 @@ power_scale:
     source_ids: []
     confidence: 0.0
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level+ (He transformed his hand into a giant hammer and slammed
+      it onto a tank0.1991934 Tons of TNT), Large Country level with Creation (He
+      created a star to help Superman escape from Lex Luthor's prisonSuperman (2025)236.09814
+      Teratons of TNT)
+    source_ids:
+    - vsbattles-metamorpho-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Relativistic+ (Flew fast enough alongside Superman to enter a hole before
+      it closesMach 747.13314)
+    source_ids:
+    - vsbattles-metamorpho-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -324,23 +286,153 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Small Building level+
+    source_ids:
+    - vsbattles-metamorpho-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Peak Human (Can keep up with other members of the Justice Gang in battle)
+    source_ids:
+    - vsbattles-metamorpho-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range, Several Meters via Powers
+    source_ids:
+    - vsbattles-metamorpho-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Gifted (He knew what chemical elements to use to make an artificial star)
+    source_ids:
+    - vsbattles-metamorpho-dc-comics
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - character-stats-profiles-metamorpho-dc-comics
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-body-control-can-turn-his-body-into-any-known-substancesupe
+  name: Body Control (Can turn his body into any known substanceSuperman (2025))
+  description: Body Control (Can turn his body into any known substanceSuperman (2025))
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight
+  name: Flight
+  description: Flight
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-light-manipulation-created-an-artificial-sun-resulting-in-a
+  name: Light Manipulation (Created an artificial sun resulting in a large light blast)
+  description: Light Manipulation (Created an artificial sun resulting in a large
+    light blast)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-acid-manipulation-threw-acid-onto-luthor-s-raptors
+  name: Acid Manipulation (Threw acid onto Luthor's raptors)
+  description: Acid Manipulation (Threw acid onto Luthor's raptors)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-metal-manipulation-turned-his-arm-into-a-steel-hammer
+  name: Metal Manipulation (Turned his arm into a steel hammer)
+  description: Metal Manipulation (Turned his arm into a steel hammer)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-additional-limbs-can-create-multiple-arms
+  name: Additional Limbs (Can create multiple arms)
+  description: Additional Limbs (Can create multiple arms)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-sand-manipulation-created-a-giant-sand-whirlwind
+  name: Sand Manipulation (Created a giant sand whirlwind)
+  description: Sand Manipulation (Created a giant sand whirlwind)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
@@ -356,19 +448,29 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: character-stats-profiles-metamorpho-dc-comics
+  secondary_disagreement_policy: warning_only
 profile_hash: f46df70e9db77e628aa21dacd0a43bf03d96732ee1a9a61c087d5a37071811d7
 repair:
-  attempted_at: '2026-10-05T12:27:27Z'
+  attempted_at: '2026-10-25T08:17:18Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
   - source_id: vsbattles-metamorpho-dc-comics
     url: https://vsbattles.fandom.com/wiki/Metamorpho_%28DC_Comics%29
@@ -378,13 +480,10 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Metamorpho (DC Universe)
     source_type: mediawiki
     revision_id: '9695349'
@@ -414,7 +513,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -429,13 +528,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-A}}, {{High 6-B}} with Creation'
-      source_id: vsbattles-metamorpho-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content='
+      value: 9-A, High 6-B with Creation
       source_id: vsbattles-metamorpho-dc-comics
       provider_id: vsbattles
       authority: high
@@ -474,32 +567,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-metamorpho-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Gifted (He knew what chemical elements to use to make an artificial star)
-      source_id: vsbattles-metamorpho-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable. ==Notable Matchups== Victories: Losses: Inconclusive:
-        ==References== {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= {{Reflist|}}}}
-        ==Statistics Values== {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        }} {{Discussions}} Category:Characters Category:Adults Category:Reformed Characters
-        Category:Good Characters Category:Male Characters Category:Science Fantasy
-        Characters Category:Science Fiction Characters Category:Justice Gang Category:Movie
-        Characters Category:Superheroes Category:Parents Category:Body Control Users
-        Category:Shapeshifters Category:Density Users Category:Matter Users Category:Statistics
-        Reduction Users Category:Power Nullification Users Category:Light Users Category:Energy
-        Users Category:Fire Users Category:Acid Users Category:Sand Users Category:Air
-        Users Category:Bodily Weaponry Users Category:Regeneration Users Category:Additional
-        Limbs Users Category:Flight Users Category:DC Universe Category:Hammer Users
-        Category:Justice Gang (DC Universe)'
       source_id: vsbattles-metamorpho-dc-comics
       provider_id: vsbattles
       authority: high
@@ -509,7 +578,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -526,7 +595,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
     - weaknesses
     normalized_page_title: Metamorpho (Canon, DC Universe)/Lesshe
     source_type: mediawiki
@@ -569,19 +637,13 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 6-B
-      source_id: character-stats-profiles-metamorpho-dc-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Body Control (Can turn his body
-        into any known substanceSuperman (2025)) *Flight *Light Manipulation (Created
-        an artificial sun resulting in a large light blast) *Acid Manipulation (Threw
-        acid onto Luthor''s raptors) *Metal Manipulation (Turned his arm into a steel
-        hammer) *Additional Limbs (Can create multiple arms) *Sand Manipulation (Created
-        a giant sand whirlwind)'
+      value: Superhuman Physical Characteristics, Body Control (Can turn his body
+        into any known substanceSuperman (2025)), Flight, Light Manipulation (Created
+        an artificial sun resulting in a large light blast), Acid Manipulation (Threw
+        acid onto Luthor's raptors), Metal Manipulation (Turned his arm into a steel
+        hammer), Additional Limbs (Can create multiple arms), Sand Manipulation (Created
+        a giant sand whirlwind)
       source_id: character-stats-profiles-metamorpho-dc-comics
       provider_id: character_stats_profiles
       authority: high
@@ -605,274 +667,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: He will easily comply if you threaten his son. == Statistics Values ==
-        == References == Category:Lesshe Category:Tier 6 Category:Tier 6-B Category:Superhuman
-        Physical Characteristics Users Category:Body Control Users Category:Flight
-        Users Category:Light Users Category:Acid Users Category:Metal Users Category:Additional
-        Limbs Users Category:Sand Users Category:Male Characters Category:Adults Category:Parents
-        Category:DC Universe Category:Movie Characters Category:Characters Category:Superheroes
-        Category:Heroes Category:Good Characters __FORCETOC__
+      value: He will easily comply if you threaten his son.
       source_id: character-stats-profiles-metamorpho-dc-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|metamorpho canon dc universe
-      lesshe|529282
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-metamorpho-dc
-    url: https://vsbattles.fandom.com/wiki/Metamorpho_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Metamorpho (DC Universe)
-    source_type: mediawiki
-    revision_id: '9695349'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 6599
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}}, {{High 6-B}} with Creation'
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content='
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level+ (He transformed his hand into a giant hammer and
-        slammed it onto a tank0.1991934 Tons of TNT), Large Country level with Creation
-        (He created a star to help Superman escape from Lex Luthor's prisonSuperman
-        (2025)236.09814 Teratons of TNT)
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Relativistic+ (Flew fast enough alongside Superman to enter a hole before
-        it closesMach 747.13314)
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building level+
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Peak Human (Can keep up with other members of the Justice Gang in battle)
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Several Meters via Powers
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Gifted (He knew what chemical elements to use to make an artificial star)
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable. ==Notable Matchups== Victories: Losses: Inconclusive:
-        ==References== {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= {{Reflist|}}}}
-        ==Statistics Values== {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        }} {{Discussions}} Category:Characters Category:Adults Category:Reformed Characters
-        Category:Good Characters Category:Male Characters Category:Science Fantasy
-        Characters Category:Science Fiction Characters Category:Justice Gang Category:Movie
-        Characters Category:Superheroes Category:Parents Category:Body Control Users
-        Category:Shapeshifters Category:Density Users Category:Matter Users Category:Statistics
-        Reduction Users Category:Power Nullification Users Category:Light Users Category:Energy
-        Users Category:Fire Users Category:Acid Users Category:Sand Users Category:Air
-        Users Category:Bodily Weaponry Users Category:Regeneration Users Category:Additional
-        Limbs Users Category:Flight Users Category:DC Universe Category:Hammer Users
-        Category:Justice Gang (DC Universe)'
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|metamorpho dc universe|9695349
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-metamorpho-dc
-    url: https://character-stats-and-profiles.fandom.com/wiki/Metamorpho_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Metamorpho (Canon, DC Universe)/Lesshe
-    source_type: mediawiki
-    revision_id: '529282'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4167
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Power and Stats
-    - Statistics Values
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 6-B
-      source_id: character-stats-profiles-metamorpho-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Body Control (Can turn his body
-        into any known substanceSuperman (2025)) *Flight *Light Manipulation (Created
-        an artificial sun resulting in a large light blast) *Acid Manipulation (Threw
-        acid onto Luthor''s raptors) *Metal Manipulation (Turned his arm into a steel
-        hammer) *Additional Limbs (Can create multiple arms) *Sand Manipulation (Created
-        a giant sand whirlwind)'
-      source_id: character-stats-profiles-metamorpho-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Country level (Created and artificial sun)
-      source_id: character-stats-profiles-metamorpho-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: High Hypersonic (Flew to Jarhanpur together with the Justice Gang)
-      source_id: character-stats-profiles-metamorpho-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Country level
-      source_id: character-stats-profiles-metamorpho-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: He will easily comply if you threaten his son. == Statistics Values ==
-        == References == Category:Lesshe Category:Tier 6 Category:Tier 6-B Category:Superhuman
-        Physical Characteristics Users Category:Body Control Users Category:Flight
-        Users Category:Light Users Category:Acid Users Category:Metal Users Category:Additional
-        Limbs Users Category:Sand Users Category:Male Characters Category:Adults Category:Parents
-        Category:DC Universe Category:Movie Characters Category:Characters Category:Superheroes
-        Category:Heroes Category:Good Characters __FORCETOC__
-      source_id: character-stats-profiles-metamorpho-dc
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -898,13 +694,10 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Metamorpho (DC Universe)
     source_type: mediawiki
     revision_id: '9695349'
@@ -934,7 +727,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -949,13 +742,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-A}}, {{High 6-B}} with Creation'
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content='
+      value: 9-A, High 6-B with Creation
       source_id: vsbattles-metamorpho-dc
       provider_id: vsbattles
       authority: high
@@ -994,32 +781,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Gifted (He knew what chemical elements to use to make an artificial star)
-      source_id: vsbattles-metamorpho-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable. ==Notable Matchups== Victories: Losses: Inconclusive:
-        ==References== {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= {{Reflist|}}}}
-        ==Statistics Values== {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        }} {{Discussions}} Category:Characters Category:Adults Category:Reformed Characters
-        Category:Good Characters Category:Male Characters Category:Science Fantasy
-        Characters Category:Science Fiction Characters Category:Justice Gang Category:Movie
-        Characters Category:Superheroes Category:Parents Category:Body Control Users
-        Category:Shapeshifters Category:Density Users Category:Matter Users Category:Statistics
-        Reduction Users Category:Power Nullification Users Category:Light Users Category:Energy
-        Users Category:Fire Users Category:Acid Users Category:Sand Users Category:Air
-        Users Category:Bodily Weaponry Users Category:Regeneration Users Category:Additional
-        Limbs Users Category:Flight Users Category:DC Universe Category:Hammer Users
-        Category:Justice Gang (DC Universe)'
       source_id: vsbattles-metamorpho-dc
       provider_id: vsbattles
       authority: high
@@ -1029,7 +792,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1046,7 +809,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
     - weaknesses
     normalized_page_title: Metamorpho (Canon, DC Universe)/Lesshe
     source_type: mediawiki
@@ -1089,19 +851,13 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 6-B
-      source_id: character-stats-profiles-metamorpho-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Body Control (Can turn his body
-        into any known substanceSuperman (2025)) *Flight *Light Manipulation (Created
-        an artificial sun resulting in a large light blast) *Acid Manipulation (Threw
-        acid onto Luthor''s raptors) *Metal Manipulation (Turned his arm into a steel
-        hammer) *Additional Limbs (Can create multiple arms) *Sand Manipulation (Created
-        a giant sand whirlwind)'
+      value: Superhuman Physical Characteristics, Body Control (Can turn his body
+        into any known substanceSuperman (2025)), Flight, Light Manipulation (Created
+        an artificial sun resulting in a large light blast), Acid Manipulation (Threw
+        acid onto Luthor's raptors), Metal Manipulation (Turned his arm into a steel
+        hammer), Additional Limbs (Can create multiple arms), Sand Manipulation (Created
+        a giant sand whirlwind)
       source_id: character-stats-profiles-metamorpho-dc
       provider_id: character_stats_profiles
       authority: high
@@ -1125,13 +881,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: He will easily comply if you threaten his son. == Statistics Values ==
-        == References == Category:Lesshe Category:Tier 6 Category:Tier 6-B Category:Superhuman
-        Physical Characteristics Users Category:Body Control Users Category:Flight
-        Users Category:Light Users Category:Acid Users Category:Metal Users Category:Additional
-        Limbs Users Category:Sand Users Category:Male Characters Category:Adults Category:Parents
-        Category:DC Universe Category:Movie Characters Category:Characters Category:Superheroes
-        Category:Heroes Category:Good Characters __FORCETOC__
+      value: He will easily comply if you threaten his son.
       source_id: character-stats-profiles-metamorpho-dc
       provider_id: character_stats_profiles
       authority: high
@@ -1157,39 +907,39 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
+    - intelligence
+    - range
     - speed
-    - standard_equipment
-    normalized_page_title: Prime Earth (DC Comics)
+    - stamina
+    - tier
+    normalized_page_title: Metamorpho (DC Universe)
     source_type: mediawiki
-    revision_id: '9674747'
+    revision_id: '9695349'
     fetch_status: fetched
     http_status: 200
-    content_length: 25810
+    content_length: 6599
     content_kind: api_json
     headings_detected:
     - Summary
-    - Calculations
-    - Characters
-    - A-C
-    - D-F
-    - G-I
-    - J-L
-    - M-O
-    - P-R
-    - S-U
-    - V-X
-    - Y-Z
-    - Weapons
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    - Statistics Values
     stat_labels_detected:
     - attack_potency
     - durability
+    - intelligence
     - keys
     - lifting_strength
+    - origin
+    - powers_and_abilities
     - range
     - speed
+    - stamina
     - standard_equipment
     - striking_strength
     - tier
+    - weaknesses
     extraction_failure_reason: ''
     rank: 115
     provider_id: vsbattles
@@ -1205,88 +955,55 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: durability
-      value: "* A vampire throws a taxi - 9-B (63.53 kilojoules) * Damian Wayne throws\
-        \ Flatline into a wall - 9-B (1,383.73 kilojoules) * Batman and Deathstroke\
-        \ survive an explosion - 9-B (1,807.49 kilojoules) * Talon dents a steel door\
-        \ - 9-B (1,927.8 kilojoules) * Batman tanks an RPG - 9-A (0.043 tons) * Batman\
-        \ endures being slammed into concrete - 9-A * Batman tanks being tackled through\
-        \ a wall - 9-A * Bane shatters steel - 9-A (0.0089 tons) * Deathstroke tanks\
-        \ an explosion - 9-A (0.0159 tons) * Jason Blood destroys a statue - 9-A (0.006\
-        \ tons) * Clayface smashes the ground - 9-A (0.02 tons) * Jason Blood blows\
-        \ up a wall - 9-A (0.013 tons) * Batman tanks the explosion of a bus - 9-A\
-        \ (0.062 tons) * Owlman survives his bombs exploding - 9-A (0.119 tons) *\
-        \ Batman tanks an explosion that destroys the top of a skyscraper - 9-A+ (0.204\
-        \ tons) * Deathstroke withstands having a submarine thrown onto him - 8-C\
-        \ (1.94 gigajoules) * Batman survives the explosion of a submarine - 8-C (0.36\
-        \ tons) * Crush throws Roundhouse - 8-C+ (1.6 tons) * Owlman's individual\
-        \ bomb yield - High 8-C (2.43 tons) * Crush destroys a metal object - High\
-        \ 8-C (3.5 tons) * Hawkman smashes the ground - 8-A (103.812 tons) * Hawkman\
-        \ makes a crater - Low 7-C (3.26 kilotons) * Sky Tyrant causes a shockwave\
-        \ - 7-C (11.90 kilotons) * Apollo destroys a meteor - 7-B+ (76.3 megatons)\
-        \ * Loma Shade blows up Cray aliens - Low 6-B+ (5.777 teratons) * Ultraman\
-        \ pushes the moon - Low 5-B (2.65 zettatons) * Brainiac survives his mothership\u2019\
-        s explosion - 5-B (348.3 zettatons) * Superman and Martian Manhunter stop\
-        \ Brainiac\u2019s mothership - 5-B (1.6 yottatons) * Superman destroys Bizzaro\
-        \ Moon - 5-A (8.34 yottatons) * Green Lanterns shield Mogo - 5-A (2 Ronnatons)\
-        \ * Mogo Lights Up a Dying Universe - 4-B (2747.966869 Foe)"
-      source_id: vsbattles-metamorpho-prime-earth
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: '* Rac Shade dodges bullets - Superhuman (26.643 m/s) * Captain Atom
-        flies to the Moon instanly - FTL (1.28c) * Krypto flies around Earth too fast
-        - FTL (3.74c) * Superman flies to the Sun on a average Thuseday - FTL (8.28c)
-        * Loma Shade flies to Mercury - FTL+ (15.77c) * Weakened Superman flies to
-        Venus - FTL+ (31.6885890438c) * Superman travels to the Sun to pipe down Luthor
-        - MFTL (165.670167282c) * Devastator throws Lobo into the Sun - MFTL (166.78c)
-        * Post-Flashpoint Superman flies to Pluto - MFTL (277.29c) * Superman travels
-        across 5 stars - MFTL+ (788405045.792c) * Superman and Jonathan Kent flies
-        accross the stars all the way to another galaxy - MFTL+ (26298168000000c)
-        * Superman flies accross tons of stars to another galaxy - MFTL+ (378431150000000c)
-        * Superman flies to the edge of the Universe - MFTL+ (1199998700000000c) *
-        Superman flies across galaxies in seconds - MFTL+ (73000000000000000c) * Val
-        Zod travel to the Edge of the Universe - MFTL+ (3155780200000000000000c) *
-        Supergirl types Quintillions of Kryptonian codes in a blink of an eye - MFTL+
-        (1.018413e21c) * Simon Baz, Jessica Cruz and Rami goes to the Edge of the
-        Universe - MFTL+ (1.2175e16c) * Superman process Zeta Beam data - MFTL+ (2.348291230195e+168c)
-        * Bizarro brawls with Kal El all the way to Pluto - MFTL+ (2706.46c) * Saint
-        Walker and Kyle Rayne travels to Oa - MFTL+ (6.428416e+30c) * Starfire flies
-        from Tamaran to Earth - MFTL+ (1314000.00841c) * Martian Manhunter reacts
-        in Plank Times - MFTL+ (1.1830829e+50c) * Reign flies from Argo City to Earth
-        - MFTL+ (27139475.2076c) * Power Girl and Simon Baz travel to Varva - MFTL+
-        (43800.07c) * Bleez and Rankorr travels from Ysmault to Earth quickly - MFTL+
-        (2685065.75659c) * Flash dodges a bullet within a femtosecond - MFTL+ (2749473.34c)
-        * Star Sapphire and White Lantern travel from Earth to Korugar in 3 hours
-        - MFTL+ (1.2436363892783377e+27c) * Star Sapphire travel from Oa to Earth
-        - MFTL+ (3.6733817e+30c) * Superman process a lot of data in seconds - MFTL+
-        (4.9593314e+17c) * Krypto flies from Krypton to Earth - MFTL+ (946076.97c)
-        * Green Lantern Squad flies to the Edge of the Universe - MFTL+ (2.5336851e+29c)
-        * Kyle Rayner and Hal Jordan travel to Mogo from Molta - MFTL+ (8.954181896063522e+28c)
-        * Ultraviolet Lantern John Steward flies quickly to Earth - MFTL+ (4099676720.26c)
-        * Hal Jordan flies from Hippocrates to Earth - MFTL+ (1.6789091472074223e+30c)
-        * John Steward, Hawkwoman, Killowog and a Lantern flies to Thanagar - MFTL+
-        (8.954181896063522e+28c)'
+    - field: tier
+      value: 9-A, High 6-B with Creation
       source_id: vsbattles-metamorpho-prime-earth
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: and
+      value: Small Building level+ (He transformed his hand into a giant hammer and
+        slammed it onto a tank0.1991934 Tons of TNT), Large Country level with Creation
+        (He created a star to help Superman escape from Lex Luthor's prisonSuperman
+        (2025)236.09814 Teratons of TNT)
       source_id: vsbattles-metamorpho-prime-earth
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: Monica-espinoza-motherbox-beautyshot.jpg|Mother Boxes|link=Mother Boxes
+    - field: speed
+      value: Relativistic+ (Flew fast enough alongside Superman to enter a hole before
+        it closesMach 747.13314)
+      source_id: vsbattles-metamorpho-prime-earth
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level+
+      source_id: vsbattles-metamorpho-prime-earth
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Peak Human (Can keep up with other members of the Justice Gang in battle)
+      source_id: vsbattles-metamorpho-prime-earth
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, Several Meters via Powers
+      source_id: vsbattles-metamorpho-prime-earth
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted (He knew what chemical elements to use to make an artificial star)
       source_id: vsbattles-metamorpho-prime-earth
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 55
+    variant_score: 25
     provider_priority: 120
     core_field_count: 3
     ability_count: 0
@@ -1294,7 +1011,7 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|prime earth dc comics|9674747
+    duplicate_key: vsbattles.fandom.com|metamorpho dc universe|9695349
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-metamorpho-prime-earth
@@ -1304,7 +1021,6 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
     - tier
     - weaknesses
@@ -1339,7 +1055,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1355,37 +1071,6 @@ repair:
     field_candidates:
     - field: tier
       value: High 1-A
-      source_id: character-stats-profiles-metamorpho-prime-earth
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Superhuman Physical Characteristics via Tenacious Anatomy (Type 2),
-        Enhanced Senses, Flight (Zatanna can fly), Magic (Was initially taught magic
-        by her father, was later taught magic further by her ex-boyfriend Nick Necro),
-        Cloth Manipulation (Can speak an incantation that makes her jacket and clothing
-        appear on her body), Paralysis Inducement, Plant Manipulation (Can use spells
-        in order to bind Batman in place with vines; Stopped Mrs Baker in her tracks
-        with a spell), Vehicular Mastery (Land Vehicles; Has shown to be capable of
-        driving a motorcycle and other modes of transportation), BFR, Mind Manipulation,
-        Glyph Creation (After projecting the image of herself into John Constantine''s
-        mind created a magical vortex which warped him to a completely different place),
-        Body Control (Can put herself in a death-like state which nullifies her pulse
-        and body heat), Memory Manipulation (States to be capable of making John Constantine
-        forget how to use her backwards magic), Teleportation (Can use her be gone
-        spell to teleport her somewhere else, she states this to be akin to materializing
-        in thin airJustice League Dark #4, and is even stated to be teleportingJustice
-        League Dark #8), Telekinesis (Can create invisible forces which she can use
-        offensivelyJustice League Dark #7), Reality Warping, Subjective Reality, Corrosion
-        Inducement (Her magic is said to be imposing her will on reality in order
-        to achieve a garnered effect she uses this to melt a vampireJustice League
-        Dark #7), Fire Manipulation (Is shown to be capable of creating flames with
-        her magicJustice League Dark #9), Portal Creation (Created a portal to Faust''s
-        TempleJustice League Dark #12), Damage Boost (Can strengthen the power of
-        her spells), Illusion Creation (Can create an illusionary armyJustice League
-        Dark #17 ), Summoning (Can summon The Nightmare NurseThe Phantom Stranger
-        Vol. 4 #8), Astral Projection (Shown here to be capable of projecting her
-        consciousness), }} |-|Cosmic Zatanna= {{#tag:tabber'
       source_id: character-stats-profiles-metamorpho-prime-earth
       provider_id: character_stats_profiles
       authority: high
@@ -1423,17 +1108,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: '*Cost of Magic: While being a powerful practioner of magic, Zatanna''s
-        magic often comes at a cost, although the specifics cost may depend on the
-        type of magic performed. **Ressurection Limitaton: Zatanna is incapable of
-        properly ressurecting people or animals without a cost, in which comes in
-        the form of internal damage and pain. Note: This page contains crucial information;
-        please refrain from any editing to ensure data integrity and accuracy. Unauthorized
-        modifications may result in unintended consequences and jeopardize the document''s
-        reliability. ==Explanations & Related Blog Posts== ==Gallery== *Character
-        Gallery: Zatanna Zatara (Prime Earth) ==Others== Notable Victories: Notable
-        Losses: Inconclusive Matches: ==References== {{scroll box|content={{Reflist|1}}}}
-        ==Categories'
+      value: 'Zatanna''s magic often comes at a cost, although the specifics cost
+        may depend on the type of magic performed., Ressurection Limitaton: Zatanna
+        is incapable of properly ressurecting people or animals without a cost, in
+        which comes in the form of internal damage and pain, please refrain from any
+        editing to ensure data integrity and accuracy. Unauthorized modifications
+        may result in unintended consequences and jeopardize the document''s reliability.'
       source_id: character-stats-profiles-metamorpho-prime-earth
       provider_id: character_stats_profiles
       authority: high
@@ -1443,13 +1123,373 @@ repair:
     variant_score: 55
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|zatanna zatara canon dc
       comics prime earth azmarin|326280
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-metamorpho-post-crisis
+    url: https://vsbattles.fandom.com/wiki/Metamorpho_%28Post-Crisis%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Clayface (Basil Karlo) (Post-Crisis)
+    source_type: mediawiki
+    revision_id: '9129490'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 17801
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 8-C, up to 5-A with Absorption
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Inorganic Physiology (Type 2; Similar
+        to Preston Payne, his blood is more akin to mineral virus while the rest of
+        his body is made of clayThe Outsiders Vol 4 #22, His biosystem contains almost
+        no trace of recognisable human biological materialBatman: Gotham Knights #70),
+        Self-Sustenance (Type 1 & 2; Came back offscreen from being launched into
+        space by Mary Marvel, Does not need nutrients to survive anymoreBatman: Shadow
+        of the Bat #88), Skilled Hand-to-Hand Combatant (Said to be a fierce hand-to-hand
+        combatantWho''s Who: The Definitive Directory of the DC Universe #5, was able
+        to outmatch Robin in a fight), Skilled Knife User (Has shown skill with a
+        knife to be able to make it stand on his fingertips without supportDetective
+        Comics Vol 1 #607 as well as implied to be a good knife throwerSecret Origins
+        Vol 2 #44), Social Influencing (Self-proclaimed as one of the greatest actors
+        of our time and able to play the roles of almost anyone, Was able to trick
+        Wonder Woman and Donna Troy when disguised as Superman and CheetahWonder Woman
+        Vol 2 #161Wonder Woman Vol 2 #160 as well as many others in his other disguises,
+        Manipulated Clayface IV into doing his bidding when he was part of the Mudpack),
+        Regeneration (At least High-Mid; Has quickly reconstituted his body from being
+        sliced in halfTitans Vol 2 #29 and being blown upBatman Confidential #21,
+        Likely Mid-High overtime; Was able to come back offscreen from having his
+        whole body be eaten by Poison Ivy''s plants), Body Control, Elasticity & Shapeshifting
+        (Able to morph or shift his body in about any way possible), Weapon Creation
+        (Has shown to be able to create weapons from nets and hooks to hammers and
+        chainsawsTitans Vol 2 #30), Density Manipulation & Elemental Intangibility
+        (Can control his density to make attacks pass through him or become extremely
+        hard), Size Manipulation (Able to grow in size to Type 0 normally at a moments
+        notice and shrink to Type 1, up to Type 1 by absorbing people into himself),
+        Duplication (Able to make a bunch of decoy people out of himself each able
+        to act on their own and with different personalitiesJoker''s Asylum II: Clayface),
+        Limited Earth Manipulation (Due to being mostly made out of clay), Stealth
+        Mastery & Camouflage (Able to disguise himself as parts of the ground to sneak
+        on the Riddler and Mary MarvelCountdown #42), Statistics Amplification, Power
+        Mimicry & Absorption (Due being partial made of smectites, he can absorb properties
+        at a greater rate than any other clay group, which was shown when he absorbed
+        other clay types into his body, the power of deep quartz into his body or
+        he absorbed the clay that made up Wonder Woman''s body, Absorbing people into
+        himself can increase his power and size), Poison Manipulation (Capable of
+        expunging material classified as toxic waste if he consumes sewageArkham Reborn
+        #2), Disease Manipulation, Biological Manipulation & Corrosion Inducement
+        (Similar to Preston Payne, with his Deadly Touch able to dissolve people into
+        protoplasm by secreting a unique enzyme with a touch, also able to corrode
+        through inorganic material such as dirt and stone as wellDetective Comics
+        Vol 1 Annual #2), Resistance to *Earth Manipulation (Able to be immune to
+        Geo-Force''s geokinesis due to being a force of nature unto himself) Same
+        Powers and Resistances as Matt Hagen, Preston Payne and Sondra Fuller due
+        to having their blood extracts injected into himBatman Vol 1 #550 Same powers
+        as before *Electricity Manipulation (Due to absorbing the properties of deep
+        quartz has gained to power of piezoelectricity which allows him the ability
+        to electrocute peopleDetective Comics Vol 1 #735) *Heat Manipulation (Can
+        send enough heat into the ground to fuse rubble together) *Fire Manipulation
+        (Able to shoot out blasts of fire that can harm Batman as well as ignite his
+        whole body with flames) Resistance to *Fire Manipulation (Shown to be unfazed
+        when completely set alight on fireBatman: Shadow of the Bat #75) *Electricity
+        Manipulation (Shrugged off being electrocuted) *Ice Manipulation (Was able
+        to quickly break of being frozen by Mr. Freeze) For more details and further
+        applications of Clayface''s powers, it is suggested to visit this blog.'
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Building level (Could overpower Robin before he even transformed, Significantly
+        stronger than Batman to where he admits that Basil is too powerful to take
+        on aloneBatman Vol 1 #568, knocked out Poison Ivy with just a single blow,
+        Restrained Roy Harper, Was able to rip open Mr. Freeze''s suit), up to Large
+        Planet level with Absorption (Absorbing things into himself can increase his
+        power, such as being able to battle Batman''s large mechs after absorbing
+        a lot of people into himselfBatman: Gotham After Midnight #3 or after absorbing
+        some miners and kids into himself could harm Geo-Force and significantly damage
+        MetamorphoThe Outsiders Vol 4 #21, After absorbing the Sacred Clay could damage
+        Wonder Woman, Shown to be able to harm a demotivated Supergirl offscreen).
+        Deadly Touch can bypass durability.'
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'At least Supersonic+, possibly Hypersonic+ (Can keep up with Batman
+        and and Stephanie BrownBatgirl Vol 3 #13)'
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Building level (Density control allows him to make himself soft enough
+        that people will pass through him or become hard enough that Batman and Poison
+        Ivy are unable to break it, Survived a hit from one of the Batwing''s missiles),
+        up to Large Planet level with Absorption (Able to tank hits from Batman''s
+        building size suit and crashing into buildings relatively unharmed after absorbing
+        a lot of people into himselfBatman: Gotham After Midnight #4, Survived being
+        crushed by Geo-Force after absorbing a bunch of people, Able to survive hits
+        from Supergirl although she most likely was holding back immenselySupergirl
+        Vol 5 #33Batman And Superman: World''s Finest #10)'
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (As his body is no longer human, he has not shown any signs
+        of tire or need to sleep as well as showing minimal pain from reconstituting
+        himself)
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: 'Extended melee range, Tens of meters with projectiles and from sheer
+        size from absorptionBatman Vol 1 #690'
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Optional
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted (A seasoned actor who proclaims himself as one of the greatest
+        of all time with decades of cinema experience and shows it with his disguises
+        of various heroes, villains and normal citizens that has shown to be able
+        to fool people such as Wonder Woman, Batgirl and Batman briefly. Master manipulator,
+        influencing even the very people that went to recruit him in the first place
+        as seen by his time in the Mud Pack and stated to be a crafty criminal tactician
+        as well)
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Extreme cold or heat is good at turning his body''s fluidity into solid,
+        allowing him to be temporarily subduedGotham City Sirens #24. Heat up to 1,000
+        degrees Celsius to his clay core undermines his basic cellular structure.
+        Sufficiently powerful sonics is able to disrupt his metabolismArkham Reborn
+        #3. Water can melt down his body structureDC Comics Presents: Batman. People
+        that he has absorbed is able to be removed through certain poisonous gases.
+        Crowbars are able to trigger PTSD within him, making him blind with rageGotham
+        City Sirens #20.'
+      source_id: vsbattles-metamorpho-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 30
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|clayface basil karlo post crisis|9129490
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-metamorpho-post-crisis
+    url: https://character-stats-and-profiles.fandom.com/wiki/Metamorpho_%28Post-Crisis%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Ui Tamaki (Canon)/ZeroTwo64
+    source_type: mediawiki
+    revision_id: '132258'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 21974
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 4-A, higher as a Doppel | At least 4-A
+      source_id: character-stats-profiles-metamorpho-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Magic, Magically Enhanced Physiology,
+        Enhanced Leap, Magic Detection (Can sense the presence of Witches nearby.
+        Due to her connection with Shitori Egumo, she is also able to sense the presence
+        of Kimochi nearby), Portal Creation (Mami is able to create portals to enter
+        a witch barrier, and Ui should have this power too), Immortality (Types 2,
+        6 and 7), Telepathy, Transformation, Self-Puppetry (Can contain and preserve
+        her soul into a soul gem), Acausality (Is one of the four girls who isn''t
+        recognised by Ultimate Madoka), Suffering Absorption (Can transfer all the
+        magical girls'' grief to herself), Magical Energy Manipulation (Can collect
+        everyone''s magical power and make a huge energy sphere with it), Danmaku,
+        Platform Manipulation (Can create platforms under her enemies and release
+        magical energy from them. Ui can also use platforms to travel quickly), Time
+        Travel w/ her cellphone, Flower Manipulation and Background Manipulation (During
+        her transformation), Curse Inducement w/ her Connect, Negation w/ her Connect
+        (Can negate damage cut on enemies), Healing and Targeting w/ her "The Stories
+        (Rumors) Also Know" Memoria, Statistics Amplification [Attack] w/ her "Because
+        She Shines Too Brightly" Memoria, Damage Amplification w/ her "What Kind of
+        Person Will I Become?" Memoria., Resistance to the followings: Magic, Status
+        Effect Inducement w/ her "Because the World is Filled With Wishes" and "Treasure
+        of This One Moment" Memoria, Emotional Manipulation w/ her "Determination
+        for the Future" Memoria, Life Absorption, Mind Manipulation and Soul Manipulation.
+        As a Doppel, she has the following'
+      source_id: character-stats-profiles-metamorpho-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multi-Solar System Level (Comparable to Touka Satomi and Nemu Hiiragi),
+        higher as a Doppel (Her Doppel increases Ui's strenght and powers) | At least
+        Multi-Solar System Level (Showed to be much stronger than Yachiyo's team,
+        Momoko Trio, Kanagi and the Puella Magi Holy Quintet. Was believed by Magius
+        to be powerful enough to fight Walpurgisnacht, whom is so strong that Magius
+        admit they can't defeat her together; Homura herself, who has witnessed Walpurgisnacht's
+        power several time, said that Eve is as strong as Walpurgisnacht)
+      source_id: character-stats-profiles-metamorpho-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Relativistic+ (Magical girls can consistently dodge multiple lasers used
+        by Wraiths) | Relativistic+ (Can easily keep up with Yachiyo's team, Momoko
+        Trio, Kanagi and the Puella Magi Holy Quintet)
+      source_id: character-stats-profiles-metamorpho-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multi-Solar System Level (Comparable to Touka Satomi and Nemu Hiiragi),
+        higher as a Doppel | At least Multi-Solar System Level (Completely unharmed
+        by the combined forces of Yachiyo's team, Momoko Trio, Kanagi and the Puella
+        Magi Holy Quintet)
+      source_id: character-stats-profiles-metamorpho-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "She instantly dies if her soul gem is destroyed or is at least 100 meters\
+        \ away from her body. The power to absorb magical girls' grief is too much\
+        \ for Ui and this caused her soul gem to taint really quickly. Ui's Doppel\
+        \ cannot move and dodge attacks, its sword and shield are purely decorative\
+        \ and can't be used as weapons, Eve's jewelries are something like a barrier,\
+        \ the big gem on her necklace is the core jewel that\u2019s spreading energy\
+        \ across other gems. By breaking this gem, Eve would not be able to keep her\
+        \ body stable and dismiss."
+      source_id: character-stats-profiles-metamorpho-post-crisis
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: false
+    duplicate_key: character-stats-and-profiles.fandom.com|ui tamaki canon zerotwo64|132258
     retryable: false
     exception_class: ''
   needs_human_source_choice: false

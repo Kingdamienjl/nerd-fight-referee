@@ -1,0 +1,46 @@
+Frag-7: explicit-none root-cause fix + name-only technique screen
+
+Root cause lived in field extraction (harvester): a labeled field's
+value ran to the next recognized alias label, so a terminal
+"Weaknesses: None notable" swallowed the following Notable
+Attacks/Techniques list, Notable Matchups and categories into the
+weaknesses value; the itemizer then filed the character's own attack
+names as weaknesses (gate 50j: the-immortal x2, 'Out Orbital Punch').
+
+Harvester (auto_profile_harvester):
+- truncate labeled-field values at the first section boundary
+  (==heading== or a Notable Attacks/Techniques / Notable Matchups
+  label) in parse_field_line and both inline extractors.
+- explicit_none_value(): corpus-enumerated explicit-none family
+  (none / none notable / none known / none whatsoever / n-a / not
+  applicable / no weaknesses / no known weaknesses / nothing
+  notable, incl. 'as of' tails, parenthetical glosses, hyphenated
+  'none-notable'). extract_vsbattles_fields drops an explicit-none
+  weaknesses field outright; first_useful_section_text reuses the
+  helper.
+
+Merge backstops (auto_repair):
+- recover_profile_evidence drops a scoped explicit-none weaknesses
+  field before itemization (boilerplate reason
+  explicit_none_weaknesses) -- covers every field producer.
+- placeholder_item_reasons drops explicit-none pieces (reason
+  explicit_none), incl. short-tail forms stored in the corpus
+  ('None notable as of Season 2', 'None notable {'): 598 raw / 78
+  distinct stored weakness items match, all hand-sampled genuine.
+- fragment_item_reasons gains name_only_technique_in_weaknesses
+  (weaknesses only): a Title-Case move-name form (2-5 tokens, every
+  token capitalized or a small connector) ending in an action noun
+  (Punch/Strike/Kick/Blast/Beam/Slam/Smash/Chop/Slash/Barrage/
+  Uppercut/Headbutt/Suplex/Slap/Rush) with no limitation semantics.
+  Weapon-noun names are deliberately excluded from the marker set
+  (calibration: 58 raw / 36 distinct, e.g. Archangel Blades, Spirit
+  Bomb, Break Cannon -- a bare weapon name in weaknesses
+  conventionally means 'can be killed by it'); lowercase and
+  possessive phrases (energy blasts, Cyclops's optical blasts)
+  survive as controls.
+
+Tests: guard + harvester suites 185/185 (was 165; +20 frag-7:
+explicit-none family + boundary truncation at extraction, verbatim
+50j regressions + controls in the guard suite, repair-path pair).
+Full discover 491 tests at 13F + 11E -- failure set byte-identical
+to the frag-6 baseline band. py_compile clean.

@@ -135,7 +135,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Sirius_Black
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -173,34 +173,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-sirius-black-harry-potter
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Sirius Black Harry Potter
-  url: https://character-stats-and-profiles.fandom.com/wiki/Sirius_Black_Harry_Potter
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-sirius-black-harry-potter
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Sirius Black (Harry Potter)
-  url: https://vsbattles.fandom.com/wiki/Sirius_Black_%28Harry_Potter%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-sirius-black-harry-potter
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -269,7 +241,7 @@ sources:
   - weaknesses
 power_scale:
   tier:
-    text: '{{9-B}} physically, {{8-C}} with magic | At least {{9-A}}, likely {{8-C}}'
+    text: physically, with magic
     source_ids:
     - vsbattles-sirius-black-harry-potter
     confidence: 0.6
@@ -278,9 +250,7 @@ power_scale:
     text: Wall level physically (Rammed Antonin Dolohov with his shoulder. Harmed
       Lucius Malfoy with his punches), Building level with magic (Matched Antonin
       Dolohov in a duel, who defeated Mad-Eye Moody and Remus Lupin. Fought equally
-      against Bellatrix Lestrange, and only died due to his recklessness) | At least
-      Small Building level, likely Building level (Was able to fight Remus Lupin in
-      his werewolf form)
+      against Bellatrix Lestrange, and only died due to his recklessness)
     source_ids:
     - vsbattles-sirius-black-harry-potter
     confidence: 0.6
@@ -292,34 +262,30 @@ power_scale:
       \ blinding flash of sunlight used to defend against the Devil's Snare. Black\
       \ should know this spell, as it\u2019s implied to be taught in basic herbology\
       \ to defend against the Devil's Snare and advanced charms class, and first years\
-      \ like Hermione have showcased this spell) | Superhuman (German shepherds can\
-      \ run up to 30 mph)"
+      \ like Hermione have showcased this spell)"
     source_ids:
     - vsbattles-sirius-black-harry-potter
     confidence: 0.6
     notes: auto_repair source extraction
   lifting_strength:
-    text: Athletic Human, Class 5 with magic | Unknown
-    source_ids: &id003
+    text: Athletic Human, Class 5 with magic
+    source_ids: &id002
     - mediawiki-4039861
     confidence: 0.95
   striking_strength:
-    text: Wall level, higher with spells | At least Small Building level, likely Building
-      level
-    source_ids: *id003
+    text: Wall level, higher with spells
+    source_ids: *id002
     confidence: 0.95
   durability:
     text: Wall level physically, Large Building level, likely higher with magical
       shielding (Should be comparable or even superior to Harry. Duelled Bellatrix
-      Lestrange) | At least Small Building level, likely Building level
+      Lestrange)
     source_ids:
     - vsbattles-sirius-black-harry-potter
     confidence: 0.6
     notes: auto_repair source extraction
   stamina:
-    text: Athletic | Superhuman (Managed to escape Azkaban via swimming across the
-      cold waters of the entire North Sea after being mentally tortured and physically
-      exhausted in his 12-year imprisonment. Survived on rats while hiding in a cave)
+    text: Athletic
     source_ids:
     - vsbattles-sirius-black-harry-potter
     confidence: 0.6
@@ -349,7 +315,7 @@ claims:
   section: power_scale
   axis: other
   text: '{{9-B}} physically, {{8-C}} with magic | At least {{9-A}}, likely {{8-C}}'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-4039861
   decisive: false
   status: unverified
@@ -363,7 +329,7 @@ claims:
     a duel, who defeated Mad-Eye Moody and Remus Lupin. Fought equally against Bellatrix
     Lestrange, and only died due to his recklessness) | At least Small Building level,
     likely Building level (Was able to fight Remus Lupin in his werewolf form)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -378,7 +344,7 @@ claims:
     \ spell, as it\u2019s implied to be taught in basic herbology to defend against\
     \ the Devil's Snare and advanced charms class, and first years like Hermione have\
     \ showcased this spell) | Superhuman (German shepherds can run up to 30 mph)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -387,7 +353,7 @@ claims:
   section: power_scale
   axis: other
   text: Athletic Human, Class 5 with magic | Unknown
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -397,7 +363,7 @@ claims:
   axis: other
   text: Wall level, higher with spells | At least Small Building level, likely Building
     level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -408,7 +374,7 @@ claims:
   text: Wall level physically, Large Building level, likely higher with magical shielding
     (Should be comparable or even superior to Harry. Duelled Bellatrix Lestrange)
     | At least Small Building level, likely Building level
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -419,7 +385,7 @@ claims:
   text: Athletic | Superhuman (Managed to escape Azkaban via swimming across the cold
     waters of the entire North Sea after being mentally tortured and physically exhausted
     in his 12-year imprisonment. Survived on rats while hiding in a cave)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -428,7 +394,7 @@ claims:
   section: power_scale
   axis: range
   text: Standard Melee Range, Extended Melee Range with spells
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -437,7 +403,7 @@ claims:
   section: equipment
   axis: equipment
   text: Wand
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -453,7 +419,7 @@ claims:
     rubbish". Achieved good grades despite not studying hard for exams and spent a
     lot of time playing pranks on others and ending up in detention. He was able to
     escape Azkaban, which is the most secure prison in the wizarding world
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -476,7 +442,7 @@ claims:
     Users Category:Deconstruction Users Category:Curse Users Category:Status Effect
     Users Category:Creation Users Category:BFR Users Category:Healers Category:Vehicular
     Masters Category:Wizarding World Category:Tragic Characters Category:Wand Users'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -500,7 +466,7 @@ claims:
     of the Dementors in Azkaban for 12 years and never lost his sanity), Possibly
     Flight (Should have learnt how to fly a broomstick, though it is never shown in
     the books)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -509,7 +475,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id005
+  source_ids: &id004
   - vsbattles-sirius-black-harry-potter
   source_claim_ids: []
   confidence: 0.85
@@ -525,7 +491,7 @@ abilities:
 - id: powers-and-abilities-magic
   name: Magic
   description: Magic
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -540,7 +506,7 @@ abilities:
 - id: powers-and-abilities-transformation-can-turn-into-a-dog
   name: Transformation (Can turn into a dog)
   description: Transformation (Can turn into a dog)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -555,7 +521,7 @@ abilities:
 - id: powers-and-abilities-paralysis-inducement
   name: Paralysis Inducement
   description: Paralysis Inducement
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -570,7 +536,7 @@ abilities:
 - id: powers-and-abilities-healing
   name: Healing
   description: Healing
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -585,7 +551,7 @@ abilities:
 - id: powers-and-abilities-teleportation
   name: Teleportation
   description: Teleportation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -602,7 +568,7 @@ abilities:
 - id: powers-and-abilities-transmutation
   name: Transmutation
   description: Transmutation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -617,7 +583,7 @@ abilities:
 - id: powers-and-abilities-summoning
   name: Summoning
   description: Summoning
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -634,7 +600,7 @@ abilities:
 - id: powers-and-abilities-disarming
   name: Disarming
   description: Disarming
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -649,7 +615,7 @@ abilities:
 - id: powers-and-abilities-can-summon-a-patronus
   name: Can summon a patronus
   description: Can summon a patronus
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -666,7 +632,7 @@ abilities:
 - id: powers-and-abilities-forcefield-creation
   name: Forcefield Creation
   description: Forcefield Creation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -681,7 +647,7 @@ abilities:
 - id: powers-and-abilities-telekinesis
   name: Telekinesis
   description: Telekinesis
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -696,7 +662,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation
   name: Fire Manipulation
   description: Fire Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -713,7 +679,7 @@ abilities:
 - id: powers-and-abilities-heat-manipulation
   name: Heat Manipulation
   description: Heat Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -730,7 +696,7 @@ abilities:
 - id: powers-and-abilities-water-manipulation
   name: Water Manipulation
   description: Water Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -745,7 +711,7 @@ abilities:
 - id: powers-and-abilities-explosion-manipulation
   name: Explosion Manipulation
   description: Explosion Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -760,7 +726,7 @@ abilities:
 - id: powers-and-abilities-pain-manipulation
   name: Pain Manipulation
   description: Pain Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -775,7 +741,7 @@ abilities:
 - id: powers-and-abilities-light-manipulation
   name: Light Manipulation
   description: Light Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -790,7 +756,7 @@ abilities:
 - id: powers-and-abilities-biological-manipulation
   name: Biological Manipulation
   description: Biological Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -805,7 +771,7 @@ abilities:
 - id: powers-and-abilities-size-manipulation
   name: Size Manipulation
   description: Size Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -820,7 +786,7 @@ abilities:
 - id: powers-and-abilities-memory-manipulation
   name: Memory Manipulation
   description: Memory Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -835,7 +801,7 @@ abilities:
 - id: powers-and-abilities-sound-manipulation
   name: Sound Manipulation
   description: Sound Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -851,7 +817,7 @@ abilities:
 - id: powers-and-abilities-holy-manipulation
   name: Holy Manipulation
   description: Holy Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -866,7 +832,7 @@ abilities:
 - id: powers-and-abilities-earth-manipulation
   name: Earth Manipulation
   description: Earth Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -881,7 +847,7 @@ abilities:
 - id: powers-and-abilities-deconstruction
   name: Deconstruction
   description: Deconstruction
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -896,7 +862,7 @@ abilities:
 - id: powers-and-abilities-limited-creation
   name: Limited Creation
   description: Limited Creation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -911,7 +877,7 @@ abilities:
 - id: powers-and-abilities-curse-manipulation
   name: Curse Manipulation
   description: Curse Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -926,7 +892,7 @@ abilities:
 - id: powers-and-abilities-status-effect-inducement
   name: Status Effect Inducement
   description: Status Effect Inducement
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -941,7 +907,7 @@ abilities:
 - id: powers-and-abilities-bfr-with-vanishing-spell
   name: BFR with Vanishing Spell
   description: BFR with Vanishing Spell
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -958,7 +924,7 @@ abilities:
     of everyone in Hogwarts)
   description: Homonculous Charm (Created the Marauders Map which can track the location
     of everyone in Hogwarts)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -973,7 +939,7 @@ abilities:
 - id: powers-and-abilities-can-communicate-with-other-animals
   name: Can communicate with other animals
   description: Can communicate with other animals
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -988,7 +954,7 @@ abilities:
 - id: powers-and-abilities-possibly-telepathy-conversed-with-remus-lupin-through-eye-c
   name: Possibly Telepathy (Conversed with Remus Lupin through eye contact)
   description: Possibly Telepathy (Conversed with Remus Lupin through eye contact)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1005,7 +971,7 @@ abilities:
 - id: powers-and-abilities-possibly
   name: Possibly
   description: Possibly
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1026,7 +992,7 @@ abilities:
     (Resisted the effects of the Dementors in Azkaban for 12 years and never lost
     his sanity), Possibly Flight (Should have learnt how to fly a broomstick, though
     it is never shown in the books)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1042,7 +1008,7 @@ equipment:
 - id: standard-equipment-wand
   name: Wand
   description: Wand
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1065,7 +1031,7 @@ resistances:
     (Resisted the effects of the Dementors in Azkaban for 12 years and never lost
     his sanity), Possibly Flight (Should have learnt how to fly a broomstick, though
     it is never shown in the books)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1082,7 +1048,7 @@ weaknesses:
 - id: weaknesses-extremely-reckless
   name: Extremely reckless
   description: Extremely reckless
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-sirius-black-harry-potter
   source_claim_ids: []
   confidence: 0.85
@@ -1101,7 +1067,7 @@ weaknesses:
   description: immature and even downright irresponsible. Risked getting caught by
     the Ministry of Magic merely because he was bored in his house. Arrogant and too
     casual in combat
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1118,7 +1084,7 @@ weaknesses:
     led to his demise. Has an explosive temper
   description: such as when he taunted Bellatrix Lestrange to do better which ultimately
     led to his demise. Has an explosive temper
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1146,7 +1112,7 @@ weaknesses:
     Users Category:Curse Users Category:Status Effect Users Category:Creation Users
     Category:BFR Users Category:Healers Category:Vehicular Masters Category:Wizarding
     World Category:Tragic Characters Category:Wand Users'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1201,7 +1167,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: 1c9336a117ee02da328f570000d9dfbced416aa8dacab9bc02a63fc15f8e98fd
 repair:
-  attempted_at: '2026-10-10T17:48:13Z'
+  attempted_at: '2026-10-21T21:36:15Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -1218,7 +1184,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Sirius_Black
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -1260,7 +1226,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -1273,7 +1239,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically, {{8-C}} with magic | At least {{9-A}}, likely {{8-C}}'
+      value: physically, with magic | At least , likely
       source_id: mediawiki-4039861
       provider_id: vsbattles
       authority: high
@@ -1373,9 +1339,9 @@ repair:
         Lestrange to do better which ultimately led to his demise. Has an explosive
         temper, as demonstrated when he shredded the portrait of the Fat Lady when
         he was not allowed access into the Gryffindor dormitory. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions}} Category:Characters Category:Male
-        Characters Category:Humans Category:Dogs Category:Magic Users Category:Telekinesis
-        Users Category:Teleportation Users Category:Transformation Users Category:Transmutation
+        Victories: Losses: Inconclusive: Category:Characters Category:Male Characters
+        Category:Humans Category:Dogs Category:Magic Users Category:Telekinesis Users
+        Category:Teleportation Users Category:Transformation Users Category:Transmutation
         Users Category:Paralysis Users Category:Summoners Category:Water Users Category:Fire
         Users Category:Temperature Users Category:Explosion Users Category:Pain Users
         Category:Light Users Category:Biology Users Category:Size Users Category:Memory
@@ -1400,11 +1366,177 @@ repair:
     duplicate_key: vsbattles.fandom.com|sirius black|9508600
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-sirius-black-harry-potter
+    url: https://character-stats-and-profiles.fandom.com/wiki/Sirius_Black_%28Harry_Potter%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: Harry Potter (Canon, Movies/Books)/Mat Content World
+    source_type: mediawiki
+    revision_id: '532099'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 14130
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Movies
+    - Books
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least 9-B physically, 9-B, up to 9-A to 8-C, at most 8-A with wands
+        and magic, 8-C with the Sword of Gryffindor, can bypass durability with certain
+        spells
+      source_id: character-stats-profiles-sirius-black-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '* Superhuman Physical Characteristics * Social Influencing (Charisma
+        - Had quickly became friends with Rony and Hermione, and becoming a non-oficial
+        family member of the former, even though many had doubts about him, he ended
+        up managing to convince many to join the D.A and was quickly appreciated by
+        his peers. Leadership - Successfully leaded the D.A, and teached many difficult
+        spells to the students, such as Expecto Patronum. Reputation - As the Boy
+        Who Lived, which made him be appreciated by many even thought not even being
+        know yet, and that made the likes of Draco Malfoy, a blood purist, ignores
+        the fact he is a half-blood and tries to be his friend, but made a poor impression
+        on him and failed to do.) * Stealth Mastery (Sneaked across the Hogwarts''
+        hallways and offices without being detected.) * Natural Athletism (It was
+        shown that he''s a natural seeker, which was responsible for him becoming
+        the youngest seeker of the century.) * Indomitable Will Power (Resisted the
+        Imperiatus Curse) * Resistance to ** Slight Pain (Managed to play Quidditch
+        with a broken arm.) ** Mind Manipulation (Resisted the Imperiatus Curse.)
+        ** Telepathy (Via Occlumency) ** Death Manipulation (Survived an Avada Kedavra)
+        * Fire Manipulation (Can create and manipulate fire with some spells) * Pain
+        Manipulation (Via Crucio) * Flight (Via broom) * Mind Manipulation (Via Imperio)
+        * Teleportation (Via Apparation) * Size Manipulation (via Reducto) * Light
+        Manipulation (Via Lumos) * Water Manipulation (Via Aguamenti)'
+      source_id: character-stats-profiles-sirius-black-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Wall Level (Can damage the ones who can harm him. Struck a bludger
+        with a swing of a baseball bat with enough force to send it flying one armed
+        when he was eleven, which would generate this much energy.Sorcerer's Stone(2001)
+        Threw a rock with enough force to damage a werewolf.Prisoner Of Azkaban(2004)
+        Stunned Nagini by hitting her with a brick, who could bust him through a wall,
+        generating this much energy in the process.Deathly Hallows P1(2010)), Wall
+        Level to Wall Level+ (Sent Severus Snape flying back with enough force to
+        collapse an old bed. Blasted Draco Malfoy with enough force to sent him flying
+        back.Chamber Of Secrets(2002) He was able to match Lucius Malfoy and his fellow
+        death eater alongside Sirius Black and won, with him blasting the former off
+        his feet three years after the match, sending him flying multiples meters
+        back. Would have killed Draco Malfoy if Severus Snape didn't intervened.Half-Blood
+        Prince(2009) Broke a faucet. Knocked Bellatrix off her feets.Order of the
+        Phoenix(2007)), up to at least Small Building Level (Some spells such as Confrigo
+        can create large fireballs.Deathly Hallows P2(2011) Made a ceiling collapse.
+        ) to Building Level (Should be comparable to the likes of Hermione Granger,
+        GInny Weasley and Luna Lovegood, who as a team were described as equal to
+        Bellatrix Lestrange in combat, who is able to create a shockwave which generated
+        this much energy. Should be comparable to Peter Pettigrew in terms of magic,
+        who blew up a street, generating this much energy.), at most Multi-City Block
+        (Keep up with Voldemort, which was able to destroy the shield of Hogwarts,
+        which would require this much energy.) with wands and magic, up to Building
+        Level with The Sword of Gryffindor (Stabbed through the basilisk's inner mouth
+        with it.), Can bypass durability with certain spells
+      source_id: character-stats-profiles-sirius-black-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Athletic Human travel Speed (Is a seeker, which means he is athletic,
+        supported by the fact that he is stated to be a fast person.Sorcerer's stone
+        (1997) Gave chase to Bellatrix Lestrange, who is an adult women and a death
+        eater.Can keep up with Cedric while on the run. Was chased by Snatchers, a
+        group of adult death eaters as he ran in decent speed.), with at least Subsonic
+        combat and reaction speed (Clambered into a troll's club, and then dodges
+        its' swipes. Grabbed the Sword of Gryffindor and stabbed through the basilisk's
+        inner mouth before she could attack him. Dodged the swings of a whooping willow.
+        Able to dodge offensive spells from Draco Malfoy. Sent offensive spells on
+        Draco Malfoy before he could react. Got into cover in the time it takes two
+        wizards to take their wands. Hopped onto his broom when its flies by him.
+        Able to trade and block spells from Voldemort. As a seeker, he had gave the
+        win to Gryffindor multiple times, which would require for him to keep up with
+        the other players in brooms and spot the golden snitch, all of which are way
+        faster than the human eye. Sent a spell on Severus Snape before the same could
+        react. Used a disarming spell on Lucius Malfoy before he could react, who
+        is an adult wizard. After apparating in front of a bus, he could react and
+        move aside to not get run over. Sent spells before Death Eaters could react.),
+        up to Subsonic with broom, Infinite speed with Apparation
+      source_id: character-stats-profiles-sirius-black-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Wall Level (Had been tackled through a wall, which would takes
+        this level of energy. Was smacked by a Whooping Willow, who could do serious
+        damage to a car. Had been smacked by a dragon tail,Goblet Of Fire(2005) which
+        had previously broken rock. Had took a stomp on the face by Draco Malfoy,
+        only having a broken nose. Had been tackled into the stairs by Quirrel, an
+        adult men while he was eleven. had been unharmed from being blasted off his
+        feets by a spell of Draco Malfoy, assuming he flung back at least five meters,
+        that means he took at least this much energy. Had been knocked back by spells
+        from Bellatrix Lestrange and Severus Snape. Took blows from Voldemort. Flied
+        through rubles while apparating with Voldemort and is fine later.)
+      source_id: character-stats-profiles-sirius-black-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|harry potter canon movies
+      books mat content world|532099
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-sirius-black-harry-potter
     url: https://vsbattles.fandom.com/wiki/Sirius_Black_Harry_Potter
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields: &id008
     - attack_potency
     - durability
     - intelligence
@@ -1446,7 +1578,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -1457,7 +1589,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically, {{8-C}} with magic | At least {{9-A}}, likely {{8-C}}'
+      value: physically, with magic | At least , likely
       source_id: vsbattles-sirius-black-harry-potter
       provider_id: vsbattles
       authority: high
@@ -1557,9 +1689,9 @@ repair:
         Lestrange to do better which ultimately led to his demise. Has an explosive
         temper, as demonstrated when he shredded the portrait of the Fat Lady when
         he was not allowed access into the Gryffindor dormitory. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions}} Category:Characters Category:Male
-        Characters Category:Humans Category:Dogs Category:Magic Users Category:Telekinesis
-        Users Category:Teleportation Users Category:Transformation Users Category:Transmutation
+        Victories: Losses: Inconclusive: Category:Characters Category:Male Characters
+        Category:Humans Category:Dogs Category:Magic Users Category:Telekinesis Users
+        Category:Teleportation Users Category:Transformation Users Category:Transmutation
         Users Category:Paralysis Users Category:Summoners Category:Water Users Category:Fire
         Users Category:Temperature Users Category:Explosion Users Category:Pain Users
         Category:Light Users Category:Biology Users Category:Size Users Category:Memory
@@ -1644,7 +1776,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base= * Superhuman Physical Characteristics * Social Influencing (Charisma
+      value: '* Superhuman Physical Characteristics * Social Influencing (Charisma
         - Had quickly became friends with Rony and Hermione, and becoming a non-oficial
         family member of the former, even though many had doubts about him, he ended
         up managing to convince many to join the D.A and was quickly appreciated by
@@ -1653,17 +1785,17 @@ repair:
         Who Lived, which made him be appreciated by many even thought not even being
         know yet, and that made the likes of Draco Malfoy, a blood purist, ignores
         the fact he is a half-blood and tries to be his friend, but made a poor impression
-        on him and failed to do.) * Stealth Mastery (Sneaked across the Hogwarts'
+        on him and failed to do.) * Stealth Mastery (Sneaked across the Hogwarts''
         hallways and offices without being detected.) * Natural Athletism (It was
-        shown that he's a natural seeker, which was responsible for him becoming the
-        youngest seeker of the century.) * Indomitable Will Power (Resisted the Imperiatus
-        Curse) * Resistance to ** Slight Pain (Managed to play Quidditch with a broken
-        arm.) ** Mind Manipulation (Resisted the Imperiatus Curse.) ** Telepathy (Via
-        Occlumency) ** Death Manipulation (Survived an Avada Kedavra) |-|Equipment/Magic=
+        shown that he''s a natural seeker, which was responsible for him becoming
+        the youngest seeker of the century.) * Indomitable Will Power (Resisted the
+        Imperiatus Curse) * Resistance to ** Slight Pain (Managed to play Quidditch
+        with a broken arm.) ** Mind Manipulation (Resisted the Imperiatus Curse.)
+        ** Telepathy (Via Occlumency) ** Death Manipulation (Survived an Avada Kedavra)
         * Fire Manipulation (Can create and manipulate fire with some spells) * Pain
         Manipulation (Via Crucio) * Flight (Via broom) * Mind Manipulation (Via Imperio)
         * Teleportation (Via Apparation) * Size Manipulation (via Reducto) * Light
-        Manipulation (Via Lumos) * Water Manipulation (Via Aguamenti)
+        Manipulation (Via Lumos) * Water Manipulation (Via Aguamenti)'
       source_id: character-stats-profiles-sirius-black-harry-potter
       provider_id: character_stats_profiles
       authority: high
@@ -1754,7 +1886,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Sirius_Black_%28Harry_Potter%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id010
     - attack_potency
     - durability
     - intelligence
@@ -1796,7 +1928,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id011
     - attack_potency
     - speed
     - durability
@@ -1807,7 +1939,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically, {{8-C}} with magic | At least {{9-A}}, likely {{8-C}}'
+      value: physically, with magic | At least , likely
       source_id: vsbattles-sirius-black-harry-potter
       provider_id: vsbattles
       authority: high
@@ -1907,9 +2039,9 @@ repair:
         Lestrange to do better which ultimately led to his demise. Has an explosive
         temper, as demonstrated when he shredded the portrait of the Fat Lady when
         he was not allowed access into the Gryffindor dormitory. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions}} Category:Characters Category:Male
-        Characters Category:Humans Category:Dogs Category:Magic Users Category:Telekinesis
-        Users Category:Teleportation Users Category:Transformation Users Category:Transmutation
+        Victories: Losses: Inconclusive: Category:Characters Category:Male Characters
+        Category:Humans Category:Dogs Category:Magic Users Category:Telekinesis Users
+        Category:Teleportation Users Category:Transformation Users Category:Transmutation
         Users Category:Paralysis Users Category:Summoners Category:Water Users Category:Fire
         Users Category:Temperature Users Category:Explosion Users Category:Pain Users
         Category:Light Users Category:Biology Users Category:Size Users Category:Memory
@@ -1932,172 +2064,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|sirius black|9508600
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-sirius-black-harry-potter
-    url: https://character-stats-and-profiles.fandom.com/wiki/Sirius_Black_%28Harry_Potter%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    normalized_page_title: Harry Potter (Canon, Movies/Books)/Mat Content World
-    source_type: mediawiki
-    revision_id: '532099'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 14130
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Movies
-    - Books
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least 9-B physically, 9-B, up to 9-A to 8-C, at most 8-A with wands
-        and magic, 8-C with the Sword of Gryffindor, can bypass durability with certain
-        spells
-      source_id: character-stats-profiles-sirius-black-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base= * Superhuman Physical Characteristics * Social Influencing (Charisma
-        - Had quickly became friends with Rony and Hermione, and becoming a non-oficial
-        family member of the former, even though many had doubts about him, he ended
-        up managing to convince many to join the D.A and was quickly appreciated by
-        his peers. Leadership - Successfully leaded the D.A, and teached many difficult
-        spells to the students, such as Expecto Patronum. Reputation - As the Boy
-        Who Lived, which made him be appreciated by many even thought not even being
-        know yet, and that made the likes of Draco Malfoy, a blood purist, ignores
-        the fact he is a half-blood and tries to be his friend, but made a poor impression
-        on him and failed to do.) * Stealth Mastery (Sneaked across the Hogwarts'
-        hallways and offices without being detected.) * Natural Athletism (It was
-        shown that he's a natural seeker, which was responsible for him becoming the
-        youngest seeker of the century.) * Indomitable Will Power (Resisted the Imperiatus
-        Curse) * Resistance to ** Slight Pain (Managed to play Quidditch with a broken
-        arm.) ** Mind Manipulation (Resisted the Imperiatus Curse.) ** Telepathy (Via
-        Occlumency) ** Death Manipulation (Survived an Avada Kedavra) |-|Equipment/Magic=
-        * Fire Manipulation (Can create and manipulate fire with some spells) * Pain
-        Manipulation (Via Crucio) * Flight (Via broom) * Mind Manipulation (Via Imperio)
-        * Teleportation (Via Apparation) * Size Manipulation (via Reducto) * Light
-        Manipulation (Via Lumos) * Water Manipulation (Via Aguamenti)
-      source_id: character-stats-profiles-sirius-black-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Wall Level (Can damage the ones who can harm him. Struck a bludger
-        with a swing of a baseball bat with enough force to send it flying one armed
-        when he was eleven, which would generate this much energy.Sorcerer's Stone(2001)
-        Threw a rock with enough force to damage a werewolf.Prisoner Of Azkaban(2004)
-        Stunned Nagini by hitting her with a brick, who could bust him through a wall,
-        generating this much energy in the process.Deathly Hallows P1(2010)), Wall
-        Level to Wall Level+ (Sent Severus Snape flying back with enough force to
-        collapse an old bed. Blasted Draco Malfoy with enough force to sent him flying
-        back.Chamber Of Secrets(2002) He was able to match Lucius Malfoy and his fellow
-        death eater alongside Sirius Black and won, with him blasting the former off
-        his feet three years after the match, sending him flying multiples meters
-        back. Would have killed Draco Malfoy if Severus Snape didn't intervened.Half-Blood
-        Prince(2009) Broke a faucet. Knocked Bellatrix off her feets.Order of the
-        Phoenix(2007)), up to at least Small Building Level (Some spells such as Confrigo
-        can create large fireballs.Deathly Hallows P2(2011) Made a ceiling collapse.
-        ) to Building Level (Should be comparable to the likes of Hermione Granger,
-        GInny Weasley and Luna Lovegood, who as a team were described as equal to
-        Bellatrix Lestrange in combat, who is able to create a shockwave which generated
-        this much energy. Should be comparable to Peter Pettigrew in terms of magic,
-        who blew up a street, generating this much energy.), at most Multi-City Block
-        (Keep up with Voldemort, which was able to destroy the shield of Hogwarts,
-        which would require this much energy.) with wands and magic, up to Building
-        Level with The Sword of Gryffindor (Stabbed through the basilisk's inner mouth
-        with it.), Can bypass durability with certain spells
-      source_id: character-stats-profiles-sirius-black-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Athletic Human travel Speed (Is a seeker, which means he is athletic,
-        supported by the fact that he is stated to be a fast person.Sorcerer's stone
-        (1997) Gave chase to Bellatrix Lestrange, who is an adult women and a death
-        eater.Can keep up with Cedric while on the run. Was chased by Snatchers, a
-        group of adult death eaters as he ran in decent speed.), with at least Subsonic
-        combat and reaction speed (Clambered into a troll's club, and then dodges
-        its' swipes. Grabbed the Sword of Gryffindor and stabbed through the basilisk's
-        inner mouth before she could attack him. Dodged the swings of a whooping willow.
-        Able to dodge offensive spells from Draco Malfoy. Sent offensive spells on
-        Draco Malfoy before he could react. Got into cover in the time it takes two
-        wizards to take their wands. Hopped onto his broom when its flies by him.
-        Able to trade and block spells from Voldemort. As a seeker, he had gave the
-        win to Gryffindor multiple times, which would require for him to keep up with
-        the other players in brooms and spot the golden snitch, all of which are way
-        faster than the human eye. Sent a spell on Severus Snape before the same could
-        react. Used a disarming spell on Lucius Malfoy before he could react, who
-        is an adult wizard. After apparating in front of a bus, he could react and
-        move aside to not get run over. Sent spells before Death Eaters could react.),
-        up to Subsonic with broom, Infinite speed with Apparation
-      source_id: character-stats-profiles-sirius-black-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Wall Level (Had been tackled through a wall, which would takes
-        this level of energy. Was smacked by a Whooping Willow, who could do serious
-        damage to a car. Had been smacked by a dragon tail,Goblet Of Fire(2005) which
-        had previously broken rock. Had took a stomp on the face by Draco Malfoy,
-        only having a broken nose. Had been tackled into the stairs by Quirrel, an
-        adult men while he was eleven. had been unharmed from being blasted off his
-        feets by a spell of Draco Malfoy, assuming he flung back at least five meters,
-        that means he took at least this much energy. Had been knocked back by spells
-        from Bellatrix Lestrange and Severus Snape. Took blows from Voldemort. Flied
-        through rubles while apparating with Voldemort and is fine later.)
-      source_id: character-stats-profiles-sirius-black-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|harry potter canon movies
-      books mat content world|532099
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-sirius-black
@@ -2160,7 +2126,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base= * Superhuman Physical Characteristics * Social Influencing (Charisma
+      value: '* Superhuman Physical Characteristics * Social Influencing (Charisma
         - Had quickly became friends with Rony and Hermione, and becoming a non-oficial
         family member of the former, even though many had doubts about him, he ended
         up managing to convince many to join the D.A and was quickly appreciated by
@@ -2169,17 +2135,17 @@ repair:
         Who Lived, which made him be appreciated by many even thought not even being
         know yet, and that made the likes of Draco Malfoy, a blood purist, ignores
         the fact he is a half-blood and tries to be his friend, but made a poor impression
-        on him and failed to do.) * Stealth Mastery (Sneaked across the Hogwarts'
+        on him and failed to do.) * Stealth Mastery (Sneaked across the Hogwarts''
         hallways and offices without being detected.) * Natural Athletism (It was
-        shown that he's a natural seeker, which was responsible for him becoming the
-        youngest seeker of the century.) * Indomitable Will Power (Resisted the Imperiatus
-        Curse) * Resistance to ** Slight Pain (Managed to play Quidditch with a broken
-        arm.) ** Mind Manipulation (Resisted the Imperiatus Curse.) ** Telepathy (Via
-        Occlumency) ** Death Manipulation (Survived an Avada Kedavra) |-|Equipment/Magic=
+        shown that he''s a natural seeker, which was responsible for him becoming
+        the youngest seeker of the century.) * Indomitable Will Power (Resisted the
+        Imperiatus Curse) * Resistance to ** Slight Pain (Managed to play Quidditch
+        with a broken arm.) ** Mind Manipulation (Resisted the Imperiatus Curse.)
+        ** Telepathy (Via Occlumency) ** Death Manipulation (Survived an Avada Kedavra)
         * Fire Manipulation (Can create and manipulate fire with some spells) * Pain
         Manipulation (Via Crucio) * Flight (Via broom) * Mind Manipulation (Via Imperio)
         * Teleportation (Via Apparation) * Size Manipulation (via Reducto) * Light
-        Manipulation (Via Lumos) * Water Manipulation (Via Aguamenti)
+        Manipulation (Via Lumos) * Water Manipulation (Via Aguamenti)'
       source_id: character-stats-profiles-sirius-black
       provider_id: character_stats_profiles
       authority: high
@@ -2270,7 +2236,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Sirius_Black_%28tv_movie%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id013
+    extracted_fields: &id012
     - attack_potency
     - durability
     - intelligence
@@ -2312,7 +2278,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id014
+    allowed_fields: &id013
     - tier
     - attack_potency
     - speed
@@ -2325,7 +2291,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically, {{8-C}} with magic | At least {{9-A}}, likely {{8-C}}'
+      value: physically, with magic | At least , likely
       source_id: vsbattles-sirius-black-tv-movie
       provider_id: vsbattles
       authority: high
@@ -2425,9 +2391,9 @@ repair:
         Lestrange to do better which ultimately led to his demise. Has an explosive
         temper, as demonstrated when he shredded the portrait of the Fat Lady when
         he was not allowed access into the Gryffindor dormitory. ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{Discussions}} Category:Characters Category:Male
-        Characters Category:Humans Category:Dogs Category:Magic Users Category:Telekinesis
-        Users Category:Teleportation Users Category:Transformation Users Category:Transmutation
+        Victories: Losses: Inconclusive: Category:Characters Category:Male Characters
+        Category:Humans Category:Dogs Category:Magic Users Category:Telekinesis Users
+        Category:Teleportation Users Category:Transformation Users Category:Transmutation
         Users Category:Paralysis Users Category:Summoners Category:Water Users Category:Fire
         Users Category:Temperature Users Category:Explosion Users Category:Pain Users
         Category:Light Users Category:Biology Users Category:Size Users Category:Memory
@@ -2584,11 +2550,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Sirius_Black
     title: Sirius Black
     rank: 120
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2605,11 +2571,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Sirius_Black_Harry_Potter
     title: Sirius Black
     rank: 120
-    extracted_fields: *id009
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2626,11 +2592,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Sirius_Black_%28Harry_Potter%29
     title: Sirius Black
     rank: 120
-    extracted_fields: *id011
+    extracted_fields: *id010
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id011
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2647,11 +2613,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Sirius_Black_%28tv_movie%29
     title: Sirius Black
     rank: 120
-    extracted_fields: *id013
+    extracted_fields: *id012
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id014
+    allowed_fields: *id013
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2668,3 +2634,26 @@ repair:
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: true
+  scoped_key: Human
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T21:36:15Z'
+  key_origin: primary_form_position
+  axes:
+    tier:
+      method: positional
+      segments: 2
+    attack_potency:
+      method: positional
+      segments: 2
+    speed:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+    stamina:
+      method: positional
+      segments: 2
+  remaining_piped_axes: []

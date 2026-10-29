@@ -11,13 +11,15 @@ generation:
   generated_at: '2026-06-10T03:38:13Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id006
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:abilities
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Atreus (Game)
   franchise: God of War
@@ -178,42 +180,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-atreus-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Atreus Game
-  url: https://vsbattles.fandom.com/wiki/Atreus_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-atreus-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Atreus Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-atreus-game-god-of-war
   provider_id: vsbattles
   source_type: mediawiki
@@ -221,7 +187,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Atreus
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -267,7 +233,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_(Canon,_God_of_War)/TheFrostKnight
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -303,62 +269,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-atreus-game-god-of-war
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Atreus (Game) God of War
-  url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29_God_of_War
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-atreus-game-god-of-war
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Atreus (Game) God of War
-  url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29_God_of_War
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-atreus-game-god-of-war
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Atreus (Game) (God of War)
-  url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29_%28God_of_War%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-atreus-game-god-of-war
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Atreus (Game) (God of War)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29_%28God_of_War%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-atreus-game-game
   provider_id: vsbattles
   source_type: mediawiki
@@ -523,7 +433,7 @@ abilities:
 - id: powers-and-abilities-border
   name: '{{Border'
   description: '{{Border'
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-atreus-game-god-of-war
   source_claim_ids: []
   confidence: 0.85
@@ -539,7 +449,7 @@ abilities:
 - id: powers-and-abilities-scroll-no
   name: Scroll=No
   description: Scroll=No
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -554,7 +464,7 @@ abilities:
 - id: powers-and-abilities-visible-yes
   name: Visible=Yes
   description: Visible=Yes
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -569,7 +479,7 @@ abilities:
 - id: powers-and-abilities-padding-yes
   name: Padding=Yes
   description: Padding=Yes
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -584,7 +494,7 @@ abilities:
 - id: powers-and-abilities-content
   name: Content=
   description: Content=
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -599,7 +509,7 @@ abilities:
 - id: powers-and-abilities
   name: '-'
   description: '-'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -614,7 +524,7 @@ abilities:
 - id: powers-and-abilities-innate-border
   name: Innate={{Border
   description: Innate={{Border
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -629,7 +539,7 @@ abilities:
 - id: powers-and-abilities-scroll-yes
   name: Scroll=Yes
   description: Scroll=Yes
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -644,7 +554,7 @@ abilities:
 - id: powers-and-abilities-visible-no
   name: Visible=No
   description: Visible=No
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -660,7 +570,7 @@ abilities:
   name: Content= *Superhuman Physical Characteristics *Immortality (Types 1 & 3
   description: Content= *Superhuman Physical Characteristics *Immortality (Types 1
     & 3
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -675,7 +585,7 @@ abilities:
 - id: powers-and-abilities-via-his-godhood-and-regenerative-abilities-inherited-from-h
   name: via his Godhood and regenerative abilities inherited from his father
   description: via his Godhood and regenerative abilities inherited from his father
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -690,7 +600,7 @@ abilities:
 - id: powers-and-abilities-kratos-soul-magic-divine
   name: Kratos) *Soul Magic (Divine
   description: Kratos) *Soul Magic (Divine
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -706,7 +616,7 @@ abilities:
 - id: powers-and-abilities-can-also-transfer-souls-from-dying-beings-to-others
   name: Can also transfer souls from dying beings to others
   description: Can also transfer souls from dying beings to others
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -722,7 +632,7 @@ abilities:
 - id: powers-and-abilities-using-objects-as-a-proxy
   name: using objects as a proxy
   description: using objects as a proxy
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -737,7 +647,7 @@ abilities:
 - id: powers-and-abilities-as-he-does-when-he-transfers-fenrir-s-soul-into-garm-from-h
   name: as he does when he transfers Fenrir's soul into Garm from his knife
   description: as he does when he transfers Fenrir's soul into Garm from his knife
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -755,7 +665,7 @@ abilities:
     (Training & Battle
   description: after he previously stored sealed Fenrir's soul in it) *Accelerated
     Development (Training & Battle
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -771,7 +681,7 @@ abilities:
 - id: powers-and-abilities-physical-statistics-abilities
   name: Physical Statistics & Abilities
   description: Physical Statistics & Abilities
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -790,7 +700,7 @@ abilities:
     to his confidenceGod of War (2018). Had gone from struggling to deal with a human
     Reaver to being able to singlehandedly destroy an army of dark elves and fighting
     alone for more than day
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -807,7 +717,7 @@ abilities:
     three years of combat training in the woods
   description: to hurting Baldur after the latter lost his invulnerability. After
     merely three years of combat training in the woods
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -822,7 +732,7 @@ abilities:
 - id: powers-and-abilities-he-becomes-capable-of-holding-his-own-against-valkyries-in-
   name: he becomes capable of holding his own against Valkyries in combat
   description: he becomes capable of holding his own against Valkyries in combat
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -837,7 +747,7 @@ abilities:
 - id: powers-and-abilities-who-are-considered-among-the-most-elite-warriors-in-all-nin
   name: who are considered among the most elite warriors in all Nine Realms
   description: who are considered among the most elite warriors in all Nine Realms
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -856,7 +766,7 @@ abilities:
   description: 'and trusted enough to train Odin''s forces. This growth culminates
     in him being able to survive against and barely hurt Odin with his punchesGod
     of War: Ragnarok - The Realms at War) *Dimensional Travel (Via the Utangard'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -874,7 +784,7 @@ abilities:
   name: a plane of existence which allows him to travel to other Realms via his dreams
   description: a plane of existence which allows him to travel to other Realms via
     his dreams
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -892,7 +802,7 @@ abilities:
     other beings
   description: something he learns to do at will) *Enhanced Senses (Can sense the
     power of other beings
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -907,7 +817,7 @@ abilities:
 - id: powers-and-abilities-as-well-as-their-distresslost-pages-of-norse-myth-page-6-li
   name: 'as well as their distressLost Pages of Norse Myth- Page 6: Like Father'
   description: 'as well as their distressLost Pages of Norse Myth- Page 6: Like Father'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -925,7 +835,7 @@ abilities:
   description: 'Like Son) *Telepathy (Can sense and hear the thoughts and emotions
     of other beingsGod of War: Lore and Legends) *Automatic Translation (Is considered
     to have an extraordinary faculty for language by Mimir'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -945,7 +855,7 @@ abilities:
     writing that he shouldn't otherwise know through the overall interconnectedness
     of language. Immediately understood the language of the Dark Elves despite having
     never been in their realm before) *Regeneration (At least Mid-Low
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -967,7 +877,7 @@ abilities:
     \ (Can turn into various animals such as a wolf and a bearGod of War: Ragnar\xF6\
     k (2022) - Surviving Fimbulwinter) *Acrobatics (As shown hereGod of War Ragnarok\
     \ - The Runaway) *Time Slow (Via Eagle Eye techniques"
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -988,7 +898,7 @@ abilities:
     \ Rage Power & Berserk Mode (InheritedGod of War (2018) - Behind the Lock his\
     \ father's Spartan RageGod of War: Ragnar\xF6k (2022) - The Lost Sanctuary) *Limited\
     \ Precognition (Saw Thor attack their house at the end of Fimbulwinter"
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1003,7 +913,7 @@ abilities:
 - id: powers-and-abilities-signaling-the-coming-of-ragnar-k
   name: "signaling the coming of Ragnar\xF6k"
   description: "signaling the coming of Ragnar\xF6k"
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1020,7 +930,7 @@ abilities:
     (After learning of his Godhood and po
   description: in his dreamsGod of War (2018) - Secret Thor Ending) *Limited Weather
     Manipulation (After learning of his Godhood and powers
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1035,7 +945,7 @@ abilities:
 - id: powers-and-abilities-upon-meeting-with-sindri
   name: upon meeting with Sindri
   description: upon meeting with Sindri
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1052,7 +962,7 @@ abilities:
     \ Brok results in him snapping"
   description: "Atreus' anger and frustration at the latter\u2019s inability to make\
     \ up with Brok results in him snapping"
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1071,7 +981,7 @@ abilities:
     of War (2018) - Return to the Summit) *Forcefield Creation (Can create a shield
     of magical energy) *Resurrection (Can revive others with Resurrection Stones)
     }}
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1088,7 +998,7 @@ abilities:
 - id: powers-and-abilities
   name: '-'
   description: '-'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1104,7 +1014,7 @@ abilities:
   name: Archery and Summoning= *Statistics Amplification (Via Sharpshooter's Stare
   description: Archery and Summoning= *Statistics Amplification (Via Sharpshooter's
     Stare
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1123,7 +1033,7 @@ abilities:
     (Via Splintered Sigil
   description: which increases the power of each shot of his arrows) *Explosion Manipulation
     (Via Splintered Sigil
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1140,7 +1050,7 @@ abilities:
     Manipulation
   description: which allows Sigil Arrows to explode upon contact with their targets)
     *Electricity Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1156,7 +1066,7 @@ abilities:
 - id: powers-and-abilities-paralysis-inducement-status-effect-inducement-via-shock-arr
   name: Paralysis Inducement & Status Effect Inducement (Via Shock Arrows
   description: Paralysis Inducement & Status Effect Inducement (Via Shock Arrows
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1171,7 +1081,7 @@ abilities:
 - id: powers-and-abilities-which-can-briefly-paralyze-enemies
   name: which can briefly paralyze enemies
   description: which can briefly paralyze enemies
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1192,7 +1102,7 @@ weaknesses:
     his father's temper
   description: Retains his inability to use Resurrection stones on himself. Atreus
     inherited his father's temper
-  source_ids: &id005
+  source_ids: &id003
   - vsbattles-atreus-game-god-of-war
   source_claim_ids: []
   confidence: 0.85
@@ -1210,7 +1120,7 @@ weaknesses:
 - id: weaknesses-often-losing-control-of-himself-and-causing-him-to-act-recklessly
   name: often losing control of himself and causing him to act recklessly
   description: often losing control of himself and causing him to act recklessly
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1228,7 +1138,7 @@ weaknesses:
   description: though this weakness appears to have mostly faded after receiving a
     scolding from Kratos. Initially had trouble controlling his transformations due
     to them being triggered on extreme emotional impulses like rage or sadness
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1245,7 +1155,7 @@ weaknesses:
     godhood and the power he draws from it heavi
   description: but has since overcome them to maintain better control over his powers.
     His godhood and the power he draws from it heavily depend on his focus and self-belief
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1263,7 +1173,7 @@ weaknesses:
   description: going from being unable to perform physically exerting tasks at his
     lowest to fighting on large with powerful gods and immortal warriors when in the
     right mindset
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1280,7 +1190,7 @@ weaknesses:
     He lacks wisdom
   description: his focus for the game improves considerably. He doesn't know how to
     swim. He lacks wisdom
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1301,7 +1211,7 @@ weaknesses:
     \ arrows and can unleash large bursts of light to attack multiple opponents at\
     \ once. *\xDEruma (Nordic: \u16A6\u16B1\u16A2\u16D7\u16A8) Atreus fires arrows\
     \ imbued with the lightning of the dragon Hr\xE6zlyr"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1322,7 +1232,7 @@ weaknesses:
     his original target. *Wrath of the Wolf: Summons a spectral wolf that pounces
     on enemies three times. *Falcon''s Dive: Summons a cast of spectral falcons that
     dive into the ground. *Bitter Squirrel: Summons a spectral squirrel'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1339,7 +1249,7 @@ weaknesses:
 - id: weaknesses-ratat-skr
   name: "Ratat\xF6skr"
   description: "Ratat\xF6skr"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1359,7 +1269,7 @@ weaknesses:
     of Crows: Summons a murder of crows that swarms enemies. *Storm of the Elks: Summons
     a spectral elk that discharges destructive energy as it walks. ==Notable Matchups==
     Victories: *Thrud (God of War) Thrud''s Profile (Starting Distance was 10 meters'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1379,7 +1289,7 @@ weaknesses:
     Realization Atreus was used
   description: Battle took place in Midgard) *Baldur (God of War) Baldur's Profile
     (Post-Godhood Realization Atreus was used
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1394,7 +1304,7 @@ weaknesses:
 - id: weaknesses-battle-took-place-in-asgard
   name: Battle took place in Asgard
   description: Battle took place in Asgard
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1413,7 +1323,7 @@ weaknesses:
     \ Profile (Norse Mythology Kratos and Post-Godhood Realization Atreus fought together\
     \ against Ni\xF0h\xF6gg) *Riku (Kingdom Hearts) Riku's Profile (KH3 Riku and Ragnar\xF6\
     k Atreus were used. Match was decided on Tigger's KH2 Minigame"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1431,7 +1341,7 @@ weaknesses:
   description: 'Speed was equalized) Losses: *Thor (God of War) Thor''s Profile (Post-Godhood
     Realization Atreus was used) *Hercules (God of War) Hercules'' Profile (Battle
     took place at the Lake of Nine'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1448,7 +1358,7 @@ weaknesses:
     1-C Frisk was used
   description: Atreus' Shapeshifting is allowed) *Frisk (Undertale) Frisk's Profile
     (Low 1-C Frisk was used
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1463,7 +1373,7 @@ weaknesses:
 - id: weaknesses-speed-was-equalized
   name: speed was equalized
   description: speed was equalized
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1480,7 +1390,7 @@ weaknesses:
     Inconclusive: ==Gallery== atreus ragnorak'
   description: 'starting distance was 10 meters and Frisk had all of their optional
     equipment) Inconclusive: ==Gallery== atreus ragnorak.png'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1498,7 +1408,7 @@ weaknesses:
     \ {{Scroll box"
   description: "Atreus as he appears in the cover art of God of War: Ragnar\xF6k ==References==\
     \ {{Scroll box"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1513,7 +1423,7 @@ weaknesses:
 - id: weaknesses-content-reflist
   name: content={{Reflist
   description: content={{Reflist
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1542,7 +1452,7 @@ weaknesses:
     Reduction Users Category:Status Effect Users Category:Stealth Masters Category:Summoners
     Category:Sword Users Category:Teenagers Category:Telepaths Category:Video Game
     Characters Category:Weather Users
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1570,316 +1480,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id006
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: e442ae632fdab57f1e2d7e5877cca8fb5f089ad36690ff0f4c48b7234ed677ba
 repair:
-  attempted_at: '2026-06-19T11:22:21Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T17:11:46Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-atreus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29_God_of_War
+  - source_id: character-stats-profiles-atreus-game
+    url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_(Canon,_God_of_War)/TheFrostKnight
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Atreus
-    source_type: mediawiki
-    revision_id: '9542354'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 21630
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - Gallery
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: "{{1-C}}, higher with Shape-shifting Name: Atreus (Greek: \u1F08\u03C4\
-        \u03C1\u03B5\u03CD\u03C2), Loki (Nordic: \u16DA\u16DF\u16B2\u16C1), Bj\xF6\
-        rn (Bear form. The name means \"Bear\") Origin: God of War Gender: Male Age:\
-        \ 11 years old during GoW2018, 14 years old during Ragnar\xF6k Classification:\
-        \ God/Jottun/Human hybrid"
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Innate={{Border|Scroll=Yes|Visible=No|Content=\
-        \ *Superhuman Physical Characteristics *Immortality (Types 1 & 3; via his\
-        \ Godhood and regenerative abilities inherited from his father, Kratos) *Soul\
-        \ Magic (Divine; Can also transfer souls from dying beings to others, using\
-        \ objects as a proxy, as he does when he transfers Fenrir's soul into Garm\
-        \ from his knife, after he previously stored sealed Fenrir's soul in it) *Accelerated\
-        \ Development (Training & Battle, Physical Statistics & Abilities; Showcases\
-        \ a great growth in his physical capabilities proportional to his confidenceGod\
-        \ of War (2018). Had gone from struggling to deal with a human Reaver to being\
-        \ able to singlehandedly destroy an army of dark elves and fighting alone\
-        \ for more than day, to hurting Baldur after the latter lost his invulnerability.\
-        \ After merely three years of combat training in the woods, he becomes capable\
-        \ of holding his own against Valkyries in combat, who are considered among\
-        \ the most elite warriors in all Nine Realms, and trusted enough to train\
-        \ Odin's forces. This growth culminates in him being able to survive against\
-        \ and barely hurt Odin with his punchesGod of War: Ragnarok - The Realms at\
-        \ War) *Dimensional Travel (Via the Utangard, a plane of existence which allows\
-        \ him to travel to other Realms via his dreams, something he learns to do\
-        \ at will) *Enhanced Senses (Can sense the power of other beings, as well\
-        \ as their distressLost Pages of Norse Myth- Page 6: Like Father, Like Son)\
-        \ *Telepathy (Can sense and hear the thoughts and emotions of other beingsGod\
-        \ of War: Lore and Legends) *Automatic Translation (Is considered to have\
-        \ an extraordinary faculty for language by Mimir, one of the most knowledgeable\
-        \ beings in all the Realms. Can piece together writing that he shouldn't otherwise\
-        \ know through the overall interconnectedness of language. Immediately understood\
-        \ the language of the Dark Elves despite having never been in their realm\
-        \ before) *Regeneration (At least Mid-Low; Was able to regenerate from a knife\
-        \ stabbed into his shoulder by Baldur. Later heals from wounds inflicted on\
-        \ him in his Bear form by Kratos) *Shapeshifting (Can turn into various animals\
-        \ such as a wolf and a bearGod of War: Ragnar\xF6k (2022) - Surviving Fimbulwinter)\
-        \ *Acrobatics (As shown hereGod of War Ragnarok - The Runaway) *Time Slow\
-        \ (Via Eagle Eye techniques, where he slows down timeGod of War: Ragnarok\
-        \ - Skill Tree through various actions) *Stealth Mastery *Skilled Archer and\
-        \ Knife Wielder *Limited Rage Power & Berserk Mode (InheritedGod of War (2018)\
-        \ - Behind the Lock his father's Spartan RageGod of War: Ragnar\xF6k (2022)\
-        \ - The Lost Sanctuary) *Limited Precognition (Saw Thor attack their house\
-        \ at the end of Fimbulwinter, signaling the coming of Ragnar\xF6k, in his\
-        \ dreamsGod of War (2018) - Secret Thor Ending) *Limited Weather Manipulation\
-        \ (After learning of his Godhood and powers, upon meeting with Sindri, Atreus'\
-        \ anger and frustration at the latter\u2019s inability to make up with Brok\
-        \ results in him snapping, with every yell Atreus makes causing the sky to\
-        \ worsen bit by bitGod of War (2018) - Return to the Summit) *Forcefield Creation\
-        \ (Can create a shield of magical energy) *Resurrection (Can revive others\
-        \ with Resurrection Stones) }} |-|Archery and Summoning= *Statistics Amplification\
-        \ (Via Sharpshooter's Stare, which increases the power of each shot of his\
-        \ arrows) *Explosion Manipulation (Via Splintered Sigil, which allows Sigil\
-        \ Arrows to explode upon contact with their targets) *Electricity Manipulation,\
-        \ Paralysis Inducement & Status Effect Inducement (Via Shock Arrows, which\
-        \ can briefly paralyze enemies, inducing them to freeze in place for a short\
-        \ whileGod of War (2018) Prima Guide- Page 15) *Danmaku (Via Falling Sky,\
-        \ where he shoots an arrow into the sky that multiplies and rains down on\
-        \ his opponents) *Intangibility Negation (His arrows can negate the intangibility\
-        \ of Revenants, who can travel throughGod of War (2018) Official Strategy\
-        \ Guide by Prima- Page 72 sheets of realityGod of War Lore and Legends- Page\
-        \ 97, as well as that of Phantoms) *Summoning (Can summon various spectral\
-        \ animals, such as a pack of wolves, a flight of falcons, an ibex and a squirrel)\
-        \ *Status Effect Inducement (With Sigil and Sonic Arrows. His flight of falcons\
-        \ can apply the status effect of his equipped arrows) *Sound Manipulation\
-        \ (Via Sonic Arrows, which use sonic vibrationsGod of War: Ragnarok to take\
-        \ advantage of structural sensitivities of materials) *Light Elf Magic (Via\
-        \ Light Arrows) |-|Resistances= *The Light of Alfheim and Leviathan Axe (Gods\
-        \ can resist the innate attributes of the magic flowing through them. Was\
-        \ also capable of touching the Light of Alfheim, despite it being very painful\
-        \ for him and pulled Kratos out of the main shaft with his bare hands, with\
-        \ the Light of Alfheim being able to drive its victims insane before completely\
-        \ incinerating them and making them and their souls one with the Light. While\
-        \ in Bear Form, he"
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Complex Multiverse level (After realizing his godhood and training for
-        3 years, he is comparable to Valkyries like Hrist and Mist and can outright
-        fight against one of them on his ownGod of War: Ragnarok (2022)- The Summoning.
-        Even while younger and weaker, he could hurt Baldur after the latter lost
-        his invulnerability. Inferior to Heimdall, which would put him on par with
-        Ares), higher with Shapeshifting (Bit through Odin''s armGod of War: Ragnarok
-        (2022)- Unlocking the Mask in his wolf form. As Bjorn, he was able to hold
-        his own against Spartan Rage Kratos, but Kratos eventually prevailed and would''ve
-        killed him if Atreus didn''t transform back to normal in time. Charged at
-        Freya and threatened to kill her had Kratos not intervened. Easily tore apart
-        a Valkyrie in half)'
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (Can fight gods and monsters on par with Kratos in swiftness,
-        such as Garm, the Valkyries, Baldur, and Odin)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level (Withstood a direct blow from Baldur with only
-        his wind knocked out of him, and after getting his breath back, Atreus was
-        ready to fight against Baldur yet againGod of War (2018)- Jotunheim in Reach.
-        Somewhat comparable to, albeit much weaker than his father, Kratos. Survived
-        a vicious beating from Hrist and Mist without any lasting injuries. Able to
-        withstand beatdowns from the likes of Odin), higher with Shape-shifting (Even
-        stronger while in Wolf Form or as Bjorn, being on par with his father and
-        taking hits from Kratos' Spartan Rage)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Even before learning of his status as a god, Atreus singlehandedly
-        destroyed an army of dark elves and fought alone for close to a whole day
-        while protecting his father. His stamina further increased after realizing
-        his potential, being able to endure long fights and withstand falls from great
-        heights without suffering any noticeable fatigue)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Tens of Meters with Talon Bow and summons. Several
-        Kilometers with Weather Manipulation (His screams caused the skies to darken
-        and erupt into a violent storm. Inapplicable in combat), Low Multiversal via
-        the Utangard (Can use it to travel to any of the Nine Realms)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Talon Bow, Knife, Resurrection Stones, Ingrid (Freyr's sword)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Genius (Has the innate talent to understand written and spoken languages
-        he has never heard of or read before by tracing their connections, being able
-        to quickly learn how to read the Niflheim and Muspelheim languages when given
-        a cipher, how to read Greek when given a jug of wine from Sparta, and even
-        how to speak the dead language of the World Serpent despite only hearing it
-        a handful of times. He can also understand some animals, and even Mimir, the
-        smartest man in the nine realms, took note of Atreus' linguistic capabilities
-        for someone of his age. A capable fighter, assisting his father in his fights
-        using his bow skills and even taking on gods such as Baldur alongside Kratos)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Retains his inability to use Resurrection stones on himself. Atreus\
-        \ inherited his father's temper, often losing control of himself and causing\
-        \ him to act recklessly, though this weakness appears to have mostly faded\
-        \ after receiving a scolding from Kratos. Initially had trouble controlling\
-        \ his transformations due to them being triggered on extreme emotional impulses\
-        \ like rage or sadness, but has since overcome them to maintain better control\
-        \ over his powers. His godhood and the power he draws from it heavily depend\
-        \ on his focus and self-belief, going from being unable to perform physically\
-        \ exerting tasks at his lowest to fighting on large with powerful gods and\
-        \ immortal warriors when in the right mindset, his focus for the game improves\
-        \ considerably. He doesn't know how to swim. He lacks wisdom, which causes\
-        \ him to get tricked by Odin. Notable Attacks/Techniques: *Lj\xF6sa (Nordic:\
-        \ \u16DA\u16C3\u16DF\u16CA\u16A8) Atreus fires arrows infused with the light\
-        \ of Alfheim that can stun opponents more easily than his regular arrows and\
-        \ can unleash large bursts of light to attack multiple opponents at once.\
-        \ *\xDEruma (Nordic: \u16A6\u16B1\u16A2\u16D7\u16A8) Atreus fires arrows imbued\
-        \ with the lightning of the dragon Hr\xE6zlyr, paralyzing foes and sending\
-        \ arcs of lightning to hit opponents near his original target. *Wrath of the\
-        \ Wolf: Summons a spectral wolf that pounces on enemies three times. *Falcon's\
-        \ Dive: Summons a cast of spectral falcons that dive into the ground. *Bitter\
-        \ Squirrel: Summons a spectral squirrel, Ratat\xF6skr, to unearth consumables\
-        \ that can restore Atreus' health. *Boar Stampede: Summons a stampede of spectral\
-        \ boars that trample enemies in their path. *Murder of Crows: Summons a murder\
-        \ of crows that swarms enemies. *Storm of the Elks: Summons a spectral elk\
-        \ that discharges destructive energy as it walks. ==Notable Matchups== Victories:\
-        \ *Thrud (God of War) Thrud's Profile (Starting Distance was 10 meters; Battle\
-        \ took place in Midgard) *Baldur (God of War) Baldur's Profile (Post-Godhood\
-        \ Realization Atreus was used; Battle took place in Asgard; Baldur was bloodlusted)\
-        \ *Ni\xF0h\xF6gg (God of War) Ni\xF0h\xF6gg's Profile (Norse Mythology Kratos\
-        \ and Post-Godhood Realization Atreus fought together against Ni\xF0h\xF6\
-        gg) *Riku (Kingdom Hearts) Riku's Profile (KH3 Riku and Ragnar\xF6k Atreus\
-        \ were used. Match was decided on Tigger's KH2 Minigame; Speed was equalized)\
-        \ Losses: *Thor (God of War) Thor's Profile (Post-Godhood Realization Atreus\
-        \ was used) *Hercules (God of War) Hercules' Profile (Battle took place at\
-        \ the Lake of Nine; Atreus' Shapeshifting is allowed) *Frisk (Undertale) Frisk's\
-        \ Profile (Low 1-C Frisk was used, speed was equalized, starting distance\
-        \ was 10 meters and Frisk had all of their optional equipment) Inconclusive:\
-        \ ==Gallery== atreus ragnorak.png|Atreus as he appears in the cover art of\
-        \ God of War: Ragnar\xF6k ==References== {{Scroll box|content={{Reflist|2}}}}\
-        \ {{Discussions}} Category:Characters Category:God of War Category:Berserkers\
-        \ Category:Bow Users Category:Concept Users Category:Deconstruction Users\
-        \ Category:Demigods Category:Electricity Users Category:Enhanced Senses Users\
-        \ Category:Explosion Users Category:Fantasy Characters Category:Forcefield\
-        \ Users Category:Game Bosses Category:Game Characters Category:Giants Category:Gods\
-        \ Category:Good Characters Category:Heroes Category:Hunters Category:Hybrids\
-        \ Category:Immortals Category:Kids Category:Knife Users Category:Light Users\
-        \ Category:Madness Users Category:Magic Users Category:Male Characters Category:Mind\
-        \ Users Category:Norse Gods Category:Paralysis Users Category:Playable Characters\
-        \ Category:Precognition Users Category:Probability Users Category:Protagonists\
-        \ Category:Rage Users Category:Regeneration Users Category:Resurrection Users\
-        \ Category:Rune Users Category:Shapeshifters Category:Soul Users Category:Sound\
-        \ Users Category:Statistics Reduction Users Category:Status Effect Users Category:Stealth\
-        \ Masters Category:Summoners Category:Sword Users Category:Teenagers Category:Telepaths\
-        \ Category:Video Game Characters Category:Weather Users"
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|atreus|9542354
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-atreus-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29_God_of_War
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -1902,6 +1523,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1915,7 +1537,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1926,27 +1548,25 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: "2-C, higher with Transformations Name: Atreus, Loki Origin: God of War\
-        \ (2018) Gender: Male Age: 11 during God of War (2018), 13-14 during God of\
-        \ War: Ragnarok Classification: Half-J\xF6tunn, Demi-God"
-      source_id: character-stats-profiles-atreus-game-god-of-war
+      value: 2-C, higher with Transformations
+      source_id: character-stats-profiles-atreus-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base= *Superhuman Physical Characteristics *Longevity *Acrobatics (Is
-        a skilled climber. Capable of performing flips during combos) *Weapon Mastery
-        (Is a skilled archer) *Regeneration (Mid-Low) (Instantly healed a stab wound
-        from Baldur. Regenerated from the wounds Kratos left on him during their fight.)
-        *Telepathy (Can hear and feel animals' thoughts/emotions) *Precognition (Foretold
-        of Thor coming his and Kratos' home years prior to his actual arrival in his
-        dream) *Weather Manipulation and Necromancy (The world mourns his death by
-        causing a red storm and summoning undead monsters such as Draugr and Hel-Walkers)
-        *Transformation and Shapeshifting (Atreus' god ability allows him to transform
+      value: '*Superhuman Physical Characteristics *Longevity *Acrobatics (Is a skilled
+        climber. Capable of performing flips during combos) *Weapon Mastery (Is a
+        skilled archer) *Regeneration (Mid-Low) (Instantly healed a stab wound from
+        Baldur. Regenerated from the wounds Kratos left on him during their fight.)
+        *Telepathy (Can hear and feel animals'' thoughts/emotions) *Precognition (Foretold
+        of Thor coming his and Kratos'' home years prior to his actual arrival in
+        his dream) *Weather Manipulation and Necromancy (The world mourns his death
+        by causing a red storm and summoning undead monsters such as Draugr and Hel-Walkers)
+        *Transformation and Shapeshifting (Atreus'' god ability allows him to transform
         into animals such as a bear and wolf) *Rage Power (Atreus is implied to have
-        his own Spartan Rage. However, it's never fully shown as Atreus passes out
+        his own Spartan Rage. However, it''s never fully shown as Atreus passes out
         due to his sickness before he can even use it.) *Forcefield Creation (Can
-        activate a magical barrier from Sindri and Brok's gear) *Soul Manipulation
+        activate a magical barrier from Sindri and Brok''s gear) *Soul Manipulation
         (Atreus can take souls and transfer them into soulless beings or inanimate
         objects such as marbles and his knife) *Dimensional Travel (Is capable of
         traveling to different realms by thinking of the place he wants to go) *Spatial
@@ -1954,15 +1574,15 @@ repair:
         of slowing down time such as Eagle Eye and Sharpshooter Stare) *Summoning
         (Can summon various spectral animals to aid him in combat) **Energy Manipulation
         with Storm of the Elks (Storm of the Elks summons a deer that discharges energy)
-        **Fire Manipulation and Ice Manipulation with Bitter Squirrel (Ratatoskr's
-        Bitter aspect can enter enemies and either freeze or burn them) |-|Arrows=
-        *Statistics Amplification (Can charge the power of his arrows. Amplifies the
-        power of three of his arrow shots with Sharpshooter Stare) *Duplication with
-        Runic Arrows (Can fire multiple Runic Arrows at once via charging it) *Light
-        Manipulation and Statistics Reduction with Light Arrows (The Light Arrows
-        are imbued with the Light of Alfheim which can stun enemies, lessen the damage
-        they deal, and lower their defense) *Possibly Madness Manipulation and Deconstruction
-        (As Atreus' Light Arrows are powered by the Light of Alfheim, it's likely
+        **Fire Manipulation and Ice Manipulation with Bitter Squirrel (Ratatoskr''s
+        Bitter aspect can enter enemies and either freeze or burn them) *Statistics
+        Amplification (Can charge the power of his arrows. Amplifies the power of
+        three of his arrow shots with Sharpshooter Stare) *Duplication with Runic
+        Arrows (Can fire multiple Runic Arrows at once via charging it) *Light Manipulation
+        and Statistics Reduction with Light Arrows (The Light Arrows are imbued with
+        the Light of Alfheim which can stun enemies, lessen the damage they deal,
+        and lower their defense) *Possibly Madness Manipulation and Deconstruction
+        (As Atreus'' Light Arrows are powered by the Light of Alfheim, it''s likely
         his arrows have these abilities as well) *Electricity Manipulation and Paralysis
         Inducement with Shock Arrows (Shock Arrows can electrocute enemies, stopping
         them from moving and spread to multiple enemies) *Sound Manipulation and Explosion
@@ -1971,15 +1591,14 @@ repair:
         (Sigil Arrows can create elemental explosions if they come in contact with
         an element or enemies with elemental Status Effects, make enemies more vulnerable
         to Status Effects, nullify magic barriers, and cause explosions on contact
-        as well as home in on enemies with Splintered Sigil) |-| Resistances= *Deconstruction,
-        Statistics Reduction, and Madness Manipulation (Pulled Kratos out of the Light
-        of Alfheim without any ill effects) *Ice Manipulation and Soul Manipulation
-        (Withstood multiple hits from the Levithian Axe which froze a lightning bolt
-        and shattered souls in Faye's battle with Thor) *Status Effect Inducement
-        with Transformations (Removes all status effects) **Fire Manipulation **Ice
-        Manipulation **Poison Manipulation **Electricity Manipulation **Perception
-        Manipulation
-      source_id: character-stats-profiles-atreus-game-god-of-war
+        as well as home in on enemies with Splintered Sigil) *Deconstruction, Statistics
+        Reduction, and Madness Manipulation (Pulled Kratos out of the Light of Alfheim
+        without any ill effects) *Ice Manipulation and Soul Manipulation (Withstood
+        multiple hits from the Levithian Axe which froze a lightning bolt and shattered
+        souls in Faye''s battle with Thor) *Status Effect Inducement with Transformations
+        (Removes all status effects) **Fire Manipulation **Ice Manipulation **Poison
+        Manipulation **Electricity Manipulation **Perception Manipulation'
+      source_id: character-stats-profiles-atreus-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1991,13 +1610,13 @@ repair:
         a fight with Kratos in his Bjorn form, even when the former activated Spartan
         Rage. Threatened to harm/kill Freya, someone considered to be equal to Kratos.
         Bit through Odin's arm in Wolf form.)
-      source_id: character-stats-profiles-atreus-game-god-of-war
+      source_id: character-stats-profiles-atreus-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
       value: Infinite, likely Immeasurable (Can keep up with Kratos, Baldur, and Odin)
-      source_id: character-stats-profiles-atreus-game-god-of-war
+      source_id: character-stats-profiles-atreus-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2005,7 +1624,7 @@ repair:
       value: Low Multiversal+ (Took a punch from Baldur when he was younger, albeit
         it left him winded for a few seconds. Survived the destruction of Asgard which
         shook Yggdrasil to its' roots though it knocked him out.)
-      source_id: character-stats-profiles-atreus-game-god-of-war
+      source_id: character-stats-profiles-atreus-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2014,450 +1633,7 @@ repair:
         fighter, having very few CQC attacks besides his bow. Can't swim. His strength
         depends on his discipline and focus and tends to vary because of this. Category:TheFrostKnight
         Category:Tier 2
-      source_id: character-stats-profiles-atreus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|atreus canon god of war
-      thefrostknight|315993
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-atreus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29_%28God_of_War%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id015
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Atreus
-    source_type: mediawiki
-    revision_id: '9542354'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 21630
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - Gallery
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id016
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: "{{1-C}}, higher with Shape-shifting Name: Atreus (Greek: \u1F08\u03C4\
-        \u03C1\u03B5\u03CD\u03C2), Loki (Nordic: \u16DA\u16DF\u16B2\u16C1), Bj\xF6\
-        rn (Bear form. The name means \"Bear\") Origin: God of War Gender: Male Age:\
-        \ 11 years old during GoW2018, 14 years old during Ragnar\xF6k Classification:\
-        \ God/Jottun/Human hybrid"
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Innate={{Border|Scroll=Yes|Visible=No|Content=\
-        \ *Superhuman Physical Characteristics *Immortality (Types 1 & 3; via his\
-        \ Godhood and regenerative abilities inherited from his father, Kratos) *Soul\
-        \ Magic (Divine; Can also transfer souls from dying beings to others, using\
-        \ objects as a proxy, as he does when he transfers Fenrir's soul into Garm\
-        \ from his knife, after he previously stored sealed Fenrir's soul in it) *Accelerated\
-        \ Development (Training & Battle, Physical Statistics & Abilities; Showcases\
-        \ a great growth in his physical capabilities proportional to his confidenceGod\
-        \ of War (2018). Had gone from struggling to deal with a human Reaver to being\
-        \ able to singlehandedly destroy an army of dark elves and fighting alone\
-        \ for more than day, to hurting Baldur after the latter lost his invulnerability.\
-        \ After merely three years of combat training in the woods, he becomes capable\
-        \ of holding his own against Valkyries in combat, who are considered among\
-        \ the most elite warriors in all Nine Realms, and trusted enough to train\
-        \ Odin's forces. This growth culminates in him being able to survive against\
-        \ and barely hurt Odin with his punchesGod of War: Ragnarok - The Realms at\
-        \ War) *Dimensional Travel (Via the Utangard, a plane of existence which allows\
-        \ him to travel to other Realms via his dreams, something he learns to do\
-        \ at will) *Enhanced Senses (Can sense the power of other beings, as well\
-        \ as their distressLost Pages of Norse Myth- Page 6: Like Father, Like Son)\
-        \ *Telepathy (Can sense and hear the thoughts and emotions of other beingsGod\
-        \ of War: Lore and Legends) *Automatic Translation (Is considered to have\
-        \ an extraordinary faculty for language by Mimir, one of the most knowledgeable\
-        \ beings in all the Realms. Can piece together writing that he shouldn't otherwise\
-        \ know through the overall interconnectedness of language. Immediately understood\
-        \ the language of the Dark Elves despite having never been in their realm\
-        \ before) *Regeneration (At least Mid-Low; Was able to regenerate from a knife\
-        \ stabbed into his shoulder by Baldur. Later heals from wounds inflicted on\
-        \ him in his Bear form by Kratos) *Shapeshifting (Can turn into various animals\
-        \ such as a wolf and a bearGod of War: Ragnar\xF6k (2022) - Surviving Fimbulwinter)\
-        \ *Acrobatics (As shown hereGod of War Ragnarok - The Runaway) *Time Slow\
-        \ (Via Eagle Eye techniques, where he slows down timeGod of War: Ragnarok\
-        \ - Skill Tree through various actions) *Stealth Mastery *Skilled Archer and\
-        \ Knife Wielder *Limited Rage Power & Berserk Mode (InheritedGod of War (2018)\
-        \ - Behind the Lock his father's Spartan RageGod of War: Ragnar\xF6k (2022)\
-        \ - The Lost Sanctuary) *Limited Precognition (Saw Thor attack their house\
-        \ at the end of Fimbulwinter, signaling the coming of Ragnar\xF6k, in his\
-        \ dreamsGod of War (2018) - Secret Thor Ending) *Limited Weather Manipulation\
-        \ (After learning of his Godhood and powers, upon meeting with Sindri, Atreus'\
-        \ anger and frustration at the latter\u2019s inability to make up with Brok\
-        \ results in him snapping, with every yell Atreus makes causing the sky to\
-        \ worsen bit by bitGod of War (2018) - Return to the Summit) *Forcefield Creation\
-        \ (Can create a shield of magical energy) *Resurrection (Can revive others\
-        \ with Resurrection Stones) }} |-|Archery and Summoning= *Statistics Amplification\
-        \ (Via Sharpshooter's Stare, which increases the power of each shot of his\
-        \ arrows) *Explosion Manipulation (Via Splintered Sigil, which allows Sigil\
-        \ Arrows to explode upon contact with their targets) *Electricity Manipulation,\
-        \ Paralysis Inducement & Status Effect Inducement (Via Shock Arrows, which\
-        \ can briefly paralyze enemies, inducing them to freeze in place for a short\
-        \ whileGod of War (2018) Prima Guide- Page 15) *Danmaku (Via Falling Sky,\
-        \ where he shoots an arrow into the sky that multiplies and rains down on\
-        \ his opponents) *Intangibility Negation (His arrows can negate the intangibility\
-        \ of Revenants, who can travel throughGod of War (2018) Official Strategy\
-        \ Guide by Prima- Page 72 sheets of realityGod of War Lore and Legends- Page\
-        \ 97, as well as that of Phantoms) *Summoning (Can summon various spectral\
-        \ animals, such as a pack of wolves, a flight of falcons, an ibex and a squirrel)\
-        \ *Status Effect Inducement (With Sigil and Sonic Arrows. His flight of falcons\
-        \ can apply the status effect of his equipped arrows) *Sound Manipulation\
-        \ (Via Sonic Arrows, which use sonic vibrationsGod of War: Ragnarok to take\
-        \ advantage of structural sensitivities of materials) *Light Elf Magic (Via\
-        \ Light Arrows) |-|Resistances= *The Light of Alfheim and Leviathan Axe (Gods\
-        \ can resist the innate attributes of the magic flowing through them. Was\
-        \ also capable of touching the Light of Alfheim, despite it being very painful\
-        \ for him and pulled Kratos out of the main shaft with his bare hands, with\
-        \ the Light of Alfheim being able to drive its victims insane before completely\
-        \ incinerating them and making them and their souls one with the Light. While\
-        \ in Bear Form, he"
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Complex Multiverse level (After realizing his godhood and training for
-        3 years, he is comparable to Valkyries like Hrist and Mist and can outright
-        fight against one of them on his ownGod of War: Ragnarok (2022)- The Summoning.
-        Even while younger and weaker, he could hurt Baldur after the latter lost
-        his invulnerability. Inferior to Heimdall, which would put him on par with
-        Ares), higher with Shapeshifting (Bit through Odin''s armGod of War: Ragnarok
-        (2022)- Unlocking the Mask in his wolf form. As Bjorn, he was able to hold
-        his own against Spartan Rage Kratos, but Kratos eventually prevailed and would''ve
-        killed him if Atreus didn''t transform back to normal in time. Charged at
-        Freya and threatened to kill her had Kratos not intervened. Easily tore apart
-        a Valkyrie in half)'
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (Can fight gods and monsters on par with Kratos in swiftness,
-        such as Garm, the Valkyries, Baldur, and Odin)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level (Withstood a direct blow from Baldur with only
-        his wind knocked out of him, and after getting his breath back, Atreus was
-        ready to fight against Baldur yet againGod of War (2018)- Jotunheim in Reach.
-        Somewhat comparable to, albeit much weaker than his father, Kratos. Survived
-        a vicious beating from Hrist and Mist without any lasting injuries. Able to
-        withstand beatdowns from the likes of Odin), higher with Shape-shifting (Even
-        stronger while in Wolf Form or as Bjorn, being on par with his father and
-        taking hits from Kratos' Spartan Rage)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Even before learning of his status as a god, Atreus singlehandedly
-        destroyed an army of dark elves and fought alone for close to a whole day
-        while protecting his father. His stamina further increased after realizing
-        his potential, being able to endure long fights and withstand falls from great
-        heights without suffering any noticeable fatigue)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Tens of Meters with Talon Bow and summons. Several
-        Kilometers with Weather Manipulation (His screams caused the skies to darken
-        and erupt into a violent storm. Inapplicable in combat), Low Multiversal via
-        the Utangard (Can use it to travel to any of the Nine Realms)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Talon Bow, Knife, Resurrection Stones, Ingrid (Freyr's sword)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Genius (Has the innate talent to understand written and spoken languages
-        he has never heard of or read before by tracing their connections, being able
-        to quickly learn how to read the Niflheim and Muspelheim languages when given
-        a cipher, how to read Greek when given a jug of wine from Sparta, and even
-        how to speak the dead language of the World Serpent despite only hearing it
-        a handful of times. He can also understand some animals, and even Mimir, the
-        smartest man in the nine realms, took note of Atreus' linguistic capabilities
-        for someone of his age. A capable fighter, assisting his father in his fights
-        using his bow skills and even taking on gods such as Baldur alongside Kratos)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Retains his inability to use Resurrection stones on himself. Atreus\
-        \ inherited his father's temper, often losing control of himself and causing\
-        \ him to act recklessly, though this weakness appears to have mostly faded\
-        \ after receiving a scolding from Kratos. Initially had trouble controlling\
-        \ his transformations due to them being triggered on extreme emotional impulses\
-        \ like rage or sadness, but has since overcome them to maintain better control\
-        \ over his powers. His godhood and the power he draws from it heavily depend\
-        \ on his focus and self-belief, going from being unable to perform physically\
-        \ exerting tasks at his lowest to fighting on large with powerful gods and\
-        \ immortal warriors when in the right mindset, his focus for the game improves\
-        \ considerably. He doesn't know how to swim. He lacks wisdom, which causes\
-        \ him to get tricked by Odin. Notable Attacks/Techniques: *Lj\xF6sa (Nordic:\
-        \ \u16DA\u16C3\u16DF\u16CA\u16A8) Atreus fires arrows infused with the light\
-        \ of Alfheim that can stun opponents more easily than his regular arrows and\
-        \ can unleash large bursts of light to attack multiple opponents at once.\
-        \ *\xDEruma (Nordic: \u16A6\u16B1\u16A2\u16D7\u16A8) Atreus fires arrows imbued\
-        \ with the lightning of the dragon Hr\xE6zlyr, paralyzing foes and sending\
-        \ arcs of lightning to hit opponents near his original target. *Wrath of the\
-        \ Wolf: Summons a spectral wolf that pounces on enemies three times. *Falcon's\
-        \ Dive: Summons a cast of spectral falcons that dive into the ground. *Bitter\
-        \ Squirrel: Summons a spectral squirrel, Ratat\xF6skr, to unearth consumables\
-        \ that can restore Atreus' health. *Boar Stampede: Summons a stampede of spectral\
-        \ boars that trample enemies in their path. *Murder of Crows: Summons a murder\
-        \ of crows that swarms enemies. *Storm of the Elks: Summons a spectral elk\
-        \ that discharges destructive energy as it walks. ==Notable Matchups== Victories:\
-        \ *Thrud (God of War) Thrud's Profile (Starting Distance was 10 meters; Battle\
-        \ took place in Midgard) *Baldur (God of War) Baldur's Profile (Post-Godhood\
-        \ Realization Atreus was used; Battle took place in Asgard; Baldur was bloodlusted)\
-        \ *Ni\xF0h\xF6gg (God of War) Ni\xF0h\xF6gg's Profile (Norse Mythology Kratos\
-        \ and Post-Godhood Realization Atreus fought together against Ni\xF0h\xF6\
-        gg) *Riku (Kingdom Hearts) Riku's Profile (KH3 Riku and Ragnar\xF6k Atreus\
-        \ were used. Match was decided on Tigger's KH2 Minigame; Speed was equalized)\
-        \ Losses: *Thor (God of War) Thor's Profile (Post-Godhood Realization Atreus\
-        \ was used) *Hercules (God of War) Hercules' Profile (Battle took place at\
-        \ the Lake of Nine; Atreus' Shapeshifting is allowed) *Frisk (Undertale) Frisk's\
-        \ Profile (Low 1-C Frisk was used, speed was equalized, starting distance\
-        \ was 10 meters and Frisk had all of their optional equipment) Inconclusive:\
-        \ ==Gallery== atreus ragnorak.png|Atreus as he appears in the cover art of\
-        \ God of War: Ragnar\xF6k ==References== {{Scroll box|content={{Reflist|2}}}}\
-        \ {{Discussions}} Category:Characters Category:God of War Category:Berserkers\
-        \ Category:Bow Users Category:Concept Users Category:Deconstruction Users\
-        \ Category:Demigods Category:Electricity Users Category:Enhanced Senses Users\
-        \ Category:Explosion Users Category:Fantasy Characters Category:Forcefield\
-        \ Users Category:Game Bosses Category:Game Characters Category:Giants Category:Gods\
-        \ Category:Good Characters Category:Heroes Category:Hunters Category:Hybrids\
-        \ Category:Immortals Category:Kids Category:Knife Users Category:Light Users\
-        \ Category:Madness Users Category:Magic Users Category:Male Characters Category:Mind\
-        \ Users Category:Norse Gods Category:Paralysis Users Category:Playable Characters\
-        \ Category:Precognition Users Category:Probability Users Category:Protagonists\
-        \ Category:Rage Users Category:Regeneration Users Category:Resurrection Users\
-        \ Category:Rune Users Category:Shapeshifters Category:Soul Users Category:Sound\
-        \ Users Category:Statistics Reduction Users Category:Status Effect Users Category:Stealth\
-        \ Masters Category:Summoners Category:Sword Users Category:Teenagers Category:Telepaths\
-        \ Category:Video Game Characters Category:Weather Users"
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|atreus|9542354
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-atreus-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29_%28God_of_War%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Atreus (Canon, God of War)/TheFrostKnight
-    source_type: mediawiki
-    revision_id: '315993'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 6746
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: "2-C, higher with Transformations Name: Atreus, Loki Origin: God of War\
-        \ (2018) Gender: Male Age: 11 during God of War (2018), 13-14 during God of\
-        \ War: Ragnarok Classification: Half-J\xF6tunn, Demi-God"
-      source_id: character-stats-profiles-atreus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base= *Superhuman Physical Characteristics *Longevity *Acrobatics (Is
-        a skilled climber. Capable of performing flips during combos) *Weapon Mastery
-        (Is a skilled archer) *Regeneration (Mid-Low) (Instantly healed a stab wound
-        from Baldur. Regenerated from the wounds Kratos left on him during their fight.)
-        *Telepathy (Can hear and feel animals' thoughts/emotions) *Precognition (Foretold
-        of Thor coming his and Kratos' home years prior to his actual arrival in his
-        dream) *Weather Manipulation and Necromancy (The world mourns his death by
-        causing a red storm and summoning undead monsters such as Draugr and Hel-Walkers)
-        *Transformation and Shapeshifting (Atreus' god ability allows him to transform
-        into animals such as a bear and wolf) *Rage Power (Atreus is implied to have
-        his own Spartan Rage. However, it's never fully shown as Atreus passes out
-        due to his sickness before he can even use it.) *Forcefield Creation (Can
-        activate a magical barrier from Sindri and Brok's gear) *Soul Manipulation
-        (Atreus can take souls and transfer them into soulless beings or inanimate
-        objects such as marbles and his knife) *Dimensional Travel (Is capable of
-        traveling to different realms by thinking of the place he wants to go) *Spatial
-        Manipulation (Can close rifts in space) *Time Manipulation (Has various forms
-        of slowing down time such as Eagle Eye and Sharpshooter Stare) *Summoning
-        (Can summon various spectral animals to aid him in combat) **Energy Manipulation
-        with Storm of the Elks (Storm of the Elks summons a deer that discharges energy)
-        **Fire Manipulation and Ice Manipulation with Bitter Squirrel (Ratatoskr's
-        Bitter aspect can enter enemies and either freeze or burn them) |-|Arrows=
-        *Statistics Amplification (Can charge the power of his arrows. Amplifies the
-        power of three of his arrow shots with Sharpshooter Stare) *Duplication with
-        Runic Arrows (Can fire multiple Runic Arrows at once via charging it) *Light
-        Manipulation and Statistics Reduction with Light Arrows (The Light Arrows
-        are imbued with the Light of Alfheim which can stun enemies, lessen the damage
-        they deal, and lower their defense) *Possibly Madness Manipulation and Deconstruction
-        (As Atreus' Light Arrows are powered by the Light of Alfheim, it's likely
-        his arrows have these abilities as well) *Electricity Manipulation and Paralysis
-        Inducement with Shock Arrows (Shock Arrows can electrocute enemies, stopping
-        them from moving and spread to multiple enemies) *Sound Manipulation and Explosion
-        Manipulation with Sound Arrows *Explosion Manipulation, limited Damage Boost,
-        Resistance Negation, Forcefield Negation and Homing Attack with Sigil Arrows
-        (Sigil Arrows can create elemental explosions if they come in contact with
-        an element or enemies with elemental Status Effects, make enemies more vulnerable
-        to Status Effects, nullify magic barriers, and cause explosions on contact
-        as well as home in on enemies with Splintered Sigil) |-| Resistances= *Deconstruction,
-        Statistics Reduction, and Madness Manipulation (Pulled Kratos out of the Light
-        of Alfheim without any ill effects) *Ice Manipulation and Soul Manipulation
-        (Withstood multiple hits from the Levithian Axe which froze a lightning bolt
-        and shattered souls in Faye's battle with Thor) *Status Effect Inducement
-        with Transformations (Removes all status effects) **Fire Manipulation **Ice
-        Manipulation **Poison Manipulation **Electricity Manipulation **Perception
-        Manipulation
-      source_id: character-stats-profiles-atreus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Low Multiversal (Can damage Baldur with his bow/kicks. Knocked Kratos
-        back with his Shock Arrow. Threw Odin to the ground with a punch. Freya believes
-        she could've beaten Kratos if not for Atreus' presence. Kratos' Codex implies
-        Atreus' power is to be feared.), higher with Transformations (Could put up
-        a fight with Kratos in his Bjorn form, even when the former activated Spartan
-        Rage. Threatened to harm/kill Freya, someone considered to be equal to Kratos.
-        Bit through Odin's arm in Wolf form.)
-      source_id: character-stats-profiles-atreus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Infinite, likely Immeasurable (Can keep up with Kratos, Baldur, and Odin)
-      source_id: character-stats-profiles-atreus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Multiversal+ (Took a punch from Baldur when he was younger, albeit
-        it left him winded for a few seconds. Survived the destruction of Asgard which
-        shook Yggdrasil to its' roots though it knocked him out.)
-      source_id: character-stats-profiles-atreus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Has no experience fighting stronger beings on his own. Is mostly a ranged
-        fighter, having very few CQC attacks besides his bow. Can't swim. His strength
-        depends on his discipline and focus and tends to vary because of this. Category:TheFrostKnight
-        Category:Tier 2
-      source_id: character-stats-profiles-atreus-game-god-of-war
+      source_id: character-stats-profiles-atreus-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2476,10 +1652,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: mediawiki-atreus-game
-    url: https://vsbattles.fandom.com/wiki/Atreus_(Game)
+    url: https://vsbattles.fandom.com/wiki/Atreus
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id017
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2509,6 +1685,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2522,7 +1699,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id018
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -2535,83 +1712,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: "{{1-C}}, higher with Shape-shifting Name: Atreus (Greek: \u1F08\u03C4\
-        \u03C1\u03B5\u03CD\u03C2), Loki (Nordic: \u16DA\u16DF\u16B2\u16C1), Bj\xF6\
-        rn (Bear form. The name means \"Bear\") Origin: God of War Gender: Male Age:\
-        \ 11 years old during GoW2018, 14 years old during Ragnar\xF6k Classification:\
-        \ God/Jottun/Human hybrid"
-      source_id: mediawiki-atreus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Innate={{Border|Scroll=Yes|Visible=No|Content=\
-        \ *Superhuman Physical Characteristics *Immortality (Types 1 & 3; via his\
-        \ Godhood and regenerative abilities inherited from his father, Kratos) *Soul\
-        \ Magic (Divine; Can also transfer souls from dying beings to others, using\
-        \ objects as a proxy, as he does when he transfers Fenrir's soul into Garm\
-        \ from his knife, after he previously stored sealed Fenrir's soul in it) *Accelerated\
-        \ Development (Training & Battle, Physical Statistics & Abilities; Showcases\
-        \ a great growth in his physical capabilities proportional to his confidenceGod\
-        \ of War (2018). Had gone from struggling to deal with a human Reaver to being\
-        \ able to singlehandedly destroy an army of dark elves and fighting alone\
-        \ for more than day, to hurting Baldur after the latter lost his invulnerability.\
-        \ After merely three years of combat training in the woods, he becomes capable\
-        \ of holding his own against Valkyries in combat, who are considered among\
-        \ the most elite warriors in all Nine Realms, and trusted enough to train\
-        \ Odin's forces. This growth culminates in him being able to survive against\
-        \ and barely hurt Odin with his punchesGod of War: Ragnarok - The Realms at\
-        \ War) *Dimensional Travel (Via the Utangard, a plane of existence which allows\
-        \ him to travel to other Realms via his dreams, something he learns to do\
-        \ at will) *Enhanced Senses (Can sense the power of other beings, as well\
-        \ as their distressLost Pages of Norse Myth- Page 6: Like Father, Like Son)\
-        \ *Telepathy (Can sense and hear the thoughts and emotions of other beingsGod\
-        \ of War: Lore and Legends) *Automatic Translation (Is considered to have\
-        \ an extraordinary faculty for language by Mimir, one of the most knowledgeable\
-        \ beings in all the Realms. Can piece together writing that he shouldn't otherwise\
-        \ know through the overall interconnectedness of language. Immediately understood\
-        \ the language of the Dark Elves despite having never been in their realm\
-        \ before) *Regeneration (At least Mid-Low; Was able to regenerate from a knife\
-        \ stabbed into his shoulder by Baldur. Later heals from wounds inflicted on\
-        \ him in his Bear form by Kratos) *Shapeshifting (Can turn into various animals\
-        \ such as a wolf and a bearGod of War: Ragnar\xF6k (2022) - Surviving Fimbulwinter)\
-        \ *Acrobatics (As shown hereGod of War Ragnarok - The Runaway) *Time Slow\
-        \ (Via Eagle Eye techniques, where he slows down timeGod of War: Ragnarok\
-        \ - Skill Tree through various actions) *Stealth Mastery *Skilled Archer and\
-        \ Knife Wielder *Limited Rage Power & Berserk Mode (InheritedGod of War (2018)\
-        \ - Behind the Lock his father's Spartan RageGod of War: Ragnar\xF6k (2022)\
-        \ - The Lost Sanctuary) *Limited Precognition (Saw Thor attack their house\
-        \ at the end of Fimbulwinter, signaling the coming of Ragnar\xF6k, in his\
-        \ dreamsGod of War (2018) - Secret Thor Ending) *Limited Weather Manipulation\
-        \ (After learning of his Godhood and powers, upon meeting with Sindri, Atreus'\
-        \ anger and frustration at the latter\u2019s inability to make up with Brok\
-        \ results in him snapping, with every yell Atreus makes causing the sky to\
-        \ worsen bit by bitGod of War (2018) - Return to the Summit) *Forcefield Creation\
-        \ (Can create a shield of magical energy) *Resurrection (Can revive others\
-        \ with Resurrection Stones) }} |-|Archery and Summoning= *Statistics Amplification\
-        \ (Via Sharpshooter's Stare, which increases the power of each shot of his\
-        \ arrows) *Explosion Manipulation (Via Splintered Sigil, which allows Sigil\
-        \ Arrows to explode upon contact with their targets) *Electricity Manipulation,\
-        \ Paralysis Inducement & Status Effect Inducement (Via Shock Arrows, which\
-        \ can briefly paralyze enemies, inducing them to freeze in place for a short\
-        \ whileGod of War (2018) Prima Guide- Page 15) *Danmaku (Via Falling Sky,\
-        \ where he shoots an arrow into the sky that multiplies and rains down on\
-        \ his opponents) *Intangibility Negation (His arrows can negate the intangibility\
-        \ of Revenants, who can travel throughGod of War (2018) Official Strategy\
-        \ Guide by Prima- Page 72 sheets of realityGod of War Lore and Legends- Page\
-        \ 97, as well as that of Phantoms) *Summoning (Can summon various spectral\
-        \ animals, such as a pack of wolves, a flight of falcons, an ibex and a squirrel)\
-        \ *Status Effect Inducement (With Sigil and Sonic Arrows. His flight of falcons\
-        \ can apply the status effect of his equipped arrows) *Sound Manipulation\
-        \ (Via Sonic Arrows, which use sonic vibrationsGod of War: Ragnarok to take\
-        \ advantage of structural sensitivities of materials) *Light Elf Magic (Via\
-        \ Light Arrows) |-|Resistances= *The Light of Alfheim and Leviathan Axe (Gods\
-        \ can resist the innate attributes of the magic flowing through them. Was\
-        \ also capable of touching the Light of Alfheim, despite it being very painful\
-        \ for him and pulled Kratos out of the main shaft with his bare hands, with\
-        \ the Light of Alfheim being able to drive its victims insane before completely\
-        \ incinerating them and making them and their souls one with the Light. While\
-        \ in Bear Form, he"
+      value: ', higher with Shape-shifting'
       source_id: mediawiki-atreus-game
       provider_id: vsbattles
       authority: high
@@ -2730,11 +1831,10 @@ repair:
         \ Profile (Low 1-C Frisk was used, speed was equalized, starting distance\
         \ was 10 meters and Frisk had all of their optional equipment) Inconclusive:\
         \ ==Gallery== atreus ragnorak.png|Atreus as he appears in the cover art of\
-        \ God of War: Ragnar\xF6k ==References== {{Scroll box|content={{Reflist|2}}}}\
-        \ {{Discussions}} Category:Characters Category:God of War Category:Berserkers\
-        \ Category:Bow Users Category:Concept Users Category:Deconstruction Users\
-        \ Category:Demigods Category:Electricity Users Category:Enhanced Senses Users\
-        \ Category:Explosion Users Category:Fantasy Characters Category:Forcefield\
+        \ God of War: Ragnar\xF6k ==References== Category:Characters Category:God\
+        \ of War Category:Berserkers Category:Bow Users Category:Concept Users Category:Deconstruction\
+        \ Users Category:Demigods Category:Electricity Users Category:Enhanced Senses\
+        \ Users Category:Explosion Users Category:Fantasy Characters Category:Forcefield\
         \ Users Category:Game Bosses Category:Game Characters Category:Giants Category:Gods\
         \ Category:Good Characters Category:Heroes Category:Hunters Category:Hybrids\
         \ Category:Immortals Category:Kids Category:Knife Users Category:Light Users\
@@ -2746,6 +1846,52 @@ repair:
         \ Users Category:Statistics Reduction Users Category:Status Effect Users Category:Stealth\
         \ Masters Category:Summoners Category:Sword Users Category:Teenagers Category:Telepaths\
         \ Category:Video Game Characters Category:Weather Users"
+      source_id: mediawiki-atreus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Innate={{Border|Scroll=Yes|Visible=No|Content=\
+        \ *Superhuman Physical Characteristics *Immortality (Types 1 & 3; via his\
+        \ Godhood and regenerative abilities inherited from his father, Kratos) *Soul\
+        \ Magic (Divine; Can also transfer souls from dying beings to others, using\
+        \ objects as a proxy, [https://youtu.be/N3XmXt_BIao?si=5MZvCO3kK0rfeSK6&t=8\
+        \ as he does when he transfers Fenrir's soul into Garm from his knife], after\
+        \ he previously [https://www.youtube.com/watch?v=mqQJ6gvwtik&pp=ygUXYXRyZXVzIGdldHMgZmVucmlyIHNvdWw%3D\
+        \ stored sealed Fenrir's soul in it]. Had gone from [https://youtu.be/WhuknTveD9w?si=BY_1PKnQPR6Je9zy&t=102\
+        \ struggling to deal with a human Reaver]) *Dimensional Travel (Via the Utangard,\
+        \ a plane of existence [https://www.youtube.com/watch?v=RSZcoqybyXg&pp=ygUYYXRyZXVzIGdvZXMgdG8gaXJvbndvb2Qg\
+        \ which allows him to travel to other Realms]) *Telepathy (Can [https://www.youtube.com/watch?v=wblyz_21v7U&t=6m55s\
+        \ sense and hear] the thoughts and emotions of other beings) *Automatic Translation\
+        \ (Is considered to have [https://youtu.be/_oOZG5-tqpA?si=wuntxn8HX22qfgDn&t=29260\
+        \ an extraordinary faculty for language]) *Acrobatics ([https://youtu.be/z2LgiP9un-Q?si=veq413JUmJNe9t0b&t=23m55s\
+        \ As shown here]) *Time Slow (Via Eagle Eye techniques, [https://youtu.be/JMTKDlHtVzw?si=vpZ4W5iqqeWgbNwc&t=138\
+        \ where he slows down time] through various actions) *Stealth Mastery *Skilled\
+        \ Archer and Knife Wielder *Limited Rage Power & Berserk Mode ([https://www.youtube.com/watch?v=LaR-Fqv1zlE&t=65s\
+        \ Inherited] his father's [https://www.youtube.com/watch?v=rKK0mbVs0Jk&t=1m10s\
+        \ Spartan Rage]) *Limited Precognition ([https://www.youtube.com/watch?v=CumDJhXjuf8&t=45m28s\
+        \ Saw Thor attack their house] at the end of Fimbulwinter, signaling the coming\
+        \ of Ragnar\xF6k, in his dreams) *Limited Weather Manipulation (After learning\
+        \ of his Godhood and powers, upon meeting with Sindri, Atreus' anger and frustration\
+        \ at the latter\u2019s [https://www.youtube.com/watch?v=H5wLY85L6fo&t=28s\
+        \ inability to make up with Brok results in him snapping, with every yell\
+        \ Atreus makes causing the sky to worsen bit by bit]) *Forcefield Creation\
+        \ (Can create a shield of magical energy) *Resurrection (Can revive others\
+        \ with Resurrection Stones) *Danmaku (Via Falling Sky, [https://youtu.be/JMTKDlHtVzw?si=cPHuq8NV-60ElR4P&t=230\
+        \ where he shoots an arrow into the sky that multiplies] sheets of reality,\
+        \ as well as that of Phantoms) *Summoning (Can summon various spectral animals,\
+        \ such as a [https://youtu.be/JMTKDlHtVzw?si=9StRwvCizCoeVySm&t=279 pack of\
+        \ wolves] to take advantage of structural sensitivities of materials) *Light\
+        \ Elf Magic (Via Light Arrows) |-|Resistances= *The Light of Alfheim and Leviathan\
+        \ Axe (Gods can resist the innate attributes of the magic flowing through\
+        \ them. Was also capable of [https://youtu.be/_oOZG5-tqpA?si=AkGzo82M3MUxO3GA&t=11397\
+        \ touching the Light of Alfheim]. Even while younger and weaker, he could\
+        \ [https://youtu.be/8JRc6x0yQx4?si=FJh5dqyZnGAWuKUY&t=921 hurt Baldur after\
+        \ the latter lost his invulnerability] in his wolf form. As Bjorn, he was\
+        \ able to [https://www.youtube.com/watch?v=oP_n8kg_pAQ hold his own] against\
+        \ Spartan Rage Kratos, but Kratos eventually prevailed and would've killed\
+        \ him if Atreus didn't transform back to normal in time, though he was swatted\
+        \ away after that), higher with Shape-Shifting"
       source_id: mediawiki-atreus-game
       provider_id: vsbattles
       authority: high
@@ -2763,11 +1909,11 @@ repair:
     duplicate_key: vsbattles.fandom.com|atreus|9542354
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-atreus-game
-    url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29
+  - source_id: vsbattles-atreus-game-god-of-war
+    url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29_God_of_War
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id019
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2797,6 +1943,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2810,7 +1957,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id020
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2821,12 +1968,141 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: "{{1-C}}, higher with Shape-shifting Name: Atreus (Greek: \u1F08\u03C4\
-        \u03C1\u03B5\u03CD\u03C2), Loki (Nordic: \u16DA\u16DF\u16B2\u16C1), Bj\xF6\
-        rn (Bear form. The name means \"Bear\") Origin: God of War Gender: Male Age:\
-        \ 11 years old during GoW2018, 14 years old during Ragnar\xF6k Classification:\
-        \ God/Jottun/Human hybrid"
-      source_id: vsbattles-atreus-game
+      value: ', higher with Shape-shifting'
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Complex Multiverse level (After realizing his godhood and training for
+        3 years, he is comparable to Valkyries like Hrist and Mist and can outright
+        fight against one of them on his ownGod of War: Ragnarok (2022)- The Summoning.
+        Even while younger and weaker, he could hurt Baldur after the latter lost
+        his invulnerability. Inferior to Heimdall, which would put him on par with
+        Ares), higher with Shapeshifting (Bit through Odin''s armGod of War: Ragnarok
+        (2022)- Unlocking the Mask in his wolf form. As Bjorn, he was able to hold
+        his own against Spartan Rage Kratos, but Kratos eventually prevailed and would''ve
+        killed him if Atreus didn''t transform back to normal in time. Charged at
+        Freya and threatened to kill her had Kratos not intervened. Easily tore apart
+        a Valkyrie in half)'
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (Can fight gods and monsters on par with Kratos in swiftness,
+        such as Garm, the Valkyries, Baldur, and Odin)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Complex Multiverse level (Withstood a direct blow from Baldur with only
+        his wind knocked out of him, and after getting his breath back, Atreus was
+        ready to fight against Baldur yet againGod of War (2018)- Jotunheim in Reach.
+        Somewhat comparable to, albeit much weaker than his father, Kratos. Survived
+        a vicious beating from Hrist and Mist without any lasting injuries. Able to
+        withstand beatdowns from the likes of Odin), higher with Shape-shifting (Even
+        stronger while in Wolf Form or as Bjorn, being on par with his father and
+        taking hits from Kratos' Spartan Rage)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Even before learning of his status as a god, Atreus singlehandedly
+        destroyed an army of dark elves and fought alone for close to a whole day
+        while protecting his father. His stamina further increased after realizing
+        his potential, being able to endure long fights and withstand falls from great
+        heights without suffering any noticeable fatigue)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, Tens of Meters with Talon Bow and summons. Several
+        Kilometers with Weather Manipulation (His screams caused the skies to darken
+        and erupt into a violent storm. Inapplicable in combat), Low Multiversal via
+        the Utangard (Can use it to travel to any of the Nine Realms)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Talon Bow, Knife, Resurrection Stones, Ingrid (Freyr's sword)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Genius (Has the innate talent to understand written and spoken languages
+        he has never heard of or read before by tracing their connections, being able
+        to quickly learn how to read the Niflheim and Muspelheim languages when given
+        a cipher, how to read Greek when given a jug of wine from Sparta, and even
+        how to speak the dead language of the World Serpent despite only hearing it
+        a handful of times. He can also understand some animals, and even Mimir, the
+        smartest man in the nine realms, took note of Atreus' linguistic capabilities
+        for someone of his age. A capable fighter, assisting his father in his fights
+        using his bow skills and even taking on gods such as Baldur alongside Kratos)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "Retains his inability to use Resurrection stones on himself. Atreus\
+        \ inherited his father's temper, often losing control of himself and causing\
+        \ him to act recklessly, though this weakness appears to have mostly faded\
+        \ after receiving a scolding from Kratos. Initially had trouble controlling\
+        \ his transformations due to them being triggered on extreme emotional impulses\
+        \ like rage or sadness, but has since overcome them to maintain better control\
+        \ over his powers. His godhood and the power he draws from it heavily depend\
+        \ on his focus and self-belief, going from being unable to perform physically\
+        \ exerting tasks at his lowest to fighting on large with powerful gods and\
+        \ immortal warriors when in the right mindset, his focus for the game improves\
+        \ considerably. He doesn't know how to swim. He lacks wisdom, which causes\
+        \ him to get tricked by Odin. Notable Attacks/Techniques: *Lj\xF6sa (Nordic:\
+        \ \u16DA\u16C3\u16DF\u16CA\u16A8) Atreus fires arrows infused with the light\
+        \ of Alfheim that can stun opponents more easily than his regular arrows and\
+        \ can unleash large bursts of light to attack multiple opponents at once.\
+        \ *\xDEruma (Nordic: \u16A6\u16B1\u16A2\u16D7\u16A8) Atreus fires arrows imbued\
+        \ with the lightning of the dragon Hr\xE6zlyr, paralyzing foes and sending\
+        \ arcs of lightning to hit opponents near his original target. *Wrath of the\
+        \ Wolf: Summons a spectral wolf that pounces on enemies three times. *Falcon's\
+        \ Dive: Summons a cast of spectral falcons that dive into the ground. *Bitter\
+        \ Squirrel: Summons a spectral squirrel, Ratat\xF6skr, to unearth consumables\
+        \ that can restore Atreus' health. *Boar Stampede: Summons a stampede of spectral\
+        \ boars that trample enemies in their path. *Murder of Crows: Summons a murder\
+        \ of crows that swarms enemies. *Storm of the Elks: Summons a spectral elk\
+        \ that discharges destructive energy as it walks. ==Notable Matchups== Victories:\
+        \ *Thrud (God of War) Thrud's Profile (Starting Distance was 10 meters; Battle\
+        \ took place in Midgard) *Baldur (God of War) Baldur's Profile (Post-Godhood\
+        \ Realization Atreus was used; Battle took place in Asgard; Baldur was bloodlusted)\
+        \ *Ni\xF0h\xF6gg (God of War) Ni\xF0h\xF6gg's Profile (Norse Mythology Kratos\
+        \ and Post-Godhood Realization Atreus fought together against Ni\xF0h\xF6\
+        gg) *Riku (Kingdom Hearts) Riku's Profile (KH3 Riku and Ragnar\xF6k Atreus\
+        \ were used. Match was decided on Tigger's KH2 Minigame; Speed was equalized)\
+        \ Losses: *Thor (God of War) Thor's Profile (Post-Godhood Realization Atreus\
+        \ was used) *Hercules (God of War) Hercules' Profile (Battle took place at\
+        \ the Lake of Nine; Atreus' Shapeshifting is allowed) *Frisk (Undertale) Frisk's\
+        \ Profile (Low 1-C Frisk was used, speed was equalized, starting distance\
+        \ was 10 meters and Frisk had all of their optional equipment) Inconclusive:\
+        \ ==Gallery== atreus ragnorak.png|Atreus as he appears in the cover art of\
+        \ God of War: Ragnar\xF6k ==References== Category:Characters Category:God\
+        \ of War Category:Berserkers Category:Bow Users Category:Concept Users Category:Deconstruction\
+        \ Users Category:Demigods Category:Electricity Users Category:Enhanced Senses\
+        \ Users Category:Explosion Users Category:Fantasy Characters Category:Forcefield\
+        \ Users Category:Game Bosses Category:Game Characters Category:Giants Category:Gods\
+        \ Category:Good Characters Category:Heroes Category:Hunters Category:Hybrids\
+        \ Category:Immortals Category:Kids Category:Knife Users Category:Light Users\
+        \ Category:Madness Users Category:Magic Users Category:Male Characters Category:Mind\
+        \ Users Category:Norse Gods Category:Paralysis Users Category:Playable Characters\
+        \ Category:Precognition Users Category:Probability Users Category:Protagonists\
+        \ Category:Rage Users Category:Regeneration Users Category:Resurrection Users\
+        \ Category:Rune Users Category:Shapeshifters Category:Soul Users Category:Sound\
+        \ Users Category:Statistics Reduction Users Category:Status Effect Users Category:Stealth\
+        \ Masters Category:Summoners Category:Sword Users Category:Teenagers Category:Telepaths\
+        \ Category:Video Game Characters Category:Weather Users"
+      source_id: vsbattles-atreus-game-god-of-war
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -2835,69 +2111,686 @@ repair:
         \ *Superhuman Physical Characteristics *Immortality (Types 1 & 3; via his\
         \ Godhood and regenerative abilities inherited from his father, Kratos) *Soul\
         \ Magic (Divine; Can also transfer souls from dying beings to others, using\
-        \ objects as a proxy, as he does when he transfers Fenrir's soul into Garm\
-        \ from his knife, after he previously stored sealed Fenrir's soul in it) *Accelerated\
-        \ Development (Training & Battle, Physical Statistics & Abilities; Showcases\
-        \ a great growth in his physical capabilities proportional to his confidenceGod\
-        \ of War (2018). Had gone from struggling to deal with a human Reaver to being\
-        \ able to singlehandedly destroy an army of dark elves and fighting alone\
-        \ for more than day, to hurting Baldur after the latter lost his invulnerability.\
-        \ After merely three years of combat training in the woods, he becomes capable\
-        \ of holding his own against Valkyries in combat, who are considered among\
-        \ the most elite warriors in all Nine Realms, and trusted enough to train\
-        \ Odin's forces. This growth culminates in him being able to survive against\
-        \ and barely hurt Odin with his punchesGod of War: Ragnarok - The Realms at\
-        \ War) *Dimensional Travel (Via the Utangard, a plane of existence which allows\
-        \ him to travel to other Realms via his dreams, something he learns to do\
-        \ at will) *Enhanced Senses (Can sense the power of other beings, as well\
-        \ as their distressLost Pages of Norse Myth- Page 6: Like Father, Like Son)\
-        \ *Telepathy (Can sense and hear the thoughts and emotions of other beingsGod\
-        \ of War: Lore and Legends) *Automatic Translation (Is considered to have\
-        \ an extraordinary faculty for language by Mimir, one of the most knowledgeable\
-        \ beings in all the Realms. Can piece together writing that he shouldn't otherwise\
-        \ know through the overall interconnectedness of language. Immediately understood\
-        \ the language of the Dark Elves despite having never been in their realm\
-        \ before) *Regeneration (At least Mid-Low; Was able to regenerate from a knife\
-        \ stabbed into his shoulder by Baldur. Later heals from wounds inflicted on\
-        \ him in his Bear form by Kratos) *Shapeshifting (Can turn into various animals\
-        \ such as a wolf and a bearGod of War: Ragnar\xF6k (2022) - Surviving Fimbulwinter)\
-        \ *Acrobatics (As shown hereGod of War Ragnarok - The Runaway) *Time Slow\
-        \ (Via Eagle Eye techniques, where he slows down timeGod of War: Ragnarok\
-        \ - Skill Tree through various actions) *Stealth Mastery *Skilled Archer and\
-        \ Knife Wielder *Limited Rage Power & Berserk Mode (InheritedGod of War (2018)\
-        \ - Behind the Lock his father's Spartan RageGod of War: Ragnar\xF6k (2022)\
-        \ - The Lost Sanctuary) *Limited Precognition (Saw Thor attack their house\
-        \ at the end of Fimbulwinter, signaling the coming of Ragnar\xF6k, in his\
-        \ dreamsGod of War (2018) - Secret Thor Ending) *Limited Weather Manipulation\
-        \ (After learning of his Godhood and powers, upon meeting with Sindri, Atreus'\
-        \ anger and frustration at the latter\u2019s inability to make up with Brok\
-        \ results in him snapping, with every yell Atreus makes causing the sky to\
-        \ worsen bit by bitGod of War (2018) - Return to the Summit) *Forcefield Creation\
+        \ objects as a proxy, [https://youtu.be/N3XmXt_BIao?si=5MZvCO3kK0rfeSK6&t=8\
+        \ as he does when he transfers Fenrir's soul into Garm from his knife], after\
+        \ he previously [https://www.youtube.com/watch?v=mqQJ6gvwtik&pp=ygUXYXRyZXVzIGdldHMgZmVucmlyIHNvdWw%3D\
+        \ stored sealed Fenrir's soul in it]. Had gone from [https://youtu.be/WhuknTveD9w?si=BY_1PKnQPR6Je9zy&t=102\
+        \ struggling to deal with a human Reaver]) *Dimensional Travel (Via the Utangard,\
+        \ a plane of existence [https://www.youtube.com/watch?v=RSZcoqybyXg&pp=ygUYYXRyZXVzIGdvZXMgdG8gaXJvbndvb2Qg\
+        \ which allows him to travel to other Realms]) *Telepathy (Can [https://www.youtube.com/watch?v=wblyz_21v7U&t=6m55s\
+        \ sense and hear] the thoughts and emotions of other beings) *Automatic Translation\
+        \ (Is considered to have [https://youtu.be/_oOZG5-tqpA?si=wuntxn8HX22qfgDn&t=29260\
+        \ an extraordinary faculty for language]) *Acrobatics ([https://youtu.be/z2LgiP9un-Q?si=veq413JUmJNe9t0b&t=23m55s\
+        \ As shown here]) *Time Slow (Via Eagle Eye techniques, [https://youtu.be/JMTKDlHtVzw?si=vpZ4W5iqqeWgbNwc&t=138\
+        \ where he slows down time] through various actions) *Stealth Mastery *Skilled\
+        \ Archer and Knife Wielder *Limited Rage Power & Berserk Mode ([https://www.youtube.com/watch?v=LaR-Fqv1zlE&t=65s\
+        \ Inherited] his father's [https://www.youtube.com/watch?v=rKK0mbVs0Jk&t=1m10s\
+        \ Spartan Rage]) *Limited Precognition ([https://www.youtube.com/watch?v=CumDJhXjuf8&t=45m28s\
+        \ Saw Thor attack their house] at the end of Fimbulwinter, signaling the coming\
+        \ of Ragnar\xF6k, in his dreams) *Limited Weather Manipulation (After learning\
+        \ of his Godhood and powers, upon meeting with Sindri, Atreus' anger and frustration\
+        \ at the latter\u2019s [https://www.youtube.com/watch?v=H5wLY85L6fo&t=28s\
+        \ inability to make up with Brok results in him snapping, with every yell\
+        \ Atreus makes causing the sky to worsen bit by bit]) *Forcefield Creation\
         \ (Can create a shield of magical energy) *Resurrection (Can revive others\
-        \ with Resurrection Stones) }} |-|Archery and Summoning= *Statistics Amplification\
-        \ (Via Sharpshooter's Stare, which increases the power of each shot of his\
-        \ arrows) *Explosion Manipulation (Via Splintered Sigil, which allows Sigil\
-        \ Arrows to explode upon contact with their targets) *Electricity Manipulation,\
-        \ Paralysis Inducement & Status Effect Inducement (Via Shock Arrows, which\
-        \ can briefly paralyze enemies, inducing them to freeze in place for a short\
-        \ whileGod of War (2018) Prima Guide- Page 15) *Danmaku (Via Falling Sky,\
-        \ where he shoots an arrow into the sky that multiplies and rains down on\
-        \ his opponents) *Intangibility Negation (His arrows can negate the intangibility\
-        \ of Revenants, who can travel throughGod of War (2018) Official Strategy\
-        \ Guide by Prima- Page 72 sheets of realityGod of War Lore and Legends- Page\
-        \ 97, as well as that of Phantoms) *Summoning (Can summon various spectral\
-        \ animals, such as a pack of wolves, a flight of falcons, an ibex and a squirrel)\
-        \ *Status Effect Inducement (With Sigil and Sonic Arrows. His flight of falcons\
-        \ can apply the status effect of his equipped arrows) *Sound Manipulation\
-        \ (Via Sonic Arrows, which use sonic vibrationsGod of War: Ragnarok to take\
-        \ advantage of structural sensitivities of materials) *Light Elf Magic (Via\
-        \ Light Arrows) |-|Resistances= *The Light of Alfheim and Leviathan Axe (Gods\
-        \ can resist the innate attributes of the magic flowing through them. Was\
-        \ also capable of touching the Light of Alfheim, despite it being very painful\
-        \ for him and pulled Kratos out of the main shaft with his bare hands, with\
-        \ the Light of Alfheim being able to drive its victims insane before completely\
-        \ incinerating them and making them and their souls one with the Light. While\
-        \ in Bear Form, he"
+        \ with Resurrection Stones) *Danmaku (Via Falling Sky, [https://youtu.be/JMTKDlHtVzw?si=cPHuq8NV-60ElR4P&t=230\
+        \ where he shoots an arrow into the sky that multiplies] sheets of reality,\
+        \ as well as that of Phantoms) *Summoning (Can summon various spectral animals,\
+        \ such as a [https://youtu.be/JMTKDlHtVzw?si=9StRwvCizCoeVySm&t=279 pack of\
+        \ wolves] to take advantage of structural sensitivities of materials) *Light\
+        \ Elf Magic (Via Light Arrows) |-|Resistances= *The Light of Alfheim and Leviathan\
+        \ Axe (Gods can resist the innate attributes of the magic flowing through\
+        \ them. Was also capable of [https://youtu.be/_oOZG5-tqpA?si=AkGzo82M3MUxO3GA&t=11397\
+        \ touching the Light of Alfheim]. Even while younger and weaker, he could\
+        \ [https://youtu.be/8JRc6x0yQx4?si=FJh5dqyZnGAWuKUY&t=921 hurt Baldur after\
+        \ the latter lost his invulnerability] in his wolf form. As Bjorn, he was\
+        \ able to [https://www.youtube.com/watch?v=oP_n8kg_pAQ hold his own] against\
+        \ Spartan Rage Kratos, but Kratos eventually prevailed and would've killed\
+        \ him if Atreus didn't transform back to normal in time, though he was swatted\
+        \ away after that), higher with Shape-Shifting"
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|atreus|9542354
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-atreus-game-god-of-war
+    url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29_God_of_War
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Atreus (Canon, God of War)/TheFrostKnight
+    source_type: mediawiki
+    revision_id: '315993'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6746
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 2-C, higher with Transformations
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '*Superhuman Physical Characteristics *Longevity *Acrobatics (Is a skilled
+        climber. Capable of performing flips during combos) *Weapon Mastery (Is a
+        skilled archer) *Regeneration (Mid-Low) (Instantly healed a stab wound from
+        Baldur. Regenerated from the wounds Kratos left on him during their fight.)
+        *Telepathy (Can hear and feel animals'' thoughts/emotions) *Precognition (Foretold
+        of Thor coming his and Kratos'' home years prior to his actual arrival in
+        his dream) *Weather Manipulation and Necromancy (The world mourns his death
+        by causing a red storm and summoning undead monsters such as Draugr and Hel-Walkers)
+        *Transformation and Shapeshifting (Atreus'' god ability allows him to transform
+        into animals such as a bear and wolf) *Rage Power (Atreus is implied to have
+        his own Spartan Rage. However, it''s never fully shown as Atreus passes out
+        due to his sickness before he can even use it.) *Forcefield Creation (Can
+        activate a magical barrier from Sindri and Brok''s gear) *Soul Manipulation
+        (Atreus can take souls and transfer them into soulless beings or inanimate
+        objects such as marbles and his knife) *Dimensional Travel (Is capable of
+        traveling to different realms by thinking of the place he wants to go) *Spatial
+        Manipulation (Can close rifts in space) *Time Manipulation (Has various forms
+        of slowing down time such as Eagle Eye and Sharpshooter Stare) *Summoning
+        (Can summon various spectral animals to aid him in combat) **Energy Manipulation
+        with Storm of the Elks (Storm of the Elks summons a deer that discharges energy)
+        **Fire Manipulation and Ice Manipulation with Bitter Squirrel (Ratatoskr''s
+        Bitter aspect can enter enemies and either freeze or burn them) *Statistics
+        Amplification (Can charge the power of his arrows. Amplifies the power of
+        three of his arrow shots with Sharpshooter Stare) *Duplication with Runic
+        Arrows (Can fire multiple Runic Arrows at once via charging it) *Light Manipulation
+        and Statistics Reduction with Light Arrows (The Light Arrows are imbued with
+        the Light of Alfheim which can stun enemies, lessen the damage they deal,
+        and lower their defense) *Possibly Madness Manipulation and Deconstruction
+        (As Atreus'' Light Arrows are powered by the Light of Alfheim, it''s likely
+        his arrows have these abilities as well) *Electricity Manipulation and Paralysis
+        Inducement with Shock Arrows (Shock Arrows can electrocute enemies, stopping
+        them from moving and spread to multiple enemies) *Sound Manipulation and Explosion
+        Manipulation with Sound Arrows *Explosion Manipulation, limited Damage Boost,
+        Resistance Negation, Forcefield Negation and Homing Attack with Sigil Arrows
+        (Sigil Arrows can create elemental explosions if they come in contact with
+        an element or enemies with elemental Status Effects, make enemies more vulnerable
+        to Status Effects, nullify magic barriers, and cause explosions on contact
+        as well as home in on enemies with Splintered Sigil) *Deconstruction, Statistics
+        Reduction, and Madness Manipulation (Pulled Kratos out of the Light of Alfheim
+        without any ill effects) *Ice Manipulation and Soul Manipulation (Withstood
+        multiple hits from the Levithian Axe which froze a lightning bolt and shattered
+        souls in Faye''s battle with Thor) *Status Effect Inducement with Transformations
+        (Removes all status effects) **Fire Manipulation **Ice Manipulation **Poison
+        Manipulation **Electricity Manipulation **Perception Manipulation'
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Low Multiversal (Can damage Baldur with his bow/kicks. Knocked Kratos
+        back with his Shock Arrow. Threw Odin to the ground with a punch. Freya believes
+        she could've beaten Kratos if not for Atreus' presence. Kratos' Codex implies
+        Atreus' power is to be feared.), higher with Transformations (Could put up
+        a fight with Kratos in his Bjorn form, even when the former activated Spartan
+        Rage. Threatened to harm/kill Freya, someone considered to be equal to Kratos.
+        Bit through Odin's arm in Wolf form.)
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Infinite, likely Immeasurable (Can keep up with Kratos, Baldur, and Odin)
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Multiversal+ (Took a punch from Baldur when he was younger, albeit
+        it left him winded for a few seconds. Survived the destruction of Asgard which
+        shook Yggdrasil to its' roots though it knocked him out.)
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Has no experience fighting stronger beings on his own. Is mostly a ranged
+        fighter, having very few CQC attacks besides his bow. Can't swim. His strength
+        depends on his discipline and focus and tends to vary because of this. Category:TheFrostKnight
+        Category:Tier 2
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|atreus canon god of war
+      thefrostknight|315993
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-atreus-game-god-of-war
+    url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29_%28God_of_War%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Atreus
+    source_type: mediawiki
+    revision_id: '9542354'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 21630
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Gallery
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: ', higher with Shape-shifting'
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Complex Multiverse level (After realizing his godhood and training for
+        3 years, he is comparable to Valkyries like Hrist and Mist and can outright
+        fight against one of them on his ownGod of War: Ragnarok (2022)- The Summoning.
+        Even while younger and weaker, he could hurt Baldur after the latter lost
+        his invulnerability. Inferior to Heimdall, which would put him on par with
+        Ares), higher with Shapeshifting (Bit through Odin''s armGod of War: Ragnarok
+        (2022)- Unlocking the Mask in his wolf form. As Bjorn, he was able to hold
+        his own against Spartan Rage Kratos, but Kratos eventually prevailed and would''ve
+        killed him if Atreus didn''t transform back to normal in time. Charged at
+        Freya and threatened to kill her had Kratos not intervened. Easily tore apart
+        a Valkyrie in half)'
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (Can fight gods and monsters on par with Kratos in swiftness,
+        such as Garm, the Valkyries, Baldur, and Odin)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Complex Multiverse level (Withstood a direct blow from Baldur with only
+        his wind knocked out of him, and after getting his breath back, Atreus was
+        ready to fight against Baldur yet againGod of War (2018)- Jotunheim in Reach.
+        Somewhat comparable to, albeit much weaker than his father, Kratos. Survived
+        a vicious beating from Hrist and Mist without any lasting injuries. Able to
+        withstand beatdowns from the likes of Odin), higher with Shape-shifting (Even
+        stronger while in Wolf Form or as Bjorn, being on par with his father and
+        taking hits from Kratos' Spartan Rage)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Even before learning of his status as a god, Atreus singlehandedly
+        destroyed an army of dark elves and fought alone for close to a whole day
+        while protecting his father. His stamina further increased after realizing
+        his potential, being able to endure long fights and withstand falls from great
+        heights without suffering any noticeable fatigue)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, Tens of Meters with Talon Bow and summons. Several
+        Kilometers with Weather Manipulation (His screams caused the skies to darken
+        and erupt into a violent storm. Inapplicable in combat), Low Multiversal via
+        the Utangard (Can use it to travel to any of the Nine Realms)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Talon Bow, Knife, Resurrection Stones, Ingrid (Freyr's sword)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Genius (Has the innate talent to understand written and spoken languages
+        he has never heard of or read before by tracing their connections, being able
+        to quickly learn how to read the Niflheim and Muspelheim languages when given
+        a cipher, how to read Greek when given a jug of wine from Sparta, and even
+        how to speak the dead language of the World Serpent despite only hearing it
+        a handful of times. He can also understand some animals, and even Mimir, the
+        smartest man in the nine realms, took note of Atreus' linguistic capabilities
+        for someone of his age. A capable fighter, assisting his father in his fights
+        using his bow skills and even taking on gods such as Baldur alongside Kratos)
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "Retains his inability to use Resurrection stones on himself. Atreus\
+        \ inherited his father's temper, often losing control of himself and causing\
+        \ him to act recklessly, though this weakness appears to have mostly faded\
+        \ after receiving a scolding from Kratos. Initially had trouble controlling\
+        \ his transformations due to them being triggered on extreme emotional impulses\
+        \ like rage or sadness, but has since overcome them to maintain better control\
+        \ over his powers. His godhood and the power he draws from it heavily depend\
+        \ on his focus and self-belief, going from being unable to perform physically\
+        \ exerting tasks at his lowest to fighting on large with powerful gods and\
+        \ immortal warriors when in the right mindset, his focus for the game improves\
+        \ considerably. He doesn't know how to swim. He lacks wisdom, which causes\
+        \ him to get tricked by Odin. Notable Attacks/Techniques: *Lj\xF6sa (Nordic:\
+        \ \u16DA\u16C3\u16DF\u16CA\u16A8) Atreus fires arrows infused with the light\
+        \ of Alfheim that can stun opponents more easily than his regular arrows and\
+        \ can unleash large bursts of light to attack multiple opponents at once.\
+        \ *\xDEruma (Nordic: \u16A6\u16B1\u16A2\u16D7\u16A8) Atreus fires arrows imbued\
+        \ with the lightning of the dragon Hr\xE6zlyr, paralyzing foes and sending\
+        \ arcs of lightning to hit opponents near his original target. *Wrath of the\
+        \ Wolf: Summons a spectral wolf that pounces on enemies three times. *Falcon's\
+        \ Dive: Summons a cast of spectral falcons that dive into the ground. *Bitter\
+        \ Squirrel: Summons a spectral squirrel, Ratat\xF6skr, to unearth consumables\
+        \ that can restore Atreus' health. *Boar Stampede: Summons a stampede of spectral\
+        \ boars that trample enemies in their path. *Murder of Crows: Summons a murder\
+        \ of crows that swarms enemies. *Storm of the Elks: Summons a spectral elk\
+        \ that discharges destructive energy as it walks. ==Notable Matchups== Victories:\
+        \ *Thrud (God of War) Thrud's Profile (Starting Distance was 10 meters; Battle\
+        \ took place in Midgard) *Baldur (God of War) Baldur's Profile (Post-Godhood\
+        \ Realization Atreus was used; Battle took place in Asgard; Baldur was bloodlusted)\
+        \ *Ni\xF0h\xF6gg (God of War) Ni\xF0h\xF6gg's Profile (Norse Mythology Kratos\
+        \ and Post-Godhood Realization Atreus fought together against Ni\xF0h\xF6\
+        gg) *Riku (Kingdom Hearts) Riku's Profile (KH3 Riku and Ragnar\xF6k Atreus\
+        \ were used. Match was decided on Tigger's KH2 Minigame; Speed was equalized)\
+        \ Losses: *Thor (God of War) Thor's Profile (Post-Godhood Realization Atreus\
+        \ was used) *Hercules (God of War) Hercules' Profile (Battle took place at\
+        \ the Lake of Nine; Atreus' Shapeshifting is allowed) *Frisk (Undertale) Frisk's\
+        \ Profile (Low 1-C Frisk was used, speed was equalized, starting distance\
+        \ was 10 meters and Frisk had all of their optional equipment) Inconclusive:\
+        \ ==Gallery== atreus ragnorak.png|Atreus as he appears in the cover art of\
+        \ God of War: Ragnar\xF6k ==References== Category:Characters Category:God\
+        \ of War Category:Berserkers Category:Bow Users Category:Concept Users Category:Deconstruction\
+        \ Users Category:Demigods Category:Electricity Users Category:Enhanced Senses\
+        \ Users Category:Explosion Users Category:Fantasy Characters Category:Forcefield\
+        \ Users Category:Game Bosses Category:Game Characters Category:Giants Category:Gods\
+        \ Category:Good Characters Category:Heroes Category:Hunters Category:Hybrids\
+        \ Category:Immortals Category:Kids Category:Knife Users Category:Light Users\
+        \ Category:Madness Users Category:Magic Users Category:Male Characters Category:Mind\
+        \ Users Category:Norse Gods Category:Paralysis Users Category:Playable Characters\
+        \ Category:Precognition Users Category:Probability Users Category:Protagonists\
+        \ Category:Rage Users Category:Regeneration Users Category:Resurrection Users\
+        \ Category:Rune Users Category:Shapeshifters Category:Soul Users Category:Sound\
+        \ Users Category:Statistics Reduction Users Category:Status Effect Users Category:Stealth\
+        \ Masters Category:Summoners Category:Sword Users Category:Teenagers Category:Telepaths\
+        \ Category:Video Game Characters Category:Weather Users"
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Innate={{Border|Scroll=Yes|Visible=No|Content=\
+        \ *Superhuman Physical Characteristics *Immortality (Types 1 & 3; via his\
+        \ Godhood and regenerative abilities inherited from his father, Kratos) *Soul\
+        \ Magic (Divine; Can also transfer souls from dying beings to others, using\
+        \ objects as a proxy, [https://youtu.be/N3XmXt_BIao?si=5MZvCO3kK0rfeSK6&t=8\
+        \ as he does when he transfers Fenrir's soul into Garm from his knife], after\
+        \ he previously [https://www.youtube.com/watch?v=mqQJ6gvwtik&pp=ygUXYXRyZXVzIGdldHMgZmVucmlyIHNvdWw%3D\
+        \ stored sealed Fenrir's soul in it]. Had gone from [https://youtu.be/WhuknTveD9w?si=BY_1PKnQPR6Je9zy&t=102\
+        \ struggling to deal with a human Reaver]) *Dimensional Travel (Via the Utangard,\
+        \ a plane of existence [https://www.youtube.com/watch?v=RSZcoqybyXg&pp=ygUYYXRyZXVzIGdvZXMgdG8gaXJvbndvb2Qg\
+        \ which allows him to travel to other Realms]) *Telepathy (Can [https://www.youtube.com/watch?v=wblyz_21v7U&t=6m55s\
+        \ sense and hear] the thoughts and emotions of other beings) *Automatic Translation\
+        \ (Is considered to have [https://youtu.be/_oOZG5-tqpA?si=wuntxn8HX22qfgDn&t=29260\
+        \ an extraordinary faculty for language]) *Acrobatics ([https://youtu.be/z2LgiP9un-Q?si=veq413JUmJNe9t0b&t=23m55s\
+        \ As shown here]) *Time Slow (Via Eagle Eye techniques, [https://youtu.be/JMTKDlHtVzw?si=vpZ4W5iqqeWgbNwc&t=138\
+        \ where he slows down time] through various actions) *Stealth Mastery *Skilled\
+        \ Archer and Knife Wielder *Limited Rage Power & Berserk Mode ([https://www.youtube.com/watch?v=LaR-Fqv1zlE&t=65s\
+        \ Inherited] his father's [https://www.youtube.com/watch?v=rKK0mbVs0Jk&t=1m10s\
+        \ Spartan Rage]) *Limited Precognition ([https://www.youtube.com/watch?v=CumDJhXjuf8&t=45m28s\
+        \ Saw Thor attack their house] at the end of Fimbulwinter, signaling the coming\
+        \ of Ragnar\xF6k, in his dreams) *Limited Weather Manipulation (After learning\
+        \ of his Godhood and powers, upon meeting with Sindri, Atreus' anger and frustration\
+        \ at the latter\u2019s [https://www.youtube.com/watch?v=H5wLY85L6fo&t=28s\
+        \ inability to make up with Brok results in him snapping, with every yell\
+        \ Atreus makes causing the sky to worsen bit by bit]) *Forcefield Creation\
+        \ (Can create a shield of magical energy) *Resurrection (Can revive others\
+        \ with Resurrection Stones) *Danmaku (Via Falling Sky, [https://youtu.be/JMTKDlHtVzw?si=cPHuq8NV-60ElR4P&t=230\
+        \ where he shoots an arrow into the sky that multiplies] sheets of reality,\
+        \ as well as that of Phantoms) *Summoning (Can summon various spectral animals,\
+        \ such as a [https://youtu.be/JMTKDlHtVzw?si=9StRwvCizCoeVySm&t=279 pack of\
+        \ wolves] to take advantage of structural sensitivities of materials) *Light\
+        \ Elf Magic (Via Light Arrows) |-|Resistances= *The Light of Alfheim and Leviathan\
+        \ Axe (Gods can resist the innate attributes of the magic flowing through\
+        \ them. Was also capable of [https://youtu.be/_oOZG5-tqpA?si=AkGzo82M3MUxO3GA&t=11397\
+        \ touching the Light of Alfheim]. Even while younger and weaker, he could\
+        \ [https://youtu.be/8JRc6x0yQx4?si=FJh5dqyZnGAWuKUY&t=921 hurt Baldur after\
+        \ the latter lost his invulnerability] in his wolf form. As Bjorn, he was\
+        \ able to [https://www.youtube.com/watch?v=oP_n8kg_pAQ hold his own] against\
+        \ Spartan Rage Kratos, but Kratos eventually prevailed and would've killed\
+        \ him if Atreus didn't transform back to normal in time, though he was swatted\
+        \ away after that), higher with Shape-Shifting"
+      source_id: vsbattles-atreus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|atreus|9542354
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-atreus-game-god-of-war
+    url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29_%28God_of_War%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Atreus (Canon, God of War)/TheFrostKnight
+    source_type: mediawiki
+    revision_id: '315993'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6746
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 2-C, higher with Transformations
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '*Superhuman Physical Characteristics *Longevity *Acrobatics (Is a skilled
+        climber. Capable of performing flips during combos) *Weapon Mastery (Is a
+        skilled archer) *Regeneration (Mid-Low) (Instantly healed a stab wound from
+        Baldur. Regenerated from the wounds Kratos left on him during their fight.)
+        *Telepathy (Can hear and feel animals'' thoughts/emotions) *Precognition (Foretold
+        of Thor coming his and Kratos'' home years prior to his actual arrival in
+        his dream) *Weather Manipulation and Necromancy (The world mourns his death
+        by causing a red storm and summoning undead monsters such as Draugr and Hel-Walkers)
+        *Transformation and Shapeshifting (Atreus'' god ability allows him to transform
+        into animals such as a bear and wolf) *Rage Power (Atreus is implied to have
+        his own Spartan Rage. However, it''s never fully shown as Atreus passes out
+        due to his sickness before he can even use it.) *Forcefield Creation (Can
+        activate a magical barrier from Sindri and Brok''s gear) *Soul Manipulation
+        (Atreus can take souls and transfer them into soulless beings or inanimate
+        objects such as marbles and his knife) *Dimensional Travel (Is capable of
+        traveling to different realms by thinking of the place he wants to go) *Spatial
+        Manipulation (Can close rifts in space) *Time Manipulation (Has various forms
+        of slowing down time such as Eagle Eye and Sharpshooter Stare) *Summoning
+        (Can summon various spectral animals to aid him in combat) **Energy Manipulation
+        with Storm of the Elks (Storm of the Elks summons a deer that discharges energy)
+        **Fire Manipulation and Ice Manipulation with Bitter Squirrel (Ratatoskr''s
+        Bitter aspect can enter enemies and either freeze or burn them) *Statistics
+        Amplification (Can charge the power of his arrows. Amplifies the power of
+        three of his arrow shots with Sharpshooter Stare) *Duplication with Runic
+        Arrows (Can fire multiple Runic Arrows at once via charging it) *Light Manipulation
+        and Statistics Reduction with Light Arrows (The Light Arrows are imbued with
+        the Light of Alfheim which can stun enemies, lessen the damage they deal,
+        and lower their defense) *Possibly Madness Manipulation and Deconstruction
+        (As Atreus'' Light Arrows are powered by the Light of Alfheim, it''s likely
+        his arrows have these abilities as well) *Electricity Manipulation and Paralysis
+        Inducement with Shock Arrows (Shock Arrows can electrocute enemies, stopping
+        them from moving and spread to multiple enemies) *Sound Manipulation and Explosion
+        Manipulation with Sound Arrows *Explosion Manipulation, limited Damage Boost,
+        Resistance Negation, Forcefield Negation and Homing Attack with Sigil Arrows
+        (Sigil Arrows can create elemental explosions if they come in contact with
+        an element or enemies with elemental Status Effects, make enemies more vulnerable
+        to Status Effects, nullify magic barriers, and cause explosions on contact
+        as well as home in on enemies with Splintered Sigil) *Deconstruction, Statistics
+        Reduction, and Madness Manipulation (Pulled Kratos out of the Light of Alfheim
+        without any ill effects) *Ice Manipulation and Soul Manipulation (Withstood
+        multiple hits from the Levithian Axe which froze a lightning bolt and shattered
+        souls in Faye''s battle with Thor) *Status Effect Inducement with Transformations
+        (Removes all status effects) **Fire Manipulation **Ice Manipulation **Poison
+        Manipulation **Electricity Manipulation **Perception Manipulation'
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Low Multiversal (Can damage Baldur with his bow/kicks. Knocked Kratos
+        back with his Shock Arrow. Threw Odin to the ground with a punch. Freya believes
+        she could've beaten Kratos if not for Atreus' presence. Kratos' Codex implies
+        Atreus' power is to be feared.), higher with Transformations (Could put up
+        a fight with Kratos in his Bjorn form, even when the former activated Spartan
+        Rage. Threatened to harm/kill Freya, someone considered to be equal to Kratos.
+        Bit through Odin's arm in Wolf form.)
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Infinite, likely Immeasurable (Can keep up with Kratos, Baldur, and Odin)
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Multiversal+ (Took a punch from Baldur when he was younger, albeit
+        it left him winded for a few seconds. Survived the destruction of Asgard which
+        shook Yggdrasil to its' roots though it knocked him out.)
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Has no experience fighting stronger beings on his own. Is mostly a ranged
+        fighter, having very few CQC attacks besides his bow. Can't swim. His strength
+        depends on his discipline and focus and tends to vary because of this. Category:TheFrostKnight
+        Category:Tier 2
+      source_id: character-stats-profiles-atreus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|atreus canon god of war
+      thefrostknight|315993
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-atreus-game
+    url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Atreus
+    source_type: mediawiki
+    revision_id: '9542354'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 21630
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Gallery
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: ', higher with Shape-shifting'
       source_id: vsbattles-atreus-game
       provider_id: vsbattles
       authority: high
@@ -3016,11 +2909,10 @@ repair:
         \ Profile (Low 1-C Frisk was used, speed was equalized, starting distance\
         \ was 10 meters and Frisk had all of their optional equipment) Inconclusive:\
         \ ==Gallery== atreus ragnorak.png|Atreus as he appears in the cover art of\
-        \ God of War: Ragnar\xF6k ==References== {{Scroll box|content={{Reflist|2}}}}\
-        \ {{Discussions}} Category:Characters Category:God of War Category:Berserkers\
-        \ Category:Bow Users Category:Concept Users Category:Deconstruction Users\
-        \ Category:Demigods Category:Electricity Users Category:Enhanced Senses Users\
-        \ Category:Explosion Users Category:Fantasy Characters Category:Forcefield\
+        \ God of War: Ragnar\xF6k ==References== Category:Characters Category:God\
+        \ of War Category:Berserkers Category:Bow Users Category:Concept Users Category:Deconstruction\
+        \ Users Category:Demigods Category:Electricity Users Category:Enhanced Senses\
+        \ Users Category:Explosion Users Category:Fantasy Characters Category:Forcefield\
         \ Users Category:Game Bosses Category:Game Characters Category:Giants Category:Gods\
         \ Category:Good Characters Category:Heroes Category:Hunters Category:Hybrids\
         \ Category:Immortals Category:Kids Category:Knife Users Category:Light Users\
@@ -3032,6 +2924,52 @@ repair:
         \ Users Category:Statistics Reduction Users Category:Status Effect Users Category:Stealth\
         \ Masters Category:Summoners Category:Sword Users Category:Teenagers Category:Telepaths\
         \ Category:Video Game Characters Category:Weather Users"
+      source_id: vsbattles-atreus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Innate={{Border|Scroll=Yes|Visible=No|Content=\
+        \ *Superhuman Physical Characteristics *Immortality (Types 1 & 3; via his\
+        \ Godhood and regenerative abilities inherited from his father, Kratos) *Soul\
+        \ Magic (Divine; Can also transfer souls from dying beings to others, using\
+        \ objects as a proxy, [https://youtu.be/N3XmXt_BIao?si=5MZvCO3kK0rfeSK6&t=8\
+        \ as he does when he transfers Fenrir's soul into Garm from his knife], after\
+        \ he previously [https://www.youtube.com/watch?v=mqQJ6gvwtik&pp=ygUXYXRyZXVzIGdldHMgZmVucmlyIHNvdWw%3D\
+        \ stored sealed Fenrir's soul in it]. Had gone from [https://youtu.be/WhuknTveD9w?si=BY_1PKnQPR6Je9zy&t=102\
+        \ struggling to deal with a human Reaver]) *Dimensional Travel (Via the Utangard,\
+        \ a plane of existence [https://www.youtube.com/watch?v=RSZcoqybyXg&pp=ygUYYXRyZXVzIGdvZXMgdG8gaXJvbndvb2Qg\
+        \ which allows him to travel to other Realms]) *Telepathy (Can [https://www.youtube.com/watch?v=wblyz_21v7U&t=6m55s\
+        \ sense and hear] the thoughts and emotions of other beings) *Automatic Translation\
+        \ (Is considered to have [https://youtu.be/_oOZG5-tqpA?si=wuntxn8HX22qfgDn&t=29260\
+        \ an extraordinary faculty for language]) *Acrobatics ([https://youtu.be/z2LgiP9un-Q?si=veq413JUmJNe9t0b&t=23m55s\
+        \ As shown here]) *Time Slow (Via Eagle Eye techniques, [https://youtu.be/JMTKDlHtVzw?si=vpZ4W5iqqeWgbNwc&t=138\
+        \ where he slows down time] through various actions) *Stealth Mastery *Skilled\
+        \ Archer and Knife Wielder *Limited Rage Power & Berserk Mode ([https://www.youtube.com/watch?v=LaR-Fqv1zlE&t=65s\
+        \ Inherited] his father's [https://www.youtube.com/watch?v=rKK0mbVs0Jk&t=1m10s\
+        \ Spartan Rage]) *Limited Precognition ([https://www.youtube.com/watch?v=CumDJhXjuf8&t=45m28s\
+        \ Saw Thor attack their house] at the end of Fimbulwinter, signaling the coming\
+        \ of Ragnar\xF6k, in his dreams) *Limited Weather Manipulation (After learning\
+        \ of his Godhood and powers, upon meeting with Sindri, Atreus' anger and frustration\
+        \ at the latter\u2019s [https://www.youtube.com/watch?v=H5wLY85L6fo&t=28s\
+        \ inability to make up with Brok results in him snapping, with every yell\
+        \ Atreus makes causing the sky to worsen bit by bit]) *Forcefield Creation\
+        \ (Can create a shield of magical energy) *Resurrection (Can revive others\
+        \ with Resurrection Stones) *Danmaku (Via Falling Sky, [https://youtu.be/JMTKDlHtVzw?si=cPHuq8NV-60ElR4P&t=230\
+        \ where he shoots an arrow into the sky that multiplies] sheets of reality,\
+        \ as well as that of Phantoms) *Summoning (Can summon various spectral animals,\
+        \ such as a [https://youtu.be/JMTKDlHtVzw?si=9StRwvCizCoeVySm&t=279 pack of\
+        \ wolves] to take advantage of structural sensitivities of materials) *Light\
+        \ Elf Magic (Via Light Arrows) |-|Resistances= *The Light of Alfheim and Leviathan\
+        \ Axe (Gods can resist the innate attributes of the magic flowing through\
+        \ them. Was also capable of [https://youtu.be/_oOZG5-tqpA?si=AkGzo82M3MUxO3GA&t=11397\
+        \ touching the Light of Alfheim]. Even while younger and weaker, he could\
+        \ [https://youtu.be/8JRc6x0yQx4?si=FJh5dqyZnGAWuKUY&t=921 hurt Baldur after\
+        \ the latter lost his invulnerability] in his wolf form. As Bjorn, he was\
+        \ able to [https://www.youtube.com/watch?v=oP_n8kg_pAQ hold his own] against\
+        \ Spartan Rage Kratos, but Kratos eventually prevailed and would've killed\
+        \ him if Atreus didn't transform back to normal in time, though he was swatted\
+        \ away after that), higher with Shape-Shifting"
       source_id: vsbattles-atreus-game
       provider_id: vsbattles
       authority: high
@@ -3053,7 +2991,7 @@ repair:
     url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -3076,6 +3014,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -3089,7 +3028,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -3100,27 +3039,25 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: "2-C, higher with Transformations Name: Atreus, Loki Origin: God of War\
-        \ (2018) Gender: Male Age: 11 during God of War (2018), 13-14 during God of\
-        \ War: Ragnarok Classification: Half-J\xF6tunn, Demi-God"
+      value: 2-C, higher with Transformations
       source_id: character-stats-profiles-atreus-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base= *Superhuman Physical Characteristics *Longevity *Acrobatics (Is
-        a skilled climber. Capable of performing flips during combos) *Weapon Mastery
-        (Is a skilled archer) *Regeneration (Mid-Low) (Instantly healed a stab wound
-        from Baldur. Regenerated from the wounds Kratos left on him during their fight.)
-        *Telepathy (Can hear and feel animals' thoughts/emotions) *Precognition (Foretold
-        of Thor coming his and Kratos' home years prior to his actual arrival in his
-        dream) *Weather Manipulation and Necromancy (The world mourns his death by
-        causing a red storm and summoning undead monsters such as Draugr and Hel-Walkers)
-        *Transformation and Shapeshifting (Atreus' god ability allows him to transform
+      value: '*Superhuman Physical Characteristics *Longevity *Acrobatics (Is a skilled
+        climber. Capable of performing flips during combos) *Weapon Mastery (Is a
+        skilled archer) *Regeneration (Mid-Low) (Instantly healed a stab wound from
+        Baldur. Regenerated from the wounds Kratos left on him during their fight.)
+        *Telepathy (Can hear and feel animals'' thoughts/emotions) *Precognition (Foretold
+        of Thor coming his and Kratos'' home years prior to his actual arrival in
+        his dream) *Weather Manipulation and Necromancy (The world mourns his death
+        by causing a red storm and summoning undead monsters such as Draugr and Hel-Walkers)
+        *Transformation and Shapeshifting (Atreus'' god ability allows him to transform
         into animals such as a bear and wolf) *Rage Power (Atreus is implied to have
-        his own Spartan Rage. However, it's never fully shown as Atreus passes out
+        his own Spartan Rage. However, it''s never fully shown as Atreus passes out
         due to his sickness before he can even use it.) *Forcefield Creation (Can
-        activate a magical barrier from Sindri and Brok's gear) *Soul Manipulation
+        activate a magical barrier from Sindri and Brok''s gear) *Soul Manipulation
         (Atreus can take souls and transfer them into soulless beings or inanimate
         objects such as marbles and his knife) *Dimensional Travel (Is capable of
         traveling to different realms by thinking of the place he wants to go) *Spatial
@@ -3128,15 +3065,15 @@ repair:
         of slowing down time such as Eagle Eye and Sharpshooter Stare) *Summoning
         (Can summon various spectral animals to aid him in combat) **Energy Manipulation
         with Storm of the Elks (Storm of the Elks summons a deer that discharges energy)
-        **Fire Manipulation and Ice Manipulation with Bitter Squirrel (Ratatoskr's
-        Bitter aspect can enter enemies and either freeze or burn them) |-|Arrows=
-        *Statistics Amplification (Can charge the power of his arrows. Amplifies the
-        power of three of his arrow shots with Sharpshooter Stare) *Duplication with
-        Runic Arrows (Can fire multiple Runic Arrows at once via charging it) *Light
-        Manipulation and Statistics Reduction with Light Arrows (The Light Arrows
-        are imbued with the Light of Alfheim which can stun enemies, lessen the damage
-        they deal, and lower their defense) *Possibly Madness Manipulation and Deconstruction
-        (As Atreus' Light Arrows are powered by the Light of Alfheim, it's likely
+        **Fire Manipulation and Ice Manipulation with Bitter Squirrel (Ratatoskr''s
+        Bitter aspect can enter enemies and either freeze or burn them) *Statistics
+        Amplification (Can charge the power of his arrows. Amplifies the power of
+        three of his arrow shots with Sharpshooter Stare) *Duplication with Runic
+        Arrows (Can fire multiple Runic Arrows at once via charging it) *Light Manipulation
+        and Statistics Reduction with Light Arrows (The Light Arrows are imbued with
+        the Light of Alfheim which can stun enemies, lessen the damage they deal,
+        and lower their defense) *Possibly Madness Manipulation and Deconstruction
+        (As Atreus'' Light Arrows are powered by the Light of Alfheim, it''s likely
         his arrows have these abilities as well) *Electricity Manipulation and Paralysis
         Inducement with Shock Arrows (Shock Arrows can electrocute enemies, stopping
         them from moving and spread to multiple enemies) *Sound Manipulation and Explosion
@@ -3145,14 +3082,13 @@ repair:
         (Sigil Arrows can create elemental explosions if they come in contact with
         an element or enemies with elemental Status Effects, make enemies more vulnerable
         to Status Effects, nullify magic barriers, and cause explosions on contact
-        as well as home in on enemies with Splintered Sigil) |-| Resistances= *Deconstruction,
-        Statistics Reduction, and Madness Manipulation (Pulled Kratos out of the Light
-        of Alfheim without any ill effects) *Ice Manipulation and Soul Manipulation
-        (Withstood multiple hits from the Levithian Axe which froze a lightning bolt
-        and shattered souls in Faye's battle with Thor) *Status Effect Inducement
-        with Transformations (Removes all status effects) **Fire Manipulation **Ice
-        Manipulation **Poison Manipulation **Electricity Manipulation **Perception
-        Manipulation
+        as well as home in on enemies with Splintered Sigil) *Deconstruction, Statistics
+        Reduction, and Madness Manipulation (Pulled Kratos out of the Light of Alfheim
+        without any ill effects) *Ice Manipulation and Soul Manipulation (Withstood
+        multiple hits from the Levithian Axe which froze a lightning bolt and shattered
+        souls in Faye''s battle with Thor) *Status Effect Inducement with Transformations
+        (Removes all status effects) **Fire Manipulation **Ice Manipulation **Poison
+        Manipulation **Electricity Manipulation **Perception Manipulation'
       source_id: character-stats-profiles-atreus-game
       provider_id: character_stats_profiles
       authority: high
@@ -3206,466 +3142,9 @@ repair:
       thefrostknight|315993
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-atreus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Atreus_Game_God_of_War
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id021
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Atreus
-    source_type: mediawiki
-    revision_id: '9542354'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 21630
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - Gallery
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id022
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: "{{1-C}}, higher with Shape-shifting Name: Atreus (Greek: \u1F08\u03C4\
-        \u03C1\u03B5\u03CD\u03C2), Loki (Nordic: \u16DA\u16DF\u16B2\u16C1), Bj\xF6\
-        rn (Bear form. The name means \"Bear\") Origin: God of War Gender: Male Age:\
-        \ 11 years old during GoW2018, 14 years old during Ragnar\xF6k Classification:\
-        \ God/Jottun/Human hybrid"
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Innate={{Border|Scroll=Yes|Visible=No|Content=\
-        \ *Superhuman Physical Characteristics *Immortality (Types 1 & 3; via his\
-        \ Godhood and regenerative abilities inherited from his father, Kratos) *Soul\
-        \ Magic (Divine; Can also transfer souls from dying beings to others, using\
-        \ objects as a proxy, as he does when he transfers Fenrir's soul into Garm\
-        \ from his knife, after he previously stored sealed Fenrir's soul in it) *Accelerated\
-        \ Development (Training & Battle, Physical Statistics & Abilities; Showcases\
-        \ a great growth in his physical capabilities proportional to his confidenceGod\
-        \ of War (2018). Had gone from struggling to deal with a human Reaver to being\
-        \ able to singlehandedly destroy an army of dark elves and fighting alone\
-        \ for more than day, to hurting Baldur after the latter lost his invulnerability.\
-        \ After merely three years of combat training in the woods, he becomes capable\
-        \ of holding his own against Valkyries in combat, who are considered among\
-        \ the most elite warriors in all Nine Realms, and trusted enough to train\
-        \ Odin's forces. This growth culminates in him being able to survive against\
-        \ and barely hurt Odin with his punchesGod of War: Ragnarok - The Realms at\
-        \ War) *Dimensional Travel (Via the Utangard, a plane of existence which allows\
-        \ him to travel to other Realms via his dreams, something he learns to do\
-        \ at will) *Enhanced Senses (Can sense the power of other beings, as well\
-        \ as their distressLost Pages of Norse Myth- Page 6: Like Father, Like Son)\
-        \ *Telepathy (Can sense and hear the thoughts and emotions of other beingsGod\
-        \ of War: Lore and Legends) *Automatic Translation (Is considered to have\
-        \ an extraordinary faculty for language by Mimir, one of the most knowledgeable\
-        \ beings in all the Realms. Can piece together writing that he shouldn't otherwise\
-        \ know through the overall interconnectedness of language. Immediately understood\
-        \ the language of the Dark Elves despite having never been in their realm\
-        \ before) *Regeneration (At least Mid-Low; Was able to regenerate from a knife\
-        \ stabbed into his shoulder by Baldur. Later heals from wounds inflicted on\
-        \ him in his Bear form by Kratos) *Shapeshifting (Can turn into various animals\
-        \ such as a wolf and a bearGod of War: Ragnar\xF6k (2022) - Surviving Fimbulwinter)\
-        \ *Acrobatics (As shown hereGod of War Ragnarok - The Runaway) *Time Slow\
-        \ (Via Eagle Eye techniques, where he slows down timeGod of War: Ragnarok\
-        \ - Skill Tree through various actions) *Stealth Mastery *Skilled Archer and\
-        \ Knife Wielder *Limited Rage Power & Berserk Mode (InheritedGod of War (2018)\
-        \ - Behind the Lock his father's Spartan RageGod of War: Ragnar\xF6k (2022)\
-        \ - The Lost Sanctuary) *Limited Precognition (Saw Thor attack their house\
-        \ at the end of Fimbulwinter, signaling the coming of Ragnar\xF6k, in his\
-        \ dreamsGod of War (2018) - Secret Thor Ending) *Limited Weather Manipulation\
-        \ (After learning of his Godhood and powers, upon meeting with Sindri, Atreus'\
-        \ anger and frustration at the latter\u2019s inability to make up with Brok\
-        \ results in him snapping, with every yell Atreus makes causing the sky to\
-        \ worsen bit by bitGod of War (2018) - Return to the Summit) *Forcefield Creation\
-        \ (Can create a shield of magical energy) *Resurrection (Can revive others\
-        \ with Resurrection Stones) }} |-|Archery and Summoning= *Statistics Amplification\
-        \ (Via Sharpshooter's Stare, which increases the power of each shot of his\
-        \ arrows) *Explosion Manipulation (Via Splintered Sigil, which allows Sigil\
-        \ Arrows to explode upon contact with their targets) *Electricity Manipulation,\
-        \ Paralysis Inducement & Status Effect Inducement (Via Shock Arrows, which\
-        \ can briefly paralyze enemies, inducing them to freeze in place for a short\
-        \ whileGod of War (2018) Prima Guide- Page 15) *Danmaku (Via Falling Sky,\
-        \ where he shoots an arrow into the sky that multiplies and rains down on\
-        \ his opponents) *Intangibility Negation (His arrows can negate the intangibility\
-        \ of Revenants, who can travel throughGod of War (2018) Official Strategy\
-        \ Guide by Prima- Page 72 sheets of realityGod of War Lore and Legends- Page\
-        \ 97, as well as that of Phantoms) *Summoning (Can summon various spectral\
-        \ animals, such as a pack of wolves, a flight of falcons, an ibex and a squirrel)\
-        \ *Status Effect Inducement (With Sigil and Sonic Arrows. His flight of falcons\
-        \ can apply the status effect of his equipped arrows) *Sound Manipulation\
-        \ (Via Sonic Arrows, which use sonic vibrationsGod of War: Ragnarok to take\
-        \ advantage of structural sensitivities of materials) *Light Elf Magic (Via\
-        \ Light Arrows) |-|Resistances= *The Light of Alfheim and Leviathan Axe (Gods\
-        \ can resist the innate attributes of the magic flowing through them. Was\
-        \ also capable of touching the Light of Alfheim, despite it being very painful\
-        \ for him and pulled Kratos out of the main shaft with his bare hands, with\
-        \ the Light of Alfheim being able to drive its victims insane before completely\
-        \ incinerating them and making them and their souls one with the Light. While\
-        \ in Bear Form, he"
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Complex Multiverse level (After realizing his godhood and training for
-        3 years, he is comparable to Valkyries like Hrist and Mist and can outright
-        fight against one of them on his ownGod of War: Ragnarok (2022)- The Summoning.
-        Even while younger and weaker, he could hurt Baldur after the latter lost
-        his invulnerability. Inferior to Heimdall, which would put him on par with
-        Ares), higher with Shapeshifting (Bit through Odin''s armGod of War: Ragnarok
-        (2022)- Unlocking the Mask in his wolf form. As Bjorn, he was able to hold
-        his own against Spartan Rage Kratos, but Kratos eventually prevailed and would''ve
-        killed him if Atreus didn''t transform back to normal in time. Charged at
-        Freya and threatened to kill her had Kratos not intervened. Easily tore apart
-        a Valkyrie in half)'
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Immeasurable (Can fight gods and monsters on par with Kratos in swiftness,
-        such as Garm, the Valkyries, Baldur, and Odin)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level (Withstood a direct blow from Baldur with only
-        his wind knocked out of him, and after getting his breath back, Atreus was
-        ready to fight against Baldur yet againGod of War (2018)- Jotunheim in Reach.
-        Somewhat comparable to, albeit much weaker than his father, Kratos. Survived
-        a vicious beating from Hrist and Mist without any lasting injuries. Able to
-        withstand beatdowns from the likes of Odin), higher with Shape-shifting (Even
-        stronger while in Wolf Form or as Bjorn, being on par with his father and
-        taking hits from Kratos' Spartan Rage)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Even before learning of his status as a god, Atreus singlehandedly
-        destroyed an army of dark elves and fought alone for close to a whole day
-        while protecting his father. His stamina further increased after realizing
-        his potential, being able to endure long fights and withstand falls from great
-        heights without suffering any noticeable fatigue)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Tens of Meters with Talon Bow and summons. Several
-        Kilometers with Weather Manipulation (His screams caused the skies to darken
-        and erupt into a violent storm. Inapplicable in combat), Low Multiversal via
-        the Utangard (Can use it to travel to any of the Nine Realms)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Talon Bow, Knife, Resurrection Stones, Ingrid (Freyr's sword)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Genius (Has the innate talent to understand written and spoken languages
-        he has never heard of or read before by tracing their connections, being able
-        to quickly learn how to read the Niflheim and Muspelheim languages when given
-        a cipher, how to read Greek when given a jug of wine from Sparta, and even
-        how to speak the dead language of the World Serpent despite only hearing it
-        a handful of times. He can also understand some animals, and even Mimir, the
-        smartest man in the nine realms, took note of Atreus' linguistic capabilities
-        for someone of his age. A capable fighter, assisting his father in his fights
-        using his bow skills and even taking on gods such as Baldur alongside Kratos)
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Retains his inability to use Resurrection stones on himself. Atreus\
-        \ inherited his father's temper, often losing control of himself and causing\
-        \ him to act recklessly, though this weakness appears to have mostly faded\
-        \ after receiving a scolding from Kratos. Initially had trouble controlling\
-        \ his transformations due to them being triggered on extreme emotional impulses\
-        \ like rage or sadness, but has since overcome them to maintain better control\
-        \ over his powers. His godhood and the power he draws from it heavily depend\
-        \ on his focus and self-belief, going from being unable to perform physically\
-        \ exerting tasks at his lowest to fighting on large with powerful gods and\
-        \ immortal warriors when in the right mindset, his focus for the game improves\
-        \ considerably. He doesn't know how to swim. He lacks wisdom, which causes\
-        \ him to get tricked by Odin. Notable Attacks/Techniques: *Lj\xF6sa (Nordic:\
-        \ \u16DA\u16C3\u16DF\u16CA\u16A8) Atreus fires arrows infused with the light\
-        \ of Alfheim that can stun opponents more easily than his regular arrows and\
-        \ can unleash large bursts of light to attack multiple opponents at once.\
-        \ *\xDEruma (Nordic: \u16A6\u16B1\u16A2\u16D7\u16A8) Atreus fires arrows imbued\
-        \ with the lightning of the dragon Hr\xE6zlyr, paralyzing foes and sending\
-        \ arcs of lightning to hit opponents near his original target. *Wrath of the\
-        \ Wolf: Summons a spectral wolf that pounces on enemies three times. *Falcon's\
-        \ Dive: Summons a cast of spectral falcons that dive into the ground. *Bitter\
-        \ Squirrel: Summons a spectral squirrel, Ratat\xF6skr, to unearth consumables\
-        \ that can restore Atreus' health. *Boar Stampede: Summons a stampede of spectral\
-        \ boars that trample enemies in their path. *Murder of Crows: Summons a murder\
-        \ of crows that swarms enemies. *Storm of the Elks: Summons a spectral elk\
-        \ that discharges destructive energy as it walks. ==Notable Matchups== Victories:\
-        \ *Thrud (God of War) Thrud's Profile (Starting Distance was 10 meters; Battle\
-        \ took place in Midgard) *Baldur (God of War) Baldur's Profile (Post-Godhood\
-        \ Realization Atreus was used; Battle took place in Asgard; Baldur was bloodlusted)\
-        \ *Ni\xF0h\xF6gg (God of War) Ni\xF0h\xF6gg's Profile (Norse Mythology Kratos\
-        \ and Post-Godhood Realization Atreus fought together against Ni\xF0h\xF6\
-        gg) *Riku (Kingdom Hearts) Riku's Profile (KH3 Riku and Ragnar\xF6k Atreus\
-        \ were used. Match was decided on Tigger's KH2 Minigame; Speed was equalized)\
-        \ Losses: *Thor (God of War) Thor's Profile (Post-Godhood Realization Atreus\
-        \ was used) *Hercules (God of War) Hercules' Profile (Battle took place at\
-        \ the Lake of Nine; Atreus' Shapeshifting is allowed) *Frisk (Undertale) Frisk's\
-        \ Profile (Low 1-C Frisk was used, speed was equalized, starting distance\
-        \ was 10 meters and Frisk had all of their optional equipment) Inconclusive:\
-        \ ==Gallery== atreus ragnorak.png|Atreus as he appears in the cover art of\
-        \ God of War: Ragnar\xF6k ==References== {{Scroll box|content={{Reflist|2}}}}\
-        \ {{Discussions}} Category:Characters Category:God of War Category:Berserkers\
-        \ Category:Bow Users Category:Concept Users Category:Deconstruction Users\
-        \ Category:Demigods Category:Electricity Users Category:Enhanced Senses Users\
-        \ Category:Explosion Users Category:Fantasy Characters Category:Forcefield\
-        \ Users Category:Game Bosses Category:Game Characters Category:Giants Category:Gods\
-        \ Category:Good Characters Category:Heroes Category:Hunters Category:Hybrids\
-        \ Category:Immortals Category:Kids Category:Knife Users Category:Light Users\
-        \ Category:Madness Users Category:Magic Users Category:Male Characters Category:Mind\
-        \ Users Category:Norse Gods Category:Paralysis Users Category:Playable Characters\
-        \ Category:Precognition Users Category:Probability Users Category:Protagonists\
-        \ Category:Rage Users Category:Regeneration Users Category:Resurrection Users\
-        \ Category:Rune Users Category:Shapeshifters Category:Soul Users Category:Sound\
-        \ Users Category:Statistics Reduction Users Category:Status Effect Users Category:Stealth\
-        \ Masters Category:Summoners Category:Sword Users Category:Teenagers Category:Telepaths\
-        \ Category:Video Game Characters Category:Weather Users"
-      source_id: vsbattles-atreus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|atreus|9542354
-    retryable: false
-    exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: character-stats-profiles-atreus-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29_God_of_War
-    title: Atreus (Canon, God of War)/TheFrostKnight
-    rank: 105
-    extracted_fields: *id007
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|atreus canon god of war
-      thefrostknight|315993
-  - source_id: character-stats-profiles-atreus-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29_%28God_of_War%29
-    title: Atreus (Canon, God of War)/TheFrostKnight
-    rank: 105
-    extracted_fields: *id009
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|atreus canon god of war
-      thefrostknight|315993
-  - source_id: character-stats-profiles-atreus-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Atreus_%28Game%29
-    title: Atreus (Canon, God of War)/TheFrostKnight
-    rank: 105
-    extracted_fields: *id011
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|atreus canon god of war
-      thefrostknight|315993
-  - source_id: vsbattles-atreus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29_God_of_War
-    title: Atreus
-    rank: 80
-    extracted_fields: *id013
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|atreus|9542354
-  - source_id: vsbattles-atreus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29_%28God_of_War%29
-    title: Atreus
-    rank: 80
-    extracted_fields: *id015
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|atreus|9542354
-  - source_id: mediawiki-atreus-game
-    url: https://vsbattles.fandom.com/wiki/Atreus_(Game)
-    title: Atreus
-    rank: 80
-    extracted_fields: *id017
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id018
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|atreus|9542354
-  - source_id: vsbattles-atreus-game
-    url: https://vsbattles.fandom.com/wiki/Atreus_%28Game%29
-    title: Atreus
-    rank: 80
-    extracted_fields: *id019
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id020
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|atreus|9542354
-  - source_id: vsbattles-atreus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Atreus_Game_God_of_War
-    title: Atreus
-    rank: 80
-    extracted_fields: *id021
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id022
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|atreus|9542354
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

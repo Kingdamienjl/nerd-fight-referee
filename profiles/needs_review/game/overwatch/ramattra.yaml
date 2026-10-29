@@ -4,14 +4,15 @@ name: Ramattra
 franchise: Overwatch
 category: game
 aliases: &id001 []
-profile_type: auto_evidence_profile
-status: provisional
-battle_eligible: true
+profile_type: needs_review
+status: needs_review
+battle_eligible: false
 generation:
   generated_at: '2026-09-22T23:24:19Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.95
-  ineligible_reasons: []
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Ramattra
   franchise: Overwatch
@@ -101,6 +102,11 @@ sources:
   - abilities
   - equipment
   - weaknesses
+  dropped_items:
+    weaknesses:
+    - item: ''''''' None notable'
+      reasons:
+      - explicit_none
 - id: vsbattles-ramattra
   provider_id: vsbattles
   source_type: mediawiki
@@ -144,7 +150,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Ramattra
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -185,42 +191,11 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-ramattra-overwatch
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Ramattra Overwatch
-  url: https://character-stats-and-profiles.fandom.com/wiki/Ramattra_Overwatch
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-ramattra-overwatch
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Ramattra (Overwatch)
-  url: https://vsbattles.fandom.com/wiki/Ramattra_%28Overwatch%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
+  dropped_items:
+    weaknesses:
+    - item: ''''''' None notable'
+      reasons:
+      - explicit_none
 - id: character-stats-profiles-ramattra-overwatch
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -305,19 +280,9 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-ramattra-overwatch
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Ramattra Overwatch
-  url: https://vsbattles.fandom.com/wiki/Ramattra_Overwatch
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 power_scale:
   tier:
-    text: '{{High 8-C}}, higher in Nemesis Form, Up to {{Low 7-C}} with Preparation'
+    text: High 8-C, higher in Nemesis Form, Up to Low 7-C with Preparation
     source_ids:
     - vsbattles-ramattra-overwatch
     confidence: 0.6
@@ -367,12 +332,12 @@ power_scale:
     text: "Class M (At least comparable to if not superior to OR-14s capable of physically\
       \ matching Reinhardt, who is this strong, in strength),Overwatch Animated Short\
       \ | \u201CHonor and Glory\u201D likely higher in Nemesis Form"
-    source_ids: &id003
+    source_ids: &id002
     - mediawiki-4782174
     confidence: 0.95
   striking_strength:
     text: Large Building level, higher in Nemesis Form
-    source_ids: *id003
+    source_ids: *id002
     confidence: 0.95
   durability:
     text: Large Building level, higher in Nemesis Form
@@ -417,7 +382,7 @@ claims:
   section: power_scale
   axis: other
   text: '{{High 8-C}}, higher in Nemesis Form, Up to {{Low 7-C}} with Preparation'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-4782174
   decisive: false
   status: unverified
@@ -453,7 +418,7 @@ claims:
     \ Explosion Index, this making the cells each equivalent to 7 Kilotons, and for\
     \ each shot the small turrets can do, and Titans can tank, is equivalent to 1.75\
     \ Kilotons of TNT)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -466,7 +431,7 @@ claims:
     to Bastion and Orisa in speed), Massively FTL+ Perception Speed (Omnics are able
     to perceive changes in stimuli in a microfraction of a microsecondOverwatch: The
     Hero of Numbani)'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -477,7 +442,7 @@ claims:
   text: "Class M (At least comparable to if not superior to OR-14s capable of physically\
     \ matching Reinhardt, who is this strong, in strength),Overwatch Animated Short\
     \ | \u201CHonor and Glory\u201D likely higher in Nemesis Form"
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -486,7 +451,7 @@ claims:
   section: power_scale
   axis: other
   text: Large Building level, higher in Nemesis Form
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -495,7 +460,7 @@ claims:
   section: power_scale
   axis: durability
   text: Large Building level, higher in Nemesis Form
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -506,7 +471,7 @@ claims:
   text: At least Superhuman, likely Infinite (Due to their physiology, Omnics do not
     need to eat, sleep, or breathe and will simply continue to function without tiring
     unless manually shut down or destroyed)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -516,7 +481,7 @@ claims:
   axis: range
   text: Standard Melee Range; Tens of Meters with Ranged Abilities; Tens of Meters
     to Hundreds of Meters with Void Accelerator
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -525,7 +490,7 @@ claims:
   section: equipment
   axis: equipment
   text: Void Accelerator
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -544,7 +509,7 @@ claims:
     FormBuilding a Revolutionary as well as designing the new forces of Null Sector
     using the outdated models from the previous uprising as a template and leading
     them in a global assault on humanity)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -557,7 +522,7 @@ claims:
     Barrier: Creates a medium-sized barrier at the targeted location. *Ravenous Vortex:
     Ramattra fires a nano ball, which explodes when it hits the ground, spreading
     a damaging field. Affected enemies are also slowed and pulled downward. *Nemesis'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -575,7 +540,7 @@ claims:
     encryptions then Bastion, making him capable of resisting Sombra''s hackingSombra:
     Did you know you have a locked storage drive? Bastion: *Inquisitive beeps* Sombra:
     *whistle* good encryption)'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -584,7 +549,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id005
+  source_ids: &id004
   - vsbattles-ramattra-overwatch
   source_claim_ids: []
   confidence: 0.85
@@ -600,7 +565,7 @@ abilities:
 - id: powers-and-abilities-weapon-mastery-expert-marksman-and-staff-wielder
   name: Weapon Mastery (Expert Marksman and Staff Wielder)
   description: Weapon Mastery (Expert Marksman and Staff Wielder)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -615,7 +580,7 @@ abilities:
 - id: powers-and-abilities-martial-arts-skilled-in-hand-to-hand-combat
   name: Martial Arts (Skilled in hand to hand combat)
   description: Martial Arts (Skilled in hand to hand combat)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -630,7 +595,7 @@ abilities:
 - id: powers-and-abilities-inorganic-physiology
   name: Inorganic Physiology
   description: Inorganic Physiology
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -645,7 +610,7 @@ abilities:
 - id: powers-and-abilities-self-sustenance-types-1-2-and-3
   name: 'Self-Sustenance: (Types 1, 2, and 3)'
   description: 'Self-Sustenance: (Types 1, 2, and 3)'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -660,7 +625,7 @@ abilities:
 - id: powers-and-abilities-preparation
   name: Preparation
   description: Preparation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -675,7 +640,7 @@ abilities:
 - id: powers-and-abilities-genius-intelligence
   name: Genius Intelligence
   description: Genius Intelligence
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -690,7 +655,7 @@ abilities:
 - id: powers-and-abilities-forcefield-creation-via-void-barrier
   name: Forcefield Creation (via Void Barrier)
   description: Forcefield Creation (via Void Barrier)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -705,7 +670,7 @@ abilities:
 - id: powers-and-abilities-statistics-reduction-speed-reduction-via-ravenous-vortex
   name: Statistics Reduction (Speed Reduction via Ravenous Vortex)
   description: Statistics Reduction (Speed Reduction via Ravenous Vortex)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -720,7 +685,7 @@ abilities:
 - id: powers-and-abilities-transformation-via-nemesis-form
   name: Transformation (via Nemesis Form)
   description: Transformation (via Nemesis Form)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -736,7 +701,7 @@ abilities:
   name: Statistics Amplification (Power and Durability Amplification via Nemesis Form)
   description: Statistics Amplification (Power and Durability Amplification via Nemesis
     Form)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -751,7 +716,7 @@ abilities:
 - id: powers-and-abilities-energy-projection-via-pummel-and-annihilation
   name: Energy Projection (via Pummel and Annihilation)
   description: Energy Projection (via Pummel and Annihilation)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -766,7 +731,7 @@ abilities:
 - id: powers-and-abilities-damage-reduction-via-block
   name: Damage Reduction (via Block)
   description: Damage Reduction (via Block)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -784,7 +749,7 @@ abilities:
   description: 'Resistance to Hacking (Has superior encryptions then Bastion, making
     him capable of resisting Sombra''s hackingSombra: Did you know you have a locked
     storage drive? Bastion: *Inquisitive beeps* Sombra: *whistle* good encryption)'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -801,7 +766,7 @@ equipment:
 - id: standard-equipment-void-accelerator
   name: Void Accelerator
   description: Void Accelerator
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -821,7 +786,7 @@ resistances:
   description: 'Resistance to Hacking (Has superior encryptions then Bastion, making
     him capable of resisting Sombra''s hackingSombra: Did you know you have a locked
     storage drive? Bastion: *Inquisitive beeps* Sombra: *whistle* good encryption)'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -838,7 +803,7 @@ weaknesses:
 - id: weaknesses-none-notable-notable-attacks-techniques
   name: 'None notable Notable Attacks/Techniques:'
   description: 'None notable Notable Attacks/Techniques:'
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-ramattra-overwatch
   source_claim_ids: []
   confidence: 0.85
@@ -854,7 +819,7 @@ weaknesses:
 - id: weaknesses-void-accelerator-ramattra-s-primary-weapon
   name: 'Void Accelerator: Ramattra''s primary weapon'
   description: 'Void Accelerator: Ramattra''s primary weapon'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -869,7 +834,7 @@ weaknesses:
 - id: weaknesses-a-staff-which-fires-a-stream-of-projectiles-in-a-fixed-pattern
   name: a staff which fires a stream of projectiles in a fixed pattern.
   description: a staff which fires a stream of projectiles in a fixed pattern.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -886,7 +851,7 @@ weaknesses:
 - id: weaknesses-void-barrier-creates-a-medium-sized-barrier-at-the-targeted-location
   name: 'Void Barrier: Creates a medium-sized barrier at the targeted location.'
   description: 'Void Barrier: Creates a medium-sized barrier at the targeted location.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -901,7 +866,7 @@ weaknesses:
 - id: weaknesses-ravenous-vortex-ramattra-fires-a-nano-ball
   name: 'Ravenous Vortex: Ramattra fires a nano ball'
   description: 'Ravenous Vortex: Ramattra fires a nano ball'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -918,7 +883,7 @@ weaknesses:
 - id: weaknesses-which-explodes-when-it-hits-the-ground
   name: which explodes when it hits the ground
   description: which explodes when it hits the ground
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -934,7 +899,7 @@ weaknesses:
   name: spreading a damaging field. Affected enemies are also slowed and pulled downward.
   description: spreading a damaging field. Affected enemies are also slowed and pulled
     downward.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -949,7 +914,7 @@ weaknesses:
 - id: weaknesses-nemesis
   name: Nemesis
   description: Nemesis
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -985,13 +950,13 @@ review:
   - unresolved_version_scope:multiple_source_keys
   source_errors: []
   notes: []
-  readiness_state: provisional
+  readiness_state: needs_review
   profile_state: auto_evidence_profile
   primary_source_id: vsbattles-ramattra-overwatch
   secondary_disagreement_policy: warning_only
 profile_hash: b01ae84aa97b017a4959bca5af749e973a2fca7002efbb3a5f2651d6a7802930
 repair:
-  attempted_at: '2026-09-25T23:13:04Z'
+  attempted_at: '2026-10-25T17:51:25Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -1001,14 +966,13 @@ repair:
   - speed
   - stamina
   - tier
-  - weaknesses
   unresolved_fields: []
   source_attempts:
   - source_id: mediawiki-4782174
     url: https://vsbattles.fandom.com/wiki/Ramattra
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -1018,7 +982,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Ramattra
     source_type: mediawiki
     revision_id: '9685214'
@@ -1053,7 +1016,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -1066,19 +1029,19 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{High 8-C}}, higher in Nemesis Form, Up to {{Low 7-C}} with Preparation'
+      value: High 8-C, higher in Nemesis Form, Up to Low 7-C with Preparation
       source_id: mediawiki-4782174
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Weapon Mastery (Expert Marksman
-        and Staff Wielder) *Martial Arts (Skilled in hand to hand combat) *Inorganic
-        Physiology *Self-Sustenance: (Types 1, 2, and 3) *Preparation *Genius Intelligence
-        *Forcefield Creation (via Void Barrier) *Statistics Reduction (Speed Reduction
-        via Ravenous Vortex) *Transformation (via Nemesis Form) *Statistics Amplification
-        (Power and Durability Amplification via Nemesis Form) *Energy Projection (via
-        Pummel and Annihilation) *Damage Reduction (via Block) *Resistance to Hacking
+      value: 'Superhuman Physical Characteristics, Weapon Mastery (Expert Marksman
+        and Staff Wielder), Martial Arts (Skilled in hand to hand combat), Inorganic
+        Physiology, Self-Sustenance: (Types 1, 2, and 3), Preparation, Genius Intelligence,
+        Forcefield Creation (via Void Barrier), Statistics Reduction (Speed Reduction
+        via Ravenous Vortex), Transformation (via Nemesis Form), Statistics Amplification
+        (Power and Durability Amplification via Nemesis Form), Energy Projection (via
+        Pummel and Annihilation), Damage Reduction (via Block), Resistance to Hacking
         (Has superior encryptions then Bastion, making him capable of resisting Sombra''s
         hackingSombra: Did you know you have a locked storage drive? Bastion: *Inquisitive
         beeps* Sombra: *whistle* good encryption)'
@@ -1167,17 +1130,6 @@ repair:
         a Revolutionary as well as designing the new forces of Null Sector using the
         outdated models from the previous uprising as a template and leading them
         in a global assault on humanity)'
-      source_id: mediawiki-4782174
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable Notable Attacks/Techniques: *Void Accelerator: Ramattra''s
-        primary weapon, a staff which fires a stream of projectiles in a fixed pattern.
-        *Void Barrier: Creates a medium-sized barrier at the targeted location. *Ravenous
-        Vortex: Ramattra fires a nano ball, which explodes when it hits the ground,
-        spreading a damaging field. Affected enemies are also slowed and pulled downward.
-        *Nemesis'
       source_id: mediawiki-4782174
       provider_id: vsbattles
       authority: high
@@ -1191,237 +1143,6 @@ repair:
     exact_name_match: true
     alias_match: false
     franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|ramattra|9685214
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-ramattra-overwatch
-    url: https://character-stats-and-profiles.fandom.com/wiki/Ramattra_Overwatch
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Ramattra Overwatch
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|ramattra overwatch
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-ramattra-overwatch
-    url: https://vsbattles.fandom.com/wiki/Ramattra_%28Overwatch%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Ramattra
-    source_type: mediawiki
-    revision_id: '9685214'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 12742
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    - References
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 120
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{High 8-C}}, higher in Nemesis Form, Up to {{Low 7-C}} with Preparation'
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Weapon Mastery (Expert Marksman
-        and Staff Wielder) *Martial Arts (Skilled in hand to hand combat) *Inorganic
-        Physiology *Self-Sustenance: (Types 1, 2, and 3) *Preparation *Genius Intelligence
-        *Forcefield Creation (via Void Barrier) *Statistics Reduction (Speed Reduction
-        via Ravenous Vortex) *Transformation (via Nemesis Form) *Statistics Amplification
-        (Power and Durability Amplification via Nemesis Form) *Energy Projection (via
-        Pummel and Annihilation) *Damage Reduction (via Block) *Resistance to Hacking
-        (Has superior encryptions then Bastion, making him capable of resisting Sombra''s
-        hackingSombra: Did you know you have a locked storage drive? Bastion: *Inquisitive
-        beeps* Sombra: *whistle* good encryption)'
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: "Large Building level (All R-7000 Ravagers were designed to be elite\
-        \ units superior in power to Bastion unitsOverwatch 2: Ramattra\u2019s Beginnings\
-        \ | Developer Update and even after the Crisis ended, the Bastion and OR-14\
-        \ units from the Crisis were considered outdated and obsolete compared to\
-        \ him.Ramattra: Reflections Ravagers have fought Junker Queen, who is this\
-        \ strong, in the past.Ramattra Voice Lines & Hero Interactions - Ramattra:\
-        \ I hear you like to prey on omnics. Try me! Junker Queen: Nah, thanks. Fought\
-        \ a buncha you before. You're a bit... gimmicky. No offense. Ramattra: \"\
-        Gimmicky\"? Junker Queen: I said, no offense! As an Omnic designed for warfare\
-        \ and combat he should be significantly stronger than Zenyatta), higher in\
-        \ Nemesis Form (Described as an upgrade of his normal physical powerOverwatch\
-        \ 2 Art Director Dion Rogers Talks About The Design Principles Behind The\
-        \ Dual Modes For Ramattra In Interview and is stated by Ramattra himself as\
-        \ utilizing more brute force than precision),Overwatch 2 - All Ramattra Interactions\
-        \ + Unique Kill Quotes - Junkrat: How come you don't stay a big bloke all\
-        \ the time? Ramattra: I prefer tactical precision over brute force. Junkrat:\
-        \ Oh, likewise, likewise. Some of my favorite bombs are extraordinarily precise!\
-        \ up to Small Town level level with Preparation (Able to access the full arsenal\
-        \ of Null Sector if given proper time to prepare, including a Titan Omnic,\
-        \ which when Ramattra deployed it, was capable of tanking several 1.75 Kiloton\
-        \ shots while only being staggered,Overwatch 2: Ironclad requiring a 7 Kiloton\
-        \ shot to destroy it, with the weaponry of Titan Omnics being able to harm\
-        \ themselvesOverwatch 2 CinematicEach cell used by Torbj\xF6rn at his workshop\
-        \ has the stated energy of a Volcanic Eruption, thus, dividing the Mount St\
-        \ Helens eruption's 7 Megaton explosion by 1000 to change it from a 5 on the\
-        \ Volanic Explosion Index to a 2 on the Volcanic Explosion Index, this making\
-        \ the cells each equivalent to 7 Kilotons, and for each shot the small turrets\
-        \ can do, and Titans can tank, is equivalent to 1.75 Kilotons of TNT)"
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (Able to run this fast), Hypersonic+ Reactions and Combat Speed
-        (Able to keep up with Zenyatta in hand to hand combat and should be comparable
-        to Bastion and Orisa in speed)
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Large Building level, higher in Nemesis Form
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: At least Superhuman, likely Infinite (Due to their physiology, Omnics
-        do not need to eat, sleep, or breathe and will simply continue to function
-        without tiring unless manually shut down or destroyed)
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range; Tens of Meters with Ranged Abilities; Tens of Meters
-        to Hundreds of Meters with Void Accelerator
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Void Accelerator
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Genius (All omnics possess mental processors that are far beyond what
-        normal humans are capable of, to the point that even their written language,
-        Omnic Script is so complex that even genius humans like Efi Oladele can only
-        comprehend a handful of words.The Hero of Numbani - Overwatch Novel #1 Ramattra
-        in particular was designed with an enhanced processor meant to excel in combat
-        and tactical assessment due to Ravager units being made as commanders, guiding
-        units into combat and adapting various strategic protocols to battlefield
-        condition changes in real time.Ramattra Ramattra is also a genius engineer,
-        having personally designed and upgraded himself to achieve his Nemesis FormBuilding
-        a Revolutionary as well as designing the new forces of Null Sector using the
-        outdated models from the previous uprising as a template and leading them
-        in a global assault on humanity)'
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable Notable Attacks/Techniques: *Void Accelerator: Ramattra''s
-        primary weapon, a staff which fires a stream of projectiles in a fixed pattern.
-        *Void Barrier: Creates a medium-sized barrier at the targeted location. *Ravenous
-        Vortex: Ramattra fires a nano ball, which explodes when it hits the ground,
-        spreading a damaging field. Affected enemies are also slowed and pulled downward.
-        *Nemesis'
-      source_id: vsbattles-ramattra-overwatch
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: true
-    identity_score: 120
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: true
-    alias_match: false
-    franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|ramattra|9685214
     retryable: false
@@ -1472,7 +1193,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Ramattra_Overwatch
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id008
     - attack_potency
     - durability
     - intelligence
@@ -1482,7 +1203,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Ramattra
     source_type: mediawiki
     revision_id: '9685214'
@@ -1517,7 +1237,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -1528,19 +1248,19 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{High 8-C}}, higher in Nemesis Form, Up to {{Low 7-C}} with Preparation'
+      value: High 8-C, higher in Nemesis Form, Up to Low 7-C with Preparation
       source_id: vsbattles-ramattra-overwatch
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Weapon Mastery (Expert Marksman
-        and Staff Wielder) *Martial Arts (Skilled in hand to hand combat) *Inorganic
-        Physiology *Self-Sustenance: (Types 1, 2, and 3) *Preparation *Genius Intelligence
-        *Forcefield Creation (via Void Barrier) *Statistics Reduction (Speed Reduction
-        via Ravenous Vortex) *Transformation (via Nemesis Form) *Statistics Amplification
-        (Power and Durability Amplification via Nemesis Form) *Energy Projection (via
-        Pummel and Annihilation) *Damage Reduction (via Block) *Resistance to Hacking
+      value: 'Superhuman Physical Characteristics, Weapon Mastery (Expert Marksman
+        and Staff Wielder), Martial Arts (Skilled in hand to hand combat), Inorganic
+        Physiology, Self-Sustenance: (Types 1, 2, and 3), Preparation, Genius Intelligence,
+        Forcefield Creation (via Void Barrier), Statistics Reduction (Speed Reduction
+        via Ravenous Vortex), Transformation (via Nemesis Form), Statistics Amplification
+        (Power and Durability Amplification via Nemesis Form), Energy Projection (via
+        Pummel and Annihilation), Damage Reduction (via Block), Resistance to Hacking
         (Has superior encryptions then Bastion, making him capable of resisting Sombra''s
         hackingSombra: Did you know you have a locked storage drive? Bastion: *Inquisitive
         beeps* Sombra: *whistle* good encryption)'
@@ -1633,13 +1353,221 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'None notable Notable Attacks/Techniques: *Void Accelerator: Ramattra''s
-        primary weapon, a staff which fires a stream of projectiles in a fixed pattern.
-        *Void Barrier: Creates a medium-sized barrier at the targeted location. *Ravenous
-        Vortex: Ramattra fires a nano ball, which explodes when it hits the ground,
-        spreading a damaging field. Affected enemies are also slowed and pulled downward.
-        *Nemesis'
+    identity_match: true
+    identity_score: 120
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: true
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|ramattra|9685214
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-ramattra-overwatch
+    url: https://character-stats-and-profiles.fandom.com/wiki/Ramattra_Overwatch
+    ok: false
+    note: provider_search_no_results
+    extracted_fields: []
+    normalized_page_title: Ramattra Overwatch
+    source_type: mediawiki
+    revision_id: ''
+    fetch_status: failed
+    http_status: null
+    content_length: 0
+    content_kind: unknown
+    headings_detected: []
+    stat_labels_detected: []
+    extraction_failure_reason: provider_search_no_results
+    rank: 70
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates: []
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 0
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|ramattra overwatch
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-ramattra-overwatch
+    url: https://vsbattles.fandom.com/wiki/Ramattra_%28Overwatch%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id010
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    normalized_page_title: Ramattra
+    source_type: mediawiki
+    revision_id: '9685214'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 12742
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    - Notes/Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 120
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id011
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 8-C, higher in Nemesis Form, Up to Low 7-C with Preparation
+      source_id: vsbattles-ramattra-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Weapon Mastery (Expert Marksman
+        and Staff Wielder), Martial Arts (Skilled in hand to hand combat), Inorganic
+        Physiology, Self-Sustenance: (Types 1, 2, and 3), Preparation, Genius Intelligence,
+        Forcefield Creation (via Void Barrier), Statistics Reduction (Speed Reduction
+        via Ravenous Vortex), Transformation (via Nemesis Form), Statistics Amplification
+        (Power and Durability Amplification via Nemesis Form), Energy Projection (via
+        Pummel and Annihilation), Damage Reduction (via Block), Resistance to Hacking
+        (Has superior encryptions then Bastion, making him capable of resisting Sombra''s
+        hackingSombra: Did you know you have a locked storage drive? Bastion: *Inquisitive
+        beeps* Sombra: *whistle* good encryption)'
+      source_id: vsbattles-ramattra-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Large Building level (All R-7000 Ravagers were designed to be elite\
+        \ units superior in power to Bastion unitsOverwatch 2: Ramattra\u2019s Beginnings\
+        \ | Developer Update and even after the Crisis ended, the Bastion and OR-14\
+        \ units from the Crisis were considered outdated and obsolete compared to\
+        \ him.Ramattra: Reflections Ravagers have fought Junker Queen, who is this\
+        \ strong, in the past.Ramattra Voice Lines & Hero Interactions - Ramattra:\
+        \ I hear you like to prey on omnics. Try me! Junker Queen: Nah, thanks. Fought\
+        \ a buncha you before. You're a bit... gimmicky. No offense. Ramattra: \"\
+        Gimmicky\"? Junker Queen: I said, no offense! As an Omnic designed for warfare\
+        \ and combat he should be significantly stronger than Zenyatta), higher in\
+        \ Nemesis Form (Described as an upgrade of his normal physical powerOverwatch\
+        \ 2 Art Director Dion Rogers Talks About The Design Principles Behind The\
+        \ Dual Modes For Ramattra In Interview and is stated by Ramattra himself as\
+        \ utilizing more brute force than precision),Overwatch 2 - All Ramattra Interactions\
+        \ + Unique Kill Quotes - Junkrat: How come you don't stay a big bloke all\
+        \ the time? Ramattra: I prefer tactical precision over brute force. Junkrat:\
+        \ Oh, likewise, likewise. Some of my favorite bombs are extraordinarily precise!\
+        \ up to Small Town level level with Preparation (Able to access the full arsenal\
+        \ of Null Sector if given proper time to prepare, including a Titan Omnic,\
+        \ which when Ramattra deployed it, was capable of tanking several 1.75 Kiloton\
+        \ shots while only being staggered,Overwatch 2: Ironclad requiring a 7 Kiloton\
+        \ shot to destroy it, with the weaponry of Titan Omnics being able to harm\
+        \ themselvesOverwatch 2 CinematicEach cell used by Torbj\xF6rn at his workshop\
+        \ has the stated energy of a Volcanic Eruption, thus, dividing the Mount St\
+        \ Helens eruption's 7 Megaton explosion by 1000 to change it from a 5 on the\
+        \ Volanic Explosion Index to a 2 on the Volcanic Explosion Index, this making\
+        \ the cells each equivalent to 7 Kilotons, and for each shot the small turrets\
+        \ can do, and Titans can tank, is equivalent to 1.75 Kilotons of TNT)"
+      source_id: vsbattles-ramattra-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic (Able to run this fast), Hypersonic+ Reactions and Combat Speed
+        (Able to keep up with Zenyatta in hand to hand combat and should be comparable
+        to Bastion and Orisa in speed)
+      source_id: vsbattles-ramattra-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Large Building level, higher in Nemesis Form
+      source_id: vsbattles-ramattra-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: At least Superhuman, likely Infinite (Due to their physiology, Omnics
+        do not need to eat, sleep, or breathe and will simply continue to function
+        without tiring unless manually shut down or destroyed)
+      source_id: vsbattles-ramattra-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range; Tens of Meters with Ranged Abilities; Tens of Meters
+        to Hundreds of Meters with Void Accelerator
+      source_id: vsbattles-ramattra-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Void Accelerator
+      source_id: vsbattles-ramattra-overwatch
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Genius (All omnics possess mental processors that are far beyond what
+        normal humans are capable of, to the point that even their written language,
+        Omnic Script is so complex that even genius humans like Efi Oladele can only
+        comprehend a handful of words.The Hero of Numbani - Overwatch Novel #1 Ramattra
+        in particular was designed with an enhanced processor meant to excel in combat
+        and tactical assessment due to Ravager units being made as commanders, guiding
+        units into combat and adapting various strategic protocols to battlefield
+        condition changes in real time.Ramattra Ramattra is also a genius engineer,
+        having personally designed and upgraded himself to achieve his Nemesis FormBuilding
+        a Revolutionary as well as designing the new forces of Null Sector using the
+        outdated models from the previous uprising as a template and leading them
+        in a global assault on humanity)'
       source_id: vsbattles-ramattra-overwatch
       provider_id: vsbattles
       authority: high
@@ -1699,195 +1627,6 @@ repair:
     duplicate_key: character-stats-and-profiles.fandom.com|ramattra
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-ramattra-game
-    url: https://vsbattles.fandom.com/wiki/Ramattra_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Ramattra
-    source_type: mediawiki
-    revision_id: '9685214'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 12742
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    - References
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 120
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{High 8-C}}, higher in Nemesis Form, Up to {{Low 7-C}} with Preparation'
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Weapon Mastery (Expert Marksman
-        and Staff Wielder) *Martial Arts (Skilled in hand to hand combat) *Inorganic
-        Physiology *Self-Sustenance: (Types 1, 2, and 3) *Preparation *Genius Intelligence
-        *Forcefield Creation (via Void Barrier) *Statistics Reduction (Speed Reduction
-        via Ravenous Vortex) *Transformation (via Nemesis Form) *Statistics Amplification
-        (Power and Durability Amplification via Nemesis Form) *Energy Projection (via
-        Pummel and Annihilation) *Damage Reduction (via Block) *Resistance to Hacking
-        (Has superior encryptions then Bastion, making him capable of resisting Sombra''s
-        hackingSombra: Did you know you have a locked storage drive? Bastion: *Inquisitive
-        beeps* Sombra: *whistle* good encryption)'
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: "Large Building level (All R-7000 Ravagers were designed to be elite\
-        \ units superior in power to Bastion unitsOverwatch 2: Ramattra\u2019s Beginnings\
-        \ | Developer Update and even after the Crisis ended, the Bastion and OR-14\
-        \ units from the Crisis were considered outdated and obsolete compared to\
-        \ him.Ramattra: Reflections Ravagers have fought Junker Queen, who is this\
-        \ strong, in the past.Ramattra Voice Lines & Hero Interactions - Ramattra:\
-        \ I hear you like to prey on omnics. Try me! Junker Queen: Nah, thanks. Fought\
-        \ a buncha you before. You're a bit... gimmicky. No offense. Ramattra: \"\
-        Gimmicky\"? Junker Queen: I said, no offense! As an Omnic designed for warfare\
-        \ and combat he should be significantly stronger than Zenyatta), higher in\
-        \ Nemesis Form (Described as an upgrade of his normal physical powerOverwatch\
-        \ 2 Art Director Dion Rogers Talks About The Design Principles Behind The\
-        \ Dual Modes For Ramattra In Interview and is stated by Ramattra himself as\
-        \ utilizing more brute force than precision),Overwatch 2 - All Ramattra Interactions\
-        \ + Unique Kill Quotes - Junkrat: How come you don't stay a big bloke all\
-        \ the time? Ramattra: I prefer tactical precision over brute force. Junkrat:\
-        \ Oh, likewise, likewise. Some of my favorite bombs are extraordinarily precise!\
-        \ up to Small Town level level with Preparation (Able to access the full arsenal\
-        \ of Null Sector if given proper time to prepare, including a Titan Omnic,\
-        \ which when Ramattra deployed it, was capable of tanking several 1.75 Kiloton\
-        \ shots while only being staggered,Overwatch 2: Ironclad requiring a 7 Kiloton\
-        \ shot to destroy it, with the weaponry of Titan Omnics being able to harm\
-        \ themselvesOverwatch 2 CinematicEach cell used by Torbj\xF6rn at his workshop\
-        \ has the stated energy of a Volcanic Eruption, thus, dividing the Mount St\
-        \ Helens eruption's 7 Megaton explosion by 1000 to change it from a 5 on the\
-        \ Volanic Explosion Index to a 2 on the Volcanic Explosion Index, this making\
-        \ the cells each equivalent to 7 Kilotons, and for each shot the small turrets\
-        \ can do, and Titans can tank, is equivalent to 1.75 Kilotons of TNT)"
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (Able to run this fast), Hypersonic+ Reactions and Combat Speed
-        (Able to keep up with Zenyatta in hand to hand combat and should be comparable
-        to Bastion and Orisa in speed)
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Large Building level, higher in Nemesis Form
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: At least Superhuman, likely Infinite (Due to their physiology, Omnics
-        do not need to eat, sleep, or breathe and will simply continue to function
-        without tiring unless manually shut down or destroyed)
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range; Tens of Meters with Ranged Abilities; Tens of Meters
-        to Hundreds of Meters with Void Accelerator
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Void Accelerator
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Genius (All omnics possess mental processors that are far beyond what
-        normal humans are capable of, to the point that even their written language,
-        Omnic Script is so complex that even genius humans like Efi Oladele can only
-        comprehend a handful of words.The Hero of Numbani - Overwatch Novel #1 Ramattra
-        in particular was designed with an enhanced processor meant to excel in combat
-        and tactical assessment due to Ravager units being made as commanders, guiding
-        units into combat and adapting various strategic protocols to battlefield
-        condition changes in real time.Ramattra Ramattra is also a genius engineer,
-        having personally designed and upgraded himself to achieve his Nemesis FormBuilding
-        a Revolutionary as well as designing the new forces of Null Sector using the
-        outdated models from the previous uprising as a template and leading them
-        in a global assault on humanity)'
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable Notable Attacks/Techniques: *Void Accelerator: Ramattra''s
-        primary weapon, a staff which fires a stream of projectiles in a fixed pattern.
-        *Void Barrier: Creates a medium-sized barrier at the targeted location. *Ravenous
-        Vortex: Ramattra fires a nano ball, which explodes when it hits the ground,
-        spreading a damaging field. Affected enemies are also slowed and pulled downward.
-        *Nemesis'
-      source_id: vsbattles-ramattra-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: true
-    identity_score: 100
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: true
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|ramattra|9685214
-    retryable: false
-    exception_class: ''
   - source_id: character-stats-profiles-ramattra-game
     url: https://character-stats-and-profiles.fandom.com/wiki/Ramattra_%28Game%29
     ok: false
@@ -1930,17 +1669,219 @@ repair:
     duplicate_key: character-stats-and-profiles.fandom.com|ramattra game
     retryable: false
     exception_class: ''
+  - source_id: vsbattles-ramattra-game
+    url: https://vsbattles.fandom.com/wiki/Ramattra_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Anubis (Overwatch)
+    source_type: mediawiki
+    revision_id: '9690292'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16002
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    - Notes/Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: physically, from 9-B to High 8-C, possibly higher with omnics
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Inorganic Physiology (Type 2; Anubis is a machine whom, unlike Omnics,
+        was not put under the Iris and thus was not given even potential life), Self-Sustenance
+        (All Types; As a machine, Anubis lacks all requirements humanity does, instread
+        running on currently unknown power sources), Technology Manipulation/Hacking
+        (Anubis has an extreme control over Technology,The Awakening of Omnics did
+        take away Anubis' control over the vast majority of them, however, as it has
+        proved to be able to take over awakened Omnics, it is the shock of having
+        much of it's system disconnected that likely stopped this from happening rather
+        than a resistance. being able to bypass the firewalls of Omnics with ease,
+        and being able to break through Helix Security's firewalls in a matter of
+        hours if left unrestrained, giving it comparable hacking capabilities to Sombra
+        at the least, whom can also bypass the firewalls of omnics with easeOverwatch
+        1 Sombra Interactions), Hive Mind (Types 1 and 2; Anubis controls Omnics by
+        putting them within it's hive mind, with non-sapient Omnics simply becoming
+        a part of it where Sapient Omnics still have their minds intact), Information
+        Analysis (Bastion Units, which Anubis is far superior to, are able to analyze
+        the topography of their surroundings up to a range of several kilometersThe
+        Last Bastion), Resistance to Hacking (Anubis bears superior firewalls to any
+        individual omnic, being the one that originally desgined the firewalls behind
+        Bastion units and R-7000 Ravagers, and never being hacked itself despite doing
+        so would be able to render it a non-threat) *All Omnics have thse
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Unknown physically (Anubis is immobile and incapable of combat itself)\
+        \ Varies (Various classes of Omnics vary in power, with different armor and\
+        \ weapon set ups, or even not having weapons at all) from Wall level (Even\
+        \ basic non-combative Omnics like Zenyatta can fracture marble railingsOverwatch:\
+        \ Rialto map15 Kilojoules) to Building level, possibly Large Building level\
+        \ (Combat-model Omnics such as Bastion units are far stronger than most humans,\
+        \ and served as the main force against humanity in the Omnic Crisis, and constantly\
+        \ fought Humanity and pushed them back, and often fought individuals like\
+        \ Jack Morrison, Ana Amari, Torbj\xF6rn, Gabriel Reyes, and Reinhardt Wilhelm,\
+        \ though were treated mostly as cannon fodder by all fiveUpscaling from 0.237\
+        \ Tons to O.25 Tons, possibly downscales from 5.019 Tons) to Large Building\
+        \ level (Configuration: Sentry form Bastion Units, R-7000 Ravagers, and OR14s\
+        \ are all of this level to varying degrees, each capable of fighting either\
+        \ Junker QueenRamattra Voice Lines & Hero Interactions - Ramattra: I hear\
+        \ you like to prey on omnics. Try me! Junker Queen: Nah, thanks. Fought a\
+        \ buncha you before. You're a bit... gimmicky. No offense. Ramattra: \"Gimmicky\"\
+        ? Junker Queen: I said, no offense! or Reinhardt Wilhelm on equal or superior\
+        \ footing5.019 Tons), possibly higher (Titan Omnics are excessively greater\
+        \ than standard Omnic units, capable of taking on several Overwatch agents\
+        \ at once with little to no damage done to its armor; Null Sector's Titan\
+        \ Omnic single-handedly threatened the lives of Reinhardt Wilhelm, Torbj\xF6\
+        rn Lindholm, Bastion, and Brigitte Lindholm) with Omnics"
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: "Immobile physically, Subsonic movement speed with Hypersonic+ combat\
+        \ speed and reactions for all known Omnics (Even normal omnics can grab Tracer\
+        \ through her blinks,Tracer\u2014London Calling #1 of 5 who is directly comparable\
+        \ to Genji, who can do this)"
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Large Building level (Pharah, despite describing her team as a "Kill
+        everything" team, and later stating they need to kill Anubis, never shot at
+        Anubis, heavily implying that it would be impervious to her rockets. Should
+        have comparable armour to R-7000 Ravagers and OR14s)
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Anubis functioned for two years straight during the omnic
+        crisis,Overwatch 2, Communications Inbox functioned for an unknown amount
+        of time before then, and is still operative now, 20-30 years later, without
+        resting for a moment)
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: 'Hundreds of Meters when restrained (Was able to hack Security bots all
+        across it''s facility and start attacking Helix''s firewalls) Planetary when
+        unrestrained (Anubis was capable of hijacking omniums across the Planet of
+        Earth to produce warbots capable of waging it''s war, and was constantly adapting
+        to Humanity''s efforts with it''s superior tactics and strategyOverwatch 2
+        Animated Short | Genesis - Part Three: Rebirth)'
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: R-7000 Ravagers served as Anubis' direct bodyguards during the Omnic
+        Crisis, and it controlled various other Omnics across the globe.
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Extraordinary Genius (Anubis was the mastermind behind the Omnic Crisis,
+        a global-spanning conflict that forced Humanity on the defensive with constantly
+        adapted strategies and movements, requiring not one,Overwatch 2 Animated Short
+        | Genesis - Part One: Dawn not two, but three miracles to even be able to
+        successfully take down Anubis'' command structure and render it inert and
+        generally unable of harming anyone. Even then, Anubis made attempts to break
+        free from confinement, and required Helix Security to make large sacrifices
+        to successfully contain it''s diminished state. Due to being the head of the
+        hive mind behind the Crisis, Anubis is superior to Ramattra in tactical acumen
+        and engineering, as it designed Ramattra.Ramattra Anubis was made to be able
+        to run the entire globe''s conservation efforts, and would also identify areas
+        that could be cultivated and farmed to meet the growing needs of humanity)'
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Anubis itself is incapable of combat, and requires omnics to do it's
+        bidding. Due to their hive mind, successfully tampering with one machine is
+        sufficient to at least temporarily disable all machines in a few dozen meter
+        area area, as otherwise the Omnic Crisis would have ended the moment a single
+        bastion unit was destroyed.
+      source_id: vsbattles-ramattra-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|anubis overwatch|9690292
+    retryable: false
+    exception_class: ''
   needs_human_source_choice: false
   candidate_sources:
   - source_id: mediawiki-4782174
     url: https://vsbattles.fandom.com/wiki/Ramattra
     title: Ramattra
     rank: 120
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -1952,37 +1893,18 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|ramattra|9685214
-  - source_id: vsbattles-ramattra-overwatch
-    url: https://vsbattles.fandom.com/wiki/Ramattra_%28Overwatch%29
-    title: Ramattra
-    rank: 120
-    extracted_fields: *id009
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: true
-    identity_score: 120
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: true
-    alias_match: false
-    franchise_match: true
-    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|ramattra|9685214
   - source_id: vsbattles-ramattra-overwatch
     url: https://vsbattles.fandom.com/wiki/Ramattra_Overwatch
     title: Ramattra
     rank: 120
-    extracted_fields: *id011
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -1994,27 +1916,31 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|ramattra|9685214
-  - source_id: vsbattles-ramattra-game
-    url: https://vsbattles.fandom.com/wiki/Ramattra_%28Game%29
+  - source_id: vsbattles-ramattra-overwatch
+    url: https://vsbattles.fandom.com/wiki/Ramattra_%28Overwatch%29
     title: Ramattra
     rank: 120
-    extracted_fields: *id013
+    extracted_fields: *id010
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id014
+    allowed_fields: *id011
     rejection_reason: ''
     identity_match: true
-    identity_score: 100
+    identity_score: 120
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
     exact_name_match: true
     alias_match: false
-    franchise_match: false
+    franchise_match: true
     variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|ramattra|9685214
   chosen_source_id: null
   failure_reasons:

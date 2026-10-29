@@ -4,14 +4,15 @@ name: Volt
 franchise: Warframe
 category: game
 aliases: &id001 []
-profile_type: auto_evidence_profile
-status: provisional
-battle_eligible: true
+profile_type: needs_review
+status: needs_review
+battle_eligible: false
 generation:
   generated_at: '2026-09-22T19:36:21Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.8
-  ineligible_reasons: []
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Volt
   franchise: Warframe
@@ -94,6 +95,22 @@ sources:
   - abilities
   - equipment
   - weaknesses
+  dropped_scalar_fields:
+    range:
+    - markup_residue
+  dropped_items:
+    standard_equipment:
+    - item: and many other abilities granted by its mods.
+      reasons:
+      - conjunction_orphan
+    weaknesses:
+    - item: Advanced
+      reasons:
+      - weakness_fragment
+    powers_and_abilities:
+    - item: and many other abilities granted by its mods.
+      reasons:
+      - conjunction_orphan
 - id: vsbattles-volt
   provider_id: vsbattles
   source_type: mediawiki
@@ -137,7 +154,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Volt
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -177,42 +194,22 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-volt-warframe
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Volt Warframe
-  url: https://character-stats-and-profiles.fandom.com/wiki/Volt_Warframe
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-volt-warframe
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Volt (Warframe)
-  url: https://vsbattles.fandom.com/wiki/Volt_%28Warframe%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
+  dropped_scalar_fields:
+    range:
+    - markup_residue
+  dropped_items:
+    standard_equipment:
+    - item: and many other abilities granted by its mods.
+      reasons:
+      - conjunction_orphan
+    weaknesses:
+    - item: Advanced
+      reasons:
+      - weakness_fragment
+    powers_and_abilities:
+    - item: and many other abilities granted by its mods.
+      reasons:
+      - conjunction_orphan
 - id: character-stats-profiles-volt-warframe
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -267,21 +264,10 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-volt-warframe
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Volt Warframe
-  url: https://vsbattles.fandom.com/wiki/Volt_Warframe
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 power_scale:
   tier:
-    text: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher with
-      Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes,
-      far higher with Tauron Strikes'
+    text: Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with Tauron
+      Strikes
     source_ids:
     - vsbattles-volt-warframe
     confidence: 0.6
@@ -307,9 +293,7 @@ power_scale:
       Tenno focus schools created by mixing their techniques with Sentient teachings,
       resulting in a massive power increase. Tauron Strikes can completely destroy
       the makvos cannon in a single hit, while even fully modded weapons needed to
-      target the cannons weak-points in order to do any damageWarframe: The Old Peace(2025))
-      | Small Town level+, Likely City level (Stronger than their base variant), higher
-      with Mods and Arcanes, far higher with Tauron Strikes (Same as before)'
+      target the cannons weak-points in order to do any damageWarframe: The Old Peace(2025))'
     source_ids:
     - vsbattles-volt-warframe
     confidence: 0.6
@@ -318,9 +302,7 @@ power_scale:
     text: Massively Hypersonic (Can react to and dodge his own electricity at close
       range), possibly Relativistic+ or higher reactions/combat speed (Can deflect
       weapons such as Opticor and Glaxion at a close distance, the former stated to
-      be able to fire a blast of "light energy"), Higher with Speed | Massively Hypersonic,
-      at least Relativistic+ or higher reactions/combat speed (Superior to their normal
-      counterparts)
+      be able to fire a blast of "light energy"), Higher with Speed
     source_ids:
     - vsbattles-volt-warframe
     confidence: 0.6
@@ -330,21 +312,19 @@ power_scale:
       directly into the capacitor towers around it''s arena. Should be comparable
       to Excalibur Prime who could withstand the force of the Hunhullus stomping him
       into the groundWarframe: The Old Peace(2025)1,746,445.32 metric tons)'
-    source_ids: &id003
+    source_ids: &id002
     - mediawiki-361838
     confidence: 0.8
   striking_strength:
     text: Small Town level+, likely City level (Can harm those comparable to themselves
-      with punches and kicks) | Small Town level+, Likely City level (Stronger than
-      their base variant), higher with Mods and Arcanes
-    source_ids: *id003
+      with punches and kicks)
+    source_ids: *id002
     confidence: 0.8
   durability:
     text: 'Small Town level+, likely City level (Can trade blows with Sentients like
       Eidolons or the Ropalolyst. Comparable to Excalibur Prime, who survived multiple
       hits from the HunhullusWarframe: The Old Peace(2025)), higher with Mods and
-      Arcanes | Small Town level+, Likely City level (More durable than their base
-      variant), higher with Mods and Arcanes'
+      Arcanes'
     source_ids:
     - vsbattles-volt-warframe
     confidence: 0.6
@@ -369,20 +349,20 @@ power_scale:
     confidence: 0.6
     notes: auto_repair source extraction
   intelligence:
-    text: 'In General= Mindless (Without their Operator piloting them the warframes
-      are simply empty husks), Gifted (While Their Operator is piloting them. Capable
-      of easily completing the numerous missions they receive regardless of the complexity
-      of the task. Additionally, they are able to solve the hall of ascension puzzles,
+    text: 'Mindless (Without their Operator piloting them the warframes are simply
+      empty husks), Gifted (While Their Operator is piloting them. Capable of easily
+      completing the numerous missions they receive regardless of the complexity of
+      the task. Additionally, they are able to solve the hall of ascension puzzles,
       Complex tests made to gauge the agility,power and cunning of the challengers)
-      |-|Combat= The Tenno are immensely skilled warriors, having been made solely
-      to face off against the constantly evolving SentientsWarframe: The Sacrifice(2018)
-      by utilizing not only their many abilities but the numerous weapons they have
-      mastered. Warframes were described as "miracles" on the battlefield, having
-      devastated many sentient strongholdsfrom Browse.wf, a website that compiles
-      and displays internal game data from Warframe. and were the singular reason
-      the empire survived the war. Individual Warframes were also capable of defeating
-      armies of Orokin soldiers,Warframe: Awakening(2020) all of whom would be equipped
-      with the same mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
+      The Tenno are immensely skilled warriors, having been made solely to face off
+      against the constantly evolving SentientsWarframe: The Sacrifice(2018) by utilizing
+      not only their many abilities but the numerous weapons they have mastered. Warframes
+      were described as "miracles" on the battlefield, having devastated many sentient
+      strongholdsfrom Browse.wf, a website that compiles and displays internal game
+      data from Warframe. and were the singular reason the empire survived the war.
+      Individual Warframes were also capable of defeating armies of Orokin soldiers,Warframe:
+      Awakening(2020) all of whom would be equipped with the same mods that made Tenno
+      weapons so powerful.Warframe: The Teacher(2025)'
     source_ids:
     - vsbattles-volt-warframe
     confidence: 0.6
@@ -394,7 +374,7 @@ claims:
   text: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher with
     Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far
     higher with Tauron Strikes'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-361838
   decisive: false
   status: unverified
@@ -426,7 +406,7 @@ claims:
     The Old Peace(2025)) | Small Town level+, Likely City level (Stronger than their
     base variant), higher with Mods and Arcanes, far higher with Tauron Strikes (Same
     as before)'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -440,7 +420,7 @@ claims:
     to fire a blast of "light energy"), Higher with Speed | Massively Hypersonic,
     at least Relativistic+ or higher reactions/combat speed (Superior to their normal
     counterparts)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -452,7 +432,7 @@ claims:
     into the capacitor towers around it''s arena. Should be comparable to Excalibur
     Prime who could withstand the force of the Hunhullus stomping him into the groundWarframe:
     The Old Peace(2025)1,746,445.32 metric tons)'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -463,7 +443,7 @@ claims:
   text: Small Town level+, likely City level (Can harm those comparable to themselves
     with punches and kicks) | Small Town level+, Likely City level (Stronger than
     their base variant), higher with Mods and Arcanes
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -476,7 +456,7 @@ claims:
     hits from the HunhullusWarframe: The Old Peace(2025)), higher with Mods and Arcanes
     | Small Town level+, Likely City level (More durable than their base variant),
     higher with Mods and Arcanes'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -486,7 +466,7 @@ claims:
   axis: stamina
   text: Infinite (As a machine he does not experience fatigue, only in destruction
     of the body is the Operator's link broken)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -501,7 +481,7 @@ claims:
     weapons used by the Tenno have ranges that vary of 300 meters up to 1000 meters
     and their beam weapons typically vary from 10 to 30 meters), Higher with Mods
     {| class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment |-
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -537,7 +517,7 @@ claims:
     produces a concussive burst of energy that stuns anyone in range) **Elytron ***Explosion
     Manipulation (All of Elytron''s abilities fires various explosives of varying
     strength) }}'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -559,7 +539,7 @@ claims:
     the war. Individual Warframes were also capable of defeating armies of Orokin
     soldiers,Warframe: Awakening(2020) all of whom would be equipped with the same
     mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -570,7 +550,7 @@ claims:
   text: 'Advanced, concentrated EMPs can restrict the use of his powers. Notable Attacks/Techniques:
     * Shock: Volt launches a shocking projectile that will electrocute opponents and
     chain to others within a radius *'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -580,19 +560,345 @@ claims:
   axis: hax
   text: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|
     {{!}}-{{!}}Base'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
   - fan_wiki_single_source
-abilities: []
+abilities:
+- id: powers-and-abilities-warframe-abilities-vary-in-their-effective-range-but-can-be
+  name: (Warframe abilities vary in their effective range but can be increased with
+    use of range mods)
+  description: (Warframe abilities vary in their effective range but can be increased
+    with use of range mods)
+  source_ids: &id004
+  - vsbattles-volt-warframe
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - range_limit
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-varies-from-tens-of-meters-up-to-hundreds-of-meters-with-pr
+  name: Varies from Tens of Meters up to Hundreds of Meters with Primary and Secondary
+    weapons (All ranged ballistic weapons use
+  description: Varies from Tens of Meters up to Hundreds of Meters with Primary and
+    Secondary weapons (All ranged ballistic weapons used by the Tenno have ranges
+    that vary of 300 meters up to 1000 meters and their beam weapons typically vary
+    from 10 to 30 meters)
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - range_limit
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-higher-with-mods
+  name: Higher with Mods {
+  description: Higher with Mods {
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-class-wikitable-mw-collapsible-mw-collapsed-standard-equipm
+  name: class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment
+  description: class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapons-warframes-always-come-equipped-with-a-primary-weapo
+  name: 'Weapons: Warframes always come equipped with a primary weapon'
+  description: 'Weapons: Warframes always come equipped with a primary weapon'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-a-secondary-sidearm
+  name: a secondary sidearm
+  description: a secondary sidearm
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-and-a-melee-weapon-their-weapons-can-vary-wildly-in-form-an
+  name: and a melee weapon. Their weapons can vary wildly in form and function
+  description: and a melee weapon. Their weapons can vary wildly in form and function
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-allowing-warframes-to-always-be-equipped-with-weapons-that-
+  name: 'allowing warframes to always be equipped with weapons that match the threats
+    they have to face. Mods: Mods can be used t'
+  description: 'allowing warframes to always be equipped with weapons that match the
+    threats they have to face. Mods: Mods can be used to increase/alter the function
+    of both a Warframe and their weapons'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-damage-reduction
+  name: Damage reduction
+  description: Damage reduction
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-elemental-resistances
+  name: Elemental resistances
+  description: Elemental resistances
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-and-stat-increases-are-all-benefits-mods-commonly-give-to-a
+  name: 'and Stat increases are all benefits mods commonly give to a Warframe. When
+    weapons can have multiple elements at a time '
+  description: 'and Stat increases are all benefits mods commonly give to a Warframe.
+    When weapons can have multiple elements at a time but some elements will fuse
+    to create more complex forces. 10 mods can be installed at a time on warframes
+    while weapons can only equip 8. Arcanes: Arcanes serve a similar purpose to mods
+    as both provide boosts to Warframe and weapon stats but unlike mods who give their
+    buffs immediately arcanes have conditions that will need to be met before the
+    buff starts. Warframes can equip 2 Arcanes and weapons only get 1. Parazon: The
+    Parazon is a deadly blade concealed in a Warframes wrist that allows them to instantly
+    interface and hack any electronic system'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_hacking
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-official-warframe-wiki
+  name: Official warframe wiki
+  description: Official warframe wiki
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-lotus-jackal-boss-fight-dialogue-grapple-onto-far-off-objec
+  name: Lotus Jackal Boss fight dialogue grapple onto far off objects
+  description: Lotus Jackal Boss fight dialogue grapple onto far off objects
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-intelligence-mindless-without-their-operator-piloting-them-
+  name: '} Intelligence: Mindless (Without their Operator piloting them the warframes
+    are simply empty husks)'
+  description: '} Intelligence: Mindless (Without their Operator piloting them the
+    warframes are simply empty husks)'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - pilot_dependency
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-gifted-while-their-operator-is-piloting-them-capable-of-eas
+  name: Gifted (While Their Operator is piloting them. Capable of easily completing
+    the numerous missions they receive regardles
+  description: Gifted (While Their Operator is piloting them. Capable of easily completing
+    the numerous missions they receive regardless of the complexity of the task. Additionally,
+    they are able to solve the hall of ascension puzzles, Complex tests made to gauge
+    the agility,power and cunning of the challengers) The Tenno are immensely skilled
+    warriors
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - pilot_dependency
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-having-been-made-solely-to-face-off-against-the-constantly-
+  name: 'having been made solely to face off against the constantly evolving SentientsWarframe:
+    The Sacrifice(2018) by utilizing '
+  description: 'having been made solely to face off against the constantly evolving
+    SentientsWarframe: The Sacrifice(2018) by utilizing not only their many abilities
+    but the numerous weapons they have mastered. Warframes were described as "miracles"
+    on the battlefield'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-having-devastated-many-sentient-strongholdsfrom-browse-wf
+  name: having devastated many sentient strongholdsfrom Browse.wf
+  description: having devastated many sentient strongholdsfrom Browse.wf
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-a-website-that-compiles-and-displays-internal-game-data-fro
+  name: 'a website that compiles and displays internal game data from Warframe. and
+    were the singular reason the empire survived '
+  description: a website that compiles and displays internal game data from Warframe.
+    and were the singular reason the empire survived the war. Individual Warframes
+    were also capable of defeating armies of Orokin soldiers
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-warframe-awakening-2020-all-of-whom-would-be-equipped-with-
+  name: 'Warframe: Awakening(2020) all of whom would be equipped with the same mods
+    that made Tenno weapons so powerful.Warframe:'
+  description: 'Warframe: Awakening(2020) all of whom would be equipped with the same
+    mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment:
 - id: standard-equipment-information-analysis-scanners-allow-the-tenno-to-scan-objects
   name: Information Analysis (Scanners allow the tenno to scan objects and creature
     for later analysis)
   description: Information Analysis (Scanners allow the tenno to scan objects and
     creature for later analysis)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -610,7 +916,7 @@ equipment:
   description: Duplication (By deploying a specter the tenno can create a preset clone
     of any warframe. Warframe specters have only the base power of the original and
     will disappear when destroyed)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -627,7 +933,7 @@ equipment:
     for several seconds)
   description: Paralysis Inducement (kinetic siphon traps can halt a target movements
     completely for several seconds)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -642,7 +948,7 @@ equipment:
 - id: standard-equipment-flight
   name: Flight
   description: Flight
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -662,7 +968,7 @@ equipment:
     with their own unique form and function but all are capable of providing the warframe
     with the means to survive in the vacuum of space for long periods and teleportation
     with a range of 800 meters)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -682,7 +988,7 @@ equipment:
 - id: standard-equipment-amesha
   name: Amesha
   description: Amesha
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -699,7 +1005,7 @@ equipment:
     that draw enemy fire to themselves)
   description: Technology Manipulation (Amesha's 1st and 2nd abilities creates decoy
     drones that draw enemy fire to themselves)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -719,7 +1025,7 @@ equipment:
     a 400 meter radius)
   description: Purification ((Type 3 ;)Amesha's Warding Grace prevents status effects
     in a 400 meter radius)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -737,7 +1043,7 @@ equipment:
   description: Statistics Amplification & Absorption (Amesha's Vengeful Rush absorbs
     damage done to it and convert it to energy that is used to boost its other abilities
     strength, range, and duration)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -753,7 +1059,7 @@ equipment:
 - id: standard-equipment-itzal
   name: Itzal
   description: Itzal
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -771,7 +1077,7 @@ equipment:
   description: Thread Manipulation (Itzal's 1st ability launches a grappling line
     that either drags enemies towards the warframe or pulls the wearer to a stationary
     object)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -788,7 +1094,7 @@ equipment:
     stationary objects invisible)
   description: Invisibility (Itzal's 2nd ability creates a 76 meter cloaking field
     that renders stationary objects invisible)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -805,7 +1111,7 @@ equipment:
     and crushes enemies in a 140 meter radius b
   description: Gravity Manipulation (Itzal's 3rd ability launches a gravity well that
     pulls and crushes enemies in a 140 meter radius before exploding)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -822,7 +1128,7 @@ equipment:
     will attack enemies before exploding when d
   description: Explosion Manipulation (Fighter escort deploys a swarm of small drones
     which will attack enemies before exploding when destroyed)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -837,7 +1143,7 @@ equipment:
 - id: standard-equipment-odonata
   name: Odonata
   description: Odonata
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -855,7 +1161,7 @@ equipment:
   description: Forcefield Creation & Fire Manipulation (Odonata's 1st ability creates
     an energy shield that blocks projectiles. Guns fired from behind the shield will
     do additional heat damage)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -872,7 +1178,7 @@ equipment:
 - id: standard-equipment-explosion-manipulation-odonata-s-3rd-ability-fires-homing-mis
   name: Explosion Manipulation (Odonata's 3rd ability fires homing missiles)
   description: Explosion Manipulation (Odonata's 3rd ability fires homing missiles)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -891,7 +1197,7 @@ equipment:
     that stuns anyone in range)
   description: Energy Projection (Odonata's 4th ability produces a concussive burst
     of energy that stuns anyone in range)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -907,7 +1213,7 @@ equipment:
 - id: standard-equipment-elytron
   name: Elytron
   description: Elytron
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -924,7 +1230,7 @@ equipment:
     of varying strength)
   description: Explosion Manipulation (All of Elytron's abilities fires various explosives
     of varying strength)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -941,43 +1247,11 @@ equipment:
 summons: []
 resistances: []
 weaknesses:
-- id: weaknesses-advanced
-  name: Advanced
-  description: Advanced
-  source_ids: &id005
+- id: weaknesses-concentrated-emps-can-restrict-the-use-of-his-powers
+  name: concentrated EMPs can restrict the use of his powers.
+  description: concentrated EMPs can restrict the use of his powers.
+  source_ids:
   - vsbattles-volt-warframe
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-concentrated-emps-can-restrict-the-use-of-his-powers-notable-attacks-
-  name: 'concentrated EMPs can restrict the use of his powers. Notable Attacks/Techniques:'
-  description: 'concentrated EMPs can restrict the use of his powers. Notable Attacks/Techniques:'
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-shock-volt-launches-a-shocking-projectile-that-will-electrocute-oppon
-  name: 'Shock: Volt launches a shocking projectile that will electrocute opponents
-    and chain to others within a radius'
-  description: 'Shock: Volt launches a shocking projectile that will electrocute opponents
-    and chain to others within a radius'
-  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1020,35 +1294,33 @@ review:
   - unresolved_version_scope:speed
   source_errors: []
   notes: []
-  readiness_state: provisional
+  readiness_state: needs_review
   profile_state: auto_evidence_profile
   primary_source_id: vsbattles-volt-warframe
   secondary_disagreement_policy: warning_only
 profile_hash: 4cfbf036a7334d36723ab754f2bdf30518be0f7e6734fcf0ce3d8b919e763159
 repair:
-  attempted_at: '2026-09-25T21:42:53Z'
+  attempted_at: '2026-10-25T17:40:42Z'
   repaired_fields:
+  - abilities
   - attack_potency
   - durability
   - intelligence
-  - range
   - speed
   - stamina
   - tier
   - weaknesses
-  unresolved_fields:
-  - abilities
+  unresolved_fields: []
   source_attempts:
   - source_id: mediawiki-361838
     url: https://vsbattles.fandom.com/wiki/Volt
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields: &id005
     - attack_potency
     - durability
     - intelligence
     - powers_and_abilities
-    - range
     - speed
     - stamina
     - standard_equipment
@@ -1087,7 +1359,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields: &id006
     - tier
     - attack_potency
     - speed
@@ -1100,50 +1372,9 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher
-        with Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes,
-        far higher with Tauron Strikes'
-      source_id: mediawiki-361838
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|
-        {{!}}-{{!}}Base'
-      source_id: mediawiki-361838
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: '*Information Analysis (Scanners allow the tenno to scan objects and
-        creature for later analysis) *Duplication (By deploying a specter the tenno
-        can create a preset clone of any warframe. Warframe specters have only the
-        base power of the original and will disappear when destroyed) *Paralysis Inducement
-        (kinetic siphon traps can halt a target movements completely for several seconds)
-        *Flight , Teleportation & Space Survival (Archwings are flight harnesses that
-        a warframe can summon in open spaces; there are multiple archwing models each
-        with their own unique form and function but all are capable of providing the
-        warframe with the means to survive in the vacuum of space for long periods
-        and teleportation with a range of 800 meters) **Amesha ***Technology Manipulation
-        (Amesha''s 1st and 2nd abilities creates decoy drones that draw enemy fire
-        to themselves) ***Purification ((Type 3 ;)Amesha''s Warding Grace prevents
-        status effects in a 400 meter radius) ***Statistics Amplification & Absorption
-        (Amesha''s Vengeful Rush absorbs damage done to it and convert it to energy
-        that is used to boost its other abilities strength, range, and duration) **Itzal
-        ***Thread Manipulation (Itzal''s 1st ability launches a grappling line that
-        either drags enemies towards the warframe or pulls the wearer to a stationary
-        object) ***Invisibility (Itzal''s 2nd ability creates a 76 meter cloaking
-        field that renders stationary objects invisible) ***Gravity Manipulation (Itzal''s
-        3rd ability launches a gravity well that pulls and crushes enemies in a 140
-        meter radius before exploding) ***Explosion Manipulation (Fighter escort deploys
-        a swarm of small drones which will attack enemies before exploding when destroyed)
-        **Odonata ***Forcefield Creation & Fire Manipulation (Odonata''s 1st ability
-        creates an energy shield that blocks projectiles. Guns fired from behind the
-        shield will do additional heat damage) ***Explosion Manipulation (Odonata''s
-        3rd ability fires homing missiles) ***Energy Projection (Odonata''s 4th ability
-        produces a concussive burst of energy that stuns anyone in range) **Elytron
-        ***Explosion Manipulation (All of Elytron''s abilities fires various explosives
-        of varying strength) }}'
+      value: Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with Tauron
+        Strikes | Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with
+        Tauron Strikes
       source_id: mediawiki-361838
       provider_id: vsbattles
       authority: high
@@ -1205,42 +1436,87 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Melee weapons; Varies from Tens of Meters up
-        to Hundreds of Meters with Abilities (Warframe abilities vary in their effective
-        range but can be increased with use of range mods), Varies from Tens of Meters
-        up to Hundreds of Meters with Primary and Secondary weapons (All ranged ballistic
-        weapons used by the Tenno have ranges that vary of 300 meters up to 1000 meters
-        and their beam weapons typically vary from 10 to 30 meters), Higher with Mods
-        {| class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment |-
+    - field: standard_equipment
+      value: 'Warframes always come equipped with a primary weapon, a secondary sidearm,
+        and a melee weapon. Their weapons can vary wildly in form and function, allowing
+        warframes to always be equipped with weapons that match the threats they have
+        to face. Mods: Mods can be used to increase/alter the function of both a Warframe
+        and their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects'
       source_id: mediawiki-361838
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: 'In General= Mindless (Without their Operator piloting them the warframes
-        are simply empty husks), Gifted (While Their Operator is piloting them. Capable
-        of easily completing the numerous missions they receive regardless of the
-        complexity of the task. Additionally, they are able to solve the hall of ascension
-        puzzles, Complex tests made to gauge the agility,power and cunning of the
-        challengers) |-|Combat= The Tenno are immensely skilled warriors, having been
-        made solely to face off against the constantly evolving SentientsWarframe:
-        The Sacrifice(2018) by utilizing not only their many abilities but the numerous
-        weapons they have mastered. Warframes were described as "miracles" on the
-        battlefield, having devastated many sentient strongholdsfrom Browse.wf, a
-        website that compiles and displays internal game data from Warframe. and were
-        the singular reason the empire survived the war. Individual Warframes were
-        also capable of defeating armies of Orokin soldiers,Warframe: Awakening(2020)
-        all of whom would be equipped with the same mods that made Tenno weapons so
-        powerful.Warframe: The Teacher(2025)'
+      value: 'Mindless (Without their Operator piloting them the warframes are simply
+        empty husks), Gifted (While Their Operator is piloting them. Capable of easily
+        completing the numerous missions they receive regardless of the complexity
+        of the task. Additionally, they are able to solve the hall of ascension puzzles,
+        Complex tests made to gauge the agility,power and cunning of the challengers)
+        The Tenno are immensely skilled warriors, having been made solely to face
+        off against the constantly evolving SentientsWarframe: The Sacrifice(2018)
+        by utilizing not only their many abilities but the numerous weapons they have
+        mastered. Warframes were described as "miracles" on the battlefield, having
+        devastated many sentient strongholdsfrom Browse.wf, a website that compiles
+        and displays internal game data from Warframe. and were the singular reason
+        the empire survived the war. Individual Warframes were also capable of defeating
+        armies of Orokin soldiers,Warframe: Awakening(2020) all of whom would be equipped
+        with the same mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: mediawiki-361838
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Advanced, concentrated EMPs can restrict the use of his powers. Notable
-        Attacks/Techniques: * Shock: Volt launches a shocking projectile that will
-        electrocute opponents and chain to others within a radius *'
+      value: concentrated EMPs can restrict the use of his powers.
+      source_id: mediawiki-361838
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '(Warframe abilities vary in their effective range but can be increased
+        with use of range mods), Varies from Tens of Meters up to Hundreds of Meters
+        with Primary and Secondary weapons (All ranged ballistic weapons used by the
+        Tenno have ranges that vary of 300 meters up to 1000 meters and their beam
+        weapons typically vary from 10 to 30 meters), Higher with Mods {, class="wikitable
+        mw-collapsible mw-collapsed" ! Standard Equipment, Weapons: Warframes always
+        come equipped with a primary weapon, a secondary sidearm, and a melee weapon.
+        Their weapons can vary wildly in form and function, allowing warframes to
+        always be equipped with weapons that match the threats they have to face.
+        Mods: Mods can be used to increase/alter the function of both a Warframe and
+        their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects, } Intelligence: Mindless (Without
+        their Operator piloting them the warframes are simply empty husks), Gifted
+        (While Their Operator is piloting them. Capable of easily completing the numerous
+        missions they receive regardless of the complexity of the task. Additionally,
+        they are able to solve the hall of ascension puzzles, Complex tests made to
+        gauge the agility,power and cunning of the challengers) The Tenno are immensely
+        skilled warriors, having been made solely to face off against the constantly
+        evolving SentientsWarframe: The Sacrifice(2018) by utilizing not only their
+        many abilities but the numerous weapons they have mastered. Warframes were
+        described as "miracles" on the battlefield, having devastated many sentient
+        strongholdsfrom Browse.wf, a website that compiles and displays internal game
+        data from Warframe. and were the singular reason the empire survived the war.
+        Individual Warframes were also capable of defeating armies of Orokin soldiers,
+        Warframe: Awakening(2020) all of whom would be equipped with the same mods
+        that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: mediawiki-361838
       provider_id: vsbattles
       authority: high
@@ -1259,21 +1535,40 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-volt-warframe
-    url: https://character-stats-and-profiles.fandom.com/wiki/Volt_Warframe
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Volt Warframe
+    url: https://character-stats-and-profiles.fandom.com/wiki/Volt_%28Warframe%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: Narin (Warframe/Canon)/Bimbo23
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '620244'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 8965
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 105
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1286,30 +1581,128 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: tier
+      value: Low 7-C , likely 7-B , higher with Mods and Arcanes.
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "resistant to the infestations ability to alter flesh on a molecular\
+        \ level) * Immortality/Resurrection (Types 1, 2, 4 & 8; Warframes are stated\
+        \ to be able to remain active forever. They can survive being pierced through\
+        \ by a sword Capable of reviving themselves up to 4 times a missions by surging\
+        \ power to their systems. Warframes are surrogate bodies controlled by an\
+        \ Operator meaning all Warframes can be reconstructed from blueprints by the\
+        \ Helminth in their bases of operation.) * Resistence to Temperature Manipulation\
+        \ (5,000\xB0C,Can fight near the surface of the sun without suffering from\
+        \ the heat[,its cold resistance should be far superior to the rest of the\
+        \ warframes since it is able to withstand its own powers * Abstract Existence\
+        \ (Type 2,Narin has an existence linked to Conceptual Incarnation and the\
+        \ Void, associated with the identity of Zikhaio Nuri.) * Extrasensory Perception\
+        \ (All Warframes have a 30 meter radar that alerts them to the position of\
+        \ their enemies.) * Healing (Orokin Lorist's could heal people of severe injuries\
+        \ like acid burns and large lacerations in the middle of battle; Warframes\
+        \ can do something similar for allies who have been downed and should possess\
+        \ healing of a similar potency but would requires more focus.) * Self-Sustenance\
+        \ (Types 2 and 3; Warframes do not need to eat or sleep, they are also able\
+        \ to survive in space and other areas with limited oxygen for extended periods\
+        \ but will eventually require life support to continue.) * Acrobatics * Flight\
+        \ (Using Hakchum, Narin deploys crane-like wings to rise and move through\
+        \ the air before swooping down on a designated area. This ability grants him\
+        \ aerial mobility and allows him to reach groups of enemies while subjecting\
+        \ them to his cryogenic effects.) * Temperature Manipulation/Ice Manipulation\
+        \ (Neote, Narin sword has an estimated natural temperature of 0.725 K (\u2212\
+        272.4 \xB0C), approximately 2 K below the cosmic microwave background temperature\
+        \ and extremely close to absolute zero. The temperature of his sword is not\
+        \ Narin limit.) * Durability Negation/Time Manipulation (Narin cold can freeze\
+        \ time, allowing him to immobilize targets without relying on overcoming their\
+        \ conventional physical resistance. His greatest temporal feat is freezing\
+        \ the moment of the Operator's decision on Yuvan Peak to contain the Zariman's\
+        \ influence. This allows him to affect physically more resilient opponents\
+        \ through temporal stasis, provided they lack adequate defenses against this\
+        \ effect.) * Limited Reality Warping/Spatial Manipulation (Through the Cryobells,\
+        \ Narin can generate phenomena that alter the conditions of reality, granting\
+        \ access to different places and times. His Binds modify the conditions of\
+        \ the scenarios linked to the bells, while his influence maintains a containment\
+        \ mechanism against anomalies related to the Void. This manipulation is limited\
+        \ by the functioning of the Cryobells and their associated effects.) * Status\
+        \ Effect Inducement/Statistics Reduction (Narin can freeze and slow her enemies,\
+        \ increasing their vulnerability to cold and reducing their defenses. Her\
+        \ attacks combine freezing and piercing effects, weakening armor and shields,\
+        \ and radial explosions against frozen targets, making her subsequent attacks\
+        \ more effective.) * Absorption/Purification (Using Naraemagi, she absorbs\
+        \ the cold status ailments of nearby enemies to restore her shields. When\
+        \ her shields are at maximum, the excess recovery generates Overguard, an\
+        \ additional energy barrier that protects her from damage and removes negative\
+        \ status ailments upon activation.) * Non-Physical Interaction (Soul, emotion,thoughts,memory,concepts\
+        \ and energy; it is stated that the only way to destroy the spectral form\
+        \ of the Thrax Centurions is with Void energy, the same is required for the\
+        \ energy form of the Vomvalyst,and it is shown that the energy of the Void,\
+        \ through conceptual embodiment, can give physical form to thoughts, memories,\
+        \ and emotions.)"
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Town level (Warframes were the ultimate weapons created by the
+        Orokin empire and were considered miracles who could reverse the tide of any
+        battle. A single Warframe could effortlessly slaughter entire armies of Orokin
+        soldiers, all of which were equipped with weapons capable of mass destruction.
+        Protea can defeat Orowyrms, which are biomechanical dragons capable of ramming
+        into the floating islands of duviri with enough force to shatter them to pieces.),
+        likely City level (Warframes like Protea were created for the main purpose
+        of fighting powerful Sentients like Hunhow, who had destroyed many cities
+        during the time of the old war. Can defeat the Ropalolyst, a Sentient capable
+        of survive being hit by its own "city frying" lasers. Protea should be relative
+        to Excalibur Prime who can casually spar with the Hunhullus, which was considered
+        the Sentients greatest weapon.), higher with Mods and Arcanes (Warframes can
+        equip various upgrades that boost/augment the power of their weapons and abilities.)
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic (Can fight evenly against Volt.), possibly Relativistic+
+        or higher reactions/combat speed (Can deflect weapons such as Opticor and
+        Glaxion at a close distance, the former stated to be able to fire a blast
+        of "light energy".), higher with mods
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Town level, likely City level (Can trade blows with Sentients like
+        Eidolons or the Ropalolyst. Comparable to Excalibur Prime, who survived multiple
+        hits from the Hunhullus.), higher with Mods and Arcanes
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
+    core_field_count: 3
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|volt warframe
+    duplicate_key: character-stats-and-profiles.fandom.com|narin warframe canon bimbo23|620244
     retryable: false
     exception_class: ''
   - source_id: vsbattles-volt-warframe
-    url: https://vsbattles.fandom.com/wiki/Volt_%28Warframe%29
+    url: https://vsbattles.fandom.com/wiki/Volt_Warframe
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id008
+    extracted_fields: &id007
     - attack_potency
     - durability
     - intelligence
     - powers_and_abilities
-    - range
     - speed
     - stamina
     - standard_equipment
@@ -1348,7 +1741,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id009
+    allowed_fields: &id008
     - attack_potency
     - speed
     - durability
@@ -1359,50 +1752,9 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher
-        with Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes,
-        far higher with Tauron Strikes'
-      source_id: vsbattles-volt-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|
-        {{!}}-{{!}}Base'
-      source_id: vsbattles-volt-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: '*Information Analysis (Scanners allow the tenno to scan objects and
-        creature for later analysis) *Duplication (By deploying a specter the tenno
-        can create a preset clone of any warframe. Warframe specters have only the
-        base power of the original and will disappear when destroyed) *Paralysis Inducement
-        (kinetic siphon traps can halt a target movements completely for several seconds)
-        *Flight , Teleportation & Space Survival (Archwings are flight harnesses that
-        a warframe can summon in open spaces; there are multiple archwing models each
-        with their own unique form and function but all are capable of providing the
-        warframe with the means to survive in the vacuum of space for long periods
-        and teleportation with a range of 800 meters) **Amesha ***Technology Manipulation
-        (Amesha''s 1st and 2nd abilities creates decoy drones that draw enemy fire
-        to themselves) ***Purification ((Type 3 ;)Amesha''s Warding Grace prevents
-        status effects in a 400 meter radius) ***Statistics Amplification & Absorption
-        (Amesha''s Vengeful Rush absorbs damage done to it and convert it to energy
-        that is used to boost its other abilities strength, range, and duration) **Itzal
-        ***Thread Manipulation (Itzal''s 1st ability launches a grappling line that
-        either drags enemies towards the warframe or pulls the wearer to a stationary
-        object) ***Invisibility (Itzal''s 2nd ability creates a 76 meter cloaking
-        field that renders stationary objects invisible) ***Gravity Manipulation (Itzal''s
-        3rd ability launches a gravity well that pulls and crushes enemies in a 140
-        meter radius before exploding) ***Explosion Manipulation (Fighter escort deploys
-        a swarm of small drones which will attack enemies before exploding when destroyed)
-        **Odonata ***Forcefield Creation & Fire Manipulation (Odonata''s 1st ability
-        creates an energy shield that blocks projectiles. Guns fired from behind the
-        shield will do additional heat damage) ***Explosion Manipulation (Odonata''s
-        3rd ability fires homing missiles) ***Energy Projection (Odonata''s 4th ability
-        produces a concussive burst of energy that stuns anyone in range) **Elytron
-        ***Explosion Manipulation (All of Elytron''s abilities fires various explosives
-        of varying strength) }}'
+      value: Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with Tauron
+        Strikes | Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with
+        Tauron Strikes
       source_id: vsbattles-volt-warframe
       provider_id: vsbattles
       authority: high
@@ -1464,42 +1816,87 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Melee weapons; Varies from Tens of Meters up
-        to Hundreds of Meters with Abilities (Warframe abilities vary in their effective
-        range but can be increased with use of range mods), Varies from Tens of Meters
-        up to Hundreds of Meters with Primary and Secondary weapons (All ranged ballistic
-        weapons used by the Tenno have ranges that vary of 300 meters up to 1000 meters
-        and their beam weapons typically vary from 10 to 30 meters), Higher with Mods
-        {| class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment |-
+    - field: standard_equipment
+      value: 'Warframes always come equipped with a primary weapon, a secondary sidearm,
+        and a melee weapon. Their weapons can vary wildly in form and function, allowing
+        warframes to always be equipped with weapons that match the threats they have
+        to face. Mods: Mods can be used to increase/alter the function of both a Warframe
+        and their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects'
       source_id: vsbattles-volt-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: 'In General= Mindless (Without their Operator piloting them the warframes
-        are simply empty husks), Gifted (While Their Operator is piloting them. Capable
-        of easily completing the numerous missions they receive regardless of the
-        complexity of the task. Additionally, they are able to solve the hall of ascension
-        puzzles, Complex tests made to gauge the agility,power and cunning of the
-        challengers) |-|Combat= The Tenno are immensely skilled warriors, having been
-        made solely to face off against the constantly evolving SentientsWarframe:
-        The Sacrifice(2018) by utilizing not only their many abilities but the numerous
-        weapons they have mastered. Warframes were described as "miracles" on the
-        battlefield, having devastated many sentient strongholdsfrom Browse.wf, a
-        website that compiles and displays internal game data from Warframe. and were
-        the singular reason the empire survived the war. Individual Warframes were
-        also capable of defeating armies of Orokin soldiers,Warframe: Awakening(2020)
-        all of whom would be equipped with the same mods that made Tenno weapons so
-        powerful.Warframe: The Teacher(2025)'
+      value: 'Mindless (Without their Operator piloting them the warframes are simply
+        empty husks), Gifted (While Their Operator is piloting them. Capable of easily
+        completing the numerous missions they receive regardless of the complexity
+        of the task. Additionally, they are able to solve the hall of ascension puzzles,
+        Complex tests made to gauge the agility,power and cunning of the challengers)
+        The Tenno are immensely skilled warriors, having been made solely to face
+        off against the constantly evolving SentientsWarframe: The Sacrifice(2018)
+        by utilizing not only their many abilities but the numerous weapons they have
+        mastered. Warframes were described as "miracles" on the battlefield, having
+        devastated many sentient strongholdsfrom Browse.wf, a website that compiles
+        and displays internal game data from Warframe. and were the singular reason
+        the empire survived the war. Individual Warframes were also capable of defeating
+        armies of Orokin soldiers,Warframe: Awakening(2020) all of whom would be equipped
+        with the same mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: vsbattles-volt-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Advanced, concentrated EMPs can restrict the use of his powers. Notable
-        Attacks/Techniques: * Shock: Volt launches a shocking projectile that will
-        electrocute opponents and chain to others within a radius *'
+      value: concentrated EMPs can restrict the use of his powers.
+      source_id: vsbattles-volt-warframe
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '(Warframe abilities vary in their effective range but can be increased
+        with use of range mods), Varies from Tens of Meters up to Hundreds of Meters
+        with Primary and Secondary weapons (All ranged ballistic weapons used by the
+        Tenno have ranges that vary of 300 meters up to 1000 meters and their beam
+        weapons typically vary from 10 to 30 meters), Higher with Mods {, class="wikitable
+        mw-collapsible mw-collapsed" ! Standard Equipment, Weapons: Warframes always
+        come equipped with a primary weapon, a secondary sidearm, and a melee weapon.
+        Their weapons can vary wildly in form and function, allowing warframes to
+        always be equipped with weapons that match the threats they have to face.
+        Mods: Mods can be used to increase/alter the function of both a Warframe and
+        their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects, } Intelligence: Mindless (Without
+        their Operator piloting them the warframes are simply empty husks), Gifted
+        (While Their Operator is piloting them. Capable of easily completing the numerous
+        missions they receive regardless of the complexity of the task. Additionally,
+        they are able to solve the hall of ascension puzzles, Complex tests made to
+        gauge the agility,power and cunning of the challengers) The Tenno are immensely
+        skilled warriors, having been made solely to face off against the constantly
+        evolving SentientsWarframe: The Sacrifice(2018) by utilizing not only their
+        many abilities but the numerous weapons they have mastered. Warframes were
+        described as "miracles" on the battlefield, having devastated many sentient
+        strongholdsfrom Browse.wf, a website that compiles and displays internal game
+        data from Warframe. and were the singular reason the empire survived the war.
+        Individual Warframes were also capable of defeating armies of Orokin soldiers,
+        Warframe: Awakening(2020) all of whom would be equipped with the same mods
+        that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: vsbattles-volt-warframe
       provider_id: vsbattles
       authority: high
@@ -1518,21 +1915,40 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-volt-warframe
-    url: https://character-stats-and-profiles.fandom.com/wiki/Volt_%28Warframe%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Volt (Warframe)
+    url: https://character-stats-and-profiles.fandom.com/wiki/Volt_Warframe
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: Narin (Warframe/Canon)/Bimbo23
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '620244'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 8965
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 105
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1545,30 +1961,128 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: tier
+      value: Low 7-C , likely 7-B , higher with Mods and Arcanes.
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "resistant to the infestations ability to alter flesh on a molecular\
+        \ level) * Immortality/Resurrection (Types 1, 2, 4 & 8; Warframes are stated\
+        \ to be able to remain active forever. They can survive being pierced through\
+        \ by a sword Capable of reviving themselves up to 4 times a missions by surging\
+        \ power to their systems. Warframes are surrogate bodies controlled by an\
+        \ Operator meaning all Warframes can be reconstructed from blueprints by the\
+        \ Helminth in their bases of operation.) * Resistence to Temperature Manipulation\
+        \ (5,000\xB0C,Can fight near the surface of the sun without suffering from\
+        \ the heat[,its cold resistance should be far superior to the rest of the\
+        \ warframes since it is able to withstand its own powers * Abstract Existence\
+        \ (Type 2,Narin has an existence linked to Conceptual Incarnation and the\
+        \ Void, associated with the identity of Zikhaio Nuri.) * Extrasensory Perception\
+        \ (All Warframes have a 30 meter radar that alerts them to the position of\
+        \ their enemies.) * Healing (Orokin Lorist's could heal people of severe injuries\
+        \ like acid burns and large lacerations in the middle of battle; Warframes\
+        \ can do something similar for allies who have been downed and should possess\
+        \ healing of a similar potency but would requires more focus.) * Self-Sustenance\
+        \ (Types 2 and 3; Warframes do not need to eat or sleep, they are also able\
+        \ to survive in space and other areas with limited oxygen for extended periods\
+        \ but will eventually require life support to continue.) * Acrobatics * Flight\
+        \ (Using Hakchum, Narin deploys crane-like wings to rise and move through\
+        \ the air before swooping down on a designated area. This ability grants him\
+        \ aerial mobility and allows him to reach groups of enemies while subjecting\
+        \ them to his cryogenic effects.) * Temperature Manipulation/Ice Manipulation\
+        \ (Neote, Narin sword has an estimated natural temperature of 0.725 K (\u2212\
+        272.4 \xB0C), approximately 2 K below the cosmic microwave background temperature\
+        \ and extremely close to absolute zero. The temperature of his sword is not\
+        \ Narin limit.) * Durability Negation/Time Manipulation (Narin cold can freeze\
+        \ time, allowing him to immobilize targets without relying on overcoming their\
+        \ conventional physical resistance. His greatest temporal feat is freezing\
+        \ the moment of the Operator's decision on Yuvan Peak to contain the Zariman's\
+        \ influence. This allows him to affect physically more resilient opponents\
+        \ through temporal stasis, provided they lack adequate defenses against this\
+        \ effect.) * Limited Reality Warping/Spatial Manipulation (Through the Cryobells,\
+        \ Narin can generate phenomena that alter the conditions of reality, granting\
+        \ access to different places and times. His Binds modify the conditions of\
+        \ the scenarios linked to the bells, while his influence maintains a containment\
+        \ mechanism against anomalies related to the Void. This manipulation is limited\
+        \ by the functioning of the Cryobells and their associated effects.) * Status\
+        \ Effect Inducement/Statistics Reduction (Narin can freeze and slow her enemies,\
+        \ increasing their vulnerability to cold and reducing their defenses. Her\
+        \ attacks combine freezing and piercing effects, weakening armor and shields,\
+        \ and radial explosions against frozen targets, making her subsequent attacks\
+        \ more effective.) * Absorption/Purification (Using Naraemagi, she absorbs\
+        \ the cold status ailments of nearby enemies to restore her shields. When\
+        \ her shields are at maximum, the excess recovery generates Overguard, an\
+        \ additional energy barrier that protects her from damage and removes negative\
+        \ status ailments upon activation.) * Non-Physical Interaction (Soul, emotion,thoughts,memory,concepts\
+        \ and energy; it is stated that the only way to destroy the spectral form\
+        \ of the Thrax Centurions is with Void energy, the same is required for the\
+        \ energy form of the Vomvalyst,and it is shown that the energy of the Void,\
+        \ through conceptual embodiment, can give physical form to thoughts, memories,\
+        \ and emotions.)"
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Town level (Warframes were the ultimate weapons created by the
+        Orokin empire and were considered miracles who could reverse the tide of any
+        battle. A single Warframe could effortlessly slaughter entire armies of Orokin
+        soldiers, all of which were equipped with weapons capable of mass destruction.
+        Protea can defeat Orowyrms, which are biomechanical dragons capable of ramming
+        into the floating islands of duviri with enough force to shatter them to pieces.),
+        likely City level (Warframes like Protea were created for the main purpose
+        of fighting powerful Sentients like Hunhow, who had destroyed many cities
+        during the time of the old war. Can defeat the Ropalolyst, a Sentient capable
+        of survive being hit by its own "city frying" lasers. Protea should be relative
+        to Excalibur Prime who can casually spar with the Hunhullus, which was considered
+        the Sentients greatest weapon.), higher with Mods and Arcanes (Warframes can
+        equip various upgrades that boost/augment the power of their weapons and abilities.)
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic (Can fight evenly against Volt.), possibly Relativistic+
+        or higher reactions/combat speed (Can deflect weapons such as Opticor and
+        Glaxion at a close distance, the former stated to be able to fire a blast
+        of "light energy".), higher with mods
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Town level, likely City level (Can trade blows with Sentients like
+        Eidolons or the Ropalolyst. Comparable to Excalibur Prime, who survived multiple
+        hits from the Hunhullus.), higher with Mods and Arcanes
+      source_id: character-stats-profiles-volt-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
+    core_field_count: 3
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|volt warframe
+    duplicate_key: character-stats-and-profiles.fandom.com|narin warframe canon bimbo23|620244
     retryable: false
     exception_class: ''
   - source_id: vsbattles-volt-warframe
-    url: https://vsbattles.fandom.com/wiki/Volt_Warframe
+    url: https://vsbattles.fandom.com/wiki/Volt_%28Warframe%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id010
+    extracted_fields: &id009
     - attack_potency
     - durability
     - intelligence
     - powers_and_abilities
-    - range
     - speed
     - stamina
     - standard_equipment
@@ -1607,7 +2121,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id011
+    allowed_fields: &id010
     - attack_potency
     - speed
     - durability
@@ -1618,50 +2132,9 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes, far higher
-        with Tauron Strikes | {{Low 7-C}}, likely {{7-B}}, higher with Mods and Arcanes,
-        far higher with Tauron Strikes'
-      source_id: vsbattles-volt-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|
-        {{!}}-{{!}}Base'
-      source_id: vsbattles-volt-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: '*Information Analysis (Scanners allow the tenno to scan objects and
-        creature for later analysis) *Duplication (By deploying a specter the tenno
-        can create a preset clone of any warframe. Warframe specters have only the
-        base power of the original and will disappear when destroyed) *Paralysis Inducement
-        (kinetic siphon traps can halt a target movements completely for several seconds)
-        *Flight , Teleportation & Space Survival (Archwings are flight harnesses that
-        a warframe can summon in open spaces; there are multiple archwing models each
-        with their own unique form and function but all are capable of providing the
-        warframe with the means to survive in the vacuum of space for long periods
-        and teleportation with a range of 800 meters) **Amesha ***Technology Manipulation
-        (Amesha''s 1st and 2nd abilities creates decoy drones that draw enemy fire
-        to themselves) ***Purification ((Type 3 ;)Amesha''s Warding Grace prevents
-        status effects in a 400 meter radius) ***Statistics Amplification & Absorption
-        (Amesha''s Vengeful Rush absorbs damage done to it and convert it to energy
-        that is used to boost its other abilities strength, range, and duration) **Itzal
-        ***Thread Manipulation (Itzal''s 1st ability launches a grappling line that
-        either drags enemies towards the warframe or pulls the wearer to a stationary
-        object) ***Invisibility (Itzal''s 2nd ability creates a 76 meter cloaking
-        field that renders stationary objects invisible) ***Gravity Manipulation (Itzal''s
-        3rd ability launches a gravity well that pulls and crushes enemies in a 140
-        meter radius before exploding) ***Explosion Manipulation (Fighter escort deploys
-        a swarm of small drones which will attack enemies before exploding when destroyed)
-        **Odonata ***Forcefield Creation & Fire Manipulation (Odonata''s 1st ability
-        creates an energy shield that blocks projectiles. Guns fired from behind the
-        shield will do additional heat damage) ***Explosion Manipulation (Odonata''s
-        3rd ability fires homing missiles) ***Energy Projection (Odonata''s 4th ability
-        produces a concussive burst of energy that stuns anyone in range) **Elytron
-        ***Explosion Manipulation (All of Elytron''s abilities fires various explosives
-        of varying strength) }}'
+      value: Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with Tauron
+        Strikes | Low 7-C, likely 7-B, higher with Mods and Arcanes, far higher with
+        Tauron Strikes
       source_id: vsbattles-volt-warframe
       provider_id: vsbattles
       authority: high
@@ -1723,42 +2196,87 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Melee weapons; Varies from Tens of Meters up
-        to Hundreds of Meters with Abilities (Warframe abilities vary in their effective
-        range but can be increased with use of range mods), Varies from Tens of Meters
-        up to Hundreds of Meters with Primary and Secondary weapons (All ranged ballistic
-        weapons used by the Tenno have ranges that vary of 300 meters up to 1000 meters
-        and their beam weapons typically vary from 10 to 30 meters), Higher with Mods
-        {| class="wikitable mw-collapsible mw-collapsed" ! Standard Equipment |-
+    - field: standard_equipment
+      value: 'Warframes always come equipped with a primary weapon, a secondary sidearm,
+        and a melee weapon. Their weapons can vary wildly in form and function, allowing
+        warframes to always be equipped with weapons that match the threats they have
+        to face. Mods: Mods can be used to increase/alter the function of both a Warframe
+        and their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects'
       source_id: vsbattles-volt-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: 'In General= Mindless (Without their Operator piloting them the warframes
-        are simply empty husks), Gifted (While Their Operator is piloting them. Capable
-        of easily completing the numerous missions they receive regardless of the
-        complexity of the task. Additionally, they are able to solve the hall of ascension
-        puzzles, Complex tests made to gauge the agility,power and cunning of the
-        challengers) |-|Combat= The Tenno are immensely skilled warriors, having been
-        made solely to face off against the constantly evolving SentientsWarframe:
-        The Sacrifice(2018) by utilizing not only their many abilities but the numerous
-        weapons they have mastered. Warframes were described as "miracles" on the
-        battlefield, having devastated many sentient strongholdsfrom Browse.wf, a
-        website that compiles and displays internal game data from Warframe. and were
-        the singular reason the empire survived the war. Individual Warframes were
-        also capable of defeating armies of Orokin soldiers,Warframe: Awakening(2020)
-        all of whom would be equipped with the same mods that made Tenno weapons so
-        powerful.Warframe: The Teacher(2025)'
+      value: 'Mindless (Without their Operator piloting them the warframes are simply
+        empty husks), Gifted (While Their Operator is piloting them. Capable of easily
+        completing the numerous missions they receive regardless of the complexity
+        of the task. Additionally, they are able to solve the hall of ascension puzzles,
+        Complex tests made to gauge the agility,power and cunning of the challengers)
+        The Tenno are immensely skilled warriors, having been made solely to face
+        off against the constantly evolving SentientsWarframe: The Sacrifice(2018)
+        by utilizing not only their many abilities but the numerous weapons they have
+        mastered. Warframes were described as "miracles" on the battlefield, having
+        devastated many sentient strongholdsfrom Browse.wf, a website that compiles
+        and displays internal game data from Warframe. and were the singular reason
+        the empire survived the war. Individual Warframes were also capable of defeating
+        armies of Orokin soldiers,Warframe: Awakening(2020) all of whom would be equipped
+        with the same mods that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: vsbattles-volt-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Advanced, concentrated EMPs can restrict the use of his powers. Notable
-        Attacks/Techniques: * Shock: Volt launches a shocking projectile that will
-        electrocute opponents and chain to others within a radius *'
+      value: concentrated EMPs can restrict the use of his powers.
+      source_id: vsbattles-volt-warframe
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '(Warframe abilities vary in their effective range but can be increased
+        with use of range mods), Varies from Tens of Meters up to Hundreds of Meters
+        with Primary and Secondary weapons (All ranged ballistic weapons used by the
+        Tenno have ranges that vary of 300 meters up to 1000 meters and their beam
+        weapons typically vary from 10 to 30 meters), Higher with Mods {, class="wikitable
+        mw-collapsible mw-collapsed" ! Standard Equipment, Weapons: Warframes always
+        come equipped with a primary weapon, a secondary sidearm, and a melee weapon.
+        Their weapons can vary wildly in form and function, allowing warframes to
+        always be equipped with weapons that match the threats they have to face.
+        Mods: Mods can be used to increase/alter the function of both a Warframe and
+        their weapons, Damage reduction, Elemental resistances, and Stat increases
+        are all benefits mods commonly give to a Warframe. When weapons can have multiple
+        elements at a time but some elements will fuse to create more complex forces.
+        10 mods can be installed at a time on warframes while weapons can only equip
+        8. Arcanes: Arcanes serve a similar purpose to mods as both provide boosts
+        to Warframe and weapon stats but unlike mods who give their buffs immediately
+        arcanes have conditions that will need to be met before the buff starts. Warframes
+        can equip 2 Arcanes and weapons only get 1. Parazon: The Parazon is a deadly
+        blade concealed in a Warframes wrist that allows them to instantly interface
+        and hack any electronic system, Official warframe wiki, Lotus Jackal Boss
+        fight dialogue grapple onto far off objects, } Intelligence: Mindless (Without
+        their Operator piloting them the warframes are simply empty husks), Gifted
+        (While Their Operator is piloting them. Capable of easily completing the numerous
+        missions they receive regardless of the complexity of the task. Additionally,
+        they are able to solve the hall of ascension puzzles, Complex tests made to
+        gauge the agility,power and cunning of the challengers) The Tenno are immensely
+        skilled warriors, having been made solely to face off against the constantly
+        evolving SentientsWarframe: The Sacrifice(2018) by utilizing not only their
+        many abilities but the numerous weapons they have mastered. Warframes were
+        described as "miracles" on the battlefield, having devastated many sentient
+        strongholdsfrom Browse.wf, a website that compiles and displays internal game
+        data from Warframe. and were the singular reason the empire survived the war.
+        Individual Warframes were also capable of defeating armies of Orokin soldiers,
+        Warframe: Awakening(2020) all of whom would be equipped with the same mods
+        that made Tenno weapons so powerful.Warframe: The Teacher(2025)'
       source_id: vsbattles-volt-warframe
       provider_id: vsbattles
       authority: high
@@ -1837,21 +2355,20 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Pichu & Pikachu= Superhuman Physical Characteristics, Small Size (Type
-        1), Natural Weaponry (Tail and fangs) Electricity Manipulation and Absorption,
-        Enhanced Senses, Homing Attack, Statistics Amplification (With Agility and
-        Double Team), Afterimage Creation, Forcefield Creation, Can paralyze enemies
-        with several of its attacks, and induce confusion with Sweet Kiss, Healing,
-        Non-Physical Interaction, Resistance to Electricity Manipulation, Metal Manipulation,
-        Air Manipulation and Sleep Manipulation |-|Raichu= All previous abilities,
-        Small Size (Type 0) |-|Alolan Raichu= All previous abilities, plus Telekinesis,
-        Flight, Fragrance Manipulation (Rubbing their cheeks emits a sweet scent)
-        |-|Gigantamax Pikachu= All of Pikachu's abilities except Small Size, Superior
-        Electricity Manipulation and Paralysis Inducement via G-Max Volt Crash (Paralyzes
-        all opponents), Electricity Manipulation via Max Lightning (Changes the ground
-        to Electric Terrain), Explosion Manipulation and Statistics Reduction (opponent's
-        speed) via Max Strike, Superior Metal Manipulation and Statistics Amplification
-        (allies' defense) via Max Steelspike, Forcefield Creation via Max Guard
+      value: Superhuman Physical Characteristics, Small Size (Type 1), Natural Weaponry
+        (Tail and fangs) Electricity Manipulation and Absorption, Enhanced Senses,
+        Homing Attack, Statistics Amplification (With Agility and Double Team), Afterimage
+        Creation, Forcefield Creation, Can paralyze enemies with several of its attacks,
+        Healing, Non-Physical Interaction, Resistance to Electricity Manipulation,
+        Metal Manipulation, Air Manipulation and Sleep Manipulation All previous abilities,
+        Small Size (Type 0) All previous abilities, plus Telekinesis, Flight, Fragrance
+        Manipulation (Rubbing their cheeks emits a sweet scent) All of Pikachu's abilities
+        except Small Size, Superior Electricity Manipulation and Paralysis Inducement
+        via G-Max Volt Crash (Paralyzes all opponents), Electricity Manipulation via
+        Max Lightning (Changes the ground to Electric Terrain), Explosion Manipulation
+        and Statistics Reduction (opponent's speed) via Max Strike, Superior Metal
+        Manipulation and Statistics Amplification (allies' defense) via Max Steelspike,
+        Forcefield Creation via Max Guard
       source_id: character-stats-profiles-volt
       provider_id: character_stats_profiles
       authority: high
@@ -1891,11 +2408,10 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Weak to Ground type attacks, Wild Charge and Volt Tackle damage itself,
-        the Light Ball only enhances offensive abilities | Alolan Raichu is weak to
-        Ground, Bug, Ghost, and Dark type attacks | Gigantamax can only be used in
-        areas with Dynamax energy (i.e. dens and stadiums), Destroying their non-move
-        forcefield through any means will harm them Notable Attacks/Techniques: Pikachu/Raichu'
+      value: Weak to Ground type attacks, the Light Ball only enhances offensive abilities,
+        Alolan Raichu is weak to Ground, Gigantamax can only be used in areas with
+        Dynamax energy (i.e. dens and stadiums), Destroying their non-move forcefield
+        through any means will harm them
       source_id: character-stats-profiles-volt
       provider_id: character_stats_profiles
       authority: high
@@ -1927,7 +2443,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Volt Panther
     source_type: mediawiki
@@ -1970,12 +2485,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-B}}'
-      source_id: vsbattles-volt-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Longevity, Self-Sustenance (Type
         2; Volt Panthers do not appear to rely on hunting to survive and may be able
@@ -1985,7 +2494,7 @@ repair:
         Inducement (Can blind its foes), Surface Scaling, Breath Attack/Electricity
         Manipulation (Able to create a charge over 120 million volts, it can kill
         a human with a single strike), Sound Manipulation (Their roar sounds like
-        a thunder), Limited Resistance to Plasma, Poison, Acid, Corrosion Inducement,
+        a thunder), Limited, Resistance to Plasma, Poison, Acid, Corrosion Inducement,
         Extreme Heat, Fire, Magma, Status Effect Inducement, Biological Manipulation,
         and Cold, Resistance to Electricity
       source_id: vsbattles-volt-game
@@ -2030,7 +2539,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Teeth, and claws
+      value: Teeth
       source_id: vsbattles-volt-game
       provider_id: vsbattles
       authority: high
@@ -2042,18 +2551,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Able to create a charge over 120 million volts. This power, however,
-        comes with a price and it can only discharge a limited amount of shocks, before
-        needing to retreat and recharge. ==Notable Matchups== Victories: Losses: Inconclusive:
-        ==References== {{scroll box|content={{reflist|2}}}} {{Discussions}} Category:Characters
-        Category:MonsterVerse Category:Game Characters Category:Game Bosses Category:Primary
-        Antagonists Category:Animals Category:Kaiju Category:Mammals Category:Longevity
-        Users Category:Enhanced Senses Users Category:Bodily Weaponry Users Category:Acrobats
-        Category:Camouflage Users Category:Stealth Masters Category:Surface Scalers
-        Category:Electricity Users Category:Breath Attack Users Category:Status Effect
-        Users Category:Statistics Amplification Users Category:Damage Boost Users
-        Category:Accelerated Development Users Category:Statistics Reduction Users
-        Category:Self-Sustenance Users Category:Cats'
+      value: Able to create a charge over 120 million volts. This power, comes with
+        a price and it can only discharge a limited amount of shocks
       source_id: vsbattles-volt-game
       provider_id: vsbattles
       authority: high
@@ -2078,21 +2577,16 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
-    - tier
     - weaknesses
-    normalized_page_title: Pikachu (Canon, Death Battle)/Unbacked0
+    normalized_page_title: Super Mario (Canon, Games)/BlastProcessing16
     source_type: mediawiki
-    revision_id: '90919'
+    revision_id: '490850'
     fetch_status: fetched
     http_status: 200
-    content_length: 2395
+    content_length: 32765
     content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
+    headings_detected: []
     stat_labels_detected:
     - attack_potency
     - durability
@@ -2109,7 +2603,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -2123,43 +2617,170 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: Unknown
-      source_id: character-stats-profiles-volt-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Electricity Manipulation (With Thunderbolt,
-        Thunder, Electro Ball and Volt Tackle), Metal Manipulation (With Iron Tail)
-      source_id: character-stats-profiles-volt-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: attack_potency
-      value: Unknown
+      value: 'Low to High Hyperversal (Mario can injure Dreamy Bowser, who has absorbed
+        the Dream Stone, granting him power over an infinite number of dimensions.
+        The Dream Stone contains the power of countless dreams, with each dream being
+        its own universe with unique space-time, effectively making Dreamy Bowser
+        a multidimensional entity), High Hyperversal (Was capable of harming Super
+        Dimentio, who is a force capable of erasing all worlds, dimensions, timelines,
+        and possibilities. Mario defeats him, indicating that Mario''s power surpasses
+        this level of reality-warping. Super Dimentio had merged with the Chaos Heart,
+        which was stated to be capable of destroying all existence including higher
+        planes like The Overthere), Low Outerversal (Capable of harming Shadow Queen
+        in Thousand Year Door, who was an ancient demon with the power to manipulate
+        and reshape reality itself. She created the Crystal Stars, artifacts that
+        hold the essence of the heavens and possess the ability to remake the planet
+        according to her will. With the Pure Hearts, Mario transcended conventional
+        dimensional limitations, gaining power that exists beyond the multiverse itself
+        and operates on a conceptual level, allowing him to counter the Chaos Heart
+        which threatened the fundamental structure of all reality. Mario has also
+        interacted with and affected Platonic concepts that exist in his universe,
+        as evidenced by references to Plato''s "The Republic" being canonical truth
+        in his world, suggesting he can affect abstract, aspatial and atemporal Forms
+        when at his peak power), Outerversal (When wielding the Star Rod after it
+        was empowered by the wishes of Princess Peach and the Star Spirits, Mario
+        was able to defeat Bowser who had harnessed cosmic wish-granting power capable
+        of reshaping the fundamental laws of reality. In Paper Mario: The Origami
+        King, Mario was able to defeat King Olly, who had the power to fundamentally
+        transform the nature of reality itself by folding the very fabric of existence,
+        transcending conventional dimensional limitations. Mario has consistently
+        demonstrated the ability to defeat entities that operate beyond standard dimensional
+        physics, placing him firmly in the outerversal category when at full power)'
       source_id: character-stats-profiles-volt-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Unknown
+      value: 'MFTL+ (Can be seen dodging lightning in the Mario & Luigi games, consistently
+        evading lasers and other high-velocity projectiles. His reflexes extend to
+        reacting to and moving faster than energy-based assaults, often operating
+        on a scale beyond conventional physical limits. In Super Mario Galaxy and
+        its sequel, Mario travels between planets and galaxies in seconds, demonstrating
+        genuine faster-than-light travel capabilities. When piloting the Star Diver
+        in Mario & Luigi: Paper Jam, he maneuvers at approximately Mach 375 while
+        simultaneously dodging attacks. In Mario & Luigi: Superstar Saga, Mario dodges
+        Cackletta''s lightning attacks with precision, showing massively hypersonic
+        reaction times. In Paper Mario: The Thousand-Year Door, he reacts to celestial
+        attacks that cross vast cosmic distances nearly instantaneously. During his
+        battle with Count Bleck and Super Dimentio in Super Paper Mario, he demonstrates
+        dimensional travel speeds, moving between planes of existence in moments.
+        In Mario Party 5, he keeps pace with objects moving through the Dream Depot,
+        which connects multiple dream universes. Mario has also outpaced meteors in
+        various games, which travel between celestial bodies in seconds. Additionally,
+        his traversal across multiple dimensions and timelines in titles like Super
+        Paper Mario and Mario & Luigi: Dream Team further emphasizes his superluminal
+        movement capabilities. When empowered by cosmic artifacts like the Pure Hearts
+        or Star Spirits, his speed increases even further, allowing him to move effectively
+        in environments where conventional physics and space-time operate differently,
+        can even outswim a black hole)'
       source_id: character-stats-profiles-volt-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Unknown
+      value: 'High Hyperversal to Low Outerversal (Mario has withstood and survived
+        attacks and environments that affect entire universes and realities. His resilience
+        is demonstrated through battles against cosmic and reality-warping entities
+        such as Super Dimentio, Count Bleck, and the Shadow Queen, each capable of
+        universal to outerversal-level destruction and reality manipulation. Mario''s
+        durability extends to surviving the collapse and reshaping of dimensions,
+        as well as enduring powerful magical and elemental attacks that surpass typical
+        physical limitations, firmly placing him between the low tiers of hyperversal
+        and outerversal durability. He''s even been able to travel through the Dream
+        Depot, Subcon, and other forms of dimensional travel. In Super Mario Galaxy,
+        he survived the collapse and recreation of the entire universe, demonstrating
+        his ability to withstand cosmic-scale events. When facing the Void in Super
+        Paper Mario, he endured its reality-erasing properties that were consuming
+        all dimensions and planes of existence. Mario withstood direct attacks from
+        the Chaos Heart, an artifact capable of destroying all worlds and dimensions.
+        He survived being blasted interdimensionally from The Void to Flipside, showing
+        his resilience against forces that transcend conventional space-time. In Paper
+        Mario: The Thousand-Year Door, he endured attacks from the Shadow Queen who
+        could reshape reality at will and created the Crystal Stars which contained
+        the essence of the heavens. When facing Dreamy Bowser in Mario & Luigi: Dream
+        Team, he withstood attacks from an entity who had absorbed the Dream Stone,
+        which contained countless dream universes. In Super Paper Mario, he survived
+        being sent to the Underwhere (the Mario universe''s afterlife) and returned,
+        demonstrating resilience against death itself. When powered by the Pure Hearts,
+        his durability increased to the point where he could withstand attacks from
+        Super Dimentio, who had transcended all dimensional limitations. Mario has
+        also demonstrated immunity to conceptual attacks when properly equipped, such
+        as resisting fate manipulation from the Dark Prognosticus. His durability
+        transcends conventional physical and dimensional limitations, allowing him
+        to operate in environments where the fundamental laws of reality differ from
+        normal space-time, including higher planes of existence like The Overthere.
+        This consistent pattern of surviving attacks from entities that threaten multiple
+        dimensions and planes of existence firmly establishes his durability at High
+        Hyperversal to Low Outerversal levels)'
       source_id: character-stats-profiles-volt-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'If Pikachu overcharges he explodes, He is weak to Ground Type moves
-        Notable Attacks/Techniques: * Thunderbolt: Thunderbolt is an Electric Type
-        move where Pikachu fires a bolt of electricity at his opponent. * Thunder:
-        Thunder is an Electric Type move where Pikachu fires a powerful bolt of electricity
-        at his opponent. * Quick'
+      value: 'Limited Long-Range Combat, Dependence on Items and External Magic, Vulnerability
+        to Status Effects, Limited Strategic Planning, Power-Up Time Limits, Reliance
+        on External Guidance Core Techniques:, Jump: Mario''s signature move, can
+        damage most enemies by landing on them, Long Jump: Extended horizontal leap
+        covering greater distance, Triple Jump: Three consecutive jumps of increasing
+        height, Wall Jump: Rebounds off walls to reach higher areas, Backflip: High
+        vertical jump performed from a standing position, Ground Pound: Mid-air downward
+        slam that breaks blocks and damages enemies, Spin Jump: Rotating jump that
+        allows Mario to bounce off certain hazards, Side Somersault: Quick sideways
+        flip for evasion and positioning, Cap Throw: Throws Cappy to hit distant enemies
+        or capture them, Cap Jump: Bounces off thrown cap for extra height and distance,
+        Dolphin Dive: Fast forward dive that can be performed underwater or on land,
+        Tornado Spin: Rapid spinning attack from Super Mario Galaxy, Dive: Forward
+        diving move for quick movement, Roll: Fast rolling maneuver for quick traversal
+        and dodging, Crouch Jump: Lower jump with reduced hitbox for tight spaces,
+        Cappy Capture: Takes control of enemies and objects by throwing his cap at
+        them, Cappy Homing Throw: Targets enemies automatically with cap throw, Upward
+        Cap Throw: Throws cap upward to hit aerial enemies, Downward Cap Throw: Throws
+        cap downward for ground enemies, Spin Throw: Spinning throw that hits enemies
+        in a circular area, Handstand Jump: Jump performed from a handstand position,
+        Somersault: Forward flip for mobility and attack, Breakdance Sweep: Spinning
+        low attack that hits surrounding enemies, Backward Somersault: Backward flip
+        for evasion and positioning, Flutter Jump: Extended hover after jump (with
+        certain power-ups), Spin Drill: Drilling motion that can pierce through certain
+        surfaces, Gravity Jump: Special jump that changes gravity direction in certain
+        areas Power-Up Transformations:, Super Mushroom: Increases size and grants
+        an extra hit point, Fire Flower: Grants pyrokinesis through fireballs, Ice
+        Flower: Enables cryokinesis through ice balls that freeze enemies, Gold Flower:
+        Transforms enemies and objects into coins, Penguin Suit: Grants ice powers
+        and improved swimming ability, Super Acorn: Transforms into Flying Squirrel
+        Form for gliding, P-Acorn: Grants unlimited Flying Squirrel flight, P-Wing:
+        Provides unlimited flight for a level, Propeller Mushroom: Enables high vertical
+        propeller jumps, Super Bell: Transforms into Cat Mario with climbing and scratching
+        abilities, Double Cherry: Creates multiple copies of Mario, Super Leaf: Transforms
+        into Raccoon Mario with tail attacks and limited flight, Tanooki Suit: Full
+        raccoon abilities plus statue transformation, Frog Suit: Enhances swimming
+        abilities and underwater movement, Boomerang Flower: Throws boomerangs that
+        collect items and damage enemies, Super Star: Temporary invincibility and
+        increased speed, Mega Mushroom: Giant growth with invincibility and destruction
+        abilities, Mini Mushroom: Shrinks Mario, Rock Mushroom: Transforms into a
+        boulder for rolling attacks, Cloud Flower: Creates cloud platforms and enables
+        limited flight, Spring Mushroom: Transforms into a spring for high bounces,
+        Boo Mushroom: Transforms into Boo Mario with intangibility and flight, Bee
+        Mushroom: Transforms into Bee Mario with limited flight and wall-clinging,
+        Rainbow Star: Enhanced version of Super Star with rainbow effects, Vanish
+        Cap: Grants temporary intangibility, Metal Cap: Transforms into Metal Mario
+        with increased weight and invulnerability, Wing Cap: Enables flight for limited
+        duration, Hammer Suit: Throws hammers and provides shell protection, Statue
+        Leaf: Enhanced Tanooki Suit with improved statue abilities, Super Crown: Transforms
+        into Peachette with floating and double jump abilities, Blue Shell: Transforms
+        Mario into Shell Mario for sliding attacks, Balloon Mario: Inflates Mario
+        allowing him to float upward, Bunny Mario: Grants super speed and jumping
+        ability, Boomerang Mario: Throws boomerangs that return, Bomb Mario: Allows
+        throwing bombs at enemies, Helicopter Mario: Transforms hat into helicopter
+        for sustained flight, Drill Mario: Allows burrowing through soft surfaces,
+        Flying Squirrel Mario: Glides and clings to walls, Cat Mario: Allows wall
+        climbing and pounce attacks, White Tanooki: Invincible version of Tanooki
+        Suit, White Raccoon: Invincible version of Raccoon Mario, Lucky Bell: Enhanced
+        version of Super Bell with golden transformation, Super Pickax: Mining ability
+        for breaking blocks, Carrot: Transforms into Bunny Mario in Super Mario Land
+        2, Superball Flower: Fires bouncing superballs that collect coins, Slow Flower:
+        Slows down time around Mario, Speed Flower: Increases Mario''s movement speed,
+        Copy Flower: Creates temporary duplicates of Mario, Mix Flower: Combines effects'
       source_id: character-stats-profiles-volt-game
       provider_id: character_stats_profiles
       authority: high
@@ -2169,13 +2790,13 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|pikachu canon death battle
-      unbacked0|90919
+    duplicate_key: character-stats-and-profiles.fandom.com|super mario canon games
+      blastprocessing16|490850
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
@@ -2184,11 +2805,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Volt
     title: Volt
     rank: 120
-    extracted_fields: *id006
+    extracted_fields: *id005
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id007
+    allowed_fields: *id006
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2200,37 +2821,18 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|volt|9621700
-  - source_id: vsbattles-volt-warframe
-    url: https://vsbattles.fandom.com/wiki/Volt_%28Warframe%29
-    title: Volt
-    rank: 120
-    extracted_fields: *id008
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id009
-    rejection_reason: ''
-    identity_match: true
-    identity_score: 120
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: true
-    alias_match: false
-    franchise_match: true
-    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|volt|9621700
   - source_id: vsbattles-volt-warframe
     url: https://vsbattles.fandom.com/wiki/Volt_Warframe
     title: Volt
     rank: 120
-    extracted_fields: *id010
+    extracted_fields: *id007
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id011
+    allowed_fields: *id008
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2242,9 +2844,54 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|volt|9621700
+  - source_id: vsbattles-volt-warframe
+    url: https://vsbattles.fandom.com/wiki/Volt_%28Warframe%29
+    title: Volt
+    rank: 120
+    extracted_fields: *id009
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id010
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 120
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: true
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|volt|9621700
   chosen_source_id: null
   failure_reasons:
-    fetched: 6
-    provider_search_no_results: 2
+    fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: false
+  scoped_key: Volt
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-25T17:40:42Z'
+  key_origin: primary_form_position
+  axes:
+    tier:
+      method: positional
+      segments: 2
+    attack_potency:
+      method: positional
+      segments: 2
+    speed:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+  remaining_piped_axes:
+  - range

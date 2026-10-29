@@ -138,7 +138,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Steven_Stone
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -179,34 +179,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-steven-stone-more-pokemon
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Steven Stone More Pokemon
-  url: https://character-stats-and-profiles.fandom.com/wiki/Steven_Stone_More_Pokemon
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-steven-stone-more-pokemon
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Steven Stone (More Pokemon)
-  url: https://vsbattles.fandom.com/wiki/Steven_Stone_%28More_Pokemon%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-steven-stone-more-pokemon
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -293,53 +265,50 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: '{{9-B}} | {{5-B}}'
+    text: "Key: By Himself | Pok\xE9mon Team Name: Steven Stone Origin: Pok\xE9mon\
+      \ Gender: Male | Varies for his Pok\xE9mon. Age: 25 (OR/AS) | 33 (Black 2/White\
+      \ 2) Classification: Pok\xE9mon Trainer, Champion"
     source_ids:
     - vsbattles-steven-stone-more-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   attack_potency:
     text: Wall level+ (Physically comparable to regular Trainers as Jessie, James
-      or Red) | Planet level (Battled Brendan/May after they faced Primal Groudon
-      or Primal Kyogre)
+      or Red)
     source_ids:
     - vsbattles-steven-stone-more-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   speed:
     text: "Peak Human with Relativistic+ reactions (Comparable to Trainers as Yellow\
-      \ or Cynthia who can dodge and react to attacks from fully evolved Pok\xE9mon)|\
-      \ Relativistic+ (Faster than Drake)"
+      \ or Cynthia who can dodge and react to attacks from fully evolved Pok\xE9mon)"
     source_ids:
     - vsbattles-steven-stone-more-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   lifting_strength:
-    text: Athletic Human | At least Class G
-    source_ids: &id003
+    text: Athletic Human
+    source_ids: &id002
     - mediawiki-507454
     confidence: 0.95
   striking_strength:
-    text: Wall level+ | Planet level
-    source_ids: *id003
+    text: Wall level+
+    source_ids: *id002
     confidence: 0.95
   durability:
-    text: Wall level+ | Planet level
+    text: Wall level+
     source_ids:
     - vsbattles-steven-stone-more-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   stamina:
-    text: "Unknown. | Superhuman for his Pok\xE9mon (Not only is he the champion,\
-      \ and his Pok\xE9mon should have high stamina, but Steel and Rock type Pok\xE9\
-      mon are naturally filled with more stamina)"
+    text: Unknown.
     source_ids:
     - vsbattles-steven-stone-more-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   range:
-    text: "Standard Melee Range. | Standard Melee Range, Tens of Kilometers on the\
-      \ Pok\xE9mon and Move."
+    text: Standard Melee Range.
     source_ids:
     - vsbattles-steven-stone-more-pokemon
     confidence: 0.6
@@ -355,7 +324,7 @@ claims:
   section: power_scale
   axis: other
   text: '{{9-B}} | {{5-B}}'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-507454
   decisive: false
   status: unverified
@@ -367,7 +336,7 @@ claims:
   text: Wall level+ (Physically comparable to regular Trainers as Jessie, James or
     Red) | Planet level (Battled Brendan/May after they faced Primal Groudon or Primal
     Kyogre)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -378,7 +347,7 @@ claims:
   text: "Peak Human with Relativistic+ reactions (Comparable to Trainers as Yellow\
     \ or Cynthia who can dodge and react to attacks from fully evolved Pok\xE9mon)|\
     \ Relativistic+ (Faster than Drake)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -387,7 +356,7 @@ claims:
   section: power_scale
   axis: other
   text: Athletic Human | At least Class G
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -396,7 +365,7 @@ claims:
   section: power_scale
   axis: other
   text: Wall level+ | Planet level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -405,7 +374,7 @@ claims:
   section: power_scale
   axis: durability
   text: Wall level+ | Planet level
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -416,7 +385,7 @@ claims:
   text: "Unknown. | Superhuman for his Pok\xE9mon (Not only is he the champion, and\
     \ his Pok\xE9mon should have high stamina, but Steel and Rock type Pok\xE9mon\
     \ are naturally filled with more stamina)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -426,7 +395,7 @@ claims:
   axis: range
   text: "Standard Melee Range. | Standard Melee Range, Tens of Kilometers on the Pok\xE9\
     mon and Move."
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -435,7 +404,7 @@ claims:
   section: equipment
   axis: equipment
   text: "Pok\xE9 Balls and a Mega Stone | Metagrossite and other \"hold items\"."
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -444,7 +413,7 @@ claims:
   section: power_scale
   axis: battle_iq
   text: Gifted (Is an experienced battler, and an experienced explorer)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -515,7 +484,7 @@ claims:
     \ fangs. * Fire Fang: Aerodactyl bites the target with fire-infused fangs. * Ice\
     \ Fang: Aerodactyl bites the target with ice-imbued fangs. ===World Tournament===\
     \ Excadrill.png|Excadrill Archeops.png|Archeops Metagross: *"
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -535,7 +504,7 @@ claims:
     Manipulation [Aggron], Earth and Rock Manipulation, Sand Manipulation [Excadrill],
     Earth and Rock Manipulation, Air Manipulation [Archeops], Earth and Rock Manipulation,
     Sand Manipulation, Plant Manipulation [Cradily], Rock and Earth Manipulation [Armaldo]
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -544,7 +513,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id005
+  source_ids: &id004
   - vsbattles-steven-stone-more-pokemon
   source_claim_ids: []
   confidence: 0.85
@@ -560,7 +529,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics-all
   name: Superhuman Physical Characteristics [All]
   description: Superhuman Physical Characteristics [All]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -575,7 +544,7 @@ abilities:
 - id: powers-and-abilities-flight-skarmory
   name: Flight [Skarmory
   description: Flight [Skarmory
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -590,7 +559,7 @@ abilities:
 - id: powers-and-abilities-aerodactyl-and-archeops
   name: Aerodactyl and Archeops]
   description: Aerodactyl and Archeops]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -605,7 +574,7 @@ abilities:
 - id: powers-and-abilities-poison-manipulation
   name: Poison Manipulation
   description: Poison Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -620,7 +589,7 @@ abilities:
 - id: powers-and-abilities-air-manipulation
   name: Air Manipulation
   description: Air Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -635,7 +604,7 @@ abilities:
 - id: powers-and-abilities-earth-manipulation
   name: Earth Manipulation
   description: Earth Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -650,7 +619,7 @@ abilities:
 - id: powers-and-abilities-metal-manipulation-skarmory
   name: Metal Manipulation [Skarmory]
   description: Metal Manipulation [Skarmory]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -665,7 +634,7 @@ abilities:
 - id: powers-and-abilities-levitation
   name: Levitation
   description: Levitation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -680,7 +649,7 @@ abilities:
 - id: powers-and-abilities-forcefield-creation
   name: Forcefield Creation
   description: Forcefield Creation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -695,7 +664,7 @@ abilities:
 - id: powers-and-abilities-telekinesis
   name: Telekinesis
   description: Telekinesis
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -710,7 +679,7 @@ abilities:
 - id: powers-and-abilities-earth-manipulation-claydol
   name: Earth Manipulation [Claydol]
   description: Earth Manipulation [Claydol]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -725,7 +694,7 @@ abilities:
 - id: powers-and-abilities-rock-and-earth-manipulation
   name: Rock and Earth Manipulation
   description: Rock and Earth Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -740,7 +709,7 @@ abilities:
 - id: powers-and-abilities-metal-manipulation-aggron
   name: Metal Manipulation [Aggron]
   description: Metal Manipulation [Aggron]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -755,7 +724,7 @@ abilities:
 - id: powers-and-abilities-absorption
   name: Absorption
   description: Absorption
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -770,7 +739,7 @@ abilities:
 - id: powers-and-abilities-plant-manipulation
   name: Plant Manipulation
   description: Plant Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -785,7 +754,7 @@ abilities:
 - id: powers-and-abilities-rock-manipulation
   name: Rock Manipulation
   description: Rock Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -800,7 +769,7 @@ abilities:
 - id: powers-and-abilities-poison-manipulation
   name: Poison Manipulation
   description: Poison Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -815,7 +784,7 @@ abilities:
 - id: powers-and-abilities-confusion-inducement-cradily
   name: Confusion Inducement [Cradily]
   description: Confusion Inducement [Cradily]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -830,7 +799,7 @@ abilities:
 - id: powers-and-abilities-rock-manipulation
   name: Rock Manipulation
   description: Rock Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -845,7 +814,7 @@ abilities:
 - id: powers-and-abilities-metal-manipulation-armaldo
   name: Metal Manipulation [Armaldo]
   description: Metal Manipulation [Armaldo]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -860,7 +829,7 @@ abilities:
 - id: powers-and-abilities-prevents-statistics-from-lowering
   name: Prevents Statistics from lowering
   description: Prevents Statistics from lowering
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -875,7 +844,7 @@ abilities:
 - id: powers-and-abilities-genius-intelligence
   name: Genius Intelligence
   description: Genius Intelligence
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -890,7 +859,7 @@ abilities:
 - id: powers-and-abilities-metal-manipulation-metagross-rock-manipulation
   name: Metal Manipulation [Metagross]. Rock Manipulation
   description: Metal Manipulation [Metagross]. Rock Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -905,7 +874,7 @@ abilities:
 - id: powers-and-abilities-elemental-fangs-aerodactyl
   name: Elemental Fangs [Aerodactyl]
   description: Elemental Fangs [Aerodactyl]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -920,7 +889,7 @@ abilities:
 - id: powers-and-abilities-martial-arts
   name: Martial Arts
   description: Martial Arts
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -935,7 +904,7 @@ abilities:
 - id: powers-and-abilities-earth-manipulation
   name: Earth Manipulation
   description: Earth Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -950,7 +919,7 @@ abilities:
 - id: powers-and-abilities-metal-manipulation-metagross
   name: Metal Manipulation [Metagross]
   description: Metal Manipulation [Metagross]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -965,7 +934,7 @@ abilities:
 - id: powers-and-abilities-earth-and-rock-manipulation
   name: Earth and Rock Manipulation
   description: Earth and Rock Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -980,7 +949,7 @@ abilities:
 - id: powers-and-abilities-ice-manipulation-aggron
   name: Ice Manipulation [Aggron]
   description: Ice Manipulation [Aggron]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -995,7 +964,7 @@ abilities:
 - id: powers-and-abilities-earth-and-rock-manipulation
   name: Earth and Rock Manipulation
   description: Earth and Rock Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1010,7 +979,7 @@ abilities:
 - id: powers-and-abilities-sand-manipulation-excadrill
   name: Sand Manipulation [Excadrill]
   description: Sand Manipulation [Excadrill]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1025,7 +994,7 @@ abilities:
 - id: powers-and-abilities-earth-and-rock-manipulation
   name: Earth and Rock Manipulation
   description: Earth and Rock Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1040,7 +1009,7 @@ abilities:
 - id: powers-and-abilities-air-manipulation-archeops
   name: Air Manipulation [Archeops]
   description: Air Manipulation [Archeops]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1055,7 +1024,7 @@ abilities:
 - id: powers-and-abilities-earth-and-rock-manipulation
   name: Earth and Rock Manipulation
   description: Earth and Rock Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1070,7 +1039,7 @@ abilities:
 - id: powers-and-abilities-sand-manipulation
   name: Sand Manipulation
   description: Sand Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1085,7 +1054,7 @@ abilities:
 - id: powers-and-abilities-plant-manipulation-cradily
   name: Plant Manipulation [Cradily]
   description: Plant Manipulation [Cradily]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1100,7 +1069,7 @@ abilities:
 - id: powers-and-abilities-rock-and-earth-manipulation-armaldo
   name: Rock and Earth Manipulation [Armaldo]
   description: Rock and Earth Manipulation [Armaldo]
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1116,7 +1085,7 @@ equipment:
 - id: standard-equipment-pok-balls-and-a-mega-stone
   name: "Pok\xE9 Balls and a Mega Stone"
   description: "Pok\xE9 Balls and a Mega Stone"
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1133,7 +1102,7 @@ equipment:
 - id: standard-equipment-metagrossite-and-other-hold-items
   name: Metagrossite and other "hold items".
   description: Metagrossite and other "hold items".
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1151,7 +1120,7 @@ weaknesses:
 - id: weaknesses-normal-human-weaknesses
   name: Normal human weaknesses.
   description: Normal human weaknesses.
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-steven-stone-more-pokemon
   source_claim_ids: []
   confidence: 0.85
@@ -1167,7 +1136,7 @@ weaknesses:
 - id: weaknesses-varies-depending-on-the-pok-mon-notable-attacks-techniques-metagross-
   name: "Varies depending on the Pok\xE9mon. Notable Attacks/Techniques: Metagross.png"
   description: "Varies depending on the Pok\xE9mon. Notable Attacks/Techniques: Metagross.png"
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1182,7 +1151,7 @@ weaknesses:
 - id: weaknesses-metagross-mega-metagross-png
   name: Metagross Mega Metagross.png
   description: Metagross Mega Metagross.png
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1197,7 +1166,7 @@ weaknesses:
 - id: weaknesses-mega-metagross-skarmory-png
   name: Mega Metagross Skarmory.png
   description: Mega Metagross Skarmory.png
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1212,7 +1181,7 @@ weaknesses:
 - id: weaknesses-skarmory-claydol-png
   name: Skarmory Claydol.png
   description: Skarmory Claydol.png
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1227,7 +1196,7 @@ weaknesses:
 - id: weaknesses-claydol-aggron-png
   name: Claydol Aggron.png
   description: Claydol Aggron.png
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1242,7 +1211,7 @@ weaknesses:
 - id: weaknesses-aggron-cradily-png
   name: Aggron Cradily.png
   description: Aggron Cradily.png
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1257,7 +1226,7 @@ weaknesses:
 - id: weaknesses-cradily-armaldo-png
   name: Cradily Armaldo.png
   description: Cradily Armaldo.png
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1272,7 +1241,7 @@ weaknesses:
 - id: weaknesses-armaldo-142aerodactyl-png
   name: Armaldo 142Aerodactyl.png
   description: Armaldo 142Aerodactyl.png
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1287,7 +1256,7 @@ weaknesses:
 - id: weaknesses-aerodactyl-first-battle-metagross
   name: Aerodactyl === First Battle === Metagross
   description: Aerodactyl === First Battle === Metagross
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1302,7 +1271,7 @@ weaknesses:
 - id: weaknesses-clear-body-metagross-is
   name: 'Clear Body: Metagross is'
   description: 'Clear Body: Metagross is'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1375,7 +1344,7 @@ weaknesses:
     Fire Fang: Aerodactyl bites the target with fire-infused fangs. * Ice Fang: Aerodactyl
     bites the target with ice-imbued fangs. ===World Tournament=== Excadrill.png|Excadrill
     Archeops.png|Archeops Metagross: *'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1427,7 +1396,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: bc6c88c9f045651204ff4dd95914cea7487a0e65ba15813beaee42add27d0655
 repair:
-  attempted_at: '2026-10-10T20:58:18Z'
+  attempted_at: '2026-10-21T19:15:03Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -1444,7 +1413,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Steven_Stone
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -1489,7 +1458,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -1501,12 +1470,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{9-B}} | {{5-B}}'
-      source_id: mediawiki-507454
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics | Superhuman Physical Characteristics
         [All], Flight [Skarmory, Aerodactyl and Archeops], Poison Manipulation, Air
@@ -1643,6 +1606,14 @@ repair:
         \ bites the target with fire-infused fangs. * Ice Fang: Aerodactyl bites the\
         \ target with ice-imbued fangs. ===World Tournament=== Excadrill.png|Excadrill\
         \ Archeops.png|Archeops Metagross: *"
+      source_id: mediawiki-507454
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: "Key: By Himself | Pok\xE9mon Team Name: Steven Stone Origin: Pok\xE9\
+        mon Gender: Male | Varies for his Pok\xE9mon. Age: 25 (OR/AS) | 33 (Black\
+        \ 2/White 2) Classification: Pok\xE9mon Trainer, Champion"
       source_id: mediawiki-507454
       provider_id: vsbattles
       authority: high
@@ -1660,11 +1631,129 @@ repair:
     duplicate_key: vsbattles.fandom.com|steven stone|9409210
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-steven-stone-more-pokemon
+    url: https://character-stats-and-profiles.fandom.com/wiki/Steven_Stone_%28More_Pokemon%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: "Steven Stone (Canon, Pok\xE9mon Adventures)/Unbacked0"
+    source_type: mediawiki
+    revision_id: '78537'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3349
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-C | 6-B as a Metagross, Higher as a Mega-Metagross
+      source_id: character-stats-profiles-steven-stone-more-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics Superhuman Physical Characteristics,
+        Flight, Magnetism Manipulation (Metagross can use magnetism to make itself
+        fly), Metal Manipulation (Via Meteor Mash and Metal Claw), Forcefield Creation
+        (Via Reflect), Resistance to Statistics Reduction (Via Clear Body), Normal,
+        Flying, Rock, Steel, Grass, Psychic, Ice, Dragon and Fairy Type moves
+      source_id: character-stats-profiles-steven-stone-more-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Street Level | Country Level (Can fight the Regi-Trio, Should be one\
+        \ of the strongest Non-Legendary Pok\xE9mon within the Hoenn Region)"
+      source_id: character-stats-profiles-steven-stone-more-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: "Peak Human movement with Massively Hypersonic reactions (Has reacted\
+        \ to the attacks of Groudon and Kyogre) | Massively Hypersonic (Fought against\
+        \ the Regi-Trio, Should be faster than most normal Pok\xE9mon)"
+      source_id: character-stats-profiles-steven-stone-more-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Country Level (Survived the pressure of controlling all three of the
+        Regi-Trio at the same time for a period of time) | Country Level (Survived
+        hits from the Regi-Trio)
+      source_id: character-stats-profiles-steven-stone-more-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "None Notable | Is weak to Ground, Ghost, Fire and Dark Type moves Notable\
+        \ Attacks/Techniques: * Metagross: Metagross is Steven's main Pok\xE9mon.\
+        \ It is a Steel and Psychic Type Pok\xE9mon. ** Meteor Mash: Meteor Mash is\
+        \ a Steel Type move where Metagross punches the opponent while covering its\
+        \ fist with energy. ** Reflect: Reflect is a Psychic Type move where Metagross\
+        \ creates a forcefield that protects it from attacks. ** Metal Claw: Metal\
+        \ Claw is a Steel Type move where Metagross slashes the opponent with one\
+        \ of its claws. ** Clear Body: Clear Body is Metagross' natural ability. It\
+        \ prevents Metagross from having any of its stats reduced."
+      source_id: character-stats-profiles-steven-stone-more-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|steven stone canon pokemon
+      adventures unbacked0|78537
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-steven-stone-more-pokemon
     url: https://vsbattles.fandom.com/wiki/Steven_Stone_More_Pokemon
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields: &id008
     - attack_potency
     - durability
     - intelligence
@@ -1709,7 +1798,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -1719,12 +1808,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-B}} | {{5-B}}'
-      source_id: vsbattles-steven-stone-more-pokemon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics | Superhuman Physical Characteristics
         [All], Flight [Skarmory, Aerodactyl and Archeops], Poison Manipulation, Air
@@ -1861,6 +1944,14 @@ repair:
         \ bites the target with fire-infused fangs. * Ice Fang: Aerodactyl bites the\
         \ target with ice-imbued fangs. ===World Tournament=== Excadrill.png|Excadrill\
         \ Archeops.png|Archeops Metagross: *"
+      source_id: vsbattles-steven-stone-more-pokemon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: "Key: By Himself | Pok\xE9mon Team Name: Steven Stone Origin: Pok\xE9\
+        mon Gender: Male | Varies for his Pok\xE9mon. Age: 25 (OR/AS) | 33 (Black\
+        \ 2/White 2) Classification: Pok\xE9mon Trainer, Champion"
       source_id: vsbattles-steven-stone-more-pokemon
       provider_id: vsbattles
       authority: high
@@ -1936,12 +2027,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Steven=Superhuman Physical Characteristics |-|Metagross=Superhuman Physical
-        Characteristics, Flight, Magnetism Manipulation (Metagross can use magnetism
-        to make itself fly), Metal Manipulation (Via Meteor Mash and Metal Claw),
-        Forcefield Creation (Via Reflect), Resistance to Statistics Reduction (Via
-        Clear Body), Normal, Flying, Rock, Steel, Grass, Psychic, Ice, Dragon and
-        Fairy Type moves
+      value: Superhuman Physical Characteristics Superhuman Physical Characteristics,
+        Flight, Magnetism Manipulation (Metagross can use magnetism to make itself
+        fly), Metal Manipulation (Via Meteor Mash and Metal Claw), Forcefield Creation
+        (Via Reflect), Resistance to Statistics Reduction (Via Clear Body), Normal,
+        Flying, Rock, Steel, Grass, Psychic, Ice, Dragon and Fairy Type moves
       source_id: character-stats-profiles-steven-stone-more-pokemon
       provider_id: character_stats_profiles
       authority: high
@@ -2001,7 +2091,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Steven_Stone_%28More_Pokemon%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id010
     - attack_potency
     - durability
     - intelligence
@@ -2046,7 +2136,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id011
     - attack_potency
     - speed
     - durability
@@ -2056,12 +2146,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-B}} | {{5-B}}'
-      source_id: vsbattles-steven-stone-more-pokemon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics | Superhuman Physical Characteristics
         [All], Flight [Skarmory, Aerodactyl and Archeops], Poison Manipulation, Air
@@ -2202,6 +2286,14 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
+    - field: tier
+      value: "Key: By Himself | Pok\xE9mon Team Name: Steven Stone Origin: Pok\xE9\
+        mon Gender: Male | Varies for his Pok\xE9mon. Age: 25 (OR/AS) | 33 (Black\
+        \ 2/White 2) Classification: Pok\xE9mon Trainer, Champion"
+      source_id: vsbattles-steven-stone-more-pokemon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: true
     identity_score: 120
     variant_score: 0
@@ -2213,125 +2305,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|steven stone|9409210
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-steven-stone-more-pokemon
-    url: https://character-stats-and-profiles.fandom.com/wiki/Steven_Stone_%28More_Pokemon%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: "Steven Stone (Canon, Pok\xE9mon Adventures)/Unbacked0"
-    source_type: mediawiki
-    revision_id: '78537'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3349
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 9-C | 6-B as a Metagross, Higher as a Mega-Metagross
-      source_id: character-stats-profiles-steven-stone-more-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Steven=Superhuman Physical Characteristics |-|Metagross=Superhuman Physical
-        Characteristics, Flight, Magnetism Manipulation (Metagross can use magnetism
-        to make itself fly), Metal Manipulation (Via Meteor Mash and Metal Claw),
-        Forcefield Creation (Via Reflect), Resistance to Statistics Reduction (Via
-        Clear Body), Normal, Flying, Rock, Steel, Grass, Psychic, Ice, Dragon and
-        Fairy Type moves
-      source_id: character-stats-profiles-steven-stone-more-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: "Street Level | Country Level (Can fight the Regi-Trio, Should be one\
-        \ of the strongest Non-Legendary Pok\xE9mon within the Hoenn Region)"
-      source_id: character-stats-profiles-steven-stone-more-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: "Peak Human movement with Massively Hypersonic reactions (Has reacted\
-        \ to the attacks of Groudon and Kyogre) | Massively Hypersonic (Fought against\
-        \ the Regi-Trio, Should be faster than most normal Pok\xE9mon)"
-      source_id: character-stats-profiles-steven-stone-more-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Country Level (Survived the pressure of controlling all three of the
-        Regi-Trio at the same time for a period of time) | Country Level (Survived
-        hits from the Regi-Trio)
-      source_id: character-stats-profiles-steven-stone-more-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "None Notable | Is weak to Ground, Ghost, Fire and Dark Type moves Notable\
-        \ Attacks/Techniques: * Metagross: Metagross is Steven's main Pok\xE9mon.\
-        \ It is a Steel and Psychic Type Pok\xE9mon. ** Meteor Mash: Meteor Mash is\
-        \ a Steel Type move where Metagross punches the opponent while covering its\
-        \ fist with energy. ** Reflect: Reflect is a Psychic Type move where Metagross\
-        \ creates a forcefield that protects it from attacks. ** Metal Claw: Metal\
-        \ Claw is a Steel Type move where Metagross slashes the opponent with one\
-        \ of its claws. ** Clear Body: Clear Body is Metagross' natural ability. It\
-        \ prevents Metagross from having any of its stats reduced."
-      source_id: character-stats-profiles-steven-stone-more-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|steven stone canon pokemon
-      adventures unbacked0|78537
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-steven-stone
@@ -2392,12 +2365,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Steven=Superhuman Physical Characteristics |-|Metagross=Superhuman Physical
-        Characteristics, Flight, Magnetism Manipulation (Metagross can use magnetism
-        to make itself fly), Metal Manipulation (Via Meteor Mash and Metal Claw),
-        Forcefield Creation (Via Reflect), Resistance to Statistics Reduction (Via
-        Clear Body), Normal, Flying, Rock, Steel, Grass, Psychic, Ice, Dragon and
-        Fairy Type moves
+      value: Superhuman Physical Characteristics Superhuman Physical Characteristics,
+        Flight, Magnetism Manipulation (Metagross can use magnetism to make itself
+        fly), Metal Manipulation (Via Meteor Mash and Metal Claw), Forcefield Creation
+        (Via Reflect), Resistance to Statistics Reduction (Via Clear Body), Normal,
+        Flying, Rock, Steel, Grass, Psychic, Ice, Dragon and Fairy Type moves
       source_id: character-stats-profiles-steven-stone
       provider_id: character_stats_profiles
       authority: high
@@ -2453,11 +2425,129 @@ repair:
       adventures unbacked0|78537
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-steven-stone-game
+    url: https://character-stats-and-profiles.fandom.com/wiki/Steven_Stone_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: "Steven Stone (Canon, Pok\xE9mon Adventures)/Unbacked0"
+    source_type: mediawiki
+    revision_id: '78537'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3349
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-C | 6-B as a Metagross, Higher as a Mega-Metagross
+      source_id: character-stats-profiles-steven-stone-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics Superhuman Physical Characteristics,
+        Flight, Magnetism Manipulation (Metagross can use magnetism to make itself
+        fly), Metal Manipulation (Via Meteor Mash and Metal Claw), Forcefield Creation
+        (Via Reflect), Resistance to Statistics Reduction (Via Clear Body), Normal,
+        Flying, Rock, Steel, Grass, Psychic, Ice, Dragon and Fairy Type moves
+      source_id: character-stats-profiles-steven-stone-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Street Level | Country Level (Can fight the Regi-Trio, Should be one\
+        \ of the strongest Non-Legendary Pok\xE9mon within the Hoenn Region)"
+      source_id: character-stats-profiles-steven-stone-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: "Peak Human movement with Massively Hypersonic reactions (Has reacted\
+        \ to the attacks of Groudon and Kyogre) | Massively Hypersonic (Fought against\
+        \ the Regi-Trio, Should be faster than most normal Pok\xE9mon)"
+      source_id: character-stats-profiles-steven-stone-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Country Level (Survived the pressure of controlling all three of the
+        Regi-Trio at the same time for a period of time) | Country Level (Survived
+        hits from the Regi-Trio)
+      source_id: character-stats-profiles-steven-stone-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "None Notable | Is weak to Ground, Ghost, Fire and Dark Type moves Notable\
+        \ Attacks/Techniques: * Metagross: Metagross is Steven's main Pok\xE9mon.\
+        \ It is a Steel and Psychic Type Pok\xE9mon. ** Meteor Mash: Meteor Mash is\
+        \ a Steel Type move where Metagross punches the opponent while covering its\
+        \ fist with energy. ** Reflect: Reflect is a Psychic Type move where Metagross\
+        \ creates a forcefield that protects it from attacks. ** Metal Claw: Metal\
+        \ Claw is a Steel Type move where Metagross slashes the opponent with one\
+        \ of its claws. ** Clear Body: Clear Body is Metagross' natural ability. It\
+        \ prevents Metagross from having any of its stats reduced."
+      source_id: character-stats-profiles-steven-stone-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|steven stone canon pokemon
+      adventures unbacked0|78537
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-steven-stone-game
     url: https://vsbattles.fandom.com/wiki/Steven_Stone_%28Game%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id013
+    extracted_fields: &id012
     - attack_potency
     - durability
     - intelligence
@@ -2502,7 +2592,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id014
+    allowed_fields: &id013
     - attack_potency
     - speed
     - durability
@@ -2512,12 +2602,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-B}} | {{5-B}}'
-      source_id: vsbattles-steven-stone-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics | Superhuman Physical Characteristics
         [All], Flight [Skarmory, Aerodactyl and Archeops], Poison Manipulation, Air
@@ -2658,6 +2742,14 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
+    - field: tier
+      value: "Key: By Himself | Pok\xE9mon Team Name: Steven Stone Origin: Pok\xE9\
+        mon Gender: Male | Varies for his Pok\xE9mon. Age: 25 (OR/AS) | 33 (Black\
+        \ 2/White 2) Classification: Pok\xE9mon Trainer, Champion"
+      source_id: vsbattles-steven-stone-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: true
     identity_score: 100
     variant_score: 0
@@ -2671,136 +2763,17 @@ repair:
     duplicate_key: vsbattles.fandom.com|steven stone|9409210
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-steven-stone-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Steven_Stone_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: "Steven Stone (Canon, Pok\xE9mon Adventures)/Unbacked0"
-    source_type: mediawiki
-    revision_id: '78537'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3349
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 9-C | 6-B as a Metagross, Higher as a Mega-Metagross
-      source_id: character-stats-profiles-steven-stone-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Steven=Superhuman Physical Characteristics |-|Metagross=Superhuman Physical
-        Characteristics, Flight, Magnetism Manipulation (Metagross can use magnetism
-        to make itself fly), Metal Manipulation (Via Meteor Mash and Metal Claw),
-        Forcefield Creation (Via Reflect), Resistance to Statistics Reduction (Via
-        Clear Body), Normal, Flying, Rock, Steel, Grass, Psychic, Ice, Dragon and
-        Fairy Type moves
-      source_id: character-stats-profiles-steven-stone-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: "Street Level | Country Level (Can fight the Regi-Trio, Should be one\
-        \ of the strongest Non-Legendary Pok\xE9mon within the Hoenn Region)"
-      source_id: character-stats-profiles-steven-stone-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: "Peak Human movement with Massively Hypersonic reactions (Has reacted\
-        \ to the attacks of Groudon and Kyogre) | Massively Hypersonic (Fought against\
-        \ the Regi-Trio, Should be faster than most normal Pok\xE9mon)"
-      source_id: character-stats-profiles-steven-stone-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Country Level (Survived the pressure of controlling all three of the
-        Regi-Trio at the same time for a period of time) | Country Level (Survived
-        hits from the Regi-Trio)
-      source_id: character-stats-profiles-steven-stone-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "None Notable | Is weak to Ground, Ghost, Fire and Dark Type moves Notable\
-        \ Attacks/Techniques: * Metagross: Metagross is Steven's main Pok\xE9mon.\
-        \ It is a Steel and Psychic Type Pok\xE9mon. ** Meteor Mash: Meteor Mash is\
-        \ a Steel Type move where Metagross punches the opponent while covering its\
-        \ fist with energy. ** Reflect: Reflect is a Psychic Type move where Metagross\
-        \ creates a forcefield that protects it from attacks. ** Metal Claw: Metal\
-        \ Claw is a Steel Type move where Metagross slashes the opponent with one\
-        \ of its claws. ** Clear Body: Clear Body is Metagross' natural ability. It\
-        \ prevents Metagross from having any of its stats reduced."
-      source_id: character-stats-profiles-steven-stone-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|steven stone canon pokemon
-      adventures unbacked0|78537
-    retryable: false
-    exception_class: ''
   needs_human_source_choice: false
   candidate_sources:
   - source_id: mediawiki-507454
     url: https://vsbattles.fandom.com/wiki/Steven_Stone
     title: Steven Stone
     rank: 120
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2817,11 +2790,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Steven_Stone_More_Pokemon
     title: Steven Stone
     rank: 120
-    extracted_fields: *id009
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2838,11 +2811,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Steven_Stone_%28More_Pokemon%29
     title: Steven Stone
     rank: 120
-    extracted_fields: *id011
+    extracted_fields: *id010
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id011
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2859,11 +2832,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Steven_Stone_%28Game%29
     title: Steven Stone
     rank: 120
-    extracted_fields: *id013
+    extracted_fields: *id012
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id014
+    allowed_fields: *id013
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2880,3 +2853,27 @@ repair:
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: false
+  scoped_key: By Himself
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T19:15:03Z'
+  key_origin: primary_form_position
+  axes:
+    attack_potency:
+      method: positional
+      segments: 2
+    speed:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+    range:
+      method: positional
+      segments: 2
+    stamina:
+      method: positional
+      segments: 2
+  remaining_piped_axes:
+  - tier

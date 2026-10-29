@@ -11,13 +11,14 @@ generation:
   generated_at: '2026-06-10T03:29:59Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id004
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Zodiark (Game)
   franchise: Final Fantasy
@@ -173,42 +174,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-zodiark-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zodiark Game
-  url: https://vsbattles.fandom.com/wiki/Zodiark_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-zodiark-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Zodiark Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-zodiark-game-final-fantasy
   provider_id: vsbattles
   source_type: mediawiki
@@ -216,7 +181,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Final_Fantasy
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -267,72 +232,8 @@ sources:
 - id: character-stats-profiles-zodiark-game-final-fantasy
   provider_id: character_stats_profiles
   source_type: mediawiki
-  title: Zodiark Game Final Fantasy
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_Game_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-zodiark-game-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zodiark (Game) Final Fantasy
-  url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-zodiark-game-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
   title: Zodiark (Game) Final Fantasy
   url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_%28Game%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-zodiark-game-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zodiark (Game) (Final Fantasy)
-  url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29_%28Final_Fantasy%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-zodiark-game-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Zodiark (Game) (Final Fantasy)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_%28Game%29_%28Final_Fantasy%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -479,7 +380,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id003
+  source_ids: &id002
   - mediawiki-zodiark-game
   source_claim_ids: []
   confidence: 0.85
@@ -495,7 +396,7 @@ abilities:
 - id: powers-and-abilities-magic
   name: Magic
   description: Magic
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -510,7 +411,7 @@ abilities:
 - id: powers-and-abilities-elemental-manipulation-of-the-wind-and-ice-variety
   name: Elemental Manipulation (Of the wind and ice variety)
   description: Elemental Manipulation (Of the wind and ice variety)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -525,7 +426,7 @@ abilities:
 - id: powers-and-abilities-flight-and-levitation
   name: Flight and Levitation
   description: Flight and Levitation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -540,7 +441,7 @@ abilities:
 - id: powers-and-abilities-regeneration-mid-low
   name: Regeneration (Mid-Low)
   description: Regeneration (Mid-Low)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -556,7 +457,7 @@ abilities:
 - id: powers-and-abilities-petrification
   name: Petrification
   description: Petrification
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -571,7 +472,7 @@ abilities:
 - id: powers-and-abilities-barrier-creation
   name: Barrier Creation
   description: Barrier Creation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -587,7 +488,7 @@ abilities:
   name: Time Manipulation (In the variety of speeding itself up and stopping targets)
   description: Time Manipulation (In the variety of speeding itself up and stopping
     targets)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -638,40 +539,37 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id004
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: fb0f161fe1d67d8aa32d72b98a8924f2711eca7e762cee6b9be34b1805fde1f9
 repair:
-  attempted_at: '2026-06-19T10:57:58Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T10:31:51Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
   - source_id: vsbattles-zodiark-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29_Final_Fantasy
+    url: https://vsbattles.fandom.com/wiki/Final_Fantasy
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id005
+    extracted_fields:
     - attack_potency
     - durability
     - speed
     - standard_equipment
     normalized_page_title: Final Fantasy
     source_type: mediawiki
-    revision_id: '9442881'
+    revision_id: '9680388'
     fetch_status: fetched
     http_status: 200
-    content_length: 31792
+    content_length: 31840
     content_kind: api_json
     headings_detected:
     - Summary
@@ -697,6 +595,7 @@ repair:
     - durability
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - speed
     - standard_equipment
@@ -707,7 +606,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id006
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -759,203 +658,14 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|final fantasy|9442881
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-zodiark-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_%28Game%29_Final_Fantasy
-    ok: false
-    note: ambiguous_candidates
-    extracted_fields: []
-    normalized_page_title: Zodiark (Game) Final Fantasy
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: ambiguous_candidates
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|zodiark game final fantasy
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-zodiark-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29_%28Final_Fantasy%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
-    - attack_potency
-    - durability
-    - speed
-    - standard_equipment
-    normalized_page_title: Final Fantasy
-    source_type: mediawiki
-    revision_id: '9442881'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 31792
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Power of the Verse
-    - Calculations
-    - Knowledgeable Members
-    - Supporters/Opponents/Neutral
-    - Supporters
-    - Opponents
-    - Neutral
-    - Characters
-    - Reoccurring
-    - Final Fantasy Tactics
-    - '''''''Final Fantasy Tactics Advance'''''''
-    - '''''''Final Fantasy Type-0'''''''
-    - '''''''Final Fantasy Fables'''''''
-    - '''''''Final Fantasy Unlimited'''''''
-    - '''''''World of Final Fantasy'''''''
-    - '''''''Mystic Quest'''''''
-    - '''''''Dissidia Final Fantasy'''''''
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 90
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id008
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: attack_potency
-      value: '* Emperor Mateus'' Cyclone : 2.375 teratons - Low 6-B (Small Country
-        level) * The Emperor sustaining Pandemonium, a dimension with countless stars:
-        16.883 ExaFOE - 4-A (Multi Solar System level)'
-      source_id: vsbattles-zodiark-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: '* Bahamut Flight'
-      source_id: vsbattles-zodiark-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: '99.3 tons - 8-B (City-Block level+) * Tifa Suplexes Weapon : 327.192
-        megatons - 7-A (Mountain level) * Ifrit''s Power : 1 exaton - High 6-A (Multi-Continent
-        level) * Bahamut Fury''s Moon Buster : 1,490 Ronnatonss - 5-A (Large Planet
-        level) * Exaflare Yield : 31,493 yottatons - High 5-A (Brown Dwarf level)
-        * Sephiroth Blows Up the Solar System : 178.8 MegaFoe - 4-B (Solar System
-        level) (Outdated)'
-      source_id: vsbattles-zodiark-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: '4.913 teratons - Low 6-B (Small Country level) * Ifrit''s Power : 1
-        exaton - High 6-A (Multi-Continent level)'
-      source_id: vsbattles-zodiark-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|final fantasy|9442881
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-zodiark-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_%28Game%29_%28Final_Fantasy%29
-    ok: false
-    note: ambiguous_candidates
-    extracted_fields: []
-    normalized_page_title: Zodiark (Game) (Final Fantasy)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: ambiguous_candidates
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 120
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|zodiark game final fantasy
+    duplicate_key: vsbattles.fandom.com|final fantasy|9680388
     retryable: false
     exception_class: ''
   - source_id: mediawiki-zodiark-game
-    url: https://vsbattles.fandom.com/wiki/Zodiark_(Game)
+    url: https://vsbattles.fandom.com/wiki/Yiazmat
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -968,10 +678,10 @@ repair:
     - weaknesses
     normalized_page_title: Yiazmat
     source_type: mediawiki
-    revision_id: '8486517'
+    revision_id: '9572291'
     fetch_status: fetched
     http_status: 200
-    content_length: 3215
+    content_length: 3263
     content_kind: api_json
     headings_detected:
     - Summary
@@ -982,6 +692,7 @@ repair:
     - durability
     - intelligence
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -995,7 +706,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -1008,8 +719,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: 'At least {{5-A}} Name: Yiazmat Origin: Final Fantasy XII Gender: Unknown
-        Age: Unknown (likely to be fairly ancient) Classification: Wyrm'
+      value: At least
       source_id: mediawiki-zodiark-game
       provider_id: vsbattles
       authority: high
@@ -1048,7 +758,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: stamina
-      value: Very High (Has the stamina to fight for weeks on end)
+      value: Superhuman (Has the stamina to fight for weeks on end)
       source_id: mediawiki-zodiark-game
       provider_id: vsbattles
       authority: high
@@ -1066,18 +776,18 @@ repair:
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Unknown, Yiazmat was driven mad by its own power according to its bestiary
-        entry.
+      value: Unknown (Yiazmat was driven mad by its own power according to its bestiary
+        entry)
       source_id: mediawiki-zodiark-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions}}
-        Category:Characters Category:Game Characters Category:Final Fantasy Category:Final
-        Fantasy XII Category:Characters from Ivalice Category:Game Bosses Category:Dragons
-        Category:Forcefield Users Category:Time Users Category:Magic Users Category:Element
-        Users Category:Flight Users Category:Regeneration Users Category:Monsters'
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Game Characters Category:Final Fantasy Category:Final Fantasy XII
+        Category:Characters from Ivalice Category:Game Bosses Category:Dragons Category:Forcefield
+        Users Category:Time Users Category:Magic Users Category:Element Users Category:Flight
+        Users Category:Regeneration Users Category:Monsters'
       source_id: mediawiki-zodiark-game
       provider_id: vsbattles
       authority: high
@@ -1092,156 +802,14 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|yiazmat|8486517
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-zodiark-game
-    url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Yiazmat
-    source_type: mediawiki
-    revision_id: '8486517'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3215
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 'At least {{5-A}} Name: Yiazmat Origin: Final Fantasy XII Gender: Unknown
-        Age: Unknown (likely to be fairly ancient) Classification: Wyrm'
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Magic, Elemental Manipulation (Of
-        the wind and ice variety), Flight and Levitation, Regeneration (Mid-Low),
-        Petrification, Barrier Creation, Time Manipulation (In the variety of speeding
-        itself up and stopping targets)
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Large Planet level (Considered a threat to the Occuria and was
-        considered the strongest being in Ivalice before its defeat at the hands of
-        Vaan. Gilgamesh and Espers like Zodiark were known entities to those making
-        these claims)
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Sub-Relativistic (Capable of keeping pace with Vaan)
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Large Planet level (Considered a peer of the Occuria and was
-        considered the strongest being in Ivalice before its defeat at the hands of
-        Vaan. Gilgamesh and Espers like Zodiark were known entities to those making
-        these claims)
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Very High (Has the stamina to fight for weeks on end)
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with physical strikes, higher with magic
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Unknown, Yiazmat was driven mad by its own power according to its bestiary
-        entry.
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions}}
-        Category:Characters Category:Game Characters Category:Final Fantasy Category:Final
-        Fantasy XII Category:Characters from Ivalice Category:Game Bosses Category:Dragons
-        Category:Forcefield Users Category:Time Users Category:Magic Users Category:Element
-        Users Category:Flight Users Category:Regeneration Users Category:Monsters'
-      source_id: vsbattles-zodiark-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|yiazmat|8486517
+    duplicate_key: vsbattles.fandom.com|yiazmat|9572291
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-zodiark-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_%28Game%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/Leo_Regulus_(Canon)/Unbacked0
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id015
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -1265,6 +833,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1278,7 +847,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id016
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1289,36 +858,34 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '2-C, High 2-A with Zodiac Clamation | High 2-A Name: Leo Regulus Origin:
-        Saint Seiya Gender: Male Age: 15 Classification: Gold Saint, Saint of Athena'
+      value: 2-C, High 2-A with Zodiac Clamation | High 2-A
       source_id: character-stats-profiles-zodiark-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Before using Zodiac Clamation=Superhuman Physical Characteristics, Immortality
-        (Type 3), Regeneration (Low-Godly, Scales to Phoenix Ikki who regenerated
-        after his entire body was atomised), Martial Arts, Chi Manipulation, Matter
-        Manipulation, Heat Manipulation, Extrasensory Perception (Can sense the Cosmo
-        energy of others), Non-Physical Interaction, Soul Manipulation (Saints are
-        able to interact with and directly harm souls), Energy Projection, Reactive
-        Evolution (Once a Saint has seen an attack once then it won't work from then
-        on), Telepathy, Pressure Point Strikes (Can hit the vital points that correlate
-        to the constellations that the person was born under), Enhanced Senses, Telepathy,
-        Teleportation, Reactive Power Level (Every time a Saint with the Seventh Sense
-        gets knocked down, he becomes stronger when he stands back up), Space-Time
-        Manipulation (Can create Big Bangs), Dimensional Travel (Is comparable to
-        Andromeda Shun who managed to attack while in a separate dimension), Instinctive
-        Reactions (Scales to Seiya who still managed to fight a battle while in a
-        coma), Probability Manipulation, Statistics Amplification (Someone with the
-        Seventh Sense is able to create Miracles which make the impossible possible
-        and can be used to boost the user's stats), Power Mimicry (With Lion's Eye),
-        Electricity Manipulation |-|After using Zodiac Clamation=All previous abilities,
-        Omnipresence, Non-Corporeal (Is one with the universe) |-|Resistances=Matter
-        Manipulation (Can take hits from other Saints which can break down matter
-        on the atomic level), Heat Manipulation, Absolute Zero (A Saint without any
-        cloth can resist cold temperatures that can freeze molten lava and the hot
-        temperatures of 10 trillion degrees, More powerful Saints can resist absolute
+      value: Superhuman Physical Characteristics, Immortality (Type 3), Regeneration
+        (Low-Godly, Scales to Phoenix Ikki who regenerated after his entire body was
+        atomised), Martial Arts, Chi Manipulation, Matter Manipulation, Heat Manipulation,
+        Extrasensory Perception (Can sense the Cosmo energy of others), Non-Physical
+        Interaction, Soul Manipulation (Saints are able to interact with and directly
+        harm souls), Energy Projection, Reactive Evolution (Once a Saint has seen
+        an attack once then it won't work from then on), Telepathy, Pressure Point
+        Strikes (Can hit the vital points that correlate to the constellations that
+        the person was born under), Enhanced Senses, Telepathy, Teleportation, Reactive
+        Power Level (Every time a Saint with the Seventh Sense gets knocked down,
+        he becomes stronger when he stands back up), Space-Time Manipulation (Can
+        create Big Bangs), Dimensional Travel (Is comparable to Andromeda Shun who
+        managed to attack while in a separate dimension), Instinctive Reactions (Scales
+        to Seiya who still managed to fight a battle while in a coma), Probability
+        Manipulation, Statistics Amplification (Someone with the Seventh Sense is
+        able to create Miracles which make the impossible possible and can be used
+        to boost the user's stats), Power Mimicry (With Lion's Eye), Electricity Manipulation
+        All previous abilities, Omnipresence, Non-Corporeal (Is one with the universe)
+        Matter Manipulation (Can take hits from other Saints which can break down
+        matter on the atomic level), Heat Manipulation, Absolute Zero (A Saint without
+        any cloth can resist cold temperatures that can freeze molten lava and the
+        hot temperatures of 10 trillion degrees, More powerful Saints can resist absolute
         zero and even colder temperatures), Electricity Manipulation (Bronze Cloth
         Saint's can resist 10,000 volts), Illusion Creation, Soul Manipulation, Soul
         Mutilation, Dream Manipulation, Mind Manipulation (Has gained a resistance
@@ -1389,57 +956,44 @@ repair:
     duplicate_key: character-stats-and-profiles.fandom.com|leo regulus canon unbacked0|135412
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-zodiark-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Zodiark_Game_Final_Fantasy
+  - source_id: character-stats-profiles-zodiark-game-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_%28Game%29_Final_Fantasy
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields:
     - attack_potency
     - durability
+    - powers_and_abilities
     - speed
-    - standard_equipment
-    normalized_page_title: Final Fantasy
+    - tier
+    normalized_page_title: Cloud Strife (Canon, Final Fantasy VII)/Plant234
     source_type: mediawiki
-    revision_id: '9442881'
+    revision_id: '468102'
     fetch_status: fetched
     http_status: 200
-    content_length: 31792
+    content_length: 26511
     content_kind: api_json
     headings_detected:
     - Summary
-    - Power of the Verse
-    - Calculations
-    - Knowledgeable Members
-    - Supporters/Opponents/Neutral
-    - Supporters
-    - Opponents
-    - Neutral
-    - Characters
-    - Reoccurring
-    - Final Fantasy Tactics
-    - '''''''Final Fantasy Tactics Advance'''''''
-    - '''''''Final Fantasy Type-0'''''''
-    - '''''''Final Fantasy Fables'''''''
-    - '''''''Final Fantasy Unlimited'''''''
-    - '''''''World of Final Fantasy'''''''
-    - '''''''Mystic Quest'''''''
-    - '''''''Dissidia Final Fantasy'''''''
+    - Powers and Stats
+    - Statistics Values
     stat_labels_detected:
     - attack_potency
     - durability
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - speed
-    - standard_equipment
     - striking_strength
     - tier
+    - weaknesses
     extraction_failure_reason: ''
-    rank: 90
-    provider_id: vsbattles
+    rank: 105
+    provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1449,34 +1003,309 @@ repair:
     - stamina
     - intelligence
     field_candidates:
+    - field: tier
+      value: 9-B | At least High 6-A, higher Limit Breaks | 4-A, higher with Limit
+        Breaks | 3-B, higher with Limit Breaks | At least 3-B, likely higher, higher
+        with Limit Breaks
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Base (FFVII)= *Superhuman Physical Characteristics (Is physically built
+        like someone in SOLDIERFinal Fantasy VII (1997). Members of SOLDIER are injected
+        with Jenova cells and large amount of Mako energyFinal Fantasy VII Remake
+        (2020)Crisis Core: Final Fantasy VII (2007), which greatly amplify their physical
+        capabilitiesFinal Fantasy VII 10th Anniversary Ultimania (2007).) *Spirit
+        Energy Manipulation (Beginner during Before Crisis & Crisis Core, Standard
+        during Disc 1, Skilled during Disc 2, Perfected during Disc 3) *Acrobatics
+        & Limited Surface Scaling (Hypermobility & Enhanced Condition; Can preform
+        flips and leaps. SOLDIER members are capable of running up walls using parkourFinal
+        Fantasy VII: The First SOLDIER (2021)) *Enhanced Senses (SOLDIER members possess
+        amazing reflexes) *Master Swordsman & Marksmanship (Ever since Cloud was younger
+        he has displayed a natural talent for swordsmanshipCrisis Core Complete Guide
+        (2008), being able to proficiently use the Buster Sword to impale Sephiroth.
+        Can skilfully use his firearms, as a Shinra infantryman he is trained in the
+        usage various of guns) *Vehicular Mastery (Seen here) *Pressure Point Strikes
+        (Via Critical Hits) *Energy Projection & Homing Attack (With his Blade Beam
+        Limit Breaks) *Non-Physical Interaction (Can harm ghosts of the Gi-Tribe)
+        *Regeneration Negation (Low-High) & Immortality Negation (Type 2, 3, 6 & 7;
+        Can permenantly kill fragments of Jenova. Jenova''s body is extremely ressiliant
+        allowing it to surive even while being reduced to cellsFinal Fantasy VII:
+        Ultimania Omega (2005), furthermore those cells are all controlled by Sephiroth''s
+        will and they will come together and form a new body again. Can also kill
+        members of the Gi Tribe, warriors that were killed in battle but live on as
+        vengeful spirits) Spirit Energy Resistances (Beginner during Before Crisis
+        & Crisis Core, Standard during Disc 1, Skilled during Disc 2, Perfected during
+        Disc 3) Base (AC)= All previous abilities on a greater scale, plus: *Spirit
+        Energy Manipulation (Unleashed) *Dual Wielding (He wields the Fusion Sword
+        now which can split up into multiple parts allowing him to use two blades
+        at a timeFinal Fantasy VII: Advent Children Complete (2009)) *Weapon Control,
+        Flight & Afterimage Creation (Via Omnislash Version 6) *Regeneration Negation
+        (Low-Godly) & Immortality Negation (All previous types, including 4 & 8; Killed
+        Sephiroth again, who can resurrect from the lifestream with Jenova as anchorFinal
+        Fantasy VII: On the Way to a Smile (2009)) Resistances=All previous resistances
+        on a greater scale, plus: *Spirit Energy Resistances (Unleashed) *Magic (Materia
+        allows a person to use magicFinal Fantasy VII Rebirth (2024)) *Summoning (Can
+        summon multiple comets with the Comet Materia) *Forcefield Creation (Can create
+        a barrier with the Barrier Materia) *Attack Reflection (Can cast a reflect
+        spell with the Barrier Materia) *Ice Manipulation (By using Ice materia. Can
+        also use ice spells with the Contain Materia) *Fire Manipulation (By using
+        fire materia. Can also use fire spells with the Contain Materia) *Earth Manipulation
+        (By using the earth materia. Can also use earth spells with the Contain Materia)
+        *Air Manipulation (Can use wind spells with the Contain Materia) *Power Nullification
+        (Using the Contain Materia''s ice spell which has a 68% chance of inflicting
+        stop on the enemy which stops the ATB bar from filling. Can also Destruct
+        Materia which nullfies forcefields) *Petrification (Using the Contain Materias
+        earth spell which has a 32% chance to petrify the enemy) *Madness Manipulation
+        (Type 3; Using the Contain Materias wind spell which has a 32% chance to inflict
+        confusion on the enemy. And by using a mystify spell.) *Death Manipulation
+        (By using the Destruct Materias death spell) *Healing (By using the Full Cure
+        Materia which cures the whole party) *Gravity Manipulation (By using the Gravity
+        Materia) *Purification (Type 1; By using the Heal Materias magic which can
+        remove poison and various status effects) *Electricity Manipulation (By using
+        lightning magic) *Poison Manipulation (With Bio) *Invulnerability (With the
+        shield materia) *Speed Amplification, Time Manipulation & Time Stop (With
+        time magic) *Transmutation (With transform materia & Morph materia) *Sleep
+        Manipulation (With the seal materia which puts sleep magic onto his enemies)
+        *Elemental Manipulation (Putting Elemental Materia on a persons weapon allows
+        them to use elemtal attacks like: Fire, Ice, Lightning, Earth, Poison and
+        Gravity) *Absorption (With various absorb Materia) *Stealth Mastery (With
+        the sneak attack which allows a person to catch their enemies ofgaurd) *Body
+        Puppetry (With the Manipulate Materia which allows the user to choose their
+        enemies next attack) *Power Mimicry (With the Mime Materia) *Clairvoyance
+        (By using the Sense materia which allows the user to gain knowledge of their
+        foes hp, mp and weaknesses) *Accelerated Development (Leveling; with EXP Plus)
+        *Statistics Amplification (With various In'
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     - field: attack_potency
-      value: '* Emperor Mateus'' Cyclone : 2.375 teratons - Low 6-B (Small Country
-        level) * The Emperor sustaining Pandemonium, a dimension with countless stars:
-        16.883 ExaFOE - 4-A (Multi Solar System level)'
+      value: 'Wall level (As an infantryman he could fight on par with avalanche troopers.
+        Avalanche troopers can easily destroy stone with a single punchBefore Crisis:
+        Final Fantasy VII (2004)) | At least Multi-Continent level (Comparable to
+        Vincent who can easily take out 3rd ver. Ravens, who are far superior to the
+        2nd which easily took out 2nd class SOLDIER members who should be on the same
+        level as Zack Fair, someone who is able to go toe to toe with Ifrit1 exaton),
+        higher with Limit Breaks (Limit Breaks are special techniques that can be
+        performed when a person''s Spirit Energy aligns and emits from their body.
+        This "overflow" is achieved as a person keeps fighting, they sustain damage
+        or their rage is pushed to the limit, or experience other intense emotions)
+        == Statistics Values == Category:Plant234 Category:Tier 9 Category:Tier 9-A
+        Category:Tier 6 Category:Tier High 6-A Category:Tier 4 Category:Tier 4-A Category:Tier
+        3 Category:Tier 3-B Category:Superhuman Physical Characteristics Users Category:Acrobats
+        Category:Surface Scalers Category:Enhanced Senses Users Category:Weapon Masters
+        Category:Vehicular Masters Category:Energy Projection Users Category:Homing
+        Attack Users Category:Non-Physical Interaction Users Category:Blessed Users
+        Category:Empowerment Users Category:Statistics Amplification Users Category:Regeneration
+        Users Category:Indomitable Will Users Category:Energy Users Category:Damage
+        Boost Users Category:Aura Users Category:Free Movement Users Category:Underwater
+        Breathers Category:Astral Projection Users Category:Negation Users Category:Immortals
+        Category:Telekinesis Users Category:Flight Users Category:Afterimage Creation
+        Users Category:Magic Users Category:Summoners Category:Forcefield Users Category:Attack
+        Reflection Users Category:Ice Users Category:Fire Users Category:Earth Users
+        Category:Air Users Category:Power Nullification Users Category:Petrification
+        Users Category:Madness Manipulation Users Category:Death Users Category:Healers
+        Category:Gravity Users Category:Purification Users Category:Electricity Users
+        Category:Poison Users Category:Invulnerability Users Category:Time Users Category:Time
+        Stop Users Category:Transmutation Users Category:Sleep Users Category:Element
+        Users Category:Absorption Users Category:Stealth Masters Category:Body Puppetry
+        Users Category:Power Mimicry Users Category:Clairvoyance Users Category:Accelerated
+        Development Users Category:Power Absorption Users Category:Speed Users Category:Damage
+        Reduction Users Category:Resurrection Users Category:Water Users Category:Spatial
+        Users Category:Durability Negation Users Category:Portal Creation Users Category:Pocket
+        Reality Users Category:Absolute Zero Users Category:Hellfire Users Category:Matter
+        Users Category:Radiation Users Category:Holy Users Category:Unholy Users Category:Paralysis
+        Inducement Users Category:Video Game Characters Category:Primary Protagonists
+        Category:Sword Users Category:Mercenaries Category:Male Characters Category:Teenagers
+        Category:Adults Category:Clones Category:Final Fantasy Category:Final Fantasy
+        VII Category:Humans Category:Soldiers Category:Gun Users Category:Heroes Category:Playable
+        Characters'
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Amplification, Time Manipulation & Time Stop (With time magic) *Transmutation
+        (With transform materia & Morph materia) *Sleep Manipulation (With the seal
+        materia which puts sleep magic onto his enemies) *Elemental Manipulation (Putting
+        Elemental Materia on a persons weapon allows them to use elemtal attacks like:
+        Fire, Ice, Lightning, Earth, Poison and Gravity) *Absorption (With various
+        absorb Materia) *Stealth Mastery (With the sneak attack which allows a person
+        to catch their enemies ofgaurd) *Body Puppetry (With the Manipulate Materia
+        which allows the user to choose their enemies next attack) *Power Mimicry
+        (With the Mime Materia) *Clairvoyance (By using the Sense materia which allows
+        the user to gain knowledge of their foes hp, mp and weaknesses) *Accelerated
+        Development (Leveling; with EXP Plus) *Statistics Amplification (With various
+        Independent Materia) Resistances & Immunitys=Resistance or/and Immunity to:
+        *Status Effect Inducement & Transformation (With the Resist spell) *Petrification,
+        Mind Manipulation, Time Stop, Death Manipulation, Madness Manipulation (Type
+        2), Poison Manipulation, Power Nullification, Sleep Manipulation, Time Manipulation
+        Size Manipulation & Transmutation (By combining the Added Effect Materia with
+        various other Materia) *Sleep Manipulation & Transmutation (With Frog Song)
+        *Size Manipulation (With L4 Suicide) *Power Absorption (With Magic Hammer)
+        *Healing (With White Wind) *Speed Manipulation & Damage Reduction (With Big
+        Guard) *Healing & Resurrection (With Angel Whisper) *Defence Amplification
+        (With Dragon Force) *Fire Manipulation (With Flame Thrower & Beta) *Gravity
+        Manipulation (With Laser) *Sleep Manipulation, Poison Manipulation, Madness
+        Manipulation (Type 2), Power Nullification, Transmutation & Size Manipulation
+        (With Bad Breath) *Water Manipulation (With Aqualung) *Electricity Manipulation
+        (With Trine) *Elemental Manipulation (Fire, Ice & Lightning; With Magic Breath)
+        *Death Manipulation (With L5 Death, Roulette & Death Sentence) *Spatial Manipulation
+        &'
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Negation (With Pandora''s Box) Resistances & Immunitys=Resistance or/and
+        Immunity to: *Death Manipulation, Sleep Manipulation, Poison Manipulation,
+        Madness Manipulation (Type 2), Time Manipulation, Time Stop, Transmutation,
+        Size Manipulation, Petrification, Paralysis Inducement and Darkness Manipulation
+        (With White Wind and Angel Whisper) *General'
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife canon final
+      fantasy vii plant234|468102
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-zodiark-game-final-fantasy
+    url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29_Final_Fantasy
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Zodiark (Final Fantasy)
+    source_type: mediawiki
+    revision_id: '9440120'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3715
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least | At least , possibly
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Magic, Flight, Regeneration (Mid-Low),
+        Barrier Creation, Time Manipulation (Can speed up time around himself to increase
+        his speed), Gravity Manipulation, Energy Projection | Reality Warping (Can
+        destroy all of reality and its laws)
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Large Planet level (The most powerful Scion, the Occuria kept
+        him as a child out of fear of what he would become if he matured) | At least
+        Universe level, possibly Universe level+ (Zodiark's Final Eclipse appears
+        to be this powerful and is described as annihilating reality and its laws)
       source_id: vsbattles-zodiark-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: '* Bahamut Flight'
-      source_id: vsbattles-zodiark-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: '99.3 tons - 8-B (City-Block level+) * Tifa Suplexes Weapon : 327.192
-        megatons - 7-A (Mountain level) * Ifrit''s Power : 1 exaton - High 6-A (Multi-Continent
-        level) * Bahamut Fury''s Moon Buster : 1,490 Ronnatonss - 5-A (Large Planet
-        level) * Exaflare Yield : 31,493 yottatons - High 5-A (Brown Dwarf level)
-        * Sephiroth Blows Up the Solar System : 178.8 MegaFoe - 4-B (Solar System
-        level) (Outdated)'
+      value: Sub-Relativistic (Comparable to the Occuria)
       source_id: vsbattles-zodiark-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: '4.913 teratons - Low 6-B (Small Country level) * Ifrit''s Power : 1
-        exaton - High 6-A (Multi-Continent level)'
+      value: At least Large Planet level | Likely Universe level
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Unknown
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Planetary | At least Universal, possibly Universal+
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: None notable
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Skilled and capable combatant, Zodiark was given the task of fashioning
+        the laws that govern all things by the Occuria
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Game Characters Category:Final Fantasy Category:Final
+        Fantasy XII Category:Summons Category:Magic Users Category:Flight Users Category:Forcefield
+        Users Category:Time Users Category:Gravity Users Category:Energy Users Category:Final
+        Fantasy Tactics Category:Final Fantasy Tactics Advance Category:Characters
+        from Ivalice Category:Regeneration Users'
       source_id: vsbattles-zodiark-game-final-fantasy
       provider_id: vsbattles
       authority: high
@@ -1486,131 +1315,510 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 0
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|final fantasy|9442881
+    duplicate_key: vsbattles.fandom.com|zodiark final fantasy|9440120
     retryable: false
     exception_class: ''
-  needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-zodiark-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29_Final_Fantasy
-    title: Final Fantasy
-    rank: 90
-    extracted_fields: *id005
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id006
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|final fantasy|9442881
   - source_id: vsbattles-zodiark-game-final-fantasy
     url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29_%28Final_Fantasy%29
-    title: Final Fantasy
-    rank: 90
-    extracted_fields: *id007
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Zodiark (Final Fantasy)
+    source_type: mediawiki
+    revision_id: '9440120'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3715
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least | At least , possibly
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Magic, Flight, Regeneration (Mid-Low),
+        Barrier Creation, Time Manipulation (Can speed up time around himself to increase
+        his speed), Gravity Manipulation, Energy Projection | Reality Warping (Can
+        destroy all of reality and its laws)
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Large Planet level (The most powerful Scion, the Occuria kept
+        him as a child out of fear of what he would become if he matured) | At least
+        Universe level, possibly Universe level+ (Zodiark's Final Eclipse appears
+        to be this powerful and is described as annihilating reality and its laws)
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Sub-Relativistic (Comparable to the Occuria)
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Large Planet level | Likely Universe level
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Unknown
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Planetary | At least Universal, possibly Universal+
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: None notable
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Skilled and capable combatant, Zodiark was given the task of fashioning
+        the laws that govern all things by the Occuria
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Game Characters Category:Final Fantasy Category:Final
+        Fantasy XII Category:Summons Category:Magic Users Category:Flight Users Category:Forcefield
+        Users Category:Time Users Category:Gravity Users Category:Energy Users Category:Final
+        Fantasy Tactics Category:Final Fantasy Tactics Advance Category:Characters
+        from Ivalice Category:Regeneration Users'
+      source_id: vsbattles-zodiark-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 0
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|final fantasy|9442881
-  - source_id: vsbattles-zodiark-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Zodiark_Game_Final_Fantasy
-    title: Final Fantasy
-    rank: 90
-    extracted_fields: *id009
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|final fantasy|9442881
-  - source_id: mediawiki-zodiark-game
-    url: https://vsbattles.fandom.com/wiki/Zodiark_(Game)
-    title: Yiazmat
-    rank: 80
-    extracted_fields: *id011
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|yiazmat|8486517
-  - source_id: vsbattles-zodiark-game
-    url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29
-    title: Yiazmat
-    rank: 80
-    extracted_fields: *id013
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|yiazmat|8486517
-  - source_id: character-stats-profiles-zodiark-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_%28Game%29
-    title: Leo Regulus (Canon)/Unbacked0
-    rank: 80
-    extracted_fields: *id015
+    duplicate_key: vsbattles.fandom.com|zodiark final fantasy|9440120
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-zodiark-game-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Zodiark_%28Game%29_%28Final_Fantasy%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: Cloud Strife (Canon, Final Fantasy VII)/Plant234
+    source_type: mediawiki
+    revision_id: '468102'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 26511
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-B | At least High 6-A, higher Limit Breaks | 4-A, higher with Limit
+        Breaks | 3-B, higher with Limit Breaks | At least 3-B, likely higher, higher
+        with Limit Breaks
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Base (FFVII)= *Superhuman Physical Characteristics (Is physically built
+        like someone in SOLDIERFinal Fantasy VII (1997). Members of SOLDIER are injected
+        with Jenova cells and large amount of Mako energyFinal Fantasy VII Remake
+        (2020)Crisis Core: Final Fantasy VII (2007), which greatly amplify their physical
+        capabilitiesFinal Fantasy VII 10th Anniversary Ultimania (2007).) *Spirit
+        Energy Manipulation (Beginner during Before Crisis & Crisis Core, Standard
+        during Disc 1, Skilled during Disc 2, Perfected during Disc 3) *Acrobatics
+        & Limited Surface Scaling (Hypermobility & Enhanced Condition; Can preform
+        flips and leaps. SOLDIER members are capable of running up walls using parkourFinal
+        Fantasy VII: The First SOLDIER (2021)) *Enhanced Senses (SOLDIER members possess
+        amazing reflexes) *Master Swordsman & Marksmanship (Ever since Cloud was younger
+        he has displayed a natural talent for swordsmanshipCrisis Core Complete Guide
+        (2008), being able to proficiently use the Buster Sword to impale Sephiroth.
+        Can skilfully use his firearms, as a Shinra infantryman he is trained in the
+        usage various of guns) *Vehicular Mastery (Seen here) *Pressure Point Strikes
+        (Via Critical Hits) *Energy Projection & Homing Attack (With his Blade Beam
+        Limit Breaks) *Non-Physical Interaction (Can harm ghosts of the Gi-Tribe)
+        *Regeneration Negation (Low-High) & Immortality Negation (Type 2, 3, 6 & 7;
+        Can permenantly kill fragments of Jenova. Jenova''s body is extremely ressiliant
+        allowing it to surive even while being reduced to cellsFinal Fantasy VII:
+        Ultimania Omega (2005), furthermore those cells are all controlled by Sephiroth''s
+        will and they will come together and form a new body again. Can also kill
+        members of the Gi Tribe, warriors that were killed in battle but live on as
+        vengeful spirits) Spirit Energy Resistances (Beginner during Before Crisis
+        & Crisis Core, Standard during Disc 1, Skilled during Disc 2, Perfected during
+        Disc 3) Base (AC)= All previous abilities on a greater scale, plus: *Spirit
+        Energy Manipulation (Unleashed) *Dual Wielding (He wields the Fusion Sword
+        now which can split up into multiple parts allowing him to use two blades
+        at a timeFinal Fantasy VII: Advent Children Complete (2009)) *Weapon Control,
+        Flight & Afterimage Creation (Via Omnislash Version 6) *Regeneration Negation
+        (Low-Godly) & Immortality Negation (All previous types, including 4 & 8; Killed
+        Sephiroth again, who can resurrect from the lifestream with Jenova as anchorFinal
+        Fantasy VII: On the Way to a Smile (2009)) Resistances=All previous resistances
+        on a greater scale, plus: *Spirit Energy Resistances (Unleashed) *Magic (Materia
+        allows a person to use magicFinal Fantasy VII Rebirth (2024)) *Summoning (Can
+        summon multiple comets with the Comet Materia) *Forcefield Creation (Can create
+        a barrier with the Barrier Materia) *Attack Reflection (Can cast a reflect
+        spell with the Barrier Materia) *Ice Manipulation (By using Ice materia. Can
+        also use ice spells with the Contain Materia) *Fire Manipulation (By using
+        fire materia. Can also use fire spells with the Contain Materia) *Earth Manipulation
+        (By using the earth materia. Can also use earth spells with the Contain Materia)
+        *Air Manipulation (Can use wind spells with the Contain Materia) *Power Nullification
+        (Using the Contain Materia''s ice spell which has a 68% chance of inflicting
+        stop on the enemy which stops the ATB bar from filling. Can also Destruct
+        Materia which nullfies forcefields) *Petrification (Using the Contain Materias
+        earth spell which has a 32% chance to petrify the enemy) *Madness Manipulation
+        (Type 3; Using the Contain Materias wind spell which has a 32% chance to inflict
+        confusion on the enemy. And by using a mystify spell.) *Death Manipulation
+        (By using the Destruct Materias death spell) *Healing (By using the Full Cure
+        Materia which cures the whole party) *Gravity Manipulation (By using the Gravity
+        Materia) *Purification (Type 1; By using the Heal Materias magic which can
+        remove poison and various status effects) *Electricity Manipulation (By using
+        lightning magic) *Poison Manipulation (With Bio) *Invulnerability (With the
+        shield materia) *Speed Amplification, Time Manipulation & Time Stop (With
+        time magic) *Transmutation (With transform materia & Morph materia) *Sleep
+        Manipulation (With the seal materia which puts sleep magic onto his enemies)
+        *Elemental Manipulation (Putting Elemental Materia on a persons weapon allows
+        them to use elemtal attacks like: Fire, Ice, Lightning, Earth, Poison and
+        Gravity) *Absorption (With various absorb Materia) *Stealth Mastery (With
+        the sneak attack which allows a person to catch their enemies ofgaurd) *Body
+        Puppetry (With the Manipulate Materia which allows the user to choose their
+        enemies next attack) *Power Mimicry (With the Mime Materia) *Clairvoyance
+        (By using the Sense materia which allows the user to gain knowledge of their
+        foes hp, mp and weaknesses) *Accelerated Development (Leveling; with EXP Plus)
+        *Statistics Amplification (With various In'
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Wall level (As an infantryman he could fight on par with avalanche troopers.
+        Avalanche troopers can easily destroy stone with a single punchBefore Crisis:
+        Final Fantasy VII (2004)) | At least Multi-Continent level (Comparable to
+        Vincent who can easily take out 3rd ver. Ravens, who are far superior to the
+        2nd which easily took out 2nd class SOLDIER members who should be on the same
+        level as Zack Fair, someone who is able to go toe to toe with Ifrit1 exaton),
+        higher with Limit Breaks (Limit Breaks are special techniques that can be
+        performed when a person''s Spirit Energy aligns and emits from their body.
+        This "overflow" is achieved as a person keeps fighting, they sustain damage
+        or their rage is pushed to the limit, or experience other intense emotions)
+        == Statistics Values == Category:Plant234 Category:Tier 9 Category:Tier 9-A
+        Category:Tier 6 Category:Tier High 6-A Category:Tier 4 Category:Tier 4-A Category:Tier
+        3 Category:Tier 3-B Category:Superhuman Physical Characteristics Users Category:Acrobats
+        Category:Surface Scalers Category:Enhanced Senses Users Category:Weapon Masters
+        Category:Vehicular Masters Category:Energy Projection Users Category:Homing
+        Attack Users Category:Non-Physical Interaction Users Category:Blessed Users
+        Category:Empowerment Users Category:Statistics Amplification Users Category:Regeneration
+        Users Category:Indomitable Will Users Category:Energy Users Category:Damage
+        Boost Users Category:Aura Users Category:Free Movement Users Category:Underwater
+        Breathers Category:Astral Projection Users Category:Negation Users Category:Immortals
+        Category:Telekinesis Users Category:Flight Users Category:Afterimage Creation
+        Users Category:Magic Users Category:Summoners Category:Forcefield Users Category:Attack
+        Reflection Users Category:Ice Users Category:Fire Users Category:Earth Users
+        Category:Air Users Category:Power Nullification Users Category:Petrification
+        Users Category:Madness Manipulation Users Category:Death Users Category:Healers
+        Category:Gravity Users Category:Purification Users Category:Electricity Users
+        Category:Poison Users Category:Invulnerability Users Category:Time Users Category:Time
+        Stop Users Category:Transmutation Users Category:Sleep Users Category:Element
+        Users Category:Absorption Users Category:Stealth Masters Category:Body Puppetry
+        Users Category:Power Mimicry Users Category:Clairvoyance Users Category:Accelerated
+        Development Users Category:Power Absorption Users Category:Speed Users Category:Damage
+        Reduction Users Category:Resurrection Users Category:Water Users Category:Spatial
+        Users Category:Durability Negation Users Category:Portal Creation Users Category:Pocket
+        Reality Users Category:Absolute Zero Users Category:Hellfire Users Category:Matter
+        Users Category:Radiation Users Category:Holy Users Category:Unholy Users Category:Paralysis
+        Inducement Users Category:Video Game Characters Category:Primary Protagonists
+        Category:Sword Users Category:Mercenaries Category:Male Characters Category:Teenagers
+        Category:Adults Category:Clones Category:Final Fantasy Category:Final Fantasy
+        VII Category:Humans Category:Soldiers Category:Gun Users Category:Heroes Category:Playable
+        Characters'
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Amplification, Time Manipulation & Time Stop (With time magic) *Transmutation
+        (With transform materia & Morph materia) *Sleep Manipulation (With the seal
+        materia which puts sleep magic onto his enemies) *Elemental Manipulation (Putting
+        Elemental Materia on a persons weapon allows them to use elemtal attacks like:
+        Fire, Ice, Lightning, Earth, Poison and Gravity) *Absorption (With various
+        absorb Materia) *Stealth Mastery (With the sneak attack which allows a person
+        to catch their enemies ofgaurd) *Body Puppetry (With the Manipulate Materia
+        which allows the user to choose their enemies next attack) *Power Mimicry
+        (With the Mime Materia) *Clairvoyance (By using the Sense materia which allows
+        the user to gain knowledge of their foes hp, mp and weaknesses) *Accelerated
+        Development (Leveling; with EXP Plus) *Statistics Amplification (With various
+        Independent Materia) Resistances & Immunitys=Resistance or/and Immunity to:
+        *Status Effect Inducement & Transformation (With the Resist spell) *Petrification,
+        Mind Manipulation, Time Stop, Death Manipulation, Madness Manipulation (Type
+        2), Poison Manipulation, Power Nullification, Sleep Manipulation, Time Manipulation
+        Size Manipulation & Transmutation (By combining the Added Effect Materia with
+        various other Materia) *Sleep Manipulation & Transmutation (With Frog Song)
+        *Size Manipulation (With L4 Suicide) *Power Absorption (With Magic Hammer)
+        *Healing (With White Wind) *Speed Manipulation & Damage Reduction (With Big
+        Guard) *Healing & Resurrection (With Angel Whisper) *Defence Amplification
+        (With Dragon Force) *Fire Manipulation (With Flame Thrower & Beta) *Gravity
+        Manipulation (With Laser) *Sleep Manipulation, Poison Manipulation, Madness
+        Manipulation (Type 2), Power Nullification, Transmutation & Size Manipulation
+        (With Bad Breath) *Water Manipulation (With Aqualung) *Electricity Manipulation
+        (With Trine) *Elemental Manipulation (Fire, Ice & Lightning; With Magic Breath)
+        *Death Manipulation (With L5 Death, Roulette & Death Sentence) *Spatial Manipulation
+        &'
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Negation (With Pandora''s Box) Resistances & Immunitys=Resistance or/and
+        Immunity to: *Death Manipulation, Sleep Manipulation, Poison Manipulation,
+        Madness Manipulation (Type 2), Time Manipulation, Time Stop, Transmutation,
+        Size Manipulation, Petrification, Paralysis Inducement and Darkness Manipulation
+        (With White Wind and Angel Whisper) *General'
+      source_id: character-stats-profiles-zodiark-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife canon final
+      fantasy vii plant234|468102
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-zodiark-game
+    url: https://vsbattles.fandom.com/wiki/Zodiark_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Yiazmat
+    source_type: mediawiki
+    revision_id: '9572291'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3263
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Magic, Elemental Manipulation (Of
+        the wind and ice variety), Flight and Levitation, Regeneration (Mid-Low),
+        Petrification, Barrier Creation, Time Manipulation (In the variety of speeding
+        itself up and stopping targets)
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Large Planet level (Considered a threat to the Occuria and was
+        considered the strongest being in Ivalice before its defeat at the hands of
+        Vaan. Gilgamesh and Espers like Zodiark were known entities to those making
+        these claims)
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Sub-Relativistic (Capable of keeping pace with Vaan)
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Large Planet level (Considered a peer of the Occuria and was
+        considered the strongest being in Ivalice before its defeat at the hands of
+        Vaan. Gilgamesh and Espers like Zodiark were known entities to those making
+        these claims)
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Has the stamina to fight for weeks on end)
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range with physical strikes, higher with magic
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: None notable
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Unknown (Yiazmat was driven mad by its own power according to its bestiary
+        entry)
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Game Characters Category:Final Fantasy Category:Final Fantasy XII
+        Category:Characters from Ivalice Category:Game Bosses Category:Dragons Category:Forcefield
+        Users Category:Time Users Category:Magic Users Category:Element Users Category:Flight
+        Users Category:Regeneration Users Category:Monsters'
+      source_id: vsbattles-zodiark-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -1621,9 +1829,12 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|leo regulus canon unbacked0|135412
+    duplicate_key: vsbattles.fandom.com|yiazmat|9572291
+    retryable: false
+    exception_class: ''
+  needs_human_source_choice: false
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
-    fetched: 6
-    ambiguous_candidates: 2
-  confidence: 0.75
+    fetched: 8
+  confidence: 0.0

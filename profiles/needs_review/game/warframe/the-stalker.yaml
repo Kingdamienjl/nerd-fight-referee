@@ -10,19 +10,9 @@ battle_eligible: false
 generation:
   generated_at: '2026-09-22T19:36:40Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: The Stalker
   franchise: Warframe
@@ -53,8 +43,8 @@ sources:
 - id: vsbattles-the-stalker
   provider_id: vsbattles
   source_type: mediawiki
-  title: The Stalker
-  url: https://vsbattles.fandom.com/wiki/The_Stalker
+  title: Stalker (The Stalker)
+  url: https://vsbattles.fandom.com/wiki/Stalker_(The_Stalker)
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -68,47 +58,60 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
+  revision_id: '9648367'
+  revision_timestamp: '2026-08-25T09:08:52Z'
+  fetch_status: fetched
+  http_status: 200
+  content_length: 16837
+  content_kind: api_json
+  search_attempted_titles:
+  - Stalker (The Stalker)
+  headings_detected:
+  - Summary
+  - Powers and Stats
+  - Notable Matchups
+  - Notes and Explainations
+  stat_labels_detected:
+  - attack_potency
+  - durability
+  - intelligence
+  - keys
+  - lifting_strength
+  - origin
+  - powers_and_abilities
+  - range
+  - speed
+  - stamina
+  - standard_equipment
+  - striking_strength
+  - tier
+  - weaknesses
+  dropped_items:
+    powers_and_abilities:
+    - item: and Paralysis Inducement (With Paralyzing Gas/Paralysis)
+      reasons:
+      - conjunction_orphan
+    - item: 'plus:'
+      reasons:
+      - section_header
+    - item: 'Resistance to: *Radiation Manipulation (Unaffected by the Stalker''s
+        Paralyzing Gas. The Stalker is implied to have been '
+      reasons:
+      - glued_fragment
+    standard_equipment:
+    - item: None notable.
+      reasons:
+      - explicit_none
+      - placeholder_instruction
+    weaknesses:
+    - item: stupid
+      reasons:
+      - weakness_fragment
 - id: character-stats-profiles-the-stalker
   provider_id: character_stats_profiles
   source_type: mediawiki
   title: The Stalker
   url: https://character-stats-and-profiles.fandom.com/wiki/The_Stalker
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-the-stalker-warframe
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: The Stalker Warframe
-  url: https://vsbattles.fandom.com/wiki/The_Stalker_Warframe
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-the-stalker-warframe
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: The Stalker Warframe
-  url: https://character-stats-and-profiles.fandom.com/wiki/The_Stalker_Warframe
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -196,17 +199,40 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 9-B physically and with Zombies | 9-B physically and with Zombies, higher
+      with abilities
+    source_ids:
+    - vsbattles-the-stalker
+    confidence: 0.6
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Wall level15 Kilojoules physically (Can kill Combines with just a few punches.
+      Can damage Stalker Sensors and cause them to violently explode) and with Zombies
+      (Weaker than the Stalker but can still harm and kill Combines with their attacks)
+      | Wall level6.3 Megajoules physically (Can kill and dismember Combines whose
+      durability should be comparable to the AP of their weapons. Can damage Sentry
+      Turrets and cause them to violently explode) and with Zombies (Weaker than the
+      Stalker but can still harm and kill Combines with their attacks), higher with
+      abilities (Can instantly destroy multiple Combines with Telekinesis, obliterating
+      their bodies the same way as when they're crushed underneath a dropship. Deals
+      50% more damage for 4 seconds while using Rage which allows it to kill Combines
+      much quicker)
+    source_ids:
+    - vsbattles-the-stalker
+    confidence: 0.6
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Peak Human, likely Superhuman (Considerably faster than standard Combines
+      and can move fast enough to avoid their gunshots), higher with abilities (Becomes
+      50% faster for 4 seconds while using Rage. Can easily outspeed Combines even
+      when they are equipped with the Speedy and Wildcard upgrades which can make
+      them 25% faster and allow them to keep up with its normal speed. Can throw objects
+      fast enough to blitz Combines with Telekinesis). Athletic Human with Zombies
+      (Can keep up with a standard Combine)
+    source_ids:
+    - vsbattles-the-stalker
+    confidence: 0.6
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -216,27 +242,562 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Wall level physically (Can withstand 40 M4 Carbine bullets from Combines
+      without needing to heal) and and with Zombies (Can withstand attacks from Combines)
+      | Wall level physically (Has 4x the health of standard Combines and can withstand
+      a lot of their gunshots and attacks which can destroy metal Dummies. Takes no
+      damage from falls that would be fatal to Combines) and with Zombies (Can withstand
+      attacks from Combines)
+    source_ids:
+    - vsbattles-the-stalker
+    confidence: 0.6
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman physically (Can survive and continue fighting at full capacity
+      even after receiving substantial damage to its body. Can regain all of its psychic
+      energy in about 20 seconds even with heavy injuries) and with Zombies (Unaffected
+      by severe blood loss and only die after receiving substantial damage to the
+      point that their bodies physically fall apart)
+    source_ids:
+    - vsbattles-the-stalker
+    confidence: 0.6
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range physically, up to Tens of Meters with abilities, Hundreds
+      of Meters with Extrasensory Perception
+    source_ids:
+    - vsbattles-the-stalker
+    confidence: 0.6
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average (A smart and cunning predator who seems to possess human levels
+      of intelligence as it can understand and speak human language. Consistently
+      shown to use its abilities effectively to defeat the Unit 8 who were trained
+      as elite soldiers serving in the most advanced and largest standing military
+      in the galaxy), Instinctive with Zombies (Corpses that no longer retain any
+      semblance of their former abilities and intelligence. Likely know nothing but
+      to pursue and attack their targets)
+    source_ids:
+    - vsbattles-the-stalker
+    confidence: 0.6
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - vsbattles-the-stalker
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-enhanced-senses-can-see-well-in-dark-areas-whereas-combines
+  name: Enhanced Senses (Can see well in dark areas whereas Combines need their light
+    to do so and can also hear enemies from fa
+  description: Enhanced Senses (Can see well in dark areas whereas Combines need their
+    light to do so and can also hear enemies from far away)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-stealth-mastery-can-run-around-without-making-any-noise-and
+  name: Stealth Mastery (Can run around without making any noise and sneak up on Combines)
+  description: Stealth Mastery (Can run around without making any noise and sneak
+    up on Combines)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-necromancy-and-body-puppetry-with-possession
+  name: Necromancy and Body Puppetry (With Possession)
+  description: Necromancy and Body Puppetry (With Possession)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - biological_possession
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-duplication-with-decoys
+  name: Duplication (With Decoys)
+  description: Duplication (With Decoys)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-sound-manipulation-and-status-effect-inducement-with-scream
+  name: Sound Manipulation and Status Effect Inducement (With Scream)
+  description: Sound Manipulation and Status Effect Inducement (With Scream)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-smoke-manipulation
+  name: Smoke Manipulation
+  description: Smoke Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-radiation-manipulation
+  name: Radiation Manipulation
+  description: Radiation Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-healing-at-least-high-low-with-healing-regeneration-can-hea
+  name: Healing (At least High-Low with Healing/Regeneration; Can heal from multiple
+    gunshots and sword slashes)
+  description: Healing (At least High-Low with Healing/Regeneration; Can heal from
+    multiple gunshots and sword slashes)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-teleportation
+  name: Teleportation
+  description: Teleportation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  - dimensional_travel
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-invisibility-highly-transparent-due-to-a-passive-camouflage
+  name: Invisibility (Highly transparent due to a passive camouflage ability which
+    makes it appear as little more than an outlin
+  description: Invisibility (Highly transparent due to a passive camouflage ability
+    which makes it appear as little more than an outline of a figure) All previous
+    abilities enhanced
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-extrasensory-perception-can-sense-the-energy-of-enemies-whi
+  name: 'Extrasensory Perception (Can sense the energy of enemies which determines
+    how much health they have and whether they''re '
+  description: Extrasensory Perception (Can sense the energy of enemies which determines
+    how much health they have and whether they're dead or alive)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-healing-and-flesh-absorption-can-heal-its-wounds-by-absorbi
+  name: 'Healing and Flesh Absorption (Can heal its wounds by absorbing flesh from
+    corpses which it can do almost instantly upon '
+  description: Healing and Flesh Absorption (Can heal its wounds by absorbing flesh
+    from corpses which it can do almost instantly upon physical contact)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_contact
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-technology-manipulation-with-scream
+  name: Technology Manipulation (With Scream)
+  description: Technology Manipulation (With Scream)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - technology_dependency
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-poison-manipulation-with-paralyzing-gas-paralysis
+  name: Poison Manipulation (With Paralyzing Gas/Paralysis)
+  description: Poison Manipulation (With Paralyzing Gas/Paralysis)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-telepathy-unlike-combines-its-voicelines-don-t-appear-in-th
+  name: Telepathy (Unlike Combines, its voicelines don't appear in the chat logs and
+    can be heard from anywhere on the map regar
+  description: Telepathy (Unlike Combines, its voicelines don't appear in the chat
+    logs and can be heard from anywhere on the map regardless of its actual location)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - mind_control
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-acrobatics-can-leap-high-into-the-air-and-land-on-its-feet-
+  name: Acrobatics (Can leap high into the air and land on its feet without taking
+    any damage)
+  description: Acrobatics (Can leap high into the air and land on its feet without
+    taking any damage)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-natural-weaponry-claws
+  name: Natural Weaponry (Claws)
+  description: Natural Weaponry (Claws)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-surface-scaling-with-wall-grip
+  name: Surface Scaling (With Wall Grip)
+  description: Surface Scaling (With Wall Grip)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-telekinesis
+  name: Telekinesis
+  description: Telekinesis
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-rage-power-and-statistics-amplification-with-rage
+  name: Rage Power and Statistics Amplification (With Rage)
+  description: Rage Power and Statistics Amplification (With Rage)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-limited-light-manipulation-can-make-its-body-glow-in-differ
+  name: 'Limited Light Manipulation (Can make its body glow in different colors and
+    also produce light with the usage of various '
+  description: Limited Light Manipulation (Can make its body glow in different colors
+    and also produce light with the usage of various abilities such as causing objects
+    to glow with a blue light when using Telekinesis)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-possibly-non-physical-interaction-can-reach-farther-than-it
+  name: Possibly Non-Physical Interaction (Can reach farther than it physically should
+    be capable of when using Wall Grip)
+  description: Possibly Non-Physical Interaction (Can reach farther than it physically
+    should be capable of when using Wall Grip)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-immortality-types-2-and-7-corpses-that-are-reanimated-and-c
+  name: Immortality (Types 2 and 7; Corpses that are reanimated and controlled by
+    the Stalker. Unaffected by severe blood loss a
+  description: Immortality (Types 2 and 7; Corpses that are reanimated and controlled
+    by the Stalker. Unaffected by severe blood loss and only die after being ripped
+    into pieces) Both the Stalker and its Zombies have
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-zombies-are-sluggish
+  name: Zombies are sluggish
+  description: Zombies are sluggish
+  source_ids: &id003
+  - vsbattles-the-stalker
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-and-lack-any-of-the-abilities-that-they-had-when-they-were-alive-rege
+  name: 'and lack any of the abilities that they had when they were alive. Regeneration
+    heals the Stalker to a random percentage '
+  description: and lack any of the abilities that they had when they were alive. Regeneration
+    heals the Stalker to a random percentage which makes it rather unreliable
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-same-as-before-but-without-the-regeneration-weakness-without-flesh-co
+  name: Same as before but without the Regeneration weakness. Without flesh consumption
+  description: Same as before but without the Regeneration weakness. Without flesh
+    consumption
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-the-stalker-will-slowly-lose-health-over-time
+  name: the Stalker will slowly lose health over time
+  description: the Stalker will slowly lose health over time
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-gradually-weakening-even-to-the-point-of-dying-and-substantial-damage
+  name: gradually weakening even to the point of dying and substantial damage or exhaustion
+    can cause its camouflage to become l
+  description: gradually weakening even to the point of dying and substantial damage
+    or exhaustion can cause its camouflage to become less effective (The weaknesses
+    mentioned above can be mitigated with its Regeneration and flesh consumption).
+    All of the Stalker's abilities now require certain amounts of psychic energy to
+    use. Regeneration
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-rage-and-possession-makes-the-stalker-temporarily-visible-when-activa
+  name: Rage and Possession makes the Stalker temporarily visible when activated.
+  description: Rage and Possession makes the Stalker temporarily visible when activated.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - biological_possession
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -248,25 +809,44 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-the-stalker
+  secondary_disagreement_policy: warning_only
 profile_hash: c6ef3225ee07a11505c437ca39d8fdc4dcc2e31414262f5b9e7927742a1dee6c
 repair:
-  attempted_at: '2026-09-25T09:59:38Z'
-  repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
+  attempted_at: '2026-10-25T17:40:39Z'
+  repaired_fields:
   - abilities
+  - attack_potency
+  - durability
+  - intelligence
+  - range
+  - speed
+  - stamina
+  - tier
+  - weaknesses
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-the-stalker-warframe
-    url: https://vsbattles.fandom.com/wiki/The_Stalker_Warframe
+  - source_id: vsbattles-the-stalker
+    url: https://vsbattles.fandom.com/wiki/Stalker_(The_Stalker)
     ok: true
     note: extracted_core_fields
-    extracted_fields:
+    extracted_fields: &id004
     - attack_potency
     - durability
     - intelligence
@@ -274,22 +854,20 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Stalker (Warframe)
+    normalized_page_title: Stalker (The Stalker)
     source_type: mediawiki
-    revision_id: '9623931'
+    revision_id: '9648367'
     fetch_status: fetched
     http_status: 200
-    content_length: 8251
+    content_length: 16837
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
     - Notable Matchups
-    - References
-    - Notes/Explanations
+    - Notes and Explainations
     stat_labels_detected:
     - attack_potency
     - durability
@@ -310,7 +888,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
+    allowed_fields: &id005
     - attack_potency
     - speed
     - durability
@@ -321,181 +899,138 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 7-C}}, likely {{7-B}} | {{Low 7-C}}, likely {{7-B}}'
-      source_id: vsbattles-the-stalker-warframe
+      value: 9-B physically and with Zombies | 9-B physically and with Zombies, higher
+        with abilities
+      source_id: vsbattles-the-stalker
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '* Superhuman strength, speed, durability and agility * Energy Manipulation
-        (Similarly to Warframes, the Stalker likely contains and manipulates Void
-        energy to fuel his powers) * Weapon Master (Is proficient in the use of his
-        Bow, Kunai and Scythe, and is proficient in using a Greatsword) * Longevity,
-        possibly Immortality (Type 1) (It is stated that he existed during the age
-        of the Orokin and is possibly a Tenno himself, but given his lack of backstory
-        and multiple contradictions, this seems unlikely) * Expert infiltrator (Is
-        arguably superior to most Tenno in this regard, as he can suddenly appear
-        in the middle of a Tenno group during a mission, without warning) * Levitation
-        and Pseudo-Flight (With the Aim Glide technique) * Regeneration (Mid-low)
-        * Invisibility (Can become invisible with Smoke Screen) * Teleportation (Can
-        teleport into the middle of a Tenno group seeminly out of nowhere, and can
-        utilise Teleportation with Smoke Screen to to move erratically across the
-        battlefield.) * Energy Absorption (Like the Tenno, the Stalker should be able
-        to absorb the Health and Energy of fallen foes) * Power Nullification (With
-        Dispel, he can negate the abilities of enemy Warframes, both those that affect
-        the Stalker or those that benefit the Tenno) * Magnetism Manipulation (With
-        Pull, he can pull enemies towards him, preventing them from retreating) *
-        Energy Absorption and Energy Projection (With Absorb, the Stalker can absorb
-        all attacks coming towards him, both kinetic and energy, and release them
-        back to his opponents) * Resistant to (Heat, Electricity, Poison, Cold, Radiation)
-        * Resistant to Mind Control, Matter Manipulation As the Shadow Stalker, he
-        gains access to: * Adaptability'
-      source_id: vsbattles-the-stalker-warframe
+      value: Superhuman Physical Characteristics, Enhanced Senses (Can see well in
+        dark areas whereas Combines need their light to do so and can also hear enemies
+        from far away), Stealth Mastery (Can run around without making any noise and
+        sneak up on Combines), Necromancy and Body Puppetry (With Possession), Duplication
+        (With Decoys), Sound Manipulation and Status Effect Inducement (With Scream),
+        Smoke Manipulation, Radiation Manipulation, Healing (At least High-Low with
+        Healing/Regeneration; Can heal from multiple gunshots and sword slashes),
+        Teleportation, Invisibility (Highly transparent due to a passive camouflage
+        ability which makes it appear as little more than an outline of a figure)
+        All previous abilities enhanced, Extrasensory Perception (Can sense the energy
+        of enemies which determines how much health they have and whether they're
+        dead or alive), Healing and Flesh Absorption (Can heal its wounds by absorbing
+        flesh from corpses which it can do almost instantly upon physical contact),
+        Technology Manipulation (With Scream), Poison Manipulation (With Paralyzing
+        Gas/Paralysis), Telepathy (Unlike Combines, its voicelines don't appear in
+        the chat logs and can be heard from anywhere on the map regardless of its
+        actual location), Acrobatics (Can leap high into the air and land on its feet
+        without taking any damage), Natural Weaponry (Claws), Surface Scaling (With
+        Wall Grip), Telekinesis, Rage Power and Statistics Amplification (With Rage),
+        Limited Light Manipulation (Can make its body glow in different colors and
+        also produce light with the usage of various abilities such as causing objects
+        to glow with a blue light when using Telekinesis), Possibly Non-Physical Interaction
+        (Can reach farther than it physically should be capable of when using Wall
+        Grip), Superhuman Physical Characteristics, Immortality (Types 2 and 7; Corpses
+        that are reanimated and controlled by the Stalker. Unaffected by severe blood
+        loss and only die after being ripped into pieces) Both the Stalker and its
+        Zombies have
+      source_id: vsbattles-the-stalker
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'Small Town level+, Likely City level (Stalker has hunted and killed
-        many Warframes throughout his life.Warframe: Jade Shadows(2024) As a Warframe
-        Stalker is capable of fighting and defeating powerful foes like the Orowyrm4.4918
-        Kilotons and the Ropalolyst.20.1132 to 62.41 Megatons Assisted the Drifter
-        in defeating an Archon, which is a hybrid made using the corpses of Sentients
-        and WarframesWarframe: The New War) | Small Town level+, Likely City level
-        (Stronger than his previous self with War, a weapon granted to him from Hunhow
-        himself to destroy the Tenno heart)'
-      source_id: vsbattles-the-stalker-warframe
+      value: Wall level15 Kilojoules physically (Can kill Combines with just a few
+        punches. Can damage Stalker Sensors and cause them to violently explode) and
+        with Zombies (Weaker than the Stalker but can still harm and kill Combines
+        with their attacks) | Wall level6.3 Megajoules physically (Can kill and dismember
+        Combines whose durability should be comparable to the AP of their weapons.
+        Can damage Sentry Turrets and cause them to violently explode) and with Zombies
+        (Weaker than the Stalker but can still harm and kill Combines with their attacks),
+        higher with abilities (Can instantly destroy multiple Combines with Telekinesis,
+        obliterating their bodies the same way as when they're crushed underneath
+        a dropship. Deals 50% more damage for 4 seconds while using Rage which allows
+        it to kill Combines much quicker)
+      source_id: vsbattles-the-stalker
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Massively Hypersonic, possibly Relativistic+ or higher reactions/combat
-        speed (Can fight evenly against Volt and is comparable to other Tenno) | Massively
-        Hypersonic, at least Relativistic+ or higher reactions/combat speed (Can best
-        a Prime Warframe in combat)
-      source_id: vsbattles-the-stalker-warframe
+      value: Peak Human, likely Superhuman (Considerably faster than standard Combines
+        and can move fast enough to avoid their gunshots), higher with abilities (Becomes
+        50% faster for 4 seconds while using Rage. Can easily outspeed Combines even
+        when they are equipped with the Speedy and Wildcard upgrades which can make
+        them 25% faster and allow them to keep up with its normal speed. Can throw
+        objects fast enough to blitz Combines with Telekinesis). Athletic Human with
+        Zombies (Can keep up with a standard Combine)
+      source_id: vsbattles-the-stalker
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Small Town level+, likely City level | Small Town level+, likely City
-        level
-      source_id: vsbattles-the-stalker-warframe
+      value: Wall level physically (Can withstand 40 M4 Carbine bullets from Combines
+        without needing to heal) and and with Zombies (Can withstand attacks from
+        Combines) | Wall level physically (Has 4x the health of standard Combines
+        and can withstand a lot of their gunshots and attacks which can destroy metal
+        Dummies. Takes no damage from falls that would be fatal to Combines) and with
+        Zombies (Can withstand attacks from Combines)
+      source_id: vsbattles-the-stalker
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: Infinite (Does not tire in battle, only finding it necessary to flee
-        after taking near fatal damage. Consists of advanced robotics)
-      source_id: vsbattles-the-stalker-warframe
+      value: Superhuman physically (Can survive and continue fighting at full capacity
+        even after receiving substantial damage to its body. Can regain all of its
+        psychic energy in about 20 seconds even with heavy injuries) and with Zombies
+        (Unaffected by severe blood loss and only die after receiving substantial
+        damage to the point that their bodies physically fall apart)
+      source_id: vsbattles-the-stalker
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: Extended Melee Range; Hundreds of Meters with "Dread", Tens of Meters
-        with "Despair" and "Shuriken", Unknown with his other abilities
-      source_id: vsbattles-the-stalker-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: His bow (Dread), his Kunai (Despair), and his scythe (Hate) | War, Grenades,
-        Omnidirectional laser beams
-      source_id: vsbattles-the-stalker-warframe
+      value: Standard Melee Range physically, up to Tens of Meters with abilities,
+        Hundreds of Meters with Extrasensory Perception
+      source_id: vsbattles-the-stalker
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Genius (His versatile combat skills and knowledge make him capable of
-        outsmarting unprepared Tenno)
-      source_id: vsbattles-the-stalker-warframe
+      value: Above Average (A smart and cunning predator who seems to possess human
+        levels of intelligence as it can understand and speak human language. Consistently
+        shown to use its abilities effectively to defeat the Unit 8 who were trained
+        as elite soldiers serving in the most advanced and largest standing military
+        in the galaxy), Instinctive with Zombies (Corpses that no longer retain any
+        semblance of their former abilities and intelligence. Likely know nothing
+        but to pursue and attack their targets)
+      source_id: vsbattles-the-stalker
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Overzealous and grudge bearing; tending to fight outnumbered and will
-        only fight with a certain target in mind. He tends to use Absorb as a last
-        resort when low on health. Notable Attacks/Techniques: * Slash Dash - Stalker
-        will usually start the fight by charging at his target with his melee weapon,
-        heavily damaging any targets in the way. * Shuriken - Stalker launches a deadly
-        projectile capable of pinning enemies to walls, this projectile will penetrate
-        armor and cause heavy bleeding * Smoke Screen - Stalker will disappear in
-        a cloud of smoke, going completely invisible. * Reckoning - This ability will
-        create a shock wave that will stagger opponents for a brief period of time,
-        giving Stalker the opportunity to attack. * Pull - Stalker will use this ability
-        mainly to prevent escape or stop their opponent from travelling long distances,
-        keeping the match close-quarters. * Absorb - Stalker will absorb all kinetic
-        energy he is struck with and release it into a radius. * Dispel - Stalker
-        will negate any support or special ability the opponent has, rendering them
-        useless. * Channeling - Channeling is a technique all Tenno and former Tenno
-        alike should be capable of. While charging additional energy through their
-        Warframe, they potentially double their AP with their melee strikes, in addition
-        to making their opponents disintegrate on contact. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{Scroll box|Content={{Reflist|3}}}}
-        ==Notes/Explanations== {{Scroll box|Content=}} {{Discussions|Stalker Warframe|Stalker
-        (Warframe)}} Category:Characters Category:Warframe Category:Antagonists Category:Assassins
-        Category:Bow Users Category:Cyborgs Category:Energy Users Category:Game Characters
-        Category:Geniuses Category:Immortals Category:Invisibility Users Category:Magnetism
-        Users Category:Male Characters Category:Matter Users Category:Power Nullification
-        Users Category:Regeneration Users Category:Scythe Users Category:Sword Users
-        Category:Teleportation Users Category:Tragic Characters Category:Vigilantes
-        Category:Weapon Masters'
-      source_id: vsbattles-the-stalker-warframe
+      value: Zombies are sluggish, and lack any of the abilities that they had when
+        they were alive. Regeneration heals the Stalker to a random percentage which
+        makes it rather unreliable, Same as before but without the Regeneration weakness.
+        Without flesh consumption, the Stalker will slowly lose health over time,
+        gradually weakening even to the point of dying and substantial damage or exhaustion
+        can cause its camouflage to become less effective (The weaknesses mentioned
+        above can be mitigated with its Regeneration and flesh consumption). All of
+        the Stalker's abilities now require certain amounts of psychic energy to use.
+        Regeneration, Rage and Possession makes the Stalker temporarily visible when
+        activated.
+      source_id: vsbattles-the-stalker
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
+    identity_match: true
+    identity_score: 60
+    variant_score: 0
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
     exact_name_match: false
     alias_match: false
-    franchise_match: true
+    franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|stalker warframe|9623931
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-the-stalker-warframe
-    url: https://character-stats-and-profiles.fandom.com/wiki/The_Stalker_Warframe
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: The Stalker Warframe
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the stalker warframe
+    duplicate_key: vsbattles.fandom.com|stalker the stalker|9648367
     retryable: false
     exception_class: ''
   - source_id: vsbattles-the-stalker-warframe
@@ -515,14 +1050,15 @@ repair:
     - weaknesses
     normalized_page_title: Stalker (Warframe)
     source_type: mediawiki
-    revision_id: '9623931'
+    revision_id: '9717638'
     fetch_status: fetched
     http_status: 200
-    content_length: 8251
+    content_length: 20987
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
+    - Gallery
     - Notable Matchups
     - References
     - Notes/Explanations
@@ -557,124 +1093,120 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 7-C}}, likely {{7-B}} | {{Low 7-C}}, likely {{7-B}}'
-      source_id: vsbattles-the-stalker-warframe
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '* Superhuman strength, speed, durability and agility * Energy Manipulation
-        (Similarly to Warframes, the Stalker likely contains and manipulates Void
-        energy to fuel his powers) * Weapon Master (Is proficient in the use of his
-        Bow, Kunai and Scythe, and is proficient in using a Greatsword) * Longevity,
-        possibly Immortality (Type 1) (It is stated that he existed during the age
-        of the Orokin and is possibly a Tenno himself, but given his lack of backstory
-        and multiple contradictions, this seems unlikely) * Expert infiltrator (Is
-        arguably superior to most Tenno in this regard, as he can suddenly appear
-        in the middle of a Tenno group during a mission, without warning) * Levitation
-        and Pseudo-Flight (With the Aim Glide technique) * Regeneration (Mid-low)
-        * Invisibility (Can become invisible with Smoke Screen) * Teleportation (Can
-        teleport into the middle of a Tenno group seeminly out of nowhere, and can
-        utilise Teleportation with Smoke Screen to to move erratically across the
-        battlefield.) * Energy Absorption (Like the Tenno, the Stalker should be able
-        to absorb the Health and Energy of fallen foes) * Power Nullification (With
-        Dispel, he can negate the abilities of enemy Warframes, both those that affect
-        the Stalker or those that benefit the Tenno) * Magnetism Manipulation (With
-        Pull, he can pull enemies towards him, preventing them from retreating) *
-        Energy Absorption and Energy Projection (With Absorb, the Stalker can absorb
-        all attacks coming towards him, both kinetic and energy, and release them
-        back to his opponents) * Resistant to (Heat, Electricity, Poison, Cold, Radiation)
-        * Resistant to Mind Control, Matter Manipulation As the Shadow Stalker, he
-        gains access to: * Adaptability'
+      value: Low 7-C, likely 7-B, higher with Mods and Arcanes | Low 7-C, likely 7-B,
+        higher with Mods and Arcanes | Low 7-C, likely 7-B, higher with Mods and Arcanes
       source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
       value: 'Small Town level+, Likely City level (Stalker has hunted and killed
-        many Warframes throughout his life.Warframe: Jade Shadows(2024) As a Warframe
-        Stalker is capable of fighting and defeating powerful foes like the Orowyrm4.4918
-        Kilotons and the Ropalolyst.20.1132 to 62.41 Megatons Assisted the Drifter
-        in defeating an Archon, which is a hybrid made using the corpses of Sentients
-        and WarframesWarframe: The New War) | Small Town level+, Likely City level
-        (Stronger than his previous self with War, a weapon granted to him from Hunhow
-        himself to destroy the Tenno heart)'
+        many Warframes throughout his life.Warframe: Jade Shadows(2024) Warframe''s
+        like Stalker are capable of fighting and defeating powerful foes like the
+        Orowyrm4.4918 Kilotons and the Ropalolyst.20.1132 to 62.41 Megatons Assisted
+        the Drifter in defeating an Archon, which is a hybrid made using the corpses
+        of powerful Sentients and WarframesWarframe: The New War), higher with Mods
+        and Arcanes (Just like his Tenno counterparts, Stalker uses various mods and
+        arcanes to enhance the strength of his weapons and abilitiesCodex Training:
+        Upgrades/Mods) | Small Town level+, Likely City level (Stalker should be stronger
+        than before after receiving an upgrade from Hunhow, who is capable of easily
+        creating weapons that can harm Warframes), higher with Mods and Arcanes |
+        Small Town level+, Likely City level (Fought and clashed with both versions
+        of his son at the same time but should not be much stronger than his base
+        formWarframe: Jade Shadows: Constellations), higher with Mods and Arcanes'
       source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Massively Hypersonic, possibly Relativistic+ or higher reactions/combat
-        speed (Can fight evenly against Volt and is comparable to other Tenno) | Massively
-        Hypersonic, at least Relativistic+ or higher reactions/combat speed (Can best
-        a Prime Warframe in combat)
+      value: Massively Hypersonic (Can fight evenly against Volt), possibly Relativistic+
+        or higher reactions/combat speed (Can deflect weapons such as Opticor and
+        Glaxion at a close distance, the former stated to be able to fire a blast
+        of "light energy")
       source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Small Town level+, likely City level | Small Town level+, likely City
-        level
+      value: Small Town level+, Likely City level (Stalker can fight evenly with other
+        Warframes, having even fought 2 other Warframes at the same time without taking
+        major damage. Much like other Warframes, Stalker is capable of surviving direct
+        attacks from enemies like Orowyrms and the Ropalolyst) | Small Town level+,
+        Likely City level (Same as before), higher with Sentient adaptation (Stalker's
+        Sentient armor makes it so repeated attacks do massively reduced damage to
+        him) | Small Town level+, Likely City level (Same as before)
       source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: Infinite (Does not tire in battle, only finding it necessary to flee
-        after taking near fatal damage. Consists of advanced robotics)
+      value: Infinite (As a Warframe he was made to have enough energy to stay active
+        indefinitely. Comparable to other Warframes who can continue to fight after
+        being impaled)
       source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: Extended Melee Range; Hundreds of Meters with "Dread", Tens of Meters
-        with "Despair" and "Shuriken", Unknown with his other abilities
+      value: Extended Melee Range with melee weapons, Tens of Meters with abilities
+        (Abilities like Smokescreen and Reckoning have a range of 15 meters, Pull
+        has a 25 meter range, and every other ability has 60 meters of range), Hundreds
+        of meters with Dread and Despair (The projectile weaponry wielded by the Tenno
+        have a range of 300 meters, meaning Stalkers weapons should be similar)
       source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: His bow (Dread), his Kunai (Despair), and his scythe (Hate) | War, Grenades,
-        Omnidirectional laser beams
+      value: 'Enlightened Hate, Hate: The Hate is a scythe used by Stalker to deliver
+        heavy blows during close quarter combat, capable of piercing and cutting through
+        Warframe armor with ease., Dread: The arrows fired by Dread are specially
+        designed for decapitation allowing Stalker to quickly dispatch off-guard foes.,
+        Despair: Throwing daggers designed to have a mono-molecular edges that can
+        cut into most materials., War: The Great sword wielded by Shadow Stalker and
+        created from a piece of the Sentient war-leader Hunhow''s body. War has the
+        ability to fire waves of energy with each swing allowing it hit foes twice
+        when at a close range. The sword sustains Stalker''s connection with Hunhow
+        and allows them to communicate regardless of distance., Enlightened Hate:
+        After Stalker was infused with Jade''s light the Hate''s blade became covered
+        in the same light, allowing it to burn enemies on contact and project orbs
+        of jade light with each swing.'
       source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Genius (His versatile combat skills and knowledge make him capable of
-        outsmarting unprepared Tenno)
+      value: Gifted (Should be comparable to the Tenno; Alongside Hunhow he perfectly
+        executed a plan to expose the Warframes greatest vulnerability) During his
+        time as a low Guardian he faced off against the Sentients, rapidly evolving
+        machines who could grow resistances to everything they encountered, despite
+        this he survived much of the war and was eventually awarded a mark of valor.
+        After his transformation Stalker has shown to be an incredibly skilled combatant,
+        having been able to ambush and defeat multiple warframes. Warframes possess
+        a huge variety of deadly abilities like Antimatter creation, Disease manipulation,
+        and Time stop all of which Stalker managed to overcome and defeat.
       source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Overzealous and grudge bearing; tending to fight outnumbered and will
-        only fight with a certain target in mind. He tends to use Absorb as a last
-        resort when low on health. Notable Attacks/Techniques: * Slash Dash - Stalker
-        will usually start the fight by charging at his target with his melee weapon,
-        heavily damaging any targets in the way. * Shuriken - Stalker launches a deadly
-        projectile capable of pinning enemies to walls, this projectile will penetrate
-        armor and cause heavy bleeding * Smoke Screen - Stalker will disappear in
-        a cloud of smoke, going completely invisible. * Reckoning - This ability will
-        create a shock wave that will stagger opponents for a brief period of time,
-        giving Stalker the opportunity to attack. * Pull - Stalker will use this ability
-        mainly to prevent escape or stop their opponent from travelling long distances,
-        keeping the match close-quarters. * Absorb - Stalker will absorb all kinetic
-        energy he is struck with and release it into a radius. * Dispel - Stalker
-        will negate any support or special ability the opponent has, rendering them
-        useless. * Channeling - Channeling is a technique all Tenno and former Tenno
-        alike should be capable of. While charging additional energy through their
-        Warframe, they potentially double their AP with their melee strikes, in addition
-        to making their opponents disintegrate on contact. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{Scroll box|Content={{Reflist|3}}}}
-        ==Notes/Explanations== {{Scroll box|Content=}} {{Discussions|Stalker Warframe|Stalker
-        (Warframe)}} Category:Characters Category:Warframe Category:Antagonists Category:Assassins
-        Category:Bow Users Category:Cyborgs Category:Energy Users Category:Game Characters
-        Category:Geniuses Category:Immortals Category:Invisibility Users Category:Magnetism
-        Users Category:Male Characters Category:Matter Users Category:Power Nullification
-        Users Category:Regeneration Users Category:Scythe Users Category:Sword Users
-        Category:Teleportation Users Category:Tragic Characters Category:Vigilantes
-        Category:Weapon Masters'
+      value: concentrated EMPs can restrict the use of his powers for up to 3 seconds.,
+        Same as before, except EMPs will quickly be made ineffective by sentient adaptation.
+        Similar to other Sentients, Shadow Stalker will lose all his developed resistances
+        if he's hit by void energy. If War is broken Stalker's connection to Hunhow
+        will break as well and causing him to violently explode and be teleported
+        away from his current location., Same as base form.
+      source_id: vsbattles-the-stalker-warframe
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: resistances to everything they encountered, despite this he survived
+        much of the war and was eventually awarded a mark of valor. After his transformation
+        Stalker has shown to be an incredibly skilled combatant, having been able
+        to ambush and defeat multiple warframes. Warframes possess a huge variety
+        of deadly abilities like Antimatter creation, Disease manipulation, and Time
+        stop all of which Stalker managed to overcome and defeat.
       source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
@@ -689,25 +1221,44 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|stalker warframe|9623931
+    duplicate_key: vsbattles.fandom.com|stalker warframe|9717638
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-the-stalker-warframe
     url: https://character-stats-and-profiles.fandom.com/wiki/The_Stalker_%28Warframe%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: The Stalker (Warframe)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - tier
+    normalized_page_title: Sirius & Orion/Bimbo23
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '620212'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6979
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -720,22 +1271,51 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
+    field_candidates:
+    - field: tier
+      value: High 6-A Physically | 5-A With Black Hole | Low 1-C With Celestial Clash
+      source_id: character-stats-profiles-the-stalker-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multi-Continent level (They left Venus in ruins after their battle on
+        Venus.) | Large Planet level (The black hole caused by Orion has a radius
+        of 22.4 m, which is equivalent to 2.525 Earth masses.) | Low Complex Multiverse
+        level With Celestial Clash
+      source_id: character-stats-profiles-the-stalker-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL (They traveled from Venus to Uranus in a matter of seconds)
+      source_id: character-stats-profiles-the-stalker-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Large Planet level | Possibly much higher (They have been shown to be
+        able to withstand, without suffering damage, the energy generated by the celestial
+        clash.)
+      source_id: character-stats-profiles-the-stalker-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 25
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 0
+    core_field_count: 3
     ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the stalker warframe
+    duplicate_key: character-stats-and-profiles.fandom.com|sirius orion bimbo23|620212
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-the-stalker
-    url: https://vsbattles.fandom.com/wiki/The_Stalker
+  - source_id: vsbattles-the-stalker-warframe
+    url: https://vsbattles.fandom.com/wiki/The_Stalker_Warframe
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -751,14 +1331,15 @@ repair:
     - weaknesses
     normalized_page_title: Stalker (Warframe)
     source_type: mediawiki
-    revision_id: '9623931'
+    revision_id: '9717638'
     fetch_status: fetched
     http_status: 200
-    content_length: 8251
+    content_length: 20987
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
+    - Gallery
     - Notable Matchups
     - References
     - Notes/Explanations
@@ -793,125 +1374,121 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Low 7-C}}, likely {{7-B}} | {{Low 7-C}}, likely {{7-B}}'
-      source_id: vsbattles-the-stalker
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '* Superhuman strength, speed, durability and agility * Energy Manipulation
-        (Similarly to Warframes, the Stalker likely contains and manipulates Void
-        energy to fuel his powers) * Weapon Master (Is proficient in the use of his
-        Bow, Kunai and Scythe, and is proficient in using a Greatsword) * Longevity,
-        possibly Immortality (Type 1) (It is stated that he existed during the age
-        of the Orokin and is possibly a Tenno himself, but given his lack of backstory
-        and multiple contradictions, this seems unlikely) * Expert infiltrator (Is
-        arguably superior to most Tenno in this regard, as he can suddenly appear
-        in the middle of a Tenno group during a mission, without warning) * Levitation
-        and Pseudo-Flight (With the Aim Glide technique) * Regeneration (Mid-low)
-        * Invisibility (Can become invisible with Smoke Screen) * Teleportation (Can
-        teleport into the middle of a Tenno group seeminly out of nowhere, and can
-        utilise Teleportation with Smoke Screen to to move erratically across the
-        battlefield.) * Energy Absorption (Like the Tenno, the Stalker should be able
-        to absorb the Health and Energy of fallen foes) * Power Nullification (With
-        Dispel, he can negate the abilities of enemy Warframes, both those that affect
-        the Stalker or those that benefit the Tenno) * Magnetism Manipulation (With
-        Pull, he can pull enemies towards him, preventing them from retreating) *
-        Energy Absorption and Energy Projection (With Absorb, the Stalker can absorb
-        all attacks coming towards him, both kinetic and energy, and release them
-        back to his opponents) * Resistant to (Heat, Electricity, Poison, Cold, Radiation)
-        * Resistant to Mind Control, Matter Manipulation As the Shadow Stalker, he
-        gains access to: * Adaptability'
-      source_id: vsbattles-the-stalker
+      value: Low 7-C, likely 7-B, higher with Mods and Arcanes | Low 7-C, likely 7-B,
+        higher with Mods and Arcanes | Low 7-C, likely 7-B, higher with Mods and Arcanes
+      source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
       value: 'Small Town level+, Likely City level (Stalker has hunted and killed
-        many Warframes throughout his life.Warframe: Jade Shadows(2024) As a Warframe
-        Stalker is capable of fighting and defeating powerful foes like the Orowyrm4.4918
-        Kilotons and the Ropalolyst.20.1132 to 62.41 Megatons Assisted the Drifter
-        in defeating an Archon, which is a hybrid made using the corpses of Sentients
-        and WarframesWarframe: The New War) | Small Town level+, Likely City level
-        (Stronger than his previous self with War, a weapon granted to him from Hunhow
-        himself to destroy the Tenno heart)'
-      source_id: vsbattles-the-stalker
+        many Warframes throughout his life.Warframe: Jade Shadows(2024) Warframe''s
+        like Stalker are capable of fighting and defeating powerful foes like the
+        Orowyrm4.4918 Kilotons and the Ropalolyst.20.1132 to 62.41 Megatons Assisted
+        the Drifter in defeating an Archon, which is a hybrid made using the corpses
+        of powerful Sentients and WarframesWarframe: The New War), higher with Mods
+        and Arcanes (Just like his Tenno counterparts, Stalker uses various mods and
+        arcanes to enhance the strength of his weapons and abilitiesCodex Training:
+        Upgrades/Mods) | Small Town level+, Likely City level (Stalker should be stronger
+        than before after receiving an upgrade from Hunhow, who is capable of easily
+        creating weapons that can harm Warframes), higher with Mods and Arcanes |
+        Small Town level+, Likely City level (Fought and clashed with both versions
+        of his son at the same time but should not be much stronger than his base
+        formWarframe: Jade Shadows: Constellations), higher with Mods and Arcanes'
+      source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Massively Hypersonic, possibly Relativistic+ or higher reactions/combat
-        speed (Can fight evenly against Volt and is comparable to other Tenno) | Massively
-        Hypersonic, at least Relativistic+ or higher reactions/combat speed (Can best
-        a Prime Warframe in combat)
-      source_id: vsbattles-the-stalker
+      value: Massively Hypersonic (Can fight evenly against Volt), possibly Relativistic+
+        or higher reactions/combat speed (Can deflect weapons such as Opticor and
+        Glaxion at a close distance, the former stated to be able to fire a blast
+        of "light energy")
+      source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Small Town level+, likely City level | Small Town level+, likely City
-        level
-      source_id: vsbattles-the-stalker
+      value: Small Town level+, Likely City level (Stalker can fight evenly with other
+        Warframes, having even fought 2 other Warframes at the same time without taking
+        major damage. Much like other Warframes, Stalker is capable of surviving direct
+        attacks from enemies like Orowyrms and the Ropalolyst) | Small Town level+,
+        Likely City level (Same as before), higher with Sentient adaptation (Stalker's
+        Sentient armor makes it so repeated attacks do massively reduced damage to
+        him) | Small Town level+, Likely City level (Same as before)
+      source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: Infinite (Does not tire in battle, only finding it necessary to flee
-        after taking near fatal damage. Consists of advanced robotics)
-      source_id: vsbattles-the-stalker
+      value: Infinite (As a Warframe he was made to have enough energy to stay active
+        indefinitely. Comparable to other Warframes who can continue to fight after
+        being impaled)
+      source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: Extended Melee Range; Hundreds of Meters with "Dread", Tens of Meters
-        with "Despair" and "Shuriken", Unknown with his other abilities
-      source_id: vsbattles-the-stalker
+      value: Extended Melee Range with melee weapons, Tens of Meters with abilities
+        (Abilities like Smokescreen and Reckoning have a range of 15 meters, Pull
+        has a 25 meter range, and every other ability has 60 meters of range), Hundreds
+        of meters with Dread and Despair (The projectile weaponry wielded by the Tenno
+        have a range of 300 meters, meaning Stalkers weapons should be similar)
+      source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: His bow (Dread), his Kunai (Despair), and his scythe (Hate) | War, Grenades,
-        Omnidirectional laser beams
-      source_id: vsbattles-the-stalker
+      value: 'Enlightened Hate, Hate: The Hate is a scythe used by Stalker to deliver
+        heavy blows during close quarter combat, capable of piercing and cutting through
+        Warframe armor with ease., Dread: The arrows fired by Dread are specially
+        designed for decapitation allowing Stalker to quickly dispatch off-guard foes.,
+        Despair: Throwing daggers designed to have a mono-molecular edges that can
+        cut into most materials., War: The Great sword wielded by Shadow Stalker and
+        created from a piece of the Sentient war-leader Hunhow''s body. War has the
+        ability to fire waves of energy with each swing allowing it hit foes twice
+        when at a close range. The sword sustains Stalker''s connection with Hunhow
+        and allows them to communicate regardless of distance., Enlightened Hate:
+        After Stalker was infused with Jade''s light the Hate''s blade became covered
+        in the same light, allowing it to burn enemies on contact and project orbs
+        of jade light with each swing.'
+      source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Genius (His versatile combat skills and knowledge make him capable of
-        outsmarting unprepared Tenno)
-      source_id: vsbattles-the-stalker
+      value: Gifted (Should be comparable to the Tenno; Alongside Hunhow he perfectly
+        executed a plan to expose the Warframes greatest vulnerability) During his
+        time as a low Guardian he faced off against the Sentients, rapidly evolving
+        machines who could grow resistances to everything they encountered, despite
+        this he survived much of the war and was eventually awarded a mark of valor.
+        After his transformation Stalker has shown to be an incredibly skilled combatant,
+        having been able to ambush and defeat multiple warframes. Warframes possess
+        a huge variety of deadly abilities like Antimatter creation, Disease manipulation,
+        and Time stop all of which Stalker managed to overcome and defeat.
+      source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Overzealous and grudge bearing; tending to fight outnumbered and will
-        only fight with a certain target in mind. He tends to use Absorb as a last
-        resort when low on health. Notable Attacks/Techniques: * Slash Dash - Stalker
-        will usually start the fight by charging at his target with his melee weapon,
-        heavily damaging any targets in the way. * Shuriken - Stalker launches a deadly
-        projectile capable of pinning enemies to walls, this projectile will penetrate
-        armor and cause heavy bleeding * Smoke Screen - Stalker will disappear in
-        a cloud of smoke, going completely invisible. * Reckoning - This ability will
-        create a shock wave that will stagger opponents for a brief period of time,
-        giving Stalker the opportunity to attack. * Pull - Stalker will use this ability
-        mainly to prevent escape or stop their opponent from travelling long distances,
-        keeping the match close-quarters. * Absorb - Stalker will absorb all kinetic
-        energy he is struck with and release it into a radius. * Dispel - Stalker
-        will negate any support or special ability the opponent has, rendering them
-        useless. * Channeling - Channeling is a technique all Tenno and former Tenno
-        alike should be capable of. While charging additional energy through their
-        Warframe, they potentially double their AP with their melee strikes, in addition
-        to making their opponents disintegrate on contact. ==Notable Matchups== Victories:
-        Losses: Inconclusive: ==References== {{Scroll box|Content={{Reflist|3}}}}
-        ==Notes/Explanations== {{Scroll box|Content=}} {{Discussions|Stalker Warframe|Stalker
-        (Warframe)}} Category:Characters Category:Warframe Category:Antagonists Category:Assassins
-        Category:Bow Users Category:Cyborgs Category:Energy Users Category:Game Characters
-        Category:Geniuses Category:Immortals Category:Invisibility Users Category:Magnetism
-        Users Category:Male Characters Category:Matter Users Category:Power Nullification
-        Users Category:Regeneration Users Category:Scythe Users Category:Sword Users
-        Category:Teleportation Users Category:Tragic Characters Category:Vigilantes
-        Category:Weapon Masters'
-      source_id: vsbattles-the-stalker
+      value: concentrated EMPs can restrict the use of his powers for up to 3 seconds.,
+        Same as before, except EMPs will quickly be made ineffective by sentient adaptation.
+        Similar to other Sentients, Shadow Stalker will lose all his developed resistances
+        if he's hit by void energy. If War is broken Stalker's connection to Hunhow
+        will break as well and causing him to violently explode and be teleported
+        away from his current location., Same as base form.
+      source_id: vsbattles-the-stalker-warframe
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: resistances to everything they encountered, despite this he survived
+        much of the war and was eventually awarded a mark of valor. After his transformation
+        Stalker has shown to be an incredibly skilled combatant, having been able
+        to ambush and defeat multiple warframes. Warframes possess a huge variety
+        of deadly abilities like Antimatter creation, Disease manipulation, and Time
+        stop all of which Stalker managed to overcome and defeat.
+      source_id: vsbattles-the-stalker-warframe
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -925,7 +1502,97 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|stalker warframe|9623931
+    duplicate_key: vsbattles.fandom.com|stalker warframe|9717638
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-the-stalker-warframe
+    url: https://character-stats-and-profiles.fandom.com/wiki/The_Stalker_Warframe
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - tier
+    normalized_page_title: Sirius & Orion/Bimbo23
+    source_type: mediawiki
+    revision_id: '620212'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6979
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 65
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 6-A Physically | 5-A With Black Hole | Low 1-C With Celestial Clash
+      source_id: character-stats-profiles-the-stalker-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multi-Continent level (They left Venus in ruins after their battle on
+        Venus.) | Large Planet level (The black hole caused by Orion has a radius
+        of 22.4 m, which is equivalent to 2.525 Earth masses.) | Low Complex Multiverse
+        level With Celestial Clash
+      source_id: character-stats-profiles-the-stalker-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL (They traveled from Venus to Uranus in a matter of seconds)
+      source_id: character-stats-profiles-the-stalker-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Large Planet level | Possibly much higher (They have been shown to be
+        able to withstand, without suffering damage, the energy generated by the celestial
+        clash.)
+      source_id: character-stats-profiles-the-stalker-warframe
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|sirius orion bimbo23|620212
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-the-stalker
@@ -986,25 +1653,25 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '* Superhuman Physical Characteristics (See Attack Potency, Speed, Lifting
-        Strength, and Durability) * Superhuman Athleticism (Can leap inhumanly high
-        and jump between trees with the skill and agility of the very animals he hunts)
-        * Hand-to-Hand Combat Mastery (Appears very comfortable in CQC, using creative
-        kicks and flying knees as if they were second nature) * Weapon Mastery with
+      value: Superhuman Physical Characteristics (See Attack Potency, Speed, Lifting
+        Strength, and Durability), Superhuman Athleticism (Can leap inhumanly high
+        and jump between trees with the skill and agility of the very animals he hunts),
+        Hand-to-Hand Combat Mastery (Appears very comfortable in CQC, using creative
+        kicks and flying knees as if they were second nature), Weapon Mastery with
         his Spear (Can throw it precisely into the barrel of a firearm) and his Blowgun
-        (Sniped a mosquito and fired three simultaneous shots at Batman II) * Stealth
+        (Sniped a mosquito and fired three simultaneous shots at Batman II), Stealth
         Mastery (True to his alias, the Stalker is an expert at evading and stalking
         his prey, as shown when he hid from and snuck up on Batman II and snuck up
-        on a GCPD officer, swiftly knocking him out) * Pole Vaulting Mastery (Throughout
+        on a GCPD officer, swiftly knocking him out), Pole Vaulting Mastery (Throughout
         all his appearances, he uses his spear to pole-vault across distances with
-        Olympic-level skill) * Preparation (In the final battle of "Bloodsport," he
+        Olympic-level skill), Preparation (In the final battle of "Bloodsport," he
         prepared various traps for Batman II, including a trip wire which caused a
         spiky boulder to fall on him, a laser grid which caused metal restraints to
         spring onto the Tomorrow Knight, turrets that fired blunt cylinders with the
         impact force of small arms fire, a pitfall trap, and an electrified metal
-        foothold) * Acrobatics (Did a flip in mid-air) * Climbing Mastery (Climbed
-        up a building) With Preparation, he can utilize: * Paralysis Inducement (A
-        trap he set for Batman II bound him in metal restraints)'
+        foothold), Acrobatics (Did a flip in mid-air), Climbing Mastery (Climbed up
+        a building) With Preparation, Paralysis Inducement (A trap he set for Batman
+        II bound him in metal restraints)
       source_id: character-stats-profiles-the-stalker
       provider_id: character_stats_profiles
       authority: high
@@ -1042,14 +1709,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Seems to have Normal Human Weaknesses. Note: Bruce Timm has stated that
-        the original DCAU tie-in comics are not canon, with the only tie in comics
-        that have statements to the contrary (other than Batman: The Adventures Continue,
+      value: 'Seems to have Normal Human Weaknesses, with the only tie in comics that
+        have statements to the contrary (other than Batman: The Adventures Continue,
         which has so many continuity issues that it''s essentially impossible to argue
         it''s canon) being Justice League Infinity, the Batman and Harley Quinn tie
-        in comics, and specifically the first annual of Batman Adventures. Ergo, I
-        only consider those three comics canon. Category:Goulden1998 Category:Tier
-        9'
+        in comics, and specifically the first annual of Batman Adventures. Ergo'
       source_id: character-stats-profiles-the-stalker
       provider_id: character_stats_profiles
       authority: high
@@ -1068,6 +1732,197 @@ repair:
       universe goulden1998|604671
     retryable: false
     exception_class: ''
+  - source_id: vsbattles-the-stalker
+    url: https://vsbattles.fandom.com/wiki/The_Stalker
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id006
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - tier
+    - weaknesses
+    normalized_page_title: Stalker (The Stalker)
+    source_type: mediawiki
+    revision_id: '9648367'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16837
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Notes and Explainations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id007
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-B physically and with Zombies | 9-B physically and with Zombies, higher
+        with abilities
+      source_id: vsbattles-the-stalker
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Enhanced Senses (Can see well in
+        dark areas whereas Combines need their light to do so and can also hear enemies
+        from far away), Stealth Mastery (Can run around without making any noise and
+        sneak up on Combines), Necromancy and Body Puppetry (With Possession), Duplication
+        (With Decoys), Sound Manipulation and Status Effect Inducement (With Scream),
+        Smoke Manipulation, Radiation Manipulation, Healing (At least High-Low with
+        Healing/Regeneration; Can heal from multiple gunshots and sword slashes),
+        Teleportation, Invisibility (Highly transparent due to a passive camouflage
+        ability which makes it appear as little more than an outline of a figure)
+        All previous abilities enhanced, Extrasensory Perception (Can sense the energy
+        of enemies which determines how much health they have and whether they're
+        dead or alive), Healing and Flesh Absorption (Can heal its wounds by absorbing
+        flesh from corpses which it can do almost instantly upon physical contact),
+        Technology Manipulation (With Scream), Poison Manipulation (With Paralyzing
+        Gas/Paralysis), Telepathy (Unlike Combines, its voicelines don't appear in
+        the chat logs and can be heard from anywhere on the map regardless of its
+        actual location), Acrobatics (Can leap high into the air and land on its feet
+        without taking any damage), Natural Weaponry (Claws), Surface Scaling (With
+        Wall Grip), Telekinesis, Rage Power and Statistics Amplification (With Rage),
+        Limited Light Manipulation (Can make its body glow in different colors and
+        also produce light with the usage of various abilities such as causing objects
+        to glow with a blue light when using Telekinesis), Possibly Non-Physical Interaction
+        (Can reach farther than it physically should be capable of when using Wall
+        Grip), Superhuman Physical Characteristics, Immortality (Types 2 and 7; Corpses
+        that are reanimated and controlled by the Stalker. Unaffected by severe blood
+        loss and only die after being ripped into pieces) Both the Stalker and its
+        Zombies have
+      source_id: vsbattles-the-stalker
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Wall level15 Kilojoules physically (Can kill Combines with just a few
+        punches. Can damage Stalker Sensors and cause them to violently explode) and
+        with Zombies (Weaker than the Stalker but can still harm and kill Combines
+        with their attacks) | Wall level6.3 Megajoules physically (Can kill and dismember
+        Combines whose durability should be comparable to the AP of their weapons.
+        Can damage Sentry Turrets and cause them to violently explode) and with Zombies
+        (Weaker than the Stalker but can still harm and kill Combines with their attacks),
+        higher with abilities (Can instantly destroy multiple Combines with Telekinesis,
+        obliterating their bodies the same way as when they're crushed underneath
+        a dropship. Deals 50% more damage for 4 seconds while using Rage which allows
+        it to kill Combines much quicker)
+      source_id: vsbattles-the-stalker
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Peak Human, likely Superhuman (Considerably faster than standard Combines
+        and can move fast enough to avoid their gunshots), higher with abilities (Becomes
+        50% faster for 4 seconds while using Rage. Can easily outspeed Combines even
+        when they are equipped with the Speedy and Wildcard upgrades which can make
+        them 25% faster and allow them to keep up with its normal speed. Can throw
+        objects fast enough to blitz Combines with Telekinesis). Athletic Human with
+        Zombies (Can keep up with a standard Combine)
+      source_id: vsbattles-the-stalker
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Wall level physically (Can withstand 40 M4 Carbine bullets from Combines
+        without needing to heal) and and with Zombies (Can withstand attacks from
+        Combines) | Wall level physically (Has 4x the health of standard Combines
+        and can withstand a lot of their gunshots and attacks which can destroy metal
+        Dummies. Takes no damage from falls that would be fatal to Combines) and with
+        Zombies (Can withstand attacks from Combines)
+      source_id: vsbattles-the-stalker
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman physically (Can survive and continue fighting at full capacity
+        even after receiving substantial damage to its body. Can regain all of its
+        psychic energy in about 20 seconds even with heavy injuries) and with Zombies
+        (Unaffected by severe blood loss and only die after receiving substantial
+        damage to the point that their bodies physically fall apart)
+      source_id: vsbattles-the-stalker
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range physically, up to Tens of Meters with abilities,
+        Hundreds of Meters with Extrasensory Perception
+      source_id: vsbattles-the-stalker
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average (A smart and cunning predator who seems to possess human
+        levels of intelligence as it can understand and speak human language. Consistently
+        shown to use its abilities effectively to defeat the Unit 8 who were trained
+        as elite soldiers serving in the most advanced and largest standing military
+        in the galaxy), Instinctive with Zombies (Corpses that no longer retain any
+        semblance of their former abilities and intelligence. Likely know nothing
+        but to pursue and attack their targets)
+      source_id: vsbattles-the-stalker
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Zombies are sluggish, and lack any of the abilities that they had when
+        they were alive. Regeneration heals the Stalker to a random percentage which
+        makes it rather unreliable, Same as before but without the Regeneration weakness.
+        Without flesh consumption, the Stalker will slowly lose health over time,
+        gradually weakening even to the point of dying and substantial damage or exhaustion
+        can cause its camouflage to become less effective (The weaknesses mentioned
+        above can be mitigated with its Regeneration and flesh consumption). All of
+        the Stalker's abilities now require certain amounts of psychic energy to use.
+        Regeneration, Rage and Possession makes the Stalker temporarily visible when
+        activated.
+      source_id: vsbattles-the-stalker
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 60
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|stalker the stalker|9648367
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-the-stalker-game
     url: https://vsbattles.fandom.com/wiki/The_Stalker_%28Game%29
     ok: true
@@ -1080,7 +1935,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Strelok (S.T.A.L.K.E.R.)
@@ -1125,25 +1979,24 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{9-C}}, likely {{9-B}} physically, {{9-C}} to {{9-B}} with
-        weapons
+      value: At least 9-C, likely 9-B physically, 9-C to 9-B with weapons
       source_id: vsbattles-the-stalker-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '*Superhuman Physical Characteristics *Weapon Mastery (Skilled with knives,
-        guns and explosives) *Survival Expert *Stealth Mastery (Strelok can hide from
+      value: 'Superhuman Physical Characteristics, Weapon Mastery (Skilled with knives,
+        guns and explosives), Survival Expert, Stealth Mastery (Strelok can hide from
         many people, make sudden attacks as well as managed to perform some of the
-        missions by stealth) *Explosion Manipulation (With grenades, rocket launcher
-        and grenade launcher) *Electricity Manipulation with Gauss rifle *Forcefield
+        missions by stealth), Explosion Manipulation (With grenades, rocket launcher
+        and grenade launcher), Electricity Manipulation with Gauss rifle, Forcefield
         Creation (Some artifacts create fields of energy that reduce radiation, bullet
         damage, slashes or electricity, can make his metabolism faster with some artifacts
-        or suits) *Enhanced Senses (Most of his suits have nightvision) *Limited Light
-        Manipulation (With his flashlight, which can be active indefinitely) *Healing
-        (Mid-Low; Can quickly heal wounds from bullets with medkits and food) *Stamina
-        Restoration (Can fully restore his stamina with "Non-Stop" energetics) *Energy
-        Absorption & Resistance to Electricity Manipulation with some of his artifacts
+        or suits), Enhanced Senses (Most of his suits have nightvision), Limited Light
+        Manipulation (With his flashlight, which can be active indefinitely), Healing
+        (Mid-Low; Can quickly heal wounds from bullets with medkits and food), Stamina
+        Restoration (Can fully restore his stamina with "Non-Stop" energetics), Energy
+        Absorption &, Resistance to Electricity Manipulation with some of his artifacts
         *Statistics Amplification, Statistics Reduction & Regeneration (Low to Mid-Low)
         from Artifacts *Extrasensory Perception & Information Analysis with PDA (With
         PDA, also known as Personal Digital Assistant, Strelok can use it as a keeper
@@ -1224,78 +2077,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: "{{scroll box|content= Here's a list of the different types of ammo that\
-        \ Strelok uses in the game. *Makarov pistol: It is the worst weapon in the\
-        \ game, due to not being accurate and using ammunition that does not do much\
-        \ damage. It uses 9x18 mm bullets either FMJ or Parabellum. *PB pistol: It\
-        \ is a silenced pistol, it is slightly more accurate but does far less damage.\
-        \ It uses 9x18 mm bullets, either FMJ or Parabellum. *Fort-12: A police pistol\
-        \ of Ukranian production, replaced the Makarov. In comparison with the other\
-        \ pistols, it has improved accuracy, ergonomics and a larger magazine. It\
-        \ uses 9x18 mm bullets, either FMJ or Parabellum. *Fort-15: A modified Fort-12\
-        \ pistol that carries 15 rounds. *Colt M1911: A semi-automatic pistol used\
-        \ by the United States. It uses .45 ACP bullets or .45ACP Hydro-Shock rounds\
-        \ which are penetration based. *Martha: It\u2019s a Beretta 92 pistol nicknamed\
-        \ Martha, it used 9x19 mm bullets, either FMJ or PB1. *Noiseless Colt M1911:\
-        \ A semi-automatic pistol with a silencer included. *SIG P220: A semi-automatic\
-        \ pistol made in Switzerland, it uses .45 ACP bullets or .45ACP Hydro-Shock\
-        \ rounds which are penetration based. *HK USP .45: A semi-automatic pistol\
-        \ made in Germany, it uses .45 ACP bullets or .45ACP Hydro-Shock rounds which\
-        \ are penetration based. *Walther P99: A semi-automatic pistol made in Germany,\
-        \ it uses 9x19 mm bullets, either FMJ or PB1. *Walker 9x18: A modified Walther\
-        \ P99 so it uses 9x18mm bullets. *IMI Desert Eagle: A semi-automatic pistol\
-        \ made by the United States, it uses .45 ACP bullets or .45ACP Hydro-Shock\
-        \ rounds which are penetration based. *Big Ben: A modified Desert Eagle so\
-        \ it fires 9x39 mm bullets. *Double barreled shotgun: A sawn-off BM 17 rifle.\
-        \ It is lighter and more compact then the original two-barrel rifle, but it\
-        \ is effective only at a close range. It uses 12x70 shot rounds, 12x76 slug\
-        \ rounds and 12x76 dart rounds. *Mossberg 88: A smooth-bore pump-action rifle\
-        \ made for use in the most hostile environment. It uses 12x70 shot rounds,\
-        \ 12x76 slug rounds and 12x76 dart rounds. *Combat Chaser: It is a modified\
-        \ Mossberg, it has a small fragment of the artifact &quot;Gravi&quot; was\
-        \ built into the barrel, positioned in such a way as to increase the speed\
-        \ of the bullet&#39;s flight. *SPAS-12: Smooth-bore rifle was developed in\
-        \ the late 1970th. This weapon is very reliable and flexibly used. It uses\
-        \ 12x70 shot rounds, 12x76 slug rounds and 12x76 dart rounds. *Threaded SPSA-14:\
-        \ This shotgun model has a rifled bore which greatly increases its accuracy\
-        \ when firing darts or slugs. *H&amp;K HK54: One of the best weapons in the\
-        \ submachine gun class. It uses 9x19mm bullets. *Noiseless Viper: A non-replacable\
-        \ muffler is added. *Viper 5 9x18: A modified version of the HK54 that fires\
-        \ 9x18mm bullets. *AKS-74: 1974 model, uses 5.45x39 mm ammunition. It is a\
-        \ simple and reliable weapon, but the cheapness of its production affected\
-        \ its ergonomy and accuracy. *Fast-shooting Akm 74/2: It fires much faster\
-        \ and the recoil is far lower. *AKS-74U: Its advantages are its small dimensions\
-        \ very useful when fighting inside a building or in a thick forest and a relatively\
-        \ high piercing capabilities, uses 5.45x39 mm ammunition. *AKS-74UB: It\u2019\
-        s an AKS-75U but with a silencer added in. *Enfield L85A1: It has a scope\
-        \ and the high accuracy of the first shot, but it is not very good at shooting\
-        \ in bursts. Uses 5.56x45 mm SS109 rounds and 5.56x45 mm AP rounds. *Balance\
-        \ IL 866: Its recoil is much lower, allowing the user to fire better. Uses\
-        \ 5.56x45 mm SS109 rounds and 5.56x45 mm AP rounds. *Lightened IL 86: It has\
-        \ a silencer added and is two kilograms lighter. Uses 5.56x45 mm SS109 rounds\
-        \ and 5.56x45 mm AP rounds. *FN F2000: An assault rifle combined with a grenade\
-        \ launcher, has a digital scope. Uses 5.56x45 mm SS109 rounds and 5.56x45\
-        \ mm AP rounds. *H&amp;K G36: A light assault rifle with a scope. Uses 5.56x45\
-        \ mm SS109 rounds and 5.56x45 mm AP rounds. *AN-94 \"Abakan\": Assault rifle\
-        \ with low recoil and high accuracy, uses 5.45x39 mm ammunition. *Sniper Obokan:\
-        \ An Obokan modified with a scope and higher accuracy. *Storming Obokan: An\
-        \ Obokan modified with a grenade launcher and is more durable. *SIG SG 550:\
-        \ Assault rifle that uses 5.56x45 mm SS109 rounds and 5.56x45 mm AP rounds,\
-        \ it doesn\u2019t have a scope. *Z-M LR-300-ML: This weapon is very popular\
-        \ due to its accuracy, soft recoil, and high reliability. It uses 5.56x45mm\
-        \ bullets. *Sniper TRs-301: Modification of storming weaponry for firing single\
-        \ shots. *AS Val: A noiseless and flameless fire assault rifle. It uses 9x39mm\
-        \ bullets. *Sniper VLA: A AS Val modified with a scope. *OTs-14 Groza: It\
-        \ is an assault rifle with a grenade launcher already attacked. It uses 9x39\
-        \ mm bullets. *Tunder 5.45: A modified OTs-14 Groza that fires 5.45x39mm bullets.\
-        \ *Gauss rifle: A sniper rifle that fires electromagnetic slugs. It can perforate\
-        \ armor easily. *Dragunov Marksman Rifle: A sniper rifle that fires 7.62x54\
-        \ bullets. *SVU: A sniper rifle that fires 7.62x54 bullets"
-      source_id: vsbattles-the-stalker-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Genius (Strelok is an exceptional leader, survives in The Zone which
         is full of armed people and mutated beings, won in the Arena with the limited
@@ -1308,25 +2089,17 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Some artifacts create radiation that can kill him eventually unless
-        countered by armor or another artifact, some artifacts degrade some of his
-        stats in exchange of enhancing others. Feats: *He walked around the Pripyat
-        and the nuclear power plant just fine, in real life the power plant has radiation
-        levels between 2.4 and even to 12.6 Microsieverts per hour, but since the
-        reactor exploded again in 2006, the game happens in 2012 the radiation levels
-        should be comparable to the ones in 1986 which were 300 Sieverts per hour
-        inside the reactor and 5 Sieverts per hour around the Pripyat area which would
-        give him lethal Acute radiation syndrome. He also walked around the nuclear
-        power plant right after it had an emission which irradiated the entire area
-        to lethal levels and killed all the factions fighting around it except Monolith
-        *He survived the psy-emissions of the Brain Scorcher using the Psi-Helmet,
-        the Brain Scorcher reduced human beings to savage beings ==Notable Matchups==
-        Victories: Losses: The Flood (Halo) The Flood''s Profile (Human Combat Form
-        Flood used, speed was equalized, and starting distance was 10 meters) Inconclusive:
-        {{Discussions|Strelok STALKER|Strelok (S.T.A.L.K.E.R.)}} Category:Characters
-        Category:S.T.A.L.K.E.R. Category:Forcefield Users Category:Game Characters
-        Category:Gun Users Category:Humans Category:Knife Users Category:Male Characters
-        Category:Video Game Characters Category:Weapon Masters'
+      value: Some artifacts create radiation that can kill him eventually unless countered
+        by armor or another artifact, He walked around the Pripyat and the nuclear
+        power plant just fine, in real life the power plant has radiation levels between
+        2.4 and even to 12.6 Microsieverts per hour, the game happens in 2012 the
+        radiation levels should be comparable to the ones in 1986 which were 300 Sieverts
+        per hour inside the reactor and 5 Sieverts per hour around the Pripyat area
+        which would give him lethal Acute radiation syndrome. He also walked around
+        the nuclear power plant right after it had an emission which irradiated the
+        entire area to lethal levels and killed all the factions fighting around it
+        except Monolith, He survived the psy-emissions of the Brain Scorcher using
+        the Psi-Helmet, the Brain Scorcher reduced human beings to savage beings
       source_id: vsbattles-the-stalker-game
       provider_id: vsbattles
       authority: high
@@ -1344,93 +2117,20 @@ repair:
     duplicate_key: vsbattles.fandom.com|strelok s t a l k e r|9581332
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-the-stalker-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/The_Stalker_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Stalker (Canon, Game Character)/Adamjensen2030
-    source_type: mediawiki
-    revision_id: '19135'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 1160
-    content_kind: api_json
-    headings_detected:
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
+  needs_human_source_choice: false
+  candidate_sources:
+  - source_id: vsbattles-the-stalker
+    url: https://vsbattles.fandom.com/wiki/Stalker_(The_Stalker)
+    title: Stalker (The Stalker)
+    rank: 105
+    extracted_fields: *id004
+    provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 9-B
-      source_id: character-stats-profiles-the-stalker-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics and Laser Breath
-      source_id: character-stats-profiles-the-stalker-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Wall level (Much stronger than their red counterparts)
-      source_id: character-stats-profiles-the-stalker-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Relativistic+ (Comparable to a very casual Sonic)
-      source_id: character-stats-profiles-the-stalker-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Wall level
-      source_id: character-stats-profiles-the-stalker-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: One-track minded Category:Adamjensen2030 Category:Tier 9
-      source_id: character-stats-profiles-the-stalker-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
+    allowed_fields: *id005
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 60
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
@@ -1439,14 +2139,33 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|stalker canon game character
-      adamjensen2030|19135
-    retryable: false
-    exception_class: ''
-  needs_human_source_choice: false
-  candidate_sources: []
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|stalker the stalker|9648367
+  - source_id: vsbattles-the-stalker
+    url: https://vsbattles.fandom.com/wiki/The_Stalker
+    title: Stalker (The Stalker)
+    rank: 105
+    extracted_fields: *id006
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id007
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 60
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|stalker the stalker|9648367
   chosen_source_id: null
   failure_reasons:
-    fetched: 6
-    provider_search_no_results: 2
-  confidence: 0.0
+    fetched: 8
+  confidence: 0.75

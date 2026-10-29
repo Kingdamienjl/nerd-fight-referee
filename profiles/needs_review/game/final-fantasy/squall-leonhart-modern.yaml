@@ -85,78 +85,6 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-squall-leonhart-modern
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Squall Leonhart Modern
-  url: https://vsbattles.fandom.com/wiki/Squall_Leonhart_Modern
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-squall-leonhart-modern
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Squall Leonhart Modern
-  url: https://character-stats-and-profiles.fandom.com/wiki/Squall_Leonhart_Modern
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-squall-leonhart-modern-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Squall Leonhart Modern Final Fantasy
-  url: https://vsbattles.fandom.com/wiki/Squall_Leonhart_Modern_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-squall-leonhart-modern-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Squall Leonhart Modern Final Fantasy
-  url: https://character-stats-and-profiles.fandom.com/wiki/Squall_Leonhart_Modern_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-squall-leonhart-modern-final-fantasy
   provider_id: vsbattles
   source_type: mediawiki
@@ -180,42 +108,6 @@ sources:
   source_type: mediawiki
   title: Squall Leonhart (Modern) Final Fantasy
   url: https://character-stats-and-profiles.fandom.com/wiki/Squall_Leonhart_%28Modern%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-squall-leonhart-modern-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Squall Leonhart (Modern) (Final Fantasy)
-  url: https://vsbattles.fandom.com/wiki/Squall_Leonhart_%28Modern%29_%28Final_Fantasy%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-squall-leonhart-modern-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Squall Leonhart (Modern) (Final Fantasy)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Squall_Leonhart_%28Modern%29_%28Final_Fantasy%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -361,7 +253,7 @@ review:
   readiness_state: needs_review
 profile_hash: 884e84fd71c87fe7e01d799d2cf9dbaaae11b179b522e9f0f8309ed939c42814
 repair:
-  attempted_at: '2026-06-19T09:59:51Z'
+  attempted_at: '2026-10-23T12:01:51Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -372,7 +264,7 @@ repair:
   - source_id: vsbattles-squall-leonhart-modern-final-fantasy
     url: https://vsbattles.fandom.com/wiki/Squall_Leonhart_%28Modern%29_Final_Fantasy
     ok: false
-    note: source_timeout_after_4s
+    note: source_timeout_after_15s
     extracted_fields: []
     normalized_page_title: Squall Leonhart (Modern) Final Fantasy
     source_type: mediawiki
@@ -413,20 +305,44 @@ repair:
     exception_class: TimeoutError
   - source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
     url: https://character-stats-and-profiles.fandom.com/wiki/Squall_Leonhart_%28Modern%29_Final_Fantasy
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Squall Leonhart (Modern) Final Fantasy
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Cloud Strife (Canon)/Tonygameman
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '505697'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16142
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Statistics
+    - Limit Breaks
+    - Magic
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -439,25 +355,122 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
-    variant_score: 25
+    field_candidates:
+    - field: tier
+      value: 4-B | High 5-A to Unknown | 3-C to Low 2-C, possibly 2-A
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Super Soldier Physiology, Human
+        Physiology, Magic, Summoning, Martial Arts (As seen in Ehrgeiz: Gods Bless
+        The Ring), Enhanced Swordsmanship, Weapon Mastery (Is skilled in the use of
+        a shotgun and grenades as he used to be a former Shinra infantryman), Multi-Weapon
+        Wielding, Weapon Proficiency, Giant Weapon Proficiency, Dual Wielding, Enhanced
+        Combat, Mid-Air Combat, Cutting, Combination Attacks, Counter, Indomitable
+        Will, Enhanced Strength, Supernatural Strength, Enhanced Agility, Enhanced
+        Stamina, Supernatural Survivability, Supernatural Cells, Pain Suppression,
+        Power Level Manipulation (Can use Mako to empower his weapon for different
+        effects), Limit Break (Can perform powerful Limit Breaks like Braver, Meteorain,
+        Cross-Slash, Finishing Touch, Omnislash, Omnislash Version 5, and many more),
+        Spiritual Assistance, God Summoning, Mutagen Empowerment, Resistance to Soul
+        Attacks, Telekinesis, Mind Control, and Illusions, Elemental Manipulation
+        (Of the lightning, ice, wind, fire and earth varieties), Darkness Manipulation,
+        Light Manipulation (Began to glow in light during his fight with Sephiroth
+        in Kingdom Hearts 2), Healing and Regeneration (Mid-Low), Vortex Creation
+        (Via Finishing Touch), Poison Manipulation, Sword Beam Emission (Via Blade
+        Beam), Transmutation (In the form of transforming others into toads), Petrification
+        (Possible side effect of the Break spell), Meteor Summoning (Via Meteorain),
+        Fear Masking, Emotion Empowerment, Anger Empowerment, Wallrunning, Teleportation
+        (Can also be used to send targets far away, not to another dimension), Barrier
+        Creation, Danmaku, Time Manipulation, Time Reduction and Time Acceleration
+        (In the form of slowing his enemies down and speeding his own time up), Energy
+        Manipulation and Energy Blast (in the form of Ultima), Death Manipulation
+        (Can instantly kill targets with the Death spell), Gadget Usage, Resistance
+        to Status Effect Inducement, Sleep Inducement, Paralysis, Silence, Confusion,
+        Transmutation, Size Manipulation, Petrification, Mind Manipulation, BFR, Death
+        Manipulation, Poison Manipulation, Time Manipulation and Time Stop (By equipping
+        one of the Ribbons made by Aerith or by slotting materia into his armor, Cloud
+        gains a variety of resistances to the status effects inflicted by various
+        magical spells)'
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Solar System level (Capable of fighting Safer-Sephiroth. Has defeated
+        Sephiroth with all versions of Omnislash. Notably, at the end of the original
+        game, Cloud will briefly surpass Sephiroth's in their battle inside the Lifestream.
+        Fought Sora and was implied to be even stronger than him at the time) | Dwarf
+        Star level to Unknown (Higher tiered summons like Typhoon or Knights of the
+        Round are capable of this level of power) | At least Galaxy level (Traded
+        blows with Squall Leonhart, who slew Ultimecia's most powerful Guardians,
+        who are able to seal away and junction themselves to the most powerful Guardian
+        Forces and are comparable to Seifer in her Castle while all but his normal
+        Junction-empowered physical attacks are sealed by their powers) to Universe
+        level+, possibly Multiverse level+ (Contended against the Evil Forces led
+        by Exdeath, which contained Sephiroth, Cloud of Darkness, and Exdeath himself
+        who posed a major threat to all worlds, all dimensions and all of existence
+        itself in a reality that is stated to contain infinite universes along with
+        infinite versions of everyone, Dissidia confirms that the Final Fantasy reality
+        are all connected between one another in one tightly knitted multiverse)
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: FTL+ (Cloud can react to various abilities that move at these speeds
+        such as Supernova. Capable of keeping pace with Sephiroth (a character far
+        stronger than Bahamut Fury) in all incarnations), Massively FTL+ (Can outpace
+        Sora at some occasions and at least keep up with him) | FTL+
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Solar System level (Tanked the awakening of the five remaining Weapons
+        in the Northern Crater and survived Sephiroth's Octaslash [Or at least the
+        slashes that just moments before parried his original Omnislash] in Advent
+        Children. Took hits from Sora) | Galaxy level (Took hits from Squall) to Universe
+        level+, possibly Multiverse level+
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Must be hard-pressed in order to use his Limit Breaks. After the events
+        of Final Fantasy VII, he has become somewhat moody and depressed as he tries
+        to piece together his identity from his fractured memories, Braver: Cloud
+        jumps into the air before cleaving the opponent in two with a single vertical
+        strike. In Dissidia, Cloud instead begins this attack in the air, Cross-Slash:
+        A single physical attack with three slashes. Can inflict paralysis. In AC,
+        with the first Tsurugi, he can split it into 2 separate blades and do a cross
+        slash., Climhazzard: Runs an opponent through the the Buster Sword before
+        dragging them into the air with an upward slash. Cloud uses Climhazzard to
+        defeat Bahamut SIN in Advent Children., Finishing Touch: Hits all enemies
+        with a tornado causing instant death, or dealing normal damage for any enemy'
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
+    core_field_count: 3
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|squall leonhart modern
-      final fantasy
+    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife canon tonygameman|505697
     retryable: false
     exception_class: ''
   - source_id: vsbattles-squall-leonhart-modern-final-fantasy
     url: https://vsbattles.fandom.com/wiki/Squall_Leonhart_%28Modern%29_%28Final_Fantasy%29
     ok: false
-    note: source_timeout_after_4s
+    note: source_timeout_after_15s
     extracted_fields: []
     normalized_page_title: Squall Leonhart (Modern) (Final Fantasy)
     source_type: mediawiki
@@ -498,20 +511,44 @@ repair:
     exception_class: TimeoutError
   - source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
     url: https://character-stats-and-profiles.fandom.com/wiki/Squall_Leonhart_%28Modern%29_%28Final_Fantasy%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Squall Leonhart (Modern) (Final Fantasy)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Cloud Strife (Canon)/Tonygameman
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '505697'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16142
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Statistics
+    - Limit Breaks
+    - Magic
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -524,25 +561,122 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 120
-    variant_score: 25
+    field_candidates:
+    - field: tier
+      value: 4-B | High 5-A to Unknown | 3-C to Low 2-C, possibly 2-A
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Super Soldier Physiology, Human
+        Physiology, Magic, Summoning, Martial Arts (As seen in Ehrgeiz: Gods Bless
+        The Ring), Enhanced Swordsmanship, Weapon Mastery (Is skilled in the use of
+        a shotgun and grenades as he used to be a former Shinra infantryman), Multi-Weapon
+        Wielding, Weapon Proficiency, Giant Weapon Proficiency, Dual Wielding, Enhanced
+        Combat, Mid-Air Combat, Cutting, Combination Attacks, Counter, Indomitable
+        Will, Enhanced Strength, Supernatural Strength, Enhanced Agility, Enhanced
+        Stamina, Supernatural Survivability, Supernatural Cells, Pain Suppression,
+        Power Level Manipulation (Can use Mako to empower his weapon for different
+        effects), Limit Break (Can perform powerful Limit Breaks like Braver, Meteorain,
+        Cross-Slash, Finishing Touch, Omnislash, Omnislash Version 5, and many more),
+        Spiritual Assistance, God Summoning, Mutagen Empowerment, Resistance to Soul
+        Attacks, Telekinesis, Mind Control, and Illusions, Elemental Manipulation
+        (Of the lightning, ice, wind, fire and earth varieties), Darkness Manipulation,
+        Light Manipulation (Began to glow in light during his fight with Sephiroth
+        in Kingdom Hearts 2), Healing and Regeneration (Mid-Low), Vortex Creation
+        (Via Finishing Touch), Poison Manipulation, Sword Beam Emission (Via Blade
+        Beam), Transmutation (In the form of transforming others into toads), Petrification
+        (Possible side effect of the Break spell), Meteor Summoning (Via Meteorain),
+        Fear Masking, Emotion Empowerment, Anger Empowerment, Wallrunning, Teleportation
+        (Can also be used to send targets far away, not to another dimension), Barrier
+        Creation, Danmaku, Time Manipulation, Time Reduction and Time Acceleration
+        (In the form of slowing his enemies down and speeding his own time up), Energy
+        Manipulation and Energy Blast (in the form of Ultima), Death Manipulation
+        (Can instantly kill targets with the Death spell), Gadget Usage, Resistance
+        to Status Effect Inducement, Sleep Inducement, Paralysis, Silence, Confusion,
+        Transmutation, Size Manipulation, Petrification, Mind Manipulation, BFR, Death
+        Manipulation, Poison Manipulation, Time Manipulation and Time Stop (By equipping
+        one of the Ribbons made by Aerith or by slotting materia into his armor, Cloud
+        gains a variety of resistances to the status effects inflicted by various
+        magical spells)'
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Solar System level (Capable of fighting Safer-Sephiroth. Has defeated
+        Sephiroth with all versions of Omnislash. Notably, at the end of the original
+        game, Cloud will briefly surpass Sephiroth's in their battle inside the Lifestream.
+        Fought Sora and was implied to be even stronger than him at the time) | Dwarf
+        Star level to Unknown (Higher tiered summons like Typhoon or Knights of the
+        Round are capable of this level of power) | At least Galaxy level (Traded
+        blows with Squall Leonhart, who slew Ultimecia's most powerful Guardians,
+        who are able to seal away and junction themselves to the most powerful Guardian
+        Forces and are comparable to Seifer in her Castle while all but his normal
+        Junction-empowered physical attacks are sealed by their powers) to Universe
+        level+, possibly Multiverse level+ (Contended against the Evil Forces led
+        by Exdeath, which contained Sephiroth, Cloud of Darkness, and Exdeath himself
+        who posed a major threat to all worlds, all dimensions and all of existence
+        itself in a reality that is stated to contain infinite universes along with
+        infinite versions of everyone, Dissidia confirms that the Final Fantasy reality
+        are all connected between one another in one tightly knitted multiverse)
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: FTL+ (Cloud can react to various abilities that move at these speeds
+        such as Supernova. Capable of keeping pace with Sephiroth (a character far
+        stronger than Bahamut Fury) in all incarnations), Massively FTL+ (Can outpace
+        Sora at some occasions and at least keep up with him) | FTL+
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Solar System level (Tanked the awakening of the five remaining Weapons
+        in the Northern Crater and survived Sephiroth's Octaslash [Or at least the
+        slashes that just moments before parried his original Omnislash] in Advent
+        Children. Took hits from Sora) | Galaxy level (Took hits from Squall) to Universe
+        level+, possibly Multiverse level+
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Must be hard-pressed in order to use his Limit Breaks. After the events
+        of Final Fantasy VII, he has become somewhat moody and depressed as he tries
+        to piece together his identity from his fractured memories, Braver: Cloud
+        jumps into the air before cleaving the opponent in two with a single vertical
+        strike. In Dissidia, Cloud instead begins this attack in the air, Cross-Slash:
+        A single physical attack with three slashes. Can inflict paralysis. In AC,
+        with the first Tsurugi, he can split it into 2 separate blades and do a cross
+        slash., Climhazzard: Runs an opponent through the the Buster Sword before
+        dragging them into the air with an upward slash. Cloud uses Climhazzard to
+        defeat Bahamut SIN in Advent Children., Finishing Touch: Hits all enemies
+        with a tornado causing instant death, or dealing normal damage for any enemy'
+      source_id: character-stats-profiles-squall-leonhart-modern-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
+    core_field_count: 3
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|squall leonhart modern
-      final fantasy
+    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife canon tonygameman|505697
     retryable: false
     exception_class: ''
   - source_id: mediawiki-squall-leonhart-modern
     url: https://vsbattles.fandom.com/wiki/Squall_Leonhart_(Modern)
     ok: false
-    note: source_timeout_after_4s
+    note: source_timeout_after_15s
     extracted_fields: []
     normalized_page_title: Squall Leonhart (Modern)
     source_type: mediawiki
@@ -586,7 +720,7 @@ repair:
   - source_id: vsbattles-squall-leonhart-modern
     url: https://vsbattles.fandom.com/wiki/Squall_Leonhart_%28Modern%29
     ok: false
-    note: source_timeout_after_4s
+    note: source_timeout_after_15s
     extracted_fields: []
     normalized_page_title: Squall Leonhart (Modern)
     source_type: mediawiki
@@ -627,20 +761,44 @@ repair:
     exception_class: TimeoutError
   - source_id: character-stats-profiles-squall-leonhart-modern
     url: https://character-stats-and-profiles.fandom.com/wiki/Squall_Leonhart_%28Modern%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Squall Leonhart (Modern)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Cloud Strife (Canon)/Tonygameman
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 60
+    revision_id: '505697'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16142
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Statistics
+    - Limit Breaks
+    - Magic
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -653,26 +811,124 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
+    field_candidates:
+    - field: tier
+      value: 4-B | High 5-A to Unknown | 3-C to Low 2-C, possibly 2-A
+      source_id: character-stats-profiles-squall-leonhart-modern
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Super Soldier Physiology, Human
+        Physiology, Magic, Summoning, Martial Arts (As seen in Ehrgeiz: Gods Bless
+        The Ring), Enhanced Swordsmanship, Weapon Mastery (Is skilled in the use of
+        a shotgun and grenades as he used to be a former Shinra infantryman), Multi-Weapon
+        Wielding, Weapon Proficiency, Giant Weapon Proficiency, Dual Wielding, Enhanced
+        Combat, Mid-Air Combat, Cutting, Combination Attacks, Counter, Indomitable
+        Will, Enhanced Strength, Supernatural Strength, Enhanced Agility, Enhanced
+        Stamina, Supernatural Survivability, Supernatural Cells, Pain Suppression,
+        Power Level Manipulation (Can use Mako to empower his weapon for different
+        effects), Limit Break (Can perform powerful Limit Breaks like Braver, Meteorain,
+        Cross-Slash, Finishing Touch, Omnislash, Omnislash Version 5, and many more),
+        Spiritual Assistance, God Summoning, Mutagen Empowerment, Resistance to Soul
+        Attacks, Telekinesis, Mind Control, and Illusions, Elemental Manipulation
+        (Of the lightning, ice, wind, fire and earth varieties), Darkness Manipulation,
+        Light Manipulation (Began to glow in light during his fight with Sephiroth
+        in Kingdom Hearts 2), Healing and Regeneration (Mid-Low), Vortex Creation
+        (Via Finishing Touch), Poison Manipulation, Sword Beam Emission (Via Blade
+        Beam), Transmutation (In the form of transforming others into toads), Petrification
+        (Possible side effect of the Break spell), Meteor Summoning (Via Meteorain),
+        Fear Masking, Emotion Empowerment, Anger Empowerment, Wallrunning, Teleportation
+        (Can also be used to send targets far away, not to another dimension), Barrier
+        Creation, Danmaku, Time Manipulation, Time Reduction and Time Acceleration
+        (In the form of slowing his enemies down and speeding his own time up), Energy
+        Manipulation and Energy Blast (in the form of Ultima), Death Manipulation
+        (Can instantly kill targets with the Death spell), Gadget Usage, Resistance
+        to Status Effect Inducement, Sleep Inducement, Paralysis, Silence, Confusion,
+        Transmutation, Size Manipulation, Petrification, Mind Manipulation, BFR, Death
+        Manipulation, Poison Manipulation, Time Manipulation and Time Stop (By equipping
+        one of the Ribbons made by Aerith or by slotting materia into his armor, Cloud
+        gains a variety of resistances to the status effects inflicted by various
+        magical spells)'
+      source_id: character-stats-profiles-squall-leonhart-modern
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Solar System level (Capable of fighting Safer-Sephiroth. Has defeated
+        Sephiroth with all versions of Omnislash. Notably, at the end of the original
+        game, Cloud will briefly surpass Sephiroth's in their battle inside the Lifestream.
+        Fought Sora and was implied to be even stronger than him at the time) | Dwarf
+        Star level to Unknown (Higher tiered summons like Typhoon or Knights of the
+        Round are capable of this level of power) | At least Galaxy level (Traded
+        blows with Squall Leonhart, who slew Ultimecia's most powerful Guardians,
+        who are able to seal away and junction themselves to the most powerful Guardian
+        Forces and are comparable to Seifer in her Castle while all but his normal
+        Junction-empowered physical attacks are sealed by their powers) to Universe
+        level+, possibly Multiverse level+ (Contended against the Evil Forces led
+        by Exdeath, which contained Sephiroth, Cloud of Darkness, and Exdeath himself
+        who posed a major threat to all worlds, all dimensions and all of existence
+        itself in a reality that is stated to contain infinite universes along with
+        infinite versions of everyone, Dissidia confirms that the Final Fantasy reality
+        are all connected between one another in one tightly knitted multiverse)
+      source_id: character-stats-profiles-squall-leonhart-modern
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: FTL+ (Cloud can react to various abilities that move at these speeds
+        such as Supernova. Capable of keeping pace with Sephiroth (a character far
+        stronger than Bahamut Fury) in all incarnations), Massively FTL+ (Can outpace
+        Sora at some occasions and at least keep up with him) | FTL+
+      source_id: character-stats-profiles-squall-leonhart-modern
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Solar System level (Tanked the awakening of the five remaining Weapons
+        in the Northern Crater and survived Sephiroth's Octaslash [Or at least the
+        slashes that just moments before parried his original Omnislash] in Advent
+        Children. Took hits from Sora) | Galaxy level (Took hits from Squall) to Universe
+        level+, possibly Multiverse level+
+      source_id: character-stats-profiles-squall-leonhart-modern
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Must be hard-pressed in order to use his Limit Breaks. After the events
+        of Final Fantasy VII, he has become somewhat moody and depressed as he tries
+        to piece together his identity from his fractured memories, Braver: Cloud
+        jumps into the air before cleaving the opponent in two with a single vertical
+        strike. In Dissidia, Cloud instead begins this attack in the air, Cross-Slash:
+        A single physical attack with three slashes. Can inflict paralysis. In AC,
+        with the first Tsurugi, he can split it into 2 separate blades and do a cross
+        slash., Climhazzard: Runs an opponent through the the Buster Sword before
+        dragging them into the air with an upward slash. Cloud uses Climhazzard to
+        defeat Bahamut SIN in Advent Children., Finishing Touch: Hits all enemies
+        with a tornado causing instant death, or dealing normal damage for any enemy'
+      source_id: character-stats-profiles-squall-leonhart-modern
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: true
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|squall leonhart modern
+    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife canon tonygameman|505697
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-squall-leonhart-modern-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Squall_Leonhart_Modern_Final_Fantasy
+  - source_id: vsbattles-squall-leonhart-modern-game
+    url: https://vsbattles.fandom.com/wiki/Squall_Leonhart_%28Modern%29_%28Game%29
     ok: false
-    note: source_timeout_after_4s
+    note: source_timeout_after_15s
     extracted_fields: []
-    normalized_page_title: Squall Leonhart Modern Final Fantasy
+    normalized_page_title: Squall Leonhart (Modern) (Game)
     source_type: mediawiki
     revision_id: ''
     fetch_status: timeout
@@ -714,5 +970,5 @@ repair:
   chosen_source_id: null
   failure_reasons:
     timeout: 5
-    provider_search_no_results: 3
+    fetched: 3
   confidence: 0.0

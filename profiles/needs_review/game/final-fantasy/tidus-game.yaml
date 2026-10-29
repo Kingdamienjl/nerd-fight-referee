@@ -11,13 +11,14 @@ generation:
   generated_at: '2026-06-10T00:54:03Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id006
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Tidus (Game)
   franchise: Final Fantasy
@@ -176,42 +177,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-tidus-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Tidus Game
-  url: https://vsbattles.fandom.com/wiki/Tidus_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-tidus-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Tidus Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-tidus-game-final-fantasy
   provider_id: vsbattles
   source_type: mediawiki
@@ -219,7 +184,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Tidus
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -264,7 +229,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Ghost_(Canon,_Game_%26_Watch)/ZeroTwo64
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -300,62 +265,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-tidus-game-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Tidus (Game) Final Fantasy
-  url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-tidus-game-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Tidus (Game) Final Fantasy
-  url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-tidus-game-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Tidus (Game) (Final Fantasy)
-  url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29_%28Final_Fantasy%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-tidus-game-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Tidus (Game) (Final Fantasy)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29_%28Final_Fantasy%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-tidus-game-game
   provider_id: vsbattles
   source_type: mediawiki
@@ -505,7 +414,7 @@ abilities:
 - id: powers-and-abilities-base-superhuman-physical-characteristics
   name: Base= Superhuman Physical Characteristics
   description: Base= Superhuman Physical Characteristics
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-tidus-game-final-fantasy
   source_claim_ids: []
   confidence: 0.85
@@ -521,7 +430,7 @@ abilities:
 - id: powers-and-abilities-acrobatics
   name: Acrobatics
   description: Acrobatics
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -536,7 +445,7 @@ abilities:
 - id: powers-and-abilities-skilled-swordsman
   name: Skilled Swordsman
   description: Skilled Swordsman
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -551,7 +460,7 @@ abilities:
 - id: powers-and-abilities-immortality-type-8
   name: Immortality (Type 8
   description: Immortality (Type 8
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -566,7 +475,7 @@ abilities:
 - id: powers-and-abilities-dependent-on-being-unaware-he-was-beckoned-back-by-yuna
   name: dependent on being unaware he was beckoned back by Yuna)
   description: dependent on being unaware he was beckoned back by Yuna)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -581,7 +490,7 @@ abilities:
 - id: powers-and-abilities-magic
   name: Magic
   description: Magic
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -598,7 +507,7 @@ abilities:
     of the Stolen Fayth and the Wraiths found Insi
   description: Non-Physical Interaction (Able to kill the lingering Ghosts in the
     Cavern of the Stolen Fayth and the Wraiths found Inside Sin)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -613,7 +522,7 @@ abilities:
 - id: powers-and-abilities-statistics-amplification-via-cheer
   name: Statistics Amplification (Via Cheer
   description: Statistics Amplification (Via Cheer
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -628,7 +537,7 @@ abilities:
 - id: powers-and-abilities-aim
   name: Aim
   description: Aim
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -643,7 +552,7 @@ abilities:
 - id: powers-and-abilities-focus
   name: Focus
   description: Focus
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -658,7 +567,7 @@ abilities:
 - id: powers-and-abilities-reflex
   name: Reflex
   description: Reflex
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -673,7 +582,7 @@ abilities:
 - id: powers-and-abilities-protect-and-shell
   name: Protect and Shell)
   description: Protect and Shell)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -690,7 +599,7 @@ abilities:
     Hastega and Slowga)
   description: Time Manipulation (Can accelerate himself or slow down enemies in time
     with Hastega and Slowga)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -706,7 +615,7 @@ abilities:
 - id: powers-and-abilities-energy-projection-via-energy-rain-and-flare
   name: Energy Projection (Via Energy Rain and Flare)
   description: Energy Projection (Via Energy Rain and Flare)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -721,7 +630,7 @@ abilities:
 - id: powers-and-abilities-healing
   name: Healing
   description: Healing
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -738,7 +647,7 @@ abilities:
     NulBlaze
   description: Damage Negation (Can completely nullify certain elemental attacks once
     via NulBlaze
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -753,7 +662,7 @@ abilities:
 - id: powers-and-abilities-nulshock
   name: NulShock
   description: NulShock
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -768,7 +677,7 @@ abilities:
 - id: powers-and-abilities-nultide-and-nulfrost
   name: NulTide and NulFrost)
   description: NulTide and NulFrost)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -783,7 +692,7 @@ abilities:
 - id: powers-and-abilities-purification-type-3-via-esuna-and-various-items
   name: Purification (Type 3 via Esuna and various items)
   description: Purification (Type 3 via Esuna and various items)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -798,7 +707,7 @@ abilities:
 - id: powers-and-abilities-resurrection-via-life
   name: Resurrection (Via Life
   description: Resurrection (Via Life
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -813,7 +722,7 @@ abilities:
 - id: powers-and-abilities-full-life-and-auto-life
   name: Full-Life and Auto-Life)
   description: Full-Life and Auto-Life)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -828,7 +737,7 @@ abilities:
 - id: powers-and-abilities-attack-reflection-via-reflect
   name: Attack Reflection (Via Reflect)
   description: Attack Reflection (Via Reflect)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -843,7 +752,7 @@ abilities:
 - id: powers-and-abilities-power-nullification-via-dispel-and-silence-attack-buster
   name: Power Nullification (Via Dispel and Silence Attack/Buster)
   description: Power Nullification (Via Dispel and Silence Attack/Buster)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -858,7 +767,7 @@ abilities:
 - id: powers-and-abilities-regeneration-mid-low-via-regen
   name: Regeneration (Mid-Low via Regen)
   description: Regeneration (Mid-Low via Regen)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -874,7 +783,7 @@ abilities:
 - id: powers-and-abilities-radiation-manipulation
   name: Radiation Manipulation
   description: Radiation Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -889,7 +798,7 @@ abilities:
 - id: powers-and-abilities-holy-manipulation
   name: Holy Manipulation
   description: Holy Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -904,7 +813,7 @@ abilities:
 - id: powers-and-abilities-darkness-manipulation-via-dark-attack-buster
   name: Darkness Manipulation (Via Dark Attack/Buster)
   description: Darkness Manipulation (Via Dark Attack/Buster)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -919,7 +828,7 @@ abilities:
 - id: powers-and-abilities-sleep-manipulation-via-sleep-attack-buster
   name: Sleep Manipulation (Via Sleep Attack/Buster)
   description: Sleep Manipulation (Via Sleep Attack/Buster)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -934,7 +843,7 @@ abilities:
 - id: powers-and-abilities-absorption-via-drain
   name: Absorption (Via Drain
   description: Absorption (Via Drain
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -949,7 +858,7 @@ abilities:
 - id: powers-and-abilities-osmose-and-eater-abilities
   name: Osmose and Eater abilities)
   description: Osmose and Eater abilities)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -964,7 +873,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation
   name: Fire Manipulation
   description: Fire Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -981,7 +890,7 @@ abilities:
 - id: powers-and-abilities-ice-manipulation
   name: Ice Manipulation
   description: Ice Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -996,7 +905,7 @@ abilities:
 - id: powers-and-abilities-electricity-manipulation
   name: Electricity Manipulation
   description: Electricity Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1011,7 +920,7 @@ abilities:
 - id: powers-and-abilities-water-manipulation
   name: Water Manipulation
   description: Water Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1026,7 +935,7 @@ abilities:
 - id: powers-and-abilities-poison-manipulation-via-bio
   name: Poison Manipulation (Via Bio)
   description: Poison Manipulation (Via Bio)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1041,7 +950,7 @@ abilities:
 - id: powers-and-abilities-gravity-manipulation-via-demi
   name: Gravity Manipulation (Via Demi)
   description: Gravity Manipulation (Via Demi)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1056,7 +965,7 @@ abilities:
 - id: powers-and-abilities-death-manipulation-via-death
   name: Death Manipulation (Via Death)
   description: Death Manipulation (Via Death)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1071,7 +980,7 @@ abilities:
 - id: powers-and-abilities-information-analysis-via-scan-and-sensor
   name: Information Analysis (Via Scan and Sensor)
   description: Information Analysis (Via Scan and Sensor)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1086,7 +995,7 @@ abilities:
 - id: powers-and-abilities-probability-manipulation-via-jinx-and-luck
   name: Probability Manipulation (Via Jinx and Luck)
   description: Probability Manipulation (Via Jinx and Luck)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1101,7 +1010,7 @@ abilities:
 - id: powers-and-abilities-statistics-reduction-via-break-abilities
   name: Statistics Reduction (Via Break abilities)
   description: Statistics Reduction (Via Break abilities)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1120,7 +1029,7 @@ weaknesses:
 - id: weaknesses-none-notable-notable-attacks-techniques
   name: 'None notable Notable Attacks/Techniques:'
   description: 'None notable Notable Attacks/Techniques:'
-  source_ids: &id005
+  source_ids: &id003
   - vsbattles-tidus-game-final-fantasy
   source_claim_ids: []
   confidence: 0.85
@@ -1136,7 +1045,7 @@ weaknesses:
 - id: weaknesses
   name: '-'
   description: '-'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1153,7 +1062,7 @@ weaknesses:
     \ \u25AA Hastega: Tidus accelerates time for his party"
   description: "Innate= \u25AA Cheer: Tidus enhances his party's attack power and\
     \ durability. \u25AA Hastega: Tidus accelerates time for his party"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1170,7 +1079,7 @@ weaknesses:
     \ his enemies"
   description: "dramatically increasing their speed. \u25AA Slowga: Tidus distorts\
     \ time around his enemies"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1187,7 +1096,7 @@ weaknesses:
     \ enemy with an incredibly powerful blow"
   description: "dramatically decreasing their speed. \u25AA Delay Buster: Tidus strikes\
     \ his enemy with an incredibly powerful blow"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1204,7 +1113,7 @@ weaknesses:
     \ Provoke: Tidus taunts an enemy"
   description: "significantly increasing the time they need to take their next action.\
     \ \u25AA Provoke: Tidus taunts an enemy"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1221,7 +1130,7 @@ weaknesses:
     \ Overdrive"
   description: "encouraging them to attack him over his allies. \u25AA Swordplay:\
     \ Tidus' Overdrive"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1239,7 +1148,7 @@ weaknesses:
   description: 'a collection of sword techniques that he gradually develops as he
     uses this Overdrive repeatedly. * Spiral Cut: Tidus performs a series of flips
     and cartwheels towards his enemy'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1256,7 +1165,7 @@ weaknesses:
     darts back and forth around his enemies'
   description: 'before leaping and slamming his sword down on them. * Slice & Dice:
     Tidus darts back and forth around his enemies'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1273,7 +1182,7 @@ weaknesses:
     the air'
   description: 'striking them six times. * Energy Rain: Tidus jumps off of one enemy
     into the air'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1290,7 +1199,7 @@ weaknesses:
     * Blitz Ace: Tidus leaps forward and slashes at'
   description: 'charging energy in his sword and throwing it down to explode on enemies.
     * Blitz Ace: Tidus leaps forward and slashes at his enemy eight times'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1307,7 +1216,7 @@ weaknesses:
     into his target
   description: before using the hilt of his sword to leap into the air and kicking
     a Blitzball into his target
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1322,7 +1231,7 @@ weaknesses:
 - id: weaknesses-which-explodes-on-impact
   name: which explodes on impact.
   description: which explodes on impact.
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1337,7 +1246,7 @@ weaknesses:
 - id: weaknesses
   name: '-'
   description: '-'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1352,7 +1261,7 @@ weaknesses:
 - id: weaknesses-inherited-contrary-to-popular-belief
   name: Inherited= Contrary to popular belief
   description: Inherited= Contrary to popular belief
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1369,7 +1278,7 @@ weaknesses:
     are capable of branching into the sections of
   description: the party members are not limited to their sections of the Sphere Grid
     and are capable of branching into the sections of other characters. Key Spheres
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1385,7 +1294,7 @@ weaknesses:
 - id: weaknesses-which-are-strictly-used-for-this-purpose
   name: which are strictly used for this purpose
   description: which are strictly used for this purpose
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1400,7 +1309,7 @@ weaknesses:
 - id: weaknesses-are-canonically-given-out-at-certain-points-in-the-story
   name: are canonically given out at certain points in the story
   description: are canonically given out at certain points in the story
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1418,7 +1327,7 @@ weaknesses:
   description: and character-exclusive abilities like Lulu's Black Magic and Kimahri's
     Lancet are discussed as if they are common abilities and not completely restricted
     to the characters in question. As a result
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1433,7 +1342,7 @@ weaknesses:
 - id: weaknesses-the-party-is-entirely-capable-of-using-each-others-abilities
   name: the party is entirely capable of using each others' abilities
   description: the party is entirely capable of using each others' abilities
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1457,7 +1366,7 @@ weaknesses:
     \ himself and his allies for one attack. \u25AA Esuna: Tidus removes all negative\
     \ status effects on himself or one of his allies. \u25AA Life: Tidus revives one\
     \ of his allies if they happen to die"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1477,7 +1386,7 @@ weaknesses:
   description: "though they are nonetheless still significantly injured. \u25AA Full-Life:\
     \ Tidus revives one of his allies at their full strength. \u25AA Shell: Tidus\
     \ enhances an ally's magic defense"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1492,7 +1401,7 @@ weaknesses:
 - id: weaknesses-halving-the-damage-of-all-spells-directed-at-them-however
   name: halving the damage of all spells directed at them. However
   description: halving the damage of all spells directed at them. However
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1509,7 +1418,7 @@ weaknesses:
     \ an ally's physical defense"
   description: "this is also inclusive of any healing spells. \u25AA Protect: Tidus\
     \ enhances an ally's physical defense"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1530,7 +1439,7 @@ weaknesses:
     \ has that would increase their power. \u25AA Regen: Tidus casts a spell that\
     \ gradually heals himself or one of his allies over a period of time. \u25AA Auto-Life:\
     \ Tidus casts a spell that ensures that"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1545,7 +1454,7 @@ weaknesses:
 - id: weaknesses-upon-death
   name: upon death
   description: upon death
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1563,7 +1472,7 @@ weaknesses:
   description: "he will be automatically revived. Holy: Tidus calls down a massive\
     \ beam of holy-elemental energy to blast his foes. Wakka's Sphere Grid: \u25AA\
     \ Dark"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1586,782 +1495,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id006
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: defd43ed6f4bf1aa68b5cb6bc3a786fb717ad41be0cc7843619ee13df6f51810
 repair:
-  attempted_at: '2026-06-19T10:10:48Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T21:11:36Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-tidus-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29_Final_Fantasy
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Tidus
-    source_type: mediawiki
-    revision_id: '9452480'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 35196
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id008
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{4-A}} | {{4-A}} | {{2-A}}'
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Acrobatics, Skilled Swordsman,
-        Immortality (Type 8, dependent on being unaware he was beckoned back by Yuna),
-        Magic, Non-Physical Interaction (Able to kill the lingering Ghosts in the
-        Cavern of the Stolen Fayth and the Wraiths found Inside Sin), Statistics Amplification
-        (Via Cheer, Aim, Focus, Reflex, Protect and Shell), Time Manipulation (Can
-        accelerate himself or slow down enemies in time with Hastega and Slowga),
-        Energy Projection (Via Energy Rain and Flare), Healing, Damage Negation (Can
-        completely nullify certain elemental attacks once via NulBlaze, NulShock,
-        NulTide and NulFrost), Purification (Type 3 via Esuna and various items),
-        Resurrection (Via Life, Full-Life and Auto-Life), Attack Reflection (Via Reflect),
-        Power Nullification (Via Dispel and Silence Attack/Buster), Regeneration (Mid-Low
-        via Regen), Radiation Manipulation, Holy Manipulation, Darkness Manipulation
-        (Via Dark Attack/Buster), Sleep Manipulation (Via Sleep Attack/Buster), Absorption
-        (Via Drain, Osmose and Eater abilities), Fire Manipulation, Ice Manipulation,
-        Electricity Manipulation, Water Manipulation, Poison Manipulation (Via Bio),
-        Gravity Manipulation (Via Demi), Death Manipulation (Via Death), Information
-        Analysis (Via Scan and Sensor), Probability Manipulation (Via Jinx and Luck),
-        Statistics Reduction (Via Break abilities), Damage Reduction (Via Sentinel),
-        Fear Manipulation (Via Threaten), Necromancy and Transmutation (Via Zombie
-        Attack), Social Influencing (Can bribe mindless monsters to leave battle),
-        Power Mimicry (Via Copycat), Durability Negation (Via Piercing and Demi),
-        Enhanced Senses and Stealth Mastery (Via Initiative), Petrification (Via Stonestrike),
-        Curse Manipulation and Death Manipulation (Via Candles of Life), Can draw
-        resistances from targets (Was capable of drawing resistances to Earth and
-        Wind manipulation from Wol.) Resistance to Fire Manipulation, Ice Manipulation,
-        Electricity Manipulation, Water Manipulation, Darkness Manipulation, Power
-        Nullification, Sleep Manipulation, Poison Manipulation, Petrification, Death
-        Manipulation, Necromancy, Transmutation, Time Manipulation (In the form of
-        Time Slow and Stop), Mind Manipulation, Empathic Manipulation, Curse Manipulation,
-        Radiation Manipulation, Absolute Zero (Can withstand Shiva''s presence and
-        attacks), and Memory Manipulation (Can challenge Sin head-on without being
-        impeded by its toxin) |-|Dissidia= {{#tag:tabber| {{!}}-{{!}}Abilites= All
-        previous abilities enhanced, Immortality (Type 8,reliant on his Crystal which
-        let him return from fading from existence after Cosmos'' death) & Regeneration
-        (Low-Godly), Summoning (Can summon various Eidolons from Summonstones and
-        the World of Illusions), Self-Sustenance (Type 2, has no need to eat or drinkDissidia
-        Final Fantasy Opera Omnia), Willpower Manipulation (a person''s will is power
-        there and enables them to do a multitude of things the stronger their willDissidia
-        Final Fantasy Opera Omnia), Reactive Power Level (the greater someone''s will,
-        the greater their powerDissidia Final Fantasy Opera Omnia), Law Manipulation
-        (Beings with strong wills can overwrite the laws of the world and bend them
-        to their willDissidia Final Fantasy Opera Omnia), Creation (With a powerful
-        enough will, once can create various things such as phone lines, airships
-        and even entire countries and worldsDissidia Final Fantasy Opera Omnia), Sealing
-        (Can seal off large areas and people with her will, such as Cecil sealing
-        himself in Castle Baron or the cast sealing Kefka inside a TorsionDissidia
-        Final Fantasy Opera Omnia), Dimensional Travel (Characters can open Torsions,
-        rifts in space-time to travel various dimensionsDissidia Final Fantasy Opera
-        Omnia), and Immortality (Type 2) (Due to the crystal core of darkness''s influence
-        in the hands of Ardyn, warriors will not die no matter how injured they are)
-        {{!}}-{{!}}Resistances= Resistance to Mind Manipulation, Soul Manipulation
-        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
-        living being on the planet), Corruption & Body Puppetry (Due to their light,
-        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
-        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
-        which is capable of affecting the hearts and minds of all living beings on
-        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
-        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
-        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
-        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
-        level,Dissidia Final Fantasy and can warp them into another dimension), Extreme
-        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
-        (Can survive Shiva''s ice attacks, including Diamond Dust), {{!}}-{{!}}With
-        Eidolons= Hellfire Manipulation (Via Ifrit, Phoenix, Rubicante, and Marilith),
-        Intangibility (Ifrit can become smoke or'
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multi-Solar System level (Capable of hurting Sin with his attacks, who
-        is unaffected by the Gravitational Forces created as an effect of his Giga
-        Graviton move. Furthermore, is considered by Lulu to have proven himself as
-        a Guardian, maybe even as the best, after the final battle with Overdrive
-        Sin, Implying his efforts and the efforts of at least one more Guardian were
-        significant towards defeating Sin) | Multi-Solar System level (Can stalemate
-        Wol, grew more powerful during his time in Palamecia Mobius Final Fantasy)
-        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
-        power from the gods of the cycle. Participated in the defeat of Shinryu)
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: FTL+ (Capable of fighting Braska's Final Aeon) | Massively FTL+ (Can
-        keep up with the other Warriors of Materia)
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multi-Solar System level (Can withstand the gravitational force exerted
-        by Sin's Giga Graviton, however a direct impact would instantly kill him.
-        Additionally, Tidus, regarded as one of the best Guardians ever, should be
-        no less durable than Rikku, a Guardian of lesser note able to survive multiple
-        Meteor spells and an Ultima from Trema, a character stronger than a Final
-        Aeon-level Fiend, Paragon/Lord Zaon) | Multi-Solar System level | Multiverse
-        level+
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Brotherhood/Caladbolg, several dozen meters
-        with magic and Blitzball techniques
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: "\u25AA Longsword: Tidus' initial weapon, given to him by Auron in the\
-        \ Dream Zanarkand as a gift from Jecht. A simple sword that he uses to fight\
-        \ off enemies \u25AA Brotherhood: A sword gifted to Tidus by Wakka, originally\
-        \ meant for his brother Chappu. It comes with both the Waterstrike and Sensor\
-        \ abilities, adding water elemental damage to its attacks and analyzing an\
-        \ enemy's strength, in addition to significantly boosting Tidus' attack power.\
-        \ \u25AA Caladbolg: Tidus' Celestial Weapon, obtained in the Calm Lands after\
-        \ escaping from Bevelle. It naturally ignores enemy defense, harming them\
-        \ regardless of attempts to increase their durability, and makes Tidus instinctively\
-        \ evade and counter attacks. \u25AA Blitzball: A spherically-studded ball\
-        \ used in the Blitzball sport across Spira. Tidus primarily uses it for ranged\
-        \ attacks, hitting enemies from several dozen meters away."
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Tidus is a master swordsman and shield wielder at the end of the game,
-        comparable to legendary warriors and Guardians like his father Jecht and Auron.
-        While he lags behind them in blocking attacks and in the use of brute force,
-        he is far more agile and acrobatic, specializing in dodging attacks before
-        dishing out lethal counterattacks in return with a variety of swift maneuvers.
-        He also triumphed over Spira's strongest, most notably, he managed to defeat
-        Yu Yevon and Sin once and for all, a feat thought impossible up to that point.
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "None notable Notable Attacks/Techniques: |-|Innate= \u25AA Cheer: Tidus\
-        \ enhances his party's attack power and durability. \u25AA Hastega: Tidus\
-        \ accelerates time for his party, dramatically increasing their speed. \u25AA\
-        \ Slowga: Tidus distorts time around his enemies, dramatically decreasing\
-        \ their speed. \u25AA Delay Buster: Tidus strikes his enemy with an incredibly\
-        \ powerful blow, significantly increasing the time they need to take their\
-        \ next action. \u25AA Provoke: Tidus taunts an enemy, encouraging them to\
-        \ attack him over his allies. \u25AA Swordplay: Tidus' Overdrive, a collection\
-        \ of sword techniques that he gradually develops as he uses this Overdrive\
-        \ repeatedly. * Spiral Cut: Tidus performs a series of flips and cartwheels\
-        \ towards his enemy, before leaping and slamming his sword down on them. *\
-        \ Slice & Dice: Tidus darts back and forth around his enemies, striking them\
-        \ six times. * Energy Rain: Tidus jumps off of one enemy into the air, charging\
-        \ energy in his sword and throwing it down to explode on enemies. * Blitz\
-        \ Ace: Tidus leaps forward and slashes at his enemy eight times, before using\
-        \ the hilt of his sword to leap into the air and kicking a Blitzball into\
-        \ his target, which explodes on impact. |-|Inherited= Contrary to popular\
-        \ belief, the party members are not limited to their sections of the Sphere\
-        \ Grid and are capable of branching into the sections of other characters.\
-        \ Key Spheres, which are strictly used for this purpose, are canonically given\
-        \ out at certain points in the story, and character-exclusive abilities like\
-        \ Lulu's Black Magic and Kimahri's Lancet are discussed as if they are common\
-        \ abilities and not completely restricted to the characters in question. As\
-        \ a result, the party is entirely capable of using each others' abilities,\
-        \ as long as they are part of the Sphere Grid. Yuna's Sphere Grid: \u25AA\
-        \ Curaga: Tidus significantly heals himself or one of his allies. \u25AA NulBlaze:\
-        \ Tidus nullifies all fire damage for himself and his allies for one attack.\
-        \ \u25AA NulShock: Tidus nullifies all lightning damage for himself and his\
-        \ allies for one attack. \u25AA NulTide: Tidus nullifies all water damage\
-        \ for himself and his allies for one attack. \u25AA NulFrost: Tidus nullifies\
-        \ all ice damage for himself and his allies for one attack. \u25AA Esuna:\
-        \ Tidus removes all negative status effects on himself or one of his allies.\
-        \ \u25AA Life: Tidus revives one of his allies if they happen to die, though\
-        \ they are nonetheless still significantly injured. \u25AA Full-Life: Tidus\
-        \ revives one of his allies at their full strength. \u25AA Shell: Tidus enhances\
-        \ an ally's magic defense, halving the damage of all spells directed at them.\
-        \ However, this is also inclusive of any healing spells. \u25AA Protect: Tidus\
-        \ enhances an ally's physical defense, halving any damage they receive from\
-        \ physical attacks. \u25AA Reflect: Tidus creates a barrier around himself\
-        \ that automatically reflects any spell back at his enemy. \u25AA Dispel:\
-        \ Tidus removes any sort of buffs his enemy has that would increase their\
-        \ power. \u25AA Regen: Tidus casts a spell that gradually heals himself or\
-        \ one of his allies over a period of time. \u25AA Auto-Life: Tidus casts a\
-        \ spell that ensures that, upon death, he will be automatically revived. Holy:\
-        \ Tidus calls down a massive beam of holy-elemental energy to blast his foes.\
-        \ Wakka's Sphere Grid: \u25AA Dark"
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-tidus-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29_Final_Fantasy
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Ghost (Canon, Game & Watch)/ZeroTwo64
-    source_type: mediawiki
-    revision_id: '53753'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 1947
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '9-A, likely 8-B Name: Ghost Origin: The Legend of Zelda / Game & Watch
-        Gender: Unknown Age: Unknown Classification: Ghost'
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Ghost Physiology, Non-Corporeal, Invisibility, Immortality (Type 7),
-        Flight, can throw spears.
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Room Level (Is able to reach this level of KE by throwing its spear),
-        likely City Block Level (Can harm Link)
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (Can throw spears at this speed)
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least City Block Level (Can't be defeated by Link. Non-Corporeality
-        and Invisibility make it hard to kill)
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None notable ==Gallery== ghostart.png|Ghost's artwork. Category:ZeroTwo64
-        Category:Tier 9 Category:Tier 8
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|ghost canon game watch
-      zerotwo64|53753
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-tidus-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29_%28Final_Fantasy%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id011
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Tidus
-    source_type: mediawiki
-    revision_id: '9452480'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 35196
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id012
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{4-A}} | {{4-A}} | {{2-A}}'
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Acrobatics, Skilled Swordsman,
-        Immortality (Type 8, dependent on being unaware he was beckoned back by Yuna),
-        Magic, Non-Physical Interaction (Able to kill the lingering Ghosts in the
-        Cavern of the Stolen Fayth and the Wraiths found Inside Sin), Statistics Amplification
-        (Via Cheer, Aim, Focus, Reflex, Protect and Shell), Time Manipulation (Can
-        accelerate himself or slow down enemies in time with Hastega and Slowga),
-        Energy Projection (Via Energy Rain and Flare), Healing, Damage Negation (Can
-        completely nullify certain elemental attacks once via NulBlaze, NulShock,
-        NulTide and NulFrost), Purification (Type 3 via Esuna and various items),
-        Resurrection (Via Life, Full-Life and Auto-Life), Attack Reflection (Via Reflect),
-        Power Nullification (Via Dispel and Silence Attack/Buster), Regeneration (Mid-Low
-        via Regen), Radiation Manipulation, Holy Manipulation, Darkness Manipulation
-        (Via Dark Attack/Buster), Sleep Manipulation (Via Sleep Attack/Buster), Absorption
-        (Via Drain, Osmose and Eater abilities), Fire Manipulation, Ice Manipulation,
-        Electricity Manipulation, Water Manipulation, Poison Manipulation (Via Bio),
-        Gravity Manipulation (Via Demi), Death Manipulation (Via Death), Information
-        Analysis (Via Scan and Sensor), Probability Manipulation (Via Jinx and Luck),
-        Statistics Reduction (Via Break abilities), Damage Reduction (Via Sentinel),
-        Fear Manipulation (Via Threaten), Necromancy and Transmutation (Via Zombie
-        Attack), Social Influencing (Can bribe mindless monsters to leave battle),
-        Power Mimicry (Via Copycat), Durability Negation (Via Piercing and Demi),
-        Enhanced Senses and Stealth Mastery (Via Initiative), Petrification (Via Stonestrike),
-        Curse Manipulation and Death Manipulation (Via Candles of Life), Can draw
-        resistances from targets (Was capable of drawing resistances to Earth and
-        Wind manipulation from Wol.) Resistance to Fire Manipulation, Ice Manipulation,
-        Electricity Manipulation, Water Manipulation, Darkness Manipulation, Power
-        Nullification, Sleep Manipulation, Poison Manipulation, Petrification, Death
-        Manipulation, Necromancy, Transmutation, Time Manipulation (In the form of
-        Time Slow and Stop), Mind Manipulation, Empathic Manipulation, Curse Manipulation,
-        Radiation Manipulation, Absolute Zero (Can withstand Shiva''s presence and
-        attacks), and Memory Manipulation (Can challenge Sin head-on without being
-        impeded by its toxin) |-|Dissidia= {{#tag:tabber| {{!}}-{{!}}Abilites= All
-        previous abilities enhanced, Immortality (Type 8,reliant on his Crystal which
-        let him return from fading from existence after Cosmos'' death) & Regeneration
-        (Low-Godly), Summoning (Can summon various Eidolons from Summonstones and
-        the World of Illusions), Self-Sustenance (Type 2, has no need to eat or drinkDissidia
-        Final Fantasy Opera Omnia), Willpower Manipulation (a person''s will is power
-        there and enables them to do a multitude of things the stronger their willDissidia
-        Final Fantasy Opera Omnia), Reactive Power Level (the greater someone''s will,
-        the greater their powerDissidia Final Fantasy Opera Omnia), Law Manipulation
-        (Beings with strong wills can overwrite the laws of the world and bend them
-        to their willDissidia Final Fantasy Opera Omnia), Creation (With a powerful
-        enough will, once can create various things such as phone lines, airships
-        and even entire countries and worldsDissidia Final Fantasy Opera Omnia), Sealing
-        (Can seal off large areas and people with her will, such as Cecil sealing
-        himself in Castle Baron or the cast sealing Kefka inside a TorsionDissidia
-        Final Fantasy Opera Omnia), Dimensional Travel (Characters can open Torsions,
-        rifts in space-time to travel various dimensionsDissidia Final Fantasy Opera
-        Omnia), and Immortality (Type 2) (Due to the crystal core of darkness''s influence
-        in the hands of Ardyn, warriors will not die no matter how injured they are)
-        {{!}}-{{!}}Resistances= Resistance to Mind Manipulation, Soul Manipulation
-        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
-        living being on the planet), Corruption & Body Puppetry (Due to their light,
-        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
-        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
-        which is capable of affecting the hearts and minds of all living beings on
-        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
-        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
-        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
-        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
-        level,Dissidia Final Fantasy and can warp them into another dimension), Extreme
-        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
-        (Can survive Shiva''s ice attacks, including Diamond Dust), {{!}}-{{!}}With
-        Eidolons= Hellfire Manipulation (Via Ifrit, Phoenix, Rubicante, and Marilith),
-        Intangibility (Ifrit can become smoke or'
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multi-Solar System level (Capable of hurting Sin with his attacks, who
-        is unaffected by the Gravitational Forces created as an effect of his Giga
-        Graviton move. Furthermore, is considered by Lulu to have proven himself as
-        a Guardian, maybe even as the best, after the final battle with Overdrive
-        Sin, Implying his efforts and the efforts of at least one more Guardian were
-        significant towards defeating Sin) | Multi-Solar System level (Can stalemate
-        Wol, grew more powerful during his time in Palamecia Mobius Final Fantasy)
-        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
-        power from the gods of the cycle. Participated in the defeat of Shinryu)
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: FTL+ (Capable of fighting Braska's Final Aeon) | Massively FTL+ (Can
-        keep up with the other Warriors of Materia)
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multi-Solar System level (Can withstand the gravitational force exerted
-        by Sin's Giga Graviton, however a direct impact would instantly kill him.
-        Additionally, Tidus, regarded as one of the best Guardians ever, should be
-        no less durable than Rikku, a Guardian of lesser note able to survive multiple
-        Meteor spells and an Ultima from Trema, a character stronger than a Final
-        Aeon-level Fiend, Paragon/Lord Zaon) | Multi-Solar System level | Multiverse
-        level+
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Brotherhood/Caladbolg, several dozen meters
-        with magic and Blitzball techniques
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: "\u25AA Longsword: Tidus' initial weapon, given to him by Auron in the\
-        \ Dream Zanarkand as a gift from Jecht. A simple sword that he uses to fight\
-        \ off enemies \u25AA Brotherhood: A sword gifted to Tidus by Wakka, originally\
-        \ meant for his brother Chappu. It comes with both the Waterstrike and Sensor\
-        \ abilities, adding water elemental damage to its attacks and analyzing an\
-        \ enemy's strength, in addition to significantly boosting Tidus' attack power.\
-        \ \u25AA Caladbolg: Tidus' Celestial Weapon, obtained in the Calm Lands after\
-        \ escaping from Bevelle. It naturally ignores enemy defense, harming them\
-        \ regardless of attempts to increase their durability, and makes Tidus instinctively\
-        \ evade and counter attacks. \u25AA Blitzball: A spherically-studded ball\
-        \ used in the Blitzball sport across Spira. Tidus primarily uses it for ranged\
-        \ attacks, hitting enemies from several dozen meters away."
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Tidus is a master swordsman and shield wielder at the end of the game,
-        comparable to legendary warriors and Guardians like his father Jecht and Auron.
-        While he lags behind them in blocking attacks and in the use of brute force,
-        he is far more agile and acrobatic, specializing in dodging attacks before
-        dishing out lethal counterattacks in return with a variety of swift maneuvers.
-        He also triumphed over Spira's strongest, most notably, he managed to defeat
-        Yu Yevon and Sin once and for all, a feat thought impossible up to that point.
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "None notable Notable Attacks/Techniques: |-|Innate= \u25AA Cheer: Tidus\
-        \ enhances his party's attack power and durability. \u25AA Hastega: Tidus\
-        \ accelerates time for his party, dramatically increasing their speed. \u25AA\
-        \ Slowga: Tidus distorts time around his enemies, dramatically decreasing\
-        \ their speed. \u25AA Delay Buster: Tidus strikes his enemy with an incredibly\
-        \ powerful blow, significantly increasing the time they need to take their\
-        \ next action. \u25AA Provoke: Tidus taunts an enemy, encouraging them to\
-        \ attack him over his allies. \u25AA Swordplay: Tidus' Overdrive, a collection\
-        \ of sword techniques that he gradually develops as he uses this Overdrive\
-        \ repeatedly. * Spiral Cut: Tidus performs a series of flips and cartwheels\
-        \ towards his enemy, before leaping and slamming his sword down on them. *\
-        \ Slice & Dice: Tidus darts back and forth around his enemies, striking them\
-        \ six times. * Energy Rain: Tidus jumps off of one enemy into the air, charging\
-        \ energy in his sword and throwing it down to explode on enemies. * Blitz\
-        \ Ace: Tidus leaps forward and slashes at his enemy eight times, before using\
-        \ the hilt of his sword to leap into the air and kicking a Blitzball into\
-        \ his target, which explodes on impact. |-|Inherited= Contrary to popular\
-        \ belief, the party members are not limited to their sections of the Sphere\
-        \ Grid and are capable of branching into the sections of other characters.\
-        \ Key Spheres, which are strictly used for this purpose, are canonically given\
-        \ out at certain points in the story, and character-exclusive abilities like\
-        \ Lulu's Black Magic and Kimahri's Lancet are discussed as if they are common\
-        \ abilities and not completely restricted to the characters in question. As\
-        \ a result, the party is entirely capable of using each others' abilities,\
-        \ as long as they are part of the Sphere Grid. Yuna's Sphere Grid: \u25AA\
-        \ Curaga: Tidus significantly heals himself or one of his allies. \u25AA NulBlaze:\
-        \ Tidus nullifies all fire damage for himself and his allies for one attack.\
-        \ \u25AA NulShock: Tidus nullifies all lightning damage for himself and his\
-        \ allies for one attack. \u25AA NulTide: Tidus nullifies all water damage\
-        \ for himself and his allies for one attack. \u25AA NulFrost: Tidus nullifies\
-        \ all ice damage for himself and his allies for one attack. \u25AA Esuna:\
-        \ Tidus removes all negative status effects on himself or one of his allies.\
-        \ \u25AA Life: Tidus revives one of his allies if they happen to die, though\
-        \ they are nonetheless still significantly injured. \u25AA Full-Life: Tidus\
-        \ revives one of his allies at their full strength. \u25AA Shell: Tidus enhances\
-        \ an ally's magic defense, halving the damage of all spells directed at them.\
-        \ However, this is also inclusive of any healing spells. \u25AA Protect: Tidus\
-        \ enhances an ally's physical defense, halving any damage they receive from\
-        \ physical attacks. \u25AA Reflect: Tidus creates a barrier around himself\
-        \ that automatically reflects any spell back at his enemy. \u25AA Dispel:\
-        \ Tidus removes any sort of buffs his enemy has that would increase their\
-        \ power. \u25AA Regen: Tidus casts a spell that gradually heals himself or\
-        \ one of his allies over a period of time. \u25AA Auto-Life: Tidus casts a\
-        \ spell that ensures that, upon death, he will be automatically revived. Holy:\
-        \ Tidus calls down a massive beam of holy-elemental energy to blast his foes.\
-        \ Wakka's Sphere Grid: \u25AA Dark"
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-tidus-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29_%28Final_Fantasy%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Ghost (Canon, Game & Watch)/ZeroTwo64
-    source_type: mediawiki
-    revision_id: '53753'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 1947
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '9-A, likely 8-B Name: Ghost Origin: The Legend of Zelda / Game & Watch
-        Gender: Unknown Age: Unknown Classification: Ghost'
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Ghost Physiology, Non-Corporeal, Invisibility, Immortality (Type 7),
-        Flight, can throw spears.
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Room Level (Is able to reach this level of KE by throwing its spear),
-        likely City Block Level (Can harm Link)
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (Can throw spears at this speed)
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least City Block Level (Can't be defeated by Link. Non-Corporeality
-        and Invisibility make it hard to kill)
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None notable ==Gallery== ghostart.png|Ghost's artwork. Category:ZeroTwo64
-        Category:Tier 9 Category:Tier 8
-      source_id: character-stats-profiles-tidus-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|ghost canon game watch
-      zerotwo64|53753
-    retryable: false
-    exception_class: ''
   - source_id: mediawiki-tidus-game
-    url: https://vsbattles.fandom.com/wiki/Tidus_(Game)
+    url: https://vsbattles.fandom.com/wiki/Tidus
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id015
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2374,10 +1528,10 @@ repair:
     - weaknesses
     normalized_page_title: Tidus
     source_type: mediawiki
-    revision_id: '9452480'
+    revision_id: '9665140'
     fetch_status: fetched
     http_status: 200
-    content_length: 35196
+    content_length: 35284
     content_kind: api_json
     headings_detected:
     - Summary
@@ -2390,6 +1544,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2403,7 +1558,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id016
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -2415,14 +1570,8 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{4-A}} | {{4-A}} | {{2-A}}'
-      source_id: mediawiki-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Acrobatics, Skilled Swordsman,
+      value: 'Superhuman Physical Characteristics, Acrobatics, Skilled Swordsman,
         Immortality (Type 8, dependent on being unaware he was beckoned back by Yuna),
         Magic, Non-Physical Interaction (Able to kill the lingering Ghosts in the
         Cavern of the Stolen Fayth and the Wraiths found Inside Sin), Statistics Amplification
@@ -2453,40 +1602,40 @@ repair:
         Time Slow and Stop), Mind Manipulation, Empathic Manipulation, Curse Manipulation,
         Radiation Manipulation, Absolute Zero (Can withstand Shiva''s presence and
         attacks), and Memory Manipulation (Can challenge Sin head-on without being
-        impeded by its toxin) |-|Dissidia= {{#tag:tabber| {{!}}-{{!}}Abilites= All
-        previous abilities enhanced, Immortality (Type 8,reliant on his Crystal which
-        let him return from fading from existence after Cosmos'' death) & Regeneration
-        (Low-Godly), Summoning (Can summon various Eidolons from Summonstones and
-        the World of Illusions), Self-Sustenance (Type 2, has no need to eat or drinkDissidia
-        Final Fantasy Opera Omnia), Willpower Manipulation (a person''s will is power
-        there and enables them to do a multitude of things the stronger their willDissidia
-        Final Fantasy Opera Omnia), Reactive Power Level (the greater someone''s will,
-        the greater their powerDissidia Final Fantasy Opera Omnia), Law Manipulation
-        (Beings with strong wills can overwrite the laws of the world and bend them
-        to their willDissidia Final Fantasy Opera Omnia), Creation (With a powerful
-        enough will, once can create various things such as phone lines, airships
-        and even entire countries and worldsDissidia Final Fantasy Opera Omnia), Sealing
-        (Can seal off large areas and people with her will, such as Cecil sealing
-        himself in Castle Baron or the cast sealing Kefka inside a TorsionDissidia
-        Final Fantasy Opera Omnia), Dimensional Travel (Characters can open Torsions,
-        rifts in space-time to travel various dimensionsDissidia Final Fantasy Opera
-        Omnia), and Immortality (Type 2) (Due to the crystal core of darkness''s influence
-        in the hands of Ardyn, warriors will not die no matter how injured they are)
-        {{!}}-{{!}}Resistances= Resistance to Mind Manipulation, Soul Manipulation
-        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
-        living being on the planet), Corruption & Body Puppetry (Due to their light,
-        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
-        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
-        which is capable of affecting the hearts and minds of all living beings on
-        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
-        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
-        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
-        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
-        level,Dissidia Final Fantasy and can warp them into another dimension), Extreme
-        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
-        (Can survive Shiva''s ice attacks, including Diamond Dust), {{!}}-{{!}}With
-        Eidolons= Hellfire Manipulation (Via Ifrit, Phoenix, Rubicante, and Marilith),
-        Intangibility (Ifrit can become smoke or'
+        impeded by its toxin) All previous abilities enhanced, Immortality (Type 8,reliant
+        on his Crystal which let him return from fading from existence after Cosmos''
+        death) & Regeneration (Low-Godly), Summoning (Can summon various Eidolons
+        from Summonstones and the World of Illusions), Self-Sustenance (Type 2, has
+        no need to eat or drinkDissidia Final Fantasy Opera Omnia), Willpower Manipulation
+        (a person''s will is power there and enables them to do a multitude of things
+        the stronger their willDissidia Final Fantasy Opera Omnia), Reactive Power
+        Level (the greater someone''s will, the greater their powerDissidia Final
+        Fantasy Opera Omnia), Law Manipulation (Beings with strong wills can overwrite
+        the laws of the world and bend them to their willDissidia Final Fantasy Opera
+        Omnia), Creation (With a powerful enough will, once can create various things
+        such as phone lines, airships and even entire countries and worldsDissidia
+        Final Fantasy Opera Omnia), Sealing (Can seal off large areas and people with
+        her will, such as Cecil sealing himself in Castle Baron or the cast sealing
+        Kefka inside a TorsionDissidia Final Fantasy Opera Omnia), Dimensional Travel
+        (Characters can open Torsions, rifts in space-time to travel various dimensionsDissidia
+        Final Fantasy Opera Omnia), and Immortality (Type 2) (Due to the crystal core
+        of darkness''s influence in the hands of Ardyn, warriors will not die no matter
+        how injured they are) Resistance to Mind Manipulation, Soul Manipulation (Via
+        Zalera, the Death Serpah, who was going to absorb the souls of every living
+        being on the planet), Corruption & Body Puppetry (Due to their light, Warriors
+        of Materia can dispel attempts to control them), Empathic Manipulation, and
+        Madness Manipulation (Type 3; Resistant to the effects of the True Moon, which
+        is capable of affecting the hearts and minds of all living beings on the planetFinal
+        Fantasy IV: The After Years), Gravity Manipulation (Unaffected by the gravitational
+        pull of the True Moon, which even the Lunar Whale couldn''t escape from),
+        Spatial Manipulation, Deconstruction, and BFR (Can withstand the attacks of
+        Atomos, who manipulates space, crush enemies down to a molecular level,Dissidia
+        Final Fantasy and can warp them into another dimension), Extreme Cold and
+        Cosmic Radiations (Can fight and survive on the moon), Absolute Zero (Can
+        survive Shiva''s ice attacks, including Diamond Dust), Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Intangibility (Ifrit can become
+        smoke or flameWar of the Visions: Final Fantasy Brave Exvius), Ice Manipulation
+        and Absolute Zero and Duplication'
       source_id: mediawiki-tidus-game
       provider_id: vsbattles
       authority: high
@@ -2531,8 +1680,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: range
-      value: Extended Melee Range with Brotherhood/Caladbolg, several dozen meters
-        with magic and Blitzball techniques
+      value: Extended Melee Range with Brotherhood/Caladbolg, Tens of Meters with
+        magic and Blitzball techniques
       source_id: mediawiki-tidus-game
       provider_id: vsbattles
       authority: high
@@ -2549,342 +1698,80 @@ repair:
         \ regardless of attempts to increase their durability, and makes Tidus instinctively\
         \ evade and counter attacks. \u25AA Blitzball: A spherically-studded ball\
         \ used in the Blitzball sport across Spira. Tidus primarily uses it for ranged\
-        \ attacks, hitting enemies from several dozen meters away."
+        \ attacks, hitting enemies from tens of meters away."
       source_id: mediawiki-tidus-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Tidus is a master swordsman and shield wielder at the end of the game,
-        comparable to legendary warriors and Guardians like his father Jecht and Auron.
-        While he lags behind them in blocking attacks and in the use of brute force,
-        he is far more agile and acrobatic, specializing in dodging attacks before
-        dishing out lethal counterattacks in return with a variety of swift maneuvers.
-        He also triumphed over Spira's strongest, most notably, he managed to defeat
-        Yu Yevon and Sin once and for all, a feat thought impossible up to that point.
+      value: Above Average (Tidus is a master swordsman and shield wielder by the
+        end of the game, comparable to legendary warriors and Guardians like his father
+        Jecht and Auron. While he lags behind them in blocking attacks and in the
+        use of brute force, he is far more agile and acrobatic, specializing in dodging
+        attacks before dishing out lethal counterattacks in return with a variety
+        of swift maneuvers. He also triumphed over Spira's strongest, most notably,
+        he managed to defeat Yu Yevon and Sin once and for all, a feat thought impossible
+        up to that point)
       source_id: mediawiki-tidus-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "None notable Notable Attacks/Techniques: |-|Innate= \u25AA Cheer: Tidus\
-        \ enhances his party's attack power and durability. \u25AA Hastega: Tidus\
-        \ accelerates time for his party, dramatically increasing their speed. \u25AA\
-        \ Slowga: Tidus distorts time around his enemies, dramatically decreasing\
-        \ their speed. \u25AA Delay Buster: Tidus strikes his enemy with an incredibly\
-        \ powerful blow, significantly increasing the time they need to take their\
-        \ next action. \u25AA Provoke: Tidus taunts an enemy, encouraging them to\
-        \ attack him over his allies. \u25AA Swordplay: Tidus' Overdrive, a collection\
-        \ of sword techniques that he gradually develops as he uses this Overdrive\
-        \ repeatedly. * Spiral Cut: Tidus performs a series of flips and cartwheels\
-        \ towards his enemy, before leaping and slamming his sword down on them. *\
-        \ Slice & Dice: Tidus darts back and forth around his enemies, striking them\
-        \ six times. * Energy Rain: Tidus jumps off of one enemy into the air, charging\
-        \ energy in his sword and throwing it down to explode on enemies. * Blitz\
-        \ Ace: Tidus leaps forward and slashes at his enemy eight times, before using\
-        \ the hilt of his sword to leap into the air and kicking a Blitzball into\
-        \ his target, which explodes on impact. |-|Inherited= Contrary to popular\
-        \ belief, the party members are not limited to their sections of the Sphere\
-        \ Grid and are capable of branching into the sections of other characters.\
-        \ Key Spheres, which are strictly used for this purpose, are canonically given\
-        \ out at certain points in the story, and character-exclusive abilities like\
-        \ Lulu's Black Magic and Kimahri's Lancet are discussed as if they are common\
-        \ abilities and not completely restricted to the characters in question. As\
-        \ a result, the party is entirely capable of using each others' abilities,\
-        \ as long as they are part of the Sphere Grid. Yuna's Sphere Grid: \u25AA\
-        \ Curaga: Tidus significantly heals himself or one of his allies. \u25AA NulBlaze:\
-        \ Tidus nullifies all fire damage for himself and his allies for one attack.\
-        \ \u25AA NulShock: Tidus nullifies all lightning damage for himself and his\
-        \ allies for one attack. \u25AA NulTide: Tidus nullifies all water damage\
-        \ for himself and his allies for one attack. \u25AA NulFrost: Tidus nullifies\
-        \ all ice damage for himself and his allies for one attack. \u25AA Esuna:\
-        \ Tidus removes all negative status effects on himself or one of his allies.\
-        \ \u25AA Life: Tidus revives one of his allies if they happen to die, though\
-        \ they are nonetheless still significantly injured. \u25AA Full-Life: Tidus\
-        \ revives one of his allies at their full strength. \u25AA Shell: Tidus enhances\
-        \ an ally's magic defense, halving the damage of all spells directed at them.\
-        \ However, this is also inclusive of any healing spells. \u25AA Protect: Tidus\
-        \ enhances an ally's physical defense, halving any damage they receive from\
-        \ physical attacks. \u25AA Reflect: Tidus creates a barrier around himself\
-        \ that automatically reflects any spell back at his enemy. \u25AA Dispel:\
-        \ Tidus removes any sort of buffs his enemy has that would increase their\
-        \ power. \u25AA Regen: Tidus casts a spell that gradually heals himself or\
-        \ one of his allies over a period of time. \u25AA Auto-Life: Tidus casts a\
-        \ spell that ensures that, upon death, he will be automatically revived. Holy:\
-        \ Tidus calls down a massive beam of holy-elemental energy to blast his foes.\
-        \ Wakka's Sphere Grid: \u25AA Dark"
+      value: "None notable Notable Attacks/Techniques: \u25AA Cheer: Tidus enhances\
+        \ his party's attack power and durability. \u25AA Hastega: Tidus accelerates\
+        \ time for his party, dramatically increasing their speed. \u25AA Slowga:\
+        \ Tidus distorts time around his enemies, dramatically decreasing their speed.\
+        \ \u25AA Delay Buster: Tidus strikes his enemy with an incredibly powerful\
+        \ blow, significantly increasing the time they need to take their next action.\
+        \ \u25AA Provoke: Tidus taunts an enemy, encouraging them to attack him over\
+        \ his allies. \u25AA Swordplay: Tidus' Overdrive, a collection of sword techniques\
+        \ that he gradually develops as he uses this Overdrive repeatedly. * Spiral\
+        \ Cut: Tidus performs a series of flips and cartwheels towards his enemy,\
+        \ before leaping and slamming his sword down on them. * Slice & Dice: Tidus\
+        \ darts back and forth around his enemies, striking them six times. * Energy\
+        \ Rain: Tidus jumps off of one enemy into the air, charging energy in his\
+        \ sword and throwing it down to explode on enemies. * Blitz Ace: Tidus leaps\
+        \ forward and slashes at his enemy eight times, before using the hilt of his\
+        \ sword to leap into the air and kicking a Blitzball into his target, which\
+        \ explodes on impact. Contrary to popular belief, the party members are not\
+        \ limited to their sections of the Sphere Grid and are capable of branching\
+        \ into the sections of other characters. Key Spheres, which are strictly used\
+        \ for this purpose, are canonically given out at certain points in the story,\
+        \ and character-exclusive abilities like Lulu's Black Magic and Kimahri's\
+        \ Lancet are discussed as if they are common abilities and not completely\
+        \ restricted to the characters in question. As a result, the party is entirely\
+        \ capable of using each others' abilities, as long as they are part of the\
+        \ Sphere Grid. Yuna's Sphere Grid: \u25AA Curaga: Tidus significantly heals\
+        \ himself or one of his allies. \u25AA NulBlaze: Tidus nullifies all fire\
+        \ damage for himself and his allies for one attack. \u25AA NulShock: Tidus\
+        \ nullifies all lightning damage for himself and his allies for one attack.\
+        \ \u25AA NulTide: Tidus nullifies all water damage for himself and his allies\
+        \ for one attack. \u25AA NulFrost: Tidus nullifies all ice damage for himself\
+        \ and his allies for one attack. \u25AA Esuna: Tidus removes all negative\
+        \ status effects on himself or one of his allies. \u25AA Life: Tidus revives\
+        \ one of his allies if they happen to die, though they are nonetheless still\
+        \ significantly injured. \u25AA Full-Life: Tidus revives one of his allies\
+        \ at their full strength. \u25AA Shell: Tidus enhances an ally's magic defense,\
+        \ halving the damage of all spells directed at them. However, this is also\
+        \ inclusive of any healing spells. \u25AA Protect: Tidus enhances an ally's\
+        \ physical defense, halving any damage they receive from physical attacks.\
+        \ \u25AA Reflect: Tidus creates a barrier around himself that automatically\
+        \ reflects any spell back at his enemy. \u25AA Dispel: Tidus removes any sort\
+        \ of buffs his enemy has that would increase their power. \u25AA Regen: Tidus\
+        \ casts a spell that gradually heals himself or one of his allies over a period\
+        \ of time. \u25AA Auto-Life: Tidus casts a spell that ensures that, upon death,\
+        \ he will be automatically revived. Holy: Tidus calls down a massive beam\
+        \ of holy-elemental energy to blast his foes. Wakka's Sphere Grid: \u25AA\
+        \ Dark"
       source_id: mediawiki-tidus-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-tidus-game
-    url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id017
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Tidus
-    source_type: mediawiki
-    revision_id: '9452480'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 35196
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id018
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
     - field: tier
-      value: '{{4-A}} | {{4-A}} | {{2-A}}'
-      source_id: vsbattles-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Acrobatics, Skilled Swordsman,
-        Immortality (Type 8, dependent on being unaware he was beckoned back by Yuna),
-        Magic, Non-Physical Interaction (Able to kill the lingering Ghosts in the
-        Cavern of the Stolen Fayth and the Wraiths found Inside Sin), Statistics Amplification
-        (Via Cheer, Aim, Focus, Reflex, Protect and Shell), Time Manipulation (Can
-        accelerate himself or slow down enemies in time with Hastega and Slowga),
-        Energy Projection (Via Energy Rain and Flare), Healing, Damage Negation (Can
-        completely nullify certain elemental attacks once via NulBlaze, NulShock,
-        NulTide and NulFrost), Purification (Type 3 via Esuna and various items),
-        Resurrection (Via Life, Full-Life and Auto-Life), Attack Reflection (Via Reflect),
-        Power Nullification (Via Dispel and Silence Attack/Buster), Regeneration (Mid-Low
-        via Regen), Radiation Manipulation, Holy Manipulation, Darkness Manipulation
-        (Via Dark Attack/Buster), Sleep Manipulation (Via Sleep Attack/Buster), Absorption
-        (Via Drain, Osmose and Eater abilities), Fire Manipulation, Ice Manipulation,
-        Electricity Manipulation, Water Manipulation, Poison Manipulation (Via Bio),
-        Gravity Manipulation (Via Demi), Death Manipulation (Via Death), Information
-        Analysis (Via Scan and Sensor), Probability Manipulation (Via Jinx and Luck),
-        Statistics Reduction (Via Break abilities), Damage Reduction (Via Sentinel),
-        Fear Manipulation (Via Threaten), Necromancy and Transmutation (Via Zombie
-        Attack), Social Influencing (Can bribe mindless monsters to leave battle),
-        Power Mimicry (Via Copycat), Durability Negation (Via Piercing and Demi),
-        Enhanced Senses and Stealth Mastery (Via Initiative), Petrification (Via Stonestrike),
-        Curse Manipulation and Death Manipulation (Via Candles of Life), Can draw
-        resistances from targets (Was capable of drawing resistances to Earth and
-        Wind manipulation from Wol.) Resistance to Fire Manipulation, Ice Manipulation,
-        Electricity Manipulation, Water Manipulation, Darkness Manipulation, Power
-        Nullification, Sleep Manipulation, Poison Manipulation, Petrification, Death
-        Manipulation, Necromancy, Transmutation, Time Manipulation (In the form of
-        Time Slow and Stop), Mind Manipulation, Empathic Manipulation, Curse Manipulation,
-        Radiation Manipulation, Absolute Zero (Can withstand Shiva''s presence and
-        attacks), and Memory Manipulation (Can challenge Sin head-on without being
-        impeded by its toxin) |-|Dissidia= {{#tag:tabber| {{!}}-{{!}}Abilites= All
-        previous abilities enhanced, Immortality (Type 8,reliant on his Crystal which
-        let him return from fading from existence after Cosmos'' death) & Regeneration
-        (Low-Godly), Summoning (Can summon various Eidolons from Summonstones and
-        the World of Illusions), Self-Sustenance (Type 2, has no need to eat or drinkDissidia
-        Final Fantasy Opera Omnia), Willpower Manipulation (a person''s will is power
-        there and enables them to do a multitude of things the stronger their willDissidia
-        Final Fantasy Opera Omnia), Reactive Power Level (the greater someone''s will,
-        the greater their powerDissidia Final Fantasy Opera Omnia), Law Manipulation
-        (Beings with strong wills can overwrite the laws of the world and bend them
-        to their willDissidia Final Fantasy Opera Omnia), Creation (With a powerful
-        enough will, once can create various things such as phone lines, airships
-        and even entire countries and worldsDissidia Final Fantasy Opera Omnia), Sealing
-        (Can seal off large areas and people with her will, such as Cecil sealing
-        himself in Castle Baron or the cast sealing Kefka inside a TorsionDissidia
-        Final Fantasy Opera Omnia), Dimensional Travel (Characters can open Torsions,
-        rifts in space-time to travel various dimensionsDissidia Final Fantasy Opera
-        Omnia), and Immortality (Type 2) (Due to the crystal core of darkness''s influence
-        in the hands of Ardyn, warriors will not die no matter how injured they are)
-        {{!}}-{{!}}Resistances= Resistance to Mind Manipulation, Soul Manipulation
-        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
-        living being on the planet), Corruption & Body Puppetry (Due to their light,
-        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
-        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
-        which is capable of affecting the hearts and minds of all living beings on
-        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
-        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
-        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
-        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
-        level,Dissidia Final Fantasy and can warp them into another dimension), Extreme
-        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
-        (Can survive Shiva''s ice attacks, including Diamond Dust), {{!}}-{{!}}With
-        Eidolons= Hellfire Manipulation (Via Ifrit, Phoenix, Rubicante, and Marilith),
-        Intangibility (Ifrit can become smoke or'
-      source_id: vsbattles-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multi-Solar System level (Capable of hurting Sin with his attacks, who
-        is unaffected by the Gravitational Forces created as an effect of his Giga
-        Graviton move. Furthermore, is considered by Lulu to have proven himself as
-        a Guardian, maybe even as the best, after the final battle with Overdrive
-        Sin, Implying his efforts and the efforts of at least one more Guardian were
-        significant towards defeating Sin) | Multi-Solar System level (Can stalemate
-        Wol, grew more powerful during his time in Palamecia Mobius Final Fantasy)
-        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
-        power from the gods of the cycle. Participated in the defeat of Shinryu)
-      source_id: vsbattles-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: FTL+ (Capable of fighting Braska's Final Aeon) | Massively FTL+ (Can
-        keep up with the other Warriors of Materia)
-      source_id: vsbattles-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multi-Solar System level (Can withstand the gravitational force exerted
-        by Sin's Giga Graviton, however a direct impact would instantly kill him.
-        Additionally, Tidus, regarded as one of the best Guardians ever, should be
-        no less durable than Rikku, a Guardian of lesser note able to survive multiple
-        Meteor spells and an Ultima from Trema, a character stronger than a Final
-        Aeon-level Fiend, Paragon/Lord Zaon) | Multi-Solar System level | Multiverse
-        level+
-      source_id: vsbattles-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Brotherhood/Caladbolg, several dozen meters
-        with magic and Blitzball techniques
-      source_id: vsbattles-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: "\u25AA Longsword: Tidus' initial weapon, given to him by Auron in the\
-        \ Dream Zanarkand as a gift from Jecht. A simple sword that he uses to fight\
-        \ off enemies \u25AA Brotherhood: A sword gifted to Tidus by Wakka, originally\
-        \ meant for his brother Chappu. It comes with both the Waterstrike and Sensor\
-        \ abilities, adding water elemental damage to its attacks and analyzing an\
-        \ enemy's strength, in addition to significantly boosting Tidus' attack power.\
-        \ \u25AA Caladbolg: Tidus' Celestial Weapon, obtained in the Calm Lands after\
-        \ escaping from Bevelle. It naturally ignores enemy defense, harming them\
-        \ regardless of attempts to increase their durability, and makes Tidus instinctively\
-        \ evade and counter attacks. \u25AA Blitzball: A spherically-studded ball\
-        \ used in the Blitzball sport across Spira. Tidus primarily uses it for ranged\
-        \ attacks, hitting enemies from several dozen meters away."
-      source_id: vsbattles-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Tidus is a master swordsman and shield wielder at the end of the game,
-        comparable to legendary warriors and Guardians like his father Jecht and Auron.
-        While he lags behind them in blocking attacks and in the use of brute force,
-        he is far more agile and acrobatic, specializing in dodging attacks before
-        dishing out lethal counterattacks in return with a variety of swift maneuvers.
-        He also triumphed over Spira's strongest, most notably, he managed to defeat
-        Yu Yevon and Sin once and for all, a feat thought impossible up to that point.
-      source_id: vsbattles-tidus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "None notable Notable Attacks/Techniques: |-|Innate= \u25AA Cheer: Tidus\
-        \ enhances his party's attack power and durability. \u25AA Hastega: Tidus\
-        \ accelerates time for his party, dramatically increasing their speed. \u25AA\
-        \ Slowga: Tidus distorts time around his enemies, dramatically decreasing\
-        \ their speed. \u25AA Delay Buster: Tidus strikes his enemy with an incredibly\
-        \ powerful blow, significantly increasing the time they need to take their\
-        \ next action. \u25AA Provoke: Tidus taunts an enemy, encouraging them to\
-        \ attack him over his allies. \u25AA Swordplay: Tidus' Overdrive, a collection\
-        \ of sword techniques that he gradually develops as he uses this Overdrive\
-        \ repeatedly. * Spiral Cut: Tidus performs a series of flips and cartwheels\
-        \ towards his enemy, before leaping and slamming his sword down on them. *\
-        \ Slice & Dice: Tidus darts back and forth around his enemies, striking them\
-        \ six times. * Energy Rain: Tidus jumps off of one enemy into the air, charging\
-        \ energy in his sword and throwing it down to explode on enemies. * Blitz\
-        \ Ace: Tidus leaps forward and slashes at his enemy eight times, before using\
-        \ the hilt of his sword to leap into the air and kicking a Blitzball into\
-        \ his target, which explodes on impact. |-|Inherited= Contrary to popular\
-        \ belief, the party members are not limited to their sections of the Sphere\
-        \ Grid and are capable of branching into the sections of other characters.\
-        \ Key Spheres, which are strictly used for this purpose, are canonically given\
-        \ out at certain points in the story, and character-exclusive abilities like\
-        \ Lulu's Black Magic and Kimahri's Lancet are discussed as if they are common\
-        \ abilities and not completely restricted to the characters in question. As\
-        \ a result, the party is entirely capable of using each others' abilities,\
-        \ as long as they are part of the Sphere Grid. Yuna's Sphere Grid: \u25AA\
-        \ Curaga: Tidus significantly heals himself or one of his allies. \u25AA NulBlaze:\
-        \ Tidus nullifies all fire damage for himself and his allies for one attack.\
-        \ \u25AA NulShock: Tidus nullifies all lightning damage for himself and his\
-        \ allies for one attack. \u25AA NulTide: Tidus nullifies all water damage\
-        \ for himself and his allies for one attack. \u25AA NulFrost: Tidus nullifies\
-        \ all ice damage for himself and his allies for one attack. \u25AA Esuna:\
-        \ Tidus removes all negative status effects on himself or one of his allies.\
-        \ \u25AA Life: Tidus revives one of his allies if they happen to die, though\
-        \ they are nonetheless still significantly injured. \u25AA Full-Life: Tidus\
-        \ revives one of his allies at their full strength. \u25AA Shell: Tidus enhances\
-        \ an ally's magic defense, halving the damage of all spells directed at them.\
-        \ However, this is also inclusive of any healing spells. \u25AA Protect: Tidus\
-        \ enhances an ally's physical defense, halving any damage they receive from\
-        \ physical attacks. \u25AA Reflect: Tidus creates a barrier around himself\
-        \ that automatically reflects any spell back at his enemy. \u25AA Dispel:\
-        \ Tidus removes any sort of buffs his enemy has that would increase their\
-        \ power. \u25AA Regen: Tidus casts a spell that gradually heals himself or\
-        \ one of his allies over a period of time. \u25AA Auto-Life: Tidus casts a\
-        \ spell that ensures that, upon death, he will be automatically revived. Holy:\
-        \ Tidus calls down a massive beam of holy-elemental energy to blast his foes.\
-        \ Wakka's Sphere Grid: \u25AA Dark"
-      source_id: vsbattles-tidus-game
+      value: '| Key: Final Fantasy X | Mobius Final Fantasy | Dissidia Name: Tidus
+        Origin: Final Fantasy X Gender: Male Age: 17 Classification: Human/Dream of
+        the Fayth, Guardian, Blitzball Player, Ace'
+      source_id: mediawiki-tidus-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -2898,14 +1785,14 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
+    duplicate_key: vsbattles.fandom.com|tidus|9665140
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-tidus-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/Axel_(Canon,_Twisted_Metal)/Unbacked0
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id019
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -2928,6 +1815,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2941,7 +1829,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id020
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2952,8 +1840,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '9-C, 8-C with Axel (Vehicle) Name: Axel Origin: Twisted Metal Gender:
-        Male Age: 35 Classification: Participant in Twisted Metal'
+      value: 9-C, 8-C with Axel (Vehicle)
       source_id: character-stats-profiles-tidus-game
       provider_id: character_stats_profiles
       authority: high
@@ -2962,11 +1849,10 @@ repair:
       value: Axel (Driver)= Superhuman Physical Characteristics, Cyborgization (Partial,
         Axel has robotic feet and hands after tearing them off), Vehicular Mastery
         (Has entered and survived multiple Twisted Metal contests, having to fight
-        against the world's greatest combat drivers every time) |-|Axel (Vehicle)=
-        Superhuman Physical Characteristics, Explosion Manipulation (With missiles),
-        Homing Attack (With Homing Missiles), Fire Manipulation (With Fire Missiles),
-        Ice Manipulation (With Freeze Missiles), Electricity Manipulation (With Crowd
-        Controller)
+        against the world's greatest combat drivers every time) Axel (Vehicle)= Superhuman
+        Physical Characteristics, Explosion Manipulation (With missiles), Homing Attack
+        (With Homing Missiles), Fire Manipulation (With Fire Missiles), Ice Manipulation
+        (With Freeze Missiles), Electricity Manipulation (With Crowd Controller)
       source_id: character-stats-profiles-tidus-game
       provider_id: character_stats_profiles
       authority: high
@@ -3014,11 +1900,116 @@ repair:
       unbacked0|242307
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-tidus-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Tidus_Game_Final_Fantasy
+  - source_id: character-stats-profiles-tidus-game-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Ghost_(Canon,_Game_%26_Watch)/ZeroTwo64
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id021
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Ghost (Canon, Game & Watch)/ZeroTwo64
+    source_type: mediawiki
+    revision_id: '53753'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 1947
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-A, likely 8-B
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Ghost Physiology, Non-Corporeal, Invisibility, Immortality (Type 7),
+        Flight, can throw spears.
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Room Level (Is able to reach this level of KE by throwing its spear),
+        likely City Block Level (Can harm Link)
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic (Can throw spears at this speed)
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least City Block Level (Can't be defeated by Link. Non-Corporeality
+        and Invisibility make it hard to kill)
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: None notable ==Gallery== ghostart.png|Ghost's artwork. Category:ZeroTwo64
+        Category:Tier 9 Category:Tier 8
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|ghost canon game watch
+      zerotwo64|53753
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-tidus-game-final-fantasy
+    url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29_Final_Fantasy
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -3031,10 +2022,10 @@ repair:
     - weaknesses
     normalized_page_title: Tidus
     source_type: mediawiki
-    revision_id: '9452480'
+    revision_id: '9665140'
     fetch_status: fetched
     http_status: 200
-    content_length: 35196
+    content_length: 35284
     content_kind: api_json
     headings_detected:
     - Summary
@@ -3047,6 +2038,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -3060,7 +2052,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id022
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -3070,14 +2062,8 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{4-A}} | {{4-A}} | {{2-A}}'
-      source_id: vsbattles-tidus-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Acrobatics, Skilled Swordsman,
+      value: 'Superhuman Physical Characteristics, Acrobatics, Skilled Swordsman,
         Immortality (Type 8, dependent on being unaware he was beckoned back by Yuna),
         Magic, Non-Physical Interaction (Able to kill the lingering Ghosts in the
         Cavern of the Stolen Fayth and the Wraiths found Inside Sin), Statistics Amplification
@@ -3108,40 +2094,40 @@ repair:
         Time Slow and Stop), Mind Manipulation, Empathic Manipulation, Curse Manipulation,
         Radiation Manipulation, Absolute Zero (Can withstand Shiva''s presence and
         attacks), and Memory Manipulation (Can challenge Sin head-on without being
-        impeded by its toxin) |-|Dissidia= {{#tag:tabber| {{!}}-{{!}}Abilites= All
-        previous abilities enhanced, Immortality (Type 8,reliant on his Crystal which
-        let him return from fading from existence after Cosmos'' death) & Regeneration
-        (Low-Godly), Summoning (Can summon various Eidolons from Summonstones and
-        the World of Illusions), Self-Sustenance (Type 2, has no need to eat or drinkDissidia
-        Final Fantasy Opera Omnia), Willpower Manipulation (a person''s will is power
-        there and enables them to do a multitude of things the stronger their willDissidia
-        Final Fantasy Opera Omnia), Reactive Power Level (the greater someone''s will,
-        the greater their powerDissidia Final Fantasy Opera Omnia), Law Manipulation
-        (Beings with strong wills can overwrite the laws of the world and bend them
-        to their willDissidia Final Fantasy Opera Omnia), Creation (With a powerful
-        enough will, once can create various things such as phone lines, airships
-        and even entire countries and worldsDissidia Final Fantasy Opera Omnia), Sealing
-        (Can seal off large areas and people with her will, such as Cecil sealing
-        himself in Castle Baron or the cast sealing Kefka inside a TorsionDissidia
-        Final Fantasy Opera Omnia), Dimensional Travel (Characters can open Torsions,
-        rifts in space-time to travel various dimensionsDissidia Final Fantasy Opera
-        Omnia), and Immortality (Type 2) (Due to the crystal core of darkness''s influence
-        in the hands of Ardyn, warriors will not die no matter how injured they are)
-        {{!}}-{{!}}Resistances= Resistance to Mind Manipulation, Soul Manipulation
-        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
-        living being on the planet), Corruption & Body Puppetry (Due to their light,
-        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
-        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
-        which is capable of affecting the hearts and minds of all living beings on
-        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
-        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
-        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
-        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
-        level,Dissidia Final Fantasy and can warp them into another dimension), Extreme
-        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
-        (Can survive Shiva''s ice attacks, including Diamond Dust), {{!}}-{{!}}With
-        Eidolons= Hellfire Manipulation (Via Ifrit, Phoenix, Rubicante, and Marilith),
-        Intangibility (Ifrit can become smoke or'
+        impeded by its toxin) All previous abilities enhanced, Immortality (Type 8,reliant
+        on his Crystal which let him return from fading from existence after Cosmos''
+        death) & Regeneration (Low-Godly), Summoning (Can summon various Eidolons
+        from Summonstones and the World of Illusions), Self-Sustenance (Type 2, has
+        no need to eat or drinkDissidia Final Fantasy Opera Omnia), Willpower Manipulation
+        (a person''s will is power there and enables them to do a multitude of things
+        the stronger their willDissidia Final Fantasy Opera Omnia), Reactive Power
+        Level (the greater someone''s will, the greater their powerDissidia Final
+        Fantasy Opera Omnia), Law Manipulation (Beings with strong wills can overwrite
+        the laws of the world and bend them to their willDissidia Final Fantasy Opera
+        Omnia), Creation (With a powerful enough will, once can create various things
+        such as phone lines, airships and even entire countries and worldsDissidia
+        Final Fantasy Opera Omnia), Sealing (Can seal off large areas and people with
+        her will, such as Cecil sealing himself in Castle Baron or the cast sealing
+        Kefka inside a TorsionDissidia Final Fantasy Opera Omnia), Dimensional Travel
+        (Characters can open Torsions, rifts in space-time to travel various dimensionsDissidia
+        Final Fantasy Opera Omnia), and Immortality (Type 2) (Due to the crystal core
+        of darkness''s influence in the hands of Ardyn, warriors will not die no matter
+        how injured they are) Resistance to Mind Manipulation, Soul Manipulation (Via
+        Zalera, the Death Serpah, who was going to absorb the souls of every living
+        being on the planet), Corruption & Body Puppetry (Due to their light, Warriors
+        of Materia can dispel attempts to control them), Empathic Manipulation, and
+        Madness Manipulation (Type 3; Resistant to the effects of the True Moon, which
+        is capable of affecting the hearts and minds of all living beings on the planetFinal
+        Fantasy IV: The After Years), Gravity Manipulation (Unaffected by the gravitational
+        pull of the True Moon, which even the Lunar Whale couldn''t escape from),
+        Spatial Manipulation, Deconstruction, and BFR (Can withstand the attacks of
+        Atomos, who manipulates space, crush enemies down to a molecular level,Dissidia
+        Final Fantasy and can warp them into another dimension), Extreme Cold and
+        Cosmic Radiations (Can fight and survive on the moon), Absolute Zero (Can
+        survive Shiva''s ice attacks, including Diamond Dust), Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Intangibility (Ifrit can become
+        smoke or flameWar of the Visions: Final Fantasy Brave Exvius), Ice Manipulation
+        and Absolute Zero and Duplication'
       source_id: vsbattles-tidus-game-final-fantasy
       provider_id: vsbattles
       authority: high
@@ -3186,8 +2172,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: range
-      value: Extended Melee Range with Brotherhood/Caladbolg, several dozen meters
-        with magic and Blitzball techniques
+      value: Extended Melee Range with Brotherhood/Caladbolg, Tens of Meters with
+        magic and Blitzball techniques
       source_id: vsbattles-tidus-game-final-fantasy
       provider_id: vsbattles
       authority: high
@@ -3204,70 +2190,79 @@ repair:
         \ regardless of attempts to increase their durability, and makes Tidus instinctively\
         \ evade and counter attacks. \u25AA Blitzball: A spherically-studded ball\
         \ used in the Blitzball sport across Spira. Tidus primarily uses it for ranged\
-        \ attacks, hitting enemies from several dozen meters away."
+        \ attacks, hitting enemies from tens of meters away."
       source_id: vsbattles-tidus-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Tidus is a master swordsman and shield wielder at the end of the game,
-        comparable to legendary warriors and Guardians like his father Jecht and Auron.
-        While he lags behind them in blocking attacks and in the use of brute force,
-        he is far more agile and acrobatic, specializing in dodging attacks before
-        dishing out lethal counterattacks in return with a variety of swift maneuvers.
-        He also triumphed over Spira's strongest, most notably, he managed to defeat
-        Yu Yevon and Sin once and for all, a feat thought impossible up to that point.
+      value: Above Average (Tidus is a master swordsman and shield wielder by the
+        end of the game, comparable to legendary warriors and Guardians like his father
+        Jecht and Auron. While he lags behind them in blocking attacks and in the
+        use of brute force, he is far more agile and acrobatic, specializing in dodging
+        attacks before dishing out lethal counterattacks in return with a variety
+        of swift maneuvers. He also triumphed over Spira's strongest, most notably,
+        he managed to defeat Yu Yevon and Sin once and for all, a feat thought impossible
+        up to that point)
       source_id: vsbattles-tidus-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "None notable Notable Attacks/Techniques: |-|Innate= \u25AA Cheer: Tidus\
-        \ enhances his party's attack power and durability. \u25AA Hastega: Tidus\
-        \ accelerates time for his party, dramatically increasing their speed. \u25AA\
-        \ Slowga: Tidus distorts time around his enemies, dramatically decreasing\
-        \ their speed. \u25AA Delay Buster: Tidus strikes his enemy with an incredibly\
-        \ powerful blow, significantly increasing the time they need to take their\
-        \ next action. \u25AA Provoke: Tidus taunts an enemy, encouraging them to\
-        \ attack him over his allies. \u25AA Swordplay: Tidus' Overdrive, a collection\
-        \ of sword techniques that he gradually develops as he uses this Overdrive\
-        \ repeatedly. * Spiral Cut: Tidus performs a series of flips and cartwheels\
-        \ towards his enemy, before leaping and slamming his sword down on them. *\
-        \ Slice & Dice: Tidus darts back and forth around his enemies, striking them\
-        \ six times. * Energy Rain: Tidus jumps off of one enemy into the air, charging\
-        \ energy in his sword and throwing it down to explode on enemies. * Blitz\
-        \ Ace: Tidus leaps forward and slashes at his enemy eight times, before using\
-        \ the hilt of his sword to leap into the air and kicking a Blitzball into\
-        \ his target, which explodes on impact. |-|Inherited= Contrary to popular\
-        \ belief, the party members are not limited to their sections of the Sphere\
-        \ Grid and are capable of branching into the sections of other characters.\
-        \ Key Spheres, which are strictly used for this purpose, are canonically given\
-        \ out at certain points in the story, and character-exclusive abilities like\
-        \ Lulu's Black Magic and Kimahri's Lancet are discussed as if they are common\
-        \ abilities and not completely restricted to the characters in question. As\
-        \ a result, the party is entirely capable of using each others' abilities,\
-        \ as long as they are part of the Sphere Grid. Yuna's Sphere Grid: \u25AA\
-        \ Curaga: Tidus significantly heals himself or one of his allies. \u25AA NulBlaze:\
-        \ Tidus nullifies all fire damage for himself and his allies for one attack.\
-        \ \u25AA NulShock: Tidus nullifies all lightning damage for himself and his\
-        \ allies for one attack. \u25AA NulTide: Tidus nullifies all water damage\
-        \ for himself and his allies for one attack. \u25AA NulFrost: Tidus nullifies\
-        \ all ice damage for himself and his allies for one attack. \u25AA Esuna:\
-        \ Tidus removes all negative status effects on himself or one of his allies.\
-        \ \u25AA Life: Tidus revives one of his allies if they happen to die, though\
-        \ they are nonetheless still significantly injured. \u25AA Full-Life: Tidus\
-        \ revives one of his allies at their full strength. \u25AA Shell: Tidus enhances\
-        \ an ally's magic defense, halving the damage of all spells directed at them.\
-        \ However, this is also inclusive of any healing spells. \u25AA Protect: Tidus\
-        \ enhances an ally's physical defense, halving any damage they receive from\
-        \ physical attacks. \u25AA Reflect: Tidus creates a barrier around himself\
-        \ that automatically reflects any spell back at his enemy. \u25AA Dispel:\
-        \ Tidus removes any sort of buffs his enemy has that would increase their\
-        \ power. \u25AA Regen: Tidus casts a spell that gradually heals himself or\
-        \ one of his allies over a period of time. \u25AA Auto-Life: Tidus casts a\
-        \ spell that ensures that, upon death, he will be automatically revived. Holy:\
-        \ Tidus calls down a massive beam of holy-elemental energy to blast his foes.\
-        \ Wakka's Sphere Grid: \u25AA Dark"
+      value: "None notable Notable Attacks/Techniques: \u25AA Cheer: Tidus enhances\
+        \ his party's attack power and durability. \u25AA Hastega: Tidus accelerates\
+        \ time for his party, dramatically increasing their speed. \u25AA Slowga:\
+        \ Tidus distorts time around his enemies, dramatically decreasing their speed.\
+        \ \u25AA Delay Buster: Tidus strikes his enemy with an incredibly powerful\
+        \ blow, significantly increasing the time they need to take their next action.\
+        \ \u25AA Provoke: Tidus taunts an enemy, encouraging them to attack him over\
+        \ his allies. \u25AA Swordplay: Tidus' Overdrive, a collection of sword techniques\
+        \ that he gradually develops as he uses this Overdrive repeatedly. * Spiral\
+        \ Cut: Tidus performs a series of flips and cartwheels towards his enemy,\
+        \ before leaping and slamming his sword down on them. * Slice & Dice: Tidus\
+        \ darts back and forth around his enemies, striking them six times. * Energy\
+        \ Rain: Tidus jumps off of one enemy into the air, charging energy in his\
+        \ sword and throwing it down to explode on enemies. * Blitz Ace: Tidus leaps\
+        \ forward and slashes at his enemy eight times, before using the hilt of his\
+        \ sword to leap into the air and kicking a Blitzball into his target, which\
+        \ explodes on impact. Contrary to popular belief, the party members are not\
+        \ limited to their sections of the Sphere Grid and are capable of branching\
+        \ into the sections of other characters. Key Spheres, which are strictly used\
+        \ for this purpose, are canonically given out at certain points in the story,\
+        \ and character-exclusive abilities like Lulu's Black Magic and Kimahri's\
+        \ Lancet are discussed as if they are common abilities and not completely\
+        \ restricted to the characters in question. As a result, the party is entirely\
+        \ capable of using each others' abilities, as long as they are part of the\
+        \ Sphere Grid. Yuna's Sphere Grid: \u25AA Curaga: Tidus significantly heals\
+        \ himself or one of his allies. \u25AA NulBlaze: Tidus nullifies all fire\
+        \ damage for himself and his allies for one attack. \u25AA NulShock: Tidus\
+        \ nullifies all lightning damage for himself and his allies for one attack.\
+        \ \u25AA NulTide: Tidus nullifies all water damage for himself and his allies\
+        \ for one attack. \u25AA NulFrost: Tidus nullifies all ice damage for himself\
+        \ and his allies for one attack. \u25AA Esuna: Tidus removes all negative\
+        \ status effects on himself or one of his allies. \u25AA Life: Tidus revives\
+        \ one of his allies if they happen to die, though they are nonetheless still\
+        \ significantly injured. \u25AA Full-Life: Tidus revives one of his allies\
+        \ at their full strength. \u25AA Shell: Tidus enhances an ally's magic defense,\
+        \ halving the damage of all spells directed at them. However, this is also\
+        \ inclusive of any healing spells. \u25AA Protect: Tidus enhances an ally's\
+        \ physical defense, halving any damage they receive from physical attacks.\
+        \ \u25AA Reflect: Tidus creates a barrier around himself that automatically\
+        \ reflects any spell back at his enemy. \u25AA Dispel: Tidus removes any sort\
+        \ of buffs his enemy has that would increase their power. \u25AA Regen: Tidus\
+        \ casts a spell that gradually heals himself or one of his allies over a period\
+        \ of time. \u25AA Auto-Life: Tidus casts a spell that ensures that, upon death,\
+        \ he will be automatically revived. Holy: Tidus calls down a massive beam\
+        \ of holy-elemental energy to blast his foes. Wakka's Sphere Grid: \u25AA\
+        \ Dark"
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: '| Key: Final Fantasy X | Mobius Final Fantasy | Dissidia Name: Tidus
+        Origin: Final Fantasy X Gender: Male Age: 17 Classification: Human/Dream of
+        the Fayth, Guardian, Blitzball Player, Ace'
       source_id: vsbattles-tidus-game-final-fantasy
       provider_id: vsbattles
       authority: high
@@ -3282,183 +2277,1014 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
+    duplicate_key: vsbattles.fandom.com|tidus|9665140
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-tidus-game-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29_Final_Fantasy
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: Cloud Strife (Canon, Final Fantasy VII)/Plant234
+    source_type: mediawiki
+    revision_id: '468102'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 26511
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-B | At least High 6-A, higher Limit Breaks | 4-A, higher with Limit
+        Breaks | 3-B, higher with Limit Breaks | At least 3-B, likely higher, higher
+        with Limit Breaks
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Base (FFVII)= *Superhuman Physical Characteristics (Is physically built
+        like someone in SOLDIERFinal Fantasy VII (1997). Members of SOLDIER are injected
+        with Jenova cells and large amount of Mako energyFinal Fantasy VII Remake
+        (2020)Crisis Core: Final Fantasy VII (2007), which greatly amplify their physical
+        capabilitiesFinal Fantasy VII 10th Anniversary Ultimania (2007).) *Spirit
+        Energy Manipulation (Beginner during Before Crisis & Crisis Core, Standard
+        during Disc 1, Skilled during Disc 2, Perfected during Disc 3) *Acrobatics
+        & Limited Surface Scaling (Hypermobility & Enhanced Condition; Can preform
+        flips and leaps. SOLDIER members are capable of running up walls using parkourFinal
+        Fantasy VII: The First SOLDIER (2021)) *Enhanced Senses (SOLDIER members possess
+        amazing reflexes) *Master Swordsman & Marksmanship (Ever since Cloud was younger
+        he has displayed a natural talent for swordsmanshipCrisis Core Complete Guide
+        (2008), being able to proficiently use the Buster Sword to impale Sephiroth.
+        Can skilfully use his firearms, as a Shinra infantryman he is trained in the
+        usage various of guns) *Vehicular Mastery (Seen here) *Pressure Point Strikes
+        (Via Critical Hits) *Energy Projection & Homing Attack (With his Blade Beam
+        Limit Breaks) *Non-Physical Interaction (Can harm ghosts of the Gi-Tribe)
+        *Regeneration Negation (Low-High) & Immortality Negation (Type 2, 3, 6 & 7;
+        Can permenantly kill fragments of Jenova. Jenova''s body is extremely ressiliant
+        allowing it to surive even while being reduced to cellsFinal Fantasy VII:
+        Ultimania Omega (2005), furthermore those cells are all controlled by Sephiroth''s
+        will and they will come together and form a new body again. Can also kill
+        members of the Gi Tribe, warriors that were killed in battle but live on as
+        vengeful spirits) Spirit Energy Resistances (Beginner during Before Crisis
+        & Crisis Core, Standard during Disc 1, Skilled during Disc 2, Perfected during
+        Disc 3) Base (AC)= All previous abilities on a greater scale, plus: *Spirit
+        Energy Manipulation (Unleashed) *Dual Wielding (He wields the Fusion Sword
+        now which can split up into multiple parts allowing him to use two blades
+        at a timeFinal Fantasy VII: Advent Children Complete (2009)) *Weapon Control,
+        Flight & Afterimage Creation (Via Omnislash Version 6) *Regeneration Negation
+        (Low-Godly) & Immortality Negation (All previous types, including 4 & 8; Killed
+        Sephiroth again, who can resurrect from the lifestream with Jenova as anchorFinal
+        Fantasy VII: On the Way to a Smile (2009)) Resistances=All previous resistances
+        on a greater scale, plus: *Spirit Energy Resistances (Unleashed) *Magic (Materia
+        allows a person to use magicFinal Fantasy VII Rebirth (2024)) *Summoning (Can
+        summon multiple comets with the Comet Materia) *Forcefield Creation (Can create
+        a barrier with the Barrier Materia) *Attack Reflection (Can cast a reflect
+        spell with the Barrier Materia) *Ice Manipulation (By using Ice materia. Can
+        also use ice spells with the Contain Materia) *Fire Manipulation (By using
+        fire materia. Can also use fire spells with the Contain Materia) *Earth Manipulation
+        (By using the earth materia. Can also use earth spells with the Contain Materia)
+        *Air Manipulation (Can use wind spells with the Contain Materia) *Power Nullification
+        (Using the Contain Materia''s ice spell which has a 68% chance of inflicting
+        stop on the enemy which stops the ATB bar from filling. Can also Destruct
+        Materia which nullfies forcefields) *Petrification (Using the Contain Materias
+        earth spell which has a 32% chance to petrify the enemy) *Madness Manipulation
+        (Type 3; Using the Contain Materias wind spell which has a 32% chance to inflict
+        confusion on the enemy. And by using a mystify spell.) *Death Manipulation
+        (By using the Destruct Materias death spell) *Healing (By using the Full Cure
+        Materia which cures the whole party) *Gravity Manipulation (By using the Gravity
+        Materia) *Purification (Type 1; By using the Heal Materias magic which can
+        remove poison and various status effects) *Electricity Manipulation (By using
+        lightning magic) *Poison Manipulation (With Bio) *Invulnerability (With the
+        shield materia) *Speed Amplification, Time Manipulation & Time Stop (With
+        time magic) *Transmutation (With transform materia & Morph materia) *Sleep
+        Manipulation (With the seal materia which puts sleep magic onto his enemies)
+        *Elemental Manipulation (Putting Elemental Materia on a persons weapon allows
+        them to use elemtal attacks like: Fire, Ice, Lightning, Earth, Poison and
+        Gravity) *Absorption (With various absorb Materia) *Stealth Mastery (With
+        the sneak attack which allows a person to catch their enemies ofgaurd) *Body
+        Puppetry (With the Manipulate Materia which allows the user to choose their
+        enemies next attack) *Power Mimicry (With the Mime Materia) *Clairvoyance
+        (By using the Sense materia which allows the user to gain knowledge of their
+        foes hp, mp and weaknesses) *Accelerated Development (Leveling; with EXP Plus)
+        *Statistics Amplification (With various In'
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Wall level (As an infantryman he could fight on par with avalanche troopers.
+        Avalanche troopers can easily destroy stone with a single punchBefore Crisis:
+        Final Fantasy VII (2004)) | At least Multi-Continent level (Comparable to
+        Vincent who can easily take out 3rd ver. Ravens, who are far superior to the
+        2nd which easily took out 2nd class SOLDIER members who should be on the same
+        level as Zack Fair, someone who is able to go toe to toe with Ifrit1 exaton),
+        higher with Limit Breaks (Limit Breaks are special techniques that can be
+        performed when a person''s Spirit Energy aligns and emits from their body.
+        This "overflow" is achieved as a person keeps fighting, they sustain damage
+        or their rage is pushed to the limit, or experience other intense emotions)
+        == Statistics Values == Category:Plant234 Category:Tier 9 Category:Tier 9-A
+        Category:Tier 6 Category:Tier High 6-A Category:Tier 4 Category:Tier 4-A Category:Tier
+        3 Category:Tier 3-B Category:Superhuman Physical Characteristics Users Category:Acrobats
+        Category:Surface Scalers Category:Enhanced Senses Users Category:Weapon Masters
+        Category:Vehicular Masters Category:Energy Projection Users Category:Homing
+        Attack Users Category:Non-Physical Interaction Users Category:Blessed Users
+        Category:Empowerment Users Category:Statistics Amplification Users Category:Regeneration
+        Users Category:Indomitable Will Users Category:Energy Users Category:Damage
+        Boost Users Category:Aura Users Category:Free Movement Users Category:Underwater
+        Breathers Category:Astral Projection Users Category:Negation Users Category:Immortals
+        Category:Telekinesis Users Category:Flight Users Category:Afterimage Creation
+        Users Category:Magic Users Category:Summoners Category:Forcefield Users Category:Attack
+        Reflection Users Category:Ice Users Category:Fire Users Category:Earth Users
+        Category:Air Users Category:Power Nullification Users Category:Petrification
+        Users Category:Madness Manipulation Users Category:Death Users Category:Healers
+        Category:Gravity Users Category:Purification Users Category:Electricity Users
+        Category:Poison Users Category:Invulnerability Users Category:Time Users Category:Time
+        Stop Users Category:Transmutation Users Category:Sleep Users Category:Element
+        Users Category:Absorption Users Category:Stealth Masters Category:Body Puppetry
+        Users Category:Power Mimicry Users Category:Clairvoyance Users Category:Accelerated
+        Development Users Category:Power Absorption Users Category:Speed Users Category:Damage
+        Reduction Users Category:Resurrection Users Category:Water Users Category:Spatial
+        Users Category:Durability Negation Users Category:Portal Creation Users Category:Pocket
+        Reality Users Category:Absolute Zero Users Category:Hellfire Users Category:Matter
+        Users Category:Radiation Users Category:Holy Users Category:Unholy Users Category:Paralysis
+        Inducement Users Category:Video Game Characters Category:Primary Protagonists
+        Category:Sword Users Category:Mercenaries Category:Male Characters Category:Teenagers
+        Category:Adults Category:Clones Category:Final Fantasy Category:Final Fantasy
+        VII Category:Humans Category:Soldiers Category:Gun Users Category:Heroes Category:Playable
+        Characters'
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Amplification, Time Manipulation & Time Stop (With time magic) *Transmutation
+        (With transform materia & Morph materia) *Sleep Manipulation (With the seal
+        materia which puts sleep magic onto his enemies) *Elemental Manipulation (Putting
+        Elemental Materia on a persons weapon allows them to use elemtal attacks like:
+        Fire, Ice, Lightning, Earth, Poison and Gravity) *Absorption (With various
+        absorb Materia) *Stealth Mastery (With the sneak attack which allows a person
+        to catch their enemies ofgaurd) *Body Puppetry (With the Manipulate Materia
+        which allows the user to choose their enemies next attack) *Power Mimicry
+        (With the Mime Materia) *Clairvoyance (By using the Sense materia which allows
+        the user to gain knowledge of their foes hp, mp and weaknesses) *Accelerated
+        Development (Leveling; with EXP Plus) *Statistics Amplification (With various
+        Independent Materia) Resistances & Immunitys=Resistance or/and Immunity to:
+        *Status Effect Inducement & Transformation (With the Resist spell) *Petrification,
+        Mind Manipulation, Time Stop, Death Manipulation, Madness Manipulation (Type
+        2), Poison Manipulation, Power Nullification, Sleep Manipulation, Time Manipulation
+        Size Manipulation & Transmutation (By combining the Added Effect Materia with
+        various other Materia) *Sleep Manipulation & Transmutation (With Frog Song)
+        *Size Manipulation (With L4 Suicide) *Power Absorption (With Magic Hammer)
+        *Healing (With White Wind) *Speed Manipulation & Damage Reduction (With Big
+        Guard) *Healing & Resurrection (With Angel Whisper) *Defence Amplification
+        (With Dragon Force) *Fire Manipulation (With Flame Thrower & Beta) *Gravity
+        Manipulation (With Laser) *Sleep Manipulation, Poison Manipulation, Madness
+        Manipulation (Type 2), Power Nullification, Transmutation & Size Manipulation
+        (With Bad Breath) *Water Manipulation (With Aqualung) *Electricity Manipulation
+        (With Trine) *Elemental Manipulation (Fire, Ice & Lightning; With Magic Breath)
+        *Death Manipulation (With L5 Death, Roulette & Death Sentence) *Spatial Manipulation
+        &'
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Negation (With Pandora''s Box) Resistances & Immunitys=Resistance or/and
+        Immunity to: *Death Manipulation, Sleep Manipulation, Poison Manipulation,
+        Madness Manipulation (Type 2), Time Manipulation, Time Stop, Transmutation,
+        Size Manipulation, Petrification, Paralysis Inducement and Darkness Manipulation
+        (With White Wind and Angel Whisper) *General'
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife canon final
+      fantasy vii plant234|468102
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-tidus-game-final-fantasy
+    url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29_%28Final_Fantasy%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Tidus
+    source_type: mediawiki
+    revision_id: '9665140'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 35284
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Acrobatics, Skilled Swordsman,
+        Immortality (Type 8, dependent on being unaware he was beckoned back by Yuna),
+        Magic, Non-Physical Interaction (Able to kill the lingering Ghosts in the
+        Cavern of the Stolen Fayth and the Wraiths found Inside Sin), Statistics Amplification
+        (Via Cheer, Aim, Focus, Reflex, Protect and Shell), Time Manipulation (Can
+        accelerate himself or slow down enemies in time with Hastega and Slowga),
+        Energy Projection (Via Energy Rain and Flare), Healing, Damage Negation (Can
+        completely nullify certain elemental attacks once via NulBlaze, NulShock,
+        NulTide and NulFrost), Purification (Type 3 via Esuna and various items),
+        Resurrection (Via Life, Full-Life and Auto-Life), Attack Reflection (Via Reflect),
+        Power Nullification (Via Dispel and Silence Attack/Buster), Regeneration (Mid-Low
+        via Regen), Radiation Manipulation, Holy Manipulation, Darkness Manipulation
+        (Via Dark Attack/Buster), Sleep Manipulation (Via Sleep Attack/Buster), Absorption
+        (Via Drain, Osmose and Eater abilities), Fire Manipulation, Ice Manipulation,
+        Electricity Manipulation, Water Manipulation, Poison Manipulation (Via Bio),
+        Gravity Manipulation (Via Demi), Death Manipulation (Via Death), Information
+        Analysis (Via Scan and Sensor), Probability Manipulation (Via Jinx and Luck),
+        Statistics Reduction (Via Break abilities), Damage Reduction (Via Sentinel),
+        Fear Manipulation (Via Threaten), Necromancy and Transmutation (Via Zombie
+        Attack), Social Influencing (Can bribe mindless monsters to leave battle),
+        Power Mimicry (Via Copycat), Durability Negation (Via Piercing and Demi),
+        Enhanced Senses and Stealth Mastery (Via Initiative), Petrification (Via Stonestrike),
+        Curse Manipulation and Death Manipulation (Via Candles of Life), Can draw
+        resistances from targets (Was capable of drawing resistances to Earth and
+        Wind manipulation from Wol.) Resistance to Fire Manipulation, Ice Manipulation,
+        Electricity Manipulation, Water Manipulation, Darkness Manipulation, Power
+        Nullification, Sleep Manipulation, Poison Manipulation, Petrification, Death
+        Manipulation, Necromancy, Transmutation, Time Manipulation (In the form of
+        Time Slow and Stop), Mind Manipulation, Empathic Manipulation, Curse Manipulation,
+        Radiation Manipulation, Absolute Zero (Can withstand Shiva''s presence and
+        attacks), and Memory Manipulation (Can challenge Sin head-on without being
+        impeded by its toxin) All previous abilities enhanced, Immortality (Type 8,reliant
+        on his Crystal which let him return from fading from existence after Cosmos''
+        death) & Regeneration (Low-Godly), Summoning (Can summon various Eidolons
+        from Summonstones and the World of Illusions), Self-Sustenance (Type 2, has
+        no need to eat or drinkDissidia Final Fantasy Opera Omnia), Willpower Manipulation
+        (a person''s will is power there and enables them to do a multitude of things
+        the stronger their willDissidia Final Fantasy Opera Omnia), Reactive Power
+        Level (the greater someone''s will, the greater their powerDissidia Final
+        Fantasy Opera Omnia), Law Manipulation (Beings with strong wills can overwrite
+        the laws of the world and bend them to their willDissidia Final Fantasy Opera
+        Omnia), Creation (With a powerful enough will, once can create various things
+        such as phone lines, airships and even entire countries and worldsDissidia
+        Final Fantasy Opera Omnia), Sealing (Can seal off large areas and people with
+        her will, such as Cecil sealing himself in Castle Baron or the cast sealing
+        Kefka inside a TorsionDissidia Final Fantasy Opera Omnia), Dimensional Travel
+        (Characters can open Torsions, rifts in space-time to travel various dimensionsDissidia
+        Final Fantasy Opera Omnia), and Immortality (Type 2) (Due to the crystal core
+        of darkness''s influence in the hands of Ardyn, warriors will not die no matter
+        how injured they are) Resistance to Mind Manipulation, Soul Manipulation (Via
+        Zalera, the Death Serpah, who was going to absorb the souls of every living
+        being on the planet), Corruption & Body Puppetry (Due to their light, Warriors
+        of Materia can dispel attempts to control them), Empathic Manipulation, and
+        Madness Manipulation (Type 3; Resistant to the effects of the True Moon, which
+        is capable of affecting the hearts and minds of all living beings on the planetFinal
+        Fantasy IV: The After Years), Gravity Manipulation (Unaffected by the gravitational
+        pull of the True Moon, which even the Lunar Whale couldn''t escape from),
+        Spatial Manipulation, Deconstruction, and BFR (Can withstand the attacks of
+        Atomos, who manipulates space, crush enemies down to a molecular level,Dissidia
+        Final Fantasy and can warp them into another dimension), Extreme Cold and
+        Cosmic Radiations (Can fight and survive on the moon), Absolute Zero (Can
+        survive Shiva''s ice attacks, including Diamond Dust), Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Intangibility (Ifrit can become
+        smoke or flameWar of the Visions: Final Fantasy Brave Exvius), Ice Manipulation
+        and Absolute Zero and Duplication'
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multi-Solar System level (Capable of hurting Sin with his attacks, who
+        is unaffected by the Gravitational Forces created as an effect of his Giga
+        Graviton move. Furthermore, is considered by Lulu to have proven himself as
+        a Guardian, maybe even as the best, after the final battle with Overdrive
+        Sin, Implying his efforts and the efforts of at least one more Guardian were
+        significant towards defeating Sin) | Multi-Solar System level (Can stalemate
+        Wol, grew more powerful during his time in Palamecia Mobius Final Fantasy)
+        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
+        power from the gods of the cycle. Participated in the defeat of Shinryu)
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: FTL+ (Capable of fighting Braska's Final Aeon) | Massively FTL+ (Can
+        keep up with the other Warriors of Materia)
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multi-Solar System level (Can withstand the gravitational force exerted
+        by Sin's Giga Graviton, however a direct impact would instantly kill him.
+        Additionally, Tidus, regarded as one of the best Guardians ever, should be
+        no less durable than Rikku, a Guardian of lesser note able to survive multiple
+        Meteor spells and an Ultima from Trema, a character stronger than a Final
+        Aeon-level Fiend, Paragon/Lord Zaon) | Multi-Solar System level | Multiverse
+        level+
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range with Brotherhood/Caladbolg, Tens of Meters with
+        magic and Blitzball techniques
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: "\u25AA Longsword: Tidus' initial weapon, given to him by Auron in the\
+        \ Dream Zanarkand as a gift from Jecht. A simple sword that he uses to fight\
+        \ off enemies \u25AA Brotherhood: A sword gifted to Tidus by Wakka, originally\
+        \ meant for his brother Chappu. It comes with both the Waterstrike and Sensor\
+        \ abilities, adding water elemental damage to its attacks and analyzing an\
+        \ enemy's strength, in addition to significantly boosting Tidus' attack power.\
+        \ \u25AA Caladbolg: Tidus' Celestial Weapon, obtained in the Calm Lands after\
+        \ escaping from Bevelle. It naturally ignores enemy defense, harming them\
+        \ regardless of attempts to increase their durability, and makes Tidus instinctively\
+        \ evade and counter attacks. \u25AA Blitzball: A spherically-studded ball\
+        \ used in the Blitzball sport across Spira. Tidus primarily uses it for ranged\
+        \ attacks, hitting enemies from tens of meters away."
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average (Tidus is a master swordsman and shield wielder by the
+        end of the game, comparable to legendary warriors and Guardians like his father
+        Jecht and Auron. While he lags behind them in blocking attacks and in the
+        use of brute force, he is far more agile and acrobatic, specializing in dodging
+        attacks before dishing out lethal counterattacks in return with a variety
+        of swift maneuvers. He also triumphed over Spira's strongest, most notably,
+        he managed to defeat Yu Yevon and Sin once and for all, a feat thought impossible
+        up to that point)
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "None notable Notable Attacks/Techniques: \u25AA Cheer: Tidus enhances\
+        \ his party's attack power and durability. \u25AA Hastega: Tidus accelerates\
+        \ time for his party, dramatically increasing their speed. \u25AA Slowga:\
+        \ Tidus distorts time around his enemies, dramatically decreasing their speed.\
+        \ \u25AA Delay Buster: Tidus strikes his enemy with an incredibly powerful\
+        \ blow, significantly increasing the time they need to take their next action.\
+        \ \u25AA Provoke: Tidus taunts an enemy, encouraging them to attack him over\
+        \ his allies. \u25AA Swordplay: Tidus' Overdrive, a collection of sword techniques\
+        \ that he gradually develops as he uses this Overdrive repeatedly. * Spiral\
+        \ Cut: Tidus performs a series of flips and cartwheels towards his enemy,\
+        \ before leaping and slamming his sword down on them. * Slice & Dice: Tidus\
+        \ darts back and forth around his enemies, striking them six times. * Energy\
+        \ Rain: Tidus jumps off of one enemy into the air, charging energy in his\
+        \ sword and throwing it down to explode on enemies. * Blitz Ace: Tidus leaps\
+        \ forward and slashes at his enemy eight times, before using the hilt of his\
+        \ sword to leap into the air and kicking a Blitzball into his target, which\
+        \ explodes on impact. Contrary to popular belief, the party members are not\
+        \ limited to their sections of the Sphere Grid and are capable of branching\
+        \ into the sections of other characters. Key Spheres, which are strictly used\
+        \ for this purpose, are canonically given out at certain points in the story,\
+        \ and character-exclusive abilities like Lulu's Black Magic and Kimahri's\
+        \ Lancet are discussed as if they are common abilities and not completely\
+        \ restricted to the characters in question. As a result, the party is entirely\
+        \ capable of using each others' abilities, as long as they are part of the\
+        \ Sphere Grid. Yuna's Sphere Grid: \u25AA Curaga: Tidus significantly heals\
+        \ himself or one of his allies. \u25AA NulBlaze: Tidus nullifies all fire\
+        \ damage for himself and his allies for one attack. \u25AA NulShock: Tidus\
+        \ nullifies all lightning damage for himself and his allies for one attack.\
+        \ \u25AA NulTide: Tidus nullifies all water damage for himself and his allies\
+        \ for one attack. \u25AA NulFrost: Tidus nullifies all ice damage for himself\
+        \ and his allies for one attack. \u25AA Esuna: Tidus removes all negative\
+        \ status effects on himself or one of his allies. \u25AA Life: Tidus revives\
+        \ one of his allies if they happen to die, though they are nonetheless still\
+        \ significantly injured. \u25AA Full-Life: Tidus revives one of his allies\
+        \ at their full strength. \u25AA Shell: Tidus enhances an ally's magic defense,\
+        \ halving the damage of all spells directed at them. However, this is also\
+        \ inclusive of any healing spells. \u25AA Protect: Tidus enhances an ally's\
+        \ physical defense, halving any damage they receive from physical attacks.\
+        \ \u25AA Reflect: Tidus creates a barrier around himself that automatically\
+        \ reflects any spell back at his enemy. \u25AA Dispel: Tidus removes any sort\
+        \ of buffs his enemy has that would increase their power. \u25AA Regen: Tidus\
+        \ casts a spell that gradually heals himself or one of his allies over a period\
+        \ of time. \u25AA Auto-Life: Tidus casts a spell that ensures that, upon death,\
+        \ he will be automatically revived. Holy: Tidus calls down a massive beam\
+        \ of holy-elemental energy to blast his foes. Wakka's Sphere Grid: \u25AA\
+        \ Dark"
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: '| Key: Final Fantasy X | Mobius Final Fantasy | Dissidia Name: Tidus
+        Origin: Final Fantasy X Gender: Male Age: 17 Classification: Human/Dream of
+        the Fayth, Guardian, Blitzball Player, Ace'
+      source_id: vsbattles-tidus-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|tidus|9665140
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-tidus-game-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29_%28Final_Fantasy%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    normalized_page_title: Cloud Strife (Canon, Final Fantasy VII)/Plant234
+    source_type: mediawiki
+    revision_id: '468102'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 26511
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-B | At least High 6-A, higher Limit Breaks | 4-A, higher with Limit
+        Breaks | 3-B, higher with Limit Breaks | At least 3-B, likely higher, higher
+        with Limit Breaks
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Base (FFVII)= *Superhuman Physical Characteristics (Is physically built
+        like someone in SOLDIERFinal Fantasy VII (1997). Members of SOLDIER are injected
+        with Jenova cells and large amount of Mako energyFinal Fantasy VII Remake
+        (2020)Crisis Core: Final Fantasy VII (2007), which greatly amplify their physical
+        capabilitiesFinal Fantasy VII 10th Anniversary Ultimania (2007).) *Spirit
+        Energy Manipulation (Beginner during Before Crisis & Crisis Core, Standard
+        during Disc 1, Skilled during Disc 2, Perfected during Disc 3) *Acrobatics
+        & Limited Surface Scaling (Hypermobility & Enhanced Condition; Can preform
+        flips and leaps. SOLDIER members are capable of running up walls using parkourFinal
+        Fantasy VII: The First SOLDIER (2021)) *Enhanced Senses (SOLDIER members possess
+        amazing reflexes) *Master Swordsman & Marksmanship (Ever since Cloud was younger
+        he has displayed a natural talent for swordsmanshipCrisis Core Complete Guide
+        (2008), being able to proficiently use the Buster Sword to impale Sephiroth.
+        Can skilfully use his firearms, as a Shinra infantryman he is trained in the
+        usage various of guns) *Vehicular Mastery (Seen here) *Pressure Point Strikes
+        (Via Critical Hits) *Energy Projection & Homing Attack (With his Blade Beam
+        Limit Breaks) *Non-Physical Interaction (Can harm ghosts of the Gi-Tribe)
+        *Regeneration Negation (Low-High) & Immortality Negation (Type 2, 3, 6 & 7;
+        Can permenantly kill fragments of Jenova. Jenova''s body is extremely ressiliant
+        allowing it to surive even while being reduced to cellsFinal Fantasy VII:
+        Ultimania Omega (2005), furthermore those cells are all controlled by Sephiroth''s
+        will and they will come together and form a new body again. Can also kill
+        members of the Gi Tribe, warriors that were killed in battle but live on as
+        vengeful spirits) Spirit Energy Resistances (Beginner during Before Crisis
+        & Crisis Core, Standard during Disc 1, Skilled during Disc 2, Perfected during
+        Disc 3) Base (AC)= All previous abilities on a greater scale, plus: *Spirit
+        Energy Manipulation (Unleashed) *Dual Wielding (He wields the Fusion Sword
+        now which can split up into multiple parts allowing him to use two blades
+        at a timeFinal Fantasy VII: Advent Children Complete (2009)) *Weapon Control,
+        Flight & Afterimage Creation (Via Omnislash Version 6) *Regeneration Negation
+        (Low-Godly) & Immortality Negation (All previous types, including 4 & 8; Killed
+        Sephiroth again, who can resurrect from the lifestream with Jenova as anchorFinal
+        Fantasy VII: On the Way to a Smile (2009)) Resistances=All previous resistances
+        on a greater scale, plus: *Spirit Energy Resistances (Unleashed) *Magic (Materia
+        allows a person to use magicFinal Fantasy VII Rebirth (2024)) *Summoning (Can
+        summon multiple comets with the Comet Materia) *Forcefield Creation (Can create
+        a barrier with the Barrier Materia) *Attack Reflection (Can cast a reflect
+        spell with the Barrier Materia) *Ice Manipulation (By using Ice materia. Can
+        also use ice spells with the Contain Materia) *Fire Manipulation (By using
+        fire materia. Can also use fire spells with the Contain Materia) *Earth Manipulation
+        (By using the earth materia. Can also use earth spells with the Contain Materia)
+        *Air Manipulation (Can use wind spells with the Contain Materia) *Power Nullification
+        (Using the Contain Materia''s ice spell which has a 68% chance of inflicting
+        stop on the enemy which stops the ATB bar from filling. Can also Destruct
+        Materia which nullfies forcefields) *Petrification (Using the Contain Materias
+        earth spell which has a 32% chance to petrify the enemy) *Madness Manipulation
+        (Type 3; Using the Contain Materias wind spell which has a 32% chance to inflict
+        confusion on the enemy. And by using a mystify spell.) *Death Manipulation
+        (By using the Destruct Materias death spell) *Healing (By using the Full Cure
+        Materia which cures the whole party) *Gravity Manipulation (By using the Gravity
+        Materia) *Purification (Type 1; By using the Heal Materias magic which can
+        remove poison and various status effects) *Electricity Manipulation (By using
+        lightning magic) *Poison Manipulation (With Bio) *Invulnerability (With the
+        shield materia) *Speed Amplification, Time Manipulation & Time Stop (With
+        time magic) *Transmutation (With transform materia & Morph materia) *Sleep
+        Manipulation (With the seal materia which puts sleep magic onto his enemies)
+        *Elemental Manipulation (Putting Elemental Materia on a persons weapon allows
+        them to use elemtal attacks like: Fire, Ice, Lightning, Earth, Poison and
+        Gravity) *Absorption (With various absorb Materia) *Stealth Mastery (With
+        the sneak attack which allows a person to catch their enemies ofgaurd) *Body
+        Puppetry (With the Manipulate Materia which allows the user to choose their
+        enemies next attack) *Power Mimicry (With the Mime Materia) *Clairvoyance
+        (By using the Sense materia which allows the user to gain knowledge of their
+        foes hp, mp and weaknesses) *Accelerated Development (Leveling; with EXP Plus)
+        *Statistics Amplification (With various In'
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Wall level (As an infantryman he could fight on par with avalanche troopers.
+        Avalanche troopers can easily destroy stone with a single punchBefore Crisis:
+        Final Fantasy VII (2004)) | At least Multi-Continent level (Comparable to
+        Vincent who can easily take out 3rd ver. Ravens, who are far superior to the
+        2nd which easily took out 2nd class SOLDIER members who should be on the same
+        level as Zack Fair, someone who is able to go toe to toe with Ifrit1 exaton),
+        higher with Limit Breaks (Limit Breaks are special techniques that can be
+        performed when a person''s Spirit Energy aligns and emits from their body.
+        This "overflow" is achieved as a person keeps fighting, they sustain damage
+        or their rage is pushed to the limit, or experience other intense emotions)
+        == Statistics Values == Category:Plant234 Category:Tier 9 Category:Tier 9-A
+        Category:Tier 6 Category:Tier High 6-A Category:Tier 4 Category:Tier 4-A Category:Tier
+        3 Category:Tier 3-B Category:Superhuman Physical Characteristics Users Category:Acrobats
+        Category:Surface Scalers Category:Enhanced Senses Users Category:Weapon Masters
+        Category:Vehicular Masters Category:Energy Projection Users Category:Homing
+        Attack Users Category:Non-Physical Interaction Users Category:Blessed Users
+        Category:Empowerment Users Category:Statistics Amplification Users Category:Regeneration
+        Users Category:Indomitable Will Users Category:Energy Users Category:Damage
+        Boost Users Category:Aura Users Category:Free Movement Users Category:Underwater
+        Breathers Category:Astral Projection Users Category:Negation Users Category:Immortals
+        Category:Telekinesis Users Category:Flight Users Category:Afterimage Creation
+        Users Category:Magic Users Category:Summoners Category:Forcefield Users Category:Attack
+        Reflection Users Category:Ice Users Category:Fire Users Category:Earth Users
+        Category:Air Users Category:Power Nullification Users Category:Petrification
+        Users Category:Madness Manipulation Users Category:Death Users Category:Healers
+        Category:Gravity Users Category:Purification Users Category:Electricity Users
+        Category:Poison Users Category:Invulnerability Users Category:Time Users Category:Time
+        Stop Users Category:Transmutation Users Category:Sleep Users Category:Element
+        Users Category:Absorption Users Category:Stealth Masters Category:Body Puppetry
+        Users Category:Power Mimicry Users Category:Clairvoyance Users Category:Accelerated
+        Development Users Category:Power Absorption Users Category:Speed Users Category:Damage
+        Reduction Users Category:Resurrection Users Category:Water Users Category:Spatial
+        Users Category:Durability Negation Users Category:Portal Creation Users Category:Pocket
+        Reality Users Category:Absolute Zero Users Category:Hellfire Users Category:Matter
+        Users Category:Radiation Users Category:Holy Users Category:Unholy Users Category:Paralysis
+        Inducement Users Category:Video Game Characters Category:Primary Protagonists
+        Category:Sword Users Category:Mercenaries Category:Male Characters Category:Teenagers
+        Category:Adults Category:Clones Category:Final Fantasy Category:Final Fantasy
+        VII Category:Humans Category:Soldiers Category:Gun Users Category:Heroes Category:Playable
+        Characters'
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Amplification, Time Manipulation & Time Stop (With time magic) *Transmutation
+        (With transform materia & Morph materia) *Sleep Manipulation (With the seal
+        materia which puts sleep magic onto his enemies) *Elemental Manipulation (Putting
+        Elemental Materia on a persons weapon allows them to use elemtal attacks like:
+        Fire, Ice, Lightning, Earth, Poison and Gravity) *Absorption (With various
+        absorb Materia) *Stealth Mastery (With the sneak attack which allows a person
+        to catch their enemies ofgaurd) *Body Puppetry (With the Manipulate Materia
+        which allows the user to choose their enemies next attack) *Power Mimicry
+        (With the Mime Materia) *Clairvoyance (By using the Sense materia which allows
+        the user to gain knowledge of their foes hp, mp and weaknesses) *Accelerated
+        Development (Leveling; with EXP Plus) *Statistics Amplification (With various
+        Independent Materia) Resistances & Immunitys=Resistance or/and Immunity to:
+        *Status Effect Inducement & Transformation (With the Resist spell) *Petrification,
+        Mind Manipulation, Time Stop, Death Manipulation, Madness Manipulation (Type
+        2), Poison Manipulation, Power Nullification, Sleep Manipulation, Time Manipulation
+        Size Manipulation & Transmutation (By combining the Added Effect Materia with
+        various other Materia) *Sleep Manipulation & Transmutation (With Frog Song)
+        *Size Manipulation (With L4 Suicide) *Power Absorption (With Magic Hammer)
+        *Healing (With White Wind) *Speed Manipulation & Damage Reduction (With Big
+        Guard) *Healing & Resurrection (With Angel Whisper) *Defence Amplification
+        (With Dragon Force) *Fire Manipulation (With Flame Thrower & Beta) *Gravity
+        Manipulation (With Laser) *Sleep Manipulation, Poison Manipulation, Madness
+        Manipulation (Type 2), Power Nullification, Transmutation & Size Manipulation
+        (With Bad Breath) *Water Manipulation (With Aqualung) *Electricity Manipulation
+        (With Trine) *Elemental Manipulation (Fire, Ice & Lightning; With Magic Breath)
+        *Death Manipulation (With L5 Death, Roulette & Death Sentence) *Spatial Manipulation
+        &'
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Negation (With Pandora''s Box) Resistances & Immunitys=Resistance or/and
+        Immunity to: *Death Manipulation, Sleep Manipulation, Poison Manipulation,
+        Madness Manipulation (Type 2), Time Manipulation, Time Stop, Transmutation,
+        Size Manipulation, Petrification, Paralysis Inducement and Darkness Manipulation
+        (With White Wind and Angel Whisper) *General'
+      source_id: character-stats-profiles-tidus-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife canon final
+      fantasy vii plant234|468102
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-tidus-game
+    url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Tidus
+    source_type: mediawiki
+    revision_id: '9665140'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 35284
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Acrobatics, Skilled Swordsman,
+        Immortality (Type 8, dependent on being unaware he was beckoned back by Yuna),
+        Magic, Non-Physical Interaction (Able to kill the lingering Ghosts in the
+        Cavern of the Stolen Fayth and the Wraiths found Inside Sin), Statistics Amplification
+        (Via Cheer, Aim, Focus, Reflex, Protect and Shell), Time Manipulation (Can
+        accelerate himself or slow down enemies in time with Hastega and Slowga),
+        Energy Projection (Via Energy Rain and Flare), Healing, Damage Negation (Can
+        completely nullify certain elemental attacks once via NulBlaze, NulShock,
+        NulTide and NulFrost), Purification (Type 3 via Esuna and various items),
+        Resurrection (Via Life, Full-Life and Auto-Life), Attack Reflection (Via Reflect),
+        Power Nullification (Via Dispel and Silence Attack/Buster), Regeneration (Mid-Low
+        via Regen), Radiation Manipulation, Holy Manipulation, Darkness Manipulation
+        (Via Dark Attack/Buster), Sleep Manipulation (Via Sleep Attack/Buster), Absorption
+        (Via Drain, Osmose and Eater abilities), Fire Manipulation, Ice Manipulation,
+        Electricity Manipulation, Water Manipulation, Poison Manipulation (Via Bio),
+        Gravity Manipulation (Via Demi), Death Manipulation (Via Death), Information
+        Analysis (Via Scan and Sensor), Probability Manipulation (Via Jinx and Luck),
+        Statistics Reduction (Via Break abilities), Damage Reduction (Via Sentinel),
+        Fear Manipulation (Via Threaten), Necromancy and Transmutation (Via Zombie
+        Attack), Social Influencing (Can bribe mindless monsters to leave battle),
+        Power Mimicry (Via Copycat), Durability Negation (Via Piercing and Demi),
+        Enhanced Senses and Stealth Mastery (Via Initiative), Petrification (Via Stonestrike),
+        Curse Manipulation and Death Manipulation (Via Candles of Life), Can draw
+        resistances from targets (Was capable of drawing resistances to Earth and
+        Wind manipulation from Wol.) Resistance to Fire Manipulation, Ice Manipulation,
+        Electricity Manipulation, Water Manipulation, Darkness Manipulation, Power
+        Nullification, Sleep Manipulation, Poison Manipulation, Petrification, Death
+        Manipulation, Necromancy, Transmutation, Time Manipulation (In the form of
+        Time Slow and Stop), Mind Manipulation, Empathic Manipulation, Curse Manipulation,
+        Radiation Manipulation, Absolute Zero (Can withstand Shiva''s presence and
+        attacks), and Memory Manipulation (Can challenge Sin head-on without being
+        impeded by its toxin) All previous abilities enhanced, Immortality (Type 8,reliant
+        on his Crystal which let him return from fading from existence after Cosmos''
+        death) & Regeneration (Low-Godly), Summoning (Can summon various Eidolons
+        from Summonstones and the World of Illusions), Self-Sustenance (Type 2, has
+        no need to eat or drinkDissidia Final Fantasy Opera Omnia), Willpower Manipulation
+        (a person''s will is power there and enables them to do a multitude of things
+        the stronger their willDissidia Final Fantasy Opera Omnia), Reactive Power
+        Level (the greater someone''s will, the greater their powerDissidia Final
+        Fantasy Opera Omnia), Law Manipulation (Beings with strong wills can overwrite
+        the laws of the world and bend them to their willDissidia Final Fantasy Opera
+        Omnia), Creation (With a powerful enough will, once can create various things
+        such as phone lines, airships and even entire countries and worldsDissidia
+        Final Fantasy Opera Omnia), Sealing (Can seal off large areas and people with
+        her will, such as Cecil sealing himself in Castle Baron or the cast sealing
+        Kefka inside a TorsionDissidia Final Fantasy Opera Omnia), Dimensional Travel
+        (Characters can open Torsions, rifts in space-time to travel various dimensionsDissidia
+        Final Fantasy Opera Omnia), and Immortality (Type 2) (Due to the crystal core
+        of darkness''s influence in the hands of Ardyn, warriors will not die no matter
+        how injured they are) Resistance to Mind Manipulation, Soul Manipulation (Via
+        Zalera, the Death Serpah, who was going to absorb the souls of every living
+        being on the planet), Corruption & Body Puppetry (Due to their light, Warriors
+        of Materia can dispel attempts to control them), Empathic Manipulation, and
+        Madness Manipulation (Type 3; Resistant to the effects of the True Moon, which
+        is capable of affecting the hearts and minds of all living beings on the planetFinal
+        Fantasy IV: The After Years), Gravity Manipulation (Unaffected by the gravitational
+        pull of the True Moon, which even the Lunar Whale couldn''t escape from),
+        Spatial Manipulation, Deconstruction, and BFR (Can withstand the attacks of
+        Atomos, who manipulates space, crush enemies down to a molecular level,Dissidia
+        Final Fantasy and can warp them into another dimension), Extreme Cold and
+        Cosmic Radiations (Can fight and survive on the moon), Absolute Zero (Can
+        survive Shiva''s ice attacks, including Diamond Dust), Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Intangibility (Ifrit can become
+        smoke or flameWar of the Visions: Final Fantasy Brave Exvius), Ice Manipulation
+        and Absolute Zero and Duplication'
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multi-Solar System level (Capable of hurting Sin with his attacks, who
+        is unaffected by the Gravitational Forces created as an effect of his Giga
+        Graviton move. Furthermore, is considered by Lulu to have proven himself as
+        a Guardian, maybe even as the best, after the final battle with Overdrive
+        Sin, Implying his efforts and the efforts of at least one more Guardian were
+        significant towards defeating Sin) | Multi-Solar System level (Can stalemate
+        Wol, grew more powerful during his time in Palamecia Mobius Final Fantasy)
+        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
+        power from the gods of the cycle. Participated in the defeat of Shinryu)
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: FTL+ (Capable of fighting Braska's Final Aeon) | Massively FTL+ (Can
+        keep up with the other Warriors of Materia)
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multi-Solar System level (Can withstand the gravitational force exerted
+        by Sin's Giga Graviton, however a direct impact would instantly kill him.
+        Additionally, Tidus, regarded as one of the best Guardians ever, should be
+        no less durable than Rikku, a Guardian of lesser note able to survive multiple
+        Meteor spells and an Ultima from Trema, a character stronger than a Final
+        Aeon-level Fiend, Paragon/Lord Zaon) | Multi-Solar System level | Multiverse
+        level+
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range with Brotherhood/Caladbolg, Tens of Meters with
+        magic and Blitzball techniques
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: "\u25AA Longsword: Tidus' initial weapon, given to him by Auron in the\
+        \ Dream Zanarkand as a gift from Jecht. A simple sword that he uses to fight\
+        \ off enemies \u25AA Brotherhood: A sword gifted to Tidus by Wakka, originally\
+        \ meant for his brother Chappu. It comes with both the Waterstrike and Sensor\
+        \ abilities, adding water elemental damage to its attacks and analyzing an\
+        \ enemy's strength, in addition to significantly boosting Tidus' attack power.\
+        \ \u25AA Caladbolg: Tidus' Celestial Weapon, obtained in the Calm Lands after\
+        \ escaping from Bevelle. It naturally ignores enemy defense, harming them\
+        \ regardless of attempts to increase their durability, and makes Tidus instinctively\
+        \ evade and counter attacks. \u25AA Blitzball: A spherically-studded ball\
+        \ used in the Blitzball sport across Spira. Tidus primarily uses it for ranged\
+        \ attacks, hitting enemies from tens of meters away."
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average (Tidus is a master swordsman and shield wielder by the
+        end of the game, comparable to legendary warriors and Guardians like his father
+        Jecht and Auron. While he lags behind them in blocking attacks and in the
+        use of brute force, he is far more agile and acrobatic, specializing in dodging
+        attacks before dishing out lethal counterattacks in return with a variety
+        of swift maneuvers. He also triumphed over Spira's strongest, most notably,
+        he managed to defeat Yu Yevon and Sin once and for all, a feat thought impossible
+        up to that point)
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "None notable Notable Attacks/Techniques: \u25AA Cheer: Tidus enhances\
+        \ his party's attack power and durability. \u25AA Hastega: Tidus accelerates\
+        \ time for his party, dramatically increasing their speed. \u25AA Slowga:\
+        \ Tidus distorts time around his enemies, dramatically decreasing their speed.\
+        \ \u25AA Delay Buster: Tidus strikes his enemy with an incredibly powerful\
+        \ blow, significantly increasing the time they need to take their next action.\
+        \ \u25AA Provoke: Tidus taunts an enemy, encouraging them to attack him over\
+        \ his allies. \u25AA Swordplay: Tidus' Overdrive, a collection of sword techniques\
+        \ that he gradually develops as he uses this Overdrive repeatedly. * Spiral\
+        \ Cut: Tidus performs a series of flips and cartwheels towards his enemy,\
+        \ before leaping and slamming his sword down on them. * Slice & Dice: Tidus\
+        \ darts back and forth around his enemies, striking them six times. * Energy\
+        \ Rain: Tidus jumps off of one enemy into the air, charging energy in his\
+        \ sword and throwing it down to explode on enemies. * Blitz Ace: Tidus leaps\
+        \ forward and slashes at his enemy eight times, before using the hilt of his\
+        \ sword to leap into the air and kicking a Blitzball into his target, which\
+        \ explodes on impact. Contrary to popular belief, the party members are not\
+        \ limited to their sections of the Sphere Grid and are capable of branching\
+        \ into the sections of other characters. Key Spheres, which are strictly used\
+        \ for this purpose, are canonically given out at certain points in the story,\
+        \ and character-exclusive abilities like Lulu's Black Magic and Kimahri's\
+        \ Lancet are discussed as if they are common abilities and not completely\
+        \ restricted to the characters in question. As a result, the party is entirely\
+        \ capable of using each others' abilities, as long as they are part of the\
+        \ Sphere Grid. Yuna's Sphere Grid: \u25AA Curaga: Tidus significantly heals\
+        \ himself or one of his allies. \u25AA NulBlaze: Tidus nullifies all fire\
+        \ damage for himself and his allies for one attack. \u25AA NulShock: Tidus\
+        \ nullifies all lightning damage for himself and his allies for one attack.\
+        \ \u25AA NulTide: Tidus nullifies all water damage for himself and his allies\
+        \ for one attack. \u25AA NulFrost: Tidus nullifies all ice damage for himself\
+        \ and his allies for one attack. \u25AA Esuna: Tidus removes all negative\
+        \ status effects on himself or one of his allies. \u25AA Life: Tidus revives\
+        \ one of his allies if they happen to die, though they are nonetheless still\
+        \ significantly injured. \u25AA Full-Life: Tidus revives one of his allies\
+        \ at their full strength. \u25AA Shell: Tidus enhances an ally's magic defense,\
+        \ halving the damage of all spells directed at them. However, this is also\
+        \ inclusive of any healing spells. \u25AA Protect: Tidus enhances an ally's\
+        \ physical defense, halving any damage they receive from physical attacks.\
+        \ \u25AA Reflect: Tidus creates a barrier around himself that automatically\
+        \ reflects any spell back at his enemy. \u25AA Dispel: Tidus removes any sort\
+        \ of buffs his enemy has that would increase their power. \u25AA Regen: Tidus\
+        \ casts a spell that gradually heals himself or one of his allies over a period\
+        \ of time. \u25AA Auto-Life: Tidus casts a spell that ensures that, upon death,\
+        \ he will be automatically revived. Holy: Tidus calls down a massive beam\
+        \ of holy-elemental energy to blast his foes. Wakka's Sphere Grid: \u25AA\
+        \ Dark"
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: '| Key: Final Fantasy X | Mobius Final Fantasy | Dissidia Name: Tidus
+        Origin: Final Fantasy X Gender: Male Age: 17 Classification: Human/Dream of
+        the Fayth, Guardian, Blitzball Player, Ace'
+      source_id: vsbattles-tidus-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|tidus|9665140
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-tidus-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29_Final_Fantasy
-    title: Tidus
-    rank: 80
-    extracted_fields: *id007
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
-  - source_id: character-stats-profiles-tidus-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29_Final_Fantasy
-    title: Ghost (Canon, Game & Watch)/ZeroTwo64
-    rank: 80
-    extracted_fields: *id009
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|ghost canon game watch
-      zerotwo64|53753
-  - source_id: vsbattles-tidus-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29_%28Final_Fantasy%29
-    title: Tidus
-    rank: 80
-    extracted_fields: *id011
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
-  - source_id: character-stats-profiles-tidus-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29_%28Final_Fantasy%29
-    title: Ghost (Canon, Game & Watch)/ZeroTwo64
-    rank: 80
-    extracted_fields: *id013
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|ghost canon game watch
-      zerotwo64|53753
-  - source_id: mediawiki-tidus-game
-    url: https://vsbattles.fandom.com/wiki/Tidus_(Game)
-    title: Tidus
-    rank: 80
-    extracted_fields: *id015
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
-  - source_id: vsbattles-tidus-game
-    url: https://vsbattles.fandom.com/wiki/Tidus_%28Game%29
-    title: Tidus
-    rank: 80
-    extracted_fields: *id017
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id018
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
-  - source_id: character-stats-profiles-tidus-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tidus_%28Game%29
-    title: Axel (Canon, Twisted Metal)/Unbacked0
-    rank: 80
-    extracted_fields: *id019
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id020
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|axel canon twisted metal
-      unbacked0|242307
-  - source_id: vsbattles-tidus-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Tidus_Game_Final_Fantasy
-    title: Tidus
-    rank: 80
-    extracted_fields: *id021
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id022
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|tidus|9452480
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

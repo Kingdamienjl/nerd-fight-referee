@@ -11,13 +11,14 @@ generation:
   generated_at: '2026-06-09T03:31:38Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id004
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Tyrael
   franchise: Diablo
@@ -202,7 +203,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Anu_(Canon,_Diablo)/Hesperus5123
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -239,34 +240,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-tyrael-diablo
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Tyrael (Diablo)
-  url: https://vsbattles.fandom.com/wiki/Tyrael_%28Diablo%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-tyrael-diablo
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Tyrael (Diablo)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael_%28Diablo%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-tyrael-game
   provider_id: vsbattles
   source_type: mediawiki
@@ -459,7 +432,7 @@ weaknesses:
     damage reduction(ex: 20 armor is'
   description: 'Extremely easy to anger Notable Attacks/Techniques: Armor: Armor grants
     percentage-base damage reduction(ex: 20 armor is 20% damage reduction)'
-  source_ids: &id003
+  source_ids: &id002
   - vsbattles-tyrael-diablo
   source_claim_ids: []
   confidence: 0.85
@@ -475,7 +448,7 @@ weaknesses:
 - id: weaknesses-and-vice-versa-for-armor-reduction
   name: and vice versa for Armor Reduction
   description: and vice versa for Armor Reduction
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -490,7 +463,7 @@ weaknesses:
 - id: weaknesses
   name: '-'
   description: '-'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -505,7 +478,7 @@ weaknesses:
 - id: weaknesses-base
   name: Base
   description: Base
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -528,186 +501,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id004
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: e4688f5e07927c0224b7d6c97fcbcf1af09878d7cd0157ae5130e2c3138a2fdf
 repair:
-  attempted_at: '2026-06-19T07:11:30Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T10:28:30Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-tyrael-diablo
-    url: https://vsbattles.fandom.com/wiki/Tyrael_Diablo
+  - source_id: character-stats-profiles-tyrael
+    url: https://character-stats-and-profiles.fandom.com/wiki/Anu_(Canon,_Diablo)/Hesperus5123
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Imperius (Heroes of the Storm)
-    source_type: mediawiki
-    revision_id: '9289111'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 16372
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 'At least {{8-A}}, likely {{3-A}} to {{Low 2-C}} Name: Imperius, Archangel
-        of Valor, Aspect of Valor, The Greatest Warrior in CreationImperius SpotlightImperius
-        Hero Interactions Origin: Heroes of the Storm, Originally from DiabloThe Veiled
-        ProphetDiablo III Gender: Male Age: Unknown, possibly billions of years old
-        (Has been around for "Eons"Imperius Poke Quotes) Classification: Archangel
-        of Valor, Hero'
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Multi-City Block level+ (Harmed and regularly challenges Diablo,
-        who regularly no-sells attacks from other heroes,First Heroes of the Storm
-        TrailerHeroes of the Storm 2 Trailer And along with Jim Raynor tanked Nova's
-        500-ton nuke. Feared by The Butcher, who one-shot Jaina Proudmoore,The Butcher
-        Hero Trailer [who Stomped Nova,Jaina Proudmoore Hero Trailer E.T.C, Sgt. Hammer,
-        The Lich King, and Nazeebo] Killed Tyrael [who also Harmed DiabloTyrael Hero
-        Trailer] Killed The Lich King, Death Knight Sonya, E.T.C, [Who Harmed Muradin]
-        Johanna [Who one-shot Sylvanas,Johanna Hero Trailer Kerrigan,(who hamred Tyrael,
-        and AlarakThe Machines of War Trailer) Nazeebo, and Anub'arak (Who one-shot
-        The Lich KingAnub'arak Hero Trailer and Valla] Jim Raynor, Zeratul, Nova,
-        [Who blocked an attack from and casually killed The Lich King and Tychus [Who
-        killed GazloweTychus Hero Trailer]. Considers himself far superior fo Gul'dan,
-        and superior to Mal'ganis), likely Universe level to Universe level+ (Considered
-        comparable to other extreme Holy powers such as Llarion by Alextrazsa, making
-        him likely comparable to The Raven Lord)
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Supersonic+, likely higher (Should be far faster than Nova,
-        whose bullets should move at this speed, which every hero can react to and
-        temporarily outrun)
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Multi-City Block level+, likely Universe level to Universe level+
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (As an Archangel, should be superior to Llarion who can keep
-        up a fight for Eternity)
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range physically, Extended Melee Range with Solarian
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Solarion, the Spear of Valor
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Genius (Considers individuals such as Alarak so much lower than him
-        that his thoughts to Alarak are "Beyond your pitiful imagination". Considered
-        the Greatest Warrior in Creation, making him more skilled than masters of
-        nearly every form of martial art and weapon) Standard Tactics:'
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Extremely easy to anger Notable Attacks/Techniques: Armor: Armor grants
-        percentage-base damage reduction(ex: 20 armor is 20% damage reduction), and
-        vice versa for Armor Reduction |-|Base'
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|imperius heroes of the storm|9289111
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-tyrael-diablo
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael_Diablo
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id005
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -732,6 +546,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -744,7 +559,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id006
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -755,10 +570,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '1-A Possibly High 1-A Name: Anu, The Diamond Warrior, The One, The Light
-        God, The Father Light, Origin: Diablo franchise Gender: Male, though initially
-        referred than as "it"'
-      source_id: character-stats-profiles-tyrael-diablo
+      value: 1-A Possibly High 1-A
+      source_id: character-stats-profiles-tyrael
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -770,7 +583,7 @@ repair:
         spine also formed the crystalline structure defining the High Heavens .[4]
         Worldstone ), Personal Duality, (controls and manipulates the myriad dual
         aspects and conflicting states of existence that he embodies)
-      source_id: character-stats-profiles-tyrael-diablo
+      source_id: character-stats-profiles-tyrael
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -781,296 +594,26 @@ repair:
         and possibilities, such how places like the void itself exist.) Possibly High
         Outerverse level (after his "death" he transcended everything and went to
         an unknown paradise where no other being can go)
-      source_id: character-stats-profiles-tyrael-diablo
+      source_id: character-stats-profiles-tyrael
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
       value: Omnipresent he is Sum of all things
-      source_id: character-stats-profiles-tyrael-diablo
+      source_id: character-stats-profiles-tyrael
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
       value: Outerverse level | High Outerverse level
-      source_id: character-stats-profiles-tyrael-diablo
+      source_id: character-stats-profiles-tyrael
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
       value: 'Notable Matchups == Victories: Losses: Inconclusive: == References ==
         Category:Tier 1 Category:Tier 1-A Category:Tier High 1-A'
-      source_id: character-stats-profiles-tyrael-diablo
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|anu canon diablo hesperus5123|514311
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-tyrael-diablo
-    url: https://vsbattles.fandom.com/wiki/Tyrael_%28Diablo%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id015
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Imperius (Heroes of the Storm)
-    source_type: mediawiki
-    revision_id: '9289111'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 16372
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id016
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 'At least {{8-A}}, likely {{3-A}} to {{Low 2-C}} Name: Imperius, Archangel
-        of Valor, Aspect of Valor, The Greatest Warrior in CreationImperius SpotlightImperius
-        Hero Interactions Origin: Heroes of the Storm, Originally from DiabloThe Veiled
-        ProphetDiablo III Gender: Male Age: Unknown, possibly billions of years old
-        (Has been around for "Eons"Imperius Poke Quotes) Classification: Archangel
-        of Valor, Hero'
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Multi-City Block level+ (Harmed and regularly challenges Diablo,
-        who regularly no-sells attacks from other heroes,First Heroes of the Storm
-        TrailerHeroes of the Storm 2 Trailer And along with Jim Raynor tanked Nova's
-        500-ton nuke. Feared by The Butcher, who one-shot Jaina Proudmoore,The Butcher
-        Hero Trailer [who Stomped Nova,Jaina Proudmoore Hero Trailer E.T.C, Sgt. Hammer,
-        The Lich King, and Nazeebo] Killed Tyrael [who also Harmed DiabloTyrael Hero
-        Trailer] Killed The Lich King, Death Knight Sonya, E.T.C, [Who Harmed Muradin]
-        Johanna [Who one-shot Sylvanas,Johanna Hero Trailer Kerrigan,(who hamred Tyrael,
-        and AlarakThe Machines of War Trailer) Nazeebo, and Anub'arak (Who one-shot
-        The Lich KingAnub'arak Hero Trailer and Valla] Jim Raynor, Zeratul, Nova,
-        [Who blocked an attack from and casually killed The Lich King and Tychus [Who
-        killed GazloweTychus Hero Trailer]. Considers himself far superior fo Gul'dan,
-        and superior to Mal'ganis), likely Universe level to Universe level+ (Considered
-        comparable to other extreme Holy powers such as Llarion by Alextrazsa, making
-        him likely comparable to The Raven Lord)
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Supersonic+, likely higher (Should be far faster than Nova,
-        whose bullets should move at this speed, which every hero can react to and
-        temporarily outrun)
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Multi-City Block level+, likely Universe level to Universe level+
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (As an Archangel, should be superior to Llarion who can keep
-        up a fight for Eternity)
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range physically, Extended Melee Range with Solarian
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Solarion, the Spear of Valor
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Genius (Considers individuals such as Alarak so much lower than him
-        that his thoughts to Alarak are "Beyond your pitiful imagination". Considered
-        the Greatest Warrior in Creation, making him more skilled than masters of
-        nearly every form of martial art and weapon) Standard Tactics:'
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Extremely easy to anger Notable Attacks/Techniques: Armor: Armor grants
-        percentage-base damage reduction(ex: 20 armor is 20% damage reduction), and
-        vice versa for Armor Reduction |-|Base'
-      source_id: vsbattles-tyrael-diablo
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|imperius heroes of the storm|9289111
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-tyrael-diablo
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael_%28Diablo%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Anu (Canon, Diablo)/Hesperus5123
-    source_type: mediawiki
-    revision_id: '514311'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3376
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - '''''''Powers and Stats'''''''
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id008
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '1-A Possibly High 1-A Name: Anu, The Diamond Warrior, The One, The Light
-        God, The Father Light, Origin: Diablo franchise Gender: Male, though initially
-        referred than as "it"'
-      source_id: character-stats-profiles-tyrael-diablo
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Immortality (Type 9), Good Embodiment (he is Ultimate good against ultimate
-        evil, Tathamet), reality warping, energy manipulation (With his energy, he
-        created the diablo reality. As the Eye of Anu/Worldstone, it served as the
-        foundation governing all places, times and possibilities in Creation, Its
-        spine also formed the crystalline structure defining the High Heavens .[4]
-        Worldstone ), Personal Duality, (controls and manipulates the myriad dual
-        aspects and conflicting states of existence that he embodies)
-      source_id: character-stats-profiles-tyrael-diablo
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Outerverse level (All existence and its concepts were created from a
-        last exchange of blows against Tathamet who was the evil part that was expelled
-        from his body, Diablo's reality is made up of countless superior spaces, realities
-        and possibilities, such how places like the void itself exist.) Possibly High
-        Outerverse level (after his "death" he transcended everything and went to
-        an unknown paradise where no other being can go)
-      source_id: character-stats-profiles-tyrael-diablo
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Omnipresent he is Sum of all things
-      source_id: character-stats-profiles-tyrael-diablo
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Outerverse level | High Outerverse level
-      source_id: character-stats-profiles-tyrael-diablo
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Notable Matchups == Victories: Losses: Inconclusive: == References ==
-        Category:Tier 1 Category:Tier 1-A Category:Tier High 1-A'
-      source_id: character-stats-profiles-tyrael-diablo
+      source_id: character-stats-profiles-tyrael
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1088,10 +631,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: mediawiki-tyrael
-    url: https://vsbattles.fandom.com/wiki/Tyrael
+    url: https://vsbattles.fandom.com/wiki/Imperius_(Heroes_of_the_Storm)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id017
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1120,6 +663,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1133,7 +677,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id018
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -1146,18 +690,39 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: 'At least {{8-A}}, likely {{3-A}} to {{Low 2-C}} Name: Imperius, Archangel
-        of Valor, Aspect of Valor, The Greatest Warrior in CreationImperius SpotlightImperius
-        Hero Interactions Origin: Heroes of the Storm, Originally from DiabloThe Veiled
-        ProphetDiablo III Gender: Male Age: Unknown, possibly billions of years old
-        (Has been around for "Eons"Imperius Poke Quotes) Classification: Archangel
-        of Valor, Hero'
+      value: At least , likely to
       source_id: mediawiki-tyrael
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base
+      value: 'Superhuman Physical Characteristics, Weapon Mastery, Martial Arts, Immortality
+        (Type 1), Flight, Regeneration (High-low: Can regenerate from near-death in
+        minutesHeroes of the Storm Gameplay), Damage Boost/Healing (Via Valorous Brand),
+        Status Effect Inducement (Via Celestial Charge, Solarian''s Fire, and Wrath
+        of the Angiris), Fire Manipulation (Via Solarian''s Fire and Molten Armor),
+        Temperature Manipulation (Can make his armor white-hot instantly with Molten
+        Armor), Forcefield Creation/Weapon Creation/Weapon Control (Via Angelic Armaments),
+        Light Manipulation (Via Wrath of the Angiris), Shapeshifting/Intangibility
+        (Shapeshifted into a mist of unknown origin), Resistance to the following:
+        Fire Manipulation/Extreme Heat (Can no-sell his own armor being made white-hot,
+        and can no-sell normal fireBattlefield of Eternity Map), Ice Manipulation
+        (Can withstand being frozen solid and can break out in seconds) Enhanced Status
+        Effect Inducement (Via Consuming Flame, Pathetic Mortals), Durability Negation
+        (Via Burn the Impure, Melting Touch), Damage Reduction (Via Soverign Armor,
+        Press Forward, and Impervious), Enhanced Healing (Via Battle Hunger, Heat
+        of Battle), Damage Boost (Via Holy Fervor, ), Forcefield Creation (Via Flash
+        of Anger,), Explosion Manipulation (Via Flash of Anger, Blaze of Glory), Statistics
+        Amplification (Via Celestial Swiftness), Teleportation (Via Valorous Pursuit),
+        Weapon Creation/Weapon Control (Via Heavenly Host), Healing (Via Unrelenting
+        Descent), limited Resistance to the following: Status Effect Inducement/Light
+        Manipulation/Ice Manipulation/Plant Manipulation/Earth Manipulation/Biological
+        Manipulation/Fire Manipulation/Air Manipulation/Empathic Manipulation/Fear
+        Manipulation/Mind Control/Transmutation/Power Nullification/Darkness Manipulation/Sound
+        Manipulation/Sleep Manipulation/Plasma Manipulation/Explosion Manipulation/Metal
+        Manipulation/Gravity Manipulation/Electricity Manipulation/Vibration Manipulation/Broadway
+        Force (Via Impervius, for three seconds is immune to almost all Crowd Control
+        abilities within Heroes of the Storm, only excluding Time Stop and Revealed)'
       source_id: mediawiki-tyrael
       provider_id: vsbattles
       authority: high
@@ -1227,7 +792,69 @@ repair:
     - field: weaknesses
       value: 'Extremely easy to anger Notable Attacks/Techniques: Armor: Armor grants
         percentage-base damage reduction(ex: 20 armor is 20% damage reduction), and
-        vice versa for Armor Reduction |-|Base'
+        vice versa for Armor Reduction *Valorous Brand: Each Basic Ability marks enemy
+        Heroes hit for 10 seconds. Basic Attacks consume the target''s marks, dealing
+        20% bonus damage per mark and healing for 75 per mark. *Celestial Charge:
+        Imperius lunges toward a targeted direction and stabs Solarian forward, dealing
+        damage. If an enemy is hit, Imperius Stun them for 1 second and deals additional
+        damage when it finishes. *Solarion''s Fire: Imperius swings Solarian low to
+        the ground, releasing a fiery wave that deals damage. Enemies hit by the center
+        take 50% bonus damage and are Slowed by 40% for 3 seconds. *Molten Armor:
+        Imperius shrouds himself in flames for 3 seconds, making his armor white-hot,
+        striking a nearby enemy for damage every 0.25 seconds. Imperius heals for
+        50% of the damage dealt, increased to 100% against Heroes. *Angelic Armaments:
+        Imperius summons a ring of blazing swords that grants a large Shield for 3
+        seconds. If the Shield lasts the full duration, this Ability can be reactivated
+        within 5 seconds to launch 6 swords toward an area, each dealing heavy damage
+        to the first enemy hit. *Wrath of the Angiris: After 0.75 seconds of charging
+        a hand with lignt, Imperius charges in a target direction, lifting the first
+        enemy Hero hit into the Heavens. While in the air, Imperius can steer the
+        landing location by moving and showing a light circle showing where they will
+        land. After 2 seconds, slam the target into the ground, dealing 375 damage
+        and Stunning them for 1 second. *Level 1 **Impaling Light: Celestial Charge''s
+        final damage is increased by 75% and cooldown is reduced by 1.25 seconds for
+        each Valorous Brand on the target when the Stun completes. **Consuming Flame:
+        Increase the center damage of Solarion''s Fire by an additional 125% and its
+        Slow amount by 15%. The first enemy Hero hit by Solarion''s Fire refunds 30
+        Mana. **Burn The Impure: Consuming a Valorous Brand mark deals bonus damage
+        equal to 2.5% of the Hero''s maximum Health. *Level 4 **Sovereign Armor: Molten
+        Armor grants 20 Armor for 1.5 seconds. Damaging an enemy Hero with Molten
+        Armor increases the duration of the Armor by 0.5 seconds. **Battle Hunger:
+        Increase the healing of Valorous Brand by 80%. **Press Forward: Gain 10 Armor
+        while being healed by a Regeneration Globe. Damaging an enemy Hero sets the
+        duration of an active Regeneration Globe on Imperius to 8 seconds (unless
+        it is already higher). *Level 7 **Flash of Anger: Consuming a mark from Celestial
+        Charge deals damage around the target and grants Imperius a decent point Shield
+        for 4 seconds. **Blaze of Glory: Solarion''s Fire leaves a line of scorched
+        earth along its center that explodes after 2 seconds for good damage, dealing
+        bonus damage with Valorous Brand marks. **Holy Fervor: ***Active: Activate
+        to cause the next 4 Basic Attacks within 10 seconds to cleave for 30% additional
+        damage. ***Passive: Casting Molten Armor grants Holy Fervor for 2 Basic Attacks.
+        *Level 13 **Pathetic Mortals: Stunning enemy Heroes with Celestial Charge
+        reduces their Movement Speed by 25% and damage by 50% for 4 seconds. **Divine
+        Rage: Consuming a Valorous Brand mark reduces the cooldown of Molten Armor
+        by 1 second. **Heat of Battle: Increase Molten Armor''s healing against Heroes
+        by 2% for every 1% of health Imperius is Missing. *Level 16 **Celestial Swiftness:
+        Imperius gains 20% Movement Speed for 5 seconds after casting Celestial Charge.
+        Gain 40% Attack Speed for 5 seconds for each enemy Hero stunned with Celestial
+        Charge. **Melting Touch: Consuming a Molten Armor mark reduces the target''s
+        Armor by 25 for 4 seconds. **Valorous Pursuit: Active: Activate to teleport
+        to an enemy that has been marked by Valorous Brand and gain 25 Armor for 3
+        seconds. *Level 20 **Heavenly Host: Nearby allied Heroes gain 600 Shield for
+        3 seconds. If the Shield lasts the full duration, fire a sword at the nearest
+        enemy Hero, dealing 140 damage. **Unrelenting Descent: Descending from the
+        Heavens restores 30% of Imperius'' maximum Health and Mana. Consuming a Valorous
+        Brand reduces the cooldown of Wrath of the Angiris by 10 seconds. **Brand
+        of Solarion: Reduce the duration of Valorous Brand to 5 seconds, but it is
+        no longer consumed when triggered. **Impervious: Activate to become Unstoppable
+        and gain 75 Spell Armor for 3 seconds. Hitting Heroes with the center of Solarion''s
+        Fire reduces this cooldown by 5 seconds. ==Notable Matchups== Victories: Losses:
+        Inconclusive: ==References== Category:Heroes of the Storm Category:Characters
+        Category:Angels Category:Neutral Characters Category:Protagonists Category:Heroes
+        Category:Warriors Category:Spear Users Category:Sword Users Category:Weapon
+        Masters Category:Martial Artists Category:Weapon Creation Users Category:Weapon
+        Control Users Category:Immortals Category:Flight Users Category:Regeneration
+        Users Category:Damage Boost Users Category:Dama'
       source_id: mediawiki-tyrael
       provider_id: vsbattles
       authority: high
@@ -1245,125 +872,11 @@ repair:
     duplicate_key: vsbattles.fandom.com|imperius heroes of the storm|9289111
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-tyrael
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Anu (Canon, Diablo)/Hesperus5123
-    source_type: mediawiki
-    revision_id: '514311'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3376
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - '''''''Powers and Stats'''''''
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '1-A Possibly High 1-A Name: Anu, The Diamond Warrior, The One, The Light
-        God, The Father Light, Origin: Diablo franchise Gender: Male, though initially
-        referred than as "it"'
-      source_id: character-stats-profiles-tyrael
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Immortality (Type 9), Good Embodiment (he is Ultimate good against ultimate
-        evil, Tathamet), reality warping, energy manipulation (With his energy, he
-        created the diablo reality. As the Eye of Anu/Worldstone, it served as the
-        foundation governing all places, times and possibilities in Creation, Its
-        spine also formed the crystalline structure defining the High Heavens .[4]
-        Worldstone ), Personal Duality, (controls and manipulates the myriad dual
-        aspects and conflicting states of existence that he embodies)
-      source_id: character-stats-profiles-tyrael
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Outerverse level (All existence and its concepts were created from a
-        last exchange of blows against Tathamet who was the evil part that was expelled
-        from his body, Diablo's reality is made up of countless superior spaces, realities
-        and possibilities, such how places like the void itself exist.) Possibly High
-        Outerverse level (after his "death" he transcended everything and went to
-        an unknown paradise where no other being can go)
-      source_id: character-stats-profiles-tyrael
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Omnipresent he is Sum of all things
-      source_id: character-stats-profiles-tyrael
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Outerverse level | High Outerverse level
-      source_id: character-stats-profiles-tyrael
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Notable Matchups == Victories: Losses: Inconclusive: == References ==
-        Category:Tier 1 Category:Tier 1-A Category:Tier High 1-A'
-      source_id: character-stats-profiles-tyrael
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|anu canon diablo hesperus5123|514311
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-tyrael-game
-    url: https://vsbattles.fandom.com/wiki/Tyrael_%28Game%29
+    url: https://vsbattles.fandom.com/wiki/Loras_Tyrell
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id019
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1392,6 +905,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1405,7 +919,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id020
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1415,14 +929,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-B}} Name: Loras Tyrell, Knight of Flowers Origin: Game of Thrones
-        Gender: Male Age: Unknown Classification: Human, Knight, Lord Commander of
-        the Kingsguard (formerly)'
-      source_id: vsbattles-tyrael-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Weapon Mastery and Skilled Horse
         Rider
@@ -1481,6 +987,14 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
+    - field: tier
+      value: 'Name: Loras Tyrell, Knight of Flowers Origin: Game of Thrones Gender:
+        Male Age: Unknown Classification: Human, Knight, Lord Commander of the Kingsguard
+        (formerly)'
+      source_id: vsbattles-tyrael-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -1494,11 +1008,251 @@ repair:
     duplicate_key: vsbattles.fandom.com|loras tyrell|9401809
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-tyrael-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael_%28Game%29
+  - source_id: vsbattles-tyrael-diablo
+    url: https://vsbattles.fandom.com/wiki/Tyrael_Diablo
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Imperius (Heroes of the Storm)
+    source_type: mediawiki
+    revision_id: '9289111'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16372
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least , likely to
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Weapon Mastery, Martial Arts, Immortality
+        (Type 1), Flight, Regeneration (High-low: Can regenerate from near-death in
+        minutesHeroes of the Storm Gameplay), Damage Boost/Healing (Via Valorous Brand),
+        Status Effect Inducement (Via Celestial Charge, Solarian''s Fire, and Wrath
+        of the Angiris), Fire Manipulation (Via Solarian''s Fire and Molten Armor),
+        Temperature Manipulation (Can make his armor white-hot instantly with Molten
+        Armor), Forcefield Creation/Weapon Creation/Weapon Control (Via Angelic Armaments),
+        Light Manipulation (Via Wrath of the Angiris), Shapeshifting/Intangibility
+        (Shapeshifted into a mist of unknown origin), Resistance to the following:
+        Fire Manipulation/Extreme Heat (Can no-sell his own armor being made white-hot,
+        and can no-sell normal fireBattlefield of Eternity Map), Ice Manipulation
+        (Can withstand being frozen solid and can break out in seconds) Enhanced Status
+        Effect Inducement (Via Consuming Flame, Pathetic Mortals), Durability Negation
+        (Via Burn the Impure, Melting Touch), Damage Reduction (Via Soverign Armor,
+        Press Forward, and Impervious), Enhanced Healing (Via Battle Hunger, Heat
+        of Battle), Damage Boost (Via Holy Fervor, ), Forcefield Creation (Via Flash
+        of Anger,), Explosion Manipulation (Via Flash of Anger, Blaze of Glory), Statistics
+        Amplification (Via Celestial Swiftness), Teleportation (Via Valorous Pursuit),
+        Weapon Creation/Weapon Control (Via Heavenly Host), Healing (Via Unrelenting
+        Descent), limited Resistance to the following: Status Effect Inducement/Light
+        Manipulation/Ice Manipulation/Plant Manipulation/Earth Manipulation/Biological
+        Manipulation/Fire Manipulation/Air Manipulation/Empathic Manipulation/Fear
+        Manipulation/Mind Control/Transmutation/Power Nullification/Darkness Manipulation/Sound
+        Manipulation/Sleep Manipulation/Plasma Manipulation/Explosion Manipulation/Metal
+        Manipulation/Gravity Manipulation/Electricity Manipulation/Vibration Manipulation/Broadway
+        Force (Via Impervius, for three seconds is immune to almost all Crowd Control
+        abilities within Heroes of the Storm, only excluding Time Stop and Revealed)'
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Multi-City Block level+ (Harmed and regularly challenges Diablo,
+        who regularly no-sells attacks from other heroes,First Heroes of the Storm
+        TrailerHeroes of the Storm 2 Trailer And along with Jim Raynor tanked Nova's
+        500-ton nuke. Feared by The Butcher, who one-shot Jaina Proudmoore,The Butcher
+        Hero Trailer [who Stomped Nova,Jaina Proudmoore Hero Trailer E.T.C, Sgt. Hammer,
+        The Lich King, and Nazeebo] Killed Tyrael [who also Harmed DiabloTyrael Hero
+        Trailer] Killed The Lich King, Death Knight Sonya, E.T.C, [Who Harmed Muradin]
+        Johanna [Who one-shot Sylvanas,Johanna Hero Trailer Kerrigan,(who hamred Tyrael,
+        and AlarakThe Machines of War Trailer) Nazeebo, and Anub'arak (Who one-shot
+        The Lich KingAnub'arak Hero Trailer and Valla] Jim Raynor, Zeratul, Nova,
+        [Who blocked an attack from and casually killed The Lich King and Tychus [Who
+        killed GazloweTychus Hero Trailer]. Considers himself far superior fo Gul'dan,
+        and superior to Mal'ganis), likely Universe level to Universe level+ (Considered
+        comparable to other extreme Holy powers such as Llarion by Alextrazsa, making
+        him likely comparable to The Raven Lord)
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Supersonic+, likely higher (Should be far faster than Nova,
+        whose bullets should move at this speed, which every hero can react to and
+        temporarily outrun)
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Multi-City Block level+, likely Universe level to Universe level+
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (As an Archangel, should be superior to Llarion who can keep
+        up a fight for Eternity)
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range physically, Extended Melee Range with Solarian
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Solarion, the Spear of Valor
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Genius (Considers individuals such as Alarak so much lower than him
+        that his thoughts to Alarak are "Beyond your pitiful imagination". Considered
+        the Greatest Warrior in Creation, making him more skilled than masters of
+        nearly every form of martial art and weapon) Standard Tactics:'
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Extremely easy to anger Notable Attacks/Techniques: Armor: Armor grants
+        percentage-base damage reduction(ex: 20 armor is 20% damage reduction), and
+        vice versa for Armor Reduction *Valorous Brand: Each Basic Ability marks enemy
+        Heroes hit for 10 seconds. Basic Attacks consume the target''s marks, dealing
+        20% bonus damage per mark and healing for 75 per mark. *Celestial Charge:
+        Imperius lunges toward a targeted direction and stabs Solarian forward, dealing
+        damage. If an enemy is hit, Imperius Stun them for 1 second and deals additional
+        damage when it finishes. *Solarion''s Fire: Imperius swings Solarian low to
+        the ground, releasing a fiery wave that deals damage. Enemies hit by the center
+        take 50% bonus damage and are Slowed by 40% for 3 seconds. *Molten Armor:
+        Imperius shrouds himself in flames for 3 seconds, making his armor white-hot,
+        striking a nearby enemy for damage every 0.25 seconds. Imperius heals for
+        50% of the damage dealt, increased to 100% against Heroes. *Angelic Armaments:
+        Imperius summons a ring of blazing swords that grants a large Shield for 3
+        seconds. If the Shield lasts the full duration, this Ability can be reactivated
+        within 5 seconds to launch 6 swords toward an area, each dealing heavy damage
+        to the first enemy hit. *Wrath of the Angiris: After 0.75 seconds of charging
+        a hand with lignt, Imperius charges in a target direction, lifting the first
+        enemy Hero hit into the Heavens. While in the air, Imperius can steer the
+        landing location by moving and showing a light circle showing where they will
+        land. After 2 seconds, slam the target into the ground, dealing 375 damage
+        and Stunning them for 1 second. *Level 1 **Impaling Light: Celestial Charge''s
+        final damage is increased by 75% and cooldown is reduced by 1.25 seconds for
+        each Valorous Brand on the target when the Stun completes. **Consuming Flame:
+        Increase the center damage of Solarion''s Fire by an additional 125% and its
+        Slow amount by 15%. The first enemy Hero hit by Solarion''s Fire refunds 30
+        Mana. **Burn The Impure: Consuming a Valorous Brand mark deals bonus damage
+        equal to 2.5% of the Hero''s maximum Health. *Level 4 **Sovereign Armor: Molten
+        Armor grants 20 Armor for 1.5 seconds. Damaging an enemy Hero with Molten
+        Armor increases the duration of the Armor by 0.5 seconds. **Battle Hunger:
+        Increase the healing of Valorous Brand by 80%. **Press Forward: Gain 10 Armor
+        while being healed by a Regeneration Globe. Damaging an enemy Hero sets the
+        duration of an active Regeneration Globe on Imperius to 8 seconds (unless
+        it is already higher). *Level 7 **Flash of Anger: Consuming a mark from Celestial
+        Charge deals damage around the target and grants Imperius a decent point Shield
+        for 4 seconds. **Blaze of Glory: Solarion''s Fire leaves a line of scorched
+        earth along its center that explodes after 2 seconds for good damage, dealing
+        bonus damage with Valorous Brand marks. **Holy Fervor: ***Active: Activate
+        to cause the next 4 Basic Attacks within 10 seconds to cleave for 30% additional
+        damage. ***Passive: Casting Molten Armor grants Holy Fervor for 2 Basic Attacks.
+        *Level 13 **Pathetic Mortals: Stunning enemy Heroes with Celestial Charge
+        reduces their Movement Speed by 25% and damage by 50% for 4 seconds. **Divine
+        Rage: Consuming a Valorous Brand mark reduces the cooldown of Molten Armor
+        by 1 second. **Heat of Battle: Increase Molten Armor''s healing against Heroes
+        by 2% for every 1% of health Imperius is Missing. *Level 16 **Celestial Swiftness:
+        Imperius gains 20% Movement Speed for 5 seconds after casting Celestial Charge.
+        Gain 40% Attack Speed for 5 seconds for each enemy Hero stunned with Celestial
+        Charge. **Melting Touch: Consuming a Molten Armor mark reduces the target''s
+        Armor by 25 for 4 seconds. **Valorous Pursuit: Active: Activate to teleport
+        to an enemy that has been marked by Valorous Brand and gain 25 Armor for 3
+        seconds. *Level 20 **Heavenly Host: Nearby allied Heroes gain 600 Shield for
+        3 seconds. If the Shield lasts the full duration, fire a sword at the nearest
+        enemy Hero, dealing 140 damage. **Unrelenting Descent: Descending from the
+        Heavens restores 30% of Imperius'' maximum Health and Mana. Consuming a Valorous
+        Brand reduces the cooldown of Wrath of the Angiris by 10 seconds. **Brand
+        of Solarion: Reduce the duration of Valorous Brand to 5 seconds, but it is
+        no longer consumed when triggered. **Impervious: Activate to become Unstoppable
+        and gain 75 Spell Armor for 3 seconds. Hitting Heroes with the center of Solarion''s
+        Fire reduces this cooldown by 5 seconds. ==Notable Matchups== Victories: Losses:
+        Inconclusive: ==References== Category:Heroes of the Storm Category:Characters
+        Category:Angels Category:Neutral Characters Category:Protagonists Category:Heroes
+        Category:Warriors Category:Spear Users Category:Sword Users Category:Weapon
+        Masters Category:Martial Artists Category:Weapon Creation Users Category:Weapon
+        Control Users Category:Immortals Category:Flight Users Category:Regeneration
+        Users Category:Damage Boost Users Category:Dama'
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|imperius heroes of the storm|9289111
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-tyrael-diablo
+    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael_Diablo
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -1523,6 +1277,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1535,7 +1290,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1546,10 +1301,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '1-A Possibly High 1-A Name: Anu, The Diamond Warrior, The One, The Light
-        God, The Father Light, Origin: Diablo franchise Gender: Male, though initially
-        referred than as "it"'
-      source_id: character-stats-profiles-tyrael-game
+      value: 1-A Possibly High 1-A
+      source_id: character-stats-profiles-tyrael-diablo
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1561,7 +1314,7 @@ repair:
         spine also formed the crystalline structure defining the High Heavens .[4]
         Worldstone ), Personal Duality, (controls and manipulates the myriad dual
         aspects and conflicting states of existence that he embodies)
-      source_id: character-stats-profiles-tyrael-game
+      source_id: character-stats-profiles-tyrael-diablo
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1572,26 +1325,26 @@ repair:
         and possibilities, such how places like the void itself exist.) Possibly High
         Outerverse level (after his "death" he transcended everything and went to
         an unknown paradise where no other being can go)
-      source_id: character-stats-profiles-tyrael-game
+      source_id: character-stats-profiles-tyrael-diablo
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
       value: Omnipresent he is Sum of all things
-      source_id: character-stats-profiles-tyrael-game
+      source_id: character-stats-profiles-tyrael-diablo
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
       value: Outerverse level | High Outerverse level
-      source_id: character-stats-profiles-tyrael-game
+      source_id: character-stats-profiles-tyrael-diablo
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
       value: 'Notable Matchups == Victories: Losses: Inconclusive: == References ==
         Category:Tier 1 Category:Tier 1-A Category:Tier High 1-A'
-      source_id: character-stats-profiles-tyrael-game
+      source_id: character-stats-profiles-tyrael-diablo
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1608,123 +1361,233 @@ repair:
     duplicate_key: character-stats-and-profiles.fandom.com|anu canon diablo hesperus5123|514311
     retryable: false
     exception_class: ''
-  needs_human_source_choice: false
-  candidate_sources:
-  - source_id: character-stats-profiles-tyrael-diablo
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael_Diablo
-    title: Anu (Canon, Diablo)/Hesperus5123
-    rank: 105
-    extracted_fields: *id005
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id006
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|anu canon diablo hesperus5123|514311
-  - source_id: character-stats-profiles-tyrael-diablo
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael_%28Diablo%29
-    title: Anu (Canon, Diablo)/Hesperus5123
-    rank: 105
-    extracted_fields: *id007
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|anu canon diablo hesperus5123|514311
-  - source_id: character-stats-profiles-tyrael
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael
-    title: Anu (Canon, Diablo)/Hesperus5123
-    rank: 105
-    extracted_fields: *id009
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|anu canon diablo hesperus5123|514311
-  - source_id: character-stats-profiles-tyrael-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael_%28Game%29
-    title: Anu (Canon, Diablo)/Hesperus5123
-    rank: 105
-    extracted_fields: *id011
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|anu canon diablo hesperus5123|514311
-  - source_id: vsbattles-tyrael-diablo
-    url: https://vsbattles.fandom.com/wiki/Tyrael_Diablo
-    title: Imperius (Heroes of the Storm)
-    rank: 80
-    extracted_fields: *id013
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|imperius heroes of the storm|9289111
   - source_id: vsbattles-tyrael-diablo
     url: https://vsbattles.fandom.com/wiki/Tyrael_%28Diablo%29
-    title: Imperius (Heroes of the Storm)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Imperius (Heroes of the Storm)
+    source_type: mediawiki
+    revision_id: '9289111'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16372
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 80
-    extracted_fields: *id015
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least , likely to
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Weapon Mastery, Martial Arts, Immortality
+        (Type 1), Flight, Regeneration (High-low: Can regenerate from near-death in
+        minutesHeroes of the Storm Gameplay), Damage Boost/Healing (Via Valorous Brand),
+        Status Effect Inducement (Via Celestial Charge, Solarian''s Fire, and Wrath
+        of the Angiris), Fire Manipulation (Via Solarian''s Fire and Molten Armor),
+        Temperature Manipulation (Can make his armor white-hot instantly with Molten
+        Armor), Forcefield Creation/Weapon Creation/Weapon Control (Via Angelic Armaments),
+        Light Manipulation (Via Wrath of the Angiris), Shapeshifting/Intangibility
+        (Shapeshifted into a mist of unknown origin), Resistance to the following:
+        Fire Manipulation/Extreme Heat (Can no-sell his own armor being made white-hot,
+        and can no-sell normal fireBattlefield of Eternity Map), Ice Manipulation
+        (Can withstand being frozen solid and can break out in seconds) Enhanced Status
+        Effect Inducement (Via Consuming Flame, Pathetic Mortals), Durability Negation
+        (Via Burn the Impure, Melting Touch), Damage Reduction (Via Soverign Armor,
+        Press Forward, and Impervious), Enhanced Healing (Via Battle Hunger, Heat
+        of Battle), Damage Boost (Via Holy Fervor, ), Forcefield Creation (Via Flash
+        of Anger,), Explosion Manipulation (Via Flash of Anger, Blaze of Glory), Statistics
+        Amplification (Via Celestial Swiftness), Teleportation (Via Valorous Pursuit),
+        Weapon Creation/Weapon Control (Via Heavenly Host), Healing (Via Unrelenting
+        Descent), limited Resistance to the following: Status Effect Inducement/Light
+        Manipulation/Ice Manipulation/Plant Manipulation/Earth Manipulation/Biological
+        Manipulation/Fire Manipulation/Air Manipulation/Empathic Manipulation/Fear
+        Manipulation/Mind Control/Transmutation/Power Nullification/Darkness Manipulation/Sound
+        Manipulation/Sleep Manipulation/Plasma Manipulation/Explosion Manipulation/Metal
+        Manipulation/Gravity Manipulation/Electricity Manipulation/Vibration Manipulation/Broadway
+        Force (Via Impervius, for three seconds is immune to almost all Crowd Control
+        abilities within Heroes of the Storm, only excluding Time Stop and Revealed)'
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Multi-City Block level+ (Harmed and regularly challenges Diablo,
+        who regularly no-sells attacks from other heroes,First Heroes of the Storm
+        TrailerHeroes of the Storm 2 Trailer And along with Jim Raynor tanked Nova's
+        500-ton nuke. Feared by The Butcher, who one-shot Jaina Proudmoore,The Butcher
+        Hero Trailer [who Stomped Nova,Jaina Proudmoore Hero Trailer E.T.C, Sgt. Hammer,
+        The Lich King, and Nazeebo] Killed Tyrael [who also Harmed DiabloTyrael Hero
+        Trailer] Killed The Lich King, Death Knight Sonya, E.T.C, [Who Harmed Muradin]
+        Johanna [Who one-shot Sylvanas,Johanna Hero Trailer Kerrigan,(who hamred Tyrael,
+        and AlarakThe Machines of War Trailer) Nazeebo, and Anub'arak (Who one-shot
+        The Lich KingAnub'arak Hero Trailer and Valla] Jim Raynor, Zeratul, Nova,
+        [Who blocked an attack from and casually killed The Lich King and Tychus [Who
+        killed GazloweTychus Hero Trailer]. Considers himself far superior fo Gul'dan,
+        and superior to Mal'ganis), likely Universe level to Universe level+ (Considered
+        comparable to other extreme Holy powers such as Llarion by Alextrazsa, making
+        him likely comparable to The Raven Lord)
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Supersonic+, likely higher (Should be far faster than Nova,
+        whose bullets should move at this speed, which every hero can react to and
+        temporarily outrun)
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Multi-City Block level+, likely Universe level to Universe level+
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (As an Archangel, should be superior to Llarion who can keep
+        up a fight for Eternity)
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range physically, Extended Melee Range with Solarian
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Solarion, the Spear of Valor
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Genius (Considers individuals such as Alarak so much lower than him
+        that his thoughts to Alarak are "Beyond your pitiful imagination". Considered
+        the Greatest Warrior in Creation, making him more skilled than masters of
+        nearly every form of martial art and weapon) Standard Tactics:'
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Extremely easy to anger Notable Attacks/Techniques: Armor: Armor grants
+        percentage-base damage reduction(ex: 20 armor is 20% damage reduction), and
+        vice versa for Armor Reduction *Valorous Brand: Each Basic Ability marks enemy
+        Heroes hit for 10 seconds. Basic Attacks consume the target''s marks, dealing
+        20% bonus damage per mark and healing for 75 per mark. *Celestial Charge:
+        Imperius lunges toward a targeted direction and stabs Solarian forward, dealing
+        damage. If an enemy is hit, Imperius Stun them for 1 second and deals additional
+        damage when it finishes. *Solarion''s Fire: Imperius swings Solarian low to
+        the ground, releasing a fiery wave that deals damage. Enemies hit by the center
+        take 50% bonus damage and are Slowed by 40% for 3 seconds. *Molten Armor:
+        Imperius shrouds himself in flames for 3 seconds, making his armor white-hot,
+        striking a nearby enemy for damage every 0.25 seconds. Imperius heals for
+        50% of the damage dealt, increased to 100% against Heroes. *Angelic Armaments:
+        Imperius summons a ring of blazing swords that grants a large Shield for 3
+        seconds. If the Shield lasts the full duration, this Ability can be reactivated
+        within 5 seconds to launch 6 swords toward an area, each dealing heavy damage
+        to the first enemy hit. *Wrath of the Angiris: After 0.75 seconds of charging
+        a hand with lignt, Imperius charges in a target direction, lifting the first
+        enemy Hero hit into the Heavens. While in the air, Imperius can steer the
+        landing location by moving and showing a light circle showing where they will
+        land. After 2 seconds, slam the target into the ground, dealing 375 damage
+        and Stunning them for 1 second. *Level 1 **Impaling Light: Celestial Charge''s
+        final damage is increased by 75% and cooldown is reduced by 1.25 seconds for
+        each Valorous Brand on the target when the Stun completes. **Consuming Flame:
+        Increase the center damage of Solarion''s Fire by an additional 125% and its
+        Slow amount by 15%. The first enemy Hero hit by Solarion''s Fire refunds 30
+        Mana. **Burn The Impure: Consuming a Valorous Brand mark deals bonus damage
+        equal to 2.5% of the Hero''s maximum Health. *Level 4 **Sovereign Armor: Molten
+        Armor grants 20 Armor for 1.5 seconds. Damaging an enemy Hero with Molten
+        Armor increases the duration of the Armor by 0.5 seconds. **Battle Hunger:
+        Increase the healing of Valorous Brand by 80%. **Press Forward: Gain 10 Armor
+        while being healed by a Regeneration Globe. Damaging an enemy Hero sets the
+        duration of an active Regeneration Globe on Imperius to 8 seconds (unless
+        it is already higher). *Level 7 **Flash of Anger: Consuming a mark from Celestial
+        Charge deals damage around the target and grants Imperius a decent point Shield
+        for 4 seconds. **Blaze of Glory: Solarion''s Fire leaves a line of scorched
+        earth along its center that explodes after 2 seconds for good damage, dealing
+        bonus damage with Valorous Brand marks. **Holy Fervor: ***Active: Activate
+        to cause the next 4 Basic Attacks within 10 seconds to cleave for 30% additional
+        damage. ***Passive: Casting Molten Armor grants Holy Fervor for 2 Basic Attacks.
+        *Level 13 **Pathetic Mortals: Stunning enemy Heroes with Celestial Charge
+        reduces their Movement Speed by 25% and damage by 50% for 4 seconds. **Divine
+        Rage: Consuming a Valorous Brand mark reduces the cooldown of Molten Armor
+        by 1 second. **Heat of Battle: Increase Molten Armor''s healing against Heroes
+        by 2% for every 1% of health Imperius is Missing. *Level 16 **Celestial Swiftness:
+        Imperius gains 20% Movement Speed for 5 seconds after casting Celestial Charge.
+        Gain 40% Attack Speed for 5 seconds for each enemy Hero stunned with Celestial
+        Charge. **Melting Touch: Consuming a Molten Armor mark reduces the target''s
+        Armor by 25 for 4 seconds. **Valorous Pursuit: Active: Activate to teleport
+        to an enemy that has been marked by Valorous Brand and gain 25 Armor for 3
+        seconds. *Level 20 **Heavenly Host: Nearby allied Heroes gain 600 Shield for
+        3 seconds. If the Shield lasts the full duration, fire a sword at the nearest
+        enemy Hero, dealing 140 damage. **Unrelenting Descent: Descending from the
+        Heavens restores 30% of Imperius'' maximum Health and Mana. Consuming a Valorous
+        Brand reduces the cooldown of Wrath of the Angiris by 10 seconds. **Brand
+        of Solarion: Reduce the duration of Valorous Brand to 5 seconds, but it is
+        no longer consumed when triggered. **Impervious: Activate to become Unstoppable
+        and gain 75 Spell Armor for 3 seconds. Hitting Heroes with the center of Solarion''s
+        Fire reduces this cooldown by 5 seconds. ==Notable Matchups== Victories: Losses:
+        Inconclusive: ==References== Category:Heroes of the Storm Category:Characters
+        Category:Angels Category:Neutral Characters Category:Protagonists Category:Heroes
+        Category:Warriors Category:Spear Users Category:Sword Users Category:Weapon
+        Masters Category:Martial Artists Category:Weapon Creation Users Category:Weapon
+        Control Users Category:Immortals Category:Flight Users Category:Regeneration
+        Users Category:Damage Boost Users Category:Dama'
+      source_id: vsbattles-tyrael-diablo
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 0
@@ -1736,16 +1599,348 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|imperius heroes of the storm|9289111
-  - source_id: mediawiki-tyrael
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-tyrael-diablo
+    url: https://character-stats-and-profiles.fandom.com/wiki/Tyrael_%28Diablo%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Anu (Canon, Diablo)/Hesperus5123
+    source_type: mediawiki
+    revision_id: '514311'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3376
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - '''''''Powers and Stats'''''''
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 1-A Possibly High 1-A
+      source_id: character-stats-profiles-tyrael-diablo
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Immortality (Type 9), Good Embodiment (he is Ultimate good against ultimate
+        evil, Tathamet), reality warping, energy manipulation (With his energy, he
+        created the diablo reality. As the Eye of Anu/Worldstone, it served as the
+        foundation governing all places, times and possibilities in Creation, Its
+        spine also formed the crystalline structure defining the High Heavens .[4]
+        Worldstone ), Personal Duality, (controls and manipulates the myriad dual
+        aspects and conflicting states of existence that he embodies)
+      source_id: character-stats-profiles-tyrael-diablo
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Outerverse level (All existence and its concepts were created from a
+        last exchange of blows against Tathamet who was the evil part that was expelled
+        from his body, Diablo's reality is made up of countless superior spaces, realities
+        and possibilities, such how places like the void itself exist.) Possibly High
+        Outerverse level (after his "death" he transcended everything and went to
+        an unknown paradise where no other being can go)
+      source_id: character-stats-profiles-tyrael-diablo
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Omnipresent he is Sum of all things
+      source_id: character-stats-profiles-tyrael-diablo
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Outerverse level | High Outerverse level
+      source_id: character-stats-profiles-tyrael-diablo
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Notable Matchups == Victories: Losses: Inconclusive: == References ==
+        Category:Tier 1 Category:Tier 1-A Category:Tier High 1-A'
+      source_id: character-stats-profiles-tyrael-diablo
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|anu canon diablo hesperus5123|514311
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-tyrael
     url: https://vsbattles.fandom.com/wiki/Tyrael
-    title: Imperius (Heroes of the Storm)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Imperius (Heroes of the Storm)
+    source_type: mediawiki
+    revision_id: '9289111'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16372
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 80
-    extracted_fields: *id017
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id018
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least , likely to
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Weapon Mastery, Martial Arts, Immortality
+        (Type 1), Flight, Regeneration (High-low: Can regenerate from near-death in
+        minutesHeroes of the Storm Gameplay), Damage Boost/Healing (Via Valorous Brand),
+        Status Effect Inducement (Via Celestial Charge, Solarian''s Fire, and Wrath
+        of the Angiris), Fire Manipulation (Via Solarian''s Fire and Molten Armor),
+        Temperature Manipulation (Can make his armor white-hot instantly with Molten
+        Armor), Forcefield Creation/Weapon Creation/Weapon Control (Via Angelic Armaments),
+        Light Manipulation (Via Wrath of the Angiris), Shapeshifting/Intangibility
+        (Shapeshifted into a mist of unknown origin), Resistance to the following:
+        Fire Manipulation/Extreme Heat (Can no-sell his own armor being made white-hot,
+        and can no-sell normal fireBattlefield of Eternity Map), Ice Manipulation
+        (Can withstand being frozen solid and can break out in seconds) Enhanced Status
+        Effect Inducement (Via Consuming Flame, Pathetic Mortals), Durability Negation
+        (Via Burn the Impure, Melting Touch), Damage Reduction (Via Soverign Armor,
+        Press Forward, and Impervious), Enhanced Healing (Via Battle Hunger, Heat
+        of Battle), Damage Boost (Via Holy Fervor, ), Forcefield Creation (Via Flash
+        of Anger,), Explosion Manipulation (Via Flash of Anger, Blaze of Glory), Statistics
+        Amplification (Via Celestial Swiftness), Teleportation (Via Valorous Pursuit),
+        Weapon Creation/Weapon Control (Via Heavenly Host), Healing (Via Unrelenting
+        Descent), limited Resistance to the following: Status Effect Inducement/Light
+        Manipulation/Ice Manipulation/Plant Manipulation/Earth Manipulation/Biological
+        Manipulation/Fire Manipulation/Air Manipulation/Empathic Manipulation/Fear
+        Manipulation/Mind Control/Transmutation/Power Nullification/Darkness Manipulation/Sound
+        Manipulation/Sleep Manipulation/Plasma Manipulation/Explosion Manipulation/Metal
+        Manipulation/Gravity Manipulation/Electricity Manipulation/Vibration Manipulation/Broadway
+        Force (Via Impervius, for three seconds is immune to almost all Crowd Control
+        abilities within Heroes of the Storm, only excluding Time Stop and Revealed)'
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Multi-City Block level+ (Harmed and regularly challenges Diablo,
+        who regularly no-sells attacks from other heroes,First Heroes of the Storm
+        TrailerHeroes of the Storm 2 Trailer And along with Jim Raynor tanked Nova's
+        500-ton nuke. Feared by The Butcher, who one-shot Jaina Proudmoore,The Butcher
+        Hero Trailer [who Stomped Nova,Jaina Proudmoore Hero Trailer E.T.C, Sgt. Hammer,
+        The Lich King, and Nazeebo] Killed Tyrael [who also Harmed DiabloTyrael Hero
+        Trailer] Killed The Lich King, Death Knight Sonya, E.T.C, [Who Harmed Muradin]
+        Johanna [Who one-shot Sylvanas,Johanna Hero Trailer Kerrigan,(who hamred Tyrael,
+        and AlarakThe Machines of War Trailer) Nazeebo, and Anub'arak (Who one-shot
+        The Lich KingAnub'arak Hero Trailer and Valla] Jim Raynor, Zeratul, Nova,
+        [Who blocked an attack from and casually killed The Lich King and Tychus [Who
+        killed GazloweTychus Hero Trailer]. Considers himself far superior fo Gul'dan,
+        and superior to Mal'ganis), likely Universe level to Universe level+ (Considered
+        comparable to other extreme Holy powers such as Llarion by Alextrazsa, making
+        him likely comparable to The Raven Lord)
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Supersonic+, likely higher (Should be far faster than Nova,
+        whose bullets should move at this speed, which every hero can react to and
+        temporarily outrun)
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Multi-City Block level+, likely Universe level to Universe level+
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (As an Archangel, should be superior to Llarion who can keep
+        up a fight for Eternity)
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range physically, Extended Melee Range with Solarian
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Solarion, the Spear of Valor
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Genius (Considers individuals such as Alarak so much lower than him
+        that his thoughts to Alarak are "Beyond your pitiful imagination". Considered
+        the Greatest Warrior in Creation, making him more skilled than masters of
+        nearly every form of martial art and weapon) Standard Tactics:'
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Extremely easy to anger Notable Attacks/Techniques: Armor: Armor grants
+        percentage-base damage reduction(ex: 20 armor is 20% damage reduction), and
+        vice versa for Armor Reduction *Valorous Brand: Each Basic Ability marks enemy
+        Heroes hit for 10 seconds. Basic Attacks consume the target''s marks, dealing
+        20% bonus damage per mark and healing for 75 per mark. *Celestial Charge:
+        Imperius lunges toward a targeted direction and stabs Solarian forward, dealing
+        damage. If an enemy is hit, Imperius Stun them for 1 second and deals additional
+        damage when it finishes. *Solarion''s Fire: Imperius swings Solarian low to
+        the ground, releasing a fiery wave that deals damage. Enemies hit by the center
+        take 50% bonus damage and are Slowed by 40% for 3 seconds. *Molten Armor:
+        Imperius shrouds himself in flames for 3 seconds, making his armor white-hot,
+        striking a nearby enemy for damage every 0.25 seconds. Imperius heals for
+        50% of the damage dealt, increased to 100% against Heroes. *Angelic Armaments:
+        Imperius summons a ring of blazing swords that grants a large Shield for 3
+        seconds. If the Shield lasts the full duration, this Ability can be reactivated
+        within 5 seconds to launch 6 swords toward an area, each dealing heavy damage
+        to the first enemy hit. *Wrath of the Angiris: After 0.75 seconds of charging
+        a hand with lignt, Imperius charges in a target direction, lifting the first
+        enemy Hero hit into the Heavens. While in the air, Imperius can steer the
+        landing location by moving and showing a light circle showing where they will
+        land. After 2 seconds, slam the target into the ground, dealing 375 damage
+        and Stunning them for 1 second. *Level 1 **Impaling Light: Celestial Charge''s
+        final damage is increased by 75% and cooldown is reduced by 1.25 seconds for
+        each Valorous Brand on the target when the Stun completes. **Consuming Flame:
+        Increase the center damage of Solarion''s Fire by an additional 125% and its
+        Slow amount by 15%. The first enemy Hero hit by Solarion''s Fire refunds 30
+        Mana. **Burn The Impure: Consuming a Valorous Brand mark deals bonus damage
+        equal to 2.5% of the Hero''s maximum Health. *Level 4 **Sovereign Armor: Molten
+        Armor grants 20 Armor for 1.5 seconds. Damaging an enemy Hero with Molten
+        Armor increases the duration of the Armor by 0.5 seconds. **Battle Hunger:
+        Increase the healing of Valorous Brand by 80%. **Press Forward: Gain 10 Armor
+        while being healed by a Regeneration Globe. Damaging an enemy Hero sets the
+        duration of an active Regeneration Globe on Imperius to 8 seconds (unless
+        it is already higher). *Level 7 **Flash of Anger: Consuming a mark from Celestial
+        Charge deals damage around the target and grants Imperius a decent point Shield
+        for 4 seconds. **Blaze of Glory: Solarion''s Fire leaves a line of scorched
+        earth along its center that explodes after 2 seconds for good damage, dealing
+        bonus damage with Valorous Brand marks. **Holy Fervor: ***Active: Activate
+        to cause the next 4 Basic Attacks within 10 seconds to cleave for 30% additional
+        damage. ***Passive: Casting Molten Armor grants Holy Fervor for 2 Basic Attacks.
+        *Level 13 **Pathetic Mortals: Stunning enemy Heroes with Celestial Charge
+        reduces their Movement Speed by 25% and damage by 50% for 4 seconds. **Divine
+        Rage: Consuming a Valorous Brand mark reduces the cooldown of Molten Armor
+        by 1 second. **Heat of Battle: Increase Molten Armor''s healing against Heroes
+        by 2% for every 1% of health Imperius is Missing. *Level 16 **Celestial Swiftness:
+        Imperius gains 20% Movement Speed for 5 seconds after casting Celestial Charge.
+        Gain 40% Attack Speed for 5 seconds for each enemy Hero stunned with Celestial
+        Charge. **Melting Touch: Consuming a Molten Armor mark reduces the target''s
+        Armor by 25 for 4 seconds. **Valorous Pursuit: Active: Activate to teleport
+        to an enemy that has been marked by Valorous Brand and gain 25 Armor for 3
+        seconds. *Level 20 **Heavenly Host: Nearby allied Heroes gain 600 Shield for
+        3 seconds. If the Shield lasts the full duration, fire a sword at the nearest
+        enemy Hero, dealing 140 damage. **Unrelenting Descent: Descending from the
+        Heavens restores 30% of Imperius'' maximum Health and Mana. Consuming a Valorous
+        Brand reduces the cooldown of Wrath of the Angiris by 10 seconds. **Brand
+        of Solarion: Reduce the duration of Valorous Brand to 5 seconds, but it is
+        no longer consumed when triggered. **Impervious: Activate to become Unstoppable
+        and gain 75 Spell Armor for 3 seconds. Hitting Heroes with the center of Solarion''s
+        Fire reduces this cooldown by 5 seconds. ==Notable Matchups== Victories: Losses:
+        Inconclusive: ==References== Category:Heroes of the Storm Category:Characters
+        Category:Angels Category:Neutral Characters Category:Protagonists Category:Heroes
+        Category:Warriors Category:Spear Users Category:Sword Users Category:Weapon
+        Masters Category:Martial Artists Category:Weapon Creation Users Category:Weapon
+        Control Users Category:Immortals Category:Flight Users Category:Regeneration
+        Users Category:Damage Boost Users Category:Dama'
+      source_id: vsbattles-tyrael
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -1757,28 +1952,11 @@ repair:
     franchise_match: false
     variant_match: true
     duplicate_key: vsbattles.fandom.com|imperius heroes of the storm|9289111
-  - source_id: vsbattles-tyrael-game
-    url: https://vsbattles.fandom.com/wiki/Tyrael_%28Game%29
-    title: Loras Tyrell
-    rank: 80
-    extracted_fields: *id019
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id020
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|loras tyrell|9401809
+    retryable: false
+    exception_class: ''
+  needs_human_source_choice: false
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

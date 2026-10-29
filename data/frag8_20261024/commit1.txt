@@ -1,0 +1,41 @@
+frag-8: page-disclaimer + prose-sentence-shard screens (weaknesses)
+
+Two new fragment screens in fragment_item_reasons, both weaknesses-only,
+wired through the shared filter_list_field_items_detailed funnel so they
+fire in recovery and repair paths.
+
+page_disclaimer: first-person voice AND a strong disclaimer/attribution
+phrase ("not my own", "my fault", "message me", "this page", "their
+videos", "in my opinion", ...), plus a capped-name safety net for
+"displayed on any profile". Calibrated: 4 raw / 2 distinct hits in the
+stored weakness corpus (Discord note x3, Death Battle disclaimer x1);
+cap artifacts (darkseid "was stated" + cut-off "i", momo "My Hero
+Academia") pinned as non-firing controls.
+
+prose_sentence_shard: leading-edge continuation markers -- conjunction
+(but/and/so/yet/however/although/though/rather than), preposition
+(during/after/before/with/without/by/through/despite/because of/due to),
+or gerund (-ing openers with a denylist), or a trailing lead-in
+("for example"/"such as"/"for instance"). Spares: subject-led finite
+clauses (with contraction expansion), comma + main clause, limitation
+markers anywhere, "without" + noun phrase. Calibrated: 4,281 raw / 388
+distinct openers. The darwin lead clause ("His body will adapt ...")
+is a complete clause and is deliberately NOT caught -- sibling-cluster
+detection was calibrated and rejected (4,951 raw / 2,322 distinct, hits
+real limitation content); the gate decides whether it re-merges.
+
+Fixes found by calib3 verbatim sanity: _shard_headed now uses only
+auxiliaries + 3rd-person -s verbs (-ed/irregular-past belong only in
+the subject-led spare; "combat-related power" was misread as headed),
+and _SHARD_FUNCTION gained a noun-head set (determiners/quantifiers/
+adjectives) so plural nouns ("many situations") are not misread as
+verbs. All four verbatim shards now fire; all controls survive.
+
+One corpus test updated: "rendering them berserk" leaves the short-
+weaknesses pass list -- it is a gerund-led fragment of Axl ability
+prose ("effects on his opponents, rendering them berserk ...") misfiled
+as a weakness, an offensive effect on others, not a limitation.
+
+Tests: guard 196/196 (186 + 10 new EighthGenFrag8Tests); full discover
+502 tests at 13F + 11E, byte-identical to the pre-existing band, zero
+new guard/demotion failures.

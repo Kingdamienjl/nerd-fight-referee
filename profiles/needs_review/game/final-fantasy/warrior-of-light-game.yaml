@@ -11,13 +11,14 @@ generation:
   generated_at: '2026-06-10T03:29:03Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id005
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Warrior of Light (Game)
   franchise: Final Fantasy
@@ -178,42 +179,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-warrior-of-light-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Warrior of Light Game
-  url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-warrior-of-light-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Warrior of Light Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-warrior-of-light-game-final-fantasy
   provider_id: vsbattles
   source_type: mediawiki
@@ -221,7 +186,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Warrior_of_Light
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -266,7 +231,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Cloud_Strife_(Cannon/Dissidia,_Final_Fantasy)
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -301,62 +266,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-warrior-of-light-game-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Warrior of Light (Game) Final Fantasy
-  url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-warrior-of-light-game-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Warrior of Light (Game) Final Fantasy
-  url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_%28Game%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-warrior-of-light-game-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Warrior of Light (Game) (Final Fantasy)
-  url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29_%28Final_Fantasy%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-warrior-of-light-game-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Warrior of Light (Game) (Final Fantasy)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_%28Game%29_%28Final_Fantasy%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-warrior-of-light-game-game
   provider_id: vsbattles
   source_type: mediawiki
@@ -517,7 +426,7 @@ weaknesses:
     the original game'
   description: 'None notable Note: While the Warrior of Light is a generic Knight
     class from the original game'
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-warrior-of-light-game-final-fantasy
   source_claim_ids: []
   confidence: 0.85
@@ -535,7 +444,7 @@ weaknesses:
     Victories: Losses: Inconclusive: ==Refer'
   description: 'the Dissidia series made him a character in his own right. ==Notable
     Matchups== Victories: Losses: Inconclusive: ==References== {{scroll box'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -550,7 +459,7 @@ weaknesses:
 - id: weaknesses-content-reflist
   name: content={{reflist
   description: content={{reflist
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -590,7 +499,7 @@ weaknesses:
     Users Category:Petrification Users Category:Dream Users Category:Memory Users
     Category:Armor Users Category:Helmet Users Category:Warriors Category:Humans Category:Artificial
     Characters Category:Good Characters
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -622,217 +531,29 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id005
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: 94be624e86dab34d3fb86657a9d57b6cff2a365d04d09e4b81a1e0ec9b3ceeab
 repair:
-  attempted_at: '2026-06-19T10:37:27Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-28T23:39:54Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-warrior-of-light-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29_Final_Fantasy
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id010
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Warrior of Light
-    source_type: mediawiki
-    revision_id: '9323624'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 21194
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id011
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-A}} | {{2-A}}'
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Madness Manipulation (Type 2) and Morality Manipulation (Can cast Confuse
-        with the Braveheart and Wizard Staff, driving the target insane and attack
-        anyone, even their allies), Holy Manipulation (via Lightbringer, which can
-        cast Holy), Light Manipulation (via Light Axe, which can cast Diara), Healing
-        (via the Rune Axe, Healing Helm, and Rune Staff, which can cast Curaga, Heal
-        and Healara respectively), Heat Manipulation (via Flare), Fire Manipulation,
-        Ice Manipulation and Matter Manipulation (Macro-Quantum; Can use different
-        levels of Fire and Ice magic. Both Fire and Ice related abilities are stated
-        to affect the target's electrons, being able to even negate durability in
-        the process), Electricity Manipulation and Pain Manipulation (via Thunder
-        weapons, which are capable of attacking the nervesFinal Fantasy IV Volume
-        2 Novel, chapter 7, page 54), Statistics Amplification (via Giant's Glove,
-        which can cast Saber), Power Nullification (via Mage Masher, which can cast
-        Silence), Death Manipulation and Blood Manipulation (Can inflict the Death
-        spell, which is even stated to solidify the victim's blood), Afterimage Creation
-        (via Defender, which can cast Blink), Forcefield Creation (via Murasame, which
-        can cast Protect), Resurrection (via Sage's Staff, which can cast Life) |-|Dissidia=
-        {{#tag:tabber
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level+ (Can defeat Shinryu, who's far superior to Neo Exdeath)
-        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
-        power from the gods of the cycle. Participated in the defeat of Shinryu)
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ (Kept pace with Chaos and Feral Chaos) | Massively FTL+
-        (Faster than before, could keep pace with Shinryu)
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level+ (Comparable to Feral Chaos and Chaos) | Multiverse
-        level+ (Took hits from Shinryu
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with weapons, Multiversal+ with magic (Magic as
-        a whole is shown to affect omnipresent beings such as Exdeath when he's become
-        one with the Void itself, which spans across the entire Final Fantasy Multiverse)
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Skilled warrior and combatant, bested Garland in mortal combat, previously
-        Cornelia's greatest Knight (of which was implied to be worth the entirety
-        of Cornelia's remaining military might alone due to the Kingdom's failure
-        to rescue Princess Sara themselves), fairly competent at problem solving with
-        little information available
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable Note: While the Warrior of Light is a generic Knight class
-        from the original game, the Dissidia series made him a character in his own
-        right. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} {{Discussions}} Category:Characters Category:Male
-        Characters Category:Game Characters Category:Final Fantasy Category:Healers
-        Category:Knights Category:Protagonists Category:Primary Protagonists Category:Heroes
-        Category:Forcefield Users Category:Poison Users Category:Corrosion Users Category:Final
-        Fantasy I Category:Magic Users Category:Sword Users Category:Weapon Masters
-        Category:Regeneration Users Category:Durability Negation Users Category:Power
-        Modification Users Category:Duplication Users Category:Statistics Amplification
-        Users Category:Soul Users Category:Homing Attack Users Category:Fusionism
-        Users Category:Size Users Category:Danmaku Users Category:Aura Users Category:Breath
-        Attack Users Category:Energy Users Category:Invisibility Users Category:Telekinesis
-        Users Category:Shield Users Category:BFR Users Category:Existence Erasure
-        Users Category:Void Users Category:Corruption Users Category:Flight Users
-        Category:Time Users Category:Space Users Category:Concept Users Category:Non-Physical
-        Interaction Users Category:Self-Sustenance Users Category:Acausal Characters
-        Category:Afterimage Users Category:Power Nullification Users Category:Soul
-        Users Category:Space Users Category:Time Users Category:Time Travelers Category:Mind
-        Users Category:Holy Users Category:Light Users Category:Fire Users Category:Temperature
-        Users Category:Ice Users Category:Electricity Users Category:Statistics Amplification
-        Users Category:Death Users Category:Supernatural Willpower Users Category:Law
-        Users Category:Summoners Category:Sealing Users Category:Reactive Power Level
-        Users Category:Dimensional Travel Users Category:Creation Users Category:Immortals
-        Category:BFR Users Category:Matter Users Category:Soul Users Category:Radiation
-        Users Category:Deconstruction Users Category:Self-Destruction Users Category:Explosion
-        Users Category:Resurrection Users Category:Petrification Users Category:Dream
-        Users Category:Memory Users Category:Armor Users Category:Helmet Users Category:Warriors
-        Category:Humans Category:Artificial Characters Category:Good Characters'
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light|9323624
-    retryable: false
-    exception_class: ''
   - source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_%28Game%29_Final_Fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Cloud_Strife_(Cannon/Dissidia,_Final_Fantasy)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields:
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
     - weaknesses
     normalized_page_title: Cloud Strife (Cannon/Dissidia, Final Fantasy)
@@ -850,6 +571,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -859,11 +581,11 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -873,40 +595,8 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: powers_and_abilities
-      value: 'A list of the character''s general abilities (Please add links to the
-        "[[:Category:Powers and Abilities|Powers and Abilities]]" pages, if it is
-        possible). [[Attack Potency]]: Outerverse level (Cloud participated in the
-        defeat of Shinryu who has also been defeated by the Warrior of Light, that
-        scales to characters like the Cloud of Darkness who has verbatim statements
-        being the fear that transcend all concepts, within the FF cosmology there
-        is concepts existing such as time and space, distance, fate, plus dimensionality,
-        form, and speed ). [[Speed]]: Irrelevant (scales to the Cloud of Darkness
-        who has transcended the concept of time and space as well as dimensionality)
-        [[Lifting Strength]]: Irrelevant [[Striking Strength]]: Outerversal (comparable
-        to Attack Potency). [[Durability]]: Outerverse level (has scaling and taken
-        damage from characters relative to the Cloud of Darkness). [[Stamina]]: Superhuman
-        (Fought entire gauntlets of monsters, for what seem to be hours, with no sign
-        of exhaustion. Clashed with powerful enemies under extreme conditions, such
-        as fighting off the Remnants of Sephiroth while afflicted with Geostigma,
-        a fatal disease whose symptoms include extreme fatigue and bouts of intense
-        physical pain; as well as being able to keep going against Sephiroth despite
-        sustaining heavy injuries, including being wounded in vital organs) [[Range]]:
-        Irrelevant'
-      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: weaknesses
-      value: 'Self-explanatory [[Feats]]: List all of the character''s amazing feats.
-        Strength feats, speed feats, durability feats, etc. You can judge a person''s
-        power by their feats. Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: Self-explanatory ==Explanations (Optional)==
-        This section can be used to explain the reasons for the assigned power level
-        of a certain character more in-depth, as well as how the powers and nature
-        of the character fundamentally work. This is particularly useful for more
-        high-tiered characters. However, it is very important that you make sure that
-        the text has good grammar/sentence structure, and is easy to understand.'
+      value: etc. You can judge a person's power by their feats.
       source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
       provider_id: character_stats_profiles
       authority: high
@@ -944,319 +634,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife cannon dissidia
-      final fantasy|372287
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-warrior-of-light-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29_%28Final_Fantasy%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id012
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Warrior of Light
-    source_type: mediawiki
-    revision_id: '9323624'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 21194
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id013
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-A}} | {{2-A}}'
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Madness Manipulation (Type 2) and Morality Manipulation (Can cast Confuse
-        with the Braveheart and Wizard Staff, driving the target insane and attack
-        anyone, even their allies), Holy Manipulation (via Lightbringer, which can
-        cast Holy), Light Manipulation (via Light Axe, which can cast Diara), Healing
-        (via the Rune Axe, Healing Helm, and Rune Staff, which can cast Curaga, Heal
-        and Healara respectively), Heat Manipulation (via Flare), Fire Manipulation,
-        Ice Manipulation and Matter Manipulation (Macro-Quantum; Can use different
-        levels of Fire and Ice magic. Both Fire and Ice related abilities are stated
-        to affect the target's electrons, being able to even negate durability in
-        the process), Electricity Manipulation and Pain Manipulation (via Thunder
-        weapons, which are capable of attacking the nervesFinal Fantasy IV Volume
-        2 Novel, chapter 7, page 54), Statistics Amplification (via Giant's Glove,
-        which can cast Saber), Power Nullification (via Mage Masher, which can cast
-        Silence), Death Manipulation and Blood Manipulation (Can inflict the Death
-        spell, which is even stated to solidify the victim's blood), Afterimage Creation
-        (via Defender, which can cast Blink), Forcefield Creation (via Murasame, which
-        can cast Protect), Resurrection (via Sage's Staff, which can cast Life) |-|Dissidia=
-        {{#tag:tabber
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level+ (Can defeat Shinryu, who's far superior to Neo Exdeath)
-        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
-        power from the gods of the cycle. Participated in the defeat of Shinryu)
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ (Kept pace with Chaos and Feral Chaos) | Massively FTL+
-        (Faster than before, could keep pace with Shinryu)
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level+ (Comparable to Feral Chaos and Chaos) | Multiverse
-        level+ (Took hits from Shinryu
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with weapons, Multiversal+ with magic (Magic as
-        a whole is shown to affect omnipresent beings such as Exdeath when he's become
-        one with the Void itself, which spans across the entire Final Fantasy Multiverse)
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Skilled warrior and combatant, bested Garland in mortal combat, previously
-        Cornelia's greatest Knight (of which was implied to be worth the entirety
-        of Cornelia's remaining military might alone due to the Kingdom's failure
-        to rescue Princess Sara themselves), fairly competent at problem solving with
-        little information available
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable Note: While the Warrior of Light is a generic Knight class
-        from the original game, the Dissidia series made him a character in his own
-        right. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} {{Discussions}} Category:Characters Category:Male
-        Characters Category:Game Characters Category:Final Fantasy Category:Healers
-        Category:Knights Category:Protagonists Category:Primary Protagonists Category:Heroes
-        Category:Forcefield Users Category:Poison Users Category:Corrosion Users Category:Final
-        Fantasy I Category:Magic Users Category:Sword Users Category:Weapon Masters
-        Category:Regeneration Users Category:Durability Negation Users Category:Power
-        Modification Users Category:Duplication Users Category:Statistics Amplification
-        Users Category:Soul Users Category:Homing Attack Users Category:Fusionism
-        Users Category:Size Users Category:Danmaku Users Category:Aura Users Category:Breath
-        Attack Users Category:Energy Users Category:Invisibility Users Category:Telekinesis
-        Users Category:Shield Users Category:BFR Users Category:Existence Erasure
-        Users Category:Void Users Category:Corruption Users Category:Flight Users
-        Category:Time Users Category:Space Users Category:Concept Users Category:Non-Physical
-        Interaction Users Category:Self-Sustenance Users Category:Acausal Characters
-        Category:Afterimage Users Category:Power Nullification Users Category:Soul
-        Users Category:Space Users Category:Time Users Category:Time Travelers Category:Mind
-        Users Category:Holy Users Category:Light Users Category:Fire Users Category:Temperature
-        Users Category:Ice Users Category:Electricity Users Category:Statistics Amplification
-        Users Category:Death Users Category:Supernatural Willpower Users Category:Law
-        Users Category:Summoners Category:Sealing Users Category:Reactive Power Level
-        Users Category:Dimensional Travel Users Category:Creation Users Category:Immortals
-        Category:BFR Users Category:Matter Users Category:Soul Users Category:Radiation
-        Users Category:Deconstruction Users Category:Self-Destruction Users Category:Explosion
-        Users Category:Resurrection Users Category:Petrification Users Category:Dream
-        Users Category:Memory Users Category:Armor Users Category:Helmet Users Category:Warriors
-        Category:Humans Category:Artificial Characters Category:Good Characters'
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light|9323624
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_%28Game%29_%28Final_Fantasy%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id008
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - weaknesses
-    normalized_page_title: Cloud Strife (Cannon/Dissidia, Final Fantasy)
-    source_type: mediawiki
-    revision_id: '372287'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 6932
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id009
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: powers_and_abilities
-      value: 'A list of the character''s general abilities (Please add links to the
-        "[[:Category:Powers and Abilities|Powers and Abilities]]" pages, if it is
-        possible). [[Attack Potency]]: Outerverse level (Cloud participated in the
-        defeat of Shinryu who has also been defeated by the Warrior of Light, that
-        scales to characters like the Cloud of Darkness who has verbatim statements
-        being the fear that transcend all concepts, within the FF cosmology there
-        is concepts existing such as time and space, distance, fate, plus dimensionality,
-        form, and speed ). [[Speed]]: Irrelevant (scales to the Cloud of Darkness
-        who has transcended the concept of time and space as well as dimensionality)
-        [[Lifting Strength]]: Irrelevant [[Striking Strength]]: Outerversal (comparable
-        to Attack Potency). [[Durability]]: Outerverse level (has scaling and taken
-        damage from characters relative to the Cloud of Darkness). [[Stamina]]: Superhuman
-        (Fought entire gauntlets of monsters, for what seem to be hours, with no sign
-        of exhaustion. Clashed with powerful enemies under extreme conditions, such
-        as fighting off the Remnants of Sephiroth while afflicted with Geostigma,
-        a fatal disease whose symptoms include extreme fatigue and bouts of intense
-        physical pain; as well as being able to keep going against Sephiroth despite
-        sustaining heavy injuries, including being wounded in vital organs) [[Range]]:
-        Irrelevant'
-      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Self-explanatory [[Feats]]: List all of the character''s amazing feats.
-        Strength feats, speed feats, durability feats, etc. You can judge a person''s
-        power by their feats. Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: Self-explanatory ==Explanations (Optional)==
-        This section can be used to explain the reasons for the assigned power level
-        of a certain character more in-depth, as well as how the powers and nature
-        of the character fundamentally work. This is particularly useful for more
-        high-tiered characters. However, it is very important that you make sure that
-        the text has good grammar/sentence structure, and is easy to understand.'
-      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: ''''''' ''''''Outerverse level'''''' (Cloud participated in the defeat
-        of Shinryu who has also been defeated by the Warrior of Light, that scales
-        to characters like the Cloud of Darkness who has verbatim statements being
-        the fear that [https://imgur.com/a/dxXNFY0 transcend all concepts], within
-        the FF cosmology there is concepts existing such as [https://imgur.com/devils-road-description-505300f
-        time] [https://imgur.com/a/iIBdzFS and space], [https://imgur.com/PR5x11q
-        distance], [https://imgur.com/a/zFnlHl7 fate], [https://imgur.com/a/wwpdTMa
-        plus] [https://imgur.com/a/6H54bCk dimensionality], [https://imgur.com/a/iIBdzFS
-        form], [[finalfantasy:Speed_(stat)|and speed]] ).'
-      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: ''''''' ''''''Irrelevant'''''' (scales to the Cloud of Darkness who has
-        transcended the concept of time and space as well as dimensionality)'
-      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: ''''''' ''''''Outerverse level'''''' (has scaling and taken damage from
-        characters relative to the Cloud of Darkness).'
-      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1266,10 +644,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: mediawiki-warrior-of-light-game
-    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_(Game)
+    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id014
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1278,7 +656,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Warrior of Light
     source_type: mediawiki
@@ -1298,6 +675,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1311,7 +689,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id015
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -1323,37 +701,72 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{2-A}} | {{2-A}}'
-      source_id: mediawiki-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: Base
-      source_id: mediawiki-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Madness Manipulation (Type 2) and Morality Manipulation (Can cast Confuse
-        with the Braveheart and Wizard Staff, driving the target insane and attack
-        anyone, even their allies), Holy Manipulation (via Lightbringer, which can
-        cast Holy), Light Manipulation (via Light Axe, which can cast Diara), Healing
-        (via the Rune Axe, Healing Helm, and Rune Staff, which can cast Curaga, Heal
-        and Healara respectively), Heat Manipulation (via Flare), Fire Manipulation,
-        Ice Manipulation and Matter Manipulation (Macro-Quantum; Can use different
-        levels of Fire and Ice magic. Both Fire and Ice related abilities are stated
-        to affect the target's electrons, being able to even negate durability in
-        the process), Electricity Manipulation and Pain Manipulation (via Thunder
-        weapons, which are capable of attacking the nervesFinal Fantasy IV Volume
-        2 Novel, chapter 7, page 54), Statistics Amplification (via Giant's Glove,
-        which can cast Saber), Power Nullification (via Mage Masher, which can cast
-        Silence), Death Manipulation and Blood Manipulation (Can inflict the Death
-        spell, which is even stated to solidify the victim's blood), Afterimage Creation
-        (via Defender, which can cast Blink), Forcefield Creation (via Murasame, which
-        can cast Protect), Resurrection (via Sage's Staff, which can cast Life) |-|Dissidia=
-        {{#tag:tabber
+      value: 'Superhuman Physical Characteristics, Blessed (Is blessed by The Crystal,
+        which grants him the abilities of the Crystal), Self-Sustenance (Type 1: Can
+        breathe underwater via Oxyale), Acausality (Type 1; Was unaffected by the
+        time paradox he made when stopping the timeloop Chaos made in the past), Magic,
+        Subjective Reality (Magic,Final Fantasy IV Novel 1, chapter 1, page 29 in
+        its basest form,Final Fantasy IV Novel 1, chapter 3, page 107 is projecting
+        one''s innerFinal Fantasy IV: The After Years Novel, chapter 2, page 109 mind
+        onto realityFinal Fantasy IV: The After Years, and is powered by intelligence
+        and mental strength), Non-Physical Interaction (Magic as a whole is shown
+        to affect a wide variety of different beings, from intangible/immaterial beings
+        to non corporeal beings, to abstract concepts like Chronodia, who''s the flow
+        of time itselfFinal Fantasy I, to Nonexistent beings like Exdeath and Cloud
+        of Darkness), Law Manipulation (Magic is stated to rewrite the natural order
+        of thingsFinal Fantasy IV Novel 1, chapter 5, page 198), Power Modification
+        (Including Duplication, Fusionism, Statistics Amplification, Size Manipulation,
+        Homing Attack, Danmaku, Aura, Breath Attack, and Energy Manipulation; Magic
+        users across the games have consistently shown the ability to manipulate the
+        shape and properties of their own magical abilities, with even higher tiers
+        of spells simply being considered stronger versions of the same basic abilityFinal
+        Fantasy IV: The After Years Novel, chapter 2 page 114), Conceptual Manipulation
+        (Type 2), and Space-Time Manipulation (Magic is shown in the novels to remove
+        concepts and warp space and time itself, like the Devil''s road, which the
+        concept of time was lost,Final Fantasy IV Novel 1, chapter 5, page 199 and
+        time and space were twisted to the pointFinal Fantasy IV: The After Years
+        Novel, chapter 1, page 67 the past, present and futureFinal Fantasy IV: The
+        After Years Novel, chapter 1, page 73 existed as oneFinal Fantasy IV: The
+        After Years Novel, chapter 3, page 147), Master Swordsman, Afterimage Creation
+        (Via Blink), Regeneration Negation (Mid-Godly) and Immortality Negation (Type
+        3, 4, 7, and 9; Is capable of killing the Undeads permanently, and the Fiends
+        despite absorbing the Crystal''s Essences and gaining its Regenerative and
+        Immortality properties as a result), Healing (via Cure), Forcefield Creation
+        (Via Protect), Invisibility (Via Invis), Telekinesis, Power Nullification
+        (via Silence), Soul Manipulation (Is capable of interacting with and killing
+        souls), Space-Time Manipulation and Time Travel (the 4 crystals are capable
+        of warping space and time, as well as being able to send someone back in time),
+        Resistant to the Following: Subjective Reality, Magic, Conceptual Manipulation
+        (Type 2), and Space-Time Manipulation (Characters are capable of surviving
+        and resisting magical abilities, Which is shown to project one''s inner mind
+        onto reality, and as shown with the creation of the Devil''s road, remove
+        entire concepts and warp space and time to where the past, present, and future
+        exists as one), Law Manipulation (Resists magic, which can rewrite the natural
+        order of things), Spatial Manipulation, Deconstruction, and BFR (Can withstand
+        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
+        levelDissidia Final Fantasy, and can warp them into another dimension), Electricity
+        Manipulation and Pain Manipulation (Is able to resist the Lightning spells,
+        which are capable of attacking the nervesFinal Fantasy IV Volume 2 Novel,
+        chapter 7, page 54), Fire Manipulation, Ice Manipulation, and Matter Manipulation
+        (Macro-Quantum; Is capable of resisting these elements, the Fire and Ice spell
+        in particular being capable of affecting the target''s electrons), Poison
+        Manipulation and Corrosion Inducement (Can resist the Poison status effect,
+        which is also stated to corrode the target), Darkness Manipulation and Perception
+        Manipulation (Can resist the darkness status ailment via various equipment,
+        which would render the target blindFinal Fantasy V GBA Manual), Power Nullification
+        (Can resist the Silence status, which would render the target''s ability to
+        use magic null), Petrification (Can resist the petrification status effect),
+        Death Manipulation and Blood Manipulation (Can resist the Death spell, which
+        is even stated to solidify the victim''s blood,Final Fantasy IV Settings Guidebook),
+        Paralysis Inducement (Can resist the Paralysis status effect), Status Effect
+        Inducement (Is capable of resisting a wide variety of status ailments with
+        the Ribbon), Morality Manipulation and Madness Manipulation (Type 2; Can resist
+        the Confuse status ailment, which can drive the target insane to attack anyone,
+        even their allies), Sleep Manipulation (Can resist the Sleep status effect),
+        Power Nullification (can resist the Silence status effect, which renders the
+        target powerless), Time Stop (Can resist the Stop spell), Earth Manipulation
+        (Can resist Earth based attacks), Curse Manipulation'
       source_id: mediawiki-warrior-of-light-game
       provider_id: vsbattles
       authority: high
@@ -1394,187 +807,9 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: intelligence
-      value: Skilled warrior and combatant, bested Garland in mortal combat, previously
-        Cornelia's greatest Knight (of which was implied to be worth the entirety
-        of Cornelia's remaining military might alone due to the Kingdom's failure
-        to rescue Princess Sara themselves), fairly competent at problem solving with
-        little information available
-      source_id: mediawiki-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable Note: While the Warrior of Light is a generic Knight class
-        from the original game, the Dissidia series made him a character in his own
-        right. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} {{Discussions}} Category:Characters Category:Male
-        Characters Category:Game Characters Category:Final Fantasy Category:Healers
-        Category:Knights Category:Protagonists Category:Primary Protagonists Category:Heroes
-        Category:Forcefield Users Category:Poison Users Category:Corrosion Users Category:Final
-        Fantasy I Category:Magic Users Category:Sword Users Category:Weapon Masters
-        Category:Regeneration Users Category:Durability Negation Users Category:Power
-        Modification Users Category:Duplication Users Category:Statistics Amplification
-        Users Category:Soul Users Category:Homing Attack Users Category:Fusionism
-        Users Category:Size Users Category:Danmaku Users Category:Aura Users Category:Breath
-        Attack Users Category:Energy Users Category:Invisibility Users Category:Telekinesis
-        Users Category:Shield Users Category:BFR Users Category:Existence Erasure
-        Users Category:Void Users Category:Corruption Users Category:Flight Users
-        Category:Time Users Category:Space Users Category:Concept Users Category:Non-Physical
-        Interaction Users Category:Self-Sustenance Users Category:Acausal Characters
-        Category:Afterimage Users Category:Power Nullification Users Category:Soul
-        Users Category:Space Users Category:Time Users Category:Time Travelers Category:Mind
-        Users Category:Holy Users Category:Light Users Category:Fire Users Category:Temperature
-        Users Category:Ice Users Category:Electricity Users Category:Statistics Amplification
-        Users Category:Death Users Category:Supernatural Willpower Users Category:Law
-        Users Category:Summoners Category:Sealing Users Category:Reactive Power Level
-        Users Category:Dimensional Travel Users Category:Creation Users Category:Immortals
-        Category:BFR Users Category:Matter Users Category:Soul Users Category:Radiation
-        Users Category:Deconstruction Users Category:Self-Destruction Users Category:Explosion
-        Users Category:Resurrection Users Category:Petrification Users Category:Dream
-        Users Category:Memory Users Category:Armor Users Category:Helmet Users Category:Warriors
-        Category:Humans Category:Artificial Characters Category:Good Characters'
-      source_id: mediawiki-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light|9323624
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-warrior-of-light-game
-    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id016
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Warrior of Light
-    source_type: mediawiki
-    revision_id: '9323624'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 21194
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id017
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-A}} | {{2-A}}'
-      source_id: vsbattles-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: standard_equipment
-      value: Madness Manipulation (Type 2) and Morality Manipulation (Can cast Confuse
-        with the Braveheart and Wizard Staff, driving the target insane and attack
-        anyone, even their allies), Holy Manipulation (via Lightbringer, which can
-        cast Holy), Light Manipulation (via Light Axe, which can cast Diara), Healing
-        (via the Rune Axe, Healing Helm, and Rune Staff, which can cast Curaga, Heal
-        and Healara respectively), Heat Manipulation (via Flare), Fire Manipulation,
-        Ice Manipulation and Matter Manipulation (Macro-Quantum; Can use different
-        levels of Fire and Ice magic. Both Fire and Ice related abilities are stated
-        to affect the target's electrons, being able to even negate durability in
-        the process), Electricity Manipulation and Pain Manipulation (via Thunder
-        weapons, which are capable of attacking the nervesFinal Fantasy IV Volume
-        2 Novel, chapter 7, page 54), Statistics Amplification (via Giant's Glove,
-        which can cast Saber), Power Nullification (via Mage Masher, which can cast
-        Silence), Death Manipulation and Blood Manipulation (Can inflict the Death
-        spell, which is even stated to solidify the victim's blood), Afterimage Creation
-        (via Defender, which can cast Blink), Forcefield Creation (via Murasame, which
-        can cast Protect), Resurrection (via Sage's Staff, which can cast Life) |-|Dissidia=
-        {{#tag:tabber
-      source_id: vsbattles-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level+ (Can defeat Shinryu, who's far superior to Neo Exdeath)
-        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
-        power from the gods of the cycle. Participated in the defeat of Shinryu)
-      source_id: vsbattles-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ (Kept pace with Chaos and Feral Chaos) | Massively FTL+
-        (Faster than before, could keep pace with Shinryu)
-      source_id: vsbattles-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level+ (Comparable to Feral Chaos and Chaos) | Multiverse
-        level+ (Took hits from Shinryu
-      source_id: vsbattles-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-warrior-of-light-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with weapons, Multiversal+ with magic (Magic as
-        a whole is shown to affect omnipresent beings such as Exdeath when he's become
-        one with the Void itself, which spans across the entire Final Fantasy Multiverse)
-      source_id: vsbattles-warrior-of-light-game
+      value: Armor of Light, Lustrous Shield
+      source_id: mediawiki-warrior-of-light-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1584,41 +819,13 @@ repair:
         of Cornelia's remaining military might alone due to the Kingdom's failure
         to rescue Princess Sara themselves), fairly competent at problem solving with
         little information available
-      source_id: vsbattles-warrior-of-light-game
+      source_id: mediawiki-warrior-of-light-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable Note: While the Warrior of Light is a generic Knight class
-        from the original game, the Dissidia series made him a character in his own
-        right. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} {{Discussions}} Category:Characters Category:Male
-        Characters Category:Game Characters Category:Final Fantasy Category:Healers
-        Category:Knights Category:Protagonists Category:Primary Protagonists Category:Heroes
-        Category:Forcefield Users Category:Poison Users Category:Corrosion Users Category:Final
-        Fantasy I Category:Magic Users Category:Sword Users Category:Weapon Masters
-        Category:Regeneration Users Category:Durability Negation Users Category:Power
-        Modification Users Category:Duplication Users Category:Statistics Amplification
-        Users Category:Soul Users Category:Homing Attack Users Category:Fusionism
-        Users Category:Size Users Category:Danmaku Users Category:Aura Users Category:Breath
-        Attack Users Category:Energy Users Category:Invisibility Users Category:Telekinesis
-        Users Category:Shield Users Category:BFR Users Category:Existence Erasure
-        Users Category:Void Users Category:Corruption Users Category:Flight Users
-        Category:Time Users Category:Space Users Category:Concept Users Category:Non-Physical
-        Interaction Users Category:Self-Sustenance Users Category:Acausal Characters
-        Category:Afterimage Users Category:Power Nullification Users Category:Soul
-        Users Category:Space Users Category:Time Users Category:Time Travelers Category:Mind
-        Users Category:Holy Users Category:Light Users Category:Fire Users Category:Temperature
-        Users Category:Ice Users Category:Electricity Users Category:Statistics Amplification
-        Users Category:Death Users Category:Supernatural Willpower Users Category:Law
-        Users Category:Summoners Category:Sealing Users Category:Reactive Power Level
-        Users Category:Dimensional Travel Users Category:Creation Users Category:Immortals
-        Category:BFR Users Category:Matter Users Category:Soul Users Category:Radiation
-        Users Category:Deconstruction Users Category:Self-Destruction Users Category:Explosion
-        Users Category:Resurrection Users Category:Petrification Users Category:Dream
-        Users Category:Memory Users Category:Armor Users Category:Helmet Users Category:Warriors
-        Category:Humans Category:Artificial Characters Category:Good Characters'
-      source_id: vsbattles-warrior-of-light-game
+      value: the Dissidia series made him a character in his own right.
+      source_id: mediawiki-warrior-of-light-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1636,10 +843,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-warrior-of-light-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_%28Game%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/Niko_(Canon,_Niko_And_The_Sword_Of_Light)/Isaac18289129
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id018
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -1665,6 +872,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1677,7 +885,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id019
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1688,14 +896,13 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{Varies}}, {{8-C}}, {{7-B}}, {{5-C}}, {{5-B}} Name: Niko Zack William
-        Origin: Niko And The Sword Of Light Gender: Male Age: 10 Classification: Champions'
+      value: 8-C, 7-B, 5-C, 5-B
       source_id: character-stats-profiles-warrior-of-light-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Air Manipulation, Astral Projection, Longevity, Burrowing, Magic, Purification,
+      value: Air Manipulation, Astral Projection, Longevity, Magic, Purification,
         Electricity Manipulation, Energy Manipulation, Energy Projection, Enhanced
         Swimming, Explosion Manipulation, Flight, Forcefield creation, Fire Manipulation,
         Shockwave Creation, Earth Manipulation, Vibration Manipulation, Sound Manipulation,
@@ -1746,10 +953,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Niko''s curiosity and stubbornness constantly put him and his friends
+      value: Niko's curiosity and stubbornness constantly put him and his friends
         in danger throughout the series. Also, he gets tired when he uses too much
-        power constantly. == Note == == Gallery == == Others == Notable Losses: Notable
-        Victories: Inconclusive Matches: Category:Isaac18289129'
+        power constantly.
       source_id: character-stats-profiles-warrior-of-light-game
       provider_id: character_stats_profiles
       authority: high
@@ -1769,10 +975,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: vsbattles-warrior-of-light-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_Game_Final_Fantasy
+    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29_Final_Fantasy
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id020
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1781,7 +987,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Warrior of Light
     source_type: mediawiki
@@ -1801,6 +1006,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1814,7 +1020,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id021
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1824,37 +1030,72 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{2-A}} | {{2-A}}'
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-warrior-of-light-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Madness Manipulation (Type 2) and Morality Manipulation (Can cast Confuse
-        with the Braveheart and Wizard Staff, driving the target insane and attack
-        anyone, even their allies), Holy Manipulation (via Lightbringer, which can
-        cast Holy), Light Manipulation (via Light Axe, which can cast Diara), Healing
-        (via the Rune Axe, Healing Helm, and Rune Staff, which can cast Curaga, Heal
-        and Healara respectively), Heat Manipulation (via Flare), Fire Manipulation,
-        Ice Manipulation and Matter Manipulation (Macro-Quantum; Can use different
-        levels of Fire and Ice magic. Both Fire and Ice related abilities are stated
-        to affect the target's electrons, being able to even negate durability in
-        the process), Electricity Manipulation and Pain Manipulation (via Thunder
-        weapons, which are capable of attacking the nervesFinal Fantasy IV Volume
-        2 Novel, chapter 7, page 54), Statistics Amplification (via Giant's Glove,
-        which can cast Saber), Power Nullification (via Mage Masher, which can cast
-        Silence), Death Manipulation and Blood Manipulation (Can inflict the Death
-        spell, which is even stated to solidify the victim's blood), Afterimage Creation
-        (via Defender, which can cast Blink), Forcefield Creation (via Murasame, which
-        can cast Protect), Resurrection (via Sage's Staff, which can cast Life) |-|Dissidia=
-        {{#tag:tabber
+      value: 'Superhuman Physical Characteristics, Blessed (Is blessed by The Crystal,
+        which grants him the abilities of the Crystal), Self-Sustenance (Type 1: Can
+        breathe underwater via Oxyale), Acausality (Type 1; Was unaffected by the
+        time paradox he made when stopping the timeloop Chaos made in the past), Magic,
+        Subjective Reality (Magic,Final Fantasy IV Novel 1, chapter 1, page 29 in
+        its basest form,Final Fantasy IV Novel 1, chapter 3, page 107 is projecting
+        one''s innerFinal Fantasy IV: The After Years Novel, chapter 2, page 109 mind
+        onto realityFinal Fantasy IV: The After Years, and is powered by intelligence
+        and mental strength), Non-Physical Interaction (Magic as a whole is shown
+        to affect a wide variety of different beings, from intangible/immaterial beings
+        to non corporeal beings, to abstract concepts like Chronodia, who''s the flow
+        of time itselfFinal Fantasy I, to Nonexistent beings like Exdeath and Cloud
+        of Darkness), Law Manipulation (Magic is stated to rewrite the natural order
+        of thingsFinal Fantasy IV Novel 1, chapter 5, page 198), Power Modification
+        (Including Duplication, Fusionism, Statistics Amplification, Size Manipulation,
+        Homing Attack, Danmaku, Aura, Breath Attack, and Energy Manipulation; Magic
+        users across the games have consistently shown the ability to manipulate the
+        shape and properties of their own magical abilities, with even higher tiers
+        of spells simply being considered stronger versions of the same basic abilityFinal
+        Fantasy IV: The After Years Novel, chapter 2 page 114), Conceptual Manipulation
+        (Type 2), and Space-Time Manipulation (Magic is shown in the novels to remove
+        concepts and warp space and time itself, like the Devil''s road, which the
+        concept of time was lost,Final Fantasy IV Novel 1, chapter 5, page 199 and
+        time and space were twisted to the pointFinal Fantasy IV: The After Years
+        Novel, chapter 1, page 67 the past, present and futureFinal Fantasy IV: The
+        After Years Novel, chapter 1, page 73 existed as oneFinal Fantasy IV: The
+        After Years Novel, chapter 3, page 147), Master Swordsman, Afterimage Creation
+        (Via Blink), Regeneration Negation (Mid-Godly) and Immortality Negation (Type
+        3, 4, 7, and 9; Is capable of killing the Undeads permanently, and the Fiends
+        despite absorbing the Crystal''s Essences and gaining its Regenerative and
+        Immortality properties as a result), Healing (via Cure), Forcefield Creation
+        (Via Protect), Invisibility (Via Invis), Telekinesis, Power Nullification
+        (via Silence), Soul Manipulation (Is capable of interacting with and killing
+        souls), Space-Time Manipulation and Time Travel (the 4 crystals are capable
+        of warping space and time, as well as being able to send someone back in time),
+        Resistant to the Following: Subjective Reality, Magic, Conceptual Manipulation
+        (Type 2), and Space-Time Manipulation (Characters are capable of surviving
+        and resisting magical abilities, Which is shown to project one''s inner mind
+        onto reality, and as shown with the creation of the Devil''s road, remove
+        entire concepts and warp space and time to where the past, present, and future
+        exists as one), Law Manipulation (Resists magic, which can rewrite the natural
+        order of things), Spatial Manipulation, Deconstruction, and BFR (Can withstand
+        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
+        levelDissidia Final Fantasy, and can warp them into another dimension), Electricity
+        Manipulation and Pain Manipulation (Is able to resist the Lightning spells,
+        which are capable of attacking the nervesFinal Fantasy IV Volume 2 Novel,
+        chapter 7, page 54), Fire Manipulation, Ice Manipulation, and Matter Manipulation
+        (Macro-Quantum; Is capable of resisting these elements, the Fire and Ice spell
+        in particular being capable of affecting the target''s electrons), Poison
+        Manipulation and Corrosion Inducement (Can resist the Poison status effect,
+        which is also stated to corrode the target), Darkness Manipulation and Perception
+        Manipulation (Can resist the darkness status ailment via various equipment,
+        which would render the target blindFinal Fantasy V GBA Manual), Power Nullification
+        (Can resist the Silence status, which would render the target''s ability to
+        use magic null), Petrification (Can resist the petrification status effect),
+        Death Manipulation and Blood Manipulation (Can resist the Death spell, which
+        is even stated to solidify the victim''s blood,Final Fantasy IV Settings Guidebook),
+        Paralysis Inducement (Can resist the Paralysis status effect), Status Effect
+        Inducement (Is capable of resisting a wide variety of status ailments with
+        the Ribbon), Morality Manipulation and Madness Manipulation (Type 2; Can resist
+        the Confuse status ailment, which can drive the target insane to attack anyone,
+        even their allies), Sleep Manipulation (Can resist the Sleep status effect),
+        Power Nullification (can resist the Silence status effect, which renders the
+        target powerless), Time Stop (Can resist the Stop spell), Earth Manipulation
+        (Can resist Earth based attacks), Curse Manipulation'
       source_id: vsbattles-warrior-of-light-game-final-fantasy
       provider_id: vsbattles
       authority: high
@@ -1895,6 +1136,12 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
+    - field: standard_equipment
+      value: Armor of Light, Lustrous Shield
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     - field: intelligence
       value: Skilled warrior and combatant, bested Garland in mortal combat, previously
         Cornelia's greatest Knight (of which was implied to be worth the entirety
@@ -1906,35 +1153,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable Note: While the Warrior of Light is a generic Knight class
-        from the original game, the Dissidia series made him a character in his own
-        right. ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{scroll box|content={{reflist|2}}}} {{Discussions}} Category:Characters Category:Male
-        Characters Category:Game Characters Category:Final Fantasy Category:Healers
-        Category:Knights Category:Protagonists Category:Primary Protagonists Category:Heroes
-        Category:Forcefield Users Category:Poison Users Category:Corrosion Users Category:Final
-        Fantasy I Category:Magic Users Category:Sword Users Category:Weapon Masters
-        Category:Regeneration Users Category:Durability Negation Users Category:Power
-        Modification Users Category:Duplication Users Category:Statistics Amplification
-        Users Category:Soul Users Category:Homing Attack Users Category:Fusionism
-        Users Category:Size Users Category:Danmaku Users Category:Aura Users Category:Breath
-        Attack Users Category:Energy Users Category:Invisibility Users Category:Telekinesis
-        Users Category:Shield Users Category:BFR Users Category:Existence Erasure
-        Users Category:Void Users Category:Corruption Users Category:Flight Users
-        Category:Time Users Category:Space Users Category:Concept Users Category:Non-Physical
-        Interaction Users Category:Self-Sustenance Users Category:Acausal Characters
-        Category:Afterimage Users Category:Power Nullification Users Category:Soul
-        Users Category:Space Users Category:Time Users Category:Time Travelers Category:Mind
-        Users Category:Holy Users Category:Light Users Category:Fire Users Category:Temperature
-        Users Category:Ice Users Category:Electricity Users Category:Statistics Amplification
-        Users Category:Death Users Category:Supernatural Willpower Users Category:Law
-        Users Category:Summoners Category:Sealing Users Category:Reactive Power Level
-        Users Category:Dimensional Travel Users Category:Creation Users Category:Immortals
-        Category:BFR Users Category:Matter Users Category:Soul Users Category:Radiation
-        Users Category:Deconstruction Users Category:Self-Destruction Users Category:Explosion
-        Users Category:Resurrection Users Category:Petrification Users Category:Dream
-        Users Category:Memory Users Category:Armor Users Category:Helmet Users Category:Warriors
-        Category:Humans Category:Artificial Characters Category:Good Characters'
+      value: the Dissidia series made him a character in his own right.
       source_id: vsbattles-warrior-of-light-game-final-fantasy
       provider_id: vsbattles
       authority: high
@@ -1952,18 +1171,170 @@ repair:
     duplicate_key: vsbattles.fandom.com|warrior of light|9323624
     retryable: false
     exception_class: ''
-  needs_human_source_choice: false
-  candidate_sources:
   - source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
     url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_%28Game%29_Final_Fantasy
-    title: Cloud Strife (Cannon/Dissidia, Final Fantasy)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    normalized_page_title: Scathach (Canon, Final Fantasy)/ZeroTC01
+    source_type: mediawiki
+    revision_id: '613111'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 29515
+    content_kind: api_json
+    headings_detected:
+    - '''''''Summary'''''''
+    - '''''''Powers and Stats'''''''
+    - Scaling Chain
+    - '''''''Gallery'''''''
+    - '''''''Others'''''''
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 105
-    extracted_fields: *id006
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id007
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Superhuman Athleticism, Acrobatics,
+        Self-Sustenance (Type 1, 2 and 3), Enhanced Senses (Voidsent can sense aether),
+        Aura (Scathach radiates malice that Cait Sith says only she could), Social
+        Influencing (She is voidsent queen with influence over thousands of extremely
+        loyal voidsent), Flight, Weapon Mastery (Of her halberd), Glyph Creation,
+        Energy Projection, Possession & Dimensional Travel (Voidsent can possess a
+        person's body and soul, which they can use to travel between worlds), Accelerated
+        Development (Passive and Training), Empowerment, Reactive Evolution & Reactive
+        Power Level (Conviction, hope, and emotions can massively fuel a fighter,
+        to the point they manage to defeat much stronger enemies who view them as
+        ants. The Heart is one's spirit, the strength that resides in people, the
+        intangible strength of one's soul, an inconstant and immeasurable factor behind
+        people's victories against their opponents. The soul is endlessly transforming
+        and seeking its own source, formless and ever-changing, meaning it evolves
+        and ascends constantly. It gives rise to emotion and intellect), Portal Creation
+        & BFR (Diabolos gained from Scathach the ability to spawn a rift that leads
+        to a battle against a voidsent, where taking too long gets you killed by the
+        enclosing darkness), Large Size (Type 0) Soul Physiology, Beyond-Dimensional
+        Physiology (Voidsent can exist in the form of a soul when not occupying a
+        vessel. Souls are composed of Chaos, a substance completely devoid of the
+        concepts of space, time, and shape. Even the Cloud of Darkness, who is one
+        with the Void which is a shadow of Valhalla, transcends all concepts. The
+        aetherial, namely incorporeal aether i.e. souls, is unbound by light, distance,
+        and dimensions), Invisibility, Non-Corporeal, Large Size (Type 11), Omnipresence,
+        Acausality (Type 3 and 5) & Nonexistent Physiology (Type 2; The soul is one
+        in number--both all and nothing, meaning it both exists and doesn't exist.
+        It is without boundary, existing in all places, at all times), Abstract Existence
+        (Type 1; Diabolos refers to Scathach's essence as primordial darkness, an
+        infinite well of shadow, and shadow itself. and of course she has the physiology
+        of a soul. The soul is the embodiment of one's wishes, dreams, and desires.
+        The soul defines existence), Transduality (Type 2; Nothingness, i.e. Void,
+        has nothing to balance with, implied to be independent Yin and Yang), Immortality,
+        Type 1 (Souls are eternal, never dying, rather evolving in perpetuity), Type
+        3, Type 5 (Visions are storied heroes whose dreams transcend death, and since
+        visions are souls and dreams themselves, they would transcend death), Type
+        9 (Souls exist everywhere, so to defeat a physical vessel of it wouldn't be
+        enough to truly annihilate it; a part of it would exist in a higher plane,
+        ascending constantly), Regeneration (True-Godly; Souls can regenerate indefinitely
+        from their destruction. This is shown in NieR Replicant, where Nier fought
+        a group of shades--which are souls--that keep on coming no matter how many
+        he destroys and for how long. Rather than there being an arbitrary number
+        of shades, there seems to be a certain number of them that continue to recover
+        from their destruction. This regenerative property of souls is also hinted
+        at in NieR Automata; Fang of the Twins is a weapon possessed by two souls,
+        which gave it the unique property of instantly repairing itself whenever it's
+        damaged. On top of this, voidsent can regenerate even from death to magic
+        thanks to the darkness of the Void, the power of activity that prevents life
+        from finding rest. They resurrect endlessly), Adaptation (Almost anyone in
+        Final Fantasy XIV can adapt to magic that inflicts status effects until they're
+        completely resistant. This includes Paralysis, Poison, Sleep, Slow--a Time
+        Mage spell--and Silence), Summoning (Scathach has thousands of voidsent minions
+        she can freely summon, including her protege, Connla), Statistics Amplification
+        (When Scathach summons Connla, they have a tether attached between them that
+        strengthens them immensely when they fight close together), Homing Attack](Scathach
+        can summon spheres that continuously track and fall on her enemies), Additional
+        Limbs (Scathach has two additional shadow limbs that she can use to attack,
+        which she can increase to eight or so with some attacks, and can also manipulate
+        the ground to summon many shadow hands that, upon any movement, slow and constantly
+        attack her enemies), Explosion Manipulation (Several of her attacks have her
+        unleash bursts of darkness and/or light), Sleep Manipulation (Too much aether
+        causes anyone exposed and unused to it to pass out; a being like Scathach
+        would have extremely potent aether, even via her aura) Soul Manipulation,
+        Soul Manipulation (Can leisurely fight and consume souls, and wields potent
+        magic), Non-Physical Interaction, Chaos Manipulation & Conceptua
+      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Extraverse level (Fought the Post-HW Warrior of Light and their alliance\
+        \ while weakened not only by her imprisonment, but her hosting of the \"body\
+        \ of a frail maiden,\" which limited her size and strength.At least Billions\
+        \ of Extraversal transcendences (The gap between 1-S and 3-dimensional tiers\
+        \ repeated billions of times) When Diabolos absorbed Scathach's essence following\
+        \ her defeat, despite her weakening, he gained strength \"rivaling the greatest\
+        \ entities of the voidsent hierarchy.\u201D The shadow, i.e. darkness, composing\
+        \ Scathach is infinite. Deathgaze, a fourth rung voidsent stronger than \"\
+        its counterpart from tales of legend,\" is a servant of the Shadow Queen)\
+        \ | Extraverse level (Scathach is equal in potency of magic to the Cloud of\
+        \ Darkness, who--in the form of an imitation of its full power, brought to\
+        \ life by the Minstrel in the Warrior of Light's mind's eye--fought their\
+        \ alliance in Dawntrail, implying Scathach's prime is around that level)"
+      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Irrelevant (Fought the HW Warrior of Light and their alliance of 23 other
+        fighters. Even in ARR, they are fast enough to assist Lightning against several
+        monsters manifested by chaos, including the Aspect of Chaos. They are far
+        superior when going up against Scathach in Post-HW to when they defeated a
+        reincarnation of Ifrit, who was so vastly beyond his previous summons that
+        the Immortal Flames' soldiers, strong enough to fight the average primal,
+        were slugs in comparison to him. They can also fight Gilgamesh and Omega,
+        who traverse and fight in the Void, which is transdual and transcends all
+        concepts. Many people can move around Torsions in Dissidia, which are void
+        of space and time, having only chaos) | Irrelevant
+      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Extraverse level (Even in a weakened state, she's too powerful for a
+        strong voidsent like Diabolos to face or absorb while she's alive--and she's
+        a voidsent on a completely different level to any other the Mhachi voidmages
+        summoned, including him at full power. After absorbing her essence, Diabolos
+        was initially so durable that the Warrior of Light couldn't even damage him)
+        | Extraverse level
+      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
@@ -1974,61 +1345,194 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife cannon dissidia
-      final fantasy|372287
-  - source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_%28Game%29_%28Final_Fantasy%29
-    title: Cloud Strife (Cannon/Dissidia, Final Fantasy)
-    rank: 105
-    extracted_fields: *id008
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id009
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife cannon dissidia
-      final fantasy|372287
-  - source_id: vsbattles-warrior-of-light-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29_Final_Fantasy
-    title: Warrior of Light
-    rank: 80
-    extracted_fields: *id010
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id011
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light|9323624
+    duplicate_key: character-stats-and-profiles.fandom.com|scathach canon final fantasy
+      zerotc01|613111
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-warrior-of-light-game-final-fantasy
     url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29_%28Final_Fantasy%29
-    title: Warrior of Light
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - weaknesses
+    normalized_page_title: Warrior of Light
+    source_type: mediawiki
+    revision_id: '9323624'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 21194
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 80
-    extracted_fields: *id012
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id013
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Blessed (Is blessed by The Crystal,
+        which grants him the abilities of the Crystal), Self-Sustenance (Type 1: Can
+        breathe underwater via Oxyale), Acausality (Type 1; Was unaffected by the
+        time paradox he made when stopping the timeloop Chaos made in the past), Magic,
+        Subjective Reality (Magic,Final Fantasy IV Novel 1, chapter 1, page 29 in
+        its basest form,Final Fantasy IV Novel 1, chapter 3, page 107 is projecting
+        one''s innerFinal Fantasy IV: The After Years Novel, chapter 2, page 109 mind
+        onto realityFinal Fantasy IV: The After Years, and is powered by intelligence
+        and mental strength), Non-Physical Interaction (Magic as a whole is shown
+        to affect a wide variety of different beings, from intangible/immaterial beings
+        to non corporeal beings, to abstract concepts like Chronodia, who''s the flow
+        of time itselfFinal Fantasy I, to Nonexistent beings like Exdeath and Cloud
+        of Darkness), Law Manipulation (Magic is stated to rewrite the natural order
+        of thingsFinal Fantasy IV Novel 1, chapter 5, page 198), Power Modification
+        (Including Duplication, Fusionism, Statistics Amplification, Size Manipulation,
+        Homing Attack, Danmaku, Aura, Breath Attack, and Energy Manipulation; Magic
+        users across the games have consistently shown the ability to manipulate the
+        shape and properties of their own magical abilities, with even higher tiers
+        of spells simply being considered stronger versions of the same basic abilityFinal
+        Fantasy IV: The After Years Novel, chapter 2 page 114), Conceptual Manipulation
+        (Type 2), and Space-Time Manipulation (Magic is shown in the novels to remove
+        concepts and warp space and time itself, like the Devil''s road, which the
+        concept of time was lost,Final Fantasy IV Novel 1, chapter 5, page 199 and
+        time and space were twisted to the pointFinal Fantasy IV: The After Years
+        Novel, chapter 1, page 67 the past, present and futureFinal Fantasy IV: The
+        After Years Novel, chapter 1, page 73 existed as oneFinal Fantasy IV: The
+        After Years Novel, chapter 3, page 147), Master Swordsman, Afterimage Creation
+        (Via Blink), Regeneration Negation (Mid-Godly) and Immortality Negation (Type
+        3, 4, 7, and 9; Is capable of killing the Undeads permanently, and the Fiends
+        despite absorbing the Crystal''s Essences and gaining its Regenerative and
+        Immortality properties as a result), Healing (via Cure), Forcefield Creation
+        (Via Protect), Invisibility (Via Invis), Telekinesis, Power Nullification
+        (via Silence), Soul Manipulation (Is capable of interacting with and killing
+        souls), Space-Time Manipulation and Time Travel (the 4 crystals are capable
+        of warping space and time, as well as being able to send someone back in time),
+        Resistant to the Following: Subjective Reality, Magic, Conceptual Manipulation
+        (Type 2), and Space-Time Manipulation (Characters are capable of surviving
+        and resisting magical abilities, Which is shown to project one''s inner mind
+        onto reality, and as shown with the creation of the Devil''s road, remove
+        entire concepts and warp space and time to where the past, present, and future
+        exists as one), Law Manipulation (Resists magic, which can rewrite the natural
+        order of things), Spatial Manipulation, Deconstruction, and BFR (Can withstand
+        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
+        levelDissidia Final Fantasy, and can warp them into another dimension), Electricity
+        Manipulation and Pain Manipulation (Is able to resist the Lightning spells,
+        which are capable of attacking the nervesFinal Fantasy IV Volume 2 Novel,
+        chapter 7, page 54), Fire Manipulation, Ice Manipulation, and Matter Manipulation
+        (Macro-Quantum; Is capable of resisting these elements, the Fire and Ice spell
+        in particular being capable of affecting the target''s electrons), Poison
+        Manipulation and Corrosion Inducement (Can resist the Poison status effect,
+        which is also stated to corrode the target), Darkness Manipulation and Perception
+        Manipulation (Can resist the darkness status ailment via various equipment,
+        which would render the target blindFinal Fantasy V GBA Manual), Power Nullification
+        (Can resist the Silence status, which would render the target''s ability to
+        use magic null), Petrification (Can resist the petrification status effect),
+        Death Manipulation and Blood Manipulation (Can resist the Death spell, which
+        is even stated to solidify the victim''s blood,Final Fantasy IV Settings Guidebook),
+        Paralysis Inducement (Can resist the Paralysis status effect), Status Effect
+        Inducement (Is capable of resisting a wide variety of status ailments with
+        the Ribbon), Morality Manipulation and Madness Manipulation (Type 2; Can resist
+        the Confuse status ailment, which can drive the target insane to attack anyone,
+        even their allies), Sleep Manipulation (Can resist the Sleep status effect),
+        Power Nullification (can resist the Silence status effect, which renders the
+        target powerless), Time Stop (Can resist the Stop spell), Earth Manipulation
+        (Can resist Earth based attacks), Curse Manipulation'
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multiverse level+ (Can defeat Shinryu, who's far superior to Neo Exdeath)
+        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
+        power from the gods of the cycle. Participated in the defeat of Shinryu)
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ (Kept pace with Chaos and Feral Chaos) | Massively FTL+
+        (Faster than before, could keep pace with Shinryu)
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multiverse level+ (Comparable to Feral Chaos and Chaos) | Multiverse
+        level+ (Took hits from Shinryu
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range with weapons, Multiversal+ with magic (Magic as
+        a whole is shown to affect omnipresent beings such as Exdeath when he's become
+        one with the Void itself, which spans across the entire Final Fantasy Multiverse)
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Armor of Light, Lustrous Shield
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Skilled warrior and combatant, bested Garland in mortal combat, previously
+        Cornelia's greatest Knight (of which was implied to be worth the entirety
+        of Cornelia's remaining military might alone due to the Kingdom's failure
+        to rescue Princess Sara themselves), fairly competent at problem solving with
+        little information available
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: the Dissidia series made him a character in his own right.
+      source_id: vsbattles-warrior-of-light-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 0
@@ -2040,58 +1544,370 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|warrior of light|9323624
-  - source_id: mediawiki-warrior-of-light-game
-    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_(Game)
-    title: Warrior of Light
-    rank: 80
-    extracted_fields: *id014
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id015
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light|9323624
-  - source_id: vsbattles-warrior-of-light-game
-    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29
-    title: Warrior of Light
-    rank: 80
-    extracted_fields: *id016
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id017
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light|9323624
-  - source_id: character-stats-profiles-warrior-of-light-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_%28Game%29
-    title: Niko (Canon, Niko And The Sword Of Light)/Isaac18289129
-    rank: 80
-    extracted_fields: *id018
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Warrior_of_Light_%28Game%29_%28Final_Fantasy%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    normalized_page_title: Scathach (Canon, Final Fantasy)/ZeroTC01
+    source_type: mediawiki
+    revision_id: '613111'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 29515
+    content_kind: api_json
+    headings_detected:
+    - '''''''Summary'''''''
+    - '''''''Powers and Stats'''''''
+    - Scaling Chain
+    - '''''''Gallery'''''''
+    - '''''''Others'''''''
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id019
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Superhuman Athleticism, Acrobatics,
+        Self-Sustenance (Type 1, 2 and 3), Enhanced Senses (Voidsent can sense aether),
+        Aura (Scathach radiates malice that Cait Sith says only she could), Social
+        Influencing (She is voidsent queen with influence over thousands of extremely
+        loyal voidsent), Flight, Weapon Mastery (Of her halberd), Glyph Creation,
+        Energy Projection, Possession & Dimensional Travel (Voidsent can possess a
+        person's body and soul, which they can use to travel between worlds), Accelerated
+        Development (Passive and Training), Empowerment, Reactive Evolution & Reactive
+        Power Level (Conviction, hope, and emotions can massively fuel a fighter,
+        to the point they manage to defeat much stronger enemies who view them as
+        ants. The Heart is one's spirit, the strength that resides in people, the
+        intangible strength of one's soul, an inconstant and immeasurable factor behind
+        people's victories against their opponents. The soul is endlessly transforming
+        and seeking its own source, formless and ever-changing, meaning it evolves
+        and ascends constantly. It gives rise to emotion and intellect), Portal Creation
+        & BFR (Diabolos gained from Scathach the ability to spawn a rift that leads
+        to a battle against a voidsent, where taking too long gets you killed by the
+        enclosing darkness), Large Size (Type 0) Soul Physiology, Beyond-Dimensional
+        Physiology (Voidsent can exist in the form of a soul when not occupying a
+        vessel. Souls are composed of Chaos, a substance completely devoid of the
+        concepts of space, time, and shape. Even the Cloud of Darkness, who is one
+        with the Void which is a shadow of Valhalla, transcends all concepts. The
+        aetherial, namely incorporeal aether i.e. souls, is unbound by light, distance,
+        and dimensions), Invisibility, Non-Corporeal, Large Size (Type 11), Omnipresence,
+        Acausality (Type 3 and 5) & Nonexistent Physiology (Type 2; The soul is one
+        in number--both all and nothing, meaning it both exists and doesn't exist.
+        It is without boundary, existing in all places, at all times), Abstract Existence
+        (Type 1; Diabolos refers to Scathach's essence as primordial darkness, an
+        infinite well of shadow, and shadow itself. and of course she has the physiology
+        of a soul. The soul is the embodiment of one's wishes, dreams, and desires.
+        The soul defines existence), Transduality (Type 2; Nothingness, i.e. Void,
+        has nothing to balance with, implied to be independent Yin and Yang), Immortality,
+        Type 1 (Souls are eternal, never dying, rather evolving in perpetuity), Type
+        3, Type 5 (Visions are storied heroes whose dreams transcend death, and since
+        visions are souls and dreams themselves, they would transcend death), Type
+        9 (Souls exist everywhere, so to defeat a physical vessel of it wouldn't be
+        enough to truly annihilate it; a part of it would exist in a higher plane,
+        ascending constantly), Regeneration (True-Godly; Souls can regenerate indefinitely
+        from their destruction. This is shown in NieR Replicant, where Nier fought
+        a group of shades--which are souls--that keep on coming no matter how many
+        he destroys and for how long. Rather than there being an arbitrary number
+        of shades, there seems to be a certain number of them that continue to recover
+        from their destruction. This regenerative property of souls is also hinted
+        at in NieR Automata; Fang of the Twins is a weapon possessed by two souls,
+        which gave it the unique property of instantly repairing itself whenever it's
+        damaged. On top of this, voidsent can regenerate even from death to magic
+        thanks to the darkness of the Void, the power of activity that prevents life
+        from finding rest. They resurrect endlessly), Adaptation (Almost anyone in
+        Final Fantasy XIV can adapt to magic that inflicts status effects until they're
+        completely resistant. This includes Paralysis, Poison, Sleep, Slow--a Time
+        Mage spell--and Silence), Summoning (Scathach has thousands of voidsent minions
+        she can freely summon, including her protege, Connla), Statistics Amplification
+        (When Scathach summons Connla, they have a tether attached between them that
+        strengthens them immensely when they fight close together), Homing Attack](Scathach
+        can summon spheres that continuously track and fall on her enemies), Additional
+        Limbs (Scathach has two additional shadow limbs that she can use to attack,
+        which she can increase to eight or so with some attacks, and can also manipulate
+        the ground to summon many shadow hands that, upon any movement, slow and constantly
+        attack her enemies), Explosion Manipulation (Several of her attacks have her
+        unleash bursts of darkness and/or light), Sleep Manipulation (Too much aether
+        causes anyone exposed and unused to it to pass out; a being like Scathach
+        would have extremely potent aether, even via her aura) Soul Manipulation,
+        Soul Manipulation (Can leisurely fight and consume souls, and wields potent
+        magic), Non-Physical Interaction, Chaos Manipulation & Conceptua
+      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Extraverse level (Fought the Post-HW Warrior of Light and their alliance\
+        \ while weakened not only by her imprisonment, but her hosting of the \"body\
+        \ of a frail maiden,\" which limited her size and strength.At least Billions\
+        \ of Extraversal transcendences (The gap between 1-S and 3-dimensional tiers\
+        \ repeated billions of times) When Diabolos absorbed Scathach's essence following\
+        \ her defeat, despite her weakening, he gained strength \"rivaling the greatest\
+        \ entities of the voidsent hierarchy.\u201D The shadow, i.e. darkness, composing\
+        \ Scathach is infinite. Deathgaze, a fourth rung voidsent stronger than \"\
+        its counterpart from tales of legend,\" is a servant of the Shadow Queen)\
+        \ | Extraverse level (Scathach is equal in potency of magic to the Cloud of\
+        \ Darkness, who--in the form of an imitation of its full power, brought to\
+        \ life by the Minstrel in the Warrior of Light's mind's eye--fought their\
+        \ alliance in Dawntrail, implying Scathach's prime is around that level)"
+      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Irrelevant (Fought the HW Warrior of Light and their alliance of 23 other
+        fighters. Even in ARR, they are fast enough to assist Lightning against several
+        monsters manifested by chaos, including the Aspect of Chaos. They are far
+        superior when going up against Scathach in Post-HW to when they defeated a
+        reincarnation of Ifrit, who was so vastly beyond his previous summons that
+        the Immortal Flames' soldiers, strong enough to fight the average primal,
+        were slugs in comparison to him. They can also fight Gilgamesh and Omega,
+        who traverse and fight in the Void, which is transdual and transcends all
+        concepts. Many people can move around Torsions in Dissidia, which are void
+        of space and time, having only chaos) | Irrelevant
+      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Extraverse level (Even in a weakened state, she's too powerful for a
+        strong voidsent like Diabolos to face or absorb while she's alive--and she's
+        a voidsent on a completely different level to any other the Mhachi voidmages
+        summoned, including him at full power. After absorbing her essence, Diabolos
+        was initially so durable that the Warrior of Light couldn't even damage him)
+        | Extraverse level
+      source_id: character-stats-profiles-warrior-of-light-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|scathach canon final fantasy
+      zerotc01|613111
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-warrior-of-light-game
+    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - weaknesses
+    normalized_page_title: Warrior of Light
+    source_type: mediawiki
+    revision_id: '9323624'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 21194
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Blessed (Is blessed by The Crystal,
+        which grants him the abilities of the Crystal), Self-Sustenance (Type 1: Can
+        breathe underwater via Oxyale), Acausality (Type 1; Was unaffected by the
+        time paradox he made when stopping the timeloop Chaos made in the past), Magic,
+        Subjective Reality (Magic,Final Fantasy IV Novel 1, chapter 1, page 29 in
+        its basest form,Final Fantasy IV Novel 1, chapter 3, page 107 is projecting
+        one''s innerFinal Fantasy IV: The After Years Novel, chapter 2, page 109 mind
+        onto realityFinal Fantasy IV: The After Years, and is powered by intelligence
+        and mental strength), Non-Physical Interaction (Magic as a whole is shown
+        to affect a wide variety of different beings, from intangible/immaterial beings
+        to non corporeal beings, to abstract concepts like Chronodia, who''s the flow
+        of time itselfFinal Fantasy I, to Nonexistent beings like Exdeath and Cloud
+        of Darkness), Law Manipulation (Magic is stated to rewrite the natural order
+        of thingsFinal Fantasy IV Novel 1, chapter 5, page 198), Power Modification
+        (Including Duplication, Fusionism, Statistics Amplification, Size Manipulation,
+        Homing Attack, Danmaku, Aura, Breath Attack, and Energy Manipulation; Magic
+        users across the games have consistently shown the ability to manipulate the
+        shape and properties of their own magical abilities, with even higher tiers
+        of spells simply being considered stronger versions of the same basic abilityFinal
+        Fantasy IV: The After Years Novel, chapter 2 page 114), Conceptual Manipulation
+        (Type 2), and Space-Time Manipulation (Magic is shown in the novels to remove
+        concepts and warp space and time itself, like the Devil''s road, which the
+        concept of time was lost,Final Fantasy IV Novel 1, chapter 5, page 199 and
+        time and space were twisted to the pointFinal Fantasy IV: The After Years
+        Novel, chapter 1, page 67 the past, present and futureFinal Fantasy IV: The
+        After Years Novel, chapter 1, page 73 existed as oneFinal Fantasy IV: The
+        After Years Novel, chapter 3, page 147), Master Swordsman, Afterimage Creation
+        (Via Blink), Regeneration Negation (Mid-Godly) and Immortality Negation (Type
+        3, 4, 7, and 9; Is capable of killing the Undeads permanently, and the Fiends
+        despite absorbing the Crystal''s Essences and gaining its Regenerative and
+        Immortality properties as a result), Healing (via Cure), Forcefield Creation
+        (Via Protect), Invisibility (Via Invis), Telekinesis, Power Nullification
+        (via Silence), Soul Manipulation (Is capable of interacting with and killing
+        souls), Space-Time Manipulation and Time Travel (the 4 crystals are capable
+        of warping space and time, as well as being able to send someone back in time),
+        Resistant to the Following: Subjective Reality, Magic, Conceptual Manipulation
+        (Type 2), and Space-Time Manipulation (Characters are capable of surviving
+        and resisting magical abilities, Which is shown to project one''s inner mind
+        onto reality, and as shown with the creation of the Devil''s road, remove
+        entire concepts and warp space and time to where the past, present, and future
+        exists as one), Law Manipulation (Resists magic, which can rewrite the natural
+        order of things), Spatial Manipulation, Deconstruction, and BFR (Can withstand
+        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
+        levelDissidia Final Fantasy, and can warp them into another dimension), Electricity
+        Manipulation and Pain Manipulation (Is able to resist the Lightning spells,
+        which are capable of attacking the nervesFinal Fantasy IV Volume 2 Novel,
+        chapter 7, page 54), Fire Manipulation, Ice Manipulation, and Matter Manipulation
+        (Macro-Quantum; Is capable of resisting these elements, the Fire and Ice spell
+        in particular being capable of affecting the target''s electrons), Poison
+        Manipulation and Corrosion Inducement (Can resist the Poison status effect,
+        which is also stated to corrode the target), Darkness Manipulation and Perception
+        Manipulation (Can resist the darkness status ailment via various equipment,
+        which would render the target blindFinal Fantasy V GBA Manual), Power Nullification
+        (Can resist the Silence status, which would render the target''s ability to
+        use magic null), Petrification (Can resist the petrification status effect),
+        Death Manipulation and Blood Manipulation (Can resist the Death spell, which
+        is even stated to solidify the victim''s blood,Final Fantasy IV Settings Guidebook),
+        Paralysis Inducement (Can resist the Paralysis status effect), Status Effect
+        Inducement (Is capable of resisting a wide variety of status ailments with
+        the Ribbon), Morality Manipulation and Madness Manipulation (Type 2; Can resist
+        the Confuse status ailment, which can drive the target insane to attack anyone,
+        even their allies), Sleep Manipulation (Can resist the Sleep status effect),
+        Power Nullification (can resist the Silence status effect, which renders the
+        target powerless), Time Stop (Can resist the Stop spell), Earth Manipulation
+        (Can resist Earth based attacks), Curse Manipulation'
+      source_id: vsbattles-warrior-of-light-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multiverse level+ (Can defeat Shinryu, who's far superior to Neo Exdeath)
+        | Multiverse level+ (Is comparable to the other Warriors of Materia and draws
+        power from the gods of the cycle. Participated in the defeat of Shinryu)
+      source_id: vsbattles-warrior-of-light-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ (Kept pace with Chaos and Feral Chaos) | Massively FTL+
+        (Faster than before, could keep pace with Shinryu)
+      source_id: vsbattles-warrior-of-light-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multiverse level+ (Comparable to Feral Chaos and Chaos) | Multiverse
+        level+ (Took hits from Shinryu
+      source_id: vsbattles-warrior-of-light-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-warrior-of-light-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range with weapons, Multiversal+ with magic (Magic as
+        a whole is shown to affect omnipresent beings such as Exdeath when he's become
+        one with the Void itself, which spans across the entire Final Fantasy Multiverse)
+      source_id: vsbattles-warrior-of-light-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Armor of Light, Lustrous Shield
+      source_id: vsbattles-warrior-of-light-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Skilled warrior and combatant, bested Garland in mortal combat, previously
+        Cornelia's greatest Knight (of which was implied to be worth the entirety
+        of Cornelia's remaining military might alone due to the Kingdom's failure
+        to rescue Princess Sara themselves), fairly competent at problem solving with
+        little information available
+      source_id: vsbattles-warrior-of-light-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: the Dissidia series made him a character in his own right.
+      source_id: vsbattles-warrior-of-light-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -2102,30 +1918,12 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|niko canon niko and the
-      sword of light isaac18289129|404763
-  - source_id: vsbattles-warrior-of-light-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_Game_Final_Fantasy
-    title: Warrior of Light
-    rank: 80
-    extracted_fields: *id020
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id021
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
     duplicate_key: vsbattles.fandom.com|warrior of light|9323624
+    retryable: false
+    exception_class: ''
+  needs_human_source_choice: false
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

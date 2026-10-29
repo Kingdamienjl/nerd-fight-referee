@@ -11,13 +11,15 @@ generation:
   generated_at: '2026-06-10T03:37:58Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id006
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:abilities
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Arch-Vile (Game)
   franchise: Doom
@@ -176,42 +178,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-arch-vile-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Arch-Vile Game
-  url: https://vsbattles.fandom.com/wiki/Arch-Vile_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-arch-vile-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Arch-Vile Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Arch-Vile_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-arch-vile-game-doom
   provider_id: vsbattles
   source_type: mediawiki
@@ -219,7 +185,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Arch-vile
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -263,7 +229,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Shadow_the_Hedgehog_(Canon,_Game_Character)/PaperPrince2
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -301,62 +267,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-arch-vile-game-doom
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Arch-Vile (Game) Doom
-  url: https://vsbattles.fandom.com/wiki/Arch-Vile_%28Game%29_Doom
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-arch-vile-game-doom
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Arch-Vile (Game) Doom
-  url: https://character-stats-and-profiles.fandom.com/wiki/Arch-Vile_%28Game%29_Doom
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-arch-vile-game-doom
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Arch-Vile (Game) (Doom)
-  url: https://vsbattles.fandom.com/wiki/Arch-Vile_%28Game%29_%28Doom%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-arch-vile-game-doom
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Arch-Vile (Game) (Doom)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Arch-Vile_%28Game%29_%28Doom%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-arch-vile-game-game
   provider_id: vsbattles
   source_type: mediawiki
@@ -511,7 +421,7 @@ abilities:
     their target in flames before causing the fire to erupt by clasping their hands.
     In Doom 3 Arch-vile's can send pillars of flames at targets. Fire-based attacks
     of demons can burn souls
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-arch-vile-game-doom
   source_claim_ids: []
   confidence: 0.85
@@ -534,7 +444,7 @@ abilities:
     with fire blasts (Can completely ignore distance as long as the target remains
     within its line of sight) *Necromancy (Can resurrect nearby demon corpses) *Summoning
     (Can summon any non-boss Demon in Doom 3) *Immortality (Types 2 and 7
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -559,7 +469,7 @@ abilities:
     and still fight. Demons are frequently referred to as mortally challenged and
     are referred as an army of the undead) Immunity to *Soul Manipulation (All demons
     have had their souls ripped away from them)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -575,7 +485,7 @@ abilities:
 - id: powers-and-abilities
   name: '-'
   description: '-'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -590,7 +500,7 @@ abilities:
 - id: powers-and-abilities-modern-same-as-before-to-a-higher-degree-plus
   name: Modern= Same as before to a higher degree plus
   description: Modern= Same as before to a higher degree plus
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -609,7 +519,7 @@ abilities:
     powers of Hell magic) *Teleportation (Can teleport around the battlefield to avoid
     attacks) *Greater Fire Manipulation & Forcefield Creation (Showcases greater a
     manipulation of fire'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -633,7 +543,7 @@ abilities:
     their hands and send large flame waves at foes like in Doom 3. Can create a forcefield
     made of flames to block oncoming attacks) **Attack Reflection (With the Fire Specialist
     upgrade
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -655,7 +565,7 @@ abilities:
     (The Broiling heat upgrade causes enemies damaged by lake of fire suffer 25% increased
     damage from all sources and inflict 25% less damage while in the area and for
     four seconds after leaving it) *Healing (Mid-low
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -675,7 +585,7 @@ abilities:
   description: Healing Zone and Team Heal helps the user and allies recover from bullet
     and explosion damage) *Greater Summoning (Can now summon large groups of demons
     at once. Can summon fodder demons and a Baron of Hell instantly
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -694,7 +604,7 @@ abilities:
     (Whatever a demon kills
   description: although there's a cooldown before they can be summoned again) *Limited
     BFR (Whatever a demon kills
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -714,7 +624,7 @@ abilities:
   description: it gets sent to Hell) *Greater Essence Manipulation (Hell's Essence
     - Arch-viles have the innate ability to channel and manipulate the unholy powers
     of Hell magic. The demons with their presence bring their reality with them
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -729,7 +639,7 @@ abilities:
 - id: powers-and-abilities-hellifying-the-environment-this-can-lead-to-many-destructiv
   name: '"hellifying" the environment. This can lead to many destructive events'
   description: '"hellifying" the environment. This can lead to many destructive events'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -746,7 +656,7 @@ abilities:
     or infecting the atmosphere
   description: all of which benefit them on conquering worlds. Whether that be creating
     Hellgrowths or infecting the atmosphere
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -761,7 +671,7 @@ abilities:
 - id: powers-and-abilities-making-it-poisonous-resistance-to
   name: making it poisonous) Resistance to
   description: making it poisonous) Resistance to
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -778,7 +688,7 @@ abilities:
     *Poison Manipulation (Should be comparable t'
   description: '*Heat *Ice Manipulation (Can quickly thaw out of the Slayer''s flash
     freeze) *Poison Manipulation (Should be comparable to other demons'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -801,7 +711,7 @@ abilities:
     Manipulation (Demons can stand on toxic waste without much issue) *Mind Manipulation
     (Can resist the effects of buff totems which taints the mind of those nearby with
     nightmarish terror) *Essence Manipulation (Hell's Essence
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -816,7 +726,7 @@ abilities:
 - id: powers-and-abilities-argent-energy
   name: Argent Energy
   description: Argent Energy
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -833,7 +743,7 @@ abilities:
     for extended period of times while using their '
   description: Sentinel Energy) and Fire Manipulation (Doom Demons can fight each
     other for extended period of times while using their abilities on each other)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -856,7 +766,7 @@ weaknesses:
     it
   description: Far less dangerous in melee encounters. Prone to attacking anything
     that hurts it
-  source_ids: &id005
+  source_ids: &id003
   - vsbattles-arch-vile-game-doom
   source_claim_ids: []
   confidence: 0.85
@@ -874,7 +784,7 @@ weaknesses:
     from someone else. Is not immune to its own f
   description: and as such will lose focus on its main enemy if hit by a stray projectile
     from someone else. Is not immune to its own flames
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -894,7 +804,7 @@ weaknesses:
   description: and can in fact harm itself if it is within close proximity of the
     target when fire spells are cast. Most spells take a brief moment of standing
     still in order to cast
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -913,7 +823,7 @@ weaknesses:
     altogether if the target hides behind cov
   description: leaving it vulnerable to attack during that period. Fire blasts can
     be avoided altogether if the target hides behind cover before they are cast
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -932,7 +842,7 @@ weaknesses:
     Attacks/Techniques: * Fire Column: The Arch'
   description: 'and they leave the Arch-vile exposed to counterattacks if they miss.
     Notable Attacks/Techniques: * Fire Column: The Arch-vile thrusts its hands forward'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -952,7 +862,7 @@ weaknesses:
   description: 'sending a fast-moving column of fire at its target. * Fire Blast:
     A spell that causes a fire to ignite itself underneath the target''s feet and
     follow them around whenever they move. After a moment of gathering its flames'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -969,7 +879,7 @@ weaknesses:
 - id: weaknesses-the-arch-vile-shoot-its-hands-forward
   name: the Arch-vile shoot its hands forward
   description: the Arch-vile shoot its hands forward
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -987,7 +897,7 @@ weaknesses:
   description: creating an explosion of fire underneath the target that more often
     than not sends them flying backwards. This can be avoided if the target manages
     to leave the Arch-vile's line of sight before the spell is cast
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1007,7 +917,7 @@ weaknesses:
 - id: weaknesses-however-summon-with-this-spell
   name: 'however. * Summon: With this spell'
   description: 'however. * Summon: With this spell'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1024,7 +934,7 @@ weaknesses:
 - id: weaknesses-the-arch-vile-opens-a-portal-to-hell
   name: the Arch-vile opens a portal to Hell
   description: the Arch-vile opens a portal to Hell
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1043,7 +953,7 @@ weaknesses:
     When presented with a fallen ally'
   description: 'summoning any demon of its choosing to fight at its side. * Resurrection:
     When presented with a fallen ally'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1065,7 +975,7 @@ weaknesses:
     they had before they died. Note: Not to be confused with the Summoner. Despite
     the two enemies fulfilling the same exact role within their respective games in
     the franchise'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1093,7 +1003,7 @@ weaknesses:
     Users Category:Immortals Category:Forcefield Users Category:Sorcerers Category:Attack
     Reflection Users Category:Statistics Amplification Users Category:Statistics Reduction
     Users Category:Healers'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1122,756 +1032,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id006
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: e5da85729b1f654c6d595034cd8af7819cd0ef7f6e0dbd61e38191782fd95b42
 repair:
-  attempted_at: '2026-06-19T07:13:37Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-28T23:42:11Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-arch-vile-game-doom
-    url: https://vsbattles.fandom.com/wiki/Arch-Vile_%28Game%29_Doom
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Arch-vile
-    source_type: mediawiki
-    revision_id: '9158586'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 14790
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id008
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}} physically, higher with fire columns and fire blasts | {{9-A}}
-        | At least {{8-C}} physically, higher with fire columns and fire blasts'
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Classic Doom/Doom 3= *Superhuman Physical Characteristics *Fire Manipulation
-        & Essence Manipulation (Essence - Arch-vile's attack in the original Doom
-        by surrounding their target in flames before causing the fire to erupt by
-        clasping their hands. In Doom 3 Arch-vile's can send pillars of flames at
-        targets. Fire-based attacks of demons can burn souls, demons are implied to
-        be capable of devouring souls) *Distance Negation with fire blasts (Can completely
-        ignore distance as long as the target remains within its line of sight) *Necromancy
-        (Can resurrect nearby demon corpses) *Summoning (Can summon any non-boss Demon
-        in Doom 3) *Immortality (Types 2 and 7; is an undead demon that can have large
-        chunks of flesh ripped away and still fight. Demons are frequently referred
-        to as mortally challenged and are referred as an army of the undead) Immunity
-        to *Soul Manipulation (All demons have had their souls ripped away from them)
-        |-|Modern= Same as before to a higher degree plus; *Magic (Arch-viles have
-        the innate channel and manipulate the unholy powers of Hell magic) *Teleportation
-        (Can teleport around the battlefield to avoid attacks) *Greater Fire Manipulation
-        & Forcefield Creation (Showcases greater a manipulation of fire, being able
-        to form a pool of flames beneath a target even while the target is out of
-        sight. Can Arch-viles can also shoot large fire balls out of their hands and
-        send large flame waves at foes like in Doom 3. Can create a forcefield made
-        of flames to block oncoming attacks) **Attack Reflection (With the Fire Specialist
-        upgrade, flame wall can reflect oncoming attacks) *Statistics Amplification
-        (Haste boosts the Arch-vile's speed by 50% for five seconds) *Statistics Reduction
-        (The Broiling heat upgrade causes enemies damaged by lake of fire suffer 25%
-        increased damage from all sources and inflict 25% less damage while in the
-        area and for four seconds after leaving it) *Healing (Mid-low; Healing Zone
-        and Team Heal helps the user and allies recover from bullet and explosion
-        damage) *Greater Summoning (Can now summon large groups of demons at once.
-        Can summon fodder demons and a Baron of Hell instantly, although there's a
-        cooldown before they can be summoned again) *Limited BFR (Whatever a demon
-        kills, it gets sent to Hell) *Greater Essence Manipulation (Hell's Essence
-        - Arch-viles have the innate ability to channel and manipulate the unholy
-        powers of Hell magic. The demons with their presence bring their reality with
-        them, "hellifying" the environment. This can lead to many destructive events,
-        all of which benefit them on conquering worlds. Whether that be creating Hellgrowths
-        or infecting the atmosphere, making it poisonous) Resistance to; *Heat *Ice
-        Manipulation (Can quickly thaw out of the Slayer's flash freeze) *Poison Manipulation
-        (Should be comparable to other demons, can walk through toxic fog with no
-        issue) *Acid Manipulation *Electricity Manipulation (Demons can stand on electrified
-        water with no damage taken) *Disease Manipulation (Unaffected by the Disease
-        filled air of the Blood Swamps) *Radiation Manipulation (Demons can stand
-        on toxic waste without much issue) *Mind Manipulation (Can resist the effects
-        of buff totems which taints the mind of those nearby with nightmarish terror)
-        *Essence Manipulation (Hell's Essence, Argent Energy, Sentinel Energy) and
-        Fire Manipulation (Doom Demons can fight each other for extended period of
-        times while using their abilities on each other)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level physically (Slightly weaker than the Cacodemon),
-        higher with fire columns and fire blasts (The most devastating of any non-boss
-        attack in the original games. Significantly more powerful than the Baron of
-        Hell's plasma projectiles) | Small Building level (One of the stronger demons
-        in the game, can contend with and overpower the Marine) | At least Building
-        level physically (Far stronger than its Classic self One of the strongest
-        demons in the game), higher with fire attacks (Its fire attacks are much stronger
-        than its physical capabilities)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Supersonic (Comparable to Doomguy, much faster than an Imp,
-        the original games depict them as being among the fastest-moving enemies encountered)
-        | Supersonic (Can keep up with the Marine) | At least Supersonic+ (Far faster
-        than its Classic self. Comparable to other Demons)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building level (Significantly superior to the Hell Knight. Capable
-        of taking multiple direct hits from the Rocket Launcher, as well as numerous
-        plasma projectiles. Point-blank explosions aren't enough to interrupt their
-        spellcasting) | Small Building level (One of the more durable demons in the
-        game, superior to many other species) | At least Building level (Far stronger
-        than its Classic Incarnations, as a Super Heavy Demon should be on this level),
-        Multi-City Block level with forcefields (Forcefields can tank BFG shots)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (The demons of Hell have limitless aggression and are tireless
-        beings)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range physically (due to size), likely Several Meters
-        with fire columns, far higher with fire blasts (presumably only limited by
-        sight)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: N/A
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Seemingly above most other demons in the series, as it is capable of
-        utilizing tactics in combat. Despite this, it is somewhat unstable, and oftentimes
-        makes little distinction between friend and foe.
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Far less dangerous in melee encounters. Prone to attacking anything
-        that hurts it, and as such will lose focus on its main enemy if hit by a stray
-        projectile from someone else. Is not immune to its own flames, and can in
-        fact harm itself if it is within close proximity of the target when fire spells
-        are cast. Most spells take a brief moment of standing still in order to cast,
-        leaving it vulnerable to attack during that period. Fire blasts can be avoided
-        altogether if the target hides behind cover before they are cast, and they
-        leave the Arch-vile exposed to counterattacks if they miss. Notable Attacks/Techniques:
-        * Fire Column: The Arch-vile thrusts its hands forward, sending a fast-moving
-        column of fire at its target. * Fire Blast: A spell that causes a fire to
-        ignite itself underneath the target''s feet and follow them around whenever
-        they move. After a moment of gathering its flames, the Arch-vile shoot its
-        hands forward, creating an explosion of fire underneath the target that more
-        often than not sends them flying backwards. This can be avoided if the target
-        manages to leave the Arch-vile''s line of sight before the spell is cast,
-        however. * Summon: With this spell, the Arch-vile opens a portal to Hell,
-        summoning any demon of its choosing to fight at its side. * Resurrection:
-        When presented with a fallen ally, the Arch-vile is capable of bringing them
-        back to life with a spell. Resurrected beings are cured of all wounds and
-        possess every bit of the strength they had before they died. Note: Not to
-        be confused with the Summoner. Despite the two enemies fulfilling the same
-        exact role within their respective games in the franchise, they are two different
-        monsters with different abilities and thus should not be treated as one in
-        the same. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Game Characters Category:Doom Category:Demons Category:Fire Users
-        Category:Necromancers Category:Summoners Category:Horror Characters Category:Characters
-        Category:Video Game Characters Category:Evil Characters Category:Villains
-        Category:Antagonists Category:Monsters Category:Genderless Characters Category:Power
-        Nullification Users Category:Magic Users Category:Teleportation Users Category:BFR
-        Users Category:Immortals Category:Forcefield Users Category:Sorcerers Category:Attack
-        Reflection Users Category:Statistics Amplification Users Category:Statistics
-        Reduction Users Category:Healers'
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|arch vile|9158586
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-arch-vile-game-doom
-    url: https://character-stats-and-profiles.fandom.com/wiki/Arch-Vile_%28Game%29_Doom
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Shadow the Hedgehog (Canon, Game Character)/PaperPrince2
-    source_type: mediawiki
-    revision_id: '556230'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 6216
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Explanations (Optional)
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: High 7-C, higher with the Light Speed Attack, Boost, and Chaos Blast,
-        Low 7-B with Power Cores and Energy Cores, even higher without Inhibitor Rings
-        | 6-B, higher with Super Sonic Boost, far higher without Inhibitor Rings
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Acrobatics, Small Size (Type 0),
-        Immortality (Type 1), Self-Sustenance (Type 1, 2 & 3), Flight, Spin Dash,
-        Elasticity, Fourth Wall Awareness, Accelerated Development, Energy Manipulation,
-        Aura & Empowerment, Healing, Forcefield Creation, Statistics Amplification,
-        Spatial Manipulation & Time Manipulation, Reality Warping, Resistance Negation,
-        Duplication, Durability Negation, BFR & Sealing, Electricity Manipulation,
-        Weapon Mastery, Vehicular Mastery, Non-Physical Interaction, Fire Manipulation
-        & Flight with Jet Shoes, Limited Resurrection, Speed Manipulation, Absorption,
-        Homing Attack, Air Manipulation. Resistance to Transmutation, Acid Manipulation,
-        Heat Manipulation & Radiation Manipulation
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Complex Multiverse level (In Sonic Generations, it's implied that Shadow
-        had previously been the one to defeat Sonic) higher without Inhibitor Rings,
-        Complex Multiverse level with 1-7 Chaos Emeralds, Complex Multiverse level
-        as Super Shadow | Complex Multiverse level, higher without Inhibitor Rings,
-        Complex Multiverse level with 1-7 Chaos Emeralds (Was able to defeat Diablon,
-        a machine powered by 1 Emerald with only 6 Emeralds) & Firearms (Even when
-        amped by the Chaos Emeralds, Shadow required firearms to actually defeat Black
-        Doom), Complex Multiverse level as Super Shadow | Complex Multiverse level
-        (Equal to a Base Sonic with the power of 4 Chaos Emeralds), higher without
-        Inhibitor Rings
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: FTL+, higher as Super Shadow | FTL+, higher as Super Shadow | Irrelevant
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level, higher without Inhibitor Rings, Complex Multiverse
-        level with 1-7 Chaos Emeralds, Complex Multiverse level as Super Shadow |
-        Complex Multiverse level, higher without Inhibitor Rings, Complex Multiverse
-        level with 1-7 Chaos Emeralds & Firearms, Complex Multiverse level as Super
-        Shadow | Complex Multiverse level, higher without Inhibitor Rings
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Self-explanatory Feats: List all of the character''s amazing feats.
-        Strength feats, speed feats, durability feats, etc. You can judge a person''s
-        power by their feats. Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: Self-explanatory == Gallery == Themes:
-        https://www.youtube.com/watch?v=OxLH0nnUnCY https://www.youtube.com/watch?v=8V1pMQKDPco
-        https://youtu.be/wiXUEpcfepk?si=CP6CxFTwrod1Z8v8 == Explanations (Optional)
-        == This section can be used to explain the reasons for the assigned power
-        level of a certain character more in-depth, as well as how the powers and
-        nature of the character fundamentally work. This is particularly useful for
-        more high-tiered characters. However, it is very important that you make sure
-        that the text has good grammar/sentence structure, and is easy to understand.
-        Category:Tier 7 Category:Tier High 7-C Category:Tier Low 7-B Category:Tier
-        6-B Category:PaperPrince2'
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|shadow the hedgehog canon
-      game character paperprince2|556230
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-arch-vile-game-doom
-    url: https://vsbattles.fandom.com/wiki/Arch-Vile_%28Game%29_%28Doom%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id011
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Arch-vile
-    source_type: mediawiki
-    revision_id: '9158586'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 14790
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id012
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}} physically, higher with fire columns and fire blasts | {{9-A}}
-        | At least {{8-C}} physically, higher with fire columns and fire blasts'
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Classic Doom/Doom 3= *Superhuman Physical Characteristics *Fire Manipulation
-        & Essence Manipulation (Essence - Arch-vile's attack in the original Doom
-        by surrounding their target in flames before causing the fire to erupt by
-        clasping their hands. In Doom 3 Arch-vile's can send pillars of flames at
-        targets. Fire-based attacks of demons can burn souls, demons are implied to
-        be capable of devouring souls) *Distance Negation with fire blasts (Can completely
-        ignore distance as long as the target remains within its line of sight) *Necromancy
-        (Can resurrect nearby demon corpses) *Summoning (Can summon any non-boss Demon
-        in Doom 3) *Immortality (Types 2 and 7; is an undead demon that can have large
-        chunks of flesh ripped away and still fight. Demons are frequently referred
-        to as mortally challenged and are referred as an army of the undead) Immunity
-        to *Soul Manipulation (All demons have had their souls ripped away from them)
-        |-|Modern= Same as before to a higher degree plus; *Magic (Arch-viles have
-        the innate channel and manipulate the unholy powers of Hell magic) *Teleportation
-        (Can teleport around the battlefield to avoid attacks) *Greater Fire Manipulation
-        & Forcefield Creation (Showcases greater a manipulation of fire, being able
-        to form a pool of flames beneath a target even while the target is out of
-        sight. Can Arch-viles can also shoot large fire balls out of their hands and
-        send large flame waves at foes like in Doom 3. Can create a forcefield made
-        of flames to block oncoming attacks) **Attack Reflection (With the Fire Specialist
-        upgrade, flame wall can reflect oncoming attacks) *Statistics Amplification
-        (Haste boosts the Arch-vile's speed by 50% for five seconds) *Statistics Reduction
-        (The Broiling heat upgrade causes enemies damaged by lake of fire suffer 25%
-        increased damage from all sources and inflict 25% less damage while in the
-        area and for four seconds after leaving it) *Healing (Mid-low; Healing Zone
-        and Team Heal helps the user and allies recover from bullet and explosion
-        damage) *Greater Summoning (Can now summon large groups of demons at once.
-        Can summon fodder demons and a Baron of Hell instantly, although there's a
-        cooldown before they can be summoned again) *Limited BFR (Whatever a demon
-        kills, it gets sent to Hell) *Greater Essence Manipulation (Hell's Essence
-        - Arch-viles have the innate ability to channel and manipulate the unholy
-        powers of Hell magic. The demons with their presence bring their reality with
-        them, "hellifying" the environment. This can lead to many destructive events,
-        all of which benefit them on conquering worlds. Whether that be creating Hellgrowths
-        or infecting the atmosphere, making it poisonous) Resistance to; *Heat *Ice
-        Manipulation (Can quickly thaw out of the Slayer's flash freeze) *Poison Manipulation
-        (Should be comparable to other demons, can walk through toxic fog with no
-        issue) *Acid Manipulation *Electricity Manipulation (Demons can stand on electrified
-        water with no damage taken) *Disease Manipulation (Unaffected by the Disease
-        filled air of the Blood Swamps) *Radiation Manipulation (Demons can stand
-        on toxic waste without much issue) *Mind Manipulation (Can resist the effects
-        of buff totems which taints the mind of those nearby with nightmarish terror)
-        *Essence Manipulation (Hell's Essence, Argent Energy, Sentinel Energy) and
-        Fire Manipulation (Doom Demons can fight each other for extended period of
-        times while using their abilities on each other)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level physically (Slightly weaker than the Cacodemon),
-        higher with fire columns and fire blasts (The most devastating of any non-boss
-        attack in the original games. Significantly more powerful than the Baron of
-        Hell's plasma projectiles) | Small Building level (One of the stronger demons
-        in the game, can contend with and overpower the Marine) | At least Building
-        level physically (Far stronger than its Classic self One of the strongest
-        demons in the game), higher with fire attacks (Its fire attacks are much stronger
-        than its physical capabilities)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Supersonic (Comparable to Doomguy, much faster than an Imp,
-        the original games depict them as being among the fastest-moving enemies encountered)
-        | Supersonic (Can keep up with the Marine) | At least Supersonic+ (Far faster
-        than its Classic self. Comparable to other Demons)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building level (Significantly superior to the Hell Knight. Capable
-        of taking multiple direct hits from the Rocket Launcher, as well as numerous
-        plasma projectiles. Point-blank explosions aren't enough to interrupt their
-        spellcasting) | Small Building level (One of the more durable demons in the
-        game, superior to many other species) | At least Building level (Far stronger
-        than its Classic Incarnations, as a Super Heavy Demon should be on this level),
-        Multi-City Block level with forcefields (Forcefields can tank BFG shots)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (The demons of Hell have limitless aggression and are tireless
-        beings)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range physically (due to size), likely Several Meters
-        with fire columns, far higher with fire blasts (presumably only limited by
-        sight)
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: N/A
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Seemingly above most other demons in the series, as it is capable of
-        utilizing tactics in combat. Despite this, it is somewhat unstable, and oftentimes
-        makes little distinction between friend and foe.
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Far less dangerous in melee encounters. Prone to attacking anything
-        that hurts it, and as such will lose focus on its main enemy if hit by a stray
-        projectile from someone else. Is not immune to its own flames, and can in
-        fact harm itself if it is within close proximity of the target when fire spells
-        are cast. Most spells take a brief moment of standing still in order to cast,
-        leaving it vulnerable to attack during that period. Fire blasts can be avoided
-        altogether if the target hides behind cover before they are cast, and they
-        leave the Arch-vile exposed to counterattacks if they miss. Notable Attacks/Techniques:
-        * Fire Column: The Arch-vile thrusts its hands forward, sending a fast-moving
-        column of fire at its target. * Fire Blast: A spell that causes a fire to
-        ignite itself underneath the target''s feet and follow them around whenever
-        they move. After a moment of gathering its flames, the Arch-vile shoot its
-        hands forward, creating an explosion of fire underneath the target that more
-        often than not sends them flying backwards. This can be avoided if the target
-        manages to leave the Arch-vile''s line of sight before the spell is cast,
-        however. * Summon: With this spell, the Arch-vile opens a portal to Hell,
-        summoning any demon of its choosing to fight at its side. * Resurrection:
-        When presented with a fallen ally, the Arch-vile is capable of bringing them
-        back to life with a spell. Resurrected beings are cured of all wounds and
-        possess every bit of the strength they had before they died. Note: Not to
-        be confused with the Summoner. Despite the two enemies fulfilling the same
-        exact role within their respective games in the franchise, they are two different
-        monsters with different abilities and thus should not be treated as one in
-        the same. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Game Characters Category:Doom Category:Demons Category:Fire Users
-        Category:Necromancers Category:Summoners Category:Horror Characters Category:Characters
-        Category:Video Game Characters Category:Evil Characters Category:Villains
-        Category:Antagonists Category:Monsters Category:Genderless Characters Category:Power
-        Nullification Users Category:Magic Users Category:Teleportation Users Category:BFR
-        Users Category:Immortals Category:Forcefield Users Category:Sorcerers Category:Attack
-        Reflection Users Category:Statistics Amplification Users Category:Statistics
-        Reduction Users Category:Healers'
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|arch vile|9158586
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-arch-vile-game-doom
-    url: https://character-stats-and-profiles.fandom.com/wiki/Arch-Vile_%28Game%29_%28Doom%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Shadow the Hedgehog (Canon, Game Character)/PaperPrince2
-    source_type: mediawiki
-    revision_id: '556230'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 6216
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Explanations (Optional)
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: High 7-C, higher with the Light Speed Attack, Boost, and Chaos Blast,
-        Low 7-B with Power Cores and Energy Cores, even higher without Inhibitor Rings
-        | 6-B, higher with Super Sonic Boost, far higher without Inhibitor Rings
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Acrobatics, Small Size (Type 0),
-        Immortality (Type 1), Self-Sustenance (Type 1, 2 & 3), Flight, Spin Dash,
-        Elasticity, Fourth Wall Awareness, Accelerated Development, Energy Manipulation,
-        Aura & Empowerment, Healing, Forcefield Creation, Statistics Amplification,
-        Spatial Manipulation & Time Manipulation, Reality Warping, Resistance Negation,
-        Duplication, Durability Negation, BFR & Sealing, Electricity Manipulation,
-        Weapon Mastery, Vehicular Mastery, Non-Physical Interaction, Fire Manipulation
-        & Flight with Jet Shoes, Limited Resurrection, Speed Manipulation, Absorption,
-        Homing Attack, Air Manipulation. Resistance to Transmutation, Acid Manipulation,
-        Heat Manipulation & Radiation Manipulation
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Complex Multiverse level (In Sonic Generations, it's implied that Shadow
-        had previously been the one to defeat Sonic) higher without Inhibitor Rings,
-        Complex Multiverse level with 1-7 Chaos Emeralds, Complex Multiverse level
-        as Super Shadow | Complex Multiverse level, higher without Inhibitor Rings,
-        Complex Multiverse level with 1-7 Chaos Emeralds (Was able to defeat Diablon,
-        a machine powered by 1 Emerald with only 6 Emeralds) & Firearms (Even when
-        amped by the Chaos Emeralds, Shadow required firearms to actually defeat Black
-        Doom), Complex Multiverse level as Super Shadow | Complex Multiverse level
-        (Equal to a Base Sonic with the power of 4 Chaos Emeralds), higher without
-        Inhibitor Rings
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: FTL+, higher as Super Shadow | FTL+, higher as Super Shadow | Irrelevant
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level, higher without Inhibitor Rings, Complex Multiverse
-        level with 1-7 Chaos Emeralds, Complex Multiverse level as Super Shadow |
-        Complex Multiverse level, higher without Inhibitor Rings, Complex Multiverse
-        level with 1-7 Chaos Emeralds & Firearms, Complex Multiverse level as Super
-        Shadow | Complex Multiverse level, higher without Inhibitor Rings
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Self-explanatory Feats: List all of the character''s amazing feats.
-        Strength feats, speed feats, durability feats, etc. You can judge a person''s
-        power by their feats. Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: Self-explanatory == Gallery == Themes:
-        https://www.youtube.com/watch?v=OxLH0nnUnCY https://www.youtube.com/watch?v=8V1pMQKDPco
-        https://youtu.be/wiXUEpcfepk?si=CP6CxFTwrod1Z8v8 == Explanations (Optional)
-        == This section can be used to explain the reasons for the assigned power
-        level of a certain character more in-depth, as well as how the powers and
-        nature of the character fundamentally work. This is particularly useful for
-        more high-tiered characters. However, it is very important that you make sure
-        that the text has good grammar/sentence structure, and is easy to understand.
-        Category:Tier 7 Category:Tier High 7-C Category:Tier Low 7-B Category:Tier
-        6-B Category:PaperPrince2'
-      source_id: character-stats-profiles-arch-vile-game-doom
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|shadow the hedgehog canon
-      game character paperprince2|556230
-    retryable: false
-    exception_class: ''
   - source_id: mediawiki-arch-vile-game
-    url: https://vsbattles.fandom.com/wiki/Arch-Vile_(Game)
+    url: https://vsbattles.fandom.com/wiki/Arch-vile
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id015
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1879,7 +1060,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Arch-vile
@@ -1899,6 +1079,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1912,7 +1093,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id016
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -1925,28 +1106,28 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-A}} physically, higher with fire columns and fire blasts | {{9-A}}
-        | At least {{8-C}} physically, higher with fire columns and fire blasts'
+      value: 9-A physically, higher with fire columns and fire blasts | 9-A | At least
+        8-C physically, higher with fire columns and fire blasts
       source_id: mediawiki-arch-vile-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Classic Doom/Doom 3= *Superhuman Physical Characteristics *Fire Manipulation
-        & Essence Manipulation (Essence - Arch-vile's attack in the original Doom
-        by surrounding their target in flames before causing the fire to erupt by
-        clasping their hands. In Doom 3 Arch-vile's can send pillars of flames at
-        targets. Fire-based attacks of demons can burn souls, demons are implied to
-        be capable of devouring souls) *Distance Negation with fire blasts (Can completely
-        ignore distance as long as the target remains within its line of sight) *Necromancy
-        (Can resurrect nearby demon corpses) *Summoning (Can summon any non-boss Demon
-        in Doom 3) *Immortality (Types 2 and 7; is an undead demon that can have large
-        chunks of flesh ripped away and still fight. Demons are frequently referred
-        to as mortally challenged and are referred as an army of the undead) Immunity
-        to *Soul Manipulation (All demons have had their souls ripped away from them)
-        |-|Modern= Same as before to a higher degree plus; *Magic (Arch-viles have
-        the innate channel and manipulate the unholy powers of Hell magic) *Teleportation
-        (Can teleport around the battlefield to avoid attacks) *Greater Fire Manipulation
+      value: Superhuman Physical Characteristics, Fire Manipulation & Essence Manipulation
+        (Essence - Arch-vile's attack in the original Doom by surrounding their target
+        in flames before causing the fire to erupt by clasping their hands. In Doom
+        3 Arch-vile's can send pillars of flames at targets. Fire-based attacks of
+        demons can burn souls, demons are implied to be capable of devouring souls),
+        Distance Negation with fire blasts (Can completely ignore distance as long
+        as the target remains within its line of sight), Necromancy (Can resurrect
+        nearby demon corpses), Summoning (Can summon any non-boss Demon in Doom 3),
+        Immortality (Types 2 and 7; is an undead demon that can have large chunks
+        of flesh ripped away and still fight. Demons are frequently referred to as
+        mortally challenged and are referred as an army of the undead), Immunity to
+        *Soul Manipulation (All demons have had their souls ripped away from them)
+        Same as before to a higher degree plus; *Magic (Arch-viles have the innate
+        channel and manipulate the unholy powers of Hell magic) *Teleportation (Can
+        teleport around the battlefield to avoid attacks) *Greater Fire Manipulation
         & Forcefield Creation (Showcases greater a manipulation of fire, being able
         to form a pool of flames beneath a target even while the target is out of
         sight. Can Arch-viles can also shoot large fire balls out of their hands and
@@ -2030,12 +1211,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: N/A
-      source_id: mediawiki-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Seemingly above most other demons in the series, as it is capable of
         utilizing tactics in combat. Despite this, it is somewhat unstable, and oftentimes
@@ -2045,264 +1220,15 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Far less dangerous in melee encounters. Prone to attacking anything
-        that hurts it, and as such will lose focus on its main enemy if hit by a stray
-        projectile from someone else. Is not immune to its own flames, and can in
+      value: Far less dangerous in melee encounters. Prone to attacking anything that
+        hurts it, and as such will lose focus on its main enemy if hit by a stray
+        projectile from someone else. Is not, immune to its own flames, and can in
         fact harm itself if it is within close proximity of the target when fire spells
         are cast. Most spells take a brief moment of standing still in order to cast,
         leaving it vulnerable to attack during that period. Fire blasts can be avoided
         altogether if the target hides behind cover before they are cast, and they
-        leave the Arch-vile exposed to counterattacks if they miss. Notable Attacks/Techniques:
-        * Fire Column: The Arch-vile thrusts its hands forward, sending a fast-moving
-        column of fire at its target. * Fire Blast: A spell that causes a fire to
-        ignite itself underneath the target''s feet and follow them around whenever
-        they move. After a moment of gathering its flames, the Arch-vile shoot its
-        hands forward, creating an explosion of fire underneath the target that more
-        often than not sends them flying backwards. This can be avoided if the target
-        manages to leave the Arch-vile''s line of sight before the spell is cast,
-        however. * Summon: With this spell, the Arch-vile opens a portal to Hell,
-        summoning any demon of its choosing to fight at its side. * Resurrection:
-        When presented with a fallen ally, the Arch-vile is capable of bringing them
-        back to life with a spell. Resurrected beings are cured of all wounds and
-        possess every bit of the strength they had before they died. Note: Not to
-        be confused with the Summoner. Despite the two enemies fulfilling the same
-        exact role within their respective games in the franchise, they are two different
-        monsters with different abilities and thus should not be treated as one in
-        the same. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Game Characters Category:Doom Category:Demons Category:Fire Users
-        Category:Necromancers Category:Summoners Category:Horror Characters Category:Characters
-        Category:Video Game Characters Category:Evil Characters Category:Villains
-        Category:Antagonists Category:Monsters Category:Genderless Characters Category:Power
-        Nullification Users Category:Magic Users Category:Teleportation Users Category:BFR
-        Users Category:Immortals Category:Forcefield Users Category:Sorcerers Category:Attack
-        Reflection Users Category:Statistics Amplification Users Category:Statistics
-        Reduction Users Category:Healers'
+        leave the Arch-vile exposed to counterattacks if they miss.
       source_id: mediawiki-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|arch vile|9158586
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-arch-vile-game
-    url: https://vsbattles.fandom.com/wiki/Arch-Vile_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id017
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Arch-vile
-    source_type: mediawiki
-    revision_id: '9158586'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 14790
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id018
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}} physically, higher with fire columns and fire blasts | {{9-A}}
-        | At least {{8-C}} physically, higher with fire columns and fire blasts'
-      source_id: vsbattles-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Classic Doom/Doom 3= *Superhuman Physical Characteristics *Fire Manipulation
-        & Essence Manipulation (Essence - Arch-vile's attack in the original Doom
-        by surrounding their target in flames before causing the fire to erupt by
-        clasping their hands. In Doom 3 Arch-vile's can send pillars of flames at
-        targets. Fire-based attacks of demons can burn souls, demons are implied to
-        be capable of devouring souls) *Distance Negation with fire blasts (Can completely
-        ignore distance as long as the target remains within its line of sight) *Necromancy
-        (Can resurrect nearby demon corpses) *Summoning (Can summon any non-boss Demon
-        in Doom 3) *Immortality (Types 2 and 7; is an undead demon that can have large
-        chunks of flesh ripped away and still fight. Demons are frequently referred
-        to as mortally challenged and are referred as an army of the undead) Immunity
-        to *Soul Manipulation (All demons have had their souls ripped away from them)
-        |-|Modern= Same as before to a higher degree plus; *Magic (Arch-viles have
-        the innate channel and manipulate the unholy powers of Hell magic) *Teleportation
-        (Can teleport around the battlefield to avoid attacks) *Greater Fire Manipulation
-        & Forcefield Creation (Showcases greater a manipulation of fire, being able
-        to form a pool of flames beneath a target even while the target is out of
-        sight. Can Arch-viles can also shoot large fire balls out of their hands and
-        send large flame waves at foes like in Doom 3. Can create a forcefield made
-        of flames to block oncoming attacks) **Attack Reflection (With the Fire Specialist
-        upgrade, flame wall can reflect oncoming attacks) *Statistics Amplification
-        (Haste boosts the Arch-vile's speed by 50% for five seconds) *Statistics Reduction
-        (The Broiling heat upgrade causes enemies damaged by lake of fire suffer 25%
-        increased damage from all sources and inflict 25% less damage while in the
-        area and for four seconds after leaving it) *Healing (Mid-low; Healing Zone
-        and Team Heal helps the user and allies recover from bullet and explosion
-        damage) *Greater Summoning (Can now summon large groups of demons at once.
-        Can summon fodder demons and a Baron of Hell instantly, although there's a
-        cooldown before they can be summoned again) *Limited BFR (Whatever a demon
-        kills, it gets sent to Hell) *Greater Essence Manipulation (Hell's Essence
-        - Arch-viles have the innate ability to channel and manipulate the unholy
-        powers of Hell magic. The demons with their presence bring their reality with
-        them, "hellifying" the environment. This can lead to many destructive events,
-        all of which benefit them on conquering worlds. Whether that be creating Hellgrowths
-        or infecting the atmosphere, making it poisonous) Resistance to; *Heat *Ice
-        Manipulation (Can quickly thaw out of the Slayer's flash freeze) *Poison Manipulation
-        (Should be comparable to other demons, can walk through toxic fog with no
-        issue) *Acid Manipulation *Electricity Manipulation (Demons can stand on electrified
-        water with no damage taken) *Disease Manipulation (Unaffected by the Disease
-        filled air of the Blood Swamps) *Radiation Manipulation (Demons can stand
-        on toxic waste without much issue) *Mind Manipulation (Can resist the effects
-        of buff totems which taints the mind of those nearby with nightmarish terror)
-        *Essence Manipulation (Hell's Essence, Argent Energy, Sentinel Energy) and
-        Fire Manipulation (Doom Demons can fight each other for extended period of
-        times while using their abilities on each other)
-      source_id: vsbattles-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level physically (Slightly weaker than the Cacodemon),
-        higher with fire columns and fire blasts (The most devastating of any non-boss
-        attack in the original games. Significantly more powerful than the Baron of
-        Hell's plasma projectiles) | Small Building level (One of the stronger demons
-        in the game, can contend with and overpower the Marine) | At least Building
-        level physically (Far stronger than its Classic self One of the strongest
-        demons in the game), higher with fire attacks (Its fire attacks are much stronger
-        than its physical capabilities)
-      source_id: vsbattles-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Supersonic (Comparable to Doomguy, much faster than an Imp,
-        the original games depict them as being among the fastest-moving enemies encountered)
-        | Supersonic (Can keep up with the Marine) | At least Supersonic+ (Far faster
-        than its Classic self. Comparable to other Demons)
-      source_id: vsbattles-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building level (Significantly superior to the Hell Knight. Capable
-        of taking multiple direct hits from the Rocket Launcher, as well as numerous
-        plasma projectiles. Point-blank explosions aren't enough to interrupt their
-        spellcasting) | Small Building level (One of the more durable demons in the
-        game, superior to many other species) | At least Building level (Far stronger
-        than its Classic Incarnations, as a Super Heavy Demon should be on this level),
-        Multi-City Block level with forcefields (Forcefields can tank BFG shots)
-      source_id: vsbattles-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (The demons of Hell have limitless aggression and are tireless
-        beings)
-      source_id: vsbattles-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range physically (due to size), likely Several Meters
-        with fire columns, far higher with fire blasts (presumably only limited by
-        sight)
-      source_id: vsbattles-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: N/A
-      source_id: vsbattles-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Seemingly above most other demons in the series, as it is capable of
-        utilizing tactics in combat. Despite this, it is somewhat unstable, and oftentimes
-        makes little distinction between friend and foe.
-      source_id: vsbattles-arch-vile-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Far less dangerous in melee encounters. Prone to attacking anything
-        that hurts it, and as such will lose focus on its main enemy if hit by a stray
-        projectile from someone else. Is not immune to its own flames, and can in
-        fact harm itself if it is within close proximity of the target when fire spells
-        are cast. Most spells take a brief moment of standing still in order to cast,
-        leaving it vulnerable to attack during that period. Fire blasts can be avoided
-        altogether if the target hides behind cover before they are cast, and they
-        leave the Arch-vile exposed to counterattacks if they miss. Notable Attacks/Techniques:
-        * Fire Column: The Arch-vile thrusts its hands forward, sending a fast-moving
-        column of fire at its target. * Fire Blast: A spell that causes a fire to
-        ignite itself underneath the target''s feet and follow them around whenever
-        they move. After a moment of gathering its flames, the Arch-vile shoot its
-        hands forward, creating an explosion of fire underneath the target that more
-        often than not sends them flying backwards. This can be avoided if the target
-        manages to leave the Arch-vile''s line of sight before the spell is cast,
-        however. * Summon: With this spell, the Arch-vile opens a portal to Hell,
-        summoning any demon of its choosing to fight at its side. * Resurrection:
-        When presented with a fallen ally, the Arch-vile is capable of bringing them
-        back to life with a spell. Resurrected beings are cured of all wounds and
-        possess every bit of the strength they had before they died. Note: Not to
-        be confused with the Summoner. Despite the two enemies fulfilling the same
-        exact role within their respective games in the franchise, they are two different
-        monsters with different abilities and thus should not be treated as one in
-        the same. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Game Characters Category:Doom Category:Demons Category:Fire Users
-        Category:Necromancers Category:Summoners Category:Horror Characters Category:Characters
-        Category:Video Game Characters Category:Evil Characters Category:Villains
-        Category:Antagonists Category:Monsters Category:Genderless Characters Category:Power
-        Nullification Users Category:Magic Users Category:Teleportation Users Category:BFR
-        Users Category:Immortals Category:Forcefield Users Category:Sorcerers Category:Attack
-        Reflection Users Category:Statistics Amplification Users Category:Statistics
-        Reduction Users Category:Healers'
-      source_id: vsbattles-arch-vile-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -2320,22 +1246,21 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-arch-vile-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Arch-Vile_%28Game%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/Shadow_the_Hedgehog_(Canon,_Game_Character)/PaperPrince2
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id019
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
-    - speed
     - tier
     - weaknesses
     normalized_page_title: Shadow the Hedgehog (Canon, Game Character)/PaperPrince2
     source_type: mediawiki
-    revision_id: '556230'
+    revision_id: '623132'
     fetch_status: fetched
     http_status: 200
-    content_length: 6216
+    content_length: 4649
     content_kind: api_json
     headings_detected:
     - Summary
@@ -2348,6 +1273,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2357,11 +1283,11 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id020
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2372,9 +1298,10 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: High 7-C, higher with the Light Speed Attack, Boost, and Chaos Blast,
-        Low 7-B with Power Cores and Energy Cores, even higher without Inhibitor Rings
-        | 6-B, higher with Super Sonic Boost, far higher without Inhibitor Rings
+      value: 8-B, higher with the Light Speed Attack, Chaos Boost, Doom Powers and
+        with three Power Cores, even higher with Shadow Rifle and his Hidden Potential
+        | High 7-C, higher with Super Sonic Boost, far higher with his Hidden Potential
+        | High 7-C, High 6-A with Doom Wing
       source_id: character-stats-profiles-arch-vile-game
       provider_id: character_stats_profiles
       authority: high
@@ -2388,57 +1315,31 @@ repair:
         Duplication, Durability Negation, BFR & Sealing, Electricity Manipulation,
         Weapon Mastery, Vehicular Mastery, Non-Physical Interaction, Fire Manipulation
         & Flight with Jet Shoes, Limited Resurrection, Speed Manipulation, Absorption,
-        Homing Attack, Air Manipulation. Resistance to Transmutation, Acid Manipulation,
+        Homing Attack, Air Manipulation., Resistance to Transmutation, Acid Manipulation,
         Heat Manipulation & Radiation Manipulation
       source_id: character-stats-profiles-arch-vile-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: Complex Multiverse level (In Sonic Generations, it's implied that Shadow
-        had previously been the one to defeat Sonic) higher without Inhibitor Rings,
-        Complex Multiverse level with 1-7 Chaos Emeralds, Complex Multiverse level
-        as Super Shadow | Complex Multiverse level, higher without Inhibitor Rings,
-        Complex Multiverse level with 1-7 Chaos Emeralds (Was able to defeat Diablon,
-        a machine powered by 1 Emerald with only 6 Emeralds) & Firearms (Even when
-        amped by the Chaos Emeralds, Shadow required firearms to actually defeat Black
-        Doom), Complex Multiverse level as Super Shadow | Complex Multiverse level
-        (Equal to a Base Sonic with the power of 4 Chaos Emeralds), higher without
-        Inhibitor Rings
-      source_id: character-stats-profiles-arch-vile-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: FTL+, higher as Super Shadow | FTL+, higher as Super Shadow | Irrelevant
-      source_id: character-stats-profiles-arch-vile-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level, higher without Inhibitor Rings, Complex Multiverse
-        level with 1-7 Chaos Emeralds, Complex Multiverse level as Super Shadow |
-        Complex Multiverse level, higher without Inhibitor Rings, Complex Multiverse
-        level with 1-7 Chaos Emeralds & Firearms, Complex Multiverse level as Super
-        Shadow | Complex Multiverse level, higher without Inhibitor Rings
+      value: City Block level, higher with the Light Speed Attack, Chaos Boost, Doom
+        Powers and with three Power Cores, even higher with Shadow Rifle and his Hidden
+        Potential | High 7-C, higher with Super Sonic Boost, far higher with his Hidden
+        Potential | High 7-C, High 6-A with Doom Wing
       source_id: character-stats-profiles-arch-vile-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Self-explanatory Feats: List all of the character''s amazing feats.
-        Strength feats, speed feats, durability feats, etc. You can judge a person''s
-        power by their feats. Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: Self-explanatory == Gallery == Themes:
-        https://www.youtube.com/watch?v=OxLH0nnUnCY https://www.youtube.com/watch?v=8V1pMQKDPco
-        https://youtu.be/wiXUEpcfepk?si=CP6CxFTwrod1Z8v8 == Explanations (Optional)
-        == This section can be used to explain the reasons for the assigned power
-        level of a certain character more in-depth, as well as how the powers and
-        nature of the character fundamentally work. This is particularly useful for
-        more high-tiered characters. However, it is very important that you make sure
-        that the text has good grammar/sentence structure, and is easy to understand.
-        Category:Tier 7 Category:Tier High 7-C Category:Tier Low 7-B Category:Tier
-        6-B Category:PaperPrince2'
+      value: etc. You can judge a person's power by their feats.
+      source_id: character-stats-profiles-arch-vile-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Negation, BFR & Sealing, Electricity Manipulation, Weapon Mastery, Vehicular
+        Mastery, Non-Physical Interaction, Fire Manipulation & Flight with Jet Shoes,
+        Limited Resurrection
       source_id: character-stats-profiles-arch-vile-game
       provider_id: character_stats_profiles
       authority: high
@@ -2447,21 +1348,21 @@ repair:
     identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|shadow the hedgehog canon
-      game character paperprince2|556230
+      game character paperprince2|623132
     retryable: false
     exception_class: ''
   - source_id: vsbattles-arch-vile-game-doom
-    url: https://vsbattles.fandom.com/wiki/Arch-Vile_Game_Doom
+    url: https://vsbattles.fandom.com/wiki/Arch-Vile_%28Game%29_Doom
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id021
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2469,7 +1370,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Arch-vile
@@ -2489,6 +1389,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2502,7 +1403,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id022
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2513,28 +1414,28 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-A}} physically, higher with fire columns and fire blasts | {{9-A}}
-        | At least {{8-C}} physically, higher with fire columns and fire blasts'
+      value: 9-A physically, higher with fire columns and fire blasts | 9-A | At least
+        8-C physically, higher with fire columns and fire blasts
       source_id: vsbattles-arch-vile-game-doom
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Classic Doom/Doom 3= *Superhuman Physical Characteristics *Fire Manipulation
-        & Essence Manipulation (Essence - Arch-vile's attack in the original Doom
-        by surrounding their target in flames before causing the fire to erupt by
-        clasping their hands. In Doom 3 Arch-vile's can send pillars of flames at
-        targets. Fire-based attacks of demons can burn souls, demons are implied to
-        be capable of devouring souls) *Distance Negation with fire blasts (Can completely
-        ignore distance as long as the target remains within its line of sight) *Necromancy
-        (Can resurrect nearby demon corpses) *Summoning (Can summon any non-boss Demon
-        in Doom 3) *Immortality (Types 2 and 7; is an undead demon that can have large
-        chunks of flesh ripped away and still fight. Demons are frequently referred
-        to as mortally challenged and are referred as an army of the undead) Immunity
-        to *Soul Manipulation (All demons have had their souls ripped away from them)
-        |-|Modern= Same as before to a higher degree plus; *Magic (Arch-viles have
-        the innate channel and manipulate the unholy powers of Hell magic) *Teleportation
-        (Can teleport around the battlefield to avoid attacks) *Greater Fire Manipulation
+      value: Superhuman Physical Characteristics, Fire Manipulation & Essence Manipulation
+        (Essence - Arch-vile's attack in the original Doom by surrounding their target
+        in flames before causing the fire to erupt by clasping their hands. In Doom
+        3 Arch-vile's can send pillars of flames at targets. Fire-based attacks of
+        demons can burn souls, demons are implied to be capable of devouring souls),
+        Distance Negation with fire blasts (Can completely ignore distance as long
+        as the target remains within its line of sight), Necromancy (Can resurrect
+        nearby demon corpses), Summoning (Can summon any non-boss Demon in Doom 3),
+        Immortality (Types 2 and 7; is an undead demon that can have large chunks
+        of flesh ripped away and still fight. Demons are frequently referred to as
+        mortally challenged and are referred as an army of the undead), Immunity to
+        *Soul Manipulation (All demons have had their souls ripped away from them)
+        Same as before to a higher degree plus; *Magic (Arch-viles have the innate
+        channel and manipulate the unholy powers of Hell magic) *Teleportation (Can
+        teleport around the battlefield to avoid attacks) *Greater Fire Manipulation
         & Forcefield Creation (Showcases greater a manipulation of fire, being able
         to form a pool of flames beneath a target even while the target is out of
         sight. Can Arch-viles can also shoot large fire balls out of their hands and
@@ -2618,12 +1519,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: N/A
-      source_id: vsbattles-arch-vile-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Seemingly above most other demons in the series, as it is capable of
         utilizing tactics in combat. Despite this, it is somewhat unstable, and oftentimes
@@ -2633,38 +1528,14 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Far less dangerous in melee encounters. Prone to attacking anything
-        that hurts it, and as such will lose focus on its main enemy if hit by a stray
-        projectile from someone else. Is not immune to its own flames, and can in
+      value: Far less dangerous in melee encounters. Prone to attacking anything that
+        hurts it, and as such will lose focus on its main enemy if hit by a stray
+        projectile from someone else. Is not, immune to its own flames, and can in
         fact harm itself if it is within close proximity of the target when fire spells
         are cast. Most spells take a brief moment of standing still in order to cast,
         leaving it vulnerable to attack during that period. Fire blasts can be avoided
         altogether if the target hides behind cover before they are cast, and they
-        leave the Arch-vile exposed to counterattacks if they miss. Notable Attacks/Techniques:
-        * Fire Column: The Arch-vile thrusts its hands forward, sending a fast-moving
-        column of fire at its target. * Fire Blast: A spell that causes a fire to
-        ignite itself underneath the target''s feet and follow them around whenever
-        they move. After a moment of gathering its flames, the Arch-vile shoot its
-        hands forward, creating an explosion of fire underneath the target that more
-        often than not sends them flying backwards. This can be avoided if the target
-        manages to leave the Arch-vile''s line of sight before the spell is cast,
-        however. * Summon: With this spell, the Arch-vile opens a portal to Hell,
-        summoning any demon of its choosing to fight at its side. * Resurrection:
-        When presented with a fallen ally, the Arch-vile is capable of bringing them
-        back to life with a spell. Resurrected beings are cured of all wounds and
-        possess every bit of the strength they had before they died. Note: Not to
-        be confused with the Summoner. Despite the two enemies fulfilling the same
-        exact role within their respective games in the franchise, they are two different
-        monsters with different abilities and thus should not be treated as one in
-        the same. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Game Characters Category:Doom Category:Demons Category:Fire Users
-        Category:Necromancers Category:Summoners Category:Horror Characters Category:Characters
-        Category:Video Game Characters Category:Evil Characters Category:Villains
-        Category:Antagonists Category:Monsters Category:Genderless Characters Category:Power
-        Nullification Users Category:Magic Users Category:Teleportation Users Category:BFR
-        Users Category:Immortals Category:Forcefield Users Category:Sorcerers Category:Attack
-        Reflection Users Category:Statistics Amplification Users Category:Statistics
-        Reduction Users Category:Healers'
+        leave the Arch-vile exposed to counterattacks if they miss.
       source_id: vsbattles-arch-vile-game-doom
       provider_id: vsbattles
       authority: high
@@ -2682,42 +1553,163 @@ repair:
     duplicate_key: vsbattles.fandom.com|arch vile|9158586
     retryable: false
     exception_class: ''
-  needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-arch-vile-game-doom
-    url: https://vsbattles.fandom.com/wiki/Arch-Vile_%28Game%29_Doom
-    title: Arch-vile
-    rank: 80
-    extracted_fields: *id007
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|arch vile|9158586
   - source_id: character-stats-profiles-arch-vile-game-doom
     url: https://character-stats-and-profiles.fandom.com/wiki/Arch-Vile_%28Game%29_Doom
-    title: Shadow the Hedgehog (Canon, Game Character)/PaperPrince2
-    rank: 80
-    extracted_fields: *id009
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Doom Slayer (Canon)/Smilodonpopulator2344+
+    source_type: mediawiki
+    revision_id: '462321'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 24907
+    content_kind: api_json
+    headings_detected:
+    - Doom Slayer
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 1-B | 1-A | High 1-A | Possibly 1-S Haxs/
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Acausality (Types 2 & 4) out infinite timelines and possibilities there
+        was one constant, that was the Destroyer and the ruin of Urdak by his hand
+        and despite the omniscient Makyr collective viewing these infinite timelines
+        and possibilities it couldn't detect the Destroyer's identity, Non-Physical
+        Interaction & Soul Manipulation (He stabbed the soul that resided within The
+        Gladiator's shield), Invulnerability Negation (Defeated the Khan Makyr while
+        her life sphere was in her chest, Can kill Cyberdemons/Tyrants who are only
+        able to be harmed with Holy weapons like the Spear of Destiny.), Immortality
+        Bypassing via Crucible and bare hands (Defeated the Immortal Titan while his
+        Crucible was Stuck in the Titan he killed in Taras Nabad and Hugo Martin stated
+        he killed the Titan with his bare hands.), Reactive Power Level (He Draws
+        strength from every enemy he defeats)
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: High 1-B (Caused a multiverse to implode in on itself a multiverse in
+        DOOM has Infinite timelines and possibilities which expand exponentially like
+        fractal patterns in the fabric of existence Infinite timelines and possibilities
+        is Many World Interpretations. That qualifies for a Type 3 Multiverse at least
+        (though you can argue higher) and a Type 3 Multiverse it mentions Infinite-Dimensional
+        Hilbert Space. Fractal patterns are infinitely complexed and never ending
+        which is the very image of the Chaos Theory which is Infinite-Dimensional.
+        Fractal systems define minority cosmological theories which includes metaphysics
+        this means the multiverses in DOOM contain the concepts of mathematical dimensionality
+        aka spatial dimensions via metaphysics. There's the usage of pan dimensional
+        existence to define the existence of a Multiverse in a way. Pan dimensionality
+        is defined as all dimensions of reality across Infinite spatial dimensions.
+        There is also Inverse Quantum Fields via Hellgrowths. Inverse Quantum Fields
+        contain Quantum Mechanics which are often formulated in infinite-dimensional
+        Hilbert Space. In each universe there is Bohm's Implicate Order and in Bohm's
+        Implicate Order the Holomovement endlessly folds and unfolds into infinite
+        dimensionality and as stated there are infinite timelines/universes per Multiverse.
+        ) | 1-A (Defeated the Khan Makyr, leader of the Makyrs who are arbiters across
+        countless dimensions and hold sway over all dominions of the known and unknown
+        dimensions. The Khan Makyr is the leader of Urdak which transcends the mortal
+        realm which the Slayer was always going to destroy as seen here) | At least
+        1-A (He is above the Elder Gods of Quake who are beyond human comprehension
+        and control extradimensional realms and is another scan for extradimensional
+        realms | 1-A maybe higher (Defeated the Icon of Sin who's mere presence caused
+        irreversible changes to Urdak which allowed the demons to pass through the
+        Void as never before) | 1-A (Defeated the Seraphim, Seraphs were molded from
+        the Void in Urdak and governed over creation) | 1-A to High 1-A (The Slayer
+        defeated the Immortal Titan of Immesurable Power and Ferocity who is arguably
+        the strongest demon to ever exist.) | High 1-A, possibly 1-S (Defeated Davoth,
+        the creator of the verse which includes the mortal realm, Urdak, and Hell
+        which is where Hellgrowths originate and Hell itself transcends Urdak and
+        is Unlimited by the boundaries of space, time, or dimension and transcends
+        them. Hell was confirmed by Hugo Martin to be an extention of Davoth. Davoth
+        stated that all things were made by his hand and that they would be unmade
+        by his hands which indicates he was going to destroy everything he created
+        which should include The Void as well. The Void was the first thing he created.
+        The engine of creation lie in The Void and is described to be "on the other
+        side of reality itself" and they breach The Void walls to touch the physical
+        world. This implies that the Void is Non-Physical note that even mathematical
+        dimensions are considered to be part of the physical world. The engine of
+        creation also spins into the physical world and back out of existence aka
+        into The Void. The Void lies between and all around dimensions in DOOM and
+        the Seraphs create life spheres or revive them using the powers of The Void).
+        This means that The Void is beyond existence and reality and mind you that
+        even Hell is within existence and reality. However, The Void is not and it
+        encompasses the entire cosmology (that we know about) within it and Hugo Martin
+        suggested that there is a place higher than even The Void where Davoth came
+        from.
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immesurable (The moment he exited the Divinity Machine he was called
+        the Time Walker and he moved through Time and Worlds) | At least Immesurable
+        (Kept up with Makyrs who move through Time and Space) | Irrelevant (Kept up
+        with the Seraphim who flew through all of creation) | Irrelevant (Kept up
+        with Davoth who flew through the Void, a structure that's Formless, and where
+        things like space, time, and dimensionality are meaningless and is beyond
+        existence itself & moved he moved between time and worlds which the Void lies
+        between and around all of creation.)
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 1-A (Tanked attacks from the Khan Makyr and Icon of Sin) | 1-A (Tanked
+        attacks from the Seraphim) | 1-A to High 1-A (Killed the Champion of Hell
+        with his bare fists) | High 1-A, possibly 1-S (Tanked attacks from Davoth
+        who was the only being that could injure the Slayer since he is either a Primeval
+        or something greater.)
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Originally his anger and love for destroying things and harming demons
+        could be used against him which led to him being sealed
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 0
+    variant_score: 25
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
@@ -2725,18 +1717,191 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|shadow the hedgehog canon
-      game character paperprince2|556230
+    duplicate_key: character-stats-and-profiles.fandom.com|doom slayer canon smilodonpopulator2344|462321
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-arch-vile-game-doom
     url: https://vsbattles.fandom.com/wiki/Arch-Vile_%28Game%29_%28Doom%29
-    title: Arch-vile
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - tier
+    - weaknesses
+    normalized_page_title: Arch-vile
+    source_type: mediawiki
+    revision_id: '9158586'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 14790
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 80
-    extracted_fields: *id011
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-A physically, higher with fire columns and fire blasts | 9-A | At least
+        8-C physically, higher with fire columns and fire blasts
+      source_id: vsbattles-arch-vile-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Fire Manipulation & Essence Manipulation
+        (Essence - Arch-vile's attack in the original Doom by surrounding their target
+        in flames before causing the fire to erupt by clasping their hands. In Doom
+        3 Arch-vile's can send pillars of flames at targets. Fire-based attacks of
+        demons can burn souls, demons are implied to be capable of devouring souls),
+        Distance Negation with fire blasts (Can completely ignore distance as long
+        as the target remains within its line of sight), Necromancy (Can resurrect
+        nearby demon corpses), Summoning (Can summon any non-boss Demon in Doom 3),
+        Immortality (Types 2 and 7; is an undead demon that can have large chunks
+        of flesh ripped away and still fight. Demons are frequently referred to as
+        mortally challenged and are referred as an army of the undead), Immunity to
+        *Soul Manipulation (All demons have had their souls ripped away from them)
+        Same as before to a higher degree plus; *Magic (Arch-viles have the innate
+        channel and manipulate the unholy powers of Hell magic) *Teleportation (Can
+        teleport around the battlefield to avoid attacks) *Greater Fire Manipulation
+        & Forcefield Creation (Showcases greater a manipulation of fire, being able
+        to form a pool of flames beneath a target even while the target is out of
+        sight. Can Arch-viles can also shoot large fire balls out of their hands and
+        send large flame waves at foes like in Doom 3. Can create a forcefield made
+        of flames to block oncoming attacks) **Attack Reflection (With the Fire Specialist
+        upgrade, flame wall can reflect oncoming attacks) *Statistics Amplification
+        (Haste boosts the Arch-vile's speed by 50% for five seconds) *Statistics Reduction
+        (The Broiling heat upgrade causes enemies damaged by lake of fire suffer 25%
+        increased damage from all sources and inflict 25% less damage while in the
+        area and for four seconds after leaving it) *Healing (Mid-low; Healing Zone
+        and Team Heal helps the user and allies recover from bullet and explosion
+        damage) *Greater Summoning (Can now summon large groups of demons at once.
+        Can summon fodder demons and a Baron of Hell instantly, although there's a
+        cooldown before they can be summoned again) *Limited BFR (Whatever a demon
+        kills, it gets sent to Hell) *Greater Essence Manipulation (Hell's Essence
+        - Arch-viles have the innate ability to channel and manipulate the unholy
+        powers of Hell magic. The demons with their presence bring their reality with
+        them, "hellifying" the environment. This can lead to many destructive events,
+        all of which benefit them on conquering worlds. Whether that be creating Hellgrowths
+        or infecting the atmosphere, making it poisonous) Resistance to; *Heat *Ice
+        Manipulation (Can quickly thaw out of the Slayer's flash freeze) *Poison Manipulation
+        (Should be comparable to other demons, can walk through toxic fog with no
+        issue) *Acid Manipulation *Electricity Manipulation (Demons can stand on electrified
+        water with no damage taken) *Disease Manipulation (Unaffected by the Disease
+        filled air of the Blood Swamps) *Radiation Manipulation (Demons can stand
+        on toxic waste without much issue) *Mind Manipulation (Can resist the effects
+        of buff totems which taints the mind of those nearby with nightmarish terror)
+        *Essence Manipulation (Hell's Essence, Argent Energy, Sentinel Energy) and
+        Fire Manipulation (Doom Demons can fight each other for extended period of
+        times while using their abilities on each other)
+      source_id: vsbattles-arch-vile-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level physically (Slightly weaker than the Cacodemon),
+        higher with fire columns and fire blasts (The most devastating of any non-boss
+        attack in the original games. Significantly more powerful than the Baron of
+        Hell's plasma projectiles) | Small Building level (One of the stronger demons
+        in the game, can contend with and overpower the Marine) | At least Building
+        level physically (Far stronger than its Classic self One of the strongest
+        demons in the game), higher with fire attacks (Its fire attacks are much stronger
+        than its physical capabilities)
+      source_id: vsbattles-arch-vile-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Supersonic (Comparable to Doomguy, much faster than an Imp,
+        the original games depict them as being among the fastest-moving enemies encountered)
+        | Supersonic (Can keep up with the Marine) | At least Supersonic+ (Far faster
+        than its Classic self. Comparable to other Demons)
+      source_id: vsbattles-arch-vile-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level (Significantly superior to the Hell Knight. Capable
+        of taking multiple direct hits from the Rocket Launcher, as well as numerous
+        plasma projectiles. Point-blank explosions aren't enough to interrupt their
+        spellcasting) | Small Building level (One of the more durable demons in the
+        game, superior to many other species) | At least Building level (Far stronger
+        than its Classic Incarnations, as a Super Heavy Demon should be on this level),
+        Multi-City Block level with forcefields (Forcefields can tank BFG shots)
+      source_id: vsbattles-arch-vile-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (The demons of Hell have limitless aggression and are tireless
+        beings)
+      source_id: vsbattles-arch-vile-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range physically (due to size), likely Several Meters
+        with fire columns, far higher with fire blasts (presumably only limited by
+        sight)
+      source_id: vsbattles-arch-vile-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Seemingly above most other demons in the series, as it is capable of
+        utilizing tactics in combat. Despite this, it is somewhat unstable, and oftentimes
+        makes little distinction between friend and foe.
+      source_id: vsbattles-arch-vile-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Far less dangerous in melee encounters. Prone to attacking anything that
+        hurts it, and as such will lose focus on its main enemy if hit by a stray
+        projectile from someone else. Is not, immune to its own flames, and can in
+        fact harm itself if it is within close proximity of the target when fire spells
+        are cast. Most spells take a brief moment of standing still in order to cast,
+        leaving it vulnerable to attack during that period. Fire blasts can be avoided
+        altogether if the target hides behind cover before they are cast, and they
+        leave the Arch-vile exposed to counterattacks if they miss.
+      source_id: vsbattles-arch-vile-game-doom
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 0
@@ -2748,19 +1913,165 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|arch vile|9158586
+    retryable: false
+    exception_class: ''
   - source_id: character-stats-profiles-arch-vile-game-doom
     url: https://character-stats-and-profiles.fandom.com/wiki/Arch-Vile_%28Game%29_%28Doom%29
-    title: Shadow the Hedgehog (Canon, Game Character)/PaperPrince2
-    rank: 80
-    extracted_fields: *id013
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Doom Slayer (Canon)/Smilodonpopulator2344+
+    source_type: mediawiki
+    revision_id: '462321'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 24907
+    content_kind: api_json
+    headings_detected:
+    - Doom Slayer
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 1-B | 1-A | High 1-A | Possibly 1-S Haxs/
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Acausality (Types 2 & 4) out infinite timelines and possibilities there
+        was one constant, that was the Destroyer and the ruin of Urdak by his hand
+        and despite the omniscient Makyr collective viewing these infinite timelines
+        and possibilities it couldn't detect the Destroyer's identity, Non-Physical
+        Interaction & Soul Manipulation (He stabbed the soul that resided within The
+        Gladiator's shield), Invulnerability Negation (Defeated the Khan Makyr while
+        her life sphere was in her chest, Can kill Cyberdemons/Tyrants who are only
+        able to be harmed with Holy weapons like the Spear of Destiny.), Immortality
+        Bypassing via Crucible and bare hands (Defeated the Immortal Titan while his
+        Crucible was Stuck in the Titan he killed in Taras Nabad and Hugo Martin stated
+        he killed the Titan with his bare hands.), Reactive Power Level (He Draws
+        strength from every enemy he defeats)
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: High 1-B (Caused a multiverse to implode in on itself a multiverse in
+        DOOM has Infinite timelines and possibilities which expand exponentially like
+        fractal patterns in the fabric of existence Infinite timelines and possibilities
+        is Many World Interpretations. That qualifies for a Type 3 Multiverse at least
+        (though you can argue higher) and a Type 3 Multiverse it mentions Infinite-Dimensional
+        Hilbert Space. Fractal patterns are infinitely complexed and never ending
+        which is the very image of the Chaos Theory which is Infinite-Dimensional.
+        Fractal systems define minority cosmological theories which includes metaphysics
+        this means the multiverses in DOOM contain the concepts of mathematical dimensionality
+        aka spatial dimensions via metaphysics. There's the usage of pan dimensional
+        existence to define the existence of a Multiverse in a way. Pan dimensionality
+        is defined as all dimensions of reality across Infinite spatial dimensions.
+        There is also Inverse Quantum Fields via Hellgrowths. Inverse Quantum Fields
+        contain Quantum Mechanics which are often formulated in infinite-dimensional
+        Hilbert Space. In each universe there is Bohm's Implicate Order and in Bohm's
+        Implicate Order the Holomovement endlessly folds and unfolds into infinite
+        dimensionality and as stated there are infinite timelines/universes per Multiverse.
+        ) | 1-A (Defeated the Khan Makyr, leader of the Makyrs who are arbiters across
+        countless dimensions and hold sway over all dominions of the known and unknown
+        dimensions. The Khan Makyr is the leader of Urdak which transcends the mortal
+        realm which the Slayer was always going to destroy as seen here) | At least
+        1-A (He is above the Elder Gods of Quake who are beyond human comprehension
+        and control extradimensional realms and is another scan for extradimensional
+        realms | 1-A maybe higher (Defeated the Icon of Sin who's mere presence caused
+        irreversible changes to Urdak which allowed the demons to pass through the
+        Void as never before) | 1-A (Defeated the Seraphim, Seraphs were molded from
+        the Void in Urdak and governed over creation) | 1-A to High 1-A (The Slayer
+        defeated the Immortal Titan of Immesurable Power and Ferocity who is arguably
+        the strongest demon to ever exist.) | High 1-A, possibly 1-S (Defeated Davoth,
+        the creator of the verse which includes the mortal realm, Urdak, and Hell
+        which is where Hellgrowths originate and Hell itself transcends Urdak and
+        is Unlimited by the boundaries of space, time, or dimension and transcends
+        them. Hell was confirmed by Hugo Martin to be an extention of Davoth. Davoth
+        stated that all things were made by his hand and that they would be unmade
+        by his hands which indicates he was going to destroy everything he created
+        which should include The Void as well. The Void was the first thing he created.
+        The engine of creation lie in The Void and is described to be "on the other
+        side of reality itself" and they breach The Void walls to touch the physical
+        world. This implies that the Void is Non-Physical note that even mathematical
+        dimensions are considered to be part of the physical world. The engine of
+        creation also spins into the physical world and back out of existence aka
+        into The Void. The Void lies between and all around dimensions in DOOM and
+        the Seraphs create life spheres or revive them using the powers of The Void).
+        This means that The Void is beyond existence and reality and mind you that
+        even Hell is within existence and reality. However, The Void is not and it
+        encompasses the entire cosmology (that we know about) within it and Hugo Martin
+        suggested that there is a place higher than even The Void where Davoth came
+        from.
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immesurable (The moment he exited the Divinity Machine he was called
+        the Time Walker and he moved through Time and Worlds) | At least Immesurable
+        (Kept up with Makyrs who move through Time and Space) | Irrelevant (Kept up
+        with the Seraphim who flew through all of creation) | Irrelevant (Kept up
+        with Davoth who flew through the Void, a structure that's Formless, and where
+        things like space, time, and dimensionality are meaningless and is beyond
+        existence itself & moved he moved between time and worlds which the Void lies
+        between and around all of creation.)
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 1-A (Tanked attacks from the Khan Makyr and Icon of Sin) | 1-A (Tanked
+        attacks from the Seraphim) | 1-A to High 1-A (Killed the Champion of Hell
+        with his bare fists) | High 1-A, possibly 1-S (Tanked attacks from Davoth
+        who was the only being that could injure the Slayer since he is either a Primeval
+        or something greater.)
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Originally his anger and love for destroying things and harming demons
+        could be used against him which led to him being sealed
+      source_id: character-stats-profiles-arch-vile-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 0
+    variant_score: 25
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
@@ -2768,39 +2079,191 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|shadow the hedgehog canon
-      game character paperprince2|556230
-  - source_id: mediawiki-arch-vile-game
-    url: https://vsbattles.fandom.com/wiki/Arch-Vile_(Game)
-    title: Arch-vile
-    rank: 80
-    extracted_fields: *id015
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|arch vile|9158586
+    duplicate_key: character-stats-and-profiles.fandom.com|doom slayer canon smilodonpopulator2344|462321
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-arch-vile-game
     url: https://vsbattles.fandom.com/wiki/Arch-Vile_%28Game%29
-    title: Arch-vile
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - tier
+    - weaknesses
+    normalized_page_title: Arch-vile
+    source_type: mediawiki
+    revision_id: '9158586'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 14790
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 80
-    extracted_fields: *id017
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id018
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-A physically, higher with fire columns and fire blasts | 9-A | At least
+        8-C physically, higher with fire columns and fire blasts
+      source_id: vsbattles-arch-vile-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Fire Manipulation & Essence Manipulation
+        (Essence - Arch-vile's attack in the original Doom by surrounding their target
+        in flames before causing the fire to erupt by clasping their hands. In Doom
+        3 Arch-vile's can send pillars of flames at targets. Fire-based attacks of
+        demons can burn souls, demons are implied to be capable of devouring souls),
+        Distance Negation with fire blasts (Can completely ignore distance as long
+        as the target remains within its line of sight), Necromancy (Can resurrect
+        nearby demon corpses), Summoning (Can summon any non-boss Demon in Doom 3),
+        Immortality (Types 2 and 7; is an undead demon that can have large chunks
+        of flesh ripped away and still fight. Demons are frequently referred to as
+        mortally challenged and are referred as an army of the undead), Immunity to
+        *Soul Manipulation (All demons have had their souls ripped away from them)
+        Same as before to a higher degree plus; *Magic (Arch-viles have the innate
+        channel and manipulate the unholy powers of Hell magic) *Teleportation (Can
+        teleport around the battlefield to avoid attacks) *Greater Fire Manipulation
+        & Forcefield Creation (Showcases greater a manipulation of fire, being able
+        to form a pool of flames beneath a target even while the target is out of
+        sight. Can Arch-viles can also shoot large fire balls out of their hands and
+        send large flame waves at foes like in Doom 3. Can create a forcefield made
+        of flames to block oncoming attacks) **Attack Reflection (With the Fire Specialist
+        upgrade, flame wall can reflect oncoming attacks) *Statistics Amplification
+        (Haste boosts the Arch-vile's speed by 50% for five seconds) *Statistics Reduction
+        (The Broiling heat upgrade causes enemies damaged by lake of fire suffer 25%
+        increased damage from all sources and inflict 25% less damage while in the
+        area and for four seconds after leaving it) *Healing (Mid-low; Healing Zone
+        and Team Heal helps the user and allies recover from bullet and explosion
+        damage) *Greater Summoning (Can now summon large groups of demons at once.
+        Can summon fodder demons and a Baron of Hell instantly, although there's a
+        cooldown before they can be summoned again) *Limited BFR (Whatever a demon
+        kills, it gets sent to Hell) *Greater Essence Manipulation (Hell's Essence
+        - Arch-viles have the innate ability to channel and manipulate the unholy
+        powers of Hell magic. The demons with their presence bring their reality with
+        them, "hellifying" the environment. This can lead to many destructive events,
+        all of which benefit them on conquering worlds. Whether that be creating Hellgrowths
+        or infecting the atmosphere, making it poisonous) Resistance to; *Heat *Ice
+        Manipulation (Can quickly thaw out of the Slayer's flash freeze) *Poison Manipulation
+        (Should be comparable to other demons, can walk through toxic fog with no
+        issue) *Acid Manipulation *Electricity Manipulation (Demons can stand on electrified
+        water with no damage taken) *Disease Manipulation (Unaffected by the Disease
+        filled air of the Blood Swamps) *Radiation Manipulation (Demons can stand
+        on toxic waste without much issue) *Mind Manipulation (Can resist the effects
+        of buff totems which taints the mind of those nearby with nightmarish terror)
+        *Essence Manipulation (Hell's Essence, Argent Energy, Sentinel Energy) and
+        Fire Manipulation (Doom Demons can fight each other for extended period of
+        times while using their abilities on each other)
+      source_id: vsbattles-arch-vile-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level physically (Slightly weaker than the Cacodemon),
+        higher with fire columns and fire blasts (The most devastating of any non-boss
+        attack in the original games. Significantly more powerful than the Baron of
+        Hell's plasma projectiles) | Small Building level (One of the stronger demons
+        in the game, can contend with and overpower the Marine) | At least Building
+        level physically (Far stronger than its Classic self One of the strongest
+        demons in the game), higher with fire attacks (Its fire attacks are much stronger
+        than its physical capabilities)
+      source_id: vsbattles-arch-vile-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Supersonic (Comparable to Doomguy, much faster than an Imp,
+        the original games depict them as being among the fastest-moving enemies encountered)
+        | Supersonic (Can keep up with the Marine) | At least Supersonic+ (Far faster
+        than its Classic self. Comparable to other Demons)
+      source_id: vsbattles-arch-vile-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level (Significantly superior to the Hell Knight. Capable
+        of taking multiple direct hits from the Rocket Launcher, as well as numerous
+        plasma projectiles. Point-blank explosions aren't enough to interrupt their
+        spellcasting) | Small Building level (One of the more durable demons in the
+        game, superior to many other species) | At least Building level (Far stronger
+        than its Classic Incarnations, as a Super Heavy Demon should be on this level),
+        Multi-City Block level with forcefields (Forcefields can tank BFG shots)
+      source_id: vsbattles-arch-vile-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (The demons of Hell have limitless aggression and are tireless
+        beings)
+      source_id: vsbattles-arch-vile-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range physically (due to size), likely Several Meters
+        with fire columns, far higher with fire blasts (presumably only limited by
+        sight)
+      source_id: vsbattles-arch-vile-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Seemingly above most other demons in the series, as it is capable of
+        utilizing tactics in combat. Despite this, it is somewhat unstable, and oftentimes
+        makes little distinction between friend and foe.
+      source_id: vsbattles-arch-vile-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Far less dangerous in melee encounters. Prone to attacking anything that
+        hurts it, and as such will lose focus on its main enemy if hit by a stray
+        projectile from someone else. Is not, immune to its own flames, and can in
+        fact harm itself if it is within close proximity of the target when fire spells
+        are cast. Most spells take a brief moment of standing still in order to cast,
+        leaving it vulnerable to attack during that period. Fire blasts can be avoided
+        altogether if the target hides behind cover before they are cast, and they
+        leave the Arch-vile exposed to counterattacks if they miss.
+      source_id: vsbattles-arch-vile-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
@@ -2812,50 +2275,124 @@ repair:
     franchise_match: false
     variant_match: true
     duplicate_key: vsbattles.fandom.com|arch vile|9158586
+    retryable: false
+    exception_class: ''
   - source_id: character-stats-profiles-arch-vile-game
     url: https://character-stats-and-profiles.fandom.com/wiki/Arch-Vile_%28Game%29
-    title: Shadow the Hedgehog (Canon, Game Character)/PaperPrince2
-    rank: 80
-    extracted_fields: *id019
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - weaknesses
+    normalized_page_title: The Terrarian (Canon)/SJG13673
+    source_type: mediawiki
+    revision_id: '605965'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 63441
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id020
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: attack_potency
+      value: Universe level+ (Can destroy a Nebula Pillar, which contains up to 60
+        Nebula Fragments, each of which contain a power of the entire galaxy. Defeated
+        Mechanical Bosses and later Moon Lord when he regained his eyes, brain and
+        parts of the skeleton,dwelling on the dark side of the moon to regain his
+        power, whom at his peak is capable to threatening the very fabric of the universe
+        and said to be practically a god with limitless and immeasurable power, with
+        Mechanical Bosses being meant to be replacements for his torn off organs to
+        restore him back to his full power. Became much more powerful with obtained
+        loot from Moon Lord. Can destroy Solar Pillar, which contains up to 60 Solar
+        Fragments, each of which contain the fury of the universe. Stardust Pillar's
+        summons are stated to use limitless energy)
+      source_id: character-stats-profiles-arch-vile-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL (Can keep the pace and outmatch Martian saucers, which
+        can fly this fast. Can control rainbow shot by Rainbow Rod. Can dodge beams
+        of light from Gastropods. Can dodge and move faster than Empress of Light's
+        projectiles. Is implied to be able to use the pocket mirror to deflect Medusa's
+        rays of light), likely Massively FTL+ (192,499,839.33885 c. Can keep up with
+        enemies amplified by an abundant amount of the Celestial Pillars' energy.
+        A small amount of which was seemingly used to pull exoplanets close to the
+        player's planet within 2 seconds, and Terrarian is implied to pull moons down
+        at a similar speed with the Lunar Hook, which was created from the fragments
+        from the Celestial Pillars themselves. Although if the appearence of those
+        planets actually is directly physical movement or teleportation is not fully
+        clear)
+      source_id: character-stats-profiles-arch-vile-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Universe level+ (With their greatest gear, they are capable of taking
+        hits from Moon Lord)
+      source_id: character-stats-profiles-arch-vile-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Magic uses a limited supply of mana which regenerates over time. The
+        usage of a mana potion weakens magic power for a short while. Healing potions
+        have a cooldown of about 60 seconds (45 with one of accesories). Has very
+        limited combat option without weapons. The Corruption can't affect those who
+        are completely pure of heart.
+      source_id: character-stats-profiles-arch-vile-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 0
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|shadow the hedgehog canon
-      game character paperprince2|556230
-  - source_id: vsbattles-arch-vile-game-doom
-    url: https://vsbattles.fandom.com/wiki/Arch-Vile_Game_Doom
-    title: Arch-vile
-    rank: 80
-    extracted_fields: *id021
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id022
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|arch vile|9158586
+    duplicate_key: character-stats-and-profiles.fandom.com|the terrarian canon sjg13673|605965
+    retryable: false
+    exception_class: ''
+  needs_human_source_choice: false
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

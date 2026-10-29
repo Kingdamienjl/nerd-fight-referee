@@ -10,18 +10,9 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-04T03:47:45Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Rui
   franchise: Demon Slayer
@@ -97,42 +88,6 @@ sources:
 - id: vsbattles-rui-demon-slayer
   provider_id: vsbattles
   source_type: mediawiki
-  title: Rui Demon Slayer
-  url: https://vsbattles.fandom.com/wiki/Rui_Demon_Slayer
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-rui-demon-slayer
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Rui Demon Slayer
-  url: https://character-stats-and-profiles.fandom.com/wiki/Rui_Demon_Slayer
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-rui-demon-slayer
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Rui (Demon Slayer)
   url: https://vsbattles.fandom.com/wiki/Rui_%28Demon_Slayer%29
   authority: high
@@ -168,17 +123,26 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least
+    source_ids:
+    - vsbattles-rui-demon-slayer
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Building level (Far stronger than Tanjiro without Hinokami Kagura and the
+      Spider Demon Father, and was stated to possess the strength around that of a
+      Lower Moon 2 or Lower Moon 1, but was never interested in climbing rank)
+    source_ids:
+    - vsbattles-rui-demon-slayer
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Supersonic+ (As a member of the Twelve Kizuki should be significantly faster
+      than the lesser Slasher Demon who could do this)
+    source_ids:
+    - vsbattles-rui-demon-slayer
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -188,27 +152,278 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Varies (The durability of demons fluctuates depending on what parts of their
+      body they reinforce, with their necks most often prioritized), at most Building
+      level (Even with Hinokami Kagura, all Tanjiro could do was nick his neck), likely
+      higher (Demons can reinforce a part of their body above the extent of their
+      own Blood Demon Art)
+    source_ids:
+    - vsbattles-rui-demon-slayer
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Infinite (Demons don't get tired)
+    source_ids:
+    - vsbattles-rui-demon-slayer
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range; Hundreds of Meters with threads
+    source_ids:
+    - vsbattles-rui-demon-slayer
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Above Average
+    source_ids:
+    - vsbattles-rui-demon-slayer
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-demon-physiology-standard-kizuki-abilities
+  name: Demon Physiology (Standard Kizuki Abilities)
+  description: Demon Physiology (Standard Kizuki Abilities)
+  source_ids: &id002
+  - vsbattles-rui-demon-slayer
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-greater-battle-spirit-overwhelming-fear-inducing-caused-dys
+  name: Greater Battle Spirit (Overwhelming & Fear-inducing; Caused dyspnea in Spider
+    Sister and made the air feel heavy and thi
+  description: Greater Battle Spirit (Overwhelming & Fear-inducing; Caused dyspnea
+    in Spider Sister and made the air feel heavy and thick to Tanjiro)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-blood-demon-art
+  name: Blood Demon Art
+  description: Blood Demon Art
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-thread-manipulation-can-create-threads-using-his-cells-and-
+  name: Thread Manipulation (Can create threads using his cells and increase the lethality
+    by using his blood)
+  description: Thread Manipulation (Can create threads using his cells and increase
+    the lethality by using his blood)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-resistance-to-fear-manipulation-paralysis-inducement-able-t
+  name: 'Resistance to: *Fear Manipulation & Paralysis Inducement (Able to withstand
+    aura that causes fear and paralysis)'
+  description: 'Resistance to: *Fear Manipulation & Paralysis Inducement (Able to
+    withstand aura that causes fear and paralysis)'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-can-get-angered-when-it-comes-to-bonds-and-families-standard-demon-we
+  name: 'Can get angered when it comes to bonds and families. Standard Demon Weaknesses
+    Notable Attacks and Techniques:'
+  description: 'Can get angered when it comes to bonds and families. Standard Demon
+    Weaknesses Notable Attacks and Techniques:'
+  source_ids: &id003
+  - vsbattles-rui-demon-slayer
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-when-rui-uses-his-full-strength
+  name: ': When Rui uses his full strength'
+  description: ': When Rui uses his full strength'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-he-begins-pumping-more-of-his-blood-into-his-hands-that-then-extend-i
+  name: he begins pumping more of his blood into his hands that then extend into his
+    threads
+  description: he begins pumping more of his blood into his hands that then extend
+    into his threads
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-increasing-the-threads-sharpness-and-cutting-ability-of-the-threads-t
+  name: increasing the threads' sharpness and cutting ability of the threads to then
+    perform his Techniques.
+  description: increasing the threads' sharpness and cutting ability of the threads
+    to then perform his Techniques.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-rui-creates-a-web-shaped-string-around-his-opponent-to-cut-them-to-pi
+  name: ': Rui creates a web-shaped string around his opponent to cut them to pieces.'
+  description: ': Rui creates a web-shaped string around his opponent to cut them
+    to pieces.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-rui-creates-a-cage-from-his-web-around-the-target
+  name: ': Rui creates a cage from his web around the target'
+  description: ': Rui creates a cage from his web around the target'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-that-continuously-shrinks-until-it-cuts-the-target-to-pieces
+  name: that continuously shrinks until it cuts the target to pieces.
+  description: that continuously shrinks until it cuts the target to pieces.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-creating-a-rotating-wheel-of-threads
+  name: ': Creating a rotating wheel of threads'
+  description: ': Creating a rotating wheel of threads'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-that-upon-reaching-the-opponent-will-cut-them-to-pieces-notable-match
+  name: 'that upon reaching the opponent will cut them to pieces. ==Notable Matchups==
+    Victories: Losses: Inconclusive: Kafka Hib'
+  description: 'that upon reaching the opponent will cut them to pieces. ==Notable
+    Matchups== Victories: Losses: Inconclusive: Kafka Hibino (Kaiju No. 8) Kafka''s
+    Profile (Human Kafka with Partial Transformation was used, and speed was equalized)
+    Category:Demon Slayer: Kimetsu No Yaiba Category:Characters Category:Manga Characters
+    Category:Anime Characters Category:Antagonists Category:Primary Antagonists Category:Monsters
+    Category:Male Characters Category:Evil Characters Category:Villains Category:Kids
+    Category:Tragic Characters Category:Demons Category:Leaders Category:Murderers
+    Category:Immortals Category:Regeneration Users Category:Body Control Users Category:Biology
+    Users Category:Thread Users Category:Blood Users Category:Power Bestowal Users
+    Category:Enhanced Senses Users Category:Information Analysis Users Category:Self-Sustenance
+    Users Category:Chi Users Category:Aura Users Category:Fear Users Category:Paralysis
+    Users'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - regeneration
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -220,367 +435,29 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-rui-demon-slayer
+  secondary_disagreement_policy: warning_only
 profile_hash: aabf1a09071eaa64f6167b68a88444defaf1949e519ce2e09fc3adb353f0bb4f
 repair:
-  attempted_at: '2026-10-04T09:01:49Z'
+  attempted_at: '2026-10-25T08:48:40Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-rui-demon-slayer
-    url: https://vsbattles.fandom.com/wiki/Rui_Demon_Slayer
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Rui (Kimetsu no Yaiba)
-    source_type: mediawiki
-    revision_id: '9624336'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 5429
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{8-C}}
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Demon Physiology (Standard Kizuki Abilities) **Greater Battle Spirit
-        (Overwhelming & Fear-inducing; Caused dyspnea in Spider Sister and made the
-        air feel heavy and thick to Tanjiro) **Blood Demon Art ***Thread Manipulation
-        (Can create threads using his cells and increase the lethality by using his
-        blood) Resistance to: *Fear Manipulation & Paralysis Inducement (Able to withstand
-        aura that causes fear and paralysis)'
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Building level (Far stronger than Tanjiro without Hinokami Kagura and
-        the Spider Demon Father, and was stated to possess the strength around that
-        of a Lower Moon 2 or Lower Moon 1, but was never interested in climbing rank)
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Supersonic+ (As a member of the Twelve Kizuki should be significantly
-        faster than the lesser Slasher Demon who could do this)
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Varies (The durability of demons fluctuates depending on what parts of
-        their body they reinforce, with their necks most often prioritized), at most
-        Building level (Even with Hinokami Kagura, all Tanjiro could do was nick his
-        neck), likely higher (Demons can reinforce a part of their body above the
-        extent of their own Blood Demon Art)
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (Demons don't get tired)
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range; Hundreds of Meters with threads
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Can get angered when it comes to bonds and families. Standard Demon\
-        \ Weaknesses Notable Attacks and Techniques: *{{Nihongo|Blood Demon Art|{{Ruby|\u8840\
-        |\u3051\u3063}}{{Ruby|\u9B3C|\u304D}}{{Ruby|\u8853|\u3058\u3085\u3064}}|Kekkijutsu}}:\
-        \ When Rui uses his full strength, he begins pumping more of his blood into\
-        \ his hands that then extend into his threads, increasing the threads' sharpness\
-        \ and cutting ability of the threads to then perform his Techniques. **{{Nihongo|Cutting\
-        \ Threat Cage|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7D72|\u3057}}{{Ruby|\u7262\
-        |\u308D\u3046}}|Kokushiro}}: Rui creates a web-shaped string around his opponent\
-        \ to cut them to pieces. **{{Nihongo|Murderous Eye Basket|{{Ruby|\u6BBA|\u3042\
-        \u3084}}{{Ruby|\u76EE|\u3081}}{{Ruby|\u7C60|\u304B\u3054}}|Ayame Kago}}: Rui\
-        \ creates a cage from his web around the target, that continuously shrinks\
-        \ until it cuts the target to pieces. **{{Nihongo|Cutting Thread Rotation|{{Ruby|\u523B\
-        |\u3053\u304F}}{{Ruby|\u7D72|\u3057}}{{Ruby|\u8F2A|\u308A\u3093}}{{Ruby|\u8EE2\
-        |\u3066\u3093}}|Kokushi Rinten}}: Creating a rotating wheel of threads, that\
-        \ upon reaching the opponent will cut them to pieces. ==Notable Matchups==\
-        \ Victories: Losses: Inconclusive: Kafka Hibino (Kaiju No. 8) Kafka's Profile\
-        \ (Human Kafka with Partial Transformation was used, and speed was equalized)\
-        \ {{Discussions}} Category:Demon Slayer: Kimetsu No Yaiba Category:Characters\
-        \ Category:Manga Characters Category:Anime Characters Category:Antagonists\
-        \ Category:Primary Antagonists Category:Monsters Category:Male Characters\
-        \ Category:Evil Characters Category:Villains Category:Kids Category:Tragic\
-        \ Characters Category:Demons Category:Leaders Category:Murderers Category:Immortals\
-        \ Category:Regeneration Users Category:Body Control Users Category:Biology\
-        \ Users Category:Thread Users Category:Blood Users Category:Power Bestowal\
-        \ Users Category:Enhanced Senses Users Category:Information Analysis Users\
-        \ Category:Self-Sustenance Users Category:Chi Users Category:Aura Users Category:Fear\
-        \ Users Category:Paralysis Users"
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|rui kimetsu no yaiba|9624336
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-rui-demon-slayer
-    url: https://character-stats-and-profiles.fandom.com/wiki/Rui_Demon_Slayer
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Rui (Canon, Kimetsu no Yaiba)/Soda727
-    source_type: mediawiki
-    revision_id: '599823'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 13090
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}}, {{8-C}} with Blood Enhanced Threads | {{7-C}}, higher with
-        Blood Enhanced Threads, far higher with Molting'
-      source_id: character-stats-profiles-rui-demon-slayer
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Split Power= *Superhuman Physical Characteristics *Accelerated Development
-        (Demons can rapidly grow stronger through eating humans) *Additional Limbs,
-        Body Control, Hair Manipulation, Shapeshifting & Weapon Creation (Demons can
-        manipulate their flesh in various ways, such as forming additional limbs,
-        clothing, hair, weapons, or even shapeshifting) *Aura, Fear Inducement & Paralysis
-        Inducement (All humans and demons alike emit an aura called Fighting Spirit,
-        with more powerful individuals being able to overwhelm others with their aura,
-        potentially causing fear and paralysis) *Blood Manipulation **Thread Manipulation
-        (His Blood Demon Art allows him to produce sharp, steel-like threads from
-        his flesh and blood) ***Damage Boost (Can increase the strength and durability
-        of his threads by infusing them with his blood) ***Platform Creation (Can
-        walk on his threads in mid-air) ***Power Bestowal (Can share his Blood Demon
-        Art with other demons through apportioning it into spiderlike forms for their
-        consumption) *Enhanced Senses (Demons can distinguish between blood types,
-        sickness, and genes) *Extrasensory Perception (Demons can sense and differentiate
-        between the presence of humans and demons) *Immortality (Types 1 & 3; Demons
-        don''t age) **Regeneration (Mid; Demons can regenerate from decapitation)
-        *Self-Sustenance (Type 3; Demons don''t fatigue or need sleep) *Weapon Mastery
-        (Can skillfully manipulate his threads) *Resistance to Disease Manipulation
-        (Demons are immune to diseases) |-|Reclaimed Full Power= *All previous abilities
-        and resistances, plus: *Blood Manipulation **Thread Manipulation ***Acid Manipulation
-        (Can form soft but durable balls of yarn containing dissolution fluids to
-        trap and melt targets) ****Breath Attack (Can spew acidic poison from his
-        mouth with Poison Sputum) ***Body Puppetry, Limited Creation, & Small Size
-        (Type 2; Can form hundreds of small spiders, which can connect his threads
-        to targets to restrain and manipulate them from a distance) ****Poison Manipulation,
-        Status Effect Inducement & Transmutation (His spiders can inject targets with
-        poison, which will cause targets to become dizzy, nauseas, go through intense
-        pain, and finally turn into small, obedient spider-like creatures that can
-        inject more poison into new targets) **Body Control, Size Manipulation, Statistics
-        Amplification & Transformation (Can molt his skin to transform into a bigger,
-        stronger form)'
-      source_id: character-stats-profiles-rui-demon-slayer
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level (As a member of the Twelve Kizuki, he is far stronger
-        than Spider Demon Father. Easily cuts a Demon Slayer into pieces. Beheads
-        Spider Demon Sister and cuts through several trees. Easily draws blood from
-        Tanjiro with his strikesUpscales from 0.008 Tons of TNT), Building level with
-        Blood Enhanced Threads (Far stronger than his normal threads. Would have killed
-        Tanjiro in one blow if he didn't cut through his thread. His strength is stated
-        to be equal to that of Lower Rank 1 or 2Upscales from 0.358 Tons of TNT) |
-        Town level (With his full power and abilities, he might have succeeded in
-        defeating HashiraScales to 29.3 Kilotons of TNT), higher with Blood Enhanced
-        Threads, far higher with Molting
-      source_id: character-stats-profiles-rui-demon-slayer
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Supersonic+ (As a member of the Twelve Kizuki, he is far faster than
-        Slasher, who can move this fastUpscales from Mach 3.53) | Massively Hypersonic+
-        (With his full power and abilities, he might have succeeded in defeating HashiraUpscales
-        from Mach 1,762)
-      source_id: character-stats-profiles-rui-demon-slayer
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Unknown (Demons' bodies are less durable than their necks), Small Building
-        level with Threads (Tanjiro's blade instantly breaks in half upon striking
-        his threads and are more durable than Spider Demon FatherUpscales from 0.008
-        Tons of TNT), Building level with Blood Enhanced Threads (Far more durable
-        than his normal threads and can't be cut by Tanjiro's Constant FluxUpscales
-        from 0.358 Tons of TNT), higher with Neck (His neck is more durable than his
-        Blood Enhanced Threads and can't be cut by Tanjiro's Hinokami Kagura) | Unknown,
-        Town level with Threads, higher with Blood Enhanced Threads, far higher with
-        Neck, even higher with Molting
-      source_id: character-stats-profiles-rui-demon-slayer
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Demons quickly disintegrate into dust when exposed to sunlight, and\
-        \ despite their regeneration, will die upon decapitation from a Nichirin Blade\
-        \ due to their sun absorbing materials. Wisteria is poisonous to demons. Can\
-        \ get emotional about family bonds, causing him to act impulsively in battle.\
-        \ | All previous weaknesses. His threads can be cut to remove his control\
-        \ over a target, although his spiders can quickly connect more. His threads\
-        \ and controlled targets are weaker the farther they are. Notable Attacks/Techniques:\
-        \ RuiThreadManipulation.gif|Rui attacking Tanjiro with his threads File:RuiCuttingThreadCage.gif|Rui\
-        \ attacking Tanjiro with Cutting Thread Cage File:RuiMurderousEyeBasket.gif|Rui\
-        \ cutting Tanjiro with Murderous Eye Basket File:RuiCuttingThreadRotation.gif|Rui's\
-        \ Cutting Thread Rotation *{{Nihongo|Blood Demon Art|{{Ruby|\u8840|\u3051\u3063\
-        }}{{Ruby|\u9B3C|\u304D}}{{Ruby|\u8853|\u3058\u3085\u3064}}|Kekkijutsu}}: **Filukinesis:\
-        \ Rui's Blood Demon Art allowed him to create extremely sharp and thin threads\
-        \ indiscernible from silk using his own flesh and blood and manipulate them\
-        \ however he pleased. Rui can further amplify their strength and durability\
-        \ by infusing his blood through them, giving them a blood red color. ***{{Nihongo|Cutting\
-        \ Thread Cage|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7CF8|\u3057}}{{Ruby|\u7262\
-        |\u308D\u3046}}|Kokushir\u014D}}: Rui creates web-shaped strings that completely\
-        \ surround his opponent to cut them to pieces. ***{{Nihongo|Murderous Eye\
-        \ Basket|{{Ruby|\u6BBA|\u3042\u3084}}{{Ruby|\u76EE|\u3081}}{{Ruby|\u7C60|\u304B\
-        \u3054}}|Ayame Kago}}: Rui creates a spherical cage from his threads around\
-        \ the target, that continuously shrink until it cuts the target to pieces.\
-        \ ***{{Nihongo|Cutting Thread Rotation|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7CF8\
-        |\u3057}}{{Ruby|\u8F2A|\u308A\u3093}}{{Ruby|\u8EE2|\u3066\u3093}}|Kokushi\
-        \ Rinten}}: Rui creates a rotating wheel of threads, that upon reaching the\
-        \ opponent will cut them to pieces. ==Notes/Explanations== {{Scroll box|content=}}\
-        \ Category:Soda727"
-      source_id: character-stats-profiles-rui-demon-slayer
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|rui canon kimetsu no yaiba
-      soda727|599823
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-rui-demon-slayer
     url: https://vsbattles.fandom.com/wiki/Rui_%28Demon_Slayer%29
     ok: true
@@ -593,7 +470,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Rui (Kimetsu no Yaiba)
@@ -638,18 +514,16 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{8-C}}
+      value: At least 8-C
       source_id: vsbattles-rui-demon-slayer
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '*Demon Physiology (Standard Kizuki Abilities) **Greater Battle Spirit
-        (Overwhelming & Fear-inducing; Caused dyspnea in Spider Sister and made the
-        air feel heavy and thick to Tanjiro) **Blood Demon Art ***Thread Manipulation
-        (Can create threads using his cells and increase the lethality by using his
-        blood) Resistance to: *Fear Manipulation & Paralysis Inducement (Able to withstand
-        aura that causes fear and paralysis)'
+      value: Demon Physiology (Standard Kizuki Abilities), Greater Battle Spirit (Overwhelming
+        & Fear-inducing; Caused dyspnea in Spider Sister and made the air feel heavy
+        and thick to Tanjiro), Blood Demon Art, Thread Manipulation (Can create threads
+        using his cells and increase the lethality by using his blood)
       source_id: vsbattles-rui-demon-slayer
       provider_id: vsbattles
       authority: high
@@ -691,12 +565,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-rui-demon-slayer
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average
       source_id: vsbattles-rui-demon-slayer
@@ -704,33 +572,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Can get angered when it comes to bonds and families. Standard Demon\
-        \ Weaknesses Notable Attacks and Techniques: *{{Nihongo|Blood Demon Art|{{Ruby|\u8840\
-        |\u3051\u3063}}{{Ruby|\u9B3C|\u304D}}{{Ruby|\u8853|\u3058\u3085\u3064}}|Kekkijutsu}}:\
-        \ When Rui uses his full strength, he begins pumping more of his blood into\
-        \ his hands that then extend into his threads, increasing the threads' sharpness\
-        \ and cutting ability of the threads to then perform his Techniques. **{{Nihongo|Cutting\
-        \ Threat Cage|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7D72|\u3057}}{{Ruby|\u7262\
-        |\u308D\u3046}}|Kokushiro}}: Rui creates a web-shaped string around his opponent\
-        \ to cut them to pieces. **{{Nihongo|Murderous Eye Basket|{{Ruby|\u6BBA|\u3042\
-        \u3084}}{{Ruby|\u76EE|\u3081}}{{Ruby|\u7C60|\u304B\u3054}}|Ayame Kago}}: Rui\
-        \ creates a cage from his web around the target, that continuously shrinks\
-        \ until it cuts the target to pieces. **{{Nihongo|Cutting Thread Rotation|{{Ruby|\u523B\
-        |\u3053\u304F}}{{Ruby|\u7D72|\u3057}}{{Ruby|\u8F2A|\u308A\u3093}}{{Ruby|\u8EE2\
-        |\u3066\u3093}}|Kokushi Rinten}}: Creating a rotating wheel of threads, that\
-        \ upon reaching the opponent will cut them to pieces. ==Notable Matchups==\
-        \ Victories: Losses: Inconclusive: Kafka Hibino (Kaiju No. 8) Kafka's Profile\
-        \ (Human Kafka with Partial Transformation was used, and speed was equalized)\
-        \ {{Discussions}} Category:Demon Slayer: Kimetsu No Yaiba Category:Characters\
-        \ Category:Manga Characters Category:Anime Characters Category:Antagonists\
-        \ Category:Primary Antagonists Category:Monsters Category:Male Characters\
-        \ Category:Evil Characters Category:Villains Category:Kids Category:Tragic\
-        \ Characters Category:Demons Category:Leaders Category:Murderers Category:Immortals\
-        \ Category:Regeneration Users Category:Body Control Users Category:Biology\
-        \ Users Category:Thread Users Category:Blood Users Category:Power Bestowal\
-        \ Users Category:Enhanced Senses Users Category:Information Analysis Users\
-        \ Category:Self-Sustenance Users Category:Chi Users Category:Aura Users Category:Fear\
-        \ Users Category:Paralysis Users"
+      value: 'Can get angered when it comes to bonds and families. Standard Demon
+        Weaknesses Notable Attacks and Techniques:, : When Rui uses his full strength,
+        he begins pumping more of his blood into his hands that then extend into his
+        threads, : Rui creates a web-shaped string around his opponent to cut them
+        to pieces., : Rui creates a cage from his web around the target'
       source_id: vsbattles-rui-demon-slayer
       provider_id: vsbattles
       authority: high
@@ -761,10 +607,10 @@ repair:
     - weaknesses
     normalized_page_title: Rui (Canon, Kimetsu no Yaiba)/Soda727
     source_type: mediawiki
-    revision_id: '599823'
+    revision_id: '620456'
     fetch_status: fetched
     http_status: 200
-    content_length: 13090
+    content_length: 13271
     content_kind: api_json
     headings_detected:
     - Summary
@@ -801,45 +647,45 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-A}}, {{8-C}} with Blood Enhanced Threads | {{7-C}}, higher with
-        Blood Enhanced Threads, far higher with Molting'
+      value: 9-A, 8-C with Blood Enhanced Threads | 7-C, higher with Blood Enhanced
+        Threads, far higher with Molting
       source_id: character-stats-profiles-rui-demon-slayer
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Split Power= *Superhuman Physical Characteristics *Accelerated Development
-        (Demons can rapidly grow stronger through eating humans) *Additional Limbs,
-        Body Control, Hair Manipulation, Shapeshifting & Weapon Creation (Demons can
-        manipulate their flesh in various ways, such as forming additional limbs,
-        clothing, hair, weapons, or even shapeshifting) *Aura, Fear Inducement & Paralysis
-        Inducement (All humans and demons alike emit an aura called Fighting Spirit,
-        with more powerful individuals being able to overwhelm others with their aura,
-        potentially causing fear and paralysis) *Blood Manipulation **Thread Manipulation
-        (His Blood Demon Art allows him to produce sharp, steel-like threads from
-        his flesh and blood) ***Damage Boost (Can increase the strength and durability
-        of his threads by infusing them with his blood) ***Platform Creation (Can
-        walk on his threads in mid-air) ***Power Bestowal (Can share his Blood Demon
-        Art with other demons through apportioning it into spiderlike forms for their
-        consumption) *Enhanced Senses (Demons can distinguish between blood types,
-        sickness, and genes) *Extrasensory Perception (Demons can sense and differentiate
-        between the presence of humans and demons) *Immortality (Types 1 & 3; Demons
-        don''t age) **Regeneration (Mid; Demons can regenerate from decapitation)
-        *Self-Sustenance (Type 3; Demons don''t fatigue or need sleep) *Weapon Mastery
-        (Can skillfully manipulate his threads) *Resistance to Disease Manipulation
-        (Demons are immune to diseases) |-|Reclaimed Full Power= *All previous abilities
-        and resistances, plus: *Blood Manipulation **Thread Manipulation ***Acid Manipulation
-        (Can form soft but durable balls of yarn containing dissolution fluids to
-        trap and melt targets) ****Breath Attack (Can spew acidic poison from his
-        mouth with Poison Sputum) ***Body Puppetry, Limited Creation, & Small Size
-        (Type 2; Can form hundreds of small spiders, which can connect his threads
-        to targets to restrain and manipulate them from a distance) ****Poison Manipulation,
-        Status Effect Inducement & Transmutation (His spiders can inject targets with
-        poison, which will cause targets to become dizzy, nauseas, go through intense
-        pain, and finally turn into small, obedient spider-like creatures that can
-        inject more poison into new targets) **Body Control, Size Manipulation, Statistics
-        Amplification & Transformation (Can molt his skin to transform into a bigger,
-        stronger form)'
+      value: 'Superhuman Physical Characteristics, Accelerated Development (Demons
+        can rapidly grow stronger through eating humans), Additional Limbs, Body Control,
+        Hair Manipulation, Shapeshifting & Weapon Creation (Demons can manipulate
+        their flesh in various ways, such as forming additional limbs, clothing, hair,
+        weapons, or even shapeshifting), Aura, Fear Inducement & Paralysis Inducement
+        (All humans and demons alike emit an aura called Fighting Spirit, with more
+        powerful individuals being able to overwhelm others with their aura, potentially
+        causing fear and paralysis), Blood Manipulation, Thread Manipulation (His
+        Blood Demon Art allows him to produce sharp, steel-like threads from his flesh
+        and blood), Damage Boost (Can increase the strength and durability of his
+        threads by infusing them with his blood), Platform Creation (Can walk on his
+        threads in mid-air), Power Bestowal (Can share his Blood Demon Art with other
+        demons through apportioning it into spiderlike forms for their consumption),
+        Enhanced Senses (Demons can distinguish between blood types, sickness, and
+        genes), Extrasensory Perception (Demons can sense and differentiate between
+        the presence of humans and demons), Immortality (Types 1 & 3; Demons don''t
+        age), Regeneration (Mid; Demons can regenerate from decapitation), Self-Sustenance
+        (Type 3; Demons don''t fatigue or need sleep), Weapon Mastery (Can skillfully
+        manipulate his threads), Resistance to Disease Manipulation (Demons are immune
+        to diseases) *All previous abilities and resistances, plus: *Blood Manipulation
+        **Thread Manipulation ***Acid Manipulation (Can form soft but durable balls
+        of yarn containing dissolution fluids to trap and melt targets) ****Breath
+        Attack (Can spew acidic poison from his mouth with Poison Sputum) ***Adhesive
+        Manipulation, Body Puppetry, Danmaku, Paralysis Inducement (Can form dozens
+        of thin spider silk threads to manipulate connected targets) ****Limited Creation
+        & Small Size (Type 2; Can form hundreds of small spiders to connect and reattach
+        his threads to targets from a distance) *****Poison Manipulation, Status Effect
+        Inducement & Transmutation (His spiders can inject targets with poison, which
+        will cause targets to become dizzy, nauseas, go through intense pain, and
+        finally turn into small, obedient spider-like creatures that can inject more
+        poison into new targets) **Body Control, Size Manipulation, Statistics Amplification
+        & Transformation (Can molt his skin to transform into a bigger, stronger form)'
       source_id: character-stats-profiles-rui-demon-slayer
       provider_id: character_stats_profiles
       authority: high
@@ -883,33 +729,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Demons quickly disintegrate into dust when exposed to sunlight, and\
-        \ despite their regeneration, will die upon decapitation from a Nichirin Blade\
-        \ due to their sun absorbing materials. Wisteria is poisonous to demons. Can\
-        \ get emotional about family bonds, causing him to act impulsively in battle.\
-        \ | All previous weaknesses. His threads can be cut to remove his control\
-        \ over a target, although his spiders can quickly connect more. His threads\
-        \ and controlled targets are weaker the farther they are. Notable Attacks/Techniques:\
-        \ RuiThreadManipulation.gif|Rui attacking Tanjiro with his threads File:RuiCuttingThreadCage.gif|Rui\
-        \ attacking Tanjiro with Cutting Thread Cage File:RuiMurderousEyeBasket.gif|Rui\
-        \ cutting Tanjiro with Murderous Eye Basket File:RuiCuttingThreadRotation.gif|Rui's\
-        \ Cutting Thread Rotation *{{Nihongo|Blood Demon Art|{{Ruby|\u8840|\u3051\u3063\
-        }}{{Ruby|\u9B3C|\u304D}}{{Ruby|\u8853|\u3058\u3085\u3064}}|Kekkijutsu}}: **Filukinesis:\
-        \ Rui's Blood Demon Art allowed him to create extremely sharp and thin threads\
-        \ indiscernible from silk using his own flesh and blood and manipulate them\
-        \ however he pleased. Rui can further amplify their strength and durability\
-        \ by infusing his blood through them, giving them a blood red color. ***{{Nihongo|Cutting\
-        \ Thread Cage|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7CF8|\u3057}}{{Ruby|\u7262\
-        |\u308D\u3046}}|Kokushir\u014D}}: Rui creates web-shaped strings that completely\
-        \ surround his opponent to cut them to pieces. ***{{Nihongo|Murderous Eye\
-        \ Basket|{{Ruby|\u6BBA|\u3042\u3084}}{{Ruby|\u76EE|\u3081}}{{Ruby|\u7C60|\u304B\
-        \u3054}}|Ayame Kago}}: Rui creates a spherical cage from his threads around\
-        \ the target, that continuously shrink until it cuts the target to pieces.\
-        \ ***{{Nihongo|Cutting Thread Rotation|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7CF8\
-        |\u3057}}{{Ruby|\u8F2A|\u308A\u3093}}{{Ruby|\u8EE2|\u3066\u3093}}|Kokushi\
-        \ Rinten}}: Rui creates a rotating wheel of threads, that upon reaching the\
-        \ opponent will cut them to pieces. ==Notes/Explanations== {{Scroll box|content=}}\
-        \ Category:Soda727"
+      value: Demons quickly disintegrate into dust when exposed to sunlight, will
+        die upon decapitation from a Nichirin Blade due to their sun absorbing materials.
+        Wisteria is poisonous to demons. Can get emotional about family bonds, All
+        previous weaknesses. His threads can be cut to remove his control over a target,
+        although his spiders can quickly connect more. His threads and controlled
+        targets are weaker the farther they are.
       source_id: character-stats-profiles-rui-demon-slayer
       provider_id: character_stats_profiles
       authority: high
@@ -925,11 +750,11 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|rui canon kimetsu no yaiba
-      soda727|599823
+      soda727|620456
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-rui
-    url: https://vsbattles.fandom.com/wiki/Rui
+  - source_id: vsbattles-rui-demon-slayer
+    url: https://vsbattles.fandom.com/wiki/Rui_Demon_Slayer
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -940,7 +765,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Rui (Kimetsu no Yaiba)
@@ -985,18 +809,311 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{8-C}}
+      value: At least 8-C
+      source_id: vsbattles-rui-demon-slayer
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Demon Physiology (Standard Kizuki Abilities), Greater Battle Spirit (Overwhelming
+        & Fear-inducing; Caused dyspnea in Spider Sister and made the air feel heavy
+        and thick to Tanjiro), Blood Demon Art, Thread Manipulation (Can create threads
+        using his cells and increase the lethality by using his blood)
+      source_id: vsbattles-rui-demon-slayer
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Building level (Far stronger than Tanjiro without Hinokami Kagura and
+        the Spider Demon Father, and was stated to possess the strength around that
+        of a Lower Moon 2 or Lower Moon 1, but was never interested in climbing rank)
+      source_id: vsbattles-rui-demon-slayer
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Supersonic+ (As a member of the Twelve Kizuki should be significantly
+        faster than the lesser Slasher Demon who could do this)
+      source_id: vsbattles-rui-demon-slayer
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Varies (The durability of demons fluctuates depending on what parts of
+        their body they reinforce, with their necks most often prioritized), at most
+        Building level (Even with Hinokami Kagura, all Tanjiro could do was nick his
+        neck), likely higher (Demons can reinforce a part of their body above the
+        extent of their own Blood Demon Art)
+      source_id: vsbattles-rui-demon-slayer
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (Demons don't get tired)
+      source_id: vsbattles-rui-demon-slayer
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range; Hundreds of Meters with threads
+      source_id: vsbattles-rui-demon-slayer
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average
+      source_id: vsbattles-rui-demon-slayer
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Can get angered when it comes to bonds and families. Standard Demon
+        Weaknesses Notable Attacks and Techniques:, : When Rui uses his full strength,
+        he begins pumping more of his blood into his hands that then extend into his
+        threads, : Rui creates a web-shaped string around his opponent to cut them
+        to pieces., : Rui creates a cage from his web around the target'
+      source_id: vsbattles-rui-demon-slayer
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|rui kimetsu no yaiba|9624336
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-rui-demon-slayer
+    url: https://character-stats-and-profiles.fandom.com/wiki/Rui_Demon_Slayer
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Rui (Canon, Kimetsu no Yaiba)/Soda727
+    source_type: mediawiki
+    revision_id: '620456'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 13271
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notes/Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-A, 8-C with Blood Enhanced Threads | 7-C, higher with Blood Enhanced
+        Threads, far higher with Molting
+      source_id: character-stats-profiles-rui-demon-slayer
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Accelerated Development (Demons
+        can rapidly grow stronger through eating humans), Additional Limbs, Body Control,
+        Hair Manipulation, Shapeshifting & Weapon Creation (Demons can manipulate
+        their flesh in various ways, such as forming additional limbs, clothing, hair,
+        weapons, or even shapeshifting), Aura, Fear Inducement & Paralysis Inducement
+        (All humans and demons alike emit an aura called Fighting Spirit, with more
+        powerful individuals being able to overwhelm others with their aura, potentially
+        causing fear and paralysis), Blood Manipulation, Thread Manipulation (His
+        Blood Demon Art allows him to produce sharp, steel-like threads from his flesh
+        and blood), Damage Boost (Can increase the strength and durability of his
+        threads by infusing them with his blood), Platform Creation (Can walk on his
+        threads in mid-air), Power Bestowal (Can share his Blood Demon Art with other
+        demons through apportioning it into spiderlike forms for their consumption),
+        Enhanced Senses (Demons can distinguish between blood types, sickness, and
+        genes), Extrasensory Perception (Demons can sense and differentiate between
+        the presence of humans and demons), Immortality (Types 1 & 3; Demons don''t
+        age), Regeneration (Mid; Demons can regenerate from decapitation), Self-Sustenance
+        (Type 3; Demons don''t fatigue or need sleep), Weapon Mastery (Can skillfully
+        manipulate his threads), Resistance to Disease Manipulation (Demons are immune
+        to diseases) *All previous abilities and resistances, plus: *Blood Manipulation
+        **Thread Manipulation ***Acid Manipulation (Can form soft but durable balls
+        of yarn containing dissolution fluids to trap and melt targets) ****Breath
+        Attack (Can spew acidic poison from his mouth with Poison Sputum) ***Adhesive
+        Manipulation, Body Puppetry, Danmaku, Paralysis Inducement (Can form dozens
+        of thin spider silk threads to manipulate connected targets) ****Limited Creation
+        & Small Size (Type 2; Can form hundreds of small spiders to connect and reattach
+        his threads to targets from a distance) *****Poison Manipulation, Status Effect
+        Inducement & Transmutation (His spiders can inject targets with poison, which
+        will cause targets to become dizzy, nauseas, go through intense pain, and
+        finally turn into small, obedient spider-like creatures that can inject more
+        poison into new targets) **Body Control, Size Manipulation, Statistics Amplification
+        & Transformation (Can molt his skin to transform into a bigger, stronger form)'
+      source_id: character-stats-profiles-rui-demon-slayer
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level (As a member of the Twelve Kizuki, he is far stronger
+        than Spider Demon Father. Easily cuts a Demon Slayer into pieces. Beheads
+        Spider Demon Sister and cuts through several trees. Easily draws blood from
+        Tanjiro with his strikesUpscales from 0.008 Tons of TNT), Building level with
+        Blood Enhanced Threads (Far stronger than his normal threads. Would have killed
+        Tanjiro in one blow if he didn't cut through his thread. His strength is stated
+        to be equal to that of Lower Rank 1 or 2Upscales from 0.358 Tons of TNT) |
+        Town level (With his full power and abilities, he might have succeeded in
+        defeating HashiraScales to 29.3 Kilotons of TNT), higher with Blood Enhanced
+        Threads, far higher with Molting
+      source_id: character-stats-profiles-rui-demon-slayer
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Supersonic+ (As a member of the Twelve Kizuki, he is far faster than
+        Slasher, who can move this fastUpscales from Mach 3.53) | Massively Hypersonic+
+        (With his full power and abilities, he might have succeeded in defeating HashiraUpscales
+        from Mach 1,762)
+      source_id: character-stats-profiles-rui-demon-slayer
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Unknown (Demons' bodies are less durable than their necks), Small Building
+        level with Threads (Tanjiro's blade instantly breaks in half upon striking
+        his threads and are more durable than Spider Demon FatherUpscales from 0.008
+        Tons of TNT), Building level with Blood Enhanced Threads (Far more durable
+        than his normal threads and can't be cut by Tanjiro's Constant FluxUpscales
+        from 0.358 Tons of TNT), higher with Neck (His neck is more durable than his
+        Blood Enhanced Threads and can't be cut by Tanjiro's Hinokami Kagura) | Unknown,
+        Town level with Threads, higher with Blood Enhanced Threads, far higher with
+        Neck, even higher with Molting
+      source_id: character-stats-profiles-rui-demon-slayer
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Demons quickly disintegrate into dust when exposed to sunlight, will
+        die upon decapitation from a Nichirin Blade due to their sun absorbing materials.
+        Wisteria is poisonous to demons. Can get emotional about family bonds, All
+        previous weaknesses. His threads can be cut to remove his control over a target,
+        although his spiders can quickly connect more. His threads and controlled
+        targets are weaker the farther they are.
+      source_id: character-stats-profiles-rui-demon-slayer
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|rui canon kimetsu no yaiba
+      soda727|620456
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-rui
+    url: https://vsbattles.fandom.com/wiki/Rui
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - tier
+    - weaknesses
+    normalized_page_title: Rui (Kimetsu no Yaiba)
+    source_type: mediawiki
+    revision_id: '9624336'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 5429
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least 8-C
       source_id: vsbattles-rui
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '*Demon Physiology (Standard Kizuki Abilities) **Greater Battle Spirit
-        (Overwhelming & Fear-inducing; Caused dyspnea in Spider Sister and made the
-        air feel heavy and thick to Tanjiro) **Blood Demon Art ***Thread Manipulation
-        (Can create threads using his cells and increase the lethality by using his
-        blood) Resistance to: *Fear Manipulation & Paralysis Inducement (Able to withstand
-        aura that causes fear and paralysis)'
+      value: Demon Physiology (Standard Kizuki Abilities), Greater Battle Spirit (Overwhelming
+        & Fear-inducing; Caused dyspnea in Spider Sister and made the air feel heavy
+        and thick to Tanjiro), Blood Demon Art, Thread Manipulation (Can create threads
+        using his cells and increase the lethality by using his blood)
       source_id: vsbattles-rui
       provider_id: vsbattles
       authority: high
@@ -1038,12 +1155,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-rui
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average
       source_id: vsbattles-rui
@@ -1051,33 +1162,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Can get angered when it comes to bonds and families. Standard Demon\
-        \ Weaknesses Notable Attacks and Techniques: *{{Nihongo|Blood Demon Art|{{Ruby|\u8840\
-        |\u3051\u3063}}{{Ruby|\u9B3C|\u304D}}{{Ruby|\u8853|\u3058\u3085\u3064}}|Kekkijutsu}}:\
-        \ When Rui uses his full strength, he begins pumping more of his blood into\
-        \ his hands that then extend into his threads, increasing the threads' sharpness\
-        \ and cutting ability of the threads to then perform his Techniques. **{{Nihongo|Cutting\
-        \ Threat Cage|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7D72|\u3057}}{{Ruby|\u7262\
-        |\u308D\u3046}}|Kokushiro}}: Rui creates a web-shaped string around his opponent\
-        \ to cut them to pieces. **{{Nihongo|Murderous Eye Basket|{{Ruby|\u6BBA|\u3042\
-        \u3084}}{{Ruby|\u76EE|\u3081}}{{Ruby|\u7C60|\u304B\u3054}}|Ayame Kago}}: Rui\
-        \ creates a cage from his web around the target, that continuously shrinks\
-        \ until it cuts the target to pieces. **{{Nihongo|Cutting Thread Rotation|{{Ruby|\u523B\
-        |\u3053\u304F}}{{Ruby|\u7D72|\u3057}}{{Ruby|\u8F2A|\u308A\u3093}}{{Ruby|\u8EE2\
-        |\u3066\u3093}}|Kokushi Rinten}}: Creating a rotating wheel of threads, that\
-        \ upon reaching the opponent will cut them to pieces. ==Notable Matchups==\
-        \ Victories: Losses: Inconclusive: Kafka Hibino (Kaiju No. 8) Kafka's Profile\
-        \ (Human Kafka with Partial Transformation was used, and speed was equalized)\
-        \ {{Discussions}} Category:Demon Slayer: Kimetsu No Yaiba Category:Characters\
-        \ Category:Manga Characters Category:Anime Characters Category:Antagonists\
-        \ Category:Primary Antagonists Category:Monsters Category:Male Characters\
-        \ Category:Evil Characters Category:Villains Category:Kids Category:Tragic\
-        \ Characters Category:Demons Category:Leaders Category:Murderers Category:Immortals\
-        \ Category:Regeneration Users Category:Body Control Users Category:Biology\
-        \ Users Category:Thread Users Category:Blood Users Category:Power Bestowal\
-        \ Users Category:Enhanced Senses Users Category:Information Analysis Users\
-        \ Category:Self-Sustenance Users Category:Chi Users Category:Aura Users Category:Fear\
-        \ Users Category:Paralysis Users"
+      value: 'Can get angered when it comes to bonds and families. Standard Demon
+        Weaknesses Notable Attacks and Techniques:, : When Rui uses his full strength,
+        he begins pumping more of his blood into his hands that then extend into his
+        threads, : Rui creates a web-shaped string around his opponent to cut them
+        to pieces., : Rui creates a cage from his web around the target'
       source_id: vsbattles-rui
       provider_id: vsbattles
       authority: high
@@ -1108,10 +1197,10 @@ repair:
     - weaknesses
     normalized_page_title: Rui (Canon, Kimetsu no Yaiba)/Soda727
     source_type: mediawiki
-    revision_id: '599823'
+    revision_id: '620456'
     fetch_status: fetched
     http_status: 200
-    content_length: 13090
+    content_length: 13271
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1148,45 +1237,45 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-A}}, {{8-C}} with Blood Enhanced Threads | {{7-C}}, higher with
-        Blood Enhanced Threads, far higher with Molting'
+      value: 9-A, 8-C with Blood Enhanced Threads | 7-C, higher with Blood Enhanced
+        Threads, far higher with Molting
       source_id: character-stats-profiles-rui
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Split Power= *Superhuman Physical Characteristics *Accelerated Development
-        (Demons can rapidly grow stronger through eating humans) *Additional Limbs,
-        Body Control, Hair Manipulation, Shapeshifting & Weapon Creation (Demons can
-        manipulate their flesh in various ways, such as forming additional limbs,
-        clothing, hair, weapons, or even shapeshifting) *Aura, Fear Inducement & Paralysis
-        Inducement (All humans and demons alike emit an aura called Fighting Spirit,
-        with more powerful individuals being able to overwhelm others with their aura,
-        potentially causing fear and paralysis) *Blood Manipulation **Thread Manipulation
-        (His Blood Demon Art allows him to produce sharp, steel-like threads from
-        his flesh and blood) ***Damage Boost (Can increase the strength and durability
-        of his threads by infusing them with his blood) ***Platform Creation (Can
-        walk on his threads in mid-air) ***Power Bestowal (Can share his Blood Demon
-        Art with other demons through apportioning it into spiderlike forms for their
-        consumption) *Enhanced Senses (Demons can distinguish between blood types,
-        sickness, and genes) *Extrasensory Perception (Demons can sense and differentiate
-        between the presence of humans and demons) *Immortality (Types 1 & 3; Demons
-        don''t age) **Regeneration (Mid; Demons can regenerate from decapitation)
-        *Self-Sustenance (Type 3; Demons don''t fatigue or need sleep) *Weapon Mastery
-        (Can skillfully manipulate his threads) *Resistance to Disease Manipulation
-        (Demons are immune to diseases) |-|Reclaimed Full Power= *All previous abilities
-        and resistances, plus: *Blood Manipulation **Thread Manipulation ***Acid Manipulation
-        (Can form soft but durable balls of yarn containing dissolution fluids to
-        trap and melt targets) ****Breath Attack (Can spew acidic poison from his
-        mouth with Poison Sputum) ***Body Puppetry, Limited Creation, & Small Size
-        (Type 2; Can form hundreds of small spiders, which can connect his threads
-        to targets to restrain and manipulate them from a distance) ****Poison Manipulation,
-        Status Effect Inducement & Transmutation (His spiders can inject targets with
-        poison, which will cause targets to become dizzy, nauseas, go through intense
-        pain, and finally turn into small, obedient spider-like creatures that can
-        inject more poison into new targets) **Body Control, Size Manipulation, Statistics
-        Amplification & Transformation (Can molt his skin to transform into a bigger,
-        stronger form)'
+      value: 'Superhuman Physical Characteristics, Accelerated Development (Demons
+        can rapidly grow stronger through eating humans), Additional Limbs, Body Control,
+        Hair Manipulation, Shapeshifting & Weapon Creation (Demons can manipulate
+        their flesh in various ways, such as forming additional limbs, clothing, hair,
+        weapons, or even shapeshifting), Aura, Fear Inducement & Paralysis Inducement
+        (All humans and demons alike emit an aura called Fighting Spirit, with more
+        powerful individuals being able to overwhelm others with their aura, potentially
+        causing fear and paralysis), Blood Manipulation, Thread Manipulation (His
+        Blood Demon Art allows him to produce sharp, steel-like threads from his flesh
+        and blood), Damage Boost (Can increase the strength and durability of his
+        threads by infusing them with his blood), Platform Creation (Can walk on his
+        threads in mid-air), Power Bestowal (Can share his Blood Demon Art with other
+        demons through apportioning it into spiderlike forms for their consumption),
+        Enhanced Senses (Demons can distinguish between blood types, sickness, and
+        genes), Extrasensory Perception (Demons can sense and differentiate between
+        the presence of humans and demons), Immortality (Types 1 & 3; Demons don''t
+        age), Regeneration (Mid; Demons can regenerate from decapitation), Self-Sustenance
+        (Type 3; Demons don''t fatigue or need sleep), Weapon Mastery (Can skillfully
+        manipulate his threads), Resistance to Disease Manipulation (Demons are immune
+        to diseases) *All previous abilities and resistances, plus: *Blood Manipulation
+        **Thread Manipulation ***Acid Manipulation (Can form soft but durable balls
+        of yarn containing dissolution fluids to trap and melt targets) ****Breath
+        Attack (Can spew acidic poison from his mouth with Poison Sputum) ***Adhesive
+        Manipulation, Body Puppetry, Danmaku, Paralysis Inducement (Can form dozens
+        of thin spider silk threads to manipulate connected targets) ****Limited Creation
+        & Small Size (Type 2; Can form hundreds of small spiders to connect and reattach
+        his threads to targets from a distance) *****Poison Manipulation, Status Effect
+        Inducement & Transmutation (His spiders can inject targets with poison, which
+        will cause targets to become dizzy, nauseas, go through intense pain, and
+        finally turn into small, obedient spider-like creatures that can inject more
+        poison into new targets) **Body Control, Size Manipulation, Statistics Amplification
+        & Transformation (Can molt his skin to transform into a bigger, stronger form)'
       source_id: character-stats-profiles-rui
       provider_id: character_stats_profiles
       authority: high
@@ -1230,33 +1319,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Demons quickly disintegrate into dust when exposed to sunlight, and\
-        \ despite their regeneration, will die upon decapitation from a Nichirin Blade\
-        \ due to their sun absorbing materials. Wisteria is poisonous to demons. Can\
-        \ get emotional about family bonds, causing him to act impulsively in battle.\
-        \ | All previous weaknesses. His threads can be cut to remove his control\
-        \ over a target, although his spiders can quickly connect more. His threads\
-        \ and controlled targets are weaker the farther they are. Notable Attacks/Techniques:\
-        \ RuiThreadManipulation.gif|Rui attacking Tanjiro with his threads File:RuiCuttingThreadCage.gif|Rui\
-        \ attacking Tanjiro with Cutting Thread Cage File:RuiMurderousEyeBasket.gif|Rui\
-        \ cutting Tanjiro with Murderous Eye Basket File:RuiCuttingThreadRotation.gif|Rui's\
-        \ Cutting Thread Rotation *{{Nihongo|Blood Demon Art|{{Ruby|\u8840|\u3051\u3063\
-        }}{{Ruby|\u9B3C|\u304D}}{{Ruby|\u8853|\u3058\u3085\u3064}}|Kekkijutsu}}: **Filukinesis:\
-        \ Rui's Blood Demon Art allowed him to create extremely sharp and thin threads\
-        \ indiscernible from silk using his own flesh and blood and manipulate them\
-        \ however he pleased. Rui can further amplify their strength and durability\
-        \ by infusing his blood through them, giving them a blood red color. ***{{Nihongo|Cutting\
-        \ Thread Cage|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7CF8|\u3057}}{{Ruby|\u7262\
-        |\u308D\u3046}}|Kokushir\u014D}}: Rui creates web-shaped strings that completely\
-        \ surround his opponent to cut them to pieces. ***{{Nihongo|Murderous Eye\
-        \ Basket|{{Ruby|\u6BBA|\u3042\u3084}}{{Ruby|\u76EE|\u3081}}{{Ruby|\u7C60|\u304B\
-        \u3054}}|Ayame Kago}}: Rui creates a spherical cage from his threads around\
-        \ the target, that continuously shrink until it cuts the target to pieces.\
-        \ ***{{Nihongo|Cutting Thread Rotation|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7CF8\
-        |\u3057}}{{Ruby|\u8F2A|\u308A\u3093}}{{Ruby|\u8EE2|\u3066\u3093}}|Kokushi\
-        \ Rinten}}: Rui creates a rotating wheel of threads, that upon reaching the\
-        \ opponent will cut them to pieces. ==Notes/Explanations== {{Scroll box|content=}}\
-        \ Category:Soda727"
+      value: Demons quickly disintegrate into dust when exposed to sunlight, will
+        die upon decapitation from a Nichirin Blade due to their sun absorbing materials.
+        Wisteria is poisonous to demons. Can get emotional about family bonds, All
+        previous weaknesses. His threads can be cut to remove his control over a target,
+        although his spiders can quickly connect more. His threads and controlled
+        targets are weaker the farther they are.
       source_id: character-stats-profiles-rui
       provider_id: character_stats_profiles
       authority: high
@@ -1272,7 +1340,7 @@ repair:
     franchise_match: false
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|rui canon kimetsu no yaiba
-      soda727|599823
+      soda727|620456
     retryable: false
     exception_class: ''
   - source_id: vsbattles-rui-anime
@@ -1287,7 +1355,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Rui (Kimetsu no Yaiba)
@@ -1334,18 +1401,16 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: At least {{8-C}}
+      value: At least 8-C
       source_id: vsbattles-rui-anime
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '*Demon Physiology (Standard Kizuki Abilities) **Greater Battle Spirit
-        (Overwhelming & Fear-inducing; Caused dyspnea in Spider Sister and made the
-        air feel heavy and thick to Tanjiro) **Blood Demon Art ***Thread Manipulation
-        (Can create threads using his cells and increase the lethality by using his
-        blood) Resistance to: *Fear Manipulation & Paralysis Inducement (Able to withstand
-        aura that causes fear and paralysis)'
+      value: Demon Physiology (Standard Kizuki Abilities), Greater Battle Spirit (Overwhelming
+        & Fear-inducing; Caused dyspnea in Spider Sister and made the air feel heavy
+        and thick to Tanjiro), Blood Demon Art, Thread Manipulation (Can create threads
+        using his cells and increase the lethality by using his blood)
       source_id: vsbattles-rui-anime
       provider_id: vsbattles
       authority: high
@@ -1387,12 +1452,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-rui-anime
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average
       source_id: vsbattles-rui-anime
@@ -1400,33 +1459,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Can get angered when it comes to bonds and families. Standard Demon\
-        \ Weaknesses Notable Attacks and Techniques: *{{Nihongo|Blood Demon Art|{{Ruby|\u8840\
-        |\u3051\u3063}}{{Ruby|\u9B3C|\u304D}}{{Ruby|\u8853|\u3058\u3085\u3064}}|Kekkijutsu}}:\
-        \ When Rui uses his full strength, he begins pumping more of his blood into\
-        \ his hands that then extend into his threads, increasing the threads' sharpness\
-        \ and cutting ability of the threads to then perform his Techniques. **{{Nihongo|Cutting\
-        \ Threat Cage|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7D72|\u3057}}{{Ruby|\u7262\
-        |\u308D\u3046}}|Kokushiro}}: Rui creates a web-shaped string around his opponent\
-        \ to cut them to pieces. **{{Nihongo|Murderous Eye Basket|{{Ruby|\u6BBA|\u3042\
-        \u3084}}{{Ruby|\u76EE|\u3081}}{{Ruby|\u7C60|\u304B\u3054}}|Ayame Kago}}: Rui\
-        \ creates a cage from his web around the target, that continuously shrinks\
-        \ until it cuts the target to pieces. **{{Nihongo|Cutting Thread Rotation|{{Ruby|\u523B\
-        |\u3053\u304F}}{{Ruby|\u7D72|\u3057}}{{Ruby|\u8F2A|\u308A\u3093}}{{Ruby|\u8EE2\
-        |\u3066\u3093}}|Kokushi Rinten}}: Creating a rotating wheel of threads, that\
-        \ upon reaching the opponent will cut them to pieces. ==Notable Matchups==\
-        \ Victories: Losses: Inconclusive: Kafka Hibino (Kaiju No. 8) Kafka's Profile\
-        \ (Human Kafka with Partial Transformation was used, and speed was equalized)\
-        \ {{Discussions}} Category:Demon Slayer: Kimetsu No Yaiba Category:Characters\
-        \ Category:Manga Characters Category:Anime Characters Category:Antagonists\
-        \ Category:Primary Antagonists Category:Monsters Category:Male Characters\
-        \ Category:Evil Characters Category:Villains Category:Kids Category:Tragic\
-        \ Characters Category:Demons Category:Leaders Category:Murderers Category:Immortals\
-        \ Category:Regeneration Users Category:Body Control Users Category:Biology\
-        \ Users Category:Thread Users Category:Blood Users Category:Power Bestowal\
-        \ Users Category:Enhanced Senses Users Category:Information Analysis Users\
-        \ Category:Self-Sustenance Users Category:Chi Users Category:Aura Users Category:Fear\
-        \ Users Category:Paralysis Users"
+      value: 'Can get angered when it comes to bonds and families. Standard Demon
+        Weaknesses Notable Attacks and Techniques:, : When Rui uses his full strength,
+        he begins pumping more of his blood into his hands that then extend into his
+        threads, : Rui creates a web-shaped string around his opponent to cut them
+        to pieces., : Rui creates a cage from his web around the target'
       source_id: vsbattles-rui-anime
       provider_id: vsbattles
       authority: high
@@ -1457,10 +1494,10 @@ repair:
     - weaknesses
     normalized_page_title: Rui (Canon, Kimetsu no Yaiba)/Soda727
     source_type: mediawiki
-    revision_id: '599823'
+    revision_id: '620456'
     fetch_status: fetched
     http_status: 200
-    content_length: 13090
+    content_length: 13271
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1495,45 +1532,45 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-A}}, {{8-C}} with Blood Enhanced Threads | {{7-C}}, higher with
-        Blood Enhanced Threads, far higher with Molting'
+      value: 9-A, 8-C with Blood Enhanced Threads | 7-C, higher with Blood Enhanced
+        Threads, far higher with Molting
       source_id: character-stats-profiles-rui-anime
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Split Power= *Superhuman Physical Characteristics *Accelerated Development
-        (Demons can rapidly grow stronger through eating humans) *Additional Limbs,
-        Body Control, Hair Manipulation, Shapeshifting & Weapon Creation (Demons can
-        manipulate their flesh in various ways, such as forming additional limbs,
-        clothing, hair, weapons, or even shapeshifting) *Aura, Fear Inducement & Paralysis
-        Inducement (All humans and demons alike emit an aura called Fighting Spirit,
-        with more powerful individuals being able to overwhelm others with their aura,
-        potentially causing fear and paralysis) *Blood Manipulation **Thread Manipulation
-        (His Blood Demon Art allows him to produce sharp, steel-like threads from
-        his flesh and blood) ***Damage Boost (Can increase the strength and durability
-        of his threads by infusing them with his blood) ***Platform Creation (Can
-        walk on his threads in mid-air) ***Power Bestowal (Can share his Blood Demon
-        Art with other demons through apportioning it into spiderlike forms for their
-        consumption) *Enhanced Senses (Demons can distinguish between blood types,
-        sickness, and genes) *Extrasensory Perception (Demons can sense and differentiate
-        between the presence of humans and demons) *Immortality (Types 1 & 3; Demons
-        don''t age) **Regeneration (Mid; Demons can regenerate from decapitation)
-        *Self-Sustenance (Type 3; Demons don''t fatigue or need sleep) *Weapon Mastery
-        (Can skillfully manipulate his threads) *Resistance to Disease Manipulation
-        (Demons are immune to diseases) |-|Reclaimed Full Power= *All previous abilities
-        and resistances, plus: *Blood Manipulation **Thread Manipulation ***Acid Manipulation
-        (Can form soft but durable balls of yarn containing dissolution fluids to
-        trap and melt targets) ****Breath Attack (Can spew acidic poison from his
-        mouth with Poison Sputum) ***Body Puppetry, Limited Creation, & Small Size
-        (Type 2; Can form hundreds of small spiders, which can connect his threads
-        to targets to restrain and manipulate them from a distance) ****Poison Manipulation,
-        Status Effect Inducement & Transmutation (His spiders can inject targets with
-        poison, which will cause targets to become dizzy, nauseas, go through intense
-        pain, and finally turn into small, obedient spider-like creatures that can
-        inject more poison into new targets) **Body Control, Size Manipulation, Statistics
-        Amplification & Transformation (Can molt his skin to transform into a bigger,
-        stronger form)'
+      value: 'Superhuman Physical Characteristics, Accelerated Development (Demons
+        can rapidly grow stronger through eating humans), Additional Limbs, Body Control,
+        Hair Manipulation, Shapeshifting & Weapon Creation (Demons can manipulate
+        their flesh in various ways, such as forming additional limbs, clothing, hair,
+        weapons, or even shapeshifting), Aura, Fear Inducement & Paralysis Inducement
+        (All humans and demons alike emit an aura called Fighting Spirit, with more
+        powerful individuals being able to overwhelm others with their aura, potentially
+        causing fear and paralysis), Blood Manipulation, Thread Manipulation (His
+        Blood Demon Art allows him to produce sharp, steel-like threads from his flesh
+        and blood), Damage Boost (Can increase the strength and durability of his
+        threads by infusing them with his blood), Platform Creation (Can walk on his
+        threads in mid-air), Power Bestowal (Can share his Blood Demon Art with other
+        demons through apportioning it into spiderlike forms for their consumption),
+        Enhanced Senses (Demons can distinguish between blood types, sickness, and
+        genes), Extrasensory Perception (Demons can sense and differentiate between
+        the presence of humans and demons), Immortality (Types 1 & 3; Demons don''t
+        age), Regeneration (Mid; Demons can regenerate from decapitation), Self-Sustenance
+        (Type 3; Demons don''t fatigue or need sleep), Weapon Mastery (Can skillfully
+        manipulate his threads), Resistance to Disease Manipulation (Demons are immune
+        to diseases) *All previous abilities and resistances, plus: *Blood Manipulation
+        **Thread Manipulation ***Acid Manipulation (Can form soft but durable balls
+        of yarn containing dissolution fluids to trap and melt targets) ****Breath
+        Attack (Can spew acidic poison from his mouth with Poison Sputum) ***Adhesive
+        Manipulation, Body Puppetry, Danmaku, Paralysis Inducement (Can form dozens
+        of thin spider silk threads to manipulate connected targets) ****Limited Creation
+        & Small Size (Type 2; Can form hundreds of small spiders to connect and reattach
+        his threads to targets from a distance) *****Poison Manipulation, Status Effect
+        Inducement & Transmutation (His spiders can inject targets with poison, which
+        will cause targets to become dizzy, nauseas, go through intense pain, and
+        finally turn into small, obedient spider-like creatures that can inject more
+        poison into new targets) **Body Control, Size Manipulation, Statistics Amplification
+        & Transformation (Can molt his skin to transform into a bigger, stronger form)'
       source_id: character-stats-profiles-rui-anime
       provider_id: character_stats_profiles
       authority: high
@@ -1577,33 +1614,12 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Demons quickly disintegrate into dust when exposed to sunlight, and\
-        \ despite their regeneration, will die upon decapitation from a Nichirin Blade\
-        \ due to their sun absorbing materials. Wisteria is poisonous to demons. Can\
-        \ get emotional about family bonds, causing him to act impulsively in battle.\
-        \ | All previous weaknesses. His threads can be cut to remove his control\
-        \ over a target, although his spiders can quickly connect more. His threads\
-        \ and controlled targets are weaker the farther they are. Notable Attacks/Techniques:\
-        \ RuiThreadManipulation.gif|Rui attacking Tanjiro with his threads File:RuiCuttingThreadCage.gif|Rui\
-        \ attacking Tanjiro with Cutting Thread Cage File:RuiMurderousEyeBasket.gif|Rui\
-        \ cutting Tanjiro with Murderous Eye Basket File:RuiCuttingThreadRotation.gif|Rui's\
-        \ Cutting Thread Rotation *{{Nihongo|Blood Demon Art|{{Ruby|\u8840|\u3051\u3063\
-        }}{{Ruby|\u9B3C|\u304D}}{{Ruby|\u8853|\u3058\u3085\u3064}}|Kekkijutsu}}: **Filukinesis:\
-        \ Rui's Blood Demon Art allowed him to create extremely sharp and thin threads\
-        \ indiscernible from silk using his own flesh and blood and manipulate them\
-        \ however he pleased. Rui can further amplify their strength and durability\
-        \ by infusing his blood through them, giving them a blood red color. ***{{Nihongo|Cutting\
-        \ Thread Cage|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7CF8|\u3057}}{{Ruby|\u7262\
-        |\u308D\u3046}}|Kokushir\u014D}}: Rui creates web-shaped strings that completely\
-        \ surround his opponent to cut them to pieces. ***{{Nihongo|Murderous Eye\
-        \ Basket|{{Ruby|\u6BBA|\u3042\u3084}}{{Ruby|\u76EE|\u3081}}{{Ruby|\u7C60|\u304B\
-        \u3054}}|Ayame Kago}}: Rui creates a spherical cage from his threads around\
-        \ the target, that continuously shrink until it cuts the target to pieces.\
-        \ ***{{Nihongo|Cutting Thread Rotation|{{Ruby|\u523B|\u3053\u304F}}{{Ruby|\u7CF8\
-        |\u3057}}{{Ruby|\u8F2A|\u308A\u3093}}{{Ruby|\u8EE2|\u3066\u3093}}|Kokushi\
-        \ Rinten}}: Rui creates a rotating wheel of threads, that upon reaching the\
-        \ opponent will cut them to pieces. ==Notes/Explanations== {{Scroll box|content=}}\
-        \ Category:Soda727"
+      value: Demons quickly disintegrate into dust when exposed to sunlight, will
+        die upon decapitation from a Nichirin Blade due to their sun absorbing materials.
+        Wisteria is poisonous to demons. Can get emotional about family bonds, All
+        previous weaknesses. His threads can be cut to remove his control over a target,
+        although his spiders can quickly connect more. His threads and controlled
+        targets are weaker the farther they are.
       source_id: character-stats-profiles-rui-anime
       provider_id: character_stats_profiles
       authority: high
@@ -1619,7 +1635,7 @@ repair:
     franchise_match: false
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|rui canon kimetsu no yaiba
-      soda727|599823
+      soda727|620456
     retryable: false
     exception_class: ''
   needs_human_source_choice: false

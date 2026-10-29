@@ -11,13 +11,14 @@ generation:
   generated_at: '2026-06-10T03:29:52Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id004
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Hydaelyn (Game)
   franchise: Final Fantasy
@@ -153,42 +154,6 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-hydaelyn-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Hydaelyn Game
-  url: https://vsbattles.fandom.com/wiki/Hydaelyn_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-hydaelyn-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Hydaelyn Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Hydaelyn_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-hydaelyn-game-final-fantasy
   provider_id: vsbattles
   source_type: mediawiki
@@ -196,7 +161,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_(Final_Fantasy_XIV)
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -238,72 +203,8 @@ sources:
 - id: character-stats-profiles-hydaelyn-game-final-fantasy
   provider_id: character_stats_profiles
   source_type: mediawiki
-  title: Hydaelyn Game Final Fantasy
-  url: https://character-stats-and-profiles.fandom.com/wiki/Hydaelyn_Game_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-hydaelyn-game-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Hydaelyn (Game) Final Fantasy
-  url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-hydaelyn-game-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
   title: Hydaelyn (Game) Final Fantasy
   url: https://character-stats-and-profiles.fandom.com/wiki/Hydaelyn_%28Game%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-hydaelyn-game-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Hydaelyn (Game) (Final Fantasy)
-  url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29_%28Final_Fantasy%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-hydaelyn-game-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Hydaelyn (Game) (Final Fantasy)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Hydaelyn_%28Game%29_%28Final_Fantasy%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -492,7 +393,7 @@ weaknesses:
   description: Subconsciously holds back his full power when not fighting a challenging
     opponent. Can only use one Job at a time. Unable to reliably kill immortals without
     White Auracite. ==Notable Attacks and Techniques==
-  source_ids: &id003
+  source_ids: &id002
   - vsbattles-hydaelyn-game-final-fantasy
   source_claim_ids: []
   confidence: 0.85
@@ -508,7 +409,7 @@ weaknesses:
 - id: weaknesses
   name: '-'
   description: '-'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -523,7 +424,7 @@ weaknesses:
 - id: weaknesses-warrior-thumb
   name: Warrior= thumb
   description: Warrior= thumb
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -540,7 +441,7 @@ weaknesses:
     of wrath'
   description: '350px * Beast Gauge: The Beast Gauge displays a warrior''s current
     amount of wrath'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -556,7 +457,7 @@ weaknesses:
   name: which is used to execute several actions such as Inner Beast and Steel Cyclone.
   description: which is used to execute several actions such as Inner Beast and Steel
     Cyclone.
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -579,444 +480,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id004
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: 8669d819ede75bf0fae0cb9a5222f5f02ee1c7d8c13c9245a8eeebe53024b1d2
 repair:
-  attempted_at: '2026-06-19T09:00:19Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-28T23:39:47Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-hydaelyn-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29_Final_Fantasy
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id005
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Warrior of Light (Final Fantasy XIV)
-    source_type: mediawiki
-    revision_id: '9460655'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 179217
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Attacks and Techniques
-    - Gallery
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id006
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-C}} | {{2-C}} | {{2-C}} | {{2-C}} | {{2-A}} | {{2-A}} | {{2-A}}'
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Low Multiverse level (Battled a transformed Gilgamesh after the latter
-        had already participated in the Dissidia conflicts) | Low Multiverse level
-        (Defeated the Cloud of Darkness within the Void who was about to destroy the
-        Source) | Low Multiverse level (Significantly stronger than before. Killed
-        the Knights of the Round Table as well as Nidhogg) | Low Multiverse level
-        (Defeated Ardbert, who is his counterpart, along with the Warriors of Darkness.
-        Killed Hollow Diabolos who's power is stated to rival that of the Cloud of
-        Darkness. Defeated the Warring Triad whom are stated to possess infinite power)
-        | Multiverse level+ (Defeated Zenos after the latter fused with Shinryu. Base
-        Zenos was able to stomp Heavensward and Early-to-Mid Stormblood Warrior of
-        Light) | Multiverse level+ (Killed a replica of Neo Exdeath who is stronger
-        than the original. Won against Midgarsormr Prime whom Omega couldn't beat
-        in his base form. Managed to defeat Final Omega who is significantly stronger
-        than its M/F transformation that is much stronger than its base form) | Multiverse
-        level+ (Significantly stronger than before. Defeated Emet-Selch after fusing
-        with Ardbert, whom he stood no chance of beating beforehand. Defeated Elidibus
-        who is superior to Emet-Selch)
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ (Kept pace with a Transformed Gilgamesh) | Massively FTL+
-        (Fought Cloud of Darkness) | Massively FTL+ | Massively FTL+ | Massively FTL+
-        (Battled a Merged Shinryu who is somewhat comparable to Omega) | Massively
-        FTL+ (Fought and defeated a copy of Neo Exdeath) | Massively FTL+
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Multiverse level | Low Multiverse level | Low Multiverse level |
-        Low Multiverse level | Multiverse level+ | Multiverse level+ | Multiverse
-        level+
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Tirelessly fights, travels, and work for weeks without rest)
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Hundreds of Meters; Low Multiversal via teleport
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Various swords, axes, shields, staves, bows, cesti, instruments, daggers,
-        guns, greatswords, katanas, gunblades, chakrams, wands, grimoires, rapiers,
-        canes, star globes, and various farming/crafting tools for use outside of
-        combat including scythes, knives, mortars, fishing rods, pickaxes, hammers,
-        saws, linkpearls for long distance communication and more. The Crystal of
-        Azem.
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: A prodigy capable of mastering professions and jobs in days when it would
-        take others over a lifetime. Has fought in countless battles and mastered
-        no less than eighteen jobs for combat, as well as eleven more for outside
-        of it, which allow him to craft weapons and armor, create potions, and farm
-        the land for its natural resources. Defeated beings with millenia of experience
-        like the Ascians, as well as skilled military commanders and tacticians.
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Subconsciously holds back his full power when not fighting a challenging
-        opponent. Can only use one Job at a time. Unable to reliably kill immortals
-        without White Auracite. ==Notable Attacks and Techniques== |-|Warrior= thumb|350px
-        * Beast Gauge: The Beast Gauge displays a warrior''s current amount of wrath,
-        which is used to execute several actions such as Inner Beast and Steel Cyclone.'
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-hydaelyn-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Hydaelyn_%28Game%29_Final_Fantasy
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Hydaelyn (Game) Final Fantasy
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|hydaelyn game final fantasy
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-hydaelyn-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29_%28Final_Fantasy%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Warrior of Light (Final Fantasy XIV)
-    source_type: mediawiki
-    revision_id: '9460655'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 179217
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Attacks and Techniques
-    - Gallery
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id008
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-C}} | {{2-C}} | {{2-C}} | {{2-C}} | {{2-A}} | {{2-A}} | {{2-A}}'
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Low Multiverse level (Battled a transformed Gilgamesh after the latter
-        had already participated in the Dissidia conflicts) | Low Multiverse level
-        (Defeated the Cloud of Darkness within the Void who was about to destroy the
-        Source) | Low Multiverse level (Significantly stronger than before. Killed
-        the Knights of the Round Table as well as Nidhogg) | Low Multiverse level
-        (Defeated Ardbert, who is his counterpart, along with the Warriors of Darkness.
-        Killed Hollow Diabolos who's power is stated to rival that of the Cloud of
-        Darkness. Defeated the Warring Triad whom are stated to possess infinite power)
-        | Multiverse level+ (Defeated Zenos after the latter fused with Shinryu. Base
-        Zenos was able to stomp Heavensward and Early-to-Mid Stormblood Warrior of
-        Light) | Multiverse level+ (Killed a replica of Neo Exdeath who is stronger
-        than the original. Won against Midgarsormr Prime whom Omega couldn't beat
-        in his base form. Managed to defeat Final Omega who is significantly stronger
-        than its M/F transformation that is much stronger than its base form) | Multiverse
-        level+ (Significantly stronger than before. Defeated Emet-Selch after fusing
-        with Ardbert, whom he stood no chance of beating beforehand. Defeated Elidibus
-        who is superior to Emet-Selch)
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ (Kept pace with a Transformed Gilgamesh) | Massively FTL+
-        (Fought Cloud of Darkness) | Massively FTL+ | Massively FTL+ | Massively FTL+
-        (Battled a Merged Shinryu who is somewhat comparable to Omega) | Massively
-        FTL+ (Fought and defeated a copy of Neo Exdeath) | Massively FTL+
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Low Multiverse level | Low Multiverse level | Low Multiverse level |
-        Low Multiverse level | Multiverse level+ | Multiverse level+ | Multiverse
-        level+
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Tirelessly fights, travels, and work for weeks without rest)
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Hundreds of Meters; Low Multiversal via teleport
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Various swords, axes, shields, staves, bows, cesti, instruments, daggers,
-        guns, greatswords, katanas, gunblades, chakrams, wands, grimoires, rapiers,
-        canes, star globes, and various farming/crafting tools for use outside of
-        combat including scythes, knives, mortars, fishing rods, pickaxes, hammers,
-        saws, linkpearls for long distance communication and more. The Crystal of
-        Azem.
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: A prodigy capable of mastering professions and jobs in days when it would
-        take others over a lifetime. Has fought in countless battles and mastered
-        no less than eighteen jobs for combat, as well as eleven more for outside
-        of it, which allow him to craft weapons and armor, create potions, and farm
-        the land for its natural resources. Defeated beings with millenia of experience
-        like the Ascians, as well as skilled military commanders and tacticians.
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Subconsciously holds back his full power when not fighting a challenging
-        opponent. Can only use one Job at a time. Unable to reliably kill immortals
-        without White Auracite. ==Notable Attacks and Techniques== |-|Warrior= thumb|350px
-        * Beast Gauge: The Beast Gauge displays a warrior''s current amount of wrath,
-        which is used to execute several actions such as Inner Beast and Steel Cyclone.'
-      source_id: vsbattles-hydaelyn-game-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-hydaelyn-game-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Hydaelyn_%28Game%29_%28Final_Fantasy%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Hydaelyn (Game) (Final Fantasy)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 120
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|hydaelyn game final fantasy
-    retryable: false
-    exception_class: ''
   - source_id: mediawiki-hydaelyn-game
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_(Game)
+    url: https://vsbattles.fandom.com/wiki/Warrior_of_Light_(Final_Fantasy_XIV)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1029,10 +513,10 @@ repair:
     - weaknesses
     normalized_page_title: Warrior of Light (Final Fantasy XIV)
     source_type: mediawiki
-    revision_id: '9460655'
+    revision_id: '9715936'
     fetch_status: fetched
     http_status: 200
-    content_length: 179217
+    content_length: 180532
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1046,6 +530,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1059,7 +544,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -1072,13 +557,23 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{2-C}} | {{2-C}} | {{2-C}} | {{2-C}} | {{2-A}} | {{2-A}} | {{2-A}}'
+      value: 2-C | 2-C | 2-C | 2-C | 2-A | 2-A | 2-A
       source_id: mediawiki-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base
+      value: 'resistant to Status Effect Inducement after being inflicted once), Homing
+        Attack (Many of their attacks have homing properties) Immortality Negation
+        (via White Auracite), limited Gravity Manipulation (Anti-gravity Gimbal allows
+        levitation but cannot go back down on its own), Electricity Manipulation (Omega
+        Jammer unleashes a large powerful lightning that is effective against machines.
+        Can be used to charge up devices) Role Actions: Damage Reduction (Rampart
+        is a shared tank ability that reduces the damage the user takes by 20%. Tank
+        Mastery is a passive that reduces damage taken by 20%), Paralysis Inducement
+        (Can stun foes using Low Blow), limited Empathic Manipulation (Can use Shirk
+        to divert enmity onto allies, and can use Provoke to draw enmity. Can use
+        Ultimatum to provoke near'
       source_id: mediawiki-hydaelyn-game
       provider_id: vsbattles
       authority: high
@@ -1157,11 +652,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Subconsciously holds back his full power when not fighting a challenging
+      value: Subconsciously holds back his full power when not fighting a challenging
         opponent. Can only use one Job at a time. Unable to reliably kill immortals
-        without White Auracite. ==Notable Attacks and Techniques== |-|Warrior= thumb|350px
-        * Beast Gauge: The Beast Gauge displays a warrior''s current amount of wrath,
-        which is used to execute several actions such as Inner Beast and Steel Cyclone.'
+        without White Auracite.
       source_id: mediawiki-hydaelyn-game
       provider_id: vsbattles
       authority: high
@@ -1176,14 +669,192 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
+    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9715936
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-hydaelyn-game
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29
+  - source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Hydaelyn_%28Game%29_Final_Fantasy
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    normalized_page_title: Scathach (Canon, Final Fantasy)/ZeroTC01
+    source_type: mediawiki
+    revision_id: '613111'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 29515
+    content_kind: api_json
+    headings_detected:
+    - '''''''Summary'''''''
+    - '''''''Powers and Stats'''''''
+    - Scaling Chain
+    - '''''''Gallery'''''''
+    - '''''''Others'''''''
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Superhuman Athleticism, Acrobatics,
+        Self-Sustenance (Type 1, 2 and 3), Enhanced Senses (Voidsent can sense aether),
+        Aura (Scathach radiates malice that Cait Sith says only she could), Social
+        Influencing (She is voidsent queen with influence over thousands of extremely
+        loyal voidsent), Flight, Weapon Mastery (Of her halberd), Glyph Creation,
+        Energy Projection, Possession & Dimensional Travel (Voidsent can possess a
+        person's body and soul, which they can use to travel between worlds), Accelerated
+        Development (Passive and Training), Empowerment, Reactive Evolution & Reactive
+        Power Level (Conviction, hope, and emotions can massively fuel a fighter,
+        to the point they manage to defeat much stronger enemies who view them as
+        ants. The Heart is one's spirit, the strength that resides in people, the
+        intangible strength of one's soul, an inconstant and immeasurable factor behind
+        people's victories against their opponents. The soul is endlessly transforming
+        and seeking its own source, formless and ever-changing, meaning it evolves
+        and ascends constantly. It gives rise to emotion and intellect), Portal Creation
+        & BFR (Diabolos gained from Scathach the ability to spawn a rift that leads
+        to a battle against a voidsent, where taking too long gets you killed by the
+        enclosing darkness), Large Size (Type 0) Soul Physiology, Beyond-Dimensional
+        Physiology (Voidsent can exist in the form of a soul when not occupying a
+        vessel. Souls are composed of Chaos, a substance completely devoid of the
+        concepts of space, time, and shape. Even the Cloud of Darkness, who is one
+        with the Void which is a shadow of Valhalla, transcends all concepts. The
+        aetherial, namely incorporeal aether i.e. souls, is unbound by light, distance,
+        and dimensions), Invisibility, Non-Corporeal, Large Size (Type 11), Omnipresence,
+        Acausality (Type 3 and 5) & Nonexistent Physiology (Type 2; The soul is one
+        in number--both all and nothing, meaning it both exists and doesn't exist.
+        It is without boundary, existing in all places, at all times), Abstract Existence
+        (Type 1; Diabolos refers to Scathach's essence as primordial darkness, an
+        infinite well of shadow, and shadow itself. and of course she has the physiology
+        of a soul. The soul is the embodiment of one's wishes, dreams, and desires.
+        The soul defines existence), Transduality (Type 2; Nothingness, i.e. Void,
+        has nothing to balance with, implied to be independent Yin and Yang), Immortality,
+        Type 1 (Souls are eternal, never dying, rather evolving in perpetuity), Type
+        3, Type 5 (Visions are storied heroes whose dreams transcend death, and since
+        visions are souls and dreams themselves, they would transcend death), Type
+        9 (Souls exist everywhere, so to defeat a physical vessel of it wouldn't be
+        enough to truly annihilate it; a part of it would exist in a higher plane,
+        ascending constantly), Regeneration (True-Godly; Souls can regenerate indefinitely
+        from their destruction. This is shown in NieR Replicant, where Nier fought
+        a group of shades--which are souls--that keep on coming no matter how many
+        he destroys and for how long. Rather than there being an arbitrary number
+        of shades, there seems to be a certain number of them that continue to recover
+        from their destruction. This regenerative property of souls is also hinted
+        at in NieR Automata; Fang of the Twins is a weapon possessed by two souls,
+        which gave it the unique property of instantly repairing itself whenever it's
+        damaged. On top of this, voidsent can regenerate even from death to magic
+        thanks to the darkness of the Void, the power of activity that prevents life
+        from finding rest. They resurrect endlessly), Adaptation (Almost anyone in
+        Final Fantasy XIV can adapt to magic that inflicts status effects until they're
+        completely resistant. This includes Paralysis, Poison, Sleep, Slow--a Time
+        Mage spell--and Silence), Summoning (Scathach has thousands of voidsent minions
+        she can freely summon, including her protege, Connla), Statistics Amplification
+        (When Scathach summons Connla, they have a tether attached between them that
+        strengthens them immensely when they fight close together), Homing Attack](Scathach
+        can summon spheres that continuously track and fall on her enemies), Additional
+        Limbs (Scathach has two additional shadow limbs that she can use to attack,
+        which she can increase to eight or so with some attacks, and can also manipulate
+        the ground to summon many shadow hands that, upon any movement, slow and constantly
+        attack her enemies), Explosion Manipulation (Several of her attacks have her
+        unleash bursts of darkness and/or light), Sleep Manipulation (Too much aether
+        causes anyone exposed and unused to it to pass out; a being like Scathach
+        would have extremely potent aether, even via her aura) Soul Manipulation,
+        Soul Manipulation (Can leisurely fight and consume souls, and wields potent
+        magic), Non-Physical Interaction, Chaos Manipulation & Conceptua
+      source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Extraverse level (Fought the Post-HW Warrior of Light and their alliance\
+        \ while weakened not only by her imprisonment, but her hosting of the \"body\
+        \ of a frail maiden,\" which limited her size and strength.At least Billions\
+        \ of Extraversal transcendences (The gap between 1-S and 3-dimensional tiers\
+        \ repeated billions of times) When Diabolos absorbed Scathach's essence following\
+        \ her defeat, despite her weakening, he gained strength \"rivaling the greatest\
+        \ entities of the voidsent hierarchy.\u201D The shadow, i.e. darkness, composing\
+        \ Scathach is infinite. Deathgaze, a fourth rung voidsent stronger than \"\
+        its counterpart from tales of legend,\" is a servant of the Shadow Queen)\
+        \ | Extraverse level (Scathach is equal in potency of magic to the Cloud of\
+        \ Darkness, who--in the form of an imitation of its full power, brought to\
+        \ life by the Minstrel in the Warrior of Light's mind's eye--fought their\
+        \ alliance in Dawntrail, implying Scathach's prime is around that level)"
+      source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Irrelevant (Fought the HW Warrior of Light and their alliance of 23 other
+        fighters. Even in ARR, they are fast enough to assist Lightning against several
+        monsters manifested by chaos, including the Aspect of Chaos. They are far
+        superior when going up against Scathach in Post-HW to when they defeated a
+        reincarnation of Ifrit, who was so vastly beyond his previous summons that
+        the Immortal Flames' soldiers, strong enough to fight the average primal,
+        were slugs in comparison to him. They can also fight Gilgamesh and Omega,
+        who traverse and fight in the Void, which is transdual and transcends all
+        concepts. Many people can move around Torsions in Dissidia, which are void
+        of space and time, having only chaos) | Irrelevant
+      source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Extraverse level (Even in a weakened state, she's too powerful for a
+        strong voidsent like Diabolos to face or absorb while she's alive--and she's
+        a voidsent on a completely different level to any other the Mhachi voidmages
+        summoned, including him at full power. After absorbing her essence, Diabolos
+        was initially so durable that the Warrior of Light couldn't even damage him)
+        | Extraverse level
+      source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|scathach canon final fantasy
+      zerotc01|613111
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-hydaelyn-game-final-fantasy
+    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29_Final_Fantasy
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1196,10 +867,10 @@ repair:
     - weaknesses
     normalized_page_title: Warrior of Light (Final Fantasy XIV)
     source_type: mediawiki
-    revision_id: '9460655'
+    revision_id: '9715936'
     fetch_status: fetched
     http_status: 200
-    content_length: 179217
+    content_length: 180532
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1213,6 +884,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1226,7 +898,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1237,14 +909,24 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{2-C}} | {{2-C}} | {{2-C}} | {{2-C}} | {{2-A}} | {{2-A}} | {{2-A}}'
-      source_id: vsbattles-hydaelyn-game
+      value: 2-C | 2-C | 2-C | 2-C | 2-A | 2-A | 2-A
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-hydaelyn-game
+      value: 'resistant to Status Effect Inducement after being inflicted once), Homing
+        Attack (Many of their attacks have homing properties) Immortality Negation
+        (via White Auracite), limited Gravity Manipulation (Anti-gravity Gimbal allows
+        levitation but cannot go back down on its own), Electricity Manipulation (Omega
+        Jammer unleashes a large powerful lightning that is effective against machines.
+        Can be used to charge up devices) Role Actions: Damage Reduction (Rampart
+        is a shared tank ability that reduces the damage the user takes by 20%. Tank
+        Mastery is a passive that reduces damage taken by 20%), Paralysis Inducement
+        (Can stun foes using Low Blow), limited Empathic Manipulation (Can use Shirk
+        to divert enmity onto allies, and can use Provoke to draw enmity. Can use
+        Ultimatum to provoke near'
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1266,7 +948,7 @@ repair:
         level+ (Significantly stronger than before. Defeated Emet-Selch after fusing
         with Ardbert, whom he stood no chance of beating beforehand. Defeated Elidibus
         who is superior to Emet-Selch)
-      source_id: vsbattles-hydaelyn-game
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1275,7 +957,7 @@ repair:
         (Fought Cloud of Darkness) | Massively FTL+ | Massively FTL+ | Massively FTL+
         (Battled a Merged Shinryu who is somewhat comparable to Omega) | Massively
         FTL+ (Fought and defeated a copy of Neo Exdeath) | Massively FTL+
-      source_id: vsbattles-hydaelyn-game
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1283,19 +965,19 @@ repair:
       value: Low Multiverse level | Low Multiverse level | Low Multiverse level |
         Low Multiverse level | Multiverse level+ | Multiverse level+ | Multiverse
         level+
-      source_id: vsbattles-hydaelyn-game
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
       value: Superhuman (Tirelessly fights, travels, and work for weeks without rest)
-      source_id: vsbattles-hydaelyn-game
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
       value: Hundreds of Meters; Low Multiversal via teleport
-      source_id: vsbattles-hydaelyn-game
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1306,7 +988,7 @@ repair:
         combat including scythes, knives, mortars, fishing rods, pickaxes, hammers,
         saws, linkpearls for long distance communication and more. The Crystal of
         Azem.
-      source_id: vsbattles-hydaelyn-game
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1317,17 +999,15 @@ repair:
         of it, which allow him to craft weapons and armor, create potions, and farm
         the land for its natural resources. Defeated beings with millenia of experience
         like the Ascians, as well as skilled military commanders and tacticians.
-      source_id: vsbattles-hydaelyn-game
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Subconsciously holds back his full power when not fighting a challenging
+      value: Subconsciously holds back his full power when not fighting a challenging
         opponent. Can only use one Job at a time. Unable to reliably kill immortals
-        without White Auracite. ==Notable Attacks and Techniques== |-|Warrior= thumb|350px
-        * Beast Gauge: The Beast Gauge displays a warrior''s current amount of wrath,
-        which is used to execute several actions such as Inner Beast and Steel Cyclone.'
-      source_id: vsbattles-hydaelyn-game
+        without White Auracite.
+      source_id: vsbattles-hydaelyn-game-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1341,7 +1021,277 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
+    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9715936
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-hydaelyn-game-final-fantasy
+    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29_%28Final_Fantasy%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Warrior of Light (Final Fantasy XIV)
+    source_type: mediawiki
+    revision_id: '9715936'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 180532
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Attacks and Techniques
+    - Gallery
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 2-C | 2-C | 2-C | 2-C | 2-A | 2-A | 2-A
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'resistant to Status Effect Inducement after being inflicted once), Homing
+        Attack (Many of their attacks have homing properties) Immortality Negation
+        (via White Auracite), limited Gravity Manipulation (Anti-gravity Gimbal allows
+        levitation but cannot go back down on its own), Electricity Manipulation (Omega
+        Jammer unleashes a large powerful lightning that is effective against machines.
+        Can be used to charge up devices) Role Actions: Damage Reduction (Rampart
+        is a shared tank ability that reduces the damage the user takes by 20%. Tank
+        Mastery is a passive that reduces damage taken by 20%), Paralysis Inducement
+        (Can stun foes using Low Blow), limited Empathic Manipulation (Can use Shirk
+        to divert enmity onto allies, and can use Provoke to draw enmity. Can use
+        Ultimatum to provoke near'
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Low Multiverse level (Battled a transformed Gilgamesh after the latter
+        had already participated in the Dissidia conflicts) | Low Multiverse level
+        (Defeated the Cloud of Darkness within the Void who was about to destroy the
+        Source) | Low Multiverse level (Significantly stronger than before. Killed
+        the Knights of the Round Table as well as Nidhogg) | Low Multiverse level
+        (Defeated Ardbert, who is his counterpart, along with the Warriors of Darkness.
+        Killed Hollow Diabolos who's power is stated to rival that of the Cloud of
+        Darkness. Defeated the Warring Triad whom are stated to possess infinite power)
+        | Multiverse level+ (Defeated Zenos after the latter fused with Shinryu. Base
+        Zenos was able to stomp Heavensward and Early-to-Mid Stormblood Warrior of
+        Light) | Multiverse level+ (Killed a replica of Neo Exdeath who is stronger
+        than the original. Won against Midgarsormr Prime whom Omega couldn't beat
+        in his base form. Managed to defeat Final Omega who is significantly stronger
+        than its M/F transformation that is much stronger than its base form) | Multiverse
+        level+ (Significantly stronger than before. Defeated Emet-Selch after fusing
+        with Ardbert, whom he stood no chance of beating beforehand. Defeated Elidibus
+        who is superior to Emet-Selch)
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ (Kept pace with a Transformed Gilgamesh) | Massively FTL+
+        (Fought Cloud of Darkness) | Massively FTL+ | Massively FTL+ | Massively FTL+
+        (Battled a Merged Shinryu who is somewhat comparable to Omega) | Massively
+        FTL+ (Fought and defeated a copy of Neo Exdeath) | Massively FTL+
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Multiverse level | Low Multiverse level | Low Multiverse level |
+        Low Multiverse level | Multiverse level+ | Multiverse level+ | Multiverse
+        level+
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Tirelessly fights, travels, and work for weeks without rest)
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Hundreds of Meters; Low Multiversal via teleport
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Various swords, axes, shields, staves, bows, cesti, instruments, daggers,
+        guns, greatswords, katanas, gunblades, chakrams, wands, grimoires, rapiers,
+        canes, star globes, and various farming/crafting tools for use outside of
+        combat including scythes, knives, mortars, fishing rods, pickaxes, hammers,
+        saws, linkpearls for long distance communication and more. The Crystal of
+        Azem.
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: A prodigy capable of mastering professions and jobs in days when it would
+        take others over a lifetime. Has fought in countless battles and mastered
+        no less than eighteen jobs for combat, as well as eleven more for outside
+        of it, which allow him to craft weapons and armor, create potions, and farm
+        the land for its natural resources. Defeated beings with millenia of experience
+        like the Ascians, as well as skilled military commanders and tacticians.
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Subconsciously holds back his full power when not fighting a challenging
+        opponent. Can only use one Job at a time. Unable to reliably kill immortals
+        without White Auracite.
+      source_id: vsbattles-hydaelyn-game-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9715936
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Hydaelyn_%28Game%29_%28Final_Fantasy%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - weaknesses
+    normalized_page_title: Cloud Strife (Cannon/Dissidia, Final Fantasy)
+    source_type: mediawiki
+    revision_id: '372287'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6932
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: weaknesses
+      value: etc. You can judge a person's power by their feats.
+      source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: ''''''' ''''''Outerverse level'''''' (Cloud participated in the defeat
+        of Shinryu who has also been defeated by the Warrior of Light, that scales
+        to characters like the Cloud of Darkness who has verbatim statements being
+        the fear that [https://imgur.com/a/dxXNFY0 transcend all concepts], within
+        the FF cosmology there is concepts existing such as [https://imgur.com/devils-road-description-505300f
+        time] [https://imgur.com/a/iIBdzFS and space], [https://imgur.com/PR5x11q
+        distance], [https://imgur.com/a/zFnlHl7 fate], [https://imgur.com/a/wwpdTMa
+        plus] [https://imgur.com/a/6H54bCk dimensionality], [https://imgur.com/a/iIBdzFS
+        form], [[finalfantasy:Speed_(stat)|and speed]] ).'
+      source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: ''''''' ''''''Irrelevant'''''' (scales to the Cloud of Darkness who has
+        transcended the concept of time and space as well as dimensionality)'
+      source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: ''''''' ''''''Outerverse level'''''' (has scaling and taken damage from
+        characters relative to the Cloud of Darkness).'
+      source_id: character-stats-profiles-hydaelyn-game-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|cloud strife cannon dissidia
+      final fantasy|372287
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-hydaelyn-game
@@ -1386,11 +1336,11 @@ repair:
     duplicate_key: character-stats-and-profiles.fandom.com|hydaelyn game
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-hydaelyn-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_Game_Final_Fantasy
+  - source_id: vsbattles-hydaelyn-game
+    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id013
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1403,10 +1353,10 @@ repair:
     - weaknesses
     normalized_page_title: Warrior of Light (Final Fantasy XIV)
     source_type: mediawiki
-    revision_id: '9460655'
+    revision_id: '9715936'
     fetch_status: fetched
     http_status: 200
-    content_length: 179217
+    content_length: 180532
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1420,6 +1370,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1433,7 +1384,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id014
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1444,14 +1395,24 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{2-C}} | {{2-C}} | {{2-C}} | {{2-C}} | {{2-A}} | {{2-A}} | {{2-A}}'
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+      value: 2-C | 2-C | 2-C | 2-C | 2-A | 2-A | 2-A
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Base
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+      value: 'resistant to Status Effect Inducement after being inflicted once), Homing
+        Attack (Many of their attacks have homing properties) Immortality Negation
+        (via White Auracite), limited Gravity Manipulation (Anti-gravity Gimbal allows
+        levitation but cannot go back down on its own), Electricity Manipulation (Omega
+        Jammer unleashes a large powerful lightning that is effective against machines.
+        Can be used to charge up devices) Role Actions: Damage Reduction (Rampart
+        is a shared tank ability that reduces the damage the user takes by 20%. Tank
+        Mastery is a passive that reduces damage taken by 20%), Paralysis Inducement
+        (Can stun foes using Low Blow), limited Empathic Manipulation (Can use Shirk
+        to divert enmity onto allies, and can use Provoke to draw enmity. Can use
+        Ultimatum to provoke near'
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1473,7 +1434,7 @@ repair:
         level+ (Significantly stronger than before. Defeated Emet-Selch after fusing
         with Ardbert, whom he stood no chance of beating beforehand. Defeated Elidibus
         who is superior to Emet-Selch)
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1482,7 +1443,7 @@ repair:
         (Fought Cloud of Darkness) | Massively FTL+ | Massively FTL+ | Massively FTL+
         (Battled a Merged Shinryu who is somewhat comparable to Omega) | Massively
         FTL+ (Fought and defeated a copy of Neo Exdeath) | Massively FTL+
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1490,19 +1451,19 @@ repair:
       value: Low Multiverse level | Low Multiverse level | Low Multiverse level |
         Low Multiverse level | Multiverse level+ | Multiverse level+ | Multiverse
         level+
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
       value: Superhuman (Tirelessly fights, travels, and work for weeks without rest)
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
       value: Hundreds of Meters; Low Multiversal via teleport
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1513,7 +1474,7 @@ repair:
         combat including scythes, knives, mortars, fishing rods, pickaxes, hammers,
         saws, linkpearls for long distance communication and more. The Crystal of
         Azem.
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1524,17 +1485,15 @@ repair:
         of it, which allow him to craft weapons and armor, create potions, and farm
         the land for its natural resources. Defeated beings with millenia of experience
         like the Ascians, as well as skilled military commanders and tacticians.
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Subconsciously holds back his full power when not fighting a challenging
+      value: Subconsciously holds back his full power when not fighting a challenging
         opponent. Can only use one Job at a time. Unable to reliably kill immortals
-        without White Auracite. ==Notable Attacks and Techniques== |-|Warrior= thumb|350px
-        * Beast Gauge: The Beast Gauge displays a warrior''s current amount of wrath,
-        which is used to execute several actions such as Inner Beast and Steel Cyclone.'
-      source_id: vsbattles-hydaelyn-game-final-fantasy
+        without White Auracite.
+      source_id: vsbattles-hydaelyn-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1548,118 +1507,187 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
+    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9715936
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-hydaelyn-game-game
+    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Warrior of Light (Final Fantasy XIV)
+    source_type: mediawiki
+    revision_id: '9715936'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 180532
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Attacks and Techniques
+    - Gallery
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 2-C | 2-C | 2-C | 2-C | 2-A | 2-A | 2-A
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'resistant to Status Effect Inducement after being inflicted once), Homing
+        Attack (Many of their attacks have homing properties) Immortality Negation
+        (via White Auracite), limited Gravity Manipulation (Anti-gravity Gimbal allows
+        levitation but cannot go back down on its own), Electricity Manipulation (Omega
+        Jammer unleashes a large powerful lightning that is effective against machines.
+        Can be used to charge up devices) Role Actions: Damage Reduction (Rampart
+        is a shared tank ability that reduces the damage the user takes by 20%. Tank
+        Mastery is a passive that reduces damage taken by 20%), Paralysis Inducement
+        (Can stun foes using Low Blow), limited Empathic Manipulation (Can use Shirk
+        to divert enmity onto allies, and can use Provoke to draw enmity. Can use
+        Ultimatum to provoke near'
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Low Multiverse level (Battled a transformed Gilgamesh after the latter
+        had already participated in the Dissidia conflicts) | Low Multiverse level
+        (Defeated the Cloud of Darkness within the Void who was about to destroy the
+        Source) | Low Multiverse level (Significantly stronger than before. Killed
+        the Knights of the Round Table as well as Nidhogg) | Low Multiverse level
+        (Defeated Ardbert, who is his counterpart, along with the Warriors of Darkness.
+        Killed Hollow Diabolos who's power is stated to rival that of the Cloud of
+        Darkness. Defeated the Warring Triad whom are stated to possess infinite power)
+        | Multiverse level+ (Defeated Zenos after the latter fused with Shinryu. Base
+        Zenos was able to stomp Heavensward and Early-to-Mid Stormblood Warrior of
+        Light) | Multiverse level+ (Killed a replica of Neo Exdeath who is stronger
+        than the original. Won against Midgarsormr Prime whom Omega couldn't beat
+        in his base form. Managed to defeat Final Omega who is significantly stronger
+        than its M/F transformation that is much stronger than its base form) | Multiverse
+        level+ (Significantly stronger than before. Defeated Emet-Selch after fusing
+        with Ardbert, whom he stood no chance of beating beforehand. Defeated Elidibus
+        who is superior to Emet-Selch)
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ (Kept pace with a Transformed Gilgamesh) | Massively FTL+
+        (Fought Cloud of Darkness) | Massively FTL+ | Massively FTL+ | Massively FTL+
+        (Battled a Merged Shinryu who is somewhat comparable to Omega) | Massively
+        FTL+ (Fought and defeated a copy of Neo Exdeath) | Massively FTL+
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Low Multiverse level | Low Multiverse level | Low Multiverse level |
+        Low Multiverse level | Multiverse level+ | Multiverse level+ | Multiverse
+        level+
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Tirelessly fights, travels, and work for weeks without rest)
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Hundreds of Meters; Low Multiversal via teleport
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Various swords, axes, shields, staves, bows, cesti, instruments, daggers,
+        guns, greatswords, katanas, gunblades, chakrams, wands, grimoires, rapiers,
+        canes, star globes, and various farming/crafting tools for use outside of
+        combat including scythes, knives, mortars, fishing rods, pickaxes, hammers,
+        saws, linkpearls for long distance communication and more. The Crystal of
+        Azem.
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: A prodigy capable of mastering professions and jobs in days when it would
+        take others over a lifetime. Has fought in countless battles and mastered
+        no less than eighteen jobs for combat, as well as eleven more for outside
+        of it, which allow him to craft weapons and armor, create potions, and farm
+        the land for its natural resources. Defeated beings with millenia of experience
+        like the Ascians, as well as skilled military commanders and tacticians.
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Subconsciously holds back his full power when not fighting a challenging
+        opponent. Can only use one Job at a time. Unable to reliably kill immortals
+        without White Auracite.
+      source_id: vsbattles-hydaelyn-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9715936
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-hydaelyn-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29_Final_Fantasy
-    title: Warrior of Light (Final Fantasy XIV)
-    rank: 105
-    extracted_fields: *id005
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id006
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
-  - source_id: vsbattles-hydaelyn-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29_%28Final_Fantasy%29
-    title: Warrior of Light (Final Fantasy XIV)
-    rank: 105
-    extracted_fields: *id007
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
-  - source_id: mediawiki-hydaelyn-game
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_(Game)
-    title: Warrior of Light (Final Fantasy XIV)
-    rank: 105
-    extracted_fields: *id009
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
-  - source_id: vsbattles-hydaelyn-game
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_%28Game%29
-    title: Warrior of Light (Final Fantasy XIV)
-    rank: 105
-    extracted_fields: *id011
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
-  - source_id: vsbattles-hydaelyn-game-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Hydaelyn_Game_Final_Fantasy
-    title: Warrior of Light (Final Fantasy XIV)
-    rank: 105
-    extracted_fields: *id013
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|warrior of light final fantasy xiv|9460655
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
-    fetched: 5
-    provider_search_no_results: 3
-  confidence: 0.75
+    fetched: 7
+    provider_search_no_results: 1
+  confidence: 0.0

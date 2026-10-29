@@ -12,15 +12,7 @@ generation:
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.8
   ineligible_reasons:
-  - invalid_evidence_text:power_scale.attack_potency
-  - invalid_evidence_text:power_scale.durability
-  - invalid_evidence_text:power_scale.speed
-  - missing_clean_linked_ability
-  - missing_powers_and_abilities
-  - source_franchise_mismatch
-  - source_identity_mismatch
-  - unresolved_version_scope:durability
-  - unresolved_version_scope:multiple_source_keys
+  - needs_review
 identity:
   canonical_name: Sonic the Hedgehog
   franchise: Mixed Games
@@ -120,7 +112,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_(Main_Continuity)
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -131,11 +123,11 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-  revision_id: '9649546'
-  revision_timestamp: '2026-08-26T09:34:39Z'
+  revision_id: '9710740'
+  revision_timestamp: '2026-10-18T21:15:49Z'
   fetch_status: fetched
   http_status: 200
-  content_length: 69368
+  content_length: 69385
   content_kind: api_json
   search_attempted_titles:
   - Sonic the Hedgehog (Main Continuity)
@@ -168,34 +160,12 @@ sources:
   - standard_equipment
   - striking_strength
   - tier
-- id: character-stats-profiles-sonic-the-hedgehog-mixed-games
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Sonic the Hedgehog Mixed Games
-  url: https://character-stats-and-profiles.fandom.com/wiki/Sonic_the_Hedgehog_Mixed_Games
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-sonic-the-hedgehog-mixed-games
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Sonic the Hedgehog (Mixed Games)
-  url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_%28Mixed_Games%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
+  dropped_items:
+    powers_and_abilities:
+    - item: '{| border="5" cellspacing="1/6" cellpadding="15" align="left" width="auto"
+        style="border: 1px solid #2f2f2f;" ! colspan='
+      reasons:
+      - unparseable_list
 - id: character-stats-profiles-sonic-the-hedgehog-mixed-games
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -252,21 +222,16 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: '{{High 3-A}}, higher with Boost | {{2-C}}, higher with Boost, far higher
-      with transformations, even higher with his Strongest Attacks | At least {{2-C}},
-      higher with Focused Homing Attack, Flying Kick, and Color Powers, even higher
-      with Final Color Blaster, Energy Cores, and Planetary Lifeforce | At least {{2-C}},
-      higher with Phantom Rush, even higher with Double Boost and Triple Boost | At
-      least {{2-C}} | {{Varies}}. At least {{2-C}}, up to {{1-C}}, higher with Charged
-      Attacks | {{1-C}}, far higher at Full Power'
-    source_ids: &id003
+    text: '{{High 3-A}}, higher with Boost'
+    source_ids: &id002
     - mediawiki-7039
     confidence: 0.8
   attack_potency:
     text: '*A Badnik breaks a wall (0.002 Tons, 9-B) *Dr. Eggman casually punches
       a truck (0.3 Tons, 8-C) *The Eclipse Cannon blasts Central City (28 Teratons,
       6-B) *The Space Colony ARK destroys a portion of the moon (376.99 Zettatons,
-      5-B) *The Chaos Energy Cannon shatters the Earth (7.2 Yottatons, 5-A) *The Indigo
+      5-B) *[https://web.archive.org/web/20140412151210/https://www.narutoforums.com/blog.php?b=21317
+      The Chaos Energy Cannon shatters the Earth] (7.2 Yottatons, 5-A) *The Indigo
       Asteroid creates a black hole made of Hyper-Go-On (7.072 Ronnatons, 5-A) *Classic
       Sonic breaks the chain links to Little Planet (90.733 Ronnatons High 5-A) *Earth
       can tank 0.5 of the Eclipse Cannon''s power (160,62318833674365 Ronnatons High
@@ -274,7 +239,7 @@ power_scale:
       *A Chaos Emerald shifts a continent (11,246 Quettatons, High 4-C) *The Nega
       Wisps creates a black hole made of Hyper-Go-On (18.08 Foe, High 4-C+) *The Final
       Egg Blaster destroys a constellation (465.364631 ExaFoe, 4-A) *Master Core:
-      ABIS creates a realm with numerous stars (1.14 YottaFoe, 3-C) {{!}}-{{!}}'
+      ABIS creates a realm with numerous stars (1.14 YottaFoe, 3-C)'
     source_ids:
     - vsbattles-sonic-the-hedgehog-mixed-games
     confidence: 0.6
@@ -291,7 +256,7 @@ power_scale:
       MFTL+) *Master Core: ABIS moves galaxies (5.1059486626578 Trillion c, MFTL+)
       *Dodon Pa''s Rocket Speed (2.445662 Quadrillion c, MFTL+) *Time Eater''s AOE
       attack at Green Hill Zone (4.891323 Quadrillion c, MFTL+) *Super Sonic and Burning
-      Blaze flying to the Exception (3.16 Quadrillion c, MFTL+) {{!}}-{{!}}'
+      Blaze flying to the Exception (3.16 Quadrillion c, MFTL+)'
     source_ids:
     - vsbattles-sonic-the-hedgehog-mixed-games
     confidence: 0.6
@@ -299,16 +264,16 @@ power_scale:
   lifting_strength:
     text: Class M (Superior to his Classic and Adventure Era selves>481,035.84817
       Metric Tons)
-    source_ids: *id003
+    source_ids: *id002
     confidence: 0.8
   striking_strength:
     text: High Universe level (Can match opponents comparable to himself. Harmed and
       defeated the Babylon Guardian with his strikes, and could do the same for the
       likes of Ifrit and Master Core)
-    source_ids: *id003
+    source_ids: *id002
     confidence: 0.8
   durability:
-    text: '*Dr. Eggman tanks an explosion (0.573 Tons, 8-C) {{!}}-{{!}}'
+    text: '*Dr. Eggman tanks an explosion (0.573 Tons, 8-C)'
     source_ids:
     - vsbattles-sonic-the-hedgehog-mixed-games
     confidence: 0.6
@@ -333,7 +298,7 @@ power_scale:
       never ending energy at the cost of not being able to hold any Rings) | Infinite
       (Is powered by all 7 Chaos Emeralds) | Infinite (Uses a Super State as its base,
       and should thus have its stamina directly)
-    source_ids: *id003
+    source_ids: *id002
     confidence: 0.8
   range:
     text: 'Base & Shatter Sonic=Standard Melee Range, Extended Melee Range with Caliburn,
@@ -373,7 +338,7 @@ power_scale:
       higher than Super Sonic {| class="mw-collapsible mw-collapsed" align="center"
       border="1" cellpadding="1" cellspacing="1" style="width:100%" | colspan="2"
       style="text-align: left; "'
-    source_ids: *id003
+    source_ids: *id002
     confidence: 0.8
   intelligence:
     text: 'Genius normally, Extraordinary Genius Combatant (Vastly superiorSonic the
@@ -440,7 +405,7 @@ power_scale:
       grew from being an amateur at Extreme Gear to being on the same level as the
       greatest Extreme Gear racer in the world. Sonic became so good at it that he
       defeated Metal Sonic after he h'
-    source_ids: *id003
+    source_ids: *id002
     confidence: 0.8
 claims:
 - id: claim-tier-3f19bda4
@@ -453,7 +418,7 @@ claims:
     higher with Phantom Rush, even higher with Double Boost and Triple Boost | At
     least {{2-C}} | {{Varies}}. At least {{2-C}}, up to {{1-C}}, higher with Charged
     Attacks | {{1-C}}, far higher at Full Power'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-7039
   decisive: false
   status: unverified
@@ -465,7 +430,7 @@ claims:
   text: 'High Universe level (Harmed the Babylon Guardian with his strikes before
     destroying it. Fought against the Ifrit. Aided in the defeat of Master Core: ABIS),
     higher with Boost'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -482,7 +447,7 @@ claims:
     with the Boost (Sonic's Boost enhances his speed by nearly 8x, 40.336994435 Trillion
     c with the technique managing to amaze his younger self even after having witnessed
     Metal Sonic's V. Maximum Overdrive Attack)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -492,7 +457,7 @@ claims:
   axis: other
   text: Class M (Superior to his Classic and Adventure Era selves>481,035.84817 Metric
     Tons)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -503,7 +468,7 @@ claims:
   text: High Universe level (Can match opponents comparable to himself. Harmed and
     defeated the Babylon Guardian with his strikes, and could do the same for the
     likes of Ifrit and Master Core)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -515,7 +480,7 @@ claims:
     from those comparable to him), higher with Boost. Up to Complex Multiverse level
     (6-D) Damage Transferal with several Rings (enough Rings shields damage from those
     as strong as Supreme) |-|Sonic and the Secret Rings - Sonic Free Riders
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -542,7 +507,7 @@ claims:
     the cost of not being able to hold any Rings) | Infinite (Is powered by all 7
     Chaos Emeralds) | Infinite (Uses a Super State as its base, and should thus have
     its stamina directly)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -586,7 +551,7 @@ claims:
     not higher than Super Sonic {| class="mw-collapsible mw-collapsed" align="center"
     border="1" cellpadding="1" cellspacing="1" style="width:100%" | colspan="2" style="text-align:
     left; "'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -657,7 +622,7 @@ claims:
     \ (Self-Afflicted; When breaking open a Parts Lock Item Box, the playable character's\
     \ tech is temporarily shut down except for the tech's mobility) *Statistics Amplification\
     \ (Temporary via Attack & High Speed. W"
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -727,7 +692,7 @@ claims:
     of combat, such as when he very quickly grew from being an amateur at Extreme
     Gear to being on the same level as the greatest Extreme Gear racer in the world.
     Sonic became so good at it that he defeated Metal Sonic after he h'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -749,7 +714,7 @@ claims:
     of Sonic''s methods of defensive traversal. Sonic Homing Attack.gif|One of Sonic''s
     most common methods of attacking an enemy. Flying Kick.gif|The Flying Kick, a
     stronger variant that Sonic can use when the Homing Attack isn''t enough. *Spin'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -821,7 +786,7 @@ claims:
     \ Palace. Endured constant torture of some form aboard of the Death Egg for six\
     \ months straight without suffering any repercussions to his mental stability,\
     \ instead treating it as a minor"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -830,7 +795,7 @@ abilities:
 - id: powers-and-abilities-techniques
   name: Techniques
   description: Techniques
-  source_ids: &id005
+  source_ids: &id004
   - vsbattles-sonic-the-hedgehog-mixed-games
   source_claim_ids: []
   confidence: 0.85
@@ -846,7 +811,7 @@ abilities:
 - id: powers-and-abilities-class-portal-style-border-1px-solid-fc6603
   name: '- ! class="portal" style="border: 1px solid #fc6603'
   description: '- ! class="portal" style="border: 1px solid #fc6603'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -863,7 +828,7 @@ abilities:
 - id: powers-and-abilities-spindashidw-jpg-webp
   name: SpinDashIDW.JPG.webp
   description: SpinDashIDW.JPG.webp
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -878,7 +843,7 @@ abilities:
 - id: powers-and-abilities-spin-attack
   name: Spin Attack
   description: Spin Attack
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -893,7 +858,7 @@ abilities:
 - id: powers-and-abilities-link-spin-attack-main-continuity-sonic-v-shadow-boss-ark-ra
   name: link=Spin Attack (Main Continuity) Sonic v Shadow Boss ARK Race.webp
   description: link=Spin Attack (Main Continuity) Sonic v Shadow Boss ARK Race.webp
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -910,7 +875,7 @@ abilities:
 - id: powers-and-abilities-boost
   name: Boost
   description: Boost
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -925,7 +890,7 @@ abilities:
 - id: powers-and-abilities-link-boost-main-continuity
   name: link=Boost (Main Continuity)
   description: link=Boost (Main Continuity)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -940,7 +905,7 @@ abilities:
 - id: powers-and-abilities-energies
   name: Energies
   description: Energies
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -955,7 +920,7 @@ abilities:
 - id: powers-and-abilities-class-portal-style-border-1px-solid-24fc03
   name: '- ! class="portal" style="border: 1px solid #24fc03'
   description: '- ! class="portal" style="border: 1px solid #24fc03'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -972,7 +937,7 @@ abilities:
 - id: powers-and-abilities-cyber-corruption-sonic-jpg
   name: Cyber Corruption Sonic.jpg
   description: Cyber Corruption Sonic.jpg
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -990,7 +955,7 @@ abilities:
 - id: powers-and-abilities-cyber-corruption
   name: Cyber Corruption
   description: Cyber Corruption
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1006,7 +971,7 @@ abilities:
 - id: powers-and-abilities-link-cyber-corruption
   name: link=Cyber Corruption
   description: link=Cyber Corruption
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1022,7 +987,7 @@ abilities:
 - id: powers-and-abilities-other
   name: '} ===Other=== {'
   description: '} ===Other=== {'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1037,7 +1002,7 @@ abilities:
 - id: powers-and-abilities-class-portal-style-border-1px-solid-2f2f2f
   name: '- ! class="portal" style="border: 1px solid #2f2f2f'
   description: '- ! class="portal" style="border: 1px solid #2f2f2f'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1054,7 +1019,7 @@ abilities:
 - id: powers-and-abilities-item-box-portrait-webp
   name: Item Box Portrait.webp
   description: Item Box Portrait.webp
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1069,7 +1034,7 @@ abilities:
 - id: powers-and-abilities-item-box
   name: Item Box
   description: Item Box
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1084,7 +1049,7 @@ abilities:
 - id: powers-and-abilities-link-item-box-sonic-the-hedgehog-babylonrougesidw-webp
   name: link=Item Box (Sonic the Hedgehog) BabylonRougesIDW.webp
   description: link=Item Box (Sonic the Hedgehog) BabylonRougesIDW.webp
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1101,7 +1066,7 @@ abilities:
 - id: powers-and-abilities-extreme-gear
   name: Extreme Gear
   description: Extreme Gear
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1116,7 +1081,7 @@ abilities:
 - id: powers-and-abilities-link-extreme-gear-main-continuity
   name: link=Extreme Gear (Main Continuity)
   description: link=Extreme Gear (Main Continuity)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1131,7 +1096,7 @@ abilities:
 - id: powers-and-abilities-locations
   name: '} ==Locations== {'
   description: '} ==Locations== {'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1146,7 +1111,7 @@ abilities:
 - id: powers-and-abilities-islands
   name: Islands
   description: Islands
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1161,7 +1126,7 @@ abilities:
 - id: powers-and-abilities-class-portal-style-border-1px-solid-0f8f03
   name: '- ! class="portal" style="border: 1px solid #0f8f03'
   description: '- ! class="portal" style="border: 1px solid #0f8f03'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1178,7 +1143,7 @@ abilities:
 - id: powers-and-abilities-green-hill-portrait-jpg
   name: Green Hill Portrait.jpg
   description: Green Hill Portrait.jpg
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1193,7 +1158,7 @@ abilities:
 - id: powers-and-abilities-green-hill-zone
   name: Green Hill Zone
   description: Green Hill Zone
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1208,7 +1173,7 @@ abilities:
 - id: powers-and-abilities-link-green-hill-zone
   name: link=Green Hill Zone
   description: link=Green Hill Zone
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1223,7 +1188,7 @@ abilities:
 - id: powers-and-abilities-celestial-bodies
   name: Celestial Bodies
   description: Celestial Bodies
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1238,7 +1203,7 @@ abilities:
 - id: powers-and-abilities-class-portal-style-border-1px-solid-0516ad
   name: '- ! class="portal" style="border: 1px solid #0516ad'
   description: '- ! class="portal" style="border: 1px solid #0516ad'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1255,7 +1220,7 @@ abilities:
 - id: powers-and-abilities-little-planet-portrait-webp
   name: Little Planet Portrait.webp
   description: Little Planet Portrait.webp
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1271,7 +1236,7 @@ abilities:
 - id: powers-and-abilities-little-planet
   name: Little Planet
   description: Little Planet
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1287,7 +1252,7 @@ abilities:
 - id: powers-and-abilities-link-little-planet
   name: link=Little Planet
   description: link=Little Planet
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1303,7 +1268,7 @@ abilities:
 - id: powers-and-abilities-alternate-dimensions
   name: Alternate Dimensions
   description: Alternate Dimensions
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1320,7 +1285,7 @@ abilities:
 - id: powers-and-abilities-class-portal-style-border-1px-solid-f205c7
   name: '- ! class="portal" style="border: 1px solid #f205c7'
   description: '- ! class="portal" style="border: 1px solid #f205c7'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1337,7 +1302,7 @@ abilities:
 - id: powers-and-abilities-sonic-moon-running-webp
   name: Sonic Moon Running.webp
   description: Sonic Moon Running.webp
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1354,7 +1319,7 @@ abilities:
 - id: powers-and-abilities-cosmology-page
   name: Cosmology Page
   description: Cosmology Page
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1371,7 +1336,7 @@ abilities:
     Space City.webp
   description: link=Sonic The Hedgehog (Main Continuity) Cosmology Page Sonic-Frontiers
     Cyber Space City.webp
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1389,7 +1354,7 @@ abilities:
 - id: powers-and-abilities-cyber-space
   name: Cyber Space
   description: Cyber Space
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1405,7 +1370,7 @@ abilities:
 - id: powers-and-abilities-link-cyber-space
   name: link=Cyber Space
   description: link=Cyber Space
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1421,7 +1386,7 @@ abilities:
 - id: powers-and-abilities-gallery
   name: '} ==Gallery=='
   description: '} ==Gallery=='
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1436,7 +1401,7 @@ abilities:
 - id: powers-and-abilities-games-intros-sonic-1-intro
   name: Games= -Intros= Sonic 1 Intro
   description: Games= -Intros= Sonic 1 Intro
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1453,7 +1418,7 @@ abilities:
 - id: powers-and-abilities-na-june-1991-sonic-2-intro
   name: NA June/1991 Sonic 2 Intro
   description: NA June/1991 Sonic 2 Intro
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1510,18 +1475,14 @@ review:
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-sonic-the-hedgehog-mixed-games
+  secondary_disagreement_policy: warning_only
 profile_hash: 4c103bb4c7f72cb22e30268ae2a2780ff7734137443a0006d85c5de80c46cce6
 repair:
-  attempted_at: '2026-10-04T10:03:01Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - speed
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
+  attempted_at: '2026-10-28T23:34:50Z'
+  repaired_fields: []
+  unresolved_fields: []
   source_attempts:
   - source_id: mediawiki-7039
     url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_(Modern)
@@ -1531,19 +1492,15 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
-    - range
     - speed
-    - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Sonic the Hedgehog (Modern)
     source_type: mediawiki
-    revision_id: '9690649'
+    revision_id: '9720079'
     fetch_status: fetched
     http_status: 200
-    content_length: 295959
+    content_length: 297158
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1568,7 +1525,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1585,348 +1542,125 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{High 3-A}}, higher with Boost | {{2-C}}, higher with Boost, far higher
-        with transformations, even higher with his Strongest Attacks | At least {{2-C}},
-        higher with Focused Homing Attack, Flying Kick, and Color Powers, even higher
-        with Final Color Blaster, Energy Cores, and Planetary Lifeforce | At least
-        {{2-C}}, higher with Phantom Rush, even higher with Double Boost and Triple
-        Boost | At least {{2-C}} | {{Varies}}. At least {{2-C}}, up to {{1-C}}, higher
-        with Charged Attacks | {{1-C}}, far higher at Full Power'
-      source_id: mediawiki-7039
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base \u25BE=\
-        \ {{#tag:tabber| {{!}}-{{!}}Abilities \u25BE= {{#tag:tabber| {{!}}-{{!}}Sonic\
-        \ the Hedgehog (2006) - Sonic Riders: Zero Gravity={{Border|Scroll=Yes|Visible=No|Content=All\
-        \ innate abilities of his Classic and Adventure Eras selves plus: *Greater\
-        \ Superhuman Physical Characteristics **Greater Acrobatics (All Types; Consistently\
-        \ displays varying kinds of acrobatics; this ranges from leaping hundreds\
-        \ of meters in a single bound, bouncing of several enemies, traversing nearly\
-        \ any type of terrain possible, run on enemies while making acrobatic movements\
-        \ to confuse them, climb up and down any surface no matter how thin or how\
-        \ compromising the terrain is, etc, all while he is constantly fighting and\
-        \ doing complex movements, even being in an environment with shifting gravity\
-        \ fails to slow him down so long as there are objects or enemies nearby for\
-        \ him to interact with.Sonic the Hedgehog #1Sonic the Hedgehog #2Sonic the\
-        \ Hedgehog #6Sonic the Hedgehog #7Sonic the Hedgehog #23Sonic the Hedgehog\
-        \ #25Sonic the Hedgehog #51Sonic the Hedgehog #55Sonic the Hedgehog #39Sonic\
-        \ the Hedgehog #41Sonic the Hedgehog #42Sonic the Hedgehog #50 Sonic's entire\
-        \ movement and fighting style hones into doubling down on his athleticism\
-        \ combined with his speed, allowing him to employ it both in and out of combat.Sonic\
-        \ 06 Wave Ocean: Sonic's StorySonic Unleashed: MazuriSonic & the Black Knight:\
-        \ OpeningSonic and the Black Knight: Misty Lake (Special Challenge: Retrieve\
-        \ the sacred sword)Sonic Lost World OpeningSonic Lost World: Dessert RuinsSonic\
-        \ the Hedgehog #1, page 3Sonic the Hedgehog #1, page 5Sonic the Hedgehog #1,\
-        \ page 6Sonic the Hedgehog #1, page 7Sonic the Hedgehog #1, page 8Sonic the\
-        \ Hedgehog #1, page 11Sonic the Hedgehog #1, page 12Sonic the Hedgehog #1,\
-        \ page 13Sonic the Hedgehog #1, page 14Sonic the Hedgehog #4, page 5Sonic\
-        \ the Hedgehog #5, page 1Sonic the Hedgehog #5, page 3Sonic the Hedgehog #5,\
-        \ page 15Sonic the Hedgehog #8, page 2Sonic the Hedgehog #8, page 16Sonic\
-        \ the Hedgehog #8, page 17Sonic the Hedgehog #10, page 12Sonic the Hedgehog\
-        \ #13, page 8Sonic the Hedgehog #13, page 9Sonic the Hedgehog Annuals and\
-        \ One-Shots - 2022 Sonic the Hedgehog Free Comic Book Day, page 8Sonic the\
-        \ Hedgehog Annuals and One-Shots - 2022 Sonic the Hedgehog Free Comic Book\
-        \ Day, page 10Sonic the Hedgehog #25, page 2Sonic the Hedgehog #25, page 2Sonic\
-        \ the Hedgehog #56, page 11Sonic the Hedgehog #57, page 21Sonic the Hedgehog\
-        \ #57, page 18Sonic the Hedgehog #58, page 1Sonic the Hedgehog #60, page 12Sonic\
-        \ the Hedgehog #63, page 13Sonic the Hedgehog #63, page 14Sonic the Hedgehog\
-        \ #63, page 14Sonic the Hedgehog #63, page 15Sonic the Hedgehog #63, page\
-        \ 19Sonic the Hedgehog's 900th Adventure, page 8Sonic the Hedgehog's 900th\
-        \ Adventure, page 10Sonic the Hedgehog's 900th Adventure, page 11Sonic the\
-        \ Hedgehog's 900th Adventure, Page 21Sonic the Hedgehog's 900th Adventure,\
-        \ Page 22Sonic the Hedgehog's 900th Adventure, Page 23Sonic the Hedgehog's\
-        \ 900th Adventure, page 36Sonic the Hedgehog's 900th Adventure, Page 39Sonic\
-        \ the Hedgehog: Endless Summer Special, Page 3Sonic the Hedgehog 2023 Halloween\
-        \ Special, Page 10Sonic the Hedgehog 2023 Winter JamSonic Lost World (Wii\
-        \ U): Tropical Coast Zone 4Sonic Lost World (3DS): Lava Montain Zone 3Sonic\
-        \ Frontiers Idle dialogue Shown to be able to \"run\" and move just as fast\
-        \ and efficiently with his hands as he can with his legs) *Greater Enhanced\
-        \ Senses (Consistently able to react to things out of his line of sight. Can\
-        \ sense camouflaged rails in Green Cave) *Possibly Paralysis Inducement (Level\
-        \ 3 Attacks in Sonic Riders are potentially capable of paralyzing opponents)\
-        \ *Indomitable Will (Sonic has displayed immense willpower, a relentless courage,\
-        \ and an absolute unwillingness to give up no matter how frightening and hopeless\
-        \ a situation might appear to be; Chip affirmed that Sonic is too strong to\
-        \ lose himself, that he never doubted himself on their journey no matter what,\
-        \ and further stated Sonic had a mind that never gives into the temptations\
-        \ of night and darknessSonic Unleashed: No Reason (Videotape 32) (JP) despite\
-        \ Dark Gaia's influence bringing out the darkness of one's heartSonic Unleashed:\
-        \ Midnight Dance (Videotape 17) and making them fall into despair. Stood firm\
-        \ in his resolve of fighting Merlina despite having his friend and mentor\
-        \ killed in front of him amd receiving a debilitating beating, refusing to\
-        \ falter even when the Knights of the Round Table insisted on him giving up\
-        \ and fleeing to save his life. Endured the Arrow of Judgement without issue\
-        \ for a large amount of his adventure in the Arabian Nights, a curse that\
-        \ was eating away at his life-force, and was able to defeat Erazor Djinn in\
-        \ combat even after a point where it brought Sonic to his kneesSonic and the\
-        \ Secret Rings - Night Palace. Endured constant torture of some form aboard\
-        \ of the Death Egg for six months straight without suffering any repercussions\
-        \ to his mental stability, instead treating it as a minor"
-      source_id: mediawiki-7039
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: "Same equipment as his Adventure and Classic selves, plus: {{#tag:tabber|\
-        \ {{!}}-{{!}}Standard= {{#tag:tabber| {{!}}-{{!}}Rings= *Damage Transferal\
-        \ (Up to 1-C [6-D] AP with Rings; Rings completely shield the user from harm\
-        \ so long as they have at least 1 in their possession.Sonic the Hedgehog (16-bit)\
-        \ Instructional ManualSonic Colors (Wii) ManualSonic the Hedgehog (8-bit)\
-        \ ManualSonic the Hedgehog 2 (16-bit) Instructional ManualSonic the Hedgehog\
-        \ 2 (8-bit) ManualSonic the Hedgehog 3 ManualSonic Adventure ManualSonic Adventure\
-        \ 2 ManualShadow the Hedgehog ManualSonic the Hedgehog (2006) ManualSonic\
-        \ Unleashed (HD) ManualSonic Rivals 2: Silver and Espio campaignSonic Prime\
-        \ Season 1 Episode 2 - The Yoke's On YouSonic Frontiers Another Story: Vs\
-        \ Supreme/The End Upon taking an instance of damage, a varying amount will\
-        \ scatter from the one who collected them with higher durability causing less\
-        \ to drop.Sonic Frontiers Rings can shield Base characters from damage, including\
-        \ from the likes of VoidSonic Shuffle and an amped SupremeSonic Frontiers\
-        \ Another Story: Vs Supreme/The End so long as they have enough in their possession)\
-        \ **Healing & Stamina Recovery (Ring Energy revitalizes the wielder and restores\
-        \ energy, as noted with Silver wanting to use some to replenish his energy.\
-        \ Rings are referred to by The End as being vitality) **Statistics Amplification\
-        \ (Ring Energy in the Sonic Riders series can amplify the user's speed by\
-        \ nearly 2x and increases their Boost duration by nearly 2 seconds when going\
-        \ from level 1 to 3.Sonic RidersSonic Riders: Zero GravitySonic Free Riders\
-        \ Achieving the max Ring count in Sonic Frontiers grants Sonic the same speed\
-        \ for his Boost that a default level 99 Speed Sonic hasSonic Frontiers) {{!}}-{{!}}Wisp\
-        \ Capsules=Contains Wisps, which grant; *Transformation & Statistics Amplification\
-        \ *Surface Scaling (With Pink Spikes and Gray Quake) *Fire Manipulation &\
-        \ Explosion Manipulation (With Red Burst and Black Bomb) *Vibration Manipulation\
-        \ (With Blue Cube and Gray Quake) *Energy Projection (With Cyan Laser and\
-        \ Crimson Eagle) *Electricity Manipulation (With Ivory Lightning) *Invisibility\
-        \ (With Jade Ghost) *Deconstruction (With Indigo Asteroid) *Transmutation,\
-        \ Black Hole Creation, Gravity Manipulation, Size Manipulation & Absorption\
-        \ (With Indigo Asteroid, Violet Void, and Purple Frenzy) *Intangibility (With\
-        \ Jade Ghost, Violet Void, Red Burst, Cyan Laser & Ivory Lightning) *Flight\
-        \ and Levitation (With Crimson Eagle, Green Hover, Indigo Asteroid, Jade Ghost,\
-        \ Magenta Rhythm, Orange Rocket and Violet Void) *Speed Reduction & Void Manipulation\
-        \ (Usage of the Violet Void near opponents will slow them downTeam Sonic Racing)\
-        \ *Gravity Manipulation, Deconstruction, Transmutation & Size Manipulation\
-        \ (With the Indigo Asteroid Wisp, which breaks down enemies and objects in\
-        \ its orbit and grows the more it consumesSonic RunnersSonic Lost World) *Free\
-        \ Movement & Underground Mobility (With the Yellow Drill Wisp, which allows\
-        \ users of their energy to burrow underground and between gaps without issue\
-        \ as well as move through water at high speeds akin to a torpedoSonic Colors\
-        \ (Wii)) *Energy Projection (With the Cyan Laser Wisp, which lets the user\
-        \ hurtle forward as a destructive beam of energy) *Boost (Final Color Blaster)\
-        \ }} {{!}}-{{!}}Optional \u25BE= {{#tag:tabber| {{!}}-{{!}}Extreme Gear= {{#tag:tabber|\
-        \ {{!}}-{{!}}Innate= Sonic starts with a Board-type Extreme Gear (Blue Star\
-        \ II). For a better, more comprehensive look at the abilities and capabilities\
-        \ of an Extreme Gear (in order to avoid redundancy in re-listing abilities),\
-        \ see the Extreme Gear page. *Technological Flight *Enhanced Acrobatics *Air\
-        \ Manipulation (By performing tricks in mid-air, Shadow is able to generate\
-        \ Air for his Extreme GearSonic Riders: Sand Ruins to use for several purposes)\
-        \ **Statistics Amplification (By using Air to perform air boosts for quick\
-        \ bursts in speed) *Transformation (With Gear Change, Shadow can alter his\
-        \ Extreme Gear to different Gear types in order to unlock new movement abilities)\
-        \ *Gravity Manipulation (With a Gravity Band, which he wears on his ankle.\
-        \ Shadow can generate bursts of gravity for various purposes; to turn sharp\
-        \ corners, repel obstacles in his way, or massively distort the gravity of\
-        \ the surrounding environmentSonic Riders Zero Gravity: MeteorTech Premises)\
-        \ *And several more as listed in the Extreme Gear page's universal abilities\
-        \ {{!}}-{{!}}Item Boxes= *Weapon Creation (Can create a regular basketball,\
-        \ bowling ball, and Tee Shot, enabling the user to use a golf club to shoot\
-        \ out golf balls, to damage other racers) **Homing Attack & Explosion Manipulation\
-        \ (Via Target Torpedo, users can summon a bomb to explode other Riders on\
-        \ the race track or a torpedo tor track them down) *Technology Manipulation\
-        \ & Power Nullification (Self-Afflicted; When breaking open a Parts Lock Item\
-        \ Box, the playable character's tech is temporarily shut down except for the\
-        \ tech's mobility) *Statistics Amplification (Temporary via Attack & High\
-        \ Speed. W"
+      value: 3-C, possibly High 3-A, higher with Boost | Low 2-C, higher with Boost.
+        Far higher as Darkspine Sonic and Excalibur Sonic, even higher with their
+        Strongest Attacks. 2-C as Werehog Sonic | 2-C, higher with the Focused Homing
+        Attack, Flying Kick, Energy Cores, and Color Powers, even higher with the
+        Final Color Blaster and Planetary Lifeforce | 2-C | 2-C, higher with Phantom
+        Rush, even higher with Double Boost and Triple Boost | . 2-C, up to 1-C, higher
+        with Charged Attacks | 1-C, far higher at Full Power
       source_id: mediawiki-7039
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'High Universe level (Harmed the Babylon Guardian with his strikes before
-        destroying it. Fought against the Ifrit. Aided in the defeat of Master Core:
-        ABIS), higher with Boost'
+      value: 'Galaxy level, possibly High Universe level (Superior to his Adventure
+        Era self. Fought Master Core: ABIS), higher with Boost'
       source_id: mediawiki-7039
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Massively FTL+ (Vastly superiorSonic the Hedgehog (2006) European Website
-        to his Adventure Era-self. Capable of evading crashing meteors on a ship traveling
-        through interstellar space.Sonic Rivals Kept pace with Master Core:ABIS while
-        it flew with its gravitational powers, the same powers it used to move multiple
-        galaxies at these speeds5.1059486626578 Trillion c), higher reaction speed,
-        far higher with the Spin Attack and Super Peel Out,20.4237946506 Trillion
-        c even higher with the Boost (Sonic's Boost enhances his speed by nearly 8x,
-        40.336994435 Trillion c with the technique managing to amaze his younger self
-        even after having witnessed Metal Sonic's V. Maximum Overdrive Attack)
+      value: 'Massively FTL+ ([https://postimg.cc/nCWxB6mL Vastly superior] to his
+        Adventure Era-self. Capable of evading crashing meteors on a ship traveling
+        through interstellar space. Kept pace with Master Core: ABIS while it flew
+        with its gravitational powers, the same powers it used to move multiple galaxies
+        at these speeds), higher Reaction Speed and with the Spin Attack and Super
+        Peel Out, even higher with the Boost (Sonic''s Boost enhances his speed by
+        nearly 8x, with the technique managing to [https://www.youtube.com/watch?v=cWJvFl2tvNA&t=743s
+        amaze his younger self] even after having witnessed Metal Sonic''s V. Maximum
+        Overdrive Attack)'
       source_id: mediawiki-7039
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: High Universe level (Can take hits from Knuckles. Able to withstand attacks
-        from those comparable to him), higher with Boost. Up to Complex Multiverse
-        level (6-D) Damage Transferal with several Rings (enough Rings shields damage
-        from those as strong as Supreme) |-|Sonic and the Secret Rings - Sonic Free
-        Riders
-      source_id: mediawiki-7039
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Endured the "Arrow of Judgement", which slowly drained his
-        life-force, weakening him to such a level that he was left on his knees, and
-        much later was still capable of standing up to fight against Erazor Djiin.
-        Withstood a beating from Merlina and refused to give up regardless of his
-        physical condition. Ran at top speed almost nonstop for several days while
-        physically and mentally taxed in order to fight off the effects of the Metal
-        Virus, receiving minimal rest for the duration of the plague. Stated that
-        he isn't used to getting tired despite his adventurous lifestyle. Absorbed
-        Cyber Corruption to free Amy, Knuckles, and Tails from their imprisonment
-        across the Starfall Islands. Even while dealing with the corruption's influence
-        across nearly all of Sonic Frontiers and dealing with it better than Sage
-        predicted, he successfully scaled all six towers of Rhea Island and refused
-        to stop until his friends were freed from Cyber Space. In situations where
-        most others would give up and where he is severely outnumbered or outgunned,
-        such as close encounters with the Titans when he's without all the Chaos Emeralds,
-        Sonic never loses faith in himself and never surrenders), same, if not higher,
-        with transformations, Infinite with Endless Boost (Gains never ending energy
-        at the cost of not being able to hold any Rings) | Infinite (Is powered by
-        all 7 Chaos Emeralds) | Infinite (Uses a Super State as its base, and should
-        thus have its stamina directly)
-      source_id: mediawiki-7039
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: 'Base & Shatter Sonic=Standard Melee Range, Extended Melee Range with
-        Caliburn, Hundreds of Meters with abilities. Up to countless, possibly Complex
-        Multiversal With Chaos Control (Chaos Control can halt time in White Space,
-        as Shadow intended to freeze the moment in time where Maria and Gerald were
-        being restored to the timeline to prevent it, despite it repeatedly being
-        stated that all of space-time was erased. Should be superior to Base Eggman
-        and Primordial Form Time Eater, which can respectively travel reach White
-        Space and Time Eater''s Lair). Beyond baseline Complex Multiversal with the
-        Double Boost (Broke through Null Space using the Double Boost alongside the
-        Rookie, an alternate dimension that is stated to go on forever, be an endless
-        void, and contain absolutely nothingSonic Forces: Stage 24 - Metropolis (Null
-        Space)) |-|Darkspine Sonic= Same as his base form, Low Multiversal with abilities
-        (Moves such as Time Break allow Darkspine Sonic to freeze the flow of time.
-        Fixed the entirety of the Arabian Nights reality with a hand gesture, which
-        consists both its main reality and the Night Palace) |-|Werehog Sonic=Same
-        as his base form, Extended Melee Range to Several Meters via Elasticity (Able
-        to extend his limbs that far), Hundreds of Meters with abilities (Able to
-        create shockwaves that cover that far by pounding the ground) |-|Excalibur
-        Sonic=Same as his base form, Extended Melee Range, higher with Excalibur''s
-        extension, Thousands of Kilometers with abilities (Excalibur is made by the
-        combined power of all 4 Sacred Swords, with them being able to create a giant
-        barrier that can cover that far) |-|Super Sonic=All of his base form''s range
-        enhanced, Standard Melee Range; Hundreds of Meters, up to Low Complex Multiversal
-        with his Aura (Super Sonic''s aura swallowed several duplicates of Perfect
-        Chaos and shattered alternate worlds of the Phantom Ruby all through out the
-        Egg Field); Varies Low Multiversal (Powered by all 7 Chaos Emeralds, with
-        the Emeralds being able to, alongside the Sol Emeralds, reach to 2 universes),
-        up to Beyond baseline Complex Multiverse level with abilities (6-D. Able to
-        affect Solaris, who Dr. Eggman twice states is an extra-dimensional lifeformSonic
-        the Hedgehog (2006) VS Solaris: Phase 1 Pop UpsSonic the Hedgehog (2006) VS
-        Solaris: Phase 2 Pop Ups that would make it superior to the likes of Illumina
-        and Void. Travelled to the Infinite Tunnel Dimension alongside Classic Super
-        Sonic. Should be comparable to Solaris due to being powered by the full power
-        of the Chaos Emeralds, which allowed him to destroy "everything" across all
-        of time, which would include Null Space) |-|Starfall Super Sonic=Same, if
-        not higher than Super Sonic {| class="mw-collapsible mw-collapsed" align="center"
-        border="1" cellpadding="1" cellspacing="1" style="width:100%" | colspan="2"
-        style="text-align: left; "'
+      value: 'Galaxy level, possibly High Universe level (Can take attacks from Master
+        Core: ABIS. Able to withstand attacks from those comparable to him), higher
+        with Boost. Up to Complex Multiverse level (6-D) Damage Transferal with several
+        Rings ([https://www.youtube.com/watch?v=Q3QksApbCvs&t=514s Enough Rings shields
+        damage from those as strong as] Supreme) |-|Sonic and the Secret Rings - Sonic
+        Free Riders'
       source_id: mediawiki-7039
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: 'Genius normally, Extraordinary Genius Combatant (Vastly superiorSonic
-        the Hedgehog (2006) European Website to his Adventure Era Self. Through years
-        of countless adventures, Sonic has shown himself to be a skilled and formidable
-        combatant. The Blue Blur''s single greatest asset is his signature speed,
-        which he has demonstratedSonic Unleashed: Skyscraper Scamper Act 1 completeSonic
-        Colors (Wii): Aquarium Park Act 1 masterySonic the Hedgehog (2006): Flame
-        Core (Sonic''s Episode) overSonic the Hedgehog (2006): Kingdom Valley (Sonic''s
-        Episode) inSonic Unleashed: Cool Edge Act 1 any environment due to full control
-        of his momentum.Sonic the Hedgehog CD: Introduction Cutscene Because of this,
-        Sonic excels in applying his speed and agility into evasive maneuversSonic
-        the Hedgehog CD; "Outro" and offensive techniquesSonic Unleashed; "Windmill
-        Isle Act 2" fueled by momentum-based combat,Sonic Unleashed: Introduction
-        Cutscene allowing him to use his incredible agility both in and out of combat
-        in nearly any type of terrain and situation.Sonic 06: Sonic''s StorySonic
-        and the Black KnightSonic Lost World (Wii U)Sonic Lost World (3DS)Sonic FrontiersSonic
-        the Hedgehog #1Sonic the Hedgehog #2Sonic the Hedgehog #6Sonic the Hedgehog
-        #7Sonic the Hedgehog #23Sonic the Hedgehog #25Sonic the Hedgehog #39Sonic
-        the Hedgehog #41Sonic the Hedgehog #42Sonic the Hedgehog #50Sonic the Hedgehog
-        #51Sonic the Hedgehog #55 Beyond clever applications of Sonic''s speed is
-        his capacity for adaptability and quick learning; learned swordsmanship so
-        quick he became bored by it, effortlessly applying teachings "like it was
-        nothing" in a manner deemed as "like a true knight" during his very first
-        battleSonic and the Black Knight: Misty Lake: 1st Training SessionSonic and
-        the Black Knight: Misty Lake: 2nd Training SessionSonic and the Black Knight:
-        Misty Lake (Boss Fight)Sonic and the Black Knight: Deep Woods (Boss Fight)Sonic
-        and the Black Knight: Titanic Plain (Boss Fight)Sonic and the Black Knight:
-        Molten Mine: Boss FightSonic and the Black Knight: Faraway Avalon (Boss Fight)Sonic
-        and the Black Knight: Dark Hollow (Boss Fight) and effortlessly applying it
-        to his speed. In duels, Sonic is capable of of precisely timing his attacks
-        with his opponent multiple times in a row, canceling the attacks and giving
-        him an opening for a counter attack, doing so as early as his first real fight
-        with Caliburn. Bested the legendary Knights of the Round Table and King Arthur
-        himself, becoming the greatest knight of all time.Sonic and the Black Knight
-        Manual Sonic is also knowledgeable on traditional martial arts such as KenpoSonic
-        Colors (Wii) Sweet MountainSonic Colors (Wii) Asteroid Coaster and Kung Fu,
-        the latter of which he quickly mastered after only 2 sections of training.Sonic
-        Unleashed: "Kung Fu Speed", Chun-nan Side Mission His skillset left Master
-        Zik utterly impressed, calling his moves unique and acknowledging him as being
-        a master on his own, with the Deadly Six being said to have been humiliated
-        by him in battle.Sonic Lost World (Boss Master Zik round 1)Sonic Lost World
-        (Boss - Master Zik Round 2)Sonic Lost World (Boss - Master Zik Round 3)Sonic
-        the hedgehog #23 Kept up with Neo Metal Sonic after he copied his Bio-Data,
-        which allows him to copy one''s own intellect for himself. Capable of out-racing,
-        out-fighting & out-thinking Metal Sonic across most of their encounters, despite
-        Metal''s capabilities of copying and learning with each encounter and having
-        powers & abilities similar to Sonic himself. Casually dominated Surge in combat,
-        who was perfectly calibrated with his Bio-Data to be his equal and who was
-        so similar in all aspects that Dr. Eggman''s systems were unable to differentiate
-        her from him. Easily defeated and mockedSonic Generations: Egg Dragoon Boss
-        Battle Eggman while piloting the Egg Dragoon, a machine that has years of
-        study of his movement patterns in the several years he and the Doctor have
-        been fighting. Referred to by Doctor Starline as the only being capable of
-        standing up to Dr. Eggman with sheer skill alone.Sonic the Hedgehog #14 Despite
-        Dr. Eggman''s intellect and vast list of creations, such as machines with
-        years of research into Sonic''s movement patterns, Sonic has come out on top
-        over 227,000 times. Defied Sage''s expectations, a supergenius AI, regarding
-        both his chances of survival against the Titans and the handling of his Cyber
-        Corruption, both of which she said it would be impossible for him to beat.
-        Impressed and shocked the Ancients'' greatest warriors and minds alike, the
-        very beings who created Cyber Space, to the point where one referred to his
-        potential as "limitless" and was incapable of comprehending the way he fought
-        nor how he overcame the Titans. Sonic is able to greatly grow in areas outside
-        of combat, such as when he very quickly grew from being an amateur at Extreme
-        Gear to being on the same level as the greatest Extreme Gear racer in the
-        world. Sonic became so good at it that he defeated Metal Sonic after he h'
+      value: Genius normally, Extraordinary Genius Combatant ([https://postimg.cc/nCWxB6mL
+        Vastly superior] to his Adventure Era Self. Through years of countless adventures,
+        Sonic has shown himself to be a skilled and formidable combatant. The Blue
+        Blur's single greatest asset is his signature speed, which he has [https://imgchest.com/p/9249e6pgbyn
+        demonstrated] [https://imgchest.com/p/lqyerxgmz4d complete] [https://imgchest.com/p/a846m858w7x
+        mastery] [https://imgchest.com/p/ej7m5dldbyd over] [https://imgchest.com/p/vj4jzl8ox78
+        in] any environment due to [https://imgchest.com/p/pg73qelbg4r full control
+        of his momentum]. Because of this, Sonic excels in applying his speed and
+        agility into [https://imgchest.com/p/pg73qedwj4r evasive maneuvers] and [https://imgchest.com/p/wl7l8qov64x
+        offensive techniques] fueled by [https://imgchest.com/p/a846m8dvw7x momentum-based]
+        [https://imgur.com/a/Q2BYcXL allowing him to use his incredible agility] [https://imgchest.com/p/m9yxnjrgm7q
+        both in and out of combat in nearly any type of terrain and situation]. Beyond
+        clever applications of Sonic's speed is his capacity for adaptability and
+        quick learning; [https://imgur.com/a/3afrbQf learned swordsmanship so quick
+        he became bored by it, effortlessly applying teachings "like it was nothing"
+        in a manner deemed as "like a true knight" during his very first battle] and
+        [https://cdn.imgchest.com/files/deedd1c05e65.mp4 effortlessly applying it
+        to his speed]. In duels, Sonic is [https://www.youtube.com/watch?v=WWUjHVPAj1Y&t=775s
+        capable of of precisely timing his attacks] with his opponent multiple times
+        in a row, canceling the attacks and giving him an opening for a counter attack,
+        doing so as early as his first real fight with Caliburn. Sonic is also knowledgeable
+        on traditional martial arts such as [https://imgur.com/a/OSCjdEg Kenpo] and
+        [https://imgur.com/a/sonic-unleashed-chun-nan-day-side-missions-9EEseEi Kung
+        Fu, the latter of which he quickly mastered after only 2 sections of training].
+        His skillset [https://imgur.com/a/b2rHMcV left Master Zik utterly impressed,
+        calling his moves unique and acknowledging him as being a master on his own],
+        with the Deadly Six being said to [https://postimg.cc/F1K2TKBm have been humiliated
+        by him in battle]. [https://imgur.com/a/7cNuPZS Kept up with] Neo Metal Sonic
+        after he copied his Bio-Data, [https://imgur.com/a/GXtPj0t which allows him
+        to copy one's own intellect for himself]. Capable of [https://imgur.com/a/blue-rat-vs-robot-rat-SU6iK3s
+        out-racing, out-fighting & out-thinking] Metal Sonic across most of their
+        encounters, despite Metal's capabilities of copying and learning with each
+        encounter and having powers & abilities similar to Sonic himself. Casually
+        [https://imgur.com/QMudkwg dominated Surge in combat], [https://imgur.com/a/starline-refers-to-surge-kit-as-perfectly-calibrated-doppelgangers-of-sonic-tails-sth-50-8vF15XZ
+        who was perfectly calibrated] [https://imgur.com/a/surge-kits-bodies-are-result-of-combination-of-cybernetics-combat-information-of-sonic-shadow-neo-metal-sonic-power-cores-loose-dna-of-tails-personality-of-belle-sth-imposter-syndrome-3-AWbbxSi
+        with his Bio-Data to be his equal] and who was so similar in all aspects that
+        Dr. Eggman's [https://imgur.com/a/starlines-combat-data-was-so-accurate-that-eggmans-security-algorithms-which-are-familiar-with-blue-blur-fox-boy-could-not-distinguish-surge-kit-from-sonic-tails-sth-imposter-syndrome-4-6mHieBk
+        systems were unable to differentiate her from him]. [https://www.youtube.com/watch?v=QMopx-E4la0&t=7340s
+        Easily defeated] [https://www.youtube.com/watch?v=QMopx-E4la0&t=7600s and
+        mocked] Eggman while piloting the Egg Dragoon, [https://imgur.com/gallery/egg-dragoon-eggmans-mad-science-pinacle-cRpusyN
+        a machine that has years of study of his movement patterns in the several
+        years he and the Doctor have been fighting]. Referred to by Doctor Starline
+        as [https://imgchest.com/p/9rydo29wl7k the only being capable of standing
+        up to Dr. Eggman with sheer skill alone]. Despite Dr. Eggman's intellect and
+        vast list of creations, such as [https://imgchest.com/p/92496dpzb4n machines
+        with years of research into Sonic's movement patterns], Sonic has [https://imgchest.com/p/a846mz3ag7x
+        come out on top over 227,000 times]. Defied Sage's expectations, a supergenius
+        AI, regarding both his chances of survival [https://www.youtube.com/watch?v=DVWeU4VhZ_g&t=300s
+        against] [https://www.youtube.com/watch?v=DVWeU4VhZ_g&t=1125s the] Titans
+        and the [https://www.youtube.com/watch?v=uiXzAli2New&t=1014s handling] of
+        his Cyber Corruption, both of which she said it would be impossible for him
+        to beat. Impressed and shocked the Ancients' [https://www.youtube.com/watch?v=tUCDSmXRyjQ&t=600s
+        greatest warriors] and [https://www.youtube.com/watch?v=tUCDSmXRyjQ&t=650s
+        minds alike], the very beings who created Cyber Space, to the point where
+        one referred to his potential as "limitless" and was incapable of comprehending
+        the way he fought nor how he overcame the Titans. Sonic is a
       source_id: mediawiki-7039
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Base = Sonic can be cocky and overconfident at times and has trouble
-        in aquatic areas due to his inability to swim. When the Warp Topaz receives
-        too much of a charge, it will cause severe reality alterations and eventually
-        explode, backfiring on the user. Without Starline''s glove it is hard to gain
-        precise control on the Topaz opening portals becomes more difficult |-| Darkspine
-        Sonic = More violent than before |-| Sonic the Werehog = His Werehog form
-        trades in a large bulk of his speed in favor of natural raw strength, and
-        he transforms into this form involuntarily at night only to change back in
-        the day |-| Shatter Sonic= When using 4 Prism Shards of the Paradox Prism
-        his power quickly runs out |-| Excalibur Sonic, Super Sonic & Starfall Super
-        Sonic = None notable Notable Attacks/Techniques: {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        |-|Base Sonic= {{#tag:tabber| {{!}}-{{!}}Standard Moves= Sonic spin dash.gif|One
-        of Sonic''s methods of defensive traversal. Sonic Homing Attack.gif|One of
-        Sonic''s most common methods of attacking an enemy. Flying Kick.gif|The Flying
-        Kick, a stronger variant that Sonic can use when the Homing Attack isn''t
-        enough. *Spin'
+      value: it will cause severe reality alterations and eventually explode, backfiring
+        on the user. Without Starline's glove it is hard to gain precise control on
+        the Topaz opening portals becomes more difficult, Darkspine Sonic = More violent
+        than before., Sonic the Werehog = His Werehog form trades in a large bulk
+        of his speed in favor of natural raw strength, and he transforms into this
+        form involuntarily at night and will forc back in the day., Shatter Sonic=
+        When using 4 Prism Shards of the Paradox Prism, his power quickly runs out.,
+        Excalibur Sonic & Super Sonic = None Notable, Starfall Super Sonic = Master
+        King referred to Sonic's enhanced Cyber Corruption power [https://imgchest.com/p/agyv3953z78
+        as a "fragile thing" that is volatile to his form] due to it not being meant
+        for him. This is proven correct, [https://youtu.be/Q3QksApbCvs?t=521 as strenuous
+        power struggles can disable the form and even shut off his Super State entirely]
+        (although he can reactivate both fairly quickly, and [https://imgur.com/a/qWYslO8
+        Rings can shield lethal damage to his Base form]).
       source_id: mediawiki-7039
       provider_id: vsbattles
       authority: high
@@ -1936,29 +1670,28 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|sonic the hedgehog modern|9690649
+    duplicate_key: vsbattles.fandom.com|sonic the hedgehog modern|9720079
     retryable: false
     exception_class: ''
   - source_id: vsbattles-sonic-the-hedgehog-mixed-games
-    url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_Mixed_Games
+    url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_(Main_Continuity)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields: &id005
     - attack_potency
     - durability
-    - powers_and_abilities
     - speed
     normalized_page_title: Sonic the Hedgehog (Main Continuity)
     source_type: mediawiki
-    revision_id: '9649546'
+    revision_id: '9710740'
     fetch_status: fetched
     http_status: 200
-    content_length: 69368
+    content_length: 69385
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1990,11 +1723,11 @@ repair:
     - striking_strength
     - tier
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields: &id006
     - attack_potency
     - speed
     - durability
@@ -2008,16 +1741,17 @@ repair:
       value: '*A Badnik breaks a wall (0.002 Tons, 9-B) *Dr. Eggman casually punches
         a truck (0.3 Tons, 8-C) *The Eclipse Cannon blasts Central City (28 Teratons,
         6-B) *The Space Colony ARK destroys a portion of the moon (376.99 Zettatons,
-        5-B) *The Chaos Energy Cannon shatters the Earth (7.2 Yottatons, 5-A) *The
-        Indigo Asteroid creates a black hole made of Hyper-Go-On (7.072 Ronnatons,
-        5-A) *Classic Sonic breaks the chain links to Little Planet (90.733 Ronnatons
-        High 5-A) *Earth can tank 0.5 of the Eclipse Cannon''s power (160,62318833674365
-        Ronnatons High 5-A) *The Eclipse Cannon can pierce the stars (32.124638 Quettatons,
+        5-B) *[https://web.archive.org/web/20140412151210/https://www.narutoforums.com/blog.php?b=21317
+        The Chaos Energy Cannon shatters the Earth] (7.2 Yottatons, 5-A) *The Indigo
+        Asteroid creates a black hole made of Hyper-Go-On (7.072 Ronnatons, 5-A) *Classic
+        Sonic breaks the chain links to Little Planet (90.733 Ronnatons High 5-A)
+        *Earth can tank 0.5 of the Eclipse Cannon''s power (160,62318833674365 Ronnatons
+        High 5-A) *The Eclipse Cannon can pierce the stars (32.124638 Quettatons,
         Low 4-C) *A Chaos Emerald shifts a continent (11,246 Quettatons, High 4-C)
         *The Nega Wisps creates a black hole made of Hyper-Go-On (18.08 Foe, High
         4-C+) *The Final Egg Blaster destroys a constellation (465.364631 ExaFoe,
         4-A) *Master Core: ABIS creates a realm with numerous stars (1.14 YottaFoe,
-        3-C) {{!}}-{{!}}'
+        3-C)'
       source_id: vsbattles-sonic-the-hedgehog-mixed-games
       provider_id: vsbattles
       authority: high
@@ -2034,380 +1768,28 @@ repair:
         Billion c, MFTL+) *Master Core: ABIS moves galaxies (5.1059486626578 Trillion
         c, MFTL+) *Dodon Pa''s Rocket Speed (2.445662 Quadrillion c, MFTL+) *Time
         Eater''s AOE attack at Green Hill Zone (4.891323 Quadrillion c, MFTL+) *Super
-        Sonic and Burning Blaze flying to the Exception (3.16 Quadrillion c, MFTL+)
-        {{!}}-{{!}}'
+        Sonic and Burning Blaze flying to the Exception (3.16 Quadrillion c, MFTL+)'
       source_id: vsbattles-sonic-the-hedgehog-mixed-games
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: '*Dr. Eggman tanks an explosion (0.573 Tons, 8-C) {{!}}-{{!}}'
-      source_id: vsbattles-sonic-the-hedgehog-mixed-games
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{| border=\"5\" cellspacing=\"1/6\" cellpadding=\"15\" align=\"left\"\
-        \ width=\"auto\" style=\"border: 1px solid #2f2f2f;\" ! colspan=\"5\" style=\"\
-        background: #fc6603; font-size: 110%;\" |Techniques |- ! class=\"portal\"\
-        \ style=\"border: 1px solid #fc6603;\" | SpinDashIDW.JPG.webp|Spin Attack|link=Spin\
-        \ Attack (Main Continuity) Sonic v Shadow Boss ARK Race.webp|Boost|link=Boost\
-        \ (Main Continuity) |} {{-}} {| border=\"5\" cellspacing=\"1/6\" cellpadding=\"\
-        15\" align=\"left\" width=\"auto\" style=\"border: 1px solid #2f2f2f;\" !\
-        \ colspan=\"5\" style=\"background: #24fc03; font-size: 110%;\" |Energies\
-        \ |- ! class=\"portal\" style=\"border: 1px solid #24fc03;\" | Cyber Corruption\
-        \ Sonic.jpg|Cyber Corruption|link=Cyber Corruption |} {{-}} ===Other=== {|\
-        \ border=\"5\" cellspacing=\"1/6\" cellpadding=\"15\" align=\"left\" width=\"\
-        auto\" style=\"border: 1px solid #2f2f2f;\" ! colspan=\"5\" style=\"background:\
-        \ #2f2f2f; font-size: 110%;\" | |- ! class=\"portal\" style=\"border: 1px\
-        \ solid #2f2f2f;\" | Item Box Portrait.webp|Item Box|link=Item Box (Sonic\
-        \ the Hedgehog) BabylonRougesIDW.webp|Extreme Gear|link=Extreme Gear (Main\
-        \ Continuity) |} {{-}} ==Locations== {| border=\"5\" cellspacing=\"1/6\" cellpadding=\"\
-        15\" align=\"left\" width=\"auto\" style=\"border: 1px solid #DEAA88;\" !\
-        \ colspan=\"5\" style=\"background: #0f8f03; font-size: 110%;\" |Islands |-\
-        \ ! class=\"portal\" style=\"border: 1px solid #0f8f03;\" | Green Hill Portrait.jpg|Green\
-        \ Hill Zone|link=Green Hill Zone |} {| border=\"5\" cellspacing=\"1/6\" cellpadding=\"\
-        15\" align=\"left\" width=\"auto\" style=\"border: 1px solid #DEAA88;\" !\
-        \ colspan=\"5\" style=\"background: #0516ad; font-size: 110%;\" |Celestial\
-        \ Bodies |- ! class=\"portal\" style=\"border: 1px solid #0516ad;\" | Little\
-        \ Planet Portrait.webp|Little Planet|link=Little Planet |} {| border=\"5\"\
-        \ cellspacing=\"1/6\" cellpadding=\"15\" align=\"left\" width=\"auto\" style=\"\
-        border: 1px solid #DEAA88;\" ! colspan=\"5\" style=\"background: #f205c7;\
-        \ font-size: 110%;\" |Alternate Dimensions |- ! class=\"portal\" style=\"\
-        border: 1px solid #f205c7;\" | Sonic Moon Running.webp|Cosmology Page|link=Sonic\
-        \ The Hedgehog (Main Continuity) Cosmology Page Sonic-Frontiers Cyber Space\
-        \ City.webp|Cyber Space|link=Cyber Space |} {{-}} ==Gallery== |-|Games= {{#tag:tabber|\
-        \ {{!}}-{{!}}Intros= Sonic 1 Intro|NA June/1991 Sonic 2 Intro|November/1992\
-        \ Sonic CD JPN-EU Title Screen|NA November/1993 Sonic 3 Intro|NA February/1994\
-        \ Sonic & Knuckles Intro Extended|October/1994 Knuckles Chaotix Intro Theme\
-        \ \u2714|April/1995 {{!}}-{{!}}Marketing= Sonic the Hedgehog - Commercials\
-        \ collection Sonic the Hedgehog 2 - Commercials collection Sonic CD - Commercials\
-        \ collection Sonic Chaos - Sonic Triple Trouble - Sonic Drift - Commercials\
-        \ collection Sonic Spinball - Commercials collection {{!}}-{{!}}Other= Sonic\
-        \ Unleashed - Opening Cutscene (HD)|November/2008 }} |-|IDW= {{#tag:tabber|\
-        \ {{!}}-{{!}}Issues= IDW Sonic Issue 1.jpg|The First Issue IDW Sonic Issue\
-        \ 1 Alt.jpg|The First Issue (Alt. cover) {{!}}-{{!}}Volumes= IDW Sonic Vol.\
-        \ 1.jpg|Volume 1, Fallout IDW Sonic Vol. 2 Fate of Dr. Eggman.jpg|Volume 2,\
-        \ The Fate of Dr. Eggman IDW Vol. 3 Battle for Angel Island.jpg|Volume 3,\
-        \ Battle for Angel Island IDW Vol. 4 Infection.jpg|Volume 4, Infection IDW\
-        \ Vol. 5 Crisis City.jpg|Volume 5, Crisis City IDW Vol 6 The Last Minute.jpg|Volume\
-        \ 6, The Last Minute IDW Vol. 7 All or Nothing.jpg|Volume 7, All or Nothing\
-        \ IDW Sonic Volume 8.jpg|Volume 8, Out of The Blue IDW Vol 9 Chao Races &\
-        \ Badnik Bases.jpg|Volume 9, Chao Races & Badnik Bases IDW Vol 10 Test Run.jpg|Volume\
-        \ 10, Test Run IDW Vol 11 Zeti Hunt.jpg|Volume 11, Zeti Hunt StHVol12.png|Volume\
-        \ 12, Trial by Fire StHVol13.png|Volume 13, Batte for the Empire IDWSonicvol14.png|Volume\
-        \ 14, Overpowered IDWSonicvol15.png|Volume 15, Urban Warfare IDWSonicvol16.png|Volume\
-        \ 16, Misadventures IDWSonicvol17.png|Volume 17, Adventure Awaits Sonic IDW\
-        \ Vol 18 Cover.png|Volume 18, Extreme Competition IDW Sonic Vol 19 cover.png|Volume\
-        \ 19, Collision Course IDW20CauseAndEffectCover.png|Volume 20, Cause & Effect\
-        \ }} {{Discussions|Sonic the Hedgehog Main Continuity|Sonic the Hedgehog (Main\
-        \ Continuity)}} {{GeneralDiscussion|107614}} Category:Verses Category:Sonic\
-        \ the Hedgehog Category:Sega Category:Marza Animation Planet Category:Toei\
-        \ Animation Category:Science Fantasy Category:Games Category:Cartoons Category:Comic\
-        \ Books Category:Internet Category:Manga Category:TV Series Category:1990s"
+      value: '*Dr. Eggman tanks an explosion (0.573 Tons, 8-C)'
       source_id: vsbattles-sonic-the-hedgehog-mixed-games
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     identity_match: true
-    identity_score: 120
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9649546
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
-    url: https://character-stats-and-profiles.fandom.com/wiki/Sonic_the_Hedgehog_Mixed_Games
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - speed
-    normalized_page_title: Sonic the Hedgehog (Canon, Composite, The Universe)/Wixzers
-    source_type: mediawiki
-    revision_id: '615618'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 18032
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Explanations
-    - Composite Timeline
-    - Powers of the Verse
-    - Calculs of the verse
-    - Games
-    - Archie
-    - IDW
-    - Satam
-    - Aosth
-    - Prime
-    - Movie
-    - Sonic Boom
-    - STC
-    - Promo Comic
-    - Universal Energy System
-    - Characters
-    - Freedom Fighters (+Resistance/Restoration)
-    - Restoration
-    - Freedom Fighters
-    - Allies
-    - Eggman Machines
-    - Fandom Characters
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - speed
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 90
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: attack_potency
-      value: '* Dr. Eggman destroys a wall (468 Kilojoules, 9-B) * A Badnik breaks
-        a wall (.002 Tons, 9-B) *Dr. Eggman casually punches a truck (.003 Tons, 8-C)
-        * breaks the chain links to Little Planet (3.282 Teratons, Low 6-B)'
-      source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Feats * Badnik parts stay frozen in midair (Mach 0.81428, Subsonic+)
-        * Smashed the Sound Barrier (Mach 1.00356, Transonic) * Sonic dodges a laser
-        (8.88% c, Sub-Relativistic+) * Laser feats throughout the Sonic series (Relativistic
-        to FTL) * Classic Sonic moves faster than lasers (5.64c and 7.79c, FTL) LS
-        Feats *Dr. Eggman casually punches a truck (8.3765359e+5 kg, Class K)
-      source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Feats * Sonic survives an explosion (0.0015 Tons, 9-B) *Eggman tanks
-        an explosion (0.573 Tons, 8-C) * Robotnik's prison explodes (6.5518 tons,
-        High 8-C+) {{!}}-{{!}}Archie= ====Archie==== {{!}}-{{!}}Idw= ====IDW==== *
-        Silver pushes a metallic cube (36984.498274 kg, Class 50) {{!}}-{{!}}Satam=
-        ====Satam==== {{!}}-{{!}}Aosth= ====Aosth==== * Sonic drills to the other
-        side of Mobius (4.250273701% SoL, Sub-Relativistic) * Grounder moves a boulder
-        (45117.3352801 kg, Class 50) * Grounder holds up a stone weight (317763.705754
-        kg, Class K) * Robotnik, Scratch and Grounder tanks a stone weight (15.259013
-        Megajoules, 9-B) * Scratch and Grounder tank a fall (2.9902 tons, High 8-C)
-        {{!}}-{{!}}Prime= ====Prime==== {{!}}-{{!}}Movie= ====Movie
-      source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
+    identity_score: 100
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
     ability_count: 0
     exact_name_match: false
     alias_match: false
-    franchise_match: true
+    franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|sonic the hedgehog canon
-      composite the universe wixzers|615618
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-sonic-the-hedgehog-mixed-games
-    url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_%28Mixed_Games%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id008
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    normalized_page_title: Sonic the Hedgehog (Main Continuity)
-    source_type: mediawiki
-    revision_id: '9649546'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 69368
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Knowledgeable Members
-    - Supporters/Opponents/Neutral
-    - Supporters
-    - Opponents
-    - Neutral
-    - Characters
-    - Heroes
-    - Villains
-    - Neutral
-    - Tails Tech
-    - Artifacts
-    - Verse specific powers
-    - Other
-    - Locations
-    - Gallery
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id009
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: attack_potency
-      value: '*A Badnik breaks a wall (0.002 Tons, 9-B) *Dr. Eggman casually punches
-        a truck (0.3 Tons, 8-C) *The Eclipse Cannon blasts Central City (28 Teratons,
-        6-B) *The Space Colony ARK destroys a portion of the moon (376.99 Zettatons,
-        5-B) *The Chaos Energy Cannon shatters the Earth (7.2 Yottatons, 5-A) *The
-        Indigo Asteroid creates a black hole made of Hyper-Go-On (7.072 Ronnatons,
-        5-A) *Classic Sonic breaks the chain links to Little Planet (90.733 Ronnatons
-        High 5-A) *Earth can tank 0.5 of the Eclipse Cannon''s power (160,62318833674365
-        Ronnatons High 5-A) *The Eclipse Cannon can pierce the stars (32.124638 Quettatons,
-        Low 4-C) *A Chaos Emerald shifts a continent (11,246 Quettatons, High 4-C)
-        *The Nega Wisps creates a black hole made of Hyper-Go-On (18.08 Foe, High
-        4-C+) *The Final Egg Blaster destroys a constellation (465.364631 ExaFoe,
-        4-A) *Master Core: ABIS creates a realm with numerous stars (1.14 YottaFoe,
-        3-C) {{!}}-{{!}}'
-      source_id: vsbattles-sonic-the-hedgehog-mixed-games
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: '*E-102 Gamma dodges E-101 Beta''s Lasers (0.3459c, Relativistic) *Laser
-        feats throughout the Sonic series (Relativistic to FTL) *Classic Sonic moves
-        faster than lasers (5.64c and 7.79c, FTL) *Modern Sonic overclocks the SPD
-        meter (Sonic Unleashed) (9.02c, FTL) *Modern Sonic goes fast in Sonic Runners
-        Adventure (16.58 Million c, MFTL+) *Super Sonic chases after the Nega Mother
-        Wisp (248.83 Millions c, MFTL+) *Modern Sonic races against an escaping Dr.
-        Eggman Nega (546.58 Million c, MFTL+) *The Egg Mobile flies to the Nonaggression
-        Zone (7.068751 Billion c, MFTL+) *The Final Egg Blaster attack speed (58.216748
-        Billion c, MFTL+) *Master Core: ABIS moves galaxies (5.1059486626578 Trillion
-        c, MFTL+) *Dodon Pa''s Rocket Speed (2.445662 Quadrillion c, MFTL+) *Time
-        Eater''s AOE attack at Green Hill Zone (4.891323 Quadrillion c, MFTL+) *Super
-        Sonic and Burning Blaze flying to the Exception (3.16 Quadrillion c, MFTL+)
-        {{!}}-{{!}}'
-      source_id: vsbattles-sonic-the-hedgehog-mixed-games
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: '*Dr. Eggman tanks an explosion (0.573 Tons, 8-C) {{!}}-{{!}}'
-      source_id: vsbattles-sonic-the-hedgehog-mixed-games
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{| border=\"5\" cellspacing=\"1/6\" cellpadding=\"15\" align=\"left\"\
-        \ width=\"auto\" style=\"border: 1px solid #2f2f2f;\" ! colspan=\"5\" style=\"\
-        background: #fc6603; font-size: 110%;\" |Techniques |- ! class=\"portal\"\
-        \ style=\"border: 1px solid #fc6603;\" | SpinDashIDW.JPG.webp|Spin Attack|link=Spin\
-        \ Attack (Main Continuity) Sonic v Shadow Boss ARK Race.webp|Boost|link=Boost\
-        \ (Main Continuity) |} {{-}} {| border=\"5\" cellspacing=\"1/6\" cellpadding=\"\
-        15\" align=\"left\" width=\"auto\" style=\"border: 1px solid #2f2f2f;\" !\
-        \ colspan=\"5\" style=\"background: #24fc03; font-size: 110%;\" |Energies\
-        \ |- ! class=\"portal\" style=\"border: 1px solid #24fc03;\" | Cyber Corruption\
-        \ Sonic.jpg|Cyber Corruption|link=Cyber Corruption |} {{-}} ===Other=== {|\
-        \ border=\"5\" cellspacing=\"1/6\" cellpadding=\"15\" align=\"left\" width=\"\
-        auto\" style=\"border: 1px solid #2f2f2f;\" ! colspan=\"5\" style=\"background:\
-        \ #2f2f2f; font-size: 110%;\" | |- ! class=\"portal\" style=\"border: 1px\
-        \ solid #2f2f2f;\" | Item Box Portrait.webp|Item Box|link=Item Box (Sonic\
-        \ the Hedgehog) BabylonRougesIDW.webp|Extreme Gear|link=Extreme Gear (Main\
-        \ Continuity) |} {{-}} ==Locations== {| border=\"5\" cellspacing=\"1/6\" cellpadding=\"\
-        15\" align=\"left\" width=\"auto\" style=\"border: 1px solid #DEAA88;\" !\
-        \ colspan=\"5\" style=\"background: #0f8f03; font-size: 110%;\" |Islands |-\
-        \ ! class=\"portal\" style=\"border: 1px solid #0f8f03;\" | Green Hill Portrait.jpg|Green\
-        \ Hill Zone|link=Green Hill Zone |} {| border=\"5\" cellspacing=\"1/6\" cellpadding=\"\
-        15\" align=\"left\" width=\"auto\" style=\"border: 1px solid #DEAA88;\" !\
-        \ colspan=\"5\" style=\"background: #0516ad; font-size: 110%;\" |Celestial\
-        \ Bodies |- ! class=\"portal\" style=\"border: 1px solid #0516ad;\" | Little\
-        \ Planet Portrait.webp|Little Planet|link=Little Planet |} {| border=\"5\"\
-        \ cellspacing=\"1/6\" cellpadding=\"15\" align=\"left\" width=\"auto\" style=\"\
-        border: 1px solid #DEAA88;\" ! colspan=\"5\" style=\"background: #f205c7;\
-        \ font-size: 110%;\" |Alternate Dimensions |- ! class=\"portal\" style=\"\
-        border: 1px solid #f205c7;\" | Sonic Moon Running.webp|Cosmology Page|link=Sonic\
-        \ The Hedgehog (Main Continuity) Cosmology Page Sonic-Frontiers Cyber Space\
-        \ City.webp|Cyber Space|link=Cyber Space |} {{-}} ==Gallery== |-|Games= {{#tag:tabber|\
-        \ {{!}}-{{!}}Intros= Sonic 1 Intro|NA June/1991 Sonic 2 Intro|November/1992\
-        \ Sonic CD JPN-EU Title Screen|NA November/1993 Sonic 3 Intro|NA February/1994\
-        \ Sonic & Knuckles Intro Extended|October/1994 Knuckles Chaotix Intro Theme\
-        \ \u2714|April/1995 {{!}}-{{!}}Marketing= Sonic the Hedgehog - Commercials\
-        \ collection Sonic the Hedgehog 2 - Commercials collection Sonic CD - Commercials\
-        \ collection Sonic Chaos - Sonic Triple Trouble - Sonic Drift - Commercials\
-        \ collection Sonic Spinball - Commercials collection {{!}}-{{!}}Other= Sonic\
-        \ Unleashed - Opening Cutscene (HD)|November/2008 }} |-|IDW= {{#tag:tabber|\
-        \ {{!}}-{{!}}Issues= IDW Sonic Issue 1.jpg|The First Issue IDW Sonic Issue\
-        \ 1 Alt.jpg|The First Issue (Alt. cover) {{!}}-{{!}}Volumes= IDW Sonic Vol.\
-        \ 1.jpg|Volume 1, Fallout IDW Sonic Vol. 2 Fate of Dr. Eggman.jpg|Volume 2,\
-        \ The Fate of Dr. Eggman IDW Vol. 3 Battle for Angel Island.jpg|Volume 3,\
-        \ Battle for Angel Island IDW Vol. 4 Infection.jpg|Volume 4, Infection IDW\
-        \ Vol. 5 Crisis City.jpg|Volume 5, Crisis City IDW Vol 6 The Last Minute.jpg|Volume\
-        \ 6, The Last Minute IDW Vol. 7 All or Nothing.jpg|Volume 7, All or Nothing\
-        \ IDW Sonic Volume 8.jpg|Volume 8, Out of The Blue IDW Vol 9 Chao Races &\
-        \ Badnik Bases.jpg|Volume 9, Chao Races & Badnik Bases IDW Vol 10 Test Run.jpg|Volume\
-        \ 10, Test Run IDW Vol 11 Zeti Hunt.jpg|Volume 11, Zeti Hunt StHVol12.png|Volume\
-        \ 12, Trial by Fire StHVol13.png|Volume 13, Batte for the Empire IDWSonicvol14.png|Volume\
-        \ 14, Overpowered IDWSonicvol15.png|Volume 15, Urban Warfare IDWSonicvol16.png|Volume\
-        \ 16, Misadventures IDWSonicvol17.png|Volume 17, Adventure Awaits Sonic IDW\
-        \ Vol 18 Cover.png|Volume 18, Extreme Competition IDW Sonic Vol 19 cover.png|Volume\
-        \ 19, Collision Course IDW20CauseAndEffectCover.png|Volume 20, Cause & Effect\
-        \ }} {{Discussions|Sonic the Hedgehog Main Continuity|Sonic the Hedgehog (Main\
-        \ Continuity)}} {{GeneralDiscussion|107614}} Category:Verses Category:Sonic\
-        \ the Hedgehog Category:Sega Category:Marza Animation Planet Category:Toei\
-        \ Animation Category:Science Fantasy Category:Games Category:Cartoons Category:Comic\
-        \ Books Category:Internet Category:Manga Category:TV Series Category:1990s"
-      source_id: vsbattles-sonic-the-hedgehog-mixed-games
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: true
-    identity_score: 120
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9649546
+    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9710740
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
@@ -2420,7 +1802,7 @@ repair:
     - speed
     normalized_page_title: Sonic the Hedgehog (Canon, Composite, The Universe)/Wixzers
     source_type: mediawiki
-    revision_id: '615618'
+    revision_id: '619317'
     fetch_status: fetched
     http_status: 200
     content_length: 18032
@@ -2494,14 +1876,7 @@ repair:
     - field: durability
       value: Feats * Sonic survives an explosion (0.0015 Tons, 9-B) *Eggman tanks
         an explosion (0.573 Tons, 8-C) * Robotnik's prison explodes (6.5518 tons,
-        High 8-C+) {{!}}-{{!}}Archie= ====Archie==== {{!}}-{{!}}Idw= ====IDW==== *
-        Silver pushes a metallic cube (36984.498274 kg, Class 50) {{!}}-{{!}}Satam=
-        ====Satam==== {{!}}-{{!}}Aosth= ====Aosth==== * Sonic drills to the other
-        side of Mobius (4.250273701% SoL, Sub-Relativistic) * Grounder moves a boulder
-        (45117.3352801 kg, Class 50) * Grounder holds up a stone weight (317763.705754
-        kg, Class K) * Robotnik, Scratch and Grounder tanks a stone weight (15.259013
-        Megajoules, 9-B) * Scratch and Grounder tank a fall (2.9902 tons, High 8-C)
-        {{!}}-{{!}}Prime= ====Prime==== {{!}}-{{!}}Movie= ====Movie
+        High 8-C+)
       source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
       provider_id: character_stats_profiles
       authority: high
@@ -2517,7 +1892,338 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|sonic the hedgehog canon
-      composite the universe wixzers|615618
+      composite the universe wixzers|619317
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-sonic-the-hedgehog-mixed-games
+    url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_Mixed_Games
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id007
+    - attack_potency
+    - durability
+    - speed
+    normalized_page_title: Sonic the Hedgehog (Main Continuity)
+    source_type: mediawiki
+    revision_id: '9710740'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 69385
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Knowledgeable Members
+    - Supporters/Opponents/Neutral
+    - Supporters
+    - Opponents
+    - Neutral
+    - Characters
+    - Heroes
+    - Villains
+    - Neutral
+    - Tails Tech
+    - Artifacts
+    - Verse specific powers
+    - Other
+    - Locations
+    - Gallery
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id008
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: attack_potency
+      value: '*A Badnik breaks a wall (0.002 Tons, 9-B) *Dr. Eggman casually punches
+        a truck (0.3 Tons, 8-C) *The Eclipse Cannon blasts Central City (28 Teratons,
+        6-B) *The Space Colony ARK destroys a portion of the moon (376.99 Zettatons,
+        5-B) *[https://web.archive.org/web/20140412151210/https://www.narutoforums.com/blog.php?b=21317
+        The Chaos Energy Cannon shatters the Earth] (7.2 Yottatons, 5-A) *The Indigo
+        Asteroid creates a black hole made of Hyper-Go-On (7.072 Ronnatons, 5-A) *Classic
+        Sonic breaks the chain links to Little Planet (90.733 Ronnatons High 5-A)
+        *Earth can tank 0.5 of the Eclipse Cannon''s power (160,62318833674365 Ronnatons
+        High 5-A) *The Eclipse Cannon can pierce the stars (32.124638 Quettatons,
+        Low 4-C) *A Chaos Emerald shifts a continent (11,246 Quettatons, High 4-C)
+        *The Nega Wisps creates a black hole made of Hyper-Go-On (18.08 Foe, High
+        4-C+) *The Final Egg Blaster destroys a constellation (465.364631 ExaFoe,
+        4-A) *Master Core: ABIS creates a realm with numerous stars (1.14 YottaFoe,
+        3-C)'
+      source_id: vsbattles-sonic-the-hedgehog-mixed-games
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: '*E-102 Gamma dodges E-101 Beta''s Lasers (0.3459c, Relativistic) *Laser
+        feats throughout the Sonic series (Relativistic to FTL) *Classic Sonic moves
+        faster than lasers (5.64c and 7.79c, FTL) *Modern Sonic overclocks the SPD
+        meter (Sonic Unleashed) (9.02c, FTL) *Modern Sonic goes fast in Sonic Runners
+        Adventure (16.58 Million c, MFTL+) *Super Sonic chases after the Nega Mother
+        Wisp (248.83 Millions c, MFTL+) *Modern Sonic races against an escaping Dr.
+        Eggman Nega (546.58 Million c, MFTL+) *The Egg Mobile flies to the Nonaggression
+        Zone (7.068751 Billion c, MFTL+) *The Final Egg Blaster attack speed (58.216748
+        Billion c, MFTL+) *Master Core: ABIS moves galaxies (5.1059486626578 Trillion
+        c, MFTL+) *Dodon Pa''s Rocket Speed (2.445662 Quadrillion c, MFTL+) *Time
+        Eater''s AOE attack at Green Hill Zone (4.891323 Quadrillion c, MFTL+) *Super
+        Sonic and Burning Blaze flying to the Exception (3.16 Quadrillion c, MFTL+)'
+      source_id: vsbattles-sonic-the-hedgehog-mixed-games
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: '*Dr. Eggman tanks an explosion (0.573 Tons, 8-C)'
+      source_id: vsbattles-sonic-the-hedgehog-mixed-games
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 120
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9710740
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
+    url: https://character-stats-and-profiles.fandom.com/wiki/Sonic_the_Hedgehog_Mixed_Games
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    normalized_page_title: Sonic the Hedgehog (Canon, Composite, The Universe)/Wixzers
+    source_type: mediawiki
+    revision_id: '619317'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 18032
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Explanations
+    - Composite Timeline
+    - Powers of the Verse
+    - Calculs of the verse
+    - Games
+    - Archie
+    - IDW
+    - Satam
+    - Aosth
+    - Prime
+    - Movie
+    - Sonic Boom
+    - STC
+    - Promo Comic
+    - Universal Energy System
+    - Characters
+    - Freedom Fighters (+Resistance/Restoration)
+    - Restoration
+    - Freedom Fighters
+    - Allies
+    - Eggman Machines
+    - Fandom Characters
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - powers_and_abilities
+    - speed
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: attack_potency
+      value: '* Dr. Eggman destroys a wall (468 Kilojoules, 9-B) * A Badnik breaks
+        a wall (.002 Tons, 9-B) *Dr. Eggman casually punches a truck (.003 Tons, 8-C)
+        * breaks the chain links to Little Planet (3.282 Teratons, Low 6-B)'
+      source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Feats * Badnik parts stay frozen in midair (Mach 0.81428, Subsonic+)
+        * Smashed the Sound Barrier (Mach 1.00356, Transonic) * Sonic dodges a laser
+        (8.88% c, Sub-Relativistic+) * Laser feats throughout the Sonic series (Relativistic
+        to FTL) * Classic Sonic moves faster than lasers (5.64c and 7.79c, FTL) LS
+        Feats *Dr. Eggman casually punches a truck (8.3765359e+5 kg, Class K)
+      source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Feats * Sonic survives an explosion (0.0015 Tons, 9-B) *Eggman tanks
+        an explosion (0.573 Tons, 8-C) * Robotnik's prison explodes (6.5518 tons,
+        High 8-C+)
+      source_id: character-stats-profiles-sonic-the-hedgehog-mixed-games
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|sonic the hedgehog canon
+      composite the universe wixzers|619317
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-sonic-the-hedgehog-mixed-games
+    url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_%28Mixed_Games%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id009
+    - attack_potency
+    - durability
+    - speed
+    normalized_page_title: Sonic the Hedgehog (Main Continuity)
+    source_type: mediawiki
+    revision_id: '9710740'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 69385
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Knowledgeable Members
+    - Supporters/Opponents/Neutral
+    - Supporters
+    - Opponents
+    - Neutral
+    - Characters
+    - Heroes
+    - Villains
+    - Neutral
+    - Tails Tech
+    - Artifacts
+    - Verse specific powers
+    - Other
+    - Locations
+    - Gallery
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id010
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: attack_potency
+      value: '*A Badnik breaks a wall (0.002 Tons, 9-B) *Dr. Eggman casually punches
+        a truck (0.3 Tons, 8-C) *The Eclipse Cannon blasts Central City (28 Teratons,
+        6-B) *The Space Colony ARK destroys a portion of the moon (376.99 Zettatons,
+        5-B) *[https://web.archive.org/web/20140412151210/https://www.narutoforums.com/blog.php?b=21317
+        The Chaos Energy Cannon shatters the Earth] (7.2 Yottatons, 5-A) *The Indigo
+        Asteroid creates a black hole made of Hyper-Go-On (7.072 Ronnatons, 5-A) *Classic
+        Sonic breaks the chain links to Little Planet (90.733 Ronnatons High 5-A)
+        *Earth can tank 0.5 of the Eclipse Cannon''s power (160,62318833674365 Ronnatons
+        High 5-A) *The Eclipse Cannon can pierce the stars (32.124638 Quettatons,
+        Low 4-C) *A Chaos Emerald shifts a continent (11,246 Quettatons, High 4-C)
+        *The Nega Wisps creates a black hole made of Hyper-Go-On (18.08 Foe, High
+        4-C+) *The Final Egg Blaster destroys a constellation (465.364631 ExaFoe,
+        4-A) *Master Core: ABIS creates a realm with numerous stars (1.14 YottaFoe,
+        3-C)'
+      source_id: vsbattles-sonic-the-hedgehog-mixed-games
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: '*E-102 Gamma dodges E-101 Beta''s Lasers (0.3459c, Relativistic) *Laser
+        feats throughout the Sonic series (Relativistic to FTL) *Classic Sonic moves
+        faster than lasers (5.64c and 7.79c, FTL) *Modern Sonic overclocks the SPD
+        meter (Sonic Unleashed) (9.02c, FTL) *Modern Sonic goes fast in Sonic Runners
+        Adventure (16.58 Million c, MFTL+) *Super Sonic chases after the Nega Mother
+        Wisp (248.83 Millions c, MFTL+) *Modern Sonic races against an escaping Dr.
+        Eggman Nega (546.58 Million c, MFTL+) *The Egg Mobile flies to the Nonaggression
+        Zone (7.068751 Billion c, MFTL+) *The Final Egg Blaster attack speed (58.216748
+        Billion c, MFTL+) *Master Core: ABIS moves galaxies (5.1059486626578 Trillion
+        c, MFTL+) *Dodon Pa''s Rocket Speed (2.445662 Quadrillion c, MFTL+) *Time
+        Eater''s AOE attack at Green Hill Zone (4.891323 Quadrillion c, MFTL+) *Super
+        Sonic and Burning Blaze flying to the Exception (3.16 Quadrillion c, MFTL+)'
+      source_id: vsbattles-sonic-the-hedgehog-mixed-games
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: '*Dr. Eggman tanks an explosion (0.573 Tons, 8-C)'
+      source_id: vsbattles-sonic-the-hedgehog-mixed-games
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 120
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9710740
     retryable: false
     exception_class: ''
   - source_id: vsbattles-sonic-the-hedgehog
@@ -2528,19 +2234,15 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
-    - range
     - speed
-    - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Sonic the Hedgehog (Modern)
     source_type: mediawiki
-    revision_id: '9690649'
+    revision_id: '9720079'
     fetch_status: fetched
     http_status: 200
-    content_length: 295959
+    content_length: 297158
     content_kind: api_json
     headings_detected:
     - Summary
@@ -2565,7 +2267,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -2580,348 +2282,125 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{High 3-A}}, higher with Boost | {{2-C}}, higher with Boost, far higher
-        with transformations, even higher with his Strongest Attacks | At least {{2-C}},
-        higher with Focused Homing Attack, Flying Kick, and Color Powers, even higher
-        with Final Color Blaster, Energy Cores, and Planetary Lifeforce | At least
-        {{2-C}}, higher with Phantom Rush, even higher with Double Boost and Triple
-        Boost | At least {{2-C}} | {{Varies}}. At least {{2-C}}, up to {{1-C}}, higher
-        with Charged Attacks | {{1-C}}, far higher at Full Power'
-      source_id: vsbattles-sonic-the-hedgehog
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base \u25BE=\
-        \ {{#tag:tabber| {{!}}-{{!}}Abilities \u25BE= {{#tag:tabber| {{!}}-{{!}}Sonic\
-        \ the Hedgehog (2006) - Sonic Riders: Zero Gravity={{Border|Scroll=Yes|Visible=No|Content=All\
-        \ innate abilities of his Classic and Adventure Eras selves plus: *Greater\
-        \ Superhuman Physical Characteristics **Greater Acrobatics (All Types; Consistently\
-        \ displays varying kinds of acrobatics; this ranges from leaping hundreds\
-        \ of meters in a single bound, bouncing of several enemies, traversing nearly\
-        \ any type of terrain possible, run on enemies while making acrobatic movements\
-        \ to confuse them, climb up and down any surface no matter how thin or how\
-        \ compromising the terrain is, etc, all while he is constantly fighting and\
-        \ doing complex movements, even being in an environment with shifting gravity\
-        \ fails to slow him down so long as there are objects or enemies nearby for\
-        \ him to interact with.Sonic the Hedgehog #1Sonic the Hedgehog #2Sonic the\
-        \ Hedgehog #6Sonic the Hedgehog #7Sonic the Hedgehog #23Sonic the Hedgehog\
-        \ #25Sonic the Hedgehog #51Sonic the Hedgehog #55Sonic the Hedgehog #39Sonic\
-        \ the Hedgehog #41Sonic the Hedgehog #42Sonic the Hedgehog #50 Sonic's entire\
-        \ movement and fighting style hones into doubling down on his athleticism\
-        \ combined with his speed, allowing him to employ it both in and out of combat.Sonic\
-        \ 06 Wave Ocean: Sonic's StorySonic Unleashed: MazuriSonic & the Black Knight:\
-        \ OpeningSonic and the Black Knight: Misty Lake (Special Challenge: Retrieve\
-        \ the sacred sword)Sonic Lost World OpeningSonic Lost World: Dessert RuinsSonic\
-        \ the Hedgehog #1, page 3Sonic the Hedgehog #1, page 5Sonic the Hedgehog #1,\
-        \ page 6Sonic the Hedgehog #1, page 7Sonic the Hedgehog #1, page 8Sonic the\
-        \ Hedgehog #1, page 11Sonic the Hedgehog #1, page 12Sonic the Hedgehog #1,\
-        \ page 13Sonic the Hedgehog #1, page 14Sonic the Hedgehog #4, page 5Sonic\
-        \ the Hedgehog #5, page 1Sonic the Hedgehog #5, page 3Sonic the Hedgehog #5,\
-        \ page 15Sonic the Hedgehog #8, page 2Sonic the Hedgehog #8, page 16Sonic\
-        \ the Hedgehog #8, page 17Sonic the Hedgehog #10, page 12Sonic the Hedgehog\
-        \ #13, page 8Sonic the Hedgehog #13, page 9Sonic the Hedgehog Annuals and\
-        \ One-Shots - 2022 Sonic the Hedgehog Free Comic Book Day, page 8Sonic the\
-        \ Hedgehog Annuals and One-Shots - 2022 Sonic the Hedgehog Free Comic Book\
-        \ Day, page 10Sonic the Hedgehog #25, page 2Sonic the Hedgehog #25, page 2Sonic\
-        \ the Hedgehog #56, page 11Sonic the Hedgehog #57, page 21Sonic the Hedgehog\
-        \ #57, page 18Sonic the Hedgehog #58, page 1Sonic the Hedgehog #60, page 12Sonic\
-        \ the Hedgehog #63, page 13Sonic the Hedgehog #63, page 14Sonic the Hedgehog\
-        \ #63, page 14Sonic the Hedgehog #63, page 15Sonic the Hedgehog #63, page\
-        \ 19Sonic the Hedgehog's 900th Adventure, page 8Sonic the Hedgehog's 900th\
-        \ Adventure, page 10Sonic the Hedgehog's 900th Adventure, page 11Sonic the\
-        \ Hedgehog's 900th Adventure, Page 21Sonic the Hedgehog's 900th Adventure,\
-        \ Page 22Sonic the Hedgehog's 900th Adventure, Page 23Sonic the Hedgehog's\
-        \ 900th Adventure, page 36Sonic the Hedgehog's 900th Adventure, Page 39Sonic\
-        \ the Hedgehog: Endless Summer Special, Page 3Sonic the Hedgehog 2023 Halloween\
-        \ Special, Page 10Sonic the Hedgehog 2023 Winter JamSonic Lost World (Wii\
-        \ U): Tropical Coast Zone 4Sonic Lost World (3DS): Lava Montain Zone 3Sonic\
-        \ Frontiers Idle dialogue Shown to be able to \"run\" and move just as fast\
-        \ and efficiently with his hands as he can with his legs) *Greater Enhanced\
-        \ Senses (Consistently able to react to things out of his line of sight. Can\
-        \ sense camouflaged rails in Green Cave) *Possibly Paralysis Inducement (Level\
-        \ 3 Attacks in Sonic Riders are potentially capable of paralyzing opponents)\
-        \ *Indomitable Will (Sonic has displayed immense willpower, a relentless courage,\
-        \ and an absolute unwillingness to give up no matter how frightening and hopeless\
-        \ a situation might appear to be; Chip affirmed that Sonic is too strong to\
-        \ lose himself, that he never doubted himself on their journey no matter what,\
-        \ and further stated Sonic had a mind that never gives into the temptations\
-        \ of night and darknessSonic Unleashed: No Reason (Videotape 32) (JP) despite\
-        \ Dark Gaia's influence bringing out the darkness of one's heartSonic Unleashed:\
-        \ Midnight Dance (Videotape 17) and making them fall into despair. Stood firm\
-        \ in his resolve of fighting Merlina despite having his friend and mentor\
-        \ killed in front of him amd receiving a debilitating beating, refusing to\
-        \ falter even when the Knights of the Round Table insisted on him giving up\
-        \ and fleeing to save his life. Endured the Arrow of Judgement without issue\
-        \ for a large amount of his adventure in the Arabian Nights, a curse that\
-        \ was eating away at his life-force, and was able to defeat Erazor Djinn in\
-        \ combat even after a point where it brought Sonic to his kneesSonic and the\
-        \ Secret Rings - Night Palace. Endured constant torture of some form aboard\
-        \ of the Death Egg for six months straight without suffering any repercussions\
-        \ to his mental stability, instead treating it as a minor"
-      source_id: vsbattles-sonic-the-hedgehog
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: "Same equipment as his Adventure and Classic selves, plus: {{#tag:tabber|\
-        \ {{!}}-{{!}}Standard= {{#tag:tabber| {{!}}-{{!}}Rings= *Damage Transferal\
-        \ (Up to 1-C [6-D] AP with Rings; Rings completely shield the user from harm\
-        \ so long as they have at least 1 in their possession.Sonic the Hedgehog (16-bit)\
-        \ Instructional ManualSonic Colors (Wii) ManualSonic the Hedgehog (8-bit)\
-        \ ManualSonic the Hedgehog 2 (16-bit) Instructional ManualSonic the Hedgehog\
-        \ 2 (8-bit) ManualSonic the Hedgehog 3 ManualSonic Adventure ManualSonic Adventure\
-        \ 2 ManualShadow the Hedgehog ManualSonic the Hedgehog (2006) ManualSonic\
-        \ Unleashed (HD) ManualSonic Rivals 2: Silver and Espio campaignSonic Prime\
-        \ Season 1 Episode 2 - The Yoke's On YouSonic Frontiers Another Story: Vs\
-        \ Supreme/The End Upon taking an instance of damage, a varying amount will\
-        \ scatter from the one who collected them with higher durability causing less\
-        \ to drop.Sonic Frontiers Rings can shield Base characters from damage, including\
-        \ from the likes of VoidSonic Shuffle and an amped SupremeSonic Frontiers\
-        \ Another Story: Vs Supreme/The End so long as they have enough in their possession)\
-        \ **Healing & Stamina Recovery (Ring Energy revitalizes the wielder and restores\
-        \ energy, as noted with Silver wanting to use some to replenish his energy.\
-        \ Rings are referred to by The End as being vitality) **Statistics Amplification\
-        \ (Ring Energy in the Sonic Riders series can amplify the user's speed by\
-        \ nearly 2x and increases their Boost duration by nearly 2 seconds when going\
-        \ from level 1 to 3.Sonic RidersSonic Riders: Zero GravitySonic Free Riders\
-        \ Achieving the max Ring count in Sonic Frontiers grants Sonic the same speed\
-        \ for his Boost that a default level 99 Speed Sonic hasSonic Frontiers) {{!}}-{{!}}Wisp\
-        \ Capsules=Contains Wisps, which grant; *Transformation & Statistics Amplification\
-        \ *Surface Scaling (With Pink Spikes and Gray Quake) *Fire Manipulation &\
-        \ Explosion Manipulation (With Red Burst and Black Bomb) *Vibration Manipulation\
-        \ (With Blue Cube and Gray Quake) *Energy Projection (With Cyan Laser and\
-        \ Crimson Eagle) *Electricity Manipulation (With Ivory Lightning) *Invisibility\
-        \ (With Jade Ghost) *Deconstruction (With Indigo Asteroid) *Transmutation,\
-        \ Black Hole Creation, Gravity Manipulation, Size Manipulation & Absorption\
-        \ (With Indigo Asteroid, Violet Void, and Purple Frenzy) *Intangibility (With\
-        \ Jade Ghost, Violet Void, Red Burst, Cyan Laser & Ivory Lightning) *Flight\
-        \ and Levitation (With Crimson Eagle, Green Hover, Indigo Asteroid, Jade Ghost,\
-        \ Magenta Rhythm, Orange Rocket and Violet Void) *Speed Reduction & Void Manipulation\
-        \ (Usage of the Violet Void near opponents will slow them downTeam Sonic Racing)\
-        \ *Gravity Manipulation, Deconstruction, Transmutation & Size Manipulation\
-        \ (With the Indigo Asteroid Wisp, which breaks down enemies and objects in\
-        \ its orbit and grows the more it consumesSonic RunnersSonic Lost World) *Free\
-        \ Movement & Underground Mobility (With the Yellow Drill Wisp, which allows\
-        \ users of their energy to burrow underground and between gaps without issue\
-        \ as well as move through water at high speeds akin to a torpedoSonic Colors\
-        \ (Wii)) *Energy Projection (With the Cyan Laser Wisp, which lets the user\
-        \ hurtle forward as a destructive beam of energy) *Boost (Final Color Blaster)\
-        \ }} {{!}}-{{!}}Optional \u25BE= {{#tag:tabber| {{!}}-{{!}}Extreme Gear= {{#tag:tabber|\
-        \ {{!}}-{{!}}Innate= Sonic starts with a Board-type Extreme Gear (Blue Star\
-        \ II). For a better, more comprehensive look at the abilities and capabilities\
-        \ of an Extreme Gear (in order to avoid redundancy in re-listing abilities),\
-        \ see the Extreme Gear page. *Technological Flight *Enhanced Acrobatics *Air\
-        \ Manipulation (By performing tricks in mid-air, Shadow is able to generate\
-        \ Air for his Extreme GearSonic Riders: Sand Ruins to use for several purposes)\
-        \ **Statistics Amplification (By using Air to perform air boosts for quick\
-        \ bursts in speed) *Transformation (With Gear Change, Shadow can alter his\
-        \ Extreme Gear to different Gear types in order to unlock new movement abilities)\
-        \ *Gravity Manipulation (With a Gravity Band, which he wears on his ankle.\
-        \ Shadow can generate bursts of gravity for various purposes; to turn sharp\
-        \ corners, repel obstacles in his way, or massively distort the gravity of\
-        \ the surrounding environmentSonic Riders Zero Gravity: MeteorTech Premises)\
-        \ *And several more as listed in the Extreme Gear page's universal abilities\
-        \ {{!}}-{{!}}Item Boxes= *Weapon Creation (Can create a regular basketball,\
-        \ bowling ball, and Tee Shot, enabling the user to use a golf club to shoot\
-        \ out golf balls, to damage other racers) **Homing Attack & Explosion Manipulation\
-        \ (Via Target Torpedo, users can summon a bomb to explode other Riders on\
-        \ the race track or a torpedo tor track them down) *Technology Manipulation\
-        \ & Power Nullification (Self-Afflicted; When breaking open a Parts Lock Item\
-        \ Box, the playable character's tech is temporarily shut down except for the\
-        \ tech's mobility) *Statistics Amplification (Temporary via Attack & High\
-        \ Speed. W"
+      value: 3-C, possibly High 3-A, higher with Boost | Low 2-C, higher with Boost.
+        Far higher as Darkspine Sonic and Excalibur Sonic, even higher with their
+        Strongest Attacks. 2-C as Werehog Sonic | 2-C, higher with the Focused Homing
+        Attack, Flying Kick, Energy Cores, and Color Powers, even higher with the
+        Final Color Blaster and Planetary Lifeforce | 2-C | 2-C, higher with Phantom
+        Rush, even higher with Double Boost and Triple Boost | . 2-C, up to 1-C, higher
+        with Charged Attacks | 1-C, far higher at Full Power
       source_id: vsbattles-sonic-the-hedgehog
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'High Universe level (Harmed the Babylon Guardian with his strikes before
-        destroying it. Fought against the Ifrit. Aided in the defeat of Master Core:
-        ABIS), higher with Boost'
+      value: 'Galaxy level, possibly High Universe level (Superior to his Adventure
+        Era self. Fought Master Core: ABIS), higher with Boost'
       source_id: vsbattles-sonic-the-hedgehog
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Massively FTL+ (Vastly superiorSonic the Hedgehog (2006) European Website
-        to his Adventure Era-self. Capable of evading crashing meteors on a ship traveling
-        through interstellar space.Sonic Rivals Kept pace with Master Core:ABIS while
-        it flew with its gravitational powers, the same powers it used to move multiple
-        galaxies at these speeds5.1059486626578 Trillion c), higher reaction speed,
-        far higher with the Spin Attack and Super Peel Out,20.4237946506 Trillion
-        c even higher with the Boost (Sonic's Boost enhances his speed by nearly 8x,
-        40.336994435 Trillion c with the technique managing to amaze his younger self
-        even after having witnessed Metal Sonic's V. Maximum Overdrive Attack)
+      value: 'Massively FTL+ ([https://postimg.cc/nCWxB6mL Vastly superior] to his
+        Adventure Era-self. Capable of evading crashing meteors on a ship traveling
+        through interstellar space. Kept pace with Master Core: ABIS while it flew
+        with its gravitational powers, the same powers it used to move multiple galaxies
+        at these speeds), higher Reaction Speed and with the Spin Attack and Super
+        Peel Out, even higher with the Boost (Sonic''s Boost enhances his speed by
+        nearly 8x, with the technique managing to [https://www.youtube.com/watch?v=cWJvFl2tvNA&t=743s
+        amaze his younger self] even after having witnessed Metal Sonic''s V. Maximum
+        Overdrive Attack)'
       source_id: vsbattles-sonic-the-hedgehog
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: High Universe level (Can take hits from Knuckles. Able to withstand attacks
-        from those comparable to him), higher with Boost. Up to Complex Multiverse
-        level (6-D) Damage Transferal with several Rings (enough Rings shields damage
-        from those as strong as Supreme) |-|Sonic and the Secret Rings - Sonic Free
-        Riders
-      source_id: vsbattles-sonic-the-hedgehog
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Endured the "Arrow of Judgement", which slowly drained his
-        life-force, weakening him to such a level that he was left on his knees, and
-        much later was still capable of standing up to fight against Erazor Djiin.
-        Withstood a beating from Merlina and refused to give up regardless of his
-        physical condition. Ran at top speed almost nonstop for several days while
-        physically and mentally taxed in order to fight off the effects of the Metal
-        Virus, receiving minimal rest for the duration of the plague. Stated that
-        he isn't used to getting tired despite his adventurous lifestyle. Absorbed
-        Cyber Corruption to free Amy, Knuckles, and Tails from their imprisonment
-        across the Starfall Islands. Even while dealing with the corruption's influence
-        across nearly all of Sonic Frontiers and dealing with it better than Sage
-        predicted, he successfully scaled all six towers of Rhea Island and refused
-        to stop until his friends were freed from Cyber Space. In situations where
-        most others would give up and where he is severely outnumbered or outgunned,
-        such as close encounters with the Titans when he's without all the Chaos Emeralds,
-        Sonic never loses faith in himself and never surrenders), same, if not higher,
-        with transformations, Infinite with Endless Boost (Gains never ending energy
-        at the cost of not being able to hold any Rings) | Infinite (Is powered by
-        all 7 Chaos Emeralds) | Infinite (Uses a Super State as its base, and should
-        thus have its stamina directly)
-      source_id: vsbattles-sonic-the-hedgehog
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: 'Base & Shatter Sonic=Standard Melee Range, Extended Melee Range with
-        Caliburn, Hundreds of Meters with abilities. Up to countless, possibly Complex
-        Multiversal With Chaos Control (Chaos Control can halt time in White Space,
-        as Shadow intended to freeze the moment in time where Maria and Gerald were
-        being restored to the timeline to prevent it, despite it repeatedly being
-        stated that all of space-time was erased. Should be superior to Base Eggman
-        and Primordial Form Time Eater, which can respectively travel reach White
-        Space and Time Eater''s Lair). Beyond baseline Complex Multiversal with the
-        Double Boost (Broke through Null Space using the Double Boost alongside the
-        Rookie, an alternate dimension that is stated to go on forever, be an endless
-        void, and contain absolutely nothingSonic Forces: Stage 24 - Metropolis (Null
-        Space)) |-|Darkspine Sonic= Same as his base form, Low Multiversal with abilities
-        (Moves such as Time Break allow Darkspine Sonic to freeze the flow of time.
-        Fixed the entirety of the Arabian Nights reality with a hand gesture, which
-        consists both its main reality and the Night Palace) |-|Werehog Sonic=Same
-        as his base form, Extended Melee Range to Several Meters via Elasticity (Able
-        to extend his limbs that far), Hundreds of Meters with abilities (Able to
-        create shockwaves that cover that far by pounding the ground) |-|Excalibur
-        Sonic=Same as his base form, Extended Melee Range, higher with Excalibur''s
-        extension, Thousands of Kilometers with abilities (Excalibur is made by the
-        combined power of all 4 Sacred Swords, with them being able to create a giant
-        barrier that can cover that far) |-|Super Sonic=All of his base form''s range
-        enhanced, Standard Melee Range; Hundreds of Meters, up to Low Complex Multiversal
-        with his Aura (Super Sonic''s aura swallowed several duplicates of Perfect
-        Chaos and shattered alternate worlds of the Phantom Ruby all through out the
-        Egg Field); Varies Low Multiversal (Powered by all 7 Chaos Emeralds, with
-        the Emeralds being able to, alongside the Sol Emeralds, reach to 2 universes),
-        up to Beyond baseline Complex Multiverse level with abilities (6-D. Able to
-        affect Solaris, who Dr. Eggman twice states is an extra-dimensional lifeformSonic
-        the Hedgehog (2006) VS Solaris: Phase 1 Pop UpsSonic the Hedgehog (2006) VS
-        Solaris: Phase 2 Pop Ups that would make it superior to the likes of Illumina
-        and Void. Travelled to the Infinite Tunnel Dimension alongside Classic Super
-        Sonic. Should be comparable to Solaris due to being powered by the full power
-        of the Chaos Emeralds, which allowed him to destroy "everything" across all
-        of time, which would include Null Space) |-|Starfall Super Sonic=Same, if
-        not higher than Super Sonic {| class="mw-collapsible mw-collapsed" align="center"
-        border="1" cellpadding="1" cellspacing="1" style="width:100%" | colspan="2"
-        style="text-align: left; "'
+      value: 'Galaxy level, possibly High Universe level (Can take attacks from Master
+        Core: ABIS. Able to withstand attacks from those comparable to him), higher
+        with Boost. Up to Complex Multiverse level (6-D) Damage Transferal with several
+        Rings ([https://www.youtube.com/watch?v=Q3QksApbCvs&t=514s Enough Rings shields
+        damage from those as strong as] Supreme) |-|Sonic and the Secret Rings - Sonic
+        Free Riders'
       source_id: vsbattles-sonic-the-hedgehog
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: 'Genius normally, Extraordinary Genius Combatant (Vastly superiorSonic
-        the Hedgehog (2006) European Website to his Adventure Era Self. Through years
-        of countless adventures, Sonic has shown himself to be a skilled and formidable
-        combatant. The Blue Blur''s single greatest asset is his signature speed,
-        which he has demonstratedSonic Unleashed: Skyscraper Scamper Act 1 completeSonic
-        Colors (Wii): Aquarium Park Act 1 masterySonic the Hedgehog (2006): Flame
-        Core (Sonic''s Episode) overSonic the Hedgehog (2006): Kingdom Valley (Sonic''s
-        Episode) inSonic Unleashed: Cool Edge Act 1 any environment due to full control
-        of his momentum.Sonic the Hedgehog CD: Introduction Cutscene Because of this,
-        Sonic excels in applying his speed and agility into evasive maneuversSonic
-        the Hedgehog CD; "Outro" and offensive techniquesSonic Unleashed; "Windmill
-        Isle Act 2" fueled by momentum-based combat,Sonic Unleashed: Introduction
-        Cutscene allowing him to use his incredible agility both in and out of combat
-        in nearly any type of terrain and situation.Sonic 06: Sonic''s StorySonic
-        and the Black KnightSonic Lost World (Wii U)Sonic Lost World (3DS)Sonic FrontiersSonic
-        the Hedgehog #1Sonic the Hedgehog #2Sonic the Hedgehog #6Sonic the Hedgehog
-        #7Sonic the Hedgehog #23Sonic the Hedgehog #25Sonic the Hedgehog #39Sonic
-        the Hedgehog #41Sonic the Hedgehog #42Sonic the Hedgehog #50Sonic the Hedgehog
-        #51Sonic the Hedgehog #55 Beyond clever applications of Sonic''s speed is
-        his capacity for adaptability and quick learning; learned swordsmanship so
-        quick he became bored by it, effortlessly applying teachings "like it was
-        nothing" in a manner deemed as "like a true knight" during his very first
-        battleSonic and the Black Knight: Misty Lake: 1st Training SessionSonic and
-        the Black Knight: Misty Lake: 2nd Training SessionSonic and the Black Knight:
-        Misty Lake (Boss Fight)Sonic and the Black Knight: Deep Woods (Boss Fight)Sonic
-        and the Black Knight: Titanic Plain (Boss Fight)Sonic and the Black Knight:
-        Molten Mine: Boss FightSonic and the Black Knight: Faraway Avalon (Boss Fight)Sonic
-        and the Black Knight: Dark Hollow (Boss Fight) and effortlessly applying it
-        to his speed. In duels, Sonic is capable of of precisely timing his attacks
-        with his opponent multiple times in a row, canceling the attacks and giving
-        him an opening for a counter attack, doing so as early as his first real fight
-        with Caliburn. Bested the legendary Knights of the Round Table and King Arthur
-        himself, becoming the greatest knight of all time.Sonic and the Black Knight
-        Manual Sonic is also knowledgeable on traditional martial arts such as KenpoSonic
-        Colors (Wii) Sweet MountainSonic Colors (Wii) Asteroid Coaster and Kung Fu,
-        the latter of which he quickly mastered after only 2 sections of training.Sonic
-        Unleashed: "Kung Fu Speed", Chun-nan Side Mission His skillset left Master
-        Zik utterly impressed, calling his moves unique and acknowledging him as being
-        a master on his own, with the Deadly Six being said to have been humiliated
-        by him in battle.Sonic Lost World (Boss Master Zik round 1)Sonic Lost World
-        (Boss - Master Zik Round 2)Sonic Lost World (Boss - Master Zik Round 3)Sonic
-        the hedgehog #23 Kept up with Neo Metal Sonic after he copied his Bio-Data,
-        which allows him to copy one''s own intellect for himself. Capable of out-racing,
-        out-fighting & out-thinking Metal Sonic across most of their encounters, despite
-        Metal''s capabilities of copying and learning with each encounter and having
-        powers & abilities similar to Sonic himself. Casually dominated Surge in combat,
-        who was perfectly calibrated with his Bio-Data to be his equal and who was
-        so similar in all aspects that Dr. Eggman''s systems were unable to differentiate
-        her from him. Easily defeated and mockedSonic Generations: Egg Dragoon Boss
-        Battle Eggman while piloting the Egg Dragoon, a machine that has years of
-        study of his movement patterns in the several years he and the Doctor have
-        been fighting. Referred to by Doctor Starline as the only being capable of
-        standing up to Dr. Eggman with sheer skill alone.Sonic the Hedgehog #14 Despite
-        Dr. Eggman''s intellect and vast list of creations, such as machines with
-        years of research into Sonic''s movement patterns, Sonic has come out on top
-        over 227,000 times. Defied Sage''s expectations, a supergenius AI, regarding
-        both his chances of survival against the Titans and the handling of his Cyber
-        Corruption, both of which she said it would be impossible for him to beat.
-        Impressed and shocked the Ancients'' greatest warriors and minds alike, the
-        very beings who created Cyber Space, to the point where one referred to his
-        potential as "limitless" and was incapable of comprehending the way he fought
-        nor how he overcame the Titans. Sonic is able to greatly grow in areas outside
-        of combat, such as when he very quickly grew from being an amateur at Extreme
-        Gear to being on the same level as the greatest Extreme Gear racer in the
-        world. Sonic became so good at it that he defeated Metal Sonic after he h'
+      value: Genius normally, Extraordinary Genius Combatant ([https://postimg.cc/nCWxB6mL
+        Vastly superior] to his Adventure Era Self. Through years of countless adventures,
+        Sonic has shown himself to be a skilled and formidable combatant. The Blue
+        Blur's single greatest asset is his signature speed, which he has [https://imgchest.com/p/9249e6pgbyn
+        demonstrated] [https://imgchest.com/p/lqyerxgmz4d complete] [https://imgchest.com/p/a846m858w7x
+        mastery] [https://imgchest.com/p/ej7m5dldbyd over] [https://imgchest.com/p/vj4jzl8ox78
+        in] any environment due to [https://imgchest.com/p/pg73qelbg4r full control
+        of his momentum]. Because of this, Sonic excels in applying his speed and
+        agility into [https://imgchest.com/p/pg73qedwj4r evasive maneuvers] and [https://imgchest.com/p/wl7l8qov64x
+        offensive techniques] fueled by [https://imgchest.com/p/a846m8dvw7x momentum-based]
+        [https://imgur.com/a/Q2BYcXL allowing him to use his incredible agility] [https://imgchest.com/p/m9yxnjrgm7q
+        both in and out of combat in nearly any type of terrain and situation]. Beyond
+        clever applications of Sonic's speed is his capacity for adaptability and
+        quick learning; [https://imgur.com/a/3afrbQf learned swordsmanship so quick
+        he became bored by it, effortlessly applying teachings "like it was nothing"
+        in a manner deemed as "like a true knight" during his very first battle] and
+        [https://cdn.imgchest.com/files/deedd1c05e65.mp4 effortlessly applying it
+        to his speed]. In duels, Sonic is [https://www.youtube.com/watch?v=WWUjHVPAj1Y&t=775s
+        capable of of precisely timing his attacks] with his opponent multiple times
+        in a row, canceling the attacks and giving him an opening for a counter attack,
+        doing so as early as his first real fight with Caliburn. Sonic is also knowledgeable
+        on traditional martial arts such as [https://imgur.com/a/OSCjdEg Kenpo] and
+        [https://imgur.com/a/sonic-unleashed-chun-nan-day-side-missions-9EEseEi Kung
+        Fu, the latter of which he quickly mastered after only 2 sections of training].
+        His skillset [https://imgur.com/a/b2rHMcV left Master Zik utterly impressed,
+        calling his moves unique and acknowledging him as being a master on his own],
+        with the Deadly Six being said to [https://postimg.cc/F1K2TKBm have been humiliated
+        by him in battle]. [https://imgur.com/a/7cNuPZS Kept up with] Neo Metal Sonic
+        after he copied his Bio-Data, [https://imgur.com/a/GXtPj0t which allows him
+        to copy one's own intellect for himself]. Capable of [https://imgur.com/a/blue-rat-vs-robot-rat-SU6iK3s
+        out-racing, out-fighting & out-thinking] Metal Sonic across most of their
+        encounters, despite Metal's capabilities of copying and learning with each
+        encounter and having powers & abilities similar to Sonic himself. Casually
+        [https://imgur.com/QMudkwg dominated Surge in combat], [https://imgur.com/a/starline-refers-to-surge-kit-as-perfectly-calibrated-doppelgangers-of-sonic-tails-sth-50-8vF15XZ
+        who was perfectly calibrated] [https://imgur.com/a/surge-kits-bodies-are-result-of-combination-of-cybernetics-combat-information-of-sonic-shadow-neo-metal-sonic-power-cores-loose-dna-of-tails-personality-of-belle-sth-imposter-syndrome-3-AWbbxSi
+        with his Bio-Data to be his equal] and who was so similar in all aspects that
+        Dr. Eggman's [https://imgur.com/a/starlines-combat-data-was-so-accurate-that-eggmans-security-algorithms-which-are-familiar-with-blue-blur-fox-boy-could-not-distinguish-surge-kit-from-sonic-tails-sth-imposter-syndrome-4-6mHieBk
+        systems were unable to differentiate her from him]. [https://www.youtube.com/watch?v=QMopx-E4la0&t=7340s
+        Easily defeated] [https://www.youtube.com/watch?v=QMopx-E4la0&t=7600s and
+        mocked] Eggman while piloting the Egg Dragoon, [https://imgur.com/gallery/egg-dragoon-eggmans-mad-science-pinacle-cRpusyN
+        a machine that has years of study of his movement patterns in the several
+        years he and the Doctor have been fighting]. Referred to by Doctor Starline
+        as [https://imgchest.com/p/9rydo29wl7k the only being capable of standing
+        up to Dr. Eggman with sheer skill alone]. Despite Dr. Eggman's intellect and
+        vast list of creations, such as [https://imgchest.com/p/92496dpzb4n machines
+        with years of research into Sonic's movement patterns], Sonic has [https://imgchest.com/p/a846mz3ag7x
+        come out on top over 227,000 times]. Defied Sage's expectations, a supergenius
+        AI, regarding both his chances of survival [https://www.youtube.com/watch?v=DVWeU4VhZ_g&t=300s
+        against] [https://www.youtube.com/watch?v=DVWeU4VhZ_g&t=1125s the] Titans
+        and the [https://www.youtube.com/watch?v=uiXzAli2New&t=1014s handling] of
+        his Cyber Corruption, both of which she said it would be impossible for him
+        to beat. Impressed and shocked the Ancients' [https://www.youtube.com/watch?v=tUCDSmXRyjQ&t=600s
+        greatest warriors] and [https://www.youtube.com/watch?v=tUCDSmXRyjQ&t=650s
+        minds alike], the very beings who created Cyber Space, to the point where
+        one referred to his potential as "limitless" and was incapable of comprehending
+        the way he fought nor how he overcame the Titans. Sonic is a
       source_id: vsbattles-sonic-the-hedgehog
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Base = Sonic can be cocky and overconfident at times and has trouble
-        in aquatic areas due to his inability to swim. When the Warp Topaz receives
-        too much of a charge, it will cause severe reality alterations and eventually
-        explode, backfiring on the user. Without Starline''s glove it is hard to gain
-        precise control on the Topaz opening portals becomes more difficult |-| Darkspine
-        Sonic = More violent than before |-| Sonic the Werehog = His Werehog form
-        trades in a large bulk of his speed in favor of natural raw strength, and
-        he transforms into this form involuntarily at night only to change back in
-        the day |-| Shatter Sonic= When using 4 Prism Shards of the Paradox Prism
-        his power quickly runs out |-| Excalibur Sonic, Super Sonic & Starfall Super
-        Sonic = None notable Notable Attacks/Techniques: {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        |-|Base Sonic= {{#tag:tabber| {{!}}-{{!}}Standard Moves= Sonic spin dash.gif|One
-        of Sonic''s methods of defensive traversal. Sonic Homing Attack.gif|One of
-        Sonic''s most common methods of attacking an enemy. Flying Kick.gif|The Flying
-        Kick, a stronger variant that Sonic can use when the Homing Attack isn''t
-        enough. *Spin'
+      value: it will cause severe reality alterations and eventually explode, backfiring
+        on the user. Without Starline's glove it is hard to gain precise control on
+        the Topaz opening portals becomes more difficult, Darkspine Sonic = More violent
+        than before., Sonic the Werehog = His Werehog form trades in a large bulk
+        of his speed in favor of natural raw strength, and he transforms into this
+        form involuntarily at night and will forc back in the day., Shatter Sonic=
+        When using 4 Prism Shards of the Paradox Prism, his power quickly runs out.,
+        Excalibur Sonic & Super Sonic = None Notable, Starfall Super Sonic = Master
+        King referred to Sonic's enhanced Cyber Corruption power [https://imgchest.com/p/agyv3953z78
+        as a "fragile thing" that is volatile to his form] due to it not being meant
+        for him. This is proven correct, [https://youtu.be/Q3QksApbCvs?t=521 as strenuous
+        power struggles can disable the form and even shut off his Super State entirely]
+        (although he can reactivate both fairly quickly, and [https://imgur.com/a/qWYslO8
+        Rings can shield lethal damage to his Base form]).
       source_id: vsbattles-sonic-the-hedgehog
       provider_id: vsbattles
       authority: high
@@ -2931,12 +2410,12 @@ repair:
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|sonic the hedgehog modern|9690649
+    duplicate_key: vsbattles.fandom.com|sonic the hedgehog modern|9720079
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-sonic-the-hedgehog
@@ -2945,46 +2424,20 @@ repair:
     note: extracted_core_fields
     extracted_fields:
     - attack_potency
-    - durability
-    - powers_and_abilities
     - speed
     - tier
     - weaknesses
-    normalized_page_title: Sonic the Hedgehog (Canon, Composite)/Wixzers
+    normalized_page_title: Sonic the Hedgehog (Canon, Game Character)/PaperPrince2
     source_type: mediawiki
-    revision_id: '617211'
+    revision_id: '623128'
     fetch_status: fetched
     http_status: 200
-    content_length: 388427
+    content_length: 5308
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
-    - '''''''Powers and Abilities:'''''''
-    - Toon Force
-    - Resistance
-    - Standard Equipment (Abilities)
-    - Equipment (Resistance)
-    - Optional Equipement
-    - Optional Equipement (Resistance)
-    - Spin
-    - Rings Energy
-    - Boost Energy
-    - Power Cores
-    - Dark Energy
-    - Hero Energy
-    - Cognitive Energy
-    - Light Cores
-    - Soul Energy
-    - Writing
-    - Dark Gaia Energy
-    - Hyper Go On
-    - Prism Energy
-    - Time Energy
-    - Life Energy
-    - Phantom Energy
-    - Cyber Energy
-    - Chaos Emeralds
+    - Gallery
     stat_labels_detected:
     - attack_potency
     - durability
@@ -3001,7 +2454,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 75
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -3016,166 +2469,35 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: High 6-A | High 4-C | 4-B | 3-A | Low 1-C | 1-C | 1-B | High 1-B | 1-A
-        | High 1-A
-      source_id: character-stats-profiles-sonic-the-hedgehog
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Optional Equipement== With Power-Ups * Homing Attack (with Mines) *
-        Fire Manipulation (with Fire) * Ice Manipulation (with Ice) * Electricity
-        Manipulation and Paralysis Inducement (with Lightning) * Perception Manipulation
-        (with Illusion) * Extrasensory Perception (With the Ionic Residue tracer,
-        Sonic can detect traces of magic despite Ixis covering his tracks to avoid
-        him) * Energy Projection (Capable of shooting lasers with the Laser Glove)
-        * Explosion Manipulation (With Sonic Crackers. which are landmines) * Statistics
-        Amplification (with Golden Gloves) * Size Manipulation (With the Reduce/Enlarge
-        component, which can shrink or enlarge himself or others) * Power Nullification,
-        and Invisible Barrier (With the Sword of Light, which negates dark magic and
-        anything stemming from it while protecting him with an unseen barrier, All
-        the abilities from the Sword of Acorns when wielding it) * Time Travel and
-        Speed Amplification (Via the Time Warp Boogie Board and the Atomic Relativivity
-        Boots) Other * Statistics Amplification (With the Herb of Toughness) * Flight
-        (With Hovercrafts, Balloons, and Rocket Shoes) * Gravity Manipulation and
-        Black Hole Creation (With the Ark of the Cosmos) * Fire Manipulation (With
-        the Flame Ring) * Time Manipulation (With Slow and Time Freezes) {{!}}-{{!}}Resistance=
-        ==Optional Equipement (Resistance)== Other Resistance * Fear Manipulation
-        (With the Vial of Calm and Philter of Tranquility) * Poison Manipulation (With
-        Poison Broach) * Ice Manipulation (With the Hot Quaff, Fiery Hot Quaff, and
-        Ice Broach) * Petrification (With Stone Protection and Petrification Immunity)
-        * Paralysis Inducement (With the Paralysis Cure and Paralysis Immunity) }}}}
-        |-|Universal Energy System= {{#tag:tabber| {{!}}-{{!}}Spin= ====Spin==== {{User
-        Blog: Wixzers/Mobian Physiology (Canon, Composite)/Wixzers}} {{!}}-{{!}}Chaos'
-      source_id: character-stats-profiles-sonic-the-hedgehog
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: "Peak Humain to Superhuman (Sonic was trained by Jonnylightfoot,a rabbit\
-        \ who is declared as the former mobius racing world champion, mobians should\
-        \ be able to adapt to mobius conditions and be able to walk on walls) Transonic\
-        \ (Sonic's speed can evolve from 1 millisecond, movement to 200mph, 400 mph\
-        \ and even 500 mph) Transonic (until he is able to break the sound barrier\
-        \ which grants him a speed of up to 1234km/h) Massively Hypersonic (Sonic\
-        \ can run through Green Hills in less than 2 seconds) Massively Hypersonic+\
-        \ (it is say to be faster than Lightning, which will grant him 120700 M/s)\
-        \ | Sub-Relativiste+ with Spin Dash (Capable of crossing the distance between\
-        \ the moon and the earth in a second) FTL (Sonic can move in nanoseconds)\
-        \ Massively FTL+ with Spaceship (Sonic with his red spaceship, flies through\
-        \ space at high speed, letting a large number of stars flash by) Massively\
-        \ FTL+ (Sonic takes a big swing to go to little planet then run on Little\
-        \ Planet's chain to go to Little Planet's, then, Sonic is able go from Little\
-        \ Planet's to Earth in 3 seconds) higher with Super Speel Out, Massively FTL+\
-        \ (During the Spinball events, the tornado was able to fly interstellar distances.\
-        \ Sonic is comparable to his brothers and sisters, who are able to travel\
-        \ to the stars from Earth expand the created constellation move the solar\
-        \ systems and destroy them) Infinite (Sonic can cross the Cosmic Interstate\
-        \ by running has come to an end, the cosmic interstate connects through all\
-        \ the multiverse and zones, the universe itself having a countless amount\
-        \ of planets and life forms, is able to go to other sonic in other universes\
-        \ and able to cross the neutral zone, which is a place outside the cosmic\
-        \ interstate) Immeasurable (He is able to travel to Aqua Planet Zone, which\
-        \ is located in another dimension, he is faster than Amy who can maintain\
-        \ a distance between herself and the Time Waster who is a creation of the\
-        \ Time Stream, at the origin of the creation of the time, which is faster\
-        \ than the Spirits of the Past, The Spirit of the Past declares that Amy and\
-        \ Tekno are outside of time) Irrelevant (faster in basic form than Super Sonic\
-        \ and Sonic Rush's Burning Blaze, which was able to traverse the entire macrocosm,\
-        \ except for the dimension containing the Prime World universe and the Sol\
-        \ Dimension, Sonic appearence in Sonic Adventure 2 is faster than before,\
-        \ can make an omnidirectional explosion on 2 separate space-time contiums\
-        \ with the power of the prism, Sonic himself says that he is faster than time.\
-        \ Can restore time and space by running, which is said that is something done\
-        \ with the power of his speed. Through using the Ultra Sonic Speed \u200B\u200B\
-        Amplifier caused Sonic to go so fast that he was out of face with the plane\
-        \ of existence of the rest, he later on is seen being able to go faster than\
-        \ that and is able to return to his plane of existence without the device)\
-        \ Irrelevant (Sonic is faster than Infinite who dodged his boost before, after\
-        \ infinite sent Sonic and Avatar into Nullspace, they were both able to escape\
-        \ it, even when Nullspace is a place of nothingness closed off from all dimensions)\
-        \ Irrelevant in his Super Form (Faster than ever before during the frontier\
-        \ era, He was able to escape from cyberspace with his own power, which was\
-        \ considered completely impossible by The End, Sage mentions that Sonic posses\
-        \ the speed to trascend causality, Sonic Post \"Murder of Sonic the Hedgehog\"\
-        \ claims to be faster than mathematics) Irrelevant (As Super Sonic, The End\
-        \ infinitely superior to all the previous villains like Solaris, Time Eater\
-        \ or Egg Wizard, due to Sage calling it a threat beyond imagination) Irrelevant\
-        \ (As Super Sonic 2 and Super Cyber Sonic) Irrelevant (As a Hyper Sonic)"
-      source_id: character-stats-profiles-sonic-the-hedgehog
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building Level | Large Building Level | Multi-City Block level
-        (Similar to Ap) | Island Level (Similar to Ap) | Small Country level | Multi-Continental
-        Level | Small Planet Level | Solar System Level | Multi Solar System Level
-        (Similar to Ap) | Multi Galaxy Level (Similar to Ap) | Universe Level (Similar
-        to Ap)| Universe+ Level (Similar to Ap) | High Multiverse+ level | Complex
-        Multiverse Class (Similar to Ap) | High Hyperverse Level (Similar to Ap) |
-        Outerverse Level (Similar to Ap) | Outerverse Level (Similar to Ap) | Outerverse
-        Level (Similar to AP)
-      source_id: character-stats-profiles-sonic-the-hedgehog
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "None Notably | its Darkspine form manifests as more violent. Notable\
-        \ Attacks/Techniques: *Fourth Wall Awareness: *When the player isn't moving\
-        \ him for a moment, Sonic's idle animation gets annoyed with the player, tapping\
-        \ his foot while looking at the screen, showing boredom, stretching to be\
-        \ on the move again, and had outright left due to becoming impatience in Sonic\
-        \ CD that causes a Game Over. |-|Base Sonic \u25BE= {{#tag:tabber| {{!}}-{{!}}Attacks=\
-        \ File:Homing attack.gif |One of Sonic's most common methods of attacking\
-        \ an enemy. File:Sonic flying kick.gif|A stronger attack that Sonic can use\
-        \ when the Homing Attack isn't enough. File:Sonic light speed attack.gif|After\
-        \ a small charge-up, Sonic glows and launches the Light Speed Attack to hit\
-        \ all enemies near him. File:Sonic Wind.gif |With simply a raise of his hand,\
-        \ Sonic launches the Sonic Wind technique. File:Sonic magic hands.gif |Sonic\
-        \ using the Magic Hands to trap an enemy. *Air Kick: Sonic jumps into the\
-        \ air and kicks out to counter an aerial combatant. *Air Spin: Sonic jumps\
-        \ into the air, curling into a ball to counter an aerial combatant in a manner\
-        \ reminiscent to the Spin Jump. *Blue Tornado: Sonic uses the Spin Dash to\
-        \ encircle around opponents through midair while leaving a blue trail. The\
-        \ resulting slipstream creates a tornado effect that forms a blue cyclonic\
-        \ vortex of air around the opponent. This can yank the opponents off their\
-        \ feet and fling them into the air, disorient enemies, or blow away their\
-        \ weaponry or equipment. *Bound Jump: In mid-air, Sonic curls into a ball\
-        \ and performs the Spin Attack straight downwards to slam down on any target\
-        \ below him. If he impacts the ground, Sonic will be propelled back into the\
-        \ air with enhanced jumping height. *Chao"
+      value: 8-B, higher with Boost, Focused Homing Attack, Flying Kick and Phantom
+        Rush, even higher with Final Color Blaster and Planetary Lifeforce, 8-B with
+        3 Power Cores | 8-B | 8-B | 8-B | 8-B | High 7-C, higher with Charged Attacks
+        | High 7-C, far higher at Full Power | High 7-C
       source_id: character-stats-profiles-sonic-the-hedgehog
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'When Sonic has his own Chao, as shown when he partnered with Cream in
-        Sonic Advanced 3, he can command his Chao to home in on any nearby enemies
-        and attack them. *Cross Slash: Sonic moves around the enemy in an arc, letting
-        loose a stream of shockwaves as he hovers through the air. *Cyclone Kick:
-        A powerful cyclone that hits anything near Sonic as he ascends through the
-        air. *Dash Spin: Sonic runs at his opponent before carrying his momentum into
-        a Spin Attack. *Dodge Spin: After dodging an attack, Sonic immediately retaliates
-        with a high speed Spin Attack that barrels through his opponent and sends
-        them flying into the air. **Dodge Spin Dive: Rather than dodging and doing
-        a Spin Attack, Sonic dodges before curling into a ball and launching himself
-        up into the air before slamming into his enemy with concussive force. *Double
-        Kick: Sonic sends two consecutive kicks towards his opponent. **Triple Kick:
-        Sonic follows up with an additional kick in a quick flurry that sends the
-        opponent flying back. *Double Spin: Sonic jumps into the air as he curls into
-        a ball, hitting his opponent once before landing in front of them while in
-        position to immediately perform a Spin Attack. *Flying Kick: For particularly
-        sturdy enemies that are impervious to Sonic''s normal attacks, this is an
-        alternate and much more powerful method. Sonic zips towards an enemy like
-        he would for a Homing Attack, and then immediately strikes them with a mid-air
-        kick to sending them flying. If another enemy is caught in the path of the
-        enemy initially kicked away, they will be sent flying and take damage as well.
-        *Foot Crush: Sonic brings up a foot, smashing it down onto the foot of the
-        other opponent to leave them reeling in pain. *Foot Sweep: Sonic drops to
-        the ground, balances on one hand, and then sweeps one of his legs around in
-        a 360 degree circle that resembles break-dancing, damaging anything he comes
-        into contact with. *Grand Slam: A powerful Spin Attack with a follow-up kick
-        to launch the enemy away. *Hammer'
+      value: City Block level, higher with Boost, Focused Homing Attack, Flying Kick
+        and Phantom Rush, even higher with Final Color Blaster and Planetary Lifeforce,
+        City Block level with 3 Power Cores | City Block level | City Block level
+        | City Block level | City Block level | Large Town level, higher with Charged
+        Attacks | Large Town level, far higher at Full Power | Large Town level
+      source_id: character-stats-profiles-sonic-the-hedgehog
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Supersonic Travel Speed, higher with Super Peel Out & Spin Dash, even
+        higher with Boost, Speed of Light with Light-Speed Dash, Relativistic+ Attack
+        and Reactions Speed | Supersonic | Supersonic | Supersonic, Relativistic+
+        as Super Sonic | Relativistic+
+      source_id: character-stats-profiles-sonic-the-hedgehog
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: etc. You can judge a person's power by their feats.
       source_id: character-stats-profiles-sonic-the-hedgehog
       provider_id: character_stats_profiles
       authority: high
@@ -3184,480 +2506,101 @@ repair:
     identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
+    core_field_count: 2
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|sonic the hedgehog canon
-      composite wixzers|617211
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-sonic-the-hedgehog-game
-    url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Sonic the Hedgehog (Modern)
-    source_type: mediawiki
-    revision_id: '9690649'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 295959
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    - References
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{High 3-A}}, higher with Boost | {{2-C}}, higher with Boost, far higher
-        with transformations, even higher with his Strongest Attacks | At least {{2-C}},
-        higher with Focused Homing Attack, Flying Kick, and Color Powers, even higher
-        with Final Color Blaster, Energy Cores, and Planetary Lifeforce | At least
-        {{2-C}}, higher with Phantom Rush, even higher with Double Boost and Triple
-        Boost | At least {{2-C}} | {{Varies}}. At least {{2-C}}, up to {{1-C}}, higher
-        with Charged Attacks | {{1-C}}, far higher at Full Power'
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base \u25BE=\
-        \ {{#tag:tabber| {{!}}-{{!}}Abilities \u25BE= {{#tag:tabber| {{!}}-{{!}}Sonic\
-        \ the Hedgehog (2006) - Sonic Riders: Zero Gravity={{Border|Scroll=Yes|Visible=No|Content=All\
-        \ innate abilities of his Classic and Adventure Eras selves plus: *Greater\
-        \ Superhuman Physical Characteristics **Greater Acrobatics (All Types; Consistently\
-        \ displays varying kinds of acrobatics; this ranges from leaping hundreds\
-        \ of meters in a single bound, bouncing of several enemies, traversing nearly\
-        \ any type of terrain possible, run on enemies while making acrobatic movements\
-        \ to confuse them, climb up and down any surface no matter how thin or how\
-        \ compromising the terrain is, etc, all while he is constantly fighting and\
-        \ doing complex movements, even being in an environment with shifting gravity\
-        \ fails to slow him down so long as there are objects or enemies nearby for\
-        \ him to interact with.Sonic the Hedgehog #1Sonic the Hedgehog #2Sonic the\
-        \ Hedgehog #6Sonic the Hedgehog #7Sonic the Hedgehog #23Sonic the Hedgehog\
-        \ #25Sonic the Hedgehog #51Sonic the Hedgehog #55Sonic the Hedgehog #39Sonic\
-        \ the Hedgehog #41Sonic the Hedgehog #42Sonic the Hedgehog #50 Sonic's entire\
-        \ movement and fighting style hones into doubling down on his athleticism\
-        \ combined with his speed, allowing him to employ it both in and out of combat.Sonic\
-        \ 06 Wave Ocean: Sonic's StorySonic Unleashed: MazuriSonic & the Black Knight:\
-        \ OpeningSonic and the Black Knight: Misty Lake (Special Challenge: Retrieve\
-        \ the sacred sword)Sonic Lost World OpeningSonic Lost World: Dessert RuinsSonic\
-        \ the Hedgehog #1, page 3Sonic the Hedgehog #1, page 5Sonic the Hedgehog #1,\
-        \ page 6Sonic the Hedgehog #1, page 7Sonic the Hedgehog #1, page 8Sonic the\
-        \ Hedgehog #1, page 11Sonic the Hedgehog #1, page 12Sonic the Hedgehog #1,\
-        \ page 13Sonic the Hedgehog #1, page 14Sonic the Hedgehog #4, page 5Sonic\
-        \ the Hedgehog #5, page 1Sonic the Hedgehog #5, page 3Sonic the Hedgehog #5,\
-        \ page 15Sonic the Hedgehog #8, page 2Sonic the Hedgehog #8, page 16Sonic\
-        \ the Hedgehog #8, page 17Sonic the Hedgehog #10, page 12Sonic the Hedgehog\
-        \ #13, page 8Sonic the Hedgehog #13, page 9Sonic the Hedgehog Annuals and\
-        \ One-Shots - 2022 Sonic the Hedgehog Free Comic Book Day, page 8Sonic the\
-        \ Hedgehog Annuals and One-Shots - 2022 Sonic the Hedgehog Free Comic Book\
-        \ Day, page 10Sonic the Hedgehog #25, page 2Sonic the Hedgehog #25, page 2Sonic\
-        \ the Hedgehog #56, page 11Sonic the Hedgehog #57, page 21Sonic the Hedgehog\
-        \ #57, page 18Sonic the Hedgehog #58, page 1Sonic the Hedgehog #60, page 12Sonic\
-        \ the Hedgehog #63, page 13Sonic the Hedgehog #63, page 14Sonic the Hedgehog\
-        \ #63, page 14Sonic the Hedgehog #63, page 15Sonic the Hedgehog #63, page\
-        \ 19Sonic the Hedgehog's 900th Adventure, page 8Sonic the Hedgehog's 900th\
-        \ Adventure, page 10Sonic the Hedgehog's 900th Adventure, page 11Sonic the\
-        \ Hedgehog's 900th Adventure, Page 21Sonic the Hedgehog's 900th Adventure,\
-        \ Page 22Sonic the Hedgehog's 900th Adventure, Page 23Sonic the Hedgehog's\
-        \ 900th Adventure, page 36Sonic the Hedgehog's 900th Adventure, Page 39Sonic\
-        \ the Hedgehog: Endless Summer Special, Page 3Sonic the Hedgehog 2023 Halloween\
-        \ Special, Page 10Sonic the Hedgehog 2023 Winter JamSonic Lost World (Wii\
-        \ U): Tropical Coast Zone 4Sonic Lost World (3DS): Lava Montain Zone 3Sonic\
-        \ Frontiers Idle dialogue Shown to be able to \"run\" and move just as fast\
-        \ and efficiently with his hands as he can with his legs) *Greater Enhanced\
-        \ Senses (Consistently able to react to things out of his line of sight. Can\
-        \ sense camouflaged rails in Green Cave) *Possibly Paralysis Inducement (Level\
-        \ 3 Attacks in Sonic Riders are potentially capable of paralyzing opponents)\
-        \ *Indomitable Will (Sonic has displayed immense willpower, a relentless courage,\
-        \ and an absolute unwillingness to give up no matter how frightening and hopeless\
-        \ a situation might appear to be; Chip affirmed that Sonic is too strong to\
-        \ lose himself, that he never doubted himself on their journey no matter what,\
-        \ and further stated Sonic had a mind that never gives into the temptations\
-        \ of night and darknessSonic Unleashed: No Reason (Videotape 32) (JP) despite\
-        \ Dark Gaia's influence bringing out the darkness of one's heartSonic Unleashed:\
-        \ Midnight Dance (Videotape 17) and making them fall into despair. Stood firm\
-        \ in his resolve of fighting Merlina despite having his friend and mentor\
-        \ killed in front of him amd receiving a debilitating beating, refusing to\
-        \ falter even when the Knights of the Round Table insisted on him giving up\
-        \ and fleeing to save his life. Endured the Arrow of Judgement without issue\
-        \ for a large amount of his adventure in the Arabian Nights, a curse that\
-        \ was eating away at his life-force, and was able to defeat Erazor Djinn in\
-        \ combat even after a point where it brought Sonic to his kneesSonic and the\
-        \ Secret Rings - Night Palace. Endured constant torture of some form aboard\
-        \ of the Death Egg for six months straight without suffering any repercussions\
-        \ to his mental stability, instead treating it as a minor"
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: "Same equipment as his Adventure and Classic selves, plus: {{#tag:tabber|\
-        \ {{!}}-{{!}}Standard= {{#tag:tabber| {{!}}-{{!}}Rings= *Damage Transferal\
-        \ (Up to 1-C [6-D] AP with Rings; Rings completely shield the user from harm\
-        \ so long as they have at least 1 in their possession.Sonic the Hedgehog (16-bit)\
-        \ Instructional ManualSonic Colors (Wii) ManualSonic the Hedgehog (8-bit)\
-        \ ManualSonic the Hedgehog 2 (16-bit) Instructional ManualSonic the Hedgehog\
-        \ 2 (8-bit) ManualSonic the Hedgehog 3 ManualSonic Adventure ManualSonic Adventure\
-        \ 2 ManualShadow the Hedgehog ManualSonic the Hedgehog (2006) ManualSonic\
-        \ Unleashed (HD) ManualSonic Rivals 2: Silver and Espio campaignSonic Prime\
-        \ Season 1 Episode 2 - The Yoke's On YouSonic Frontiers Another Story: Vs\
-        \ Supreme/The End Upon taking an instance of damage, a varying amount will\
-        \ scatter from the one who collected them with higher durability causing less\
-        \ to drop.Sonic Frontiers Rings can shield Base characters from damage, including\
-        \ from the likes of VoidSonic Shuffle and an amped SupremeSonic Frontiers\
-        \ Another Story: Vs Supreme/The End so long as they have enough in their possession)\
-        \ **Healing & Stamina Recovery (Ring Energy revitalizes the wielder and restores\
-        \ energy, as noted with Silver wanting to use some to replenish his energy.\
-        \ Rings are referred to by The End as being vitality) **Statistics Amplification\
-        \ (Ring Energy in the Sonic Riders series can amplify the user's speed by\
-        \ nearly 2x and increases their Boost duration by nearly 2 seconds when going\
-        \ from level 1 to 3.Sonic RidersSonic Riders: Zero GravitySonic Free Riders\
-        \ Achieving the max Ring count in Sonic Frontiers grants Sonic the same speed\
-        \ for his Boost that a default level 99 Speed Sonic hasSonic Frontiers) {{!}}-{{!}}Wisp\
-        \ Capsules=Contains Wisps, which grant; *Transformation & Statistics Amplification\
-        \ *Surface Scaling (With Pink Spikes and Gray Quake) *Fire Manipulation &\
-        \ Explosion Manipulation (With Red Burst and Black Bomb) *Vibration Manipulation\
-        \ (With Blue Cube and Gray Quake) *Energy Projection (With Cyan Laser and\
-        \ Crimson Eagle) *Electricity Manipulation (With Ivory Lightning) *Invisibility\
-        \ (With Jade Ghost) *Deconstruction (With Indigo Asteroid) *Transmutation,\
-        \ Black Hole Creation, Gravity Manipulation, Size Manipulation & Absorption\
-        \ (With Indigo Asteroid, Violet Void, and Purple Frenzy) *Intangibility (With\
-        \ Jade Ghost, Violet Void, Red Burst, Cyan Laser & Ivory Lightning) *Flight\
-        \ and Levitation (With Crimson Eagle, Green Hover, Indigo Asteroid, Jade Ghost,\
-        \ Magenta Rhythm, Orange Rocket and Violet Void) *Speed Reduction & Void Manipulation\
-        \ (Usage of the Violet Void near opponents will slow them downTeam Sonic Racing)\
-        \ *Gravity Manipulation, Deconstruction, Transmutation & Size Manipulation\
-        \ (With the Indigo Asteroid Wisp, which breaks down enemies and objects in\
-        \ its orbit and grows the more it consumesSonic RunnersSonic Lost World) *Free\
-        \ Movement & Underground Mobility (With the Yellow Drill Wisp, which allows\
-        \ users of their energy to burrow underground and between gaps without issue\
-        \ as well as move through water at high speeds akin to a torpedoSonic Colors\
-        \ (Wii)) *Energy Projection (With the Cyan Laser Wisp, which lets the user\
-        \ hurtle forward as a destructive beam of energy) *Boost (Final Color Blaster)\
-        \ }} {{!}}-{{!}}Optional \u25BE= {{#tag:tabber| {{!}}-{{!}}Extreme Gear= {{#tag:tabber|\
-        \ {{!}}-{{!}}Innate= Sonic starts with a Board-type Extreme Gear (Blue Star\
-        \ II). For a better, more comprehensive look at the abilities and capabilities\
-        \ of an Extreme Gear (in order to avoid redundancy in re-listing abilities),\
-        \ see the Extreme Gear page. *Technological Flight *Enhanced Acrobatics *Air\
-        \ Manipulation (By performing tricks in mid-air, Shadow is able to generate\
-        \ Air for his Extreme GearSonic Riders: Sand Ruins to use for several purposes)\
-        \ **Statistics Amplification (By using Air to perform air boosts for quick\
-        \ bursts in speed) *Transformation (With Gear Change, Shadow can alter his\
-        \ Extreme Gear to different Gear types in order to unlock new movement abilities)\
-        \ *Gravity Manipulation (With a Gravity Band, which he wears on his ankle.\
-        \ Shadow can generate bursts of gravity for various purposes; to turn sharp\
-        \ corners, repel obstacles in his way, or massively distort the gravity of\
-        \ the surrounding environmentSonic Riders Zero Gravity: MeteorTech Premises)\
-        \ *And several more as listed in the Extreme Gear page's universal abilities\
-        \ {{!}}-{{!}}Item Boxes= *Weapon Creation (Can create a regular basketball,\
-        \ bowling ball, and Tee Shot, enabling the user to use a golf club to shoot\
-        \ out golf balls, to damage other racers) **Homing Attack & Explosion Manipulation\
-        \ (Via Target Torpedo, users can summon a bomb to explode other Riders on\
-        \ the race track or a torpedo tor track them down) *Technology Manipulation\
-        \ & Power Nullification (Self-Afflicted; When breaking open a Parts Lock Item\
-        \ Box, the playable character's tech is temporarily shut down except for the\
-        \ tech's mobility) *Statistics Amplification (Temporary via Attack & High\
-        \ Speed. W"
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'High Universe level (Harmed the Babylon Guardian with his strikes before
-        destroying it. Fought against the Ifrit. Aided in the defeat of Master Core:
-        ABIS), higher with Boost'
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ (Vastly superiorSonic the Hedgehog (2006) European Website
-        to his Adventure Era-self. Capable of evading crashing meteors on a ship traveling
-        through interstellar space.Sonic Rivals Kept pace with Master Core:ABIS while
-        it flew with its gravitational powers, the same powers it used to move multiple
-        galaxies at these speeds5.1059486626578 Trillion c), higher reaction speed,
-        far higher with the Spin Attack and Super Peel Out,20.4237946506 Trillion
-        c even higher with the Boost (Sonic's Boost enhances his speed by nearly 8x,
-        40.336994435 Trillion c with the technique managing to amaze his younger self
-        even after having witnessed Metal Sonic's V. Maximum Overdrive Attack)
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: High Universe level (Can take hits from Knuckles. Able to withstand attacks
-        from those comparable to him), higher with Boost. Up to Complex Multiverse
-        level (6-D) Damage Transferal with several Rings (enough Rings shields damage
-        from those as strong as Supreme) |-|Sonic and the Secret Rings - Sonic Free
-        Riders
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Endured the "Arrow of Judgement", which slowly drained his
-        life-force, weakening him to such a level that he was left on his knees, and
-        much later was still capable of standing up to fight against Erazor Djiin.
-        Withstood a beating from Merlina and refused to give up regardless of his
-        physical condition. Ran at top speed almost nonstop for several days while
-        physically and mentally taxed in order to fight off the effects of the Metal
-        Virus, receiving minimal rest for the duration of the plague. Stated that
-        he isn't used to getting tired despite his adventurous lifestyle. Absorbed
-        Cyber Corruption to free Amy, Knuckles, and Tails from their imprisonment
-        across the Starfall Islands. Even while dealing with the corruption's influence
-        across nearly all of Sonic Frontiers and dealing with it better than Sage
-        predicted, he successfully scaled all six towers of Rhea Island and refused
-        to stop until his friends were freed from Cyber Space. In situations where
-        most others would give up and where he is severely outnumbered or outgunned,
-        such as close encounters with the Titans when he's without all the Chaos Emeralds,
-        Sonic never loses faith in himself and never surrenders), same, if not higher,
-        with transformations, Infinite with Endless Boost (Gains never ending energy
-        at the cost of not being able to hold any Rings) | Infinite (Is powered by
-        all 7 Chaos Emeralds) | Infinite (Uses a Super State as its base, and should
-        thus have its stamina directly)
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: 'Base & Shatter Sonic=Standard Melee Range, Extended Melee Range with
-        Caliburn, Hundreds of Meters with abilities. Up to countless, possibly Complex
-        Multiversal With Chaos Control (Chaos Control can halt time in White Space,
-        as Shadow intended to freeze the moment in time where Maria and Gerald were
-        being restored to the timeline to prevent it, despite it repeatedly being
-        stated that all of space-time was erased. Should be superior to Base Eggman
-        and Primordial Form Time Eater, which can respectively travel reach White
-        Space and Time Eater''s Lair). Beyond baseline Complex Multiversal with the
-        Double Boost (Broke through Null Space using the Double Boost alongside the
-        Rookie, an alternate dimension that is stated to go on forever, be an endless
-        void, and contain absolutely nothingSonic Forces: Stage 24 - Metropolis (Null
-        Space)) |-|Darkspine Sonic= Same as his base form, Low Multiversal with abilities
-        (Moves such as Time Break allow Darkspine Sonic to freeze the flow of time.
-        Fixed the entirety of the Arabian Nights reality with a hand gesture, which
-        consists both its main reality and the Night Palace) |-|Werehog Sonic=Same
-        as his base form, Extended Melee Range to Several Meters via Elasticity (Able
-        to extend his limbs that far), Hundreds of Meters with abilities (Able to
-        create shockwaves that cover that far by pounding the ground) |-|Excalibur
-        Sonic=Same as his base form, Extended Melee Range, higher with Excalibur''s
-        extension, Thousands of Kilometers with abilities (Excalibur is made by the
-        combined power of all 4 Sacred Swords, with them being able to create a giant
-        barrier that can cover that far) |-|Super Sonic=All of his base form''s range
-        enhanced, Standard Melee Range; Hundreds of Meters, up to Low Complex Multiversal
-        with his Aura (Super Sonic''s aura swallowed several duplicates of Perfect
-        Chaos and shattered alternate worlds of the Phantom Ruby all through out the
-        Egg Field); Varies Low Multiversal (Powered by all 7 Chaos Emeralds, with
-        the Emeralds being able to, alongside the Sol Emeralds, reach to 2 universes),
-        up to Beyond baseline Complex Multiverse level with abilities (6-D. Able to
-        affect Solaris, who Dr. Eggman twice states is an extra-dimensional lifeformSonic
-        the Hedgehog (2006) VS Solaris: Phase 1 Pop UpsSonic the Hedgehog (2006) VS
-        Solaris: Phase 2 Pop Ups that would make it superior to the likes of Illumina
-        and Void. Travelled to the Infinite Tunnel Dimension alongside Classic Super
-        Sonic. Should be comparable to Solaris due to being powered by the full power
-        of the Chaos Emeralds, which allowed him to destroy "everything" across all
-        of time, which would include Null Space) |-|Starfall Super Sonic=Same, if
-        not higher than Super Sonic {| class="mw-collapsible mw-collapsed" align="center"
-        border="1" cellpadding="1" cellspacing="1" style="width:100%" | colspan="2"
-        style="text-align: left; "'
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Genius normally, Extraordinary Genius Combatant (Vastly superiorSonic
-        the Hedgehog (2006) European Website to his Adventure Era Self. Through years
-        of countless adventures, Sonic has shown himself to be a skilled and formidable
-        combatant. The Blue Blur''s single greatest asset is his signature speed,
-        which he has demonstratedSonic Unleashed: Skyscraper Scamper Act 1 completeSonic
-        Colors (Wii): Aquarium Park Act 1 masterySonic the Hedgehog (2006): Flame
-        Core (Sonic''s Episode) overSonic the Hedgehog (2006): Kingdom Valley (Sonic''s
-        Episode) inSonic Unleashed: Cool Edge Act 1 any environment due to full control
-        of his momentum.Sonic the Hedgehog CD: Introduction Cutscene Because of this,
-        Sonic excels in applying his speed and agility into evasive maneuversSonic
-        the Hedgehog CD; "Outro" and offensive techniquesSonic Unleashed; "Windmill
-        Isle Act 2" fueled by momentum-based combat,Sonic Unleashed: Introduction
-        Cutscene allowing him to use his incredible agility both in and out of combat
-        in nearly any type of terrain and situation.Sonic 06: Sonic''s StorySonic
-        and the Black KnightSonic Lost World (Wii U)Sonic Lost World (3DS)Sonic FrontiersSonic
-        the Hedgehog #1Sonic the Hedgehog #2Sonic the Hedgehog #6Sonic the Hedgehog
-        #7Sonic the Hedgehog #23Sonic the Hedgehog #25Sonic the Hedgehog #39Sonic
-        the Hedgehog #41Sonic the Hedgehog #42Sonic the Hedgehog #50Sonic the Hedgehog
-        #51Sonic the Hedgehog #55 Beyond clever applications of Sonic''s speed is
-        his capacity for adaptability and quick learning; learned swordsmanship so
-        quick he became bored by it, effortlessly applying teachings "like it was
-        nothing" in a manner deemed as "like a true knight" during his very first
-        battleSonic and the Black Knight: Misty Lake: 1st Training SessionSonic and
-        the Black Knight: Misty Lake: 2nd Training SessionSonic and the Black Knight:
-        Misty Lake (Boss Fight)Sonic and the Black Knight: Deep Woods (Boss Fight)Sonic
-        and the Black Knight: Titanic Plain (Boss Fight)Sonic and the Black Knight:
-        Molten Mine: Boss FightSonic and the Black Knight: Faraway Avalon (Boss Fight)Sonic
-        and the Black Knight: Dark Hollow (Boss Fight) and effortlessly applying it
-        to his speed. In duels, Sonic is capable of of precisely timing his attacks
-        with his opponent multiple times in a row, canceling the attacks and giving
-        him an opening for a counter attack, doing so as early as his first real fight
-        with Caliburn. Bested the legendary Knights of the Round Table and King Arthur
-        himself, becoming the greatest knight of all time.Sonic and the Black Knight
-        Manual Sonic is also knowledgeable on traditional martial arts such as KenpoSonic
-        Colors (Wii) Sweet MountainSonic Colors (Wii) Asteroid Coaster and Kung Fu,
-        the latter of which he quickly mastered after only 2 sections of training.Sonic
-        Unleashed: "Kung Fu Speed", Chun-nan Side Mission His skillset left Master
-        Zik utterly impressed, calling his moves unique and acknowledging him as being
-        a master on his own, with the Deadly Six being said to have been humiliated
-        by him in battle.Sonic Lost World (Boss Master Zik round 1)Sonic Lost World
-        (Boss - Master Zik Round 2)Sonic Lost World (Boss - Master Zik Round 3)Sonic
-        the hedgehog #23 Kept up with Neo Metal Sonic after he copied his Bio-Data,
-        which allows him to copy one''s own intellect for himself. Capable of out-racing,
-        out-fighting & out-thinking Metal Sonic across most of their encounters, despite
-        Metal''s capabilities of copying and learning with each encounter and having
-        powers & abilities similar to Sonic himself. Casually dominated Surge in combat,
-        who was perfectly calibrated with his Bio-Data to be his equal and who was
-        so similar in all aspects that Dr. Eggman''s systems were unable to differentiate
-        her from him. Easily defeated and mockedSonic Generations: Egg Dragoon Boss
-        Battle Eggman while piloting the Egg Dragoon, a machine that has years of
-        study of his movement patterns in the several years he and the Doctor have
-        been fighting. Referred to by Doctor Starline as the only being capable of
-        standing up to Dr. Eggman with sheer skill alone.Sonic the Hedgehog #14 Despite
-        Dr. Eggman''s intellect and vast list of creations, such as machines with
-        years of research into Sonic''s movement patterns, Sonic has come out on top
-        over 227,000 times. Defied Sage''s expectations, a supergenius AI, regarding
-        both his chances of survival against the Titans and the handling of his Cyber
-        Corruption, both of which she said it would be impossible for him to beat.
-        Impressed and shocked the Ancients'' greatest warriors and minds alike, the
-        very beings who created Cyber Space, to the point where one referred to his
-        potential as "limitless" and was incapable of comprehending the way he fought
-        nor how he overcame the Titans. Sonic is able to greatly grow in areas outside
-        of combat, such as when he very quickly grew from being an amateur at Extreme
-        Gear to being on the same level as the greatest Extreme Gear racer in the
-        world. Sonic became so good at it that he defeated Metal Sonic after he h'
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Base = Sonic can be cocky and overconfident at times and has trouble
-        in aquatic areas due to his inability to swim. When the Warp Topaz receives
-        too much of a charge, it will cause severe reality alterations and eventually
-        explode, backfiring on the user. Without Starline''s glove it is hard to gain
-        precise control on the Topaz opening portals becomes more difficult |-| Darkspine
-        Sonic = More violent than before |-| Sonic the Werehog = His Werehog form
-        trades in a large bulk of his speed in favor of natural raw strength, and
-        he transforms into this form involuntarily at night only to change back in
-        the day |-| Shatter Sonic= When using 4 Prism Shards of the Paradox Prism
-        his power quickly runs out |-| Excalibur Sonic, Super Sonic & Starfall Super
-        Sonic = None notable Notable Attacks/Techniques: {{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content=
-        |-|Base Sonic= {{#tag:tabber| {{!}}-{{!}}Standard Moves= Sonic spin dash.gif|One
-        of Sonic''s methods of defensive traversal. Sonic Homing Attack.gif|One of
-        Sonic''s most common methods of attacking an enemy. Flying Kick.gif|The Flying
-        Kick, a stronger variant that Sonic can use when the Homing Attack isn''t
-        enough. *Spin'
-      source_id: vsbattles-sonic-the-hedgehog-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|sonic the hedgehog modern|9690649
+      game character paperprince2|623128
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
   candidate_sources:
   - source_id: vsbattles-sonic-the-hedgehog-mixed-games
-    url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_Mixed_Games
+    url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_(Main_Continuity)
     title: Sonic the Hedgehog (Main Continuity)
-    rank: 105
-    extracted_fields: *id006
+    rank: 90
+    extracted_fields: *id005
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id007
+    allowed_fields: *id006
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 100
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9710740
+  - source_id: vsbattles-sonic-the-hedgehog-mixed-games
+    url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_Mixed_Games
+    title: Sonic the Hedgehog (Main Continuity)
+    rank: 90
+    extracted_fields: *id007
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id008
     rejection_reason: ''
     identity_match: true
     identity_score: 120
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9649546
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9710740
   - source_id: vsbattles-sonic-the-hedgehog-mixed-games
     url: https://vsbattles.fandom.com/wiki/Sonic_the_Hedgehog_%28Mixed_Games%29
     title: Sonic the Hedgehog (Main Continuity)
-    rank: 105
-    extracted_fields: *id008
+    rank: 90
+    extracted_fields: *id009
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id009
+    allowed_fields: *id010
     rejection_reason: ''
     identity_match: true
     identity_score: 120
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9649546
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|sonic the hedgehog main continuity|9710740
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0
+version_scope:
+  evidence_scoped: false
+  scoped_key: 'Sonic Riders - Sonic Riders: Zero Gravity'
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T17:38:21Z'
+  key_origin: primary_form_position
+  axes:
+    tier:
+      method: positional
+      segments: 7
+  remaining_piped_axes:
+  - range
+  - stamina

@@ -145,7 +145,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Pumpkinhead
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -186,34 +186,6 @@ sources:
 - id: character-stats-profiles-pumpkinhead-horror-icons
   provider_id: character_stats_profiles
   source_type: mediawiki
-  title: Pumpkinhead Horror Icons
-  url: https://character-stats-and-profiles.fandom.com/wiki/Pumpkinhead_Horror_Icons
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-pumpkinhead-horror-icons
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Pumpkinhead (Horror Icons)
-  url: https://vsbattles.fandom.com/wiki/Pumpkinhead_%28Horror_Icons%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-pumpkinhead-horror-icons
-  provider_id: character_stats_profiles
-  source_type: mediawiki
   title: Pumpkinhead (Horror Icons)
   url: https://character-stats-and-profiles.fandom.com/wiki/Pumpkinhead_%28Horror_Icons%29
   authority: high
@@ -231,56 +203,46 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: '{{9-B}} | At least {{9-B}}, possibly {{9-A}}'
+    text: At least , possibly
     source_ids:
     - vsbattles-pumpkinhead-horror-icons
     confidence: 0.6
     notes: auto_repair source extraction
   attack_potency:
-    text: Wall level (Can rip through walls, uproot trees, and destroy cars) | At
-      least Wall level (Crushes a man's skull], rips humans apart, can harm and fight
-      his siblings), possibly Small Building level (Should be comparable to all his
-      siblings including Excess, who could destroy buildings; Vengeance later kills
-      Excess)
+    text: Wall level (Can rip through walls, uproot trees, and destroy cars)
     source_ids:
     - vsbattles-pumpkinhead-horror-icons
     confidence: 0.6
     notes: auto_repair source extraction
   speed:
-    text: Peak Human | Superhuman (Can catch up to a speeding car; Comparable to other
-      demons)
+    text: Peak Human
     source_ids:
     - vsbattles-pumpkinhead-horror-icons
     confidence: 0.6
     notes: auto_repair source extraction
   lifting_strength:
-    text: "Class K (Punches through a man\u2019s torso, removing a chunk of spine)\
-      \ | At least Class 1, likely Class 5 (Throws humans and large dogs; Lifts the\
-      \ front end of a car)"
-    source_ids: &id003
+    text: "Class K (Punches through a man\u2019s torso, removing a chunk of spine)"
+    source_ids: &id002
     - mediawiki-215897
     confidence: 0.8
   striking_strength:
-    text: Wall level | At least Wall level (Comparable to his siblings), possibly
-      Small Building level
-    source_ids: *id003
+    text: Wall level
+    source_ids: *id002
     confidence: 0.8
   durability:
-    text: Wall level (Can tank gunfire) | At least Wall level (Can take hits from
-      his siblings, shrugs off shotgun blast), possibly Small Building level (Comparable
-      to Excess)
+    text: Wall level (Can tank gunfire)
     source_ids:
     - vsbattles-pumpkinhead-horror-icons
     confidence: 0.6
     notes: auto_repair source extraction
   stamina:
-    text: Superhuman | High
+    text: Superhuman
     source_ids:
     - vsbattles-pumpkinhead-horror-icons
     confidence: 0.6
     notes: auto_repair source extraction
   range:
-    text: Extended melee range | Extended melee range
+    text: Extended melee range
     source_ids:
     - vsbattles-pumpkinhead-horror-icons
     confidence: 0.6
@@ -289,7 +251,7 @@ power_scale:
     text: Average. Pumpkinhead showcases a sadistic cunning and predatory skill, expertly
       tracking its prey no matter where they run to and having enough knowledge to
       destroy their methods of escape, such as cars and bikes, and playing dead to
-      lure prey closer. | Average
+      lure prey closer.
     source_ids:
     - vsbattles-pumpkinhead-horror-icons
     confidence: 0.6
@@ -299,7 +261,7 @@ claims:
   section: power_scale
   axis: other
   text: '{{9-B}} | At least {{9-B}}, possibly {{9-A}}'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-215897
   decisive: false
   status: unverified
@@ -312,7 +274,7 @@ claims:
     Wall level (Crushes a man's skull], rips humans apart, can harm and fight his
     siblings), possibly Small Building level (Should be comparable to all his siblings
     including Excess, who could destroy buildings; Vengeance later kills Excess)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -322,7 +284,7 @@ claims:
   axis: speed
   text: Peak Human | Superhuman (Can catch up to a speeding car; Comparable to other
     demons)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -333,7 +295,7 @@ claims:
   text: "Class K (Punches through a man\u2019s torso, removing a chunk of spine) |\
     \ At least Class 1, likely Class 5 (Throws humans and large dogs; Lifts the front\
     \ end of a car)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -343,7 +305,7 @@ claims:
   axis: other
   text: Wall level | At least Wall level (Comparable to his siblings), possibly Small
     Building level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -354,7 +316,7 @@ claims:
   text: Wall level (Can tank gunfire) | At least Wall level (Can take hits from his
     siblings, shrugs off shotgun blast), possibly Small Building level (Comparable
     to Excess)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -363,7 +325,7 @@ claims:
   section: power_scale
   axis: stamina
   text: Superhuman | High
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -372,7 +334,7 @@ claims:
   section: power_scale
   axis: range
   text: Extended melee range | Extended melee range
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -381,7 +343,7 @@ claims:
   section: equipment
   axis: equipment
   text: Nothing notable
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -393,7 +355,7 @@ claims:
     tracking its prey no matter where they run to and having enough knowledge to destroy
     their methods of escape, such as cars and bikes, and playing dead to lure prey
     closer. | Average
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -405,7 +367,7 @@ claims:
     will be banished and disappear. Any damage done to the seeker of vengeance will
     appear on Pumpkinhead as well. Pumpkinhead tends to torture its victims, taking
     time to kill them as opposed to killing them outright.
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -429,7 +391,7 @@ claims:
     through the chest, being eaten, acid, gunshots, bites, and attacks from his siblings),
     Stealth Mastery, Large Size (Type 0), Body Control, limited Morality Manipulation,
     Pain Manipulation, Telepathy, and Fire Manipulation of Summoner'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -468,7 +430,7 @@ equipment:
 - id: standard-equipment-nothing-notable
   name: Nothing notable
   description: Nothing notable
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -492,7 +454,7 @@ resistances:
     from his siblings), Stealth Mastery, Large Size (Type 0), Body Control, limited
     Morality Manipulation, Pain Manipulation, Telepathy, and Fire Manipulation of
     Summoner
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -510,7 +472,7 @@ weaknesses:
 - id: weaknesses-if-all-of-pumpkinhead-s-targets
   name: If all of Pumpkinhead's targets
   description: If all of Pumpkinhead's targets
-  source_ids: &id005
+  source_ids: &id004
   - vsbattles-pumpkinhead-horror-icons
   source_claim_ids: []
   confidence: 0.85
@@ -526,7 +488,7 @@ weaknesses:
 - id: weaknesses-or-the-seeker-of-vengeance
   name: or the seeker of vengeance
   description: or the seeker of vengeance
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -541,7 +503,7 @@ weaknesses:
 - id: weaknesses-are-killed
   name: are killed
   description: are killed
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -559,7 +521,7 @@ weaknesses:
   description: he will be banished and disappear. Any damage done to the seeker of
     vengeance will appear on Pumpkinhead as well. Pumpkinhead tends to torture its
     victims
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -575,7 +537,7 @@ weaknesses:
 - id: weaknesses-taking-time-to-kill-them-as-opposed-to-killing-them-outright
   name: taking time to kill them as opposed to killing them outright.
   description: taking time to kill them as opposed to killing them outright.
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -622,7 +584,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: 3d4f4ae0d30bda920cd7768abc563fb9844f9b5cd7349d614149520698344382
 repair:
-  attempted_at: '2026-10-11T01:12:38Z'
+  attempted_at: '2026-10-21T21:37:26Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -639,7 +601,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pumpkinhead
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields: &id005
     - attack_potency
     - durability
     - intelligence
@@ -681,7 +643,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields: &id006
     - tier
     - attack_potency
     - speed
@@ -694,7 +656,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} | At least {{9-B}}, possibly {{9-A}}'
+      value: At least , possibly
       source_id: mediawiki-215897
       provider_id: vsbattles
       authority: high
@@ -795,11 +757,137 @@ repair:
     duplicate_key: vsbattles.fandom.com|pumpkinhead|9610245
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-pumpkinhead-horror-icons
+    url: https://character-stats-and-profiles.fandom.com/wiki/Pumpkinhead_%28Horror_Icons%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Leatherface (Canon, Composite)/FNAFpro52
+    source_type: mediawiki
+    revision_id: '374423'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 9836
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Key
+    - Other
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-C | 9-B with weaponry | 9-B | High 8-C
+      source_id: character-stats-profiles-pumpkinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Athletic Human Physical Characteristics, Stealth Mastery, Immortality
+        (Type 1, 2, and 8), Pain Tolerance, Weapon Mastery, Fear Aura, Enhanced Senses
+        and Extrasensory Perception (Can see the aura of Survivors), Berserker Mode
+        and Statistics Amplification, Blessed, Empowerment (via Hex: No One Escapes
+        Death), Summoning (Via Sacrificial Hooks and several different perks, which
+        all summon the Entity), Status Effect Inducement, Technopathy (via certain
+        perks, namely Overcharge).'
+      source_id: character-stats-profiles-pumpkinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Street level (Can smash through a wall, ripped off the back of a car,
+        punched through a wooden door) | Wall level with weaponry (Can kill people
+        with hammers and decapitate people with chainsaws) | Wall level (Can easily
+        smash through walls, which are comparable to doors) | Large Building level
+        (Is comparable to Jax and Johnny, who are two times stronger than a Large
+        Building feat) | High Universal Level (Overpowered Cassie Cage, who is comparable
+        to Shinnok)
+      source_id: character-stats-profiles-pumpkinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Average Human | Athletic Human | Superhuman movement speed with Subsonic
+        reactions (Reacted fast enough to block shotgun fire) | Superhuman (Can outwalk
+        athletic humans) | Supersonic+ (Scales to the cast of Mortal Kombat, who can
+        casually react to assault rifles and sub-machine guns)
+      source_id: character-stats-profiles-pumpkinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Street level (Gets hit multiple times with a large rock until he's forced
+        underwater) | Street level (Managed to tank being shot with a shotgun) | Wall
+        level (Survived being hit with a car and a small explosion that seemingly
+        only stunned him) | Large Building level (Can tank hits from Jax and Johnny,
+        who upscale from this feat)
+      source_id: character-stats-profiles-pumpkinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Mentally handicapped, tends to blindly follow his family's orders, his
+        chainsaw can run out of gas/oil, Killers are servants of the Entity, making
+        them more prone to preserve their prey first in an attempt to sacrifice them.
+        The Stain is an indication of where killers are looking, making their line
+        of sight more exploitable. Bubba is prone to fits of rage should he bump into
+        an object while in pursuit with his chainsaw.
+      source_id: character-stats-profiles-pumpkinhead-horror-icons
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|leatherface canon composite
+      fnafpro52|374423
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-pumpkinhead-horror-icons
     url: https://vsbattles.fandom.com/wiki/Pumpkinhead_Horror_Icons
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id008
+    extracted_fields: &id007
     - attack_potency
     - durability
     - intelligence
@@ -841,7 +929,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id009
+    allowed_fields: &id008
     - attack_potency
     - speed
     - durability
@@ -852,7 +940,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} | At least {{9-B}}, possibly {{9-A}}'
+      value: At least , possibly
       source_id: vsbattles-pumpkinhead-horror-icons
       provider_id: vsbattles
       authority: high
@@ -1077,7 +1165,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pumpkinhead_%28Horror_Icons%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id010
+    extracted_fields: &id009
     - attack_potency
     - durability
     - intelligence
@@ -1119,7 +1207,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id011
+    allowed_fields: &id010
     - attack_potency
     - speed
     - durability
@@ -1130,7 +1218,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} | At least {{9-B}}, possibly {{9-A}}'
+      value: At least , possibly
       source_id: vsbattles-pumpkinhead-horror-icons
       provider_id: vsbattles
       authority: high
@@ -1229,132 +1317,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|pumpkinhead|9610245
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-pumpkinhead-horror-icons
-    url: https://character-stats-and-profiles.fandom.com/wiki/Pumpkinhead_%28Horror_Icons%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Leatherface (Canon, Composite)/FNAFpro52
-    source_type: mediawiki
-    revision_id: '374423'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 9836
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Key
-    - Other
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 9-C | 9-B with weaponry | 9-B | High 8-C
-      source_id: character-stats-profiles-pumpkinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Athletic Human Physical Characteristics, Stealth Mastery, Immortality
-        (Type 1, 2, and 8), Pain Tolerance, Weapon Mastery, Fear Aura, Enhanced Senses
-        and Extrasensory Perception (Can see the aura of Survivors), Berserker Mode
-        and Statistics Amplification, Blessed, Empowerment (via Hex: No One Escapes
-        Death), Summoning (Via Sacrificial Hooks and several different perks, which
-        all summon the Entity), Status Effect Inducement, Technopathy (via certain
-        perks, namely Overcharge).'
-      source_id: character-stats-profiles-pumpkinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Street level (Can smash through a wall, ripped off the back of a car,
-        punched through a wooden door) | Wall level with weaponry (Can kill people
-        with hammers and decapitate people with chainsaws) | Wall level (Can easily
-        smash through walls, which are comparable to doors) | Large Building level
-        (Is comparable to Jax and Johnny, who are two times stronger than a Large
-        Building feat) | High Universal Level (Overpowered Cassie Cage, who is comparable
-        to Shinnok)
-      source_id: character-stats-profiles-pumpkinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Average Human | Athletic Human | Superhuman movement speed with Subsonic
-        reactions (Reacted fast enough to block shotgun fire) | Superhuman (Can outwalk
-        athletic humans) | Supersonic+ (Scales to the cast of Mortal Kombat, who can
-        casually react to assault rifles and sub-machine guns)
-      source_id: character-stats-profiles-pumpkinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Street level (Gets hit multiple times with a large rock until he's forced
-        underwater) | Street level (Managed to tank being shot with a shotgun) | Wall
-        level (Survived being hit with a car and a small explosion that seemingly
-        only stunned him) | Large Building level (Can tank hits from Jax and Johnny,
-        who upscale from this feat)
-      source_id: character-stats-profiles-pumpkinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Mentally handicapped, tends to blindly follow his family's orders, his
-        chainsaw can run out of gas/oil, Killers are servants of the Entity, making
-        them more prone to preserve their prey first in an attempt to sacrifice them.
-        The Stain is an indication of where killers are looking, making their line
-        of sight more exploitable. Bubba is prone to fits of rage should he bump into
-        an object while in pursuit with his chainsaw.
-      source_id: character-stats-profiles-pumpkinhead-horror-icons
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|leatherface canon composite
-      fnafpro52|374423
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-pumpkinhead
@@ -1628,11 +1590,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pumpkinhead
     title: Pumpkinhead
     rank: 120
-    extracted_fields: *id006
+    extracted_fields: *id005
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id007
+    allowed_fields: *id006
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -1649,11 +1611,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pumpkinhead_Horror_Icons
     title: Pumpkinhead
     rank: 120
-    extracted_fields: *id008
+    extracted_fields: *id007
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id009
+    allowed_fields: *id008
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -1670,11 +1632,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Pumpkinhead_%28Horror_Icons%29
     title: Pumpkinhead
     rank: 120
-    extracted_fields: *id010
+    extracted_fields: *id009
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id011
+    allowed_fields: *id010
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -1693,3 +1655,29 @@ repair:
     ambiguous_candidates: 1
     provider_search_no_results: 1
   confidence: 0.75
+version_scope:
+  evidence_scoped: true
+  scoped_key: Films
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T21:37:26Z'
+  key_origin: primary_form_position
+  axes:
+    attack_potency:
+      method: positional
+      segments: 2
+    speed:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+    range:
+      method: positional
+      segments: 2
+    stamina:
+      method: positional
+      segments: 2
+    intelligence:
+      method: positional
+      segments: 2
+  remaining_piped_axes: []

@@ -146,7 +146,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Aoi_Todo
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -186,34 +186,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-aoi-todo-jujutsu-kaisen
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Aoi Todo Jujutsu Kaisen
-  url: https://character-stats-and-profiles.fandom.com/wiki/Aoi_Todo_Jujutsu_Kaisen
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-aoi-todo-jujutsu-kaisen
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Aoi Todo (Jujutsu Kaisen)
-  url: https://vsbattles.fandom.com/wiki/Aoi_Todo_%28Jujutsu_Kaisen%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-aoi-todo-jujutsu-kaisen
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -284,8 +256,7 @@ sources:
   - weaknesses
 power_scale:
   tier:
-    text: '{{8-B}}, higher with Playful Cloud | At least {{8-B}}, far higher with
-      Black Flash'
+    text: '{{8-B}}, higher with Playful Cloud'
     source_ids:
     - vsbattles-aoi-todo-jujutsu-kaisen
     confidence: 0.6
@@ -304,10 +275,7 @@ power_scale:
       Chapter 36 and would've taken his arms off with a Cursed Energy reinforced punch
       if a Cursed Spirit didn't mitigate the blow.Jujutsu Kaisen Chapter 34 Is strong
       enough to harm HanamiJujutsu Kaisen Chapter 49) higher with Playful Cloud (Dealt
-      serious damage to HanamiJujutsu Kaisen Chapter 51) | At least City Block level+
-      (Fought against Mahito. His output increased to 120% after landing a Black Flash),
-      far higher with Black Flash (Black Flash exponentially increases ones striking
-      powerJujutsu Kaisen Chapter 48)
+      serious damage to HanamiJujutsu Kaisen Chapter 51)
     source_ids:
     - vsbattles-aoi-todo-jujutsu-kaisen
     confidence: 0.6
@@ -315,7 +283,7 @@ power_scale:
   speed:
     text: Subsonic (Kept up with YujiChapter 36 who could blitz a cursed spirit. Should
       be faster than Hanami's tree attack, as he states it sacrifices speed for rangeJujutsu
-      Kaisen Chapter 49) | At least Subsonic (Comparable to MahitoChapter 127)
+      Kaisen Chapter 49)
     source_ids:
     - vsbattles-aoi-todo-jujutsu-kaisen
     confidence: 0.6
@@ -323,17 +291,15 @@ power_scale:
   lifting_strength:
     text: Class 5 (Could wrestle with Yuji,Jujutsu Kaisen Chapter 37 who can throw
       cars)
-    source_ids: &id003
+    source_ids: &id002
     - mediawiki-4679906
     confidence: 0.8
   striking_strength:
-    text: City Block level+, higher with Playful Cloud | At least City Block level+,
-      far higher with Black Flash
-    source_ids: *id003
+    text: City Block level+, higher with Playful Cloud
+    source_ids: *id002
     confidence: 0.8
   durability:
-    text: City Block level+ (Can take hits from Hanami and Yuji) | At least City Block
-      level+ (Tanked Mahito's Body Repel, which is this powerful)
+    text: City Block level+ (Can take hits from Hanami and Yuji)
     source_ids:
     - vsbattles-aoi-todo-jujutsu-kaisen
     confidence: 0.6
@@ -348,9 +314,7 @@ power_scale:
     notes: auto_repair source extraction
   range:
     text: Standard Melee Range, Tens of Meters with Boogie Woogie (Swapped Yuji and
-      Playful Cloud, which was in the riverbed) | At least Hundreds of Meters in Shinjuku,
-      likely Hundreds of Kilometers (Was able to swap the students outside of Sukuna's
-      domain. Likely used his teleportation to swap Yuta to Sukuna's location)
+      Playful Cloud, which was in the riverbed)
     source_ids:
     - vsbattles-aoi-todo-jujutsu-kaisen
     confidence: 0.6
@@ -370,7 +334,7 @@ claims:
   axis: other
   text: '{{8-B}}, higher with Playful Cloud | At least {{8-B}}, far higher with Black
     Flash'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-4679906
   decisive: false
   status: unverified
@@ -395,7 +359,7 @@ claims:
     Kaisen Chapter 51) | At least City Block level+ (Fought against Mahito. His output
     increased to 120% after landing a Black Flash), far higher with Black Flash (Black
     Flash exponentially increases ones striking powerJujutsu Kaisen Chapter 48)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -406,7 +370,7 @@ claims:
   text: Subsonic (Kept up with YujiChapter 36 who could blitz a cursed spirit. Should
     be faster than Hanami's tree attack, as he states it sacrifices speed for rangeJujutsu
     Kaisen Chapter 49) | At least Subsonic (Comparable to MahitoChapter 127)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -415,7 +379,7 @@ claims:
   section: power_scale
   axis: other
   text: Class 5 (Could wrestle with Yuji,Jujutsu Kaisen Chapter 37 who can throw cars)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -425,7 +389,7 @@ claims:
   axis: other
   text: City Block level+, higher with Playful Cloud | At least City Block level+,
     far higher with Black Flash
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -435,7 +399,7 @@ claims:
   axis: durability
   text: City Block level+ (Can take hits from Hanami and Yuji) | At least City Block
     level+ (Tanked Mahito's Body Repel, which is this powerful)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -446,7 +410,7 @@ claims:
   text: Superhuman (Despite having his hand sliced off and being hit so hard he started
     internally bleeding, he was still able to stand and use cursed energyJujutsu Kaisen
     Chapter 132)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -458,7 +422,7 @@ claims:
     Playful Cloud, which was in the riverbed) | At least Hundreds of Meters in Shinjuku,
     likely Hundreds of Kilometers (Was able to swap the students outside of Sukuna's
     domain. Likely used his teleportation to swap Yuta to Sukuna's location)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -468,7 +432,7 @@ claims:
   axis: equipment
   text: None notable Aoi Todo hits Hanami with Playful Cloud 29.webp|Todo attacks
     Hanami with Playful Cloud Optional
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -480,7 +444,7 @@ claims:
     given a 10 in classroom learning and Jujutsu sense. Extremely skilled in hand
     to hand fights. In a very small amount of time he was able to teach Yuji how to
     properly manipulate his cursed energy and the Black Flash)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -524,7 +488,7 @@ claims:
     \ Category:Humans Category:Teenagers Category:Energy Users Category:Weapon Users\
     \ Category:Teleportation Users Category:Enhanced Senses Users Category:Power Nullification\
     \ Users Category:Martial Artists"
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -547,17 +511,120 @@ claims:
     he is now able to teleport targets fifty times a second, and with a binding vow
     that limits the amount of swaps, he has increased the targets and effective range)
     }}'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
   - fan_wiki_single_source
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id004
+  - character-stats-profiles-aoi-todo-jujutsu-kaisen
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-energy-manipulation-can-produce-and-manipulate-cursed-energ
+  name: Energy Manipulation (Can produce and manipulate cursed energyChapter 37)
+  description: Energy Manipulation (Can produce and manipulate cursed energyChapter
+    37)
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-statistics-amplification-cursed-energy-can-enhance-a-sorcor
+  name: Statistics Amplification (Cursed energy can enhance a sorcorers physical powerChapter
+    12)
+  description: Statistics Amplification (Cursed energy can enhance a sorcorers physical
+    powerChapter 12)
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-minor-spatial-manipulation-the-black-flash-creates-a-distor
+  name: minor Spatial Manipulation (The black flash creates a distortion in spaceChapter
+    48)
+  description: minor Spatial Manipulation (The black flash creates a distortion in
+    spaceChapter 48)
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-teleportation-boogie-woogie-allows-him-to-switch-the-positi
+  name: Teleportation (Boogie Woogie allows him to switch the positions of anything
+    with cursed energy within his range with a c
+  description: Teleportation (Boogie Woogie allows him to switch the positions of
+    anything with cursed energy within his range with a clap of his handsChapter 50)
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - battlefield_relocation
+  - dimensional_travel
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations:
+  - range_limit
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-power-nullification-simple-domain-allows-todo-to-neutralize
+  name: Power Nullification (Simple Domain allows Todo to neutralize or counter all
+    cursed techniquesChapter 82Chapter 102Chapte
+  description: Power Nullification (Simple Domain allows Todo to neutralize or counter
+    all cursed techniquesChapter 82Chapter 102Chapter 130)
+  source_ids: *id004
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment:
 - id: standard-equipment-none-notable-aoi-todo-hits-hanami-with-playful-cloud-29-webp
   name: None notable Aoi Todo hits Hanami with Playful Cloud 29.webp
   description: None notable Aoi Todo hits Hanami with Playful Cloud 29.webp
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -572,7 +639,7 @@ equipment:
 - id: standard-equipment-todo-attacks-hanami-with-playful-cloud-optional
   name: Todo attacks Hanami with Playful Cloud Optional
   description: Todo attacks Hanami with Playful Cloud Optional
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -933,7 +1000,7 @@ review:
   notes: []
   readiness_state: provisional
   profile_state: auto_evidence_profile
-  primary_source_id: vsbattles-aoi-todo-jujutsu-kaisen
+  primary_source_id: character-stats-profiles-aoi-todo-jujutsu-kaisen
   secondary_disagreement_policy: warning_only
 profile_hash: d0b27dc2b7fee430cd5255b801278a0aa78e932c80b6b07197101c5726bcf79b
 repair:
@@ -2434,3 +2501,29 @@ repair:
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: true
+  scoped_key: Kyoto Goodwill Event
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T17:35:26Z'
+  key_origin: primary_form_position
+  axes:
+    tier:
+      method: positional
+      segments: 2
+    attack_potency:
+      method: positional
+      segments: 2
+    speed:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+    range:
+      method: positional
+      segments: 2
+    striking_strength:
+      method: positional
+      segments: 2
+  remaining_piped_axes: []

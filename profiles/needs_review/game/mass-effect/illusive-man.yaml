@@ -11,13 +11,14 @@ generation:
   generated_at: '2026-06-09T03:25:05Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id004
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Illusive Man
   franchise: Mass Effect
@@ -195,42 +196,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-illusive-man-mass-effect
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Illusive Man Mass Effect
-  url: https://character-stats-and-profiles.fandom.com/wiki/Illusive_Man_Mass_Effect
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-illusive-man-mass-effect
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Illusive Man (Mass Effect)
-  url: https://vsbattles.fandom.com/wiki/Illusive_Man_%28Mass_Effect%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-illusive-man-mass-effect
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -778,30 +743,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id004
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: 5b5dce1216213bfe1437fff09722a5a7b1f91f316b6a6c2a3c167b97e72a0bbe
 repair:
-  attempted_at: '2026-06-19T12:23:35Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T14:04:02Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-illusive-man-mass-effect
-    url: https://vsbattles.fandom.com/wiki/Illusive_Man_Mass_Effect
+  - source_id: mediawiki-illusive-man
+    url: https://vsbattles.fandom.com/wiki/Miranda_Lawson
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id005
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -829,6 +791,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -842,7 +805,178 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id006
+    allowed_fields:
+    - tier
+    - attack_potency
+    - speed
+    - durability
+    - range
+    - stamina
+    - intelligence
+    - abilities
+    - equipment
+    - weaknesses
+    field_candidates:
+    - field: tier
+      value: physically, to with weaponry, with high explosives rounds/grenades, via
+        biotics
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Longevity (Her genetic modifications
+        will allow her to live longer than the average human), Social Influencing
+        (Great leader who can command loyalty through sheer experience), Expert Hand-to-Hand
+        Combatant, Weapon Mastery (Expert Markswoman and Grenadier), Hacking, Energy
+        Manipulation/Mass Manipulation (Can manipulate dark energy to increase/decrease/fluctuate
+        the mass of a given volume of space via mass effect fields created by her
+        biotics), Telekinesis (Can move objects/people with her mind through mass
+        lowering fields via biotics), Electricity Manipulation (With Overload), Fire
+        Manipulation (Via Incinerate), Kinetic/Biotic Barriers, Energy Projection
+        (In the form of Biotic Explosion and Warp), Absorption (In the form of Reave),
+        Regeneration and Durability Negation (Up to High, as Warp prevents regeneration
+        on a molecular level) and Matter Manipulation (Warp rips the opponent apart
+        on a molecular level)
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level physically (Able to contend with Commander Shepard),
+        Wall level+ to Small Building level with weaponry, City Block Level+ with
+        high explosives rounds/grenades, Large Building level via biotics (Comparable
+        to Jack)
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic Combat Speed and Reactions (Comparable to James
+        Vega), Relativistic Attack Speed with mass accelerator weaponry
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level physically, City Block level with kinetic/biotic
+        barriers (Scaling from Commander Shepard)
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, Tens of Meters with biotics or tech abilities,
+        Hundreds of Meters with mass accelerator weaponry
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: A pistol, a sub-machine gun, an omni-tool, and a biotic amp.
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Genius. A talented soldier and biotic. Was one of the Illusive Man's
+        most well respected and trusted operatives. She was picked by the Illusive
+        Man to oversee some of the most dangerous, risky and technically demanding
+        operations Cerberus undertook, including Project Lazarus (which resulted in
+        bringing Shepard back to life, the most amazing medical achievment in recorded
+        history), as well as serving as Shepard's second-in-command during their mission
+        against the Collectors. Despite her somewhat anti-social and cold attitude,
+        she can command loyalty through experience, making her an exceptional leader.
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Kinetic barriers are activated based on the speed of an attack. A melee
+        attack is not fast enough to set it off. In addition, the shielding afforded
+        by kinetic barriers does not protect against extremes of temperature, toxins,
+        or radiation. Notable Attacks/Techniques: *Overload: Overload electronics
+        with this power surge, stunning the enemy. *Warp: Rips an enemy apart at a
+        molecular level. Preventing the enemy from regenerating health. *Slam: Deals
+        massive damage with a biotic body slam. *Incinerate: Burns an opponent and
+        incinerates their armor. *Reave: Drain a target''s health and disrupt their
+        resistances, receiving increased damage protection while this power is in
+        effect. ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Female Characters Category:Humans Category:Mass Effect Category:Gun
+        Users Category:Telekinesis Users Category:Forcefield Users Category:Leaders
+        Category:Weapon Masters Category:Martial Artists Category:Soldiers Category:Energy
+        Users Category:Absorption Users Category:Durability Negation Users Category:Matter
+        Users Category:Hackers Category:Brawlers Category:Game Characters Category:Video
+        Game Characters Category:Adults Category:Electricity Users Category:Fire Users
+        Category:Energy Projection Users Category:Power Nullification Users Category:Science
+        Fiction Characters'
+      source_id: mediawiki-illusive-man
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|miranda lawson|9508369
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-illusive-man
+    url: https://character-stats-and-profiles.fandom.com/wiki/Queen_Cassiopeia_(Canon,_Ni_no_Kuni)/ZeroTC01
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Queen Cassiopeia (Canon, Ni no Kuni)/ZeroTC01
+    source_type: mediawiki
+    revision_id: '131171'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 23755
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -853,11 +987,372 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-A}} physically, {{9-B}} to {{9-A}} with weaponry, {{8-B}} with high
-        explosives rounds/grenades, {{High 8-C}} via biotics Name: Miranda Lawson
-        Origin: Mass Effect Gender: Female Age: Around 36 years old by Mass Effect
-        3 Classification: Artificial Human, Biotic, Former Lieutenant Commander, Former
-        Elite Cerberus Operative'
+      value: 4-A, likely Low 2-C | At least 2-A, possibly High 2-A
+      source_id: character-stats-profiles-illusive-man
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "Superhuman Physical Characteristics, Self-Sustenance (Type 1, 2 and\
+        \ 3), Extrasensory Perception, Aura, Presence Concealment, Invisibility, Non-Corporeal\
+        \ (Is inherently invisible and incorporeal to beings from foreign worlds,\
+        \ even to those who can perceive things such as spirits. Can create illusive\
+        \ copies of herself that are non-physical in nature. Can completely conceal\
+        \ her presence via Veil), Immortality (Type 1, 3, possibly 5 and 8; Stated\
+        \ that death is a privilege she will never know, leaving her stuck in endless\
+        \ solitude as a consequence of casting the Forbidden Spell), Resurrection/Regeneration\
+        \ (High-Godly; She bestowed upon Shadar his powers and made him into the Dark\
+        \ Djinn. Shadar in-turn would scale to Vileheart, a being born from despair\
+        \ and the darkness of the human heart, who can regenerate himself thanks to\
+        \ it even after being destroyed by conceptual attacks and beings like familiars),\
+        \ Empathic Manipulation (Should have to power to steal a piece of someone's\
+        \ heart, causing them to become broken-hearted, which puts them in a miserable\
+        \ state that they don't even know whether they're dead or alive, nor are they\
+        \ able to fight back or function properly), Invulnerability (Scaling to the\
+        \ Ivory Tower itself, which was noted by Marcassin to be invulnerable), Healing\
+        \ (Via Healing Touch and Healing Hand), Resurrection (Via Ashes of Resurrection.\
+        \ Can also utilize a regular spell in-combat that can revive her allies),\
+        \ Malevolence (Only as the White Witch), Indomitable Will, Transformation,\
+        \ which grants Large Size (Type 0; By turning into the Monster of Manna),\
+        \ Magic, Forcefield Creation (Via Nightshade), Levitation (Via Levitate),\
+        \ Clairvoyance (Shown to possess a crystal ball that allows her to peer into\
+        \ other worlds and tamper with them), Illusion Creation, Subjective Reality\
+        \ (Recreated multiple beings from her memories and imagination, including\
+        \ Apus, the Zodiarchs, as well as Caph and his fellow knights, and can subconsciously\
+        \ make them real), Existence Erasure (Seemingly erased Apus with a wave of\
+        \ her hand), Pocket Reality Manipulation (Her merely becoming the White Witch\
+        \ created a dimension containing countless planets and stars), Reality Warping\
+        \ (Scaling to Apus, who tampered with the Philmobile from a different world),\
+        \ BFR (Banished Pea to Oliver's world. Can send others to a land of eternal\
+        \ darkness), Power Bestowal, Fear Manipulation, Mind Manipulation, Madness\
+        \ Manipulation (Type 2 and 3), Corruption (Type 2), Memory Manipulation, Biological\
+        \ Manipulation (Turned the likes of King Tom and the Cowlipha into berserk,\
+        \ monstrous, and far more powerful versions of themselves via Ashes of Resurrection,\
+        \ and thousands of years ago, accidentally did so to the people of Nazca\xE4\
+        . This even transformed Porco Grosso, which is a machine), Durability Negation,\
+        \ Death Manipulation (Ashes of Resurrection was implied to have directly killed\
+        \ people, with Horace stating that he was \"killed\" by it himself. Can also\
+        \ induce death scaling to the Ivory Tower's familiars), Power Nullification\
+        \ (Via Nix and Cloudburst. Also via scaling to Shadar, whose mere presence\
+        \ renders magic useless), Purification (Via Sanctify, which can purify those\
+        \ corrupted by Ashes of Resurrection), Portal Creation, Dimensional Travel\
+        \ (Via Gateway. Additionally, she can instantly enter her pocket universe\
+        \ via her cape), Time Travel (Via Breach Time, which she should be able to\
+        \ use without much restrictions scaling to Gallus and given the fact that\
+        \ she is immortal), Teleportation (Via Travel and Vacate), Fate Manipulation\
+        \ (Refers to herself as the arbiter of the world's fate, and is repeatedly\
+        \ stated to be able to shape and decide the fate of the world. She was able\
+        \ to create Gallus via her mere imagination, who refers to himself as one\
+        \ who guides the fate of the world, as well as the Zodiarchs, who decide the\
+        \ fate of the world), Probability Manipulation (Via Fortune's Fool. Can bring\
+        \ good fortune or even bad luck), Precognition (Can see the future and the\
+        \ truth of all things), Danmaku, Astroremkinesis, Life Manipulation, Absorption\
+        \ (Can absorb color and vitality from the world around her. Can draw power\
+        \ from celestial bodies and the night sky. Can absorb one's strength through\
+        \ their shadows), Time Manipulation (Via Rejuvenate), Void Manipulation (Via\
+        \ Evenstar), Fusionism (Via Fuse. Also merged with Pea to return back to her\
+        \ original self), Transmutation, Curse Manipulation (Scaling to Aapep, whose\
+        \ magic can curse people and turn them into frogs), Non-Physical Interaction,\
+        \ Soul Manipulation (Can suck out one's soul and seal them within objects),\
+        \ Conceptual Manipulation (Type 2; Can harm familiars with even her regular\
+        \ attacks and magic, which are stated to be the manifestation of one's heart\
+        \ and soul, as well as their fighting spirit given flesh. They are born of\
+        \ the human heart. Should be able to interact with Vileheart, who is born\
+        \ of despair and the darkness of man's heart, as well as the Guardian of Worlds,\
+        \ who literally is all worlds), Space-Time M"
+      source_id: character-stats-profiles-illusive-man
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multi-Solar System level (Upon simply becoming the White Witch, she created
+        a pocket dimension in which innumerable stars and planets exist. This feat
+        being so casual is also supported when engaging the Zodiarchangel, a parallel
+        version of the Zodiarch created by Cassiopeia's imagination, in battle, which
+        seemingly creates the exact same pocket dimension on the spot. Superior to
+        Astralynx, which draws its power from celestial bodies and the night sky,
+        and can unleash a shower of shooting stars with said power), likely Universe
+        level+ (Stated that her manna could end the world in an instant, and has repeatedly
+        claimed that she would bring the entire world to an end and remake it anew.
+        The term "world" in Ni no Kuni is typically used in reference to the universe
+        as a whole, as it is often used in the context of parallel dimensions/universes,
+        even when in the context of Shadar threatening Drippy's world. Much stronger
+        than Shadar and has bestowed upon him several powers, who is the Executor
+        charged with bringing destruction to the world, which is repeatedly stated
+        throughout the game. All this applies to the White Witch's base form, which
+        is inferior to her Monster of Manna form, which in-turn should be inferior
+        to Queen Cassiopeia's complete self) | At least Multiverse level+, possibly
+        High Multiverse level+ (Fought the main party after they had defeated the
+        Guardian of Worlds, a being stated to control and literally be one with all
+        worlds in existence, of which there is an infinite number parallel with, perpendicular
+        to, above, below and beyond our own respectively according to the Conductor.
+        Even a single event can lead to an infinite variety of futures, which should
+        already exist given the fact that Ferdinand, Evan's son from the future, already
+        exists and interacts with him throughout Ni no Kuni 2's story. Furthermore,
+        the cosmology would be even larger given the aforementioned infinite parallel
+        worlds. Each world, of which we have 4 categories that each branch off into
+        infinity, would essentially have infinite parallels of their own, and the
+        rule of any event leading to infinite different futures would apply to those
+        worlds as well. Meanwhile, this feat could potentially be 5th-dimensional,
+        as the term "beyond" is repeatedly used in the context of superiority to something,
+        rather than just position or place)
+      source_id: character-stats-profiles-illusive-man
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ (Vastly superior to characters capable of evading numerous
+        electricity and light-based attacks. Superior to Astralynx, which can summon
+        shooting stars from presumably outer space), possibly Inaccessible (Vastly
+        superior to Alicia, who was able to rescue Oliver from "the space between
+        worlds", where he was cast adrift) | Immeasurable (At least comparable, if
+        not superior to the Guardian of Worlds, who resides in the Grand Confluence,
+        which is a space in which all worlds meet, but at the same time, is shown
+        to exist outside and be separate from the worlds themselves, and should be
+        able to move in ones that are beyond multiple sets of infinite worlds)
+      source_id: character-stats-profiles-illusive-man
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multi-Solar System level, likely Universe level+ (Tanked numerous attacks
+        from the main party. Shown to be capable of withstanding the Zodiarchs' attacks
+        better than the likes of Oliver) | At least Multiverse level+, possibly High
+        Multiverse level+
+      source_id: character-stats-profiles-illusive-man
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: None notable.
+      source_id: character-stats-profiles-illusive-man
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|queen cassiopeia canon
+      ni no kuni zerotc01|131171
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-illusive-man-mass-effect
+    url: https://character-stats-and-profiles.fandom.com/wiki/Illusive_Man_%28Mass_Effect%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Liara T'soni (Canon, Mass Effect)/J989
+    source_type: mediawiki
+    revision_id: '408670'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6407
+    content_kind: api_json
+    headings_detected:
+    - Liara T'Soni
+    - Contents
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-A with physical strikes, 9-B to 9-A with weaponry, 8-B with high explosives
+        rounds/grenades, High 8-C via biotics |8-B higher with biotics | 8-A with
+        biotics
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Longevity, Weapon Mastery (Expert
+        Markswoman and Grenadier),Aura, Chi Manipulation, Hacking, Telepathy (As an
+        Asari she is able to meld her mind with others in close proximity to her and
+        exchange both thoughts and memories), Electricity Manipulation (Via Overload),
+        Energy Manipulation/Mass Manipulation (Can manipulate dark energy to increase/decrease/fluctuate
+        the mass of a given volume of space via mass effect fields created by her
+        biotics), Telekinesis (Can move objects with her mind through mass lowering
+        fields or root them in place with mass increasing fields via biotics), Energy
+        Projection (In the form of Biotic Explosion and Warp), Forcefield Creation
+        (She can enable kinetic barriers through her armour and cast biotic barriers),
+        Paralysis Inducement (With Stasis), Healing(via medi-gel) Black Hole Creation
+        (Through Singularity), Information Analysis (with her Omni-tool and her AI
+        hologram) Regeneration and Durability Negation (Up to High, as Warp prevents
+        regeneration on a molecular level) and Matter Manipulation (Warp rips the
+        opponent apart on a molecular level), Information Manipulation (Due to her
+        being a Shadow Broker) DNA( By melding with her opponent she can pick desired
+        traits from her partner and transfer it to her asari offspring) Archeologist(Spent
+        her time studying prothean beacon and their history while learning everything
+        there is about the protheans), Technology Manipulation, Death Manipulation
+        Perception Manipulation(Able to alter their appearance so anyone looking at
+        them will always find them beautiful ),Genius Intelligence Voice Mimicry(
+        She was able to mimic the shadow broker's voice after she defeated him with
+        the help of Commander Shepard and she took control of the shadow broker base),Levitation(
+        with her biotic powers) Space-Time Manipulation(with her biotic powers which
+        allows her to bend space around her to create singular attacks), Indomitable
+        Willpower, Statistics Amplification (via toxic cloud which boost biotic powers
+        and it tears a person's skin if they stay in it for long period of time) Social
+        Influence Existence Erasure, Memory Manipulation, Mind Manipulation
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level physically (Comparable to the Shadow Broker and
+        Commander Shepard), Wall level+ to Small Building level with weaponry, City
+        Block Level+ with high explosives rounds/grenades, Large Building level via
+        biotics (Comparable to Jack (Mass Effect))
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic Combat Speed and Reactions (Comparable to James
+        Vega), Relativistic Attack Speed with mass accelerator weaponry
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level physically, City Block level with kinetic/biotic
+        barriers (Scaling from Commander Shepard
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Kinetic barriers are activated based on the speed of an attack. A melee
+        attack is not fast enough to set it off. In addition, the shielding afforded
+        by kinetic barriers does not protect against extremes of temperature, toxins,
+        or radiation. Notable Attacks/Techniques: * Throw: Tosses an enemy through
+        the air with this biotic blast. * Lift: Cause enemies to float helplessly
+        in the air. * Warp: Throws a blast of biotic energy that rips an enemy apart
+        at a molecular level. It also prevents the targeted enemy from regenerating
+        health. * Singularity: Creates a sphere of dark energy that traps and dangles
+        enemies caught in its field. * Barrier: Surrounds the target with a high density
+        mass effect shield. * Stasis: Stops an enemy in its tracks with a powerful
+        mass effect field. Enemies will eventually break out of Stasis after taking
+        major damage. * Warp Ammo: Blasts vulnerable opponents already lifted by biotics
+        for a damage bonus, and weakens the armour of grounded targets. * Overload:
+        Overloads electronics with a power surge, stunning the enemy. Category:J989
+        Category:Tier 9 Category:Tier 8-C Category:Tier 8-B'
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|liara t soni canon mass
+      effect j989|408670
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-illusive-man-mass-effect
+    url: https://vsbattles.fandom.com/wiki/Illusive_Man_Mass_Effect
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Miranda Lawson
+    source_type: mediawiki
+    revision_id: '9508369'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6529
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: physically, to with weaponry, with high explosives rounds/grenades, via
+        biotics
       source_id: vsbattles-illusive-man-mass-effect
       provider_id: vsbattles
       authority: high
@@ -945,15 +1440,15 @@ repair:
         massive damage with a biotic body slam. *Incinerate: Burns an opponent and
         incinerates their armor. *Reave: Drain a target''s health and disrupt their
         resistances, receiving increased damage protection while this power is in
-        effect. ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions}}
-        Category:Characters Category:Female Characters Category:Humans Category:Mass
-        Effect Category:Gun Users Category:Telekinesis Users Category:Forcefield Users
-        Category:Leaders Category:Weapon Masters Category:Martial Artists Category:Soldiers
-        Category:Energy Users Category:Absorption Users Category:Durability Negation
-        Users Category:Matter Users Category:Hackers Category:Brawlers Category:Game
-        Characters Category:Video Game Characters Category:Adults Category:Electricity
-        Users Category:Fire Users Category:Energy Projection Users Category:Power
-        Nullification Users Category:Science Fiction Characters'
+        effect. ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Female Characters Category:Humans Category:Mass Effect Category:Gun
+        Users Category:Telekinesis Users Category:Forcefield Users Category:Leaders
+        Category:Weapon Masters Category:Martial Artists Category:Soldiers Category:Energy
+        Users Category:Absorption Users Category:Durability Negation Users Category:Matter
+        Users Category:Hackers Category:Brawlers Category:Game Characters Category:Video
+        Game Characters Category:Adults Category:Electricity Users Category:Fire Users
+        Category:Energy Projection Users Category:Power Nullification Users Category:Science
+        Fiction Characters'
       source_id: vsbattles-illusive-man-mass-effect
       provider_id: vsbattles
       authority: high
@@ -973,20 +1468,44 @@ repair:
     exception_class: ''
   - source_id: character-stats-profiles-illusive-man-mass-effect
     url: https://character-stats-and-profiles.fandom.com/wiki/Illusive_Man_Mass_Effect
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Illusive Man Mass Effect
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Liara T'soni (Canon, Mass Effect)/J989
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '408670'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6407
+    content_kind: api_json
+    headings_detected:
+    - Liara T'Soni
+    - Contents
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -999,25 +1518,110 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
+    field_candidates:
+    - field: tier
+      value: 9-A with physical strikes, 9-B to 9-A with weaponry, 8-B with high explosives
+        rounds/grenades, High 8-C via biotics |8-B higher with biotics | 8-A with
+        biotics
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Longevity, Weapon Mastery (Expert
+        Markswoman and Grenadier),Aura, Chi Manipulation, Hacking, Telepathy (As an
+        Asari she is able to meld her mind with others in close proximity to her and
+        exchange both thoughts and memories), Electricity Manipulation (Via Overload),
+        Energy Manipulation/Mass Manipulation (Can manipulate dark energy to increase/decrease/fluctuate
+        the mass of a given volume of space via mass effect fields created by her
+        biotics), Telekinesis (Can move objects with her mind through mass lowering
+        fields or root them in place with mass increasing fields via biotics), Energy
+        Projection (In the form of Biotic Explosion and Warp), Forcefield Creation
+        (She can enable kinetic barriers through her armour and cast biotic barriers),
+        Paralysis Inducement (With Stasis), Healing(via medi-gel) Black Hole Creation
+        (Through Singularity), Information Analysis (with her Omni-tool and her AI
+        hologram) Regeneration and Durability Negation (Up to High, as Warp prevents
+        regeneration on a molecular level) and Matter Manipulation (Warp rips the
+        opponent apart on a molecular level), Information Manipulation (Due to her
+        being a Shadow Broker) DNA( By melding with her opponent she can pick desired
+        traits from her partner and transfer it to her asari offspring) Archeologist(Spent
+        her time studying prothean beacon and their history while learning everything
+        there is about the protheans), Technology Manipulation, Death Manipulation
+        Perception Manipulation(Able to alter their appearance so anyone looking at
+        them will always find them beautiful ),Genius Intelligence Voice Mimicry(
+        She was able to mimic the shadow broker's voice after she defeated him with
+        the help of Commander Shepard and she took control of the shadow broker base),Levitation(
+        with her biotic powers) Space-Time Manipulation(with her biotic powers which
+        allows her to bend space around her to create singular attacks), Indomitable
+        Willpower, Statistics Amplification (via toxic cloud which boost biotic powers
+        and it tears a person's skin if they stay in it for long period of time) Social
+        Influence Existence Erasure, Memory Manipulation, Mind Manipulation
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Building level physically (Comparable to the Shadow Broker and
+        Commander Shepard), Wall level+ to Small Building level with weaponry, City
+        Block Level+ with high explosives rounds/grenades, Large Building level via
+        biotics (Comparable to Jack (Mass Effect))
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively Hypersonic Combat Speed and Reactions (Comparable to James
+        Vega), Relativistic Attack Speed with mass accelerator weaponry
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Building level physically, City Block level with kinetic/biotic
+        barriers (Scaling from Commander Shepard
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Kinetic barriers are activated based on the speed of an attack. A melee
+        attack is not fast enough to set it off. In addition, the shielding afforded
+        by kinetic barriers does not protect against extremes of temperature, toxins,
+        or radiation. Notable Attacks/Techniques: * Throw: Tosses an enemy through
+        the air with this biotic blast. * Lift: Cause enemies to float helplessly
+        in the air. * Warp: Throws a blast of biotic energy that rips an enemy apart
+        at a molecular level. It also prevents the targeted enemy from regenerating
+        health. * Singularity: Creates a sphere of dark energy that traps and dangles
+        enemies caught in its field. * Barrier: Surrounds the target with a high density
+        mass effect shield. * Stasis: Stops an enemy in its tracks with a powerful
+        mass effect field. Enemies will eventually break out of Stasis after taking
+        major damage. * Warp Ammo: Blasts vulnerable opponents already lifted by biotics
+        for a damage bonus, and weakens the armour of grounded targets. * Overload:
+        Overloads electronics with a power surge, stunning the enemy. Category:J989
+        Category:Tier 9 Category:Tier 8-C Category:Tier 8-B'
+      source_id: character-stats-profiles-illusive-man-mass-effect
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
     variant_score: 25
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
+    core_field_count: 3
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|illusive man mass effect
+    duplicate_key: character-stats-and-profiles.fandom.com|liara t soni canon mass
+      effect j989|408670
     retryable: false
     exception_class: ''
   - source_id: vsbattles-illusive-man-mass-effect
     url: https://vsbattles.fandom.com/wiki/Illusive_Man_%28Mass_Effect%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1045,6 +1649,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1058,7 +1663,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1069,11 +1674,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-A}} physically, {{9-B}} to {{9-A}} with weaponry, {{8-B}} with high
-        explosives rounds/grenades, {{High 8-C}} via biotics Name: Miranda Lawson
-        Origin: Mass Effect Gender: Female Age: Around 36 years old by Mass Effect
-        3 Classification: Artificial Human, Biotic, Former Lieutenant Commander, Former
-        Elite Cerberus Operative'
+      value: physically, to with weaponry, with high explosives rounds/grenades, via
+        biotics
       source_id: vsbattles-illusive-man-mass-effect
       provider_id: vsbattles
       authority: high
@@ -1161,15 +1763,15 @@ repair:
         massive damage with a biotic body slam. *Incinerate: Burns an opponent and
         incinerates their armor. *Reave: Drain a target''s health and disrupt their
         resistances, receiving increased damage protection while this power is in
-        effect. ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions}}
-        Category:Characters Category:Female Characters Category:Humans Category:Mass
-        Effect Category:Gun Users Category:Telekinesis Users Category:Forcefield Users
-        Category:Leaders Category:Weapon Masters Category:Martial Artists Category:Soldiers
-        Category:Energy Users Category:Absorption Users Category:Durability Negation
-        Users Category:Matter Users Category:Hackers Category:Brawlers Category:Game
-        Characters Category:Video Game Characters Category:Adults Category:Electricity
-        Users Category:Fire Users Category:Energy Projection Users Category:Power
-        Nullification Users Category:Science Fiction Characters'
+        effect. ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Female Characters Category:Humans Category:Mass Effect Category:Gun
+        Users Category:Telekinesis Users Category:Forcefield Users Category:Leaders
+        Category:Weapon Masters Category:Martial Artists Category:Soldiers Category:Energy
+        Users Category:Absorption Users Category:Durability Negation Users Category:Matter
+        Users Category:Hackers Category:Brawlers Category:Game Characters Category:Video
+        Game Characters Category:Adults Category:Electricity Users Category:Fire Users
+        Category:Energy Projection Users Category:Power Nullification Users Category:Science
+        Fiction Characters'
       source_id: vsbattles-illusive-man-mass-effect
       provider_id: vsbattles
       authority: high
@@ -1187,53 +1789,11 @@ repair:
     duplicate_key: vsbattles.fandom.com|miranda lawson|9508369
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-illusive-man-mass-effect
-    url: https://character-stats-and-profiles.fandom.com/wiki/Illusive_Man_%28Mass_Effect%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Illusive Man (Mass Effect)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 120
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|illusive man mass effect
-    retryable: false
-    exception_class: ''
-  - source_id: mediawiki-illusive-man
+  - source_id: vsbattles-illusive-man
     url: https://vsbattles.fandom.com/wiki/Illusive_Man
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1261,6 +1821,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1274,25 +1835,20 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
-    - tier
+    allowed_fields:
     - attack_potency
     - speed
     - durability
+    - powers_and_abilities
+    - weaknesses
     - range
     - stamina
     - intelligence
-    - abilities
-    - equipment
-    - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-A}} physically, {{9-B}} to {{9-A}} with weaponry, {{8-B}} with high
-        explosives rounds/grenades, {{High 8-C}} via biotics Name: Miranda Lawson
-        Origin: Mass Effect Gender: Female Age: Around 36 years old by Mass Effect
-        3 Classification: Artificial Human, Biotic, Former Lieutenant Commander, Former
-        Elite Cerberus Operative'
-      source_id: mediawiki-illusive-man
+      value: physically, to with weaponry, with high explosives rounds/grenades, via
+        biotics
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1310,7 +1866,7 @@ repair:
         Regeneration and Durability Negation (Up to High, as Warp prevents regeneration
         on a molecular level) and Matter Manipulation (Warp rips the opponent apart
         on a molecular level)
-      source_id: mediawiki-illusive-man
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1319,40 +1875,40 @@ repair:
         Wall level+ to Small Building level with weaponry, City Block Level+ with
         high explosives rounds/grenades, Large Building level via biotics (Comparable
         to Jack)
-      source_id: mediawiki-illusive-man
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
       value: Massively Hypersonic Combat Speed and Reactions (Comparable to James
         Vega), Relativistic Attack Speed with mass accelerator weaponry
-      source_id: mediawiki-illusive-man
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
       value: Small Building level physically, City Block level with kinetic/biotic
         barriers (Scaling from Commander Shepard)
-      source_id: mediawiki-illusive-man
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
       value: Superhuman
-      source_id: mediawiki-illusive-man
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
       value: Standard Melee Range, Tens of Meters with biotics or tech abilities,
         Hundreds of Meters with mass accelerator weaponry
-      source_id: mediawiki-illusive-man
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
       value: A pistol, a sub-machine gun, an omni-tool, and a biotic amp.
-      source_id: mediawiki-illusive-man
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1365,7 +1921,7 @@ repair:
         history), as well as serving as Shepard's second-in-command during their mission
         against the Collectors. Despite her somewhat anti-social and cold attitude,
         she can command loyalty through experience, making her an exceptional leader.
-      source_id: mediawiki-illusive-man
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1379,16 +1935,16 @@ repair:
         massive damage with a biotic body slam. *Incinerate: Burns an opponent and
         incinerates their armor. *Reave: Drain a target''s health and disrupt their
         resistances, receiving increased damage protection while this power is in
-        effect. ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions}}
-        Category:Characters Category:Female Characters Category:Humans Category:Mass
-        Effect Category:Gun Users Category:Telekinesis Users Category:Forcefield Users
-        Category:Leaders Category:Weapon Masters Category:Martial Artists Category:Soldiers
-        Category:Energy Users Category:Absorption Users Category:Durability Negation
-        Users Category:Matter Users Category:Hackers Category:Brawlers Category:Game
-        Characters Category:Video Game Characters Category:Adults Category:Electricity
-        Users Category:Fire Users Category:Energy Projection Users Category:Power
-        Nullification Users Category:Science Fiction Characters'
-      source_id: mediawiki-illusive-man
+        effect. ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Female Characters Category:Humans Category:Mass Effect Category:Gun
+        Users Category:Telekinesis Users Category:Forcefield Users Category:Leaders
+        Category:Weapon Masters Category:Martial Artists Category:Soldiers Category:Energy
+        Users Category:Absorption Users Category:Durability Negation Users Category:Matter
+        Users Category:Hackers Category:Brawlers Category:Game Characters Category:Video
+        Game Characters Category:Adults Category:Electricity Users Category:Fire Users
+        Category:Energy Projection Users Category:Power Nullification Users Category:Science
+        Fiction Characters'
+      source_id: vsbattles-illusive-man
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1409,7 +1965,7 @@ repair:
     url: https://character-stats-and-profiles.fandom.com/wiki/Illusive_Man
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -1434,6 +1990,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1447,7 +2004,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1458,9 +2015,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: "4-A, likely Low 2-C | At least 2-A, possibly High 2-A Name: Cassiopeia,\
-        \ Pea Origin: Ni no Kuni: Wrath of the White Witch Gender: Female Age: Over\
-        \ 10,000 years Classification: Queen of Nazca\xE4, The White Witch"
+      value: 4-A, likely Low 2-C | At least 2-A, possibly High 2-A
       source_id: character-stats-profiles-illusive-man
       provider_id: character_stats_profiles
       authority: high
@@ -1599,391 +2154,6 @@ repair:
     - field: weaknesses
       value: None notable.
       source_id: character-stats-profiles-illusive-man
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|queen cassiopeia canon
-      ni no kuni zerotc01|131171
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-illusive-man-game
-    url: https://vsbattles.fandom.com/wiki/Illusive_Man_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Miranda Lawson
-    source_type: mediawiki
-    revision_id: '9508369'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 6529
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-A}} physically, {{9-B}} to {{9-A}} with weaponry, {{8-B}} with high
-        explosives rounds/grenades, {{High 8-C}} via biotics Name: Miranda Lawson
-        Origin: Mass Effect Gender: Female Age: Around 36 years old by Mass Effect
-        3 Classification: Artificial Human, Biotic, Former Lieutenant Commander, Former
-        Elite Cerberus Operative'
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Longevity (Her genetic modifications
-        will allow her to live longer than the average human), Social Influencing
-        (Great leader who can command loyalty through sheer experience), Expert Hand-to-Hand
-        Combatant, Weapon Mastery (Expert Markswoman and Grenadier), Hacking, Energy
-        Manipulation/Mass Manipulation (Can manipulate dark energy to increase/decrease/fluctuate
-        the mass of a given volume of space via mass effect fields created by her
-        biotics), Telekinesis (Can move objects/people with her mind through mass
-        lowering fields via biotics), Electricity Manipulation (With Overload), Fire
-        Manipulation (Via Incinerate), Kinetic/Biotic Barriers, Energy Projection
-        (In the form of Biotic Explosion and Warp), Absorption (In the form of Reave),
-        Regeneration and Durability Negation (Up to High, as Warp prevents regeneration
-        on a molecular level) and Matter Manipulation (Warp rips the opponent apart
-        on a molecular level)
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Building level physically (Able to contend with Commander Shepard),
-        Wall level+ to Small Building level with weaponry, City Block Level+ with
-        high explosives rounds/grenades, Large Building level via biotics (Comparable
-        to Jack)
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively Hypersonic Combat Speed and Reactions (Comparable to James
-        Vega), Relativistic Attack Speed with mass accelerator weaponry
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Building level physically, City Block level with kinetic/biotic
-        barriers (Scaling from Commander Shepard)
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Tens of Meters with biotics or tech abilities,
-        Hundreds of Meters with mass accelerator weaponry
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: A pistol, a sub-machine gun, an omni-tool, and a biotic amp.
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Genius. A talented soldier and biotic. Was one of the Illusive Man's
-        most well respected and trusted operatives. She was picked by the Illusive
-        Man to oversee some of the most dangerous, risky and technically demanding
-        operations Cerberus undertook, including Project Lazarus (which resulted in
-        bringing Shepard back to life, the most amazing medical achievment in recorded
-        history), as well as serving as Shepard's second-in-command during their mission
-        against the Collectors. Despite her somewhat anti-social and cold attitude,
-        she can command loyalty through experience, making her an exceptional leader.
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Kinetic barriers are activated based on the speed of an attack. A melee
-        attack is not fast enough to set it off. In addition, the shielding afforded
-        by kinetic barriers does not protect against extremes of temperature, toxins,
-        or radiation. Notable Attacks/Techniques: *Overload: Overload electronics
-        with this power surge, stunning the enemy. *Warp: Rips an enemy apart at a
-        molecular level. Preventing the enemy from regenerating health. *Slam: Deals
-        massive damage with a biotic body slam. *Incinerate: Burns an opponent and
-        incinerates their armor. *Reave: Drain a target''s health and disrupt their
-        resistances, receiving increased damage protection while this power is in
-        effect. ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions}}
-        Category:Characters Category:Female Characters Category:Humans Category:Mass
-        Effect Category:Gun Users Category:Telekinesis Users Category:Forcefield Users
-        Category:Leaders Category:Weapon Masters Category:Martial Artists Category:Soldiers
-        Category:Energy Users Category:Absorption Users Category:Durability Negation
-        Users Category:Matter Users Category:Hackers Category:Brawlers Category:Game
-        Characters Category:Video Game Characters Category:Adults Category:Electricity
-        Users Category:Fire Users Category:Energy Projection Users Category:Power
-        Nullification Users Category:Science Fiction Characters'
-      source_id: vsbattles-illusive-man-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|miranda lawson|9508369
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-illusive-man-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Illusive_Man_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id015
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Queen Cassiopeia (Canon, Ni no Kuni)/ZeroTC01
-    source_type: mediawiki
-    revision_id: '131171'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 23755
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id016
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: "4-A, likely Low 2-C | At least 2-A, possibly High 2-A Name: Cassiopeia,\
-        \ Pea Origin: Ni no Kuni: Wrath of the White Witch Gender: Female Age: Over\
-        \ 10,000 years Classification: Queen of Nazca\xE4, The White Witch"
-      source_id: character-stats-profiles-illusive-man-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Self-Sustenance (Type 1, 2 and\
-        \ 3), Extrasensory Perception, Aura, Presence Concealment, Invisibility, Non-Corporeal\
-        \ (Is inherently invisible and incorporeal to beings from foreign worlds,\
-        \ even to those who can perceive things such as spirits. Can create illusive\
-        \ copies of herself that are non-physical in nature. Can completely conceal\
-        \ her presence via Veil), Immortality (Type 1, 3, possibly 5 and 8; Stated\
-        \ that death is a privilege she will never know, leaving her stuck in endless\
-        \ solitude as a consequence of casting the Forbidden Spell), Resurrection/Regeneration\
-        \ (High-Godly; She bestowed upon Shadar his powers and made him into the Dark\
-        \ Djinn. Shadar in-turn would scale to Vileheart, a being born from despair\
-        \ and the darkness of the human heart, who can regenerate himself thanks to\
-        \ it even after being destroyed by conceptual attacks and beings like familiars),\
-        \ Empathic Manipulation (Should have to power to steal a piece of someone's\
-        \ heart, causing them to become broken-hearted, which puts them in a miserable\
-        \ state that they don't even know whether they're dead or alive, nor are they\
-        \ able to fight back or function properly), Invulnerability (Scaling to the\
-        \ Ivory Tower itself, which was noted by Marcassin to be invulnerable), Healing\
-        \ (Via Healing Touch and Healing Hand), Resurrection (Via Ashes of Resurrection.\
-        \ Can also utilize a regular spell in-combat that can revive her allies),\
-        \ Malevolence (Only as the White Witch), Indomitable Will, Transformation,\
-        \ which grants Large Size (Type 0; By turning into the Monster of Manna),\
-        \ Magic, Forcefield Creation (Via Nightshade), Levitation (Via Levitate),\
-        \ Clairvoyance (Shown to possess a crystal ball that allows her to peer into\
-        \ other worlds and tamper with them), Illusion Creation, Subjective Reality\
-        \ (Recreated multiple beings from her memories and imagination, including\
-        \ Apus, the Zodiarchs, as well as Caph and his fellow knights, and can subconsciously\
-        \ make them real), Existence Erasure (Seemingly erased Apus with a wave of\
-        \ her hand), Pocket Reality Manipulation (Her merely becoming the White Witch\
-        \ created a dimension containing countless planets and stars), Reality Warping\
-        \ (Scaling to Apus, who tampered with the Philmobile from a different world),\
-        \ BFR (Banished Pea to Oliver's world. Can send others to a land of eternal\
-        \ darkness), Power Bestowal, Fear Manipulation, Mind Manipulation, Madness\
-        \ Manipulation (Type 2 and 3), Corruption (Type 2), Memory Manipulation, Biological\
-        \ Manipulation (Turned the likes of King Tom and the Cowlipha into berserk,\
-        \ monstrous, and far more powerful versions of themselves via Ashes of Resurrection,\
-        \ and thousands of years ago, accidentally did so to the people of Nazca\xE4\
-        . This even transformed Porco Grosso, which is a machine), Durability Negation,\
-        \ Death Manipulation (Ashes of Resurrection was implied to have directly killed\
-        \ people, with Horace stating that he was \"killed\" by it himself. Can also\
-        \ induce death scaling to the Ivory Tower's familiars), Power Nullification\
-        \ (Via Nix and Cloudburst. Also via scaling to Shadar, whose mere presence\
-        \ renders magic useless), Purification (Via Sanctify, which can purify those\
-        \ corrupted by Ashes of Resurrection), Portal Creation, Dimensional Travel\
-        \ (Via Gateway. Additionally, she can instantly enter her pocket universe\
-        \ via her cape), Time Travel (Via Breach Time, which she should be able to\
-        \ use without much restrictions scaling to Gallus and given the fact that\
-        \ she is immortal), Teleportation (Via Travel and Vacate), Fate Manipulation\
-        \ (Refers to herself as the arbiter of the world's fate, and is repeatedly\
-        \ stated to be able to shape and decide the fate of the world. She was able\
-        \ to create Gallus via her mere imagination, who refers to himself as one\
-        \ who guides the fate of the world, as well as the Zodiarchs, who decide the\
-        \ fate of the world), Probability Manipulation (Via Fortune's Fool. Can bring\
-        \ good fortune or even bad luck), Precognition (Can see the future and the\
-        \ truth of all things), Danmaku, Astroremkinesis, Life Manipulation, Absorption\
-        \ (Can absorb color and vitality from the world around her. Can draw power\
-        \ from celestial bodies and the night sky. Can absorb one's strength through\
-        \ their shadows), Time Manipulation (Via Rejuvenate), Void Manipulation (Via\
-        \ Evenstar), Fusionism (Via Fuse. Also merged with Pea to return back to her\
-        \ original self), Transmutation, Curse Manipulation (Scaling to Aapep, whose\
-        \ magic can curse people and turn them into frogs), Non-Physical Interaction,\
-        \ Soul Manipulation (Can suck out one's soul and seal them within objects),\
-        \ Conceptual Manipulation (Type 2; Can harm familiars with even her regular\
-        \ attacks and magic, which are stated to be the manifestation of one's heart\
-        \ and soul, as well as their fighting spirit given flesh. They are born of\
-        \ the human heart. Should be able to interact with Vileheart, who is born\
-        \ of despair and the darkness of man's heart, as well as the Guardian of Worlds,\
-        \ who literally is all worlds), Space-Time M"
-      source_id: character-stats-profiles-illusive-man-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multi-Solar System level (Upon simply becoming the White Witch, she created
-        a pocket dimension in which innumerable stars and planets exist. This feat
-        being so casual is also supported when engaging the Zodiarchangel, a parallel
-        version of the Zodiarch created by Cassiopeia's imagination, in battle, which
-        seemingly creates the exact same pocket dimension on the spot. Superior to
-        Astralynx, which draws its power from celestial bodies and the night sky,
-        and can unleash a shower of shooting stars with said power), likely Universe
-        level+ (Stated that her manna could end the world in an instant, and has repeatedly
-        claimed that she would bring the entire world to an end and remake it anew.
-        The term "world" in Ni no Kuni is typically used in reference to the universe
-        as a whole, as it is often used in the context of parallel dimensions/universes,
-        even when in the context of Shadar threatening Drippy's world. Much stronger
-        than Shadar and has bestowed upon him several powers, who is the Executor
-        charged with bringing destruction to the world, which is repeatedly stated
-        throughout the game. All this applies to the White Witch's base form, which
-        is inferior to her Monster of Manna form, which in-turn should be inferior
-        to Queen Cassiopeia's complete self) | At least Multiverse level+, possibly
-        High Multiverse level+ (Fought the main party after they had defeated the
-        Guardian of Worlds, a being stated to control and literally be one with all
-        worlds in existence, of which there is an infinite number parallel with, perpendicular
-        to, above, below and beyond our own respectively according to the Conductor.
-        Even a single event can lead to an infinite variety of futures, which should
-        already exist given the fact that Ferdinand, Evan's son from the future, already
-        exists and interacts with him throughout Ni no Kuni 2's story. Furthermore,
-        the cosmology would be even larger given the aforementioned infinite parallel
-        worlds. Each world, of which we have 4 categories that each branch off into
-        infinity, would essentially have infinite parallels of their own, and the
-        rule of any event leading to infinite different futures would apply to those
-        worlds as well. Meanwhile, this feat could potentially be 5th-dimensional,
-        as the term "beyond" is repeatedly used in the context of superiority to something,
-        rather than just position or place)
-      source_id: character-stats-profiles-illusive-man-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Massively FTL+ (Vastly superior to characters capable of evading numerous
-        electricity and light-based attacks. Superior to Astralynx, which can summon
-        shooting stars from presumably outer space), possibly Inaccessible (Vastly
-        superior to Alicia, who was able to rescue Oliver from "the space between
-        worlds", where he was cast adrift) | Immeasurable (At least comparable, if
-        not superior to the Guardian of Worlds, who resides in the Grand Confluence,
-        which is a space in which all worlds meet, but at the same time, is shown
-        to exist outside and be separate from the worlds themselves, and should be
-        able to move in ones that are beyond multiple sets of infinite worlds)
-      source_id: character-stats-profiles-illusive-man-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multi-Solar System level, likely Universe level+ (Tanked numerous attacks
-        from the main party. Shown to be capable of withstanding the Zodiarchs' attacks
-        better than the likes of Oliver) | At least Multiverse level+, possibly High
-        Multiverse level+
-      source_id: character-stats-profiles-illusive-man-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None notable.
-      source_id: character-stats-profiles-illusive-man-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2002,137 +2172,8 @@ repair:
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-illusive-man-mass-effect
-    url: https://vsbattles.fandom.com/wiki/Illusive_Man_Mass_Effect
-    title: Miranda Lawson
-    rank: 80
-    extracted_fields: *id005
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id006
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|miranda lawson|9508369
-  - source_id: vsbattles-illusive-man-mass-effect
-    url: https://vsbattles.fandom.com/wiki/Illusive_Man_%28Mass_Effect%29
-    title: Miranda Lawson
-    rank: 80
-    extracted_fields: *id007
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|miranda lawson|9508369
-  - source_id: mediawiki-illusive-man
-    url: https://vsbattles.fandom.com/wiki/Illusive_Man
-    title: Miranda Lawson
-    rank: 80
-    extracted_fields: *id009
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|miranda lawson|9508369
-  - source_id: character-stats-profiles-illusive-man
-    url: https://character-stats-and-profiles.fandom.com/wiki/Illusive_Man
-    title: Queen Cassiopeia (Canon, Ni no Kuni)/ZeroTC01
-    rank: 80
-    extracted_fields: *id011
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|queen cassiopeia canon
-      ni no kuni zerotc01|131171
-  - source_id: vsbattles-illusive-man-game
-    url: https://vsbattles.fandom.com/wiki/Illusive_Man_%28Game%29
-    title: Miranda Lawson
-    rank: 80
-    extracted_fields: *id013
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|miranda lawson|9508369
-  - source_id: character-stats-profiles-illusive-man-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Illusive_Man_%28Game%29
-    title: Queen Cassiopeia (Canon, Ni no Kuni)/ZeroTC01
-    rank: 80
-    extracted_fields: *id015
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|queen cassiopeia canon
-      ni no kuni zerotc01|131171
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
-    fetched: 6
-    provider_search_no_results: 2
-  confidence: 0.75
+    fetched: 8
+  confidence: 0.0

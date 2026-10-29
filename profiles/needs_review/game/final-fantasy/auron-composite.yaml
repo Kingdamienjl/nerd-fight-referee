@@ -11,13 +11,14 @@ generation:
   generated_at: '2026-06-10T00:55:06Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id005
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Auron (Composite)
   franchise: Final Fantasy
@@ -153,42 +154,6 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-auron-composite
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Auron Composite
-  url: https://vsbattles.fandom.com/wiki/Auron_Composite
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-auron-composite
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Auron Composite
-  url: https://character-stats-and-profiles.fandom.com/wiki/Auron_Composite
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-auron-composite-final-fantasy
   provider_id: vsbattles
   source_type: mediawiki
@@ -196,7 +161,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Data-Sora
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -236,72 +201,8 @@ sources:
 - id: character-stats-profiles-auron-composite-final-fantasy
   provider_id: character_stats_profiles
   source_type: mediawiki
-  title: Auron Composite Final Fantasy
-  url: https://character-stats-and-profiles.fandom.com/wiki/Auron_Composite_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-auron-composite-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Auron (Composite) Final Fantasy
-  url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-auron-composite-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
   title: Auron (Composite) Final Fantasy
   url: https://character-stats-and-profiles.fandom.com/wiki/Auron_%28Composite%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-auron-composite-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Auron (Composite) (Final Fantasy)
-  url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29_%28Final_Fantasy%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-auron-composite-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Auron (Composite) (Final Fantasy)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Auron_%28Composite%29_%28Final_Fantasy%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -462,7 +363,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id003
+  source_ids: &id002
   - vsbattles-auron-composite-final-fantasy
   source_claim_ids: []
   confidence: 0.85
@@ -478,7 +379,7 @@ abilities:
 - id: powers-and-abilities-standard-keyblade-powers
   name: Standard Keyblade powers
   description: Standard Keyblade powers
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -495,7 +396,7 @@ abilities:
     ability that various Keychains he possesses
   description: Damage Boost (Can make all of his attacks critical hits via the All
     Critical ability that various Keychains he possesses have
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -513,7 +414,7 @@ abilities:
     Sora's chance of landing critical hits)
   description: Via the Strike Armlet which has the Critical Boost ability that increases
     Sora's chance of landing critical hits)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -528,7 +429,7 @@ abilities:
 - id: powers-and-abilities-summoning-can-summon-meteors-via-meteor-rain
   name: Summoning (Can summon meteors via Meteor Rain)
   description: Summoning (Can summon meteors via Meteor Rain)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -545,7 +446,7 @@ abilities:
 - id: powers-and-abilities-flight-can-glide-through-the-air
   name: Flight (Can glide through the air)
   description: Flight (Can glide through the air)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -560,7 +461,7 @@ abilities:
 - id: powers-and-abilities-self-sustenance-type-1-can-breathe-in-space
   name: Self-Sustenance (Type 1. Can breathe in space)
   description: Self-Sustenance (Type 1. Can breathe in space)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -575,7 +476,7 @@ abilities:
 - id: powers-and-abilities-magic
   name: Magic
   description: Magic
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -590,7 +491,7 @@ abilities:
 - id: powers-and-abilities-homing-attack-with-most-spells
   name: Homing Attack (With most spells)
   description: Homing Attack (With most spells)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -605,7 +506,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation
   name: Fire Manipulation
   description: Fire Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -622,7 +523,7 @@ abilities:
 - id: powers-and-abilities-ice-manipulation
   name: Ice Manipulation
   description: Ice Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -637,7 +538,7 @@ abilities:
 - id: powers-and-abilities-electricity-manipulation
   name: Electricity Manipulation
   description: Electricity Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -652,7 +553,7 @@ abilities:
 - id: powers-and-abilities-air-manipulation
   name: Air Manipulation
   description: Air Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -670,7 +571,7 @@ abilities:
   description: Paralysis Inducement (Can immobilize foes with wind-based spells and
     the Wishing Star Keychain which has the Aero Counter ability which allows him
     to inflict this via blocking)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -687,7 +588,7 @@ abilities:
     as a game mechanic
   description: Enhanced Senses (Has a "map" in his head (While it could normally be
     dismissed as a game mechanic
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -704,7 +605,7 @@ abilities:
     an actual ability)
   description: the status effect in 358/2 Days that prevents access to it justifies
     it being an actual ability)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -719,7 +620,7 @@ abilities:
 - id: powers-and-abilities-said-map-also-displays-the-locations-of-enemies-and-allies
   name: said map also displays the locations of enemies and allies)
   description: said map also displays the locations of enemies and allies)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -735,7 +636,7 @@ abilities:
   name: Information Analysis (Via Scan which allows him to view his opponent's health)
   description: Information Analysis (Via Scan which allows him to view his opponent's
     health)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -752,7 +653,7 @@ abilities:
     have the Drain ability)
   description: Life Absorption (Via the Metal Chocobo and the Ultima Weapon Keychains
     which have the Drain ability)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -767,7 +668,7 @@ abilities:
 - id: powers-and-abilities-healing-via-curaga-and-various-items
   name: Healing (Via Curaga and various items
   description: Healing (Via Curaga and various items
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -784,7 +685,7 @@ abilities:
     user to recover health by blocking attacks
   description: Via various Keychains which have the Drain Counter ability that allows
     the user to recover health by blocking attacks
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -799,7 +700,7 @@ abilities:
 - id: powers-and-abilities-via-various-keychains-which-have-the-regen-ability
   name: Via various Keychains which have the Regen ability)
   description: Via various Keychains which have the Regen ability)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -814,7 +715,7 @@ abilities:
 - id: powers-and-abilities-statistics-amplification-via-various-keychains
   name: Statistics Amplification (Via various Keychains
   description: Statistics Amplification (Via various Keychains
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -831,7 +732,7 @@ abilities:
     its user's attack strength if they have less t
   description: Via the Power Armlet which has the Attack Boost ability that can increase
     its user's attack strength if they have less than 25% of their health left
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -848,7 +749,7 @@ abilities:
     its user''s Magic if they have less than 25% '
   description: Via the Wizard's Armlet which has the Magic Boost ability that can
     increase its user's Magic if they have less than 25% of their health left
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -865,7 +766,7 @@ abilities:
     the power of its user's physical attacks
   description: Via various Keychains which have the Attack Upgrade ability that increases
     the power of its user's physical attacks
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -882,7 +783,7 @@ abilities:
     user's Magic more powerful
   description: Via various Keychains which have the Magic Upgrade ability that makes
     its user's Magic more powerful
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -900,7 +801,7 @@ abilities:
   description: Via the Olympia and the Metal Chocobo Keychains which have the Full
     Swing ability that increases the user's strength in exchange for landing less
     critical attacks
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -918,7 +819,7 @@ abilities:
   description: Via the Oblivion Keychain which has the Two-Edged Blade ability that
     increases the strength of its user's physical attack but drains their health with
     every hit in exchange)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -935,7 +836,7 @@ abilities:
     can reduce damage from attacks by 25%
   description: Damage Reduction (Via various Keychains which have the Protect ability
     that can reduce damage from attacks by 25%
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -952,7 +853,7 @@ abilities:
     damage from Magic attacks
   description: Via various Keychains which have the Shell ability that can vastly
     reduce damage from Magic attacks
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -969,7 +870,7 @@ abilities:
     all damage when Sora has 25% or less of his he
   description: Via the Half-moon Armlet which has the Half-Damage ability that can
     halve all damage when Sora has 25% or less of his health left)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -985,7 +886,7 @@ abilities:
   name: Light Manipulation (Can use several light based attacks as a warrior of light)
   description: Light Manipulation (Can use several light based attacks as a warrior
     of light)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1000,7 +901,7 @@ abilities:
 - id: powers-and-abilities-gravity-manipulation-via-gravity-drop
   name: Gravity Manipulation (Via Gravity Drop)
   description: Gravity Manipulation (Via Gravity Drop)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1015,7 +916,7 @@ abilities:
 - id: powers-and-abilities-magnetism-manipulation-via-magnega
   name: Magnetism Manipulation (Via Magnega)
   description: Magnetism Manipulation (Via Magnega)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1032,7 +933,7 @@ abilities:
     user resurrect themself)
   description: Resurrection (Via Oathkeeper which has the Auto-Life ability that allows
     the user resurrect themself)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1047,7 +948,7 @@ abilities:
 - id: powers-and-abilities-time-manipulation-in-the-form-of-slowing-down-and-stopping-
   name: Time Manipulation (In the form of slowing down and stopping time)
   description: Time Manipulation (In the form of slowing down and stopping time)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1063,7 +964,7 @@ abilities:
 - id: powers-and-abilities-status-effect-inducement-can-stun-opponents-with-stun-impac
   name: Status Effect Inducement (Can stun opponents with Stun Impact)
   description: Status Effect Inducement (Can stun opponents with Stun Impact)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1078,7 +979,7 @@ abilities:
 - id: powers-and-abilities-keyblade-master-level-fighter
   name: Keyblade Master-level Fighter
   description: Keyblade Master-level Fighter
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1093,7 +994,7 @@ abilities:
 - id: powers-and-abilities-invulnerability-while-healing-himself-via-leaf-bracer
   name: Invulnerability (While healing himself (Via Leaf Bracer))
   description: Invulnerability (While healing himself (Via Leaf Bracer))
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1112,7 +1013,7 @@ weaknesses:
 - id: weaknesses-like-his-original
   name: Like his original
   description: Like his original
-  source_ids: &id004
+  source_ids: &id003
   - vsbattles-auron-composite-final-fantasy
   source_claim_ids: []
   confidence: 0.85
@@ -1148,7 +1049,7 @@ weaknesses:
     Category:Magic Users Category:Transformation Users Category:Blade Users Category:Instinctive
     Action Users Category:Empowerment Users Category:Weapon Control Users Category:Data
     Users Category:Key Users Category:Concept Users Category:Information Users'
-  source_ids: *id004
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1177,578 +1078,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id005
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: d5f8fa630009896f1d8164c474177b6efc7949f26116b022515f546284b49f99
 repair:
-  attempted_at: '2026-06-19T08:12:59Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T18:57:56Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-auron-composite-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29_Final_Fantasy
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id006
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Data-Sora
-    source_type: mediawiki
-    revision_id: '9489226'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 12265
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id007
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-B}} | {{1-C}}'
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Standard Keyblade powers, Damage
-        Boost (Can make all of his attacks critical hits via the All Critical ability
-        that various Keychains he possesses have, Via the Strike Armlet which has
-        the Critical Boost ability that increases Sora's chance of landing critical
-        hits), Summoning (Can summon meteors via Meteor Rain), Flight (Can glide through
-        the air), Self-Sustenance (Type 1. Can breathe in space), Magic, Homing Attack
-        (With most spells), Fire Manipulation, Ice Manipulation, Electricity Manipulation,
-        Air Manipulation, Paralysis Inducement (Can immobilize foes with wind-based
-        spells and the Wishing Star Keychain which has the Aero Counter ability which
-        allows him to inflict this via blocking), Enhanced Senses (Has a "map" in
-        his head (While it could normally be dismissed as a game mechanic, the status
-        effect in 358/2 Days that prevents access to it justifies it being an actual
-        ability), said map also displays the locations of enemies and allies), Information
-        Analysis (Via Scan which allows him to view his opponent's health), Life Absorption
-        (Via the Metal Chocobo and the Ultima Weapon Keychains which have the Drain
-        ability), Healing (Via Curaga and various items, Via various Keychains which
-        have the Drain Counter ability that allows the user to recover health by blocking
-        attacks, Via various Keychains which have the Regen ability), Statistics Amplification
-        (Via various Keychains, Via the Power Armlet which has the Attack Boost ability
-        that can increase its user's attack strength if they have less than 25% of
-        their health left, Via the Wizard's Armlet which has the Magic Boost ability
-        that can increase its user's Magic if they have less than 25% of their health
-        left, Via various Keychains which have the Attack Upgrade ability that increases
-        the power of its user's physical attacks, Via various Keychains which have
-        the Magic Upgrade ability that makes its user's Magic more powerful, Via the
-        Olympia and the Metal Chocobo Keychains which have the Full Swing ability
-        that increases the user's strength in exchange for landing less critical attacks,
-        Via the Oblivion Keychain which has the Two-Edged Blade ability that increases
-        the strength of its user's physical attack but drains their health with every
-        hit in exchange), Damage Reduction (Via various Keychains which have the Protect
-        ability that can reduce damage from attacks by 25%, Via various Keychains
-        which have the Shell ability that can vastly reduce damage from Magic attacks,
-        Via the Half-moon Armlet which has the Half-Damage ability that can halve
-        all damage when Sora has 25% or less of his health left), Light Manipulation
-        (Can use several light based attacks as a warrior of light), Gravity Manipulation
-        (Via Gravity Drop), Magnetism Manipulation (Via Magnega), Resurrection (Via
-        Oathkeeper which has the Auto-Life ability that allows the user resurrect
-        themself), Time Manipulation (In the form of slowing down and stopping time),
-        Status Effect Inducement (Can stun opponents with Stun Impact), Keyblade Master-level
-        Fighter, Invulnerability (While healing himself (Via Leaf Bracer)), Vibration
-        Manipulation (Via Quake), Mind Manipulation, and Confusion (Can confuse the
-        target with Confuse), Instinctive Reaction (Via various Keychains which have
-        the Auto-Block ability which allows Sora to sometimes automatically block
-        attacks, Via various Keychains which have the Auto-Dodge ability that allows
-        Sora to sometimes automatically dodge attacks, Via the Kingdom Key which has
-        the Auto-Potion ability which allows Sora to automatically heal himself with
-        Potions (Hi-Potions if he has no Potions) when he has low health, Automatically
-        counterattacks after blocking via Auto-Counter, Block-Counter and Command
-        Counter (The former two abilities are provided by the Oblivion Keychain and
-        the latter by the Command Ring), Automatically counterattacks after being
-        attacked mid-air via Auto-Payback (from the Oblivion and the Zero/One Keychains),
-        Aerial Payback and Command Payback (from the Payback Ring)), Is able to hold
-        on in a fight after taking massive damage or being comboed via Second Chance
-        and Once More |-|Resistances=Elemental Manipulation (Fire, Lightning, Ice,
-        and Wind), Time Manipulation (Data-Sora's Keyblade was able to nullify Jafar's
-        Magic-based Time Stop without Sora having to even think about it, Can move
-        inside the Realm of Darkness, Resists getting his time slowed down), Status
-        Effect Inducement (Getting movement controls reversed, Getting his ability
-        to jump (when not attacking) nullified, and getting blinded), Statistics Reduction
-        (In the form of getting his defense cut), Power Nullification, Absorption,
-        Death Manipulation (Unaffected by Heartless, which passively kill and absorb
-        things around them), Data Manipulation (Ansem The Wise stated that the "heart"
-        cannot be contained by data, and that the process itself would be incalculable),
-        Existence Erasure (Can take hits from Heartless, which can do this with any
-        attack), Cosmic Radiati
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level (As a direct copy of KHI Sora, he should be comparable
-        to him) | Complex Multiverse level (After acquiring a true Keyblade, Data-Sora
-        could defeat Pete, Maleficent, Data-Riku and Sora's Heartless, should be on
-        the same level as Mickey Mouse)
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Infinite (Can keep up with Pete and Maleficent)
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level (Can withstand attacks from Hades, Cerberus and others
-        that can threaten him) | Complex Multiverse level
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Very high, capable of fighting through hordes of Heartless in rapid succession
-        without tiring
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Kingdom Key. Tens of Meters with Keyblade telepathy.
-        Planetary with magic , Interdimensional with Keyholes
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Kingdom Key (His Keyblade)
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: "For all intents and purposes, Data-Sora is the exact likeness of his\
-        \ real-life counterpart in terms of temperament, personality, and thought\
-        \ patterns. While fully aware that he is a mere data copy, he confronts each\
-        \ and every challenge with nearly boundless cheer and retains his original\u2019\
-        s naivety. Nevertheless, he also retains his original\u2019s knack for combat,\
-        \ being able to use virtually all of his Keyblade Techniques and Magic spells,\
-        \ deftly using them to blast his way through armies of Heartless with ease.\
-        \ In addition, he also has a certain degree of puzzle-solving skills, navigating\
-        \ his way through Jiminy\u2019s Journal and debugging it with only limited\
-        \ instruction from King Mickey. He is also in some ways even more determined\
-        \ and optimistic than the original Sora, completing his quest despite knowing\
-        \ that the Journal\u2019s completion will lead to the end of his existence,\
-        \ trudging on even after his memories are erased due to the value he\u2019\
-        s placed in the bonds he has with his friends (whom he no longer remembers)\
-        \ and to simply do the right thing"
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Like his original, Data-Sora was not trained in hand-to-hand combat
-        and is thus helpless if he is somehow disarmed (As shown when Maleficent had
-        destroyed his digital Keyblade before he obtained a true Keyblade in Hollow
-        Bastion) and much like the real Sora he is rather naive ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{discussions}} Category:Characters Category:Male
-        Characters Category:Game Characters Category:Protagonists Category:Primary
-        Protagonists Category:Heroes Category:Good Characters Category:Kingdom Hearts
-        Category:Keyblade Wielders Category:Clones Category:Teenagers Category:Fire
-        Users Category:Ice Users Category:Electricity Users Category:Air Users Category:Earth
-        Users Category:Healers Category:Light Users Category:Gravity Users Category:Time
-        Users Category:Element Users Category:Damage Reduction Users Category:Magnetism
-        Users Category:Resurrection Users Category:Mind Users Category:Self-Sustenance
-        Users Category:Playable Characters Category:Non-Physical Interaction Users
-        Category:BFR Users Category:Sealing Users Category:Curse Users Category:Possession
-        Users Category:Immortals Category:Purification Users Category:Power Nullification
-        Users Category:Telepaths Category:Flight Users Category:Power Bestowal Users
-        Category:Dimensional Travel Users Category:Portal Users Category:Information
-        Analysis Users Category:Enhanced Senses Users Category:Existence Erasure Users
-        Category:Magic Users Category:Transformation Users Category:Blade Users Category:Instinctive
-        Action Users Category:Empowerment Users Category:Weapon Control Users Category:Data
-        Users Category:Key Users Category:Concept Users Category:Information Users'
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|data sora|9489226
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-auron-composite-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Auron_%28Composite%29_Final_Fantasy
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Auron (Composite) Final Fantasy
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|auron composite final fantasy
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-auron-composite-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29_%28Final_Fantasy%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id008
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Data-Sora
-    source_type: mediawiki
-    revision_id: '9489226'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 12265
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id009
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-B}} | {{1-C}}'
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Standard Keyblade powers, Damage
-        Boost (Can make all of his attacks critical hits via the All Critical ability
-        that various Keychains he possesses have, Via the Strike Armlet which has
-        the Critical Boost ability that increases Sora's chance of landing critical
-        hits), Summoning (Can summon meteors via Meteor Rain), Flight (Can glide through
-        the air), Self-Sustenance (Type 1. Can breathe in space), Magic, Homing Attack
-        (With most spells), Fire Manipulation, Ice Manipulation, Electricity Manipulation,
-        Air Manipulation, Paralysis Inducement (Can immobilize foes with wind-based
-        spells and the Wishing Star Keychain which has the Aero Counter ability which
-        allows him to inflict this via blocking), Enhanced Senses (Has a "map" in
-        his head (While it could normally be dismissed as a game mechanic, the status
-        effect in 358/2 Days that prevents access to it justifies it being an actual
-        ability), said map also displays the locations of enemies and allies), Information
-        Analysis (Via Scan which allows him to view his opponent's health), Life Absorption
-        (Via the Metal Chocobo and the Ultima Weapon Keychains which have the Drain
-        ability), Healing (Via Curaga and various items, Via various Keychains which
-        have the Drain Counter ability that allows the user to recover health by blocking
-        attacks, Via various Keychains which have the Regen ability), Statistics Amplification
-        (Via various Keychains, Via the Power Armlet which has the Attack Boost ability
-        that can increase its user's attack strength if they have less than 25% of
-        their health left, Via the Wizard's Armlet which has the Magic Boost ability
-        that can increase its user's Magic if they have less than 25% of their health
-        left, Via various Keychains which have the Attack Upgrade ability that increases
-        the power of its user's physical attacks, Via various Keychains which have
-        the Magic Upgrade ability that makes its user's Magic more powerful, Via the
-        Olympia and the Metal Chocobo Keychains which have the Full Swing ability
-        that increases the user's strength in exchange for landing less critical attacks,
-        Via the Oblivion Keychain which has the Two-Edged Blade ability that increases
-        the strength of its user's physical attack but drains their health with every
-        hit in exchange), Damage Reduction (Via various Keychains which have the Protect
-        ability that can reduce damage from attacks by 25%, Via various Keychains
-        which have the Shell ability that can vastly reduce damage from Magic attacks,
-        Via the Half-moon Armlet which has the Half-Damage ability that can halve
-        all damage when Sora has 25% or less of his health left), Light Manipulation
-        (Can use several light based attacks as a warrior of light), Gravity Manipulation
-        (Via Gravity Drop), Magnetism Manipulation (Via Magnega), Resurrection (Via
-        Oathkeeper which has the Auto-Life ability that allows the user resurrect
-        themself), Time Manipulation (In the form of slowing down and stopping time),
-        Status Effect Inducement (Can stun opponents with Stun Impact), Keyblade Master-level
-        Fighter, Invulnerability (While healing himself (Via Leaf Bracer)), Vibration
-        Manipulation (Via Quake), Mind Manipulation, and Confusion (Can confuse the
-        target with Confuse), Instinctive Reaction (Via various Keychains which have
-        the Auto-Block ability which allows Sora to sometimes automatically block
-        attacks, Via various Keychains which have the Auto-Dodge ability that allows
-        Sora to sometimes automatically dodge attacks, Via the Kingdom Key which has
-        the Auto-Potion ability which allows Sora to automatically heal himself with
-        Potions (Hi-Potions if he has no Potions) when he has low health, Automatically
-        counterattacks after blocking via Auto-Counter, Block-Counter and Command
-        Counter (The former two abilities are provided by the Oblivion Keychain and
-        the latter by the Command Ring), Automatically counterattacks after being
-        attacked mid-air via Auto-Payback (from the Oblivion and the Zero/One Keychains),
-        Aerial Payback and Command Payback (from the Payback Ring)), Is able to hold
-        on in a fight after taking massive damage or being comboed via Second Chance
-        and Once More |-|Resistances=Elemental Manipulation (Fire, Lightning, Ice,
-        and Wind), Time Manipulation (Data-Sora's Keyblade was able to nullify Jafar's
-        Magic-based Time Stop without Sora having to even think about it, Can move
-        inside the Realm of Darkness, Resists getting his time slowed down), Status
-        Effect Inducement (Getting movement controls reversed, Getting his ability
-        to jump (when not attacking) nullified, and getting blinded), Statistics Reduction
-        (In the form of getting his defense cut), Power Nullification, Absorption,
-        Death Manipulation (Unaffected by Heartless, which passively kill and absorb
-        things around them), Data Manipulation (Ansem The Wise stated that the "heart"
-        cannot be contained by data, and that the process itself would be incalculable),
-        Existence Erasure (Can take hits from Heartless, which can do this with any
-        attack), Cosmic Radiati
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level (As a direct copy of KHI Sora, he should be comparable
-        to him) | Complex Multiverse level (After acquiring a true Keyblade, Data-Sora
-        could defeat Pete, Maleficent, Data-Riku and Sora's Heartless, should be on
-        the same level as Mickey Mouse)
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Infinite (Can keep up with Pete and Maleficent)
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level (Can withstand attacks from Hades, Cerberus and others
-        that can threaten him) | Complex Multiverse level
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Very high, capable of fighting through hordes of Heartless in rapid succession
-        without tiring
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Kingdom Key. Tens of Meters with Keyblade telepathy.
-        Planetary with magic , Interdimensional with Keyholes
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Kingdom Key (His Keyblade)
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: "For all intents and purposes, Data-Sora is the exact likeness of his\
-        \ real-life counterpart in terms of temperament, personality, and thought\
-        \ patterns. While fully aware that he is a mere data copy, he confronts each\
-        \ and every challenge with nearly boundless cheer and retains his original\u2019\
-        s naivety. Nevertheless, he also retains his original\u2019s knack for combat,\
-        \ being able to use virtually all of his Keyblade Techniques and Magic spells,\
-        \ deftly using them to blast his way through armies of Heartless with ease.\
-        \ In addition, he also has a certain degree of puzzle-solving skills, navigating\
-        \ his way through Jiminy\u2019s Journal and debugging it with only limited\
-        \ instruction from King Mickey. He is also in some ways even more determined\
-        \ and optimistic than the original Sora, completing his quest despite knowing\
-        \ that the Journal\u2019s completion will lead to the end of his existence,\
-        \ trudging on even after his memories are erased due to the value he\u2019\
-        s placed in the bonds he has with his friends (whom he no longer remembers)\
-        \ and to simply do the right thing"
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Like his original, Data-Sora was not trained in hand-to-hand combat
-        and is thus helpless if he is somehow disarmed (As shown when Maleficent had
-        destroyed his digital Keyblade before he obtained a true Keyblade in Hollow
-        Bastion) and much like the real Sora he is rather naive ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{discussions}} Category:Characters Category:Male
-        Characters Category:Game Characters Category:Protagonists Category:Primary
-        Protagonists Category:Heroes Category:Good Characters Category:Kingdom Hearts
-        Category:Keyblade Wielders Category:Clones Category:Teenagers Category:Fire
-        Users Category:Ice Users Category:Electricity Users Category:Air Users Category:Earth
-        Users Category:Healers Category:Light Users Category:Gravity Users Category:Time
-        Users Category:Element Users Category:Damage Reduction Users Category:Magnetism
-        Users Category:Resurrection Users Category:Mind Users Category:Self-Sustenance
-        Users Category:Playable Characters Category:Non-Physical Interaction Users
-        Category:BFR Users Category:Sealing Users Category:Curse Users Category:Possession
-        Users Category:Immortals Category:Purification Users Category:Power Nullification
-        Users Category:Telepaths Category:Flight Users Category:Power Bestowal Users
-        Category:Dimensional Travel Users Category:Portal Users Category:Information
-        Analysis Users Category:Enhanced Senses Users Category:Existence Erasure Users
-        Category:Magic Users Category:Transformation Users Category:Blade Users Category:Instinctive
-        Action Users Category:Empowerment Users Category:Weapon Control Users Category:Data
-        Users Category:Key Users Category:Concept Users Category:Information Users'
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|data sora|9489226
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-auron-composite-final-fantasy
-    url: https://character-stats-and-profiles.fandom.com/wiki/Auron_%28Composite%29_%28Final_Fantasy%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Auron (Composite) (Final Fantasy)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 120
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|auron composite final fantasy
-    retryable: false
-    exception_class: ''
   - source_id: mediawiki-auron-composite
-    url: https://vsbattles.fandom.com/wiki/Auron_(Composite)
+    url: https://vsbattles.fandom.com/wiki/Michael_Myers_(Green_Timeline)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id010
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1761,10 +1111,10 @@ repair:
     - weaknesses
     normalized_page_title: Michael Myers (Green Timeline)
     source_type: mediawiki
-    revision_id: '9549589'
+    revision_id: '9712102'
     fetch_status: fetched
     http_status: 200
-    content_length: 27478
+    content_length: 33889
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1778,6 +1128,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1791,7 +1142,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id011
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -1804,13 +1155,13 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: At least {{9-C}} | {{9-B}}
+      value: At least
       source_id: mediawiki-auron-composite
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content='
+      value: '1978'
       source_id: mediawiki-auron-composite
       provider_id: vsbattles
       authority: high
@@ -1826,17 +1177,20 @@ repair:
       authority: high
       confidence: 0.75
     - field: speed
-      value: At least Peak Human, possibly higher (Frequently disappears from sight,
-        eluding the senses of those around him.. Stated in the novelization to be
-        able to rip apart humans limb by limb with absolutely zero effort, though
-        this might've been hyperbole)
+      value: Superhuman (Frequently disappears from sight, eluding the senses of those
+        around him. Should be comparable to Corey, who proved to be weaker than 1978
+        Michael; Corey was able to dodge a bullet and vanish without anyone perceiving
+        him)
       source_id: mediawiki-auron-composite
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
       value: At least Street levelScales to 2.97 Kilojoules (Survived being shot six
-        times and falling off of a two-story balconyHalloween)
+        times and falling off of a two-story balcony.Halloween Took a stab to the
+        neck with a knitting needle and two deep stabs to the gut with his own knife.
+        Later in the night, Michael was barely fazed after being punched twice by
+        a cop in the torso)
       source_id: mediawiki-auron-composite
       provider_id: vsbattles
       authority: high
@@ -1846,71 +1200,94 @@ repair:
         no signs of having rested as he travelled to Haddonfield, prepared for his
         killings, and began stalking down his victims.Halloween Even after being stabbed
         and shot six times, immediately followed up by a two-storey fall, he continued
-        to leisurely walk around HaddonfieldHalloween Kills)
+        to leisurely walk around and had enough power left to blitz and physically
+        manhandle Officer McCabe Halloween Kills)
       source_id: mediawiki-auron-composite
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
       value: Standard Melee Range physically; Extended Melee Range with Kitchen Knife
-        |-|2018-2022
+        2018-2022
       source_id: mediawiki-auron-composite
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Kitchen Knife *Optional
+      value: Kitchen Knife, Boogeyman mask *Optional
       source_id: mediawiki-auron-composite
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: "Gifted (Despite being institutionalized since childhood and exhibiting\
-        \ silent and simple-minded behavior, Michael displays a high level of intelligence\
-        \ overall. In 1978, Michael orchestrated his escape from Smith's Grove by\
-        \ triggering a mass breakout of prisoners from the transport bus. Prior to\
-        \ his murder spree, Michael had created escape plans, and also had ID\u2019\
-        s of himself. He took notes on airplane schedules and acquired road maps to\
-        \ drive his way back to Haddonfield after he escaped, which was 150 miles\
-        \ away, despite him not having any notable prior driving lessons and learning\
-        \ them by observing how Loomis and other policemen drove him around from the\
-        \ backseat. Instantly mastered driving and later memorized all of Haddonfield's\
-        \ roads to stalk his way around town. Plotted his Halloween night murder spree\
-        \ by stalking his victims, learning their whereabouts and gathering the necessary\
-        \ supplies to kill each of them with different tactics to lure them in. Usually\
-        \ sets up the corpses of his victims in a grotesque fashion so that others\
-        \ may find them, allowing him to kill them when they are in a panic. Has shown\
-        \ other instances of planning ahead, such as using a rake to jam the back\
-        \ door so Laurie couldn't easily escape and cutting the phone line so she\
-        \ couldn't call for help. He also has a tendency to play dead once he's beaten\
-        \ down, allowing him to immediately retaliate when his victims lower their\
-        \ guard. Presumably caused the mass breakout during the 2018 events in order\
-        \ to steal a truck and drive back to Haddonfield where he carefully tracked\
-        \ and stalked Aaron and Dana in order to quietly kill them and retrieve his\
-        \ mask from their car. Discovered Laurie's panic room beneath the floor by\
-        \ noticing light subtly shining from the bullet holes in the floor and predicted\
-        \ that Karen would have a gun trained on the spot, though he was fooled when\
-        \ she pretended to be helpless. Furthermore, Michael has proven to be effective\
-        \ in combat. He managed outmatched Laurie in a one-on-one confrontation, the\
-        \ latter of which had taken 40 years of self-defence training in preparation\
-        \ for killing Myers. Outsmarted Marion, wasting her bullets and left her defenseless\
-        \ before she was killed then redirected a woman's hand using a vehicle door,\
-        \ causing her to shoot herself instead of Michael, with the latter only having\
-        \ a few seconds to act on this. Managed to kill an entire lynch mob using\
-        \ only a kitchen knife after taking a beating, despite his opponents all utilizing\
-        \ weapons with greater range such as baseball bats and handguns. Located Corey\
-        \ to Laurie\u2019s residence to retrieve his stolen mask. Escaped after his\
-        \ 2018 murder spree, switching up his tracks, outsmarting the entire town\
-        \ of Haddonfield, and remained hidden despite investigation by Sheriff Scott,\
-        \ law enforcement, and the National Guard\u2019s search of Michael, who could\
-        \ not turn up as much as a single clue, effectively outsmarting themHalloween\
-        \ Ends: The Official Movie Novelization, Page 19) Standard Tactics: Michael\
-        \ Myers is an emotionless, mute serial killer who feels no remorse when killing\
-        \ people or animals. This enables Michael to be a brutal killer and sometimes\
-        \ mutilates his victims. Michael usually uses a kitchen knife to carry out\
-        \ his murders, but he can also use other weapons he finds. Michael utilizes\
-        \ the element of surprise and his natural talent in stealth, stealthily approaching\
-        \ his target in deadly silence."
+      value: "At least Gifted (Despite being institutionalized since childhood and\
+        \ exhibiting silent and simple-minded behavior, Michael displays a high level\
+        \ of intelligence overall. In 1978, Michael orchestrated his escape from Smith's\
+        \ Grove by triggering a mass breakout of prisoners from the transport bus.\
+        \ Prior to his murder spree, Michael had created escape plans, and also had\
+        \ ID\u2019s of himself forged. He took notes on airplane schedules and acquired\
+        \ road maps to drive his way back to Haddonfield after he escaped, which was\
+        \ 150 miles away, despite him not having any notable prior driving lessons\
+        \ and learning them by observing how Loomis and other policemen drove him\
+        \ around from the backseat. Instantly mastered driving and later memorized\
+        \ all of Haddonfield's roads to stalk his way around town. Plotted his Halloween\
+        \ night murder spree by stalking his victims, learning their whereabouts and\
+        \ gathering the necessary supplies to kill each of them with different tactics\
+        \ to lure them in. Usually sets up the corpses of his victims in a grotesque\
+        \ fashion so that others may find them, allowing him to kill them when they\
+        \ are in a panic. Has shown other instances of planning ahead, such as using\
+        \ a rake to jam the back door so Laurie couldn't easily escape and cutting\
+        \ the phone line so she couldn't call for help. He also has a tendency to\
+        \ play dead once he's beaten down, allowing him to immediately retaliate when\
+        \ his victims lower their guard. Presumably caused the mass breakout during\
+        \ the 2018 events in order to steal a truck and drive back to Haddonfield\
+        \ where he carefully tracked and stalked Aaron and Dana in order to quietly\
+        \ kill them and retrieve his mask from their car. Discovered Laurie's panic\
+        \ room beneath the floor by noticing light subtly shining from the bullet\
+        \ holes in the floor and predicted that Karen would have a gun trained on\
+        \ the spot, though he was fooled when she pretended to be helpless. Furthermore,\
+        \ Michael has proven to be effective in combat. He managed outmatched Laurie\
+        \ in a one-on-one confrontation, the latter of which had taken 40 years of\
+        \ self-defence training in preparation for killing Myers. Outsmarted Marion,\
+        \ wasting her bullets and left her defenseless before she was killed then\
+        \ redirected a woman's hand using a vehicle door, causing her to shoot herself\
+        \ instead of Michael, with the latter only having a few seconds to act on\
+        \ this. Managed to kill an entire lynch mob using only a kitchen knife after\
+        \ taking a beating, despite his opponents all utilizing weapons with greater\
+        \ range such as baseball bats and handguns. Located Corey to Laurie\u2019\
+        s residence to retrieve his stolen mask. Escaped after his 2018 murder spree,\
+        \ switching up his tracks, outsmarting the entire town of Haddonfield, and\
+        \ remained hidden despite investigation by Sheriff Scott, law enforcement,\
+        \ and the National Guard\u2019s search of Michael, who could not turn up as\
+        \ much as a single clue, effectively outsmarting themHalloween Ends: The Official\
+        \ Movie Novelization, Page 19 Actor James Jude Courtney describes Michael\
+        \ as heavily instinctual and with an \"incredible intuition,\" comparing him\
+        \ to an ex-mafioso who could instantly read a room full of people and stating\
+        \ that Michael is the \"epitome of someone who can each out and feel everything\
+        \ around him.\") 1978 Plan= Michael's original killing spree began with the\
+        \ days leading up to Halloween and is quite devious. It's noted by Loomis\
+        \ that Michael had been staring at a wall for years looking forward to Halloween\
+        \ night, and this benefitted him since it made it seem like much of his strange\
+        \ behavior (stalking, wearing a mask, etc.) was just part of the holidays,\
+        \ a time of year when the police and neighbors would already be dealing with\
+        \ pranks. Michael began by breaking into a Nick's Hardware Store, from which\
+        \ he acquired his iconic mask, rope, and a knife without getting caught. This\
+        \ allow lured Dr. Loomis and the Sheriff there, where Michael was able to\
+        \ observe them from afar. Michael also stole his sister's gravestone and took\
+        \ it to his sister's house, misleading Dr. Loomis, who already believed he\
+        \ was intent on returning home, and Sheriff Brackett into believing that Michael\
+        \ was using his house as a base. He also left a half-eaten dog's corpse and\
+        \ the stolen car there to further sell the illusion. All throughout, Michael\
+        \ is shown stalking and tracking the movements of Laurie, Annie, Lynda, and\
+        \ even Dr. Loomis without alerting the authorities. After spooking Annie into\
+        \ relocating Lindsey at the Doyle house, he killed her in her car, allowing\
+        \ him to finish off her friends Bob and Lynda who arrived shortly after without\
+        \ alerting them, purposefully eliminating Lynda last while she was on the\
+        \ phone to lure his true target, Laurie Strode, over before cutting the phone\
+        \ lines. Michael proves to have decently predicted her actions as the bodies\
+        \ scare her into clutching a wall by an adjacent room, where Michael is revealed\
+        \ to have been lying in wait, and when she attempted to flee by the back door\
+        \ Michael a"
       source_id: mediawiki-auron-composite
       provider_id: vsbattles
       authority: high
@@ -1926,22 +1303,20 @@ repair:
         \ those much weaker than him could accomplishHalloweenHalloween Kills Note:\
         \ This profile covers Michael Myers in the Green Timeline. The movies in this\
         \ timeline are Halloween, Halloween (2018), Halloween Kills, and Halloween\
-        \ Ends. ==Notable Matchups== |-|Victories= *Norman Bates (Psycho) Norman's\
-        \ Profile (Michael's 1978 key was used. Speed was equalized and both had their\
-        \ standard equipment. Both started 10 meters away and battle took place in\
-        \ Bates Motel) |-|Losses= *Chucky (Child's Play) Chucky\u2019s Profile (1978\
-        \ Michael and Chucky\u2019s doll form were used. Speed was equalized and both\
-        \ had their standard equipment. Both started 10 meters away from each other)\
-        \ *Dexter Morgan (Dexter) Dexter's Profile (Michael's 2nd key was used. Speed\
-        \ was equalized. The fight took place in a junkyard on halloween night & both\
-        \ had prior knowledge. They started 20 meters apart & in hiding) *Giraffe\
-        \ (The Real World) Giraffe's Profile (Speed was equalized, battle took place\
-        \ in a Open flat field, 1978 Michael was used) * The Pale Grin (The Happyhills\
-        \ Homicide) The Pale Grin's Profile (Second key Michael was used, Battle took\
-        \ place in a Mansion, Starting distance was 50 meters, Both had their optional\
-        \ equipment, Equal speed) |-|Inconclusive= ==References== {{Scroll box|Content={{Reflist}}}}\
-        \ ==Statistics Values== {{Scroll box|Content=}} {{Discussions|Michael Myers\
-        \ Green Timeline|Michael Myers (Green Timeline)}} Category:Characters Category:Halloween\
+        \ Ends. ==Notable Matchups== *Norman Bates (Psycho) Norman's Profile (Michael's\
+        \ 1978 key was used. Speed was equalized and both had their standard equipment.\
+        \ Both started 10 meters away and battle took place in Bates Motel) *Chucky\
+        \ (Child's Play) Chucky\u2019s Profile (1978 Michael and Chucky\u2019s doll\
+        \ form were used. Speed was equalized and both had their standard equipment.\
+        \ Both started 10 meters away from each other) *Dexter Morgan (Dexter) Dexter's\
+        \ Profile (Michael's 2nd key was used. Speed was equalized. The fight took\
+        \ place in a junkyard on halloween night & both had prior knowledge. They\
+        \ started 20 meters apart & in hiding) *Giraffe (The Real World) Giraffe's\
+        \ Profile (Speed was equalized, battle took place in a Open flat field, 1978\
+        \ Michael was used) *The Pale Grin (The Happyhills Homicide) The Pale Grin's\
+        \ Profile (Second key Michael was used, Battle took place in a Mansion, Starting\
+        \ distance was 50 meters, Both had their optional equipment, Equal speed)\
+        \ ==References== ==Statistics Values== Category:Characters Category:Halloween\
         \ Category:Adults Category:Antagonists Category:Bat Users Category:Blade Users\
         \ Category:Corruption Users Category:Drivers Category:Emotionless Characters\
         \ Category:Empowerment Users Category:Evil Characters Category:Gun Users Category:Hammer\
@@ -1968,14 +1343,14 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|michael myers green timeline|9549589
+    duplicate_key: vsbattles.fandom.com|michael myers green timeline|9712102
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-auron-composite
-    url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29
+  - source_id: vsbattles-auron-composite-final-fantasy
+    url: https://vsbattles.fandom.com/wiki/Data-Sora
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id012
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1986,25 +1361,24 @@ repair:
     - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Michael Myers (Green Timeline)
+    normalized_page_title: Data-Sora
     source_type: mediawiki
-    revision_id: '9549589'
+    revision_id: '9489226'
     fetch_status: fetched
     http_status: 200
-    content_length: 27478
+    content_length: 12265
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
     - Notable Matchups
-    - References
-    - Statistics Values
     stat_labels_detected:
     - attack_potency
     - durability
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2018,7 +1392,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id013
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2028,158 +1402,172 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: At least {{9-C}} | {{9-B}}
-      source_id: vsbattles-auron-composite
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content='
-      source_id: vsbattles-auron-composite
+      value: Superhuman Physical Characteristics, Standard Keyblade powers, Damage
+        Boost (Can make all of his attacks critical hits via the All Critical ability
+        that various Keychains he possesses have, Via the Strike Armlet which has
+        the Critical Boost ability that increases Sora's chance of landing critical
+        hits), Summoning (Can summon meteors via Meteor Rain), Flight (Can glide through
+        the air), Self-Sustenance (Type 1. Can breathe in space), Magic, Homing Attack
+        (With most spells), Fire Manipulation, Ice Manipulation, Electricity Manipulation,
+        Air Manipulation, Paralysis Inducement (Can immobilize foes with wind-based
+        spells and the Wishing Star Keychain which has the Aero Counter ability which
+        allows him to inflict this via blocking), Enhanced Senses (Has a "map" in
+        his head (While it could normally be dismissed as a game mechanic, the status
+        effect in 358/2 Days that prevents access to it justifies it being an actual
+        ability), said map also displays the locations of enemies and allies), Information
+        Analysis (Via Scan which allows him to view his opponent's health), Life Absorption
+        (Via the Metal Chocobo and the Ultima Weapon Keychains which have the Drain
+        ability), Healing (Via Curaga and various items, Via various Keychains which
+        have the Drain Counter ability that allows the user to recover health by blocking
+        attacks, Via various Keychains which have the Regen ability), Statistics Amplification
+        (Via various Keychains, Via the Power Armlet which has the Attack Boost ability
+        that can increase its user's attack strength if they have less than 25% of
+        their health left, Via the Wizard's Armlet which has the Magic Boost ability
+        that can increase its user's Magic if they have less than 25% of their health
+        left, Via various Keychains which have the Attack Upgrade ability that increases
+        the power of its user's physical attacks, Via various Keychains which have
+        the Magic Upgrade ability that makes its user's Magic more powerful, Via the
+        Olympia and the Metal Chocobo Keychains which have the Full Swing ability
+        that increases the user's strength in exchange for landing less critical attacks,
+        Via the Oblivion Keychain which has the Two-Edged Blade ability that increases
+        the strength of its user's physical attack but drains their health with every
+        hit in exchange), Damage Reduction (Via various Keychains which have the Protect
+        ability that can reduce damage from attacks by 25%, Via various Keychains
+        which have the Shell ability that can vastly reduce damage from Magic attacks,
+        Via the Half-moon Armlet which has the Half-Damage ability that can halve
+        all damage when Sora has 25% or less of his health left), Light Manipulation
+        (Can use several light based attacks as a warrior of light), Gravity Manipulation
+        (Via Gravity Drop), Magnetism Manipulation (Via Magnega), Resurrection (Via
+        Oathkeeper which has the Auto-Life ability that allows the user resurrect
+        themself), Time Manipulation (In the form of slowing down and stopping time),
+        Status Effect Inducement (Can stun opponents with Stun Impact), Keyblade Master-level
+        Fighter, Invulnerability (While healing himself (Via Leaf Bracer)), Vibration
+        Manipulation (Via Quake), Mind Manipulation, and Confusion (Can confuse the
+        target with Confuse), Instinctive Reaction (Via various Keychains which have
+        the Auto-Block ability which allows Sora to sometimes automatically block
+        attacks, Via various Keychains which have the Auto-Dodge ability that allows
+        Sora to sometimes automatically dodge attacks, Via the Kingdom Key which has
+        the Auto-Potion ability which allows Sora to automatically heal himself with
+        Potions (Hi-Potions if he has no Potions) when he has low health, Automatically
+        counterattacks after blocking via Auto-Counter, Block-Counter and Command
+        Counter (The former two abilities are provided by the Oblivion Keychain and
+        the latter by the Command Ring), Automatically counterattacks after being
+        attacked mid-air via Auto-Payback (from the Oblivion and the Zero/One Keychains),
+        Aerial Payback and Command Payback (from the Payback Ring)), Is able to hold
+        on in a fight after taking massive damage or being comboed via Second Chance
+        and Once More Elemental Manipulation (Fire, Lightning, Ice, and Wind), Time
+        Manipulation (Data-Sora's Keyblade was able to nullify Jafar's Magic-based
+        Time Stop without Sora having to even think about it, Can move inside the
+        Realm of Darkness, Resists getting his time slowed down), Status Effect Inducement
+        (Getting movement controls reversed, Getting his ability to jump (when not
+        attacking) nullified, and getting blinded), Statistics Reduction (In the form
+        of getting his defense cut), Power Nullification, Absorption, Death Manipulation
+        (Unaffected by Heartless, which passively kill and absorb things around them),
+        Data Manipulation (Ansem The Wise stated that the "heart" cannot be contained
+        by data, and that the process itself would be incalculable), Existence Erasure
+        (Can take hits from Heartless, which can do this with any attack), Cosmic
+        Radiations, Curse Mani
+      source_id: vsbattles-auron-composite-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: At least Street levelScales to 695.139 Joules (It is stated that he can
-        shatter doors in just a few hits. Can easily overcome locks and bolts. Heavily
-        cracked a car door window just by slapping it.Halloween Punched a hole through
-        a wooden door,Halloween which would require this much energy. Broke down a
-        closet door over time. Easily overpowered a police officerHalloween Kills)
-      source_id: vsbattles-auron-composite
+      value: Multiverse level (As a direct copy of KHI Sora, he should be comparable
+        to him) | Complex Multiverse level (After acquiring a true Keyblade, Data-Sora
+        could defeat Pete, Maleficent, Data-Riku and Sora's Heartless, should be on
+        the same level as Mickey Mouse)
+      source_id: vsbattles-auron-composite-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: At least Peak Human, possibly higher (Frequently disappears from sight,
-        eluding the senses of those around him.. Stated in the novelization to be
-        able to rip apart humans limb by limb with absolutely zero effort, though
-        this might've been hyperbole)
-      source_id: vsbattles-auron-composite
+      value: Infinite (Can keep up with Pete and Maleficent)
+      source_id: vsbattles-auron-composite-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: At least Street levelScales to 2.97 Kilojoules (Survived being shot six
-        times and falling off of a two-story balconyHalloween)
-      source_id: vsbattles-auron-composite
+      value: Multiverse level (Can withstand attacks from Hades, Cerberus and others
+        that can threaten him) | Complex Multiverse level
+      source_id: vsbattles-auron-composite-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: Peak Human (From the moment he escaped imprisonment, Michael displayed
-        no signs of having rested as he travelled to Haddonfield, prepared for his
-        killings, and began stalking down his victims.Halloween Even after being stabbed
-        and shot six times, immediately followed up by a two-storey fall, he continued
-        to leisurely walk around HaddonfieldHalloween Kills)
-      source_id: vsbattles-auron-composite
+      value: Very high, capable of fighting through hordes of Heartless in rapid succession
+        without tiring
+      source_id: vsbattles-auron-composite-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: Standard Melee Range physically; Extended Melee Range with Kitchen Knife
-        |-|2018-2022
-      source_id: vsbattles-auron-composite
+      value: Extended Melee Range with Kingdom Key. Tens of Meters with Keyblade telepathy.
+        Planetary with magic , Interdimensional with Keyholes
+      source_id: vsbattles-auron-composite-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Kitchen Knife *Optional
-      source_id: vsbattles-auron-composite
+      value: Kingdom Key (His Keyblade)
+      source_id: vsbattles-auron-composite-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: "Gifted (Despite being institutionalized since childhood and exhibiting\
-        \ silent and simple-minded behavior, Michael displays a high level of intelligence\
-        \ overall. In 1978, Michael orchestrated his escape from Smith's Grove by\
-        \ triggering a mass breakout of prisoners from the transport bus. Prior to\
-        \ his murder spree, Michael had created escape plans, and also had ID\u2019\
-        s of himself. He took notes on airplane schedules and acquired road maps to\
-        \ drive his way back to Haddonfield after he escaped, which was 150 miles\
-        \ away, despite him not having any notable prior driving lessons and learning\
-        \ them by observing how Loomis and other policemen drove him around from the\
-        \ backseat. Instantly mastered driving and later memorized all of Haddonfield's\
-        \ roads to stalk his way around town. Plotted his Halloween night murder spree\
-        \ by stalking his victims, learning their whereabouts and gathering the necessary\
-        \ supplies to kill each of them with different tactics to lure them in. Usually\
-        \ sets up the corpses of his victims in a grotesque fashion so that others\
-        \ may find them, allowing him to kill them when they are in a panic. Has shown\
-        \ other instances of planning ahead, such as using a rake to jam the back\
-        \ door so Laurie couldn't easily escape and cutting the phone line so she\
-        \ couldn't call for help. He also has a tendency to play dead once he's beaten\
-        \ down, allowing him to immediately retaliate when his victims lower their\
-        \ guard. Presumably caused the mass breakout during the 2018 events in order\
-        \ to steal a truck and drive back to Haddonfield where he carefully tracked\
-        \ and stalked Aaron and Dana in order to quietly kill them and retrieve his\
-        \ mask from their car. Discovered Laurie's panic room beneath the floor by\
-        \ noticing light subtly shining from the bullet holes in the floor and predicted\
-        \ that Karen would have a gun trained on the spot, though he was fooled when\
-        \ she pretended to be helpless. Furthermore, Michael has proven to be effective\
-        \ in combat. He managed outmatched Laurie in a one-on-one confrontation, the\
-        \ latter of which had taken 40 years of self-defence training in preparation\
-        \ for killing Myers. Outsmarted Marion, wasting her bullets and left her defenseless\
-        \ before she was killed then redirected a woman's hand using a vehicle door,\
-        \ causing her to shoot herself instead of Michael, with the latter only having\
-        \ a few seconds to act on this. Managed to kill an entire lynch mob using\
-        \ only a kitchen knife after taking a beating, despite his opponents all utilizing\
-        \ weapons with greater range such as baseball bats and handguns. Located Corey\
-        \ to Laurie\u2019s residence to retrieve his stolen mask. Escaped after his\
-        \ 2018 murder spree, switching up his tracks, outsmarting the entire town\
-        \ of Haddonfield, and remained hidden despite investigation by Sheriff Scott,\
-        \ law enforcement, and the National Guard\u2019s search of Michael, who could\
-        \ not turn up as much as a single clue, effectively outsmarting themHalloween\
-        \ Ends: The Official Movie Novelization, Page 19) Standard Tactics: Michael\
-        \ Myers is an emotionless, mute serial killer who feels no remorse when killing\
-        \ people or animals. This enables Michael to be a brutal killer and sometimes\
-        \ mutilates his victims. Michael usually uses a kitchen knife to carry out\
-        \ his murders, but he can also use other weapons he finds. Michael utilizes\
-        \ the element of surprise and his natural talent in stealth, stealthily approaching\
-        \ his target in deadly silence."
-      source_id: vsbattles-auron-composite
+      value: "For all intents and purposes, Data-Sora is the exact likeness of his\
+        \ real-life counterpart in terms of temperament, personality, and thought\
+        \ patterns. While fully aware that he is a mere data copy, he confronts each\
+        \ and every challenge with nearly boundless cheer and retains his original\u2019\
+        s naivety. Nevertheless, he also retains his original\u2019s knack for combat,\
+        \ being able to use virtually all of his Keyblade Techniques and Magic spells,\
+        \ deftly using them to blast his way through armies of Heartless with ease.\
+        \ In addition, he also has a certain degree of puzzle-solving skills, navigating\
+        \ his way through Jiminy\u2019s Journal and debugging it with only limited\
+        \ instruction from King Mickey. He is also in some ways even more determined\
+        \ and optimistic than the original Sora, completing his quest despite knowing\
+        \ that the Journal\u2019s completion will lead to the end of his existence,\
+        \ trudging on even after his memories are erased due to the value he\u2019\
+        s placed in the bonds he has with his friends (whom he no longer remembers)\
+        \ and to simply do the right thing"
+      source_id: vsbattles-auron-composite-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Has lost three of his fingers and is blind in one eye, although these\
-        \ have not appeared to significantly impacted his combat efficiency. Without\
-        \ killing others or retaining a stable source of fear from others, Michael\
-        \ will be greatly weakened.Halloween Ends Infecting others with his evil does\
-        \ not necessarily mean they will not attack him, such as when Corey fought\
-        \ him.Halloween Ends Removing Michael's mask can act as an effective distraction\
-        \ which may cause him to stop attacking until putting it back on, a feat that\
-        \ those much weaker than him could accomplishHalloweenHalloween Kills Note:\
-        \ This profile covers Michael Myers in the Green Timeline. The movies in this\
-        \ timeline are Halloween, Halloween (2018), Halloween Kills, and Halloween\
-        \ Ends. ==Notable Matchups== |-|Victories= *Norman Bates (Psycho) Norman's\
-        \ Profile (Michael's 1978 key was used. Speed was equalized and both had their\
-        \ standard equipment. Both started 10 meters away and battle took place in\
-        \ Bates Motel) |-|Losses= *Chucky (Child's Play) Chucky\u2019s Profile (1978\
-        \ Michael and Chucky\u2019s doll form were used. Speed was equalized and both\
-        \ had their standard equipment. Both started 10 meters away from each other)\
-        \ *Dexter Morgan (Dexter) Dexter's Profile (Michael's 2nd key was used. Speed\
-        \ was equalized. The fight took place in a junkyard on halloween night & both\
-        \ had prior knowledge. They started 20 meters apart & in hiding) *Giraffe\
-        \ (The Real World) Giraffe's Profile (Speed was equalized, battle took place\
-        \ in a Open flat field, 1978 Michael was used) * The Pale Grin (The Happyhills\
-        \ Homicide) The Pale Grin's Profile (Second key Michael was used, Battle took\
-        \ place in a Mansion, Starting distance was 50 meters, Both had their optional\
-        \ equipment, Equal speed) |-|Inconclusive= ==References== {{Scroll box|Content={{Reflist}}}}\
-        \ ==Statistics Values== {{Scroll box|Content=}} {{Discussions|Michael Myers\
-        \ Green Timeline|Michael Myers (Green Timeline)}} Category:Characters Category:Halloween\
-        \ Category:Adults Category:Antagonists Category:Bat Users Category:Blade Users\
-        \ Category:Corruption Users Category:Drivers Category:Emotionless Characters\
-        \ Category:Empowerment Users Category:Evil Characters Category:Gun Users Category:Hammer\
-        \ Users Category:Healers Category:Horror Characters Category:Humans Category:Immortals\
-        \ Category:Knife Users Category:Live-Action Characters Category:Male Characters\
-        \ Category:Mask Users Category:Movie Characters Category:Murderers Category:Power\
-        \ Bestowal Users Category:Primary Antagonists Category:Psychopaths Category:Regeneration\
-        \ Users Category:Sadists Category:Saw Users Category:Serial Killers Category:Silent\
-        \ Characters Category:Stealth Masters Category:Villains Category:Weapon Masters\
-        \ Category:Weapon Users Category:Book Characters Category:Martial Artists\
-        \ Category:Vehicular Masters Category:Non-Standard Breathing Users Category:Elders\
-        \ Category:Prisoners"
-      source_id: vsbattles-auron-composite
+      value: 'Like his original, Data-Sora was not trained in hand-to-hand combat
+        and is thus helpless if he is somehow disarmed (As shown when Maleficent had
+        destroyed his digital Keyblade before he obtained a true Keyblade in Hollow
+        Bastion) and much like the real Sora he is rather naive ==Notable Matchups==
+        Victories: Losses: Inconclusive: Category:Characters Category:Male Characters
+        Category:Game Characters Category:Protagonists Category:Primary Protagonists
+        Category:Heroes Category:Good Characters Category:Kingdom Hearts Category:Keyblade
+        Wielders Category:Clones Category:Teenagers Category:Fire Users Category:Ice
+        Users Category:Electricity Users Category:Air Users Category:Earth Users Category:Healers
+        Category:Light Users Category:Gravity Users Category:Time Users Category:Element
+        Users Category:Damage Reduction Users Category:Magnetism Users Category:Resurrection
+        Users Category:Mind Users Category:Self-Sustenance Users Category:Playable
+        Characters Category:Non-Physical Interaction Users Category:BFR Users Category:Sealing
+        Users Category:Curse Users Category:Possession Users Category:Immortals Category:Purification
+        Users Category:Power Nullification Users Category:Telepaths Category:Flight
+        Users Category:Power Bestowal Users Category:Dimensional Travel Users Category:Portal
+        Users Category:Information Analysis Users Category:Enhanced Senses Users Category:Existence
+        Erasure Users Category:Magic Users Category:Transformation Users Category:Blade
+        Users Category:Instinctive Action Users Category:Empowerment Users Category:Weapon
+        Control Users Category:Data Users Category:Key Users Category:Concept Users
+        Category:Information Users'
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: "Key: False Keyblade | True Keyblade Name: Data-Sora (Typically referred\
+        \ to as Sora) Origin: Kingdom Hearts Gender: Technically genderless due to\
+        \ being made of data, has the appearance of a male Age: Technically no more\
+        \ than 2 (Due to being Jiminy\u2019s Journal\u2019s version of Sora, whose\
+        \ transcribing in the journal only existed at the beginning of KH1), has the\
+        \ form of a 14 year old Classification: Digital Replica of Sora"
+      source_id: vsbattles-auron-composite-final-fantasy
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -2193,14 +1581,722 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|michael myers green timeline|9549589
+    duplicate_key: vsbattles.fandom.com|data sora|9489226
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-auron-composite-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Auron_%28Composite%29_Final_Fantasy
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Auron (Canon, Kingdom Hearts)/Unbacked0
+    source_type: mediawiki
+    revision_id: '178735'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3023
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Low 2-C
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Self-Sustenance (Type 1, Can breathe
+        underwater and in space), Weapon Mastery, Air Manipulation, Healing, Non-Physical
+        Interaction (Can directly harm Heartless, which don't have physical forms,
+        and Nobodies, which don't even exist) Resistance to Death Manipulation, Absorption
+        (Whenever a Heartless gets near someone, it instantly kills them and absorbs
+        their Heart), Limited Law Manipulation (People from other Worlds are immune
+        to the laws of different Worlds) Attack Potency Universe Level+ (Can fight
+        on par with Sora and Hercules, Is far stronger than Heartless that can destroy
+        Worlds)
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Inaccessible (Scales to characters that can move in the Realm of Darkness
+        which has been stated to have no time)
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Universe Level+ (Can take hits from Sora)
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None Notable Note: Worlds in Kingdom Hearts are universes rather than
+        planets like people think. Proof of this is how it''s been stated that you
+        naturally can''t travel to different Worlds without. It has also been shown
+        that Worlds are seen as stars in Traverse Town which is considered a "World
+        between Worlds" which means they can''t be just planets. It has also been
+        stated that a normal person can''t leave a World even if said World has advanced
+        spaceships which are capable of travelling through space. Riku has stated
+        that any two Worlds have different Axis of time and that every World has its
+        own flow of time. The Grand Councilwoman who has been stated "oversee the
+        universe" didn''t know what Terra was. ==Others== Notable Victories: Notable
+        Losses: Inconclusive Matches: Category:Unbacked0 Category:Tier 2'
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Universe Level+ (Can fight on par with Sora and Hercules, Is far stronger
+        than Heartless that can destroy Worlds)
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|auron canon kingdom hearts
+      unbacked0|178735
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-auron-composite-final-fantasy
+    url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29_Final_Fantasy
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Auron
+    source_type: mediawiki
+    revision_id: '8684204'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 34997
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Magic, Non-Physical Interaction
+        (Able to kill the lingering Ghosts in the Cavern of the Stolen Fayth and the
+        Wraiths found Inside Sin), Immortality (Types 1, 3 and 7), Regeneration (Low-Godly.
+        As an unsent, Auron can reform his body from non-physical pyreflies as long
+        as his spirit is not sent to the Farplane), Statistics Reduction (Via Break
+        abilities), Damage Reduction (Via Sentinel), Fear Manipulation (Via Threaten),
+        Necromancy and Transmutation (Via Zombie Attack), Death Manipulation (Via
+        Death and Shin-Zantetsu), BFR (Via Shooting Star), Air Manipulation (Via Tornado),
+        Statistics Amplification (Via Cheer, Aim, Focus, Reflex, Protect and Shell),
+        Time Manipulation (Can accelerate himself or slow down enemies in time with
+        Hastega and Slowga), Healing, Damage Negation (Via NulBlaze, NulShock, NulTide
+        and NulFrost), Purification (Type 3 via Esuna and various items), Resurrection
+        (Via Life, Full-Life and Auto-Life), Attack Reflection (Via Reflect), Holy
+        Manipulation, Fire Manipulation, Ice Manipulation, Electricity Manipulation,
+        Water Manipulation, Poison Manipulation (Via Bio), Gravity Manipulation (Via
+        Demi), Energy Projection (Via Flare), Radiation Manipulation, Information
+        Analysis (Via Scan and Sensor), Probability Manipulation (Via Jinx and Luck),
+        Social Influencing (Can bribe mindless monsters to leave battle), Power Mimicry
+        (Via Copycat), Durability Negation (Via Piercing and Demi), Enhanced Senses
+        and Stealth Mastery (Via Initiative), Curse Manipulation and Death Manipulation
+        (Via Candles of Life), Resistance to Fire Manipulation, Ice Manipulation,
+        Electricity Manipulation, Water Manipulation, Darkness Manipulation, Power
+        Nullification, Sleep Manipulation, Poison Manipulation, Petrification, Death
+        Manipulation, Necromancy, Transmutation, Time Manipulation (In the form of
+        Time Slow and Stop), Mind Manipulation, Empathic Manipulation, Radiation Manipulation,
+        Absolute Zero (Can withstand Shiva''s presence and attacks), Curse Manipulation,
+        and Memory Manipulation (Can challenge Sin head-on without being impeded by
+        its toxin) All previous abilities enhanced, possibly Immortality (Type 8,reliant
+        on her Crystal which let Cosmos''s group return from fading from existence
+        after Cosmos'' death) & Regeneration (Low-Godly), Summoning (Can summon various
+        Eidolons from Summonstones and the World of Illusions), Willpower Manipulation
+        (a person''s will is power there and enables them to do a multitude of things
+        the stronger their willDissidia Final Fantasy Opera Omnia), Reactive Power
+        Level (the greater someone''s will, the greater their powerDissidia Final
+        Fantasy Opera Omnia), Law Manipulation (Beings with strong wills can overwrite
+        the laws of the world and bend them to their willDissidia Final Fantasy Opera
+        Omnia), Creation (With a powerful enough will, once can create various things
+        such as phone lines, airships and even entire countries and worldsDissidia
+        Final Fantasy Opera Omnia), Sealing (Can seal off large areas and people with
+        her will, such as Cecil sealing himself in Castle Baron or the cast sealing
+        Kefka inside a TorsionDissidia Final Fantasy Opera Omnia), Dimensional Travel
+        (Characters can open Torsions, rifts in space-time to travel various dimensionsDissidia
+        Final Fantasy Opera Omnia), and Immortality (Type 2) (Due to the crystal core
+        of darkness''s influence in the hands of Ardyn, warriors will not die no matter
+        how injured they are) Resistance to Mind Manipulation, Soul Manipulation (Via
+        Zalera, the Death Serpah, who was going to absorb the souls of every living
+        being on the planet), Corruption & Body Puppetry (Due to their light, Warriors
+        of Materia can dispel attempts to control them), Empathic Manipulation, and
+        Madness Manipulation (Type 3; Resistant to the effects of the True Moon, which
+        is capable of affecting the hearts and minds of all living beings on the planetFinal
+        Fantasy IV: The After Years), Gravity Manipulation (Unaffected by the gravitational
+        pull of the True Moon, which even the Lunar Whale couldn''t escape from),
+        Spatial Manipulation, Deconstruction, and BFR (Can withstand the attacks of
+        Atomos, who manipulates space, crush enemies down to a molecular level,Dissidia
+        Final Fantasy and can warp them into another dimension), Extreme Cold and
+        Cosmic Radiations (Can fight and survive on the moon), Absolute Zero (Can
+        survive Shiva''s ice attacks, including Diamond Dust), Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Ice Manipulation and Absolute
+        Zero and Duplication (Via Shiva who''s Ice and aura are stated to reach Absolute
+        Zero including her Diamond Dust, Shiva can duplicate herselfDissidia Final
+        Fantasy NT), Water Manipulation (via Kraken, Cagnazzo, and Leviathan), Necromancy
+        (Via Lich), Spatial Manipulation, Deconstruction, and BFR (via Atomos, who
+        manipulates space, crush enemies down to a molecular level,Dissidia Final
+        Fantasy and can warp them into another dimension), Death Manipulation and
+        Space-Time Manipulation (Via Odin, who'
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Planet level (Capable of hurting Sin with his attacks, who is unaffected
+        by the Gravitational Forces created as an effect of his Giga Graviton move.
+        Furthermore, as a legendary Guardian, Auron is the most likely candidate to
+        be considered a peer of Tidus at the time of the final battle with Overdrive
+        Sin) | At least Multiverse level+ (Is comparable to the other Warriors of
+        Materia and draws power from the gods of the cycle. Participated in the defeat
+        of Shinryu) | Multiverse level (Battled Hercules to a standstill (and was
+        winning), can keep up with KHII Sora and others against Hades)
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: FTL+ (Capable of fighting Braska's Final Aeon), higher with Masamune
+        (First Strike, Auron can use First Strike on Braska's Final Aeon) | Massively
+        FTL+ (Can keep up with the other Warriors of Materia) | Infinite (Kept up
+        with Hercules, Sora and others of this speed)
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Planet level (Can withstand the gravitational force exerted by
+        Sin's Giga Graviton, however a direct impact would instantly kill him. Additionally,
+        as one of the best Guardians ever, he should be no less durable than Rikku,
+        a Guardian of lesser note able to survive multiple Meteor spells and an Ultima
+        from Trema [A character stronger than a Final Aeon-level Fiend, Paragon/Lord
+        Zaon], also able to survive being struck by Yunalesca's magic long enough
+        to travel all the way from Zanarkand to Bevelle on his own) | At least Multiverse
+        level+ | Multiverse level
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Unknown
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range with sword strikes, Tens of Meters with energy blasts
+        and magic
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: "\u25AA Blade: Auron's initial weapon, a generic sword that he uses to\
+        \ fight off enemies. \u25AA Masamune: Auron's Celestial Weapon, which he obtains\
+        \ after bringing a Rusty Sword to a statue of Lord Mi'ihen on the Mushroom\
+        \ Rock Road. It naturally ignores enemy defense, harming them regardless of\
+        \ attempts to increase their durability, and allows Auron to instinctually\
+        \ counter attacks. Additionally, his attacks become more powerful depending\
+        \ on how injured he is."
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted, Highly skilled combatant with over two pilgrimages of experience
+        in combat. These amount to global treks throughout Spira in dangerous unpredictable
+        environments where he had to contend with countless enemies with a variety
+        of different abilities and combat styles.
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "None notable Notable Attacks/Techniques: \u25AA Power Break: Auron strikes\
+        \ his enemy, halving their physical power. \u25AA Magic Break: Auron strikes\
+        \ his enemy, halving their magic power. \u25AA Armor Break: Auron strikes\
+        \ his enemy, halving their defense and shattering their armored defense. \u25AA\
+        \ Mental Break: Auron strikes his enemy, halving their magic defense. \u25AA\
+        \ Full Break\" Auron strikes his enemy, inflicting Power, Magic, Armor and\
+        \ Mental Break at once. \u25AA Guard: Auron defends an ally from damage, taking\
+        \ the attack for them instead. \u25AA Sentinel: Auron enters a defensive stance,\
+        \ decreasing the damage he receives from attacks. \u25AA Threaten: Auron immobilizes\
+        \ his enemy with fear after threatening them. \u25AA Entrust: Auron grants\
+        \ one of his allies the ability to quickly access their Overdrive, at the\
+        \ cost of his own Overdrive gauge. \u25AA Zombie"
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|auron|8684204
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-auron-composite-final-fantasy
+    url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29_%28Final_Fantasy%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Auron
+    source_type: mediawiki
+    revision_id: '8684204'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 34997
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Magic, Non-Physical Interaction
+        (Able to kill the lingering Ghosts in the Cavern of the Stolen Fayth and the
+        Wraiths found Inside Sin), Immortality (Types 1, 3 and 7), Regeneration (Low-Godly.
+        As an unsent, Auron can reform his body from non-physical pyreflies as long
+        as his spirit is not sent to the Farplane), Statistics Reduction (Via Break
+        abilities), Damage Reduction (Via Sentinel), Fear Manipulation (Via Threaten),
+        Necromancy and Transmutation (Via Zombie Attack), Death Manipulation (Via
+        Death and Shin-Zantetsu), BFR (Via Shooting Star), Air Manipulation (Via Tornado),
+        Statistics Amplification (Via Cheer, Aim, Focus, Reflex, Protect and Shell),
+        Time Manipulation (Can accelerate himself or slow down enemies in time with
+        Hastega and Slowga), Healing, Damage Negation (Via NulBlaze, NulShock, NulTide
+        and NulFrost), Purification (Type 3 via Esuna and various items), Resurrection
+        (Via Life, Full-Life and Auto-Life), Attack Reflection (Via Reflect), Holy
+        Manipulation, Fire Manipulation, Ice Manipulation, Electricity Manipulation,
+        Water Manipulation, Poison Manipulation (Via Bio), Gravity Manipulation (Via
+        Demi), Energy Projection (Via Flare), Radiation Manipulation, Information
+        Analysis (Via Scan and Sensor), Probability Manipulation (Via Jinx and Luck),
+        Social Influencing (Can bribe mindless monsters to leave battle), Power Mimicry
+        (Via Copycat), Durability Negation (Via Piercing and Demi), Enhanced Senses
+        and Stealth Mastery (Via Initiative), Curse Manipulation and Death Manipulation
+        (Via Candles of Life), Resistance to Fire Manipulation, Ice Manipulation,
+        Electricity Manipulation, Water Manipulation, Darkness Manipulation, Power
+        Nullification, Sleep Manipulation, Poison Manipulation, Petrification, Death
+        Manipulation, Necromancy, Transmutation, Time Manipulation (In the form of
+        Time Slow and Stop), Mind Manipulation, Empathic Manipulation, Radiation Manipulation,
+        Absolute Zero (Can withstand Shiva''s presence and attacks), Curse Manipulation,
+        and Memory Manipulation (Can challenge Sin head-on without being impeded by
+        its toxin) All previous abilities enhanced, possibly Immortality (Type 8,reliant
+        on her Crystal which let Cosmos''s group return from fading from existence
+        after Cosmos'' death) & Regeneration (Low-Godly), Summoning (Can summon various
+        Eidolons from Summonstones and the World of Illusions), Willpower Manipulation
+        (a person''s will is power there and enables them to do a multitude of things
+        the stronger their willDissidia Final Fantasy Opera Omnia), Reactive Power
+        Level (the greater someone''s will, the greater their powerDissidia Final
+        Fantasy Opera Omnia), Law Manipulation (Beings with strong wills can overwrite
+        the laws of the world and bend them to their willDissidia Final Fantasy Opera
+        Omnia), Creation (With a powerful enough will, once can create various things
+        such as phone lines, airships and even entire countries and worldsDissidia
+        Final Fantasy Opera Omnia), Sealing (Can seal off large areas and people with
+        her will, such as Cecil sealing himself in Castle Baron or the cast sealing
+        Kefka inside a TorsionDissidia Final Fantasy Opera Omnia), Dimensional Travel
+        (Characters can open Torsions, rifts in space-time to travel various dimensionsDissidia
+        Final Fantasy Opera Omnia), and Immortality (Type 2) (Due to the crystal core
+        of darkness''s influence in the hands of Ardyn, warriors will not die no matter
+        how injured they are) Resistance to Mind Manipulation, Soul Manipulation (Via
+        Zalera, the Death Serpah, who was going to absorb the souls of every living
+        being on the planet), Corruption & Body Puppetry (Due to their light, Warriors
+        of Materia can dispel attempts to control them), Empathic Manipulation, and
+        Madness Manipulation (Type 3; Resistant to the effects of the True Moon, which
+        is capable of affecting the hearts and minds of all living beings on the planetFinal
+        Fantasy IV: The After Years), Gravity Manipulation (Unaffected by the gravitational
+        pull of the True Moon, which even the Lunar Whale couldn''t escape from),
+        Spatial Manipulation, Deconstruction, and BFR (Can withstand the attacks of
+        Atomos, who manipulates space, crush enemies down to a molecular level,Dissidia
+        Final Fantasy and can warp them into another dimension), Extreme Cold and
+        Cosmic Radiations (Can fight and survive on the moon), Absolute Zero (Can
+        survive Shiva''s ice attacks, including Diamond Dust), Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Ice Manipulation and Absolute
+        Zero and Duplication (Via Shiva who''s Ice and aura are stated to reach Absolute
+        Zero including her Diamond Dust, Shiva can duplicate herselfDissidia Final
+        Fantasy NT), Water Manipulation (via Kraken, Cagnazzo, and Leviathan), Necromancy
+        (Via Lich), Spatial Manipulation, Deconstruction, and BFR (via Atomos, who
+        manipulates space, crush enemies down to a molecular level,Dissidia Final
+        Fantasy and can warp them into another dimension), Death Manipulation and
+        Space-Time Manipulation (Via Odin, who'
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Planet level (Capable of hurting Sin with his attacks, who is unaffected
+        by the Gravitational Forces created as an effect of his Giga Graviton move.
+        Furthermore, as a legendary Guardian, Auron is the most likely candidate to
+        be considered a peer of Tidus at the time of the final battle with Overdrive
+        Sin) | At least Multiverse level+ (Is comparable to the other Warriors of
+        Materia and draws power from the gods of the cycle. Participated in the defeat
+        of Shinryu) | Multiverse level (Battled Hercules to a standstill (and was
+        winning), can keep up with KHII Sora and others against Hades)
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: FTL+ (Capable of fighting Braska's Final Aeon), higher with Masamune
+        (First Strike, Auron can use First Strike on Braska's Final Aeon) | Massively
+        FTL+ (Can keep up with the other Warriors of Materia) | Infinite (Kept up
+        with Hercules, Sora and others of this speed)
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Planet level (Can withstand the gravitational force exerted by
+        Sin's Giga Graviton, however a direct impact would instantly kill him. Additionally,
+        as one of the best Guardians ever, he should be no less durable than Rikku,
+        a Guardian of lesser note able to survive multiple Meteor spells and an Ultima
+        from Trema [A character stronger than a Final Aeon-level Fiend, Paragon/Lord
+        Zaon], also able to survive being struck by Yunalesca's magic long enough
+        to travel all the way from Zanarkand to Bevelle on his own) | At least Multiverse
+        level+ | Multiverse level
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Unknown
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range with sword strikes, Tens of Meters with energy blasts
+        and magic
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: "\u25AA Blade: Auron's initial weapon, a generic sword that he uses to\
+        \ fight off enemies. \u25AA Masamune: Auron's Celestial Weapon, which he obtains\
+        \ after bringing a Rusty Sword to a statue of Lord Mi'ihen on the Mushroom\
+        \ Rock Road. It naturally ignores enemy defense, harming them regardless of\
+        \ attempts to increase their durability, and allows Auron to instinctually\
+        \ counter attacks. Additionally, his attacks become more powerful depending\
+        \ on how injured he is."
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted, Highly skilled combatant with over two pilgrimages of experience
+        in combat. These amount to global treks throughout Spira in dangerous unpredictable
+        environments where he had to contend with countless enemies with a variety
+        of different abilities and combat styles.
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "None notable Notable Attacks/Techniques: \u25AA Power Break: Auron strikes\
+        \ his enemy, halving their physical power. \u25AA Magic Break: Auron strikes\
+        \ his enemy, halving their magic power. \u25AA Armor Break: Auron strikes\
+        \ his enemy, halving their defense and shattering their armored defense. \u25AA\
+        \ Mental Break: Auron strikes his enemy, halving their magic defense. \u25AA\
+        \ Full Break\" Auron strikes his enemy, inflicting Power, Magic, Armor and\
+        \ Mental Break at once. \u25AA Guard: Auron defends an ally from damage, taking\
+        \ the attack for them instead. \u25AA Sentinel: Auron enters a defensive stance,\
+        \ decreasing the damage he receives from attacks. \u25AA Threaten: Auron immobilizes\
+        \ his enemy with fear after threatening them. \u25AA Entrust: Auron grants\
+        \ one of his allies the ability to quickly access their Overdrive, at the\
+        \ cost of his own Overdrive gauge. \u25AA Zombie"
+      source_id: vsbattles-auron-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|auron|8684204
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-auron-composite-final-fantasy
+    url: https://character-stats-and-profiles.fandom.com/wiki/Auron_%28Composite%29_%28Final_Fantasy%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Auron (Canon, Kingdom Hearts)/Unbacked0
+    source_type: mediawiki
+    revision_id: '178735'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3023
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Low 2-C
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Self-Sustenance (Type 1, Can breathe
+        underwater and in space), Weapon Mastery, Air Manipulation, Healing, Non-Physical
+        Interaction (Can directly harm Heartless, which don't have physical forms,
+        and Nobodies, which don't even exist) Resistance to Death Manipulation, Absorption
+        (Whenever a Heartless gets near someone, it instantly kills them and absorbs
+        their Heart), Limited Law Manipulation (People from other Worlds are immune
+        to the laws of different Worlds) Attack Potency Universe Level+ (Can fight
+        on par with Sora and Hercules, Is far stronger than Heartless that can destroy
+        Worlds)
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Inaccessible (Scales to characters that can move in the Realm of Darkness
+        which has been stated to have no time)
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Universe Level+ (Can take hits from Sora)
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None Notable Note: Worlds in Kingdom Hearts are universes rather than
+        planets like people think. Proof of this is how it''s been stated that you
+        naturally can''t travel to different Worlds without. It has also been shown
+        that Worlds are seen as stars in Traverse Town which is considered a "World
+        between Worlds" which means they can''t be just planets. It has also been
+        stated that a normal person can''t leave a World even if said World has advanced
+        spaceships which are capable of travelling through space. Riku has stated
+        that any two Worlds have different Axis of time and that every World has its
+        own flow of time. The Grand Councilwoman who has been stated "oversee the
+        universe" didn''t know what Terra was. ==Others== Notable Victories: Notable
+        Losses: Inconclusive Matches: Category:Unbacked0 Category:Tier 2'
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Universe Level+ (Can fight on par with Sora and Hercules, Is far stronger
+        than Heartless that can destroy Worlds)
+      source_id: character-stats-profiles-auron-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|auron canon kingdom hearts
+      unbacked0|178735
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-auron-composite
     url: https://character-stats-and-profiles.fandom.com/wiki/Auron_%28Composite%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id016
+    extracted_fields:
     - attack_potency
     - powers_and_abilities
     - speed
@@ -2211,7 +2307,7 @@ repair:
     revision_id: '470071'
     fetch_status: fetched
     http_status: 200
-    content_length: 57321
+    content_length: 57421
     content_kind: api_json
     headings_detected:
     - Summary
@@ -2223,6 +2319,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2236,7 +2333,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id017
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2253,27 +2350,26 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Human={{#tag:tabber| Base=Genius Intelligence, Preparation Time Mastery,
-        Stealth Mastery, Immortality (Type 1, 8: O5-13 made a deal with Death in order
-        to stray death away, merged with the Foundation), Regeneration (Mid-Low: With
-        SCP-006), Superhuman Physical Characteristics (Dodged attacks from the Gate
-        Guardian, kept up with Calvin Lucien), Enhanced Swordsmanship, Fire Manipulation
-        (With the Star of the Morning, which can do this), Power Nullification (With
-        the reality anchor which he used to kill the Gate Guardian, should wear an
-        object that stabilizes reality around them), Precognition (Foresaw the downfall
-        of the Foundation), Metaphysics Manipulation (Has access to SCP-2719, a metaphysical
-        pointer), Beyond-Dimensional Physiology (Exists in the Noosphere, which is
-        beyond all dimensions of the world), Transcendence Manipulation (Has access
-        to SCP-2719 which can manipulate "transcendence"), Conceptual Manipulation
-        (Has access to SCP-2719 which can manipulate things such as "transcendence"
-        and "punishment") {{!}}-{{!}} Preparation=All previous abilities plus Creation,
-        Reality Warping, Physics Manipulation (Created several SCPs with his equations,
-        including 076-2 and 682), Transformation (Became SCP-055), Time Manipulation
-        (Reset the universe with the Spiral Path), Matter Manipulation, Existence
-        Erasure, Quantum Manipulation (Has the trigger to SCP-001: The Children who
-        can do this) and many more. (Is a member of the O5 Council, which has near-absolute
-        authority over all of the SCP Foundation and its weapons.) }} |-|SCP-055=
-        All previous abilities plus Mind Manipulation, Memory Manipulation, Information
+      value: 'Genius Intelligence, Preparation Time Mastery, Stealth Mastery, Immortality
+        (Type 1, 8: O5-13 made a deal with Death in order to stray death away, merged
+        with the Foundation), Regeneration (Mid-Low: With SCP-006), Superhuman Physical
+        Characteristics (Dodged attacks from the Gate Guardian, kept up with Calvin
+        Lucien), Enhanced Swordsmanship, Fire Manipulation (With the Star of the Morning,
+        which can do this), Power Nullification (With the reality anchor which he
+        used to kill the Gate Guardian, should wear an object that stabilizes reality
+        around them), Precognition (Foresaw the downfall of the Foundation), Metaphysics
+        Manipulation (Has access to SCP-2719, a metaphysical pointer), Beyond-Dimensional
+        Physiology (Exists in the Noosphere, which is beyond all dimensions of the
+        world), Transcendence Manipulation (Has access to SCP-2719 which can manipulate
+        "transcendence"), Conceptual Manipulation (Has access to SCP-2719 which can
+        manipulate things such as "transcendence" and "punishment") All previous abilities
+        plus Creation, Reality Warping, Physics Manipulation (Created several SCPs
+        with his equations, including 076-2 and 682), Transformation (Became SCP-055),
+        Time Manipulation (Reset the universe with the Spiral Path), Matter Manipulation,
+        Existence Erasure, Quantum Manipulation (Has the trigger to SCP-001: The Children
+        who can do this) and many more. (Is a member of the O5 Council, which has
+        near-absolute authority over all of the SCP Foundation and its weapons.) All
+        previous abilities plus Mind Manipulation, Memory Manipulation, Information
         Manipulation, Text Manipulation, Data Manipulation, Technology Manipulation,
         Stamina Manipulation, and Behavior Manipulation (SCP-055 is a self-keeping
         secret, which erases people''s memories about it after losing sight of it.
@@ -2284,19 +2380,18 @@ repair:
         Mathematics Manipulation (In the SCP-2305 experiment record, 055 even contains
         the set of all real numbers, or aleph-one, and its destruction leads to changes
         in mathematical laws), Non-Physical Interaction, Blindness Inducement (Should
-        be able to do a similar feat to WILD LIGHT, which blinded SCP-3125) |-|Chinese
-        Branch= All previous abilities amplified to an unknown degree plus Much Greater
-        Reality Warping (Scales above Grand Karcist Ion who changed the Sea of Hume
-        into a sea of blood. The Sea of Hume supports all of reality and is full of
-        humes which are a measurement of reality warping prowess), Acausality (Type
-        5: Can interact with and kill Grand Karcist Ion, who has transcended past
-        Mekhane who existed before and made causality), Life and Death Transcendence
-        (Transcended Life and Death with SCP-2719 and SCP-5115), Imagination Manifestation
-        (Can bring ideas into reality), Power Bestowal (Whomever he touches gains
-        the power of SCP-055), Absolute Character Creation (The true essence of his
-        equations is a rift between the Upper and Lower Narratives, where energy from
-        the Upper Narrative flows down to the Lower Narrative, which would then create
-        the thing)'
+        be able to do a similar feat to WILD LIGHT, which blinded SCP-3125) All previous
+        abilities amplified to an unknown degree plus Much Greater Reality Warping
+        (Scales above Grand Karcist Ion who changed the Sea of Hume into a sea of
+        blood. The Sea of Hume supports all of reality and is full of humes which
+        are a measurement of reality warping prowess), Acausality (Type 5: Can interact
+        with and kill Grand Karcist Ion, who has transcended past Mekhane who existed
+        before and made causality), Life and Death Transcendence (Transcended Life
+        and Death with SCP-2719 and SCP-5115), Imagination Manifestation (Can bring
+        ideas into reality), Power Bestowal (Whomever he touches gains the power of
+        SCP-055), Absolute Character Creation (The true essence of his equations is
+        a rift between the Upper and Lower Narratives, where energy from the Upper
+        Narrative flows down to the Lower Narrative, which would then create the thing)'
       source_id: character-stats-profiles-auron-composite
       provider_id: character_stats_profiles
       authority: high
@@ -2368,11 +2463,11 @@ repair:
       notcreativewithnamesre|470071
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-auron-composite-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Auron_Composite_Final_Fantasy
+  - source_id: vsbattles-auron-composite
+    url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id014
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2383,23 +2478,26 @@ repair:
     - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Data-Sora
+    normalized_page_title: Daredevil (Marvel Cinematic Universe)
     source_type: mediawiki
-    revision_id: '9489226'
+    revision_id: '9514595'
     fetch_status: fetched
     http_status: 200
-    content_length: 12265
+    content_length: 26462
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
     - Notable Matchups
+    - References
+    - Notes/Explanations
     stat_labels_detected:
     - attack_potency
     - durability
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2413,7 +2511,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id015
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2423,314 +2521,187 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{2-B}} | {{1-C}}'
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Standard Keyblade powers, Damage
-        Boost (Can make all of his attacks critical hits via the All Critical ability
-        that various Keychains he possesses have, Via the Strike Armlet which has
-        the Critical Boost ability that increases Sora's chance of landing critical
-        hits), Summoning (Can summon meteors via Meteor Rain), Flight (Can glide through
-        the air), Self-Sustenance (Type 1. Can breathe in space), Magic, Homing Attack
-        (With most spells), Fire Manipulation, Ice Manipulation, Electricity Manipulation,
-        Air Manipulation, Paralysis Inducement (Can immobilize foes with wind-based
-        spells and the Wishing Star Keychain which has the Aero Counter ability which
-        allows him to inflict this via blocking), Enhanced Senses (Has a "map" in
-        his head (While it could normally be dismissed as a game mechanic, the status
-        effect in 358/2 Days that prevents access to it justifies it being an actual
-        ability), said map also displays the locations of enemies and allies), Information
-        Analysis (Via Scan which allows him to view his opponent's health), Life Absorption
-        (Via the Metal Chocobo and the Ultima Weapon Keychains which have the Drain
-        ability), Healing (Via Curaga and various items, Via various Keychains which
-        have the Drain Counter ability that allows the user to recover health by blocking
-        attacks, Via various Keychains which have the Regen ability), Statistics Amplification
-        (Via various Keychains, Via the Power Armlet which has the Attack Boost ability
-        that can increase its user's attack strength if they have less than 25% of
-        their health left, Via the Wizard's Armlet which has the Magic Boost ability
-        that can increase its user's Magic if they have less than 25% of their health
-        left, Via various Keychains which have the Attack Upgrade ability that increases
-        the power of its user's physical attacks, Via various Keychains which have
-        the Magic Upgrade ability that makes its user's Magic more powerful, Via the
-        Olympia and the Metal Chocobo Keychains which have the Full Swing ability
-        that increases the user's strength in exchange for landing less critical attacks,
-        Via the Oblivion Keychain which has the Two-Edged Blade ability that increases
-        the strength of its user's physical attack but drains their health with every
-        hit in exchange), Damage Reduction (Via various Keychains which have the Protect
-        ability that can reduce damage from attacks by 25%, Via various Keychains
-        which have the Shell ability that can vastly reduce damage from Magic attacks,
-        Via the Half-moon Armlet which has the Half-Damage ability that can halve
-        all damage when Sora has 25% or less of his health left), Light Manipulation
-        (Can use several light based attacks as a warrior of light), Gravity Manipulation
-        (Via Gravity Drop), Magnetism Manipulation (Via Magnega), Resurrection (Via
-        Oathkeeper which has the Auto-Life ability that allows the user resurrect
-        themself), Time Manipulation (In the form of slowing down and stopping time),
-        Status Effect Inducement (Can stun opponents with Stun Impact), Keyblade Master-level
-        Fighter, Invulnerability (While healing himself (Via Leaf Bracer)), Vibration
-        Manipulation (Via Quake), Mind Manipulation, and Confusion (Can confuse the
-        target with Confuse), Instinctive Reaction (Via various Keychains which have
-        the Auto-Block ability which allows Sora to sometimes automatically block
-        attacks, Via various Keychains which have the Auto-Dodge ability that allows
-        Sora to sometimes automatically dodge attacks, Via the Kingdom Key which has
-        the Auto-Potion ability which allows Sora to automatically heal himself with
-        Potions (Hi-Potions if he has no Potions) when he has low health, Automatically
-        counterattacks after blocking via Auto-Counter, Block-Counter and Command
-        Counter (The former two abilities are provided by the Oblivion Keychain and
-        the latter by the Command Ring), Automatically counterattacks after being
-        attacked mid-air via Auto-Payback (from the Oblivion and the Zero/One Keychains),
-        Aerial Payback and Command Payback (from the Payback Ring)), Is able to hold
-        on in a fight after taking massive damage or being comboed via Second Chance
-        and Once More |-|Resistances=Elemental Manipulation (Fire, Lightning, Ice,
-        and Wind), Time Manipulation (Data-Sora's Keyblade was able to nullify Jafar's
-        Magic-based Time Stop without Sora having to even think about it, Can move
-        inside the Realm of Darkness, Resists getting his time slowed down), Status
-        Effect Inducement (Getting movement controls reversed, Getting his ability
-        to jump (when not attacking) nullified, and getting blinded), Statistics Reduction
-        (In the form of getting his defense cut), Power Nullification, Absorption,
-        Death Manipulation (Unaffected by Heartless, which passively kill and absorb
-        things around them), Data Manipulation (Ansem The Wise stated that the "heart"
-        cannot be contained by data, and that the process itself would be incalculable),
-        Existence Erasure (Can take hits from Heartless, which can do this with any
-        attack), Cosmic Radiati
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level (As a direct copy of KHI Sora, he should be comparable
-        to him) | Complex Multiverse level (After acquiring a true Keyblade, Data-Sora
-        could defeat Pete, Maleficent, Data-Riku and Sora's Heartless, should be on
-        the same level as Mickey Mouse)
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: speed
-      value: Infinite (Can keep up with Pete and Maleficent)
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level (Can withstand attacks from Hades, Cerberus and others
-        that can threaten him) | Complex Multiverse level
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Very high, capable of fighting through hordes of Heartless in rapid succession
-        without tiring
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range with Kingdom Key. Tens of Meters with Keyblade telepathy.
-        Planetary with magic , Interdimensional with Keyholes
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Kingdom Key (His Keyblade)
-      source_id: vsbattles-auron-composite-final-fantasy
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: "For all intents and purposes, Data-Sora is the exact likeness of his\
-        \ real-life counterpart in terms of temperament, personality, and thought\
-        \ patterns. While fully aware that he is a mere data copy, he confronts each\
-        \ and every challenge with nearly boundless cheer and retains his original\u2019\
-        s naivety. Nevertheless, he also retains his original\u2019s knack for combat,\
-        \ being able to use virtually all of his Keyblade Techniques and Magic spells,\
-        \ deftly using them to blast his way through armies of Heartless with ease.\
-        \ In addition, he also has a certain degree of puzzle-solving skills, navigating\
-        \ his way through Jiminy\u2019s Journal and debugging it with only limited\
-        \ instruction from King Mickey. He is also in some ways even more determined\
-        \ and optimistic than the original Sora, completing his quest despite knowing\
-        \ that the Journal\u2019s completion will lead to the end of his existence,\
-        \ trudging on even after his memories are erased due to the value he\u2019\
-        s placed in the bonds he has with his friends (whom he no longer remembers)\
-        \ and to simply do the right thing"
-      source_id: vsbattles-auron-composite-final-fantasy
+      value: Subsonic travel speed (Can easily blitz large groups of thugs before
+        they can react), higher combat and reaction speed (Comparable to Maya Lopez.
+        As fast as, if not faster than, Luke Cage. Dodged a handgun bullet from Punisher
+        at point-blank range. Managed to react to the bullets from an M4 Carbine after
+        they were fired. Dodged blows from She-Hulk)
+      source_id: vsbattles-auron-composite
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Like his original, Data-Sora was not trained in hand-to-hand combat
-        and is thus helpless if he is somehow disarmed (As shown when Maleficent had
-        destroyed his digital Keyblade before he obtained a true Keyblade in Hollow
-        Bastion) and much like the real Sora he is rather naive ==Notable Matchups==
-        Victories: Losses: Inconclusive: {{discussions}} Category:Characters Category:Male
-        Characters Category:Game Characters Category:Protagonists Category:Primary
-        Protagonists Category:Heroes Category:Good Characters Category:Kingdom Hearts
-        Category:Keyblade Wielders Category:Clones Category:Teenagers Category:Fire
-        Users Category:Ice Users Category:Electricity Users Category:Air Users Category:Earth
-        Users Category:Healers Category:Light Users Category:Gravity Users Category:Time
-        Users Category:Element Users Category:Damage Reduction Users Category:Magnetism
-        Users Category:Resurrection Users Category:Mind Users Category:Self-Sustenance
-        Users Category:Playable Characters Category:Non-Physical Interaction Users
-        Category:BFR Users Category:Sealing Users Category:Curse Users Category:Possession
-        Users Category:Immortals Category:Purification Users Category:Power Nullification
-        Users Category:Telepaths Category:Flight Users Category:Power Bestowal Users
-        Category:Dimensional Travel Users Category:Portal Users Category:Information
-        Analysis Users Category:Enhanced Senses Users Category:Existence Erasure Users
-        Category:Magic Users Category:Transformation Users Category:Blade Users Category:Instinctive
-        Action Users Category:Empowerment Users Category:Weapon Control Users Category:Data
-        Users Category:Key Users Category:Concept Users Category:Information Users'
-      source_id: vsbattles-auron-composite-final-fantasy
+      value: 'Apart from his blindness, Daredevil has few weaknesses. But he inherited
+        his father''s ferocity that can overtake him in some fights. He refuses to
+        kill his opponents under most circumstances, but will potentially forgo this
+        rule if he feels there''s absolutely no other way to protect his friends or
+        his city. Has an emotional weakness for women and children, which was exploited
+        by Kingpin to bait him into fighting Nobu at Pier 81. ==Notable Matchups==
+        Victories: Losses: Inconclusive: ==References== {{scroll box|content=}} ==Notes/Explanations==
+        Category:Characters Category:Marvel Cinematic Universe Category:Adults Category:Blind
+        Characters Category:Club Users Category:Defenders Category:Dual Wielders Category:Good
+        Characters Category:Grappling Users Category:Gun Users Category:Heroes Category:Humans
+        Category:Lawyers Category:Live-Action Characters Category:Male Characters
+        Category:Martial Artists Category:Primary Protagonists Category:Protagonists
+        Category:Staff Users Category:TV Characters Category:Vigilantes Category:Weapon
+        Masters Category:Philanthropes Category:Disabled Characters Category:Acrobats
+        Category:Weapon Users Category:Stealth Masters Category:Enhanced Senses Users
+        Category:Precognition Users Category:Information Analysis Users Category:Healers
+        Category:Supernatural Willpower Users Category:Attack Reflection Users Category:Armor
+        Users Category:Helmet Users Category:The Defenders (Marvel) Category:Social
+        Influencers Category:Tragic Characters Category:Freedom Fighters Category:Revolutionaries
+        Category:Boxers Category:Superheroes Category:Orphans Category:Leaders Category:Baton
+        Users'
+      source_id: vsbattles-auron-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: "Name: Matthew \"Matt\" Murdock, The Devil of Hell's Kitchen, Daredevil,\
+        \ \"Red\" Origin: Marvel Cinematic Universe Gender: Male Age: Around 42 as\
+        \ of Daredevil: Born Again (Was born in the mid-1980's This is very impressive\
+        \ because Stick is extremely skilled himself and has mentored many skilled\
+        \ fighters over his long life, including the likes of Elektra. Matt was also\
+        \ praised for his skill by Elektra, Nobu, Iron Fist, He can routinely fight\
+        \ numerous opponents at once and come out on top due to his sheer skill and\
+        \ creativity in combat. His fighting styles include [https://www.facebook.com/Daredevil/videos/1646729508896619/?permPage=1\
+        \ boxing, Muay Thai, ground & pound, Kung Fu, Judo, Aikido, Capoeira, Taekwondo,\
+        \ tricking, pro wrestling], [https://www.youtube.com/watch?v=SpOYbAEWb5E Silat,\
+        \ Kali, Wing Chun, Jeet Kune Do, Wushu], and Ninjutsu) *Social Influencing\
+        \ (Charisma - Murdock is a highly skilled lawyer and negotiator, shown to\
+        \ be quite efficient in conversations. Even with the case regarding the assassination\
+        \ carried out by John Healy, where Matt did not want to defend him and knew\
+        \ he was guilty, he delivered an extremely convincing speech that accurately\
+        \ addressed how Healy should walk free according to the law, which was ultimately\
+        \ the result of the case. Successfully sued Berkowitz, the CEO of a large\
+        \ pharmaceutical company, for $11,000,000 as compensation for Aaron James'\
+        \ paralysis, in a case was shown to have easily won while working pro bono.\
+        \ He confidently told Kingpin he would use \"every legal loophole and footnote\"\
+        \ to keep Vanessa Marianna from ever setting foot in the United States again,\
+        \ all without breaking the law. Had no trouble exonerating Peter Parker's\
+        \ overwhelming charges after the latter was framed for killing Mysterio. While\
+        \ fighting off a sedative and having sustained injuries, Matt convinced Vic\
+        \ Jusufi to help him safely leave Ryker's Island in order to take Fisk down,\
+        \ despite how Jusufi was confident in initially killing Murdock. Manipulated\
+        \ Benjamin Poindexter into turning against and attacking Wilson Fisk at his\
+        \ wedding, after the former of the two had become extremely loyal to the Kingpin.\
+        \ Convinced Sofija Ozola to lower Leroy Bradford's sentence to just ten days\
+        \ in jail despite his criminal record. Instigating Fear - Daredevil is also\
+        \ a capable interrogator, having scared information out of Felix Manning in\
+        \ spite of his persistence to keep quiet,) *Weapon Mastery (Expert baton user\
+        \ and can throw it with enough accuracy to hit his targets from impossible\
+        \ angles. Moreover, he can easily counter many types of weapons, such as blades,\
+        \ knives, sais, guns, and more. He was able to easily [https://imgur.com/eprJJrx\
+        \ deflect Nobu's projectiles]) *Enhanced Senses (Enhanced Awareness, Enhanced\
+        \ Hearing, Enhanced Smell, Enhanced Taste & Enhanced Touch; After becoming\
+        \ blind, Matt's other senses were enhanced to a great degree. This allows\
+        \ him to combine his senses to sense things like balance and direction, micro-changes\
+        \ in air density, vibrations, blankets of temperature variations, subtle smells,\
+        \ and sounds to form an impressionistic picture that allows him to \u201C\
+        see\u201D his surroundings. He instinctively knows where objects are in relation\
+        \ to himself and his surroundings. Matt can [https://imgur.com/ilh1Dn0 listen\
+        \ to heartbeats] and detect irregularities from across rooms, which helps\
+        \ him discern whether someone is lying or telling the truth, even if the person\
+        \ is in a stressful situation that would disrupt his heartbeat to begin with.\
+        \ He can accurately [https://imgur.com/yI6cael detect the presence] of [https://www.youtube.com/watch?v=R8mZts7HjPA&t=219s\
+        \ any enemies in his surroundings]. Likewise, he can track his enemies by\
+        \ listening to their weapons rustling, and their subtle breathing patterns.\
+        \ [https://imgur.com/xT3BZyd His senses are so acute] that he can hear and\
+        \ smell things from blocks away, smell cologne from several stories away,\
+        \ pick up on radio chatter in a loud party, and even scan an entire city)\
+        \ **Information Analysis (Using his senses, Matt can [https://imgur.com/Du0NFvk\
+        \ discern] He does this by listening to irregularities in heartbeat, breathing\
+        \ patterns, the sounds of weapons, among other things.) *Supernatural Willpower\
+        \ (He can endure an inhuman amount of pain and damage, and still keep fighting\
+        \ and running through the city for hours on end Has fought against Kingpin,\
+        \ and managed to defeat him twice, almost beating him to death the second\
+        \ time)"
+      source_id: vsbattles-auron-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: ''''''''
+      source_id: vsbattles-auron-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: ''''''' ''''''Small Building level'''''' (While visibly casual, had the
+        upper-hand on an early into her criminal career [[Echo (Marvel Cinematic Universe)|Maya
+        Lopez]], [https://youtu.be/0XXW1xsgqjk?t=7 flooring] [https://youtu.be/0XXW1xsgqjk?t=19
+        her] [https://youtu.be/0XXW1xsgqjk?t=32 multiple] [https://youtu.be/0XXW1xsgqjk?t=62
+        times] during their battle.''''Echo'''', S1E1 Has fought against [[Kingpin
+        (Marvel Cinematic Universe)|Kingpin]], and managed to defeat him twice, almost
+        beating him to death the second time''''''0.08385 Tons of TNT'''''')'
+      source_id: vsbattles-auron-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: ''''''' ''''''Small Building level'''''' ([https://youtu.be/0XXW1xsgqjk?t=25
+        Was barely staggered by a kick] from [[Echo (Marvel Cinematic Universe)|Maya
+        Lopez]]. Survived a two-floor fall with no visible injuries. Took multiple
+        hits from Bakuto. Took multiple hits from the Kingpin. Was relatively unharmed
+        after Kingpin [https://imgur.com/gPhaOUk pushed him through walls] and a [https://imgur.com/1MzcIjo
+        thick table]. Survived a building collapsing on him. [[Media:She-Hulk thunderclap.mp4|Survived
+        a casual thunderclap]] from [[She-Hulk (Marvel Cinematic Universe)|She-Hulk]]
+        that shattered nearby car windows), ''''''higher'''''' with suit (His Daredevil
+        suit is resistant to knives and gunfire, and his helmet is bulletproof)'
+      source_id: vsbattles-auron-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: ''''''' ''''''Superhuman'''''' (Matt is extremely tenacious and able
+        to endure night after night of constant beatings and fighting. He is able
+        to endure unholy amounts of damage such as [https://imgur.com/KNyE1AI broken
+        ribs, stab wounds, a concussion, and a collapsing lung], and then partake
+        in long, gruelling fights right afterwards. He was able to [https://imgur.com/Po98hbu
+        endure] multiple lacerations, stab wounds, a brutal beating, and extreme blood
+        loss in his battle against Nobu, and still kept fighting until he beat him)'
+      source_id: vsbattles-auron-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: ''''''' ''''''Standard Melee Range''''''; ''''''Extended Melee Range''''''
+        with Billy Clubs; ''''''Tens of Meters'''''' via throwing Billy Clubs and
+        grapple hook; Up to ''''''Kilometres'''''' with his Senses ([https://youtu.be/IKas-QWcVBM?t=168
+        Surveys Hell''s Kitchen on sound alone])'
+      source_id: vsbattles-auron-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: ''''''''
+      source_id: vsbattles-auron-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: ''''''''
+      source_id: vsbattles-auron-composite
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     identity_match: false
-    identity_score: 20
+    identity_score: 0
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
     exact_name_match: false
     alias_match: false
-    franchise_match: true
+    franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|data sora|9489226
+    duplicate_key: vsbattles.fandom.com|daredevil marvel cinematic universe|9514595
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-auron-composite-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29_Final_Fantasy
-    title: Data-Sora
-    rank: 80
-    extracted_fields: *id006
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id007
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|data sora|9489226
-  - source_id: vsbattles-auron-composite-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29_%28Final_Fantasy%29
-    title: Data-Sora
-    rank: 80
-    extracted_fields: *id008
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id009
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|data sora|9489226
-  - source_id: mediawiki-auron-composite
-    url: https://vsbattles.fandom.com/wiki/Auron_(Composite)
-    title: Michael Myers (Green Timeline)
-    rank: 80
-    extracted_fields: *id010
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id011
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|michael myers green timeline|9549589
-  - source_id: vsbattles-auron-composite
-    url: https://vsbattles.fandom.com/wiki/Auron_%28Composite%29
-    title: Michael Myers (Green Timeline)
-    rank: 80
-    extracted_fields: *id012
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id013
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|michael myers green timeline|9549589
-  - source_id: vsbattles-auron-composite-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Auron_Composite_Final_Fantasy
-    title: Data-Sora
-    rank: 80
-    extracted_fields: *id014
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id015
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|data sora|9489226
-  - source_id: character-stats-profiles-auron-composite
-    url: https://character-stats-and-profiles.fandom.com/wiki/Auron_%28Composite%29
-    title: Aaron Siegel (Canon, Composite)/NotcreativewithnamesRE
-    rank: 65
-    extracted_fields: *id016
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id017
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 2
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|aaron siegel canon composite
-      notcreativewithnamesre|470071
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
-    fetched: 6
-    provider_search_no_results: 2
-  confidence: 0.75
+    fetched: 8
+  confidence: 0.0

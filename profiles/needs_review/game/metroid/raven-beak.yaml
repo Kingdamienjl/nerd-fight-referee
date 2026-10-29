@@ -135,7 +135,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Raven_Beak
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -173,34 +173,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-raven-beak-metroid
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Raven Beak Metroid
-  url: https://character-stats-and-profiles.fandom.com/wiki/Raven_Beak_Metroid
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-raven-beak-metroid
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Raven Beak (Metroid)
-  url: https://vsbattles.fandom.com/wiki/Raven_Beak_%28Metroid%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-raven-beak-metroid
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -284,7 +256,9 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: '{{6-B}} | {{6-B}}'
+    text: 'Key: Base | Raven Beak X Name: Ashkar Behek (Chozo language), Raven Beak
+      (English language) Origin: Metroid Age: Unknown Gender: Male Classification:
+      Chozo | Chozo/X-Parasite/Kraid/Experiment No. Z-57 mix'
     source_ids:
     - vsbattles-raven-beak-metroid
     confidence: 0.6
@@ -292,33 +266,29 @@ power_scale:
   attack_potency:
     text: Country level+ (Destroyed an E.M.M.I., which Samus could only damage with
       the Omega Cannon, and ripped one of its arms off. Fought and easily overpowered
-      Dread Samus in her Gravity Suit) | Country level+ (Can kill Metroid Suit Samus)
+      Dread Samus in her Gravity Suit)
     source_ids:
     - vsbattles-raven-beak-metroid
     confidence: 0.6
     notes: auto_repair source extraction
   speed:
-    text: Sub-Relativistic (Successfully grabbed Samus multiple times) | Sub-Relativistic
-      reactions
+    text: Sub-Relativistic (Successfully grabbed Samus multiple times)
     source_ids:
     - vsbattles-raven-beak-metroid
     confidence: 0.6
     notes: auto_repair source extraction
   lifting_strength:
     text: Class M
-    source_ids: &id003
+    source_ids: &id002
     - mediawiki-4711126
     confidence: 0.95
   striking_strength:
-    text: Country level (Nearly killed Gravity Suit Samus at her full potential) |
-      Country level
-    source_ids: *id003
+    text: Country level (Nearly killed Gravity Suit Samus at her full potential)
+    source_ids: *id002
     confidence: 0.95
   durability:
     text: Country level (Could shrug off most blows from Samus in Gravity Suit with
-      the Power Suit, although without it his wing was blasted off) | Country level
-      (Withstood a continuous blast from Metroid Suit Samus' Hyper Beam before being
-      killed by it)
+      the Power Suit, although without it his wing was blasted off)
     source_ids:
     - vsbattles-raven-beak-metroid
     confidence: 0.6
@@ -343,9 +313,7 @@ power_scale:
       by his victories against Samus at her full power even with his wings blown off.
       Was able to reprogram the E.M.M.I.s. Developed a sophisticated plan on a planetary
       scale to awaken Samus' Metroid Powers to use them for his plans. He also managed
-      to impersonate ADAM for the entirety of the game. | Animalistic to Below Average.
-      The X Parasite has taken over his mind, although he is still capable of very
-      limited speech.
+      to impersonate ADAM for the entirety of the game.
     source_ids:
     - vsbattles-raven-beak-metroid
     confidence: 0.6
@@ -355,7 +323,7 @@ claims:
   section: power_scale
   axis: other
   text: '{{6-B}} | {{6-B}}'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-4711126
   decisive: false
   status: unverified
@@ -367,7 +335,7 @@ claims:
   text: Country level+ (Destroyed an E.M.M.I., which Samus could only damage with
     the Omega Cannon, and ripped one of its arms off. Fought and easily overpowered
     Dread Samus in her Gravity Suit) | Country level+ (Can kill Metroid Suit Samus)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -377,7 +345,7 @@ claims:
   axis: speed
   text: Sub-Relativistic (Successfully grabbed Samus multiple times) | Sub-Relativistic
     reactions
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -386,7 +354,7 @@ claims:
   section: power_scale
   axis: other
   text: Class M
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -396,7 +364,7 @@ claims:
   axis: other
   text: Country level (Nearly killed Gravity Suit Samus at her full potential) | Country
     level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -408,7 +376,7 @@ claims:
     the Power Suit, although without it his wing was blasted off) | Country level
     (Withstood a continuous blast from Metroid Suit Samus' Hyper Beam before being
     killed by it)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -418,7 +386,7 @@ claims:
   axis: stamina
   text: Superhuman (Fought with Samus, and could recover after his energy was drained
     by Samus' Metroid Powers and his fortress, Itorash, crashed to the ground)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -428,7 +396,7 @@ claims:
   axis: range
   text: Standard Melee Range with physical attacks, likely Stellar with weapons, Planetary
     with technology.
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -437,7 +405,7 @@ claims:
   section: equipment
   axis: equipment
   text: Claws, Power Suit, Arm Cannon
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -453,7 +421,7 @@ claims:
     to impersonate ADAM for the entirety of the game. | Animalistic to Below Average.
     The X Parasite has taken over his mind, although he is still capable of very limited
     speech.
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -500,7 +468,7 @@ claims:
     Users Category:Shapeshifters Category:Immortals Category:Science Fiction Characters
     Category:Energy Weapon Users Category:Hybrids Category:Parasites Category:Cape
     Users Category:Adults'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -517,16 +485,16 @@ claims:
     Large Size (Type 1: Assimilated Kraid''s body, so his size is comparable), Natural
     Weaponry, along with Absorption, Duplication, Possession, Power Absorption, Resurrection,
     Shapeshifting, Regeneration (Low-High), and Immortality (Type 6) via X-Parasite'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
   - fan_wiki_single_source
 abilities:
-- id: powers-and-abilities-base-superhuman-physical-characteristics
-  name: Base=Superhuman Physical Characteristics
-  description: Base=Superhuman Physical Characteristics
-  source_ids: &id005
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id004
   - vsbattles-raven-beak-metroid
   source_claim_ids: []
   confidence: 0.85
@@ -542,7 +510,7 @@ abilities:
 - id: powers-and-abilities-large-size-type-0
   name: Large Size (Type 0)
   description: Large Size (Type 0)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -557,7 +525,7 @@ abilities:
 - id: powers-and-abilities-longevity
   name: Longevity
   description: Longevity
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -572,7 +540,7 @@ abilities:
 - id: powers-and-abilities-energy-projection-with-arm-cannon-abilities
   name: Energy Projection (with arm cannon abilities)
   description: Energy Projection (with arm cannon abilities)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -588,7 +556,7 @@ abilities:
   name: Electricity Manipulation and Forcefield Creation (via Lightning Armor variants)
   description: Electricity Manipulation and Forcefield Creation (via Lightning Armor
     variants)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -606,7 +574,7 @@ abilities:
   description: Energy Manipulation and Statistics Amplification (with Aeion abilities
     such as Flash Shift, Lightning Armor, and a charged collision attack similar to
     the Shinespark)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -621,7 +589,7 @@ abilities:
 - id: powers-and-abilities-skilled-at-hand-to-hand-combat
   name: skilled at hand-to-hand combat
   description: skilled at hand-to-hand combat
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -636,7 +604,7 @@ abilities:
 - id: powers-and-abilities-flight
   name: Flight
   description: Flight
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -651,7 +619,7 @@ abilities:
 - id: powers-and-abilities-adapted-to-gravity-manipulation
   name: Adapted to Gravity Manipulation
   description: Adapted to Gravity Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -663,25 +631,10 @@ abilities:
   enrichment:
     method: deterministic_keyword_rules
     metadata_only: true
-- id: powers-and-abilities-flight
-  name: Flight
-  description: Flight
-  source_ids: *id005
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: powers-and-abilities-raven-beak-x-superhuman-physical-characteristics
-  name: Raven Beak X=Superhuman Physical Characteristics
-  description: Raven Beak X=Superhuman Physical Characteristics
-  source_ids: *id005
+- id: powers-and-abilities-flight-superhuman-physical-characteristics
+  name: Flight Superhuman Physical Characteristics
+  description: Flight Superhuman Physical Characteristics
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -696,7 +649,7 @@ abilities:
 - id: powers-and-abilities-large-size-type-1-assimilated-kraid-s-body-so-his-size-is-c
   name: 'Large Size (Type 1: Assimilated Kraid''s body, so his size is comparable)'
   description: 'Large Size (Type 1: Assimilated Kraid''s body, so his size is comparable)'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -711,7 +664,7 @@ abilities:
 - id: powers-and-abilities-natural-weaponry
   name: Natural Weaponry
   description: Natural Weaponry
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -726,7 +679,7 @@ abilities:
 - id: powers-and-abilities-along-with-absorption
   name: along with Absorption
   description: along with Absorption
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -741,7 +694,7 @@ abilities:
 - id: powers-and-abilities-duplication
   name: Duplication
   description: Duplication
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -756,7 +709,7 @@ abilities:
 - id: powers-and-abilities-possession
   name: Possession
   description: Possession
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -772,7 +725,7 @@ abilities:
 - id: powers-and-abilities-power-absorption
   name: Power Absorption
   description: Power Absorption
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -787,7 +740,7 @@ abilities:
 - id: powers-and-abilities-resurrection
   name: Resurrection
   description: Resurrection
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -802,7 +755,7 @@ abilities:
 - id: powers-and-abilities-shapeshifting
   name: Shapeshifting
   description: Shapeshifting
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -817,7 +770,7 @@ abilities:
 - id: powers-and-abilities-regeneration-low-high
   name: Regeneration (Low-High)
   description: Regeneration (Low-High)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -833,7 +786,7 @@ abilities:
 - id: powers-and-abilities-and-immortality-type-6-via-x-parasite
   name: and Immortality (Type 6) via X-Parasite
   description: and Immortality (Type 6) via X-Parasite
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -850,7 +803,7 @@ equipment:
 - id: standard-equipment-claws
   name: Claws
   description: Claws
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -865,7 +818,7 @@ equipment:
 - id: standard-equipment-power-suit
   name: Power Suit
   description: Power Suit
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -880,7 +833,7 @@ equipment:
 - id: standard-equipment-arm-cannon
   name: Arm Cannon
   description: Arm Cannon
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -900,7 +853,7 @@ weaknesses:
     access to any of the Power Suit's abilities.
   description: 'Raven Beak X is most likely not in control of his actions and does
     not have access to any of the Power Suit''s abilities. Notable Attacks/Techniques:'
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-raven-beak-metroid
   source_claim_ids: []
   confidence: 0.85
@@ -918,7 +871,7 @@ weaknesses:
     in any direction and can be chained up '
   description: 'Flash Shift: An Aeion technique that immediately transports him a
     small distance in any direction and can be chained up to 4 times. Unlike Samus'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -936,7 +889,7 @@ weaknesses:
     while Samus can only move left and right wi
   description: Raven Beak's Flash Shift is red in color and can move diagonally up
     and down while Samus can only move left and right with her Flash Shift.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -954,7 +907,7 @@ weaknesses:
   description: 'Lightning Armor: An Aeion technique. When active it covers Raven Beak
     with a force field that protects against all of Samus'' attacks. Unlike Samus''
     Lightning Armor from Samus Returns'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -969,7 +922,7 @@ weaknesses:
 - id: weaknesses-raven-beak-s-doesn-t-have-an-observable-time-limit
   name: Raven Beak's doesn't have an observable time limit
   description: Raven Beak's doesn't have an observable time limit
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -986,7 +939,7 @@ weaknesses:
     on Raven Beak. Raven Beak''s variant changes '
   description: it can only be deactivated when Samus successfully performs a Melee
     Counter on Raven Beak. Raven Beak's variant changes color as it is damaged
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1003,7 +956,7 @@ weaknesses:
     Once the Lightning Armor is red
   description: starting with a blue color and slowing becoming red as it absorbs damage.
     Once the Lightning Armor is red
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1023,7 +976,7 @@ weaknesses:
     Releasing this energy blast reverts the Lightning Armor to it's initial blue color.
     Raven Beak is also capable of changing his Lightning Armor to be gold in color
     after being Melee Countered by Samus
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1038,7 +991,7 @@ weaknesses:
 - id: weaknesses-in-this-state
   name: In this state
   description: In this state
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1053,7 +1006,7 @@ weaknesses:
 - id: weaknesses-the-lightning-armor-is-unaffected-by-samus-attacks
   name: the Lightning Armor is unaffected by Samus' attacks
   description: the Lightning Armor is unaffected by Samus' attacks
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1068,7 +1021,7 @@ weaknesses:
 - id: weaknesses-only-a-melee-counter-can-deactivate-it
   name: only a Melee Counter can deactivate it.
   description: only a Melee Counter can deactivate it.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1088,7 +1041,7 @@ weaknesses:
     of energy. Raven Beak''s variation can be fired much longer than Samus'' from
     Samus Returns. Raven Beak can also use this ability multiple time in succession
     if he desires.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1106,7 +1059,7 @@ weaknesses:
   name: 'Shinespark: An extremely damaging rush attack in any direction. Unlike Samus'
   description: 'Shinespark: An extremely damaging rush attack in any direction. Unlike
     Samus'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1123,7 +1076,7 @@ weaknesses:
     and can change direction with the Shinesp
   description: Raven Beak does not seem to need to charge this ability with the Speed
     Booster and can change direction with the Shinespark in sudden
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1153,7 +1106,7 @@ weaknesses:
     Users Category:Shapeshifters Category:Immortals Category:Science Fiction Characters
     Category:Energy Weapon Users Category:Hybrids Category:Parasites Category:Cape
     Users Category:Adults'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1202,7 +1155,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: c72690e97326a2504ecc64a5d3ff8e966dd90ce5f65e26b8f2d2efb28819618a
 repair:
-  attempted_at: '2026-10-11T01:27:56Z'
+  attempted_at: '2026-10-21T19:10:27Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -1219,7 +1172,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Raven_Beak
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -1261,7 +1214,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -1273,23 +1226,17 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{6-B}} | {{6-B}}'
-      source_id: mediawiki-4711126
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base=Superhuman Physical Characteristics, Large Size (Type 0), Longevity,
+      value: 'Superhuman Physical Characteristics, Large Size (Type 0), Longevity,
         Energy Projection (with arm cannon abilities), Electricity Manipulation and
         Forcefield Creation (via Lightning Armor variants), Energy Manipulation and
         Statistics Amplification (with Aeion abilities such as Flash Shift, Lightning
         Armor, and a charged collision attack similar to the Shinespark), skilled
-        at hand-to-hand combat, Flight, Adapted to Gravity Manipulation, Flight |-|Raven
-        Beak X=Superhuman Physical Characteristics, Large Size (Type 1: Assimilated
-        Kraid''s body, so his size is comparable), Natural Weaponry, along with Absorption,
-        Duplication, Possession, Power Absorption, Resurrection, Shapeshifting, Regeneration
-        (Low-High), and Immortality (Type 6) via X-Parasite'
+        at hand-to-hand combat, Flight, Adapted to Gravity Manipulation, Flight Superhuman
+        Physical Characteristics, Large Size (Type 1: Assimilated Kraid''s body, so
+        his size is comparable), Natural Weaponry, along with Absorption, Duplication,
+        Possession, Power Absorption, Resurrection, Shapeshifting, Regeneration (Low-High),
+        and Immortality (Type 6) via X-Parasite'
       source_id: mediawiki-4711126
       provider_id: vsbattles
       authority: high
@@ -1379,20 +1326,28 @@ repair:
         any direction. Unlike Samus, Raven Beak does not seem to need to charge this
         ability with the Speed Booster and can change direction with the Shinespark
         in sudden, 45 degree angles. ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{Discussions}} Category:Metroid Category:Villains Category:Gun Users Category:Aliens
-        Category:Geniuses Category:Energy Users Category:Leaders Category:Warriors
-        Category:Electricity Users Category:Technology Users Category:Male Characters
-        Category:Birds Category:Evil Characters Category:Armor Users Category:Forcefield
-        Users Category:Regeneration Users Category:Absorption Users Category:Game
-        Bosses Category:Final Bosses Category:Characters Category:Game Characters
-        Category:Video Game Characters Category:Antagonists Category:Primary Antagonists
-        Category:Armor Users Category:Claw Users Category:Large Sized Characters Category:Longevity
-        Users Category:Energy Projection Users Category:Statistics Amplification Users
-        Category:Flight Users Category:Martial Artists Category:Adaptation Users Category:Gravity
-        Users Category:Bodily Weaponry Users Category:Duplication Users Category:Possession
+        Category:Metroid Category:Villains Category:Gun Users Category:Aliens Category:Geniuses
+        Category:Energy Users Category:Leaders Category:Warriors Category:Electricity
+        Users Category:Technology Users Category:Male Characters Category:Birds Category:Evil
+        Characters Category:Armor Users Category:Forcefield Users Category:Regeneration
+        Users Category:Absorption Users Category:Game Bosses Category:Final Bosses
+        Category:Characters Category:Game Characters Category:Video Game Characters
+        Category:Antagonists Category:Primary Antagonists Category:Armor Users Category:Claw
+        Users Category:Large Sized Characters Category:Longevity Users Category:Energy
+        Projection Users Category:Statistics Amplification Users Category:Flight Users
+        Category:Martial Artists Category:Adaptation Users Category:Gravity Users
+        Category:Bodily Weaponry Users Category:Duplication Users Category:Possession
         Users Category:Power Absorption Users Category:Resurrection Users Category:Shapeshifters
         Category:Immortals Category:Science Fiction Characters Category:Energy Weapon
         Users Category:Hybrids Category:Parasites Category:Cape Users Category:Adults'
+      source_id: mediawiki-4711126
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Key: Base | Raven Beak X Name: Ashkar Behek (Chozo language), Raven
+        Beak (English language) Origin: Metroid Age: Unknown Gender: Male Classification:
+        Chozo | Chozo/X-Parasite/Kraid/Experiment No. Z-57 mix'
       source_id: mediawiki-4711126
       provider_id: vsbattles
       authority: high
@@ -1410,201 +1365,8 @@ repair:
     duplicate_key: vsbattles.fandom.com|raven beak|9666110
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-raven-beak-metroid
-    url: https://vsbattles.fandom.com/wiki/Raven_Beak_Metroid
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Raven Beak
-    source_type: mediawiki
-    revision_id: '9666110'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 7657
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 120
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{6-B}} | {{6-B}}'
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Base=Superhuman Physical Characteristics, Large Size (Type 0), Longevity,
-        Energy Projection (with arm cannon abilities), Electricity Manipulation and
-        Forcefield Creation (via Lightning Armor variants), Energy Manipulation and
-        Statistics Amplification (with Aeion abilities such as Flash Shift, Lightning
-        Armor, and a charged collision attack similar to the Shinespark), skilled
-        at hand-to-hand combat, Flight, Adapted to Gravity Manipulation, Flight |-|Raven
-        Beak X=Superhuman Physical Characteristics, Large Size (Type 1: Assimilated
-        Kraid''s body, so his size is comparable), Natural Weaponry, along with Absorption,
-        Duplication, Possession, Power Absorption, Resurrection, Shapeshifting, Regeneration
-        (Low-High), and Immortality (Type 6) via X-Parasite'
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Country level+ (Destroyed an E.M.M.I., which Samus could only damage
-        with the Omega Cannon, and ripped one of its arms off. Fought and easily overpowered
-        Dread Samus in her Gravity Suit) | Country level+ (Can kill Metroid Suit Samus)
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Sub-Relativistic (Successfully grabbed Samus multiple times) | Sub-Relativistic
-        reactions
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Country level (Could shrug off most blows from Samus in Gravity Suit
-        with the Power Suit, although without it his wing was blasted off) | Country
-        level (Withstood a continuous blast from Metroid Suit Samus' Hyper Beam before
-        being killed by it)
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Fought with Samus, and could recover after his energy was
-        drained by Samus' Metroid Powers and his fortress, Itorash, crashed to the
-        ground)
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range with physical attacks, likely Stellar with weapons,
-        Planetary with technology.
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Claws, Power Suit, Arm Cannon
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Genius. As a leader of the Mawkin tribe, he is an experienced fighter
-        and an expert strategist, and has mastery of his arm cannon's abilities, demonstrated
-        by his victories against Samus at her full power even with his wings blown
-        off. Was able to reprogram the E.M.M.I.s. Developed a sophisticated plan on
-        a planetary scale to awaken Samus' Metroid Powers to use them for his plans.
-        He also managed to impersonate ADAM for the entirety of the game. | Animalistic
-        to Below Average. The X Parasite has taken over his mind, although he is still
-        capable of very limited speech.
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Raven Beak X is most likely not in control of his actions and does not
-        have access to any of the Power Suit''s abilities. Notable Attacks/Techniques:
-        * Flash Shift: An Aeion technique that immediately transports him a small
-        distance in any direction and can be chained up to 4 times. Unlike Samus,
-        Raven Beak''s Flash Shift is red in color and can move diagonally up and down
-        while Samus can only move left and right with her Flash Shift. * Lightning
-        Armor: An Aeion technique. When active it covers Raven Beak with a force field
-        that protects against all of Samus'' attacks. Unlike Samus'' Lightning Armor
-        from Samus Returns, Raven Beak''s doesn''t have an observable time limit,
-        it can only be deactivated when Samus successfully performs a Melee Counter
-        on Raven Beak. Raven Beak''s variant changes color as it is damaged, starting
-        with a blue color and slowing becoming red as it absorbs damage. Once the
-        Lightning Armor is red, Raven Beak can release that energy in the form of
-        an omnidirectional energy blast that leaves a small opening around three feet
-        above ground level. Releasing this energy blast reverts the Lightning Armor
-        to it''s initial blue color. Raven Beak is also capable of changing his Lightning
-        Armor to be gold in color after being Melee Countered by Samus, In this state,
-        the Lightning Armor is unaffected by Samus'' attacks, only a Melee Counter
-        can deactivate it. *Beam Burst: An Aeion technique. Allows Raven Beak to fire
-        his beam in the form of full auto shots like Samus'' beam instead of a concentrated
-        beam of energy. Raven Beak''s variation can be fired much longer than Samus''
-        from Samus Returns. Raven Beak can also use this ability multiple time in
-        succession if he desires. *Shinespark: An extremely damaging rush attack in
-        any direction. Unlike Samus, Raven Beak does not seem to need to charge this
-        ability with the Speed Booster and can change direction with the Shinespark
-        in sudden, 45 degree angles. ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{Discussions}} Category:Metroid Category:Villains Category:Gun Users Category:Aliens
-        Category:Geniuses Category:Energy Users Category:Leaders Category:Warriors
-        Category:Electricity Users Category:Technology Users Category:Male Characters
-        Category:Birds Category:Evil Characters Category:Armor Users Category:Forcefield
-        Users Category:Regeneration Users Category:Absorption Users Category:Game
-        Bosses Category:Final Bosses Category:Characters Category:Game Characters
-        Category:Video Game Characters Category:Antagonists Category:Primary Antagonists
-        Category:Armor Users Category:Claw Users Category:Large Sized Characters Category:Longevity
-        Users Category:Energy Projection Users Category:Statistics Amplification Users
-        Category:Flight Users Category:Martial Artists Category:Adaptation Users Category:Gravity
-        Users Category:Bodily Weaponry Users Category:Duplication Users Category:Possession
-        Users Category:Power Absorption Users Category:Resurrection Users Category:Shapeshifters
-        Category:Immortals Category:Science Fiction Characters Category:Energy Weapon
-        Users Category:Hybrids Category:Parasites Category:Cape Users Category:Adults'
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: true
-    identity_score: 120
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: true
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|raven beak|9666110
-    retryable: false
-    exception_class: ''
   - source_id: character-stats-profiles-raven-beak-metroid
-    url: https://character-stats-and-profiles.fandom.com/wiki/Raven_Beak_Metroid
+    url: https://character-stats-and-profiles.fandom.com/wiki/Raven_Beak_%28Metroid%29
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -1616,7 +1378,7 @@ repair:
     revision_id: '408917'
     fetch_status: fetched
     http_status: 200
-    content_length: 199749
+    content_length: 199751
     content_kind: api_json
     headings_detected:
     - '[[File:Summary_SU.png|215px]]'
@@ -1680,66 +1442,476 @@ repair:
         through any opponents in her way while also providing protection, rendering
         her effectively invulnerable. It is powerful enough to easily destroy most
         enemies just by jumping through them. She can also perform this with short
-        hops, essentially dashing forwards with a Screw Attack. |-|Suits= * Zero Suit:
-        The skintight bodysuit that Samus wears underneath her Power Suit. If she
-        has somehow lost access to her Power Suit, Samus instead utilizes this, which
-        leaves her unprotected and much more vulnerable. The Zero Suit can also be
-        used to manifest and unmanifest her Power Suit. * Power Suit: Samus'' basic,
-        signature Power Suit, the lynchpin of her arsenal, properly known as Chozo
-        Battle Suit Ver SA1-4468-VM6-P. This refers to both the base Power Suit without
-        upgrades, and her suit as a whole and any equipment she may have acquired.
-        It is equipped with Oxygen Supply Equipment that allows Samus to survive essentially
-        indefinitely in the vacuum of space or underwater, and protects against airborne
-        toxins and pollutants, allowing her to survive in inhospitable environments.
-        The Power Suit''s modular technology allows Samus to integrate all sorts of
-        technology into its construction so that she can amass a powerful arsenal
-        of weapons and armor upgrades throughout her adventures, becoming increasingly
-        dangerous as she does so. Weapons and ammunition are stored as data until
-        they are needed, at which point they are rendered tangible so that Samus can
-        fire them. It has advanced energy shielding technology equipped by default
-        as well, protecting her from harm. The Power Suit integrates with Samus on
-        a biological level, and thus cannot be removed without her cooperation, but
-        if she wills it, it will simply disappear in a flash. She can materialize
-        it in the same way. At the end of Zero Mission, after passing the Ruins Test,
-        Samus gains the Legendary Power Suit, a powerful upgrade to her basic Power
-        Suit that she has wielded ever since then. In Metroid Fusion, her Power Suit
-        is rebuilt as the Fusion Suit, which has much of the same capabilities but
-        is much slimmer and lighter, and, as a result, provides less protection, especially
-        against subzero temperatures, which Samus is extremely weak to thanks to her
-        Metroid DNA. ** Varia Suit: Samus'' most recognizable suit, the Varia Suit
-        protects against extreme conditions such as acid and intense temperatures
-        of either extreme, allowing her to safely travel through superhot locations
-        such as the depths of Norfair and subzero locations such as Sector 5 in Metroid
-        Fusion, overcoming the weakness to cold she had at the time thanks to her
-        Metroid DNA. It also increases the strength of Samus'' defenses, greatly reducing
-        the damage she takes in combat. ** Gravity Suit: One of Samus'' most effective
-        suits, the Gravity Suit allows her to move through environments with abnormal
-        gravity and water without being impeded, making her highly resistant to gravitational
-        forces. It also further reinforces her defenses and increases her resistance
-        to even hotter temperatures. The Gravity Boost that she gains in Metroid Prime
-        2: Echoes is effectively analogous, allowing her to easily move through the
-        water. ** Phazon Suit: Samus'' final suit in Metroid Prime, which she gained
-        after being exposed to high amounts of Phazon after she killed the Omega Pirate.
-        Thanks to the corrupted nature of this state, Samus gained increased resistance
-        to blue Phazon as well as increased defenses. Additionally, when exposed to
-        high amounts of Phazon, it allows her to enter Hypermode and make use of the
-        extremely powerful Phazon Beam. ** Dark Suit: A Luminoth Power Suit that was
-        used by their kind to survive in the harsh environment of Dark Aether, protecting
-        her from the noxious dark vapor and filtering out 80% of the effects of Dark
-        Aether''s corrosive atmosphere. ** Light Suit: The ultimate Luminoth Power
-        Suit, the greatest weapon, which they intended to use against the Ing. Powered
-        by the Light of Aether, the Light Suit protects Samus from the foul Dark Water
-        of Dark Aether and the assaults of swarms of Ingstorm, allowing her to move
-        through Dark Aether without issue. It also lets her travel through Light Shafts
-        to quickly traverse great distances on Aether. ** PED Suit: A Phazon Enhancement
-        Device designed specifically for Samus to integrate with her Power Suit, the
-        PED Suit allows Samus to safely absorb and harness the power of Phazon, which
-        she can produce herself. Her resistance to Phazon is greatly enhanced in this
-        suit. With this suit, Samus can restore her health while submerged in pools
-        of Phazon and enter into Hypermode. It is later enhanced by the Hazard Shield,
-        protecting Samus from environmental hazards such as acid rain and fuel gel.
-        ** Unnamed/Omega Suit: After absorbing SA-X, Samus momentarily has her DNA
-        restored although not the suit. This allows Samus to onc'
+        hops, essentially dashing forwards with a Screw Attack. * Zero Suit: The skintight
+        bodysuit that Samus wears underneath her Power Suit. If she has somehow lost
+        access to her Power Suit, Samus instead utilizes this, which leaves her unprotected
+        and much more vulnerable. The Zero Suit can also be used to manifest and unmanifest
+        her Power Suit. * Power Suit: Samus'' basic, signature Power Suit, the lynchpin
+        of her arsenal, properly known as Chozo Battle Suit Ver SA1-4468-VM6-P. This
+        refers to both the base Power Suit without upgrades, and her suit as a whole
+        and any equipment she may have acquired. It is equipped with Oxygen Supply
+        Equipment that allows Samus to survive essentially indefinitely in the vacuum
+        of space or underwater, and protects against airborne toxins and pollutants,
+        allowing her to survive in inhospitable environments. The Power Suit''s modular
+        technology allows Samus to integrate all sorts of technology into its construction
+        so that she can amass a powerful arsenal of weapons and armor upgrades throughout
+        her adventures, becoming increasingly dangerous as she does so. Weapons and
+        ammunition are stored as data until they are needed, at which point they are
+        rendered tangible so that Samus can fire them. It has advanced energy shielding
+        technology equipped by default as well, protecting her from harm. The Power
+        Suit integrates with Samus on a biological level, and thus cannot be removed
+        without her cooperation, but if she wills it, it will simply disappear in
+        a flash. She can materialize it in the same way. At the end of Zero Mission,
+        after passing the Ruins Test, Samus gains the Legendary Power Suit, a powerful
+        upgrade to her basic Power Suit that she has wielded ever since then. In Metroid
+        Fusion, her Power Suit is rebuilt as the Fusion Suit, which has much of the
+        same capabilities but is much slimmer and lighter, and, as a result, provides
+        less protection, especially against subzero temperatures, which Samus is extremely
+        weak to thanks to her Metroid DNA. ** Varia Suit: Samus'' most recognizable
+        suit, the Varia Suit protects against extreme conditions such as acid and
+        intense temperatures of either extreme, allowing her to safely travel through
+        superhot locations such as the depths of Norfair and subzero locations such
+        as Sector 5 in Metroid Fusion, overcoming the weakness to cold she had at
+        the time thanks to her Metroid DNA. It also increases the strength of Samus''
+        defenses, greatly reducing the damage she takes in combat. ** Gravity Suit:
+        One of Samus'' most effective suits, the Gravity Suit allows her to move through
+        environments with abnormal gravity and water without being impeded, making
+        her highly resistant to gravitational forces. It also further reinforces her
+        defenses and increases her resistance to even hotter temperatures. The Gravity
+        Boost that she gains in Metroid Prime 2: Echoes is effectively analogous,
+        allowing her to easily move through the water. ** Phazon Suit: Samus'' final
+        suit in Metroid Prime, which she gained after being exposed to high amounts
+        of Phazon after she killed the Omega Pirate. Thanks to the corrupted nature
+        of this state, Samus gained increased resistance to blue Phazon as well as
+        increased defenses. Additionally, when exposed to high amounts of Phazon,
+        it allows her to enter Hypermode and make use of the extremely powerful Phazon
+        Beam. ** Dark Suit: A Luminoth Power Suit that was used by their kind to survive
+        in the harsh environment of Dark Aether, protecting her from the noxious dark
+        vapor and filtering out 80% of the effects of Dark Aether''s corrosive atmosphere.
+        ** Light Suit: The ultimate Luminoth Power Suit, the greatest weapon, which
+        they intended to use against the Ing. Powered by the Light of Aether, the
+        Light Suit protects Samus from the foul Dark Water of Dark Aether and the
+        assaults of swarms of Ingstorm, allowing her to move through Dark Aether without
+        issue. It also lets her travel through Light Shafts to quickly traverse great
+        distances on Aether. ** PED Suit: A Phazon Enhancement Device designed specifically
+        for Samus to integrate with her Power Suit, the PED Suit allows Samus to safely
+        absorb and harness the power of Phazon, which she can produce herself. Her
+        resistance to Phazon is greatly enhanced in this suit. With this suit, Samus
+        can restore her health while submerged in pools of Phazon and enter into Hypermode.
+        It is later enhanced by the Hazard Shield, protecting Samus from environmental
+        hazards such as acid rain and fuel gel. ** Unnamed/Omega Suit: After absorbing
+        SA-X, Samus momentarily has her DNA restored although not the suit. This allows
+        Samus to once again us'
+      source_id: character-stats-profiles-raven-beak-metroid
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'A set of unique powers that Samus has access to in Metroid: Samus Returns,
+        gained from channeling a "mystical and powerful energy source" known as Aeion.
+        She gains these powers from Aeion Ability Artifacts and can replenish her
+        limited supply of Aeion from downed and slain opponents. ** Phantom Cloak:
+        While used, Samus'' drains her Aeion to become invisible to regular detection.
+        ** Flash Shift: Samus can travel a set distance, either forward or backward,
+        up to three times. Frequently used to avoid attacks or exploration. ** Beam
+        Burst: This ability enhances Samus'' beam weapons so that she can fire a machine
+        gun-like barrage of beam shots rather than charge her attacks. Every shot
+        made drains her Aeion. ** Lightning Armor: Samus surrounds herself with a
+        field of green electricity, protecting herself from harm by absorbing attacks
+        directed at her, draining her Aeion instead of her energy. This ability also
+        empowers her Melee Counter into a more powerful and longer ranged Lightning
+        Counter. ** Phase Drift: The final Aeion ability, which, when used, slows
+        down time for all things around Samus by 50%, allowing her to move as quickly
+        as usual while everyone else is left to catch up. ** Scan Pulse: When used,
+        at the cost of a small amount of Aeion, this ability envelops Samus in a blue
+        field that dissipates throughout her surroundings, revealing Map data for
+        them and exposing any breakable obstacles. * Concentration: A technique that
+        Samus can use when low on health to replenish her energy by focusing power
+        in her Arm Cannon, restoring a tank of energy and some of her missiles. The
+        amount of energy she can regain in this way can be increased by "E-Recovery
+        Tanks". * Crystal Flash: A secret technique that Samus can use to replenish
+        her health at the cost of her ammunition, taught to her by the Chozo and performed
+        using technology integrated into the Power Suit. By laying a Power Bomb, Samus
+        wreathes herself in a cocoon of energy, using the power of the bomb to completely
+        replenish her energy supplies. * Hypermode: A highly powerful but temporary
+        state in which Samus is powered up by exposure to Phazon, draining her energy
+        to greatly increase her firepower and render herself nearly invulnerable to
+        harm. While in Hypermode, Samus must vent her Phazon so that she doesn''t
+        damage herself and suffer terminal corruption, dying and becoming another
+        Dark Samus. ** Phazon / Hyper Beam: An incredibly powerful upgrade for Samus''
+        beam that instead fires blue bolts of electricity with high power, draining
+        her supply of Phazon if none is available nearby. It can be charged to instead
+        rapidly fire multiple beams one after another. ** Hyper Ball: A Phazon-powered
+        Morph Ball strike that releases a burst of blue electricity in all directions,
+        seeking and damaging all opponents caught in the blast but constantly draining
+        Samus'' Phazon as long as it''s active. ** Hyper Grapple: An enhanced Grapple
+        Beam, empowered by the power of Phazon. After latching onto an opponent with
+        her Grapple Beam, Samus can either pump them full of Phazon to heavily damage
+        and kill them or absorb their supplies of Phazon. ** Hyper Missile: A Phazon-empowered
+        missile that fires missiles that explode into large bursts of Phazon, dealing
+        extensive damage. * Lethal Strike: A melee combat technique utilized by Samus
+        in Other M. Once an opponent has been downed, Samus can quickly run up to
+        them to overpower them physically before blasting them with a point-blank
+        Charge Beam, often destroying them instantly. * Melee Counter: A melee technique
+        in which Samus swings up her Arm Cannon while an opponent charges, knocking
+        them back and stunning them if timed properly and instantly readying a fully-charged
+        beam. * Overblast: Samus jumps up onto her opponent, forcing them to the ground
+        and firing a full-power Charge Beam into their head or another weak point
+        at point-blank range, often instantly killing her target. * SenseMove: An
+        evasive technique that uses the thrusters of Samus'' suit to dodge and quickly
+        react to an attack on her, immediately following up with a charged shot. Integrating
+        some sort of precognitive ability, it allows Samus to easily react to attacks
+        from out of view.'
+      source_id: character-stats-profiles-raven-beak-metroid
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 1
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|samus aran canon memelordgamer
+      trap|408917
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-raven-beak-metroid
+    url: https://vsbattles.fandom.com/wiki/Raven_Beak_Metroid
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id008
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Raven Beak
+    source_type: mediawiki
+    revision_id: '9666110'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 7657
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 120
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id009
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Large Size (Type 0), Longevity,
+        Energy Projection (with arm cannon abilities), Electricity Manipulation and
+        Forcefield Creation (via Lightning Armor variants), Energy Manipulation and
+        Statistics Amplification (with Aeion abilities such as Flash Shift, Lightning
+        Armor, and a charged collision attack similar to the Shinespark), skilled
+        at hand-to-hand combat, Flight, Adapted to Gravity Manipulation, Flight Superhuman
+        Physical Characteristics, Large Size (Type 1: Assimilated Kraid''s body, so
+        his size is comparable), Natural Weaponry, along with Absorption, Duplication,
+        Possession, Power Absorption, Resurrection, Shapeshifting, Regeneration (Low-High),
+        and Immortality (Type 6) via X-Parasite'
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Country level+ (Destroyed an E.M.M.I., which Samus could only damage
+        with the Omega Cannon, and ripped one of its arms off. Fought and easily overpowered
+        Dread Samus in her Gravity Suit) | Country level+ (Can kill Metroid Suit Samus)
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Sub-Relativistic (Successfully grabbed Samus multiple times) | Sub-Relativistic
+        reactions
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Country level (Could shrug off most blows from Samus in Gravity Suit
+        with the Power Suit, although without it his wing was blasted off) | Country
+        level (Withstood a continuous blast from Metroid Suit Samus' Hyper Beam before
+        being killed by it)
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Fought with Samus, and could recover after his energy was
+        drained by Samus' Metroid Powers and his fortress, Itorash, crashed to the
+        ground)
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range with physical attacks, likely Stellar with weapons,
+        Planetary with technology.
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Claws, Power Suit, Arm Cannon
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Genius. As a leader of the Mawkin tribe, he is an experienced fighter
+        and an expert strategist, and has mastery of his arm cannon's abilities, demonstrated
+        by his victories against Samus at her full power even with his wings blown
+        off. Was able to reprogram the E.M.M.I.s. Developed a sophisticated plan on
+        a planetary scale to awaken Samus' Metroid Powers to use them for his plans.
+        He also managed to impersonate ADAM for the entirety of the game. | Animalistic
+        to Below Average. The X Parasite has taken over his mind, although he is still
+        capable of very limited speech.
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Raven Beak X is most likely not in control of his actions and does not
+        have access to any of the Power Suit''s abilities. Notable Attacks/Techniques:
+        * Flash Shift: An Aeion technique that immediately transports him a small
+        distance in any direction and can be chained up to 4 times. Unlike Samus,
+        Raven Beak''s Flash Shift is red in color and can move diagonally up and down
+        while Samus can only move left and right with her Flash Shift. * Lightning
+        Armor: An Aeion technique. When active it covers Raven Beak with a force field
+        that protects against all of Samus'' attacks. Unlike Samus'' Lightning Armor
+        from Samus Returns, Raven Beak''s doesn''t have an observable time limit,
+        it can only be deactivated when Samus successfully performs a Melee Counter
+        on Raven Beak. Raven Beak''s variant changes color as it is damaged, starting
+        with a blue color and slowing becoming red as it absorbs damage. Once the
+        Lightning Armor is red, Raven Beak can release that energy in the form of
+        an omnidirectional energy blast that leaves a small opening around three feet
+        above ground level. Releasing this energy blast reverts the Lightning Armor
+        to it''s initial blue color. Raven Beak is also capable of changing his Lightning
+        Armor to be gold in color after being Melee Countered by Samus, In this state,
+        the Lightning Armor is unaffected by Samus'' attacks, only a Melee Counter
+        can deactivate it. *Beam Burst: An Aeion technique. Allows Raven Beak to fire
+        his beam in the form of full auto shots like Samus'' beam instead of a concentrated
+        beam of energy. Raven Beak''s variation can be fired much longer than Samus''
+        from Samus Returns. Raven Beak can also use this ability multiple time in
+        succession if he desires. *Shinespark: An extremely damaging rush attack in
+        any direction. Unlike Samus, Raven Beak does not seem to need to charge this
+        ability with the Speed Booster and can change direction with the Shinespark
+        in sudden, 45 degree angles. ==Notable Matchups== Victories: Losses: Inconclusive:
+        Category:Metroid Category:Villains Category:Gun Users Category:Aliens Category:Geniuses
+        Category:Energy Users Category:Leaders Category:Warriors Category:Electricity
+        Users Category:Technology Users Category:Male Characters Category:Birds Category:Evil
+        Characters Category:Armor Users Category:Forcefield Users Category:Regeneration
+        Users Category:Absorption Users Category:Game Bosses Category:Final Bosses
+        Category:Characters Category:Game Characters Category:Video Game Characters
+        Category:Antagonists Category:Primary Antagonists Category:Armor Users Category:Claw
+        Users Category:Large Sized Characters Category:Longevity Users Category:Energy
+        Projection Users Category:Statistics Amplification Users Category:Flight Users
+        Category:Martial Artists Category:Adaptation Users Category:Gravity Users
+        Category:Bodily Weaponry Users Category:Duplication Users Category:Possession
+        Users Category:Power Absorption Users Category:Resurrection Users Category:Shapeshifters
+        Category:Immortals Category:Science Fiction Characters Category:Energy Weapon
+        Users Category:Hybrids Category:Parasites Category:Cape Users Category:Adults'
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Key: Base | Raven Beak X Name: Ashkar Behek (Chozo language), Raven
+        Beak (English language) Origin: Metroid Age: Unknown Gender: Male Classification:
+        Chozo | Chozo/X-Parasite/Kraid/Experiment No. Z-57 mix'
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 120
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: true
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|raven beak|9666110
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-raven-beak-metroid
+    url: https://character-stats-and-profiles.fandom.com/wiki/Raven_Beak_Metroid
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - powers_and_abilities
+    - tier
+    normalized_page_title: Samus Aran (Canon)/MemeLordGamer Trap
+    source_type: mediawiki
+    revision_id: '408917'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 199751
+    content_kind: api_json
+    headings_detected:
+    - '[[File:Summary_SU.png|215px]]'
+    - '[[File:Notable_Powers_SU_Text.png|703px]]'
+    - '[[File:Attack_Potency.png|703px]]'
+    - '[[File:Speed.png|703px]]'
+    - '[[File:Lifting_Strength.png|703px]]'
+    - '[[File:Striking_Strength.png|703px]]'
+    - '[[File:Durability.png|703px]]'
+    - '[[File:Mariostamina.png]]'
+    - '[[File:Range.png|703px]]'
+    - '[[File:Mariostandardequip.png]]'
+    - '[[File:Intelligence.png|703px]]'
+    - '[[File:Weaknesses.png|703px]]'
+    - '[[File:Notable_Attacks_and_Techniques.png|703px]]'
+    - '''''''Key:'''''''
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 50
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 7-C | High 6-A | 5-B | 5-B | 5-B | 5-B | At least Low 4-C, likely High
+        4-C | At least Low 4-C, likely High 4-C | At least Low 4-C, likely High 4-C
+        | At least Low 4-C, likely High 4-C, High 3-A with White Hole Manipulation
+        | At least Low 4-C, likely High 4-C, High 3-A | At least Low 4-C, likely High
+        4-C, High 3-A
+      source_id: character-stats-profiles-raven-beak-metroid
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'One of Samus'' most iconic and powerful upgrades, the Screw Attack allows
+        Samus to surround herself in a field of energy while spin jumping, shredding
+        through any opponents in her way while also providing protection, rendering
+        her effectively invulnerable. It is powerful enough to easily destroy most
+        enemies just by jumping through them. She can also perform this with short
+        hops, essentially dashing forwards with a Screw Attack. * Zero Suit: The skintight
+        bodysuit that Samus wears underneath her Power Suit. If she has somehow lost
+        access to her Power Suit, Samus instead utilizes this, which leaves her unprotected
+        and much more vulnerable. The Zero Suit can also be used to manifest and unmanifest
+        her Power Suit. * Power Suit: Samus'' basic, signature Power Suit, the lynchpin
+        of her arsenal, properly known as Chozo Battle Suit Ver SA1-4468-VM6-P. This
+        refers to both the base Power Suit without upgrades, and her suit as a whole
+        and any equipment she may have acquired. It is equipped with Oxygen Supply
+        Equipment that allows Samus to survive essentially indefinitely in the vacuum
+        of space or underwater, and protects against airborne toxins and pollutants,
+        allowing her to survive in inhospitable environments. The Power Suit''s modular
+        technology allows Samus to integrate all sorts of technology into its construction
+        so that she can amass a powerful arsenal of weapons and armor upgrades throughout
+        her adventures, becoming increasingly dangerous as she does so. Weapons and
+        ammunition are stored as data until they are needed, at which point they are
+        rendered tangible so that Samus can fire them. It has advanced energy shielding
+        technology equipped by default as well, protecting her from harm. The Power
+        Suit integrates with Samus on a biological level, and thus cannot be removed
+        without her cooperation, but if she wills it, it will simply disappear in
+        a flash. She can materialize it in the same way. At the end of Zero Mission,
+        after passing the Ruins Test, Samus gains the Legendary Power Suit, a powerful
+        upgrade to her basic Power Suit that she has wielded ever since then. In Metroid
+        Fusion, her Power Suit is rebuilt as the Fusion Suit, which has much of the
+        same capabilities but is much slimmer and lighter, and, as a result, provides
+        less protection, especially against subzero temperatures, which Samus is extremely
+        weak to thanks to her Metroid DNA. ** Varia Suit: Samus'' most recognizable
+        suit, the Varia Suit protects against extreme conditions such as acid and
+        intense temperatures of either extreme, allowing her to safely travel through
+        superhot locations such as the depths of Norfair and subzero locations such
+        as Sector 5 in Metroid Fusion, overcoming the weakness to cold she had at
+        the time thanks to her Metroid DNA. It also increases the strength of Samus''
+        defenses, greatly reducing the damage she takes in combat. ** Gravity Suit:
+        One of Samus'' most effective suits, the Gravity Suit allows her to move through
+        environments with abnormal gravity and water without being impeded, making
+        her highly resistant to gravitational forces. It also further reinforces her
+        defenses and increases her resistance to even hotter temperatures. The Gravity
+        Boost that she gains in Metroid Prime 2: Echoes is effectively analogous,
+        allowing her to easily move through the water. ** Phazon Suit: Samus'' final
+        suit in Metroid Prime, which she gained after being exposed to high amounts
+        of Phazon after she killed the Omega Pirate. Thanks to the corrupted nature
+        of this state, Samus gained increased resistance to blue Phazon as well as
+        increased defenses. Additionally, when exposed to high amounts of Phazon,
+        it allows her to enter Hypermode and make use of the extremely powerful Phazon
+        Beam. ** Dark Suit: A Luminoth Power Suit that was used by their kind to survive
+        in the harsh environment of Dark Aether, protecting her from the noxious dark
+        vapor and filtering out 80% of the effects of Dark Aether''s corrosive atmosphere.
+        ** Light Suit: The ultimate Luminoth Power Suit, the greatest weapon, which
+        they intended to use against the Ing. Powered by the Light of Aether, the
+        Light Suit protects Samus from the foul Dark Water of Dark Aether and the
+        assaults of swarms of Ingstorm, allowing her to move through Dark Aether without
+        issue. It also lets her travel through Light Shafts to quickly traverse great
+        distances on Aether. ** PED Suit: A Phazon Enhancement Device designed specifically
+        for Samus to integrate with her Power Suit, the PED Suit allows Samus to safely
+        absorb and harness the power of Phazon, which she can produce herself. Her
+        resistance to Phazon is greatly enhanced in this suit. With this suit, Samus
+        can restore her health while submerged in pools of Phazon and enter into Hypermode.
+        It is later enhanced by the Hazard Shield, protecting Samus from environmental
+        hazards such as acid rain and fuel gel. ** Unnamed/Omega Suit: After absorbing
+        SA-X, Samus momentarily has her DNA restored although not the suit. This allows
+        Samus to once again us'
       source_id: character-stats-profiles-raven-beak-metroid
       provider_id: character_stats_profiles
       authority: high
@@ -1822,7 +1994,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Raven_Beak_%28Metroid%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id010
     - attack_potency
     - durability
     - intelligence
@@ -1864,7 +2036,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id011
     - attack_potency
     - speed
     - durability
@@ -1874,23 +2046,17 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{6-B}} | {{6-B}}'
-      source_id: vsbattles-raven-beak-metroid
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base=Superhuman Physical Characteristics, Large Size (Type 0), Longevity,
+      value: 'Superhuman Physical Characteristics, Large Size (Type 0), Longevity,
         Energy Projection (with arm cannon abilities), Electricity Manipulation and
         Forcefield Creation (via Lightning Armor variants), Energy Manipulation and
         Statistics Amplification (with Aeion abilities such as Flash Shift, Lightning
         Armor, and a charged collision attack similar to the Shinespark), skilled
-        at hand-to-hand combat, Flight, Adapted to Gravity Manipulation, Flight |-|Raven
-        Beak X=Superhuman Physical Characteristics, Large Size (Type 1: Assimilated
-        Kraid''s body, so his size is comparable), Natural Weaponry, along with Absorption,
-        Duplication, Possession, Power Absorption, Resurrection, Shapeshifting, Regeneration
-        (Low-High), and Immortality (Type 6) via X-Parasite'
+        at hand-to-hand combat, Flight, Adapted to Gravity Manipulation, Flight Superhuman
+        Physical Characteristics, Large Size (Type 1: Assimilated Kraid''s body, so
+        his size is comparable), Natural Weaponry, along with Absorption, Duplication,
+        Possession, Power Absorption, Resurrection, Shapeshifting, Regeneration (Low-High),
+        and Immortality (Type 6) via X-Parasite'
       source_id: vsbattles-raven-beak-metroid
       provider_id: vsbattles
       authority: high
@@ -1980,20 +2146,28 @@ repair:
         any direction. Unlike Samus, Raven Beak does not seem to need to charge this
         ability with the Speed Booster and can change direction with the Shinespark
         in sudden, 45 degree angles. ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{Discussions}} Category:Metroid Category:Villains Category:Gun Users Category:Aliens
-        Category:Geniuses Category:Energy Users Category:Leaders Category:Warriors
-        Category:Electricity Users Category:Technology Users Category:Male Characters
-        Category:Birds Category:Evil Characters Category:Armor Users Category:Forcefield
-        Users Category:Regeneration Users Category:Absorption Users Category:Game
-        Bosses Category:Final Bosses Category:Characters Category:Game Characters
-        Category:Video Game Characters Category:Antagonists Category:Primary Antagonists
-        Category:Armor Users Category:Claw Users Category:Large Sized Characters Category:Longevity
-        Users Category:Energy Projection Users Category:Statistics Amplification Users
-        Category:Flight Users Category:Martial Artists Category:Adaptation Users Category:Gravity
-        Users Category:Bodily Weaponry Users Category:Duplication Users Category:Possession
+        Category:Metroid Category:Villains Category:Gun Users Category:Aliens Category:Geniuses
+        Category:Energy Users Category:Leaders Category:Warriors Category:Electricity
+        Users Category:Technology Users Category:Male Characters Category:Birds Category:Evil
+        Characters Category:Armor Users Category:Forcefield Users Category:Regeneration
+        Users Category:Absorption Users Category:Game Bosses Category:Final Bosses
+        Category:Characters Category:Game Characters Category:Video Game Characters
+        Category:Antagonists Category:Primary Antagonists Category:Armor Users Category:Claw
+        Users Category:Large Sized Characters Category:Longevity Users Category:Energy
+        Projection Users Category:Statistics Amplification Users Category:Flight Users
+        Category:Martial Artists Category:Adaptation Users Category:Gravity Users
+        Category:Bodily Weaponry Users Category:Duplication Users Category:Possession
         Users Category:Power Absorption Users Category:Resurrection Users Category:Shapeshifters
         Category:Immortals Category:Science Fiction Characters Category:Energy Weapon
         Users Category:Hybrids Category:Parasites Category:Cape Users Category:Adults'
+      source_id: vsbattles-raven-beak-metroid
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Key: Base | Raven Beak X Name: Ashkar Behek (Chozo language), Raven
+        Beak (English language) Origin: Metroid Age: Unknown Gender: Male Classification:
+        Chozo | Chozo/X-Parasite/Kraid/Experiment No. Z-57 mix'
       source_id: vsbattles-raven-beak-metroid
       provider_id: vsbattles
       authority: high
@@ -2009,221 +2183,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|raven beak|9666110
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-raven-beak-metroid
-    url: https://character-stats-and-profiles.fandom.com/wiki/Raven_Beak_%28Metroid%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - powers_and_abilities
-    - tier
-    normalized_page_title: Samus Aran (Canon)/MemeLordGamer Trap
-    source_type: mediawiki
-    revision_id: '408917'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 199749
-    content_kind: api_json
-    headings_detected:
-    - '[[File:Summary_SU.png|215px]]'
-    - '[[File:Notable_Powers_SU_Text.png|703px]]'
-    - '[[File:Attack_Potency.png|703px]]'
-    - '[[File:Speed.png|703px]]'
-    - '[[File:Lifting_Strength.png|703px]]'
-    - '[[File:Striking_Strength.png|703px]]'
-    - '[[File:Durability.png|703px]]'
-    - '[[File:Mariostamina.png]]'
-    - '[[File:Range.png|703px]]'
-    - '[[File:Mariostandardequip.png]]'
-    - '[[File:Intelligence.png|703px]]'
-    - '[[File:Weaknesses.png|703px]]'
-    - '[[File:Notable_Attacks_and_Techniques.png|703px]]'
-    - '''''''Key:'''''''
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 50
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 7-C | High 6-A | 5-B | 5-B | 5-B | 5-B | At least Low 4-C, likely High
-        4-C | At least Low 4-C, likely High 4-C | At least Low 4-C, likely High 4-C
-        | At least Low 4-C, likely High 4-C, High 3-A with White Hole Manipulation
-        | At least Low 4-C, likely High 4-C, High 3-A | At least Low 4-C, likely High
-        4-C, High 3-A
-      source_id: character-stats-profiles-raven-beak-metroid
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'One of Samus'' most iconic and powerful upgrades, the Screw Attack allows
-        Samus to surround herself in a field of energy while spin jumping, shredding
-        through any opponents in her way while also providing protection, rendering
-        her effectively invulnerable. It is powerful enough to easily destroy most
-        enemies just by jumping through them. She can also perform this with short
-        hops, essentially dashing forwards with a Screw Attack. |-|Suits= * Zero Suit:
-        The skintight bodysuit that Samus wears underneath her Power Suit. If she
-        has somehow lost access to her Power Suit, Samus instead utilizes this, which
-        leaves her unprotected and much more vulnerable. The Zero Suit can also be
-        used to manifest and unmanifest her Power Suit. * Power Suit: Samus'' basic,
-        signature Power Suit, the lynchpin of her arsenal, properly known as Chozo
-        Battle Suit Ver SA1-4468-VM6-P. This refers to both the base Power Suit without
-        upgrades, and her suit as a whole and any equipment she may have acquired.
-        It is equipped with Oxygen Supply Equipment that allows Samus to survive essentially
-        indefinitely in the vacuum of space or underwater, and protects against airborne
-        toxins and pollutants, allowing her to survive in inhospitable environments.
-        The Power Suit''s modular technology allows Samus to integrate all sorts of
-        technology into its construction so that she can amass a powerful arsenal
-        of weapons and armor upgrades throughout her adventures, becoming increasingly
-        dangerous as she does so. Weapons and ammunition are stored as data until
-        they are needed, at which point they are rendered tangible so that Samus can
-        fire them. It has advanced energy shielding technology equipped by default
-        as well, protecting her from harm. The Power Suit integrates with Samus on
-        a biological level, and thus cannot be removed without her cooperation, but
-        if she wills it, it will simply disappear in a flash. She can materialize
-        it in the same way. At the end of Zero Mission, after passing the Ruins Test,
-        Samus gains the Legendary Power Suit, a powerful upgrade to her basic Power
-        Suit that she has wielded ever since then. In Metroid Fusion, her Power Suit
-        is rebuilt as the Fusion Suit, which has much of the same capabilities but
-        is much slimmer and lighter, and, as a result, provides less protection, especially
-        against subzero temperatures, which Samus is extremely weak to thanks to her
-        Metroid DNA. ** Varia Suit: Samus'' most recognizable suit, the Varia Suit
-        protects against extreme conditions such as acid and intense temperatures
-        of either extreme, allowing her to safely travel through superhot locations
-        such as the depths of Norfair and subzero locations such as Sector 5 in Metroid
-        Fusion, overcoming the weakness to cold she had at the time thanks to her
-        Metroid DNA. It also increases the strength of Samus'' defenses, greatly reducing
-        the damage she takes in combat. ** Gravity Suit: One of Samus'' most effective
-        suits, the Gravity Suit allows her to move through environments with abnormal
-        gravity and water without being impeded, making her highly resistant to gravitational
-        forces. It also further reinforces her defenses and increases her resistance
-        to even hotter temperatures. The Gravity Boost that she gains in Metroid Prime
-        2: Echoes is effectively analogous, allowing her to easily move through the
-        water. ** Phazon Suit: Samus'' final suit in Metroid Prime, which she gained
-        after being exposed to high amounts of Phazon after she killed the Omega Pirate.
-        Thanks to the corrupted nature of this state, Samus gained increased resistance
-        to blue Phazon as well as increased defenses. Additionally, when exposed to
-        high amounts of Phazon, it allows her to enter Hypermode and make use of the
-        extremely powerful Phazon Beam. ** Dark Suit: A Luminoth Power Suit that was
-        used by their kind to survive in the harsh environment of Dark Aether, protecting
-        her from the noxious dark vapor and filtering out 80% of the effects of Dark
-        Aether''s corrosive atmosphere. ** Light Suit: The ultimate Luminoth Power
-        Suit, the greatest weapon, which they intended to use against the Ing. Powered
-        by the Light of Aether, the Light Suit protects Samus from the foul Dark Water
-        of Dark Aether and the assaults of swarms of Ingstorm, allowing her to move
-        through Dark Aether without issue. It also lets her travel through Light Shafts
-        to quickly traverse great distances on Aether. ** PED Suit: A Phazon Enhancement
-        Device designed specifically for Samus to integrate with her Power Suit, the
-        PED Suit allows Samus to safely absorb and harness the power of Phazon, which
-        she can produce herself. Her resistance to Phazon is greatly enhanced in this
-        suit. With this suit, Samus can restore her health while submerged in pools
-        of Phazon and enter into Hypermode. It is later enhanced by the Hazard Shield,
-        protecting Samus from environmental hazards such as acid rain and fuel gel.
-        ** Unnamed/Omega Suit: After absorbing SA-X, Samus momentarily has her DNA
-        restored although not the suit. This allows Samus to onc'
-      source_id: character-stats-profiles-raven-beak-metroid
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'A set of unique powers that Samus has access to in Metroid: Samus Returns,
-        gained from channeling a "mystical and powerful energy source" known as Aeion.
-        She gains these powers from Aeion Ability Artifacts and can replenish her
-        limited supply of Aeion from downed and slain opponents. ** Phantom Cloak:
-        While used, Samus'' drains her Aeion to become invisible to regular detection.
-        ** Flash Shift: Samus can travel a set distance, either forward or backward,
-        up to three times. Frequently used to avoid attacks or exploration. ** Beam
-        Burst: This ability enhances Samus'' beam weapons so that she can fire a machine
-        gun-like barrage of beam shots rather than charge her attacks. Every shot
-        made drains her Aeion. ** Lightning Armor: Samus surrounds herself with a
-        field of green electricity, protecting herself from harm by absorbing attacks
-        directed at her, draining her Aeion instead of her energy. This ability also
-        empowers her Melee Counter into a more powerful and longer ranged Lightning
-        Counter. ** Phase Drift: The final Aeion ability, which, when used, slows
-        down time for all things around Samus by 50%, allowing her to move as quickly
-        as usual while everyone else is left to catch up. ** Scan Pulse: When used,
-        at the cost of a small amount of Aeion, this ability envelops Samus in a blue
-        field that dissipates throughout her surroundings, revealing Map data for
-        them and exposing any breakable obstacles. * Concentration: A technique that
-        Samus can use when low on health to replenish her energy by focusing power
-        in her Arm Cannon, restoring a tank of energy and some of her missiles. The
-        amount of energy she can regain in this way can be increased by "E-Recovery
-        Tanks". * Crystal Flash: A secret technique that Samus can use to replenish
-        her health at the cost of her ammunition, taught to her by the Chozo and performed
-        using technology integrated into the Power Suit. By laying a Power Bomb, Samus
-        wreathes herself in a cocoon of energy, using the power of the bomb to completely
-        replenish her energy supplies. * Hypermode: A highly powerful but temporary
-        state in which Samus is powered up by exposure to Phazon, draining her energy
-        to greatly increase her firepower and render herself nearly invulnerable to
-        harm. While in Hypermode, Samus must vent her Phazon so that she doesn''t
-        damage herself and suffer terminal corruption, dying and becoming another
-        Dark Samus. ** Phazon / Hyper Beam: An incredibly powerful upgrade for Samus''
-        beam that instead fires blue bolts of electricity with high power, draining
-        her supply of Phazon if none is available nearby. It can be charged to instead
-        rapidly fire multiple beams one after another. ** Hyper Ball: A Phazon-powered
-        Morph Ball strike that releases a burst of blue electricity in all directions,
-        seeking and damaging all opponents caught in the blast but constantly draining
-        Samus'' Phazon as long as it''s active. ** Hyper Grapple: An enhanced Grapple
-        Beam, empowered by the power of Phazon. After latching onto an opponent with
-        her Grapple Beam, Samus can either pump them full of Phazon to heavily damage
-        and kill them or absorb their supplies of Phazon. ** Hyper Missile: A Phazon-empowered
-        missile that fires missiles that explode into large bursts of Phazon, dealing
-        extensive damage. * Lethal Strike: A melee combat technique utilized by Samus
-        in Other M. Once an opponent has been downed, Samus can quickly run up to
-        them to overpower them physically before blasting them with a point-blank
-        Charge Beam, often destroying them instantly. * Melee Counter: A melee technique
-        in which Samus swings up her Arm Cannon while an opponent charges, knocking
-        them back and stunning them if timed properly and instantly readying a fully-charged
-        beam. * Overblast: Samus jumps up onto her opponent, forcing them to the ground
-        and firing a full-power Charge Beam into their head or another weak point
-        at point-blank range, often instantly killing her target. * SenseMove: An
-        evasive technique that uses the thrusters of Samus'' suit to dodge and quickly
-        react to an attack on her, immediately following up with a charged shot. Integrating
-        some sort of precognitive ability, it allows Samus to easily react to attacks
-        from out of view.'
-      source_id: character-stats-profiles-raven-beak-metroid
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 1
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|samus aran canon memelordgamer
-      trap|408917
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-raven-beak
@@ -2284,16 +2243,16 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Crowman=Superhuman Physical Characteristics, Superhuman Athleticism,
-        Acrobatics (Chojin are able to leap tens of metres into the air with ease
-        and casually perform multiple flips and intense acrobatics skills with ease),
-        Immortality (Type 1 & 2, Crowman doesn't age and has lived for hundreds of
-        millions of years, Chojin have repeatedly shown the ability to shake off wounds
-        such as having large holes punched through their chest), Regeneration (Mid-Low,
-        Chojin are able to heal from wounds in three days that takes a normal human
-        six months an example of this is when Terryman recovered from large deep wounds
-        over his body in less than a few minutes), Martial Arts (Crowman is a master
-        wrestler who has millions of years of combat experience and training), Self-Sustenance
+      value: Superhuman Physical Characteristics, Superhuman Athleticism, Acrobatics
+        (Chojin are able to leap tens of metres into the air with ease and casually
+        perform multiple flips and intense acrobatics skills with ease), Immortality
+        (Type 1 & 2, Crowman doesn't age and has lived for hundreds of millions of
+        years, Chojin have repeatedly shown the ability to shake off wounds such as
+        having large holes punched through their chest), Regeneration (Mid-Low, Chojin
+        are able to heal from wounds in three days that takes a normal human six months
+        an example of this is when Terryman recovered from large deep wounds over
+        his body in less than a few minutes), Martial Arts (Crowman is a master wrestler
+        who has millions of years of combat experience and training), Self-Sustenance
         (Type 1, Chojin have shown the ability to casually survive in the vacuum of
         space for over twenty minutes without suffering any negative effects from
         the lack of air), Flight (Chojin are able to propel their bodies through the
@@ -2330,14 +2289,14 @@ repair:
         is able to launch an opponent's projectile back at them), Limited Density
         Manipulation (Crowman is able to physical bite into stone and stretch it out
         as if it was made out of rubber), Body Control (Crowman is able to increase
-        the size of his muscles by pumping them up) |-|Resistances=Resistance to Radiation
-        Manipulation, Heat Manipulation (Chojin are able to survive in the vacuum
-        of space without suffering from any negative effects of cosmic radiation or
-        intense heat or cold), Fate Manipulation (Chojin are able to overcome changes
-        to their fate through effort and willpower which is how Terryman avoided being
-        decapitated after his Destiny Doll's head was ripped off), Emotional Manipulation
-        (Chojin are able to restore the bonds with their former allies after they
-        have their emotions changed to become enemies with their allies)
+        the size of his muscles by pumping them up) Resistance to Radiation Manipulation,
+        Heat Manipulation (Chojin are able to survive in the vacuum of space without
+        suffering from any negative effects of cosmic radiation or intense heat or
+        cold), Fate Manipulation (Chojin are able to overcome changes to their fate
+        through effort and willpower which is how Terryman avoided being decapitated
+        after his Destiny Doll's head was ripped off), Emotional Manipulation (Chojin
+        are able to restore the bonds with their former allies after they have their
+        emotions changed to become enemies with their allies)
       source_id: character-stats-profiles-raven-beak
       provider_id: character_stats_profiles
       authority: high
@@ -2401,25 +2360,66 @@ repair:
       value: 'As a Chojin, Crowman is incredibly weak to a special type of light called
         the Capillaria Rays which poison a Chojin with incredibly minor contact and
         fully melt their bodies into dust when exposed for much longer Notable Attacks/Techniques:
-        |-|Wrestling Techniques= * Lock Up of Judgement: The Lock-Up of Judgement
-        is a special technique that all Perfect Chojin know where Crowman grapples
-        with the opponent in order to accurately measure an opponent''s physical strength
-        as well as see all of their abilities and techniques. * Raven Wing Strike:
-        The Raven Wing Strike is a special technique where Crowman strikes the opponent
-        with both of his wings by slamming them on both sides of the opponent. * Crow
-        Beak: The Crow Beak is a special technique where Crowman stabs the opponent''s
-        chest with his incredibly sharp beak. * Crows Bombs Away: The Crows Bombs
-        Away is a special technique where Crowman grabs the opponent''s arms with
-        his hands, spreading them out before flying the opponent up into the air and
-        slamming them to the ground and stabbing the opponent''s chest with his beak,
-        aiming to impale their heart. * Peacock Feather Blade: The Peacock Feather
-        Blade is a special technique where Crowman slashes the opponent with the edges
-        of his two wings by spinning around. * Crow''s Prey Skewer: The Crow''s Prey
-        Skewer is a special technique where Crowman, after using his Crow Beak Scissors
-        to make a stone skewer, grabs the opponent''s arms with his hands, spreading
-        them out before flying the opponent up into the air and slamming them down
-        onto the stone skewer, impaling their back and stabbing the opponent''s chest
-        with his beak, aiming to impale their heart.'
+        * Lock Up of Judgement: The Lock-Up of Judgement is a special technique that
+        all Perfect Chojin know where Crowman grapples with the opponent in order
+        to accurately measure an opponent''s physical strength as well as see all
+        of their abilities and techniques. * Raven Wing Strike: The Raven Wing Strike
+        is a special technique where Crowman strikes the opponent with both of his
+        wings by slamming them on both sides of the opponent. * Crow Beak: The Crow
+        Beak is a special technique where Crowman stabs the opponent''s chest with
+        his incredibly sharp beak. * Crows Bombs Away: The Crows Bombs Away is a special
+        technique where Crowman grabs the opponent''s arms with his hands, spreading
+        them out before flying the opponent up into the air and slamming them to the
+        ground and stabbing the opponent''s chest with his beak, aiming to impale
+        their heart. * Peacock Feather Blade: The Peacock Feather Blade is a special
+        technique where Crowman slashes the opponent with the edges of his two wings
+        by spinning around. * Crow''s Prey Skewer: The Crow''s Prey Skewer is a special
+        technique where Crowman, after using his Crow Beak Scissors to make a stone
+        skewer, grabs the opponent''s arms with his hands, spreading them out before
+        flying the opponent up into the air and slamming them down onto the stone
+        skewer, impaling their back and stabbing the opponent''s chest with his beak,
+        aiming to impale their heart. :* Perfect Chojin Physiology: As a Perfect Chojin,
+        the race of super beings that inhabit the Kinnikuman world, Crowman is incredibly
+        strong, fast and durable. All Chojin are able to withstand an incredible amount
+        of damage before dying with them even being able to survive having large holes
+        blown through their chest. A Chojin''s natural healing factor is far greater
+        than any human''s with them being able to naturally heal from injuries that
+        would take a human six months in just three days and Chojin can heal from
+        large gashes across their body. All Chojin are able to extract their own Chojin
+        Power from their body and grant to another Chojin, powering them up and healing
+        them. ::* Flight: All Chojin naturally have the ability to fly through the
+        air with nothing propelling them forward like boosters or wings. This level
+        of flight allows Chojin to fly in space. ::* Size Changing: All Chojin naturally
+        have the ability to grow in size, easily growing to become thirty metres tall
+        with ease and no negative side effects. ::* Immortality: As a Perfect Chojin,
+        Crowman doesn''t age at all, instead remaining at his peak physical condition
+        for hundreds of millions of years without physically ageing a single day.
+        ::* Perfect Chojin Power Bestowal: All members of the Perfect Origin are able
+        to turn any Chojin that they think is worthy into a Perfect Chojin. When a
+        normal Chojin becomes a Perfect Chojin, their physical features change and
+        they become physically unable to age, allowing them to live for millions of
+        years. Unlike other Chojin, the Perfect Origin does not need to give up a
+        portion of their Chojin Power in order to do so. ::* Selective Intangibility:
+        All members of the Perfect Origin are able to render their entire bodies completely
+        intangible. This allows them to physically phase their bodies into objects
+        or an opponent''s attack before teleporting large distances without being
+        seen. ::* Dimensional Tears: All members of the Perfect Origin are able to
+        make physical tears in space itself in order to open up portals that lead
+        to whatever location they want to go to. Crowman is able to do this by shooting
+        out electricity from his hands to tear open space. :* Parrot Back Body Motion:
+        The Parrot Back Body Motion is a special ability where Crowman increases drastically
+        increase his speed to the point he can switch places with the opponent before
+        they can even react to what is happening. Crowman uses this ability to switch
+        places with an opponent in order to reverse an opponent''s hold :* Crow Feather
+        Shield: The Crow Feather Shield is a special ability where Crowman launches
+        his feathers off of his body at an opponent''s projectile to stop it from
+        hitting Crowman. ::* Crow Feather Fireball: The Crow Feather Fireball is a
+        special ability where Crowman launches the Crow Feather Shield at the opponent,
+        hitting the opponent with their own projectile. :* Crow Beak Scissors: The
+        Crow Beak Scissors is a special ability where Crowman opens up his beak and
+        bites onto the stone ground before stretching it upward to make a stone spike
+        to impale the opponent onto. Category:Unbacked0 Category:Tier 5 Category:Tier
+        2'
       source_id: character-stats-profiles-raven-beak
       provider_id: character_stats_profiles
       authority: high
@@ -2437,11 +2437,120 @@ repair:
     duplicate_key: character-stats-and-profiles.fandom.com|crowman canon unbacked0|288868
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-raven-beak-game
+    url: https://character-stats-and-profiles.fandom.com/wiki/Raven_Beak_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Raven (Canon, Twisted Metal)/Unbacked0
+    source_type: mediawiki
+    revision_id: '244772'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4597
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-C, 8-C with Shadow
+      source_id: character-stats-profiles-raven-beak-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Vehicular Mastery (Has entered and
+        survived multiple Twisted Metal contests, having to fight against the world's
+        greatest combat drivers every time) Superhuman Physical Characteristics, Explosion
+        Manipulation (With missiles), Homing Attack (With Homing Missiles), Fire Manipulation
+        (With Fire Missiles), Ice Manipulation (With Freeze Missiles), Energy Projection
+        (With Shadow Burst)
+      source_id: character-stats-profiles-raven-beak-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Street Level (Should be comparable to other contestants like Calypso
+        and Needles Kane), Large Building Level with Shadow (All vehicles in Twisted
+        Metal are able to destroy large monuments such as the Effiel Tower, the World
+        Trade Center and the Statue of Liberty)
+      source_id: character-stats-profiles-raven-beak-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic (Scales to Calypso who was was able to dodge tank shots from
+        Minion)
+      source_id: character-stats-profiles-raven-beak-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Street Level, Large Building Level with Shadow
+      source_id: character-stats-profiles-raven-beak-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: None Notable Category:Unbacked0 Category:Tier 9 Category:Tier 8
+      source_id: character-stats-profiles-raven-beak-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|raven canon twisted metal
+      unbacked0|244772
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-raven-beak-game
     url: https://vsbattles.fandom.com/wiki/Raven_Beak_%28Game%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id013
+    extracted_fields: &id012
     - attack_potency
     - durability
     - intelligence
@@ -2483,7 +2592,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id014
+    allowed_fields: &id013
     - attack_potency
     - speed
     - durability
@@ -2493,23 +2602,17 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{6-B}} | {{6-B}}'
-      source_id: vsbattles-raven-beak-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base=Superhuman Physical Characteristics, Large Size (Type 0), Longevity,
+      value: 'Superhuman Physical Characteristics, Large Size (Type 0), Longevity,
         Energy Projection (with arm cannon abilities), Electricity Manipulation and
         Forcefield Creation (via Lightning Armor variants), Energy Manipulation and
         Statistics Amplification (with Aeion abilities such as Flash Shift, Lightning
         Armor, and a charged collision attack similar to the Shinespark), skilled
-        at hand-to-hand combat, Flight, Adapted to Gravity Manipulation, Flight |-|Raven
-        Beak X=Superhuman Physical Characteristics, Large Size (Type 1: Assimilated
-        Kraid''s body, so his size is comparable), Natural Weaponry, along with Absorption,
-        Duplication, Possession, Power Absorption, Resurrection, Shapeshifting, Regeneration
-        (Low-High), and Immortality (Type 6) via X-Parasite'
+        at hand-to-hand combat, Flight, Adapted to Gravity Manipulation, Flight Superhuman
+        Physical Characteristics, Large Size (Type 1: Assimilated Kraid''s body, so
+        his size is comparable), Natural Weaponry, along with Absorption, Duplication,
+        Possession, Power Absorption, Resurrection, Shapeshifting, Regeneration (Low-High),
+        and Immortality (Type 6) via X-Parasite'
       source_id: vsbattles-raven-beak-game
       provider_id: vsbattles
       authority: high
@@ -2599,20 +2702,28 @@ repair:
         any direction. Unlike Samus, Raven Beak does not seem to need to charge this
         ability with the Speed Booster and can change direction with the Shinespark
         in sudden, 45 degree angles. ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{Discussions}} Category:Metroid Category:Villains Category:Gun Users Category:Aliens
-        Category:Geniuses Category:Energy Users Category:Leaders Category:Warriors
-        Category:Electricity Users Category:Technology Users Category:Male Characters
-        Category:Birds Category:Evil Characters Category:Armor Users Category:Forcefield
-        Users Category:Regeneration Users Category:Absorption Users Category:Game
-        Bosses Category:Final Bosses Category:Characters Category:Game Characters
-        Category:Video Game Characters Category:Antagonists Category:Primary Antagonists
-        Category:Armor Users Category:Claw Users Category:Large Sized Characters Category:Longevity
-        Users Category:Energy Projection Users Category:Statistics Amplification Users
-        Category:Flight Users Category:Martial Artists Category:Adaptation Users Category:Gravity
-        Users Category:Bodily Weaponry Users Category:Duplication Users Category:Possession
+        Category:Metroid Category:Villains Category:Gun Users Category:Aliens Category:Geniuses
+        Category:Energy Users Category:Leaders Category:Warriors Category:Electricity
+        Users Category:Technology Users Category:Male Characters Category:Birds Category:Evil
+        Characters Category:Armor Users Category:Forcefield Users Category:Regeneration
+        Users Category:Absorption Users Category:Game Bosses Category:Final Bosses
+        Category:Characters Category:Game Characters Category:Video Game Characters
+        Category:Antagonists Category:Primary Antagonists Category:Armor Users Category:Claw
+        Users Category:Large Sized Characters Category:Longevity Users Category:Energy
+        Projection Users Category:Statistics Amplification Users Category:Flight Users
+        Category:Martial Artists Category:Adaptation Users Category:Gravity Users
+        Category:Bodily Weaponry Users Category:Duplication Users Category:Possession
         Users Category:Power Absorption Users Category:Resurrection Users Category:Shapeshifters
         Category:Immortals Category:Science Fiction Characters Category:Energy Weapon
         Users Category:Hybrids Category:Parasites Category:Cape Users Category:Adults'
+      source_id: vsbattles-raven-beak-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Key: Base | Raven Beak X Name: Ashkar Behek (Chozo language), Raven
+        Beak (English language) Origin: Metroid Age: Unknown Gender: Male Classification:
+        Chozo | Chozo/X-Parasite/Kraid/Experiment No. Z-57 mix'
       source_id: vsbattles-raven-beak-game
       provider_id: vsbattles
       authority: high
@@ -2630,126 +2741,17 @@ repair:
     duplicate_key: vsbattles.fandom.com|raven beak|9666110
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-raven-beak-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Raven_Beak_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Raven (Canon, Twisted Metal)/Unbacked0
-    source_type: mediawiki
-    revision_id: '244772'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4597
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 9-C, 8-C with Shadow
-      source_id: character-stats-profiles-raven-beak-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Raven= Superhuman Physical Characteristics, Vehicular Mastery (Has entered
-        and survived multiple Twisted Metal contests, having to fight against the
-        world's greatest combat drivers every time) |-|Shadow= Superhuman Physical
-        Characteristics, Explosion Manipulation (With missiles), Homing Attack (With
-        Homing Missiles), Fire Manipulation (With Fire Missiles), Ice Manipulation
-        (With Freeze Missiles), Energy Projection (With Shadow Burst)
-      source_id: character-stats-profiles-raven-beak-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Street Level (Should be comparable to other contestants like Calypso
-        and Needles Kane), Large Building Level with Shadow (All vehicles in Twisted
-        Metal are able to destroy large monuments such as the Effiel Tower, the World
-        Trade Center and the Statue of Liberty)
-      source_id: character-stats-profiles-raven-beak-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (Scales to Calypso who was was able to dodge tank shots from
-        Minion)
-      source_id: character-stats-profiles-raven-beak-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Street Level, Large Building Level with Shadow
-      source_id: character-stats-profiles-raven-beak-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None Notable Category:Unbacked0 Category:Tier 9 Category:Tier 8
-      source_id: character-stats-profiles-raven-beak-game
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|raven canon twisted metal
-      unbacked0|244772
-    retryable: false
-    exception_class: ''
   needs_human_source_choice: false
   candidate_sources:
   - source_id: mediawiki-4711126
     url: https://vsbattles.fandom.com/wiki/Raven_Beak
     title: Raven Beak
     rank: 120
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2766,11 +2768,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Raven_Beak_Metroid
     title: Raven Beak
     rank: 120
-    extracted_fields: *id009
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2787,11 +2789,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Raven_Beak_%28Metroid%29
     title: Raven Beak
     rank: 120
-    extracted_fields: *id011
+    extracted_fields: *id010
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id011
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2808,11 +2810,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Raven_Beak_%28Game%29
     title: Raven Beak
     rank: 120
-    extracted_fields: *id013
+    extracted_fields: *id012
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id014
+    allowed_fields: *id013
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2829,3 +2831,24 @@ repair:
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: false
+  scoped_key: Base
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T19:10:27Z'
+  key_origin: primary_form_position
+  axes:
+    attack_potency:
+      method: positional
+      segments: 2
+    speed:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+    intelligence:
+      method: positional
+      segments: 2
+  remaining_piped_axes:
+  - tier

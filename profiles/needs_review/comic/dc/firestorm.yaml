@@ -4,14 +4,15 @@ name: Firestorm
 franchise: DC
 category: comic
 aliases: &id001 []
-profile_type: auto_evidence_profile
-status: provisional
-battle_eligible: true
+profile_type: needs_review
+status: needs_review
+battle_eligible: false
 generation:
   generated_at: '2026-09-22T19:52:01Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.6
-  ineligible_reasons: []
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Firestorm
   franchise: DC
@@ -62,42 +63,6 @@ sources:
   source_type: mediawiki
   title: Firestorm
   url: https://character-stats-and-profiles.fandom.com/wiki/Firestorm
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-firestorm-dc
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Firestorm DC
-  url: https://vsbattles.fandom.com/wiki/Firestorm_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-firestorm-dc
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Firestorm DC
-  url: https://character-stats-and-profiles.fandom.com/wiki/Firestorm_DC
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -165,11 +130,11 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-  revision_id: '8664134'
-  revision_timestamp: '2024-07-28T23:02:43Z'
+  revision_id: '9706325'
+  revision_timestamp: '2026-10-14T22:50:16Z'
   fetch_status: fetched
   http_status: 200
-  content_length: 9822
+  content_length: 9840
   content_kind: api_json
   search_attempted_titles:
   - Firestorm (Pre-Crisis)
@@ -193,6 +158,41 @@ sources:
   - striking_strength
   - tier
   - weaknesses
+  dropped_items:
+    standard_equipment:
+    - item: None Notable
+      reasons:
+      - explicit_none
+      - placeholder_instruction
+    weaknesses:
+    - item: and if he tries
+      reasons:
+      - conjunction_orphan
+    - item: he gets harmed by harmful energy feedback. If his components aren't in
+        unity
+      reasons:
+      - trailing_fragment
+    - item: 'Energy Manipulation:'
+      reasons:
+      - section_header
+    - item: 'Energy Projection: Firestorm can project massive amounts of different
+        amount of energies. Naturally occurring energy pro'
+      reasons:
+      - technique_in_weaknesses
+    - item: due to consistency
+      reasons:
+      - prose_sentence_shard
+    - item: Before making any changes to this page
+      reasons:
+      - editor_note_item
+  stripped_items:
+    weaknesses:
+    - item: 'Energy Absorption: Firestorm can absorb massive amounts of energy as
+        well as being able to absorb many different types o'
+      kept: 'Energy Absorption: Firestorm can absorb massive amounts of energy as
+        well as being able to absorb many different types o'
+      reasons:
+      - editor_note_tail
 - id: character-stats-profiles-firestorm-dc-comics
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -319,28 +319,10 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-firestorm-dc-comics
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Firestorm (DC Comics)
-  url: https://vsbattles.fandom.com/wiki/Firestorm_%28DC_Comics%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 power_scale:
   tier:
-    text: At most {{9-A}} physically. {{Varies}}, up to at least {{High 6-B}}, possibly
-      higher with Nuclear Blasts & Bursts
+    text: At most 9-A physically. , up to at least High 6-B, possibly higher with
+      Nuclear Blasts & Bursts
     source_ids:
     - vsbattles-firestorm-dc-comics
     confidence: 0.6
@@ -852,37 +834,6 @@ weaknesses:
   enrichment:
     method: deterministic_keyword_rules
     metadata_only: true
-- id: weaknesses-and-if-he-tries
-  name: and if he tries
-  description: and if he tries
-  source_ids: *id003
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-he-gets-harmed-by-harmful-energy-feedback-if-his-components-aren-t-in
-  name: he gets harmed by harmful energy feedback. If his components aren't in unity
-  description: he gets harmed by harmful energy feedback. If his components aren't
-    in unity
-  source_ids: *id003
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
 - id: weaknesses-firestorm-can-t-act-notable-attacks-techniques
   name: Firestorm can't act Notable Attacks/Techniques
   description: Firestorm can't act Notable Attacks/Techniques
@@ -976,46 +927,11 @@ weaknesses:
   enrichment:
     method: deterministic_keyword_rules
     metadata_only: true
-- id: weaknesses-energy-manipulation
-  name: 'Energy Manipulation:'
-  description: 'Energy Manipulation:'
-  source_ids: *id003
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-energy-projection-firestorm-can-project-massive-amounts-of-different-
-  name: 'Energy Projection: Firestorm can project massive amounts of different amount
-    of energies. Naturally occurring energy pro'
-  description: 'Energy Projection: Firestorm can project massive amounts of different
-    amount of energies. Naturally occurring energy projected by Firestorm are "Nuclear
-    Blasts" however elements can project a number of different energies at will.'
-  source_ids: *id003
-  source_claim_ids: []
-  confidence: 0.85
-  tags:
-  - heat_attack
-  - sonic_or_heat_interaction
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
 - id: weaknesses-energy-absorption-firestorm-can-absorb-massive-amounts-of-energy-as-w
   name: 'Energy Absorption: Firestorm can absorb massive amounts of energy as well
     as being able to absorb many different types o'
   description: 'Energy Absorption: Firestorm can absorb massive amounts of energy
-    as well as being able to absorb many different types of energy. Notes:'
+    as well as being able to absorb many different types of energy'
   source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
@@ -1033,21 +949,6 @@ weaknesses:
 - id: weaknesses-although-this-character-was-unaffected-by-the-crisis
   name: Although this character was unaffected by the Crisis
   description: Although this character was unaffected by the Crisis
-  source_ids: *id003
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-due-to-consistency
-  name: due to consistency
-  description: due to consistency
   source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
@@ -1090,43 +991,13 @@ weaknesses:
   enrichment:
     method: deterministic_keyword_rules
     metadata_only: true
-- id: weaknesses-before-making-any-changes-to-this-page
-  name: Before making any changes to this page
-  description: Before making any changes to this page
+- id: weaknesses-please-read-and-follow-the-power-scaling-rules-for-marvel-and-dc-comi
+  name: please read and follow the Power-scaling Rules for Marvel and DC Comics.
+  description: please read and follow the Power-scaling Rules for Marvel and DC Comics.
   source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-please-read-and-follow-the-power-scaling-rules-for-marvel-and-dc-comi
-  name: 'please read and follow the Power-scaling Rules for Marvel and DC Comics.
-    ==Notable Matchups== Victories: Losses: Inconcl'
-  description: 'please read and follow the Power-scaling Rules for Marvel and DC Comics.
-    ==Notable Matchups== Victories: Losses: Inconclusive: ==References== Category:Characters
-    Category:DC Comics Category:Absorption Users Category:Adults Category:Cloth Users
-    Category:Comic Book Characters Category:Creation Users Category:Deconstruction
-    Users Category:Density Users Category:Earth Users Category:Ectoplasm Users Category:Energy
-    Users Category:Enhanced Senses Users Category:Explosion Users Category:Fire Users
-    Category:Flight Users Category:Fusionism Users Category:Fusions Category:Geniuses
-    Category:Heroes Category:Humans Category:Hybrids Category:Information Analysis
-    Users Category:Intangibility Users Category:Justice League Members Category:Life
-    Users Category:Light Users Category:Male Characters Category:Matter Users Category:Power
-    Nullification Users Category:Psychometry Users Category:Scientists Category:Self-Sustenance
-    Users Category:Sleep Users Category:Students Category:Telepaths Category:Temperature
-    Users Category:Transmutation Users Category:Weapon Creation Users'
-  source_ids: *id003
-  source_claim_ids: []
-  confidence: 0.85
-  tags:
-  - heat_attack
-  - sonic_or_heat_interaction
   targets: []
   activation_requirements: []
   counters: []
@@ -1160,13 +1031,13 @@ review:
   - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: provisional
+  readiness_state: needs_review
   profile_state: auto_evidence_profile
   primary_source_id: vsbattles-firestorm-dc-comics
   secondary_disagreement_policy: warning_only
 profile_hash: 7965180229727556031ca007e53a8802e9dd5ffb6b25efba10410eb35d36aef0
 repair:
-  attempted_at: '2026-09-26T00:36:40Z'
+  attempted_at: '2026-10-25T17:40:59Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -1191,15 +1062,14 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Firestorm (Pre-Crisis)
     source_type: mediawiki
-    revision_id: '8664134'
+    revision_id: '9706325'
     fetch_status: fetched
     http_status: 200
-    content_length: 9822
+    content_length: 9840
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1237,8 +1107,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{9-A}} physically. {{Varies}}, up to at least {{High 6-B}},
-        possibly higher with Nuclear Blasts & Bursts
+      value: At most 9-A physically. , up to at least High 6-B, possibly higher with
+        Nuclear Blasts & Bursts
       source_id: vsbattles-firestorm-dc-comics
       provider_id: vsbattles
       authority: high
@@ -1257,7 +1127,7 @@ repair:
         attack HammondJustice League of America #205), Power Nullification (Trapped
         Zatanna in an anti-magic bubbleThe Fury of Firestorm #4), Sleep Manipulation
         (Via sleeping gas), Deconstruction (See hereThe Fury of Firestorm #32), Life
-        Manipulation (Capable of animating inanimate objects) Resistance to Radiation,
+        Manipulation (Capable of animating inanimate objects), Resistance to Radiation,
         Extreme Colds, Heat, and Petrification (Resisted The Satin Satan''s metamorphosis
         kiss, which can turn others into steel statuesJustice League of America #180)'
       source_id: vsbattles-firestorm-dc-comics
@@ -1315,12 +1185,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None Notable
-      source_id: vsbattles-firestorm-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average (Ronnie is a successful high school student. Martin Stein
         is at least a Genius, as one of the most intelligent scientists on the DC
@@ -1331,41 +1195,22 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: 'Needs to concentrate really hard to know what structure he needs to
-        make. Cannot affect organic matter, and if he tries, he gets harmed by harmful
-        energy feedback. If his components aren''t in unity, Firestorm can''t act
-        Notable Attacks/Techniques *Molecular Reconstruction: Firestorm has one main
-        ability which all others stem from. Firestorm can break down and reapply subatomic
-        particles as well as break up the molecular structure of elements and rearrange
-        them. To do this the element must know the exact elemental make-up of the
-        object or human. *Density Control: Firestorm has complete control over molecules
-        and as such can change the density of solids, liquids and gases to as light
-        as hydrogen or as heavy as uranium. Although he has direct control over an
-        object''s density he can use this ability on himself and only himself and
-        affect living tissue to pass through objects. *Quark Vision: The ability to
-        see extremely small objects and images down to the subatomic level. *Energy
-        Manipulation: **Energy Projection: Firestorm can project massive amounts of
-        different amount of energies. Naturally occurring energy projected by Firestorm
-        are "Nuclear Blasts" however elements can project a number of different energies
-        at will. **Energy Absorption: Firestorm can absorb massive amounts of energy
-        as well as being able to absorb many different types of energy. Notes: *Although
-        this character was unaffected by the Crisis, due to consistency, in both showings
-        and in narrative tropes, the page is being split into both its Pre-Crisis
-        and Post-Crisis incarnations *Before making any changes to this page, please
-        read and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable
-        Matchups== Victories: Losses: Inconclusive: ==References== {{scroll box|content={{reflist|2}}}}
-        {{discussions|Firestorm|Firestorm (Pre-Crisis)}} Category:Characters Category:DC
-        Comics Category:Absorption Users Category:Adults Category:Cloth Users Category:Comic
-        Book Characters Category:Creation Users Category:Deconstruction Users Category:Density
-        Users Category:Earth Users Category:Ectoplasm Users Category:Energy Users
-        Category:Enhanced Senses Users Category:Explosion Users Category:Fire Users
-        Category:Flight Users Category:Fusionism Users Category:Fusions Category:Geniuses
-        Category:Heroes Category:Humans Category:Hybrids Category:Information Analysis
-        Users Category:Intangibility Users Category:Justice League Members Category:Life
-        Users Category:Light Users Category:Male Characters Category:Matter Users
-        Category:Power Nullification Users Category:Psychometry Users Category:Scientists
-        Category:Self-Sustenance Users Category:Sleep Users Category:Students Category:Telepaths
-        Category:Temperature Users Category:Transmutation Users Category:Weapon Creation
-        Users'
+        make. Cannot affect organic matter, Firestorm can''t act Notable Attacks/Techniques,
+        Molecular Reconstruction: Firestorm has one main ability which all others
+        stem from. Firestorm can break down and reapply subatomic particles as well
+        as break up the molecular structure of elements and rearrange them. To do
+        this the element must know the exact elemental make-up of the object or human.,
+        Density Control: Firestorm has complete control over molecules and as such
+        can change the density of solids, liquids and gases to as light as hydrogen
+        or as heavy as uranium. Although he has direct control over an object''s density
+        he can use this ability on himself and only himself and affect living tissue
+        to pass through objects., Quark Vision: The ability to see extremely small
+        objects and images down to the subatomic level., Energy Absorption: Firestorm
+        can absorb massive amounts of energy as well as being able to absorb many
+        different types of energy, Although this character was unaffected by the Crisis,
+        in both showings and in narrative tropes, the page is being split into both
+        its Pre-Crisis and Post-Crisis incarnations, please read and follow the Power-scaling
+        Rules for Marvel and DC Comics.'
       source_id: vsbattles-firestorm-dc-comics
       provider_id: vsbattles
       authority: high
@@ -1380,7 +1225,7 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: false
-    duplicate_key: vsbattles.fandom.com|firestorm pre crisis|8664134
+    duplicate_key: vsbattles.fandom.com|firestorm pre crisis|9706325
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-firestorm-dc-comics
@@ -1390,48 +1235,37 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
+    - powers_and_abilities
     - speed
-    normalized_page_title: DC Comics (Canon, The Verse)/Azmarin
+    - tier
+    - weaknesses
+    normalized_page_title: Captain Atom (Canon)/BlueMarvel23555
     source_type: mediawiki
-    revision_id: '554795'
+    revision_id: '58057'
     fetch_status: fetched
     http_status: 200
-    content_length: 45234
+    content_length: 6710
     content_kind: api_json
     headings_detected:
     - Summary
-    - Power of the Verse
-    - Explanations
-    - Calculations
-    - Characters
-    - A-C
-    - D-F
-    - G-I
-    - J-L
-    - M-O
-    - P-R
-    - S-U
-    - V-X
-    - Y-Z
-    - Other Elseworlds
-    - Races & Factions
-    - Weapons
-    - Civilization
-    - Concepts/Forces
+    - Powers and Stats
     stat_labels_detected:
     - attack_potency
     - durability
+    - intelligence
     - keys
     - lifting_strength
     - origin
     - powers_and_abilities
     - range
     - speed
+    - stamina
     - standard_equipment
     - striking_strength
     - tier
+    - weaknesses
     extraction_failure_reason: ''
-    rank: 115
+    rank: 80
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1445,36 +1279,81 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: durability
-      value: '{{!}}-{{!}}'
+    - field: tier
+      value: 4-B | Low 2-C | Low 2-C
       source_id: character-stats-profiles-firestorm-dc-comics
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: speed
-      value: '{{!}}-{{!}}'
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Type 1), Flight, Matter
+        Manipulation, Energy Manipulation, Time Manipulation, Energy Absorption, Telepathy,
+        Spatial Manipulation, Quantum Manipulation, Forcefield Creation, Time Travel,
+        Resistance to Absolute Zero, Magic and Mind Manipulation, control of the Quantum
+        Field
       source_id: character-stats-profiles-firestorm-dc-comics
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: and
+      value: Solar System level (He is comparable to other high-tier DC Comics superheroes)
+        | Universe level+ (Can cause a new Big Bang, created a universe within the
+        Quantum Field and later destroyed it. Defeated Nekron) | Universe level+ (Stronger
+        than an Unrestricted Atom. Easily defeated the Captain Atom Brigade, a team
+        composed by multiple versions of Atom, before absorbing them. Created an explosion
+        powerful enough to destroy a universal space-time continuum)
+      source_id: character-stats-profiles-firestorm-dc-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ | Massively FTL+ | Massively FTL+ (Could keep up with
+        an amplified Superboy-Prime)
+      source_id: character-stats-profiles-firestorm-dc-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Solar System level | Universe level+ | Universe level+
+      source_id: character-stats-profiles-firestorm-dc-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'he will be sent hurtling through time. Depending on the type of energy
+        absorbed, he either goes forward or backwards, Captain Atom is able to control
+        time, Big Bang: Captain Atom is also able to control incredible amounts of
+        energy, being able to catalyze another Big Bang if he so wished., Dilustel
+        Armor: Captain Atom''s metallic shell, is composed of a portion of the alien
+        being known as Silver Shield, and is called Dilustel. Pieces of the alien''s
+        metal body were used in the Captain Atom Project, Project Major Force and
+        similar projects thereafter. Nathaniel is able to coat himself with the metal,
+        either partially or totally. Atom''s symbiosis with the metal is such that
+        even partially armored, he is able to access the Quantum Field., Quantum Field
+        Manipulation: Captain Atom''s metal skin is tied into the Quantum Field, he
+        is able to create an exact replica of Earth, complete with life, Firestorm
+        and even the Spectre with ease. His power is such, he was able to instantaneously
+        create an entire universe out of nothing, but he has never used this level
+        of power again as a result of him mentally limiting himself. Captain Atom
+        is also able to absorb potentially harmful energy into himself, or explosive
+        ''bombs'', destroying objects within an certain radius. On more than one occasion,
+        he has used his ability to manipulate all forms of energy to prevent a foe
+        using their own powers'
       source_id: character-stats-profiles-firestorm-dc-comics
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 55
+    variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 0
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|dc comics canon the verse
-      azmarin|554795
+    variant_match: false
+    duplicate_key: character-stats-and-profiles.fandom.com|captain atom canon bluemarvel23555|58057
     retryable: false
     exception_class: ''
   - source_id: vsbattles-firestorm-dc-comics
@@ -1489,15 +1368,14 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Firestorm (Pre-Crisis)
     source_type: mediawiki
-    revision_id: '8664134'
+    revision_id: '9706325'
     fetch_status: fetched
     http_status: 200
-    content_length: 9822
+    content_length: 9840
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1535,8 +1413,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{9-A}} physically. {{Varies}}, up to at least {{High 6-B}},
-        possibly higher with Nuclear Blasts & Bursts
+      value: At most 9-A physically. , up to at least High 6-B, possibly higher with
+        Nuclear Blasts & Bursts
       source_id: vsbattles-firestorm-dc-comics
       provider_id: vsbattles
       authority: high
@@ -1555,7 +1433,7 @@ repair:
         attack HammondJustice League of America #205), Power Nullification (Trapped
         Zatanna in an anti-magic bubbleThe Fury of Firestorm #4), Sleep Manipulation
         (Via sleeping gas), Deconstruction (See hereThe Fury of Firestorm #32), Life
-        Manipulation (Capable of animating inanimate objects) Resistance to Radiation,
+        Manipulation (Capable of animating inanimate objects), Resistance to Radiation,
         Extreme Colds, Heat, and Petrification (Resisted The Satin Satan''s metamorphosis
         kiss, which can turn others into steel statuesJustice League of America #180)'
       source_id: vsbattles-firestorm-dc-comics
@@ -1613,12 +1491,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None Notable
-      source_id: vsbattles-firestorm-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average (Ronnie is a successful high school student. Martin Stein
         is at least a Genius, as one of the most intelligent scientists on the DC
@@ -1629,41 +1501,22 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: 'Needs to concentrate really hard to know what structure he needs to
-        make. Cannot affect organic matter, and if he tries, he gets harmed by harmful
-        energy feedback. If his components aren''t in unity, Firestorm can''t act
-        Notable Attacks/Techniques *Molecular Reconstruction: Firestorm has one main
-        ability which all others stem from. Firestorm can break down and reapply subatomic
-        particles as well as break up the molecular structure of elements and rearrange
-        them. To do this the element must know the exact elemental make-up of the
-        object or human. *Density Control: Firestorm has complete control over molecules
-        and as such can change the density of solids, liquids and gases to as light
-        as hydrogen or as heavy as uranium. Although he has direct control over an
-        object''s density he can use this ability on himself and only himself and
-        affect living tissue to pass through objects. *Quark Vision: The ability to
-        see extremely small objects and images down to the subatomic level. *Energy
-        Manipulation: **Energy Projection: Firestorm can project massive amounts of
-        different amount of energies. Naturally occurring energy projected by Firestorm
-        are "Nuclear Blasts" however elements can project a number of different energies
-        at will. **Energy Absorption: Firestorm can absorb massive amounts of energy
-        as well as being able to absorb many different types of energy. Notes: *Although
-        this character was unaffected by the Crisis, due to consistency, in both showings
-        and in narrative tropes, the page is being split into both its Pre-Crisis
-        and Post-Crisis incarnations *Before making any changes to this page, please
-        read and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable
-        Matchups== Victories: Losses: Inconclusive: ==References== {{scroll box|content={{reflist|2}}}}
-        {{discussions|Firestorm|Firestorm (Pre-Crisis)}} Category:Characters Category:DC
-        Comics Category:Absorption Users Category:Adults Category:Cloth Users Category:Comic
-        Book Characters Category:Creation Users Category:Deconstruction Users Category:Density
-        Users Category:Earth Users Category:Ectoplasm Users Category:Energy Users
-        Category:Enhanced Senses Users Category:Explosion Users Category:Fire Users
-        Category:Flight Users Category:Fusionism Users Category:Fusions Category:Geniuses
-        Category:Heroes Category:Humans Category:Hybrids Category:Information Analysis
-        Users Category:Intangibility Users Category:Justice League Members Category:Life
-        Users Category:Light Users Category:Male Characters Category:Matter Users
-        Category:Power Nullification Users Category:Psychometry Users Category:Scientists
-        Category:Self-Sustenance Users Category:Sleep Users Category:Students Category:Telepaths
-        Category:Temperature Users Category:Transmutation Users Category:Weapon Creation
-        Users'
+        make. Cannot affect organic matter, Firestorm can''t act Notable Attacks/Techniques,
+        Molecular Reconstruction: Firestorm has one main ability which all others
+        stem from. Firestorm can break down and reapply subatomic particles as well
+        as break up the molecular structure of elements and rearrange them. To do
+        this the element must know the exact elemental make-up of the object or human.,
+        Density Control: Firestorm has complete control over molecules and as such
+        can change the density of solids, liquids and gases to as light as hydrogen
+        or as heavy as uranium. Although he has direct control over an object''s density
+        he can use this ability on himself and only himself and affect living tissue
+        to pass through objects., Quark Vision: The ability to see extremely small
+        objects and images down to the subatomic level., Energy Absorption: Firestorm
+        can absorb massive amounts of energy as well as being able to absorb many
+        different types of energy, Although this character was unaffected by the Crisis,
+        in both showings and in narrative tropes, the page is being split into both
+        its Pre-Crisis and Post-Crisis incarnations, please read and follow the Power-scaling
+        Rules for Marvel and DC Comics.'
       source_id: vsbattles-firestorm-dc-comics
       provider_id: vsbattles
       authority: high
@@ -1678,317 +1531,7 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: false
-    duplicate_key: vsbattles.fandom.com|firestorm pre crisis|8664134
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-firestorm-dc
-    url: https://vsbattles.fandom.com/wiki/Firestorm_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Firestorm (Ronnie Raymond) (Post-Crisis)
-    source_type: mediawiki
-    revision_id: '9667591'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 12729
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{10-A}} | {{Low 1-C}} | {{Low 1-C}}, {{3-A}} via Big Bang'
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Ronnie Raymond=Limited Teleportation, Transformation and Fusionism (Via
-        Instantaneous Fusion; Elements tied to the Firestorm Matrix can transform
-        from their normal human forms into Firestorm) |-|Firestorm (Ronnie Raymond
-        + Other Person)=Superhuman Physical Characteristics, Flight, Fire Manipulation,
-        Transmutation, Energy Projection, Matter Manipulation, Telepathy, Self-Sustenance,
-        Heat Manipulation, Energy Manipulation and Absorption, Forcefield Creation,
-        Danmaku (Melted Killer Frost''s ice instantly), Density Manipulation allows
-        him Intangibility, Extrasensory Perception, Enhanced Senses and Information
-        Analysis, Explosion Manipulation, Air Manipulation (Suffocated Multiplex,
-        and his clones), Sleep Manipulation (Can fire out blasts that can put someone
-        to sleep), Earth Manipulation (Controlled the ground to hold Mammoth), Biological
-        Manipulation (Cured Killer Frost of a terminal illness by using another human
-        as a template and superimposing the healthy parts onto her), Ice Manipulation,
-        Power Nullification (Cancelled out an energy blast), Size Manipulation (Can
-        shrink his size to a molecular level), Power Absorption (Absorbed Killer Frost''s
-        powers), Resistance to Extreme Heat and Cold |-|Firestorm (Jason Rusch + Ronnie
-        Raymond)=All previous powers, as well as seemingly all the powers of Jason
-        Rusch''s Firestorm, Teleportation (Teleported to the Anti-Matter universeBrightest
-        Day Vol 1 #10)'
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Athlete level (Is a trained athlete) | At most Low Complex Multiverse
-        level (Should be comparable to Wonder Girl) | Low Complex Multiverse level
-        (Should be superior than Ronnie and Jason's Firestorms individually), Universe
-        level via Big Bang (If agitated, there is a higher chance of Firestorm triggering
-        a Big Bang, destroying everything in the universe)
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: 'Athletic Human, Speed of Light with Instantaneous Fusion (Their fusion
-        process occurs at the speed of lightThe Fury of Firestorm Vol 2 #6, November
-        1982) | Massively FTL+ combat speed (Able to react to Darkseid''s Omega Beams),
-        Sub-Relativistic flight speed (Can fly from another planet to the Moon in
-        a brief amount of time) | Massively FTL+ combat speed, Sub-Relativistic flight
-        speed'
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Athlete level | At most Low Complex Multiverse level (Withstood hits
-        from Captain Atom) | Low Complex Multiverse level (When agitated, the Big
-        Bang he generates comes from his own body, destroying the universe but not
-        himself)
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Able to fly extremely long distances without getting tired)
-        | Unknown
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range physically, Several Meters with Fire Manipulation,
-        Kilometers with nuclear blasts | Standard Melee Range physically, Several
-        Meters with Fire Manipulation, Kilometers with nuclear blasts, Universal with
-        the Big Bang
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Above Average (Ronnie is a successful high school student), Genius as
-        Martin Stein (He is one of the most intelligent scientists on the DC Comics
-        version of Earth. Jason Rusch is an average high school student)
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Needs to concentrate really hard to know what structure he needs to
-        make. Cannot affect organic matter, and if he tries, he gets harmed by harmful
-        energy feedback | An agitated state will increase the chances of triggering
-        a New Big Bang Notable Attacks/Techniques * Molecular Reconstruction: Firestorm
-        has one main ability which all other stem from. Firestorm can break down and
-        reapply subatomic particles as well as break up the molecular structure of
-        elements and rearrange them. To do this the element must know the exact elemental
-        make-up of the object or human. Most Firestorms cannot affect living tissue
-        but it is possible though very unstable. * Density Control: Firestorm has
-        complete control over molecules and as such can change the density of solids,
-        liquids and gases to as light as hydrogen or as heavy as uranium. Although
-        he has direct control over an object''s density he can use this ability on
-        himself and only himself and affect living tissue to pass through objects.
-        * Matrix Memory Recall: Elements tied to the Firestorm Matrix can access the
-        memories of each and every single being that has ever been fused into the
-        Matrix. New elements are allowed to automatically download surface information.
-        *Energy Manipulation: **Energy Projection: Firestorm can project massive amounts
-        of different amount of energies. Naturally occurring energy projected by Firestorm
-        are "Nuclear Blasts" however elements can project a number of different energies
-        at will, such as Kryptonite energy. **Energy Absorption: Firestorm can absorb
-        massive amounts of energy as well as being able to absorb many different types
-        of energy. Most commonly the elements and energies associate with life and
-        the human body are absorbed. **Forcefield Creation: Firestorm can create energy
-        shields and energy forcefields to deflect and stop attacks, like energy beams
-        and punches *Quark Vision: The ability to see extremely small objects and
-        images down to the subatomic level. *Self-Sustenance: Elements tied to the
-        Firestorm Matrix can survive in space unaided, never need to eat to sustain
-        life and never truly need another element to be processed or broken down by
-        their bodies. Notes: *Before making any changes to this page, please read
-        and follow the Power-scaling Rules for Marvel and DC Comics. *At emotional
-        equilibrium, the chances of a Big Bang are near zero. If agitated, the chances
-        are one in a million, maybe one in a hundred thousand. *Due to Ronnie''s and
-        Jason''s merging as Firestorm having limited appearances before the New 52,
-        he is unable to scale to those he did prior. ==Gallery== Firestorm Vol 2 85.jpg|The
-        Elemental Firestorm Blackest Night Vol 1 3 Variant Virgin.jpg|Blackest Night
-        Firestorm ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{Reflist}} {{Discussions|Firestorm Ronnie Raymond DC Comics|Firestorm (Ronnie
-        Raymond) (DC Comics)}} Category:Characters Category:DC Comics Category:Male
-        Characters Category:Heroes Category:Hybrids Category:Humans Category:Fusionism
-        Users Category:Fusions Category:Flight Users Category:Fire Users Category:Transmutation
-        Users Category:Energy Users Category:Creation Users Category:Weapon Creation
-        Users Category:Matter Users Category:Telepaths Category:Self-Sustenance Users
-        Category:Temperature Users Category:Absorption Users Category:Danmaku Users
-        Category:Density Users Category:Intangibility Users Category:Extrasensory
-        Perception Users Category:Enhanced Senses Users Category:Information Analysis
-        Users Category:Explosion Users Category:Air Users Category:Sleep Users Category:Earth
-        Users Category:Biology Users Category:Ice Users Category:Power Nullification
-        Users Category:Size Users Category:Teleportation Users Category:Power Absorption
-        Users Category:Adults Category:Students Category:Scientists Category:Justice
-        League Members Category:Geniuses'
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 30
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|firestorm ronnie raymond post crisis|9667591
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-firestorm-dc
-    url: https://character-stats-and-profiles.fandom.com/wiki/Firestorm_DC
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - speed
-    normalized_page_title: DC Comics (Canon, The Verse)/Azmarin
-    source_type: mediawiki
-    revision_id: '554795'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 45234
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Power of the Verse
-    - Explanations
-    - Calculations
-    - Characters
-    - A-C
-    - D-F
-    - G-I
-    - J-L
-    - M-O
-    - P-R
-    - S-U
-    - V-X
-    - Y-Z
-    - Other Elseworlds
-    - Races & Factions
-    - Weapons
-    - Civilization
-    - Concepts/Forces
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 115
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: durability
-      value: '{{!}}-{{!}}'
-      source_id: character-stats-profiles-firestorm-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: '{{!}}-{{!}}'
-      source_id: character-stats-profiles-firestorm-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: and
-      source_id: character-stats-profiles-firestorm-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|dc comics canon the verse
-      azmarin|554795
+    duplicate_key: vsbattles.fandom.com|firestorm pre crisis|9706325
     retryable: false
     exception_class: ''
   - source_id: vsbattles-firestorm-dc
@@ -2003,7 +1546,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Firestorm (Ronnie Raymond) (Post-Crisis)
@@ -2050,31 +1592,30 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{10-A}} | {{Low 1-C}} | {{Low 1-C}}, {{3-A}} via Big Bang'
+      value: 10-A | Low 1-C | Low 1-C, 3-A via Big Bang
       source_id: vsbattles-firestorm-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Ronnie Raymond=Limited Teleportation, Transformation and Fusionism (Via
-        Instantaneous Fusion; Elements tied to the Firestorm Matrix can transform
-        from their normal human forms into Firestorm) |-|Firestorm (Ronnie Raymond
-        + Other Person)=Superhuman Physical Characteristics, Flight, Fire Manipulation,
-        Transmutation, Energy Projection, Matter Manipulation, Telepathy, Self-Sustenance,
-        Heat Manipulation, Energy Manipulation and Absorption, Forcefield Creation,
-        Danmaku (Melted Killer Frost''s ice instantly), Density Manipulation allows
-        him Intangibility, Extrasensory Perception, Enhanced Senses and Information
-        Analysis, Explosion Manipulation, Air Manipulation (Suffocated Multiplex,
-        and his clones), Sleep Manipulation (Can fire out blasts that can put someone
-        to sleep), Earth Manipulation (Controlled the ground to hold Mammoth), Biological
-        Manipulation (Cured Killer Frost of a terminal illness by using another human
-        as a template and superimposing the healthy parts onto her), Ice Manipulation,
-        Power Nullification (Cancelled out an energy blast), Size Manipulation (Can
-        shrink his size to a molecular level), Power Absorption (Absorbed Killer Frost''s
-        powers), Resistance to Extreme Heat and Cold |-|Firestorm (Jason Rusch + Ronnie
-        Raymond)=All previous powers, as well as seemingly all the powers of Jason
-        Rusch''s Firestorm, Teleportation (Teleported to the Anti-Matter universeBrightest
-        Day Vol 1 #10)'
+      value: 'Limited Teleportation, Transformation and Fusionism (Via Instantaneous
+        Fusion; Elements tied to the Firestorm Matrix can transform from their normal
+        human forms into Firestorm) Firestorm (Ronnie Raymond + Other Person)=Superhuman
+        Physical Characteristics, Flight, Fire Manipulation, Transmutation, Energy
+        Projection, Matter Manipulation, Telepathy, Self-Sustenance, Heat Manipulation,
+        Energy Manipulation and Absorption, Forcefield Creation, Danmaku (Melted Killer
+        Frost''s ice instantly), Density Manipulation allows him Intangibility, Extrasensory
+        Perception, Enhanced Senses and Information Analysis, Explosion Manipulation,
+        Air Manipulation (Suffocated Multiplex, and his clones), Sleep Manipulation
+        (Can fire out blasts that can put someone to sleep), Earth Manipulation (Controlled
+        the ground to hold Mammoth), Biological Manipulation (Cured Killer Frost of
+        a terminal illness by using another human as a template and superimposing
+        the healthy parts onto her), Ice Manipulation, Power Nullification (Cancelled
+        out an energy blast), Size Manipulation (Can shrink his size to a molecular
+        level), Power Absorption (Absorbed Killer Frost''s powers), Resistance to
+        Extreme Heat and Cold Firestorm (Jason Rusch + Ronnie Raymond)=All previous
+        powers, as well as seemingly all the powers of Jason Rusch''s Firestorm, Teleportation
+        (Teleported to the Anti-Matter universeBrightest Day Vol 1 #10)'
       source_id: vsbattles-firestorm-dc
       provider_id: vsbattles
       authority: high
@@ -2125,12 +1666,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-firestorm-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average (Ronnie is a successful high school student), Genius as
         Martin Stein (He is one of the most intelligent scientists on the DC Comics
@@ -2141,55 +1676,33 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: 'Needs to concentrate really hard to know what structure he needs to
-        make. Cannot affect organic matter, and if he tries, he gets harmed by harmful
-        energy feedback | An agitated state will increase the chances of triggering
-        a New Big Bang Notable Attacks/Techniques * Molecular Reconstruction: Firestorm
-        has one main ability which all other stem from. Firestorm can break down and
-        reapply subatomic particles as well as break up the molecular structure of
-        elements and rearrange them. To do this the element must know the exact elemental
-        make-up of the object or human. Most Firestorms cannot affect living tissue
-        but it is possible though very unstable. * Density Control: Firestorm has
-        complete control over molecules and as such can change the density of solids,
-        liquids and gases to as light as hydrogen or as heavy as uranium. Although
-        he has direct control over an object''s density he can use this ability on
-        himself and only himself and affect living tissue to pass through objects.
-        * Matrix Memory Recall: Elements tied to the Firestorm Matrix can access the
-        memories of each and every single being that has ever been fused into the
-        Matrix. New elements are allowed to automatically download surface information.
-        *Energy Manipulation: **Energy Projection: Firestorm can project massive amounts
-        of different amount of energies. Naturally occurring energy projected by Firestorm
-        are "Nuclear Blasts" however elements can project a number of different energies
-        at will, such as Kryptonite energy. **Energy Absorption: Firestorm can absorb
-        massive amounts of energy as well as being able to absorb many different types
-        of energy. Most commonly the elements and energies associate with life and
-        the human body are absorbed. **Forcefield Creation: Firestorm can create energy
-        shields and energy forcefields to deflect and stop attacks, like energy beams
-        and punches *Quark Vision: The ability to see extremely small objects and
-        images down to the subatomic level. *Self-Sustenance: Elements tied to the
-        Firestorm Matrix can survive in space unaided, never need to eat to sustain
-        life and never truly need another element to be processed or broken down by
-        their bodies. Notes: *Before making any changes to this page, please read
-        and follow the Power-scaling Rules for Marvel and DC Comics. *At emotional
-        equilibrium, the chances of a Big Bang are near zero. If agitated, the chances
-        are one in a million, maybe one in a hundred thousand. *Due to Ronnie''s and
-        Jason''s merging as Firestorm having limited appearances before the New 52,
-        he is unable to scale to those he did prior. ==Gallery== Firestorm Vol 2 85.jpg|The
-        Elemental Firestorm Blackest Night Vol 1 3 Variant Virgin.jpg|Blackest Night
-        Firestorm ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{Reflist}} {{Discussions|Firestorm Ronnie Raymond DC Comics|Firestorm (Ronnie
-        Raymond) (DC Comics)}} Category:Characters Category:DC Comics Category:Male
-        Characters Category:Heroes Category:Hybrids Category:Humans Category:Fusionism
-        Users Category:Fusions Category:Flight Users Category:Fire Users Category:Transmutation
-        Users Category:Energy Users Category:Creation Users Category:Weapon Creation
-        Users Category:Matter Users Category:Telepaths Category:Self-Sustenance Users
-        Category:Temperature Users Category:Absorption Users Category:Danmaku Users
-        Category:Density Users Category:Intangibility Users Category:Extrasensory
-        Perception Users Category:Enhanced Senses Users Category:Information Analysis
-        Users Category:Explosion Users Category:Air Users Category:Sleep Users Category:Earth
-        Users Category:Biology Users Category:Ice Users Category:Power Nullification
-        Users Category:Size Users Category:Teleportation Users Category:Power Absorption
-        Users Category:Adults Category:Students Category:Scientists Category:Justice
-        League Members Category:Geniuses'
+        make. Cannot affect organic matter, he gets harmed by harmful energy feedback,
+        An agitated state will increase the chances of triggering a New Big Bang Notable
+        Attacks/Techniques, Molecular Reconstruction: Firestorm has one main ability
+        which all other stem from. Firestorm can break down and reapply subatomic
+        particles as well as break up the molecular structure of elements and rearrange
+        them. To do this the element must know the exact elemental make-up of the
+        object or human. Most Firestorms cannot affect living tissue but it is possible
+        though very unstable., Density Control: Firestorm has complete control over
+        molecules and as such can change the density of solids, liquids and gases
+        to as light as hydrogen or as heavy as uranium. Although he has direct control
+        over an object''s density he can use this ability on himself and only himself
+        and affect living tissue to pass through objects., Matrix Memory Recall: Elements
+        tied to the Firestorm Matrix can access the memories of each and every single
+        being that has ever been fused into the Matrix. New elements are allowed to
+        automatically download surface information., Energy Absorption: Firestorm
+        can absorb massive amounts of energy as well as being able to absorb many
+        different types of energy. Most commonly the elements and energies associate
+        with life and the human body are absorbed., like energy beams and punches,
+        Quark Vision: The ability to see extremely small objects and images down to
+        the subatomic level., Self-Sustenance: Elements tied to the Firestorm Matrix
+        can survive in space unaided, never need to eat to sustain life and never
+        truly need another element to be processed or broken down by their bodies,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics.,
+        At emotional equilibrium, the chances are one in a million, maybe one in a
+        hundred thousand., Due to Ronnie''s and Jason''s merging as Firestorm having
+        limited appearances before the New 52, he is unable to scale to those he did
+        prior.'
       source_id: vsbattles-firestorm-dc
       provider_id: vsbattles
       authority: high
@@ -2214,48 +1727,37 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
+    - powers_and_abilities
     - speed
-    normalized_page_title: DC Comics (Canon, The Verse)/Azmarin
+    - tier
+    - weaknesses
+    normalized_page_title: Captain Atom (Canon)/BlueMarvel23555
     source_type: mediawiki
-    revision_id: '554795'
+    revision_id: '58057'
     fetch_status: fetched
     http_status: 200
-    content_length: 45234
+    content_length: 6710
     content_kind: api_json
     headings_detected:
     - Summary
-    - Power of the Verse
-    - Explanations
-    - Calculations
-    - Characters
-    - A-C
-    - D-F
-    - G-I
-    - J-L
-    - M-O
-    - P-R
-    - S-U
-    - V-X
-    - Y-Z
-    - Other Elseworlds
-    - Races & Factions
-    - Weapons
-    - Civilization
-    - Concepts/Forces
+    - Powers and Stats
     stat_labels_detected:
     - attack_potency
     - durability
+    - intelligence
     - keys
     - lifting_strength
     - origin
     - powers_and_abilities
     - range
     - speed
+    - stamina
     - standard_equipment
     - striking_strength
     - tier
+    - weaknesses
     extraction_failure_reason: ''
-    rank: 115
+    rank: 80
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -2269,36 +1771,81 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: durability
-      value: '{{!}}-{{!}}'
+    - field: tier
+      value: 4-B | Low 2-C | Low 2-C
       source_id: character-stats-profiles-firestorm-dc
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: speed
-      value: '{{!}}-{{!}}'
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Type 1), Flight, Matter
+        Manipulation, Energy Manipulation, Time Manipulation, Energy Absorption, Telepathy,
+        Spatial Manipulation, Quantum Manipulation, Forcefield Creation, Time Travel,
+        Resistance to Absolute Zero, Magic and Mind Manipulation, control of the Quantum
+        Field
       source_id: character-stats-profiles-firestorm-dc
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: and
+      value: Solar System level (He is comparable to other high-tier DC Comics superheroes)
+        | Universe level+ (Can cause a new Big Bang, created a universe within the
+        Quantum Field and later destroyed it. Defeated Nekron) | Universe level+ (Stronger
+        than an Unrestricted Atom. Easily defeated the Captain Atom Brigade, a team
+        composed by multiple versions of Atom, before absorbing them. Created an explosion
+        powerful enough to destroy a universal space-time continuum)
+      source_id: character-stats-profiles-firestorm-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ | Massively FTL+ | Massively FTL+ (Could keep up with
+        an amplified Superboy-Prime)
+      source_id: character-stats-profiles-firestorm-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Solar System level | Universe level+ | Universe level+
+      source_id: character-stats-profiles-firestorm-dc
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'he will be sent hurtling through time. Depending on the type of energy
+        absorbed, he either goes forward or backwards, Captain Atom is able to control
+        time, Big Bang: Captain Atom is also able to control incredible amounts of
+        energy, being able to catalyze another Big Bang if he so wished., Dilustel
+        Armor: Captain Atom''s metallic shell, is composed of a portion of the alien
+        being known as Silver Shield, and is called Dilustel. Pieces of the alien''s
+        metal body were used in the Captain Atom Project, Project Major Force and
+        similar projects thereafter. Nathaniel is able to coat himself with the metal,
+        either partially or totally. Atom''s symbiosis with the metal is such that
+        even partially armored, he is able to access the Quantum Field., Quantum Field
+        Manipulation: Captain Atom''s metal skin is tied into the Quantum Field, he
+        is able to create an exact replica of Earth, complete with life, Firestorm
+        and even the Spectre with ease. His power is such, he was able to instantaneously
+        create an entire universe out of nothing, but he has never used this level
+        of power again as a result of him mentally limiting himself. Captain Atom
+        is also able to absorb potentially harmful energy into himself, or explosive
+        ''bombs'', destroying objects within an certain radius. On more than one occasion,
+        he has used his ability to manipulate all forms of energy to prevent a foe
+        using their own powers'
       source_id: character-stats-profiles-firestorm-dc
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 55
+    variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 0
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|dc comics canon the verse
-      azmarin|554795
+    variant_match: false
+    duplicate_key: character-stats-and-profiles.fandom.com|captain atom canon bluemarvel23555|58057
     retryable: false
     exception_class: ''
   - source_id: vsbattles-firestorm-prime-earth
@@ -2313,7 +1860,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Firestorm (Ronnie Raymond) (Post-Crisis)
@@ -2360,31 +1906,30 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{10-A}} | {{Low 1-C}} | {{Low 1-C}}, {{3-A}} via Big Bang'
+      value: 10-A | Low 1-C | Low 1-C, 3-A via Big Bang
       source_id: vsbattles-firestorm-prime-earth
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Ronnie Raymond=Limited Teleportation, Transformation and Fusionism (Via
-        Instantaneous Fusion; Elements tied to the Firestorm Matrix can transform
-        from their normal human forms into Firestorm) |-|Firestorm (Ronnie Raymond
-        + Other Person)=Superhuman Physical Characteristics, Flight, Fire Manipulation,
-        Transmutation, Energy Projection, Matter Manipulation, Telepathy, Self-Sustenance,
-        Heat Manipulation, Energy Manipulation and Absorption, Forcefield Creation,
-        Danmaku (Melted Killer Frost''s ice instantly), Density Manipulation allows
-        him Intangibility, Extrasensory Perception, Enhanced Senses and Information
-        Analysis, Explosion Manipulation, Air Manipulation (Suffocated Multiplex,
-        and his clones), Sleep Manipulation (Can fire out blasts that can put someone
-        to sleep), Earth Manipulation (Controlled the ground to hold Mammoth), Biological
-        Manipulation (Cured Killer Frost of a terminal illness by using another human
-        as a template and superimposing the healthy parts onto her), Ice Manipulation,
-        Power Nullification (Cancelled out an energy blast), Size Manipulation (Can
-        shrink his size to a molecular level), Power Absorption (Absorbed Killer Frost''s
-        powers), Resistance to Extreme Heat and Cold |-|Firestorm (Jason Rusch + Ronnie
-        Raymond)=All previous powers, as well as seemingly all the powers of Jason
-        Rusch''s Firestorm, Teleportation (Teleported to the Anti-Matter universeBrightest
-        Day Vol 1 #10)'
+      value: 'Limited Teleportation, Transformation and Fusionism (Via Instantaneous
+        Fusion; Elements tied to the Firestorm Matrix can transform from their normal
+        human forms into Firestorm) Firestorm (Ronnie Raymond + Other Person)=Superhuman
+        Physical Characteristics, Flight, Fire Manipulation, Transmutation, Energy
+        Projection, Matter Manipulation, Telepathy, Self-Sustenance, Heat Manipulation,
+        Energy Manipulation and Absorption, Forcefield Creation, Danmaku (Melted Killer
+        Frost''s ice instantly), Density Manipulation allows him Intangibility, Extrasensory
+        Perception, Enhanced Senses and Information Analysis, Explosion Manipulation,
+        Air Manipulation (Suffocated Multiplex, and his clones), Sleep Manipulation
+        (Can fire out blasts that can put someone to sleep), Earth Manipulation (Controlled
+        the ground to hold Mammoth), Biological Manipulation (Cured Killer Frost of
+        a terminal illness by using another human as a template and superimposing
+        the healthy parts onto her), Ice Manipulation, Power Nullification (Cancelled
+        out an energy blast), Size Manipulation (Can shrink his size to a molecular
+        level), Power Absorption (Absorbed Killer Frost''s powers), Resistance to
+        Extreme Heat and Cold Firestorm (Jason Rusch + Ronnie Raymond)=All previous
+        powers, as well as seemingly all the powers of Jason Rusch''s Firestorm, Teleportation
+        (Teleported to the Anti-Matter universeBrightest Day Vol 1 #10)'
       source_id: vsbattles-firestorm-prime-earth
       provider_id: vsbattles
       authority: high
@@ -2435,12 +1980,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-firestorm-prime-earth
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Above Average (Ronnie is a successful high school student), Genius as
         Martin Stein (He is one of the most intelligent scientists on the DC Comics
@@ -2451,56 +1990,338 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: 'Needs to concentrate really hard to know what structure he needs to
-        make. Cannot affect organic matter, and if he tries, he gets harmed by harmful
-        energy feedback | An agitated state will increase the chances of triggering
-        a New Big Bang Notable Attacks/Techniques * Molecular Reconstruction: Firestorm
-        has one main ability which all other stem from. Firestorm can break down and
-        reapply subatomic particles as well as break up the molecular structure of
-        elements and rearrange them. To do this the element must know the exact elemental
-        make-up of the object or human. Most Firestorms cannot affect living tissue
-        but it is possible though very unstable. * Density Control: Firestorm has
-        complete control over molecules and as such can change the density of solids,
-        liquids and gases to as light as hydrogen or as heavy as uranium. Although
-        he has direct control over an object''s density he can use this ability on
-        himself and only himself and affect living tissue to pass through objects.
-        * Matrix Memory Recall: Elements tied to the Firestorm Matrix can access the
-        memories of each and every single being that has ever been fused into the
-        Matrix. New elements are allowed to automatically download surface information.
-        *Energy Manipulation: **Energy Projection: Firestorm can project massive amounts
-        of different amount of energies. Naturally occurring energy projected by Firestorm
-        are "Nuclear Blasts" however elements can project a number of different energies
-        at will, such as Kryptonite energy. **Energy Absorption: Firestorm can absorb
-        massive amounts of energy as well as being able to absorb many different types
-        of energy. Most commonly the elements and energies associate with life and
-        the human body are absorbed. **Forcefield Creation: Firestorm can create energy
-        shields and energy forcefields to deflect and stop attacks, like energy beams
-        and punches *Quark Vision: The ability to see extremely small objects and
-        images down to the subatomic level. *Self-Sustenance: Elements tied to the
-        Firestorm Matrix can survive in space unaided, never need to eat to sustain
-        life and never truly need another element to be processed or broken down by
-        their bodies. Notes: *Before making any changes to this page, please read
-        and follow the Power-scaling Rules for Marvel and DC Comics. *At emotional
-        equilibrium, the chances of a Big Bang are near zero. If agitated, the chances
-        are one in a million, maybe one in a hundred thousand. *Due to Ronnie''s and
-        Jason''s merging as Firestorm having limited appearances before the New 52,
-        he is unable to scale to those he did prior. ==Gallery== Firestorm Vol 2 85.jpg|The
-        Elemental Firestorm Blackest Night Vol 1 3 Variant Virgin.jpg|Blackest Night
-        Firestorm ==Notable Matchups== Victories: Losses: Inconclusive: ==References==
-        {{Reflist}} {{Discussions|Firestorm Ronnie Raymond DC Comics|Firestorm (Ronnie
-        Raymond) (DC Comics)}} Category:Characters Category:DC Comics Category:Male
-        Characters Category:Heroes Category:Hybrids Category:Humans Category:Fusionism
-        Users Category:Fusions Category:Flight Users Category:Fire Users Category:Transmutation
-        Users Category:Energy Users Category:Creation Users Category:Weapon Creation
-        Users Category:Matter Users Category:Telepaths Category:Self-Sustenance Users
-        Category:Temperature Users Category:Absorption Users Category:Danmaku Users
-        Category:Density Users Category:Intangibility Users Category:Extrasensory
-        Perception Users Category:Enhanced Senses Users Category:Information Analysis
-        Users Category:Explosion Users Category:Air Users Category:Sleep Users Category:Earth
-        Users Category:Biology Users Category:Ice Users Category:Power Nullification
-        Users Category:Size Users Category:Teleportation Users Category:Power Absorption
-        Users Category:Adults Category:Students Category:Scientists Category:Justice
-        League Members Category:Geniuses'
+        make. Cannot affect organic matter, he gets harmed by harmful energy feedback,
+        An agitated state will increase the chances of triggering a New Big Bang Notable
+        Attacks/Techniques, Molecular Reconstruction: Firestorm has one main ability
+        which all other stem from. Firestorm can break down and reapply subatomic
+        particles as well as break up the molecular structure of elements and rearrange
+        them. To do this the element must know the exact elemental make-up of the
+        object or human. Most Firestorms cannot affect living tissue but it is possible
+        though very unstable., Density Control: Firestorm has complete control over
+        molecules and as such can change the density of solids, liquids and gases
+        to as light as hydrogen or as heavy as uranium. Although he has direct control
+        over an object''s density he can use this ability on himself and only himself
+        and affect living tissue to pass through objects., Matrix Memory Recall: Elements
+        tied to the Firestorm Matrix can access the memories of each and every single
+        being that has ever been fused into the Matrix. New elements are allowed to
+        automatically download surface information., Energy Absorption: Firestorm
+        can absorb massive amounts of energy as well as being able to absorb many
+        different types of energy. Most commonly the elements and energies associate
+        with life and the human body are absorbed., like energy beams and punches,
+        Quark Vision: The ability to see extremely small objects and images down to
+        the subatomic level., Self-Sustenance: Elements tied to the Firestorm Matrix
+        can survive in space unaided, never need to eat to sustain life and never
+        truly need another element to be processed or broken down by their bodies,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics.,
+        At emotional equilibrium, the chances are one in a million, maybe one in a
+        hundred thousand., Due to Ronnie''s and Jason''s merging as Firestorm having
+        limited appearances before the New 52, he is unable to scale to those he did
+        prior.'
       source_id: vsbattles-firestorm-prime-earth
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 30
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|firestorm ronnie raymond post crisis|9667591
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-firestorm-prime-earth
+    url: https://character-stats-and-profiles.fandom.com/wiki/Firestorm_%28Prime_Earth%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Zatanna Zatara (Canon, DC Comics, Prime Earth)/Azmarin
+    source_type: mediawiki
+    revision_id: '326280'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 14752
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - '''''''Weaknesses'''''''
+    - Explanations & Related Blog Posts
+    - Gallery
+    - Others
+    - References
+    - Categories
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 115
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 1-A
+      source_id: character-stats-profiles-firestorm-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Outerverse Level to High Outerverse Level (Held her own against Felix
+        Faust for an extended period of timeJustice League Dark #11 whom previously
+        was stated by herself and John Constantine to be strongJustice League Dark
+        #9; With the help of John Constantine regrew an aspect of Swamp Thing inside
+        Pralaya by manipulating it''s connection to The Green, Pralaya is the manifestation
+        of the infinite darkness which predates the creation as well as the Creator
+        otherwise known as The Presence, she herself states to be that of Gods Unconscious
+        and is stated to be the place where all things originated and will return
+        to in the end; As the Sorceress SupremeDC Nation #0/3 should be superior to
+        Doctor Fate, John Constantine, all other Prime Earth magic users)'
+      source_id: character-stats-profiles-firestorm-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Inaccessible Speed to Irrelevant Speed (Can move within the House of
+        Mystery one of the two Twin Houses which exists at the very cross-section
+        of space and timeJustice League Dark #10, this house is also stated to exist
+        within the higher plane ofSame comic as before (Justice League Dark #10)Limbo;
+        )'
+      source_id: character-stats-profiles-firestorm-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Outerverse Level to High Outerverse level (Can tank having her magic
+        thrown back at herJustice League Dark #12)'
+      source_id: character-stats-profiles-firestorm-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Zatanna''s magic often comes at a cost, although the specifics cost
+        may depend on the type of magic performed., Ressurection Limitaton: Zatanna
+        is incapable of properly ressurecting people or animals without a cost, in
+        which comes in the form of internal damage and pain, please refrain from any
+        editing to ensure data integrity and accuracy. Unauthorized modifications
+        may result in unintended consequences and jeopardize the document''s reliability.'
+      source_id: character-stats-profiles-firestorm-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|zatanna zatara canon dc
+      comics prime earth azmarin|326280
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-firestorm-post-crisis
+    url: https://vsbattles.fandom.com/wiki/Firestorm_%28Post-Crisis%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - tier
+    - weaknesses
+    normalized_page_title: Firestorm (Ronnie Raymond) (Post-Crisis)
+    source_type: mediawiki
+    revision_id: '9667591'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 12729
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 10-A | Low 1-C | Low 1-C, 3-A via Big Bang
+      source_id: vsbattles-firestorm-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Limited Teleportation, Transformation and Fusionism (Via Instantaneous
+        Fusion; Elements tied to the Firestorm Matrix can transform from their normal
+        human forms into Firestorm) Firestorm (Ronnie Raymond + Other Person)=Superhuman
+        Physical Characteristics, Flight, Fire Manipulation, Transmutation, Energy
+        Projection, Matter Manipulation, Telepathy, Self-Sustenance, Heat Manipulation,
+        Energy Manipulation and Absorption, Forcefield Creation, Danmaku (Melted Killer
+        Frost''s ice instantly), Density Manipulation allows him Intangibility, Extrasensory
+        Perception, Enhanced Senses and Information Analysis, Explosion Manipulation,
+        Air Manipulation (Suffocated Multiplex, and his clones), Sleep Manipulation
+        (Can fire out blasts that can put someone to sleep), Earth Manipulation (Controlled
+        the ground to hold Mammoth), Biological Manipulation (Cured Killer Frost of
+        a terminal illness by using another human as a template and superimposing
+        the healthy parts onto her), Ice Manipulation, Power Nullification (Cancelled
+        out an energy blast), Size Manipulation (Can shrink his size to a molecular
+        level), Power Absorption (Absorbed Killer Frost''s powers), Resistance to
+        Extreme Heat and Cold Firestorm (Jason Rusch + Ronnie Raymond)=All previous
+        powers, as well as seemingly all the powers of Jason Rusch''s Firestorm, Teleportation
+        (Teleported to the Anti-Matter universeBrightest Day Vol 1 #10)'
+      source_id: vsbattles-firestorm-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Athlete level (Is a trained athlete) | At most Low Complex Multiverse
+        level (Should be comparable to Wonder Girl) | Low Complex Multiverse level
+        (Should be superior than Ronnie and Jason's Firestorms individually), Universe
+        level via Big Bang (If agitated, there is a higher chance of Firestorm triggering
+        a Big Bang, destroying everything in the universe)
+      source_id: vsbattles-firestorm-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Athletic Human, Speed of Light with Instantaneous Fusion (Their fusion
+        process occurs at the speed of lightThe Fury of Firestorm Vol 2 #6, November
+        1982) | Massively FTL+ combat speed (Able to react to Darkseid''s Omega Beams),
+        Sub-Relativistic flight speed (Can fly from another planet to the Moon in
+        a brief amount of time) | Massively FTL+ combat speed, Sub-Relativistic flight
+        speed'
+      source_id: vsbattles-firestorm-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Athlete level | At most Low Complex Multiverse level (Withstood hits
+        from Captain Atom) | Low Complex Multiverse level (When agitated, the Big
+        Bang he generates comes from his own body, destroying the universe but not
+        himself)
+      source_id: vsbattles-firestorm-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (Able to fly extremely long distances without getting tired)
+        | Unknown
+      source_id: vsbattles-firestorm-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range physically, Several Meters with Fire Manipulation,
+        Kilometers with nuclear blasts | Standard Melee Range physically, Several
+        Meters with Fire Manipulation, Kilometers with nuclear blasts, Universal with
+        the Big Bang
+      source_id: vsbattles-firestorm-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Above Average (Ronnie is a successful high school student), Genius as
+        Martin Stein (He is one of the most intelligent scientists on the DC Comics
+        version of Earth. Jason Rusch is an average high school student)
+      source_id: vsbattles-firestorm-post-crisis
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Needs to concentrate really hard to know what structure he needs to
+        make. Cannot affect organic matter, he gets harmed by harmful energy feedback,
+        An agitated state will increase the chances of triggering a New Big Bang Notable
+        Attacks/Techniques, Molecular Reconstruction: Firestorm has one main ability
+        which all other stem from. Firestorm can break down and reapply subatomic
+        particles as well as break up the molecular structure of elements and rearrange
+        them. To do this the element must know the exact elemental make-up of the
+        object or human. Most Firestorms cannot affect living tissue but it is possible
+        though very unstable., Density Control: Firestorm has complete control over
+        molecules and as such can change the density of solids, liquids and gases
+        to as light as hydrogen or as heavy as uranium. Although he has direct control
+        over an object''s density he can use this ability on himself and only himself
+        and affect living tissue to pass through objects., Matrix Memory Recall: Elements
+        tied to the Firestorm Matrix can access the memories of each and every single
+        being that has ever been fused into the Matrix. New elements are allowed to
+        automatically download surface information., Energy Absorption: Firestorm
+        can absorb massive amounts of energy as well as being able to absorb many
+        different types of energy. Most commonly the elements and energies associate
+        with life and the human body are absorbed., like energy beams and punches,
+        Quark Vision: The ability to see extremely small objects and images down to
+        the subatomic level., Self-Sustenance: Elements tied to the Firestorm Matrix
+        can survive in space unaided, never need to eat to sustain life and never
+        truly need another element to be processed or broken down by their bodies,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics.,
+        At emotional equilibrium, the chances are one in a million, maybe one in a
+        hundred thousand., Due to Ronnie''s and Jason''s merging as Firestorm having
+        limited appearances before the New 52, he is unable to scale to those he did
+        prior.'
+      source_id: vsbattles-firestorm-post-crisis
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -2539,7 +2360,9 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: false
-    duplicate_key: vsbattles.fandom.com|firestorm pre crisis|8664134
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|firestorm pre crisis|9706325
   - source_id: vsbattles-firestorm-dc-comics
     url: https://vsbattles.fandom.com/wiki/Firestorm_%28DC_Comics%29
     title: Firestorm (Pre-Crisis)
@@ -2560,7 +2383,9 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: false
-    duplicate_key: vsbattles.fandom.com|firestorm pre crisis|8664134
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|firestorm pre crisis|9706325
   chosen_source_id: null
   failure_reasons:
     fetched: 8

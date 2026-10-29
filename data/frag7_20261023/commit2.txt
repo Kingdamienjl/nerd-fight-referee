@@ -1,0 +1,19 @@
+Frag-7 follow-up: markup-residue explicit-none form (dry-run catch)
+
+The Part 1 deploy dry-run on the two gate-50j profiles caught a
+sibling form the clean-text regressions missed: via the recovery
+search-substitution fetch, The Immortal (Comics) yields a
+section-scoped weaknesses value of "''' None notable" -- wikitext
+bold residue clinging to the statement -- which merged verbatim as
+a weakness item named "''' None notable" (the name-only technique
+itself was already gone). explicit_none_value now strips markup
+quotes at both ends before matching, and the piece-level head rule
+tolerates leading markup. Verbatim regressions added at both
+layers + the repair path.
+
+Re-verified: guard + harvester suites 186/186; full discover 492
+tests at 13F + 11E (baseline band, failure set unchanged).
+Dry-run proof after the fix: both profiles recover attack_potency
+only, weaknesses stay [], the (Comics) source's weaknesses field
+drops wholesale with boilerplate reason explicit_none_weaknesses,
+live files byte-identical.

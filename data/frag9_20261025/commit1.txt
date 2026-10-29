@@ -1,0 +1,80 @@
+frag-9: relative-pronoun + or/even/like + numeric-split + header-cutoff screens (weaknesses)
+
+Four new fragment screens in fragment_item_reasons (weaknesses only,
+shared funnel, so they fire in recovery and repair paths), plus a
+thousands-comma guard in split_listish (harvester root cause for the
+numeric split). All 10 gate-50l verbatim items drop; all controls
+survive; guard 213/213; full discover 519 tests at 13F + 11E,
+byte-identical to the pre-existing band, zero new guard/demotion
+failures.
+
+relative_pronoun_opener: an item opening with which/that/who/whom/
+whose/what is a continuation of a sentence whose head stayed on the
+page ("which has causes drastic shifts in his personality.", "which
+can weaken or nullify the suit's healing powers."). The frag-8
+headed-clause spare does NOT apply here -- the relative pronoun is
+itself the subject of its clause, so "which bounces..." looks headed
+while still being a fragment with no antecedent. An item is whole
+only if it carries a MAIN clause of its own (after a comma, or after
+a sentence boundary). No limitation spare: the relative clause's own
+verb ("weaken") does not make the item whole. One spare, and it is
+load-bearing: a PAST-TENSE relative clause narrates a completed event
+(a documented exploit), which the frag-5 long-clause calibration
+deliberately protects -- "which allowed Denji to successfully ambush
+her in their final confrontation" is a pinned zero-reason control, so
+the screen spares relative clauses whose main verb is past tense
+(-ed, irregular past, was/were/had). The gate-50l items are
+present-tense/modal property statements and still fire. Calibrated:
+869 raw hits (which 696, that 79, who 49, whom 18, what 16, whose
+11); sampled hits are fragment-class throughout.
+
+prose_sentence_shard extensions (same reason, same spares): "or"
+joins the conjunction set (it was simply missing in frag-8 -- the
+gate-50l venom item "or by anything that can pass through the
+symbiote..." slipped through on exactly that gap); "like" joins the
+preposition set ("like all others of its kind"); "even" is a new
+adverb-opener class ("even in the eminence of a battle."). Two
+fixes found by the failing verbatim test: _shard_subject_led no
+longer counts a relative pronoun attached to a preceding noun as a
+main-clause subject ("anything that can pass..." -- "that" is a
+relative pronoun there, not the subject of a main clause); "even
+without" + a noun phrase is spared like "without" + a noun phrase
+("even without her horn" is a real limitation statement).
+Calibrated: 394 raw hits via the new openers (or 235, like 97, even
+62); sampled hits are fragment-class throughout.
+
+numeric_split_fragment + split_listish guard: "radiation up to
+4,000 hertz" was split at its thousands comma into "radiation up to
+4" / "000 hertz". Root cause: split_listish splits on every comma.
+It now skips thousands-separator commas (digit before, exactly three
+digits after, non-digit after that) -- ordinary list commas
+("Strength 4, Speed 5", "1,000, 2,000") still split. Backstop
+screen: an item opening with exactly three digits (fourth character
+not a digit) and carrying no clause of its own is a split half or an
+image-size fragment. Calibrated: 397 raw / 100 distinct (dominated
+by 400px/300px/250px image-size fragments); the limitation spare
+protects real numeric limits ("180 degree blind spot"). No rule on
+items ENDING in a bare digit: 1,172 such items, including legit
+"Season 3" / "White & Red #3" shapes.
+
+header_cutoff: "Header: <rest>" where the rest is cut off --
+subordinate-only rest (As/If/When/... with no main clause after a
+comma and no limitation marker; the subordinate check runs BEFORE
+the headed check because "If Anti-Venom overuses his healing
+powers" has a finite verb inside the subordinate clause), shard
+rest (the post-colon text itself trips the prose-shard screens:
+"Through the Force", "Drawing power from the moon", "Like all
+Ainur"), or a short definite-NP rest ("The " + 2-4 words: "The
+Venom symbiote"). A whole rest survives: subject-led finite clause,
+main clause after a comma, leading finite verb ("Burns on contact"),
+or a limitation marker anywhere; longer definitions survive too
+("Ki Blast: The most basic form of energy wave."). "A "/"An "
+definitions (187 items) and the 1,610-item other-bare-NP class are
+deliberately NOT caught -- accepted residual, the gate decides.
+Calibrated: 529 raw (subordinate_only 319, shard_rest 203,
+the_np_short 7).
+
+Tests: NinthGenFrag9Tests (12 tests: all 10 verbatim items, controls
+for every screen incl. the Denji past-tense control, weaknesses-only
+checks, filter + repair-path end-to-end) + ThousandsCommaSplitTests
+(5 tests). Guard 213/213 (196 + 17 new); discover 519 @ 13F+11E.

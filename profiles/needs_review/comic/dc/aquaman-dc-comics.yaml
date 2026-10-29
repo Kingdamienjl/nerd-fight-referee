@@ -11,19 +11,9 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-04T05:08:44Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_linked_sources
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Aquaman (DC Comics)
   franchise: DC
@@ -88,78 +78,6 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-aquaman-dc-comics
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Aquaman DC Comics
-  url: https://vsbattles.fandom.com/wiki/Aquaman_DC_Comics
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-aquaman-dc-comics
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Aquaman DC Comics
-  url: https://character-stats-and-profiles.fandom.com/wiki/Aquaman_DC_Comics
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-aquaman-dc-comics-dc
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Aquaman DC Comics DC
-  url: https://vsbattles.fandom.com/wiki/Aquaman_DC_Comics_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-aquaman-dc-comics-dc
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Aquaman DC Comics DC
-  url: https://character-stats-and-profiles.fandom.com/wiki/Aquaman_DC_Comics_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-aquaman-dc-comics-dc
   provider_id: vsbattles
   source_type: mediawiki
@@ -183,42 +101,6 @@ sources:
   source_type: mediawiki
   title: Aquaman (DC Comics) DC
   url: https://character-stats-and-profiles.fandom.com/wiki/Aquaman_%28DC_Comics%29_DC
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-aquaman-dc-comics-dc
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Aquaman (DC Comics) (DC)
-  url: https://vsbattles.fandom.com/wiki/Aquaman_%28DC_Comics%29_%28DC%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-aquaman-dc-comics-dc
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Aquaman (DC Comics) (DC)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Aquaman_%28DC_Comics%29_%28DC%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -486,11 +368,75 @@ power_scale:
     source_ids: []
     confidence: 0.0
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id002
+  - character-stats-profiles-aquaman-dc-comics
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-marine-telepathy
+  name: Marine Telepathy
+  description: Marine Telepathy
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - mind_control
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-weapon-mastery-former
+  name: Weapon Mastery / Former
+  description: Weapon Mastery / Former
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-his-water-powers-become-weaker-as-he-spends-more-time-away-from-the-w
+  name: His water powers become weaker as he spends more time away from the water
+  description: His water powers become weaker as he spends more time away from the
+    water
+  source_ids:
+  - vsbattles-aquaman-dc-comics
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -502,19 +448,32 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_linked_sources
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: character-stats-profiles-aquaman-dc-comics
+  secondary_disagreement_policy: warning_only
 profile_hash: d34afa37561ade7cfd9e1a77de0c3ae7538793ef508a9dd3a65fb110499f21bc
 repair:
-  attempted_at: '2026-10-04T13:25:20Z'
+  attempted_at: '2026-10-25T11:44:26Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
   - speed
   - durability
-  - abilities
   source_attempts:
   - source_id: vsbattles-aquaman-dc-comics
     url: https://vsbattles.fandom.com/wiki/Aquaman_%28DC_Comics%29
@@ -524,7 +483,6 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
@@ -558,7 +516,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -573,26 +531,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{High 5-A}}, likely {{Low 4-C}}, higher with the Trident of
-        Atlantis
-      source_id: vsbattles-aquaman-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= *Superhuman Physical
-        Characteristics **Enhanced Vision (Can see in the dark) **Underwater Breathing
-        (Type 2; Can breathe and talk underwater.) *Bilingualism (Fluent in both Icelandic
-        and English) *Expert Swimmer *Water Manipulation (Can stop a gush of flowing
-        water and created a hydrokinetic barrier) *Energy Projection with the Trident
-        of Atlantis *Marine Communication (Tells a whale to open his mouth and hides
-        inside it) **Animal Manipulation (In the form of Aquatic Life, Is able to
-        control trench) *Weapon Mastery, Leadership Abilities, Skilled Unarmed Combatant
-        (Catches a punch of an opponent behind him, then puts him in an overhead hold.
-        Comparable to Ocean Master, who has never known defeat, is a five-time undefeated
-        trident champion, and has many other qualifications. Grew in skill to the
-        point he surpassed his mentor, Vulko and Wonder Woman implied that their skills
-        are now comparable) }}'
+      value: At least High 5-A, likely Low 4-C, higher with the Trident of Atlantis
       source_id: vsbattles-aquaman-dc-comics
       provider_id: vsbattles
       authority: high
@@ -657,30 +596,18 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'His water powers become weaker as he spends more time away from the
-        water, although his half-human side greatly curbs this. ==Notable Matchups==
-        Victories: Losses: Inconclusive:{{discussions|Aquaman DC Extended Universe|Aquaman
-        (DC Extended Universe)}} Category:Characters Category:Male Characters Category:Trident
-        Users Category:Water Users Category:Telepaths Category:Martial Artists Category:DC
-        Extended Universe Category:Movie Characters Category:Animal Users Category:Brawlers
-        Category:Weapon Masters Category:Enhanced Senses Users Category:Energy Users
-        Category:Kings Category:Humans Category:Adults Category:Hybrids Category:Live-Action
-        Characters Category:Protagonists Category:Primary Protagonists Category:Good
-        Characters Category:Heroes Category:Antiheroes Category:Justice League Members
-        Category:Underwater Breathing Users Category:Knights Category:Staff Users
-        Category:Science Fantasy Characters Category:Royal Characters Category:Princes
-        Category:Camouflage Users Category:Armor Users Category:Parents Category:Superheroes
-        Category:Animal Communicators'
+      value: His water powers become weaker as he spends more time away from the water,
+        although his half-human side greatly curbs this.
       source_id: vsbattles-aquaman-dc-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    identity_match: false
-    identity_score: 20
+    identity_match: true
+    identity_score: 120
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -697,8 +624,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Aquaman (Canon, Post-Flashpoint)/JHFjdnvfcmcd
     source_type: mediawiki
     revision_id: '340934'
@@ -739,12 +664,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 1-A
-      source_id: character-stats-profiles-aquaman-dc-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Marine Telepathy, Weapon Mastery
         / Former
@@ -773,13 +692,6 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: Lack of Water (Becomes progressively weaker the longer he is without
-        water). Category:Tier 5 Category:JHFjdnvfcmcd
-      source_id: character-stats-profiles-aquaman-dc-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 30
@@ -802,7 +714,6 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
@@ -836,7 +747,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -851,26 +762,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{High 5-A}}, likely {{Low 4-C}}, higher with the Trident of
-        Atlantis
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= *Superhuman Physical
-        Characteristics **Enhanced Vision (Can see in the dark) **Underwater Breathing
-        (Type 2; Can breathe and talk underwater.) *Bilingualism (Fluent in both Icelandic
-        and English) *Expert Swimmer *Water Manipulation (Can stop a gush of flowing
-        water and created a hydrokinetic barrier) *Energy Projection with the Trident
-        of Atlantis *Marine Communication (Tells a whale to open his mouth and hides
-        inside it) **Animal Manipulation (In the form of Aquatic Life, Is able to
-        control trench) *Weapon Mastery, Leadership Abilities, Skilled Unarmed Combatant
-        (Catches a punch of an opponent behind him, then puts him in an overhead hold.
-        Comparable to Ocean Master, who has never known defeat, is a five-time undefeated
-        trident champion, and has many other qualifications. Grew in skill to the
-        point he surpassed his mentor, Vulko and Wonder Woman implied that their skills
-        are now comparable) }}'
+      value: At least High 5-A, likely Low 4-C, higher with the Trident of Atlantis
       source_id: vsbattles-aquaman-dc-comics-dc
       provider_id: vsbattles
       authority: high
@@ -935,30 +827,18 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'His water powers become weaker as he spends more time away from the
-        water, although his half-human side greatly curbs this. ==Notable Matchups==
-        Victories: Losses: Inconclusive:{{discussions|Aquaman DC Extended Universe|Aquaman
-        (DC Extended Universe)}} Category:Characters Category:Male Characters Category:Trident
-        Users Category:Water Users Category:Telepaths Category:Martial Artists Category:DC
-        Extended Universe Category:Movie Characters Category:Animal Users Category:Brawlers
-        Category:Weapon Masters Category:Enhanced Senses Users Category:Energy Users
-        Category:Kings Category:Humans Category:Adults Category:Hybrids Category:Live-Action
-        Characters Category:Protagonists Category:Primary Protagonists Category:Good
-        Characters Category:Heroes Category:Antiheroes Category:Justice League Members
-        Category:Underwater Breathing Users Category:Knights Category:Staff Users
-        Category:Science Fantasy Characters Category:Royal Characters Category:Princes
-        Category:Camouflage Users Category:Armor Users Category:Parents Category:Superheroes
-        Category:Animal Communicators'
+      value: His water powers become weaker as he spends more time away from the water,
+        although his half-human side greatly curbs this.
       source_id: vsbattles-aquaman-dc-comics-dc
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    identity_match: false
-    identity_score: 20
+    identity_match: true
+    identity_score: 120
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -975,144 +855,16 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    normalized_page_title: Aquaman (Canon, DC Comics, Post-Flashpoint)/Azmarin
+    normalized_page_title: Aquaman (Canon, Post-Flashpoint)/JHFjdnvfcmcd
     source_type: mediawiki
-    revision_id: '614118'
+    revision_id: '340934'
     fetch_status: fetched
     http_status: 200
-    content_length: 15047
+    content_length: 2513
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
-    - Explanations & Related Blog Posts
-    - '''''''Related Blog Posts'''''''
-    - Gallery
-    - Others
-    - References
-    - Categories
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: at least {{9-B}} | {{4-C}}
-      source_id: character-stats-profiles-aquaman-dc-comics-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Enhanced Senses (States to be capable
-        of seeing perfectly fine at the bottom of the ocean, has super hearing comparable
-        to Superman), Master Hand-to-Hand Combatant, Acrobatics (Can jump entire buildings
-        in single bounds), Enhanced Swimming (Aquaman can breathe underwater without
-        the need of gear and can swim efficiently enough to keep up with the flash
-        underwater), Weapon Mastery (Is proficient enough with his Trident to be capable
-        of combatting members of the Court of Owls), Telepathy likely Mind Manipulation
-        (Aquaman doesn't talk to fish but rather telepathically reaches into their
-        midbrain and pushes them to help him), Social Influencing (As the King of
-        Atlantis has some form of political influence),
-      source_id: character-stats-profiles-aquaman-dc-comics-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Varies atleast Wall Level (Threw this robber into the windshield of
-        a police cruiser with enough force to crack it; Can combat these monsters,
-        here as well, which can tear apart humans with ease and can damage him; Can
-        combat Black Manta), | atleast Star Level (Punched Superman a distance and
-        was capable of overpowering Wonder Woman with her lassoSee Explanation #1),'
-      source_id: character-stats-profiles-aquaman-dc-comics-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: 'Subsonic (A younger Arthur could move faster than an avalanche in order
-        to save this girl, avalanches move this fast) | Hypersonic (Is stated to be
-        capable of swimming fast enough to beat The Operatives jet, which is said
-        to be capable of going hypersonic speeds) higher (Should be faster than Aquawoman
-        at her fastestSee Explanation #2 who easily caught up to the Operatives jet)
-        likely High Hypersonic (Should be superior to Vostok, who''s stated to be
-        capable of traveling from the moon to earth in 8 to 9 hours) | FTL (Is fast
-        enough to react to Black Manta''s lasers)'
-      source_id: character-stats-profiles-aquaman-dc-comics-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Varies atleast Wall Level (Can point blank tank Black Manta's lasers
-        at full power; Is said to have muscle density ten times that of the average
-        human)
-      source_id: character-stats-profiles-aquaman-dc-comics-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|aquaman canon dc comics
-      post flashpoint azmarin|614118
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-aquaman-dc-comics-dc
-    url: https://vsbattles.fandom.com/wiki/Aquaman_%28DC_Comics%29_%28DC%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Aquaman (DC Extended Universe)
-    source_type: mediawiki
-    revision_id: '9479002'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 6269
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
     stat_labels_detected:
     - attack_potency
     - durability
@@ -1130,177 +882,6 @@ repair:
     - weaknesses
     extraction_failure_reason: ''
     rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{High 5-A}}, likely {{Low 4-C}}, higher with the Trident of
-        Atlantis
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= *Superhuman Physical
-        Characteristics **Enhanced Vision (Can see in the dark) **Underwater Breathing
-        (Type 2; Can breathe and talk underwater.) *Bilingualism (Fluent in both Icelandic
-        and English) *Expert Swimmer *Water Manipulation (Can stop a gush of flowing
-        water and created a hydrokinetic barrier) *Energy Projection with the Trident
-        of Atlantis *Marine Communication (Tells a whale to open his mouth and hides
-        inside it) **Animal Manipulation (In the form of Aquatic Life, Is able to
-        control trench) *Weapon Mastery, Leadership Abilities, Skilled Unarmed Combatant
-        (Catches a punch of an opponent behind him, then puts him in an overhead hold.
-        Comparable to Ocean Master, who has never known defeat, is a five-time undefeated
-        trident champion, and has many other qualifications. Grew in skill to the
-        point he surpassed his mentor, Vulko and Wonder Woman implied that their skills
-        are now comparable) }}'
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Brown Dwarf level, likely Small Star level+ (Held his own against
-        Steppenwolf, stabbed him with his Quindent after his armour was destroyed.
-        Comparable to Wonder Woman in strength. Fought against Orm who was comparable
-        to him and can cause tsunamis that can topple aircraft carriers and leave
-        a large junk of trash on land as a warning shot), higher with the Trident
-        of Atlantis (His new Trident of Atlantis is far superior to his old Quindent,
-        as it broke Orm's trident which broke his old Quindent. The Trident of Atlantis
-        seemingly sank Atlantis and dried up the Sahara Desert. Controlled Karathen)
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Hypersonic+ swimming speed (Caused a sonic boom underwater.
-        Can swim at such speeds that it causes his trident to heat up and glow), Relativistic+
-        combat speed and reactions (Kept up with Steppenwolf in battle. Comparable
-        to Wonder Woman)
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Brown Dwarf level, likely Small Star level+ (Was capable of
-        fighting almost evenly with Steppenwolf. Comparable to Wonder Woman. Took
-        hits from Orm who was comparable to him. Took hits from Karathen)
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (Capable of freely using his water powers without that much
-        damage to his stamina, especially with the Trident of Poseidon. Could easily
-        defeat many Parademons without tiring out)
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard melee range, Tens of Meters with the Trident of Poseidon and
-        Water Manipulation.
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Atlanna's Quindent. The Trident of Atlantis/Atlan's Trident
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: At least Above Average (A well-accomplished leader and experienced combatant,
-        with enough prowess to surprise the likes of Wonder Woman and fight someone
-        as skilled as Orm)
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'His water powers become weaker as he spends more time away from the
-        water, although his half-human side greatly curbs this. ==Notable Matchups==
-        Victories: Losses: Inconclusive:{{discussions|Aquaman DC Extended Universe|Aquaman
-        (DC Extended Universe)}} Category:Characters Category:Male Characters Category:Trident
-        Users Category:Water Users Category:Telepaths Category:Martial Artists Category:DC
-        Extended Universe Category:Movie Characters Category:Animal Users Category:Brawlers
-        Category:Weapon Masters Category:Enhanced Senses Users Category:Energy Users
-        Category:Kings Category:Humans Category:Adults Category:Hybrids Category:Live-Action
-        Characters Category:Protagonists Category:Primary Protagonists Category:Good
-        Characters Category:Heroes Category:Antiheroes Category:Justice League Members
-        Category:Underwater Breathing Users Category:Knights Category:Staff Users
-        Category:Science Fantasy Characters Category:Royal Characters Category:Princes
-        Category:Camouflage Users Category:Armor Users Category:Parents Category:Superheroes
-        Category:Animal Communicators'
-      source_id: vsbattles-aquaman-dc-comics-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|aquaman dc extended universe|9479002
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-aquaman-dc-comics-dc
-    url: https://character-stats-and-profiles.fandom.com/wiki/Aquaman_%28DC_Comics%29_%28DC%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    normalized_page_title: Aquaman (Canon, DC Comics, Post-Flashpoint)/Azmarin
-    source_type: mediawiki
-    revision_id: '614118'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 15047
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Explanations & Related Blog Posts
-    - '''''''Related Blog Posts'''''''
-    - Gallery
-    - Others
-    - References
-    - Categories
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 130
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1314,61 +895,37 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: at least {{9-B}} | {{4-C}}
-      source_id: character-stats-profiles-aquaman-dc-comics-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Enhanced Senses (States to be capable
-        of seeing perfectly fine at the bottom of the ocean, has super hearing comparable
-        to Superman), Master Hand-to-Hand Combatant, Acrobatics (Can jump entire buildings
-        in single bounds), Enhanced Swimming (Aquaman can breathe underwater without
-        the need of gear and can swim efficiently enough to keep up with the flash
-        underwater), Weapon Mastery (Is proficient enough with his Trident to be capable
-        of combatting members of the Court of Owls), Telepathy likely Mind Manipulation
-        (Aquaman doesn't talk to fish but rather telepathically reaches into their
-        midbrain and pushes them to help him), Social Influencing (As the King of
-        Atlantis has some form of political influence),
+      value: Superhuman Physical Characteristics, Marine Telepathy, Weapon Mastery
+        / Former
       source_id: character-stats-profiles-aquaman-dc-comics-dc
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'Varies atleast Wall Level (Threw this robber into the windshield of
-        a police cruiser with enough force to crack it; Can combat these monsters,
-        here as well, which can tear apart humans with ease and can damage him; Can
-        combat Black Manta), | atleast Star Level (Punched Superman a distance and
-        was capable of overpowering Wonder Woman with her lassoSee Explanation #1),'
+      value: Outerversal level (Has fought against Wonder Woman, Superman, and Martian
+        Manhunter)
       source_id: character-stats-profiles-aquaman-dc-comics-dc
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: 'Subsonic (A younger Arthur could move faster than an avalanche in order
-        to save this girl, avalanches move this fast) | Hypersonic (Is stated to be
-        capable of swimming fast enough to beat The Operatives jet, which is said
-        to be capable of going hypersonic speeds) higher (Should be faster than Aquawoman
-        at her fastestSee Explanation #2 who easily caught up to the Operatives jet)
-        likely High Hypersonic (Should be superior to Vostok, who''s stated to be
-        capable of traveling from the moon to earth in 8 to 9 hours) | FTL (Is fast
-        enough to react to Black Manta''s lasers)'
+      value: At least infinite Speed (Was able to blitz Wonder Woman and dodge Black
+        Manta's lasers)
       source_id: character-stats-profiles-aquaman-dc-comics-dc
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Varies atleast Wall Level (Can point blank tank Black Manta's lasers
-        at full power; Is said to have muscle density ten times that of the average
-        human)
+      value: Outerversal level (Has traded blows with Superman and Martian Manhunter
+        )
       source_id: character-stats-profiles-aquaman-dc-comics-dc
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 55
+    variant_score: 30
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
@@ -1376,8 +933,8 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|aquaman canon dc comics
-      post flashpoint azmarin|614118
+    duplicate_key: character-stats-and-profiles.fandom.com|aquaman canon post flashpoint
+      jhfjdnvfcmcd|340934
     retryable: false
     exception_class: ''
   - source_id: vsbattles-aquaman-dc-comics-dc-comics
@@ -1388,7 +945,6 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
@@ -1422,7 +978,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 105
+    rank: 90
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1437,26 +993,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{High 5-A}}, likely {{Low 4-C}}, higher with the Trident of
-        Atlantis
-      source_id: vsbattles-aquaman-dc-comics-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= *Superhuman Physical
-        Characteristics **Enhanced Vision (Can see in the dark) **Underwater Breathing
-        (Type 2; Can breathe and talk underwater.) *Bilingualism (Fluent in both Icelandic
-        and English) *Expert Swimmer *Water Manipulation (Can stop a gush of flowing
-        water and created a hydrokinetic barrier) *Energy Projection with the Trident
-        of Atlantis *Marine Communication (Tells a whale to open his mouth and hides
-        inside it) **Animal Manipulation (In the form of Aquatic Life, Is able to
-        control trench) *Weapon Mastery, Leadership Abilities, Skilled Unarmed Combatant
-        (Catches a punch of an opponent behind him, then puts him in an overhead hold.
-        Comparable to Ocean Master, who has never known defeat, is a five-time undefeated
-        trident champion, and has many other qualifications. Grew in skill to the
-        point he surpassed his mentor, Vulko and Wonder Woman implied that their skills
-        are now comparable) }}'
+      value: At least High 5-A, likely Low 4-C, higher with the Trident of Atlantis
       source_id: vsbattles-aquaman-dc-comics-dc-comics
       provider_id: vsbattles
       authority: high
@@ -1521,30 +1058,18 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'His water powers become weaker as he spends more time away from the
-        water, although his half-human side greatly curbs this. ==Notable Matchups==
-        Victories: Losses: Inconclusive:{{discussions|Aquaman DC Extended Universe|Aquaman
-        (DC Extended Universe)}} Category:Characters Category:Male Characters Category:Trident
-        Users Category:Water Users Category:Telepaths Category:Martial Artists Category:DC
-        Extended Universe Category:Movie Characters Category:Animal Users Category:Brawlers
-        Category:Weapon Masters Category:Enhanced Senses Users Category:Energy Users
-        Category:Kings Category:Humans Category:Adults Category:Hybrids Category:Live-Action
-        Characters Category:Protagonists Category:Primary Protagonists Category:Good
-        Characters Category:Heroes Category:Antiheroes Category:Justice League Members
-        Category:Underwater Breathing Users Category:Knights Category:Staff Users
-        Category:Science Fantasy Characters Category:Royal Characters Category:Princes
-        Category:Camouflage Users Category:Armor Users Category:Parents Category:Superheroes
-        Category:Animal Communicators'
+      value: His water powers become weaker as he spends more time away from the water,
+        although his half-human side greatly curbs this.
       source_id: vsbattles-aquaman-dc-comics-dc-comics
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    identity_match: false
-    identity_score: 20
+    identity_match: true
+    identity_score: 120
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1561,6 +1086,237 @@ repair:
     - durability
     - powers_and_abilities
     - speed
+    normalized_page_title: Aquaman (Canon, Post-Flashpoint)/JHFjdnvfcmcd
+    source_type: mediawiki
+    revision_id: '340934'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 2513
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Marine Telepathy, Weapon Mastery
+        / Former
+      source_id: character-stats-profiles-aquaman-dc-comics-dc-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Outerversal level (Has fought against Wonder Woman, Superman, and Martian
+        Manhunter)
+      source_id: character-stats-profiles-aquaman-dc-comics-dc-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least infinite Speed (Was able to blitz Wonder Woman and dodge Black
+        Manta's lasers)
+      source_id: character-stats-profiles-aquaman-dc-comics-dc-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Outerversal level (Has traded blows with Superman and Martian Manhunter
+        )
+      source_id: character-stats-profiles-aquaman-dc-comics-dc-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 30
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|aquaman canon post flashpoint
+      jhfjdnvfcmcd|340934
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-aquaman-dc-comics-prime-earth
+    url: https://vsbattles.fandom.com/wiki/Aquaman_%28DC_Comics%29_%28Prime_Earth%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - durability
+    - speed
+    - standard_equipment
+    normalized_page_title: Prime Earth (DC Comics)
+    source_type: mediawiki
+    revision_id: '9674747'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 25810
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Calculations
+    - Characters
+    - A-C
+    - D-F
+    - G-I
+    - J-L
+    - M-O
+    - P-R
+    - S-U
+    - V-X
+    - Y-Z
+    - Weapons
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - range
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 100
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: durability
+      value: "* A vampire throws a taxi - 9-B (63.53 kilojoules) * Damian Wayne throws\
+        \ Flatline into a wall - 9-B (1,383.73 kilojoules) * Batman and Deathstroke\
+        \ survive an explosion - 9-B (1,807.49 kilojoules) * Talon dents a steel door\
+        \ - 9-B (1,927.8 kilojoules) * Batman tanks an RPG - 9-A (0.043 tons) * Batman\
+        \ endures being slammed into concrete - 9-A * Batman tanks being tackled through\
+        \ a wall - 9-A * Bane shatters steel - 9-A (0.0089 tons) * Deathstroke tanks\
+        \ an explosion - 9-A (0.0159 tons) * Jason Blood destroys a statue - 9-A (0.006\
+        \ tons) * Clayface smashes the ground - 9-A (0.02 tons) * Jason Blood blows\
+        \ up a wall - 9-A (0.013 tons) * Batman tanks the explosion of a bus - 9-A\
+        \ (0.062 tons) * Owlman survives his bombs exploding - 9-A (0.119 tons) *\
+        \ Batman tanks an explosion that destroys the top of a skyscraper - 9-A+ (0.204\
+        \ tons) * Deathstroke withstands having a submarine thrown onto him - 8-C\
+        \ (1.94 gigajoules) * Batman survives the explosion of a submarine - 8-C (0.36\
+        \ tons) * Crush throws Roundhouse - 8-C+ (1.6 tons) * Owlman's individual\
+        \ bomb yield - High 8-C (2.43 tons) * Crush destroys a metal object - High\
+        \ 8-C (3.5 tons) * Hawkman smashes the ground - 8-A (103.812 tons) * Hawkman\
+        \ makes a crater - Low 7-C (3.26 kilotons) * Sky Tyrant causes a shockwave\
+        \ - 7-C (11.90 kilotons) * Apollo destroys a meteor - 7-B+ (76.3 megatons)\
+        \ * Loma Shade blows up Cray aliens - Low 6-B+ (5.777 teratons) * Ultraman\
+        \ pushes the moon - Low 5-B (2.65 zettatons) * Brainiac survives his mothership\u2019\
+        s explosion - 5-B (348.3 zettatons) * Superman and Martian Manhunter stop\
+        \ Brainiac\u2019s mothership - 5-B (1.6 yottatons) * Superman destroys Bizzaro\
+        \ Moon - 5-A (8.34 yottatons) * Green Lanterns shield Mogo - 5-A (2 Ronnatons)\
+        \ * Mogo Lights Up a Dying Universe - 4-B (2747.966869 Foe)"
+      source_id: vsbattles-aquaman-dc-comics-prime-earth
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: '* Rac Shade dodges bullets - Superhuman (26.643 m/s) * Captain Atom
+        flies to the Moon instanly - FTL (1.28c) * Krypto flies around Earth too fast
+        - FTL (3.74c) * Superman flies to the Sun on a average Thuseday - FTL (8.28c)
+        * Loma Shade flies to Mercury - FTL+ (15.77c) * Weakened Superman flies to
+        Venus - FTL+ (31.6885890438c) * Superman travels to the Sun to pipe down Luthor
+        - MFTL (165.670167282c) * Devastator throws Lobo into the Sun - MFTL (166.78c)
+        * Post-Flashpoint Superman flies to Pluto - MFTL (277.29c) * Superman travels
+        across 5 stars - MFTL+ (788405045.792c) * Superman and Jonathan Kent flies
+        accross the stars all the way to another galaxy - MFTL+ (26298168000000c)
+        * Superman flies accross tons of stars to another galaxy - MFTL+ (378431150000000c)
+        * Superman flies to the edge of the Universe - MFTL+ (1199998700000000c) *
+        Superman flies across galaxies in seconds - MFTL+ (73000000000000000c) * Val
+        Zod travel to the Edge of the Universe - MFTL+ (3155780200000000000000c) *
+        Supergirl types Quintillions of Kryptonian codes in a blink of an eye - MFTL+
+        (1.018413e21c) * Simon Baz, Jessica Cruz and Rami goes to the Edge of the
+        Universe - MFTL+ (1.2175e16c) * Superman process Zeta Beam data - MFTL+ (2.348291230195e+168c)
+        * Bizarro brawls with Kal El all the way to Pluto - MFTL+ (2706.46c) * Saint
+        Walker and Kyle Rayne travels to Oa - MFTL+ (6.428416e+30c) * Starfire flies
+        from Tamaran to Earth - MFTL+ (1314000.00841c) * Martian Manhunter reacts
+        in Plank Times - MFTL+ (1.1830829e+50c) * Reign flies from Argo City to Earth
+        - MFTL+ (27139475.2076c) * Power Girl and Simon Baz travel to Varva - MFTL+
+        (43800.07c) * Bleez and Rankorr travels from Ysmault to Earth quickly - MFTL+
+        (2685065.75659c) * Flash dodges a bullet within a femtosecond - MFTL+ (2749473.34c)
+        * Star Sapphire and White Lantern travel from Earth to Korugar in 3 hours
+        - MFTL+ (1.2436363892783377e+27c) * Star Sapphire travel from Oa to Earth
+        - MFTL+ (3.6733817e+30c) * Superman process a lot of data in seconds - MFTL+
+        (4.9593314e+17c) * Krypto flies from Krypton to Earth - MFTL+ (946076.97c)
+        * Green Lantern Squad flies to the Edge of the Universe - MFTL+ (2.5336851e+29c)
+        * Kyle Rayner and Hal Jordan travel to Mogo from Molta - MFTL+ (8.954181896063522e+28c)
+        * Ultraviolet Lantern John Steward flies quickly to Earth - MFTL+ (4099676720.26c)
+        * Hal Jordan flies from Hippocrates to Earth - MFTL+ (1.6789091472074223e+30c)
+        * John Steward, Hawkwoman, Killowog and a Lantern flies to Thanagar - MFTL+
+        (8.954181896063522e+28c)'
+      source_id: vsbattles-aquaman-dc-comics-prime-earth
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Mother Boxes, link=Mother Boxes
+      source_id: vsbattles-aquaman-dc-comics-prime-earth
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 2
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|prime earth dc comics|9674747
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-aquaman-dc-comics-prime-earth
+    url: https://character-stats-and-profiles.fandom.com/wiki/Aquaman_%28DC_Comics%29_%28Prime_Earth%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
     - tier
     normalized_page_title: Aquaman (Canon, DC Comics, Post-Flashpoint)/Azmarin
     source_type: mediawiki
@@ -1608,8 +1364,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: at least {{9-B}} | {{4-C}}
-      source_id: character-stats-profiles-aquaman-dc-comics-dc-comics
+      value: at least 9-B | 4-C
+      source_id: character-stats-profiles-aquaman-dc-comics-prime-earth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1623,8 +1379,8 @@ repair:
         of combatting members of the Court of Owls), Telepathy likely Mind Manipulation
         (Aquaman doesn't talk to fish but rather telepathically reaches into their
         midbrain and pushes them to help him), Social Influencing (As the King of
-        Atlantis has some form of political influence),
-      source_id: character-stats-profiles-aquaman-dc-comics-dc-comics
+        Atlantis has some form of political influence)
+      source_id: character-stats-profiles-aquaman-dc-comics-prime-earth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1633,8 +1389,8 @@ repair:
         a police cruiser with enough force to crack it; Can combat these monsters,
         here as well, which can tear apart humans with ease and can damage him; Can
         combat Black Manta), | atleast Star Level (Punched Superman a distance and
-        was capable of overpowering Wonder Woman with her lassoSee Explanation #1),'
-      source_id: character-stats-profiles-aquaman-dc-comics-dc-comics
+        was capable of overpowering Wonder Woman with her lassoSee Explanation #1)'
+      source_id: character-stats-profiles-aquaman-dc-comics-prime-earth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1647,7 +1403,7 @@ repair:
         likely High Hypersonic (Should be superior to Vostok, who''s stated to be
         capable of traveling from the moon to earth in 8 to 9 hours) | FTL (Is fast
         enough to react to Black Manta''s lasers)'
-      source_id: character-stats-profiles-aquaman-dc-comics-dc-comics
+      source_id: character-stats-profiles-aquaman-dc-comics-prime-earth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -1655,7 +1411,7 @@ repair:
       value: Varies atleast Wall Level (Can point blank tank Black Manta's lasers
         at full power; Is said to have muscle density ten times that of the average
         human)
-      source_id: character-stats-profiles-aquaman-dc-comics-dc-comics
+      source_id: character-stats-profiles-aquaman-dc-comics-prime-earth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75

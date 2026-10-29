@@ -11,13 +11,14 @@ generation:
   generated_at: '2026-06-10T03:36:25Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id005
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Cyberdemon (Game)
   franchise: Doom
@@ -151,42 +152,6 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-cyberdemon-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Cyberdemon Game
-  url: https://vsbattles.fandom.com/wiki/Cyberdemon_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-cyberdemon-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Cyberdemon Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Cyberdemon_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-cyberdemon-game-doom
   provider_id: vsbattles
   source_type: mediawiki
@@ -194,7 +159,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Cyberdemon
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -235,72 +200,8 @@ sources:
 - id: character-stats-profiles-cyberdemon-game-doom
   provider_id: character_stats_profiles
   source_type: mediawiki
-  title: Cyberdemon Game Doom
-  url: https://character-stats-and-profiles.fandom.com/wiki/Cyberdemon_Game_Doom
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-cyberdemon-game-doom
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Cyberdemon (Game) Doom
-  url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29_Doom
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-cyberdemon-game-doom
-  provider_id: character_stats_profiles
-  source_type: mediawiki
   title: Cyberdemon (Game) Doom
   url: https://character-stats-and-profiles.fandom.com/wiki/Cyberdemon_%28Game%29_Doom
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-cyberdemon-game-doom
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Cyberdemon (Game) (Doom)
-  url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29_%28Doom%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-cyberdemon-game-doom
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Cyberdemon (Game) (Doom)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Cyberdemon_%28Game%29_%28Doom%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -466,7 +367,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id003
+  source_ids: &id002
   - vsbattles-cyberdemon-game-doom
   source_claim_ids: []
   confidence: 0.85
@@ -482,7 +383,7 @@ abilities:
 - id: powers-and-abilities-cyborgization
   name: Cyborgization
   description: Cyborgization
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -497,7 +398,7 @@ abilities:
 - id: powers-and-abilities-rapidly-fires-explosives
   name: Rapidly fires explosives
   description: Rapidly fires explosives
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -514,7 +415,7 @@ abilities:
 - id: powers-and-abilities-large-size-type-0
   name: Large Size (Type 0)
   description: Large Size (Type 0)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -531,7 +432,7 @@ abilities:
     Essence -The demons with their presence br
   description: Essence Manipulation (Essence - Demons are capable of devouring souls.
     Hell's Essence -The demons with their presence bring their reality with them
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -547,7 +448,7 @@ abilities:
 - id: powers-and-abilities-hellifying-the-environment-this-can-lead-to-many-destructiv
   name: '"hellifying" the environment. This can lead to many destructive events'
   description: '"hellifying" the environment. This can lead to many destructive events'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -564,7 +465,7 @@ abilities:
     or infecting the atmosphere
   description: all of which benefit them on conquering worlds. Whether that be creating
     Hellgrowths or infecting the atmosphere
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -579,7 +480,7 @@ abilities:
 - id: powers-and-abilities-making-it-poisonous-fire-manipulation
   name: making it poisonous) Fire Manipulation
   description: making it poisonous) Fire Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -596,7 +497,7 @@ abilities:
 - id: powers-and-abilities-immortality-type-7
   name: Immortality (Type 7
   description: Immortality (Type 7
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -613,7 +514,7 @@ abilities:
     as an army of the undead)
   description: Demons are frequently referred to as mortally challenged and are referred
     as an army of the undead)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -628,7 +529,7 @@ abilities:
 - id: powers-and-abilities-same-as-before-plus
   name: Same as before plus
   description: Same as before plus
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -643,7 +544,7 @@ abilities:
 - id: powers-and-abilities-invulnerability-only-the-soul-cube-can-deal-damage-to-it
   name: Invulnerability (Only the Soul Cube can deal damage to it)
   description: Invulnerability (Only the Soul Cube can deal damage to it)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -659,7 +560,7 @@ abilities:
 - id: powers-and-abilities-same-as-classic-to-a-higher-degree-plus
   name: Same as classic to a higher degree plus
   description: Same as classic to a higher degree plus
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -674,7 +575,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation
   name: Fire Manipulation
   description: Fire Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -691,7 +592,7 @@ abilities:
 - id: powers-and-abilities-energy-projection
   name: Energy Projection
   description: Energy Projection
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -706,7 +607,7 @@ abilities:
 - id: powers-and-abilities-can-raise-pillars-of-stone
   name: Can raise pillars of stone
   description: Can raise pillars of stone
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -723,7 +624,7 @@ abilities:
 - id: powers-and-abilities-can-generate-shockwaves
   name: Can generate shockwaves
   description: Can generate shockwaves
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -740,7 +641,7 @@ abilities:
     until the Argent Accumulator is removed) and
   description: With the Argent Accumulator they gain Resurrection (Continuously resurrects
     until the Argent Accumulator is removed) and Regeneration (Mid-Low). When ruptured
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -756,7 +657,7 @@ abilities:
 - id: powers-and-abilities-it-teleports-them-and-the-player-to-hell
   name: it teleports them and the player to Hell
   description: it teleports them and the player to Hell
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -773,7 +674,7 @@ abilities:
 - id: powers-and-abilities-same-as-2016-minus-argent-accumulator-abilities
   name: Same as 2016 (Minus Argent Accumulator Abilities)
   description: Same as 2016 (Minus Argent Accumulator Abilities)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -788,7 +689,7 @@ abilities:
 - id: powers-and-abilities-in-addition-to-homing-attack-via-targeting-lasers
   name: 'in-addition to: Homing Attack (Via targeting lasers)'
   description: 'in-addition to: Homing Attack (Via targeting lasers)'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -805,7 +706,7 @@ abilities:
     bodyparts)
   description: Immortality (Type 2) (In Eternal they are capable of fighting with
     missing bodyparts)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -820,7 +721,7 @@ abilities:
 - id: powers-and-abilities-limited-bfr-whatever-a-demon-kills
   name: Limited BFR (Whatever a demon kills
   description: Limited BFR (Whatever a demon kills
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -835,7 +736,7 @@ abilities:
 - id: powers-and-abilities-it-gets-sent-to-hell-immunity-to-soul-manipulation
   name: it gets sent to Hell) Immunity to Soul Manipulation
   description: it gets sent to Hell) Immunity to Soul Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -851,7 +752,7 @@ abilities:
 - id: powers-and-abilities-resistance-to-heat
   name: Resistance to Heat
   description: Resistance to Heat
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -868,7 +769,7 @@ abilities:
 - id: powers-and-abilities-poison-manipulation
   name: Poison Manipulation
   description: Poison Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -883,7 +784,7 @@ abilities:
 - id: powers-and-abilities-acid-manipulation
   name: Acid Manipulation
   description: Acid Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -898,7 +799,7 @@ abilities:
 - id: powers-and-abilities-electricity-manipulation
   name: Electricity Manipulation
   description: Electricity Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -913,7 +814,7 @@ abilities:
 - id: powers-and-abilities-disease-manipulation
   name: Disease Manipulation
   description: Disease Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -928,7 +829,7 @@ abilities:
 - id: powers-and-abilities-radiation-manipulation
   name: Radiation Manipulation
   description: Radiation Manipulation
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -943,7 +844,7 @@ abilities:
 - id: powers-and-abilities-essence-manipulation-hell-s-essence
   name: Essence Manipulation (Hell's Essence
   description: Essence Manipulation (Hell's Essence
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -958,7 +859,7 @@ abilities:
 - id: powers-and-abilities-argent-energy
   name: Argent Energy
   description: Argent Energy
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -975,7 +876,7 @@ abilities:
     period of times all the time which includes
   description: Sentinel Energy) Fire Manipulation (Doom Demons fight eachother for
     extended period of times all the time which includes using their abilities)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -996,7 +897,7 @@ weaknesses:
 - id: weaknesses-none-notable-videos-thumb
   name: None notable ==Videos== thumb
   description: None notable ==Videos== thumb
-  source_ids: &id004
+  source_ids: &id003
   - vsbattles-cyberdemon-game-doom
   source_claim_ids: []
   confidence: 0.85
@@ -1012,7 +913,7 @@ weaknesses:
 - id: weaknesses-center
   name: center
   description: center
-  source_ids: *id004
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1027,7 +928,7 @@ weaknesses:
 - id: weaknesses-250-pxthumb
   name: 250 pxthumb
   description: 250 pxthumb
-  source_ids: *id004
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1042,7 +943,7 @@ weaknesses:
 - id: weaknesses-center
   name: center
   description: center
-  source_ids: *id004
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1068,7 +969,7 @@ weaknesses:
     Characters Category:Rocket Users Category:Shockwave Users Category:Sword Users
     Category:Teleportation Users Category:Undead Category:Vibration Users Category:Video
     Game Characters Category:Villains Category:Weapon Masters'
-  source_ids: *id004
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1097,30 +998,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id005
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: 3aa979b72ae95e4105650d7472ddb1cec3570d822e56104a76fc12799a4a49f6
 repair:
-  attempted_at: '2026-06-19T07:20:20Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-29T02:12:55Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-cyberdemon-game-doom
-    url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29_Doom
+  - source_id: mediawiki-cyberdemon-game
+    url: https://vsbattles.fandom.com/wiki/Cyberdemon
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1130,7 +1028,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Cyberdemon
     source_type: mediawiki
     revision_id: '8924431'
@@ -1149,6 +1046,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1162,7 +1060,168 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields:
+    - tier
+    - attack_potency
+    - speed
+    - durability
+    - range
+    - stamina
+    - intelligence
+    - abilities
+    - equipment
+    - weaknesses
+    field_candidates:
+    - field: tier
+      value: At least 9-A, likely far higher | At least 9-A, likely higher | 8-A |
+        8-A
+      source_id: mediawiki-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Cyborgization, Rapidly fires explosives,
+        Large Size (Type 0), Essence Manipulation (Essence - Demons are capable of
+        devouring souls. Hell''s Essence -The demons with their presence bring their
+        reality with them, "hellifying" the environment. This can lead to many destructive
+        events, all of which benefit them on conquering worlds. Whether that be creating
+        Hellgrowths or infecting the atmosphere, making it poisonous) Fire Manipulation,
+        Immortality (Type 7; Demons are frequently referred to as mortally challenged
+        and are referred as an army of the undead), Same as before plus, Invulnerability
+        (Only the Soul Cube can deal damage to it), Same as classic to a higher degree
+        plus, Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
+        generate shockwaves, With the Argent Accumulator they gain Resurrection (Continuously
+        resurrects until the Argent Accumulator is removed) and Regeneration (Mid-Low).
+        When ruptured, it teleports them and the player to Hell, Same as 2016 (Minus
+        Argent Accumulator Abilities), in-addition to: Homing Attack (Via targeting
+        lasers), Immortality (Type 2) (In Eternal they are capable of fighting with
+        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell),
+        Immunity to Soul Manipulation, Resistance to Heat, Poison Manipulation, Acid
+        Manipulation, Electricity Manipulation, Disease Manipulation, Radiation Manipulation,
+        Essence Manipulation (Hell''s Essence, Argent Energy, Sentinel Energy) Fire
+        Manipulation (Doom Demons fight eachother for extended period of times all
+        the time which includes using their abilities)'
+      source_id: mediawiki-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Small Building level, likely far higher (Stronger than the Spider
+        Mastermind, consistently shown to be one of the most powerful demons in the
+        series, can effortlessly kill the Classic Doomguy regardless of amps and trade
+        blows with other Cyberdemons) | At least Small Building level, likely higher
+        (Can deal huge damage to the Marine, far stronger than most other demons)
+        | Multi-City Block level (Should at least be comparable to the likes of the
+        Spider Mastermind, should be comparable, if not superior to Tyrants) | Multi-City
+        Block level (One of the strongest Super Heavy Demons in the game, can harm
+        others of their kind, superior to Fireborne Barons)
+      source_id: mediawiki-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic+ movement speed, at least Supersonic combat and reaction speed
+        (Easily comparable to Doomguy) | Supersonic combat and reaction speed (Can
+        keep up with the Marine) | At least Supersonic+ (Faster than their classic
+        incarnation. Comparable to other Demons) | At least Supersonic+ combat and
+        reaction speed (Same as before)
+      source_id: mediawiki-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Small Building level, likely far higher (Able to tank numerous
+        blasts from the BFG9000. Significantly superior to the Spider Mastermind)
+        | At least Small Building level, likely higher (Only the likes of the Soul
+        Cube can deal any major damage to it, can effortlessly tank shots from the
+        Marines BFG9000) | Multi-City Block level (Far more durable than its Classic
+        incarnation, capable of tanking shots from later models of the BFG9000) |
+        Multi-City Block level (Far stronger than their Classic counterparts, can
+        tank shots from a Modern BFG9000)
+      source_id: mediawiki-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (The demons of Hell have limitless aggression and are tireless
+        beings)
+      source_id: mediawiki-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Varies up to Hundreds of Meters with weaponry
+      source_id: mediawiki-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Rocket Launcher/Laser Cannon, Demonic Sword
+      source_id: mediawiki-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Unknown, likely Above Average (Described to be part of a greater intelligence
+        or hivemind. Individually they are capable of activating and controlling technology
+        that gives them motor function and are capable in combat against the likes
+        of Doomguy)
+      source_id: mediawiki-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-cyberdemon-game-doom
+    url: https://character-stats-and-profiles.fandom.com/wiki/Cyberdemon_%28Game%29_Doom
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Doom Slayer (Canon)/Smilodonpopulator2344+
+    source_type: mediawiki
+    revision_id: '462321'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 24907
+    content_kind: api_json
+    headings_detected:
+    - Doom Slayer
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1173,8 +1232,183 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{9-A}}, likely far higher | At least {{9-A}}, likely higher
-        | {{8-A}} | {{8-A}}
+      value: High 1-B | 1-A | High 1-A | Possibly 1-S Haxs/
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Acausality (Types 2 & 4) out infinite timelines and possibilities there
+        was one constant, that was the Destroyer and the ruin of Urdak by his hand
+        and despite the omniscient Makyr collective viewing these infinite timelines
+        and possibilities it couldn't detect the Destroyer's identity, Non-Physical
+        Interaction & Soul Manipulation (He stabbed the soul that resided within The
+        Gladiator's shield), Invulnerability Negation (Defeated the Khan Makyr while
+        her life sphere was in her chest, Can kill Cyberdemons/Tyrants who are only
+        able to be harmed with Holy weapons like the Spear of Destiny.), Immortality
+        Bypassing via Crucible and bare hands (Defeated the Immortal Titan while his
+        Crucible was Stuck in the Titan he killed in Taras Nabad and Hugo Martin stated
+        he killed the Titan with his bare hands.), Reactive Power Level (He Draws
+        strength from every enemy he defeats)
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: High 1-B (Caused a multiverse to implode in on itself a multiverse in
+        DOOM has Infinite timelines and possibilities which expand exponentially like
+        fractal patterns in the fabric of existence Infinite timelines and possibilities
+        is Many World Interpretations. That qualifies for a Type 3 Multiverse at least
+        (though you can argue higher) and a Type 3 Multiverse it mentions Infinite-Dimensional
+        Hilbert Space. Fractal patterns are infinitely complexed and never ending
+        which is the very image of the Chaos Theory which is Infinite-Dimensional.
+        Fractal systems define minority cosmological theories which includes metaphysics
+        this means the multiverses in DOOM contain the concepts of mathematical dimensionality
+        aka spatial dimensions via metaphysics. There's the usage of pan dimensional
+        existence to define the existence of a Multiverse in a way. Pan dimensionality
+        is defined as all dimensions of reality across Infinite spatial dimensions.
+        There is also Inverse Quantum Fields via Hellgrowths. Inverse Quantum Fields
+        contain Quantum Mechanics which are often formulated in infinite-dimensional
+        Hilbert Space. In each universe there is Bohm's Implicate Order and in Bohm's
+        Implicate Order the Holomovement endlessly folds and unfolds into infinite
+        dimensionality and as stated there are infinite timelines/universes per Multiverse.
+        ) | 1-A (Defeated the Khan Makyr, leader of the Makyrs who are arbiters across
+        countless dimensions and hold sway over all dominions of the known and unknown
+        dimensions. The Khan Makyr is the leader of Urdak which transcends the mortal
+        realm which the Slayer was always going to destroy as seen here) | At least
+        1-A (He is above the Elder Gods of Quake who are beyond human comprehension
+        and control extradimensional realms and is another scan for extradimensional
+        realms | 1-A maybe higher (Defeated the Icon of Sin who's mere presence caused
+        irreversible changes to Urdak which allowed the demons to pass through the
+        Void as never before) | 1-A (Defeated the Seraphim, Seraphs were molded from
+        the Void in Urdak and governed over creation) | 1-A to High 1-A (The Slayer
+        defeated the Immortal Titan of Immesurable Power and Ferocity who is arguably
+        the strongest demon to ever exist.) | High 1-A, possibly 1-S (Defeated Davoth,
+        the creator of the verse which includes the mortal realm, Urdak, and Hell
+        which is where Hellgrowths originate and Hell itself transcends Urdak and
+        is Unlimited by the boundaries of space, time, or dimension and transcends
+        them. Hell was confirmed by Hugo Martin to be an extention of Davoth. Davoth
+        stated that all things were made by his hand and that they would be unmade
+        by his hands which indicates he was going to destroy everything he created
+        which should include The Void as well. The Void was the first thing he created.
+        The engine of creation lie in The Void and is described to be "on the other
+        side of reality itself" and they breach The Void walls to touch the physical
+        world. This implies that the Void is Non-Physical note that even mathematical
+        dimensions are considered to be part of the physical world. The engine of
+        creation also spins into the physical world and back out of existence aka
+        into The Void. The Void lies between and all around dimensions in DOOM and
+        the Seraphs create life spheres or revive them using the powers of The Void).
+        This means that The Void is beyond existence and reality and mind you that
+        even Hell is within existence and reality. However, The Void is not and it
+        encompasses the entire cosmology (that we know about) within it and Hugo Martin
+        suggested that there is a place higher than even The Void where Davoth came
+        from.
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immesurable (The moment he exited the Divinity Machine he was called
+        the Time Walker and he moved through Time and Worlds) | At least Immesurable
+        (Kept up with Makyrs who move through Time and Space) | Irrelevant (Kept up
+        with the Seraphim who flew through all of creation) | Irrelevant (Kept up
+        with Davoth who flew through the Void, a structure that's Formless, and where
+        things like space, time, and dimensionality are meaningless and is beyond
+        existence itself & moved he moved between time and worlds which the Void lies
+        between and around all of creation.)
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 1-A (Tanked attacks from the Khan Makyr and Icon of Sin) | 1-A (Tanked
+        attacks from the Seraphim) | 1-A to High 1-A (Killed the Champion of Hell
+        with his bare fists) | High 1-A, possibly 1-S (Tanked attacks from Davoth
+        who was the only being that could injure the Slayer since he is either a Primeval
+        or something greater.)
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Originally his anger and love for destroying things and harming demons
+        could be used against him which led to him being sealed
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|doom slayer canon smilodonpopulator2344|462321
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-cyberdemon-game-doom
+    url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29_Doom
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    normalized_page_title: Cyberdemon
+    source_type: mediawiki
+    revision_id: '8924431'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 11073
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Videos
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least 9-A, likely far higher | At least 9-A, likely higher | 8-A |
+        8-A
       source_id: vsbattles-cyberdemon-game-doom
       provider_id: vsbattles
       authority: high
@@ -1187,15 +1421,15 @@ repair:
         events, all of which benefit them on conquering worlds. Whether that be creating
         Hellgrowths or infecting the atmosphere, making it poisonous) Fire Manipulation,
         Immortality (Type 7; Demons are frequently referred to as mortally challenged
-        and are referred as an army of the undead) | Same as before plus; Invulnerability
-        (Only the Soul Cube can deal damage to it) | Same as classic to a higher degree
-        plus; Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
+        and are referred as an army of the undead), Same as before plus, Invulnerability
+        (Only the Soul Cube can deal damage to it), Same as classic to a higher degree
+        plus, Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
         generate shockwaves, With the Argent Accumulator they gain Resurrection (Continuously
         resurrects until the Argent Accumulator is removed) and Regeneration (Mid-Low).
-        When ruptured, it teleports them and the player to Hell | Same as 2016 (Minus
+        When ruptured, it teleports them and the player to Hell, Same as 2016 (Minus
         Argent Accumulator Abilities), in-addition to: Homing Attack (Via targeting
         lasers), Immortality (Type 2) (In Eternal they are capable of fighting with
-        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell)
+        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell),
         Immunity to Soul Manipulation, Resistance to Heat, Poison Manipulation, Acid
         Manipulation, Electricity Manipulation, Disease Manipulation, Radiation Manipulation,
         Essence Manipulation (Hell''s Essence, Argent Energy, Sentinel Energy) Fire
@@ -1266,23 +1500,6 @@ repair:
         or hivemind. Individually they are capable of activating and controlling technology
         that gives them motor function and are capable in combat against the likes
         of Doomguy)
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Videos== thumb|center|250 pxthumb|center|250 px ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions}} Category:Characters
-        Category:Doom Category:Antagonists Category:Berserkers Category:BFR Users
-        Category:Blade Users Category:Cyborgs Category:Demons Category:Earth Users
-        Category:Energy Projection Users Category:Energy Users Category:Energy Weapon
-        Users Category:Evil Characters Category:Explosion Users Category:Fire Users
-        Category:Game Bosses Category:Game Characters Category:Giants Category:Gun
-        Users Category:Homing Attack Users Category:Large Sized Characters Category:Monsters
-        Category:Reality Warpers Category:Regeneration Users Category:Resurrection
-        Users Category:Revived Characters Category:Rocket Users Category:Shockwave
-        Users Category:Sword Users Category:Teleportation Users Category:Undead Category:Vibration
-        Users Category:Video Game Characters Category:Villains Category:Weapon Masters'
       source_id: vsbattles-cyberdemon-game-doom
       provider_id: vsbattles
       authority: high
@@ -1300,53 +1517,11 @@ repair:
     duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-cyberdemon-game-doom
-    url: https://character-stats-and-profiles.fandom.com/wiki/Cyberdemon_%28Game%29_Doom
-    ok: false
-    note: source_timeout_after_4s
-    extracted_fields: []
-    normalized_page_title: Cyberdemon (Game) Doom
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: timeout
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: timeout
-    rank: 0
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 0
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: false
-    duplicate_key: ''
-    retryable: true
-    exception_class: TimeoutError
   - source_id: vsbattles-cyberdemon-game-doom
     url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29_%28Doom%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id008
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1356,7 +1531,6 @@ repair:
     - stamina
     - standard_equipment
     - tier
-    - weaknesses
     normalized_page_title: Cyberdemon
     source_type: mediawiki
     revision_id: '8924431'
@@ -1375,6 +1549,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1388,7 +1563,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id009
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1399,8 +1574,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{9-A}}, likely far higher | At least {{9-A}}, likely higher
-        | {{8-A}} | {{8-A}}
+      value: At least 9-A, likely far higher | At least 9-A, likely higher | 8-A |
+        8-A
       source_id: vsbattles-cyberdemon-game-doom
       provider_id: vsbattles
       authority: high
@@ -1413,15 +1588,15 @@ repair:
         events, all of which benefit them on conquering worlds. Whether that be creating
         Hellgrowths or infecting the atmosphere, making it poisonous) Fire Manipulation,
         Immortality (Type 7; Demons are frequently referred to as mortally challenged
-        and are referred as an army of the undead) | Same as before plus; Invulnerability
-        (Only the Soul Cube can deal damage to it) | Same as classic to a higher degree
-        plus; Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
+        and are referred as an army of the undead), Same as before plus, Invulnerability
+        (Only the Soul Cube can deal damage to it), Same as classic to a higher degree
+        plus, Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
         generate shockwaves, With the Argent Accumulator they gain Resurrection (Continuously
         resurrects until the Argent Accumulator is removed) and Regeneration (Mid-Low).
-        When ruptured, it teleports them and the player to Hell | Same as 2016 (Minus
+        When ruptured, it teleports them and the player to Hell, Same as 2016 (Minus
         Argent Accumulator Abilities), in-addition to: Homing Attack (Via targeting
         lasers), Immortality (Type 2) (In Eternal they are capable of fighting with
-        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell)
+        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell),
         Immunity to Soul Manipulation, Resistance to Heat, Poison Manipulation, Acid
         Manipulation, Electricity Manipulation, Disease Manipulation, Radiation Manipulation,
         Essence Manipulation (Hell''s Essence, Argent Energy, Sentinel Energy) Fire
@@ -1492,23 +1667,6 @@ repair:
         or hivemind. Individually they are capable of activating and controlling technology
         that gives them motor function and are capable in combat against the likes
         of Doomguy)
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Videos== thumb|center|250 pxthumb|center|250 px ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions}} Category:Characters
-        Category:Doom Category:Antagonists Category:Berserkers Category:BFR Users
-        Category:Blade Users Category:Cyborgs Category:Demons Category:Earth Users
-        Category:Energy Projection Users Category:Energy Users Category:Energy Weapon
-        Users Category:Evil Characters Category:Explosion Users Category:Fire Users
-        Category:Game Bosses Category:Game Characters Category:Giants Category:Gun
-        Users Category:Homing Attack Users Category:Large Sized Characters Category:Monsters
-        Category:Reality Warpers Category:Regeneration Users Category:Resurrection
-        Users Category:Revived Characters Category:Rocket Users Category:Shockwave
-        Users Category:Sword Users Category:Teleportation Users Category:Undead Category:Vibration
-        Users Category:Video Game Characters Category:Villains Category:Weapon Masters'
       source_id: vsbattles-cyberdemon-game-doom
       provider_id: vsbattles
       authority: high
@@ -1528,20 +1686,39 @@ repair:
     exception_class: ''
   - source_id: character-stats-profiles-cyberdemon-game-doom
     url: https://character-stats-and-profiles.fandom.com/wiki/Cyberdemon_%28Game%29_%28Doom%29
-    ok: false
-    note: source_timeout_after_4s
-    extracted_fields: []
-    normalized_page_title: Cyberdemon (Game) (Doom)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Doom Slayer (Canon)/Smilodonpopulator2344+
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: timeout
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: timeout
-    rank: 0
+    revision_id: '462321'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 24907
+    content_kind: api_json
+    headings_detected:
+    - Doom Slayer
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1554,725 +1731,630 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 0
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: false
-    duplicate_key: ''
-    retryable: true
-    exception_class: TimeoutError
-  - source_id: mediawiki-cyberdemon-game
-    url: https://vsbattles.fandom.com/wiki/Cyberdemon_(Game)
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id010
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Cyberdemon
-    source_type: mediawiki
-    revision_id: '8924431'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 11073
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Videos
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id011
-    - tier
-    - attack_potency
-    - speed
-    - durability
-    - range
-    - stamina
-    - intelligence
-    - abilities
-    - equipment
-    - weaknesses
     field_candidates:
     - field: tier
-      value: At least {{9-A}}, likely far higher | At least {{9-A}}, likely higher
-        | {{8-A}} | {{8-A}}
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
+      value: High 1-B | 1-A | High 1-A | Possibly 1-S Haxs/
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Superhuman Physical Characteristics, Cyborgization, Rapidly fires explosives,
-        Large Size (Type 0), Essence Manipulation (Essence - Demons are capable of
-        devouring souls. Hell''s Essence -The demons with their presence bring their
-        reality with them, "hellifying" the environment. This can lead to many destructive
-        events, all of which benefit them on conquering worlds. Whether that be creating
-        Hellgrowths or infecting the atmosphere, making it poisonous) Fire Manipulation,
-        Immortality (Type 7; Demons are frequently referred to as mortally challenged
-        and are referred as an army of the undead) | Same as before plus; Invulnerability
-        (Only the Soul Cube can deal damage to it) | Same as classic to a higher degree
-        plus; Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
-        generate shockwaves, With the Argent Accumulator they gain Resurrection (Continuously
-        resurrects until the Argent Accumulator is removed) and Regeneration (Mid-Low).
-        When ruptured, it teleports them and the player to Hell | Same as 2016 (Minus
-        Argent Accumulator Abilities), in-addition to: Homing Attack (Via targeting
-        lasers), Immortality (Type 2) (In Eternal they are capable of fighting with
-        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell)
-        Immunity to Soul Manipulation, Resistance to Heat, Poison Manipulation, Acid
-        Manipulation, Electricity Manipulation, Disease Manipulation, Radiation Manipulation,
-        Essence Manipulation (Hell''s Essence, Argent Energy, Sentinel Energy) Fire
-        Manipulation (Doom Demons fight eachother for extended period of times all
-        the time which includes using their abilities)'
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
+      value: Acausality (Types 2 & 4) out infinite timelines and possibilities there
+        was one constant, that was the Destroyer and the ruin of Urdak by his hand
+        and despite the omniscient Makyr collective viewing these infinite timelines
+        and possibilities it couldn't detect the Destroyer's identity, Non-Physical
+        Interaction & Soul Manipulation (He stabbed the soul that resided within The
+        Gladiator's shield), Invulnerability Negation (Defeated the Khan Makyr while
+        her life sphere was in her chest, Can kill Cyberdemons/Tyrants who are only
+        able to be harmed with Holy weapons like the Spear of Destiny.), Immortality
+        Bypassing via Crucible and bare hands (Defeated the Immortal Titan while his
+        Crucible was Stuck in the Titan he killed in Taras Nabad and Hugo Martin stated
+        he killed the Titan with his bare hands.), Reactive Power Level (He Draws
+        strength from every enemy he defeats)
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: At least Small Building level, likely far higher (Stronger than the Spider
-        Mastermind, consistently shown to be one of the most powerful demons in the
-        series, can effortlessly kill the Classic Doomguy regardless of amps and trade
-        blows with other Cyberdemons) | At least Small Building level, likely higher
-        (Can deal huge damage to the Marine, far stronger than most other demons)
-        | Multi-City Block level (Should at least be comparable to the likes of the
-        Spider Mastermind, should be comparable, if not superior to Tyrants) | Multi-City
-        Block level (One of the strongest Super Heavy Demons in the game, can harm
-        others of their kind, superior to Fireborne Barons)
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
+      value: High 1-B (Caused a multiverse to implode in on itself a multiverse in
+        DOOM has Infinite timelines and possibilities which expand exponentially like
+        fractal patterns in the fabric of existence Infinite timelines and possibilities
+        is Many World Interpretations. That qualifies for a Type 3 Multiverse at least
+        (though you can argue higher) and a Type 3 Multiverse it mentions Infinite-Dimensional
+        Hilbert Space. Fractal patterns are infinitely complexed and never ending
+        which is the very image of the Chaos Theory which is Infinite-Dimensional.
+        Fractal systems define minority cosmological theories which includes metaphysics
+        this means the multiverses in DOOM contain the concepts of mathematical dimensionality
+        aka spatial dimensions via metaphysics. There's the usage of pan dimensional
+        existence to define the existence of a Multiverse in a way. Pan dimensionality
+        is defined as all dimensions of reality across Infinite spatial dimensions.
+        There is also Inverse Quantum Fields via Hellgrowths. Inverse Quantum Fields
+        contain Quantum Mechanics which are often formulated in infinite-dimensional
+        Hilbert Space. In each universe there is Bohm's Implicate Order and in Bohm's
+        Implicate Order the Holomovement endlessly folds and unfolds into infinite
+        dimensionality and as stated there are infinite timelines/universes per Multiverse.
+        ) | 1-A (Defeated the Khan Makyr, leader of the Makyrs who are arbiters across
+        countless dimensions and hold sway over all dominions of the known and unknown
+        dimensions. The Khan Makyr is the leader of Urdak which transcends the mortal
+        realm which the Slayer was always going to destroy as seen here) | At least
+        1-A (He is above the Elder Gods of Quake who are beyond human comprehension
+        and control extradimensional realms and is another scan for extradimensional
+        realms | 1-A maybe higher (Defeated the Icon of Sin who's mere presence caused
+        irreversible changes to Urdak which allowed the demons to pass through the
+        Void as never before) | 1-A (Defeated the Seraphim, Seraphs were molded from
+        the Void in Urdak and governed over creation) | 1-A to High 1-A (The Slayer
+        defeated the Immortal Titan of Immesurable Power and Ferocity who is arguably
+        the strongest demon to ever exist.) | High 1-A, possibly 1-S (Defeated Davoth,
+        the creator of the verse which includes the mortal realm, Urdak, and Hell
+        which is where Hellgrowths originate and Hell itself transcends Urdak and
+        is Unlimited by the boundaries of space, time, or dimension and transcends
+        them. Hell was confirmed by Hugo Martin to be an extention of Davoth. Davoth
+        stated that all things were made by his hand and that they would be unmade
+        by his hands which indicates he was going to destroy everything he created
+        which should include The Void as well. The Void was the first thing he created.
+        The engine of creation lie in The Void and is described to be "on the other
+        side of reality itself" and they breach The Void walls to touch the physical
+        world. This implies that the Void is Non-Physical note that even mathematical
+        dimensions are considered to be part of the physical world. The engine of
+        creation also spins into the physical world and back out of existence aka
+        into The Void. The Void lies between and all around dimensions in DOOM and
+        the Seraphs create life spheres or revive them using the powers of The Void).
+        This means that The Void is beyond existence and reality and mind you that
+        even Hell is within existence and reality. However, The Void is not and it
+        encompasses the entire cosmology (that we know about) within it and Hugo Martin
+        suggested that there is a place higher than even The Void where Davoth came
+        from.
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Subsonic+ movement speed, at least Supersonic combat and reaction speed
-        (Easily comparable to Doomguy) | Supersonic combat and reaction speed (Can
-        keep up with the Marine) | At least Supersonic+ (Faster than their classic
-        incarnation. Comparable to other Demons) | At least Supersonic+ combat and
-        reaction speed (Same as before)
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
+      value: Immesurable (The moment he exited the Divinity Machine he was called
+        the Time Walker and he moved through Time and Worlds) | At least Immesurable
+        (Kept up with Makyrs who move through Time and Space) | Irrelevant (Kept up
+        with the Seraphim who flew through all of creation) | Irrelevant (Kept up
+        with Davoth who flew through the Void, a structure that's Formless, and where
+        things like space, time, and dimensionality are meaningless and is beyond
+        existence itself & moved he moved between time and worlds which the Void lies
+        between and around all of creation.)
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: durability
-      value: At least Small Building level, likely far higher (Able to tank numerous
-        blasts from the BFG9000. Significantly superior to the Spider Mastermind)
-        | At least Small Building level, likely higher (Only the likes of the Soul
-        Cube can deal any major damage to it, can effortlessly tank shots from the
-        Marines BFG9000) | Multi-City Block level (Far more durable than its Classic
-        incarnation, capable of tanking shots from later models of the BFG9000) |
-        Multi-City Block level (Far stronger than their Classic counterparts, can
-        tank shots from a Modern BFG9000)
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (The demons of Hell have limitless aggression and are tireless
-        beings)
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Varies up to Hundreds of Meters with weaponry
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Rocket Launcher/Laser Cannon, Demonic Sword
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Unknown, likely Above Average (Described to be part of a greater intelligence
-        or hivemind. Individually they are capable of activating and controlling technology
-        that gives them motor function and are capable in combat against the likes
-        of Doomguy)
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
+      value: 1-A (Tanked attacks from the Khan Makyr and Icon of Sin) | 1-A (Tanked
+        attacks from the Seraphim) | 1-A to High 1-A (Killed the Champion of Hell
+        with his bare fists) | High 1-A, possibly 1-S (Tanked attacks from Davoth
+        who was the only being that could injure the Slayer since he is either a Primeval
+        or something greater.)
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable ==Videos== thumb|center|250 pxthumb|center|250 px ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions}} Category:Characters
-        Category:Doom Category:Antagonists Category:Berserkers Category:BFR Users
-        Category:Blade Users Category:Cyborgs Category:Demons Category:Earth Users
-        Category:Energy Projection Users Category:Energy Users Category:Energy Weapon
-        Users Category:Evil Characters Category:Explosion Users Category:Fire Users
-        Category:Game Bosses Category:Game Characters Category:Giants Category:Gun
-        Users Category:Homing Attack Users Category:Large Sized Characters Category:Monsters
-        Category:Reality Warpers Category:Regeneration Users Category:Resurrection
-        Users Category:Revived Characters Category:Rocket Users Category:Shockwave
-        Users Category:Sword Users Category:Teleportation Users Category:Undead Category:Vibration
-        Users Category:Video Game Characters Category:Villains Category:Weapon Masters'
-      source_id: mediawiki-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-cyberdemon-game
-    url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id012
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Cyberdemon
-    source_type: mediawiki
-    revision_id: '8924431'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 11073
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Videos
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id013
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{9-A}}, likely far higher | At least {{9-A}}, likely higher
-        | {{8-A}} | {{8-A}}
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Superhuman Physical Characteristics, Cyborgization, Rapidly fires explosives,
-        Large Size (Type 0), Essence Manipulation (Essence - Demons are capable of
-        devouring souls. Hell''s Essence -The demons with their presence bring their
-        reality with them, "hellifying" the environment. This can lead to many destructive
-        events, all of which benefit them on conquering worlds. Whether that be creating
-        Hellgrowths or infecting the atmosphere, making it poisonous) Fire Manipulation,
-        Immortality (Type 7; Demons are frequently referred to as mortally challenged
-        and are referred as an army of the undead) | Same as before plus; Invulnerability
-        (Only the Soul Cube can deal damage to it) | Same as classic to a higher degree
-        plus; Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
-        generate shockwaves, With the Argent Accumulator they gain Resurrection (Continuously
-        resurrects until the Argent Accumulator is removed) and Regeneration (Mid-Low).
-        When ruptured, it teleports them and the player to Hell | Same as 2016 (Minus
-        Argent Accumulator Abilities), in-addition to: Homing Attack (Via targeting
-        lasers), Immortality (Type 2) (In Eternal they are capable of fighting with
-        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell)
-        Immunity to Soul Manipulation, Resistance to Heat, Poison Manipulation, Acid
-        Manipulation, Electricity Manipulation, Disease Manipulation, Radiation Manipulation,
-        Essence Manipulation (Hell''s Essence, Argent Energy, Sentinel Energy) Fire
-        Manipulation (Doom Demons fight eachother for extended period of times all
-        the time which includes using their abilities)'
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Small Building level, likely far higher (Stronger than the Spider
-        Mastermind, consistently shown to be one of the most powerful demons in the
-        series, can effortlessly kill the Classic Doomguy regardless of amps and trade
-        blows with other Cyberdemons) | At least Small Building level, likely higher
-        (Can deal huge damage to the Marine, far stronger than most other demons)
-        | Multi-City Block level (Should at least be comparable to the likes of the
-        Spider Mastermind, should be comparable, if not superior to Tyrants) | Multi-City
-        Block level (One of the strongest Super Heavy Demons in the game, can harm
-        others of their kind, superior to Fireborne Barons)
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic+ movement speed, at least Supersonic combat and reaction speed
-        (Easily comparable to Doomguy) | Supersonic combat and reaction speed (Can
-        keep up with the Marine) | At least Supersonic+ (Faster than their classic
-        incarnation. Comparable to other Demons) | At least Supersonic+ combat and
-        reaction speed (Same as before)
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Small Building level, likely far higher (Able to tank numerous
-        blasts from the BFG9000. Significantly superior to the Spider Mastermind)
-        | At least Small Building level, likely higher (Only the likes of the Soul
-        Cube can deal any major damage to it, can effortlessly tank shots from the
-        Marines BFG9000) | Multi-City Block level (Far more durable than its Classic
-        incarnation, capable of tanking shots from later models of the BFG9000) |
-        Multi-City Block level (Far stronger than their Classic counterparts, can
-        tank shots from a Modern BFG9000)
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (The demons of Hell have limitless aggression and are tireless
-        beings)
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Varies up to Hundreds of Meters with weaponry
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Rocket Launcher/Laser Cannon, Demonic Sword
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Unknown, likely Above Average (Described to be part of a greater intelligence
-        or hivemind. Individually they are capable of activating and controlling technology
-        that gives them motor function and are capable in combat against the likes
-        of Doomguy)
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Videos== thumb|center|250 pxthumb|center|250 px ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions}} Category:Characters
-        Category:Doom Category:Antagonists Category:Berserkers Category:BFR Users
-        Category:Blade Users Category:Cyborgs Category:Demons Category:Earth Users
-        Category:Energy Projection Users Category:Energy Users Category:Energy Weapon
-        Users Category:Evil Characters Category:Explosion Users Category:Fire Users
-        Category:Game Bosses Category:Game Characters Category:Giants Category:Gun
-        Users Category:Homing Attack Users Category:Large Sized Characters Category:Monsters
-        Category:Reality Warpers Category:Regeneration Users Category:Resurrection
-        Users Category:Revived Characters Category:Rocket Users Category:Shockwave
-        Users Category:Sword Users Category:Teleportation Users Category:Undead Category:Vibration
-        Users Category:Video Game Characters Category:Villains Category:Weapon Masters'
-      source_id: vsbattles-cyberdemon-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-cyberdemon-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Cyberdemon_%28Game%29
-    ok: false
-    note: source_timeout_after_4s
-    extracted_fields: []
-    normalized_page_title: Cyberdemon (Game)
-    source_type: mediawiki
-    revision_id: ''
-    fetch_status: timeout
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: timeout
-    rank: 0
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates: []
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 0
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: false
-    duplicate_key: ''
-    retryable: true
-    exception_class: TimeoutError
-  - source_id: vsbattles-cyberdemon-game-doom
-    url: https://vsbattles.fandom.com/wiki/Cyberdemon_Game_Doom
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id014
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Cyberdemon
-    source_type: mediawiki
-    revision_id: '8924431'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 11073
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Videos
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id015
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{9-A}}, likely far higher | At least {{9-A}}, likely higher
-        | {{8-A}} | {{8-A}}
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Superhuman Physical Characteristics, Cyborgization, Rapidly fires explosives,
-        Large Size (Type 0), Essence Manipulation (Essence - Demons are capable of
-        devouring souls. Hell''s Essence -The demons with their presence bring their
-        reality with them, "hellifying" the environment. This can lead to many destructive
-        events, all of which benefit them on conquering worlds. Whether that be creating
-        Hellgrowths or infecting the atmosphere, making it poisonous) Fire Manipulation,
-        Immortality (Type 7; Demons are frequently referred to as mortally challenged
-        and are referred as an army of the undead) | Same as before plus; Invulnerability
-        (Only the Soul Cube can deal damage to it) | Same as classic to a higher degree
-        plus; Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
-        generate shockwaves, With the Argent Accumulator they gain Resurrection (Continuously
-        resurrects until the Argent Accumulator is removed) and Regeneration (Mid-Low).
-        When ruptured, it teleports them and the player to Hell | Same as 2016 (Minus
-        Argent Accumulator Abilities), in-addition to: Homing Attack (Via targeting
-        lasers), Immortality (Type 2) (In Eternal they are capable of fighting with
-        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell)
-        Immunity to Soul Manipulation, Resistance to Heat, Poison Manipulation, Acid
-        Manipulation, Electricity Manipulation, Disease Manipulation, Radiation Manipulation,
-        Essence Manipulation (Hell''s Essence, Argent Energy, Sentinel Energy) Fire
-        Manipulation (Doom Demons fight eachother for extended period of times all
-        the time which includes using their abilities)'
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Small Building level, likely far higher (Stronger than the Spider
-        Mastermind, consistently shown to be one of the most powerful demons in the
-        series, can effortlessly kill the Classic Doomguy regardless of amps and trade
-        blows with other Cyberdemons) | At least Small Building level, likely higher
-        (Can deal huge damage to the Marine, far stronger than most other demons)
-        | Multi-City Block level (Should at least be comparable to the likes of the
-        Spider Mastermind, should be comparable, if not superior to Tyrants) | Multi-City
-        Block level (One of the strongest Super Heavy Demons in the game, can harm
-        others of their kind, superior to Fireborne Barons)
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic+ movement speed, at least Supersonic combat and reaction speed
-        (Easily comparable to Doomguy) | Supersonic combat and reaction speed (Can
-        keep up with the Marine) | At least Supersonic+ (Faster than their classic
-        incarnation. Comparable to other Demons) | At least Supersonic+ combat and
-        reaction speed (Same as before)
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Small Building level, likely far higher (Able to tank numerous
-        blasts from the BFG9000. Significantly superior to the Spider Mastermind)
-        | At least Small Building level, likely higher (Only the likes of the Soul
-        Cube can deal any major damage to it, can effortlessly tank shots from the
-        Marines BFG9000) | Multi-City Block level (Far more durable than its Classic
-        incarnation, capable of tanking shots from later models of the BFG9000) |
-        Multi-City Block level (Far stronger than their Classic counterparts, can
-        tank shots from a Modern BFG9000)
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Infinite (The demons of Hell have limitless aggression and are tireless
-        beings)
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Varies up to Hundreds of Meters with weaponry
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Rocket Launcher/Laser Cannon, Demonic Sword
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Unknown, likely Above Average (Described to be part of a greater intelligence
-        or hivemind. Individually they are capable of activating and controlling technology
-        that gives them motor function and are capable in combat against the likes
-        of Doomguy)
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None notable ==Videos== thumb|center|250 pxthumb|center|250 px ==Notable
-        Matchups== Victories: Losses: Inconclusive: {{Discussions}} Category:Characters
-        Category:Doom Category:Antagonists Category:Berserkers Category:BFR Users
-        Category:Blade Users Category:Cyborgs Category:Demons Category:Earth Users
-        Category:Energy Projection Users Category:Energy Users Category:Energy Weapon
-        Users Category:Evil Characters Category:Explosion Users Category:Fire Users
-        Category:Game Bosses Category:Game Characters Category:Giants Category:Gun
-        Users Category:Homing Attack Users Category:Large Sized Characters Category:Monsters
-        Category:Reality Warpers Category:Regeneration Users Category:Resurrection
-        Users Category:Revived Characters Category:Rocket Users Category:Shockwave
-        Users Category:Sword Users Category:Teleportation Users Category:Undead Category:Vibration
-        Users Category:Video Game Characters Category:Villains Category:Weapon Masters'
-      source_id: vsbattles-cyberdemon-game-doom
-      provider_id: vsbattles
+      value: Originally his anger and love for destroying things and harming demons
+        could be used against him which led to him being sealed
+      source_id: character-stats-profiles-cyberdemon-game-doom
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 0
+    variant_score: 25
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|doom slayer canon smilodonpopulator2344|462321
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-cyberdemon-game
+    url: https://character-stats-and-profiles.fandom.com/wiki/Cyberdemon_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Doom Slayer (Canon)/Smilodonpopulator2344+
+    source_type: mediawiki
+    revision_id: '462321'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 24907
+    content_kind: api_json
+    headings_detected:
+    - Doom Slayer
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 1-B | 1-A | High 1-A | Possibly 1-S Haxs/
+      source_id: character-stats-profiles-cyberdemon-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Acausality (Types 2 & 4) out infinite timelines and possibilities there
+        was one constant, that was the Destroyer and the ruin of Urdak by his hand
+        and despite the omniscient Makyr collective viewing these infinite timelines
+        and possibilities it couldn't detect the Destroyer's identity, Non-Physical
+        Interaction & Soul Manipulation (He stabbed the soul that resided within The
+        Gladiator's shield), Invulnerability Negation (Defeated the Khan Makyr while
+        her life sphere was in her chest, Can kill Cyberdemons/Tyrants who are only
+        able to be harmed with Holy weapons like the Spear of Destiny.), Immortality
+        Bypassing via Crucible and bare hands (Defeated the Immortal Titan while his
+        Crucible was Stuck in the Titan he killed in Taras Nabad and Hugo Martin stated
+        he killed the Titan with his bare hands.), Reactive Power Level (He Draws
+        strength from every enemy he defeats)
+      source_id: character-stats-profiles-cyberdemon-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: High 1-B (Caused a multiverse to implode in on itself a multiverse in
+        DOOM has Infinite timelines and possibilities which expand exponentially like
+        fractal patterns in the fabric of existence Infinite timelines and possibilities
+        is Many World Interpretations. That qualifies for a Type 3 Multiverse at least
+        (though you can argue higher) and a Type 3 Multiverse it mentions Infinite-Dimensional
+        Hilbert Space. Fractal patterns are infinitely complexed and never ending
+        which is the very image of the Chaos Theory which is Infinite-Dimensional.
+        Fractal systems define minority cosmological theories which includes metaphysics
+        this means the multiverses in DOOM contain the concepts of mathematical dimensionality
+        aka spatial dimensions via metaphysics. There's the usage of pan dimensional
+        existence to define the existence of a Multiverse in a way. Pan dimensionality
+        is defined as all dimensions of reality across Infinite spatial dimensions.
+        There is also Inverse Quantum Fields via Hellgrowths. Inverse Quantum Fields
+        contain Quantum Mechanics which are often formulated in infinite-dimensional
+        Hilbert Space. In each universe there is Bohm's Implicate Order and in Bohm's
+        Implicate Order the Holomovement endlessly folds and unfolds into infinite
+        dimensionality and as stated there are infinite timelines/universes per Multiverse.
+        ) | 1-A (Defeated the Khan Makyr, leader of the Makyrs who are arbiters across
+        countless dimensions and hold sway over all dominions of the known and unknown
+        dimensions. The Khan Makyr is the leader of Urdak which transcends the mortal
+        realm which the Slayer was always going to destroy as seen here) | At least
+        1-A (He is above the Elder Gods of Quake who are beyond human comprehension
+        and control extradimensional realms and is another scan for extradimensional
+        realms | 1-A maybe higher (Defeated the Icon of Sin who's mere presence caused
+        irreversible changes to Urdak which allowed the demons to pass through the
+        Void as never before) | 1-A (Defeated the Seraphim, Seraphs were molded from
+        the Void in Urdak and governed over creation) | 1-A to High 1-A (The Slayer
+        defeated the Immortal Titan of Immesurable Power and Ferocity who is arguably
+        the strongest demon to ever exist.) | High 1-A, possibly 1-S (Defeated Davoth,
+        the creator of the verse which includes the mortal realm, Urdak, and Hell
+        which is where Hellgrowths originate and Hell itself transcends Urdak and
+        is Unlimited by the boundaries of space, time, or dimension and transcends
+        them. Hell was confirmed by Hugo Martin to be an extention of Davoth. Davoth
+        stated that all things were made by his hand and that they would be unmade
+        by his hands which indicates he was going to destroy everything he created
+        which should include The Void as well. The Void was the first thing he created.
+        The engine of creation lie in The Void and is described to be "on the other
+        side of reality itself" and they breach The Void walls to touch the physical
+        world. This implies that the Void is Non-Physical note that even mathematical
+        dimensions are considered to be part of the physical world. The engine of
+        creation also spins into the physical world and back out of existence aka
+        into The Void. The Void lies between and all around dimensions in DOOM and
+        the Seraphs create life spheres or revive them using the powers of The Void).
+        This means that The Void is beyond existence and reality and mind you that
+        even Hell is within existence and reality. However, The Void is not and it
+        encompasses the entire cosmology (that we know about) within it and Hugo Martin
+        suggested that there is a place higher than even The Void where Davoth came
+        from.
+      source_id: character-stats-profiles-cyberdemon-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immesurable (The moment he exited the Divinity Machine he was called
+        the Time Walker and he moved through Time and Worlds) | At least Immesurable
+        (Kept up with Makyrs who move through Time and Space) | Irrelevant (Kept up
+        with the Seraphim who flew through all of creation) | Irrelevant (Kept up
+        with Davoth who flew through the Void, a structure that's Formless, and where
+        things like space, time, and dimensionality are meaningless and is beyond
+        existence itself & moved he moved between time and worlds which the Void lies
+        between and around all of creation.)
+      source_id: character-stats-profiles-cyberdemon-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 1-A (Tanked attacks from the Khan Makyr and Icon of Sin) | 1-A (Tanked
+        attacks from the Seraphim) | 1-A to High 1-A (Killed the Champion of Hell
+        with his bare fists) | High 1-A, possibly 1-S (Tanked attacks from Davoth
+        who was the only being that could injure the Slayer since he is either a Primeval
+        or something greater.)
+      source_id: character-stats-profiles-cyberdemon-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Originally his anger and love for destroying things and harming demons
+        could be used against him which led to him being sealed
+      source_id: character-stats-profiles-cyberdemon-game
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|doom slayer canon smilodonpopulator2344|462321
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-cyberdemon-game
+    url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    normalized_page_title: Cyberdemon
+    source_type: mediawiki
+    revision_id: '8924431'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 11073
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Videos
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least 9-A, likely far higher | At least 9-A, likely higher | 8-A |
+        8-A
+      source_id: vsbattles-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Cyborgization, Rapidly fires explosives,
+        Large Size (Type 0), Essence Manipulation (Essence - Demons are capable of
+        devouring souls. Hell''s Essence -The demons with their presence bring their
+        reality with them, "hellifying" the environment. This can lead to many destructive
+        events, all of which benefit them on conquering worlds. Whether that be creating
+        Hellgrowths or infecting the atmosphere, making it poisonous) Fire Manipulation,
+        Immortality (Type 7; Demons are frequently referred to as mortally challenged
+        and are referred as an army of the undead), Same as before plus, Invulnerability
+        (Only the Soul Cube can deal damage to it), Same as classic to a higher degree
+        plus, Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
+        generate shockwaves, With the Argent Accumulator they gain Resurrection (Continuously
+        resurrects until the Argent Accumulator is removed) and Regeneration (Mid-Low).
+        When ruptured, it teleports them and the player to Hell, Same as 2016 (Minus
+        Argent Accumulator Abilities), in-addition to: Homing Attack (Via targeting
+        lasers), Immortality (Type 2) (In Eternal they are capable of fighting with
+        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell),
+        Immunity to Soul Manipulation, Resistance to Heat, Poison Manipulation, Acid
+        Manipulation, Electricity Manipulation, Disease Manipulation, Radiation Manipulation,
+        Essence Manipulation (Hell''s Essence, Argent Energy, Sentinel Energy) Fire
+        Manipulation (Doom Demons fight eachother for extended period of times all
+        the time which includes using their abilities)'
+      source_id: vsbattles-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Small Building level, likely far higher (Stronger than the Spider
+        Mastermind, consistently shown to be one of the most powerful demons in the
+        series, can effortlessly kill the Classic Doomguy regardless of amps and trade
+        blows with other Cyberdemons) | At least Small Building level, likely higher
+        (Can deal huge damage to the Marine, far stronger than most other demons)
+        | Multi-City Block level (Should at least be comparable to the likes of the
+        Spider Mastermind, should be comparable, if not superior to Tyrants) | Multi-City
+        Block level (One of the strongest Super Heavy Demons in the game, can harm
+        others of their kind, superior to Fireborne Barons)
+      source_id: vsbattles-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic+ movement speed, at least Supersonic combat and reaction speed
+        (Easily comparable to Doomguy) | Supersonic combat and reaction speed (Can
+        keep up with the Marine) | At least Supersonic+ (Faster than their classic
+        incarnation. Comparable to other Demons) | At least Supersonic+ combat and
+        reaction speed (Same as before)
+      source_id: vsbattles-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Small Building level, likely far higher (Able to tank numerous
+        blasts from the BFG9000. Significantly superior to the Spider Mastermind)
+        | At least Small Building level, likely higher (Only the likes of the Soul
+        Cube can deal any major damage to it, can effortlessly tank shots from the
+        Marines BFG9000) | Multi-City Block level (Far more durable than its Classic
+        incarnation, capable of tanking shots from later models of the BFG9000) |
+        Multi-City Block level (Far stronger than their Classic counterparts, can
+        tank shots from a Modern BFG9000)
+      source_id: vsbattles-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (The demons of Hell have limitless aggression and are tireless
+        beings)
+      source_id: vsbattles-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Varies up to Hundreds of Meters with weaponry
+      source_id: vsbattles-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Rocket Launcher/Laser Cannon, Demonic Sword
+      source_id: vsbattles-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Unknown, likely Above Average (Described to be part of a greater intelligence
+        or hivemind. Individually they are capable of activating and controlling technology
+        that gives them motor function and are capable in combat against the likes
+        of Doomguy)
+      source_id: vsbattles-cyberdemon-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-cyberdemon-game-game
+    url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    normalized_page_title: Cyberdemon
+    source_type: mediawiki
+    revision_id: '8924431'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 11073
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Videos
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least 9-A, likely far higher | At least 9-A, likely higher | 8-A |
+        8-A
+      source_id: vsbattles-cyberdemon-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Cyborgization, Rapidly fires explosives,
+        Large Size (Type 0), Essence Manipulation (Essence - Demons are capable of
+        devouring souls. Hell''s Essence -The demons with their presence bring their
+        reality with them, "hellifying" the environment. This can lead to many destructive
+        events, all of which benefit them on conquering worlds. Whether that be creating
+        Hellgrowths or infecting the atmosphere, making it poisonous) Fire Manipulation,
+        Immortality (Type 7; Demons are frequently referred to as mortally challenged
+        and are referred as an army of the undead), Same as before plus, Invulnerability
+        (Only the Soul Cube can deal damage to it), Same as classic to a higher degree
+        plus, Fire Manipulation, Energy Projection, Can raise pillars of stone, Can
+        generate shockwaves, With the Argent Accumulator they gain Resurrection (Continuously
+        resurrects until the Argent Accumulator is removed) and Regeneration (Mid-Low).
+        When ruptured, it teleports them and the player to Hell, Same as 2016 (Minus
+        Argent Accumulator Abilities), in-addition to: Homing Attack (Via targeting
+        lasers), Immortality (Type 2) (In Eternal they are capable of fighting with
+        missing bodyparts), Limited BFR (Whatever a demon kills, it gets sent to Hell),
+        Immunity to Soul Manipulation, Resistance to Heat, Poison Manipulation, Acid
+        Manipulation, Electricity Manipulation, Disease Manipulation, Radiation Manipulation,
+        Essence Manipulation (Hell''s Essence, Argent Energy, Sentinel Energy) Fire
+        Manipulation (Doom Demons fight eachother for extended period of times all
+        the time which includes using their abilities)'
+      source_id: vsbattles-cyberdemon-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Small Building level, likely far higher (Stronger than the Spider
+        Mastermind, consistently shown to be one of the most powerful demons in the
+        series, can effortlessly kill the Classic Doomguy regardless of amps and trade
+        blows with other Cyberdemons) | At least Small Building level, likely higher
+        (Can deal huge damage to the Marine, far stronger than most other demons)
+        | Multi-City Block level (Should at least be comparable to the likes of the
+        Spider Mastermind, should be comparable, if not superior to Tyrants) | Multi-City
+        Block level (One of the strongest Super Heavy Demons in the game, can harm
+        others of their kind, superior to Fireborne Barons)
+      source_id: vsbattles-cyberdemon-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic+ movement speed, at least Supersonic combat and reaction speed
+        (Easily comparable to Doomguy) | Supersonic combat and reaction speed (Can
+        keep up with the Marine) | At least Supersonic+ (Faster than their classic
+        incarnation. Comparable to other Demons) | At least Supersonic+ combat and
+        reaction speed (Same as before)
+      source_id: vsbattles-cyberdemon-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Small Building level, likely far higher (Able to tank numerous
+        blasts from the BFG9000. Significantly superior to the Spider Mastermind)
+        | At least Small Building level, likely higher (Only the likes of the Soul
+        Cube can deal any major damage to it, can effortlessly tank shots from the
+        Marines BFG9000) | Multi-City Block level (Far more durable than its Classic
+        incarnation, capable of tanking shots from later models of the BFG9000) |
+        Multi-City Block level (Far stronger than their Classic counterparts, can
+        tank shots from a Modern BFG9000)
+      source_id: vsbattles-cyberdemon-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (The demons of Hell have limitless aggression and are tireless
+        beings)
+      source_id: vsbattles-cyberdemon-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Varies up to Hundreds of Meters with weaponry
+      source_id: vsbattles-cyberdemon-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Rocket Launcher/Laser Cannon, Demonic Sword
+      source_id: vsbattles-cyberdemon-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Unknown, likely Above Average (Described to be part of a greater intelligence
+        or hivemind. Individually they are capable of activating and controlling technology
+        that gives them motor function and are capable in combat against the likes
+        of Doomguy)
+      source_id: vsbattles-cyberdemon-game-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
     variant_match: true
     duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-cyberdemon-game-doom
-    url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29_Doom
-    title: Cyberdemon
-    rank: 80
-    extracted_fields: *id006
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id007
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
-  - source_id: vsbattles-cyberdemon-game-doom
-    url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29_%28Doom%29
-    title: Cyberdemon
-    rank: 80
-    extracted_fields: *id008
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id009
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
-  - source_id: mediawiki-cyberdemon-game
-    url: https://vsbattles.fandom.com/wiki/Cyberdemon_(Game)
-    title: Cyberdemon
-    rank: 80
-    extracted_fields: *id010
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id011
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
-  - source_id: vsbattles-cyberdemon-game
-    url: https://vsbattles.fandom.com/wiki/Cyberdemon_%28Game%29
-    title: Cyberdemon
-    rank: 80
-    extracted_fields: *id012
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id013
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
-  - source_id: vsbattles-cyberdemon-game-doom
-    url: https://vsbattles.fandom.com/wiki/Cyberdemon_Game_Doom
-    title: Cyberdemon
-    rank: 80
-    extracted_fields: *id014
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id015
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|cyberdemon|8924431
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
-    fetched: 5
-    timeout: 3
-  confidence: 0.75
+    fetched: 8
+  confidence: 0.0

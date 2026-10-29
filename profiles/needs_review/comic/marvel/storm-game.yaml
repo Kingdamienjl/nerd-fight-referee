@@ -12,13 +12,14 @@ generation:
   generated_at: '2026-06-10T00:42:27Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id006
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Storm (Game)
   franchise: Marvel
@@ -86,42 +87,6 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-storm-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Storm Game
-  url: https://vsbattles.fandom.com/wiki/Storm_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-storm-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Storm Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Storm_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-storm-game-marvel
   provider_id: vsbattles
   source_type: mediawiki
@@ -129,7 +94,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Storm_(Marvel_Comics)
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -175,7 +140,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Storm_(Canon,_Marvel,_Death_Battle)/Unbacked0
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -212,62 +177,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-storm-game-marvel
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Storm (Game) Marvel
-  url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_Marvel
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-storm-game-marvel
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Storm (Game) Marvel
-  url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_Marvel
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-storm-game-marvel
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Storm (Game) (Marvel)
-  url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_%28Marvel%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-storm-game-marvel
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Storm (Game) (Marvel)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_%28Marvel%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-ororo-munroe
   provider_id: vsbattles
   source_type: mediawiki
@@ -639,7 +548,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-storm-game-marvel-comics
   source_claim_ids: []
   confidence: 0.85
@@ -657,7 +566,7 @@ abilities:
     and rain patterns. Can also detect natu
   description: Enhanced Senses (Is aware of sudden changes in ecology and can read
     air currents and rain patterns. Can also detect natural phenomena such as storms
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -672,7 +581,7 @@ abilities:
 - id: powers-and-abilities-hurricanes
   name: hurricanes
   description: hurricanes
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -687,7 +596,7 @@ abilities:
 - id: powers-and-abilities-and-earthquakes
   name: and earthquakes
   description: and earthquakes
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -702,7 +611,7 @@ abilities:
 - id: powers-and-abilities-and-has-an-innate-connection-to-lifeforms-all-around-earth
   name: and has an innate connection to lifeforms all around Earth)
   description: and has an innate connection to lifeforms all around Earth)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -717,7 +626,7 @@ abilities:
 - id: powers-and-abilities-martial-arts-has-learned-muay-thai-and-gidigbo-from-black-p
   name: Martial Arts (Has learned Muay Thai and Gidigbo from Black Panther
   description: Martial Arts (Has learned Muay Thai and Gidigbo from Black Panther
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -732,7 +641,7 @@ abilities:
 - id: powers-and-abilities-kenjutsu-and-krav-maga-from-wolverine
   name: Kenjutsu and Krav Maga from Wolverine
   description: Kenjutsu and Krav Maga from Wolverine
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -747,7 +656,7 @@ abilities:
 - id: powers-and-abilities-and-tai-chi-along-with-hung-gar-from-shang-chistorm-2024-12
   name: 'and Tai Chi along with Hung Gar from Shang ChiStorm (2024) #12)'
   description: 'and Tai Chi along with Hung Gar from Shang ChiStorm (2024) #12)'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -762,7 +671,7 @@ abilities:
 - id: powers-and-abilities-weather
   name: Weather
   description: Weather
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -777,7 +686,7 @@ abilities:
 - id: powers-and-abilities-elemental
   name: Elemental
   description: Elemental
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -792,7 +701,7 @@ abilities:
 - id: powers-and-abilities-energy
   name: Energy
   description: Energy
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -811,7 +720,7 @@ abilities:
     dominant power is her weather manipulation that is the basis for the vast majority
     of Storm''s powers.House of X #1 Tapped into the life-support systems and micro-climates
     of multiple spaceships'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -833,7 +742,7 @@ abilities:
     atmosphere on fire.Storm Vol 3 #4 Stated that she is an energy manipulator in
     her fight with Vulcan and that the energy was circling between them looking for
     a weakness.X-Men: Red #2 Used power from the galactic core'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -851,7 +760,7 @@ abilities:
 - id: powers-and-abilities-which-was-composed-of-millions-of-suns
   name: which was composed of millions of suns
   description: which was composed of millions of suns
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -866,7 +775,7 @@ abilities:
 - id: powers-and-abilities-to-purge-herself-of-a-brood-egguncanny-x-men-165
   name: 'to purge herself of a Brood eggUncanny X-Men #165)'
   description: 'to purge herself of a Brood eggUncanny X-Men #165)'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -884,7 +793,7 @@ abilities:
   description: Energy Projection and Energy Absorption (Contested and defeated Vulcan
     in a battle of wills as their energy was circling and building between them. Absorbed
     and channeled more magic than Magik
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -899,7 +808,7 @@ abilities:
 - id: powers-and-abilities-a-sorcerer-supreme
   name: a sorcerer supreme
   description: a sorcerer supreme
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -917,7 +826,7 @@ abilities:
   description: 'could safely control.Extraordinary X-Men #16 Absorbed Spectrum while
     fighting in defense of Wakanda.Black Panther Vol. 7 #24 Storm could absorb life
     force energy Magneto provided to recoverResurrection of Magneto #3)'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -932,7 +841,7 @@ abilities:
 - id: powers-and-abilities-adaptation-to-her-environment-via-her-powers
   name: Adaptation (To her environment via her powers)
   description: Adaptation (To her environment via her powers)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -949,7 +858,7 @@ abilities:
     the air from people's lungs
   description: Status Effect Inducement and minor Biological Manipulation (Capable
     of ripping the air from people's lungs
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -964,7 +873,7 @@ abilities:
 - id: powers-and-abilities-controlling-electrical-impulses-to-induce-seizures-or-fry-b
   name: controlling electrical impulses to induce seizures or fry brains
   description: controlling electrical impulses to induce seizures or fry brains
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -981,7 +890,7 @@ abilities:
     MagnetoUncanny X-Men #113 )'
   description: 'and freeze hearts and shatter veins.Wolverines #6 Sucked the humidity
     from MagnetoUncanny X-Men #113 )'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -999,7 +908,7 @@ abilities:
   description: 'Magnetism Manipulation and Electricity Manipulation (Tapped into the
     planet''s magnetic fields to throw flesh zombies away from it.Storm Vol 3 #11
     Gathered hydrogen atoms around Silver Surfer'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1022,7 +931,7 @@ abilities:
     Vol 1 #17 Taught Scarlet Witch a spell to generate electricity.Scarlet Witch (2023)
     #6 Can block incoming attacks by using lighting bolts as shieldsX-Men: Worlds
     Apart #4)'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1037,7 +946,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation
   name: Fire Manipulation
   description: Fire Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1056,7 +965,7 @@ abilities:
     the roomStorm Vol 3 #1)'
   description: 'Temperature Manipulation (Subconsciously agitated air molecules heating
     up the roomStorm Vol 3 #1)'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1080,7 +989,7 @@ abilities:
     area.S.W.O.R.D. Vol 2 #11 Can use her powers to suck the air out of her opponent''s
     lungs.X-Men: Worlds Apart #1 Can disorient opponents by manipulating the air in
     their ears'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1099,7 +1008,7 @@ abilities:
     conceal herselfX-Men: Worlds Apart #3)'
   description: 'and create waves of fog large enough to engulf entire cities in order
     to conceal herselfX-Men: Worlds Apart #3)'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1121,7 +1030,7 @@ abilities:
     just as much an omega level "hydrokinetic/cryomancer" as Iceman and wins in their
     past sparring matches and current fight.Marvel''s Voices: X-Men Froze a gun and
     the hands of its user and made the temperature drop 200 degrees'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1142,7 +1051,7 @@ abilities:
     Worlds Apart #2)'
   description: 'to the point where the gun''s user would need skin grafts due to the
     frostbiteX-Men: Worlds Apart #2)'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1157,7 +1066,7 @@ abilities:
 - id: powers-and-abilities-summoning-using-a-yoruba-spell-taught-to-her-by-doctor-vood
   name: Summoning (Using a Yoruba spell taught to her by Doctor Voodoo
   description: Summoning (Using a Yoruba spell taught to her by Doctor Voodoo
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1176,7 +1085,7 @@ abilities:
     godsStorm (2024) #7)'
   description: 'summons a massive energy octopus powerful enough to restrain multiple
     Storm godsStorm (2024) #7)'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1195,7 +1104,7 @@ abilities:
     patterns
   description: Cosmic Awareness and Extrasensory Perception (Perceives the world as
     energy patterns
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1212,7 +1121,7 @@ abilities:
     \ with Mars/Arakko.X-Men"
   description: "capable of sensing the Earth\u2019s pain and likely has a similar\
     \ relationship with Mars/Arakko.X-Men"
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1227,7 +1136,7 @@ abilities:
 - id: powers-and-abilities-vol-6
   name: Vol.6
   description: Vol.6
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1244,7 +1153,7 @@ abilities:
     system'
   description: '#9 An explanation of how Storm perceives the world including the human
     nervous system'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1259,7 +1168,7 @@ abilities:
 - id: powers-and-abilities-weather-patterns
   name: weather patterns
   description: weather patterns
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1275,7 +1184,7 @@ abilities:
   name: 'and electrons.X-Treme X-Men #13 Storm perceives a forcefield around an island'
   description: 'and electrons.X-Treme X-Men #13 Storm perceives a forcefield around
     an island'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1290,7 +1199,7 @@ abilities:
 - id: powers-and-abilities-the-ways-it-influenced-the-weather
   name: the ways it influenced the weather
   description: the ways it influenced the weather
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1308,7 +1217,7 @@ abilities:
   description: 'and the dark magic that composed it.X-Men: Curse of the Mutants -
     Storm & Gambit Mentions that she sometimes feels as if she has pierced the core
     of creation and something behind and within it all.X-Factor #101 Capable of perce'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1329,7 +1238,7 @@ weaknesses:
     her powers can cause extreme exhaustion. If she '
   description: Storm's power is affected by her emotions and her willpower. Overuse
     of her powers can cause extreme exhaustion. If she becomes enraged
-  source_ids: &id005
+  source_ids: &id003
   - vsbattles-storm-game-marvel-comics
   source_claim_ids: []
   confidence: 0.85
@@ -1347,7 +1256,7 @@ weaknesses:
     of people that have faith in her. She for
   description: she can cause devastating storms. Storm's godhead powers vary based
     the amount of people that have faith in her. She formerly had severe claustrophobia
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1365,7 +1274,7 @@ weaknesses:
   description: 'and is sometimes depicted as being very arrogant and aggressive. Notable
     Attacks/Techniques: -Electricity Manipulation: Storm''s most common method of
     offense'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1380,7 +1289,7 @@ weaknesses:
 - id: weaknesses-she-can-fire-a-real
   name: she can fire a real
   description: she can fire a real
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1397,7 +1306,7 @@ weaknesses:
 - id: weaknesses-natural-lightning-bolt-from-the-sky
   name: natural lightning bolt from the sky
   description: natural lightning bolt from the sky
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1412,7 +1321,7 @@ weaknesses:
 - id: weaknesses-shoot-lightning-from-her-hands
   name: shoot lightning from her hands
   description: shoot lightning from her hands
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1427,7 +1336,7 @@ weaknesses:
 - id: weaknesses-create-emp-s
   name: create EMP's
   description: create EMP's
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1442,7 +1351,7 @@ weaknesses:
 - id: weaknesses-manipulate-and-perceive-electromagnetic-fields
   name: manipulate and perceive electromagnetic fields
   description: manipulate and perceive electromagnetic fields
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1457,7 +1366,7 @@ weaknesses:
 - id: weaknesses-screw-with-a-person-s-bio-electricity-and-generate-electrolysis
   name: screw with a person's bio-electricity and generate electrolysis
   description: screw with a person's bio-electricity and generate electrolysis
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1484,7 +1393,7 @@ weaknesses:
     -Hurricane: Storm can create large scale hurricanes. -Hail: Can rain hail down
     on her enemies. -Hydrogen Bomb: Storm gathers hydrogen into a particular area
     and then uses electricity within that area to ignite it'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1508,7 +1417,7 @@ weaknesses:
     -Telepathy Protection: Storm''s electrical powers in combination with her will
     power gives her protection from telepathy. Notes: *Storm was capable of wielding
     a magical duplicate of Thor''s mystic Hammer Mjolnir'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1524,7 +1433,7 @@ weaknesses:
 - id: weaknesses-created-by-loki-before-making-any-changes-to-this-page
   name: created by Loki. *Before making any changes to this page
   description: created by Loki. *Before making any changes to this page
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1542,7 +1451,7 @@ weaknesses:
   description: 'please read and follow the Power-scaling Rules for Marvel and DC Comics.
     ==Notable Matchups== Victories: Losses: Inconclusive: ==References== {{Scroll
     box'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1557,7 +1466,7 @@ weaknesses:
 - id: weaknesses-reflist
   name: '{{Reflist'
   description: '{{Reflist'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1572,7 +1481,7 @@ weaknesses:
 - id: weaknesses-2-statistics-values-discussions
   name: 2}}}} ==Statistics Values== {{Discussions
   description: 2}}}} ==Statistics Values== {{Discussions
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1587,7 +1496,7 @@ weaknesses:
 - id: weaknesses-storm-marvel-comics
   name: Storm Marvel Comics
   description: Storm Marvel Comics
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1617,7 +1526,7 @@ weaknesses:
     Category:Flight Users Category:Light Users Category:Underwater Breathing Users
     Category:Knife Users Category:Sword Users Category:Blade Users Category:Weapon
     Masters Category:Weapon Users Category:Adults
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1642,30 +1551,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id006
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: d69911f5005ac54a47f84fadab1a410f08c8df07efc4dfa072026c1df6921c84
 repair:
-  attempted_at: '2026-06-19T06:01:08Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T13:38:04Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-storm-game-marvel-comics
-    url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_%28Marvel_Comics%29
+  - source_id: vsbattles-storm-game-marvel
+    url: https://vsbattles.fandom.com/wiki/Storm_(Marvel_Comics)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1678,10 +1584,10 @@ repair:
     - weaknesses
     normalized_page_title: Storm (Marvel Comics)
     source_type: mediawiki
-    revision_id: '9468799'
+    revision_id: '9694756'
     fetch_status: fetched
     http_status: 200
-    content_length: 30798
+    content_length: 30865
     content_kind: api_json
     headings_detected:
     - Summary
@@ -1695,6 +1601,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1708,7 +1615,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1719,14 +1626,674 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically. At to least {{Low 6-B}}, likely far higher via environmental
-        destruction. Up to {{3-C}} with lightning bolts. {{Varies}}, up to at least
-        {{High 6-A}} when accessing ambient energy. Up to {{1-A}} at her peak and
-        accessing her godhead. Name: Ororo Munroe, Storm, Hadari Yao Origin: Marvel
-        Comics Gender: Female Age: Unknown. Likely in her mid-thirties. Classification:
-        Omega level mutant, queen and goddess of Wakanda, member of the Quiet Council
-        of Krakoa, member of the Great Ring, regent of Arakko, X-Men leader and member,
-        Morlock queen.'
+      value: physically. At to least , likely far higher via environmental destruction.
+        Up to with lightning bolts. , up to at least when accessing ambient energy.
+        Up to at her peak and accessing her godhead.
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "Superhuman Physical Characteristics, Enhanced Senses (Is aware of sudden\
+        \ changes in ecology and can read air currents and rain patterns. Can also\
+        \ detect natural phenomena such as storms, hurricanes, and earthquakes, and\
+        \ has an innate connection to lifeforms all around Earth), Martial Arts (Has\
+        \ learned Muay Thai and Gidigbo from Black Panther, Kenjutsu and Krav Maga\
+        \ from Wolverine, and Tai Chi along with Hung Gar from Shang ChiStorm (2024)\
+        \ #12), Weather, Elemental, Energy, and limited Matter Manipulation (Storm\
+        \ is an Omega level Mutant whose dominant power is her weather manipulation\
+        \ that is the basis for the vast majority of Storm's powers.House of X #1\
+        \ Tapped into the life-support systems and micro-climates of multiple spaceships,\
+        \ using it to take down enemy ships.Black Panther Vol 7 #21 Altered the climate\
+        \ of the entirety of the planet Mars/Arakko.Planet-Size X-Men #1 While grieving\
+        \ Wolverine's death she started to freeze the helicopter she's in and created\
+        \ a global aurora. She also remarked that she was trying not to set the atmosphere\
+        \ on fire.Storm Vol 3 #4 Stated that she is an energy manipulator in her fight\
+        \ with Vulcan and that the energy was circling between them looking for a\
+        \ weakness.X-Men: Red #2 Used power from the galactic core, which was composed\
+        \ of millions of suns, to purge herself of a Brood eggUncanny X-Men #165),\
+        \ Energy Projection and Energy Absorption (Contested and defeated Vulcan in\
+        \ a battle of wills as their energy was circling and building between them.\
+        \ Absorbed and channeled more magic than Magik, a sorcerer supreme, could\
+        \ safely control.Extraordinary X-Men #16 Absorbed Spectrum while fighting\
+        \ in defense of Wakanda.Black Panther Vol. 7 #24 Storm could absorb life force\
+        \ energy Magneto provided to recoverResurrection of Magneto #3), Adaptation\
+        \ (To her environment via her powers), Status Effect Inducement and minor\
+        \ Biological Manipulation (Capable of ripping the air from people's lungs,\
+        \ controlling electrical impulses to induce seizures or fry brains, and freeze\
+        \ hearts and shatter veins.Wolverines #6 Sucked the humidity from MagnetoUncanny\
+        \ X-Men #113 ), Magnetism Manipulation and Electricity Manipulation (Tapped\
+        \ into the planet's magnetic fields to throw flesh zombies away from it.Storm\
+        \ Vol 3 #11 Gathered hydrogen atoms around Silver Surfer, then ignited them\
+        \ with lightning.Fantastic Four #545 Parted the Earth's ozone layer and magnetic\
+        \ field to evaporate a huge wave.Storm Vol 3 #8 Generated an electromagnetic\
+        \ pulse.X-Treme X-Men #1 Ionizes fog she creates to disrupt communications.X-Treme\
+        \ X-Men #2 Killed Callisto with one punch by electrocuting her heart in her\
+        \ chest.Marauders Vol 1 #17 Taught Scarlet Witch a spell to generate electricity.Scarlet\
+        \ Witch (2023) #6 Can block incoming attacks by using lighting bolts as shieldsX-Men:\
+        \ Worlds Apart #4), Fire Manipulation, Temperature Manipulation (Subconsciously\
+        \ agitated air molecules heating up the roomStorm Vol 3 #1), Air Manipulation\
+        \ (Could generate strong enough winds to blow out the Human Torch's flameContest\
+        \ of Champions #2 and knock the Hulk into the air.Incredible Hulk #444 Claims\
+        \ to be capable of leveling mountains. Capable of controlling solar winds.Uncanny\
+        \ X-Men #99 Controlled and dropped the air pressure within the surrounding\
+        \ area.S.W.O.R.D. Vol 2 #11 Can use her powers to suck the air out of her\
+        \ opponent's lungs.X-Men: Worlds Apart #1 Can disorient opponents by manipulating\
+        \ the air in their ears, and create waves of fog large enough to engulf entire\
+        \ cities in order to conceal herselfX-Men: Worlds Apart #3), Water Manipulation\
+        \ and Ice Manipulation (Summoned a tidal wave against Cassandra Nova.X-Men\
+        \ Red Vol 1 #8 Created a monsoon to put out Pyro's flames.Uncanny X-Men #178\
+        \ Was shown casually creating blizzards.Uncanny X-Men #112Uncanny X-Men:First\
+        \ Class #2 Capable of flash-freezing rain.Uncanny X-Men #270 States that she's\
+        \ just as much an omega level \"hydrokinetic/cryomancer\" as Iceman and wins\
+        \ in their past sparring matches and current fight.Marvel's Voices: X-Men\
+        \ Froze a gun and the hands of its user and made the temperature drop 200\
+        \ degrees, to the point where the gun's user would need skin grafts due to\
+        \ the frostbiteX-Men: Worlds Apart #2), Summoning (Using a Yoruba spell taught\
+        \ to her by Doctor Voodoo, summons a massive energy octopus powerful enough\
+        \ to restrain multiple Storm godsStorm (2024) #7), Cosmic Awareness and Extrasensory\
+        \ Perception (Perceives the world as energy patterns, capable of sensing the\
+        \ Earth\u2019s pain and likely has a similar relationship with Mars/Arakko.X-Men,\
+        \ Vol.6, #9 An explanation of how Storm perceives the world including the\
+        \ human nervous system, weather patterns, and electrons.X-Treme X-Men #13\
+        \ Storm perceives a forcefield around an island, the ways it influenced the\
+        \ weather, and the dark magic that composed it.X-Men: Curse of the Mutants\
+        \ - Storm & Gambit Mentions that she sometimes feels as if she has pierced\
+        \ the core of creation and something behind and within it all.X-Factor #101\
+        \ Capable of perce"
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Small Building level physically (Spars equally with GambitX-Treme X-Men
+        Vol 1 35 and defeated Cyclops while powerlessUncanny X-Men Vol 1 201). At
+        least Small Country level, likely far higher via environmental destruction
+        (Under Rachel''s control, created a primal planetary hyper-storm like the
+        one that shaped the planet. Later dispersed the storm after merging consciousnesses
+        and wills with Rachel.Uncanny X-Men #459 While grieving Wolverine, she stated
+        that she could set the atmosphere on fire. According to Thor, Storm summoned
+        "a tempest fierce enough to scour the surface of the world down to its bedrock").
+        Up to Galaxy level with lightning bolts (Can harm StardustFantastic Four Vol
+        1 546). Varies, up to at least Multi-Continent level when accessing ambient
+        energies and forces (Storm''s ability to manipulate the weather extends to
+        the ambient energies and forces relative to her location, the effects of her
+        powers depend on what she has access to. Using power from the galactic core,
+        which was composed of millions of suns, Storm was stated to shine with the
+        brightness of a star). Up to Outerverse level at her peak and accessing her
+        godhead (Storm overpowered The Adversary and was stated to be a bigger god
+        than him. Storm fought a group of entities including the Adversary, Bete Noir,
+        the First Fallen, the Goblin Force, and the Elder God Annihilation, repelling
+        them all. By working with Magneto in a circuit they managed to temporarily
+        destroy the Shadow King, whose realm naturally exists on the level of the
+        astral planeAstonishing X-Men #1. While in Overspace, Storm harmed eight Dominions
+        at once with her powers, Dominions'' power and nature make them capable of
+        threatening the Beyonders. Storm created a storm around Yggdrasil that threatened
+        to spread to the other realms on its branchesMarvel''s Voices Infinity Comic
+        #92Marvel''s Voices Infinity Comic #93). Can negate durability in several
+        ways.'
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'HypersonicMach 8.23 combat and reaction speed (Scaling from Cyclops,
+        Wolverine, and Black Panther. Famously defeated Cyclops for leadership of
+        the X-Men without her powers. Casually reacts to an attack from a bloodlusted
+        Cyclops. Storm has also reacted to lightning bolts, Cyclops'' optic beams,
+        and military missiles. Reacted to Thor throwing Mjolnir.Contest of Champions
+        #3 Dodged a hammer throw from Ragnarok.Black Panther 2005 #25 Reacted to Quicksilver
+        before he could reach her. Her ability to perceive energy and manipulate neural
+        impulses allows her to increase her reaction speed), likely up to Infinite
+        when accessing her godhead (As she is a bigger god than The Adversary, she
+        should have speed comparable to him when accessing her godhead). Up to FTL
+        flight speed (Flies at jet speeds.Uncanny X-Men #386 Casually broke the sound
+        barrierX-Men Vol 4 #26. Can quickly fly from Earth to Sentinel City, which
+        is near the sun)'
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: 'Small Building level. Can create pressure domes to block attacks,Uncanny
+        X-Men #283 higher against elemental and energy based attacks (Her powers naturally
+        react to protect her from attacks of this nature). Up to Outerverse level
+        at her peak and accessing her godhead (Should be comparable to her AP, and
+        she was able to take an attack from a Dominion)'
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: 'Superhuman (Fought and defeated Black Panther after previously fighting
+        the Dora Milaje.World''s Apart #3 After getting stabbed in the ribs and struck
+        by her own lightning, proceeded to fight off assailantsX-Treme X-Men #14X-Treme
+        X-Men #15 Fought in the Genesis War for Arakko, which lasted around 70 daysX-Men:
+        Red #14)'
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Planetary usually, Interdimensional with portals, up to Universal with
+        senses (Narration states that Storm perceives the universe "... the empty
+        space, bright stars, solid planets" all as patterns of energy that she's able
+        to control. Mentions that she sometimes feels as if she has pierced the core
+        of creation and something behind and within it all), Outerversal at peak
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: 'Usually has a set of knives on her,Marauders #20 at least one of which
+        is vibranium,Marauders Vol 1 #5 and a staff for necessary occasions. Has a
+        set of lock picking tools stored within her crown.'
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Above Average (Storm has been the leader of the X-Men and thinks of
+        creative ways to use her powers in almost any situation, and is aware of the
+        effect her powers have on the planet. Served on the governing bodies both
+        mutant nations, Krakoa and Arakko, while also being the regent/representative
+        of the entire Solar System to the rest of the universe. Is an expert at pickpocketing
+        and lock picking. Picked a lock designed by T''Challa to not yield to science
+        or magicDoomwar #1) Standard Tactics: Storm often refrains from using her
+        full strength for several reasons. Storm more often than not refrains from
+        killing, but will if necessary. Storm tries to be careful about the ways she
+        alters the weather in one location because it will affect the weather in another
+        part of the world. Lastly Storm refrains from using her more powerful abilities
+        in populated areas out of fear of collateral damage.'
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Storm''s power is affected by her emotions and her willpower. Overuse
+        of her powers can cause extreme exhaustion. If she becomes enraged, she can
+        cause devastating storms. Storm''s godhead powers vary based the amount of
+        people that have faith in her. She formerly had severe claustrophobia, and
+        is recurrently depicted as being extremely arrogant and prone to using violence
+        as a first solution. Notable Attacks/Techniques: -Electricity Manipulation:
+        Storm''s most common method of offense, she can fire a real, natural lightning
+        bolt from the sky, shoot lightning from her hands, create EMP''s, manipulate
+        and perceive electromagnetic fields, screw with a person''s bio-electricity
+        and generate electrolysis, allowing her to breathe underwater. She can even
+        use cosmic lightning bolts in space. -Wind Manipulation: Uses the wind as
+        a powerful attack. Her control over wind is powerful enough that Storm can
+        instantly create large tornadoes and make vacuums that suck away the air.
+        She also uses the wind to make herself fly and increase her physical strength.
+        Her winds even managed to affect the Hulk. She can also use solar winds. -Flash
+        Flood: Storm can instantly create a flood of water. -Flash Freeze: Manipulates
+        the temperature to instantly freeze her opponent solid. -Humidity: Storm can
+        increase the temperature to extremely high degrees. -Acid Rain: Storm is capable
+        of causing acid rain to fall down on her enemies. -Hurricane: Storm can create
+        large scale hurricanes. -Hail: Can rain hail down on her enemies. -Hydrogen
+        Bomb: Storm gathers hydrogen into a particular area and then uses electricity
+        within that area to ignite it, causing a massive explosion. -Atmospheric Pressure:
+        Storm can affect the pressure of the atmosphere to her will. -Fog: She can
+        make a fog thick enough to hide herself in. She can make it acid for offensive
+        corrosive purposes. -Pressure Field: Storm can create a field of pressure
+        around herself and use it as a shield. -Telepathy Protection: Storm''s electrical
+        powers in combination with her will power gives her protection from telepathy.
+        Notes: *Storm was capable of wielding a magical duplicate of Thor''s mystic
+        Hammer Mjolnir, created by Loki. *Before making any changes to this page,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable
+        Matchups== Victories: Losses: Inconclusive: ==References== ==Statistics Values==
+        Category:Characters Category:Marvel Comics Category:Comic Book Characters
+        Category:Element Users Category:Energy Users Category:Female Characters Category:Glass
+        Cannons Category:Good Characters Category:Heroes Category:Humans Category:Magic
+        Users Category:Martial Artists Category:Mutants (Marvel) Category:Protagonists
+        Category:Superheroes Category:Weather Users Category:X-Men Category:Air Users
+        Category:Mutants Category:Gladiators Category:Adventurers Category:Students
+        Category:Thieves Category:Royal Characters Category:Queens Category:Teachers
+        Category:Avengers Category:Leaders Category:Enhanced Senses Users Category:Matter
+        Users Category:Energy Projection Users Category:Absorption Users Category:Adaptation
+        Users Category:Status Effect Users Category:Biology Users Category:Magnetism
+        Users Category:Electricity Users Category:Fire Users Category:Temperature
+        Users Category:Water Users Category:Ice Users Category:Extrasensory Perception
+        Users Category:Supernatural Willpower Users Category:Flight Users Category:Light
+        Users Category:Underwater Breathing Users Category:Knife Users Category:Sword
+        Users Category:Blade Users Category:Weapon Masters Category:Weapon Users Category:Adults'
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|storm marvel comics|9694756
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-storm-game-marvel-comics
+    url: https://character-stats-and-profiles.fandom.com/wiki/Storm_(Canon,_Marvel_Comics)/SteelAvenger99
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Storm (Canon, Marvel Comics)/SteelAvenger99
+    source_type: mediawiki
+    revision_id: '211761'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6609
+    content_kind: api_json
+    headings_detected:
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 3-A, possibly 2-C
+      source_id: character-stats-profiles-storm-game-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Enhanced Senses (Is aware of sudden
+        changes in ecology and can read air currents and rain patterns. Can also detect
+        natural phenomenon such as storms, hurricanes, and earthquakes, and has an
+        innate connection to lifeforms all around Earth and potentially the universe),
+        Weather Manipulation, Energy Manipulation, Electricity Manipulation, Flight,
+        Magic (Has great magical potential due to her lineage, but she has never tapped
+        into it), Expert Hand-to-Hand Combatant, Resistance to Telepathy, Mind Manipulation
+        (Her ability to channel and manipulate electricity and her incredible willpower
+        make it difficult for telepaths to break into her mind) and extreme temperatures
+        (Her body reacts accordingly to areas of severe heat and cold)
+      source_id: character-stats-profiles-storm-game-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Universe level, possibly Low Multiverse level (Matched Cyclops' Optic
+        Blast. Blasted base Hulk away and even momentarily stunned/stopped a berserker
+        Hulk with a lightning bolt during Onslaught, https://qph.fs.quoracdn.net/main-qimg-912a64f2b5181d0f0fc71f7ffd67da71
+        base Hulk destroyed the entire Universe during his fight with The Nameless-One.
+        Has blasted back Rogue and even harmed her. Could harm Colossus and it's was
+        confirmed. Manipulates the elemental forces of Trion to seal a hole in time
+        and space. Harmed Terrax, who blocked a blast from Tyrant. Harmed Stardust,
+        who took attacks from Beta Ray Bill. Has harmed Silver Surfer.)
+      source_id: character-stats-profiles-storm-game-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Sub-Relativistic flight speed (Keep up with Human Torch when flying,
+        who has this level of speed), with Speed of Light reaction (Reacted to Cyclops'
+        Optic Blast on several occasions, which was called to have this speed multiple
+        times)
+      source_id: character-stats-profiles-storm-game-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Likely Multi-City Block level, possibly far higher (Can easily survive
+        elemental attacks. Survived a punch from Wolverine, though was knocked out)
+      source_id: character-stats-profiles-storm-game-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Storm's power is affected by her emotions and her willpower. Overuse
+        of her powers can cause extreme exhaustion. If she becomes enraged, she can
+        cause devastating storms. Also has severe claustrophobia Category:Tier 3 Category:Tier
+        2 Category:SteelAvenger99
+      source_id: character-stats-profiles-storm-game-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|storm canon marvel comics
+      steelavenger99|211761
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-storm-game-marvel
+    url: https://character-stats-and-profiles.fandom.com/wiki/Storm_(Canon,_Marvel,_Death_Battle)/Unbacked0
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Storm (Canon, Marvel, Death Battle)/Unbacked0
+    source_type: mediawiki
+    revision_id: '202517'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 1795
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Low 5-B
+      source_id: character-stats-profiles-storm-game-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Elemental Manipulation, Weather
+        Manipulation, Air Manipulation, Water Manipulation, Smoke Manipulation, Ice
+        Manipulation, Absolute Zero, Electricity Manipulation, Magnetism Manipulation,
+        Flight, Enhanced Senses
+      source_id: character-stats-profiles-storm-game-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Small Planet Level (Created a storm that covered the planet which was
+        calc'd to require 539.58 Exatons)
+      source_id: character-stats-profiles-storm-game-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: FTL (Can dodge beams of light)
+      source_id: character-stats-profiles-storm-game-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Small Planet Level
+      source_id: character-stats-profiles-storm-game-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Has a fear of close spaces Note: This profile is based on what is in
+        Death Battles video, any information displayed on any profile based on Death
+        Battle are solely based on whatever is said in their videos and not my own
+        opinion. So if a character is weaker or stronger on a profile than they actually
+        are then it isn''t my fault. == Others == Notable Victories: Notable Losses:
+        Inconclusive Matches: Category:Unbacked0 Category:Tier 5'
+      source_id: character-stats-profiles-storm-game-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|storm canon marvel death
+      battle unbacked0|202517
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-storm-game-earth-616
+    url: https://character-stats-and-profiles.fandom.com/wiki/The_Human_Torch_(Canon,_Earth-616)/Maverick_Zero_X
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: The Human Torch (Canon, Earth-616)/Maverick Zero X
+    source_type: mediawiki
+    revision_id: '122612'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4428
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 7-B, 5-A with Supernova
+      source_id: character-stats-profiles-storm-game-earth-616
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Fire Manipulation, Heat Manipulation,
+        Aura, Body Control, Flight, Light Manipulation, Absorption (Can absorb fire
+        and heat), Air Manipulation (Can generate colossal tornadoes), Duplication,
+        Illusion Creation, Sleep Inducement, Extrasensory Perception, Vehicular Mastery,
+        Resistance to Fire, Heat, and Ice Manipulation
+      source_id: character-stats-profiles-storm-game-earth-616
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: City Level+ (Destroyed an asteroid the size of Manhattan), Large Planet
+        level with Supernova (Can reach the temperature of an exploding star, outputting
+        31 Yottatons)
+      source_id: character-stats-profiles-storm-game-earth-616
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Sub-Relativistic Reaction, Combat, and Flight Speed (Reacted in a microsecond.
+        Quickly flew into the upper atmosphere. Easily reacted to a meteorite)
+      source_id: character-stats-profiles-storm-game-earth-616
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Building level (Took a hit from Black Panther. Survived being pulled
+        into a tornado. Withstood a building collapsing on him.), Large Planet level
+        against fire/heat/energy-based attacks
+      source_id: character-stats-profiles-storm-game-earth-616
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Requires oxygen in the vicinity to ignite himself, leaving him virtually
+        powerless in the vacuum of space. His flames can be extinguished sufficient
+        suppressant materials, although he can reignite them. Notable Attacks/Techniques:
+        * Flame Clones: Johnny can create temporary clones out of flame to distract
+        or attack his opponents * Fire Manipulation: In addition to creating a fire
+        aura around itself, he can manipulate any fire in the area, causing them to
+        grow larger or smaller. He can also project flame as jets, beams, fireballs,
+        etc. and form it into complex forms like cages, ropes, discs, and other shapes.
+        * Nova Flames: by burning his maximum natural limit, he can create a massively
+        intense form of fire which is comparable to stellar temperatures and will
+        completely overwhelm any normal fire. Using this attack at maximum potential,
+        he can create a small-scale version of a supernova, which has the potential
+        to ignite the atmosphere and destroy the surface of the Earth ==Others== Notable
+        Victories: Notable Losses: Inconclusive Matches: Category:Maverick Zero X
+        Category:Tier 7 Category:Tier 5'
+      source_id: character-stats-profiles-storm-game-earth-616
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 30
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|the human torch canon earth
+      616 maverick zero x|122612
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-storm-game-marvel-comics
+    url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_%28Marvel_Comics%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Storm (Marvel Comics)
+    source_type: mediawiki
+    revision_id: '9694756'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 30865
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: physically. At to least , likely far higher via environmental destruction.
+        Up to with lightning bolts. , up to at least when accessing ambient energy.
+        Up to at her peak and accessing her godhead.
       source_id: vsbattles-storm-game-marvel-comics
       provider_id: vsbattles
       authority: high
@@ -1804,11 +2371,11 @@ repair:
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'Wall level+ physically (Spars equally with GambitX-Treme X-Men Vol 1
-        35 and defeated Cyclops while powerlessUncanny X-Men Vol 1 201). At least
-        Small Country level, likely far higher via environmental destruction (Under
-        Rachel''s control, created a primal planetary hyper-storm like the one that
-        shaped the planet. Later dispersed the storm after merging consciousnesses
+      value: 'Small Building level physically (Spars equally with GambitX-Treme X-Men
+        Vol 1 35 and defeated Cyclops while powerlessUncanny X-Men Vol 1 201). At
+        least Small Country level, likely far higher via environmental destruction
+        (Under Rachel''s control, created a primal planetary hyper-storm like the
+        one that shaped the planet. Later dispersed the storm after merging consciousnesses
         and wills with Rachel.Uncanny X-Men #459 While grieving Wolverine, she stated
         that she could set the atmosphere on fire. According to Thor, Storm summoned
         "a tempest fierce enough to scour the surface of the world down to its bedrock").
@@ -1853,8 +2420,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: durability
-      value: 'Wall level+. Can create pressure domes to block attacks,Uncanny X-Men
-        #283 higher against elemental and energy based attacks (Her powers naturally
+      value: 'Small Building level. Can create pressure domes to block attacks,Uncanny
+        X-Men #283 higher against elemental and energy based attacks (Her powers naturally
         react to protect her from attacks of this nature). Up to Outerverse level
         at her peak and accessing her godhead (Should be comparable to her AP, and
         she was able to take an attack from a Dominion)'
@@ -1912,34 +2479,33 @@ repair:
         of her powers can cause extreme exhaustion. If she becomes enraged, she can
         cause devastating storms. Storm''s godhead powers vary based the amount of
         people that have faith in her. She formerly had severe claustrophobia, and
-        is sometimes depicted as being very arrogant and aggressive. Notable Attacks/Techniques:
-        -Electricity Manipulation: Storm''s most common method of offense, she can
-        fire a real, natural lightning bolt from the sky, shoot lightning from her
-        hands, create EMP''s, manipulate and perceive electromagnetic fields, screw
-        with a person''s bio-electricity and generate electrolysis, allowing her to
-        breathe underwater. She can even use cosmic lightning bolts in space. -Wind
-        Manipulation: Uses the wind as a powerful attack. Her control over wind is
-        powerful enough that Storm can instantly create large tornadoes and make vacuums
-        that suck away the air. She also uses the wind to make herself fly and increase
-        her physical strength. Her winds even managed to affect the Hulk. She can
-        also use solar winds. -Flash Flood: Storm can instantly create a flood of
-        water. -Flash Freeze: Manipulates the temperature to instantly freeze her
-        opponent solid. -Humidity: Storm can increase the temperature to extremely
-        high degrees. -Acid Rain: Storm is capable of causing acid rain to fall down
-        on her enemies. -Hurricane: Storm can create large scale hurricanes. -Hail:
-        Can rain hail down on her enemies. -Hydrogen Bomb: Storm gathers hydrogen
-        into a particular area and then uses electricity within that area to ignite
-        it, causing a massive explosion. -Atmospheric Pressure: Storm can affect the
-        pressure of the atmosphere to her will. -Fog: She can make a fog thick enough
-        to hide herself in. She can make it acid for offensive corrosive purposes.
-        -Pressure Field: Storm can create a field of pressure around herself and use
-        it as a shield. -Telepathy Protection: Storm''s electrical powers in combination
-        with her will power gives her protection from telepathy. Notes: *Storm was
-        capable of wielding a magical duplicate of Thor''s mystic Hammer Mjolnir,
-        created by Loki. *Before making any changes to this page, please read and
-        follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
-        Victories: Losses: Inconclusive: ==References== {{Scroll box|{{Reflist|2}}}}
-        ==Statistics Values== {{Discussions|Storm Marvel Comics|Storm (Marvel Comics)}}
+        is recurrently depicted as being extremely arrogant and prone to using violence
+        as a first solution. Notable Attacks/Techniques: -Electricity Manipulation:
+        Storm''s most common method of offense, she can fire a real, natural lightning
+        bolt from the sky, shoot lightning from her hands, create EMP''s, manipulate
+        and perceive electromagnetic fields, screw with a person''s bio-electricity
+        and generate electrolysis, allowing her to breathe underwater. She can even
+        use cosmic lightning bolts in space. -Wind Manipulation: Uses the wind as
+        a powerful attack. Her control over wind is powerful enough that Storm can
+        instantly create large tornadoes and make vacuums that suck away the air.
+        She also uses the wind to make herself fly and increase her physical strength.
+        Her winds even managed to affect the Hulk. She can also use solar winds. -Flash
+        Flood: Storm can instantly create a flood of water. -Flash Freeze: Manipulates
+        the temperature to instantly freeze her opponent solid. -Humidity: Storm can
+        increase the temperature to extremely high degrees. -Acid Rain: Storm is capable
+        of causing acid rain to fall down on her enemies. -Hurricane: Storm can create
+        large scale hurricanes. -Hail: Can rain hail down on her enemies. -Hydrogen
+        Bomb: Storm gathers hydrogen into a particular area and then uses electricity
+        within that area to ignite it, causing a massive explosion. -Atmospheric Pressure:
+        Storm can affect the pressure of the atmosphere to her will. -Fog: She can
+        make a fog thick enough to hide herself in. She can make it acid for offensive
+        corrosive purposes. -Pressure Field: Storm can create a field of pressure
+        around herself and use it as a shield. -Telepathy Protection: Storm''s electrical
+        powers in combination with her will power gives her protection from telepathy.
+        Notes: *Storm was capable of wielding a magical duplicate of Thor''s mystic
+        Hammer Mjolnir, created by Loki. *Before making any changes to this page,
+        please read and follow the Power-scaling Rules for Marvel and DC Comics. ==Notable
+        Matchups== Victories: Losses: Inconclusive: ==References== ==Statistics Values==
         Category:Characters Category:Marvel Comics Category:Comic Book Characters
         Category:Element Users Category:Energy Users Category:Female Characters Category:Glass
         Cannons Category:Good Characters Category:Heroes Category:Humans Category:Magic
@@ -1969,14 +2535,14 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|storm marvel comics|9468799
+    duplicate_key: vsbattles.fandom.com|storm marvel comics|9694756
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-storm-game-marvel-comics
     url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_%28Marvel_Comics%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -1998,6 +2564,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2011,7 +2578,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2022,8 +2589,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '3-A, possibly 2-C Name: Ororo Munroe, Storm Origin: Marvel Comics Gender:
-        Female Age: In her 30''s Classification: Human Mutant'
+      value: 3-A, possibly 2-C
       source_id: character-stats-profiles-storm-game-marvel-comics
       provider_id: character_stats_profiles
       authority: high
@@ -2099,7 +2665,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_Marvel
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2110,16 +2676,17 @@ repair:
     - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Storm (Marvel Comics)
+    normalized_page_title: Storm (Marvel Rivals)
     source_type: mediawiki
-    revision_id: '9468799'
+    revision_id: '9322329'
     fetch_status: fetched
     http_status: 200
-    content_length: 30798
+    content_length: 9651
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
+    - Gallery
     - Notable Matchups
     - References
     - Statistics Values
@@ -2129,6 +2696,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2138,11 +2706,11 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 105
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2153,249 +2721,116 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically. At to least {{Low 6-B}}, likely far higher via environmental
-        destruction. Up to {{3-C}} with lightning bolts. {{Varies}}, up to at least
-        {{High 6-A}} when accessing ambient energy. Up to {{1-A}} at her peak and
-        accessing her godhead. Name: Ororo Munroe, Storm, Hadari Yao Origin: Marvel
-        Comics Gender: Female Age: Unknown. Likely in her mid-thirties. Classification:
-        Omega level mutant, queen and goddess of Wakanda, member of the Quiet Council
-        of Krakoa, member of the Great Ring, regent of Arakko, X-Men leader and member,
-        Morlock queen.'
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Enhanced Senses (Is aware of sudden\
-        \ changes in ecology and can read air currents and rain patterns. Can also\
-        \ detect natural phenomena such as storms, hurricanes, and earthquakes, and\
-        \ has an innate connection to lifeforms all around Earth), Martial Arts (Has\
-        \ learned Muay Thai and Gidigbo from Black Panther, Kenjutsu and Krav Maga\
-        \ from Wolverine, and Tai Chi along with Hung Gar from Shang ChiStorm (2024)\
-        \ #12), Weather, Elemental, Energy, and limited Matter Manipulation (Storm\
-        \ is an Omega level Mutant whose dominant power is her weather manipulation\
-        \ that is the basis for the vast majority of Storm's powers.House of X #1\
-        \ Tapped into the life-support systems and micro-climates of multiple spaceships,\
-        \ using it to take down enemy ships.Black Panther Vol 7 #21 Altered the climate\
-        \ of the entirety of the planet Mars/Arakko.Planet-Size X-Men #1 While grieving\
-        \ Wolverine's death she started to freeze the helicopter she's in and created\
-        \ a global aurora. She also remarked that she was trying not to set the atmosphere\
-        \ on fire.Storm Vol 3 #4 Stated that she is an energy manipulator in her fight\
-        \ with Vulcan and that the energy was circling between them looking for a\
-        \ weakness.X-Men: Red #2 Used power from the galactic core, which was composed\
-        \ of millions of suns, to purge herself of a Brood eggUncanny X-Men #165),\
-        \ Energy Projection and Energy Absorption (Contested and defeated Vulcan in\
-        \ a battle of wills as their energy was circling and building between them.\
-        \ Absorbed and channeled more magic than Magik, a sorcerer supreme, could\
-        \ safely control.Extraordinary X-Men #16 Absorbed Spectrum while fighting\
-        \ in defense of Wakanda.Black Panther Vol. 7 #24 Storm could absorb life force\
-        \ energy Magneto provided to recoverResurrection of Magneto #3), Adaptation\
-        \ (To her environment via her powers), Status Effect Inducement and minor\
-        \ Biological Manipulation (Capable of ripping the air from people's lungs,\
-        \ controlling electrical impulses to induce seizures or fry brains, and freeze\
-        \ hearts and shatter veins.Wolverines #6 Sucked the humidity from MagnetoUncanny\
-        \ X-Men #113 ), Magnetism Manipulation and Electricity Manipulation (Tapped\
-        \ into the planet's magnetic fields to throw flesh zombies away from it.Storm\
-        \ Vol 3 #11 Gathered hydrogen atoms around Silver Surfer, then ignited them\
-        \ with lightning.Fantastic Four #545 Parted the Earth's ozone layer and magnetic\
-        \ field to evaporate a huge wave.Storm Vol 3 #8 Generated an electromagnetic\
-        \ pulse.X-Treme X-Men #1 Ionizes fog she creates to disrupt communications.X-Treme\
-        \ X-Men #2 Killed Callisto with one punch by electrocuting her heart in her\
-        \ chest.Marauders Vol 1 #17 Taught Scarlet Witch a spell to generate electricity.Scarlet\
-        \ Witch (2023) #6 Can block incoming attacks by using lighting bolts as shieldsX-Men:\
-        \ Worlds Apart #4), Fire Manipulation, Temperature Manipulation (Subconsciously\
-        \ agitated air molecules heating up the roomStorm Vol 3 #1), Air Manipulation\
-        \ (Could generate strong enough winds to blow out the Human Torch's flameContest\
-        \ of Champions #2 and knock the Hulk into the air.Incredible Hulk #444 Claims\
-        \ to be capable of leveling mountains. Capable of controlling solar winds.Uncanny\
-        \ X-Men #99 Controlled and dropped the air pressure within the surrounding\
-        \ area.S.W.O.R.D. Vol 2 #11 Can use her powers to suck the air out of her\
-        \ opponent's lungs.X-Men: Worlds Apart #1 Can disorient opponents by manipulating\
-        \ the air in their ears, and create waves of fog large enough to engulf entire\
-        \ cities in order to conceal herselfX-Men: Worlds Apart #3), Water Manipulation\
-        \ and Ice Manipulation (Summoned a tidal wave against Cassandra Nova.X-Men\
-        \ Red Vol 1 #8 Created a monsoon to put out Pyro's flames.Uncanny X-Men #178\
-        \ Was shown casually creating blizzards.Uncanny X-Men #112Uncanny X-Men:First\
-        \ Class #2 Capable of flash-freezing rain.Uncanny X-Men #270 States that she's\
-        \ just as much an omega level \"hydrokinetic/cryomancer\" as Iceman and wins\
-        \ in their past sparring matches and current fight.Marvel's Voices: X-Men\
-        \ Froze a gun and the hands of its user and made the temperature drop 200\
-        \ degrees, to the point where the gun's user would need skin grafts due to\
-        \ the frostbiteX-Men: Worlds Apart #2), Summoning (Using a Yoruba spell taught\
-        \ to her by Doctor Voodoo, summons a massive energy octopus powerful enough\
-        \ to restrain multiple Storm godsStorm (2024) #7), Cosmic Awareness and Extrasensory\
-        \ Perception (Perceives the world as energy patterns, capable of sensing the\
-        \ Earth\u2019s pain and likely has a similar relationship with Mars/Arakko.X-Men,\
-        \ Vol.6, #9 An explanation of how Storm perceives the world including the\
-        \ human nervous system, weather patterns, and electrons.X-Treme X-Men #13\
-        \ Storm perceives a forcefield around an island, the ways it influenced the\
-        \ weather, and the dark magic that composed it.X-Men: Curse of the Mutants\
-        \ - Storm & Gambit Mentions that she sometimes feels as if she has pierced\
-        \ the core of creation and something behind and within it all.X-Factor #101\
-        \ Capable of perce"
+      value: ', possibly physically and with lightning bolts, Environmental Destruction'
       source_id: vsbattles-storm-game-marvel
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'Wall level+ physically (Spars equally with GambitX-Treme X-Men Vol 1
-        35 and defeated Cyclops while powerlessUncanny X-Men Vol 1 201). At least
-        Small Country level, likely far higher via environmental destruction (Under
-        Rachel''s control, created a primal planetary hyper-storm like the one that
-        shaped the planet. Later dispersed the storm after merging consciousnesses
-        and wills with Rachel.Uncanny X-Men #459 While grieving Wolverine, she stated
-        that she could set the atmosphere on fire. According to Thor, Storm summoned
-        "a tempest fierce enough to scour the surface of the world down to its bedrock").
-        Up to Galaxy level with lightning bolts (Can harm StardustFantastic Four Vol
-        1 546). Varies, up to at least Multi-Continent level when accessing ambient
-        energies and forces (Storm''s ability to manipulate the weather extends to
-        the ambient energies and forces relative to her location, the effects of her
-        powers depend on what she has access to. Using power from the galactic core,
-        which was composed of millions of suns, Storm was stated to shine with the
-        brightness of a star). Up to Outerverse level at her peak and accessing her
-        godhead (Storm overpowered The Adversary and was stated to be a bigger god
-        than him. Storm fought a group of entities including the Adversary, Bete Noir,
-        the First Fallen, the Goblin Force, and the Elder God Annihilation, repelling
-        them all. By working with Magneto in a circuit they managed to temporarily
-        destroy the Shadow King, whose realm naturally exists on the level of the
-        astral planeAstonishing X-Men #1. While in Overspace, Storm harmed eight Dominions
-        at once with her powers, Dominions'' power and nature make them capable of
-        threatening the Beyonders. Storm created a storm around Yggdrasil that threatened
-        to spread to the other realms on its branchesMarvel''s Voices Infinity Comic
-        #92Marvel''s Voices Infinity Comic #93). Can negate durability in several
-        ways.'
+      value: Small City level+ (Comparable to Namor and his monsters, who can create
+        large tsunamis and earthquakes), possibly Multi-Continent level (Able to trade
+        blows with Blood Berserker Wolverine, who slashed through the moon4.04 Megatons
+        of TNT, possibly 290.34 Petatons of TNT), Multi-Continent level+ Environmental
+        Destruction (Can flood the entire world25.5 Exatons of TNT)
       source_id: vsbattles-storm-game-marvel
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: 'HypersonicMach 8.23 combat and reaction speed (Scaling from Cyclops,
-        Wolverine, and Black Panther. Famously defeated Cyclops for leadership of
-        the X-Men without her powers. Casually reacts to an attack from a bloodlusted
-        Cyclops. Storm has also reacted to lightning bolts, Cyclops'' optic beams,
-        and military missiles. Reacted to Thor throwing Mjolnir.Contest of Champions
-        #3 Dodged a hammer throw from Ragnarok.Black Panther 2005 #25 Reacted to Quicksilver
-        before he could reach her. Her ability to perceive energy and manipulate neural
-        impulses allows her to increase her reaction speed), likely up to Infinite
-        when accessing her godhead (As she is a bigger god than The Adversary, she
-        should have speed comparable to him when accessing her godhead). Up to FTL
-        flight speed (Flies at jet speeds.Uncanny X-Men #386 Casually broke the sound
-        barrierX-Men Vol 4 #26. Can quickly fly from Earth to Sentinel City, which
-        is near the sun)'
+      value: Subsonic travel speed (Capable of keeping up with Magik who is this fast
+        and Peni Parker77.17 m/s), Supersonic combat and reactions speed (Is comparable
+        to other heroes such as Iron Fist, who can block bullets at point-blank rangeMach
+        1.3), possibly Relativistic combat and reactions speeds (Able to keep up with
+        Blood Berserker Wolverine, who could move this fast0.34 c)
       source_id: vsbattles-storm-game-marvel
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: 'Wall level+. Can create pressure domes to block attacks,Uncanny X-Men
-        #283 higher against elemental and energy based attacks (Her powers naturally
-        react to protect her from attacks of this nature). Up to Outerverse level
-        at her peak and accessing her godhead (Should be comparable to her AP, and
-        she was able to take an attack from a Dominion)'
+      value: Small City level+ (Can survive attacks from Namor and other heroes, who
+        should be comparable to Monstro, who can create large tsunamis and earthquakes),
+        possibly Multi-Continent level (Able to take attacks from Blood Berserker
+        Wolverine, who slashed through the moon)
       source_id: vsbattles-storm-game-marvel
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: 'Superhuman (Fought and defeated Black Panther after previously fighting
-        the Dora Milaje.World''s Apart #3 After getting stabbed in the ribs and struck
-        by her own lightning, proceeded to fight off assailantsX-Treme X-Men #14X-Treme
-        X-Men #15 Fought in the Genesis War for Arakko, which lasted around 70 daysX-Men:
-        Red #14)'
+      value: At least Athletic Human (Doesn't tire throughout battles and can shrug
+        off hard hits from opponents)
       source_id: vsbattles-storm-game-marvel
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: Planetary usually, Interdimensional with portals, up to Universal with
-        senses (Narration states that Storm perceives the universe "... the empty
-        space, bright stars, solid planets" all as patterns of energy that she's able
-        to control. Mentions that she sometimes feels as if she has pierced the core
-        of creation and something behind and within it all), Outerversal at peak
+      value: Standard Melee Range physically, up to Planetary with powers (Can cause
+        worldwide floods)
       source_id: vsbattles-storm-game-marvel
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: 'Usually has a set of knives on her,Marauders #20 at least one of which
-        is vibranium,Marauders Vol 1 #5 and a staff for necessary occasions. Has a
-        set of lock picking tools stored within her crown.'
+      value: Her costume
       source_id: vsbattles-storm-game-marvel
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: 'Above Average (Storm has been the leader of the X-Men and thinks of
-        creative ways to use her powers in almost any situation, and is aware of the
-        effect her powers have on the planet. Served on the governing bodies both
-        mutant nations, Krakoa and Arakko, while also being the regent/representative
-        of the entire Solar System to the rest of the universe. Is an expert at pickpocketing
-        and lock picking. Picked a lock designed by T''Challa to not yield to science
-        or magicDoomwar #1) Standard Tactics: Storm often refrains from using her
-        full strength for several reasons. Storm more often than not refrains from
-        killing, but will if necessary. Storm tries to be careful about the ways she
-        alters the weather in one location because it will affect the weather in another
-        part of the world. Lastly Storm refrains from using her more powerful abilities
-        in populated areas out of fear of collateral damage.'
+      value: Above Average (Storm is a skilled and experienced leader as well as combatant)
       source_id: vsbattles-storm-game-marvel
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Storm''s power is affected by her emotions and her willpower. Overuse
-        of her powers can cause extreme exhaustion. If she becomes enraged, she can
-        cause devastating storms. Storm''s godhead powers vary based the amount of
-        people that have faith in her. She formerly had severe claustrophobia, and
-        is sometimes depicted as being very arrogant and aggressive. Notable Attacks/Techniques:
-        -Electricity Manipulation: Storm''s most common method of offense, she can
-        fire a real, natural lightning bolt from the sky, shoot lightning from her
-        hands, create EMP''s, manipulate and perceive electromagnetic fields, screw
-        with a person''s bio-electricity and generate electrolysis, allowing her to
-        breathe underwater. She can even use cosmic lightning bolts in space. -Wind
-        Manipulation: Uses the wind as a powerful attack. Her control over wind is
-        powerful enough that Storm can instantly create large tornadoes and make vacuums
-        that suck away the air. She also uses the wind to make herself fly and increase
-        her physical strength. Her winds even managed to affect the Hulk. She can
-        also use solar winds. -Flash Flood: Storm can instantly create a flood of
-        water. -Flash Freeze: Manipulates the temperature to instantly freeze her
-        opponent solid. -Humidity: Storm can increase the temperature to extremely
-        high degrees. -Acid Rain: Storm is capable of causing acid rain to fall down
-        on her enemies. -Hurricane: Storm can create large scale hurricanes. -Hail:
-        Can rain hail down on her enemies. -Hydrogen Bomb: Storm gathers hydrogen
-        into a particular area and then uses electricity within that area to ignite
-        it, causing a massive explosion. -Atmospheric Pressure: Storm can affect the
-        pressure of the atmosphere to her will. -Fog: She can make a fog thick enough
-        to hide herself in. She can make it acid for offensive corrosive purposes.
-        -Pressure Field: Storm can create a field of pressure around herself and use
-        it as a shield. -Telepathy Protection: Storm''s electrical powers in combination
-        with her will power gives her protection from telepathy. Notes: *Storm was
-        capable of wielding a magical duplicate of Thor''s mystic Hammer Mjolnir,
-        created by Loki. *Before making any changes to this page, please read and
-        follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
-        Victories: Losses: Inconclusive: ==References== {{Scroll box|{{Reflist|2}}}}
-        ==Statistics Values== {{Discussions|Storm Marvel Comics|Storm (Marvel Comics)}}
-        Category:Characters Category:Marvel Comics Category:Comic Book Characters
-        Category:Element Users Category:Energy Users Category:Female Characters Category:Glass
-        Cannons Category:Good Characters Category:Heroes Category:Humans Category:Magic
-        Users Category:Martial Artists Category:Mutants (Marvel) Category:Protagonists
-        Category:Superheroes Category:Weather Users Category:X-Men Category:Air Users
-        Category:Mutants Category:Gladiators Category:Adventurers Category:Students
-        Category:Thieves Category:Royal Characters Category:Queens Category:Teachers
-        Category:Avengers Category:Leaders Category:Enhanced Senses Users Category:Matter
-        Users Category:Energy Projection Users Category:Absorption Users Category:Adaptation
-        Users Category:Status Effect Users Category:Biology Users Category:Magnetism
-        Users Category:Electricity Users Category:Fire Users Category:Temperature
-        Users Category:Water Users Category:Ice Users Category:Extrasensory Perception
-        Users Category:Supernatural Willpower Users Category:Flight Users Category:Light
-        Users Category:Underwater Breathing Users Category:Knife Users Category:Sword
-        Users Category:Blade Users Category:Weapon Masters Category:Weapon Users Category:Adults'
+      value: 'None notable Notable Attacks/Techniques: ==Gallery== See here ==Notable
+        Matchups== Victories: Losses: Inconclusive: ==References== ==Statistics Values==
+        Category:Adults Category:Air Users Category:Cape Users Category:Characters
+        Category:Electricity Users Category:Element Users Category:Extrasensory Perception
+        Users Category:Female Characters Category:Flight Users Category:Good Characters
+        Category:Heroes Category:Homing Attack Users Category:Ice Users Category:Leaders
+        Category:Marvel Rivals Category:Mutants (Marvel) Category:Mutants Category:Non-Physical
+        Interaction Users Category:Paralysis Users Category:Platform Creation Users
+        Category:Power Nullification Users Category:Space Users Category:Statistics
+        Amplification Users Category:Statistics Reduction Users Category:Superheroes
+        Category:Temperature Users Category:Time Users Category:Water Users Category:Weather
+        Users Category:X-Men Category:Game Characters Category:Video Game Characters
+        Category:Playable Characters Category:Protagonists Category:Gods'
+      source_id: vsbattles-storm-game-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= *Superhuman Physical
+        Characteristics *Weather Manipulation ([https://www.marvelrivals.com/heroes/?id=93784596-43d9-42f9-bb0c-86a5140f4917
+        It is stated that she has the power to manipulate weather patterns]) **Elemental
+        Manipulation ***Electricity Manipulation and possibly Paralysis Inducement
+        ([https://youtu.be/oYNPePa1vD0?t=42 Able to hurl bolts of natural lightning]
+        [https://youtu.be/xw_HtRdpUn8?t=64 as well as summon lightning bolts from
+        the sky]) ***Water Manipulation ([https://youtu.be/ZLbB4mvSeR4?t=50 Can cause
+        floods]) ***Ice Manipulation (Shares Luna Snow''s ability to manipulate ice,
+        being able to do "[https://youtu.be/ZLbB4mvSeR4?t=355 everything I can do
+        and so much more]") ****Magnetism-Negation (Scales to Luna Snow) ****Platform
+        Creation (Scales to Luna Snow) ***Air Manipulation (Can control the wind and
+        use it [https://youtu.be/xw_HtRdpUn8?t=16 to create hurricanes], [https://youtu.be/xw_HtRdpUn8?t=34
+        tornados], or even use it as [https://youtu.be/xw_HtRdpUn8 blades]) **Temperature
+        Manipulation (Can alter the climate at will) **Statistics Amplification and
+        Reduction (Can change the weather to boost either her own, or her allies''
+        statistics as well as debuff enemies. These effects change depending on the
+        weather she chooses, where a tornado will slow her enemies and speed herself
+        up, and a thunderstorm will give her a damage boost will slowly dealing damage
+        to opponents) *Extrasensory Perception ([https://marvelrivals.fandom.com/wiki/Storm#:~:text=Storm%20was%20hypersensitive%20to%20tiny%20changes%20in%20the%20atmosphere%20around%20her%2C%20due%20to%20the%20nature%20of%20her%20Mutant%20powers
+        Hyper sensitive to tiny changes in the atmosphere] as well as illusions) Resistance
+        to: *Radiation Manipulation (Can withstand Bruce Banner''s Gamma Gun and Gamma
+        Grenade) *Soul Damage (Can withstand direct attacks to the soul), Multi-Continent
+        level+ Environmental Destruction ([https://youtu.be/ZLbB4mvSeR4?t=50 Can flood
+        the entire world])'
       source_id: vsbattles-storm-game-marvel
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 55
+    variant_score: 25
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
@@ -2403,14 +2838,14 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|storm marvel comics|9468799
+    duplicate_key: vsbattles.fandom.com|storm marvel rivals|9322329
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-storm-game-marvel
     url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_Marvel
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id017
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -2434,6 +2869,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2447,7 +2883,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id018
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2458,8 +2894,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 'Low 5-B Name: Storm, Ororo Munroe Origin: Death Battle (Marvel) Gender:
-        Female Age: 20''s Classification: Mutant, X-Man'
+      value: Low 5-B
       source_id: character-stats-profiles-storm-game-marvel
       provider_id: character_stats_profiles
       authority: high
@@ -2515,1042 +2950,11 @@ repair:
     variant_match: true
     duplicate_key: character-stats-and-profiles.fandom.com|storm canon marvel death
       battle unbacked0|202517
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-storm-game-marvel
-    url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_%28Marvel%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Storm (Marvel Comics)
-    source_type: mediawiki
-    revision_id: '9468799'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 30798
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-B}} physically. At to least {{Low 6-B}}, likely far higher via environmental
-        destruction. Up to {{3-C}} with lightning bolts. {{Varies}}, up to at least
-        {{High 6-A}} when accessing ambient energy. Up to {{1-A}} at her peak and
-        accessing her godhead. Name: Ororo Munroe, Storm, Hadari Yao Origin: Marvel
-        Comics Gender: Female Age: Unknown. Likely in her mid-thirties. Classification:
-        Omega level mutant, queen and goddess of Wakanda, member of the Quiet Council
-        of Krakoa, member of the Great Ring, regent of Arakko, X-Men leader and member,
-        Morlock queen.'
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Enhanced Senses (Is aware of sudden\
-        \ changes in ecology and can read air currents and rain patterns. Can also\
-        \ detect natural phenomena such as storms, hurricanes, and earthquakes, and\
-        \ has an innate connection to lifeforms all around Earth), Martial Arts (Has\
-        \ learned Muay Thai and Gidigbo from Black Panther, Kenjutsu and Krav Maga\
-        \ from Wolverine, and Tai Chi along with Hung Gar from Shang ChiStorm (2024)\
-        \ #12), Weather, Elemental, Energy, and limited Matter Manipulation (Storm\
-        \ is an Omega level Mutant whose dominant power is her weather manipulation\
-        \ that is the basis for the vast majority of Storm's powers.House of X #1\
-        \ Tapped into the life-support systems and micro-climates of multiple spaceships,\
-        \ using it to take down enemy ships.Black Panther Vol 7 #21 Altered the climate\
-        \ of the entirety of the planet Mars/Arakko.Planet-Size X-Men #1 While grieving\
-        \ Wolverine's death she started to freeze the helicopter she's in and created\
-        \ a global aurora. She also remarked that she was trying not to set the atmosphere\
-        \ on fire.Storm Vol 3 #4 Stated that she is an energy manipulator in her fight\
-        \ with Vulcan and that the energy was circling between them looking for a\
-        \ weakness.X-Men: Red #2 Used power from the galactic core, which was composed\
-        \ of millions of suns, to purge herself of a Brood eggUncanny X-Men #165),\
-        \ Energy Projection and Energy Absorption (Contested and defeated Vulcan in\
-        \ a battle of wills as their energy was circling and building between them.\
-        \ Absorbed and channeled more magic than Magik, a sorcerer supreme, could\
-        \ safely control.Extraordinary X-Men #16 Absorbed Spectrum while fighting\
-        \ in defense of Wakanda.Black Panther Vol. 7 #24 Storm could absorb life force\
-        \ energy Magneto provided to recoverResurrection of Magneto #3), Adaptation\
-        \ (To her environment via her powers), Status Effect Inducement and minor\
-        \ Biological Manipulation (Capable of ripping the air from people's lungs,\
-        \ controlling electrical impulses to induce seizures or fry brains, and freeze\
-        \ hearts and shatter veins.Wolverines #6 Sucked the humidity from MagnetoUncanny\
-        \ X-Men #113 ), Magnetism Manipulation and Electricity Manipulation (Tapped\
-        \ into the planet's magnetic fields to throw flesh zombies away from it.Storm\
-        \ Vol 3 #11 Gathered hydrogen atoms around Silver Surfer, then ignited them\
-        \ with lightning.Fantastic Four #545 Parted the Earth's ozone layer and magnetic\
-        \ field to evaporate a huge wave.Storm Vol 3 #8 Generated an electromagnetic\
-        \ pulse.X-Treme X-Men #1 Ionizes fog she creates to disrupt communications.X-Treme\
-        \ X-Men #2 Killed Callisto with one punch by electrocuting her heart in her\
-        \ chest.Marauders Vol 1 #17 Taught Scarlet Witch a spell to generate electricity.Scarlet\
-        \ Witch (2023) #6 Can block incoming attacks by using lighting bolts as shieldsX-Men:\
-        \ Worlds Apart #4), Fire Manipulation, Temperature Manipulation (Subconsciously\
-        \ agitated air molecules heating up the roomStorm Vol 3 #1), Air Manipulation\
-        \ (Could generate strong enough winds to blow out the Human Torch's flameContest\
-        \ of Champions #2 and knock the Hulk into the air.Incredible Hulk #444 Claims\
-        \ to be capable of leveling mountains. Capable of controlling solar winds.Uncanny\
-        \ X-Men #99 Controlled and dropped the air pressure within the surrounding\
-        \ area.S.W.O.R.D. Vol 2 #11 Can use her powers to suck the air out of her\
-        \ opponent's lungs.X-Men: Worlds Apart #1 Can disorient opponents by manipulating\
-        \ the air in their ears, and create waves of fog large enough to engulf entire\
-        \ cities in order to conceal herselfX-Men: Worlds Apart #3), Water Manipulation\
-        \ and Ice Manipulation (Summoned a tidal wave against Cassandra Nova.X-Men\
-        \ Red Vol 1 #8 Created a monsoon to put out Pyro's flames.Uncanny X-Men #178\
-        \ Was shown casually creating blizzards.Uncanny X-Men #112Uncanny X-Men:First\
-        \ Class #2 Capable of flash-freezing rain.Uncanny X-Men #270 States that she's\
-        \ just as much an omega level \"hydrokinetic/cryomancer\" as Iceman and wins\
-        \ in their past sparring matches and current fight.Marvel's Voices: X-Men\
-        \ Froze a gun and the hands of its user and made the temperature drop 200\
-        \ degrees, to the point where the gun's user would need skin grafts due to\
-        \ the frostbiteX-Men: Worlds Apart #2), Summoning (Using a Yoruba spell taught\
-        \ to her by Doctor Voodoo, summons a massive energy octopus powerful enough\
-        \ to restrain multiple Storm godsStorm (2024) #7), Cosmic Awareness and Extrasensory\
-        \ Perception (Perceives the world as energy patterns, capable of sensing the\
-        \ Earth\u2019s pain and likely has a similar relationship with Mars/Arakko.X-Men,\
-        \ Vol.6, #9 An explanation of how Storm perceives the world including the\
-        \ human nervous system, weather patterns, and electrons.X-Treme X-Men #13\
-        \ Storm perceives a forcefield around an island, the ways it influenced the\
-        \ weather, and the dark magic that composed it.X-Men: Curse of the Mutants\
-        \ - Storm & Gambit Mentions that she sometimes feels as if she has pierced\
-        \ the core of creation and something behind and within it all.X-Factor #101\
-        \ Capable of perce"
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Wall level+ physically (Spars equally with GambitX-Treme X-Men Vol 1
-        35 and defeated Cyclops while powerlessUncanny X-Men Vol 1 201). At least
-        Small Country level, likely far higher via environmental destruction (Under
-        Rachel''s control, created a primal planetary hyper-storm like the one that
-        shaped the planet. Later dispersed the storm after merging consciousnesses
-        and wills with Rachel.Uncanny X-Men #459 While grieving Wolverine, she stated
-        that she could set the atmosphere on fire. According to Thor, Storm summoned
-        "a tempest fierce enough to scour the surface of the world down to its bedrock").
-        Up to Galaxy level with lightning bolts (Can harm StardustFantastic Four Vol
-        1 546). Varies, up to at least Multi-Continent level when accessing ambient
-        energies and forces (Storm''s ability to manipulate the weather extends to
-        the ambient energies and forces relative to her location, the effects of her
-        powers depend on what she has access to. Using power from the galactic core,
-        which was composed of millions of suns, Storm was stated to shine with the
-        brightness of a star). Up to Outerverse level at her peak and accessing her
-        godhead (Storm overpowered The Adversary and was stated to be a bigger god
-        than him. Storm fought a group of entities including the Adversary, Bete Noir,
-        the First Fallen, the Goblin Force, and the Elder God Annihilation, repelling
-        them all. By working with Magneto in a circuit they managed to temporarily
-        destroy the Shadow King, whose realm naturally exists on the level of the
-        astral planeAstonishing X-Men #1. While in Overspace, Storm harmed eight Dominions
-        at once with her powers, Dominions'' power and nature make them capable of
-        threatening the Beyonders. Storm created a storm around Yggdrasil that threatened
-        to spread to the other realms on its branchesMarvel''s Voices Infinity Comic
-        #92Marvel''s Voices Infinity Comic #93). Can negate durability in several
-        ways.'
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: 'HypersonicMach 8.23 combat and reaction speed (Scaling from Cyclops,
-        Wolverine, and Black Panther. Famously defeated Cyclops for leadership of
-        the X-Men without her powers. Casually reacts to an attack from a bloodlusted
-        Cyclops. Storm has also reacted to lightning bolts, Cyclops'' optic beams,
-        and military missiles. Reacted to Thor throwing Mjolnir.Contest of Champions
-        #3 Dodged a hammer throw from Ragnarok.Black Panther 2005 #25 Reacted to Quicksilver
-        before he could reach her. Her ability to perceive energy and manipulate neural
-        impulses allows her to increase her reaction speed), likely up to Infinite
-        when accessing her godhead (As she is a bigger god than The Adversary, she
-        should have speed comparable to him when accessing her godhead). Up to FTL
-        flight speed (Flies at jet speeds.Uncanny X-Men #386 Casually broke the sound
-        barrierX-Men Vol 4 #26. Can quickly fly from Earth to Sentinel City, which
-        is near the sun)'
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: 'Wall level+. Can create pressure domes to block attacks,Uncanny X-Men
-        #283 higher against elemental and energy based attacks (Her powers naturally
-        react to protect her from attacks of this nature). Up to Outerverse level
-        at her peak and accessing her godhead (Should be comparable to her AP, and
-        she was able to take an attack from a Dominion)'
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: 'Superhuman (Fought and defeated Black Panther after previously fighting
-        the Dora Milaje.World''s Apart #3 After getting stabbed in the ribs and struck
-        by her own lightning, proceeded to fight off assailantsX-Treme X-Men #14X-Treme
-        X-Men #15 Fought in the Genesis War for Arakko, which lasted around 70 daysX-Men:
-        Red #14)'
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Planetary usually, Interdimensional with portals, up to Universal with
-        senses (Narration states that Storm perceives the universe "... the empty
-        space, bright stars, solid planets" all as patterns of energy that she's able
-        to control. Mentions that she sometimes feels as if she has pierced the core
-        of creation and something behind and within it all), Outerversal at peak
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: 'Usually has a set of knives on her,Marauders #20 at least one of which
-        is vibranium,Marauders Vol 1 #5 and a staff for necessary occasions. Has a
-        set of lock picking tools stored within her crown.'
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Above Average (Storm has been the leader of the X-Men and thinks of
-        creative ways to use her powers in almost any situation, and is aware of the
-        effect her powers have on the planet. Served on the governing bodies both
-        mutant nations, Krakoa and Arakko, while also being the regent/representative
-        of the entire Solar System to the rest of the universe. Is an expert at pickpocketing
-        and lock picking. Picked a lock designed by T''Challa to not yield to science
-        or magicDoomwar #1) Standard Tactics: Storm often refrains from using her
-        full strength for several reasons. Storm more often than not refrains from
-        killing, but will if necessary. Storm tries to be careful about the ways she
-        alters the weather in one location because it will affect the weather in another
-        part of the world. Lastly Storm refrains from using her more powerful abilities
-        in populated areas out of fear of collateral damage.'
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Storm''s power is affected by her emotions and her willpower. Overuse
-        of her powers can cause extreme exhaustion. If she becomes enraged, she can
-        cause devastating storms. Storm''s godhead powers vary based the amount of
-        people that have faith in her. She formerly had severe claustrophobia, and
-        is sometimes depicted as being very arrogant and aggressive. Notable Attacks/Techniques:
-        -Electricity Manipulation: Storm''s most common method of offense, she can
-        fire a real, natural lightning bolt from the sky, shoot lightning from her
-        hands, create EMP''s, manipulate and perceive electromagnetic fields, screw
-        with a person''s bio-electricity and generate electrolysis, allowing her to
-        breathe underwater. She can even use cosmic lightning bolts in space. -Wind
-        Manipulation: Uses the wind as a powerful attack. Her control over wind is
-        powerful enough that Storm can instantly create large tornadoes and make vacuums
-        that suck away the air. She also uses the wind to make herself fly and increase
-        her physical strength. Her winds even managed to affect the Hulk. She can
-        also use solar winds. -Flash Flood: Storm can instantly create a flood of
-        water. -Flash Freeze: Manipulates the temperature to instantly freeze her
-        opponent solid. -Humidity: Storm can increase the temperature to extremely
-        high degrees. -Acid Rain: Storm is capable of causing acid rain to fall down
-        on her enemies. -Hurricane: Storm can create large scale hurricanes. -Hail:
-        Can rain hail down on her enemies. -Hydrogen Bomb: Storm gathers hydrogen
-        into a particular area and then uses electricity within that area to ignite
-        it, causing a massive explosion. -Atmospheric Pressure: Storm can affect the
-        pressure of the atmosphere to her will. -Fog: She can make a fog thick enough
-        to hide herself in. She can make it acid for offensive corrosive purposes.
-        -Pressure Field: Storm can create a field of pressure around herself and use
-        it as a shield. -Telepathy Protection: Storm''s electrical powers in combination
-        with her will power gives her protection from telepathy. Notes: *Storm was
-        capable of wielding a magical duplicate of Thor''s mystic Hammer Mjolnir,
-        created by Loki. *Before making any changes to this page, please read and
-        follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
-        Victories: Losses: Inconclusive: ==References== {{Scroll box|{{Reflist|2}}}}
-        ==Statistics Values== {{Discussions|Storm Marvel Comics|Storm (Marvel Comics)}}
-        Category:Characters Category:Marvel Comics Category:Comic Book Characters
-        Category:Element Users Category:Energy Users Category:Female Characters Category:Glass
-        Cannons Category:Good Characters Category:Heroes Category:Humans Category:Magic
-        Users Category:Martial Artists Category:Mutants (Marvel) Category:Protagonists
-        Category:Superheroes Category:Weather Users Category:X-Men Category:Air Users
-        Category:Mutants Category:Gladiators Category:Adventurers Category:Students
-        Category:Thieves Category:Royal Characters Category:Queens Category:Teachers
-        Category:Avengers Category:Leaders Category:Enhanced Senses Users Category:Matter
-        Users Category:Energy Projection Users Category:Absorption Users Category:Adaptation
-        Users Category:Status Effect Users Category:Biology Users Category:Magnetism
-        Users Category:Electricity Users Category:Fire Users Category:Temperature
-        Users Category:Water Users Category:Ice Users Category:Extrasensory Perception
-        Users Category:Supernatural Willpower Users Category:Flight Users Category:Light
-        Users Category:Underwater Breathing Users Category:Knife Users Category:Sword
-        Users Category:Blade Users Category:Weapon Masters Category:Weapon Users Category:Adults'
-      source_id: vsbattles-storm-game-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|storm marvel comics|9468799
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-storm-game-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_%28Marvel%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id019
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Storm (Canon, Marvel, Death Battle)/Unbacked0
-    source_type: mediawiki
-    revision_id: '202517'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 1795
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id020
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 'Low 5-B Name: Storm, Ororo Munroe Origin: Death Battle (Marvel) Gender:
-        Female Age: 20''s Classification: Mutant, X-Man'
-      source_id: character-stats-profiles-storm-game-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Elemental Manipulation, Weather
-        Manipulation, Air Manipulation, Water Manipulation, Smoke Manipulation, Ice
-        Manipulation, Absolute Zero, Electricity Manipulation, Magnetism Manipulation,
-        Flight, Enhanced Senses
-      source_id: character-stats-profiles-storm-game-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Small Planet Level (Created a storm that covered the planet which was
-        calc'd to require 539.58 Exatons)
-      source_id: character-stats-profiles-storm-game-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: FTL (Can dodge beams of light)
-      source_id: character-stats-profiles-storm-game-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Small Planet Level
-      source_id: character-stats-profiles-storm-game-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Has a fear of close spaces Note: This profile is based on what is in
-        Death Battles video, any information displayed on any profile based on Death
-        Battle are solely based on whatever is said in their videos and not my own
-        opinion. So if a character is weaker or stronger on a profile than they actually
-        are then it isn''t my fault. == Others == Notable Victories: Notable Losses:
-        Inconclusive Matches: Category:Unbacked0 Category:Tier 5'
-      source_id: character-stats-profiles-storm-game-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|storm canon marvel death
-      battle unbacked0|202517
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-storm-game-earth-616
-    url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_%28Earth-616%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id015
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Storm (Marvel Comics)
-    source_type: mediawiki
-    revision_id: '9468799'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 30798
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - References
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id016
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-B}} physically. At to least {{Low 6-B}}, likely far higher via environmental
-        destruction. Up to {{3-C}} with lightning bolts. {{Varies}}, up to at least
-        {{High 6-A}} when accessing ambient energy. Up to {{1-A}} at her peak and
-        accessing her godhead. Name: Ororo Munroe, Storm, Hadari Yao Origin: Marvel
-        Comics Gender: Female Age: Unknown. Likely in her mid-thirties. Classification:
-        Omega level mutant, queen and goddess of Wakanda, member of the Quiet Council
-        of Krakoa, member of the Great Ring, regent of Arakko, X-Men leader and member,
-        Morlock queen.'
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Enhanced Senses (Is aware of sudden\
-        \ changes in ecology and can read air currents and rain patterns. Can also\
-        \ detect natural phenomena such as storms, hurricanes, and earthquakes, and\
-        \ has an innate connection to lifeforms all around Earth), Martial Arts (Has\
-        \ learned Muay Thai and Gidigbo from Black Panther, Kenjutsu and Krav Maga\
-        \ from Wolverine, and Tai Chi along with Hung Gar from Shang ChiStorm (2024)\
-        \ #12), Weather, Elemental, Energy, and limited Matter Manipulation (Storm\
-        \ is an Omega level Mutant whose dominant power is her weather manipulation\
-        \ that is the basis for the vast majority of Storm's powers.House of X #1\
-        \ Tapped into the life-support systems and micro-climates of multiple spaceships,\
-        \ using it to take down enemy ships.Black Panther Vol 7 #21 Altered the climate\
-        \ of the entirety of the planet Mars/Arakko.Planet-Size X-Men #1 While grieving\
-        \ Wolverine's death she started to freeze the helicopter she's in and created\
-        \ a global aurora. She also remarked that she was trying not to set the atmosphere\
-        \ on fire.Storm Vol 3 #4 Stated that she is an energy manipulator in her fight\
-        \ with Vulcan and that the energy was circling between them looking for a\
-        \ weakness.X-Men: Red #2 Used power from the galactic core, which was composed\
-        \ of millions of suns, to purge herself of a Brood eggUncanny X-Men #165),\
-        \ Energy Projection and Energy Absorption (Contested and defeated Vulcan in\
-        \ a battle of wills as their energy was circling and building between them.\
-        \ Absorbed and channeled more magic than Magik, a sorcerer supreme, could\
-        \ safely control.Extraordinary X-Men #16 Absorbed Spectrum while fighting\
-        \ in defense of Wakanda.Black Panther Vol. 7 #24 Storm could absorb life force\
-        \ energy Magneto provided to recoverResurrection of Magneto #3), Adaptation\
-        \ (To her environment via her powers), Status Effect Inducement and minor\
-        \ Biological Manipulation (Capable of ripping the air from people's lungs,\
-        \ controlling electrical impulses to induce seizures or fry brains, and freeze\
-        \ hearts and shatter veins.Wolverines #6 Sucked the humidity from MagnetoUncanny\
-        \ X-Men #113 ), Magnetism Manipulation and Electricity Manipulation (Tapped\
-        \ into the planet's magnetic fields to throw flesh zombies away from it.Storm\
-        \ Vol 3 #11 Gathered hydrogen atoms around Silver Surfer, then ignited them\
-        \ with lightning.Fantastic Four #545 Parted the Earth's ozone layer and magnetic\
-        \ field to evaporate a huge wave.Storm Vol 3 #8 Generated an electromagnetic\
-        \ pulse.X-Treme X-Men #1 Ionizes fog she creates to disrupt communications.X-Treme\
-        \ X-Men #2 Killed Callisto with one punch by electrocuting her heart in her\
-        \ chest.Marauders Vol 1 #17 Taught Scarlet Witch a spell to generate electricity.Scarlet\
-        \ Witch (2023) #6 Can block incoming attacks by using lighting bolts as shieldsX-Men:\
-        \ Worlds Apart #4), Fire Manipulation, Temperature Manipulation (Subconsciously\
-        \ agitated air molecules heating up the roomStorm Vol 3 #1), Air Manipulation\
-        \ (Could generate strong enough winds to blow out the Human Torch's flameContest\
-        \ of Champions #2 and knock the Hulk into the air.Incredible Hulk #444 Claims\
-        \ to be capable of leveling mountains. Capable of controlling solar winds.Uncanny\
-        \ X-Men #99 Controlled and dropped the air pressure within the surrounding\
-        \ area.S.W.O.R.D. Vol 2 #11 Can use her powers to suck the air out of her\
-        \ opponent's lungs.X-Men: Worlds Apart #1 Can disorient opponents by manipulating\
-        \ the air in their ears, and create waves of fog large enough to engulf entire\
-        \ cities in order to conceal herselfX-Men: Worlds Apart #3), Water Manipulation\
-        \ and Ice Manipulation (Summoned a tidal wave against Cassandra Nova.X-Men\
-        \ Red Vol 1 #8 Created a monsoon to put out Pyro's flames.Uncanny X-Men #178\
-        \ Was shown casually creating blizzards.Uncanny X-Men #112Uncanny X-Men:First\
-        \ Class #2 Capable of flash-freezing rain.Uncanny X-Men #270 States that she's\
-        \ just as much an omega level \"hydrokinetic/cryomancer\" as Iceman and wins\
-        \ in their past sparring matches and current fight.Marvel's Voices: X-Men\
-        \ Froze a gun and the hands of its user and made the temperature drop 200\
-        \ degrees, to the point where the gun's user would need skin grafts due to\
-        \ the frostbiteX-Men: Worlds Apart #2), Summoning (Using a Yoruba spell taught\
-        \ to her by Doctor Voodoo, summons a massive energy octopus powerful enough\
-        \ to restrain multiple Storm godsStorm (2024) #7), Cosmic Awareness and Extrasensory\
-        \ Perception (Perceives the world as energy patterns, capable of sensing the\
-        \ Earth\u2019s pain and likely has a similar relationship with Mars/Arakko.X-Men,\
-        \ Vol.6, #9 An explanation of how Storm perceives the world including the\
-        \ human nervous system, weather patterns, and electrons.X-Treme X-Men #13\
-        \ Storm perceives a forcefield around an island, the ways it influenced the\
-        \ weather, and the dark magic that composed it.X-Men: Curse of the Mutants\
-        \ - Storm & Gambit Mentions that she sometimes feels as if she has pierced\
-        \ the core of creation and something behind and within it all.X-Factor #101\
-        \ Capable of perce"
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Wall level+ physically (Spars equally with GambitX-Treme X-Men Vol 1
-        35 and defeated Cyclops while powerlessUncanny X-Men Vol 1 201). At least
-        Small Country level, likely far higher via environmental destruction (Under
-        Rachel''s control, created a primal planetary hyper-storm like the one that
-        shaped the planet. Later dispersed the storm after merging consciousnesses
-        and wills with Rachel.Uncanny X-Men #459 While grieving Wolverine, she stated
-        that she could set the atmosphere on fire. According to Thor, Storm summoned
-        "a tempest fierce enough to scour the surface of the world down to its bedrock").
-        Up to Galaxy level with lightning bolts (Can harm StardustFantastic Four Vol
-        1 546). Varies, up to at least Multi-Continent level when accessing ambient
-        energies and forces (Storm''s ability to manipulate the weather extends to
-        the ambient energies and forces relative to her location, the effects of her
-        powers depend on what she has access to. Using power from the galactic core,
-        which was composed of millions of suns, Storm was stated to shine with the
-        brightness of a star). Up to Outerverse level at her peak and accessing her
-        godhead (Storm overpowered The Adversary and was stated to be a bigger god
-        than him. Storm fought a group of entities including the Adversary, Bete Noir,
-        the First Fallen, the Goblin Force, and the Elder God Annihilation, repelling
-        them all. By working with Magneto in a circuit they managed to temporarily
-        destroy the Shadow King, whose realm naturally exists on the level of the
-        astral planeAstonishing X-Men #1. While in Overspace, Storm harmed eight Dominions
-        at once with her powers, Dominions'' power and nature make them capable of
-        threatening the Beyonders. Storm created a storm around Yggdrasil that threatened
-        to spread to the other realms on its branchesMarvel''s Voices Infinity Comic
-        #92Marvel''s Voices Infinity Comic #93). Can negate durability in several
-        ways.'
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: 'HypersonicMach 8.23 combat and reaction speed (Scaling from Cyclops,
-        Wolverine, and Black Panther. Famously defeated Cyclops for leadership of
-        the X-Men without her powers. Casually reacts to an attack from a bloodlusted
-        Cyclops. Storm has also reacted to lightning bolts, Cyclops'' optic beams,
-        and military missiles. Reacted to Thor throwing Mjolnir.Contest of Champions
-        #3 Dodged a hammer throw from Ragnarok.Black Panther 2005 #25 Reacted to Quicksilver
-        before he could reach her. Her ability to perceive energy and manipulate neural
-        impulses allows her to increase her reaction speed), likely up to Infinite
-        when accessing her godhead (As she is a bigger god than The Adversary, she
-        should have speed comparable to him when accessing her godhead). Up to FTL
-        flight speed (Flies at jet speeds.Uncanny X-Men #386 Casually broke the sound
-        barrierX-Men Vol 4 #26. Can quickly fly from Earth to Sentinel City, which
-        is near the sun)'
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: 'Wall level+. Can create pressure domes to block attacks,Uncanny X-Men
-        #283 higher against elemental and energy based attacks (Her powers naturally
-        react to protect her from attacks of this nature). Up to Outerverse level
-        at her peak and accessing her godhead (Should be comparable to her AP, and
-        she was able to take an attack from a Dominion)'
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: 'Superhuman (Fought and defeated Black Panther after previously fighting
-        the Dora Milaje.World''s Apart #3 After getting stabbed in the ribs and struck
-        by her own lightning, proceeded to fight off assailantsX-Treme X-Men #14X-Treme
-        X-Men #15 Fought in the Genesis War for Arakko, which lasted around 70 daysX-Men:
-        Red #14)'
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Planetary usually, Interdimensional with portals, up to Universal with
-        senses (Narration states that Storm perceives the universe "... the empty
-        space, bright stars, solid planets" all as patterns of energy that she's able
-        to control. Mentions that she sometimes feels as if she has pierced the core
-        of creation and something behind and within it all), Outerversal at peak
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: 'Usually has a set of knives on her,Marauders #20 at least one of which
-        is vibranium,Marauders Vol 1 #5 and a staff for necessary occasions. Has a
-        set of lock picking tools stored within her crown.'
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Above Average (Storm has been the leader of the X-Men and thinks of
-        creative ways to use her powers in almost any situation, and is aware of the
-        effect her powers have on the planet. Served on the governing bodies both
-        mutant nations, Krakoa and Arakko, while also being the regent/representative
-        of the entire Solar System to the rest of the universe. Is an expert at pickpocketing
-        and lock picking. Picked a lock designed by T''Challa to not yield to science
-        or magicDoomwar #1) Standard Tactics: Storm often refrains from using her
-        full strength for several reasons. Storm more often than not refrains from
-        killing, but will if necessary. Storm tries to be careful about the ways she
-        alters the weather in one location because it will affect the weather in another
-        part of the world. Lastly Storm refrains from using her more powerful abilities
-        in populated areas out of fear of collateral damage.'
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Storm''s power is affected by her emotions and her willpower. Overuse
-        of her powers can cause extreme exhaustion. If she becomes enraged, she can
-        cause devastating storms. Storm''s godhead powers vary based the amount of
-        people that have faith in her. She formerly had severe claustrophobia, and
-        is sometimes depicted as being very arrogant and aggressive. Notable Attacks/Techniques:
-        -Electricity Manipulation: Storm''s most common method of offense, she can
-        fire a real, natural lightning bolt from the sky, shoot lightning from her
-        hands, create EMP''s, manipulate and perceive electromagnetic fields, screw
-        with a person''s bio-electricity and generate electrolysis, allowing her to
-        breathe underwater. She can even use cosmic lightning bolts in space. -Wind
-        Manipulation: Uses the wind as a powerful attack. Her control over wind is
-        powerful enough that Storm can instantly create large tornadoes and make vacuums
-        that suck away the air. She also uses the wind to make herself fly and increase
-        her physical strength. Her winds even managed to affect the Hulk. She can
-        also use solar winds. -Flash Flood: Storm can instantly create a flood of
-        water. -Flash Freeze: Manipulates the temperature to instantly freeze her
-        opponent solid. -Humidity: Storm can increase the temperature to extremely
-        high degrees. -Acid Rain: Storm is capable of causing acid rain to fall down
-        on her enemies. -Hurricane: Storm can create large scale hurricanes. -Hail:
-        Can rain hail down on her enemies. -Hydrogen Bomb: Storm gathers hydrogen
-        into a particular area and then uses electricity within that area to ignite
-        it, causing a massive explosion. -Atmospheric Pressure: Storm can affect the
-        pressure of the atmosphere to her will. -Fog: She can make a fog thick enough
-        to hide herself in. She can make it acid for offensive corrosive purposes.
-        -Pressure Field: Storm can create a field of pressure around herself and use
-        it as a shield. -Telepathy Protection: Storm''s electrical powers in combination
-        with her will power gives her protection from telepathy. Notes: *Storm was
-        capable of wielding a magical duplicate of Thor''s mystic Hammer Mjolnir,
-        created by Loki. *Before making any changes to this page, please read and
-        follow the Power-scaling Rules for Marvel and DC Comics. ==Notable Matchups==
-        Victories: Losses: Inconclusive: ==References== {{Scroll box|{{Reflist|2}}}}
-        ==Statistics Values== {{Discussions|Storm Marvel Comics|Storm (Marvel Comics)}}
-        Category:Characters Category:Marvel Comics Category:Comic Book Characters
-        Category:Element Users Category:Energy Users Category:Female Characters Category:Glass
-        Cannons Category:Good Characters Category:Heroes Category:Humans Category:Magic
-        Users Category:Martial Artists Category:Mutants (Marvel) Category:Protagonists
-        Category:Superheroes Category:Weather Users Category:X-Men Category:Air Users
-        Category:Mutants Category:Gladiators Category:Adventurers Category:Students
-        Category:Thieves Category:Royal Characters Category:Queens Category:Teachers
-        Category:Avengers Category:Leaders Category:Enhanced Senses Users Category:Matter
-        Users Category:Energy Projection Users Category:Absorption Users Category:Adaptation
-        Users Category:Status Effect Users Category:Biology Users Category:Magnetism
-        Users Category:Electricity Users Category:Fire Users Category:Temperature
-        Users Category:Water Users Category:Ice Users Category:Extrasensory Perception
-        Users Category:Supernatural Willpower Users Category:Flight Users Category:Light
-        Users Category:Underwater Breathing Users Category:Knife Users Category:Sword
-        Users Category:Blade Users Category:Weapon Masters Category:Weapon Users Category:Adults'
-      source_id: vsbattles-storm-game-earth-616
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|storm marvel comics|9468799
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-storm-game-earth-616
-    url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_%28Earth-616%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id021
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: The Human Torch (Canon, Earth-616)/Maverick Zero X
-    source_type: mediawiki
-    revision_id: '122612'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4428
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id022
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 'High 7-B, 5-A with Supernova Name: Johnathan "Johnny" Lowell Spencer
-        Storm, The Human Torch Origin: Marvel Comics Gender: Male Age: In his mid
-        to late 20''s Classification: Human Mutate'
-      source_id: character-stats-profiles-storm-game-earth-616
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Fire Manipulation, Heat Manipulation,
-        Aura, Body Control, Flight, Light Manipulation, Absorption (Can absorb fire
-        and heat), Air Manipulation (Can generate colossal tornadoes), Duplication,
-        Illusion Creation, Sleep Inducement, Extrasensory Perception, Vehicular Mastery,
-        Resistance to Fire, Heat, and Ice Manipulation
-      source_id: character-stats-profiles-storm-game-earth-616
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: City Level+ (Destroyed an asteroid the size of Manhattan), Large Planet
-        level with Supernova (Can reach the temperature of an exploding star, outputting
-        31 Yottatons)
-      source_id: character-stats-profiles-storm-game-earth-616
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Sub-Relativistic Reaction, Combat, and Flight Speed (Reacted in a microsecond.
-        Quickly flew into the upper atmosphere. Easily reacted to a meteorite)
-      source_id: character-stats-profiles-storm-game-earth-616
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Building level (Took a hit from Black Panther. Survived being pulled
-        into a tornado. Withstood a building collapsing on him.), Large Planet level
-        against fire/heat/energy-based attacks
-      source_id: character-stats-profiles-storm-game-earth-616
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Requires oxygen in the vicinity to ignite himself, leaving him virtually
-        powerless in the vacuum of space. His flames can be extinguished sufficient
-        suppressant materials, although he can reignite them. Notable Attacks/Techniques:
-        * Flame Clones: Johnny can create temporary clones out of flame to distract
-        or attack his opponents * Fire Manipulation: In addition to creating a fire
-        aura around itself, he can manipulate any fire in the area, causing them to
-        grow larger or smaller. He can also project flame as jets, beams, fireballs,
-        etc. and form it into complex forms like cages, ropes, discs, and other shapes.
-        * Nova Flames: by burning his maximum natural limit, he can create a massively
-        intense form of fire which is comparable to stellar temperatures and will
-        completely overwhelm any normal fire. Using this attack at maximum potential,
-        he can create a small-scale version of a supernova, which has the potential
-        to ignite the atmosphere and destroy the surface of the Earth ==Others== Notable
-        Victories: Notable Losses: Inconclusive Matches: Category:Maverick Zero X
-        Category:Tier 7 Category:Tier 5'
-      source_id: character-stats-profiles-storm-game-earth-616
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 30
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the human torch canon earth
-      616 maverick zero x|122612
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-storm-game-marvel-comics
-    url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_%28Marvel_Comics%29
-    title: Storm (Marvel Comics)
-    rank: 130
-    extracted_fields: *id007
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|storm marvel comics|9468799
-  - source_id: character-stats-profiles-storm-game-marvel-comics
-    url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_%28Marvel_Comics%29
-    title: Storm (Canon, Marvel Comics)/SteelAvenger99
-    rank: 130
-    extracted_fields: *id009
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|storm canon marvel comics
-      steelavenger99|211761
-  - source_id: vsbattles-storm-game-marvel
-    url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_Marvel
-    title: Storm (Marvel Comics)
-    rank: 130
-    extracted_fields: *id011
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|storm marvel comics|9468799
-  - source_id: vsbattles-storm-game-marvel
-    url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_%28Marvel%29
-    title: Storm (Marvel Comics)
-    rank: 130
-    extracted_fields: *id013
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|storm marvel comics|9468799
-  - source_id: vsbattles-storm-game-earth-616
-    url: https://vsbattles.fandom.com/wiki/Storm_%28Game%29_%28Earth-616%29
-    title: Storm (Marvel Comics)
-    rank: 130
-    extracted_fields: *id015
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|storm marvel comics|9468799
-  - source_id: character-stats-profiles-storm-game-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_Marvel
-    title: Storm (Canon, Marvel, Death Battle)/Unbacked0
-    rank: 105
-    extracted_fields: *id017
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id018
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|storm canon marvel death
-      battle unbacked0|202517
-  - source_id: character-stats-profiles-storm-game-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_%28Marvel%29
-    title: Storm (Canon, Marvel, Death Battle)/Unbacked0
-    rank: 105
-    extracted_fields: *id019
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id020
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|storm canon marvel death
-      battle unbacked0|202517
-  - source_id: character-stats-profiles-storm-game-earth-616
-    url: https://character-stats-and-profiles.fandom.com/wiki/Storm_%28Game%29_%28Earth-616%29
-    title: The Human Torch (Canon, Earth-616)/Maverick Zero X
-    rank: 105
-    extracted_fields: *id021
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id022
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 30
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|the human torch canon earth
-      616 maverick zero x|122612
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

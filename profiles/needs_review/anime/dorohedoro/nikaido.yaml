@@ -10,18 +10,9 @@ battle_eligible: false
 generation:
   generated_at: '2026-09-22T20:07:28Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Nikaido
   franchise: Dorohedoro
@@ -97,42 +88,6 @@ sources:
 - id: vsbattles-nikaido-dorohedoro
   provider_id: vsbattles
   source_type: mediawiki
-  title: Nikaido Dorohedoro
-  url: https://vsbattles.fandom.com/wiki/Nikaido_Dorohedoro
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-nikaido-dorohedoro
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Nikaido Dorohedoro
-  url: https://character-stats-and-profiles.fandom.com/wiki/Nikaido_Dorohedoro
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-nikaido-dorohedoro
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Nikaido (Dorohedoro)
   url: https://vsbattles.fandom.com/wiki/Nikaido_%28Dorohedoro%29
   authority: high
@@ -168,17 +123,30 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: At least , at least with Aurora Gate
+    source_ids:
+    - vsbattles-nikaido-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: "At least Building level (Can easily destroy buildings, her Aurora Cannon\
+      \ had enough power to both restore Takeru Kusanagi\u2019s Witch Hunter form\
+      \ and allow him to destroy a Mechanical Dragon, fought Elizabeth and Ouka Ootori\
+      \ using Dracula), at least City Block level with Aurora Gate (Aurora Gate is\
+      \ stated to be capable of destroying a battleship or an aircraft carrier and\
+      \ to have enough power to wipe out an entire fleet)"
+    source_ids:
+    - vsbattles-nikaido-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Average Human, at least Subsonic via flight magic (Can fly faster than the
+      wind and faster than human perception), Supersonic via Aurora Benefit (Can fight
+      Ouka Ootori using Dracula)
+    source_ids:
+    - vsbattles-nikaido-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -188,27 +156,957 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: "Human level, at least Building level with magic barriers (Stopped Elizabeth\u2019\
+      s Quietus spell, Aurora Fortress sustained a railgun and spell barrage from\
+      \ 100 Einherjar)"
+    source_ids:
+    - vsbattles-nikaido-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Superhuman (As an Ancient Witch Mari has a lot of magic power and can cast
+      several powerful spells in succession. Managed to continue moving after losing
+      an arm and a leg for a last-ditch move
+    source_ids:
+    - vsbattles-nikaido-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range, at least Hundreds of Meters with magic spells
+    source_ids:
+    - vsbattles-nikaido-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Gifted (Mari is a highly intelligent, expert witch. She managed to find
+      a way to reproduce the Moon and Sun magic attributes, therefore removing their
+      classification of Ancient attributes after a few weeks of study, and also learned
+      Transfer magic in a similarly short span of time. Improvises and comes up with
+      new spells on the fly to deal with enemy abilities. Instantly came out with
+      a plan to defeat Mother Goose after losing an arm and a leg)
+    source_ids:
+    - vsbattles-nikaido-dorohedoro
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
-abilities: []
+abilities:
+- id: powers-and-abilities-magic
+  name: Magic
+  description: Magic
+  source_ids: &id002
+  - vsbattles-nikaido-dorohedoro
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-enhanced-senses-can-sense-magic-power
+  name: Enhanced Senses (Can sense magic power)
+  description: Enhanced Senses (Can sense magic power)
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-light-manipulation
+  name: Light Manipulation
+  description: Light Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-darkness-manipulation
+  name: Darkness Manipulation
+  description: Darkness Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-explosion-manipulation
+  name: Explosion Manipulation
+  description: Explosion Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-electricity-manipulation
+  name: Electricity Manipulation
+  description: Electricity Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-vibration-manipulation
+  name: Vibration Manipulation
+  description: Vibration Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - sonic_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-limited-illusion-creation
+  name: limited Illusion Creation
+  description: limited Illusion Creation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-forcefield-creation
+  name: Forcefield Creation
+  description: Forcefield Creation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-gravity-manipulation
+  name: Gravity Manipulation
+  description: Gravity Manipulation
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-summoning
+  name: Summoning
+  description: Summoning
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - summoning
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_summon
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-healing
+  name: Healing
+  description: Healing
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-statistics-amplification
+  name: Statistics Amplification
+  description: Statistics Amplification
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-can-damage-and-destroy-souls
+  name: can damage and destroy souls
+  description: can damage and destroy souls
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: powers-and-abilities-flight
+  name: Flight
+  description: Flight
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-aurora-gate-and-aurora-fortress-take-significant-time-to-cast
+  name: Aurora Gate and Aurora Fortress take significant time to cast
+  description: Aurora Gate and Aurora Fortress take significant time to cast
+  source_ids: &id003
+  - vsbattles-nikaido-dorohedoro
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-as-a-light-type-magic-aurora-magic-is-weak-to-darkness-type-attacks-a
+  name: as a Light-type magic Aurora magic is weak to Darkness-type attacks and Darkness-derivate
+    properties like "Blood"
+  description: as a Light-type magic Aurora magic is weak to Darkness-type attacks
+    and Darkness-derivate properties like "Blood"
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-gloom
+  name: '"Gloom"'
+  description: '"Gloom"'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-rotting
+  name: '"Rotting"'
+  description: '"Rotting"'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-and-poison-notable-attacks-techniques-magic-mari-is-a-witch
+  name: 'and "Poison" Notable Attacks/Techniques: Magic: Mari is a witch'
+  description: 'and "Poison" Notable Attacks/Techniques: Magic: Mari is a witch'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-a-human-that-can-use-magic-due-to-a-special-organ-on-her-body-called-
+  name: a human that can use magic due to a special organ on her body called a Phantom
+    Instrument that produces magic power. Her
+  description: "a human that can use magic due to a special organ on her body called\
+    \ a Phantom Instrument that produces magic power. Her attribute is the Ancient\
+    \ attribute known as \u201CAurora\u201D"
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-the-strongest-light-attribute-and-a-versatile-attribute-which-makes-h
+  name: the strongest light attribute and a versatile attribute which makes her magic
+    shine with the seven colors of the rainbow
+  description: the strongest light attribute and a versatile attribute which makes
+    her magic shine with the seven colors of the rainbow. Additionally
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-magic-attacks-have-the-ability-to-deal-damage-directly-to-soul
+  name: Aurora magic attacks have the ability to deal damage directly to souls and
+    even destroy them
+  description: Aurora magic attacks have the ability to deal damage directly to souls
+    and even destroy them
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - soul_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-though-mari-can-regulate-their-power-to-make-them-non-lethal
+  name: though Mari can regulate their power to make them non-lethal.
+  description: though Mari can regulate their power to make them non-lethal.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-bullet-lit-auroral-arrowhead-mari-imitates-a-gun-with-her-fing
+  name: "Aurora Bullet (\u6975\u5149\u306E\u93C3 (\u30A2\u30A6\u30ED\u30FC\u30E9\u30FB\
+    \u30D0\u30EC\u30C4\u30C8) lit. Auroral Arrowhead): Mari imitates a gun with her\
+    \ fingers before shooting a powerfu"
+  description: "Aurora Bullet (\u6975\u5149\u306E\u93C3 (\u30A2\u30A6\u30ED\u30FC\u30E9\
+    \u30FB\u30D0\u30EC\u30C4\u30C8) lit. Auroral Arrowhead): Mari imitates a gun with\
+    \ her fingers before shooting a powerful concentrated magic bullet at high speed."
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-gate-lit-light-convergence-mari-s-strongest-offensive-spell-ma
+  name: "Aurora Gate (\u5149\u306E\u5230\u9054\u70B9 (\u30A2\u30A6\u30ED\u30FC\u30E9\
+    \u30FB\u30B2\u30FC\u30C8) lit. Light Convergence): Mari's strongest offensive\
+    \ spell. Mari summons a huge magic circ"
+  description: "Aurora Gate (\u5149\u306E\u5230\u9054\u70B9 (\u30A2\u30A6\u30ED\u30FC\
+    \u30E9\u30FB\u30B2\u30FC\u30C8) lit. Light Convergence): Mari's strongest offensive\
+    \ spell. Mari summons a huge magic circle beneath her feet as she gathers magic\
+    \ power. Once she finishes building up power Mari joins her hands together and\
+    \ gives a chant for the spell"
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - summoning
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_summon
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-which-will-release-a-powerful-wave-of-light-from-a-gate-that-appears-
+  name: "which will release a powerful wave of light from a gate that appears in front\
+    \ of Mari. Chant: \u201CWith the blessing of a Go"
+  description: "which will release a powerful wave of light from a gate that appears\
+    \ in front of Mari. Chant: \u201CWith the blessing of a Goddess's of Dawn"
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-i-become-one-who-embodies-the-divine-will-the-end-of-knowledge-and-cr
+  name: I become one who embodies the divine will. The end of knowledge and creativity
+    brings about dazzling demise. Ultimate li
+  description: "I become one who embodies the divine will. The end of knowledge and\
+    \ creativity brings about dazzling demise. Ultimate light opens up the heavenly\
+    \ gates\u2014\u2014and entices that person to step in nothingness!\u201D"
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-beam-mari-shoots-a-two-meter-thick-magic-beam-from-a-magic-squ
+  name: 'Aurora Beam: Mari shoots a two-meter thick magic beam from a magic square
+    that appears in her vicinity.'
+  description: 'Aurora Beam: Mari shoots a two-meter thick magic beam from a magic
+    square that appears in her vicinity.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-cannon-mari-gathers-her-magic-power-into-a-huge-shell-before-s
+  name: 'Aurora Cannon: Mari gathers her magic power into a huge shell before shooting
+    it towards the enemy.'
+  description: 'Aurora Cannon: Mari gathers her magic power into a huge shell before
+    shooting it towards the enemy.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-auroral-collider-an-aurora-cannon-enchanted-with-electrification-magi
+  name: 'Auroral Collider: An Aurora Cannon enchanted with ''Electrification'' magical
+    property'
+  description: 'Auroral Collider: An Aurora Cannon enchanted with ''Electrification''
+    magical property'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-taking-the-form-of-rainbow-colored-thunder-bullet
+  name: taking the form of rainbow-colored thunder bullet.
+  description: taking the form of rainbow-colored thunder bullet.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-barrage-mari-releases-a-storm-of-light-bullets-from-several-hu
+  name: 'Aurora Barrage: Mari releases a storm of light bullets from several hundred
+    small magic circles that appear around her.'
+  description: 'Aurora Barrage: Mari releases a storm of light bullets from several
+    hundred small magic circles that appear around her.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-blade-mari-creates-a-20m-long-blade-out-of-rainbow-colored-par
+  name: 'Aurora Blade: Mari creates a 20m long blade out of rainbow-colored particles
+    to slash the enemy.'
+  description: 'Aurora Blade: Mari creates a 20m long blade out of rainbow-colored
+    particles to slash the enemy.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-eclipse-blade-mari-reverses-the-light-property-of-aurora-blade
+  name: 'Eclipse Blade: Mari reverses the light property of Aurora Blade'
+  description: 'Eclipse Blade: Mari reverses the light property of Aurora Blade'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-turning-it-into-a-darkness-type
+  name: turning it into a Darkness-type
+  description: turning it into a Darkness-type
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-moon-property-jet-black-sword
+  name: Moon-property jet-black sword.
+  description: Moon-property jet-black sword.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-helios-blade-mari-turns-her-eclipse-blade-into-a-light-type-sun-prope
+  name: 'Helios Blade: Mari turns her Eclipse blade into a Light-type Sun-property
+    sword of light.'
+  description: 'Helios Blade: Mari turns her Eclipse blade into a Light-type Sun-property
+    sword of light.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-counter-undescribed-spell-that-mari-used-to-shoot-down-hundred
+  name: 'Aurora Counter: Undescribed spell that Mari used to shoot down hundreds of
+    missiles to save Ouka.'
+  description: 'Aurora Counter: Undescribed spell that Mari used to shoot down hundreds
+    of missiles to save Ouka.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-stardust-aurora-lit-auroral-meteor-shower-an-improvised-technique-mar
+  name: "Stardust Aurora (\u6975\u5149\u6D41\u661F\u7FA4 (\u30B9\u30BF\u30FC\u30C0\
+    \u30B9\u30C8\u30FB\u30A2\u30A6\u30ED\u30FC\u30E9) lit. Auroral Meteor Shower):\
+    \ An improvised technique Mari developed to try and dea"
+  description: "Stardust Aurora (\u6975\u5149\u6D41\u661F\u7FA4 (\u30B9\u30BF\u30FC\
+    \u30C0\u30B9\u30C8\u30FB\u30A2\u30A6\u30ED\u30FC\u30E9) lit. Auroral Meteor Shower):\
+    \ An improvised technique Mari developed to try and deal with Iori Himemiya and\
+    \ her Relic Eater ability to predict magic and the enemy's movements. Mari creates\
+    \ a huge magic circle below her. She then pulls her right arm back"
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - artifact_dependency
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_artifact
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-building-up-magic-power-before-punching-the-magical-circle
+  name: building up magic power before punching the magical circle
+  description: building up magic power before punching the magical circle
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-causing-it-to-crumble-and-release-several-overlapping-car-sized-auror
+  name: causing it to crumble and release several overlapping car-sized Aurora Cannons
+    in all directions. Because the circle was
+  description: causing it to crumble and release several overlapping car-sized Aurora
+    Cannons in all directions. Because the circle was crushed before the operative
+    procedure fixing the magic into rays could be completed
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-the-magic-is-forced-to-activate-prematurely-and-the-aurora-cannons-fi
+  name: the magic is forced to activate prematurely and the Aurora Cannons fire in
+    random directions.
+  description: the magic is forced to activate prematurely and the Aurora Cannons
+    fire in random directions.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - heat_attack
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-impact-mari-uses-a-five-layered-magic-circle-to-converge-magic
+  name: 'Aurora Impact: Mari uses a five-layered magic circle to converge magic power
+    into her hands. She joins her hands togethe'
+  description: 'Aurora Impact: Mari uses a five-layered magic circle to converge magic
+    power into her hands. She joins her hands together and slams her fists into the
+    enemy'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-releasing-the-magic-at-the-same-time-to-cause-an-explosion-capable-of
+  name: releasing the magic at the same time to cause an explosion capable of pulverizing
+    an Einherjar made with Blue Crystal.
+  description: releasing the magic at the same time to cause an explosion capable
+    of pulverizing an Einherjar made with Blue Crystal.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-arrow-mari-summons-a-bow-with-a-rainbow-colored-arrow
+  name: 'Aurora Arrow: Mari summons a bow with a rainbow-colored arrow.'
+  description: 'Aurora Arrow: Mari summons a bow with a rainbow-colored arrow.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - summoning
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_summon
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-enchantment-mari-envelops-her-own-fist-or-leg-with-magic
+  name: 'Aurora Enchantment: Mari envelops her own fist or leg with magic'
+  description: 'Aurora Enchantment: Mari envelops her own fist or leg with magic'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-massively-increasing-the-power-of-her-blows-to-the-point-it-can-blow-
+  name: massively increasing the power of her blows to the point it can blow through
+    Ouka Ootori's defenses despite Ouka being i
+  description: massively increasing the power of her blows to the point it can blow
+    through Ouka Ootori's defenses despite Ouka being in Dracula form.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-rain-mari-summons-several-magical-circles-on-the-sky-that-cons
+  name: 'Aurora Rain: Mari summons several magical circles on the sky that constantly
+    pour down rainbow-colored pillars of light.'
+  description: 'Aurora Rain: Mari summons several magical circles on the sky that
+    constantly pour down rainbow-colored pillars of light. Mari can create up to 100
+    magic circles for this attack.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - summoning
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies:
+  - requires_summon
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-shockwave-mari-can-concentrate-and-release-her-magic-power-from-her-b
+  name: 'Shockwave: Mari can concentrate and release her magic power from her body
+    as a shockwave. This technique can be used to '
+  description: 'Shockwave: Mari can concentrate and release her magic power from her
+    body as a shockwave. This technique can be used to blow nearby people away or
+    to counter a sound attack.'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - sonic_or_heat_interaction
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-benefit-mari-s-body-is-covered-with-a-very-thin-layer-of-auror
+  name: 'Aurora Benefit: Mari''s body is covered with a very thin layer of aurora
+    light. This spell is a combination of body stren'
+  description: 'Aurora Benefit: Mari''s body is covered with a very thin layer of
+    aurora light. This spell is a combination of body strengthening magic and brain
+    acceleration magic that significantly increases Mari''s speed and reflexes. However'
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-brain-acceleration-magic-is-incredibly-dangerous-and-can-cause-brain-
+  name: brain acceleration magic is incredibly dangerous and can cause brain damage
+    at the slightest mistake
+  description: brain acceleration magic is incredibly dangerous and can cause brain
+    damage at the slightest mistake
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-which-is-why-mari-doesn-t-voluntarily-use-this-spell
+  name: which is why Mari doesn't voluntarily use this spell.
+  description: which is why Mari doesn't voluntarily use this spell.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-aurora-field-mari-creates-a-field-of-multi-colored-light-anything-ins
+  name: 'Aurora Field: Mari creates a field of multi-colored light. Anything inside
+    the field (or that enters the field after whi'
+  description: "Aurora Field: Mari creates a field of multi-colored light. Anything\
+    \ inside the field (or that enters the field after while it\u2019s active) slows\
+    \ down to a crawl and moves in slow motion"
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-also-increasing-their-weight
+  name: also increasing their weight.
+  description: also increasing their weight.
+  source_ids: *id003
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -220,363 +1118,29 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-nikaido-dorohedoro
+  secondary_disagreement_policy: warning_only
 profile_hash: 09b825fbcb3c093e59632a101b5e0af0135045e98d6792047a782e6a165bb71b
 repair:
-  attempted_at: '2026-09-25T10:54:42Z'
+  attempted_at: '2026-10-25T17:41:40Z'
   repaired_fields: []
-  unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
-  - abilities
+  unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-nikaido-dorohedoro
-    url: https://vsbattles.fandom.com/wiki/Nikaido_Dorohedoro
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Mari Nikaido
-    source_type: mediawiki
-    revision_id: '9419257'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 13465
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{8-C}}, at least {{8-B}} with Aurora Gate
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Magic, Enhanced Senses (Can sense magic power), Light Manipulation, Darkness
-        Manipulation, Explosion Manipulation, Electricity Manipulation, Vibration
-        Manipulation, limited Illusion Creation, Forcefield Creation, Gravity Manipulation,
-        Summoning, Healing, Statistics Amplification, can damage and destroy souls,
-        Flight
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: "At least Building level (Can easily destroy buildings, her Aurora Cannon\
-        \ had enough power to both restore Takeru Kusanagi\u2019s Witch Hunter form\
-        \ and allow him to destroy a Mechanical Dragon, fought Elizabeth and Ouka\
-        \ Ootori using Dracula), at least City Block level with Aurora Gate (Aurora\
-        \ Gate is stated to be capable of destroying a battleship or an aircraft carrier\
-        \ and to have enough power to wipe out an entire fleet)"
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Average Human, at least Subsonic via flight magic (Can fly faster than
-        the wind and faster than human perception), Supersonic via Aurora Benefit
-        (Can fight Ouka Ootori using Dracula)
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: "Human level, at least Building level with magic barriers (Stopped Elizabeth\u2019\
-        s Quietus spell, Aurora Fortress sustained a railgun and spell barrage from\
-        \ 100 Einherjar)"
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman (As an Ancient Witch Mari has a lot of magic power and can
-        cast several powerful spells in succession. Managed to continue moving after
-        losing an arm and a leg for a last-ditch move
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, at least Hundreds of Meters with magic spells
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Gifted (Mari is a highly intelligent, expert witch. She managed to find
-        a way to reproduce the Moon and Sun magic attributes, therefore removing their
-        classification of Ancient attributes after a few weeks of study, and also
-        learned Transfer magic in a similarly short span of time. Improvises and comes
-        up with new spells on the fly to deal with enemy abilities. Instantly came
-        out with a plan to defeat Mother Goose after losing an arm and a leg)
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Aurora Gate and Aurora Fortress take significant time to cast, as a\
-        \ Light-type magic Aurora magic is weak to Darkness-type attacks and Darkness-derivate\
-        \ properties like \"Blood\", \"Gloom\", \"Rotting\", and \"Poison\" Notable\
-        \ Attacks/Techniques: Magic: Mari is a witch, a human that can use magic due\
-        \ to a special organ on her body called a Phantom Instrument that produces\
-        \ magic power. Her attribute is the Ancient attribute known as \u201CAurora\u201D\
-        , the strongest light attribute and a versatile attribute which makes her\
-        \ magic shine with the seven colors of the rainbow. Additionally, Aurora magic\
-        \ attacks have the ability to deal damage directly to souls and even destroy\
-        \ them, though Mari can regulate their power to make them non-lethal. *Aurora\
-        \ Bullet (\u6975\u5149\u306E\u93C3 (\u30A2\u30A6\u30ED\u30FC\u30E9\u30FB\u30D0\
-        \u30EC\u30C4\u30C8) lit. Auroral Arrowhead): Mari imitates a gun with her\
-        \ fingers before shooting a powerful concentrated magic bullet at high speed.\
-        \ *Aurora Gate (\u5149\u306E\u5230\u9054\u70B9 (\u30A2\u30A6\u30ED\u30FC\u30E9\
-        \u30FB\u30B2\u30FC\u30C8) lit. Light Convergence): Mari's strongest offensive\
-        \ spell. Mari summons a huge magic circle beneath her feet as she gathers\
-        \ magic power. Once she finishes building up power Mari joins her hands together\
-        \ and gives a chant for the spell, which will release a powerful wave of light\
-        \ from a gate that appears in front of Mari. Chant: \u201CWith the blessing\
-        \ of a Goddess's of Dawn, I become one who embodies the divine will. The end\
-        \ of knowledge and creativity brings about dazzling demise. Ultimate light\
-        \ opens up the heavenly gates\u2014\u2014and entices that person to step in\
-        \ nothingness!\u201D *Aurora Beam: Mari shoots a two-meter thick magic beam\
-        \ from a magic square that appears in her vicinity. *Aurora Cannon: Mari gathers\
-        \ her magic power into a huge shell before shooting it towards the enemy.\
-        \ **Auroral Collider: An Aurora Cannon enchanted with 'Electrification' magical\
-        \ property, taking the form of rainbow-colored thunder bullet. *Aurora Barrage:\
-        \ Mari releases a storm of light bullets from several hundred small magic\
-        \ circles that appear around her. *Aurora Blade: Mari creates a 20m long blade\
-        \ out of rainbow-colored particles to slash the enemy. **Eclipse Blade: Mari\
-        \ reverses the light property of Aurora Blade, turning it into a Darkness-type,\
-        \ Moon-property jet-black sword. **Helios Blade: Mari turns her Eclipse blade\
-        \ into a Light-type Sun-property sword of light. *Aurora Counter: Undescribed\
-        \ spell that Mari used to shoot down hundreds of missiles to save Ouka. *Stardust\
-        \ Aurora (\u6975\u5149\u6D41\u661F\u7FA4 (\u30B9\u30BF\u30FC\u30C0\u30B9\u30C8\
-        \u30FB\u30A2\u30A6\u30ED\u30FC\u30E9) lit. Auroral Meteor Shower): An improvised\
-        \ technique Mari developed to try and deal with Iori Himemiya and her Relic\
-        \ Eater ability to predict magic and the enemy's movements. Mari creates a\
-        \ huge magic circle below her. She then pulls her right arm back, building\
-        \ up magic power before punching the magical circle, causing it to crumble\
-        \ and release several overlapping car-sized Aurora Cannons in all directions.\
-        \ Because the circle was crushed before the operative procedure fixing the\
-        \ magic into rays could be completed, the magic is forced to activate prematurely\
-        \ and the Aurora Cannons fire in random directions. *Aurora Impact: Mari uses\
-        \ a five-layered magic circle to converge magic power into her hands. She\
-        \ joins her hands together and slams her fists into the enemy, releasing the\
-        \ magic at the same time to cause an explosion capable of pulverizing an Einherjar\
-        \ made with Blue Crystal. *Aurora Arrow: Mari summons a bow with a rainbow-colored\
-        \ arrow. *Aurora Enchantment: Mari envelops her own fist or leg with magic,\
-        \ massively increasing the power of her blows to the point it can blow through\
-        \ Ouka Ootori's defenses despite Ouka being in Dracula form. *Aurora Rain:\
-        \ Mari summons several magical circles on the sky that constantly pour down\
-        \ rainbow-colored pillars of light. Mari can create up to 100 magic circles\
-        \ for this attack. *Shockwave: Mari can concentrate and release her magic\
-        \ power from her body as a shockwave. This technique can be used to blow nearby\
-        \ people away or to counter a sound attack. *Aurora Benefit: Mari's body is\
-        \ covered with a very thin layer of aurora light. This spell is a combination\
-        \ of body strengthening magic and brain acceleration magic that significantly\
-        \ increases Mari's speed and reflexes. However, brain acceleration magic is\
-        \ incredibly dangerous and can cause brain damage at the slightest mistake,\
-        \ which is why Mari doesn't voluntarily use this spell. *Aurora Field: Mari\
-        \ creates a field of multi-colored light. Anything inside the field (or that\
-        \ enters the field after while it\u2019s active) slows down to a crawl and\
-        \ moves in slow motion, also increasing their weight. *Aurora Shield: Mari\
-        \ puts her hands on the ground and creates a magic circle around her. The\
-        \ circle wraps everyone inside it with multi-colored light like a barrier\
-        \ film. *Aurora Fortress (\u5149\u306E\u57CE\u585E (\u30A2\u30A6\u30ED\u30FC\
-        \u30E9\u30FB\u30D5\u30AA\u30FC\u30C8\u30EC\u30B9) lit. Fortress of Light):\
-        \ Mari's strongest defensive spell. Mari creates a rainbow-colored magic circle\
-        \ on the ground that she smashes with a punch after a long chant. The spell\
-        \ creates a huge fortress shaped with magical power to protect Mari and any"
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|mari nikaido|9419257
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-nikaido-dorohedoro
-    url: https://character-stats-and-profiles.fandom.com/wiki/Nikaido_Dorohedoro
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Hole (Canon, Dorohedoro)/ChaosSeether2999
-    source_type: mediawiki
-    revision_id: '538022'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4447
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{7-B}}, likely far higher, even higher with Store''s Kitchen Knife'
-      source_id: character-stats-profiles-nikaido-dorohedoro
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Immortality (Types 1, 2, and 8,
-        resulting in 7; As a devil like Chidaruma, should be able to live forever.
-        Can survive being torn apart and can operate as just a head. Reduced to a
-        small spiritual being after the destruction of his devil tumor), Limited Flight
-        (Hovers and floats), Weapon Mastery (Wields a giant knife and fork, and has
-        wielded Store's Kitchen Knife), Time Travel (Uses Nikaido's time travel magic
-        box), Social Influencing (Humans automatically recognise him as human in origin
-        and are drawn to him), Status Effect Inducement (Can cause rain that harms
-        and weakens magic users, including Devils. His mud turns those hit into the
-        ancient dead), Paralysis Inducement (His bones cause magic users to fall frozen),
-        Large Size (Type 0; is 14'1 feet tall), Necromancy (Can raise the ancient
-        dead. Controlled the deceased Nikaido as a guardian), Water Manipulation,
-        Earth Manipulation (Can manipulate sludge from the Lake of Refuse), Dimensional
-        Storage (Can hold his massive eating utensils in his pockets), Weather Manipulation
-        (Can create small scale storms over himself. Uses ancient dead and a giant
-        door to create a massive rainstorm that weakens magic users), Instinctive
-        Reactions (Automatically senses and tracks down magic users), Dimensional
-        Travel (Has a giant door that connects the worlds of the humans and magic
-        users), Spatial Manipulation (The entirety of the Lake of Refuse's contents
-        are inside Hole, despite statements it's bottomless)
-      source_id: character-stats-profiles-nikaido-dorohedoro
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: City level (Far superior to En, who covered a whole city in mushrooms),
-        likely far higher (Devils possess an infinite energy sack. Chidaruma, who
-        was amazed by Hole's presence, created Hell, a realm of presumably vast size),
-        even higher with Store's Kitchen Knife
-      source_id: character-stats-profiles-nikaido-dorohedoro
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: FTL (Devils are superior to magic users, with one that became a devil
-        having magic than enables light-speed)
-      source_id: character-stats-profiles-nikaido-dorohedoro
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: City level, likely far higher
-      source_id: character-stats-profiles-nikaido-dorohedoro
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: If the devil tumor inside of him is destroyed, he'll be, at the very
-        least, reduced to an inconsequential ghostly form Category:ChaosSeether2999
-      source_id: character-stats-profiles-nikaido-dorohedoro
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|hole canon dorohedoro chaosseether2999|538022
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-nikaido-dorohedoro
     url: https://vsbattles.fandom.com/wiki/Nikaido_%28Dorohedoro%29
     ok: true
@@ -589,7 +1153,6 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Mari Nikaido
@@ -634,7 +1197,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At least {{8-C}}, at least {{8-B}} with Aurora Gate
+      value: At least 8-C, at least 8-B with Aurora Gate
       source_id: vsbattles-nikaido-dorohedoro
       provider_id: vsbattles
       authority: high
@@ -690,12 +1253,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None notable
-      source_id: vsbattles-nikaido-dorohedoro
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: Gifted (Mari is a highly intelligent, expert witch. She managed to find
         a way to reproduce the Moon and Sun magic attributes, therefore removing their
@@ -708,77 +1265,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: "Aurora Gate and Aurora Fortress take significant time to cast, as a\
-        \ Light-type magic Aurora magic is weak to Darkness-type attacks and Darkness-derivate\
-        \ properties like \"Blood\", \"Gloom\", \"Rotting\", and \"Poison\" Notable\
-        \ Attacks/Techniques: Magic: Mari is a witch, a human that can use magic due\
-        \ to a special organ on her body called a Phantom Instrument that produces\
-        \ magic power. Her attribute is the Ancient attribute known as \u201CAurora\u201D\
-        , the strongest light attribute and a versatile attribute which makes her\
-        \ magic shine with the seven colors of the rainbow. Additionally, Aurora magic\
-        \ attacks have the ability to deal damage directly to souls and even destroy\
-        \ them, though Mari can regulate their power to make them non-lethal. *Aurora\
-        \ Bullet (\u6975\u5149\u306E\u93C3 (\u30A2\u30A6\u30ED\u30FC\u30E9\u30FB\u30D0\
-        \u30EC\u30C4\u30C8) lit. Auroral Arrowhead): Mari imitates a gun with her\
-        \ fingers before shooting a powerful concentrated magic bullet at high speed.\
-        \ *Aurora Gate (\u5149\u306E\u5230\u9054\u70B9 (\u30A2\u30A6\u30ED\u30FC\u30E9\
-        \u30FB\u30B2\u30FC\u30C8) lit. Light Convergence): Mari's strongest offensive\
-        \ spell. Mari summons a huge magic circle beneath her feet as she gathers\
-        \ magic power. Once she finishes building up power Mari joins her hands together\
-        \ and gives a chant for the spell, which will release a powerful wave of light\
-        \ from a gate that appears in front of Mari. Chant: \u201CWith the blessing\
-        \ of a Goddess's of Dawn, I become one who embodies the divine will. The end\
-        \ of knowledge and creativity brings about dazzling demise. Ultimate light\
-        \ opens up the heavenly gates\u2014\u2014and entices that person to step in\
-        \ nothingness!\u201D *Aurora Beam: Mari shoots a two-meter thick magic beam\
-        \ from a magic square that appears in her vicinity. *Aurora Cannon: Mari gathers\
-        \ her magic power into a huge shell before shooting it towards the enemy.\
-        \ **Auroral Collider: An Aurora Cannon enchanted with 'Electrification' magical\
-        \ property, taking the form of rainbow-colored thunder bullet. *Aurora Barrage:\
-        \ Mari releases a storm of light bullets from several hundred small magic\
-        \ circles that appear around her. *Aurora Blade: Mari creates a 20m long blade\
-        \ out of rainbow-colored particles to slash the enemy. **Eclipse Blade: Mari\
-        \ reverses the light property of Aurora Blade, turning it into a Darkness-type,\
-        \ Moon-property jet-black sword. **Helios Blade: Mari turns her Eclipse blade\
-        \ into a Light-type Sun-property sword of light. *Aurora Counter: Undescribed\
-        \ spell that Mari used to shoot down hundreds of missiles to save Ouka. *Stardust\
-        \ Aurora (\u6975\u5149\u6D41\u661F\u7FA4 (\u30B9\u30BF\u30FC\u30C0\u30B9\u30C8\
-        \u30FB\u30A2\u30A6\u30ED\u30FC\u30E9) lit. Auroral Meteor Shower): An improvised\
-        \ technique Mari developed to try and deal with Iori Himemiya and her Relic\
-        \ Eater ability to predict magic and the enemy's movements. Mari creates a\
-        \ huge magic circle below her. She then pulls her right arm back, building\
-        \ up magic power before punching the magical circle, causing it to crumble\
-        \ and release several overlapping car-sized Aurora Cannons in all directions.\
-        \ Because the circle was crushed before the operative procedure fixing the\
-        \ magic into rays could be completed, the magic is forced to activate prematurely\
-        \ and the Aurora Cannons fire in random directions. *Aurora Impact: Mari uses\
-        \ a five-layered magic circle to converge magic power into her hands. She\
-        \ joins her hands together and slams her fists into the enemy, releasing the\
-        \ magic at the same time to cause an explosion capable of pulverizing an Einherjar\
-        \ made with Blue Crystal. *Aurora Arrow: Mari summons a bow with a rainbow-colored\
-        \ arrow. *Aurora Enchantment: Mari envelops her own fist or leg with magic,\
-        \ massively increasing the power of her blows to the point it can blow through\
-        \ Ouka Ootori's defenses despite Ouka being in Dracula form. *Aurora Rain:\
-        \ Mari summons several magical circles on the sky that constantly pour down\
-        \ rainbow-colored pillars of light. Mari can create up to 100 magic circles\
-        \ for this attack. *Shockwave: Mari can concentrate and release her magic\
-        \ power from her body as a shockwave. This technique can be used to blow nearby\
-        \ people away or to counter a sound attack. *Aurora Benefit: Mari's body is\
-        \ covered with a very thin layer of aurora light. This spell is a combination\
-        \ of body strengthening magic and brain acceleration magic that significantly\
-        \ increases Mari's speed and reflexes. However, brain acceleration magic is\
-        \ incredibly dangerous and can cause brain damage at the slightest mistake,\
-        \ which is why Mari doesn't voluntarily use this spell. *Aurora Field: Mari\
-        \ creates a field of multi-colored light. Anything inside the field (or that\
-        \ enters the field after while it\u2019s active) slows down to a crawl and\
-        \ moves in slow motion, also increasing their weight. *Aurora Shield: Mari\
-        \ puts her hands on the ground and creates a magic circle around her. The\
-        \ circle wraps everyone inside it with multi-colored light like a barrier\
-        \ film. *Aurora Fortress (\u5149\u306E\u57CE\u585E (\u30A2\u30A6\u30ED\u30FC\
-        \u30E9\u30FB\u30D5\u30AA\u30FC\u30C8\u30EC\u30B9) lit. Fortress of Light):\
-        \ Mari's strongest defensive spell. Mari creates a rainbow-colored magic circle\
-        \ on the ground that she smashes with a punch after a long chant. The spell\
-        \ creates a huge fortress shaped with magical power to protect Mari and any"
+      value: Aurora Gate and Aurora Fortress take significant time to cast, as a Light-type
+        magic Aurora magic is weak to Darkness-type attacks and Darkness-derivate
+        properties like "Blood"
       source_id: vsbattles-nikaido-dorohedoro
       provider_id: vsbattles
       authority: high
@@ -848,7 +1337,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{7-B}}, likely far higher, even higher with Store''s Kitchen Knife'
+      value: 7-B, likely far higher, even higher with Store's Kitchen Knife
       source_id: character-stats-profiles-nikaido-dorohedoro
       provider_id: character_stats_profiles
       authority: high
@@ -901,8 +1390,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: If the devil tumor inside of him is destroyed, he'll be, at the very
-        least, reduced to an inconsequential ghostly form Category:ChaosSeether2999
+      value: he'll be, at the very least
       source_id: character-stats-profiles-nikaido-dorohedoro
       provider_id: character_stats_profiles
       authority: high
@@ -920,8 +1408,8 @@ repair:
     duplicate_key: character-stats-and-profiles.fandom.com|hole canon dorohedoro chaosseether2999|538022
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-nikaido
-    url: https://vsbattles.fandom.com/wiki/Nikaido
+  - source_id: vsbattles-nikaido-dorohedoro
+    url: https://vsbattles.fandom.com/wiki/Nikaido_Dorohedoro
     ok: true
     note: extracted_core_fields
     extracted_fields:
@@ -932,15 +1420,14 @@ repair:
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Nikaido Ren
+    normalized_page_title: Mari Nikaido
     source_type: mediawiki
-    revision_id: '9351977'
+    revision_id: '9419257'
     fetch_status: fetched
     http_status: 200
-    content_length: 4632
+    content_length: 13465
     content_kind: api_json
     headings_detected:
     - Summary
@@ -977,97 +1464,330 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-B}}'
-      source_id: vsbattles-nikaido
+      value: At least 8-C, at least 8-B with Aurora Gate
+      source_id: vsbattles-nikaido-dorohedoro
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Expert Martial Artist, Weapon Mastery
-        (Heavenly Wolves are expert at various weaponry), Electricity Manipulation
-        and Paralysis Inducement with Tasers, Sleep Manipulation (Capable of putting
-        other people to sleep using special assassination needle), Extrasensory Perception
-        (Capable of sensing other people with limited range), Sound Manipulation,
-        Shockwave Generation and Air Manipulation (Capable of releasing compressed
-        air from his hand which when hit, makes the opponent instinctively stop their
-        movements) and Mind Manipulation (Capable of inducing hypnosis with his magical
-        spell)
+      value: Magic, Enhanced Senses (Can sense magic power), Light Manipulation, Darkness
+        Manipulation, Explosion Manipulation, Electricity Manipulation, Vibration
+        Manipulation, limited Illusion Creation, Forcefield Creation, Gravity Manipulation,
+        Summoning, Healing, Statistics Amplification, can damage and destroy souls,
+        Flight
+      source_id: vsbattles-nikaido-dorohedoro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "At least Building level (Can easily destroy buildings, her Aurora Cannon\
+        \ had enough power to both restore Takeru Kusanagi\u2019s Witch Hunter form\
+        \ and allow him to destroy a Mechanical Dragon, fought Elizabeth and Ouka\
+        \ Ootori using Dracula), at least City Block level with Aurora Gate (Aurora\
+        \ Gate is stated to be capable of destroying a battleship or an aircraft carrier\
+        \ and to have enough power to wipe out an entire fleet)"
+      source_id: vsbattles-nikaido-dorohedoro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Average Human, at least Subsonic via flight magic (Can fly faster than
+        the wind and faster than human perception), Supersonic via Aurora Benefit
+        (Can fight Ouka Ootori using Dracula)
+      source_id: vsbattles-nikaido-dorohedoro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: "Human level, at least Building level with magic barriers (Stopped Elizabeth\u2019\
+        s Quietus spell, Aurora Fortress sustained a railgun and spell barrage from\
+        \ 100 Einherjar)"
+      source_id: vsbattles-nikaido-dorohedoro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman (As an Ancient Witch Mari has a lot of magic power and can
+        cast several powerful spells in succession. Managed to continue moving after
+        losing an arm and a leg for a last-ditch move
+      source_id: vsbattles-nikaido-dorohedoro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, at least Hundreds of Meters with magic spells
+      source_id: vsbattles-nikaido-dorohedoro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted (Mari is a highly intelligent, expert witch. She managed to find
+        a way to reproduce the Moon and Sun magic attributes, therefore removing their
+        classification of Ancient attributes after a few weeks of study, and also
+        learned Transfer magic in a similarly short span of time. Improvises and comes
+        up with new spells on the fly to deal with enemy abilities. Instantly came
+        out with a plan to defeat Mother Goose after losing an arm and a leg)
+      source_id: vsbattles-nikaido-dorohedoro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Aurora Gate and Aurora Fortress take significant time to cast, as a Light-type
+        magic Aurora magic is weak to Darkness-type attacks and Darkness-derivate
+        properties like "Blood"
+      source_id: vsbattles-nikaido-dorohedoro
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|mari nikaido|9419257
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-nikaido-dorohedoro
+    url: https://character-stats-and-profiles.fandom.com/wiki/Nikaido_Dorohedoro
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Hole (Canon, Dorohedoro)/ChaosSeether2999
+    source_type: mediawiki
+    revision_id: '538022'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4447
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 7-B, likely far higher, even higher with Store's Kitchen Knife
+      source_id: character-stats-profiles-nikaido-dorohedoro
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Types 1, 2, and 8,
+        resulting in 7; As a devil like Chidaruma, should be able to live forever.
+        Can survive being torn apart and can operate as just a head. Reduced to a
+        small spiritual being after the destruction of his devil tumor), Limited Flight
+        (Hovers and floats), Weapon Mastery (Wields a giant knife and fork, and has
+        wielded Store's Kitchen Knife), Time Travel (Uses Nikaido's time travel magic
+        box), Social Influencing (Humans automatically recognise him as human in origin
+        and are drawn to him), Status Effect Inducement (Can cause rain that harms
+        and weakens magic users, including Devils. His mud turns those hit into the
+        ancient dead), Paralysis Inducement (His bones cause magic users to fall frozen),
+        Large Size (Type 0; is 14'1 feet tall), Necromancy (Can raise the ancient
+        dead. Controlled the deceased Nikaido as a guardian), Water Manipulation,
+        Earth Manipulation (Can manipulate sludge from the Lake of Refuse), Dimensional
+        Storage (Can hold his massive eating utensils in his pockets), Weather Manipulation
+        (Can create small scale storms over himself. Uses ancient dead and a giant
+        door to create a massive rainstorm that weakens magic users), Instinctive
+        Reactions (Automatically senses and tracks down magic users), Dimensional
+        Travel (Has a giant door that connects the worlds of the humans and magic
+        users), Spatial Manipulation (The entirety of the Lake of Refuse's contents
+        are inside Hole, despite statements it's bottomless)
+      source_id: character-stats-profiles-nikaido-dorohedoro
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: City level (Far superior to En, who covered a whole city in mushrooms),
+        likely far higher (Devils possess an infinite energy sack. Chidaruma, who
+        was amazed by Hole's presence, created Hell, a realm of presumably vast size),
+        even higher with Store's Kitchen Knife
+      source_id: character-stats-profiles-nikaido-dorohedoro
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: FTL (Devils are superior to magic users, with one that became a devil
+        having magic than enables light-speed)
+      source_id: character-stats-profiles-nikaido-dorohedoro
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: City level, likely far higher
+      source_id: character-stats-profiles-nikaido-dorohedoro
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: he'll be, at the very least
+      source_id: character-stats-profiles-nikaido-dorohedoro
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|hole canon dorohedoro chaosseether2999|538022
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-nikaido
+    url: https://vsbattles.fandom.com/wiki/Nikaido
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - weaknesses
+    normalized_page_title: Kururi Nikaido
+    source_type: mediawiki
+    revision_id: '9457269'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3089
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, master knife user, abnormal dodging
+        skills born of her uncanny ability to perfectly judge distances between herself
+        and other people/things
       source_id: vsbattles-nikaido
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: City Block level (Managed to barely damage Kiryu and capable of fighting
-        Masaki)
+      value: Wall level (Can send a large man flying several meters with a kick, can
+        fight Fear, Konoha and Oratorie)
       source_id: vsbattles-nikaido
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Likely Subsonic (Capable of barely keeping up with Fallen Demon Kiryu)
+      value: At least Peak Human (Noted to be very fast for a human, can fight Konoha,
+        Fear and Oratorie, can barely dodge Un Izoey's attacks)
       source_id: vsbattles-nikaido
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: City Block level (Took hits from casual Kiryu)
+      value: Wall level (Landed from a two-story drop with no issue, blocked Konoha's
+        kick)
       source_id: vsbattles-nikaido
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: stamina
-      value: Very high. Was able to fight after his arm was completely destroyed by
-        Kiryu's Rakshasa's Palm.
+      value: At least Above Average
       source_id: vsbattles-nikaido
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: 1.5 meters. His sensory and his range with Qilong is this long.
+      value: Standard Melee Range
       source_id: vsbattles-nikaido
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: Customized Taser and Assassination Needle
+      value: Returning Kukri of Childbirth, a concealed knife hidden in a cross pendant.
+        After leaving the Bivorio family Kururi just carries a switchblade.
       source_id: vsbattles-nikaido
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: intelligence
-      value: Above Average. He is an expert assassin and user of Heavenly Wolf Fist,
-        a style used by assassins to win against Japanese in World War II. He is so
-        good that he can use Qilong in combat, when normally it can't be even used
-        in practice.
+      value: Average (Expert fighter considered a master knife fighter, she's particularly
+        talented in dodging attacks with the slimmest of margins, with Konoha mentioning
+        very few swordmasters would be able to replicate her moves, even back in the
+        Warring States period)
       source_id: vsbattles-nikaido
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Overly narcissistic at times though this isn''t the case anymore in
-        Kengan Omega. Notable Attacks/Techniques: *Heavenly Wolf Fist: Nikaido Ren
-        uses a lost Japanese-style Chinese martial art. He mastered this so much that
-        he easily defeated Takemoto Hisayasu who was hailed as "God of War". **Guang
-        Da: A different name for fa jin in the Heavenly Wolf Fist style. Ren attacks
-        the opponent with fa jin strikes. **Lan: Ren launches a flurry of rapid fa
-        jin strikes at his opponent. **Last-Ditch Kick Up: While in a supine position,
-        Ren launches himself upwards with a powerful kick. **Secret Technique: Qilong:
-        The mysterious secret technique is a three step technique, reputedly impossible
-        to pull off even while sparring. ***Xu: The first step of Qilong, Ren compresses
-        air within his palms before releasing it all at once when his target is within
-        range. All those exposed to the "blast" within the 1.5 metre range will instinctively
-        stop moving for a moment. ***Huan: The second step of Qilong, Ren whispers
-        a secret "spell" into their ears while their complete attention is directed
-        to their hearing. This is a form of instantaneous hypnosis. ***Guang: The
-        third step of Qilong, Ren attacks the now defenceless opponent with a fa jin
-        strike. ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Characters Category:Male Characters Category:Humans Category:Kenganverse
-        Category:Manga Characters Category:Anime Characters Category:Assassins Category:Narcissists
-        Category:Adults Category:Martial Artists Category:Villains Category:Weapon
-        Masters Category:Needle Users Category:Electricity Users Category:Paralysis
-        Users Category:Sleep Users Category:Extrasensory Perception Users Category:Sound
-        Users Category:Vibration Users Category:Shockwave Users Category:Air Users
-        Category:Mind Users'
+      value: Normal human weaknesses
       source_id: vsbattles-nikaido
       provider_id: vsbattles
       authority: high
@@ -1082,7 +1802,7 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|nikaido ren|9351977
+    duplicate_key: vsbattles.fandom.com|kururi nikaido|9457269
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-nikaido
@@ -1094,8 +1814,6 @@ repair:
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Benimaru Nikaido (Canon, Manhua)/Unbacked0
     source_type: mediawiki
     revision_id: '232271'
@@ -1137,12 +1855,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: 6-C
-      source_id: character-stats-profiles-nikaido
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, Martial Arts, Electricity Manipulation
         (Benimaru can generate electricity from his body and use it as a weapon),
@@ -1167,13 +1879,6 @@ repair:
       confidence: 0.75
     - field: durability
       value: Island Level
-      source_id: character-stats-profiles-nikaido
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None Notable ==Others== Notable Victories: Notable Losses: Inconclusive
-        Matches: Category:Unbacked0 Category:Tier 6'
       source_id: character-stats-profiles-nikaido
       provider_id: character_stats_profiles
       authority: high
@@ -1205,7 +1910,6 @@ repair:
     - speed
     - stamina
     - standard_equipment
-    - tier
     - weaknesses
     normalized_page_title: Kururi Nikaido
     source_type: mediawiki
@@ -1249,12 +1953,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{9-B}}'
-      source_id: vsbattles-nikaido-anime
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Superhuman Physical Characteristics, master knife user, abnormal dodging
         skills born of her uncanny ability to perfectly judge distances between herself
@@ -1313,22 +2011,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Normal human weaknesses Notable Attacks/Techniques: Returning Kukri
-        of Childbirth: A cursed kukri that was created when a mother that had her
-        baby killed by a feudal lord hid a knife within her own body, seduced him
-        and killed him in his own bed with it. The kukri has the power to enter and
-        leave the body of its owner without physically harming them. However, the
-        owner will still experience the discomfort and pain one would expect from
-        having that kind of foreign object enter and leave the body forcefully. Its
-        curse makes it so that every time it enters the body it gradually moves closer
-        to the owner''s heart, eventually killing them. Milimeter Dodging: Because
-        of the psychological torture she suffered, Kururi is incredibly aware of each
-        single millimeter of distance between her and others, a skill she uses to
-        dodge attacks using the narrowest margin possible. ==Notable Matchups== Victories:
-        Losses: Inconclusive: {{Discussions}} Category:Characters Category:Female
-        Characters Category:Light Novel Characters Category:Anime Characters Category:CubexCursedxCurious
-        Category:Humans Category:Knife Users Category:Weapon Masters Category:Cursed
-        Characters Category:Tragic Characters Category:Teenagers Category:Antagonists'
+      value: Normal human weaknesses
       source_id: vsbattles-nikaido-anime
       provider_id: vsbattles
       authority: high
@@ -1396,7 +2079,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{7-B}}, likely far higher, even higher with Store''s Kitchen Knife'
+      value: 7-B, likely far higher, even higher with Store's Kitchen Knife
       source_id: character-stats-profiles-nikaido-anime
       provider_id: character_stats_profiles
       authority: high
@@ -1449,8 +2132,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: If the devil tumor inside of him is destroyed, he'll be, at the very
-        least, reduced to an inconsequential ghostly form Category:ChaosSeether2999
+      value: he'll be, at the very least
       source_id: character-stats-profiles-nikaido-anime
       provider_id: character_stats_profiles
       authority: high

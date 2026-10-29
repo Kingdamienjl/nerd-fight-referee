@@ -148,7 +148,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Machamp
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -193,34 +193,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-machamp-pokemon
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Machamp Pokemon
-  url: https://character-stats-and-profiles.fandom.com/wiki/Machamp_Pokemon
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-machamp-pokemon
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Machamp (Pokemon)
-  url: https://vsbattles.fandom.com/wiki/Machamp_%28Pokemon%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-machamp-pokemon
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -277,7 +249,7 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}}
+    text: At most | |
     source_ids:
     - vsbattles-machamp-pokemon
     confidence: 0.6
@@ -285,19 +257,13 @@ power_scale:
   attack_potency:
     text: At most Small City level (Should be comparable, though slightly inferior
       to Rhyhorn, who can shatter mountains. Can go toe to toe with the likes of Piplup)
-      | Mountain level (Comparable, if not superior, to a mid-level Dragonair, who
-      can obliterate a city. Should be far superior to the likes of Rhyhorn, who can
-      shatter mountains and should be comparable to Pupitar) | Island level (comparable
-      to other fully evolved Pokemon such as Tyranitar) | Island level (Far stronger
-      than before. Should be comparable to other Gigantamax pokemon such as Centiskorch)
     source_ids:
     - vsbattles-machamp-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   speed:
     text: "Massively Hypersonic+ (Can dodge lightning-based moves from first stage\
-      \ Pok\xE9mon, such as Pikachu) | Massively Hypersonic+ (Faster than before)\
-      \ | FTL (Comparable to the likes of Lycanroc) | FTL"
+      \ Pok\xE9mon, such as Pikachu)"
     source_ids:
     - vsbattles-machamp-pokemon
     confidence: 0.6
@@ -306,21 +272,15 @@ power_scale:
     text: Class K (Scaling above Mantyke, who lifts a large boulder. Capable of learning
       the move Strength. Can lift Gravelers, which weight over 200 kg, like they are
       barbells. Can throw 100 adults with ease and carry a sumo wrestler on its shoulders)
-      | Class M (Can easily hold a sumo wrestler with one finger and a dump truck
-      with one hand. Should be superior to Brock's Happiny) | Class T (Capable of
-      moving mountains with one arm) | At least Class T (Stronger than before, comparable
-      to Gigantamax Sandaconda)
-    source_ids: &id003
+    source_ids: &id002
     - mediawiki-436493
     confidence: 0.95
   striking_strength:
-    text: At most Small City level | Mountain level | Island level | Island level
-    source_ids: *id003
+    text: At most Small City level
+    source_ids: *id002
     confidence: 0.95
   durability:
-    text: At most Small City level | Mountain level | Island level (Can tank hits
-      from other fully evolved pokemon) | Island level (Far stronger than before.
-      Should be comparable to other Gigantamax pokemon such as Centiscorch)
+    text: At most Small City level
     source_ids:
     - vsbattles-machamp-pokemon
     confidence: 0.6
@@ -353,7 +313,7 @@ claims:
   section: power_scale
   axis: other
   text: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}}
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-436493
   decisive: false
   status: unverified
@@ -369,7 +329,7 @@ claims:
     mountains and should be comparable to Pupitar) | Island level (comparable to other
     fully evolved Pokemon such as Tyranitar) | Island level (Far stronger than before.
     Should be comparable to other Gigantamax pokemon such as Centiskorch)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -380,7 +340,7 @@ claims:
   text: "Massively Hypersonic+ (Can dodge lightning-based moves from first stage Pok\xE9\
     mon, such as Pikachu) | Massively Hypersonic+ (Faster than before) | FTL (Comparable\
     \ to the likes of Lycanroc) | FTL"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -395,7 +355,7 @@ claims:
     one hand. Should be superior to Brock's Happiny) | Class T (Capable of moving
     mountains with one arm) | At least Class T (Stronger than before, comparable to
     Gigantamax Sandaconda)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -404,7 +364,7 @@ claims:
   section: power_scale
   axis: other
   text: At most Small City level | Mountain level | Island level | Island level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -415,7 +375,7 @@ claims:
   text: At most Small City level | Mountain level | Island level (Can tank hits from
     other fully evolved pokemon) | Island level (Far stronger than before. Should
     be comparable to other Gigantamax pokemon such as Centiscorch)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -426,7 +386,7 @@ claims:
   text: Superhuman (The average pokemon is hardwired for battle and can go on fighting
     for lots of time despite being injured. Capable of spending a day on foot while
     fighting hordes of enemies in mystery dungeons with little to no breaks)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -436,7 +396,7 @@ claims:
   axis: range
   text: Standard Melee Range; Hundreds of Meters with Stone Edge | Tens of Meters;
     Hundreds of Meters with most attacks
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -445,7 +405,7 @@ claims:
   section: equipment
   axis: equipment
   text: Focus Band | Focus Band, Power-Save Belt | None notable
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -456,7 +416,7 @@ claims:
   text: Below Average normally, Above Average in combat as Machop and Machoke (Machop
     undergo extensive training and are capable of using every form of martial arts),
     Genius as Machamp (Machamp has mastered all the world's martial arts)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -468,7 +428,7 @@ claims:
     type attacks | Gigantamax can only be used in areas with Dynamax energy (i.e.
     dens and stadiums), Destroying their non-move forcefield through any means will
     harm them Notable Attacks/Techniques:'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -498,16 +458,16 @@ claims:
     (Summons a hailstorm), Superior Electricity Manipulation via Max Lightning (Changes
     the ground to Electric Terrain), Earth Manipulation and Weather Manipulation via
     Max Rockfall (Summons a sandstorm), Forcefield Creation via Max Guard
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
   - fan_wiki_single_source
 abilities:
-- id: powers-and-abilities-machop-superhuman-physical-characteristics
-  name: Machop= Superhuman Physical Characteristics
-  description: Machop= Superhuman Physical Characteristics
-  source_ids: &id005
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id004
   - vsbattles-machamp-pokemon
   source_claim_ids: []
   confidence: 0.85
@@ -523,7 +483,7 @@ abilities:
 - id: powers-and-abilities-martial-arts
   name: Martial Arts
   description: Martial Arts
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -538,7 +498,7 @@ abilities:
 - id: powers-and-abilities-statistics-amplification
   name: Statistics Amplification
   description: Statistics Amplification
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -553,7 +513,7 @@ abilities:
 - id: powers-and-abilities-can-hit-ghosts-with-regular-attacks-with-foresight
   name: Can hit Ghosts with regular attacks (With Foresight)
   description: Can hit Ghosts with regular attacks (With Foresight)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -568,7 +528,7 @@ abilities:
 - id: powers-and-abilities-non-physical-interaction
   name: Non-Physical Interaction
   description: Non-Physical Interaction
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -583,7 +543,7 @@ abilities:
 - id: powers-and-abilities-status-effect-inducement-confusion-via-dynamic-punch
   name: Status Effect Inducement (Confusion via Dynamic Punch)
   description: Status Effect Inducement (Confusion via Dynamic Punch)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -598,7 +558,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation
   name: Fire Manipulation
   description: Fire Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -615,7 +575,7 @@ abilities:
 - id: powers-and-abilities-ice-manipulation
   name: Ice Manipulation
   description: Ice Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -630,7 +590,7 @@ abilities:
 - id: powers-and-abilities-electricity-manipulation
   name: Electricity Manipulation
   description: Electricity Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -645,7 +605,7 @@ abilities:
 - id: powers-and-abilities-limited-metal-manipulation
   name: Limited Metal Manipulation
   description: Limited Metal Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -660,7 +620,7 @@ abilities:
 - id: powers-and-abilities-limited-darkness-manipulation
   name: Limited Darkness Manipulation
   description: Limited Darkness Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -675,7 +635,7 @@ abilities:
 - id: powers-and-abilities-becomes-stronger-when-affected-by-a-status-condition
   name: Becomes stronger when affected by a status condition
   description: Becomes stronger when affected by a status condition
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -690,7 +650,7 @@ abilities:
 - id: powers-and-abilities-can-ensure-all-attacks-land
   name: Can ensure all attacks land
   description: Can ensure all attacks land
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -705,7 +665,7 @@ abilities:
 - id: powers-and-abilities-statistics-reduction
   name: Statistics Reduction
   description: Statistics Reduction
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -720,7 +680,7 @@ abilities:
 - id: powers-and-abilities-attack-reflection
   name: Attack Reflection
   description: Attack Reflection
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -735,7 +695,7 @@ abilities:
 - id: powers-and-abilities-forcefield-creation
   name: Forcefield Creation
   description: Forcefield Creation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -750,7 +710,7 @@ abilities:
 - id: powers-and-abilities-enhanced-senses
   name: Enhanced Senses
   description: Enhanced Senses
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -765,7 +725,7 @@ abilities:
 - id: powers-and-abilities-healing
   name: Healing
   description: Healing
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -780,7 +740,7 @@ abilities:
 - id: powers-and-abilities-dynamax
   name: Dynamax
   description: Dynamax
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -793,25 +753,25 @@ abilities:
     method: deterministic_keyword_rules
     metadata_only: true
 - id: powers-and-abilities-resistance-to-dark-bug-and-rock-type-attacks-as-well-as-to-
-  name: Resistance to Dark, Bug and Rock-type attacks, as well as to Sleep Manipulation
-    |-|Machoke= All previous powers to a gre
+  name: 'Resistance to Dark, Bug and Rock-type attacks, as well as to Sleep Manipulation
+    All previous powers to a greater extent '
   description: Resistance to Dark, Bug and Rock-type attacks, as well as to Sleep
-    Manipulation |-|Machoke= All previous powers to a greater extent |-|Machamp= All
-    previous powers to a much greater extent plus Additional Arms, Earth Manipulation,
-    Shockwave Generation (It attacks with devastating punches and shock waves) |-|Gigantamax
-    Machamp= All previous plus Gigantamax, Superior Martial Arts, Chi Manipulation,
-    Explosion Manipulation, and Statistics Amplification via G-Max Chi Strike (Raises
-    the chance of critical hits), Superior Darkness Manipulation and Statistics Reduction
-    (target's Sp. Def) via Max Darkness, Explosion Manipulation and Statistics Reduction
-    (opponent's speed) via Max Strike, Energy Projection and Statistics Reduction
-    (target's attack) via Max Wyrmwind, Superior Metal Manipulation and Statistics
-    Amplification (allies' defense) via Max Steelspike, Superior Fire Manipulation,
-    Explosion Manipulation, and Heat Manipulation via Max Flare (Intensifies the sun),
-    Superior Ice Manipulation and Weather Manipulation via Max Hailstorm (Summons
-    a hailstorm), Superior Electricity Manipulation via Max Lightning (Changes the
-    ground to Electric Terrain), Earth Manipulation and Weather Manipulation via Max
-    Rockfall (Summons a sandstorm), Forcefield Creation via Max Guard
-  source_ids: *id005
+    Manipulation All previous powers to a greater extent All previous powers to a
+    much greater extent plus Additional Arms, Earth Manipulation, Shockwave Generation
+    (It attacks with devastating punches and shock waves) All previous plus Gigantamax,
+    Superior Martial Arts, Chi Manipulation, Explosion Manipulation, and Statistics
+    Amplification via G-Max Chi Strike (Raises the chance of critical hits), Superior
+    Darkness Manipulation and Statistics Reduction (target's Sp. Def) via Max Darkness,
+    Explosion Manipulation and Statistics Reduction (opponent's speed) via Max Strike,
+    Energy Projection and Statistics Reduction (target's attack) via Max Wyrmwind,
+    Superior Metal Manipulation and Statistics Amplification (allies' defense) via
+    Max Steelspike, Superior Fire Manipulation, Explosion Manipulation, and Heat Manipulation
+    via Max Flare (Intensifies the sun), Superior Ice Manipulation and Weather Manipulation
+    via Max Hailstorm (Summons a hailstorm), Superior Electricity Manipulation via
+    Max Lightning (Changes the ground to Electric Terrain), Earth Manipulation and
+    Weather Manipulation via Max Rockfall (Summons a sandstorm), Forcefield Creation
+    via Max Guard
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -831,7 +791,7 @@ equipment:
 - id: standard-equipment-focus-band
   name: Focus Band
   description: Focus Band
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -846,7 +806,7 @@ equipment:
 - id: standard-equipment-focus-band
   name: Focus Band
   description: Focus Band
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -861,7 +821,7 @@ equipment:
 - id: standard-equipment-power-save-belt
   name: Power-Save Belt
   description: Power-Save Belt
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -876,7 +836,7 @@ equipment:
 - id: standard-equipment-none-notable
   name: None notable
   description: None notable
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -909,7 +869,7 @@ resistances:
     a hailstorm), Superior Electricity Manipulation via Max Lightning (Changes the
     ground to Electric Terrain), Earth Manipulation and Weather Manipulation via Max
     Rockfall (Summons a sandstorm), Forcefield Creation via Max Guard
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -927,7 +887,7 @@ weaknesses:
 - id: weaknesses-machamp-has-poor-dexterity
   name: Machamp has poor dexterity
   description: Machamp has poor dexterity
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-machamp-pokemon
   source_claim_ids: []
   confidence: 0.85
@@ -943,7 +903,7 @@ weaknesses:
 - id: weaknesses-and-it-is-weak-to-fairy
   name: and it is weak to Fairy
   description: and it is weak to Fairy
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -958,7 +918,7 @@ weaknesses:
 - id: weaknesses-flying
   name: Flying
   description: Flying
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -973,7 +933,7 @@ weaknesses:
 - id: weaknesses-and-psychic-type-attacks
   name: and Psychic type attacks
   description: and Psychic type attacks
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -989,7 +949,7 @@ weaknesses:
   name: Gigantamax can only be used in areas with Dynamax energy (i.e. dens and stadiums)
   description: Gigantamax can only be used in areas with Dynamax energy (i.e. dens
     and stadiums)
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1006,7 +966,7 @@ weaknesses:
     Attacks/Techniques:'
   description: 'Destroying their non-move forcefield through any means will harm them
     Notable Attacks/Techniques:'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1052,7 +1012,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: 926a51aa69353f3bc4a0a0ba9aff7ffb17037a59c3523a6eafd9248c519b43ca
 repair:
-  attempted_at: '2026-10-11T02:25:56Z'
+  attempted_at: '2026-10-21T21:26:05Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -1069,7 +1029,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Machamp
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -1118,7 +1078,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -1131,36 +1091,35 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}}
+      value: At most | |
       source_id: mediawiki-436493
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Machop= Superhuman Physical Characteristics, Martial Arts, Statistics
-        Amplification, Can hit Ghosts with regular attacks (With Foresight), Non-Physical
-        Interaction, Status Effect Inducement (Confusion via Dynamic Punch), Fire
-        Manipulation, Ice Manipulation, Electricity Manipulation, Limited Metal Manipulation,
-        Limited Darkness Manipulation, Becomes stronger when affected by a status
-        condition, Can ensure all attacks land, Statistics Reduction, Attack Reflection,
-        Forcefield Creation, Enhanced Senses, Healing, Dynamax, Resistance to Dark,
-        Bug and Rock-type attacks, as well as to Sleep Manipulation |-|Machoke= All
-        previous powers to a greater extent |-|Machamp= All previous powers to a much
-        greater extent plus Additional Arms, Earth Manipulation, Shockwave Generation
-        (It attacks with devastating punches and shock waves) |-|Gigantamax Machamp=
-        All previous plus Gigantamax, Superior Martial Arts, Chi Manipulation, Explosion
-        Manipulation, and Statistics Amplification via G-Max Chi Strike (Raises the
-        chance of critical hits), Superior Darkness Manipulation and Statistics Reduction
-        (target's Sp. Def) via Max Darkness, Explosion Manipulation and Statistics
-        Reduction (opponent's speed) via Max Strike, Energy Projection and Statistics
-        Reduction (target's attack) via Max Wyrmwind, Superior Metal Manipulation
-        and Statistics Amplification (allies' defense) via Max Steelspike, Superior
-        Fire Manipulation, Explosion Manipulation, and Heat Manipulation via Max Flare
-        (Intensifies the sun), Superior Ice Manipulation and Weather Manipulation
-        via Max Hailstorm (Summons a hailstorm), Superior Electricity Manipulation
-        via Max Lightning (Changes the ground to Electric Terrain), Earth Manipulation
-        and Weather Manipulation via Max Rockfall (Summons a sandstorm), Forcefield
-        Creation via Max Guard
+      value: Superhuman Physical Characteristics, Martial Arts, Statistics Amplification,
+        Can hit Ghosts with regular attacks (With Foresight), Non-Physical Interaction,
+        Status Effect Inducement (Confusion via Dynamic Punch), Fire Manipulation,
+        Ice Manipulation, Electricity Manipulation, Limited Metal Manipulation, Limited
+        Darkness Manipulation, Becomes stronger when affected by a status condition,
+        Can ensure all attacks land, Statistics Reduction, Attack Reflection, Forcefield
+        Creation, Enhanced Senses, Healing, Dynamax, Resistance to Dark, Bug and Rock-type
+        attacks, as well as to Sleep Manipulation All previous powers to a greater
+        extent All previous powers to a much greater extent plus Additional Arms,
+        Earth Manipulation, Shockwave Generation (It attacks with devastating punches
+        and shock waves) All previous plus Gigantamax, Superior Martial Arts, Chi
+        Manipulation, Explosion Manipulation, and Statistics Amplification via G-Max
+        Chi Strike (Raises the chance of critical hits), Superior Darkness Manipulation
+        and Statistics Reduction (target's Sp. Def) via Max Darkness, Explosion Manipulation
+        and Statistics Reduction (opponent's speed) via Max Strike, Energy Projection
+        and Statistics Reduction (target's attack) via Max Wyrmwind, Superior Metal
+        Manipulation and Statistics Amplification (allies' defense) via Max Steelspike,
+        Superior Fire Manipulation, Explosion Manipulation, and Heat Manipulation
+        via Max Flare (Intensifies the sun), Superior Ice Manipulation and Weather
+        Manipulation via Max Hailstorm (Summons a hailstorm), Superior Electricity
+        Manipulation via Max Lightning (Changes the ground to Electric Terrain), Earth
+        Manipulation and Weather Manipulation via Max Rockfall (Summons a sandstorm),
+        Forcefield Creation via Max Guard
       source_id: mediawiki-436493
       provider_id: vsbattles
       authority: high
@@ -1247,11 +1206,129 @@ repair:
     duplicate_key: vsbattles.fandom.com|machamp|9645899
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-machamp-pokemon
+    url: https://character-stats-and-profiles.fandom.com/wiki/Machamp_%28Pokemon%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Machamp (Canon)/AdamGregory03
+    source_type: mediawiki
+    revision_id: '120102'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 7088
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 7-A
+      source_id: character-stats-profiles-machamp-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Martial Arts (Mastered every single
+        one of them, according to Sapphire's PokeDex entry.) Statistics Amplification
+        & Reduction, Status Effect Inducement via Dynamic Punch, Probability Manipulation
+        via Focus Energy, Resistance to Bug, Dark, and Rock-type moves, More via TMs/HMs,
+        move tutors, and breeding (Gaining access to moves like Flamethrower, Fire
+        Blast, Sunny Day, Toxic, Poison Jab, Earthquake, Stone Edge, Ice Punch, Thunder
+        Punch, etc.)
+      source_id: character-stats-profiles-machamp-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Large City level (It's PokeDex entry from Yellow states it can move\
+        \ mountains using one arm, and it's entry from Sun states it punches with\
+        \ megaton levels of force. Naturally learns Seismic Toss, which throws the\
+        \ opposing Pok\xE9mon out of the Earth's hemisphere, even ones that can weigh\
+        \ up to 2204.4 lbs.) Can negate durability with Seismic Toss as it deals a\
+        \ fixed amount of damage based on the user's level."
+      source_id: character-stats-profiles-machamp-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: "Massively Hypersonic+ (Is capable of reacting to elemental-based special\
+        \ moves, which includes electricity, and can keep up in combat with Electric-type\
+        \ Pok\xE9mon. It's PokeDex entries from FireRed, Diamond, and X all state\
+        \ it can throw a thousand punches in two seconds, which is supported in Pokken\
+        \ Tournament.)"
+      source_id: character-stats-profiles-machamp-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: "Large City level (Scaling to Attack Potency. Can contend with other\
+        \ fully-evolved Pok\xE9mon with it's base stat total, such as Conkeldurr,\
+        \ Nidoking, and Gigalith)"
+      source_id: character-stats-profiles-machamp-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "Takes super-effective damage from Fairy, Flying, and Psychic-type moves.\
+        \ It's STAB Fighting-type moves have no affect against Ghost-type Pok\xE9\
+        mon."
+      source_id: character-stats-profiles-machamp-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|machamp canon adamgregory03|120102
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-machamp-pokemon
     url: https://vsbattles.fandom.com/wiki/Machamp_Pokemon
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields: &id008
     - attack_potency
     - durability
     - intelligence
@@ -1300,7 +1377,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -1311,36 +1388,35 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}}
+      value: At most | |
       source_id: vsbattles-machamp-pokemon
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Machop= Superhuman Physical Characteristics, Martial Arts, Statistics
-        Amplification, Can hit Ghosts with regular attacks (With Foresight), Non-Physical
-        Interaction, Status Effect Inducement (Confusion via Dynamic Punch), Fire
-        Manipulation, Ice Manipulation, Electricity Manipulation, Limited Metal Manipulation,
-        Limited Darkness Manipulation, Becomes stronger when affected by a status
-        condition, Can ensure all attacks land, Statistics Reduction, Attack Reflection,
-        Forcefield Creation, Enhanced Senses, Healing, Dynamax, Resistance to Dark,
-        Bug and Rock-type attacks, as well as to Sleep Manipulation |-|Machoke= All
-        previous powers to a greater extent |-|Machamp= All previous powers to a much
-        greater extent plus Additional Arms, Earth Manipulation, Shockwave Generation
-        (It attacks with devastating punches and shock waves) |-|Gigantamax Machamp=
-        All previous plus Gigantamax, Superior Martial Arts, Chi Manipulation, Explosion
-        Manipulation, and Statistics Amplification via G-Max Chi Strike (Raises the
-        chance of critical hits), Superior Darkness Manipulation and Statistics Reduction
-        (target's Sp. Def) via Max Darkness, Explosion Manipulation and Statistics
-        Reduction (opponent's speed) via Max Strike, Energy Projection and Statistics
-        Reduction (target's attack) via Max Wyrmwind, Superior Metal Manipulation
-        and Statistics Amplification (allies' defense) via Max Steelspike, Superior
-        Fire Manipulation, Explosion Manipulation, and Heat Manipulation via Max Flare
-        (Intensifies the sun), Superior Ice Manipulation and Weather Manipulation
-        via Max Hailstorm (Summons a hailstorm), Superior Electricity Manipulation
-        via Max Lightning (Changes the ground to Electric Terrain), Earth Manipulation
-        and Weather Manipulation via Max Rockfall (Summons a sandstorm), Forcefield
-        Creation via Max Guard
+      value: Superhuman Physical Characteristics, Martial Arts, Statistics Amplification,
+        Can hit Ghosts with regular attacks (With Foresight), Non-Physical Interaction,
+        Status Effect Inducement (Confusion via Dynamic Punch), Fire Manipulation,
+        Ice Manipulation, Electricity Manipulation, Limited Metal Manipulation, Limited
+        Darkness Manipulation, Becomes stronger when affected by a status condition,
+        Can ensure all attacks land, Statistics Reduction, Attack Reflection, Forcefield
+        Creation, Enhanced Senses, Healing, Dynamax, Resistance to Dark, Bug and Rock-type
+        attacks, as well as to Sleep Manipulation All previous powers to a greater
+        extent All previous powers to a much greater extent plus Additional Arms,
+        Earth Manipulation, Shockwave Generation (It attacks with devastating punches
+        and shock waves) All previous plus Gigantamax, Superior Martial Arts, Chi
+        Manipulation, Explosion Manipulation, and Statistics Amplification via G-Max
+        Chi Strike (Raises the chance of critical hits), Superior Darkness Manipulation
+        and Statistics Reduction (target's Sp. Def) via Max Darkness, Explosion Manipulation
+        and Statistics Reduction (opponent's speed) via Max Strike, Energy Projection
+        and Statistics Reduction (target's attack) via Max Wyrmwind, Superior Metal
+        Manipulation and Statistics Amplification (allies' defense) via Max Steelspike,
+        Superior Fire Manipulation, Explosion Manipulation, and Heat Manipulation
+        via Max Flare (Intensifies the sun), Superior Ice Manipulation and Weather
+        Manipulation via Max Hailstorm (Summons a hailstorm), Superior Electricity
+        Manipulation via Max Lightning (Changes the ground to Electric Terrain), Earth
+        Manipulation and Weather Manipulation via Max Rockfall (Summons a sandstorm),
+        Forcefield Creation via Max Guard
       source_id: vsbattles-machamp-pokemon
       provider_id: vsbattles
       authority: high
@@ -1549,7 +1625,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Machamp_%28Pokemon%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id010
     - attack_potency
     - durability
     - intelligence
@@ -1598,7 +1674,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id011
     - attack_potency
     - speed
     - durability
@@ -1609,36 +1685,35 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}}
+      value: At most | |
       source_id: vsbattles-machamp-pokemon
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Machop= Superhuman Physical Characteristics, Martial Arts, Statistics
-        Amplification, Can hit Ghosts with regular attacks (With Foresight), Non-Physical
-        Interaction, Status Effect Inducement (Confusion via Dynamic Punch), Fire
-        Manipulation, Ice Manipulation, Electricity Manipulation, Limited Metal Manipulation,
-        Limited Darkness Manipulation, Becomes stronger when affected by a status
-        condition, Can ensure all attacks land, Statistics Reduction, Attack Reflection,
-        Forcefield Creation, Enhanced Senses, Healing, Dynamax, Resistance to Dark,
-        Bug and Rock-type attacks, as well as to Sleep Manipulation |-|Machoke= All
-        previous powers to a greater extent |-|Machamp= All previous powers to a much
-        greater extent plus Additional Arms, Earth Manipulation, Shockwave Generation
-        (It attacks with devastating punches and shock waves) |-|Gigantamax Machamp=
-        All previous plus Gigantamax, Superior Martial Arts, Chi Manipulation, Explosion
-        Manipulation, and Statistics Amplification via G-Max Chi Strike (Raises the
-        chance of critical hits), Superior Darkness Manipulation and Statistics Reduction
-        (target's Sp. Def) via Max Darkness, Explosion Manipulation and Statistics
-        Reduction (opponent's speed) via Max Strike, Energy Projection and Statistics
-        Reduction (target's attack) via Max Wyrmwind, Superior Metal Manipulation
-        and Statistics Amplification (allies' defense) via Max Steelspike, Superior
-        Fire Manipulation, Explosion Manipulation, and Heat Manipulation via Max Flare
-        (Intensifies the sun), Superior Ice Manipulation and Weather Manipulation
-        via Max Hailstorm (Summons a hailstorm), Superior Electricity Manipulation
-        via Max Lightning (Changes the ground to Electric Terrain), Earth Manipulation
-        and Weather Manipulation via Max Rockfall (Summons a sandstorm), Forcefield
-        Creation via Max Guard
+      value: Superhuman Physical Characteristics, Martial Arts, Statistics Amplification,
+        Can hit Ghosts with regular attacks (With Foresight), Non-Physical Interaction,
+        Status Effect Inducement (Confusion via Dynamic Punch), Fire Manipulation,
+        Ice Manipulation, Electricity Manipulation, Limited Metal Manipulation, Limited
+        Darkness Manipulation, Becomes stronger when affected by a status condition,
+        Can ensure all attacks land, Statistics Reduction, Attack Reflection, Forcefield
+        Creation, Enhanced Senses, Healing, Dynamax, Resistance to Dark, Bug and Rock-type
+        attacks, as well as to Sleep Manipulation All previous powers to a greater
+        extent All previous powers to a much greater extent plus Additional Arms,
+        Earth Manipulation, Shockwave Generation (It attacks with devastating punches
+        and shock waves) All previous plus Gigantamax, Superior Martial Arts, Chi
+        Manipulation, Explosion Manipulation, and Statistics Amplification via G-Max
+        Chi Strike (Raises the chance of critical hits), Superior Darkness Manipulation
+        and Statistics Reduction (target's Sp. Def) via Max Darkness, Explosion Manipulation
+        and Statistics Reduction (opponent's speed) via Max Strike, Energy Projection
+        and Statistics Reduction (target's attack) via Max Wyrmwind, Superior Metal
+        Manipulation and Statistics Amplification (allies' defense) via Max Steelspike,
+        Superior Fire Manipulation, Explosion Manipulation, and Heat Manipulation
+        via Max Flare (Intensifies the sun), Superior Ice Manipulation and Weather
+        Manipulation via Max Hailstorm (Summons a hailstorm), Superior Electricity
+        Manipulation via Max Lightning (Changes the ground to Electric Terrain), Earth
+        Manipulation and Weather Manipulation via Max Rockfall (Summons a sandstorm),
+        Forcefield Creation via Max Guard
       source_id: vsbattles-machamp-pokemon
       provider_id: vsbattles
       authority: high
@@ -1723,124 +1798,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|machamp|9645899
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-machamp-pokemon
-    url: https://character-stats-and-profiles.fandom.com/wiki/Machamp_%28Pokemon%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Machamp (Canon)/AdamGregory03
-    source_type: mediawiki
-    revision_id: '120102'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 7088
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 7-A
-      source_id: character-stats-profiles-machamp-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Martial Arts (Mastered every single
-        one of them, according to Sapphire's PokeDex entry.) Statistics Amplification
-        & Reduction, Status Effect Inducement via Dynamic Punch, Probability Manipulation
-        via Focus Energy, Resistance to Bug, Dark, and Rock-type moves, More via TMs/HMs,
-        move tutors, and breeding (Gaining access to moves like Flamethrower, Fire
-        Blast, Sunny Day, Toxic, Poison Jab, Earthquake, Stone Edge, Ice Punch, Thunder
-        Punch, etc.)
-      source_id: character-stats-profiles-machamp-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: "Large City level (It's PokeDex entry from Yellow states it can move\
-        \ mountains using one arm, and it's entry from Sun states it punches with\
-        \ megaton levels of force. Naturally learns Seismic Toss, which throws the\
-        \ opposing Pok\xE9mon out of the Earth's hemisphere, even ones that can weigh\
-        \ up to 2204.4 lbs.) Can negate durability with Seismic Toss as it deals a\
-        \ fixed amount of damage based on the user's level."
-      source_id: character-stats-profiles-machamp-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: "Massively Hypersonic+ (Is capable of reacting to elemental-based special\
-        \ moves, which includes electricity, and can keep up in combat with Electric-type\
-        \ Pok\xE9mon. It's PokeDex entries from FireRed, Diamond, and X all state\
-        \ it can throw a thousand punches in two seconds, which is supported in Pokken\
-        \ Tournament.)"
-      source_id: character-stats-profiles-machamp-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: "Large City level (Scaling to Attack Potency. Can contend with other\
-        \ fully-evolved Pok\xE9mon with it's base stat total, such as Conkeldurr,\
-        \ Nidoking, and Gigalith)"
-      source_id: character-stats-profiles-machamp-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Takes super-effective damage from Fairy, Flying, and Psychic-type moves.\
-        \ It's STAB Fighting-type moves have no affect against Ghost-type Pok\xE9\
-        mon."
-      source_id: character-stats-profiles-machamp-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|machamp canon adamgregory03|120102
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-machamp
@@ -1970,13 +1927,12 @@ repair:
     - durability
     - speed
     - standard_equipment
-    - tier
     normalized_page_title: "Pok\xE9mon"
     source_type: mediawiki
-    revision_id: '9700819'
+    revision_id: '9710294'
     fetch_status: fetched
     http_status: 200
-    content_length: 52326
+    content_length: 52521
     content_kind: api_json
     headings_detected:
     - Summary
@@ -2049,7 +2005,7 @@ repair:
         \ level) *Ho-Oh's feather creates a storm (38 Teratons - Country level - 193.3\
         \ Petatons - Multi-Continent level) *Groudon raises the continents (216.31\
         \ Petatons - Multi-Continent level) *Deoxys destroys the planet (896.53 Zettatons\
-        \ - Planet level) {{!}}-{{!}}"
+        \ - Planet level)"
       source_id: vsbattles-machamp-game
       provider_id: vsbattles
       authority: high
@@ -2057,7 +2013,7 @@ repair:
     - field: durability
       value: '*Red tanks an explosion (0.00285 Tons - Wall level+) *Cleffa tanks meteor
         impacts (0.62 Tons - Building level) *Full weight of a Gigantamax Snorlax
-        (24.1732 kilotons - Large Town level) {{!}}-{{!}}'
+        (24.1732 kilotons - Large Town level)'
       source_id: vsbattles-machamp-game
       provider_id: vsbattles
       authority: high
@@ -2067,73 +2023,7 @@ repair:
         Runs Up a Wall (23.18 m/s - Superhuman) *Pinsir Intercepts a Solar Beam (2.46c
         - FTL) *Deoxys travels to Earth (9.862e5c - Massively FTL+) *Lunala travels
         through the Ultra Space (1.073e9c - Massively FTL+) }} |-|Supporting Feats=
-        {{#tag:tabber| {{!}}-{{!}}'
-      source_id: vsbattles-machamp-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: tier
-      value: "characters) *Bobsican *GyroNutz (Primarily games + spin-offs, limited\
-        \ anime + TCG knowledge) *Nemo212 (mainly games) *Robot972 (Games + Spin-offs,\
-        \ Decent TCG and Anime *Sans2345 (mainly games) *Udlmaster *SamanPatou *Crimson\
-        \ Shadow101 (Mainly Gen 5 games and Pokemon Mystery Dungeon 2) *Gilad Hyperstar\
-        \ (Mostly the games up to Gen 5, Have some knowledge on the anime too, especially\
-        \ in Diamond and Pearl and XY series) *Imaginym (Mostly main games & some\
-        \ anime knowledge.) *CloverDragon03 (Main series games and anime) *CuddleFox\
-        \ *Spinoirr (Main series games from gen 5 to current) *Random-Helper323 (Anime\
-        \ and main games up to Gen 4, limited knowledge after) *LordTracer (Main series\
-        \ games up to Gen 6, limited knowledge after) *Azure404 (Type advantages and\
-        \ disadvantages, moves, and Pok\xE9dex) }} ==Supporters/Opponents/Neutral==\
-        \ ===Supporters=== {{Scroll box| *The real cal howard *RadicalMrR *ArbitraryNumbers\
-        \ *Elizhaa *Oiguana2701 *MarvelFanatic119 *Dino Ranger Black *SuperKamiNappa\
-        \ *Hop Hoppington-Hoppenhiemer *SomebodyData *Amelia Lonelyheart *Dragonmasterxyz\
-        \ *Kirbyelmejor *WeeklyBattles *Saikou The Lewd King *Colonel Krukov *GameHearo266\
-        \ *Shadowbokunohero *GreyFang82 *Spinosaurus75DinosaurFan *Apex Predator GX\
-        \ *Starter Pack *Kaltias *Edwellken *Sandman31 *KingEzran *GyroNutz *Sans2345\
-        \ *Alien Dual Blaster *Bobsican *SitrusNetwork *GojiBoyForever *CrackerVolley\
-        \ *Psychomaster35 *StrymULTRA *Ionliosite *SamanPatou *DragonGamerZ913 *ElixirBlue\
-        \ *Firestorm808 *Realjackthegamer312 *KieranH10 *Valiant Abyss *Executor N0\
-        \ *CuddleFox *AceOfSpaces3709 *FinePoint *Gilad Hyperstar *Ayewale *Everything12\
-        \ *LeoEpicGamer8910 *Javenplayz253 *Hypertornado099 *Azure404 *Ztesrxgdfjcvgkbh\
-        \ *Random-Helper323 }} ===Opponents=== ===Neutral=== *Megamangohan *Theglassman12\
-        \ *DarkDragonMedeus *The Smashor *Roachman40 ==Characters== ===Pok\xE9mon\
-        \ (by Species)=== |-|Generation I (Kanto)= Venusaur-0.jpg|link=Venusaur|Venusaur\
-        \ Mega charizard y by haychel-d6kzoji.jpg|link=Charizard|Charizard Blastoise\
-        \ by tatatorterra-d45sf7n.png|link=Blastoise|Blastoise Tumblr nkkw0rVbDm1unlgoso1\
-        \ 500.png|link=Butterfree|Butterfree A4886ebbe7c26567ccd8c237df6c2d1284435a9e\
-        \ hq.jpg|link=Beedrill|Beedrill Wonderful-Pidgeot-Wallpaper.jpg|link=Pidgey|Pidgeot\
-        \ Raitcate attack.png|link=Raticate|Raticate Fearow-000.jpg|link=Fearow|Fearow\
-        \ Arbokf.jpg|link=Arbok|Arbok Pika pi.jpg|link=Pikachu|Pikachu Sandslashf.jpg|link=Sandslash|Sandslash\
-        \ 1728773-ep597 nidoking de paul.jpg|link=Nidoking|Nidoking Nidoqueen-0.jpg|link=Nidoqueen|Nidoqueen\
-        \ Clefairy Anime.png|link=Clefairy|Clefairy Ninetales-0.png|link=Ninetales|Ninetales\
-        \ Tumblr oahvjkdojq1ra1vfao1 500.jpg|link=Jigglypuff|Jigglypuff Vileplumef.jpg|link=Vileplume|Vileplume\
-        \ Parasectf.jpg|link=Parasect|Parasect Venomothf.jpg|link=Venomoth|Venomoth\
-        \ 300px-Diglett anime.png|link=Diglett|Diglett Meowthf.jpg|link=Meowth|Meowth\
-        \ Pmdbrt-psyduck.jpg|link=Psyduck|Psyduck Primeapef.jpg|link=Primeape|Primeape\
-        \ Arcanine-0.png|link=Arcanine|Arcanine Poliwrath by all0412-d8dmibi.jpg|link=Poliwrath|Poliwrath\
-        \ 5281581-3272118311-alaka.jpg|link=Alakazam|Alakazam Machamp-pokken-tournament-59.2.jpg|link=Machamp|Machamp\
-        \ Victreebelf.jpg|link=Victreebel|Victreebel Day 337 dokukurage tentacruel\
-        \ by autobottesla-d8p0cto.png|link=Tentacruel|Tentacruel Golem pokemon.jpg|link=Golem\
-        \ (Pok\xE9mon)|Golem Rapidash-0.png|link=Rapidash|Rapidash Slow slow slow.gif|link=Slowpoke|Slowpoke\
-        \ Tumblr m7dh3iALlo1raxtcho1 1280.jpg|link=Magnemite|Magneton Farfetchf.png|link=Farfetch'd|Farfetch'd\
-        \ Dodrio for jontukka by psidra.jpg|link=Dodrio|Dodrio Dewgongf.jpg|link=Dewgong|Dewgong\
-        \ Muk.png|link=Muk|Muk Cloyster by ameri linel-d6yd3bh.png|link=Cloyster|Cloyster\
-        \ Geng.jpg|link=Gengar|Gengar Hypno.jpg|link=Hypno|Hypno Kingler crabhammer\
-        \ by ishmam-d5sq6of.png|link=Kingler|Kingler Electrodef.jpg|link=Electrode|Electrode\
-        \ Exeggutorf.jpg|link=Exeggutor|Exeggutor Marowak by pablog143-d6wbs2y.jpg|link=Marowak|Marowak\
-        \ Hitmonlee.jpg|link=Hitmonlee|Hitmonlee Hitmonchan by pokemon master.jpg|link=Hitmonchan|Hitmonchan\
-        \ Lickitungf.jpg|link=Lickitung|Lickitung PLEEI Weezing Smokescreen.png|link=Weezing|Weezing\
-        \ 113chansey2.JPG|link=Chansey|Chansey Tumblr myli2baTPK1rc8nruo1 500.png|link=Kangaskhan|Kangaskhan\
-        \ 60bf6683f0e9c5ebcf36ca92b3479e23.gif|link=Seaking|Seaking Starmie.jpg|link=Starmie|Starmie\
-        \ Screen-Shot-2018-11-12-at-9.33.23-PM.png|link=Mr. Mime|Mr. Mime Jynx by\
-        \ Willow-Pendragon.png|link=Jynx|Jynx Pinsir Anime3.png|link=Pinsir|Pinsir\
-        \ Tauros 0.jpg|link=Tauros|Tauros Misty Gyarados anime.png|link=Gyarados|Gyarados\
-        \ Lapras.full.1417439.jpg|link=Lapras|Lapras Pokemon-go-ditto.jpg|link=Ditto\
-        \ (Pok\xE9mon)|Ditto 40eaaf41dee2c19456c11e863b61c581--pokemon-eevee-cute-eevee.jpg|link=Eevee|Eevee\
-        \ Vaporeon-art.jpg|link=Eevee|Vaporeon 250px-Jolteon BW135.png|link=Eevee|Jolteon\
-        \ Flareon by mast88-daro2wk.jpg|link=Eevee|Flareon Porygon by nidoking256.jpg|link=Porygon|Porygon\
-        \ D58872e49ac6901cbbf0ec1fc5849c9a050c8bca714ced47371cf8e9a5734497 1.jpg|link=Omastar|Omastar\
-        \ Kabutops by evilapple513-d6y87ph.jpg|link=Kabutops|Kabutops Ae"
+        {{#tag:tabber|'
       source_id: vsbattles-machamp-game
       provider_id: vsbattles
       authority: high
@@ -2154,7 +2044,7 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|pokemon|9700819
+    duplicate_key: vsbattles.fandom.com|pokemon|9710294
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-machamp-game
@@ -2340,11 +2230,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Machamp
     title: Machamp
     rank: 120
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2361,11 +2251,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Machamp_Pokemon
     title: Machamp
     rank: 120
-    extracted_fields: *id009
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2382,11 +2272,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Machamp_%28Pokemon%29
     title: Machamp
     rank: 120
-    extracted_fields: *id011
+    extracted_fields: *id010
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id011
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2403,3 +2293,22 @@ repair:
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: false
+  scoped_key: Machop
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T21:26:05Z'
+  key_origin: primary_form_position
+  axes:
+    attack_potency:
+      method: positional
+      segments: 4
+    speed:
+      method: positional
+      segments: 4
+    durability:
+      method: positional
+      segments: 4
+  remaining_piped_axes:
+  - tier
+  - range

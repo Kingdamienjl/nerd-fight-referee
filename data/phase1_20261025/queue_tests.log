@@ -1,0 +1,36 @@
+test_claim_query_uses_skip_locked (tests.test_profile_queue.ProfileQueueTests.test_claim_query_uses_skip_locked) ... ok
+test_import_is_called_after_promotion_threshold (tests.test_profile_queue.ProfileQueueTests.test_import_is_called_after_promotion_threshold) ... ok
+test_requeue_source_choice_dry_run_does_not_update (tests.test_profile_queue.ProfileQueueTests.test_requeue_source_choice_dry_run_does_not_update) ... ok
+test_requeue_source_choice_filter_does_not_touch_unrelated_needs_review_jobs (tests.test_profile_queue.ProfileQueueTests.test_requeue_source_choice_filter_does_not_touch_unrelated_needs_review_jobs) ... ok
+test_requeue_source_choice_filter_excludes_runtime_skeleton_and_quarantine_paths (tests.test_profile_queue.ProfileQueueTests.test_requeue_source_choice_filter_excludes_runtime_skeleton_and_quarantine_paths) ... ok
+test_requeue_source_choice_updates_only_matching_needs_review_jobs (tests.test_profile_queue.ProfileQueueTests.test_requeue_source_choice_updates_only_matching_needs_review_jobs) ... ok
+test_seed_assesses_new_jobs (tests.test_profile_queue.ProfileQueueTests.test_seed_assesses_new_jobs) ... ERROR
+test_seed_assesses_terminal_requeue_candidates (tests.test_profile_queue.ProfileQueueTests.test_seed_assesses_terminal_requeue_candidates) ... ok
+test_seed_skips_assessment_for_active_jobs (tests.test_profile_queue.ProfileQueueTests.test_seed_skips_assessment_for_active_jobs) ... ok
+test_seed_skips_assessment_for_parked_terminal_jobs (tests.test_profile_queue.ProfileQueueTests.test_seed_skips_assessment_for_parked_terminal_jobs) ... ok
+test_seed_skips_generated_and_archive_outputs (tests.test_profile_queue.ProfileQueueTests.test_seed_skips_generated_and_archive_outputs) ... ok
+test_user_request_skeleton_job_is_not_auto_promoted (tests.test_profile_queue.ProfileQueueTests.test_user_request_skeleton_job_is_not_auto_promoted) ... ok
+test_worker_fails_deterministic_failure_after_max_attempts (tests.test_profile_queue.ProfileQueueTests.test_worker_fails_deterministic_failure_after_max_attempts) ... ok
+test_worker_marks_promoted (tests.test_profile_queue.ProfileQueueTests.test_worker_marks_promoted) ... ok
+test_worker_quarantines_yaml_parse_failure_without_retry (tests.test_profile_queue.ProfileQueueTests.test_worker_quarantines_yaml_parse_failure_without_retry) ... ok
+test_worker_retries_transient_failure (tests.test_profile_queue.ProfileQueueTests.test_worker_retries_transient_failure) ... ok
+
+======================================================================
+ERROR: test_seed_assesses_new_jobs (tests.test_profile_queue.ProfileQueueTests.test_seed_assesses_new_jobs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/app/tests/test_profile_queue.py", line 325, in test_seed_assesses_new_jobs
+    self.assertEqual(connection.inserted[0][3], 7)
+                     ^^^^^^^^^^
+NameError: name 'connection' is not defined. Did you mean: 'FakeConnection'?
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.081s
+
+FAILED (errors=1)

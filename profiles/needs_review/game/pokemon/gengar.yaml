@@ -145,7 +145,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Gengar
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -184,34 +184,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-gengar-pokemon
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Gengar Pokemon
-  url: https://character-stats-and-profiles.fandom.com/wiki/Gengar_Pokemon
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-gengar-pokemon
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Gengar (Pokemon)
-  url: https://vsbattles.fandom.com/wiki/Gengar_%28Pokemon%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-gengar-pokemon
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -268,22 +240,15 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}} | {{6-C}}
+    text: At most | | |
     source_ids:
     - vsbattles-gengar-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   attack_potency:
-    text: "At most Small City level (should be comparable, though slightly inferior\
-      \ to Rhyhorn, who can shatter mountains. Can go to toe to toe with the likes\
-      \ of Piplup) | Mountain level (Is comparable, if not superior to a mid-level\
-      \ Dragonair, who can obliterate a city. Should be far superior to the likes\
-      \ of Rhyhorn, who can shatter mountains and should be comparable to Pupitar)\
-      \ | Island level (Comparable to fully evolved Pok\xE9mon like Alakazam) | Island\
-      \ level (Stronger than Pure/Huge Power Pok\xE9mon and Marowak holding a Thick\
-      \ Club, should be comparable to other mega evolved Pok\xE9mon such as Mega Charizard)\
-      \ | Island level (Stronger than Pure/Huge Power Pok\xE9mon and Marowak holding\
-      \ a Thick Club)"
+    text: At most Small City level (should be comparable, though slightly inferior
+      to Rhyhorn, who can shatter mountains. Can go to toe to toe with the likes of
+      Piplup)
     source_ids:
     - vsbattles-gengar-pokemon
     confidence: 0.6
@@ -298,20 +263,17 @@ power_scale:
     confidence: 0.6
     notes: auto_repair source extraction
   lifting_strength:
-    text: Unknown | Unknown, likely Class K | Class M (Should be comparable to Charizard.
-      Tamed Gengar have been observed pushing around boulders in the 5-6 metric ton
-      range (Unova region boulders) | Class M | Class T (Compares to Gigantamax Sandaconda)
-    source_ids: &id003
+    text: Unknown
+    source_ids: &id002
     - mediawiki-741143
     confidence: 0.95
   striking_strength:
-    text: At most Small City level | Mountain level | Island level | Island level
-      | Island level
-    source_ids: *id003
+    text: At most Small City level
+    source_ids: *id002
     confidence: 0.95
   durability:
     text: At most Small City level, Non-Corporeality and Regeneration makes it hard
-      to kill | Mountain level |Island level | Island level | Island level
+      to kill
     source_ids:
     - vsbattles-gengar-pokemon
     confidence: 0.6
@@ -325,9 +287,7 @@ power_scale:
     confidence: 0.6
     notes: auto_repair source extraction
   range:
-    text: Standard Melee Range, Hundreds of Meters with most attacks | Standard Melee
-      Range, Tens of Kilometers with most attacks | Same as before | Same as before
-      | Tens of Meters, Tens of Kilometers with most attacks
+    text: Standard Melee Range, Hundreds of Meters with most attacks
     source_ids:
     - vsbattles-gengar-pokemon
     confidence: 0.6
@@ -350,7 +310,7 @@ claims:
   section: power_scale
   axis: other
   text: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}} | {{6-C}}
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-741143
   decisive: false
   status: unverified
@@ -368,7 +328,7 @@ claims:
     \ Power Pok\xE9mon and Marowak holding a Thick Club, should be comparable to other\
     \ mega evolved Pok\xE9mon such as Mega Charizard) | Island level (Stronger than\
     \ Pure/Huge Power Pok\xE9mon and Marowak holding a Thick Club)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -380,7 +340,7 @@ claims:
     \ Pok\xE9mon) | Massively Hypersonic+ (Superior to its previous form, Gastly)\
     \ | FTL(Comparable to other fully-evolved Pok\xE9mon, such as Gyarados) | At least\
     \ FTL (Much faster than before)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -391,7 +351,7 @@ claims:
   text: Unknown | Unknown, likely Class K | Class M (Should be comparable to Charizard.
     Tamed Gengar have been observed pushing around boulders in the 5-6 metric ton
     range (Unova region boulders) | Class M | Class T (Compares to Gigantamax Sandaconda)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -401,7 +361,7 @@ claims:
   axis: other
   text: At most Small City level | Mountain level | Island level | Island level |
     Island level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -411,7 +371,7 @@ claims:
   axis: durability
   text: At most Small City level, Non-Corporeality and Regeneration makes it hard
     to kill | Mountain level |Island level | Island level | Island level
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -422,7 +382,7 @@ claims:
   text: Superhuman (The average pokemon is hardwired for battle and can go on fighting
     for lots of time despite being injured. Capable of spending a day on foot while
     fighting hordes of enemies in mystery dungeons with little to no breaks)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -433,7 +393,7 @@ claims:
   text: Standard Melee Range, Hundreds of Meters with most attacks | Standard Melee
     Range, Tens of Kilometers with most attacks | Same as before | Same as before
     | Tens of Meters, Tens of Kilometers with most attacks
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -443,7 +403,7 @@ claims:
   axis: equipment
   text: Bitter Berry/Persim Berry (Cures Confusion when consumed) | Gengarite (Mega
     Gengar)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -459,7 +419,7 @@ claims:
     \ martial arts), Gifted in battle as Gengar (Should be superior to 1st and 2nd\
     \ stage Pok\xE9mon and are able to consistently fight the likes of Machamp which\
     \ have mastered all martial arts, as well as Alakazam)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -530,7 +490,7 @@ claims:
     \ Pok\xE9mon Category:Temperature Users Category:Absorption Users Category:Regeneration\
     \ Users Category:Immortals Category:Undead Category:Reality Warpers Category:Illusionists\
     \ Category:Healers Category:Enhanced Senses Users"
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -578,16 +538,16 @@ claims:
     \ Reduction (target's Sp. Def) via Max Darkness, Superior Mind Manipulation via\
     \ Max Mindstorm (Changes the ground to Psychic Terrain), Forcefield Creation via\
     \ Max Guard"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
   - fan_wiki_single_source
 abilities:
-- id: powers-and-abilities-gastly-superhuman-physical-characteristics
-  name: Gastly=Superhuman Physical Characteristics
-  description: Gastly=Superhuman Physical Characteristics
-  source_ids: &id005
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id004
   - vsbattles-gengar-pokemon
   source_claim_ids: []
   confidence: 0.85
@@ -603,7 +563,7 @@ abilities:
 - id: powers-and-abilities-immortality-types-3-and-7
   name: Immortality (Types 3 and 7)
   description: Immortality (Types 3 and 7)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -618,7 +578,7 @@ abilities:
 - id: powers-and-abilities-darkness-and-shadow-manipulation
   name: Darkness and Shadow Manipulation
   description: Darkness and Shadow Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -633,7 +593,7 @@ abilities:
 - id: powers-and-abilities-enhanced-senses
   name: Enhanced Senses
   description: Enhanced Senses
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -648,7 +608,7 @@ abilities:
 - id: powers-and-abilities-statistics-amplification
   name: Statistics Amplification
   description: Statistics Amplification
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -663,7 +623,7 @@ abilities:
 - id: powers-and-abilities-statistics-reduction
   name: Statistics Reduction
   description: Statistics Reduction
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -680,7 +640,7 @@ abilities:
     souls. They can phase through walls)
   description: Intangibility and Incorporeality (It is made up of a mixture of gases
     and souls. They can phase through walls)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -696,7 +656,7 @@ abilities:
 - id: powers-and-abilities-possession
   name: Possession
   description: Possession
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -712,7 +672,7 @@ abilities:
 - id: powers-and-abilities-curse-manipulation
   name: Curse Manipulation
   description: Curse Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -727,7 +687,7 @@ abilities:
 - id: powers-and-abilities-shapeshifting
   name: Shapeshifting
   description: Shapeshifting
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -742,7 +702,7 @@ abilities:
 - id: powers-and-abilities-status-effect-inducement
   name: Status Effect Inducement
   description: Status Effect Inducement
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -759,7 +719,7 @@ abilities:
     \ A group of Gastly made an illusion of fire)"
   description: "Illusion Creation (Gastly can create illusions of fully evolved Pok\xE9\
     mon. A group of Gastly made an illusion of fire)"
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -776,7 +736,7 @@ abilities:
 - id: powers-and-abilities-reality-warping
   name: Reality Warping
   description: Reality Warping
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -794,7 +754,7 @@ abilities:
     of Team Rocket)
   description: Perception Manipulation (A group of Gastly once messed with the perception
     of Team Rocket)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -809,7 +769,7 @@ abilities:
 - id: powers-and-abilities-necromancy-a-gastly-once-used-its-fog-to-resurrect-pok-mon-
   name: "Necromancy (A Gastly once used its fog to resurrect Pok\xE9mon zombies)"
   description: "Necromancy (A Gastly once used its fog to resurrect Pok\xE9mon zombies)"
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -824,7 +784,7 @@ abilities:
 - id: powers-and-abilities-sleep-manipulation
   name: Sleep Manipulation
   description: Sleep Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -839,7 +799,7 @@ abilities:
 - id: powers-and-abilities-mind-manipulation
   name: Mind Manipulation
   description: Mind Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -854,7 +814,7 @@ abilities:
 - id: powers-and-abilities-soul-manipulation
   name: Soul Manipulation
   description: Soul Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -870,7 +830,7 @@ abilities:
 - id: powers-and-abilities-size-manipulation
   name: Size Manipulation
   description: Size Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -885,7 +845,7 @@ abilities:
 - id: powers-and-abilities-poison-manipulation
   name: Poison Manipulation
   description: Poison Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -900,7 +860,7 @@ abilities:
 - id: powers-and-abilities-absorption-of-dreams
   name: Absorption of dreams
   description: Absorption of dreams
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -915,7 +875,7 @@ abilities:
 - id: powers-and-abilities-healing
   name: Healing
   description: Healing
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -930,7 +890,7 @@ abilities:
 - id: powers-and-abilities-power-nullification
   name: Power Nullification
   description: Power Nullification
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -945,7 +905,7 @@ abilities:
 - id: powers-and-abilities-aura-via-dark-pulse
   name: Aura (Via Dark Pulse)
   description: Aura (Via Dark Pulse)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -960,7 +920,7 @@ abilities:
 - id: powers-and-abilities-offensive-illusion-creation-via-night-shade
   name: Offensive Illusion Creation (Via Night Shade)
   description: Offensive Illusion Creation (Via Night Shade)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -975,7 +935,7 @@ abilities:
 - id: powers-and-abilities-duplication
   name: Duplication
   description: Duplication
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -990,7 +950,7 @@ abilities:
 - id: powers-and-abilities-flight
   name: Flight
   description: Flight
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1005,7 +965,7 @@ abilities:
 - id: powers-and-abilities-and-pseudo-teleportation
   name: and Pseudo-Teleportation
   description: and Pseudo-Teleportation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1024,7 +984,7 @@ abilities:
     it can reform itself)
   description: Regeneration (Mid-High; Gastly is composed of gas and has no real shape,
     so it can reform itself)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1040,7 +1000,7 @@ abilities:
 - id: powers-and-abilities-damage-transferal-via-destiny-bond
   name: Damage Transferal (Via Destiny Bond)
   description: Damage Transferal (Via Destiny Bond)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1055,7 +1015,7 @@ abilities:
 - id: powers-and-abilities-minor-sealing-via-mean-look
   name: Minor Sealing (Via Mean Look)
   description: Minor Sealing (Via Mean Look)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1070,7 +1030,7 @@ abilities:
 - id: powers-and-abilities-electricity-manipulation
   name: Electricity Manipulation
   description: Electricity Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1085,7 +1045,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation
   name: Fire Manipulation
   description: Fire Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1102,7 +1062,7 @@ abilities:
 - id: powers-and-abilities-ice-manipulation
   name: Ice Manipulation
   description: Ice Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1119,7 +1079,7 @@ abilities:
     other Pokemon invisible)
   description: Invisibility (Gastly is almost completely invisible, and can turn itself
     and other Pokemon invisible)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1136,7 +1096,7 @@ abilities:
     \ Ranger. Lick can paralyse the enemy)"
   description: "Paralysis Inducement (Its attacks cause the 'paused' status in Pok\xE9\
     mon Ranger. Lick can paralyse the enemy)"
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1152,7 +1112,7 @@ abilities:
 - id: powers-and-abilities-dynamax
   name: Dynamax
   description: Dynamax
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1170,26 +1130,25 @@ abilities:
   description: "Resistance to Poison Moves, Bug, Grass, and Fairy moves, as well as\
     \ Sleep Manipulation and Mind Manipulation (Gastly can no-sell the mind control\
     \ of an enhanced Drowzee that could control every other Pok\xE9mon on an island)\
-    \ and Immunity to being Poisoned and Earth Manipulation (within limitations) |-|Haunter=Same\
+    \ and Immunity to being Poisoned and Earth Manipulation (within limitations) Same\
     \ as before to a greater exent, plus Life Force Absorption, Light Manipulation,\
     \ Telekinesis, possibly Dimensional Travel (Said to have come from another dimension)\
-    \ |-|Gengar=Same as before to a greater extent, sans Regeneration (Mid-High),\
-    \ plus Can absorb heat to lower temperature by 10 degrees Celsius and Regeneration\
-    \ (Likely Mid, can regenerate large holes in its body), Stealth Mastery (can disappear\
-    \ into shadows for sneak attacks) |-|Mega Gengar= Same but higher, Dimensional\
-    \ Travel (The third eye growth enables Mega Gengar to freely observe beings and\
-    \ events across space-time boundaries and see into alternate dimensions/universes),\
-    \ can immobilize an enemy's movement by making contact with its shadow |-|Gigantamax\
-    \ Gengar=All of Gengar's abilities plus, Gigantamax, Dimensional Travel and Death\
-    \ Manipulation (It's mouth is rumored to lead directly to the afterlife, Steals\
-    \ the lives of those it catches), Sound Manipulation (Standing in front of its\
-    \ mouth causes one to hear the voices of their loved ones), Superior Soul Manipulation,\
-    \ Telekinesis, Ectoplasm Manipulation, and Fear Manipulation via Max Terror (Prevents\
-    \ the opponent from switching out or fleeing), Superior Darkness Manipulation\
-    \ and Statistics Reduction (target's Sp. Def) via Max Darkness, Superior Mind\
-    \ Manipulation via Max Mindstorm (Changes the ground to Psychic Terrain), Forcefield\
-    \ Creation via Max Guard"
-  source_ids: *id005
+    \ Same as before to a greater extent, sans Regeneration (Mid-High), plus Can absorb\
+    \ heat to lower temperature by 10 degrees Celsius and Regeneration (Likely Mid,\
+    \ can regenerate large holes in its body), Stealth Mastery (can disappear into\
+    \ shadows for sneak attacks) Same but higher, Dimensional Travel (The third eye\
+    \ growth enables Mega Gengar to freely observe beings and events across space-time\
+    \ boundaries and see into alternate dimensions/universes), can immobilize an enemy's\
+    \ movement by making contact with its shadow All of Gengar's abilities plus, Gigantamax,\
+    \ Dimensional Travel and Death Manipulation (It's mouth is rumored to lead directly\
+    \ to the afterlife, Steals the lives of those it catches), Sound Manipulation\
+    \ (Standing in front of its mouth causes one to hear the voices of their loved\
+    \ ones), Superior Soul Manipulation, Telekinesis, Ectoplasm Manipulation, and\
+    \ Fear Manipulation via Max Terror (Prevents the opponent from switching out or\
+    \ fleeing), Superior Darkness Manipulation and Statistics Reduction (target's\
+    \ Sp. Def) via Max Darkness, Superior Mind Manipulation via Max Mindstorm (Changes\
+    \ the ground to Psychic Terrain), Forcefield Creation via Max Guard"
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1213,7 +1172,7 @@ equipment:
 - id: standard-equipment-bitter-berry-persim-berry-cures-confusion-when-consumed
   name: Bitter Berry/Persim Berry (Cures Confusion when consumed)
   description: Bitter Berry/Persim Berry (Cures Confusion when consumed)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1228,7 +1187,7 @@ equipment:
 - id: standard-equipment-gengarite-mega-gengar
   name: Gengarite (Mega Gengar)
   description: Gengarite (Mega Gengar)
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1267,7 +1226,7 @@ resistances:
     \ and Statistics Reduction (target's Sp. Def) via Max Darkness, Superior Mind\
     \ Manipulation via Max Mindstorm (Changes the ground to Psychic Terrain), Forcefield\
     \ Creation via Max Guard"
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1286,7 +1245,7 @@ weaknesses:
 - id: weaknesses-weak-against-ghost
   name: Weak against Ghost
   description: Weak against Ghost
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-gengar-pokemon
   source_claim_ids: []
   confidence: 0.85
@@ -1302,7 +1261,7 @@ weaknesses:
 - id: weaknesses-psychic-and-dark-type-attacks
   name: Psychic and Dark type attacks
   description: Psychic and Dark type attacks
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1321,7 +1280,7 @@ weaknesses:
     possession of a specific Mega Stone type that is uniquely attuned to that species
     and resonating the Stone with an accompanying Mega Ring (or similar device containing
     a Key Stone)
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1342,7 +1301,7 @@ weaknesses:
     specimens from harnessing the innate evolutio'
   description: 'which can only be constructed by artificial means: this excludes most
     wild specimens from harnessing the innate evolutionary potential'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1359,7 +1318,7 @@ weaknesses:
     Mega Evolution is not a permanent trans
   description: leaving only individuals in captivity as probable candidates for Mega
     Evolution. Mega Evolution is not a permanent transformation
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1376,7 +1335,7 @@ weaknesses:
     successfully concluded
   description: specimens immediately revert back to their "base" forms once combat
     has been successfully concluded
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1392,7 +1351,7 @@ weaknesses:
   name: Gigantamax can only be used in areas with Dynamax energy (i.e. dens and stadiums)
   description: Gigantamax can only be used in areas with Dynamax energy (i.e. dens
     and stadiums)
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1409,7 +1368,7 @@ weaknesses:
     Attacks/Techniques
   description: Destroying their non-move forcefield through any means will harm them
     Notable Attacks/Techniques
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1426,7 +1385,7 @@ weaknesses:
     mid-air for combat situations even while not act'
   description: 'Levitate: Gengar''s special ability. Gengar tend to continually hover
     in mid-air for combat situations even while not actively flying'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1442,7 +1401,7 @@ weaknesses:
   name: avoiding the ineptitude of its physiology in handling or traversing on land.
   description: avoiding the ineptitude of its physiology in handling or traversing
     on land.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1457,7 +1416,7 @@ weaknesses:
 - id: weaknesses-cursed-body-gengar-s-new-ability-gengar
   name: 'Cursed Body: Gengar''s new ability. Gengar'
   description: 'Cursed Body: Gengar''s new ability. Gengar'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1472,7 +1431,7 @@ weaknesses:
 - id: weaknesses-when-hit
   name: when hit
   description: when hit
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1489,7 +1448,7 @@ weaknesses:
     short period of time.
   description: has a chance of making sure the opponent cannot use that move again
     for a short period of time.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1505,7 +1464,7 @@ weaknesses:
   name: 'Shadow Tag: Mega Gengar''s special ability. As a result of the Mega Evolution'
   description: 'Shadow Tag: Mega Gengar''s special ability. As a result of the Mega
     Evolution'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1523,7 +1482,7 @@ weaknesses:
   description: Mega Gengar are able to completely restrict an entity's ability of
     locomotion by conventional means by entering or simply making contact with their
     shadow(s). However
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1539,7 +1498,7 @@ weaknesses:
 - id: weaknesses-spectral-or-ectoplasmic-beings-are-unaffected-by-this-ability
   name: spectral or ectoplasmic beings are unaffected by this ability
   description: spectral or ectoplasmic beings are unaffected by this ability
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1556,7 +1515,7 @@ weaknesses:
     can naturally learn will be listed in this pro'
   description: 'regardless of them possessing a shadow. Note: Only techniques that
     Gengar can naturally learn will be listed in this profile. No TMs'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1572,7 +1531,7 @@ weaknesses:
 - id: weaknesses-hms-or-tutor-moves
   name: HMs or Tutor Moves.
   description: HMs or Tutor Moves.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1589,7 +1548,7 @@ weaknesses:
     into a deep sleep.'
   description: 'Hypnosis: Gengar utilizes hypnotic suggestion to send the target organism
     into a deep sleep.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1605,7 +1564,7 @@ weaknesses:
 - id: weaknesses-lick-gengar-licks-the-opponent-with-its-gaseous-tongue
   name: 'Lick: Gengar licks the opponent with its gaseous tongue'
   description: 'Lick: Gengar licks the opponent with its gaseous tongue'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1621,7 +1580,7 @@ weaknesses:
   name: triggering physical paralysis and/or a strong possibility of death via convulsions.
   description: triggering physical paralysis and/or a strong possibility of death
     via convulsions.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1638,7 +1597,7 @@ weaknesses:
     time it uses the technique last used prior to'
   description: 'Spite: Gengar fires a hex that depletes the target''s stamina severely
     each time it uses the technique last used prior to the hex making contact.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1657,7 +1616,7 @@ weaknesses:
 - id: weaknesses-mean-look-gengar-fixes-a-dark
   name: 'Mean Look: Gengar fixes a dark'
   description: 'Mean Look: Gengar fixes a dark'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1672,7 +1631,7 @@ weaknesses:
 - id: weaknesses-arresting-look-at-the-opponent
   name: arresting look at the opponent
   description: arresting look at the opponent
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1689,7 +1648,7 @@ weaknesses:
     like teleportation are ineffectual.
   description: freezing their actions on the spot and preventing further escape. Even
     abilities like teleportation are ineffectual.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1709,7 +1668,7 @@ weaknesses:
   description: 'Curse: Gengar evokes a curse by reducing as much of half of its own
     health. The opponent is then "cursed" and gradually sapped of their own health
     until either unconsciousness or death.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1726,7 +1685,7 @@ weaknesses:
     a frightening mirage.'
   description: 'Night Shade: Gengar uses its ghostly powers to dupe the target into
     witnessing a frightening mirage.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1743,7 +1702,7 @@ weaknesses:
     the opponent.'
   description: 'Confuse Ray: Gengar releases a sinister ray of light which mentally
     disorientates the opponent.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1758,7 +1717,7 @@ weaknesses:
 - id: weaknesses-sucker-punch-from-a-secure-hiding-spot
   name: 'Sucker Punch: From a secure hiding spot'
   description: 'Sucker Punch: From a secure hiding spot'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1775,7 +1734,7 @@ weaknesses:
     seclusion.
   description: Gengar rushes out and performs a sneak strike before retreating back
     into seclusion.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1792,7 +1751,7 @@ weaknesses:
     unerring accuracy.'
   description: 'Shadow Punch: Gengar throws a fist composed of shadows at the opponent
     with unerring accuracy.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1807,7 +1766,7 @@ weaknesses:
 - id: weaknesses-payback-gengar-begins-to-store-up-its-energy-reserves
   name: 'Payback: Gengar begins to store up its energy reserves'
   description: 'Payback: Gengar begins to store up its energy reserves'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1826,7 +1785,7 @@ weaknesses:
     prior attack. The nature of the energy appears to enable Gengar to augment the
     strike beyond its standard power if it occurs after a previous offensive blow
     from the foe.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1841,7 +1800,7 @@ weaknesses:
 - id: weaknesses-shadow-ball-gengar-projects-a-blob-of-shadow-energy-at-the-opponent
   name: 'Shadow Ball: Gengar projects a blob of shadow energy at the opponent.'
   description: 'Shadow Ball: Gengar projects a blob of shadow energy at the opponent.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1856,7 +1815,7 @@ weaknesses:
 - id: weaknesses-dream-eater-gengar-begins-to-consume-the-dreams-of-sleeping-organisms
   name: 'Dream Eater: Gengar begins to consume the dreams of sleeping organisms'
   description: 'Dream Eater: Gengar begins to consume the dreams of sleeping organisms'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1873,7 +1832,7 @@ weaknesses:
     for regenerating health.
   description: stealing mental energy from them and using up to half of the absorbed
     energy for regenerating health.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1890,7 +1849,7 @@ weaknesses:
     dark aura'
   description: 'Dark Pulse: Gengar focuses its negative and violent thoughts into
     a visibly dark aura'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1906,7 +1865,7 @@ weaknesses:
   name: before projecting the aura outwards as an omnidirectional "wave" of dark energy.
   description: before projecting the aura outwards as an omnidirectional "wave" of
     dark energy.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1921,7 +1880,7 @@ weaknesses:
 - id: weaknesses-destiny-bond-gengar-casts-a-peculiar-energy-signature-outwards
   name: 'Destiny Bond: Gengar casts a peculiar energy signature outwards'
   description: 'Destiny Bond: Gengar casts a peculiar energy signature outwards'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1936,7 +1895,7 @@ weaknesses:
 - id: weaknesses-linking-it-with-a-certain-organism-when-gengar-falls-unconscious
   name: 'linking it with a certain organism: when Gengar falls unconscious'
   description: 'linking it with a certain organism: when Gengar falls unconscious'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1991,7 +1950,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: fe3851fc9de0d6933605875e67f1365ea6eca37f43cc5c8c8f6d7774e52cd52d
 repair:
-  attempted_at: '2026-10-10T22:14:11Z'
+  attempted_at: '2026-10-21T21:24:34Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -2008,7 +1967,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gengar
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -2051,7 +2010,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -2064,53 +2023,52 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}} | {{6-C}}
+      value: At most | | |
       source_id: mediawiki-741143
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "Gastly=Superhuman Physical Characteristics, Immortality (Types 3 and\
-        \ 7), Darkness and Shadow Manipulation, Enhanced Senses, Statistics Amplification,\
-        \ Statistics Reduction, Intangibility and Incorporeality (It is made up of\
-        \ a mixture of gases and souls. They can phase through walls), Possession,\
-        \ Curse Manipulation, Shapeshifting, Status Effect Inducement, Illusion Creation\
-        \ (Gastly can create illusions of fully evolved Pok\xE9mon. A group of Gastly\
-        \ made an illusion of fire), Reality Warping, Perception Manipulation (A group\
-        \ of Gastly once messed with the perception of Team Rocket), Necromancy (A\
-        \ Gastly once used its fog to resurrect Pok\xE9mon zombies), Sleep Manipulation,\
-        \ Mind Manipulation, Soul Manipulation, Size Manipulation, Poison Manipulation,\
-        \ Absorption of dreams, Healing, Power Nullification, Aura (Via Dark Pulse),\
-        \ Offensive Illusion Creation (Via Night Shade), Duplication, Flight, and\
-        \ Pseudo-Teleportation, Regeneration (Mid-High; Gastly is composed of gas\
-        \ and has no real shape, so it can reform itself), Damage Transferal (Via\
-        \ Destiny Bond), Minor Sealing (Via Mean Look), Electricity Manipulation,\
-        \ Fire Manipulation, Ice Manipulation, Invisibility (Gastly is almost completely\
-        \ invisible, and can turn itself and other Pokemon invisible), Paralysis Inducement\
-        \ (Its attacks cause the 'paused' status in Pok\xE9mon Ranger. Lick can paralyse\
-        \ the enemy), Dynamax, Resistance to Poison Moves, Bug, Grass, and Fairy moves,\
-        \ as well as Sleep Manipulation and Mind Manipulation (Gastly can no-sell\
-        \ the mind control of an enhanced Drowzee that could control every other Pok\xE9\
-        mon on an island) and Immunity to being Poisoned and Earth Manipulation (within\
-        \ limitations) |-|Haunter=Same as before to a greater exent, plus Life Force\
-        \ Absorption, Light Manipulation, Telekinesis, possibly Dimensional Travel\
-        \ (Said to have come from another dimension) |-|Gengar=Same as before to a\
-        \ greater extent, sans Regeneration (Mid-High), plus Can absorb heat to lower\
-        \ temperature by 10 degrees Celsius and Regeneration (Likely Mid, can regenerate\
-        \ large holes in its body), Stealth Mastery (can disappear into shadows for\
-        \ sneak attacks) |-|Mega Gengar= Same but higher, Dimensional Travel (The\
-        \ third eye growth enables Mega Gengar to freely observe beings and events\
+      value: "Superhuman Physical Characteristics, Immortality (Types 3 and 7), Darkness\
+        \ and Shadow Manipulation, Enhanced Senses, Statistics Amplification, Statistics\
+        \ Reduction, Intangibility and Incorporeality (It is made up of a mixture\
+        \ of gases and souls. They can phase through walls), Possession, Curse Manipulation,\
+        \ Shapeshifting, Status Effect Inducement, Illusion Creation (Gastly can create\
+        \ illusions of fully evolved Pok\xE9mon. A group of Gastly made an illusion\
+        \ of fire), Reality Warping, Perception Manipulation (A group of Gastly once\
+        \ messed with the perception of Team Rocket), Necromancy (A Gastly once used\
+        \ its fog to resurrect Pok\xE9mon zombies), Sleep Manipulation, Mind Manipulation,\
+        \ Soul Manipulation, Size Manipulation, Poison Manipulation, Absorption of\
+        \ dreams, Healing, Power Nullification, Aura (Via Dark Pulse), Offensive Illusion\
+        \ Creation (Via Night Shade), Duplication, Flight, and Pseudo-Teleportation,\
+        \ Regeneration (Mid-High; Gastly is composed of gas and has no real shape,\
+        \ so it can reform itself), Damage Transferal (Via Destiny Bond), Minor Sealing\
+        \ (Via Mean Look), Electricity Manipulation, Fire Manipulation, Ice Manipulation,\
+        \ Invisibility (Gastly is almost completely invisible, and can turn itself\
+        \ and other Pokemon invisible), Paralysis Inducement (Its attacks cause the\
+        \ 'paused' status in Pok\xE9mon Ranger. Lick can paralyse the enemy), Dynamax,\
+        \ Resistance to Poison Moves, Bug, Grass, and Fairy moves, as well as Sleep\
+        \ Manipulation and Mind Manipulation (Gastly can no-sell the mind control\
+        \ of an enhanced Drowzee that could control every other Pok\xE9mon on an island)\
+        \ and Immunity to being Poisoned and Earth Manipulation (within limitations)\
+        \ Same as before to a greater exent, plus Life Force Absorption, Light Manipulation,\
+        \ Telekinesis, possibly Dimensional Travel (Said to have come from another\
+        \ dimension) Same as before to a greater extent, sans Regeneration (Mid-High),\
+        \ plus Can absorb heat to lower temperature by 10 degrees Celsius and Regeneration\
+        \ (Likely Mid, can regenerate large holes in its body), Stealth Mastery (can\
+        \ disappear into shadows for sneak attacks) Same but higher, Dimensional Travel\
+        \ (The third eye growth enables Mega Gengar to freely observe beings and events\
         \ across space-time boundaries and see into alternate dimensions/universes),\
-        \ can immobilize an enemy's movement by making contact with its shadow |-|Gigantamax\
-        \ Gengar=All of Gengar's abilities plus, Gigantamax, Dimensional Travel and\
-        \ Death Manipulation (It's mouth is rumored to lead directly to the afterlife,\
-        \ Steals the lives of those it catches), Sound Manipulation (Standing in front\
-        \ of its mouth causes one to hear the voices of their loved ones), Superior\
-        \ Soul Manipulation, Telekinesis, Ectoplasm Manipulation, and Fear Manipulation\
-        \ via Max Terror (Prevents the opponent from switching out or fleeing), Superior\
-        \ Darkness Manipulation and Statistics Reduction (target's Sp. Def) via Max\
-        \ Darkness, Superior Mind Manipulation via Max Mindstorm (Changes the ground\
-        \ to Psychic Terrain), Forcefield Creation via Max Guard"
+        \ can immobilize an enemy's movement by making contact with its shadow All\
+        \ of Gengar's abilities plus, Gigantamax, Dimensional Travel and Death Manipulation\
+        \ (It's mouth is rumored to lead directly to the afterlife, Steals the lives\
+        \ of those it catches), Sound Manipulation (Standing in front of its mouth\
+        \ causes one to hear the voices of their loved ones), Superior Soul Manipulation,\
+        \ Telekinesis, Ectoplasm Manipulation, and Fear Manipulation via Max Terror\
+        \ (Prevents the opponent from switching out or fleeing), Superior Darkness\
+        \ Manipulation and Statistics Reduction (target's Sp. Def) via Max Darkness,\
+        \ Superior Mind Manipulation via Max Mindstorm (Changes the ground to Psychic\
+        \ Terrain), Forcefield Creation via Max Guard"
       source_id: mediawiki-741143
       provider_id: vsbattles
       authority: high
@@ -2243,14 +2201,14 @@ repair:
         \ oled616EfI1uhuflmo1 500.gif tenorj.gif tumblr nnj6ld8JkI1s5rmywo1 500.gif\
         \ tumblr m4hsmrkpJy1rwaejso1 500.gif 1506622415516.gif gengar-gif-18.gif ==Notable\
         \ Matchups== Victories: Xatu (Pok\xE9mon) Xatu's Profile (Base Gengar was\
-        \ used in this battle) Losses: Inconclusive: {{discussions}} Category:Characters\
-        \ Category:Species Category:Game Characters Category:Anime Characters Category:Pok\xE9\
-        mon Category:Ghosts Category:Darkness Users Category:Possession Users Category:Mind\
-        \ Users Category:Neutral Characters Category:Poison Users Category:Monsters\
-        \ Category:Intangibility Users Category:Mega Pok\xE9mon Category:Temperature\
-        \ Users Category:Absorption Users Category:Regeneration Users Category:Immortals\
-        \ Category:Undead Category:Reality Warpers Category:Illusionists Category:Healers\
-        \ Category:Enhanced Senses Users"
+        \ used in this battle) Losses: Inconclusive: Category:Characters Category:Species\
+        \ Category:Game Characters Category:Anime Characters Category:Pok\xE9mon Category:Ghosts\
+        \ Category:Darkness Users Category:Possession Users Category:Mind Users Category:Neutral\
+        \ Characters Category:Poison Users Category:Monsters Category:Intangibility\
+        \ Users Category:Mega Pok\xE9mon Category:Temperature Users Category:Absorption\
+        \ Users Category:Regeneration Users Category:Immortals Category:Undead Category:Reality\
+        \ Warpers Category:Illusionists Category:Healers Category:Enhanced Senses\
+        \ Users Category:Statist"
       source_id: mediawiki-741143
       provider_id: vsbattles
       authority: high
@@ -2268,11 +2226,199 @@ repair:
     duplicate_key: vsbattles.fandom.com|gengar|9413973
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-gengar-pokemon
+    url: https://character-stats-and-profiles.fandom.com/wiki/Gengar_%28Pokemon%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Gengar (Canon)/Niarobi
+    source_type: mediawiki
+    revision_id: '214607'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 11225
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: High 5-A to 3-B. 4-A to 3-B with Z-Moves and Dynamaxing | 4-C to 3-B.
+        4-A to 3-B with Z-Moves and Dynamaxing | 3-C to at least High 3-A | 3-C to
+        at least High 3-A, likely Low 2-C, possibly 2-C
+      source_id: character-stats-profiles-gengar-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "Superhuman Physical Characteristics, Immortality (Types 1, 2, 3, 4,\
+        \ and 7), Regeneration (Mid-High, can regenerate from exploding), Stealth\
+        \ Mastery, Willpower Manipulation, Martial Arts, Invisibility, Intangibility,\
+        \ Reality Warping, Flight, Soul Manipulation, Dream Manipulation, Nightmare\
+        \ Manipulation, Explosion Manipulation, Enhanced Senses, Extrasensory Perception,\
+        \ Fate Manipulation, Smoke Manipulation, Size Manipulation, Nightmare Manipulation,\
+        \ Pocket Reality Manipulation, Sealing, Statistics Amplification, Acid Manipulation,\
+        \ Energy Manipulation, Energy Projection, Mind Manipulation, Fear Manipulation,\
+        \ Statistics Reduction, Emotional Manipulation, Magic, Attack Reflection,\
+        \ Spatial Manipulation, Possession, Darkness Manipulation, Fire Manipulation,\
+        \ Hellfire Manipulation, Plant Manipulation, Black Hole Creation, Power Mimicry,\
+        \ Curse Manipulation, Death Manipulation, Intelligence Manipulation, Light\
+        \ Manipulation, Creation, Air Manipulation, Poison Manipulation, Summoning,\
+        \ Time Manipulation, Forcefield Creation, Ice Manipulation, Water Manipulation,\
+        \ Weather Manipulation, Power Nullification, Teleportation, Venom Manipulation,\
+        \ Telekinesis, Can steal the effects of moves, Can swap the opponent's physical\
+        \ and non-physical durability, Illusion Creation, Duplication, Sleep Manipulation,\
+        \ Electricity Manipulation, Summoning, Pain Manipulation, Sound Manipulation,\
+        \ BFR, Absorption, Can attack while sleeping, Aura, Healing, Can harm intangible\
+        \ beings, minds, and souls, sometimes Shapeshifting, Life Manipulation, Acausality\
+        \ (Anyone can bypass the effects of time by just ignoring reality), Causality\
+        \ Manipulation, Fate Manipulation, and Law Manipulation (There were several\
+        \ occasions where just any regular Pok\xE9mon are capable of changing the\
+        \ future when the future was already set, such as the time where Sabrina knew\
+        \ she would fight the protagonist three years in advance, and she foresaw\
+        \ their victory, and then changed the future to where she won, and yet they\
+        \ still won, anyway. Olympia can also predict the future and she sees battles\
+        \ as the trainers writing their futures and fates. It is clarified when fighting\
+        \ against one Hex Maniac that her clairvoyance was so potent that the player's\
+        \ Pok\xE9mon had to have rewrote the laws of causality to have won), Resistance\
+        \ to Earth Manipulation, Sand Manipulation, Bone Manipulation, Horse-based\
+        \ attacks, Martial Arts, Chi Manipulation, Plant Manipulation, Fungus Manipulation,\
+        \ Solar Manipulation, Poison Manipulation, Radiation Manipulation, Smoke Manipulation,\
+        \ Venom Manipulation, Acid Manipulation, Gross-based attacks, Snake-based\
+        \ attacks, Emotional Manipulation, Faery-based attacks, Bug-based attacks,\
+        \ and Sound Manipulation | All previous abilities boosted, Existence Erasure,\
+        \ Portal Creation | All previous abilities boosted, Heat Manipulation | All\
+        \ previous abilities boosted, Can prevent beings from moving by being in their\
+        \ shadows"
+      source_id: character-stats-profiles-gengar-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Dwarf Star level (Comparable to Pok\xE9mon who can use Seismic Toss\
+        \ and Moonlight) to Multi-Galaxy level (Unevolved Gastly can get so powerful\
+        \ over time that the Ghost of Maiden's Peak was capable of creating and uncreating\
+        \ powerful fully-evolved Pok\xE9mon and even fusing them. Ash found him too\
+        \ powerful to be defeated after fighting him alongside Brock, Misty, Jessie,\
+        \ and James.) Multi-Solar System level to Multi-Galaxy level with Z-Moves\
+        \ (All basic Z-Moves should scale to Twinkle Tackle, where we see a space\
+        \ that has a background full of stars, which is clarified in the move description\
+        \ to have been created by the user. Colress's description for why Z-Moves\
+        \ are so powerful is virtually the same for Magnolia's description for why\
+        \ Dynamaxing is powerful.) | Star level (Much more powerful than before. Comparable\
+        \ to Pok\xE9mon who can use Morning Sun) to Multi-Galaxy level (Over time,\
+        \ an unevolved Haunter should be able to become even more powerful than the\
+        \ Ghost of Maiden's Peak. Black Fog was a powerful and ancient unevolved Haunter\
+        \ from a time when Pok\xE9mon were worshiped as gods. Ash was incapable of\
+        \ defeating him and they resorted to making him commit suicide by repeated\
+        \ attempts at catching him.) Multi-Solar System level to Multi-Galaxy level\
+        \ with Z-Moves (All basic Z-Moves should scale to Twinkle Tackle, where we\
+        \ see a space that has a background full of stars, which is clarified in the\
+        \ move description to have been created by the user. Colress's description\
+        \ for why Z-Moves are so powerful is virtually the same for Magnolia's description\
+        \ for why Dynamaxing is powerful.) | Galaxy level+ (Comparable to most fully-evolved\
+        \ Pok\xE9mon, such as Gothitelle, who has spatial manipulation at this potency\
+        \ and can create a world with a background full of stars from its memories,\
+        \ Beheeyem, who can create a dream world with a background full of stars,\
+        \ Gardevoir, who can create a world with a background full of stars, Musharna,\
+        \ who can turn dream worlds to mist, and Mismagius, who can create a world\
+        \ with a background full of stars) to at least High Universe level (Over time,\
+        \ a Gengar should be able to become more powerful than the Ghost of Maiden's\
+        \ Peak or Black Fog. There was once a time when Gengar were giant and so powerful\
+        \ that attacks from fully-evolved Pok\xE9mon wouldn't even grasp his attention\
+        \ and it would threaten to destroy everything if him and another Pok\xE9mon\
+        \ on his level were to clash attacks. According to Lucian, the universe is\
+        \ infinite.) | Galaxy level (As a Mega Evolution, they should be far superior\
+        \ to their previous form) to at least High Universe level (If an ancient Gengar\
+        \ were to Mega-evolve, they should be far superior), Universe level+ (Can\
+        \ destroy universes. Should likely be comparable to Mega Gardevoir, who can\
+        \ create a universe), possibly at least Low Multiverse level (Possibly comparable\
+        \ to Mega Alakazam, who can merge parallel universes together.)"
+      source_id: character-stats-profiles-gengar-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: "At least FTL (Should be at least comparable in speed to Diglett, who\
+        \ was stated to be faster than light speed. Can dodge moves like Flash with\
+        \ a slight boost in speed) to at least FTL+ | FTL+ (Can keep up with Pok\xE9\
+        mon who can use Morning Sun), to at least FTL+ | FTL+ (Far faster than before),\
+        \ to at least FTL+ | At least FTL+ (Far faster than before.)"
+      source_id: character-stats-profiles-gengar-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Dwarf Star level to Multi-Galaxy level. Multi-Solar System level to Multi-Galaxy
+        level with Z-Power | Star level to Multi-Galaxy level. Multi-Solar System
+        level to Multi-Galaxy level with Z-Moves | Galaxy level+ to at least High
+        Universe level | Multi-Galaxy level to at least High Universe level, likely
+        Universe level+, possibly at least Low Multiverse level
+      source_id: character-stats-profiles-gengar-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Ghost, Psychic, and Dark type attacks. May get swept away by the wind.
+        | Ghost, Psychic, and Dark type attacks. Fears light. | Ghost, Psychic, and
+        Dark type attacks. | Same as Gengar.
+      source_id: character-stats-profiles-gengar-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|gengar canon niarobi|214607
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-gengar-pokemon
     url: https://vsbattles.fandom.com/wiki/Gengar_Pokemon
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields: &id008
     - attack_potency
     - durability
     - intelligence
@@ -2315,7 +2461,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -2326,53 +2472,52 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}} | {{6-C}}
+      value: At most | | |
       source_id: vsbattles-gengar-pokemon
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "Gastly=Superhuman Physical Characteristics, Immortality (Types 3 and\
-        \ 7), Darkness and Shadow Manipulation, Enhanced Senses, Statistics Amplification,\
-        \ Statistics Reduction, Intangibility and Incorporeality (It is made up of\
-        \ a mixture of gases and souls. They can phase through walls), Possession,\
-        \ Curse Manipulation, Shapeshifting, Status Effect Inducement, Illusion Creation\
-        \ (Gastly can create illusions of fully evolved Pok\xE9mon. A group of Gastly\
-        \ made an illusion of fire), Reality Warping, Perception Manipulation (A group\
-        \ of Gastly once messed with the perception of Team Rocket), Necromancy (A\
-        \ Gastly once used its fog to resurrect Pok\xE9mon zombies), Sleep Manipulation,\
-        \ Mind Manipulation, Soul Manipulation, Size Manipulation, Poison Manipulation,\
-        \ Absorption of dreams, Healing, Power Nullification, Aura (Via Dark Pulse),\
-        \ Offensive Illusion Creation (Via Night Shade), Duplication, Flight, and\
-        \ Pseudo-Teleportation, Regeneration (Mid-High; Gastly is composed of gas\
-        \ and has no real shape, so it can reform itself), Damage Transferal (Via\
-        \ Destiny Bond), Minor Sealing (Via Mean Look), Electricity Manipulation,\
-        \ Fire Manipulation, Ice Manipulation, Invisibility (Gastly is almost completely\
-        \ invisible, and can turn itself and other Pokemon invisible), Paralysis Inducement\
-        \ (Its attacks cause the 'paused' status in Pok\xE9mon Ranger. Lick can paralyse\
-        \ the enemy), Dynamax, Resistance to Poison Moves, Bug, Grass, and Fairy moves,\
-        \ as well as Sleep Manipulation and Mind Manipulation (Gastly can no-sell\
-        \ the mind control of an enhanced Drowzee that could control every other Pok\xE9\
-        mon on an island) and Immunity to being Poisoned and Earth Manipulation (within\
-        \ limitations) |-|Haunter=Same as before to a greater exent, plus Life Force\
-        \ Absorption, Light Manipulation, Telekinesis, possibly Dimensional Travel\
-        \ (Said to have come from another dimension) |-|Gengar=Same as before to a\
-        \ greater extent, sans Regeneration (Mid-High), plus Can absorb heat to lower\
-        \ temperature by 10 degrees Celsius and Regeneration (Likely Mid, can regenerate\
-        \ large holes in its body), Stealth Mastery (can disappear into shadows for\
-        \ sneak attacks) |-|Mega Gengar= Same but higher, Dimensional Travel (The\
-        \ third eye growth enables Mega Gengar to freely observe beings and events\
+      value: "Superhuman Physical Characteristics, Immortality (Types 3 and 7), Darkness\
+        \ and Shadow Manipulation, Enhanced Senses, Statistics Amplification, Statistics\
+        \ Reduction, Intangibility and Incorporeality (It is made up of a mixture\
+        \ of gases and souls. They can phase through walls), Possession, Curse Manipulation,\
+        \ Shapeshifting, Status Effect Inducement, Illusion Creation (Gastly can create\
+        \ illusions of fully evolved Pok\xE9mon. A group of Gastly made an illusion\
+        \ of fire), Reality Warping, Perception Manipulation (A group of Gastly once\
+        \ messed with the perception of Team Rocket), Necromancy (A Gastly once used\
+        \ its fog to resurrect Pok\xE9mon zombies), Sleep Manipulation, Mind Manipulation,\
+        \ Soul Manipulation, Size Manipulation, Poison Manipulation, Absorption of\
+        \ dreams, Healing, Power Nullification, Aura (Via Dark Pulse), Offensive Illusion\
+        \ Creation (Via Night Shade), Duplication, Flight, and Pseudo-Teleportation,\
+        \ Regeneration (Mid-High; Gastly is composed of gas and has no real shape,\
+        \ so it can reform itself), Damage Transferal (Via Destiny Bond), Minor Sealing\
+        \ (Via Mean Look), Electricity Manipulation, Fire Manipulation, Ice Manipulation,\
+        \ Invisibility (Gastly is almost completely invisible, and can turn itself\
+        \ and other Pokemon invisible), Paralysis Inducement (Its attacks cause the\
+        \ 'paused' status in Pok\xE9mon Ranger. Lick can paralyse the enemy), Dynamax,\
+        \ Resistance to Poison Moves, Bug, Grass, and Fairy moves, as well as Sleep\
+        \ Manipulation and Mind Manipulation (Gastly can no-sell the mind control\
+        \ of an enhanced Drowzee that could control every other Pok\xE9mon on an island)\
+        \ and Immunity to being Poisoned and Earth Manipulation (within limitations)\
+        \ Same as before to a greater exent, plus Life Force Absorption, Light Manipulation,\
+        \ Telekinesis, possibly Dimensional Travel (Said to have come from another\
+        \ dimension) Same as before to a greater extent, sans Regeneration (Mid-High),\
+        \ plus Can absorb heat to lower temperature by 10 degrees Celsius and Regeneration\
+        \ (Likely Mid, can regenerate large holes in its body), Stealth Mastery (can\
+        \ disappear into shadows for sneak attacks) Same but higher, Dimensional Travel\
+        \ (The third eye growth enables Mega Gengar to freely observe beings and events\
         \ across space-time boundaries and see into alternate dimensions/universes),\
-        \ can immobilize an enemy's movement by making contact with its shadow |-|Gigantamax\
-        \ Gengar=All of Gengar's abilities plus, Gigantamax, Dimensional Travel and\
-        \ Death Manipulation (It's mouth is rumored to lead directly to the afterlife,\
-        \ Steals the lives of those it catches), Sound Manipulation (Standing in front\
-        \ of its mouth causes one to hear the voices of their loved ones), Superior\
-        \ Soul Manipulation, Telekinesis, Ectoplasm Manipulation, and Fear Manipulation\
-        \ via Max Terror (Prevents the opponent from switching out or fleeing), Superior\
-        \ Darkness Manipulation and Statistics Reduction (target's Sp. Def) via Max\
-        \ Darkness, Superior Mind Manipulation via Max Mindstorm (Changes the ground\
-        \ to Psychic Terrain), Forcefield Creation via Max Guard"
+        \ can immobilize an enemy's movement by making contact with its shadow All\
+        \ of Gengar's abilities plus, Gigantamax, Dimensional Travel and Death Manipulation\
+        \ (It's mouth is rumored to lead directly to the afterlife, Steals the lives\
+        \ of those it catches), Sound Manipulation (Standing in front of its mouth\
+        \ causes one to hear the voices of their loved ones), Superior Soul Manipulation,\
+        \ Telekinesis, Ectoplasm Manipulation, and Fear Manipulation via Max Terror\
+        \ (Prevents the opponent from switching out or fleeing), Superior Darkness\
+        \ Manipulation and Statistics Reduction (target's Sp. Def) via Max Darkness,\
+        \ Superior Mind Manipulation via Max Mindstorm (Changes the ground to Psychic\
+        \ Terrain), Forcefield Creation via Max Guard"
       source_id: vsbattles-gengar-pokemon
       provider_id: vsbattles
       authority: high
@@ -2505,14 +2650,14 @@ repair:
         \ oled616EfI1uhuflmo1 500.gif tenorj.gif tumblr nnj6ld8JkI1s5rmywo1 500.gif\
         \ tumblr m4hsmrkpJy1rwaejso1 500.gif 1506622415516.gif gengar-gif-18.gif ==Notable\
         \ Matchups== Victories: Xatu (Pok\xE9mon) Xatu's Profile (Base Gengar was\
-        \ used in this battle) Losses: Inconclusive: {{discussions}} Category:Characters\
-        \ Category:Species Category:Game Characters Category:Anime Characters Category:Pok\xE9\
-        mon Category:Ghosts Category:Darkness Users Category:Possession Users Category:Mind\
-        \ Users Category:Neutral Characters Category:Poison Users Category:Monsters\
-        \ Category:Intangibility Users Category:Mega Pok\xE9mon Category:Temperature\
-        \ Users Category:Absorption Users Category:Regeneration Users Category:Immortals\
-        \ Category:Undead Category:Reality Warpers Category:Illusionists Category:Healers\
-        \ Category:Enhanced Senses Users"
+        \ used in this battle) Losses: Inconclusive: Category:Characters Category:Species\
+        \ Category:Game Characters Category:Anime Characters Category:Pok\xE9mon Category:Ghosts\
+        \ Category:Darkness Users Category:Possession Users Category:Mind Users Category:Neutral\
+        \ Characters Category:Poison Users Category:Monsters Category:Intangibility\
+        \ Users Category:Mega Pok\xE9mon Category:Temperature Users Category:Absorption\
+        \ Users Category:Regeneration Users Category:Immortals Category:Undead Category:Reality\
+        \ Warpers Category:Illusionists Category:Healers Category:Enhanced Senses\
+        \ Users Category:Statist"
       source_id: vsbattles-gengar-pokemon
       provider_id: vsbattles
       authority: high
@@ -2722,7 +2867,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gengar_%28Pokemon%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id010
     - attack_potency
     - durability
     - intelligence
@@ -2765,7 +2910,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id011
     - attack_potency
     - speed
     - durability
@@ -2776,53 +2921,52 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: At most {{Low 7-B}} | {{7-A}} | {{6-C}} | {{6-C}} | {{6-C}}
+      value: At most | | |
       source_id: vsbattles-gengar-pokemon
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "Gastly=Superhuman Physical Characteristics, Immortality (Types 3 and\
-        \ 7), Darkness and Shadow Manipulation, Enhanced Senses, Statistics Amplification,\
-        \ Statistics Reduction, Intangibility and Incorporeality (It is made up of\
-        \ a mixture of gases and souls. They can phase through walls), Possession,\
-        \ Curse Manipulation, Shapeshifting, Status Effect Inducement, Illusion Creation\
-        \ (Gastly can create illusions of fully evolved Pok\xE9mon. A group of Gastly\
-        \ made an illusion of fire), Reality Warping, Perception Manipulation (A group\
-        \ of Gastly once messed with the perception of Team Rocket), Necromancy (A\
-        \ Gastly once used its fog to resurrect Pok\xE9mon zombies), Sleep Manipulation,\
-        \ Mind Manipulation, Soul Manipulation, Size Manipulation, Poison Manipulation,\
-        \ Absorption of dreams, Healing, Power Nullification, Aura (Via Dark Pulse),\
-        \ Offensive Illusion Creation (Via Night Shade), Duplication, Flight, and\
-        \ Pseudo-Teleportation, Regeneration (Mid-High; Gastly is composed of gas\
-        \ and has no real shape, so it can reform itself), Damage Transferal (Via\
-        \ Destiny Bond), Minor Sealing (Via Mean Look), Electricity Manipulation,\
-        \ Fire Manipulation, Ice Manipulation, Invisibility (Gastly is almost completely\
-        \ invisible, and can turn itself and other Pokemon invisible), Paralysis Inducement\
-        \ (Its attacks cause the 'paused' status in Pok\xE9mon Ranger. Lick can paralyse\
-        \ the enemy), Dynamax, Resistance to Poison Moves, Bug, Grass, and Fairy moves,\
-        \ as well as Sleep Manipulation and Mind Manipulation (Gastly can no-sell\
-        \ the mind control of an enhanced Drowzee that could control every other Pok\xE9\
-        mon on an island) and Immunity to being Poisoned and Earth Manipulation (within\
-        \ limitations) |-|Haunter=Same as before to a greater exent, plus Life Force\
-        \ Absorption, Light Manipulation, Telekinesis, possibly Dimensional Travel\
-        \ (Said to have come from another dimension) |-|Gengar=Same as before to a\
-        \ greater extent, sans Regeneration (Mid-High), plus Can absorb heat to lower\
-        \ temperature by 10 degrees Celsius and Regeneration (Likely Mid, can regenerate\
-        \ large holes in its body), Stealth Mastery (can disappear into shadows for\
-        \ sneak attacks) |-|Mega Gengar= Same but higher, Dimensional Travel (The\
-        \ third eye growth enables Mega Gengar to freely observe beings and events\
+      value: "Superhuman Physical Characteristics, Immortality (Types 3 and 7), Darkness\
+        \ and Shadow Manipulation, Enhanced Senses, Statistics Amplification, Statistics\
+        \ Reduction, Intangibility and Incorporeality (It is made up of a mixture\
+        \ of gases and souls. They can phase through walls), Possession, Curse Manipulation,\
+        \ Shapeshifting, Status Effect Inducement, Illusion Creation (Gastly can create\
+        \ illusions of fully evolved Pok\xE9mon. A group of Gastly made an illusion\
+        \ of fire), Reality Warping, Perception Manipulation (A group of Gastly once\
+        \ messed with the perception of Team Rocket), Necromancy (A Gastly once used\
+        \ its fog to resurrect Pok\xE9mon zombies), Sleep Manipulation, Mind Manipulation,\
+        \ Soul Manipulation, Size Manipulation, Poison Manipulation, Absorption of\
+        \ dreams, Healing, Power Nullification, Aura (Via Dark Pulse), Offensive Illusion\
+        \ Creation (Via Night Shade), Duplication, Flight, and Pseudo-Teleportation,\
+        \ Regeneration (Mid-High; Gastly is composed of gas and has no real shape,\
+        \ so it can reform itself), Damage Transferal (Via Destiny Bond), Minor Sealing\
+        \ (Via Mean Look), Electricity Manipulation, Fire Manipulation, Ice Manipulation,\
+        \ Invisibility (Gastly is almost completely invisible, and can turn itself\
+        \ and other Pokemon invisible), Paralysis Inducement (Its attacks cause the\
+        \ 'paused' status in Pok\xE9mon Ranger. Lick can paralyse the enemy), Dynamax,\
+        \ Resistance to Poison Moves, Bug, Grass, and Fairy moves, as well as Sleep\
+        \ Manipulation and Mind Manipulation (Gastly can no-sell the mind control\
+        \ of an enhanced Drowzee that could control every other Pok\xE9mon on an island)\
+        \ and Immunity to being Poisoned and Earth Manipulation (within limitations)\
+        \ Same as before to a greater exent, plus Life Force Absorption, Light Manipulation,\
+        \ Telekinesis, possibly Dimensional Travel (Said to have come from another\
+        \ dimension) Same as before to a greater extent, sans Regeneration (Mid-High),\
+        \ plus Can absorb heat to lower temperature by 10 degrees Celsius and Regeneration\
+        \ (Likely Mid, can regenerate large holes in its body), Stealth Mastery (can\
+        \ disappear into shadows for sneak attacks) Same but higher, Dimensional Travel\
+        \ (The third eye growth enables Mega Gengar to freely observe beings and events\
         \ across space-time boundaries and see into alternate dimensions/universes),\
-        \ can immobilize an enemy's movement by making contact with its shadow |-|Gigantamax\
-        \ Gengar=All of Gengar's abilities plus, Gigantamax, Dimensional Travel and\
-        \ Death Manipulation (It's mouth is rumored to lead directly to the afterlife,\
-        \ Steals the lives of those it catches), Sound Manipulation (Standing in front\
-        \ of its mouth causes one to hear the voices of their loved ones), Superior\
-        \ Soul Manipulation, Telekinesis, Ectoplasm Manipulation, and Fear Manipulation\
-        \ via Max Terror (Prevents the opponent from switching out or fleeing), Superior\
-        \ Darkness Manipulation and Statistics Reduction (target's Sp. Def) via Max\
-        \ Darkness, Superior Mind Manipulation via Max Mindstorm (Changes the ground\
-        \ to Psychic Terrain), Forcefield Creation via Max Guard"
+        \ can immobilize an enemy's movement by making contact with its shadow All\
+        \ of Gengar's abilities plus, Gigantamax, Dimensional Travel and Death Manipulation\
+        \ (It's mouth is rumored to lead directly to the afterlife, Steals the lives\
+        \ of those it catches), Sound Manipulation (Standing in front of its mouth\
+        \ causes one to hear the voices of their loved ones), Superior Soul Manipulation,\
+        \ Telekinesis, Ectoplasm Manipulation, and Fear Manipulation via Max Terror\
+        \ (Prevents the opponent from switching out or fleeing), Superior Darkness\
+        \ Manipulation and Statistics Reduction (target's Sp. Def) via Max Darkness,\
+        \ Superior Mind Manipulation via Max Mindstorm (Changes the ground to Psychic\
+        \ Terrain), Forcefield Creation via Max Guard"
       source_id: vsbattles-gengar-pokemon
       provider_id: vsbattles
       authority: high
@@ -2955,14 +3099,14 @@ repair:
         \ oled616EfI1uhuflmo1 500.gif tenorj.gif tumblr nnj6ld8JkI1s5rmywo1 500.gif\
         \ tumblr m4hsmrkpJy1rwaejso1 500.gif 1506622415516.gif gengar-gif-18.gif ==Notable\
         \ Matchups== Victories: Xatu (Pok\xE9mon) Xatu's Profile (Base Gengar was\
-        \ used in this battle) Losses: Inconclusive: {{discussions}} Category:Characters\
-        \ Category:Species Category:Game Characters Category:Anime Characters Category:Pok\xE9\
-        mon Category:Ghosts Category:Darkness Users Category:Possession Users Category:Mind\
-        \ Users Category:Neutral Characters Category:Poison Users Category:Monsters\
-        \ Category:Intangibility Users Category:Mega Pok\xE9mon Category:Temperature\
-        \ Users Category:Absorption Users Category:Regeneration Users Category:Immortals\
-        \ Category:Undead Category:Reality Warpers Category:Illusionists Category:Healers\
-        \ Category:Enhanced Senses Users"
+        \ used in this battle) Losses: Inconclusive: Category:Characters Category:Species\
+        \ Category:Game Characters Category:Anime Characters Category:Pok\xE9mon Category:Ghosts\
+        \ Category:Darkness Users Category:Possession Users Category:Mind Users Category:Neutral\
+        \ Characters Category:Poison Users Category:Monsters Category:Intangibility\
+        \ Users Category:Mega Pok\xE9mon Category:Temperature Users Category:Absorption\
+        \ Users Category:Regeneration Users Category:Immortals Category:Undead Category:Reality\
+        \ Warpers Category:Illusionists Category:Healers Category:Enhanced Senses\
+        \ Users Category:Statist"
       source_id: vsbattles-gengar-pokemon
       provider_id: vsbattles
       authority: high
@@ -2978,194 +3122,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|gengar|9413973
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-gengar-pokemon
-    url: https://character-stats-and-profiles.fandom.com/wiki/Gengar_%28Pokemon%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Gengar (Canon)/Niarobi
-    source_type: mediawiki
-    revision_id: '214607'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 11225
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: High 5-A to 3-B. 4-A to 3-B with Z-Moves and Dynamaxing | 4-C to 3-B.
-        4-A to 3-B with Z-Moves and Dynamaxing | 3-C to at least High 3-A | 3-C to
-        at least High 3-A, likely Low 2-C, possibly 2-C
-      source_id: character-stats-profiles-gengar-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Immortality (Types 1, 2, 3, 4,\
-        \ and 7), Regeneration (Mid-High, can regenerate from exploding), Stealth\
-        \ Mastery, Willpower Manipulation, Martial Arts, Invisibility, Intangibility,\
-        \ Reality Warping, Flight, Soul Manipulation, Dream Manipulation, Nightmare\
-        \ Manipulation, Explosion Manipulation, Enhanced Senses, Extrasensory Perception,\
-        \ Fate Manipulation, Smoke Manipulation, Size Manipulation, Nightmare Manipulation,\
-        \ Pocket Reality Manipulation, Sealing, Statistics Amplification, Acid Manipulation,\
-        \ Energy Manipulation, Energy Projection, Mind Manipulation, Fear Manipulation,\
-        \ Statistics Reduction, Emotional Manipulation, Magic, Attack Reflection,\
-        \ Spatial Manipulation, Possession, Darkness Manipulation, Fire Manipulation,\
-        \ Hellfire Manipulation, Plant Manipulation, Black Hole Creation, Power Mimicry,\
-        \ Curse Manipulation, Death Manipulation, Intelligence Manipulation, Light\
-        \ Manipulation, Creation, Air Manipulation, Poison Manipulation, Summoning,\
-        \ Time Manipulation, Forcefield Creation, Ice Manipulation, Water Manipulation,\
-        \ Weather Manipulation, Power Nullification, Teleportation, Venom Manipulation,\
-        \ Telekinesis, Can steal the effects of moves, Can swap the opponent's physical\
-        \ and non-physical durability, Illusion Creation, Duplication, Sleep Manipulation,\
-        \ Electricity Manipulation, Summoning, Pain Manipulation, Sound Manipulation,\
-        \ BFR, Absorption, Can attack while sleeping, Aura, Healing, Can harm intangible\
-        \ beings, minds, and souls, sometimes Shapeshifting, Life Manipulation, Acausality\
-        \ (Anyone can bypass the effects of time by just ignoring reality), Causality\
-        \ Manipulation, Fate Manipulation, and Law Manipulation (There were several\
-        \ occasions where just any regular Pok\xE9mon are capable of changing the\
-        \ future when the future was already set, such as the time where Sabrina knew\
-        \ she would fight the protagonist three years in advance, and she foresaw\
-        \ their victory, and then changed the future to where she won, and yet they\
-        \ still won, anyway. Olympia can also predict the future and she sees battles\
-        \ as the trainers writing their futures and fates. It is clarified when fighting\
-        \ against one Hex Maniac that her clairvoyance was so potent that the player's\
-        \ Pok\xE9mon had to have rewrote the laws of causality to have won), Resistance\
-        \ to Earth Manipulation, Sand Manipulation, Bone Manipulation, Horse-based\
-        \ attacks, Martial Arts, Chi Manipulation, Plant Manipulation, Fungus Manipulation,\
-        \ Solar Manipulation, Poison Manipulation, Radiation Manipulation, Smoke Manipulation,\
-        \ Venom Manipulation, Acid Manipulation, Gross-based attacks, Snake-based\
-        \ attacks, Emotional Manipulation, Faery-based attacks, Bug-based attacks,\
-        \ and Sound Manipulation | All previous abilities boosted, Existence Erasure,\
-        \ Portal Creation | All previous abilities boosted, Heat Manipulation | All\
-        \ previous abilities boosted, Can prevent beings from moving by being in their\
-        \ shadows"
-      source_id: character-stats-profiles-gengar-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: "Dwarf Star level (Comparable to Pok\xE9mon who can use Seismic Toss\
-        \ and Moonlight) to Multi-Galaxy level (Unevolved Gastly can get so powerful\
-        \ over time that the Ghost of Maiden's Peak was capable of creating and uncreating\
-        \ powerful fully-evolved Pok\xE9mon and even fusing them. Ash found him too\
-        \ powerful to be defeated after fighting him alongside Brock, Misty, Jessie,\
-        \ and James.) Multi-Solar System level to Multi-Galaxy level with Z-Moves\
-        \ (All basic Z-Moves should scale to Twinkle Tackle, where we see a space\
-        \ that has a background full of stars, which is clarified in the move description\
-        \ to have been created by the user. Colress's description for why Z-Moves\
-        \ are so powerful is virtually the same for Magnolia's description for why\
-        \ Dynamaxing is powerful.) | Star level (Much more powerful than before. Comparable\
-        \ to Pok\xE9mon who can use Morning Sun) to Multi-Galaxy level (Over time,\
-        \ an unevolved Haunter should be able to become even more powerful than the\
-        \ Ghost of Maiden's Peak. Black Fog was a powerful and ancient unevolved Haunter\
-        \ from a time when Pok\xE9mon were worshiped as gods. Ash was incapable of\
-        \ defeating him and they resorted to making him commit suicide by repeated\
-        \ attempts at catching him.) Multi-Solar System level to Multi-Galaxy level\
-        \ with Z-Moves (All basic Z-Moves should scale to Twinkle Tackle, where we\
-        \ see a space that has a background full of stars, which is clarified in the\
-        \ move description to have been created by the user. Colress's description\
-        \ for why Z-Moves are so powerful is virtually the same for Magnolia's description\
-        \ for why Dynamaxing is powerful.) | Galaxy level+ (Comparable to most fully-evolved\
-        \ Pok\xE9mon, such as Gothitelle, who has spatial manipulation at this potency\
-        \ and can create a world with a background full of stars from its memories,\
-        \ Beheeyem, who can create a dream world with a background full of stars,\
-        \ Gardevoir, who can create a world with a background full of stars, Musharna,\
-        \ who can turn dream worlds to mist, and Mismagius, who can create a world\
-        \ with a background full of stars) to at least High Universe level (Over time,\
-        \ a Gengar should be able to become more powerful than the Ghost of Maiden's\
-        \ Peak or Black Fog. There was once a time when Gengar were giant and so powerful\
-        \ that attacks from fully-evolved Pok\xE9mon wouldn't even grasp his attention\
-        \ and it would threaten to destroy everything if him and another Pok\xE9mon\
-        \ on his level were to clash attacks. According to Lucian, the universe is\
-        \ infinite.) | Galaxy level (As a Mega Evolution, they should be far superior\
-        \ to their previous form) to at least High Universe level (If an ancient Gengar\
-        \ were to Mega-evolve, they should be far superior), Universe level+ (Can\
-        \ destroy universes. Should likely be comparable to Mega Gardevoir, who can\
-        \ create a universe), possibly at least Low Multiverse level (Possibly comparable\
-        \ to Mega Alakazam, who can merge parallel universes together.)"
-      source_id: character-stats-profiles-gengar-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: "At least FTL (Should be at least comparable in speed to Diglett, who\
-        \ was stated to be faster than light speed. Can dodge moves like Flash with\
-        \ a slight boost in speed) to at least FTL+ | FTL+ (Can keep up with Pok\xE9\
-        mon who can use Morning Sun), to at least FTL+ | FTL+ (Far faster than before),\
-        \ to at least FTL+ | At least FTL+ (Far faster than before.)"
-      source_id: character-stats-profiles-gengar-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Dwarf Star level to Multi-Galaxy level. Multi-Solar System level to Multi-Galaxy
-        level with Z-Power | Star level to Multi-Galaxy level. Multi-Solar System
-        level to Multi-Galaxy level with Z-Moves | Galaxy level+ to at least High
-        Universe level | Multi-Galaxy level to at least High Universe level, likely
-        Universe level+, possibly at least Low Multiverse level
-      source_id: character-stats-profiles-gengar-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Ghost, Psychic, and Dark type attacks. May get swept away by the wind.
-        | Ghost, Psychic, and Dark type attacks. Fears light. | Ghost, Psychic, and
-        Dark type attacks. | Same as Gengar.
-      source_id: character-stats-profiles-gengar-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|gengar canon niarobi|214607
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-gengar
@@ -3363,26 +3319,40 @@ repair:
     extracted_fields:
     - attack_potency
     - durability
-    - intelligence
-    - powers_and_abilities
-    - range
     - speed
-    - stamina
     - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Leaf
+    normalized_page_title: "Pok\xE9mon"
     source_type: mediawiki
-    revision_id: '9407391'
+    revision_id: '9710294'
     fetch_status: fetched
     http_status: 200
-    content_length: 9366
+    content_length: 52521
     content_kind: api_json
     headings_detected:
     - Summary
-    - Powers and Stats
+    - Power of the Verse
+    - Calculations
+    - Notes
+    - Knowledgeable Members
+    - Supporters/Opponents/Neutral
+    - Supporters
+    - Opponents
+    - Neutral
+    - Characters
+    - "Pok\xE9mon (by Species)"
+    - Games
+    - Anime
+    - Manga
+    - Movies
+    - "Pok\xE9mon Trainers"
+    - Games
+    - Anime
+    - Manga
+    - Other Creatures
+    - Equipment
+    - Civilizations
+    - Transformations
     - Gallery
-    - Notable Matchups
     stat_labels_detected:
     - attack_potency
     - durability
@@ -3397,9 +3367,8 @@ repair:
     - standard_equipment
     - striking_strength
     - tier
-    - weaknesses
     extraction_failure_reason: ''
-    rank: 80
+    rank: 65
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -3413,116 +3382,63 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{9-B}} | {{6-C}}, higher with Mega Blastoise'
-      source_id: vsbattles-gengar-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Superhuman Physical Characteristics, Sealing (Via Pok\xE9 Balls), Can\
-        \ give to her Pok\xE9mon: Healing and Purification (Type 3. Via Recovery Items),\
-        \ Statistics Amplification (Via Battle Effect Items, Berries and Hold Items),\
-        \ Transformation (Via Evolutionary Items) | Superhuman Physical Characteristics,\
-        \ Enhanced Senses, Non-Physical Interaction [All], Energy Projection, Forcefield\
-        \ Creation and Damage Reduction, Status Effect Inducement, Fire Manipulation,\
-        \ Ice Manipulation, and Electricity Manipulation [Clefable]. Intangibility,\
-        \ Darkness Manipulation, Poison Manipulation, and Status Effect Inducement\
-        \ through Fire Manipulation [Gengar]. Plant Manipulation, Poison Manipulation,\
-        \ Darkness Manipulation, and Absorption [Victreebel]. Fire Manipulation, Darkness\
-        \ Manipulation, and Energy Projection [Ninetales]. Status Effect Inducement,\
-        \ Darkness Manipulation, Electricity Manipulation, and Martial Arts [Kangaskhan].\
-        \ Water Manipulation, Metal Manipulation, Ice Manipulation, Status Effect\
-        \ Inducement, and Transformation [Blastoise]."
-      source_id: vsbattles-gengar-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: attack_potency
-      value: "Wall level+ (Comparable to regular Trainers such as Jessie, James or\
-        \ Red) | Island level (Equal to Blue and is thusly superior to the Elite Four;\
-        \ entered the Cerulean Cave, which you need to be at the level of a Pokemon\
-        \ Champion to be allowed to do, battled a Chase that had already fought the\
-        \ Pikachu Master Trainer, while Master Trainers themselves possess the strongest\
-        \ trained Pok\xE9mon known to man), higher with Mega Blastoise."
-      source_id: vsbattles-gengar-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: "Peak Human with FTL reactions (Comparable to Trainers as Yellow or Cynthia\
-        \ who can dodge and react to attacks from fully evolved Pok\xE9mon) | FTL\
-        \ (Can keep up with high tier trainers like Chase and Blue)"
+      value: "*Team Rocket Trio stops Dragonite (0.004 Tons - Wall level+) *Magikarp\
+        \ splash impact (0.011 Tons - Small Building level) *Espurr obliterates everything\
+        \ around him (80.3 Tons - City Block level+) *Rhyhorn destroys a skyscraper\
+        \ with a Tackle (647.65 Tons - Multi-City Block level+) *Catastropika's power\
+        \ (2.45 Kilotons - Small Town level) *Piplup's Whirlpool (131.04 Kilotons\
+        \ - Large Town level) *Pupitar topples a mountain (187.1 Kilotons - Large\
+        \ Town level) *Rhyhorn shatters a mountain (1.45 Megatons - Small City level)\
+        \ *Dragonair destroys a city (45.88 Megatons - City level) *Giant Piloswine's\
+        \ Earthquake (2.935 Gigatons - Large Mountain level+) *Tyranitar's mountain-destroying\
+        \ earthquakes (3.181 Gigatons - Large Mountain level+) *Dugtrio's 60 mile\
+        \ earthquake (4.174 Gigatons - Large Mountain level+) *Abomasnow Makes a Snowstorm\
+        \ (4.34 Gigatons - Island level) *Mega Pok\xE9mon and fully evolved Dynamax\
+        \ and Gigantamax Pok\xE9mon scale to >5x this value (>15.905 Gigatons - Island\
+        \ level) *Ho-Oh's feather creates a storm (38 Teratons - Country level - 193.3\
+        \ Petatons - Multi-Continent level) *Groudon raises the continents (216.31\
+        \ Petatons - Multi-Continent level) *Deoxys destroys the planet (896.53 Zettatons\
+        \ - Planet level)"
       source_id: vsbattles-gengar-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Island level (Comparable to regular Trainers such as Jessie, James or
-        Red) | Island level, higher with Mega Blastoise.
+      value: '*Red tanks an explosion (0.00285 Tons - Wall level+) *Cleffa tanks meteor
+        impacts (0.62 Tons - Building level) *Full weight of a Gigantamax Snorlax
+        (24.1732 kilotons - Large Town level)'
       source_id: vsbattles-gengar-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: stamina
-      value: Unknown | Superhuman, as one of the Big 3 original trainers in Let's
-        Go, Green is one of the most powerful trainers alive in the context of the
-        GO universe. Maxed AVs include a massive boost in stamina among other stats.
-        She is on par with Blue in most ways including stamina, and even believed
-        her team was capable of handling fighting Mewtwo, mostly proven right by her
-        long-winded battle with Chase right afterwards.
-      source_id: vsbattles-gengar-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: "Standard Melee Range, Tens of Kilometers depending on the Pok\xE9mon\
-        \ and move used"
+    - field: speed
+      value: '*Nate runs across a football field (16.32857 m/s - Superhuman) *Goh
+        Runs Up a Wall (23.18 m/s - Superhuman) *Pinsir Intercepts a Solar Beam (2.46c
+        - FTL) *Deoxys travels to Earth (9.862e5c - Massively FTL+) *Lunala travels
+        through the Ultra Space (1.073e9c - Massively FTL+) }} |-|Supporting Feats=
+        {{#tag:tabber|'
       source_id: vsbattles-gengar-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: "Pok\xE9 Balls, Full Restores, multiple TMs, Blastoisinite, should own\
-        \ a great deal of Candy as all of his Pok\xE9mon have max AVs"
-      source_id: vsbattles-gengar-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: "Gifted; While she's unknown when it comes to basic intellect, she's\
-        \ a very accomplished trainer, having reached a level nearly unheard of in\
-        \ Pok\xE9mon battling, and is confident enough to believe she has a chance\
-        \ of capturing Mewtwo, in which even knowing that it exists is a feat in and\
-        \ of itself. She also puts up a good fight against the current champion who\
-        \ has enough skill to have already captured Mewtwo at this point."
-      source_id: vsbattles-gengar-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: "Her Pok\xE9mon have specific type weaknesses, and Leaf is just a normal\
-        \ human by herself. Notable Attacks/Techniques: |-|Clefable= *Moonblast: Clefable\
-        \ fires a fae beam from itself powered by the moon that has the power to potentially\
-        \ lower the enemy's special attack. *Light Screen: Clefable puts up a barrier\
-        \ that halves the damage it and its teammates take from all special attacks.\
-        \ *Reflect: Clefable puts up a barrier that halves the damage it and its teammates\
-        \ take from all physical attacks. *Tri"
+      value: "Pokeball.png|link=Pok\xE9 Ball|Pok\xE9 Ball"
       source_id: vsbattles-gengar-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     identity_match: false
-    identity_score: 0
+    identity_score: 20
     variant_score: 0
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
-    franchise_match: false
+    franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|leaf|9407391
+    duplicate_key: vsbattles.fandom.com|pokemon|9710294
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-gengar-game
@@ -3719,11 +3635,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gengar
     title: Gengar
     rank: 120
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -3740,11 +3656,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gengar_Pokemon
     title: Gengar
     rank: 120
-    extracted_fields: *id009
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -3761,11 +3677,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gengar_%28Pokemon%29
     title: Gengar
     rank: 120
-    extracted_fields: *id011
+    extracted_fields: *id010
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id011
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -3782,3 +3698,22 @@ repair:
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: false
+  scoped_key: Gastly
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T21:24:34Z'
+  key_origin: primary_form_position
+  axes:
+    attack_potency:
+      method: positional
+      segments: 5
+    durability:
+      method: positional
+      segments: 5
+    range:
+      method: positional
+      segments: 5
+  remaining_piped_axes:
+  - tier
+  - speed

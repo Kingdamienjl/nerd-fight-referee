@@ -135,7 +135,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -173,34 +173,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-gellert-grindelwald-harry-potter
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Gellert Grindelwald Harry Potter
-  url: https://character-stats-and-profiles.fandom.com/wiki/Gellert_Grindelwald_Harry_Potter
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-gellert-grindelwald-harry-potter
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Gellert Grindelwald (Harry Potter)
-  url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald_%28Harry_Potter%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-gellert-grindelwald-harry-potter
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -269,8 +241,7 @@ sources:
   - weaknesses
 power_scale:
   tier:
-    text: '{{9-B}} physically. {{High 8-C}} with magic | {{9-B}} physically. At least
-      {{High 8-C}} with regular spells, {{Low 7-C}} with more powerful spells'
+    text: physically. with magic
     source_ids:
     - vsbattles-gellert-grindelwald-harry-potter
     confidence: 0.6
@@ -279,17 +250,7 @@ power_scale:
     text: Wall level physically. Large Building level with magic (Was said by many
       to be the second most powerful Dark Wizard ever, and hence shouldn't be overwhelmingly
       weaker than Voldemort. Fought the Dumbledore brothers in a three-way duel. Easily
-      overpowered Newt Scamander) | Wall level physically. At least Large Building
-      level with magic (Likely superior to old Dumbledore. Described repeatedly as
-      Prime Dumbledore's equal in power and two of the strongest wizards with the
-      Elder Wand, which would make him superior to Voldemort, as the latter was unable
-      to match Old Dumbledore. Created a fire that was eventually going to burn down
-      Paris and summoned multiple lightning bolts. Contended with Dumbledore much
-      better than Credence Barebone did), Small Town level+ with more powerful spells
-      (Dueled Prime Dumbledore in a legendary duel and was described to have lost
-      only because he was slightly less skilled, with Dumbledore admitting in terms
-      of power, they were evenly matched). Several of his spells can ignore conventional
-      durability.
+      overpowered Newt Scamander)
     source_ids:
     - vsbattles-gellert-grindelwald-harry-potter
     confidence: 0.6
@@ -308,22 +269,19 @@ power_scale:
     notes: auto_repair source extraction
   lifting_strength:
     text: Athletic Human physically. Class 5 to Class 10 with magic (Comparable to
-      Dumbledore. Threw a car on Tina Goldstein with wandless magic) | Athletic Human
-      physically. Class 5 to Class 10 with magic (Should be stronger than before)
-    source_ids: &id003
+      Dumbledore. Threw a car on Tina Goldstein with wandless magic)
+    source_ids: &id002
     - mediawiki-514278
     confidence: 0.95
   striking_strength:
     text: Wall level
-    source_ids: *id003
+    source_ids: *id002
     confidence: 0.95
   durability:
     text: Wall level (Should be comparable to Harry Potter) physically. Large Building
       level, likely higher with magical shielding (Should be far superior to a bounty
       hunter capable of blocking attacks from Credence's Obscurus. Protected himself
-      from over ten aurors simultaneously) | Wall level physically. Large Building
-      level, likely higher with magical shielding (Capable of blocking attacks from
-      Albus Dumbledore. Should be far stronger than before)
+      from over ten aurors simultaneously)
     source_ids:
     - vsbattles-gellert-grindelwald-harry-potter
     confidence: 0.6
@@ -374,7 +332,7 @@ claims:
   axis: other
   text: '{{9-B}} physically. {{High 8-C}} with magic | {{9-B}} physically. At least
     {{High 8-C}} with regular spells, {{Low 7-C}} with more powerful spells'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-514278
   decisive: false
   status: unverified
@@ -396,7 +354,7 @@ claims:
     a legendary duel and was described to have lost only because he was slightly less
     skilled, with Dumbledore admitting in terms of power, they were evenly matched).
     Several of his spells can ignore conventional durability.
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -411,7 +369,7 @@ claims:
     \ it\u2019s implied to be taught in basic herbology to defend against the Devil's\
     \ Snare and advanced charms class, and first years like Hermione have showcased\
     \ this spell)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -422,7 +380,7 @@ claims:
   text: Athletic Human physically. Class 5 to Class 10 with magic (Comparable to Dumbledore.
     Threw a car on Tina Goldstein with wandless magic) | Athletic Human physically.
     Class 5 to Class 10 with magic (Should be stronger than before)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -431,7 +389,7 @@ claims:
   section: power_scale
   axis: other
   text: Wall level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -445,7 +403,7 @@ claims:
     from over ten aurors simultaneously) | Wall level physically. Large Building level,
     likely higher with magical shielding (Capable of blocking attacks from Albus Dumbledore.
     Should be far stronger than before)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -454,7 +412,7 @@ claims:
   section: power_scale
   axis: stamina
   text: Superhuman (Fought Dumbledore for 3 hours)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -465,7 +423,7 @@ claims:
   text: Tens of Meters with most spells. At least Tens of Kilometers with Teleportation
     and with magic (His fire was going to spread over all of Paris. Should be comparable
     to Dumbledore)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -474,7 +432,7 @@ claims:
   section: equipment
   axis: equipment
   text: His wand, Percival Graves' wand | The Elder Wand, his skull-hookah
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -502,7 +460,7 @@ claims:
     accent, and limit his magical abilities to be only on par with Graves, as well
     as convincingly and effectively carry out Graves' many duties, while also gradually
     managing to locate the rampaging Obscurial, all without arousing suspicion.
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -520,7 +478,7 @@ claims:
     Category:Movie Characters Category:Humans Category:Adults Category:Terrorists
     Category:Evil Characters Category:Biology Users Category:Deconstruction Users
     Category:Memory Users Category:Weather Users Category:Fantasy Characters Category:Villains'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -550,7 +508,7 @@ claims:
     via Apparition, Genius Intelligence, Social Influencing (Can sway entire crowds
     to join his side. MACUSA was forced to cut out his tongue after he convinced 3
     different prison guards to try and help him escape), Potioncraft
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -559,7 +517,7 @@ abilities:
 - id: powers-and-abilities-superhuman-physical-characteristics
   name: Superhuman Physical Characteristics
   description: Superhuman Physical Characteristics
-  source_ids: &id005
+  source_ids: &id004
   - vsbattles-gellert-grindelwald-harry-potter
   source_claim_ids: []
   confidence: 0.85
@@ -575,7 +533,7 @@ abilities:
 - id: powers-and-abilities-magic-advanced
   name: Magic (Advanced)
   description: Magic (Advanced)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -590,7 +548,7 @@ abilities:
 - id: powers-and-abilities-telekinesis
   name: Telekinesis
   description: Telekinesis
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -605,7 +563,7 @@ abilities:
 - id: powers-and-abilities-energy-manipulation-and-projection-via-various-spells
   name: Energy Manipulation and Projection via various spells
   description: Energy Manipulation and Projection via various spells
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -620,7 +578,7 @@ abilities:
 - id: powers-and-abilities-forcefield-creation-via-shield-charms
   name: Forcefield Creation via Shield Charms
   description: Forcefield Creation via Shield Charms
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -635,7 +593,7 @@ abilities:
 - id: powers-and-abilities-attack-reflection-via-spells-and-shield-charms
   name: Attack Reflection (Via spells and Shield Charms)
   description: Attack Reflection (Via spells and Shield Charms)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -650,7 +608,7 @@ abilities:
 - id: powers-and-abilities-death-manipulation-via-the-killing-curse
   name: Death Manipulation via the Killing Curse
   description: Death Manipulation via the Killing Curse
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -665,7 +623,7 @@ abilities:
 - id: powers-and-abilities-pain-manipulation-via-the-cruciatus-curse
   name: Pain Manipulation via the Cruciatus Curse
   description: Pain Manipulation via the Cruciatus Curse
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -680,7 +638,7 @@ abilities:
 - id: powers-and-abilities-mind-control-via-the-imperius-curse
   name: Mind Control via the Imperius Curse
   description: Mind Control via the Imperius Curse
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -696,7 +654,7 @@ abilities:
 - id: powers-and-abilities-fire-manipulation-and-regeneration-negation-with-fiendfyre
   name: Fire Manipulation and Regeneration Negation with Fiendfyre
   description: Fire Manipulation and Regeneration Negation with Fiendfyre
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -714,7 +672,7 @@ abilities:
 - id: powers-and-abilities-electricity-manipulation-can-summon-lightning-bolts
   name: Electricity Manipulation (Can summon lightning bolts)
   description: Electricity Manipulation (Can summon lightning bolts)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -733,7 +691,7 @@ abilities:
     manipulated water against Credence)
   description: Water Manipulation (Filled his incarceration carriage with water. Wandlessly
     manipulated water against Credence)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -748,7 +706,7 @@ abilities:
 - id: powers-and-abilities-vibration-manipulation-can-generate-powerful-shockwaves
   name: Vibration Manipulation (Can generate powerful shockwaves)
   description: Vibration Manipulation (Can generate powerful shockwaves)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -766,7 +724,7 @@ abilities:
     from the MACUSA)
   description: Weather Manipulation (Used Magic to control the weather during his
     escape from the MACUSA)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -783,7 +741,7 @@ abilities:
     by simply touching them)
   description: Healing (Healed the cuts on Credence's hands wandlessly and non-verbally,
     by simply touching them)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -799,7 +757,7 @@ abilities:
 - id: powers-and-abilities-biological-manipulation-conjured-a-new-forked-tongue-for-ab
   name: Biological Manipulation (Conjured a new forked tongue for Abernaty)
   description: Biological Manipulation (Conjured a new forked tongue for Abernaty)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -814,7 +772,7 @@ abilities:
 - id: powers-and-abilities-necromancy-wandlessly-reanimated-a-qilin-and-bend-it-to-his
   name: Necromancy (Wandlessly reanimated a Qilin and bend it to his will)
   description: Necromancy (Wandlessly reanimated a Qilin and bend it to his will)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -831,7 +789,7 @@ abilities:
     living snakes)
   description: Transmutation (Transfigured the reigns of his Incarceration Carriage
     into living snakes)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -846,7 +804,7 @@ abilities:
 - id: powers-and-abilities-deconstruction-desintegrated-two-aurors-s-wands
   name: Deconstruction (Desintegrated two Aurors's wands)
   description: Deconstruction (Desintegrated two Aurors's wands)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -861,7 +819,7 @@ abilities:
 - id: powers-and-abilities-memory-manipulation-removed-yusuf-s-memories-of-leta-s-deat
   name: Memory Manipulation (Removed Yusuf's memories of Leta's death)
   description: Memory Manipulation (Removed Yusuf's memories of Leta's death)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -876,7 +834,7 @@ abilities:
 - id: powers-and-abilities-invisibility-with-the-disillusionment-charm
   name: Invisibility with the Disillusionment Charm
   description: Invisibility with the Disillusionment Charm
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -891,7 +849,7 @@ abilities:
 - id: powers-and-abilities-precognition-is-a-powerful-seer
   name: Precognition (Is a powerful seer)
   description: Precognition (Is a powerful seer)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -909,7 +867,7 @@ abilities:
   description: Illusion Creation and Smoke Manipulation (Made an illusion of notable
     events from World War II to his followers out of smoke. Can also project images
     with spells)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -926,7 +884,7 @@ abilities:
     for an extended period of time. Turned himse
   description: Shapeshifting (Transformed himself into an exact replica of Percival
     Graves for an extended period of time. Turned himself into one of his followers)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -941,7 +899,7 @@ abilities:
 - id: powers-and-abilities-teleportation-via-apparition
   name: Teleportation via Apparition
   description: Teleportation via Apparition
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -958,7 +916,7 @@ abilities:
 - id: powers-and-abilities-genius-intelligence
   name: Genius Intelligence
   description: Genius Intelligence
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -976,7 +934,7 @@ abilities:
   description: Social Influencing (Can sway entire crowds to join his side. MACUSA
     was forced to cut out his tongue after he convinced 3 different prison guards
     to try and help him escape)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -991,7 +949,7 @@ abilities:
 - id: powers-and-abilities-potioncraft
   name: Potioncraft
   description: Potioncraft
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1007,7 +965,7 @@ equipment:
 - id: standard-equipment-his-wand
   name: His wand
   description: His wand
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1022,7 +980,7 @@ equipment:
 - id: standard-equipment-percival-graves-wand
   name: Percival Graves' wand
   description: Percival Graves' wand
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1037,7 +995,7 @@ equipment:
 - id: standard-equipment-the-elder-wand
   name: The Elder Wand
   description: The Elder Wand
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1052,7 +1010,7 @@ equipment:
 - id: standard-equipment-his-skull-hookah
   name: his skull-hookah
   description: his skull-hookah
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1133,7 +1091,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: b153ee4c3185a70344828fa1f04d869bebd758ccd787988ac8e754c600264cd4
 repair:
-  attempted_at: '2026-10-11T00:46:02Z'
+  attempted_at: '2026-10-21T17:20:51Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -1150,7 +1108,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields: &id005
     - attack_potency
     - durability
     - intelligence
@@ -1192,7 +1150,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields: &id006
     - tier
     - attack_potency
     - speed
@@ -1205,8 +1163,8 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically. {{High 8-C}} with magic | {{9-B}} physically. At
-        least {{High 8-C}} with regular spells, {{Low 7-C}} with more powerful spells'
+      value: physically. with magic | physically. At least with regular spells, with
+        more powerful spells
       source_id: mediawiki-514278
       provider_id: vsbattles
       authority: high
@@ -1329,14 +1287,14 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Characters Category:Male Characters Category:Live-Action Characters
-        Category:Antagonists Category:Shapeshifters Category:Magic Users Category:Telekinesis
-        Users Category:Teleportation Users Category:Electricity Users Category:Pain
-        Users Category:Mind Users Category:Death Users Category:Forcefield Users Category:Precognition
-        Users Category:Healers Category:Illusionists Category:Smoke Users Category:Power
-        Nullification Users Category:Vibration Users Category:Invisibility Users Category:Wizarding
-        World Category:Wand Users Category:Wizards Category:Movie Characters Category:Humans
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Live-Action Characters Category:Antagonists
+        Category:Shapeshifters Category:Magic Users Category:Telekinesis Users Category:Teleportation
+        Users Category:Electricity Users Category:Pain Users Category:Mind Users Category:Death
+        Users Category:Forcefield Users Category:Precognition Users Category:Healers
+        Category:Illusionists Category:Smoke Users Category:Power Nullification Users
+        Category:Vibration Users Category:Invisibility Users Category:Wizarding World
+        Category:Wand Users Category:Wizards Category:Movie Characters Category:Humans
         Category:Adults Category:Terrorists Category:Evil Characters Category:Biology
         Users Category:Deconstruction Users Category:Memory Users Category:Weather
         Users Category:Fantasy Characters Category:Villains'
@@ -1357,11 +1315,161 @@ repair:
     duplicate_key: vsbattles.fandom.com|gellert grindelwald|9091108
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-gellert-grindelwald-harry-potter
+    url: https://character-stats-and-profiles.fandom.com/wiki/Gellert_Grindelwald_%28Harry_Potter%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Albus Dumbledore (Canon, WW)/Maskboiperson
+    source_type: mediawiki
+    revision_id: '342576'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 8932
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers & Stats
+    - '''''''Battles'''''''
+    - '''''''Wins ():'''''''
+    - '''''''Loses ():'''''''
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Wall Level, Large Building Level with Magic | Wall Level, At Most Small
+        City Level with Regular Spells, At Least Small City Level+, possibly City
+        Level with More Powerful Spells. Several of his spells ignore conventional
+        durability | At least Athlete Level, At Most Small City Level with Regular
+        Spells, City Level to City Level+ with More Powerful Spells. Several of his
+        spells ignore conventional durability.
+      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Regular Human Abilities, Superhuman Physical Characteristics, Magic,
+        Legilimency (Mind Reading, Memory Reading, Mental Attacks), Forcefield Creation,
+        Telekinesis, Teleportation (Via Apparition), Fire Manipulation, Invisibility,
+        Water Manipulation, Transmutation, Animation (Brought the statues at the Ministry
+        to life, who protected him and Harry Potter before Voldemort's Killing Curses),
+        Healing, Status Effect Inducement, Memory Manipulation, Summoning, Flight
+        (With broomstick), Resistance to Telepathy (Via Occlumency)
+      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Wall Level (Stronger than Harry who fought a bludger who can destroy
+        bathroom doors [516,644.24 J]), Large Building Level with magic (Comparable
+        to Gellert Grindelwald and fought him in a three-way duel with Aberforth)
+        | Wall Level, At Most Small City Level with regular spells (Said to be slightly
+        superior to Gellert Grindelwald, who created a fire that could potentially
+        burn down Paris. Easily neutralized Credence Barebone's attacks and overpowered
+        him. Can match and somewhat gain an edge against Grindelwald), At Least Small
+        City Level+, possibly City Level with more powerful spells (Covered London
+        [a city] in a fog. He defeated Grindelwald in a legendary duel despite the
+        latter being in possession of the Elder Wand, describing himself as having
+        equivalent power but slightly greater skill). Several of his spells ignore
+        conventional durability | At Least Athlete Level (Was able to lift Harry Potter
+        off the ground despite his old age), At Most Small City Level with regular
+        spells (Created a firestorm when he was weakened by Voldemort's potion. Superior
+        to Voldemort, who was capable of creating a huge lightning bolt), Small City
+        Level+ to City Level with more powerful spells (Repeatedly stated as superior
+        to Voldemort and the only one he's ever been afraid of. Bested Voldemort in
+        their duel, forcing him into retreat. He should not be overwhelmingly weaker
+        than his younger self. It has been repeatedly stated that he is still the
+        most powerful wizard. Was in possession of the Elder Wand, the most powerful
+        wand ever made). Several of his spells ignore conventional durability.
+      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: "Athletic Human with Subsonic Reactions, Speed of Light Attack Speed\
+        \ via Lumos Solem (Lumos Solem is a charm that creates a blinding flash of\
+        \ sunlight used to defend against the Devil's Snare. Dumbledore should know\
+        \ this spell, as it\u2019s implied to be taught in basic herbology to defend\
+        \ against the Devil's Snare and advanced charms class, and first years like\
+        \ Hermione have showcased it.) | Athletic Human with Subsonic Reactions, Speed\
+        \ of Light Attack Speed via Lumos Solem | Most Likely Human with At most Subsonic\
+        \ Reactions (Kept up with Voldemort, although his reactions were noted to\
+        \ be a lot slower than before), Speed of Light Attack Speed via Lumos Solem"
+      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Wall Level, At least Large Building Level, likely Higher with Magical
+        Shielding (Contended with Grindelwald and Abeforth in a three-way duel) |
+        Wall Level, At Least Small City Level+, possibly City Level with Magical Shielding
+        (Far superior to a bounty hunter capable of blocking attacks from Credence's
+        Obscurus. Casually deflected attacks from Credence. Can contend with Grindelwald
+        while the latter had the Elder Wand) | At least Athlete Level, Small City
+        Level+ to City Level with Magical Shielding (Repelled vicious attacks from
+        Voldemort during their duel)
+      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Regular Human
+      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|albus dumbledore canon
+      ww maskboiperson|342576
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-gellert-grindelwald-harry-potter
     url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald_Harry_Potter
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id008
+    extracted_fields: &id007
     - attack_potency
     - durability
     - intelligence
@@ -1403,7 +1511,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id009
+    allowed_fields: &id008
     - attack_potency
     - speed
     - durability
@@ -1414,8 +1522,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically. {{High 8-C}} with magic | {{9-B}} physically. At
-        least {{High 8-C}} with regular spells, {{Low 7-C}} with more powerful spells'
+      value: physically. with magic | physically. At least with regular spells, with
+        more powerful spells
       source_id: vsbattles-gellert-grindelwald-harry-potter
       provider_id: vsbattles
       authority: high
@@ -1538,14 +1646,14 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Characters Category:Male Characters Category:Live-Action Characters
-        Category:Antagonists Category:Shapeshifters Category:Magic Users Category:Telekinesis
-        Users Category:Teleportation Users Category:Electricity Users Category:Pain
-        Users Category:Mind Users Category:Death Users Category:Forcefield Users Category:Precognition
-        Users Category:Healers Category:Illusionists Category:Smoke Users Category:Power
-        Nullification Users Category:Vibration Users Category:Invisibility Users Category:Wizarding
-        World Category:Wand Users Category:Wizards Category:Movie Characters Category:Humans
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Live-Action Characters Category:Antagonists
+        Category:Shapeshifters Category:Magic Users Category:Telekinesis Users Category:Teleportation
+        Users Category:Electricity Users Category:Pain Users Category:Mind Users Category:Death
+        Users Category:Forcefield Users Category:Precognition Users Category:Healers
+        Category:Illusionists Category:Smoke Users Category:Power Nullification Users
+        Category:Vibration Users Category:Invisibility Users Category:Wizarding World
+        Category:Wand Users Category:Wizards Category:Movie Characters Category:Humans
         Category:Adults Category:Terrorists Category:Evil Characters Category:Biology
         Users Category:Deconstruction Users Category:Memory Users Category:Weather
         Users Category:Fantasy Characters Category:Villains'
@@ -1720,7 +1828,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald_%28Harry_Potter%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id010
+    extracted_fields: &id009
     - attack_potency
     - durability
     - intelligence
@@ -1762,7 +1870,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id011
+    allowed_fields: &id010
     - attack_potency
     - speed
     - durability
@@ -1773,8 +1881,8 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically. {{High 8-C}} with magic | {{9-B}} physically. At
-        least {{High 8-C}} with regular spells, {{Low 7-C}} with more powerful spells'
+      value: physically. with magic | physically. At least with regular spells, with
+        more powerful spells
       source_id: vsbattles-gellert-grindelwald-harry-potter
       provider_id: vsbattles
       authority: high
@@ -1897,14 +2005,14 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Characters Category:Male Characters Category:Live-Action Characters
-        Category:Antagonists Category:Shapeshifters Category:Magic Users Category:Telekinesis
-        Users Category:Teleportation Users Category:Electricity Users Category:Pain
-        Users Category:Mind Users Category:Death Users Category:Forcefield Users Category:Precognition
-        Users Category:Healers Category:Illusionists Category:Smoke Users Category:Power
-        Nullification Users Category:Vibration Users Category:Invisibility Users Category:Wizarding
-        World Category:Wand Users Category:Wizards Category:Movie Characters Category:Humans
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Live-Action Characters Category:Antagonists
+        Category:Shapeshifters Category:Magic Users Category:Telekinesis Users Category:Teleportation
+        Users Category:Electricity Users Category:Pain Users Category:Mind Users Category:Death
+        Users Category:Forcefield Users Category:Precognition Users Category:Healers
+        Category:Illusionists Category:Smoke Users Category:Power Nullification Users
+        Category:Vibration Users Category:Invisibility Users Category:Wizarding World
+        Category:Wand Users Category:Wizards Category:Movie Characters Category:Humans
         Category:Adults Category:Terrorists Category:Evil Characters Category:Biology
         Users Category:Deconstruction Users Category:Memory Users Category:Weather
         Users Category:Fantasy Characters Category:Villains'
@@ -1923,156 +2031,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|gellert grindelwald|9091108
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-gellert-grindelwald-harry-potter
-    url: https://character-stats-and-profiles.fandom.com/wiki/Gellert_Grindelwald_%28Harry_Potter%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Albus Dumbledore (Canon, WW)/Maskboiperson
-    source_type: mediawiki
-    revision_id: '342576'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 8932
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers & Stats
-    - '''''''Battles'''''''
-    - '''''''Wins ():'''''''
-    - '''''''Loses ():'''''''
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: Wall Level, Large Building Level with Magic | Wall Level, At Most Small
-        City Level with Regular Spells, At Least Small City Level+, possibly City
-        Level with More Powerful Spells. Several of his spells ignore conventional
-        durability | At least Athlete Level, At Most Small City Level with Regular
-        Spells, City Level to City Level+ with More Powerful Spells. Several of his
-        spells ignore conventional durability.
-      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Regular Human Abilities, Superhuman Physical Characteristics, Magic,
-        Legilimency (Mind Reading, Memory Reading, Mental Attacks), Forcefield Creation,
-        Telekinesis, Teleportation (Via Apparition), Fire Manipulation, Invisibility,
-        Water Manipulation, Transmutation, Animation (Brought the statues at the Ministry
-        to life, who protected him and Harry Potter before Voldemort's Killing Curses),
-        Healing, Status Effect Inducement, Memory Manipulation, Summoning, Flight
-        (With broomstick), Resistance to Telepathy (Via Occlumency)
-      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Wall Level (Stronger than Harry who fought a bludger who can destroy
-        bathroom doors [516,644.24 J]), Large Building Level with magic (Comparable
-        to Gellert Grindelwald and fought him in a three-way duel with Aberforth)
-        | Wall Level, At Most Small City Level with regular spells (Said to be slightly
-        superior to Gellert Grindelwald, who created a fire that could potentially
-        burn down Paris. Easily neutralized Credence Barebone's attacks and overpowered
-        him. Can match and somewhat gain an edge against Grindelwald), At Least Small
-        City Level+, possibly City Level with more powerful spells (Covered London
-        [a city] in a fog. He defeated Grindelwald in a legendary duel despite the
-        latter being in possession of the Elder Wand, describing himself as having
-        equivalent power but slightly greater skill). Several of his spells ignore
-        conventional durability | At Least Athlete Level (Was able to lift Harry Potter
-        off the ground despite his old age), At Most Small City Level with regular
-        spells (Created a firestorm when he was weakened by Voldemort's potion. Superior
-        to Voldemort, who was capable of creating a huge lightning bolt), Small City
-        Level+ to City Level with more powerful spells (Repeatedly stated as superior
-        to Voldemort and the only one he's ever been afraid of. Bested Voldemort in
-        their duel, forcing him into retreat. He should not be overwhelmingly weaker
-        than his younger self. It has been repeatedly stated that he is still the
-        most powerful wizard. Was in possession of the Elder Wand, the most powerful
-        wand ever made). Several of his spells ignore conventional durability.
-      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: "Athletic Human with Subsonic Reactions, Speed of Light Attack Speed\
-        \ via Lumos Solem (Lumos Solem is a charm that creates a blinding flash of\
-        \ sunlight used to defend against the Devil's Snare. Dumbledore should know\
-        \ this spell, as it\u2019s implied to be taught in basic herbology to defend\
-        \ against the Devil's Snare and advanced charms class, and first years like\
-        \ Hermione have showcased it.) | Athletic Human with Subsonic Reactions, Speed\
-        \ of Light Attack Speed via Lumos Solem | Most Likely Human with At most Subsonic\
-        \ Reactions (Kept up with Voldemort, although his reactions were noted to\
-        \ be a lot slower than before), Speed of Light Attack Speed via Lumos Solem"
-      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Wall Level, At least Large Building Level, likely Higher with Magical
-        Shielding (Contended with Grindelwald and Abeforth in a three-way duel) |
-        Wall Level, At Least Small City Level+, possibly City Level with Magical Shielding
-        (Far superior to a bounty hunter capable of blocking attacks from Credence's
-        Obscurus. Casually deflected attacks from Credence. Can contend with Grindelwald
-        while the latter had the Elder Wand) | At least Athlete Level, Small City
-        Level+ to City Level with Magical Shielding (Repelled vicious attacks from
-        Voldemort during their duel)
-      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Regular Human
-      source_id: character-stats-profiles-gellert-grindelwald-harry-potter
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|albus dumbledore canon
-      ww maskboiperson|342576
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-gellert-grindelwald
@@ -2229,7 +2187,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald_%28tv_movie%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id012
+    extracted_fields: &id011
     - attack_potency
     - durability
     - intelligence
@@ -2271,7 +2229,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id013
+    allowed_fields: &id012
     - tier
     - attack_potency
     - speed
@@ -2284,8 +2242,8 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} physically. {{High 8-C}} with magic | {{9-B}} physically. At
-        least {{High 8-C}} with regular spells, {{Low 7-C}} with more powerful spells'
+      value: physically. with magic | physically. At least with regular spells, with
+        more powerful spells
       source_id: vsbattles-gellert-grindelwald-tv-movie
       provider_id: vsbattles
       authority: high
@@ -2408,14 +2366,14 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: {{Discussions}}
-        Category:Characters Category:Male Characters Category:Live-Action Characters
-        Category:Antagonists Category:Shapeshifters Category:Magic Users Category:Telekinesis
-        Users Category:Teleportation Users Category:Electricity Users Category:Pain
-        Users Category:Mind Users Category:Death Users Category:Forcefield Users Category:Precognition
-        Users Category:Healers Category:Illusionists Category:Smoke Users Category:Power
-        Nullification Users Category:Vibration Users Category:Invisibility Users Category:Wizarding
-        World Category:Wand Users Category:Wizards Category:Movie Characters Category:Humans
+      value: 'None notable ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Live-Action Characters Category:Antagonists
+        Category:Shapeshifters Category:Magic Users Category:Telekinesis Users Category:Teleportation
+        Users Category:Electricity Users Category:Pain Users Category:Mind Users Category:Death
+        Users Category:Forcefield Users Category:Precognition Users Category:Healers
+        Category:Illusionists Category:Smoke Users Category:Power Nullification Users
+        Category:Vibration Users Category:Invisibility Users Category:Wizarding World
+        Category:Wand Users Category:Wizards Category:Movie Characters Category:Humans
         Category:Adults Category:Terrorists Category:Evil Characters Category:Biology
         Users Category:Deconstruction Users Category:Memory Users Category:Weather
         Users Category:Fantasy Characters Category:Villains'
@@ -2487,37 +2445,6 @@ repair:
     - abilities
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{9-C}}'
-      source_id: character-stats-profiles-gellert-grindelwald-tv-movie
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= * Superhuman Physical
-        Characteristics * Martial Arts (Is a highly skilled hand-to-hand combatant,
-        as he managed to disarm his younger brother from his sword and could do the
-        same against a few assailants attacking him. Additionally, despite being heavily
-        drunk and still mourning over Siggy''s death, Rollo was able to hold his own
-        with Bjorn in close-quarters) * Weapon Mastery (Skilled in using many melee
-        weapons, such as knives, axes, swords, etc. He also has an accurate aim with
-        longer ranged equipment as he can throw spears through incoming warriors)
-        * Stealth Mastery (Infiltrated the enemy''s camp while they were sleeping)
-        * Preparation (Made defense plans against Ragnar''s eventual attack in order
-        to protect Paris and la Seine, which ended up working) * Multiple Languages
-        (Learned how to speak, read and write in Old French after joining the Franks)
-        * Social Influencing (Leadership, Reputation and Social Position - Rollo is
-        a great leader, as he proved himself capable of reuniting the little force
-        remaining to defend Kattegat Yarl Borg''s forces. Even when his soldiers was
-        discouraged at the idea that they were outnumbered and disadvantaged, he successfully
-        reencouraged his army to fight for greater purpose. Due to his victory over
-        his brother''s invasion, Rollo became known as the hero of Paris and was rewarded
-        the title of Duke, giving him a noticeable title and position in the Frank''s
-        kingdom.) }}'
-      source_id: character-stats-profiles-gellert-grindelwald-tv-movie
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: attack_potency
       value: 'Street level+ (Fought against a weakened Ragnar,Vikings: Season 4 Episode
         10 who, in a much more worse condition, survived falling from 40 feet high.Vikings:
@@ -2550,11 +2477,36 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
+    - field: tier
+      value: 'Name: Rollo Lothbrok Sigurdsson, Rollo of Normandy, The Bear, Rolf Origin:
+        Vikings Gender: Male Age: 31/33 (Season 1), 37 (Season 2), 39-40 (Season 3),
+        41-43 (Season 4A), 53 (Season 4B), 54-55 (Season 5). Classification: Human,
+        Former Viking, Duke of Normandy, Count of Rouen'
+      source_id: character-stats-profiles-gellert-grindelwald-tv-movie
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=Yes|Visible=Yes|Padding=Yes|Content= * Superhuman Physical
+        Characteristics * Martial Arts (Is a highly skilled hand-to-hand combatant,
+        as he managed to [https://youtu.be/wR4_TO4Ac20?t=225 disarm] his younger brother
+        from his sword [https://vsbattles.fandom.com/wiki/User_blog:69Blood69/(Vikings)_Ragnar_falls_into_a_pit
+        who, in a much more worse condition, survived falling from 40 feet high].
+        [https://youtu.be/k027YAckDIk?t=41 Traded blows] with Bjorn while severally
+        drunk, who withstood this fall. who survived [https://youtu.be/XF7qvRe6xeU?t=70
+        a major cave collapse]. [https://imgur.com/a/Tkba2im Killed a priest with
+        multiple stomps]. [https://imgur.com/a/R06fvjQ Killed a Anglo-Saxon Soldier
+        with a single stomp]. [https://youtu.be/TF4yQ3rsPQY?t=2419 Easily impaled
+        armored soldier by throwing spears])'
+      source_id: character-stats-profiles-gellert-grindelwald-tv-movie
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     - field: weaknesses
-      value: 'Has internal struggles throughout the first seasons, having an pseudo-obsession
-        to Lagertha, making him jealous & resilient of his brother and got himself
-        into depression after Siggy''s death. == Others == Victories: Losses: Inconclusive:
-        == References == {{Reflist}}'
+      value: ''''''' Has internal struggles throughout the first seasons, having an
+        pseudo-obsession to Lagertha, making him jealous & resilient of [[Ragnar Lothbrok
+        (Canon, TV Series)/ 69Blood69|his brother]] and got himself into depression
+        after Siggy''s death.'
       source_id: character-stats-profiles-gellert-grindelwald-tv-movie
       provider_id: character_stats_profiles
       authority: high
@@ -2579,11 +2531,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald
     title: Gellert Grindelwald
     rank: 120
-    extracted_fields: *id006
+    extracted_fields: *id005
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id007
+    allowed_fields: *id006
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2600,11 +2552,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald_Harry_Potter
     title: Gellert Grindelwald
     rank: 120
-    extracted_fields: *id008
+    extracted_fields: *id007
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id009
+    allowed_fields: *id008
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2621,11 +2573,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald_%28Harry_Potter%29
     title: Gellert Grindelwald
     rank: 120
-    extracted_fields: *id010
+    extracted_fields: *id009
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id011
+    allowed_fields: *id010
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2642,11 +2594,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Gellert_Grindelwald_%28tv_movie%29
     title: Gellert Grindelwald
     rank: 120
-    extracted_fields: *id012
+    extracted_fields: *id011
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id013
+    allowed_fields: *id012
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2663,3 +2615,23 @@ repair:
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: true
+  scoped_key: Pre-Prime
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T17:40:30Z'
+  key_origin: primary_form_position
+  axes:
+    tier:
+      method: positional
+      segments: 2
+    attack_potency:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+    lifting_strength:
+      method: positional
+      segments: 2
+  remaining_piped_axes: []

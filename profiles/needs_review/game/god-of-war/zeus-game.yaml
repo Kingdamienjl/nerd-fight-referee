@@ -11,13 +11,14 @@ generation:
   generated_at: '2026-06-10T03:38:24Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id005
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Zeus (Game)
   franchise: God of War
@@ -175,42 +176,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-zeus-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zeus Game
-  url: https://vsbattles.fandom.com/wiki/Zeus_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-zeus-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Zeus Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-zeus-game-god-of-war
   provider_id: vsbattles
   source_type: mediawiki
@@ -218,7 +183,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Gauntlet_of_Zeus_(God_of_War)
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -258,7 +223,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Kratos_the_God_of_War_(Canon,_God_of_War)/Antipsw123
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -295,62 +260,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-zeus-game-god-of-war
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zeus (Game) God of War
-  url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29_God_of_War
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-zeus-game-god-of-war
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Zeus (Game) God of War
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29_God_of_War
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-zeus-game-god-of-war
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zeus (Game) (God of War)
-  url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29_%28God_of_War%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-zeus-game-god-of-war
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Zeus (Game) (God of War)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29_%28God_of_War%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-zeus-game-game
   provider_id: vsbattles
   source_type: mediawiki
@@ -511,7 +420,7 @@ weaknesses:
 - id: weaknesses-none-notable-references-scroll-box
   name: None notable ==References== {{scroll box
   description: None notable ==References== {{scroll box
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-zeus-game-god-of-war
   source_claim_ids: []
   confidence: 0.85
@@ -527,7 +436,7 @@ weaknesses:
 - id: weaknesses-content-reflist
   name: content={{reflist
   description: content={{reflist
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -542,7 +451,7 @@ weaknesses:
 - id: weaknesses-2-discussions
   name: 2}}}} {{discussions
   description: 2}}}} {{discussions
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -557,7 +466,7 @@ weaknesses:
 - id: weaknesses-gauntlet-of-zeus-god-of-war
   name: Gauntlet of Zeus God of War
   description: Gauntlet of Zeus God of War
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -576,7 +485,7 @@ weaknesses:
     Category:Electricity Users Category:Empowerment Users Category:Gauntlets Category:Magic
     Users Category:Paralysis Users Category:Power Nullification Users Category:Statistics
     Amplification Users
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -599,30 +508,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id005
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: cdb36b911997401e12dfaadd34222c01b242370c1b173d4fc5886be016b4d83b
 repair:
-  attempted_at: '2026-06-19T11:43:28Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T10:32:15Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
   - source_id: vsbattles-zeus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29_God_of_War
+    url: https://vsbattles.fandom.com/wiki/Gauntlet_of_Zeus_(God_of_War)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id006
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -645,6 +551,7 @@ repair:
     - attack_potency
     - durability
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -656,7 +563,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id007
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -666,15 +573,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{1-C}} Name: Gauntlet of Zeus Origin: God of War Age: At least one
-        thousand years old (Zeus commissioned this Gauntlet from Hephaestus immediately
-        after the Great War, which took a thousand years before the events of the
-        first God of War game) Classification: Gauntlet Wielders: Zeus, Kratos'
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: '*Statistics Amplification and Empowerment *Divine Magic *The Lightning
         of Zeus (Armed with Zeus'' lightning)'
@@ -712,11 +610,19 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: None notable ==References== {{scroll box|content={{reflist|2}}}} {{discussions|Gauntlet
-        of Zeus God of War|Gauntlet of Zeus (God of War)}} Category:Items Category:God
-        of War Category:Electricity Users Category:Empowerment Users Category:Gauntlets
-        Category:Magic Users Category:Paralysis Users Category:Power Nullification
-        Users Category:Statistics Amplification Users
+      value: None notable ==References== Category:Items Category:God of War Category:Electricity
+        Users Category:Empowerment Users Category:Gauntlets Category:Magic Users Category:Paralysis
+        Users Category:Power Nullification Users Category:Statistics Amplification
+        Users
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Gauntlet of Zeus Origin: God of War Age: At least one thousand
+        years old (Zeus commissioned this Gauntlet from Hephaestus immediately after
+        the Great War, which took a thousand years before the events of the first
+        God of War game) Classification: Gauntlet Wielders: Zeus, Kratos'
       source_id: vsbattles-zeus-game-god-of-war
       provider_id: vsbattles
       authority: high
@@ -735,10 +641,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-zeus-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29_God_of_War
+    url: https://character-stats-and-profiles.fandom.com/wiki/Kratos_the_God_of_War_(Canon,_God_of_War)/Antipsw123
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id008
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -761,6 +667,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -774,7 +681,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id009
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -785,291 +692,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '1-S Name: Kratos Origin: God of War Gender: Male Age: 150+ years Classification:
-        Spartan, God of War and Death, Godslayer, Formerly a Spartan General'
-      source_id: character-stats-profiles-zeus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman strength, speed, reflexes, agility and durability, Magic,
-        Weapon Mastery, Time Manipulation, Electrokinesis, Pyrokinesis, Cyrokinesis,
-        Duplication, Life-Force Absorption (Via contact), Anger Affinity (After seeing
-        Deimos's death, Kratos granted himself infinitely lasting magic and killed
-        Thanatos), Resistance to Time Stop (Overpowered the abilities of the Amulet
-        of Uroborus when against Castor & Pollux), Soul Mutilation (Killed the souls
-        on Elysium), Limited Power Nullification (Can nullify illusions with the Eye
-        of Truth), Limited Teleportation with the Oath Stone of Orkos (His clones
-        can teleport directly in front of the enemy), Homin Attacks(Soul of Hades
-        can vaporize enemies too, and this same power can be utilized with the Army
-        of Hades), Limited Healing with Orkos's Cloak, Resistance to Mind Manipulation
-        (Resisted Persephone trying to persuade him into letting the gods die. Should
-        be able to resist the power of the Lethe River, which can erase a person's
-        memory from existence), Petrification, Resistance to Power Nullification,
-        Limited Matter Manipulation (Atomic; Poseidon's Rage can atomize hundreds
-        of foes, and Zeus' Fury does the same, albeit to a lesser degree), Resistance
-        to Petrification (Via Rage of the Gods. Activating the Rage of the Titans
-        also immediately breaks Kratos out of petrification), Aerokinesis, Earthquake
-        Generation, Energy Manipulation, Resistance to Fate Manipulation (The Sisters
-        of Fate, who determine the destinies of the Gods and Titans, were unable to
-        use their powers to actually force Kratos to lose, resulting in Kratos killing
-        them instead), Time Travel (Traveled roughly 4,000 years back to the Great
-        War and subsequently teleported all Titans to the future), Explosion Manipulation
-        with the Spear of Destiny, Resistance to Soul Manipulation, Soul Manipulation
-        (Via Claw of Hades), Intangibility Nullification (With the Head of Helios),
-        Telekinesis, Telepathy, Weapon Summoning, Enhanced Senses (Can sense beings
-        thousands of miles away), Size Manipulation, Shapeshifting, Immortality (Types
-        1 and 3; can no longer die, and no matter what he does, he will walk the Earth
-        forever), Regeneration (Low-Mid), Flight, Astral Projection, Terrakinesis,
-        Resistance to Death Inducement (Resisted the effects of the River Styx, which
-        can slay any being who drinks from it), Resistance to Fear Inducement (Easily
-        resisted the effects of Fear Zeus), Resurrection(Resurrection; as long as
-        aspects of his mind, such as his soul and body, still exist, Hope will bring
-        him back to life. Therefore, this is effective even against high-level Matter
-        Manipulation hax or the likes), and Weather Manipulation (Via the Blade of
-        Olympus), All the powers of the Spear of Destiny, Soul Manipulation & Soul
-        Absorption, Deconstruction, Non-Physical Interaction, Mind Manipulation &
-        Memory Manipulation, Probability Manipulation & Conceptual Manipulation (Type
-        1; Souls are constructs of magic, composed of their form, the metaphysical
-        nature of a being, their luck, their mind and their direction. With the Eye
-        of Atlantis and Poseidon's Rage, both of which conform Poseidon's power, which
-        destroys both the soul and the body of whoever stands in the path of its electric
-        beam, with Poseidon's Rage being able to even destroy incorporeal Wraiths.
-        With the Claws of Hades, he easily tore outHades's soul and absorbed it for
-        himself, and can also summon souls to attack his enemies. Damaging souls can
-        shatter and fragment their memories as a consequence) complete arsenal, the
-        gods are able to defy all abstract concepts of the universe itself and Kratos
-        also defy all laws because of him being a god and the gods have limitless
-        powers
-      source_id: character-stats-profiles-zeus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Extraversal level (He scales above the universe which holds Yggdrasil
-        which is beyond an infinite hierarchy that is beyond an aleph fixed point
-        amount of 1-S hierarchies and the lowest layer is beyond all infinities even
-        absolute infinity which is beyond any unamed infinity which are Aleph church
-        Kleene ordinal, aleph church Kleene ordinal}aleph church Kleene ordinal, aleph
-        church Kleene ordinal&L, aleph church Kleene ordinal}aleph church Kleene ordinal,
-        aleph church Kleene ordinal amount of higher infinity recursions beyond Berkeley
-        infinities which are beyond weakly compact infinities which are beyond mahlo
-        infinities which are beyond inaccessible infinities which are beyond all Alephs
-        even aleph fixed point)
-      source_id: character-stats-profiles-zeus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Irrelevant (Kratos fought with Helios at one point, and dodged his light
-        pretty casually. Hades' Underworld is infinite in size according to guides
-        as well as concept artists behind the game's development. Helios' light can
-        spread across this infinite-sized world, which would mean its exact speed
-        is infinite. It was actual author intent that Kratos is faster than Helios
-        and his light, and the fact that the Essence of Hyperion is easily FTL, Zeus
-        is above that, and Kratos stomped Zeus into the dirt, it's actually rather
-        consistent for Kratos to be at such speeds; as described by the authors, the
-        Essence of Hyperion is powerful, but Zeus is godly. And nothing can kill Kratos...except
-        Kratos)
-      source_id: character-stats-profiles-zeus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Extraversal Level (Can contend with Baldur)
-      source_id: character-stats-profiles-zeus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None notable. Category:Tier 1-S
-      source_id: character-stats-profiles-zeus-game-god-of-war
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|kratos the god of war canon
-      god of war antipsw123|534201
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-zeus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29_%28God_of_War%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id010
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - range
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Gauntlet of Zeus (God of War)
-    source_type: mediawiki
-    revision_id: '9542374'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3848
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - References
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id011
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{1-C}} Name: Gauntlet of Zeus Origin: God of War Age: At least one
-        thousand years old (Zeus commissioned this Gauntlet from Hephaestus immediately
-        after the Great War, which took a thousand years before the events of the
-        first God of War game) Classification: Gauntlet Wielders: Zeus, Kratos'
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '*Statistics Amplification and Empowerment *Divine Magic *The Lightning
-        of Zeus (Armed with Zeus'' lightning)'
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'Complex Multiverse level (Was used by its namesake to chain up all the
-        Titans to the pits of Tartarus,God of War: Chains of Olympus (2008) and Kratos
-        with the Gauntlet managed to overpower and re-chain Atlas, forcing him to
-        lift the entirety of the cosmos by himselfGod of War Official Facebook Page-
-        A Sacrifice To Save All Creation)'
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Amplifies its wielders to Immeasurable speed (Kratos with the Gauntlet
-        was able to easily keep up with the likes of Atlas and Persephone)
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Complex Multiverse level (Able to withstand the force of its own blows)
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range; Extended Melee Range with electrical shockwaves
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: None notable ==References== {{scroll box|content={{reflist|2}}}} {{discussions|Gauntlet
-        of Zeus God of War|Gauntlet of Zeus (God of War)}} Category:Items Category:God
-        of War Category:Electricity Users Category:Empowerment Users Category:Gauntlets
-        Category:Magic Users Category:Paralysis Users Category:Power Nullification
-        Users Category:Statistics Amplification Users
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|gauntlet of zeus god of war|9542374
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-zeus-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29_%28God_of_War%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id012
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Kratos the God of War (Canon, God of War)/Antipsw123
-    source_type: mediawiki
-    revision_id: '534201'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 8835
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Statistics
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 105
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id013
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '1-S Name: Kratos Origin: God of War Gender: Male Age: 150+ years Classification:
-        Spartan, God of War and Death, Godslayer, Formerly a Spartan General'
+      value: 1-S
       source_id: character-stats-profiles-zeus-game-god-of-war
       provider_id: character_stats_profiles
       authority: high
@@ -1185,10 +808,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: mediawiki-zeus-game
-    url: https://vsbattles.fandom.com/wiki/Zeus_(Game)
+    url: https://vsbattles.fandom.com/wiki/Zeus_(Wizard101)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id016
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -1216,6 +839,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1229,7 +853,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id017
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -1242,8 +866,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: 'At least {{Low 2-C}}, possibly higher Name: Zeus Origin: Wizard101 Gender:
-        Male Age: Unknown Classification: Immortal, Ruler of the Skies'
+      value: At least , possibly higher
       source_id: mediawiki-zeus-game
       provider_id: vsbattles
       authority: high
@@ -1315,177 +938,19 @@ repair:
         in strength. Vulnerable to Weather Manipulation and Electricity Manipulation.
         However, this could be due to game mechanics. Note: Zeus having Shadow Magic
         is more than likely game mechanics ==Notable Matchups== Victories: Losses:
-        Inconclusive: {{Discussions|Zeus Wizard101|Zeus (Wizard101)}} Category:Characters
-        Category:Wizard101 Category:Absorption Users Category:Aura Users Category:Darkness
-        Users Category:Earth Users Category:Empathic Manipulation Users Category:Fantasy
-        Characters Category:Fire Users Category:Game Characters Category:Healers Category:Ice
-        Users Category:Immortals Category:Life Users Category:Magic Users Category:Male
-        Characters Category:Mind Users Category:Morality Users Category:Necromancers
-        Category:Non-Physical Interaction Users Category:Paralysis Users Category:Poison
-        Users Category:Power Bestowal Users Category:Power Nullification Users Category:Probability
-        Users Category:Rulers Category:Science Fantasy Characters Category:Statistics
-        Amplification Users Category:Statistics Reduction Users Category:Status Effect
-        Users Category:Summoners Category:Summons Category:Telekinesis Users Category:Teleportation
-        Users Category:Transmutation Users Category:Weather Users Category:Wise Characters'
+        Inconclusive: Category:Characters Category:Wizard101 Category:Absorption Users
+        Category:Aura Users Category:Darkness Users Category:Earth Users Category:Empathic
+        Manipulation Users Category:Fantasy Characters Category:Fire Users Category:Game
+        Characters Category:Healers Category:Ice Users Category:Immortals Category:Life
+        Users Category:Magic Users Category:Male Characters Category:Mind Users Category:Morality
+        Users Category:Necromancers Category:Non-Physical Interaction Users Category:Paralysis
+        Users Category:Poison Users Category:Power Bestowal Users Category:Power Nullification
+        Users Category:Probability Users Category:Rulers Category:Science Fantasy
+        Characters Category:Statistics Amplification Users Category:Statistics Reduction
+        Users Category:Status Effect Users Category:Summoners Category:Summons Category:Telekinesis
+        Users Category:Teleportation Users Category:Transmutation Users Category:Weather
+        Users Category:Wise Characters'
       source_id: mediawiki-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|zeus wizard101|9499040
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-zeus-game
-    url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id018
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Zeus (Wizard101)
-    source_type: mediawiki
-    revision_id: '9499040'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 4775
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id019
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 'At least {{Low 2-C}}, possibly higher Name: Zeus Origin: Wizard101 Gender:
-        Male Age: Unknown Classification: Immortal, Ruler of the Skies'
-      source_id: vsbattles-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Superhuman Physical Characteristics, Magic, Law Manipulation, Necromancy,
-        Immortality (Type 1), Life Force Absorption, Life Manipulation, Mind Manipulation,
-        Empathic Manipulation, Summoning, Telekinesis, Transmutation (Transformed
-        a character into a Minotaur), Power Bestowal, Power Nullification, Morality
-        Manipulation, Aura, Poison Manipulation, Non-Physical Interaction, Teleportation,
-        Weather Manipulation, Electricity Manipulation, Ice Manipulation, Earth Manipulation,
-        Fire Manipulation, Status Effect Inducement, Statistics Reduction (Can weaken
-        healing), Statistics Amplification (Can buff his attacking and healing spells),
-        Healing, Probability Manipulation, Resistances to the following: Paralysis
-        Inducement, Empathic Manipulation, Mind Manipulation'
-      source_id: vsbattles-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: At least Universe level+, possibly higher (Equal if not superior to Hades.
-        Stated the Player "was not the most powerful", not long before he had to fight
-        Morganthe)
-      source_id: vsbattles-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Massively Hypersonic+
-      source_id: vsbattles-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Universe level+, possibly higher (Could survive hits from the
-        Player and is likely more durable than Hades)
-      source_id: vsbattles-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Universal with magic
-      source_id: vsbattles-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Scepter
-      source_id: vsbattles-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Genius (As one of the three Immortals and likely the most powerful among
-        them, Zeus is extremely skilled in the magical arts and knowledgeable about
-        the spiral)
-      source_id: vsbattles-zeus-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Tends to hold back unless he knows his opponent is comparable to him
-        in strength. Vulnerable to Weather Manipulation and Electricity Manipulation.
-        However, this could be due to game mechanics. Note: Zeus having Shadow Magic
-        is more than likely game mechanics ==Notable Matchups== Victories: Losses:
-        Inconclusive: {{Discussions|Zeus Wizard101|Zeus (Wizard101)}} Category:Characters
-        Category:Wizard101 Category:Absorption Users Category:Aura Users Category:Darkness
-        Users Category:Earth Users Category:Empathic Manipulation Users Category:Fantasy
-        Characters Category:Fire Users Category:Game Characters Category:Healers Category:Ice
-        Users Category:Immortals Category:Life Users Category:Magic Users Category:Male
-        Characters Category:Mind Users Category:Morality Users Category:Necromancers
-        Category:Non-Physical Interaction Users Category:Paralysis Users Category:Poison
-        Users Category:Power Bestowal Users Category:Power Nullification Users Category:Probability
-        Users Category:Rulers Category:Science Fantasy Characters Category:Statistics
-        Amplification Users Category:Statistics Reduction Users Category:Status Effect
-        Users Category:Summoners Category:Summons Category:Telekinesis Users Category:Teleportation
-        Users Category:Transmutation Users Category:Weather Users Category:Wise Characters'
-      source_id: vsbattles-zeus-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -1503,10 +968,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-zeus-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_(Canon,_Kingdom_Hearts)/Unbacked0
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id020
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -1530,6 +995,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -1543,7 +1009,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id021
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1554,23 +1020,22 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 'Low 2-C Name: Zeus Origin: Kingdom Hearts Gender: Male Age: Unknown
-        Classification: God of Thunder'
+      value: Low 2-C
       source_id: character-stats-profiles-zeus-game
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: Zeus=Superhuman Physical Characteristics, Self-Sustenance (Type 1, Can
-        breathe underwater and in space), Immortality (Type 1), Electricity Manipulation
-        Non-Physical Interaction (Can directly harm Heartless, which don't have physical
-        forms, and Nobodies, which don't even exist), Reality Warping (Altered the
-        stars in order to form a new constellation) |-|Resistances=Resistance to Death
-        Manipulation, Absorption (Whenever a Heartless gets near someone, it instantly
-        kills them and absorbs their Heart), Limited Law Manipulation (People from
-        other Worlds are immune to the laws of different Worlds), Fate Manipulation
-        (As an Olympian God, Zeus is unable to be killed by the Sisters of Fate) Attack
-        Potency Universe Level+ (Is comparable to Sora and Hercules, Can harm Hades)
+      value: Superhuman Physical Characteristics, Self-Sustenance (Type 1, Can breathe
+        underwater and in space), Immortality (Type 1), Electricity Manipulation Non-Physical
+        Interaction (Can directly harm Heartless, which don't have physical forms,
+        and Nobodies, which don't even exist), Reality Warping (Altered the stars
+        in order to form a new constellation) Resistance to Death Manipulation, Absorption
+        (Whenever a Heartless gets near someone, it instantly kills them and absorbs
+        their Heart), Limited Law Manipulation (People from other Worlds are immune
+        to the laws of different Worlds), Fate Manipulation (As an Olympian God, Zeus
+        is unable to be killed by the Sisters of Fate) Attack Potency Universe Level+
+        (Is comparable to Sora and Hercules, Can harm Hades)
       source_id: character-stats-profiles-zeus-game
       provider_id: character_stats_profiles
       authority: high
@@ -1625,35 +1090,44 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: vsbattles-zeus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Zeus_Game_God_of_War
+    url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29_God_of_War
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id014
+    extracted_fields:
     - attack_potency
     - durability
+    - intelligence
     - powers_and_abilities
     - range
     - speed
+    - stamina
+    - standard_equipment
     - tier
     - weaknesses
-    normalized_page_title: Gauntlet of Zeus (God of War)
+    normalized_page_title: Zeus (God of War)
     source_type: mediawiki
-    revision_id: '9542374'
+    revision_id: '9617742'
     fetch_status: fetched
     http_status: 200
-    content_length: 3848
+    content_length: 32348
     content_kind: api_json
     headings_detected:
     - Summary
     - Powers and Stats
+    - Notable Matchups
     - References
     stat_labels_detected:
     - attack_potency
     - durability
+    - intelligence
+    - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
+    - stamina
+    - standard_equipment
     - striking_strength
     - tier
     - weaknesses
@@ -1662,7 +1136,205 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id015
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: attack_potency
+      value: 'Complex Multiverse level (Is the mightiest and strongestGod of War II:
+        From Myth to Legend ofGod of War Instruction Booklet (2005)- Pages 34 and
+        35 all theGod of War 2 PS2 Manual- Page 10 Olympian gods.God of War II (Novel)-
+        Chapter 19 He proved himself capable of beating his father,God of War Official
+        Website and Interactive Map. Archive Link here Cronos, during the Great WarGod
+        of War Instruction Booklet (2005)- Page 21, and went on to completely demolish
+        the entire Titan race at once with a single energy blast powered by his godly
+        might.Official God of War: Ascension Timeline (The Great War), original post
+        here During his absolute prime, he considered the powers of the whole Titan
+        race to be near-irrelevant. Fought on par with Kratos when the latter was
+        at the peak of his power, as the God of War) | Complex Multiverse level (Became
+        much stronger than his base form and knocked out Kratos out with a single
+        strike, destroying all of his equipment in the process, then killed him by
+        snapping his neck. The Evils, if let free would destroy the world of man and
+        gods. Was only defeated by the Power of Hope from Pandora''s Box)'
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Immeasurable (His lightning bolts are so fast that Hermes couldn't perceive
+        them.God of War II (Novel)- Chapter 17 Comparable to Kratos when the latter
+        was at the peak of his power in the Greek world) | Immeasurable (Far above
+        his previous speed, managed to catch Kratos off-guard and grab him before
+        he could react)
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Complex Multiverse level (Was impaled by the Blade of Olympus on multiple
+        different occasions, survived and managed to recover quickly and come back
+        even stronger, even after being impaled and pinned for minutes and on the
+        range of a point-blank explosion from Gaia's heart, and only pretended to
+        be dead. Also withstood a massive blitz and a continuous beating from Kratos,
+        only to emerge even stronger from said beating) | At least Complex Multiverse
+        level (Immeasurably more powerful than his prior self)
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (Magic is the source of all physical attributes in the setting.
+        The Rage of the Gods, a transformation that allows Kratos to channel on the
+        powers of the Gods,God of War (2005) grants him infiniteGod of War (2005)
+        - Prima Guide magic, which translates to stamina, including mental fatigueGod
+        of War Chains of Olympus Official Strategy Guide By BradyGames - Page 113)
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Low Multiversal (Gods are present across their domains, which at the
+        minimum span all of space and time.God of War I Novelization - Epilogue Can
+        reach across the Underworld and Human World, as seen when he sent a worshipper's
+        soul straight to the Underworld with a mere gesture, and when he dug a hole
+        from the Mortal World to the Underworld to allow Kratos to escape, with the
+        Underworld and Mortal World, with the Underworld and Mortal World having been
+        stated to be separate space-time continuums. Upon hearing that the Sisters
+        of Fate were dead, Zeus roared in shock and disbelief, said roar shaking the
+        foundations of the Greek World. Also threatens Ares that his lightning bolt
+        would be able to strike even him, regardless of where Ares would goGod of
+        War (Novel)- Chapter 2), Complex Multiversal via Summoning (Sealed the Great
+        Evils within Pandora's Box) | Complex Multiversal (Has become Fear itself,
+        an abstraction that supersedes even the Primordials and extends across the
+        totality of the Greek World)
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: The Blade of Olympus, Gauntlet of Zeus
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Nigh-Omniscient (Gods hold an intrinsic awareness and understanding of
+        their domains and all that falls within their purview for the rest of eternityGod
+        of War I Novelization - Epilogue, with Zeus being the god of the skies and
+        thus, the heavens. Zeus is a deep planner such that even Athena cannot guess
+        at his plans and machinations. Had planned out the entire events of the Siege
+        of Athens, down to the death of Kratos by Ares's hands and beyondGod of War
+        I Novelization, Ch.26, such that even Athena could not see through his plans)
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Incredibly prideful and arrogant. The Blade of Olympus. | Retains his
+        pride and arrogance, and is consumed by irrational fear and hate for Kratos
+        due to the Great Evil Fear infecting him. The Power of Hope ==Notable Matchups==
+        Victories: Losses: Inconclusive: ==References== Category:Characters Category:God
+        of War Category:Absorption Users Category:Abstract Entities Category:Acausal
+        Characters Category:Accelerated Development Users Category:Animal Users Category:Antagonists
+        Category:Astral Projection Users Category:Attack Reflection Users Category:BFR
+        Users Category:Body Puppetry Users Category:Clairvoyance Users Category:Concept
+        Users Category:Curse Users Category:Death Users Category:Dimensional Travel
+        Users Category:Duplication Users Category:Electricity Users Category:Empathic
+        Manipulation Users Category:Empowerment Users Category:Energy Users Category:Enhanced
+        Senses Users Category:Evil Characters Category:Extrasensory Perception Users
+        Category:Fantasy Characters Category:Fear Users Category:Final Bosses Category:Flight
+        Users Category:Game Bosses Category:Game Characters Category:Geniuses Category:Gods
+        Category:Greek Gods Category:Healers Category:Immortals Category:Kings Category:Life
+        Users Category:Madness Users Category:Probability Users Category:Magic Users
+        Category:Male Characters Category:Married Characters Category:Memory Users
+        Category:Mind Users Category:Necromancers Category:Parents Category:Portal
+        Users Category:Possession Users Category:Power Bestowal Users Category:Power
+        Nullification Users Category:Precognition Users Category:Primary Antagonists
+        Category:Regeneration Users Category:Resistance Negation Users Category:Resurrection
+        Users Category:Rulers Category:Sealing Users Category:Shapeshifters Category:Size
+        Users Category:Soul Users Category:Sound Users Category:Status Effect Users
+        Category:Summoners Category:Telekinesis Users Category:Telepaths Category:Teleportation
+        Users Category:Transformation Users Category:Tyrants Category:Villains Category:Weather
+        Users'
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Keys: Base | Fear Incarnated Name: Zeus, Skyfather, The Grave Digger
+        Origin: God of War Gender: Male Age: At least thousands of years old Classification:
+        Deity, Greek God, Olympian God, King of the Olympians, God of Skies and Thunder'
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|'
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|zeus god of war|9617742
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-zeus-game-god-of-war
+    url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29_God_of_War
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Zeus (Canon, God of War)/Adamjensen2030
+    source_type: mediawiki
+    revision_id: '193331'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6645
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -1673,56 +1345,256 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{1-C}} Name: Gauntlet of Zeus Origin: God of War Age: At least one
-        thousand years old (Zeus commissioned this Gauntlet from Hephaestus immediately
-        after the Great War, which took a thousand years before the events of the
-        first God of War game) Classification: Gauntlet Wielders: Zeus, Kratos'
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
+      value: At least High 6-A, likely Low 2-C
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: '*Statistics Amplification and Empowerment *Divine Magic *The Lightning
-        of Zeus (Armed with Zeus'' lightning)'
-      source_id: vsbattles-zeus-game-god-of-war
-      provider_id: vsbattles
+      value: Superhuman Physical Characteristics, Magic, Teleportation, Lightning
+        Manipulation and Projection, Flight, Telekinesis, Telepathy, Weather Manipulation,
+        Energy Projection, Duplication, Regeneration (Low-Mid), Shapeshifting and
+        Size Shifting, Immortality (Types 1, 2 and 4), Sealing (Sealed the evils within
+        Pandora's box), Astral Projection, Summoning (Summoned Sirens in his battle
+        with Kratos) and can bestow powers onto others, Power Nullification, Absorption
+        (Drained Kratos of his powers as well as the powers of Gaia's heart), Portal
+        Creation, BFR (via Portal Creation)
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: attack_potency
-      value: 'Complex Multiverse level (Was used by its namesake to chain up all the
-        Titans to the pits of Tartarus,God of War: Chains of Olympus (2008) and Kratos
-        with the Gauntlet managed to overpower and re-chain Atlas, forcing him to
-        lift the entirety of the cosmos by himselfGod of War Official Facebook Page-
-        A Sacrifice To Save All Creation)'
+      value: At least Multi-Continent level, likely Universe level+ (Is equal to GoW3
+        Kratos. Far above Atlas, Cronos, Poseidon, Hades, Hercules and any other god
+        Kratos previously fought. He is strong enough to wrest control of the universe
+        from Cronos)
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Infinite combat speed and reactions (Matched Kratos, who caught Hermes
+        in combat)
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Multi-Continent level, likely Universe level+
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'The Blade of Olympus Notable Attacks/Techniques: Zeus, being the King
+        of the Olympians, possess electric manipulation and the mastery over the thunderbolts.
+        He also displayed the following abilities in God of War III: * Superhuman
+        Strength: As the King of the Gods, Zeus possessed incredible levels of superhuman
+        strength. He could easily overpower almost anything in Creation. * Superhuman'
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|zeus canon god of war adamjensen2030|193331
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-zeus-game-god-of-war
+    url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29_%28God_of_War%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Zeus (God of War)
+    source_type: mediawiki
+    revision_id: '9617742'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 32348
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: attack_potency
+      value: 'Complex Multiverse level (Is the mightiest and strongestGod of War II:
+        From Myth to Legend ofGod of War Instruction Booklet (2005)- Pages 34 and
+        35 all theGod of War 2 PS2 Manual- Page 10 Olympian gods.God of War II (Novel)-
+        Chapter 19 He proved himself capable of beating his father,God of War Official
+        Website and Interactive Map. Archive Link here Cronos, during the Great WarGod
+        of War Instruction Booklet (2005)- Page 21, and went on to completely demolish
+        the entire Titan race at once with a single energy blast powered by his godly
+        might.Official God of War: Ascension Timeline (The Great War), original post
+        here During his absolute prime, he considered the powers of the whole Titan
+        race to be near-irrelevant. Fought on par with Kratos when the latter was
+        at the peak of his power, as the God of War) | Complex Multiverse level (Became
+        much stronger than his base form and knocked out Kratos out with a single
+        strike, destroying all of his equipment in the process, then killed him by
+        snapping his neck. The Evils, if let free would destroy the world of man and
+        gods. Was only defeated by the Power of Hope from Pandora''s Box)'
       source_id: vsbattles-zeus-game-god-of-war
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: speed
-      value: Amplifies its wielders to Immeasurable speed (Kratos with the Gauntlet
-        was able to easily keep up with the likes of Atlas and Persephone)
+      value: Immeasurable (His lightning bolts are so fast that Hermes couldn't perceive
+        them.God of War II (Novel)- Chapter 17 Comparable to Kratos when the latter
+        was at the peak of his power in the Greek world) | Immeasurable (Far above
+        his previous speed, managed to catch Kratos off-guard and grab him before
+        he could react)
       source_id: vsbattles-zeus-game-god-of-war
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: durability
-      value: Complex Multiverse level (Able to withstand the force of its own blows)
+      value: Complex Multiverse level (Was impaled by the Blade of Olympus on multiple
+        different occasions, survived and managed to recover quickly and come back
+        even stronger, even after being impaled and pinned for minutes and on the
+        range of a point-blank explosion from Gaia's heart, and only pretended to
+        be dead. Also withstood a massive blitz and a continuous beating from Kratos,
+        only to emerge even stronger from said beating) | At least Complex Multiverse
+        level (Immeasurably more powerful than his prior self)
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Infinite (Magic is the source of all physical attributes in the setting.
+        The Rage of the Gods, a transformation that allows Kratos to channel on the
+        powers of the Gods,God of War (2005) grants him infiniteGod of War (2005)
+        - Prima Guide magic, which translates to stamina, including mental fatigueGod
+        of War Chains of Olympus Official Strategy Guide By BradyGames - Page 113)
       source_id: vsbattles-zeus-game-god-of-war
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: range
-      value: Standard Melee Range; Extended Melee Range with electrical shockwaves
+      value: Low Multiversal (Gods are present across their domains, which at the
+        minimum span all of space and time.God of War I Novelization - Epilogue Can
+        reach across the Underworld and Human World, as seen when he sent a worshipper's
+        soul straight to the Underworld with a mere gesture, and when he dug a hole
+        from the Mortal World to the Underworld to allow Kratos to escape, with the
+        Underworld and Mortal World, with the Underworld and Mortal World having been
+        stated to be separate space-time continuums. Upon hearing that the Sisters
+        of Fate were dead, Zeus roared in shock and disbelief, said roar shaking the
+        foundations of the Greek World. Also threatens Ares that his lightning bolt
+        would be able to strike even him, regardless of where Ares would goGod of
+        War (Novel)- Chapter 2), Complex Multiversal via Summoning (Sealed the Great
+        Evils within Pandora's Box) | Complex Multiversal (Has become Fear itself,
+        an abstraction that supersedes even the Primordials and extends across the
+        totality of the Greek World)
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: The Blade of Olympus, Gauntlet of Zeus
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Nigh-Omniscient (Gods hold an intrinsic awareness and understanding of
+        their domains and all that falls within their purview for the rest of eternityGod
+        of War I Novelization - Epilogue, with Zeus being the god of the skies and
+        thus, the heavens. Zeus is a deep planner such that even Athena cannot guess
+        at his plans and machinations. Had planned out the entire events of the Siege
+        of Athens, down to the death of Kratos by Ares's hands and beyondGod of War
+        I Novelization, Ch.26, such that even Athena could not see through his plans)
       source_id: vsbattles-zeus-game-god-of-war
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: None notable ==References== {{scroll box|content={{reflist|2}}}} {{discussions|Gauntlet
-        of Zeus God of War|Gauntlet of Zeus (God of War)}} Category:Items Category:God
-        of War Category:Electricity Users Category:Empowerment Users Category:Gauntlets
-        Category:Magic Users Category:Paralysis Users Category:Power Nullification
-        Users Category:Statistics Amplification Users
+      value: 'Incredibly prideful and arrogant. The Blade of Olympus. | Retains his
+        pride and arrogance, and is consumed by irrational fear and hate for Kratos
+        due to the Great Evil Fear infecting him. The Power of Hope ==Notable Matchups==
+        Victories: Losses: Inconclusive: ==References== Category:Characters Category:God
+        of War Category:Absorption Users Category:Abstract Entities Category:Acausal
+        Characters Category:Accelerated Development Users Category:Animal Users Category:Antagonists
+        Category:Astral Projection Users Category:Attack Reflection Users Category:BFR
+        Users Category:Body Puppetry Users Category:Clairvoyance Users Category:Concept
+        Users Category:Curse Users Category:Death Users Category:Dimensional Travel
+        Users Category:Duplication Users Category:Electricity Users Category:Empathic
+        Manipulation Users Category:Empowerment Users Category:Energy Users Category:Enhanced
+        Senses Users Category:Evil Characters Category:Extrasensory Perception Users
+        Category:Fantasy Characters Category:Fear Users Category:Final Bosses Category:Flight
+        Users Category:Game Bosses Category:Game Characters Category:Geniuses Category:Gods
+        Category:Greek Gods Category:Healers Category:Immortals Category:Kings Category:Life
+        Users Category:Madness Users Category:Probability Users Category:Magic Users
+        Category:Male Characters Category:Married Characters Category:Memory Users
+        Category:Mind Users Category:Necromancers Category:Parents Category:Portal
+        Users Category:Possession Users Category:Power Bestowal Users Category:Power
+        Nullification Users Category:Precognition Users Category:Primary Antagonists
+        Category:Regeneration Users Category:Resistance Negation Users Category:Resurrection
+        Users Category:Rulers Category:Sealing Users Category:Shapeshifters Category:Size
+        Users Category:Soul Users Category:Sound Users Category:Status Effect Users
+        Category:Summoners Category:Telekinesis Users Category:Telepaths Category:Teleportation
+        Users Category:Transformation Users Category:Tyrants Category:Villains Category:Weather
+        Users'
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Keys: Base | Fear Incarnated Name: Zeus, Skyfather, The Grave Digger
+        Origin: God of War Gender: Male Age: At least thousands of years old Classification:
+        Deity, Greek God, Olympian God, King of the Olympians, God of Skies and Thunder'
+      source_id: vsbattles-zeus-game-god-of-war
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Base= {{#tag:tabber|'
       source_id: vsbattles-zeus-game-god-of-war
       provider_id: vsbattles
       authority: high
@@ -1737,183 +1609,127 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|gauntlet of zeus god of war|9542374
+    duplicate_key: vsbattles.fandom.com|zeus god of war|9617742
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-zeus-game-god-of-war
+    url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29_%28God_of_War%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Zeus (Canon, God of War)/Adamjensen2030
+    source_type: mediawiki
+    revision_id: '193331'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 6645
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least High 6-A, likely Low 2-C
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Magic, Teleportation, Lightning
+        Manipulation and Projection, Flight, Telekinesis, Telepathy, Weather Manipulation,
+        Energy Projection, Duplication, Regeneration (Low-Mid), Shapeshifting and
+        Size Shifting, Immortality (Types 1, 2 and 4), Sealing (Sealed the evils within
+        Pandora's box), Astral Projection, Summoning (Summoned Sirens in his battle
+        with Kratos) and can bestow powers onto others, Power Nullification, Absorption
+        (Drained Kratos of his powers as well as the powers of Gaia's heart), Portal
+        Creation, BFR (via Portal Creation)
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Multi-Continent level, likely Universe level+ (Is equal to GoW3
+        Kratos. Far above Atlas, Cronos, Poseidon, Hades, Hercules and any other god
+        Kratos previously fought. He is strong enough to wrest control of the universe
+        from Cronos)
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Infinite combat speed and reactions (Matched Kratos, who caught Hermes
+        in combat)
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Multi-Continent level, likely Universe level+
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'The Blade of Olympus Notable Attacks/Techniques: Zeus, being the King
+        of the Olympians, possess electric manipulation and the mastery over the thunderbolts.
+        He also displayed the following abilities in God of War III: * Superhuman
+        Strength: As the King of the Gods, Zeus possessed incredible levels of superhuman
+        strength. He could easily overpower almost anything in Creation. * Superhuman'
+      source_id: character-stats-profiles-zeus-game-god-of-war
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|zeus canon god of war adamjensen2030|193331
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-zeus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29_God_of_War
-    title: Gauntlet of Zeus (God of War)
-    rank: 105
-    extracted_fields: *id006
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id007
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|gauntlet of zeus god of war|9542374
-  - source_id: character-stats-profiles-zeus-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29_God_of_War
-    title: Kratos the God of War (Canon, God of War)/Antipsw123
-    rank: 105
-    extracted_fields: *id008
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id009
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|kratos the god of war canon
-      god of war antipsw123|534201
-  - source_id: vsbattles-zeus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29_%28God_of_War%29
-    title: Gauntlet of Zeus (God of War)
-    rank: 105
-    extracted_fields: *id010
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id011
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|gauntlet of zeus god of war|9542374
-  - source_id: character-stats-profiles-zeus-game-god-of-war
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29_%28God_of_War%29
-    title: Kratos the God of War (Canon, God of War)/Antipsw123
-    rank: 105
-    extracted_fields: *id012
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id013
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|kratos the god of war canon
-      god of war antipsw123|534201
-  - source_id: vsbattles-zeus-game-god-of-war
-    url: https://vsbattles.fandom.com/wiki/Zeus_Game_God_of_War
-    title: Gauntlet of Zeus (God of War)
-    rank: 105
-    extracted_fields: *id014
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id015
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|gauntlet of zeus god of war|9542374
-  - source_id: mediawiki-zeus-game
-    url: https://vsbattles.fandom.com/wiki/Zeus_(Game)
-    title: Zeus (Wizard101)
-    rank: 80
-    extracted_fields: *id016
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id017
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|zeus wizard101|9499040
-  - source_id: vsbattles-zeus-game
-    url: https://vsbattles.fandom.com/wiki/Zeus_%28Game%29
-    title: Zeus (Wizard101)
-    rank: 80
-    extracted_fields: *id018
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id019
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|zeus wizard101|9499040
-  - source_id: character-stats-profiles-zeus-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zeus_%28Game%29
-    title: Zeus (Canon, Kingdom Hearts)/Unbacked0
-    rank: 80
-    extracted_fields: *id020
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id021
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|zeus canon kingdom hearts
-      unbacked0|178707
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

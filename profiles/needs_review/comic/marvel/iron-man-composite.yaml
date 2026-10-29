@@ -12,13 +12,14 @@ generation:
   generated_at: '2026-06-10T00:34:03Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id006
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:abilities
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Iron Man (Composite)
   franchise: Marvel
@@ -86,42 +87,6 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-iron-man-composite
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Iron Man Composite
-  url: https://vsbattles.fandom.com/wiki/Iron_Man_Composite
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-iron-man-composite
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Iron Man Composite
-  url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_Composite
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-iron-man-composite-marvel
   provider_id: vsbattles
   source_type: mediawiki
@@ -129,7 +94,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Iron_Man_Armor_Model_13
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -172,7 +137,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Death%27s_Head_(Canon,_Composite)/MisterNobodyVulAdvAoyll
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -209,62 +174,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-iron-man-composite-marvel
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Iron Man (Composite) Marvel
-  url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-iron-man-composite-marvel
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Iron Man (Composite) Marvel
-  url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-iron-man-composite-marvel
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Iron Man (Composite) (Marvel)
-  url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-iron-man-composite-marvel
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Iron Man (Composite) (Marvel)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-tony-stark
   provider_id: vsbattles
   source_type: mediawiki
@@ -584,7 +493,7 @@ abilities:
 - id: powers-and-abilities-model-13-superhuman-physical-characteristics
   name: Model 13=Superhuman Physical Characteristics
   description: Model 13=Superhuman Physical Characteristics
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-iron-man-composite-marvel-comics
   source_claim_ids: []
   confidence: 0.85
@@ -600,7 +509,7 @@ abilities:
 - id: powers-and-abilities-energy-projection
   name: Energy Projection
   description: Energy Projection
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -615,7 +524,7 @@ abilities:
 - id: powers-and-abilities-energy-absorption
   name: Energy Absorption
   description: Energy Absorption
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -630,7 +539,7 @@ abilities:
 - id: powers-and-abilities-plasma-manipulation-via-phased-plama-streams
   name: Plasma Manipulation via Phased Plama Streams
   description: Plasma Manipulation via Phased Plama Streams
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -646,7 +555,7 @@ abilities:
 - id: powers-and-abilities-flight
   name: Flight
   description: Flight
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -661,7 +570,7 @@ abilities:
 - id: powers-and-abilities-adhesive-manipulation-via-polybond-adhesive-compound
   name: Adhesive Manipulation via Polybond Adhesive Compound
   description: Adhesive Manipulation via Polybond Adhesive Compound
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -678,7 +587,7 @@ abilities:
     pulses)
   description: Magnetism Manipulation (As shown here. The armor can also emit electromagnetic
     pulses)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -693,7 +602,7 @@ abilities:
 - id: powers-and-abilities-ice-manipulation-via-cryogenic-compact-module
   name: Ice Manipulation via Cryogenic Compact Module
   description: Ice Manipulation via Cryogenic Compact Module
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -708,7 +617,7 @@ abilities:
 - id: powers-and-abilities-explosion-manipulation-via-explosive-shells
   name: Explosion Manipulation via Explosive Shells
   description: Explosion Manipulation via Explosive Shells
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -723,7 +632,7 @@ abilities:
 - id: powers-and-abilities-sound-manipulation-uses-ultrasound-imaging-to-sense-venom
   name: Sound Manipulation (Uses ultrasound imaging to sense Venom)
   description: Sound Manipulation (Uses ultrasound imaging to sense Venom)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -739,7 +648,7 @@ abilities:
 - id: powers-and-abilities-electric-discharge-electrocutes-venom
   name: Electric Discharge (Electrocutes Venom)
   description: Electric Discharge (Electrocutes Venom)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -755,7 +664,7 @@ abilities:
   name: Temperature Manipulation (Can absorb and convert heat into energy with thermocouples)
   description: Temperature Manipulation (Can absorb and convert heat into energy with
     thermocouples)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -772,7 +681,7 @@ abilities:
 - id: powers-and-abilities-limited-atomic-manipulation-by-attaching-two-compact-module
   name: Limited Atomic Manipulation (By attaching two compact modules
   description: Limited Atomic Manipulation (By attaching two compact modules
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -787,7 +696,7 @@ abilities:
 - id: powers-and-abilities-mutually-opposing-magnetic-fields-are-generated-onto-ted-s-
   name: mutually opposing magnetic fields are generated onto Ted's body
   description: mutually opposing magnetic fields are generated onto Ted's body
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -803,7 +712,7 @@ abilities:
   name: '"polarizing his synthetic structure and causing his atoms to repel one another")'
   description: '"polarizing his synthetic structure and causing his atoms to repel
     one another")'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -818,7 +727,7 @@ abilities:
 - id: powers-and-abilities-illusion-creation-with-image-inducers
   name: Illusion Creation with Image Inducers
   description: Illusion Creation with Image Inducers
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -835,7 +744,7 @@ abilities:
     to short-circuit Ultimo)
   description: Limited Technology Manipulation (Can use a Compact Electromagnetic
     Field Generator to short-circuit Ultimo)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -851,7 +760,7 @@ abilities:
 - id: powers-and-abilities-limited-gravity-manipulation-with-magnogravetic-field-gener
   name: Limited Gravity Manipulation with Magnogravetic Field Generator
   description: Limited Gravity Manipulation with Magnogravetic Field Generator
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -868,7 +777,7 @@ abilities:
     that shields itself from energy attacks)
   description: Resistance to Energy Projection (The Modular Armor has a retractive
     coating that shields itself from energy attacks)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -885,7 +794,7 @@ abilities:
     blasts)
   description: and Microwave Radiation Projection (Shrugs off Firestar's microwave
     radiation blasts)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -902,7 +811,7 @@ abilities:
 - id: powers-and-abilities
   name: '-'
   description: '-'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -917,7 +826,7 @@ abilities:
 - id: powers-and-abilities-hulk-buster-superhuman-physical-characteristics
   name: Hulk Buster=Superhuman Physical Characteristics
   description: Hulk Buster=Superhuman Physical Characteristics
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -932,7 +841,7 @@ abilities:
 - id: powers-and-abilities-flight
   name: Flight
   description: Flight
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -947,7 +856,7 @@ abilities:
 - id: powers-and-abilities-energy-projection-as-shown-here
   name: Energy Projection (As shown here)
   description: Energy Projection (As shown here)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -964,7 +873,7 @@ abilities:
     Impact-Resistant Carbon Composites
   description: Resistance to Blunt Force Trauma (The Hulk Buster exo-armor is built
     with Impact-Resistant Carbon Composites
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -979,7 +888,7 @@ abilities:
 - id: powers-and-abilities-allowing-the-armor-to-survive-the-forceful-impact-of-hulk-s
   name: allowing the armor to survive the forceful impact of Hulk's blows)
   description: allowing the armor to survive the forceful impact of Hulk's blows)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -998,7 +907,7 @@ weaknesses:
 - id: weaknesses-none-notable
   name: None Notable
   description: None Notable
-  source_ids: &id005
+  source_ids: &id003
   - vsbattles-iron-man-composite-marvel-comics
   source_claim_ids: []
   confidence: 0.85
@@ -1019,7 +928,7 @@ weaknesses:
     Model 13: *Phased Plasma Streams: Uses phased plasma streams against EmberForce
     Works #4. *Polybond Adhesive Compound: Can launch an adhesive substance against
     enemies'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1038,7 +947,7 @@ weaknesses:
   description: 'which he does to SpeedballIron Man #303. *Cryogenic Compact Module:
     Can use liquid nitrogen to freeze and solidify opponentsIron Man #318. *Explosive
     Shel'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1061,1032 +970,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id006
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: 0cb74d2f300005eed5d92c4516d9ce233faaf363f085489a473d013a35757837
 repair:
-  attempted_at: '2026-06-19T03:20:10Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T22:55:31Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-iron-man-composite-marvel-comics
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel_Comics%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - range
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Iron Man Armor Model 13
-    source_type: mediawiki
-    revision_id: '9360925'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 10190
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - References
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{8-B}} | {{5-B}}
-      source_id: vsbattles-iron-man-composite-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Model 13=Superhuman Physical Characteristics, Energy Projection, Energy
-        Absorption, Plasma Manipulation via Phased Plama Streams, Flight, Adhesive
-        Manipulation via Polybond Adhesive Compound, Magnetism Manipulation (As shown
-        here. The armor can also emit electromagnetic pulses), Ice Manipulation via
-        Cryogenic Compact Module, Explosion Manipulation via Explosive Shells, Sound
-        Manipulation (Uses ultrasound imaging to sense Venom), Electric Discharge
-        (Electrocutes Venom), Temperature Manipulation (Can absorb and convert heat
-        into energy with thermocouples), Limited Atomic Manipulation (By attaching
-        two compact modules, mutually opposing magnetic fields are generated onto
-        Ted's body, "polarizing his synthetic structure and causing his atoms to repel
-        one another"), Illusion Creation with Image Inducers, Limited Technology Manipulation
-        (Can use a Compact Electromagnetic Field Generator to short-circuit Ultimo),
-        Limited Gravity Manipulation with Magnogravetic Field Generator, Resistance
-        to Energy Projection (The Modular Armor has a retractive coating that shields
-        itself from energy attacks), and Microwave Radiation Projection (Shrugs off
-        Firestar's microwave radiation blasts) |-|Hulk Buster=Superhuman Physical
-        Characteristics, Flight, Energy Projection (As shown here), Resistance to
-        Blunt Force Trauma (The Hulk Buster exo-armor is built with Impact-Resistant
-        Carbon Composites, allowing the armor to survive the forceful impact of Hulk's
-        blows)
-      source_id: vsbattles-iron-man-composite-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'At least City Block level (During its run, it was the most advanced
-        and versatile armor yet and was regarded by Tony as a "quantum leap" from
-        the previous armors. Therefore, it should be at least comparable, if not superior
-        to previous armors such as Model 8, Model 9, and Model 11) | Planet level
-        (Fought and traded blowsIron Man Vol 1 #305 with Professor Hulk, although
-        the fight ended in a stalemate)'
-      source_id: vsbattles-iron-man-composite-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Hypersonic (Should be far faster than earlier models such as
-        Model 4Mach 8.23) | Unknown, possibly at most Hypersonic combat speed (In
-        order to fight the Hulk, versatility and mobility was sacrificed for enhanced
-        physical strength and hand-to-hand combat. Even so, the armor is still capable
-        of keeping up with the HulkMach 8.23)
-      source_id: vsbattles-iron-man-composite-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least City Block level, possibly far higher (Should have equal, if
-        not superior durability to Model 11) | Planet level (Took blows from Professor
-        Hulk)
-      source_id: vsbattles-iron-man-composite-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Unknown with repulsors
-      source_id: vsbattles-iron-man-composite-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None Notable | The Hulk-Buster armor lacks versatility and mobility
-        compared to other armors due to being made specifically for the Hulk Notable
-        Attacks/Techniques: Model 13: *Phased Plasma Streams: Uses phased plasma streams
-        against EmberForce Works #4. *Polybond Adhesive Compound: Can launch an adhesive
-        substance against enemies, which he does to SpeedballIron Man #303. *Cryogenic
-        Compact Module: Can use liquid nitrogen to freeze and solidify opponentsIron
-        Man #318. *Explosive Shel'
-      source_id: vsbattles-iron-man-composite-marvel-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: vsbattles.fandom.com|iron man armor model 13|9360925
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-iron-man-composite-marvel-comics
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel_Comics%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id011
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Death's Head (Canon, Composite)/MisterNobodyVulAdvAoyll
-    source_type: mediawiki
-    revision_id: '582401'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 17581
-    content_kind: api_json
-    headings_detected:
-    - '''''''Summary'''''''
-    - '''''''Powers and Stats'''''''
-    - '''''''Others'''''''
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id012
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least 9-A to 8-C to 5-B, 5-B with weaponry | At least 9-B to 5-B,
-        5-B with weaponry | At least 9-B to 5-B, likely higher | At least 9-B, higher
-        with weaponry, possibly 5-B | At least 9-B to High 3-A to Low 1-C, High 3-A
-        to Low 1-C with weaponry
-      source_id: character-stats-profiles-iron-man-composite-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Original Body= *Superhuman Physical Characteristics *Inorganic Physiology\
-        \ (Type 2; Is a robot, or a Mechanoid, in his own words) *Preparation (Environmental;\
-        \ In High Noon Tex, he was able to prepare an explosive dummy of himself for\
-        \ Tex and trick him with it) *Social Influencing (Deception; is completely\
-        \ willing to trick his enemies just to defeat them) *Large Size (Type 0; is\
-        \ thirty feet tall) *Enhanced Senses (Enhanced Sight; has 360\xB0 vision *Martial\
-        \ Arts (Extremely skilled in hand-to-hand combat;) *Weapon Mastery (Close\
-        \ Weapon Mastery, Firearms Mastery, Explosives Mastery, and High-Tech Weapons\
-        \ Mastery; Can use his weapons with ease, and can even improvise weapons on\
-        \ the fly) *Acrobatics (Stated to be an acrobat) *Natural Weaponry (Horns,\
-        \ tusks, fists, Multi-Use Hand) *Fourth Wall Awareness (In one of his comic\
-        \ book covers, he directly speaks to the reader) *Energy Manipulation (Energy\
-        \ Projection; has a laser cutter built into his hand) *Explosion Manipulation\
-        \ (Missile Launcher Hand, Mine Launcher Hand) *Information Analysis (Has a\
-        \ built-in scanner) *Dimensional Travel (Consistently hops between dimensions)\
-        \ *Time Manipulation (Time Travel; travelled back in time to kill Galvatron)\
-        \ *Immortality (Type 2; survived being decapitated) *Fire Manipulation (Flamethrower\
-        \ Hand) *Flight (Jet Boots allow him to fly) *Sleep Manipulation and Smoke\
-        \ Manipulation (Via knockout gas) *Pressure Point Strikes (Could find Galvatron's\
-        \ weak spot and exploit it to his advantage (in combat)) *Teleportation (Has\
-        \ access to a teleportation device and uses it whenever he needs a quick escape)\
-        \ *Hacking *Resistance to: **Standard forms of Mind Manipulation (Has a non-organic\
-        \ brain) **Hacking (States that his brain is armed with several anti-hacking\
-        \ locks) |-| Rebuilt= *All previous abilities excluding Large Size *Possible\
-        \ Size Manipulation (His size seemingly varies from seven feet to thirty feet\
-        \ with no apparent explanation) |-| Death's Head II= *Superhuman Physical\
-        \ Characteristics *Inorganic Physiology (Type 2; Minion's body is robotic)\
-        \ *Genius Intelligence (Minion is able to download his opponents' minds, something\
-        \ he refers to as Cranial Disruption. As such, he gains his opponents' experience\
-        \ and intelligence, effectively getting smarter over time; has once killed\
-        \ Reed Richards) *Martial Arts (A master of all forms of combat) *Enhanced\
-        \ Senses (Enhanced Hearing, Enhanced Vision, and Enhanced Smell) *Possession/Mind\
-        \ Manipulation (Was able to take over Minion's mind after his personality\
-        \ was assimilated into him) *Multiple Personalities *Natural Weaponry/Limited\
-        \ Transformation (His arm can turn into either a razor-sharp blade, a large\
-        \ hand, or a plasma-fusion cannon; has horns as well) *Energy Projection (Cannon\
-        \ hand) *Regeneration (Low-Mid; Minion's body was built to regenerate severed\
-        \ limbs in under a minute) *Time Manipulation and Dimensional Travel (Time\
-        \ Travel; via his A.I.M. Time Belt; claims to have been on adventures across\
-        \ time and space) *Resistance to: **Heat Manipulation **Energy Projection\
-        \ |-| What If...Death's Head Had Lived?= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Martial Arts *Weapon Mastery (Of his axe,\
-        \ spear, large gun, etc.) *Natural Weaponry *Social Influencing (Trust; despite\
-        \ his position as a mercenary, he was able to recruit superheroes to fight\
-        \ Charnel/Minion) *Dimensional Travel/Time Manipulation (Time Travel; should\
-        \ just be an alternate version of base Death's Head) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head |-| Destroy All Robots!= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Natural Weaponry (Fists, horns, tusks, Multi-Use\
-        \ Hand) *Weapon Mastery (Close Weapon Mastery) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head"
-      source_id: character-stats-profiles-iron-man-composite-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'At least Small Building Level to Building Level (Held his own against
-        Transformers, and is comparable in size to them) to Planet Level (Fought against
-        Unicron along with Rodimus Prime; fought Hulk in Marvel Heroes #33), Planet
-        Level with weaponry (His Shottblaster was able to destroy Laserbeak; killed
-        Shockwave with a blast of his gun) | At least Wall Level (His punches are
-        hard enough to send people flying; can rip through metal walls) to Planet
-        Level (Can hold his own against The Thing), Planet Level with weaponry (His
-        weapons are able to harm the likes of both characters previously listed) |
-        At least Wall Level (Is powerful enough to impale a normal human) to Planet
-        Level (Comparable to the original Death''s Head), likely higher (Was able
-        to kill Death''s Head) | At least Wall Level (Should be this powerful, as
-        he upgraded himself before fighting Charnel), higher with weaponry, possibly
-        Planet Level (Killed Charnel/Minion, who, in turn, could kill and take hits
-        from The Thing) | At least Wall Level (Should be comparable to Rebuilt Death''s
-        Head) to High Universe Level to Low Complex Multiverse Level (Decapitated
-        Ultron, most likely with ease), High Universe Level to Low Complex Multiverse
-        Level with weaponry (Put Ultron''s head on a spear)'
-      source_id: character-stats-profiles-iron-man-composite-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Sub-Relativistic (Comparable to the other Transformers, who
-        could dodge laser beams), possibly Immeasurable (Could keep up with The TARDIS
-        and accidentally crashed into it) | At least Hypersonic (Comparable to Iron
-        Man, who can fly this fast), possibly Immeasurable (Was again hired to hunt
-        down The Doctor and could track down the TARDIS) | At least Hypersonic to
-        Hypersonic+ (Should be superior to base Death's Head) | Unknown, possibly
-        Hypersonic | Unknown, possibly Hypersonic to Infinite (Should scale above
-        Ultron via killing him, who is comparable to Thor, who can travel across the
-        Nine Realms in seconds, with each being several light years long)
-      source_id: character-stats-profiles-iron-man-composite-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Planet Level (Tanked a blast from Shockwave's Particle Cannon,
-        which could heavily injure other Transformers) | At least Planet Level, possibly
-        higher (Tanked several hits from The Thing) | At least Planet Level (Could
-        tank a punch from The Thing) | Wall Level, possibly higher | At least Wall
-        Level, possibly Low Complex Multiverse Level
-      source_id: character-stats-profiles-iron-man-composite-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Water can cause him to short out. His weapons can be broken. If his
-        head is impaled, he will die. Refuses to kill unless it is for profit. | All
-        previous weaknesses. | Vulnerable to telepathic attacks. Refuses to kill unless
-        it is for profit. | None notable, likely all previous weaknesses from the
-        first and second keys. | Can be killed, likely all previous weaknesses from
-        the first and second keys. == Others == Notable Victories: Notable Losses:
-        Inconclusive Matches: Category:Tier 9 Category:Tier 9-B Category:Tier 9-A
-        Category:Tier 8 Category:Tier 8-C Category:Tier 5 Category:Tier 5-B Category:Tier
-        1 Category:Tier Low 1-C Category:MisterNobodyVulAdvAoyll Category:Tier 3 Category:Tier
-        High 3-A'
-      source_id: character-stats-profiles-iron-man-composite-marvel-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|death s head canon composite
-      misternobodyvuladvaoyll|582401
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-iron-man-composite-marvel
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - range
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Iron Man Armor Model 13
-    source_type: mediawiki
-    revision_id: '9360925'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 10190
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - References
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{8-B}} | {{5-B}}
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Model 13=Superhuman Physical Characteristics, Energy Projection, Energy
-        Absorption, Plasma Manipulation via Phased Plama Streams, Flight, Adhesive
-        Manipulation via Polybond Adhesive Compound, Magnetism Manipulation (As shown
-        here. The armor can also emit electromagnetic pulses), Ice Manipulation via
-        Cryogenic Compact Module, Explosion Manipulation via Explosive Shells, Sound
-        Manipulation (Uses ultrasound imaging to sense Venom), Electric Discharge
-        (Electrocutes Venom), Temperature Manipulation (Can absorb and convert heat
-        into energy with thermocouples), Limited Atomic Manipulation (By attaching
-        two compact modules, mutually opposing magnetic fields are generated onto
-        Ted's body, "polarizing his synthetic structure and causing his atoms to repel
-        one another"), Illusion Creation with Image Inducers, Limited Technology Manipulation
-        (Can use a Compact Electromagnetic Field Generator to short-circuit Ultimo),
-        Limited Gravity Manipulation with Magnogravetic Field Generator, Resistance
-        to Energy Projection (The Modular Armor has a retractive coating that shields
-        itself from energy attacks), and Microwave Radiation Projection (Shrugs off
-        Firestar's microwave radiation blasts) |-|Hulk Buster=Superhuman Physical
-        Characteristics, Flight, Energy Projection (As shown here), Resistance to
-        Blunt Force Trauma (The Hulk Buster exo-armor is built with Impact-Resistant
-        Carbon Composites, allowing the armor to survive the forceful impact of Hulk's
-        blows)
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'At least City Block level (During its run, it was the most advanced
-        and versatile armor yet and was regarded by Tony as a "quantum leap" from
-        the previous armors. Therefore, it should be at least comparable, if not superior
-        to previous armors such as Model 8, Model 9, and Model 11) | Planet level
-        (Fought and traded blowsIron Man Vol 1 #305 with Professor Hulk, although
-        the fight ended in a stalemate)'
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Hypersonic (Should be far faster than earlier models such as
-        Model 4Mach 8.23) | Unknown, possibly at most Hypersonic combat speed (In
-        order to fight the Hulk, versatility and mobility was sacrificed for enhanced
-        physical strength and hand-to-hand combat. Even so, the armor is still capable
-        of keeping up with the HulkMach 8.23)
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least City Block level, possibly far higher (Should have equal, if
-        not superior durability to Model 11) | Planet level (Took blows from Professor
-        Hulk)
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Unknown with repulsors
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None Notable | The Hulk-Buster armor lacks versatility and mobility
-        compared to other armors due to being made specifically for the Hulk Notable
-        Attacks/Techniques: Model 13: *Phased Plasma Streams: Uses phased plasma streams
-        against EmberForce Works #4. *Polybond Adhesive Compound: Can launch an adhesive
-        substance against enemies, which he does to SpeedballIron Man #303. *Cryogenic
-        Compact Module: Can use liquid nitrogen to freeze and solidify opponentsIron
-        Man #318. *Explosive Shel'
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: vsbattles.fandom.com|iron man armor model 13|9360925
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-iron-man-composite-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id015
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Death's Head (Canon, Composite)/MisterNobodyVulAdvAoyll
-    source_type: mediawiki
-    revision_id: '582401'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 17581
-    content_kind: api_json
-    headings_detected:
-    - '''''''Summary'''''''
-    - '''''''Powers and Stats'''''''
-    - '''''''Others'''''''
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id016
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least 9-A to 8-C to 5-B, 5-B with weaponry | At least 9-B to 5-B,
-        5-B with weaponry | At least 9-B to 5-B, likely higher | At least 9-B, higher
-        with weaponry, possibly 5-B | At least 9-B to High 3-A to Low 1-C, High 3-A
-        to Low 1-C with weaponry
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Original Body= *Superhuman Physical Characteristics *Inorganic Physiology\
-        \ (Type 2; Is a robot, or a Mechanoid, in his own words) *Preparation (Environmental;\
-        \ In High Noon Tex, he was able to prepare an explosive dummy of himself for\
-        \ Tex and trick him with it) *Social Influencing (Deception; is completely\
-        \ willing to trick his enemies just to defeat them) *Large Size (Type 0; is\
-        \ thirty feet tall) *Enhanced Senses (Enhanced Sight; has 360\xB0 vision *Martial\
-        \ Arts (Extremely skilled in hand-to-hand combat;) *Weapon Mastery (Close\
-        \ Weapon Mastery, Firearms Mastery, Explosives Mastery, and High-Tech Weapons\
-        \ Mastery; Can use his weapons with ease, and can even improvise weapons on\
-        \ the fly) *Acrobatics (Stated to be an acrobat) *Natural Weaponry (Horns,\
-        \ tusks, fists, Multi-Use Hand) *Fourth Wall Awareness (In one of his comic\
-        \ book covers, he directly speaks to the reader) *Energy Manipulation (Energy\
-        \ Projection; has a laser cutter built into his hand) *Explosion Manipulation\
-        \ (Missile Launcher Hand, Mine Launcher Hand) *Information Analysis (Has a\
-        \ built-in scanner) *Dimensional Travel (Consistently hops between dimensions)\
-        \ *Time Manipulation (Time Travel; travelled back in time to kill Galvatron)\
-        \ *Immortality (Type 2; survived being decapitated) *Fire Manipulation (Flamethrower\
-        \ Hand) *Flight (Jet Boots allow him to fly) *Sleep Manipulation and Smoke\
-        \ Manipulation (Via knockout gas) *Pressure Point Strikes (Could find Galvatron's\
-        \ weak spot and exploit it to his advantage (in combat)) *Teleportation (Has\
-        \ access to a teleportation device and uses it whenever he needs a quick escape)\
-        \ *Hacking *Resistance to: **Standard forms of Mind Manipulation (Has a non-organic\
-        \ brain) **Hacking (States that his brain is armed with several anti-hacking\
-        \ locks) |-| Rebuilt= *All previous abilities excluding Large Size *Possible\
-        \ Size Manipulation (His size seemingly varies from seven feet to thirty feet\
-        \ with no apparent explanation) |-| Death's Head II= *Superhuman Physical\
-        \ Characteristics *Inorganic Physiology (Type 2; Minion's body is robotic)\
-        \ *Genius Intelligence (Minion is able to download his opponents' minds, something\
-        \ he refers to as Cranial Disruption. As such, he gains his opponents' experience\
-        \ and intelligence, effectively getting smarter over time; has once killed\
-        \ Reed Richards) *Martial Arts (A master of all forms of combat) *Enhanced\
-        \ Senses (Enhanced Hearing, Enhanced Vision, and Enhanced Smell) *Possession/Mind\
-        \ Manipulation (Was able to take over Minion's mind after his personality\
-        \ was assimilated into him) *Multiple Personalities *Natural Weaponry/Limited\
-        \ Transformation (His arm can turn into either a razor-sharp blade, a large\
-        \ hand, or a plasma-fusion cannon; has horns as well) *Energy Projection (Cannon\
-        \ hand) *Regeneration (Low-Mid; Minion's body was built to regenerate severed\
-        \ limbs in under a minute) *Time Manipulation and Dimensional Travel (Time\
-        \ Travel; via his A.I.M. Time Belt; claims to have been on adventures across\
-        \ time and space) *Resistance to: **Heat Manipulation **Energy Projection\
-        \ |-| What If...Death's Head Had Lived?= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Martial Arts *Weapon Mastery (Of his axe,\
-        \ spear, large gun, etc.) *Natural Weaponry *Social Influencing (Trust; despite\
-        \ his position as a mercenary, he was able to recruit superheroes to fight\
-        \ Charnel/Minion) *Dimensional Travel/Time Manipulation (Time Travel; should\
-        \ just be an alternate version of base Death's Head) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head |-| Destroy All Robots!= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Natural Weaponry (Fists, horns, tusks, Multi-Use\
-        \ Hand) *Weapon Mastery (Close Weapon Mastery) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head"
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'At least Small Building Level to Building Level (Held his own against
-        Transformers, and is comparable in size to them) to Planet Level (Fought against
-        Unicron along with Rodimus Prime; fought Hulk in Marvel Heroes #33), Planet
-        Level with weaponry (His Shottblaster was able to destroy Laserbeak; killed
-        Shockwave with a blast of his gun) | At least Wall Level (His punches are
-        hard enough to send people flying; can rip through metal walls) to Planet
-        Level (Can hold his own against The Thing), Planet Level with weaponry (His
-        weapons are able to harm the likes of both characters previously listed) |
-        At least Wall Level (Is powerful enough to impale a normal human) to Planet
-        Level (Comparable to the original Death''s Head), likely higher (Was able
-        to kill Death''s Head) | At least Wall Level (Should be this powerful, as
-        he upgraded himself before fighting Charnel), higher with weaponry, possibly
-        Planet Level (Killed Charnel/Minion, who, in turn, could kill and take hits
-        from The Thing) | At least Wall Level (Should be comparable to Rebuilt Death''s
-        Head) to High Universe Level to Low Complex Multiverse Level (Decapitated
-        Ultron, most likely with ease), High Universe Level to Low Complex Multiverse
-        Level with weaponry (Put Ultron''s head on a spear)'
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Sub-Relativistic (Comparable to the other Transformers, who
-        could dodge laser beams), possibly Immeasurable (Could keep up with The TARDIS
-        and accidentally crashed into it) | At least Hypersonic (Comparable to Iron
-        Man, who can fly this fast), possibly Immeasurable (Was again hired to hunt
-        down The Doctor and could track down the TARDIS) | At least Hypersonic to
-        Hypersonic+ (Should be superior to base Death's Head) | Unknown, possibly
-        Hypersonic | Unknown, possibly Hypersonic to Infinite (Should scale above
-        Ultron via killing him, who is comparable to Thor, who can travel across the
-        Nine Realms in seconds, with each being several light years long)
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Planet Level (Tanked a blast from Shockwave's Particle Cannon,
-        which could heavily injure other Transformers) | At least Planet Level, possibly
-        higher (Tanked several hits from The Thing) | At least Planet Level (Could
-        tank a punch from The Thing) | Wall Level, possibly higher | At least Wall
-        Level, possibly Low Complex Multiverse Level
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Water can cause him to short out. His weapons can be broken. If his
-        head is impaled, he will die. Refuses to kill unless it is for profit. | All
-        previous weaknesses. | Vulnerable to telepathic attacks. Refuses to kill unless
-        it is for profit. | None notable, likely all previous weaknesses from the
-        first and second keys. | Can be killed, likely all previous weaknesses from
-        the first and second keys. == Others == Notable Victories: Notable Losses:
-        Inconclusive Matches: Category:Tier 9 Category:Tier 9-B Category:Tier 9-A
-        Category:Tier 8 Category:Tier 8-C Category:Tier 5 Category:Tier 5-B Category:Tier
-        1 Category:Tier Low 1-C Category:MisterNobodyVulAdvAoyll Category:Tier 3 Category:Tier
-        High 3-A'
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|death s head canon composite
-      misternobodyvuladvaoyll|582401
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-iron-man-composite-marvel
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id017
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - range
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Iron Man Armor Model 13
-    source_type: mediawiki
-    revision_id: '9360925'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 10190
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - References
-    - Statistics Values
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id018
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least {{8-B}} | {{5-B}}
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Model 13=Superhuman Physical Characteristics, Energy Projection, Energy
-        Absorption, Plasma Manipulation via Phased Plama Streams, Flight, Adhesive
-        Manipulation via Polybond Adhesive Compound, Magnetism Manipulation (As shown
-        here. The armor can also emit electromagnetic pulses), Ice Manipulation via
-        Cryogenic Compact Module, Explosion Manipulation via Explosive Shells, Sound
-        Manipulation (Uses ultrasound imaging to sense Venom), Electric Discharge
-        (Electrocutes Venom), Temperature Manipulation (Can absorb and convert heat
-        into energy with thermocouples), Limited Atomic Manipulation (By attaching
-        two compact modules, mutually opposing magnetic fields are generated onto
-        Ted's body, "polarizing his synthetic structure and causing his atoms to repel
-        one another"), Illusion Creation with Image Inducers, Limited Technology Manipulation
-        (Can use a Compact Electromagnetic Field Generator to short-circuit Ultimo),
-        Limited Gravity Manipulation with Magnogravetic Field Generator, Resistance
-        to Energy Projection (The Modular Armor has a retractive coating that shields
-        itself from energy attacks), and Microwave Radiation Projection (Shrugs off
-        Firestar's microwave radiation blasts) |-|Hulk Buster=Superhuman Physical
-        Characteristics, Flight, Energy Projection (As shown here), Resistance to
-        Blunt Force Trauma (The Hulk Buster exo-armor is built with Impact-Resistant
-        Carbon Composites, allowing the armor to survive the forceful impact of Hulk's
-        blows)
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'At least City Block level (During its run, it was the most advanced
-        and versatile armor yet and was regarded by Tony as a "quantum leap" from
-        the previous armors. Therefore, it should be at least comparable, if not superior
-        to previous armors such as Model 8, Model 9, and Model 11) | Planet level
-        (Fought and traded blowsIron Man Vol 1 #305 with Professor Hulk, although
-        the fight ended in a stalemate)'
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Hypersonic (Should be far faster than earlier models such as
-        Model 4Mach 8.23) | Unknown, possibly at most Hypersonic combat speed (In
-        order to fight the Hulk, versatility and mobility was sacrificed for enhanced
-        physical strength and hand-to-hand combat. Even so, the armor is still capable
-        of keeping up with the HulkMach 8.23)
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least City Block level, possibly far higher (Should have equal, if
-        not superior durability to Model 11) | Planet level (Took blows from Professor
-        Hulk)
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range, Unknown with repulsors
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None Notable | The Hulk-Buster armor lacks versatility and mobility
-        compared to other armors due to being made specifically for the Hulk Notable
-        Attacks/Techniques: Model 13: *Phased Plasma Streams: Uses phased plasma streams
-        against EmberForce Works #4. *Polybond Adhesive Compound: Can launch an adhesive
-        substance against enemies, which he does to SpeedballIron Man #303. *Cryogenic
-        Compact Module: Can use liquid nitrogen to freeze and solidify opponentsIron
-        Man #318. *Explosive Shel'
-      source_id: vsbattles-iron-man-composite-marvel
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: vsbattles.fandom.com|iron man armor model 13|9360925
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-iron-man-composite-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id019
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Death's Head (Canon, Composite)/MisterNobodyVulAdvAoyll
-    source_type: mediawiki
-    revision_id: '582401'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 17581
-    content_kind: api_json
-    headings_detected:
-    - '''''''Summary'''''''
-    - '''''''Powers and Stats'''''''
-    - '''''''Others'''''''
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id020
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: At least 9-A to 8-C to 5-B, 5-B with weaponry | At least 9-B to 5-B,
-        5-B with weaponry | At least 9-B to 5-B, likely higher | At least 9-B, higher
-        with weaponry, possibly 5-B | At least 9-B to High 3-A to Low 1-C, High 3-A
-        to Low 1-C with weaponry
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Original Body= *Superhuman Physical Characteristics *Inorganic Physiology\
-        \ (Type 2; Is a robot, or a Mechanoid, in his own words) *Preparation (Environmental;\
-        \ In High Noon Tex, he was able to prepare an explosive dummy of himself for\
-        \ Tex and trick him with it) *Social Influencing (Deception; is completely\
-        \ willing to trick his enemies just to defeat them) *Large Size (Type 0; is\
-        \ thirty feet tall) *Enhanced Senses (Enhanced Sight; has 360\xB0 vision *Martial\
-        \ Arts (Extremely skilled in hand-to-hand combat;) *Weapon Mastery (Close\
-        \ Weapon Mastery, Firearms Mastery, Explosives Mastery, and High-Tech Weapons\
-        \ Mastery; Can use his weapons with ease, and can even improvise weapons on\
-        \ the fly) *Acrobatics (Stated to be an acrobat) *Natural Weaponry (Horns,\
-        \ tusks, fists, Multi-Use Hand) *Fourth Wall Awareness (In one of his comic\
-        \ book covers, he directly speaks to the reader) *Energy Manipulation (Energy\
-        \ Projection; has a laser cutter built into his hand) *Explosion Manipulation\
-        \ (Missile Launcher Hand, Mine Launcher Hand) *Information Analysis (Has a\
-        \ built-in scanner) *Dimensional Travel (Consistently hops between dimensions)\
-        \ *Time Manipulation (Time Travel; travelled back in time to kill Galvatron)\
-        \ *Immortality (Type 2; survived being decapitated) *Fire Manipulation (Flamethrower\
-        \ Hand) *Flight (Jet Boots allow him to fly) *Sleep Manipulation and Smoke\
-        \ Manipulation (Via knockout gas) *Pressure Point Strikes (Could find Galvatron's\
-        \ weak spot and exploit it to his advantage (in combat)) *Teleportation (Has\
-        \ access to a teleportation device and uses it whenever he needs a quick escape)\
-        \ *Hacking *Resistance to: **Standard forms of Mind Manipulation (Has a non-organic\
-        \ brain) **Hacking (States that his brain is armed with several anti-hacking\
-        \ locks) |-| Rebuilt= *All previous abilities excluding Large Size *Possible\
-        \ Size Manipulation (His size seemingly varies from seven feet to thirty feet\
-        \ with no apparent explanation) |-| Death's Head II= *Superhuman Physical\
-        \ Characteristics *Inorganic Physiology (Type 2; Minion's body is robotic)\
-        \ *Genius Intelligence (Minion is able to download his opponents' minds, something\
-        \ he refers to as Cranial Disruption. As such, he gains his opponents' experience\
-        \ and intelligence, effectively getting smarter over time; has once killed\
-        \ Reed Richards) *Martial Arts (A master of all forms of combat) *Enhanced\
-        \ Senses (Enhanced Hearing, Enhanced Vision, and Enhanced Smell) *Possession/Mind\
-        \ Manipulation (Was able to take over Minion's mind after his personality\
-        \ was assimilated into him) *Multiple Personalities *Natural Weaponry/Limited\
-        \ Transformation (His arm can turn into either a razor-sharp blade, a large\
-        \ hand, or a plasma-fusion cannon; has horns as well) *Energy Projection (Cannon\
-        \ hand) *Regeneration (Low-Mid; Minion's body was built to regenerate severed\
-        \ limbs in under a minute) *Time Manipulation and Dimensional Travel (Time\
-        \ Travel; via his A.I.M. Time Belt; claims to have been on adventures across\
-        \ time and space) *Resistance to: **Heat Manipulation **Energy Projection\
-        \ |-| What If...Death's Head Had Lived?= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Martial Arts *Weapon Mastery (Of his axe,\
-        \ spear, large gun, etc.) *Natural Weaponry *Social Influencing (Trust; despite\
-        \ his position as a mercenary, he was able to recruit superheroes to fight\
-        \ Charnel/Minion) *Dimensional Travel/Time Manipulation (Time Travel; should\
-        \ just be an alternate version of base Death's Head) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head |-| Destroy All Robots!= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Natural Weaponry (Fists, horns, tusks, Multi-Use\
-        \ Hand) *Weapon Mastery (Close Weapon Mastery) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head"
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: 'At least Small Building Level to Building Level (Held his own against
-        Transformers, and is comparable in size to them) to Planet Level (Fought against
-        Unicron along with Rodimus Prime; fought Hulk in Marvel Heroes #33), Planet
-        Level with weaponry (His Shottblaster was able to destroy Laserbeak; killed
-        Shockwave with a blast of his gun) | At least Wall Level (His punches are
-        hard enough to send people flying; can rip through metal walls) to Planet
-        Level (Can hold his own against The Thing), Planet Level with weaponry (His
-        weapons are able to harm the likes of both characters previously listed) |
-        At least Wall Level (Is powerful enough to impale a normal human) to Planet
-        Level (Comparable to the original Death''s Head), likely higher (Was able
-        to kill Death''s Head) | At least Wall Level (Should be this powerful, as
-        he upgraded himself before fighting Charnel), higher with weaponry, possibly
-        Planet Level (Killed Charnel/Minion, who, in turn, could kill and take hits
-        from The Thing) | At least Wall Level (Should be comparable to Rebuilt Death''s
-        Head) to High Universe Level to Low Complex Multiverse Level (Decapitated
-        Ultron, most likely with ease), High Universe Level to Low Complex Multiverse
-        Level with weaponry (Put Ultron''s head on a spear)'
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Sub-Relativistic (Comparable to the other Transformers, who
-        could dodge laser beams), possibly Immeasurable (Could keep up with The TARDIS
-        and accidentally crashed into it) | At least Hypersonic (Comparable to Iron
-        Man, who can fly this fast), possibly Immeasurable (Was again hired to hunt
-        down The Doctor and could track down the TARDIS) | At least Hypersonic to
-        Hypersonic+ (Should be superior to base Death's Head) | Unknown, possibly
-        Hypersonic | Unknown, possibly Hypersonic to Infinite (Should scale above
-        Ultron via killing him, who is comparable to Thor, who can travel across the
-        Nine Realms in seconds, with each being several light years long)
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: At least Planet Level (Tanked a blast from Shockwave's Particle Cannon,
-        which could heavily injure other Transformers) | At least Planet Level, possibly
-        higher (Tanked several hits from The Thing) | At least Planet Level (Could
-        tank a punch from The Thing) | Wall Level, possibly higher | At least Wall
-        Level, possibly Low Complex Multiverse Level
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Water can cause him to short out. His weapons can be broken. If his
-        head is impaled, he will die. Refuses to kill unless it is for profit. | All
-        previous weaknesses. | Vulnerable to telepathic attacks. Refuses to kill unless
-        it is for profit. | None notable, likely all previous weaknesses from the
-        first and second keys. | Can be killed, likely all previous weaknesses from
-        the first and second keys. == Others == Notable Victories: Notable Losses:
-        Inconclusive Matches: Category:Tier 9 Category:Tier 9-B Category:Tier 9-A
-        Category:Tier 8 Category:Tier 8-C Category:Tier 5 Category:Tier 5-B Category:Tier
-        1 Category:Tier Low 1-C Category:MisterNobodyVulAdvAoyll Category:Tier 3 Category:Tier
-        High 3-A'
-      source_id: character-stats-profiles-iron-man-composite-marvel
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|death s head canon composite
-      misternobodyvuladvaoyll|582401
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-iron-man-composite-earth-616
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Earth-616%29
+    url: https://vsbattles.fandom.com/wiki/War_Machine_(Marvel_Comics)
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2099,10 +1003,10 @@ repair:
     - weaknesses
     normalized_page_title: War Machine (Marvel Comics)
     source_type: mediawiki
-    revision_id: '9330294'
+    revision_id: '9617878'
     fetch_status: fetched
     http_status: 200
-    content_length: 8084
+    content_length: 8108
     content_kind: api_json
     headings_detected:
     - Summary
@@ -2115,6 +1019,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2128,7 +1033,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2139,26 +1044,23 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: 'At least {{8-B}} to {{5-B}} Name: James Rupert "Rhodey" Rhodes, War
-        Machine Origin: Marvel Comics Gender: Male Age: Middle aged (Probably in his
-        40s) Classification: Human Cyborg with Power Armor'
+      value: At least to
       source_id: vsbattles-iron-man-composite-earth-616
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: By himself=Enhanced intelligence and processing speed due to cybernetic
-        implants, Martial Arts and Weapon Mastery (Is a trained USAF soldier) |-|With
-        Armors=Superhuman Physical Characteristics, Flight, Energy Manipulation and
-        Absorption, Information Analysis, Light Manipulation, Forcefield Creation,
-        Plasma Manipulation with Plasma Cannon, Guided Missiles, Fire Manipulation
-        with Flamethrower, Tear Gas, Limited Radiation Manipulation with Depleted
-        Uranium, Smoke Manipulation, Sleep Manipulation with Tranquilizer Rounds,
-        Explosion Manipulation with Rocket Launcher and Missiles, Electricity Manipulation,
-        Magnetism Manipulation, Attack Reflection, Invisibility, Enhanced Senses,
-        Technology Manipulation, Body Control, Fusionism, Camouflage, Intangibility,
-        Resistance to Energy Projection and Heat, Poison Manipulation, Radiation and
-        Vacuum
+      value: Enhanced intelligence and processing speed due to cybernetic implants,
+        Martial Arts and Weapon Mastery (Is a trained USAF soldier) Superhuman Physical
+        Characteristics, Flight, Energy Manipulation and Absorption, Information Analysis,
+        Light Manipulation, Forcefield Creation, Plasma Manipulation with Plasma Cannon,
+        Guided Missiles, Fire Manipulation with Flamethrower, Tear Gas, Limited Radiation
+        Manipulation with Depleted Uranium, Smoke Manipulation, Sleep Manipulation
+        with Tranquilizer Rounds, Explosion Manipulation with Rocket Launcher and
+        Missiles, Electricity Manipulation, Magnetism Manipulation, Attack Reflection,
+        Invisibility, Enhanced Senses, Technology Manipulation, Body Control, Fusionism,
+        Camouflage, Intangibility, Resistance to Energy Projection and Heat, Poison
+        Manipulation, Radiation and Vacuum
       source_id: vsbattles-iron-man-composite-earth-616
       provider_id: vsbattles
       authority: high
@@ -2221,7 +1123,43 @@ repair:
         * Repulsor Rays: The armor can fire particle beams from either or both the
         palm gauntlets which can repel physical and energy-based attacks, traveling
         as a single stream or as a wide-field dispersal. * Unibeam: A powerful searchlight
-        capable of projecting beams in virtually every light spectrum. *Power Cel'
+        capable of projecting beams in virtually every light spectrum. *Power Cells:
+        The armor is powered by a combination of solar converters, electrical batteries
+        and an on-board generator that uses beta particle absorption as a fuel source.
+        *Energy Conversion Power Recharge: The armor is also able to convert nearby
+        energy sources, such as heat or kinetic energy into electricity, or even drain
+        electrical energy directly into the batteries for recharge. *Self-Contained
+        Life-Support System & Environmental Protection: The armor can be completely
+        sealed for operations in vacuum or underwater, providing its own life support,
+        and is shielded against radiation. * Lasers * Magnetism * Gatling Gun A powerful
+        automatic machine gun added to his right shoulder, which fires many bullets
+        simultaneously. * Rocket Launcher An automatic missile launcher added to his
+        left shoulder, which fires a variety of missiles of any type. * Miniature
+        Heat Seeking Missiles A small version of the heat seeking missile designed
+        to hit the targets emitting heat signatures. * Chameleon Mode: Includes invisibility,
+        camouflage, and holographic projection. * Ghost-Tech: Multi-dimensional bridge
+        teleportation allows the armor to phase through solid objects. * Scanner Invisibility:
+        Complete undetectability by sensory arrays, including targeting programs.
+        * EMP projector * Sleep Gas- "urban pacification compound" developed by SHIELD.
+        Notes: *This profile only covers the 616 Marvel Comics version of War Machine.
+        *Before making any changes to this page, please read and follow the Power-scaling
+        Rules for Marvel and DC Comics. ==Notable Matchups== Victories: Losses: Inconclusive:
+        ==Statistics Values== Category:Marvel Comics Category:Comic Book Characters
+        Category:Characters Category:Male Characters Category:Adults Category:Protagonists
+        Category:Primary Protagonists Category:Heroes Category:Superheroes Category:Good
+        Characters Category:Military Characters Category:Soldiers Category:Pilots
+        Category:Leaders Category:Avengers Category:Defenders Category:Gun Users Category:Sword
+        Users Category:Martial Artists Category:Weapon Masters Category:Flight Users
+        Category:Energy Users Category:Energy Projection Users Category:Absorption
+        Users Category:Information Analysis Users Category:Light Users Category:Forcefield
+        Users Category:Plasma Users Category:Homing Attack Users Category:Fire Users
+        Category:Status Effect Users Category:Radiation Users Category:Smoke Users
+        Category:Sleep Users Category:Explosion Users Category:Electricity Users Category:Magnetism
+        Users Category:Attack Reflection Users Category:Invisibility Users Category:Enhanced
+        Senses Users Category:Technology Users Category:Body Control Users Category:Fusionism
+        Users Category:Intangibility Users Category:Camouflage Users Category:Weapon
+        Users Category:Humans Category:Cyborgs Category:Armor Users Category:Rocket
+        Boot Users Category:Helmet Users Category:Tragic Characters Category:Survivors'
       source_id: vsbattles-iron-man-composite-earth-616
       provider_id: vsbattles
       authority: high
@@ -2236,14 +1174,671 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|war machine marvel comics|9330294
+    duplicate_key: vsbattles.fandom.com|war machine marvel comics|9617878
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-iron-man-composite-earth-616
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Earth-616%29
+  - source_id: vsbattles-iron-man-composite-marvel-comics
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel_Comics%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id021
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man (Marvel Comics)
+    source_type: mediawiki
+    revision_id: '9404254'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 22621
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: '| , up to | , likely higher'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Preparation, Genius Intelligence, Martial Arts, Weapon Mastery, Summoning
+        All previous abilities, plus Technology Manipulation, Hacking, Regeneration
+        (High-Low over time, heals from the fatal injuries he sufferedIron Man Vol
+        4 #4 in 24 hoursIron Man Vol 4 #5), Flight, Energy Projection, Enhanced Senses,
+        Magnetism Manipulation and Extrasensory Perception via R.T Node All previous
+        abilities, plus the weapons and gadgets from the Iron Legion All previous
+        abilities, plus Superhuman Physical Characteristics, Flight, Cosmic Awareness
+        and Retrocognition (Thanks to his link to the cosmos, Iron Man is able to
+        view a multitude of realities. He can also hear the "stories" of these realities
+        from their whispers and gasps, which he used to deduce what happened to the
+        dead universe he was inIron Man (2020) #15), Space-Time Manipulation (Tore
+        a hole in the universe with a repulsor blast, creating a gateway to another
+        Was stated to be tearing through galaxies and dimensions during his battle
+        with Korvac), Dimensional Travel and BFR (Traveled to an alternate universe
+        and intended to leave Korvac there), Size Manipulation (When arriving to Earth
+        giant-sized, he shrank to the height of the Washington Square Arch, and then
+        to human heightIron Man (2020) #16) up to Large Size (Type 5; Can grow large
+        enough to grab and throw planets), Statistics Amplification and Reduction
+        (Made everyone in NYC as smart as him, including Reed Richards, which made
+        him dumber. Reduced the IQ of the people in his prison to 80Iron Man (2020)
+        #17), Transformation (Can quickly shift between human form and Iron God form),
+        Teleportation (As shown here), Creation (Built a special floating prison),
+        Morality Manipulation (Was able to get an entire group of politicians to agree
+        to what he says), Matter Manipulation and Transmutation (Disassembled the
+        Big Wheel and turned Gargoyle to stone), Heat Manipulation (Melted the Silver
+        Surfer with an energy blast, reducing him to a silver puddle), Explosion Manipulation,
+        possibly Death Manipulation (Killed Jim Hammond with a wave of his hand),
+        Telekinesis (Killed Halcyon by choking him from afar), Forcefield Creation
+        (Can use forcefields to trap opponents or to block attacks), and Resurrection
+        (As shown hereIron Man (2020) #18), as a user of the Power Cosmic, he should
+        likely have all of the abilities of the Silver Surfer'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Athlete level (He is an adult man who regularly trains in combat with
+        Captain America and other highly skilled fightersIron Man: Fatal Frontier
+        #12) | Small Building level (Can overpower DaredevilSuperior Iron Man #2)
+        | Varies (Has access to suits such as Model 1, Model 4, Model 29 and Hulkbusters),
+        up to Outerverse level (Built the Phoenixbuster, which fragmented the Phoenix
+        Force) | Outerverse level, likely higher (Wields the Power Cosmic. Fought
+        evenly with a Power Cosmic-amped Korvac, who threatened to destroy the universe
+        and was considered to be a disturbance to the universal balance by the Living
+        Tribunal. The same Korvac claimed to be too powerful for the Living Tribunal
+        and the In-Betweener to contain. The Abstracts showed concern over Iron Man''s
+        state and believed that his power could possibly determine the fate of existence.
+        It is also stated that he could cause radical and drastic change to the universe,
+        and even reality itself)'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Athletic Human | At least Athletic Human, Partial Speed of Light Reactions
+        (Some of his brain functions process information at light speedIron Man Vol
+        4 #25) | At least Hypersonic with several armors (From Model 4 to upwardsMach
+        8.23) | Massively FTL+ (Battled with Korvac across the galaxy)'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Athlete level | Small Building level | Varies | Outerverse level (Took
+        several attacks from a Power Cosmic-amped Korvac)
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: 'Superhuman (Can work for 2 days straight with no restIron Man Vol 1
+        #98) | Higher than before due to his advanced metabolism | Varies from armor
+        to armor | Unknown'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range; Planetary through extremis, Several Meters with
+        R.T Node blast, can manipulate armors from light years of distance | Standard
+        Melee Range; Planetary with Mind Manipulation, up to Interplanetary with Size
+        Manipulation; Outerversal with Cosmic Awareness and Dimensional Travel
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: '*Iron Man Armor: Tony''s primary powers mostly come from his iron man
+        armors, sophisticated suits containing various offensive, defensive and evasive
+        abilities. Some are mission-specific, some are prototypes for testing, and
+        others are older models kept for nostalgia or for research. *Extremis virus:
+        After being fatally wounded by an Extremis-enhanced terrorist, Tony Stark
+        had to inject himself with the Extremis virus in order to survive. His entire
+        body has also been enhanced by the techno-organic Extremis virus which granted
+        him enhanced senses, reflexes, and regenerative healing. He also reprogrammed
+        the serum to help him have better, fourth connection and control over his
+        Iron Man armor, effectively making him Iron Man "inside and out.Iron Man Vol
+        4 #4 *RepulsorTech Node: Also known as R.T node is a type of fusion power
+        which derived from the repulsor technology of the Iron Man suit created by
+        Tony. It can be used as a source for clean energy as well as a powerful bomb.
+        After being left in a coma in a battle against Norman Osborn, an arc reactor
+        was used to run Stark''s body once more by using it to run the basic machine
+        codes to keep Stark''s Extremis-modified body working, also providing Stark
+        with an increased intelligence, multitasking abilities and additional powers.Iron
+        Man Vol 5 #25'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'At least Extraordinary Genius, likely Supergenius (He is only a fraction
+        less smart than Reed Richards, and his technology is nearly a worthy match
+        for Asgardian wizardry. Created various armors that operate on a higher or
+        beyond-dimensional scale, like models 22, 38, 61, 63, and 72, the first of
+        which is powered by the same enchantment that gives mjolnir its strength,
+        which Thor described as taking and weaponizing a gift of the gods. He and
+        his team made a virtual universe in which one could do anything, go anywhere
+        and be anyone. He reverse-engineered a celestial to make Model 72. Aside from
+        his powers granted to him by his suits, Tony Stark is easily one of the smartest
+        people on Earth. Being a engineer and mechanic prodigy capable of fixing almost
+        any machinery, he graduated from the Massachusetts Institute of Technology
+        with honors at the age of 17. He''s designed and built all of the devices
+        and armors listed here and as a futurist, he has shown to predict certain
+        events in the future.Illuminati Vol 1 Stark is also a world-renowned businessman
+        with impeccable business ethics, able to command people''s attentions when
+        he speaks on economic matters and is a brilliant tactician and strategist
+        capable of quickly formulating battle strategies and new plans if the situation
+        changes, even going as far as putting Reed Richards in check on five different
+        boards in chess, a game he didn''t learn until later in his life. Besides
+        English, Tony can speak different languages fluently such as Japanese, Mandarin
+        Chinese, French, Russian, Korean, and even multiple Middle Eastern languages
+        and is a quite physically formidable combatant on his own when the situation
+        demands it, managing to fight Hammer Industries guards and bare-handedly confront
+        several ninjas) | At least Extraordinary Genius with the Extremis enhancements
+        that allow him to process information at a much faster rate. Feats: Base:
+        *Beats up several skrulls in hand to hand.Illuminati Vol 2 #1 *Easily flips
+        over a guy with a laser via Caps moves. *Takes out several gladiators in hand
+        to hand. *Can fight Crimson Dynamo, take a conference, checks over the laboratories
+        and bids on a relic simultaneously.Iron Man Vol 4 #7 *Temporary held his own
+        against Madame Hydra.Iron Man: Director of S.H.I.E.L.D. *Can even hack advanced
+        technology with simple tools while being mentally unstable. As Cosmic Iron
+        Man: *Blew a hole through Korvac with his unibeam, temporarily incapacitating
+        him. *Was fine after Korvac threw a planet at him. *Was so powerful that Hellcat
+        called for Doctor Doom and the Silver Surfer to help stop him. *One-shotted
+        Doctor Doom. *Destroyed several planets and extinguished a star during his
+        fight with Korvac.'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Without his armor, Extremis or the R.T Node, he is just a normal human
+        being. He holds back against opponents he finds harmless or personally refuses
+        to kill. Even though he quit drinking, Tony continues to struggle and avoid
+        falling off the wagon, making his alcoholism susceptible to the prospect of
+        drinking, especially under pressure. | Due to Extremis being biologically
+        attached to his body he is directly vulnerable to technological assaults,
+        the virus also accelerates some of his brain functions while leaving others
+        at normal levels, making him suffer from things like hallucinations. He is
+        highly dependent on the R.T Node to keep his Extremis-modified body working
+        should he lose Extremis. | Varies from armor to armor. | None Notable. Notable
+        Attacks/Techniques: By himself: *Iron Legion: Also known as Royalguard, an
+        army of several Iron Man Armors are summoned and commanded from his armory,
+        those can be controlled remotely or automatically by his I.As. The legions
+        includes both known and unknown models and marks. Stark mainly calls them
+        to battle several foes at time or one large and strong enemy. Extremis Enhanced:
+        *Technology Interference: Via Extremis, Stark can remotely access to external
+        communications systems such as satellites, cellular phones, and computers
+        throughout the world. H was could project his voice through a cellular phones
+        for example. He can crack codes entire nations couldn''tIron Man: Inevitable
+        #6 , and take over Cloc which was a fabrication of Reed RichardsIron Man Vol
+        4 #11 *Armor Undersheath: The nanoparticles inside the hollow of his bones
+        can form a gold outershell that has the primary functions to manipulate the
+        extremis armor, it also works as a shield of sorts RepulsorTech Node: *Energy
+        Projection: The R.T. node not only provided repulsor energy to run devices
+        such as the Iron Man Armor, its user could produce beams of energy at will,
+        albeit much weaker.Iron Man Vol 5 #521 *Electrical Fields Detection: As the
+        R.T. node was connected to Tony, he could feel different electrical fields
+        that the node was picking up. This included all kinds of invisible frequencies.Iron
+        Man Vol 5 #4 *Magnetic Force-Field: The R.T. node created a force-field which
+        could be modified at will by its user by increasing the power of the reactor
+        incrementally. The Forcefield can be used to levitate the person. Note: Before
+        making any changes to this page, please read and follow the Power-scaling
+        Rules for Marvel and DC Comics. ==Gallery== {| class="mw-collapsible mw-collapsed"
+        align="center" border="1" cellpadding="1" cellspacing="1" style="width:100%"
+        | colspan="2" style="text-align: center; background-color: red; color: gold
+        " |Armory |- | Model 1 MK1.png|Model 1 MK I|link=Iron Man Armor Model 1 Model
+        2 MK I.png|Model 2|link=Iron Man Armor Model 2 Model 4.png|Model 4 (Classic
+        Armor)|link=Iron Man Armor Model 4 Model 6.png|Model 6 (Hydro Armor)|link=Iron
+        Man Armor Model 6 Iron Man Armor Model 8.png|Model 8 (Silver Centurion)|link=Iron
+        Man Armor Model 8 Model 13.png|Model 13 (Modular Armor)|link=Iron Man Armor
+        Model 13 Model 15.png|Model 15 (Retro Armor)|link=Iron Man Armor Model 15
+        Model 16.png|Model 16 (Renaissance Armor)|link=Iron Man Armor Model 16 Model
+        19.png|Model 19 (S.K.I.N. Armor)|link=Iron Man Armor Model 19 Model 20.png|Model
+        20|link=Iron Man Armor Model 20 Iron Man Armor Model 22.png|Model 22 (Thorbuster)|link=Iron
+        Man Armor Model 22 Model 29.png|Model 29 (Extremis Armor)|link=Iron Man Armor
+        Model 29 Model 36.png|Model 36 (Hulkbuster MK II)|link=Iron Man Armor Model
+        36 Model 37.png|Model 37 (Bleeding Edge)|link=Iron Man Armor Model 37 Iron
+        Man Model 38 MC TR.png|Model 38 (Phoenix Buster)|link=Iron Man Armor Model
+        38 Model 42.png|Model 42|link=Iron Man Armor Model 42 Model 50.png|Model 50
+        (Endo-Sym Armor)|link=Iron Man Armor Model 50 Model 51.png|Model 51 (Prime
+        Armor)|link=Iron Man Armor Model 51 Iron Man Model 54 MC TR.png|Model 54 (Marvel
+        Buster)|link=Iron Man Armor Model 54 New61render.png|Model 61 (Godkiller MKll
+        Armor)|link=Iron Man Armor Model 61 Godbuster armor model 63.png|Model 63
+        (Godbuster Armor)|link=Iron Man Armor Model 63 Model 65 .png|Model 65 (Ultron
+        Buster)|link=Iron Man Armor Model 65 Model70.png|Model 72 (Celestial Hulkbuster
+        Armor)|link=Iron Man Armor Model 72 |} ==Notable Matchups== Victories: Simon
+        the Digger (Tengen Toppa Gurren Lagann) Simon''s Profile (Both were 7-B, speed
+        was equalized, Iron Man had the Iron Man Armor Model 20 and Simon the Gurren
+        Lagann) Xenomorph (Alien (Franchise)) Xenomorph''s Profile (Iron Man was in
+        his Mark 3 suit, Xenomorph Queen was used, speed was equalised) Losses: Inconclusive:
+        ==References== ==Statistics Values== Category:Characters Category:Marvel Comics
+        Category:Absolute Zero Users Category:Acid Users Category:Adults Category:Armor
+        Users Category:Armor Users Category:Avengers Category:Billionaires Category:Blood
+        Users Category:Camouflage Users Category:Comic Book Characters Category:Deconstruction
+        Users Category:Durability Negation Use'
+      source_id: vsbattles-iron-man-composite-marvel-comics
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|iron man marvel comics|9404254
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-iron-man-composite-marvel-comics
+    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel_Comics%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man (Canon, Marvel Comics)/ObberGobb
+    source_type: mediawiki
+    revision_id: '568475'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 14580
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 10-A | 9-B | 9-A | 5-A | 5-A | 5-A | At most 2-A | 2-A | 2-A | 1-A |
+        1-A | 1-A | 1-A | High 1-A
+      source_id: character-stats-profiles-iron-man-composite-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Type 6. Backed up his
+        mind and personality to a computer, and was ultimately brought back to life
+        entirely later on), Genius Intelligence, Information Analysis, Hacking, Technopathy,
+        Preparation, Martial Arts (Trained in Martial Arts by Captain America), Regeneration
+        (High-Low himself, up to High-Mid for nanotech armors), Enhanced Senses, Extrasensory
+        Perception, Fire Manipulation, Ice Manipulation, Electricity Manipulation,
+        Light Manipulation, Magnetism Manipulation, Absorption (Can absorb energy
+        from power grids and other sources), Weapon Creation, Size Manipulation, and
+        Shapeshifting (Nanotechnology allows for him to shift his armor to different
+        sizes and weapons), Invisibility (Possesses stealth armors that can turn invisible),
+        Flight, Energy Manipulation, Energy Projection, Weapon Mastery, Statistics
+        Amplification (Can increase the strength of his armors by adding nanotech
+        or modules), Summoning (Can summon Iron Man armors), Homing Attack, Accelerated
+        Development (Can learn new skills far faster than normal people), Analytical
+        Prediction (His armor could read Captain America's attacks and predict them),
+        Explosion Manipulation, Forcefield Creation, Non-Physical Interaction (Phoenix
+        Buster could harm the Phoenix Force), Stealth Mastery, Supernatural Willpower,
+        Resistance to Telepathy, Mind Manipulation, Pain Manipulation, Hacking, Intangibility
+        (Blocked Vision's phasing),
+      source_id: character-stats-profiles-iron-man-composite-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Athlete level (Is an athletic adult man and has trained in martial arts
+        with Captain America) | Wall level (Fought and overpowered Daredevil, who
+        can break through stone walls) | Large Planet level (Is somewhat comparable
+        to Namor and was able to fight against him on two separate occasions. Comparable
+        to Wonder Man, and he thought he could defeat him on his own. He would later
+        fight evenly against an undead Wonder Man. Repeatedly stated in the 1960s
+        and '70s to be the second strongest Avenger after Thor, making him superior
+        to Giant Man and Vision, the latter of whom he was directly stated to be superior
+        to by Kang) | At least Large Planet level (Much stronger than his base armors.
+        Fought against a base Professor Hulk, but couldn't defeat him) | At least
+        Large Planet level (His extremely armor is vastly more powerful than any previous
+        armors, effortlessly defeated multiple of them, including models that were
+        stronger than the Thing, Namor underwater, She-Hulk, and Ms. Marvel. Fought
+        evenly against the Classic Hulkbuster, each unable to defeat the other. Overpowered
+        Red Hulk and could defeat Magneto with Bleeding Edge. Could fight evenly against
+        Doctor Doom with both the Extremis and Model 42 armors) | At most Multiverse
+        level+ (Held his own against Captain Marvel, but was ultimately weaker) |
+        Multiverse level+ (Stated to be his most powerful armor yet. Made of Mysterium,
+        which is far stronger than Adamantium, and is capable of casually crushing
+        it. Could one-shot Stark Sentinels, which withstood an attack from a Magneto
+        amped by Storm and Blue Marvel. Even Blue Marvel was scared of facing multiple
+        at once) | Multiverse level+ (Vastly superior to the Mysterium Armor, and
+        is capable of fighting dozens of Stark Sentinels at once)
+      source_id: character-stats-profiles-iron-man-composite-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ (Can keep up with the likes of Thor)
+      source_id: character-stats-profiles-iron-man-composite-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Athlete level | Wall level | At least Large Planet level, possibly Multiverse
+        level+ (Tackled by Annihilus. Undamaged by a laser from Starbrand. Survived
+        the heat of Odin's forge), higher with shields (Shields an attack from an
+        enraged Wonder Man. Shields from an attack from Doctor Doom) | Up to High
+        Hyperverse level (Blocks an attack from Final Form Ultron when amped by Kree
+        technology. His specialty armors should have durability comparable to their
+        attack potency) | Outerverse level
+      source_id: character-stats-profiles-iron-man-composite-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Is a normal human underneath his suit Feats: * Impressed Mephisto *
+        Brawled with Ultron * Fought against Spectrum * Knocked out She-Hulk * Brawled
+        with Namor, who is greatly impressed with his strength * Brawled with Hercules,
+        who implied he was not holding back * Fought against Hulk for a while * Knocked
+        out Hulk * Tied with Silver Surfer, with both being knocked out in their clash
+        * Withstood a Mjolnir attack * Withstood Wonder Man''s punch * Withstood She-Hulk''s
+        attacks * Pushed Blue Marvel to the ground * Almost killed Graviton * Killed
+        Crimson Dynamo * Easily defeated an armor that was in the process of defeating
+        Namor underwater * Defeated an armor that Thing was having trouble with *
+        Matched Doctor Doom * Sent Namor flying with a punch * Hurt Human Torch with
+        his punch * Stalemated a Hulkbuster * Withstood repeated attacks from Sentry
+        * Tanked Ares'' axe being thrown at him by Sentry * Blocked Doctor Doom''s
+        attack * Tanked an explosion that knocked Hulk out * Only briefly knocked
+        out by an attack from Red Hulk, with his armor being entirely undamaged *
+        Killed Terminus * Restrained Apocalypse with his shields * Fought evenly against
+        an enraged and mind controlled Thor * Fought an amped Crimson Dynamo, who
+        is on Thor''s level * Knocked out Ulik, twice * Wounded Worthy Grey Gargoyle
+        * When amped by NYC''s power grid, stunned Mangog * Beat up Red Hulk * Fought
+        evenly against Magnetic, who was amped by the power of several planets * Only
+        stunned by a punch from Colossus * Took a punch from Taurus, who previously
+        knocked out Thor * Tanked a laser blast from Gladiator * Shielded from Wonder
+        Man''s attack * Withstood multiple blows from Worthy Grey Gargoyle * Survived
+        the heat of Odin''s forge, which can melt Uru * Withstood a punch from Rogue
+        with Hulk''s powers * Blocks an attack from Phoenix Force-amped Emma Frost
+        * One-shot Teen Abomination * Sent the real Abomination flying, twice * Stalemated
+        Doctor Doom, and ultimately managed to defeat him * Withstood repeated punches
+        from the Hulk * His armor blocked an axe attack from Terrax, although was
+        damaged * Tanked an eyebeam from Starbrand * Sustains no damage from a stomp
+        by an enraged Hulk * Effortlessly stomped the World War Hulkbuster, which
+        was stronger than normal Hulkbusters * Defeated Teen Abomination * Cracked
+        one of the Illuminati''s cells, which were previously detaining Terrax * Could
+        fight and destroy several older armors at once, including the Model 42 * Killed
+        Corvus Glaive * Shielded from Doctor Doom and Scarlet Witch at the same time
+        * Shielded from Spectrum''s attack * Tanked the explosion of Sol''s Hammer,
+        which was far larger than a planet Model Prime * Matched Captain Marvel''s
+        energy attack * Matched Vision''s energy beam * One-shot Gamora extremely
+        casually * One-shot Gray Hulk * Withstood a tackle from Annihilus who was
+        aiming for Thor * Withstood multiple attacks from Hyperion Category:ObberGobb
+        Category:Tier 2 Category:Tier 5 Category:Tier 9 Category:Tier 10'
+      source_id: character-stats-profiles-iron-man-composite-marvel-comics
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|iron man canon marvel comics
+      obbergobb|568475
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-iron-man-composite-marvel
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_Armor_Model_13
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - range
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man Armor Model 13
+    source_type: mediawiki
+    revision_id: '9360925'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 10190
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - References
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: At least
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Energy Projection, Energy Absorption,
+        Plasma Manipulation via Phased Plama Streams, Flight, Adhesive Manipulation
+        via Polybond Adhesive Compound, Magnetism Manipulation (As shown here. The
+        armor can also emit electromagnetic pulses), Ice Manipulation via Cryogenic
+        Compact Module, Explosion Manipulation via Explosive Shells, Sound Manipulation
+        (Uses ultrasound imaging to sense Venom), Electric Discharge (Electrocutes
+        Venom), Temperature Manipulation (Can absorb and convert heat into energy
+        with thermocouples), Limited Atomic Manipulation (By attaching two compact
+        modules, mutually opposing magnetic fields are generated onto Ted's body,
+        "polarizing his synthetic structure and causing his atoms to repel one another"),
+        Illusion Creation with Image Inducers, Limited Technology Manipulation (Can
+        use a Compact Electromagnetic Field Generator to short-circuit Ultimo), Limited
+        Gravity Manipulation with Magnogravetic Field Generator, Resistance to Energy
+        Projection (The Modular Armor has a retractive coating that shields itself
+        from energy attacks), and Microwave Radiation Projection (Shrugs off Firestar's
+        microwave radiation blasts) Superhuman Physical Characteristics, Flight, Energy
+        Projection (As shown here), Resistance to Blunt Force Trauma (The Hulk Buster
+        exo-armor is built with Impact-Resistant Carbon Composites, allowing the armor
+        to survive the forceful impact of Hulk's blows)
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'At least City Block level (During its run, it was the most advanced
+        and versatile armor yet and was regarded by Tony as a "quantum leap" from
+        the previous armors. Therefore, it should be at least comparable, if not superior
+        to previous armors such as Model 8, Model 9, and Model 11) | Planet level
+        (Fought and traded blowsIron Man Vol 1 #305 with Professor Hulk, although
+        the fight ended in a stalemate)'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Hypersonic (Should be far faster than earlier models such as
+        Model 4Mach 8.23) | Unknown, possibly at most Hypersonic combat speed (In
+        order to fight the Hulk, versatility and mobility was sacrificed for enhanced
+        physical strength and hand-to-hand combat. Even so, the armor is still capable
+        of keeping up with the HulkMach 8.23)
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least City Block level, possibly far higher (Should have equal, if
+        not superior durability to Model 11) | Planet level (Took blows from Professor
+        Hulk)
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range, Unknown with repulsors
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None Notable | The Hulk-Buster armor lacks versatility and mobility
+        compared to other armors due to being made specifically for the Hulk Notable
+        Attacks/Techniques: Model 13: *Phased Plasma Streams: Uses phased plasma streams
+        against EmberForce Works #4. *Polybond Adhesive Compound: Can launch an adhesive
+        substance against enemies, which he does to SpeedballIron Man #303. *Cryogenic
+        Compact Module: Can use liquid nitrogen to freeze and solidify opponentsIron
+        Man #318. *Explosive Shells: Can implant explosive shells to detonate on his
+        enemies, which he does to Ultimo hereIron Man #300. *Semi-Fluid Polymer Compound:
+        Can "drink up" energy "like a sponge". *Image Inducers: Can create holographic
+        images to fool opponents. These image inducers can also create tactile feedback
+        through tensor fields and give off transceiver signatures.Iron Man Annual
+        #15 *Magnetic Soles: The armor has magnetic soles to replicate Spider-Man''s
+        ability to stick on surfaces. *Adamantium-Tipped Scanalyzer Probe: Can launch
+        this to penetrate hard substances such as Ultimo''s hide. *Compact Electromagnetic
+        Field Generator: Used to short-circuit Ultimo. *Magnogravetic Field Generator:
+        Uses this to cancel out Rage''s gravity. *Hypospray Injector: Can administer
+        shots of pure adrenaline, which he uses on Chuckles to calm him downForce
+        Works #9. *Electrical Discharge: Uses this against VenomIron Man #302. *Sensors:
+        Sensors can sense and measure the volume of matter across riftsForce Works
+        #3. Hulk-Buster: *Impact-Resistant Carbon Composites: The exo-armor is built
+        with impact-resistant plating to survive the force of Hulk''s attacks. *Magno-Hydraulic
+        Pseudomusclature: This was integrated into the armor to provide the armor
+        increased strength rated at 175 tons. *Inertial Dampening Systems: As shown
+        here. Feats: *Survives a blast from the MandarinIron Man #312 who was amped
+        with the Heart of Darkness. *Casually tears apart steel doorsIron Man #315.
+        *Showcases of Model 13''sIron Man #310 superiority over Model 11. *Can stay
+        in molten metal (waist down) without any damages to the armor. *Repulsors
+        can level buildingsNight Thrasher #10. *The armor''s maneuverability and agility
+        impresses Night Thrasher. *Can effortlessly lift steel girdersIron Man #306.
+        *Singlehandedly fights the X-Men. Notes: *Before making any changes to this
+        page, please read and follow the Power-scaling Rules for Marvel and DC Comics
+        ==References== ==Statistics Values== Category:Items Category:Marvel Comics
+        Category:Iron Man Armors Category:Armors Category:Energy Projection Users
+        Category:Energy Users Category:Plasma Users Category:Adhesivity Users Category:Magnetism
+        Users Category:Ice Users Category:Explosion Users Category:Sound Users Category:Electricity
+        Users Category:Temperature Users Category:Matter Users Category:Technology
+        Users Category:Gravity Users Category:Flight Users'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: false
+    duplicate_key: vsbattles.fandom.com|iron man armor model 13|9360925
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-iron-man-composite-marvel
+    url: https://character-stats-and-profiles.fandom.com/wiki/Death%27s_Head_(Canon,_Composite)/MisterNobodyVulAdvAoyll
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -2252,10 +1847,10 @@ repair:
     - weaknesses
     normalized_page_title: Death's Head (Canon, Composite)/MisterNobodyVulAdvAoyll
     source_type: mediawiki
-    revision_id: '582401'
+    revision_id: '615285'
     fetch_status: fetched
     http_status: 200
-    content_length: 17581
+    content_length: 17749
     content_kind: api_json
     headings_detected:
     - '''''''Summary'''''''
@@ -2267,6 +1862,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2280,7 +1876,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id022
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2295,13 +1891,13 @@ repair:
         5-B with weaponry | At least 9-B to 5-B, likely higher | At least 9-B, higher
         with weaponry, possibly 5-B | At least 9-B to High 3-A to Low 1-C, High 3-A
         to Low 1-C with weaponry
-      source_id: character-stats-profiles-iron-man-composite-earth-616
+      source_id: character-stats-profiles-iron-man-composite-marvel
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "Original Body= *Superhuman Physical Characteristics *Inorganic Physiology\
-        \ (Type 2; Is a robot, or a Mechanoid, in his own words) *Preparation (Environmental;\
+      value: "*Superhuman Physical Characteristics *Inorganic Physiology (Type 2;\
+        \ Is a robot, or a Mechanoid, in his own words) *Preparation (Environmental;\
         \ In High Noon Tex, he was able to prepare an explosive dummy of himself for\
         \ Tex and trick him with it) *Social Influencing (Deception; is completely\
         \ willing to trick his enemies just to defeat them) *Large Size (Type 0; is\
@@ -2323,36 +1919,35 @@ repair:
         \ access to a teleportation device and uses it whenever he needs a quick escape)\
         \ *Hacking *Resistance to: **Standard forms of Mind Manipulation (Has a non-organic\
         \ brain) **Hacking (States that his brain is armed with several anti-hacking\
-        \ locks) |-| Rebuilt= *All previous abilities excluding Large Size *Possible\
-        \ Size Manipulation (His size seemingly varies from seven feet to thirty feet\
-        \ with no apparent explanation) |-| Death's Head II= *Superhuman Physical\
-        \ Characteristics *Inorganic Physiology (Type 2; Minion's body is robotic)\
-        \ *Genius Intelligence (Minion is able to download his opponents' minds, something\
-        \ he refers to as Cranial Disruption. As such, he gains his opponents' experience\
-        \ and intelligence, effectively getting smarter over time; has once killed\
-        \ Reed Richards) *Martial Arts (A master of all forms of combat) *Enhanced\
-        \ Senses (Enhanced Hearing, Enhanced Vision, and Enhanced Smell) *Possession/Mind\
-        \ Manipulation (Was able to take over Minion's mind after his personality\
-        \ was assimilated into him) *Multiple Personalities *Natural Weaponry/Limited\
-        \ Transformation (His arm can turn into either a razor-sharp blade, a large\
-        \ hand, or a plasma-fusion cannon; has horns as well) *Energy Projection (Cannon\
-        \ hand) *Regeneration (Low-Mid; Minion's body was built to regenerate severed\
-        \ limbs in under a minute) *Time Manipulation and Dimensional Travel (Time\
-        \ Travel; via his A.I.M. Time Belt; claims to have been on adventures across\
-        \ time and space) *Resistance to: **Heat Manipulation **Energy Projection\
-        \ |-| What If...Death's Head Had Lived?= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Martial Arts *Weapon Mastery (Of his axe,\
-        \ spear, large gun, etc.) *Natural Weaponry *Social Influencing (Trust; despite\
-        \ his position as a mercenary, he was able to recruit superheroes to fight\
-        \ Charnel/Minion) *Dimensional Travel/Time Manipulation (Time Travel; should\
-        \ just be an alternate version of base Death's Head) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head |-| Destroy All Robots!= *Superhuman Physical Characteristics\
-        \ *Inorganic Physiology (Type 2) *Natural Weaponry (Fists, horns, tusks, Multi-Use\
-        \ Hand) *Weapon Mastery (Close Weapon Mastery) *As an alternative version\
-        \ of base Death's Head, he should have all previous abilities attributed to\
-        \ Death's Head"
-      source_id: character-stats-profiles-iron-man-composite-earth-616
+        \ locks) *All previous abilities excluding Large Size *Possible Size Manipulation\
+        \ (His size seemingly varies from seven feet to thirty feet with no apparent\
+        \ explanation) Death's Head II= *Superhuman Physical Characteristics *Inorganic\
+        \ Physiology (Type 2; Minion's body is robotic) *Genius Intelligence (Minion\
+        \ is able to download his opponents' minds, something he refers to as Cranial\
+        \ Disruption. As such, he gains his opponents' experience and intelligence,\
+        \ effectively getting smarter over time; has once killed Reed Richards) *Martial\
+        \ Arts (A master of all forms of combat) *Enhanced Senses (Enhanced Hearing,\
+        \ Enhanced Vision, and Enhanced Smell) *Possession/Mind Manipulation (Was\
+        \ able to take over Minion's mind after his personality was assimilated into\
+        \ him) *Multiple Personalities *Natural Weaponry/Limited Transformation (His\
+        \ arm can turn into either a razor-sharp blade, a large hand, or a plasma-fusion\
+        \ cannon; has horns as well) *Energy Projection (Cannon hand) *Regeneration\
+        \ (Low-Mid; Minion's body was built to regenerate severed limbs in under a\
+        \ minute) *Time Manipulation and Dimensional Travel (Time Travel; via his\
+        \ A.I.M. Time Belt; claims to have been on adventures across time and space)\
+        \ *Resistance to: **Heat Manipulation **Energy Projection What If...Death's\
+        \ Head Had Lived?= *Superhuman Physical Characteristics *Inorganic Physiology\
+        \ (Type 2) *Martial Arts *Weapon Mastery (Of his axe, spear, large gun, etc.)\
+        \ *Natural Weaponry *Social Influencing (Trust; despite his position as a\
+        \ mercenary, he was able to recruit superheroes to fight Charnel/Minion) *Dimensional\
+        \ Travel/Time Manipulation (Time Travel; should just be an alternate version\
+        \ of base Death's Head) *As an alternative version of base Death's Head, he\
+        \ should have all previous abilities attributed to Death's Head Destroy All\
+        \ Robots!= *Superhuman Physical Characteristics *Inorganic Physiology (Type\
+        \ 2) *Natural Weaponry (Fists, horns, tusks, Multi-Use Hand) *Weapon Mastery\
+        \ (Close Weapon Mastery) *As an alternative version of base Death's Head,\
+        \ he should have all previous abilities attributed to Death's Head"
+      source_id: character-stats-profiles-iron-man-composite-marvel
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2374,7 +1969,7 @@ repair:
         Head) to High Universe Level to Low Complex Multiverse Level (Decapitated
         Ultron, most likely with ease), High Universe Level to Low Complex Multiverse
         Level with weaponry (Put Ultron''s head on a spear)'
-      source_id: character-stats-profiles-iron-man-composite-earth-616
+      source_id: character-stats-profiles-iron-man-composite-marvel
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2388,7 +1983,7 @@ repair:
         Hypersonic | Unknown, possibly Hypersonic to Infinite (Should scale above
         Ultron via killing him, who is comparable to Thor, who can travel across the
         Nine Realms in seconds, with each being several light years long)
-      source_id: character-stats-profiles-iron-man-composite-earth-616
+      source_id: character-stats-profiles-iron-man-composite-marvel
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2398,7 +1993,7 @@ repair:
         higher (Tanked several hits from The Thing) | At least Planet Level (Could
         tank a punch from The Thing) | Wall Level, possibly higher | At least Wall
         Level, possibly Low Complex Multiverse Level
-      source_id: character-stats-profiles-iron-man-composite-earth-616
+      source_id: character-stats-profiles-iron-man-composite-marvel
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2413,7 +2008,7 @@ repair:
         Category:Tier 8 Category:Tier 8-C Category:Tier 5 Category:Tier 5-B Category:Tier
         1 Category:Tier Low 1-C Category:MisterNobodyVulAdvAoyll Category:Tier 3 Category:Tier
         High 3-A'
-      source_id: character-stats-profiles-iron-man-composite-earth-616
+      source_id: character-stats-profiles-iron-man-composite-marvel
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2428,21 +2023,295 @@ repair:
     franchise_match: false
     variant_match: false
     duplicate_key: character-stats-and-profiles.fandom.com|death s head canon composite
-      misternobodyvuladvaoyll|582401
+      misternobodyvuladvaoyll|615285
     retryable: false
     exception_class: ''
-  needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-iron-man-composite-earth-616
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Earth-616%29
-    title: War Machine (Marvel Comics)
+  - source_id: vsbattles-iron-man-composite-marvel
+    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man (Marvel Comics)
+    source_type: mediawiki
+    revision_id: '9404254'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 22621
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
     rank: 130
-    extracted_fields: *id007
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: '| , up to | , likely higher'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Preparation, Genius Intelligence, Martial Arts, Weapon Mastery, Summoning
+        All previous abilities, plus Technology Manipulation, Hacking, Regeneration
+        (High-Low over time, heals from the fatal injuries he sufferedIron Man Vol
+        4 #4 in 24 hoursIron Man Vol 4 #5), Flight, Energy Projection, Enhanced Senses,
+        Magnetism Manipulation and Extrasensory Perception via R.T Node All previous
+        abilities, plus the weapons and gadgets from the Iron Legion All previous
+        abilities, plus Superhuman Physical Characteristics, Flight, Cosmic Awareness
+        and Retrocognition (Thanks to his link to the cosmos, Iron Man is able to
+        view a multitude of realities. He can also hear the "stories" of these realities
+        from their whispers and gasps, which he used to deduce what happened to the
+        dead universe he was inIron Man (2020) #15), Space-Time Manipulation (Tore
+        a hole in the universe with a repulsor blast, creating a gateway to another
+        Was stated to be tearing through galaxies and dimensions during his battle
+        with Korvac), Dimensional Travel and BFR (Traveled to an alternate universe
+        and intended to leave Korvac there), Size Manipulation (When arriving to Earth
+        giant-sized, he shrank to the height of the Washington Square Arch, and then
+        to human heightIron Man (2020) #16) up to Large Size (Type 5; Can grow large
+        enough to grab and throw planets), Statistics Amplification and Reduction
+        (Made everyone in NYC as smart as him, including Reed Richards, which made
+        him dumber. Reduced the IQ of the people in his prison to 80Iron Man (2020)
+        #17), Transformation (Can quickly shift between human form and Iron God form),
+        Teleportation (As shown here), Creation (Built a special floating prison),
+        Morality Manipulation (Was able to get an entire group of politicians to agree
+        to what he says), Matter Manipulation and Transmutation (Disassembled the
+        Big Wheel and turned Gargoyle to stone), Heat Manipulation (Melted the Silver
+        Surfer with an energy blast, reducing him to a silver puddle), Explosion Manipulation,
+        possibly Death Manipulation (Killed Jim Hammond with a wave of his hand),
+        Telekinesis (Killed Halcyon by choking him from afar), Forcefield Creation
+        (Can use forcefields to trap opponents or to block attacks), and Resurrection
+        (As shown hereIron Man (2020) #18), as a user of the Power Cosmic, he should
+        likely have all of the abilities of the Silver Surfer'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Athlete level (He is an adult man who regularly trains in combat with
+        Captain America and other highly skilled fightersIron Man: Fatal Frontier
+        #12) | Small Building level (Can overpower DaredevilSuperior Iron Man #2)
+        | Varies (Has access to suits such as Model 1, Model 4, Model 29 and Hulkbusters),
+        up to Outerverse level (Built the Phoenixbuster, which fragmented the Phoenix
+        Force) | Outerverse level, likely higher (Wields the Power Cosmic. Fought
+        evenly with a Power Cosmic-amped Korvac, who threatened to destroy the universe
+        and was considered to be a disturbance to the universal balance by the Living
+        Tribunal. The same Korvac claimed to be too powerful for the Living Tribunal
+        and the In-Betweener to contain. The Abstracts showed concern over Iron Man''s
+        state and believed that his power could possibly determine the fate of existence.
+        It is also stated that he could cause radical and drastic change to the universe,
+        and even reality itself)'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Athletic Human | At least Athletic Human, Partial Speed of Light Reactions
+        (Some of his brain functions process information at light speedIron Man Vol
+        4 #25) | At least Hypersonic with several armors (From Model 4 to upwardsMach
+        8.23) | Massively FTL+ (Battled with Korvac across the galaxy)'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Athlete level | Small Building level | Varies | Outerverse level (Took
+        several attacks from a Power Cosmic-amped Korvac)
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: 'Superhuman (Can work for 2 days straight with no restIron Man Vol 1
+        #98) | Higher than before due to his advanced metabolism | Varies from armor
+        to armor | Unknown'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range; Planetary through extremis, Several Meters with
+        R.T Node blast, can manipulate armors from light years of distance | Standard
+        Melee Range; Planetary with Mind Manipulation, up to Interplanetary with Size
+        Manipulation; Outerversal with Cosmic Awareness and Dimensional Travel
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: '*Iron Man Armor: Tony''s primary powers mostly come from his iron man
+        armors, sophisticated suits containing various offensive, defensive and evasive
+        abilities. Some are mission-specific, some are prototypes for testing, and
+        others are older models kept for nostalgia or for research. *Extremis virus:
+        After being fatally wounded by an Extremis-enhanced terrorist, Tony Stark
+        had to inject himself with the Extremis virus in order to survive. His entire
+        body has also been enhanced by the techno-organic Extremis virus which granted
+        him enhanced senses, reflexes, and regenerative healing. He also reprogrammed
+        the serum to help him have better, fourth connection and control over his
+        Iron Man armor, effectively making him Iron Man "inside and out.Iron Man Vol
+        4 #4 *RepulsorTech Node: Also known as R.T node is a type of fusion power
+        which derived from the repulsor technology of the Iron Man suit created by
+        Tony. It can be used as a source for clean energy as well as a powerful bomb.
+        After being left in a coma in a battle against Norman Osborn, an arc reactor
+        was used to run Stark''s body once more by using it to run the basic machine
+        codes to keep Stark''s Extremis-modified body working, also providing Stark
+        with an increased intelligence, multitasking abilities and additional powers.Iron
+        Man Vol 5 #25'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'At least Extraordinary Genius, likely Supergenius (He is only a fraction
+        less smart than Reed Richards, and his technology is nearly a worthy match
+        for Asgardian wizardry. Created various armors that operate on a higher or
+        beyond-dimensional scale, like models 22, 38, 61, 63, and 72, the first of
+        which is powered by the same enchantment that gives mjolnir its strength,
+        which Thor described as taking and weaponizing a gift of the gods. He and
+        his team made a virtual universe in which one could do anything, go anywhere
+        and be anyone. He reverse-engineered a celestial to make Model 72. Aside from
+        his powers granted to him by his suits, Tony Stark is easily one of the smartest
+        people on Earth. Being a engineer and mechanic prodigy capable of fixing almost
+        any machinery, he graduated from the Massachusetts Institute of Technology
+        with honors at the age of 17. He''s designed and built all of the devices
+        and armors listed here and as a futurist, he has shown to predict certain
+        events in the future.Illuminati Vol 1 Stark is also a world-renowned businessman
+        with impeccable business ethics, able to command people''s attentions when
+        he speaks on economic matters and is a brilliant tactician and strategist
+        capable of quickly formulating battle strategies and new plans if the situation
+        changes, even going as far as putting Reed Richards in check on five different
+        boards in chess, a game he didn''t learn until later in his life. Besides
+        English, Tony can speak different languages fluently such as Japanese, Mandarin
+        Chinese, French, Russian, Korean, and even multiple Middle Eastern languages
+        and is a quite physically formidable combatant on his own when the situation
+        demands it, managing to fight Hammer Industries guards and bare-handedly confront
+        several ninjas) | At least Extraordinary Genius with the Extremis enhancements
+        that allow him to process information at a much faster rate. Feats: Base:
+        *Beats up several skrulls in hand to hand.Illuminati Vol 2 #1 *Easily flips
+        over a guy with a laser via Caps moves. *Takes out several gladiators in hand
+        to hand. *Can fight Crimson Dynamo, take a conference, checks over the laboratories
+        and bids on a relic simultaneously.Iron Man Vol 4 #7 *Temporary held his own
+        against Madame Hydra.Iron Man: Director of S.H.I.E.L.D. *Can even hack advanced
+        technology with simple tools while being mentally unstable. As Cosmic Iron
+        Man: *Blew a hole through Korvac with his unibeam, temporarily incapacitating
+        him. *Was fine after Korvac threw a planet at him. *Was so powerful that Hellcat
+        called for Doctor Doom and the Silver Surfer to help stop him. *One-shotted
+        Doctor Doom. *Destroyed several planets and extinguished a star during his
+        fight with Korvac.'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Without his armor, Extremis or the R.T Node, he is just a normal human
+        being. He holds back against opponents he finds harmless or personally refuses
+        to kill. Even though he quit drinking, Tony continues to struggle and avoid
+        falling off the wagon, making his alcoholism susceptible to the prospect of
+        drinking, especially under pressure. | Due to Extremis being biologically
+        attached to his body he is directly vulnerable to technological assaults,
+        the virus also accelerates some of his brain functions while leaving others
+        at normal levels, making him suffer from things like hallucinations. He is
+        highly dependent on the R.T Node to keep his Extremis-modified body working
+        should he lose Extremis. | Varies from armor to armor. | None Notable. Notable
+        Attacks/Techniques: By himself: *Iron Legion: Also known as Royalguard, an
+        army of several Iron Man Armors are summoned and commanded from his armory,
+        those can be controlled remotely or automatically by his I.As. The legions
+        includes both known and unknown models and marks. Stark mainly calls them
+        to battle several foes at time or one large and strong enemy. Extremis Enhanced:
+        *Technology Interference: Via Extremis, Stark can remotely access to external
+        communications systems such as satellites, cellular phones, and computers
+        throughout the world. H was could project his voice through a cellular phones
+        for example. He can crack codes entire nations couldn''tIron Man: Inevitable
+        #6 , and take over Cloc which was a fabrication of Reed RichardsIron Man Vol
+        4 #11 *Armor Undersheath: The nanoparticles inside the hollow of his bones
+        can form a gold outershell that has the primary functions to manipulate the
+        extremis armor, it also works as a shield of sorts RepulsorTech Node: *Energy
+        Projection: The R.T. node not only provided repulsor energy to run devices
+        such as the Iron Man Armor, its user could produce beams of energy at will,
+        albeit much weaker.Iron Man Vol 5 #521 *Electrical Fields Detection: As the
+        R.T. node was connected to Tony, he could feel different electrical fields
+        that the node was picking up. This included all kinds of invisible frequencies.Iron
+        Man Vol 5 #4 *Magnetic Force-Field: The R.T. node created a force-field which
+        could be modified at will by its user by increasing the power of the reactor
+        incrementally. The Forcefield can be used to levitate the person. Note: Before
+        making any changes to this page, please read and follow the Power-scaling
+        Rules for Marvel and DC Comics. ==Gallery== {| class="mw-collapsible mw-collapsed"
+        align="center" border="1" cellpadding="1" cellspacing="1" style="width:100%"
+        | colspan="2" style="text-align: center; background-color: red; color: gold
+        " |Armory |- | Model 1 MK1.png|Model 1 MK I|link=Iron Man Armor Model 1 Model
+        2 MK I.png|Model 2|link=Iron Man Armor Model 2 Model 4.png|Model 4 (Classic
+        Armor)|link=Iron Man Armor Model 4 Model 6.png|Model 6 (Hydro Armor)|link=Iron
+        Man Armor Model 6 Iron Man Armor Model 8.png|Model 8 (Silver Centurion)|link=Iron
+        Man Armor Model 8 Model 13.png|Model 13 (Modular Armor)|link=Iron Man Armor
+        Model 13 Model 15.png|Model 15 (Retro Armor)|link=Iron Man Armor Model 15
+        Model 16.png|Model 16 (Renaissance Armor)|link=Iron Man Armor Model 16 Model
+        19.png|Model 19 (S.K.I.N. Armor)|link=Iron Man Armor Model 19 Model 20.png|Model
+        20|link=Iron Man Armor Model 20 Iron Man Armor Model 22.png|Model 22 (Thorbuster)|link=Iron
+        Man Armor Model 22 Model 29.png|Model 29 (Extremis Armor)|link=Iron Man Armor
+        Model 29 Model 36.png|Model 36 (Hulkbuster MK II)|link=Iron Man Armor Model
+        36 Model 37.png|Model 37 (Bleeding Edge)|link=Iron Man Armor Model 37 Iron
+        Man Model 38 MC TR.png|Model 38 (Phoenix Buster)|link=Iron Man Armor Model
+        38 Model 42.png|Model 42|link=Iron Man Armor Model 42 Model 50.png|Model 50
+        (Endo-Sym Armor)|link=Iron Man Armor Model 50 Model 51.png|Model 51 (Prime
+        Armor)|link=Iron Man Armor Model 51 Iron Man Model 54 MC TR.png|Model 54 (Marvel
+        Buster)|link=Iron Man Armor Model 54 New61render.png|Model 61 (Godkiller MKll
+        Armor)|link=Iron Man Armor Model 61 Godbuster armor model 63.png|Model 63
+        (Godbuster Armor)|link=Iron Man Armor Model 63 Model 65 .png|Model 65 (Ultron
+        Buster)|link=Iron Man Armor Model 65 Model70.png|Model 72 (Celestial Hulkbuster
+        Armor)|link=Iron Man Armor Model 72 |} ==Notable Matchups== Victories: Simon
+        the Digger (Tengen Toppa Gurren Lagann) Simon''s Profile (Both were 7-B, speed
+        was equalized, Iron Man had the Iron Man Armor Model 20 and Simon the Gurren
+        Lagann) Xenomorph (Alien (Franchise)) Xenomorph''s Profile (Iron Man was in
+        his Mark 3 suit, Xenomorph Queen was used, speed was equalised) Losses: Inconclusive:
+        ==References== ==Statistics Values== Category:Characters Category:Marvel Comics
+        Category:Absolute Zero Users Category:Acid Users Category:Adults Category:Armor
+        Users Category:Armor Users Category:Avengers Category:Billionaires Category:Blood
+        Users Category:Camouflage Users Category:Comic Book Characters Category:Deconstruction
+        Users Category:Durability Negation Use'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 55
@@ -2453,159 +2322,497 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|war machine marvel comics|9330294
-  - source_id: vsbattles-iron-man-composite-marvel-comics
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel_Comics%29
-    title: Iron Man Armor Model 13
-    rank: 80
-    extracted_fields: *id009
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: vsbattles.fandom.com|iron man armor model 13|9360925
-  - source_id: character-stats-profiles-iron-man-composite-marvel-comics
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel_Comics%29
-    title: Death's Head (Canon, Composite)/MisterNobodyVulAdvAoyll
-    rank: 80
-    extracted_fields: *id011
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|death s head canon composite
-      misternobodyvuladvaoyll|582401
-  - source_id: vsbattles-iron-man-composite-marvel
-    url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
-    title: Iron Man Armor Model 13
-    rank: 80
-    extracted_fields: *id013
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: vsbattles.fandom.com|iron man armor model 13|9360925
+    duplicate_key: vsbattles.fandom.com|iron man marvel comics|9404254
+    retryable: false
+    exception_class: ''
   - source_id: character-stats-profiles-iron-man-composite-marvel
     url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_Marvel
-    title: Death's Head (Canon, Composite)/MisterNobodyVulAdvAoyll
-    rank: 80
-    extracted_fields: *id015
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man (Canon, Marvel Comics)/ObberGobb
+    source_type: mediawiki
+    revision_id: '568475'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 14580
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 10-A | 9-B | 9-A | 5-A | 5-A | 5-A | At most 2-A | 2-A | 2-A | 1-A |
+        1-A | 1-A | 1-A | High 1-A
+      source_id: character-stats-profiles-iron-man-composite-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Immortality (Type 6. Backed up his
+        mind and personality to a computer, and was ultimately brought back to life
+        entirely later on), Genius Intelligence, Information Analysis, Hacking, Technopathy,
+        Preparation, Martial Arts (Trained in Martial Arts by Captain America), Regeneration
+        (High-Low himself, up to High-Mid for nanotech armors), Enhanced Senses, Extrasensory
+        Perception, Fire Manipulation, Ice Manipulation, Electricity Manipulation,
+        Light Manipulation, Magnetism Manipulation, Absorption (Can absorb energy
+        from power grids and other sources), Weapon Creation, Size Manipulation, and
+        Shapeshifting (Nanotechnology allows for him to shift his armor to different
+        sizes and weapons), Invisibility (Possesses stealth armors that can turn invisible),
+        Flight, Energy Manipulation, Energy Projection, Weapon Mastery, Statistics
+        Amplification (Can increase the strength of his armors by adding nanotech
+        or modules), Summoning (Can summon Iron Man armors), Homing Attack, Accelerated
+        Development (Can learn new skills far faster than normal people), Analytical
+        Prediction (His armor could read Captain America's attacks and predict them),
+        Explosion Manipulation, Forcefield Creation, Non-Physical Interaction (Phoenix
+        Buster could harm the Phoenix Force), Stealth Mastery, Supernatural Willpower,
+        Resistance to Telepathy, Mind Manipulation, Pain Manipulation, Hacking, Intangibility
+        (Blocked Vision's phasing),
+      source_id: character-stats-profiles-iron-man-composite-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Athlete level (Is an athletic adult man and has trained in martial arts
+        with Captain America) | Wall level (Fought and overpowered Daredevil, who
+        can break through stone walls) | Large Planet level (Is somewhat comparable
+        to Namor and was able to fight against him on two separate occasions. Comparable
+        to Wonder Man, and he thought he could defeat him on his own. He would later
+        fight evenly against an undead Wonder Man. Repeatedly stated in the 1960s
+        and '70s to be the second strongest Avenger after Thor, making him superior
+        to Giant Man and Vision, the latter of whom he was directly stated to be superior
+        to by Kang) | At least Large Planet level (Much stronger than his base armors.
+        Fought against a base Professor Hulk, but couldn't defeat him) | At least
+        Large Planet level (His extremely armor is vastly more powerful than any previous
+        armors, effortlessly defeated multiple of them, including models that were
+        stronger than the Thing, Namor underwater, She-Hulk, and Ms. Marvel. Fought
+        evenly against the Classic Hulkbuster, each unable to defeat the other. Overpowered
+        Red Hulk and could defeat Magneto with Bleeding Edge. Could fight evenly against
+        Doctor Doom with both the Extremis and Model 42 armors) | At most Multiverse
+        level+ (Held his own against Captain Marvel, but was ultimately weaker) |
+        Multiverse level+ (Stated to be his most powerful armor yet. Made of Mysterium,
+        which is far stronger than Adamantium, and is capable of casually crushing
+        it. Could one-shot Stark Sentinels, which withstood an attack from a Magneto
+        amped by Storm and Blue Marvel. Even Blue Marvel was scared of facing multiple
+        at once) | Multiverse level+ (Vastly superior to the Mysterium Armor, and
+        is capable of fighting dozens of Stark Sentinels at once)
+      source_id: character-stats-profiles-iron-man-composite-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Massively FTL+ (Can keep up with the likes of Thor)
+      source_id: character-stats-profiles-iron-man-composite-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Athlete level | Wall level | At least Large Planet level, possibly Multiverse
+        level+ (Tackled by Annihilus. Undamaged by a laser from Starbrand. Survived
+        the heat of Odin's forge), higher with shields (Shields an attack from an
+        enraged Wonder Man. Shields from an attack from Doctor Doom) | Up to High
+        Hyperverse level (Blocks an attack from Final Form Ultron when amped by Kree
+        technology. His specialty armors should have durability comparable to their
+        attack potency) | Outerverse level
+      source_id: character-stats-profiles-iron-man-composite-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Is a normal human underneath his suit Feats: * Impressed Mephisto *
+        Brawled with Ultron * Fought against Spectrum * Knocked out She-Hulk * Brawled
+        with Namor, who is greatly impressed with his strength * Brawled with Hercules,
+        who implied he was not holding back * Fought against Hulk for a while * Knocked
+        out Hulk * Tied with Silver Surfer, with both being knocked out in their clash
+        * Withstood a Mjolnir attack * Withstood Wonder Man''s punch * Withstood She-Hulk''s
+        attacks * Pushed Blue Marvel to the ground * Almost killed Graviton * Killed
+        Crimson Dynamo * Easily defeated an armor that was in the process of defeating
+        Namor underwater * Defeated an armor that Thing was having trouble with *
+        Matched Doctor Doom * Sent Namor flying with a punch * Hurt Human Torch with
+        his punch * Stalemated a Hulkbuster * Withstood repeated attacks from Sentry
+        * Tanked Ares'' axe being thrown at him by Sentry * Blocked Doctor Doom''s
+        attack * Tanked an explosion that knocked Hulk out * Only briefly knocked
+        out by an attack from Red Hulk, with his armor being entirely undamaged *
+        Killed Terminus * Restrained Apocalypse with his shields * Fought evenly against
+        an enraged and mind controlled Thor * Fought an amped Crimson Dynamo, who
+        is on Thor''s level * Knocked out Ulik, twice * Wounded Worthy Grey Gargoyle
+        * When amped by NYC''s power grid, stunned Mangog * Beat up Red Hulk * Fought
+        evenly against Magnetic, who was amped by the power of several planets * Only
+        stunned by a punch from Colossus * Took a punch from Taurus, who previously
+        knocked out Thor * Tanked a laser blast from Gladiator * Shielded from Wonder
+        Man''s attack * Withstood multiple blows from Worthy Grey Gargoyle * Survived
+        the heat of Odin''s forge, which can melt Uru * Withstood a punch from Rogue
+        with Hulk''s powers * Blocks an attack from Phoenix Force-amped Emma Frost
+        * One-shot Teen Abomination * Sent the real Abomination flying, twice * Stalemated
+        Doctor Doom, and ultimately managed to defeat him * Withstood repeated punches
+        from the Hulk * His armor blocked an axe attack from Terrax, although was
+        damaged * Tanked an eyebeam from Starbrand * Sustains no damage from a stomp
+        by an enraged Hulk * Effortlessly stomped the World War Hulkbuster, which
+        was stronger than normal Hulkbusters * Defeated Teen Abomination * Cracked
+        one of the Illuminati''s cells, which were previously detaining Terrax * Could
+        fight and destroy several older armors at once, including the Model 42 * Killed
+        Corvus Glaive * Shielded from Doctor Doom and Scarlet Witch at the same time
+        * Shielded from Spectrum''s attack * Tanked the explosion of Sol''s Hammer,
+        which was far larger than a planet Model Prime * Matched Captain Marvel''s
+        energy attack * Matched Vision''s energy beam * One-shot Gamora extremely
+        casually * One-shot Gray Hulk * Withstood a tackle from Annihilus who was
+        aiming for Thor * Withstood multiple attacks from Hyperion Category:ObberGobb
+        Category:Tier 2 Category:Tier 5 Category:Tier 9 Category:Tier 10'
+      source_id: character-stats-profiles-iron-man-composite-marvel
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 0
+    variant_score: 55
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|death s head canon composite
-      misternobodyvuladvaoyll|582401
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|iron man canon marvel comics
+      obbergobb|568475
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-iron-man-composite-marvel
     url: https://vsbattles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel%29
-    title: Iron Man Armor Model 13
-    rank: 80
-    extracted_fields: *id017
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Iron Man (Marvel Comics)
+    source_type: mediawiki
+    revision_id: '9404254'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 22621
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    - Statistics Values
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 130
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id018
-    rejection_reason: ''
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: '| , up to | , likely higher'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Preparation, Genius Intelligence, Martial Arts, Weapon Mastery, Summoning
+        All previous abilities, plus Technology Manipulation, Hacking, Regeneration
+        (High-Low over time, heals from the fatal injuries he sufferedIron Man Vol
+        4 #4 in 24 hoursIron Man Vol 4 #5), Flight, Energy Projection, Enhanced Senses,
+        Magnetism Manipulation and Extrasensory Perception via R.T Node All previous
+        abilities, plus the weapons and gadgets from the Iron Legion All previous
+        abilities, plus Superhuman Physical Characteristics, Flight, Cosmic Awareness
+        and Retrocognition (Thanks to his link to the cosmos, Iron Man is able to
+        view a multitude of realities. He can also hear the "stories" of these realities
+        from their whispers and gasps, which he used to deduce what happened to the
+        dead universe he was inIron Man (2020) #15), Space-Time Manipulation (Tore
+        a hole in the universe with a repulsor blast, creating a gateway to another
+        Was stated to be tearing through galaxies and dimensions during his battle
+        with Korvac), Dimensional Travel and BFR (Traveled to an alternate universe
+        and intended to leave Korvac there), Size Manipulation (When arriving to Earth
+        giant-sized, he shrank to the height of the Washington Square Arch, and then
+        to human heightIron Man (2020) #16) up to Large Size (Type 5; Can grow large
+        enough to grab and throw planets), Statistics Amplification and Reduction
+        (Made everyone in NYC as smart as him, including Reed Richards, which made
+        him dumber. Reduced the IQ of the people in his prison to 80Iron Man (2020)
+        #17), Transformation (Can quickly shift between human form and Iron God form),
+        Teleportation (As shown here), Creation (Built a special floating prison),
+        Morality Manipulation (Was able to get an entire group of politicians to agree
+        to what he says), Matter Manipulation and Transmutation (Disassembled the
+        Big Wheel and turned Gargoyle to stone), Heat Manipulation (Melted the Silver
+        Surfer with an energy blast, reducing him to a silver puddle), Explosion Manipulation,
+        possibly Death Manipulation (Killed Jim Hammond with a wave of his hand),
+        Telekinesis (Killed Halcyon by choking him from afar), Forcefield Creation
+        (Can use forcefields to trap opponents or to block attacks), and Resurrection
+        (As shown hereIron Man (2020) #18), as a user of the Power Cosmic, he should
+        likely have all of the abilities of the Silver Surfer'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: 'Athlete level (He is an adult man who regularly trains in combat with
+        Captain America and other highly skilled fightersIron Man: Fatal Frontier
+        #12) | Small Building level (Can overpower DaredevilSuperior Iron Man #2)
+        | Varies (Has access to suits such as Model 1, Model 4, Model 29 and Hulkbusters),
+        up to Outerverse level (Built the Phoenixbuster, which fragmented the Phoenix
+        Force) | Outerverse level, likely higher (Wields the Power Cosmic. Fought
+        evenly with a Power Cosmic-amped Korvac, who threatened to destroy the universe
+        and was considered to be a disturbance to the universal balance by the Living
+        Tribunal. The same Korvac claimed to be too powerful for the Living Tribunal
+        and the In-Betweener to contain. The Abstracts showed concern over Iron Man''s
+        state and believed that his power could possibly determine the fate of existence.
+        It is also stated that he could cause radical and drastic change to the universe,
+        and even reality itself)'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: 'Athletic Human | At least Athletic Human, Partial Speed of Light Reactions
+        (Some of his brain functions process information at light speedIron Man Vol
+        4 #25) | At least Hypersonic with several armors (From Model 4 to upwardsMach
+        8.23) | Massively FTL+ (Battled with Korvac across the galaxy)'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Athlete level | Small Building level | Varies | Outerverse level (Took
+        several attacks from a Power Cosmic-amped Korvac)
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: 'Superhuman (Can work for 2 days straight with no restIron Man Vol 1
+        #98) | Higher than before due to his advanced metabolism | Varies from armor
+        to armor | Unknown'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range; Planetary through extremis, Several Meters with
+        R.T Node blast, can manipulate armors from light years of distance | Standard
+        Melee Range; Planetary with Mind Manipulation, up to Interplanetary with Size
+        Manipulation; Outerversal with Cosmic Awareness and Dimensional Travel
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: '*Iron Man Armor: Tony''s primary powers mostly come from his iron man
+        armors, sophisticated suits containing various offensive, defensive and evasive
+        abilities. Some are mission-specific, some are prototypes for testing, and
+        others are older models kept for nostalgia or for research. *Extremis virus:
+        After being fatally wounded by an Extremis-enhanced terrorist, Tony Stark
+        had to inject himself with the Extremis virus in order to survive. His entire
+        body has also been enhanced by the techno-organic Extremis virus which granted
+        him enhanced senses, reflexes, and regenerative healing. He also reprogrammed
+        the serum to help him have better, fourth connection and control over his
+        Iron Man armor, effectively making him Iron Man "inside and out.Iron Man Vol
+        4 #4 *RepulsorTech Node: Also known as R.T node is a type of fusion power
+        which derived from the repulsor technology of the Iron Man suit created by
+        Tony. It can be used as a source for clean energy as well as a powerful bomb.
+        After being left in a coma in a battle against Norman Osborn, an arc reactor
+        was used to run Stark''s body once more by using it to run the basic machine
+        codes to keep Stark''s Extremis-modified body working, also providing Stark
+        with an increased intelligence, multitasking abilities and additional powers.Iron
+        Man Vol 5 #25'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'At least Extraordinary Genius, likely Supergenius (He is only a fraction
+        less smart than Reed Richards, and his technology is nearly a worthy match
+        for Asgardian wizardry. Created various armors that operate on a higher or
+        beyond-dimensional scale, like models 22, 38, 61, 63, and 72, the first of
+        which is powered by the same enchantment that gives mjolnir its strength,
+        which Thor described as taking and weaponizing a gift of the gods. He and
+        his team made a virtual universe in which one could do anything, go anywhere
+        and be anyone. He reverse-engineered a celestial to make Model 72. Aside from
+        his powers granted to him by his suits, Tony Stark is easily one of the smartest
+        people on Earth. Being a engineer and mechanic prodigy capable of fixing almost
+        any machinery, he graduated from the Massachusetts Institute of Technology
+        with honors at the age of 17. He''s designed and built all of the devices
+        and armors listed here and as a futurist, he has shown to predict certain
+        events in the future.Illuminati Vol 1 Stark is also a world-renowned businessman
+        with impeccable business ethics, able to command people''s attentions when
+        he speaks on economic matters and is a brilliant tactician and strategist
+        capable of quickly formulating battle strategies and new plans if the situation
+        changes, even going as far as putting Reed Richards in check on five different
+        boards in chess, a game he didn''t learn until later in his life. Besides
+        English, Tony can speak different languages fluently such as Japanese, Mandarin
+        Chinese, French, Russian, Korean, and even multiple Middle Eastern languages
+        and is a quite physically formidable combatant on his own when the situation
+        demands it, managing to fight Hammer Industries guards and bare-handedly confront
+        several ninjas) | At least Extraordinary Genius with the Extremis enhancements
+        that allow him to process information at a much faster rate. Feats: Base:
+        *Beats up several skrulls in hand to hand.Illuminati Vol 2 #1 *Easily flips
+        over a guy with a laser via Caps moves. *Takes out several gladiators in hand
+        to hand. *Can fight Crimson Dynamo, take a conference, checks over the laboratories
+        and bids on a relic simultaneously.Iron Man Vol 4 #7 *Temporary held his own
+        against Madame Hydra.Iron Man: Director of S.H.I.E.L.D. *Can even hack advanced
+        technology with simple tools while being mentally unstable. As Cosmic Iron
+        Man: *Blew a hole through Korvac with his unibeam, temporarily incapacitating
+        him. *Was fine after Korvac threw a planet at him. *Was so powerful that Hellcat
+        called for Doctor Doom and the Silver Surfer to help stop him. *One-shotted
+        Doctor Doom. *Destroyed several planets and extinguished a star during his
+        fight with Korvac.'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Without his armor, Extremis or the R.T Node, he is just a normal human
+        being. He holds back against opponents he finds harmless or personally refuses
+        to kill. Even though he quit drinking, Tony continues to struggle and avoid
+        falling off the wagon, making his alcoholism susceptible to the prospect of
+        drinking, especially under pressure. | Due to Extremis being biologically
+        attached to his body he is directly vulnerable to technological assaults,
+        the virus also accelerates some of his brain functions while leaving others
+        at normal levels, making him suffer from things like hallucinations. He is
+        highly dependent on the R.T Node to keep his Extremis-modified body working
+        should he lose Extremis. | Varies from armor to armor. | None Notable. Notable
+        Attacks/Techniques: By himself: *Iron Legion: Also known as Royalguard, an
+        army of several Iron Man Armors are summoned and commanded from his armory,
+        those can be controlled remotely or automatically by his I.As. The legions
+        includes both known and unknown models and marks. Stark mainly calls them
+        to battle several foes at time or one large and strong enemy. Extremis Enhanced:
+        *Technology Interference: Via Extremis, Stark can remotely access to external
+        communications systems such as satellites, cellular phones, and computers
+        throughout the world. H was could project his voice through a cellular phones
+        for example. He can crack codes entire nations couldn''tIron Man: Inevitable
+        #6 , and take over Cloc which was a fabrication of Reed RichardsIron Man Vol
+        4 #11 *Armor Undersheath: The nanoparticles inside the hollow of his bones
+        can form a gold outershell that has the primary functions to manipulate the
+        extremis armor, it also works as a shield of sorts RepulsorTech Node: *Energy
+        Projection: The R.T. node not only provided repulsor energy to run devices
+        such as the Iron Man Armor, its user could produce beams of energy at will,
+        albeit much weaker.Iron Man Vol 5 #521 *Electrical Fields Detection: As the
+        R.T. node was connected to Tony, he could feel different electrical fields
+        that the node was picking up. This included all kinds of invisible frequencies.Iron
+        Man Vol 5 #4 *Magnetic Force-Field: The R.T. node created a force-field which
+        could be modified at will by its user by increasing the power of the reactor
+        incrementally. The Forcefield can be used to levitate the person. Note: Before
+        making any changes to this page, please read and follow the Power-scaling
+        Rules for Marvel and DC Comics. ==Gallery== {| class="mw-collapsible mw-collapsed"
+        align="center" border="1" cellpadding="1" cellspacing="1" style="width:100%"
+        | colspan="2" style="text-align: center; background-color: red; color: gold
+        " |Armory |- | Model 1 MK1.png|Model 1 MK I|link=Iron Man Armor Model 1 Model
+        2 MK I.png|Model 2|link=Iron Man Armor Model 2 Model 4.png|Model 4 (Classic
+        Armor)|link=Iron Man Armor Model 4 Model 6.png|Model 6 (Hydro Armor)|link=Iron
+        Man Armor Model 6 Iron Man Armor Model 8.png|Model 8 (Silver Centurion)|link=Iron
+        Man Armor Model 8 Model 13.png|Model 13 (Modular Armor)|link=Iron Man Armor
+        Model 13 Model 15.png|Model 15 (Retro Armor)|link=Iron Man Armor Model 15
+        Model 16.png|Model 16 (Renaissance Armor)|link=Iron Man Armor Model 16 Model
+        19.png|Model 19 (S.K.I.N. Armor)|link=Iron Man Armor Model 19 Model 20.png|Model
+        20|link=Iron Man Armor Model 20 Iron Man Armor Model 22.png|Model 22 (Thorbuster)|link=Iron
+        Man Armor Model 22 Model 29.png|Model 29 (Extremis Armor)|link=Iron Man Armor
+        Model 29 Model 36.png|Model 36 (Hulkbuster MK II)|link=Iron Man Armor Model
+        36 Model 37.png|Model 37 (Bleeding Edge)|link=Iron Man Armor Model 37 Iron
+        Man Model 38 MC TR.png|Model 38 (Phoenix Buster)|link=Iron Man Armor Model
+        38 Model 42.png|Model 42|link=Iron Man Armor Model 42 Model 50.png|Model 50
+        (Endo-Sym Armor)|link=Iron Man Armor Model 50 Model 51.png|Model 51 (Prime
+        Armor)|link=Iron Man Armor Model 51 Iron Man Model 54 MC TR.png|Model 54 (Marvel
+        Buster)|link=Iron Man Armor Model 54 New61render.png|Model 61 (Godkiller MKll
+        Armor)|link=Iron Man Armor Model 61 Godbuster armor model 63.png|Model 63
+        (Godbuster Armor)|link=Iron Man Armor Model 63 Model 65 .png|Model 65 (Ultron
+        Buster)|link=Iron Man Armor Model 65 Model70.png|Model 72 (Celestial Hulkbuster
+        Armor)|link=Iron Man Armor Model 72 |} ==Notable Matchups== Victories: Simon
+        the Digger (Tengen Toppa Gurren Lagann) Simon''s Profile (Both were 7-B, speed
+        was equalized, Iron Man had the Iron Man Armor Model 20 and Simon the Gurren
+        Lagann) Xenomorph (Alien (Franchise)) Xenomorph''s Profile (Iron Man was in
+        his Mark 3 suit, Xenomorph Queen was used, speed was equalised) Losses: Inconclusive:
+        ==References== ==Statistics Values== Category:Characters Category:Marvel Comics
+        Category:Absolute Zero Users Category:Acid Users Category:Adults Category:Armor
+        Users Category:Armor Users Category:Avengers Category:Billionaires Category:Blood
+        Users Category:Camouflage Users Category:Comic Book Characters Category:Deconstruction
+        Users Category:Durability Negation Use'
+      source_id: vsbattles-iron-man-composite-marvel
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: false
     identity_score: 20
-    variant_score: 0
+    variant_score: 55
     provider_priority: 120
     core_field_count: 3
     ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
-    variant_match: false
-    duplicate_key: vsbattles.fandom.com|iron man armor model 13|9360925
-  - source_id: character-stats-profiles-iron-man-composite-marvel
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Marvel%29
-    title: Death's Head (Canon, Composite)/MisterNobodyVulAdvAoyll
-    rank: 80
-    extracted_fields: *id019
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id020
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|death s head canon composite
-      misternobodyvuladvaoyll|582401
-  - source_id: character-stats-profiles-iron-man-composite-earth-616
-    url: https://character-stats-and-profiles.fandom.com/wiki/Iron_Man_%28Composite%29_%28Earth-616%29
-    title: Death's Head (Canon, Composite)/MisterNobodyVulAdvAoyll
-    rank: 80
-    extracted_fields: *id021
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id022
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: false
-    duplicate_key: character-stats-and-profiles.fandom.com|death s head canon composite
-      misternobodyvuladvaoyll|582401
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|iron man marvel comics|9404254
+    retryable: false
+    exception_class: ''
+  needs_human_source_choice: false
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

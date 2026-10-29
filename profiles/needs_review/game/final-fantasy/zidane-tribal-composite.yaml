@@ -85,78 +85,6 @@ sources:
   - intelligence
   parser: mediawiki_battle_stats
   promotion_allowed: true
-- id: vsbattles-zidane-tribal-composite
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zidane Tribal Composite
-  url: https://vsbattles.fandom.com/wiki/Zidane_Tribal_Composite
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-zidane-tribal-composite
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Zidane Tribal Composite
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zidane_Tribal_Composite
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-zidane-tribal-composite-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zidane Tribal Composite Final Fantasy
-  url: https://vsbattles.fandom.com/wiki/Zidane_Tribal_Composite_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-zidane-tribal-composite-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Zidane Tribal Composite Final Fantasy
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zidane_Tribal_Composite_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-zidane-tribal-composite-final-fantasy
   provider_id: vsbattles
   source_type: mediawiki
@@ -180,42 +108,6 @@ sources:
   source_type: mediawiki
   title: Zidane Tribal (Composite) Final Fantasy
   url: https://character-stats-and-profiles.fandom.com/wiki/Zidane_Tribal_%28Composite%29_Final_Fantasy
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-zidane-tribal-composite-final-fantasy
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zidane Tribal (Composite) (Final Fantasy)
-  url: https://vsbattles.fandom.com/wiki/Zidane_Tribal_%28Composite%29_%28Final_Fantasy%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-zidane-tribal-composite-final-fantasy
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Zidane Tribal (Composite) (Final Fantasy)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zidane_Tribal_%28Composite%29_%28Final_Fantasy%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -361,7 +253,7 @@ review:
   readiness_state: needs_review
 profile_hash: bf87603da03c26e68959c1da10a3e79285821fd29f08ab7318aa121e762a6608
 repair:
-  attempted_at: '2026-06-19T10:51:38Z'
+  attempted_at: '2026-10-23T04:29:10Z'
   repaired_fields: []
   unresolved_fields:
   - attack_potency
@@ -371,20 +263,48 @@ repair:
   source_attempts:
   - source_id: vsbattles-zidane-tribal-composite-final-fantasy
     url: https://vsbattles.fandom.com/wiki/Zidane_Tribal_%28Composite%29_Final_Fantasy
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Zidane Tribal (Composite) Final Fantasy
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Zidane Tribal
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '9073084'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 15229
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -397,36 +317,218 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
-    variant_score: 25
+    field_candidates:
+    - field: tier
+      value: At least | At least
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Longevity, Magic, Master thief,
+        Highly skilled at wielding daggers and double-bladed weapons, Highly skilled
+        acrobatic, Can transform into his Trance that amps his stats further, Excels
+        in aerial combat, Able to transfer stamina and magic reserves to unconscious
+        allies of his choosing at the expense of himself, Non-Physical Interaction
+        (Able to harm Ghosts), Can inflict status ailments that are enchanted to his
+        weapon upon his opponents (Magic Nullification, Sleep Manipulation, Death
+        Manipulation, Petrification), Limited, Resistance to Sleep Manipulation (Managed
+        to wake up from Black Waltz 1 spell, also granted resistance to sleep manipulation
+        via Insomniac), Resistance to Soul Manipulation (Appears capable of surviving
+        without a soul), Attack Reflection via Auto-Reflect, Levitation via Auto-Float,
+        Limited Time Manipulation via Slowing Time and Auto-Haste, Regeneration (Mid-Low,
+        via Auto-Regen/Auto Potion), Resurrection via Auto-Life, Resistance to Freezing
+        via Body Temp, Resistance to Poison Manipulation via Antibody, Resistance
+        to Petrification via Jelly, Resistance to Time Stop via Locomotion, Resistance
+        to Mind Control via Clearheaded Resistance to Mind Manipulation, Soul Manipulation
+        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
+        living being on the planet), Corruption & Body Puppetry (Due to their light,
+        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
+        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
+        which is capable of affecting the hearts and minds of all living beings on
+        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
+        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
+        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
+        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
+        levelDissidia Final Fantasy, and can warp them into another dimension), Extreme
+        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
+        (Can survive Shiva''s ice attacks, including Diamond Dust) Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Ice Manipulation and Absolute
+        Zero and Duplication (Via Shiva who''s Ice and aura are stated to reach Absolute
+        Zero including her Diamond Dust, Shiva can duplicate herselfDissidia Final
+        Fantasy NT), Water Manipulation (via Kraken, Cagnazzo, and Leviathan), Necromancy
+        (Via Lich), Spatial Manipulation, Deconstruction, and BFR (via Atomos, who
+        manipulates space, crush enemies down to a molecular levelDissidia Final Fantasy,
+        and can warp them into another dimension), Death Manipulation and Space-Time
+        Manipulation (Via Odin, who''s Zantetsuken instantly kills an enemy and opens
+        a rift in space time to take their remainsWar of the Visions: Final Fantasy
+        Brave Exvius), Matter Manipulation and Radiation Manipulation (via Megaflare,
+        which is statedFinal Fantasy IV: The After Years Novel, chapter 5, page 270
+        numerous times to be a nuclear powerFinal Fantasy IV: The After Years Novel,
+        chapter 5, page 271), Attack Reflection (via Carbuncle), Poison Manipulation
+        and Corrosion Inducement (The Poison status effect, which is also stated to
+        corrode the targetFinal Fantasy IV Series Guidebook), Darkness Manipulation
+        and Perception Manipulation (The darkness status ailment via various equipment,
+        which would render the target blindFinal Fantasy V GBA Manual), Power Nullification
+        (The Silence status, which would render the target''s ability to use magic
+        null), and Petrification (Via Malboro''s Bad Breath), Resurrection (Phoenix
+        can revive fallen party members), Light Manipulation and Holy Manipulation
+        (Via Alexander), Explosion Manipulation and Self-Destruction (Via Bomb), Healing
+        (Via Sylph and Asura), Earth Manipulation (Via Titan), BFR (via Typhon), Soul
+        Manipulation (Via Zalera, the Death Seraph, who was going to abosrb all souls
+        on the planetFinal Fantasy XII)'
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Brown Dwarf level (Contributed in the defeats of the Ark, Garland
+        and Deathguise. Fought Trance Kuja and Necron alongside the rest of the party)
+        | At least Multiverse level+ (Is comparable to the other Warriors of Materia
+        and draws power from the gods of the cycle. Participated in the defeat of
+        Shinryu)
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Relativistic+ (Was able to outrun the roots of the Iifa Tree for an extended
+        period and should be faster than the Chaos Guardians) | Massively FTL+ (Can
+        keep up with the other Warriors of Materia such as Warrior of Light)
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Brown Dwarf level (Survived being hit by Kuja's Ultima). Resurrection,
+        Resistance to Soul Manipulation and Regeneration make him difficult to kill.
+        | At least Multiverse level+
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range, Planetary with spells.
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Two Mage Mashers (Pictured above), Orichalcum (Signature dagger)
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted thief and skilled combatant, he is proficient with both short
+        swords and daggers, as well as magic. He also dueled Gaia and Terra's most
+        powerful, including Kuja, who overpowered and enslaved Bahamut, and Garland,
+        who attempted to free Terra from its position within Gaia. In addition, he's
+        a master of slaying a variety of targets, gaining bonuses went put against
+        humans, undead, devils, beasts, bugs, golems, and birds. His prowess as a
+        thief also makes him an expert at sabotage, stealth, and other profession-related
+        skills.
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "He's a bit of a skirt-chaser and is innately kind, hoping to avoid killing\
+        \ if at all possible. Auto-Reflect only works on magic. Notable Attacks/Techniques\
+        \ Steal: His \u201CSteal\u201D ability allows him to steal items from an enemy.\
+        \ The command can be augmented with his other skills such as Flee Gil, Steal\
+        \ Gil, Master Thief, Flee: Instantly escape from the battle at the cost of\
+        \ 10% of the Gil the party would have won from it., Detect: Shows what items\
+        \ the enemy has to Steal, listed from the rarest to the most common., What's\
+        \ That!?: Causes enemies to turn around, resetting their ATB bars and allowing\
+        \ the characters to perform a back attack on them., Soul Blade: Inflicts a\
+        \ status ailment on an opponent. The status ailment inflicted is the same\
+        \ as whatever status Zidane's current weapon carries. 99% accuracy with thief\
+        \ swords, but always misses with daggers., Annoy: Inflict Trouble on an enemy.\
+        \ 50% accuracy., Sacrifice: Zidane reduces his HP and MP to 0 and fully restores\
+        \ the other party members HP and MP., Lucky Seven: If Zidane's current HP\
+        \ ends in 7, it randomly inflicts 7, 777 or 7777 damage to a single enemy.,\
+        \ Thievery: Inflicts damage to a single enemy. Zidane's Thievery skill is\
+        \ directly linked to the number of successful steals performed times half\
+        \ of his speed, the player can power it up to deal 9, 999 damage with enough\
+        \ theft. Steals done by Blank, Free Energy: Five explosive physical attacks\
+        \ are inflicted on the target, though without Zidane moving. Each explosion\
+        \ is a different symbol, inflicting 50% more damage than a regular attack.,\
+        \ Tidal Flame: All enemies are struck by a wave of fire, inflicting heavy\
+        \ damage, which is 50% stronger than Zidane\u2019s regular attacks., Scoop\
+        \ Art: Purple beams of energy strike one target. The attack has twice the\
+        \ damage output of a regular one., Shift Break: A swirling vortex forms beneath\
+        \ all enemies, dealing damage equal to twice that of Zidane's physical attacks.,\
+        \ Stellar Circle 5: A tornado of energy forms, dealing 2.5 times the damage\
+        \ of a normal attack., Meo Twister: All enemies are struck from above by multiple\
+        \ blasts of energy, dealing 2.5 times the damage of Zidane's normal attacks.,\
+        \ Solution 9: A mass of red runic symbols fly past one enemy, causing a massive\
+        \ explosion of energy in their wake, dealing three times the damage of a regular\
+        \ strike., Grand Lethal: Several beams of energy lance out from Zidane\u2019\
+        s body, striking all enemies. A symbol appears in the impact explosion, dealing\
+        \ four times his normal striking strength with each hit., Reverse Gaia: His\
+        \ EX Burst from Dissidia, Zidane dashes past the opponent from multiple angles\
+        \ to attack. Zidane ends the EX Burst by circling the opponent"
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
+    core_field_count: 3
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|zidane tribal composite final fantasy
+    duplicate_key: vsbattles.fandom.com|zidane tribal|9073084
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
     url: https://character-stats-and-profiles.fandom.com/wiki/Zidane_Tribal_%28Composite%29_Final_Fantasy
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Zidane Tribal (Composite) Final Fantasy
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - weaknesses
+    normalized_page_title: Emperor Mateus (Canon)/Piccolo823
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '220400'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4801
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Categories
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -439,37 +541,93 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
-    variant_score: 25
+    field_candidates:
+    - field: attack_potency
+      value: Outerverse level (Is stronger than early game Firion, who can destroy
+        entities which are not bound by the concepts of space and time. In Dissidia,
+        he can defeat True Form Shinryu who is more powerful than the Cloud of Darkness,
+        who is verbatim stated to transcend all concepts.)
+      source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Irrelevant (Can react to souls and attacks that can tag and destroy them,
+        which are stated to be made of a substance that is larger than 3 dimensional
+        beings but lacks the concept of space and time)
+      source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Outerverse level
+      source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Is very overconfident
+      source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 0
+    core_field_count: 3
     ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|zidane tribal composite
-      final fantasy
+    duplicate_key: character-stats-and-profiles.fandom.com|emperor mateus canon piccolo823|220400
     retryable: false
     exception_class: ''
   - source_id: vsbattles-zidane-tribal-composite-final-fantasy
     url: https://vsbattles.fandom.com/wiki/Zidane_Tribal_%28Composite%29_%28Final_Fantasy%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Zidane Tribal (Composite) (Final Fantasy)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Zidane Tribal
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '9073084'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 15229
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -482,36 +640,218 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 120
-    variant_score: 25
+    field_candidates:
+    - field: tier
+      value: At least | At least
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Longevity, Magic, Master thief,
+        Highly skilled at wielding daggers and double-bladed weapons, Highly skilled
+        acrobatic, Can transform into his Trance that amps his stats further, Excels
+        in aerial combat, Able to transfer stamina and magic reserves to unconscious
+        allies of his choosing at the expense of himself, Non-Physical Interaction
+        (Able to harm Ghosts), Can inflict status ailments that are enchanted to his
+        weapon upon his opponents (Magic Nullification, Sleep Manipulation, Death
+        Manipulation, Petrification), Limited, Resistance to Sleep Manipulation (Managed
+        to wake up from Black Waltz 1 spell, also granted resistance to sleep manipulation
+        via Insomniac), Resistance to Soul Manipulation (Appears capable of surviving
+        without a soul), Attack Reflection via Auto-Reflect, Levitation via Auto-Float,
+        Limited Time Manipulation via Slowing Time and Auto-Haste, Regeneration (Mid-Low,
+        via Auto-Regen/Auto Potion), Resurrection via Auto-Life, Resistance to Freezing
+        via Body Temp, Resistance to Poison Manipulation via Antibody, Resistance
+        to Petrification via Jelly, Resistance to Time Stop via Locomotion, Resistance
+        to Mind Control via Clearheaded Resistance to Mind Manipulation, Soul Manipulation
+        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
+        living being on the planet), Corruption & Body Puppetry (Due to their light,
+        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
+        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
+        which is capable of affecting the hearts and minds of all living beings on
+        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
+        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
+        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
+        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
+        levelDissidia Final Fantasy, and can warp them into another dimension), Extreme
+        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
+        (Can survive Shiva''s ice attacks, including Diamond Dust) Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Ice Manipulation and Absolute
+        Zero and Duplication (Via Shiva who''s Ice and aura are stated to reach Absolute
+        Zero including her Diamond Dust, Shiva can duplicate herselfDissidia Final
+        Fantasy NT), Water Manipulation (via Kraken, Cagnazzo, and Leviathan), Necromancy
+        (Via Lich), Spatial Manipulation, Deconstruction, and BFR (via Atomos, who
+        manipulates space, crush enemies down to a molecular levelDissidia Final Fantasy,
+        and can warp them into another dimension), Death Manipulation and Space-Time
+        Manipulation (Via Odin, who''s Zantetsuken instantly kills an enemy and opens
+        a rift in space time to take their remainsWar of the Visions: Final Fantasy
+        Brave Exvius), Matter Manipulation and Radiation Manipulation (via Megaflare,
+        which is statedFinal Fantasy IV: The After Years Novel, chapter 5, page 270
+        numerous times to be a nuclear powerFinal Fantasy IV: The After Years Novel,
+        chapter 5, page 271), Attack Reflection (via Carbuncle), Poison Manipulation
+        and Corrosion Inducement (The Poison status effect, which is also stated to
+        corrode the targetFinal Fantasy IV Series Guidebook), Darkness Manipulation
+        and Perception Manipulation (The darkness status ailment via various equipment,
+        which would render the target blindFinal Fantasy V GBA Manual), Power Nullification
+        (The Silence status, which would render the target''s ability to use magic
+        null), and Petrification (Via Malboro''s Bad Breath), Resurrection (Phoenix
+        can revive fallen party members), Light Manipulation and Holy Manipulation
+        (Via Alexander), Explosion Manipulation and Self-Destruction (Via Bomb), Healing
+        (Via Sylph and Asura), Earth Manipulation (Via Titan), BFR (via Typhon), Soul
+        Manipulation (Via Zalera, the Death Seraph, who was going to abosrb all souls
+        on the planetFinal Fantasy XII)'
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Brown Dwarf level (Contributed in the defeats of the Ark, Garland
+        and Deathguise. Fought Trance Kuja and Necron alongside the rest of the party)
+        | At least Multiverse level+ (Is comparable to the other Warriors of Materia
+        and draws power from the gods of the cycle. Participated in the defeat of
+        Shinryu)
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Relativistic+ (Was able to outrun the roots of the Iifa Tree for an extended
+        period and should be faster than the Chaos Guardians) | Massively FTL+ (Can
+        keep up with the other Warriors of Materia such as Warrior of Light)
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Brown Dwarf level (Survived being hit by Kuja's Ultima). Resurrection,
+        Resistance to Soul Manipulation and Regeneration make him difficult to kill.
+        | At least Multiverse level+
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range, Planetary with spells.
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Two Mage Mashers (Pictured above), Orichalcum (Signature dagger)
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted thief and skilled combatant, he is proficient with both short
+        swords and daggers, as well as magic. He also dueled Gaia and Terra's most
+        powerful, including Kuja, who overpowered and enslaved Bahamut, and Garland,
+        who attempted to free Terra from its position within Gaia. In addition, he's
+        a master of slaying a variety of targets, gaining bonuses went put against
+        humans, undead, devils, beasts, bugs, golems, and birds. His prowess as a
+        thief also makes him an expert at sabotage, stealth, and other profession-related
+        skills.
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "He's a bit of a skirt-chaser and is innately kind, hoping to avoid killing\
+        \ if at all possible. Auto-Reflect only works on magic. Notable Attacks/Techniques\
+        \ Steal: His \u201CSteal\u201D ability allows him to steal items from an enemy.\
+        \ The command can be augmented with his other skills such as Flee Gil, Steal\
+        \ Gil, Master Thief, Flee: Instantly escape from the battle at the cost of\
+        \ 10% of the Gil the party would have won from it., Detect: Shows what items\
+        \ the enemy has to Steal, listed from the rarest to the most common., What's\
+        \ That!?: Causes enemies to turn around, resetting their ATB bars and allowing\
+        \ the characters to perform a back attack on them., Soul Blade: Inflicts a\
+        \ status ailment on an opponent. The status ailment inflicted is the same\
+        \ as whatever status Zidane's current weapon carries. 99% accuracy with thief\
+        \ swords, but always misses with daggers., Annoy: Inflict Trouble on an enemy.\
+        \ 50% accuracy., Sacrifice: Zidane reduces his HP and MP to 0 and fully restores\
+        \ the other party members HP and MP., Lucky Seven: If Zidane's current HP\
+        \ ends in 7, it randomly inflicts 7, 777 or 7777 damage to a single enemy.,\
+        \ Thievery: Inflicts damage to a single enemy. Zidane's Thievery skill is\
+        \ directly linked to the number of successful steals performed times half\
+        \ of his speed, the player can power it up to deal 9, 999 damage with enough\
+        \ theft. Steals done by Blank, Free Energy: Five explosive physical attacks\
+        \ are inflicted on the target, though without Zidane moving. Each explosion\
+        \ is a different symbol, inflicting 50% more damage than a regular attack.,\
+        \ Tidal Flame: All enemies are struck by a wave of fire, inflicting heavy\
+        \ damage, which is 50% stronger than Zidane\u2019s regular attacks., Scoop\
+        \ Art: Purple beams of energy strike one target. The attack has twice the\
+        \ damage output of a regular one., Shift Break: A swirling vortex forms beneath\
+        \ all enemies, dealing damage equal to twice that of Zidane's physical attacks.,\
+        \ Stellar Circle 5: A tornado of energy forms, dealing 2.5 times the damage\
+        \ of a normal attack., Meo Twister: All enemies are struck from above by multiple\
+        \ blasts of energy, dealing 2.5 times the damage of Zidane's normal attacks.,\
+        \ Solution 9: A mass of red runic symbols fly past one enemy, causing a massive\
+        \ explosion of energy in their wake, dealing three times the damage of a regular\
+        \ strike., Grand Lethal: Several beams of energy lance out from Zidane\u2019\
+        s body, striking all enemies. A symbol appears in the impact explosion, dealing\
+        \ four times his normal striking strength with each hit., Reverse Gaia: His\
+        \ EX Burst from Dissidia, Zidane dashes past the opponent from multiple angles\
+        \ to attack. Zidane ends the EX Burst by circling the opponent"
+      source_id: vsbattles-zidane-tribal-composite-final-fantasy
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
+    core_field_count: 3
+    ability_count: 1
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|zidane tribal composite final fantasy
+    duplicate_key: vsbattles.fandom.com|zidane tribal|9073084
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
     url: https://character-stats-and-profiles.fandom.com/wiki/Zidane_Tribal_%28Composite%29_%28Final_Fantasy%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Zidane Tribal (Composite) (Final Fantasy)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - speed
+    - weaknesses
+    normalized_page_title: Emperor Mateus (Canon)/Piccolo823
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 70
+    revision_id: '220400'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 4801
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Categories
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -524,37 +864,93 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 120
-    variant_score: 25
+    field_candidates:
+    - field: attack_potency
+      value: Outerverse level (Is stronger than early game Firion, who can destroy
+        entities which are not bound by the concepts of space and time. In Dissidia,
+        he can defeat True Form Shinryu who is more powerful than the Cloud of Darkness,
+        who is verbatim stated to transcend all concepts.)
+      source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Irrelevant (Can react to souls and attacks that can tag and destroy them,
+        which are stated to be made of a substance that is larger than 3 dimensional
+        beings but lacks the concept of space and time)
+      source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Outerverse level
+      source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Is very overconfident
+      source_id: character-stats-profiles-zidane-tribal-composite-final-fantasy
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 0
+    core_field_count: 3
     ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|zidane tribal composite
-      final fantasy
+    duplicate_key: character-stats-and-profiles.fandom.com|emperor mateus canon piccolo823|220400
     retryable: false
     exception_class: ''
   - source_id: mediawiki-zidane-tribal-composite
     url: https://vsbattles.fandom.com/wiki/Zidane_Tribal_(Composite)
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Zidane Tribal (Composite)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Zidane Tribal
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 60
+    revision_id: '9073084'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 15229
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -569,36 +965,225 @@ repair:
     - abilities
     - equipment
     - weaknesses
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
+    field_candidates:
+    - field: tier
+      value: At least | At least
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Longevity, Magic, Master thief,
+        Highly skilled at wielding daggers and double-bladed weapons, Highly skilled
+        acrobatic, Can transform into his Trance that amps his stats further, Excels
+        in aerial combat, Able to transfer stamina and magic reserves to unconscious
+        allies of his choosing at the expense of himself, Non-Physical Interaction
+        (Able to harm Ghosts), Can inflict status ailments that are enchanted to his
+        weapon upon his opponents (Magic Nullification, Sleep Manipulation, Death
+        Manipulation, Petrification), Limited, Resistance to Sleep Manipulation (Managed
+        to wake up from Black Waltz 1 spell, also granted resistance to sleep manipulation
+        via Insomniac), Resistance to Soul Manipulation (Appears capable of surviving
+        without a soul), Attack Reflection via Auto-Reflect, Levitation via Auto-Float,
+        Limited Time Manipulation via Slowing Time and Auto-Haste, Regeneration (Mid-Low,
+        via Auto-Regen/Auto Potion), Resurrection via Auto-Life, Resistance to Freezing
+        via Body Temp, Resistance to Poison Manipulation via Antibody, Resistance
+        to Petrification via Jelly, Resistance to Time Stop via Locomotion, Resistance
+        to Mind Control via Clearheaded Resistance to Mind Manipulation, Soul Manipulation
+        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
+        living being on the planet), Corruption & Body Puppetry (Due to their light,
+        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
+        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
+        which is capable of affecting the hearts and minds of all living beings on
+        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
+        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
+        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
+        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
+        levelDissidia Final Fantasy, and can warp them into another dimension), Extreme
+        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
+        (Can survive Shiva''s ice attacks, including Diamond Dust) Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Ice Manipulation and Absolute
+        Zero and Duplication (Via Shiva who''s Ice and aura are stated to reach Absolute
+        Zero including her Diamond Dust, Shiva can duplicate herselfDissidia Final
+        Fantasy NT), Water Manipulation (via Kraken, Cagnazzo, and Leviathan), Necromancy
+        (Via Lich), Spatial Manipulation, Deconstruction, and BFR (via Atomos, who
+        manipulates space, crush enemies down to a molecular levelDissidia Final Fantasy,
+        and can warp them into another dimension), Death Manipulation and Space-Time
+        Manipulation (Via Odin, who''s Zantetsuken instantly kills an enemy and opens
+        a rift in space time to take their remainsWar of the Visions: Final Fantasy
+        Brave Exvius), Matter Manipulation and Radiation Manipulation (via Megaflare,
+        which is statedFinal Fantasy IV: The After Years Novel, chapter 5, page 270
+        numerous times to be a nuclear powerFinal Fantasy IV: The After Years Novel,
+        chapter 5, page 271), Attack Reflection (via Carbuncle), Poison Manipulation
+        and Corrosion Inducement (The Poison status effect, which is also stated to
+        corrode the targetFinal Fantasy IV Series Guidebook), Darkness Manipulation
+        and Perception Manipulation (The darkness status ailment via various equipment,
+        which would render the target blindFinal Fantasy V GBA Manual), Power Nullification
+        (The Silence status, which would render the target''s ability to use magic
+        null), and Petrification (Via Malboro''s Bad Breath), Resurrection (Phoenix
+        can revive fallen party members), Light Manipulation and Holy Manipulation
+        (Via Alexander), Explosion Manipulation and Self-Destruction (Via Bomb), Healing
+        (Via Sylph and Asura), Earth Manipulation (Via Titan), BFR (via Typhon), Soul
+        Manipulation (Via Zalera, the Death Seraph, who was going to abosrb all souls
+        on the planetFinal Fantasy XII)'
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Brown Dwarf level (Contributed in the defeats of the Ark, Garland
+        and Deathguise. Fought Trance Kuja and Necron alongside the rest of the party)
+        | At least Multiverse level+ (Is comparable to the other Warriors of Materia
+        and draws power from the gods of the cycle. Participated in the defeat of
+        Shinryu)
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Relativistic+ (Was able to outrun the roots of the Iifa Tree for an extended
+        period and should be faster than the Chaos Guardians) | Massively FTL+ (Can
+        keep up with the other Warriors of Materia such as Warrior of Light)
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Brown Dwarf level (Survived being hit by Kuja's Ultima). Resurrection,
+        Resistance to Soul Manipulation and Regeneration make him difficult to kill.
+        | At least Multiverse level+
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range, Planetary with spells.
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Two Mage Mashers (Pictured above), Orichalcum (Signature dagger)
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted thief and skilled combatant, he is proficient with both short
+        swords and daggers, as well as magic. He also dueled Gaia and Terra's most
+        powerful, including Kuja, who overpowered and enslaved Bahamut, and Garland,
+        who attempted to free Terra from its position within Gaia. In addition, he's
+        a master of slaying a variety of targets, gaining bonuses went put against
+        humans, undead, devils, beasts, bugs, golems, and birds. His prowess as a
+        thief also makes him an expert at sabotage, stealth, and other profession-related
+        skills.
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "He's a bit of a skirt-chaser and is innately kind, hoping to avoid killing\
+        \ if at all possible. Auto-Reflect only works on magic. Notable Attacks/Techniques\
+        \ Steal: His \u201CSteal\u201D ability allows him to steal items from an enemy.\
+        \ The command can be augmented with his other skills such as Flee Gil, Steal\
+        \ Gil, Master Thief, Flee: Instantly escape from the battle at the cost of\
+        \ 10% of the Gil the party would have won from it., Detect: Shows what items\
+        \ the enemy has to Steal, listed from the rarest to the most common., What's\
+        \ That!?: Causes enemies to turn around, resetting their ATB bars and allowing\
+        \ the characters to perform a back attack on them., Soul Blade: Inflicts a\
+        \ status ailment on an opponent. The status ailment inflicted is the same\
+        \ as whatever status Zidane's current weapon carries. 99% accuracy with thief\
+        \ swords, but always misses with daggers., Annoy: Inflict Trouble on an enemy.\
+        \ 50% accuracy., Sacrifice: Zidane reduces his HP and MP to 0 and fully restores\
+        \ the other party members HP and MP., Lucky Seven: If Zidane's current HP\
+        \ ends in 7, it randomly inflicts 7, 777 or 7777 damage to a single enemy.,\
+        \ Thievery: Inflicts damage to a single enemy. Zidane's Thievery skill is\
+        \ directly linked to the number of successful steals performed times half\
+        \ of his speed, the player can power it up to deal 9, 999 damage with enough\
+        \ theft. Steals done by Blank, Free Energy: Five explosive physical attacks\
+        \ are inflicted on the target, though without Zidane moving. Each explosion\
+        \ is a different symbol, inflicting 50% more damage than a regular attack.,\
+        \ Tidal Flame: All enemies are struck by a wave of fire, inflicting heavy\
+        \ damage, which is 50% stronger than Zidane\u2019s regular attacks., Scoop\
+        \ Art: Purple beams of energy strike one target. The attack has twice the\
+        \ damage output of a regular one., Shift Break: A swirling vortex forms beneath\
+        \ all enemies, dealing damage equal to twice that of Zidane's physical attacks.,\
+        \ Stellar Circle 5: A tornado of energy forms, dealing 2.5 times the damage\
+        \ of a normal attack., Meo Twister: All enemies are struck from above by multiple\
+        \ blasts of energy, dealing 2.5 times the damage of Zidane's normal attacks.,\
+        \ Solution 9: A mass of red runic symbols fly past one enemy, causing a massive\
+        \ explosion of energy in their wake, dealing three times the damage of a regular\
+        \ strike., Grand Lethal: Several beams of energy lance out from Zidane\u2019\
+        s body, striking all enemies. A symbol appears in the impact explosion, dealing\
+        \ four times his normal striking strength with each hit., Reverse Gaia: His\
+        \ EX Burst from Dissidia, Zidane dashes past the opponent from multiple angles\
+        \ to attack. Zidane ends the EX Burst by circling the opponent"
+      source_id: mediawiki-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: true
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|zidane tribal composite
+    duplicate_key: vsbattles.fandom.com|zidane tribal|9073084
     retryable: false
     exception_class: ''
   - source_id: vsbattles-zidane-tribal-composite
     url: https://vsbattles.fandom.com/wiki/Zidane_Tribal_%28Composite%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Zidane Tribal (Composite)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Zidane Tribal
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 60
+    revision_id: '9073084'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 15229
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -611,36 +1196,220 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
+    field_candidates:
+    - field: tier
+      value: At least | At least
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Longevity, Magic, Master thief,
+        Highly skilled at wielding daggers and double-bladed weapons, Highly skilled
+        acrobatic, Can transform into his Trance that amps his stats further, Excels
+        in aerial combat, Able to transfer stamina and magic reserves to unconscious
+        allies of his choosing at the expense of himself, Non-Physical Interaction
+        (Able to harm Ghosts), Can inflict status ailments that are enchanted to his
+        weapon upon his opponents (Magic Nullification, Sleep Manipulation, Death
+        Manipulation, Petrification), Limited, Resistance to Sleep Manipulation (Managed
+        to wake up from Black Waltz 1 spell, also granted resistance to sleep manipulation
+        via Insomniac), Resistance to Soul Manipulation (Appears capable of surviving
+        without a soul), Attack Reflection via Auto-Reflect, Levitation via Auto-Float,
+        Limited Time Manipulation via Slowing Time and Auto-Haste, Regeneration (Mid-Low,
+        via Auto-Regen/Auto Potion), Resurrection via Auto-Life, Resistance to Freezing
+        via Body Temp, Resistance to Poison Manipulation via Antibody, Resistance
+        to Petrification via Jelly, Resistance to Time Stop via Locomotion, Resistance
+        to Mind Control via Clearheaded Resistance to Mind Manipulation, Soul Manipulation
+        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
+        living being on the planet), Corruption & Body Puppetry (Due to their light,
+        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
+        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
+        which is capable of affecting the hearts and minds of all living beings on
+        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
+        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
+        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
+        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
+        levelDissidia Final Fantasy, and can warp them into another dimension), Extreme
+        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
+        (Can survive Shiva''s ice attacks, including Diamond Dust) Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Ice Manipulation and Absolute
+        Zero and Duplication (Via Shiva who''s Ice and aura are stated to reach Absolute
+        Zero including her Diamond Dust, Shiva can duplicate herselfDissidia Final
+        Fantasy NT), Water Manipulation (via Kraken, Cagnazzo, and Leviathan), Necromancy
+        (Via Lich), Spatial Manipulation, Deconstruction, and BFR (via Atomos, who
+        manipulates space, crush enemies down to a molecular levelDissidia Final Fantasy,
+        and can warp them into another dimension), Death Manipulation and Space-Time
+        Manipulation (Via Odin, who''s Zantetsuken instantly kills an enemy and opens
+        a rift in space time to take their remainsWar of the Visions: Final Fantasy
+        Brave Exvius), Matter Manipulation and Radiation Manipulation (via Megaflare,
+        which is statedFinal Fantasy IV: The After Years Novel, chapter 5, page 270
+        numerous times to be a nuclear powerFinal Fantasy IV: The After Years Novel,
+        chapter 5, page 271), Attack Reflection (via Carbuncle), Poison Manipulation
+        and Corrosion Inducement (The Poison status effect, which is also stated to
+        corrode the targetFinal Fantasy IV Series Guidebook), Darkness Manipulation
+        and Perception Manipulation (The darkness status ailment via various equipment,
+        which would render the target blindFinal Fantasy V GBA Manual), Power Nullification
+        (The Silence status, which would render the target''s ability to use magic
+        null), and Petrification (Via Malboro''s Bad Breath), Resurrection (Phoenix
+        can revive fallen party members), Light Manipulation and Holy Manipulation
+        (Via Alexander), Explosion Manipulation and Self-Destruction (Via Bomb), Healing
+        (Via Sylph and Asura), Earth Manipulation (Via Titan), BFR (via Typhon), Soul
+        Manipulation (Via Zalera, the Death Seraph, who was going to abosrb all souls
+        on the planetFinal Fantasy XII)'
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Brown Dwarf level (Contributed in the defeats of the Ark, Garland
+        and Deathguise. Fought Trance Kuja and Necron alongside the rest of the party)
+        | At least Multiverse level+ (Is comparable to the other Warriors of Materia
+        and draws power from the gods of the cycle. Participated in the defeat of
+        Shinryu)
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Relativistic+ (Was able to outrun the roots of the Iifa Tree for an extended
+        period and should be faster than the Chaos Guardians) | Massively FTL+ (Can
+        keep up with the other Warriors of Materia such as Warrior of Light)
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Brown Dwarf level (Survived being hit by Kuja's Ultima). Resurrection,
+        Resistance to Soul Manipulation and Regeneration make him difficult to kill.
+        | At least Multiverse level+
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range, Planetary with spells.
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Two Mage Mashers (Pictured above), Orichalcum (Signature dagger)
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted thief and skilled combatant, he is proficient with both short
+        swords and daggers, as well as magic. He also dueled Gaia and Terra's most
+        powerful, including Kuja, who overpowered and enslaved Bahamut, and Garland,
+        who attempted to free Terra from its position within Gaia. In addition, he's
+        a master of slaying a variety of targets, gaining bonuses went put against
+        humans, undead, devils, beasts, bugs, golems, and birds. His prowess as a
+        thief also makes him an expert at sabotage, stealth, and other profession-related
+        skills.
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "He's a bit of a skirt-chaser and is innately kind, hoping to avoid killing\
+        \ if at all possible. Auto-Reflect only works on magic. Notable Attacks/Techniques\
+        \ Steal: His \u201CSteal\u201D ability allows him to steal items from an enemy.\
+        \ The command can be augmented with his other skills such as Flee Gil, Steal\
+        \ Gil, Master Thief, Flee: Instantly escape from the battle at the cost of\
+        \ 10% of the Gil the party would have won from it., Detect: Shows what items\
+        \ the enemy has to Steal, listed from the rarest to the most common., What's\
+        \ That!?: Causes enemies to turn around, resetting their ATB bars and allowing\
+        \ the characters to perform a back attack on them., Soul Blade: Inflicts a\
+        \ status ailment on an opponent. The status ailment inflicted is the same\
+        \ as whatever status Zidane's current weapon carries. 99% accuracy with thief\
+        \ swords, but always misses with daggers., Annoy: Inflict Trouble on an enemy.\
+        \ 50% accuracy., Sacrifice: Zidane reduces his HP and MP to 0 and fully restores\
+        \ the other party members HP and MP., Lucky Seven: If Zidane's current HP\
+        \ ends in 7, it randomly inflicts 7, 777 or 7777 damage to a single enemy.,\
+        \ Thievery: Inflicts damage to a single enemy. Zidane's Thievery skill is\
+        \ directly linked to the number of successful steals performed times half\
+        \ of his speed, the player can power it up to deal 9, 999 damage with enough\
+        \ theft. Steals done by Blank, Free Energy: Five explosive physical attacks\
+        \ are inflicted on the target, though without Zidane moving. Each explosion\
+        \ is a different symbol, inflicting 50% more damage than a regular attack.,\
+        \ Tidal Flame: All enemies are struck by a wave of fire, inflicting heavy\
+        \ damage, which is 50% stronger than Zidane\u2019s regular attacks., Scoop\
+        \ Art: Purple beams of energy strike one target. The attack has twice the\
+        \ damage output of a regular one., Shift Break: A swirling vortex forms beneath\
+        \ all enemies, dealing damage equal to twice that of Zidane's physical attacks.,\
+        \ Stellar Circle 5: A tornado of energy forms, dealing 2.5 times the damage\
+        \ of a normal attack., Meo Twister: All enemies are struck from above by multiple\
+        \ blasts of energy, dealing 2.5 times the damage of Zidane's normal attacks.,\
+        \ Solution 9: A mass of red runic symbols fly past one enemy, causing a massive\
+        \ explosion of energy in their wake, dealing three times the damage of a regular\
+        \ strike., Grand Lethal: Several beams of energy lance out from Zidane\u2019\
+        s body, striking all enemies. A symbol appears in the impact explosion, dealing\
+        \ four times his normal striking strength with each hit., Reverse Gaia: His\
+        \ EX Burst from Dissidia, Zidane dashes past the opponent from multiple angles\
+        \ to attack. Zidane ends the EX Burst by circling the opponent"
+      source_id: vsbattles-zidane-tribal-composite
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: true
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|zidane tribal composite
+    duplicate_key: vsbattles.fandom.com|zidane tribal|9073084
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-zidane-tribal-composite
     url: https://character-stats-and-profiles.fandom.com/wiki/Zidane_Tribal_%28Composite%29
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Zidane Tribal (Composite)
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - weaknesses
+    normalized_page_title: Human (Canon, Composite, The Real World)/Reximusmaximus
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 60
+    revision_id: '620494'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 15760
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers & Stats
+    - Note
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -653,36 +1422,142 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
+    field_candidates:
+    - field: powers_and_abilities
+      value: "Peak Human Physical Characteristics, Genius Intelligence, Photographic\
+        \ Memory, Preparation, Master Martial Artist (Has mastery over every martial\
+        \ art a human has mastered), Weapon Mastery (Has mastery over every ranged\
+        \ & melee weapon), Vehicular Mastery (Has mastery over every boat, car & plane),\
+        \ Stealth Mastery, Enhanced Senses (Veronica Seider can see people from 1.6\
+        \ km away. Is a supertaster & has perfect pitch), Social Influencing, Acrobatics,\
+        \ Pressure Points, Instinctive Reactions (With enough experience, procedural\
+        \ memory can be used to predict movement and automatically execute a response,\
+        \ granting increased reaction speed), Analytical Prediction (Capable of predicting\
+        \ the movements of their opponents in fights), Accelerated Development (Ferdinand\
+        \ Waldo Demara Jr. was able to learn almost anything in an extremely short\
+        \ amount of time and replicate it with relative ease, and could take on practically\
+        \ any identity he wanted just by learning what he was supposed to know. Those\
+        \ with a suppressed NCoR1 gene grow muscle at accelerated rates), Hacking,\
+        \ Millions Of Various Skills & Talents, Immune To: *Pain (CIP is a condition\
+        \ where someone can't feel pain) Resistance To: *Fear Manipulation (Urbach-Wiethe\
+        \ disease causes a person to not feel fear, though biological factors such\
+        \ as suffocation can induce a panic response) *Emotional Manipulation (Antisocial\
+        \ Personality Disorder is a condition where someone can't feel empathy for\
+        \ others) *Heat Manipulation (Wim Hof could run in -20 C temperatures in shorts.\
+        \ Timo Kaukonen survived & was conscious for 6 minutes in a 110 C sauna) Limited\
+        \ Resistance To: *Electricity Manipulation (Harry F. McGrew survived getting\
+        \ shocked with 340,000 volts of electricity) *Poison Manipulation (Mithridatism\
+        \ is the practice of building resistance to specific poisons. Andr\xE9 Roussimoff\
+        \ could supposedly drink 117 - 156 beers in a single sitting without suffering\
+        \ from alcohol poisoning. The highest BAC ever recorded that someone has survived\
+        \ was 1.374) *Radiation Manipulation (Albert Stevens survived after getting\
+        \ exposed to 6,400 rems of plutonium)"
+      source_id: character-stats-profiles-zidane-tribal-composite
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Street level (Mike Tyson can punch this hard. Maur\xEDcio Rua can kick\
+        \ this hard. Rugby & football players can tackle this hard. Bruce Lee could\
+        \ launch men with a punch and his students claimed he could punch a sandbag\
+        \ hard enough for it to slap against the ceiling, which would require this\
+        \ much energy [See Note]. A woman on hysterical strength could fight with\
+        \ a polar bear for an extended period of time. There have been multiple reports\
+        \ of people cutting other people in half with longswords & katanas)"
+      source_id: character-stats-profiles-zidane-tribal-composite
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Peak Human Travel Speed (Usain Bolt can sprint at 12.42 m/s) with Superhuman
+        Reaction & Combat Speeds (The fastest punch was 44 mph [19.67 M/S]. Elite
+        sprinters have been shown to have 80 ms reaction time to auditory stimulus.
+        Can pilot fast moving vehicles such as fighter jets and NASCAR vehicles),
+        Subsonic Attack Speed with Kicks (The fastest kick was measured at 80.1 mph
+        [35.81 M/S]), Subsonic+ Perception Speeds (A UK airforce pilot could perceive
+        an image only flashed on-screen for 1/220ths of a second)
+      source_id: character-stats-profiles-zidane-tribal-composite
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Street level (A man's bone density was 8 times higher than that
+        of the average human, which requires this much energy to break. Can survive
+        getting hit by cars and even trains under the right circumstances. People
+        have survived several mile high falls into deep snow. John Ferraro's skull
+        is 16 mm thick, which is 2.3x thicker than the average human skull)
+      source_id: character-stats-profiles-zidane-tribal-composite
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Standard Human Weaknesses Standard Tactics: Is naturally bloodlusted
+        Feats:, World Records Of Sports & Strength, Celebrity World Records, World
+        Records Of Arts & Crafts, World Records Of Dedication & Collections, World
+        Records Of The Human Body, Greatest Achievements Of Mankind, Greatest Generals
+        Of All Time, Greatest Warriors Of All Time, List Of War Heroes'
+      source_id: character-stats-profiles-zidane-tribal-composite
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
-    exact_name_match: true
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|zidane tribal composite
+    duplicate_key: character-stats-and-profiles.fandom.com|human canon composite the
+      real world reximusmaximus|620494
     retryable: false
     exception_class: ''
-  - source_id: vsbattles-zidane-tribal-composite-final-fantasy
-    url: https://vsbattles.fandom.com/wiki/Zidane_Tribal_Composite_Final_Fantasy
-    ok: false
-    note: provider_search_no_results
-    extracted_fields: []
-    normalized_page_title: Zidane Tribal Composite Final Fantasy
+  - source_id: vsbattles-zidane-tribal-composite-game
+    url: https://vsbattles.fandom.com/wiki/Zidane_Tribal_%28Composite%29_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Zidane Tribal
     source_type: mediawiki
-    revision_id: ''
-    fetch_status: failed
-    http_status: null
-    content_length: 0
-    content_kind: unknown
-    headings_detected: []
-    stat_labels_detected: []
-    extraction_failure_reason: provider_search_no_results
-    rank: 45
+    revision_id: '9073084'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 15229
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -695,23 +1570,184 @@ repair:
     - range
     - stamina
     - intelligence
-    field_candidates: []
-    identity_match: true
-    identity_score: 100
-    variant_score: 25
+    field_candidates:
+    - field: tier
+      value: At least | At least
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Longevity, Magic, Master thief,
+        Highly skilled at wielding daggers and double-bladed weapons, Highly skilled
+        acrobatic, Can transform into his Trance that amps his stats further, Excels
+        in aerial combat, Able to transfer stamina and magic reserves to unconscious
+        allies of his choosing at the expense of himself, Non-Physical Interaction
+        (Able to harm Ghosts), Can inflict status ailments that are enchanted to his
+        weapon upon his opponents (Magic Nullification, Sleep Manipulation, Death
+        Manipulation, Petrification), Limited, Resistance to Sleep Manipulation (Managed
+        to wake up from Black Waltz 1 spell, also granted resistance to sleep manipulation
+        via Insomniac), Resistance to Soul Manipulation (Appears capable of surviving
+        without a soul), Attack Reflection via Auto-Reflect, Levitation via Auto-Float,
+        Limited Time Manipulation via Slowing Time and Auto-Haste, Regeneration (Mid-Low,
+        via Auto-Regen/Auto Potion), Resurrection via Auto-Life, Resistance to Freezing
+        via Body Temp, Resistance to Poison Manipulation via Antibody, Resistance
+        to Petrification via Jelly, Resistance to Time Stop via Locomotion, Resistance
+        to Mind Control via Clearheaded Resistance to Mind Manipulation, Soul Manipulation
+        (Via Zalera, the Death Serpah, who was going to absorb the souls of every
+        living being on the planet), Corruption & Body Puppetry (Due to their light,
+        Warriors of Materia can dispel attempts to control them), Empathic Manipulation,
+        and Madness Manipulation (Type 3; Resistant to the effects of the True Moon,
+        which is capable of affecting the hearts and minds of all living beings on
+        the planetFinal Fantasy IV: The After Years), Gravity Manipulation (Unaffected
+        by the gravitational pull of the True Moon, which even the Lunar Whale couldn''t
+        escape from), Spatial Manipulation, Deconstruction, and BFR (Can withstand
+        the attacks of Atomos, who manipulates space, crush enemies down to a molecular
+        levelDissidia Final Fantasy, and can warp them into another dimension), Extreme
+        Cold and Cosmic Radiations (Can fight and survive on the moon), Absolute Zero
+        (Can survive Shiva''s ice attacks, including Diamond Dust) Hellfire Manipulation
+        (Via Ifrit, Phoenix, Rubicante, and Marilith), Ice Manipulation and Absolute
+        Zero and Duplication (Via Shiva who''s Ice and aura are stated to reach Absolute
+        Zero including her Diamond Dust, Shiva can duplicate herselfDissidia Final
+        Fantasy NT), Water Manipulation (via Kraken, Cagnazzo, and Leviathan), Necromancy
+        (Via Lich), Spatial Manipulation, Deconstruction, and BFR (via Atomos, who
+        manipulates space, crush enemies down to a molecular levelDissidia Final Fantasy,
+        and can warp them into another dimension), Death Manipulation and Space-Time
+        Manipulation (Via Odin, who''s Zantetsuken instantly kills an enemy and opens
+        a rift in space time to take their remainsWar of the Visions: Final Fantasy
+        Brave Exvius), Matter Manipulation and Radiation Manipulation (via Megaflare,
+        which is statedFinal Fantasy IV: The After Years Novel, chapter 5, page 270
+        numerous times to be a nuclear powerFinal Fantasy IV: The After Years Novel,
+        chapter 5, page 271), Attack Reflection (via Carbuncle), Poison Manipulation
+        and Corrosion Inducement (The Poison status effect, which is also stated to
+        corrode the targetFinal Fantasy IV Series Guidebook), Darkness Manipulation
+        and Perception Manipulation (The darkness status ailment via various equipment,
+        which would render the target blindFinal Fantasy V GBA Manual), Power Nullification
+        (The Silence status, which would render the target''s ability to use magic
+        null), and Petrification (Via Malboro''s Bad Breath), Resurrection (Phoenix
+        can revive fallen party members), Light Manipulation and Holy Manipulation
+        (Via Alexander), Explosion Manipulation and Self-Destruction (Via Bomb), Healing
+        (Via Sylph and Asura), Earth Manipulation (Via Titan), BFR (via Typhon), Soul
+        Manipulation (Via Zalera, the Death Seraph, who was going to abosrb all souls
+        on the planetFinal Fantasy XII)'
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: At least Brown Dwarf level (Contributed in the defeats of the Ark, Garland
+        and Deathguise. Fought Trance Kuja and Necron alongside the rest of the party)
+        | At least Multiverse level+ (Is comparable to the other Warriors of Materia
+        and draws power from the gods of the cycle. Participated in the defeat of
+        Shinryu)
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Relativistic+ (Was able to outrun the roots of the Iifa Tree for an extended
+        period and should be faster than the Chaos Guardians) | Massively FTL+ (Can
+        keep up with the other Warriors of Materia such as Warrior of Light)
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: At least Brown Dwarf level (Survived being hit by Kuja's Ultima). Resurrection,
+        Resistance to Soul Manipulation and Regeneration make him difficult to kill.
+        | At least Multiverse level+
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Superhuman
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range, Planetary with spells.
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Two Mage Mashers (Pictured above), Orichalcum (Signature dagger)
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Gifted thief and skilled combatant, he is proficient with both short
+        swords and daggers, as well as magic. He also dueled Gaia and Terra's most
+        powerful, including Kuja, who overpowered and enslaved Bahamut, and Garland,
+        who attempted to free Terra from its position within Gaia. In addition, he's
+        a master of slaying a variety of targets, gaining bonuses went put against
+        humans, undead, devils, beasts, bugs, golems, and birds. His prowess as a
+        thief also makes him an expert at sabotage, stealth, and other profession-related
+        skills.
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: "He's a bit of a skirt-chaser and is innately kind, hoping to avoid killing\
+        \ if at all possible. Auto-Reflect only works on magic. Notable Attacks/Techniques\
+        \ Steal: His \u201CSteal\u201D ability allows him to steal items from an enemy.\
+        \ The command can be augmented with his other skills such as Flee Gil, Steal\
+        \ Gil, Master Thief, Flee: Instantly escape from the battle at the cost of\
+        \ 10% of the Gil the party would have won from it., Detect: Shows what items\
+        \ the enemy has to Steal, listed from the rarest to the most common., What's\
+        \ That!?: Causes enemies to turn around, resetting their ATB bars and allowing\
+        \ the characters to perform a back attack on them., Soul Blade: Inflicts a\
+        \ status ailment on an opponent. The status ailment inflicted is the same\
+        \ as whatever status Zidane's current weapon carries. 99% accuracy with thief\
+        \ swords, but always misses with daggers., Annoy: Inflict Trouble on an enemy.\
+        \ 50% accuracy., Sacrifice: Zidane reduces his HP and MP to 0 and fully restores\
+        \ the other party members HP and MP., Lucky Seven: If Zidane's current HP\
+        \ ends in 7, it randomly inflicts 7, 777 or 7777 damage to a single enemy.,\
+        \ Thievery: Inflicts damage to a single enemy. Zidane's Thievery skill is\
+        \ directly linked to the number of successful steals performed times half\
+        \ of his speed, the player can power it up to deal 9, 999 damage with enough\
+        \ theft. Steals done by Blank, Free Energy: Five explosive physical attacks\
+        \ are inflicted on the target, though without Zidane moving. Each explosion\
+        \ is a different symbol, inflicting 50% more damage than a regular attack.,\
+        \ Tidal Flame: All enemies are struck by a wave of fire, inflicting heavy\
+        \ damage, which is 50% stronger than Zidane\u2019s regular attacks., Scoop\
+        \ Art: Purple beams of energy strike one target. The attack has twice the\
+        \ damage output of a regular one., Shift Break: A swirling vortex forms beneath\
+        \ all enemies, dealing damage equal to twice that of Zidane's physical attacks.,\
+        \ Stellar Circle 5: A tornado of energy forms, dealing 2.5 times the damage\
+        \ of a normal attack., Meo Twister: All enemies are struck from above by multiple\
+        \ blasts of energy, dealing 2.5 times the damage of Zidane's normal attacks.,\
+        \ Solution 9: A mass of red runic symbols fly past one enemy, causing a massive\
+        \ explosion of energy in their wake, dealing three times the damage of a regular\
+        \ strike., Grand Lethal: Several beams of energy lance out from Zidane\u2019\
+        s body, striking all enemies. A symbol appears in the impact explosion, dealing\
+        \ four times his normal striking strength with each hit., Reverse Gaia: His\
+        \ EX Burst from Dissidia, Zidane dashes past the opponent from multiple angles\
+        \ to attack. Zidane ends the EX Burst by circling the opponent"
+      source_id: vsbattles-zidane-tribal-composite-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 0
+    core_field_count: 3
+    ability_count: 1
     exact_name_match: false
     alias_match: false
-    franchise_match: true
+    franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|zidane tribal composite final fantasy
+    duplicate_key: vsbattles.fandom.com|zidane tribal|9073084
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
   candidate_sources: []
   chosen_source_id: null
   failure_reasons:
-    provider_search_no_results: 8
+    fetched: 8
   confidence: 0.0

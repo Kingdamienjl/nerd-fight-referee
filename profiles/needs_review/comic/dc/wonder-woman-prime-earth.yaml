@@ -5,14 +5,15 @@ franchise: DC
 category: comic
 aliases: &id001
 - Diana Prince
-profile_type: auto_evidence_profile
-status: provisional
-battle_eligible: true
+profile_type: needs_review
+status: needs_review
+battle_eligible: false
 generation:
   generated_at: '2026-10-04T04:35:56Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.6
-  ineligible_reasons: []
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Wonder Woman (Prime Earth)
   franchise: DC
@@ -41,61 +42,6 @@ forms:
   name: Strongest consistent canonical form
   source_field: null
 sources:
-- id: vsbattles-wonder-woman-prime-earth
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Wonder Woman (Post-Flashpoint)
-  url: https://vsbattles.fandom.com/wiki/Wonder_Woman_(Post-Flashpoint)
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-  revision_id: null
-  revision_timestamp: '2026-06-30T15:28:26Z'
-  fetch_status: null
-  http_status: 200
-  content_length: 16082
-  content_kind: api_json
-  search_attempted_titles:
-  - Wonder Woman (Post-Crisis)
-  headings_detected:
-  - Summary
-  - Powers and Stats
-  - Notable Matchups
-  - References
-  - Notes/Explanations
-  stat_labels_detected:
-  - attack_potency
-  - durability
-  - intelligence
-  - keys
-  - lifting_strength
-  - origin
-  - powers_and_abilities
-  - range
-  - speed
-  - stamina
-  - standard_equipment
-  - striking_strength
-  - tier
-  - weaknesses
-  continuity_repair:
-    rule: continuity_source_repair
-    at: '2026-10-22T17:25:08.577931+00:00'
-    old_title: Wonder Woman (Post-Crisis)
-    old_url: https://vsbattles.fandom.com/wiki/Wonder_Woman_(Post-Crisis)
-    old_revision_id: '9577775'
-    new_title: Wonder Woman (Post-Flashpoint)
-    new_url: https://vsbattles.fandom.com/wiki/Wonder_Woman_(Post-Flashpoint)
 - id: character-stats-profiles-wonder-woman-prime-earth
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -359,6 +305,24 @@ sources:
   source_type: mediawiki
   title: Wonder Woman DC Prime Earth
   url: https://character-stats-and-profiles.fandom.com/wiki/Wonder_Woman_DC_Prime_Earth
+  authority: high
+  notes: enrich_sources_candidate
+  allowed_fields:
+  - attack_potency
+  - speed
+  - durability
+  - powers_and_abilities
+  - weaknesses
+  - range
+  - stamina
+  - intelligence
+  parser: mediawiki_battle_stats
+  promotion_allowed: true
+- id: vsbattles-wonder-woman-prime-earth
+  provider_id: vsbattles
+  source_type: mediawiki
+  title: Wonder Woman (Prime Earth)
+  url: https://vsbattles.fandom.com/wiki/Wonder_Woman_%28Prime_Earth%29
   authority: high
   notes: enrich_sources_candidate
   allowed_fields:
@@ -1282,23 +1246,14 @@ review:
   - unlinked_stat:speed
   source_errors: []
   notes: []
-  readiness_state: provisional
+  readiness_state: needs_review
   profile_state: auto_evidence_profile
   primary_source_id: vsbattles-wonder-woman-prime-earth
   secondary_disagreement_policy: warning_only
 profile_hash: 84e05c4ab1857c4fcd3656f78759c769a1cf08567fd5f24103d6bc241cc6d351
 repair:
-  attempted_at: '2026-10-22T08:18:18Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-25T11:27:12Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
   - source_id: vsbattles-wonder-woman-prime-earth-dc
@@ -1306,7 +1261,6 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - attack_potency
     - durability
     - speed
     - standard_equipment
@@ -1342,7 +1296,7 @@ repair:
     - striking_strength
     - tier
     extraction_failure_reason: ''
-    rank: 115
+    rank: 100
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1423,14 +1377,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: attack_potency
-      value: and
-      source_id: vsbattles-wonder-woman-prime-earth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: standard_equipment
-      value: Monica-espinoza-motherbox-beautyshot.jpg|Mother Boxes|link=Mother Boxes
+      value: Mother Boxes, link=Mother Boxes
       source_id: vsbattles-wonder-woman-prime-earth-dc
       provider_id: vsbattles
       authority: high
@@ -1439,7 +1387,7 @@ repair:
     identity_score: 20
     variant_score: 55
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 0
     exact_name_match: false
     alias_match: false
@@ -1453,12 +1401,9 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - attack_potency
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Wonder Woman (Canon, DC Comics, Prime Earth)/ItsSoba
     source_type: mediawiki
     revision_id: '613374'
@@ -1491,7 +1436,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1505,22 +1450,8 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: The tier(s) of the character (with the individual tier ratings themselves
-        enclosed within curly brackets, for example {{7-A}}, {{3-C}}
-      source_id: character-stats-profiles-wonder-woman-prime-earth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Enhanced Senses,
-      source_id: character-stats-profiles-wonder-woman-prime-earth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: The character's attack power or destructive capacity (in bold; add any
-        explanations using brackets, not in bold).
+      value: Superhuman Physical Characteristics, Enhanced Senses
       source_id: character-stats-profiles-wonder-woman-prime-earth-dc
       provider_id: character_stats_profiles
       authority: high
@@ -1535,7 +1466,7 @@ repair:
         the SCAR-L, SCAR-L's have a muzzle velocity of 710 m/s[DCR]), Supersonic+
         (Is capable of moving fast enough to intercept a bullet from an M16 after
         it was already fired as well as parrying multiple bullets fired from the same
-        rifle afterwards, M16s have a muzzle velocity of 960 m/s[DCR]),
+        rifle afterwards, M16s have a muzzle velocity of 960 m/s[DCR])
       source_id: character-stats-profiles-wonder-woman-prime-earth-dc
       provider_id: character_stats_profiles
       authority: high
@@ -1549,33 +1480,11 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Self-explanatory Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: This article is protected. Any unauthorized
-        modifications, alterations, or revisions are strictly prohibited. Unauthorized
-        editing may compromise the accuracy, integrity, and reliability of the content.
-        )f you have suggestions or concerns regarding the information presented herein,
-        please contact the designated administrator for assistance. (Basically don''t
-        edit my page without my consent) ==Explanations & Related Blog Posts== This
-        section can be used to explain the reasons for the assigned power level of
-        a certain character more in-depth, as well as how the powers and nature of
-        the character fundamentally work. This is particularly useful for more high-tiered
-        characters. However, it is very important that you make sure that the text
-        has good grammar/sentence structure, and is easy to understand. ==Related
-        Images & Other Galleries== Put other pictures of the character here. ==Others==
-        Notable Victories: Put some notable/good matches that result in the character''s
-        victory. Notable Losses: Put some notable/good matches that result in the
-        character''s loss. Inconclusive Matches: Put some notable/good matches with
-        the results still unclear. ==Categories'
-      source_id: character-stats-profiles-wonder-woman-prime-earth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 55
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 1
     exact_name_match: false
     alias_match: false
@@ -1590,7 +1499,6 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - attack_potency
     - durability
     - speed
     - standard_equipment
@@ -1626,7 +1534,7 @@ repair:
     - striking_strength
     - tier
     extraction_failure_reason: ''
-    rank: 115
+    rank: 100
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1707,14 +1615,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: attack_potency
-      value: and
-      source_id: vsbattles-wonder-woman-prime-earth-dc-comics
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: standard_equipment
-      value: Monica-espinoza-motherbox-beautyshot.jpg|Mother Boxes|link=Mother Boxes
+      value: Mother Boxes, link=Mother Boxes
       source_id: vsbattles-wonder-woman-prime-earth-dc-comics
       provider_id: vsbattles
       authority: high
@@ -1723,7 +1625,7 @@ repair:
     identity_score: 20
     variant_score: 55
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 0
     exact_name_match: false
     alias_match: false
@@ -1737,12 +1639,9 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - attack_potency
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Wonder Woman (Canon, DC Comics, Prime Earth)/ItsSoba
     source_type: mediawiki
     revision_id: '613374'
@@ -1775,7 +1674,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1789,22 +1688,8 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: The tier(s) of the character (with the individual tier ratings themselves
-        enclosed within curly brackets, for example {{7-A}}, {{3-C}}
-      source_id: character-stats-profiles-wonder-woman-prime-earth-dc-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Enhanced Senses,
-      source_id: character-stats-profiles-wonder-woman-prime-earth-dc-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: The character's attack power or destructive capacity (in bold; add any
-        explanations using brackets, not in bold).
+      value: Superhuman Physical Characteristics, Enhanced Senses
       source_id: character-stats-profiles-wonder-woman-prime-earth-dc-comics
       provider_id: character_stats_profiles
       authority: high
@@ -1819,7 +1704,7 @@ repair:
         the SCAR-L, SCAR-L's have a muzzle velocity of 710 m/s[DCR]), Supersonic+
         (Is capable of moving fast enough to intercept a bullet from an M16 after
         it was already fired as well as parrying multiple bullets fired from the same
-        rifle afterwards, M16s have a muzzle velocity of 960 m/s[DCR]),
+        rifle afterwards, M16s have a muzzle velocity of 960 m/s[DCR])
       source_id: character-stats-profiles-wonder-woman-prime-earth-dc-comics
       provider_id: character_stats_profiles
       authority: high
@@ -1833,33 +1718,11 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Self-explanatory Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: This article is protected. Any unauthorized
-        modifications, alterations, or revisions are strictly prohibited. Unauthorized
-        editing may compromise the accuracy, integrity, and reliability of the content.
-        )f you have suggestions or concerns regarding the information presented herein,
-        please contact the designated administrator for assistance. (Basically don''t
-        edit my page without my consent) ==Explanations & Related Blog Posts== This
-        section can be used to explain the reasons for the assigned power level of
-        a certain character more in-depth, as well as how the powers and nature of
-        the character fundamentally work. This is particularly useful for more high-tiered
-        characters. However, it is very important that you make sure that the text
-        has good grammar/sentence structure, and is easy to understand. ==Related
-        Images & Other Galleries== Put other pictures of the character here. ==Others==
-        Notable Victories: Put some notable/good matches that result in the character''s
-        victory. Notable Losses: Put some notable/good matches that result in the
-        character''s loss. Inconclusive Matches: Put some notable/good matches with
-        the results still unclear. ==Categories'
-      source_id: character-stats-profiles-wonder-woman-prime-earth-dc-comics
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 55
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 1
     exact_name_match: false
     alias_match: false
@@ -1874,7 +1737,6 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - attack_potency
     - durability
     - speed
     - standard_equipment
@@ -1910,7 +1772,7 @@ repair:
     - striking_strength
     - tier
     extraction_failure_reason: ''
-    rank: 115
+    rank: 100
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1991,14 +1853,8 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: attack_potency
-      value: and
-      source_id: vsbattles-wonder-woman-prime-earth-dc
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: standard_equipment
-      value: Monica-espinoza-motherbox-beautyshot.jpg|Mother Boxes|link=Mother Boxes
+      value: Mother Boxes, link=Mother Boxes
       source_id: vsbattles-wonder-woman-prime-earth-dc
       provider_id: vsbattles
       authority: high
@@ -2007,7 +1863,7 @@ repair:
     identity_score: 20
     variant_score: 55
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 0
     exact_name_match: false
     alias_match: false
@@ -2021,12 +1877,9 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - attack_potency
     - durability
     - powers_and_abilities
     - speed
-    - tier
-    - weaknesses
     normalized_page_title: Wonder Woman (Canon, DC Comics, Prime Earth)/ItsSoba
     source_type: mediawiki
     revision_id: '613374'
@@ -2059,7 +1912,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -2073,22 +1926,8 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: The tier(s) of the character (with the individual tier ratings themselves
-        enclosed within curly brackets, for example {{7-A}}, {{3-C}}
-      source_id: character-stats-profiles-wonder-woman-prime-earth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Enhanced Senses,
-      source_id: character-stats-profiles-wonder-woman-prime-earth-dc
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: The character's attack power or destructive capacity (in bold; add any
-        explanations using brackets, not in bold).
+      value: Superhuman Physical Characteristics, Enhanced Senses
       source_id: character-stats-profiles-wonder-woman-prime-earth-dc
       provider_id: character_stats_profiles
       authority: high
@@ -2103,7 +1942,7 @@ repair:
         the SCAR-L, SCAR-L's have a muzzle velocity of 710 m/s[DCR]), Supersonic+
         (Is capable of moving fast enough to intercept a bullet from an M16 after
         it was already fired as well as parrying multiple bullets fired from the same
-        rifle afterwards, M16s have a muzzle velocity of 960 m/s[DCR]),
+        rifle afterwards, M16s have a muzzle velocity of 960 m/s[DCR])
       source_id: character-stats-profiles-wonder-woman-prime-earth-dc
       provider_id: character_stats_profiles
       authority: high
@@ -2117,25 +1956,101 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: 'Self-explanatory Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: This article is protected. Any unauthorized
-        modifications, alterations, or revisions are strictly prohibited. Unauthorized
-        editing may compromise the accuracy, integrity, and reliability of the content.
-        )f you have suggestions or concerns regarding the information presented herein,
-        please contact the designated administrator for assistance. (Basically don''t
-        edit my page without my consent) ==Explanations & Related Blog Posts== This
-        section can be used to explain the reasons for the assigned power level of
-        a certain character more in-depth, as well as how the powers and nature of
-        the character fundamentally work. This is particularly useful for more high-tiered
-        characters. However, it is very important that you make sure that the text
-        has good grammar/sentence structure, and is easy to understand. ==Related
-        Images & Other Galleries== Put other pictures of the character here. ==Others==
-        Notable Victories: Put some notable/good matches that result in the character''s
-        victory. Notable Losses: Put some notable/good matches that result in the
-        character''s loss. Inconclusive Matches: Put some notable/good matches with
-        the results still unclear. ==Categories'
-      source_id: character-stats-profiles-wonder-woman-prime-earth-dc
+    identity_match: false
+    identity_score: 20
+    variant_score: 55
+    provider_priority: 120
+    core_field_count: 2
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|wonder woman canon dc comics
+      prime earth itssoba|613374
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-wonder-woman-prime-earth
+    url: https://character-stats-and-profiles.fandom.com/wiki/Wonder_Woman_%28Prime_Earth%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - durability
+    - powers_and_abilities
+    - speed
+    normalized_page_title: Wonder Woman (Canon, DC Comics, Prime Earth)/ItsSoba
+    source_type: mediawiki
+    revision_id: '613374'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 21282
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Youth
+    - Learning Her History
+    - Powers and Stats
+    - Explanations & Related Blog Posts
+    - Related Images & Other Galleries
+    - Others
+    - Categories
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 115
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Superhuman Physical Characteristics, Enhanced Senses
+      source_id: character-stats-profiles-wonder-woman-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Transonic possibly Supersonic (In order to become the champion of Themyscira
+        the Amazons went through trials of parrying the shot from a military grade
+        pistol which soon after Diana is crowned their champion implying that she
+        was capable of doing so, the official military grade pistol is a SIG Sauer
+        M17 which has a muzzle velocity of 365 m/s[DCR]) | Supersonic (Diana is shown
+        to be capable of reacting to gunfire from a weapon which resembles that of
+        the SCAR-L, SCAR-L's have a muzzle velocity of 710 m/s[DCR]), Supersonic+
+        (Is capable of moving fast enough to intercept a bullet from an M16 after
+        it was already fired as well as parrying multiple bullets fired from the same
+        rifle afterwards, M16s have a muzzle velocity of 960 m/s[DCR])
+      source_id: character-stats-profiles-wonder-woman-prime-earth
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Wall Level (Could withstand the explosion of a grenade which has an explosive
+        yield of 1.20E-04 Tons of TNT[DCR]; Could withstand the blast of a missile
+        fired from A.R.G.U.S's military-grade jets, which tend to have an explosion
+        yield of about 1.00E-03 Tons of TNT[DCR])
+      source_id: character-stats-profiles-wonder-woman-prime-earth
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
@@ -2143,7 +2058,7 @@ repair:
     identity_score: 20
     variant_score: 55
     provider_priority: 120
-    core_field_count: 3
+    core_field_count: 2
     ability_count: 1
     exact_name_match: false
     alias_match: false
@@ -2157,7 +2072,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Wonder_Woman_%28Prime_Earth%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id004
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2201,7 +2116,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id005
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2212,7 +2127,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: ', up to , likely | , up to'
+      value: up to Low 2-C, likely Low 1-C | , up to Low 1-C
       source_id: vsbattles-wonder-woman-prime-earth
       provider_id: vsbattles
       authority: high
@@ -2306,14 +2221,14 @@ repair:
       authority: high
       confidence: 0.75
     - field: standard_equipment
-      value: '*Bracelets of Submission: Wonder Woman''s indestructible bracelets that
+      value: 'Bracelets of Submission: Wonder Woman''s indestructible bracelets that
         were forged from the remnants of the Aegis Shield wielded by Zeus. They can
         harmlessly deflect virtually any projectile or attack, even defending against
         the mighty Omega Beams of Darkseid. When crossed, Wonder Woman can create
         a hemispherical barrier positioned in front of her to defend against attacks
         that she would not be able to deflect, such as large explosions. In addition,
         Diana can channel Zeus'' lightning through them to strike her foes by striking
-        the bracelets together. *Lasso of Truth: Diana''s most famous and iconic weapon,
+        the bracelets together., Lasso of Truth: Diana''s most famous and iconic weapon,
         it is a magical lasso forged and blessed by the gods. to be completely indestructible
         even to entities as powerful as Superman. In addition, Hestia blessed it with
         the fires of her hearth so that all caught in its clutches will be forced
@@ -2321,8 +2236,8 @@ repair:
         also been known to be able to restore the memories of others, hypnotize others,
         dispel illusions, and offer a measure of protection against magical attacks
         for those within its radius. The lasso seems to be able to alter its length
-        according to Diana''s wishes and she can also use it as a whip if necessary.
-        *Tiara of Athena: A crown given to the Amazons by the goddess of wisdom, it
+        according to Diana''s wishes and she can also use it as a whip if necessary.,
+        Tiara of Athena: A crown given to the Amazons by the goddess of wisdom, it
         enhances Diana''s senses and strengthens her mind against mental attacks.
         In addition, it can be used as a boomerang-like projectile sharp enough to
         slice the throat of Superman and temporarily incapacitate him.'
@@ -2349,42 +2264,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Wonder Woman is weak to sharp objects such as spears, swords, bullets,
-        etc., she can only use the Godwave for a few minutes or she will go insane
-        Notable Attacks/Techniques: *Godwave: With focused meditation and prayer,
-        Diana can channel the power of the Godwave, one of the primordial cosmic forces
-        of the DC Universe, greatly amplifying all of her abilities and shrouding
-        her in a powerful divine aura. However, overuse of this ability will eventually
-        render her insane, forcing her to use this sparingly. Notes: *Before making
-        any changes to this page, please read and follow the Power-scaling Rules for
-        Marvel and DC Comics. *Her Pre-Clayface Absorption key consists of her first
-        appearance in Wonder Woman Vol. 2 #1 (February 1987) to Wonder Woman Vol.
-        2 #161 (October 2000). *Her Post-Clayface Absorption key consists of Wonder
-        Woman Vol. 2 #162 (November 2000) and onward. Standard Tactics: Wonder Woman
-        often holds back her full strength as to not kill or seriously injure her
-        enemies. * Wonder Woman admits to weakening her punch (Wonder Woman Vol 1
-        600) * Amazonians don''t kill if they don''t have to. (Wonder Woman Vol 3
-        25) ** This obviously extends to far, far weaker opponents (Wonder Woman Vol
-        3 14) ** All the way to stronger characters, like Captain Nazi (Wonder Woman
-        Vol 3 15) ==Notable Matchups== Victories: Losses: *Kai (Ninjago) Kai''s Profile
-        (Staff of Elements Kai and Pre-Clayface Absorption keys were used. Speed was
-        equalized. Fight took place in a jungle. Starting Distance: 10m) Inconclusive:
-        ==References== ==Notes/Explanations== Category:Characters Category:DC Comics
-        Category:Adaptation Users Category:Amazons Category:Aura Users Category:Comic
-        Book Characters Category:Female Characters Category:Flight Users Category:Good
-        Characters Category:Heroes Category:Immortals Category:Justice League Members
-        Category:Lasso Users Category:Martial Artists Category:Mind Users Category:Philanthropes
-        Category:Primary Protagonists Category:Protagonists Category:Regeneration
-        Users Category:Royal Characters Category:Self-Sustenance Users Category:Statistics
-        Amplification Users Category:Telepaths Category:Warriors Category:Weapon Control
-        Users Category:Weapon Masters Category:Weapon Users Category:Superheroes Category:Teleportation
-        Users Category:Enhanced Senses Users Category:Biology Users Category:Electricity
-        Users Category:Transmutation Users Category:Reality Warpers Category:Absorption
-        Users Category:Purification Users Category:Non-Physical Interaction Users
-        Category:Pressure Point Users Category:Alternate Future Display Users Category:Information
-        Analysis Users Category:Honorable Characters Category:Hybrids Category:Humans
-        Category:Gods Category:Demigods Category:Blade Users Category:Boomerang Users
-        Category:Thrown Weapon Users'
+      value: Wonder Woman is weak to sharp objects such as spears, she can only use
+        the Godwave for a few minutes or she will go insane
       source_id: vsbattles-wonder-woman-prime-earth
       provider_id: vsbattles
       authority: high
@@ -2402,167 +2283,9 @@ repair:
     duplicate_key: vsbattles.fandom.com|wonder woman post crisis|9577775
     retryable: false
     exception_class: ''
-  - source_id: character-stats-profiles-wonder-woman-prime-earth
-    url: https://character-stats-and-profiles.fandom.com/wiki/Wonder_Woman_%28Prime_Earth%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Wonder Woman (Canon, DC Comics, Prime Earth)/ItsSoba
-    source_type: mediawiki
-    revision_id: '613374'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 21282
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Youth
-    - Learning Her History
-    - Powers and Stats
-    - Explanations & Related Blog Posts
-    - Related Images & Other Galleries
-    - Others
-    - Categories
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: The tier(s) of the character (with the individual tier ratings themselves
-        enclosed within curly brackets, for example {{7-A}}, {{3-C}}
-      source_id: character-stats-profiles-wonder-woman-prime-earth
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Superhuman Physical Characteristics, Enhanced Senses,
-      source_id: character-stats-profiles-wonder-woman-prime-earth
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: The character's attack power or destructive capacity (in bold; add any
-        explanations using brackets, not in bold).
-      source_id: character-stats-profiles-wonder-woman-prime-earth
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Transonic possibly Supersonic (In order to become the champion of Themyscira
-        the Amazons went through trials of parrying the shot from a military grade
-        pistol which soon after Diana is crowned their champion implying that she
-        was capable of doing so, the official military grade pistol is a SIG Sauer
-        M17 which has a muzzle velocity of 365 m/s[DCR]) | Supersonic (Diana is shown
-        to be capable of reacting to gunfire from a weapon which resembles that of
-        the SCAR-L, SCAR-L's have a muzzle velocity of 710 m/s[DCR]), Supersonic+
-        (Is capable of moving fast enough to intercept a bullet from an M16 after
-        it was already fired as well as parrying multiple bullets fired from the same
-        rifle afterwards, M16s have a muzzle velocity of 960 m/s[DCR]),
-      source_id: character-stats-profiles-wonder-woman-prime-earth
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Wall Level (Could withstand the explosion of a grenade which has an explosive
-        yield of 1.20E-04 Tons of TNT[DCR]; Could withstand the blast of a missile
-        fired from A.R.G.U.S's military-grade jets, which tend to have an explosion
-        yield of about 1.00E-03 Tons of TNT[DCR])
-      source_id: character-stats-profiles-wonder-woman-prime-earth
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Self-explanatory Notable Attacks/Techniques: A list of some abilities
-        the character generally uses. Note: This article is protected. Any unauthorized
-        modifications, alterations, or revisions are strictly prohibited. Unauthorized
-        editing may compromise the accuracy, integrity, and reliability of the content.
-        )f you have suggestions or concerns regarding the information presented herein,
-        please contact the designated administrator for assistance. (Basically don''t
-        edit my page without my consent) ==Explanations & Related Blog Posts== This
-        section can be used to explain the reasons for the assigned power level of
-        a certain character more in-depth, as well as how the powers and nature of
-        the character fundamentally work. This is particularly useful for more high-tiered
-        characters. However, it is very important that you make sure that the text
-        has good grammar/sentence structure, and is easy to understand. ==Related
-        Images & Other Galleries== Put other pictures of the character here. ==Others==
-        Notable Victories: Put some notable/good matches that result in the character''s
-        victory. Notable Losses: Put some notable/good matches that result in the
-        character''s loss. Inconclusive Matches: Put some notable/good matches with
-        the results still unclear. ==Categories'
-      source_id: character-stats-profiles-wonder-woman-prime-earth
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 55
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|wonder woman canon dc comics
-      prime earth itssoba|613374
-    retryable: false
-    exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-wonder-woman-prime-earth
-    url: https://vsbattles.fandom.com/wiki/Wonder_Woman_%28Prime_Earth%29
-    title: Wonder Woman (Post-Crisis)
-    rank: 105
-    extracted_fields: *id004
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id005
-    rejection_reason: ''
-    identity_match: true
-    identity_score: 100
-    variant_score: 30
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|wonder woman post crisis|9577775
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

@@ -136,7 +136,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Zacian
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -175,34 +175,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-zacian-pokemon
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Zacian Pokemon
-  url: https://character-stats-and-profiles.fandom.com/wiki/Zacian_Pokemon
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-zacian-pokemon
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Zacian (Pokemon)
-  url: https://vsbattles.fandom.com/wiki/Zacian_%28Pokemon%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: character-stats-profiles-zacian-pokemon
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -259,40 +231,36 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: '{{High 6-A}} | {{Low 1-C}}'
+    text: 'Key: Hero of Many Battles'
     source_ids:
     - vsbattles-zacian-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   attack_potency:
     text: Multi-Continent level (Should at least be comparable to the Galarian variants
-      of the Legendary Birds) | Low Complex Multiverse level (Defeated the base form
-      of Eternatus alongside Crowned Shield Zamazenta, and defeated its Eternamax
-      form alongside Zamazenta, Hop, and Victor)
+      of the Legendary Birds)
     source_ids:
     - vsbattles-zacian-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   speed:
     text: "At least FTL (Far superior to non-legendary Pok\xE9mon like Ash-Greninja),\
-      \ higher with Quick Attack | At least Massively FTL+, likely Infinite (Able\
-      \ to keep up with Eternatus), higher with Quick Attack"
+      \ higher with Quick Attack"
     source_ids:
     - vsbattles-zacian-pokemon
     confidence: 0.6
     notes: auto_repair source extraction
   lifting_strength:
     text: Class M (Comparable to Brock's Happiny, who is comparable to final evolutions)
-      | At least Class Z (Far superior to Regice)
-    source_ids: &id003
+    source_ids: &id002
     - mediawiki-4693444
     confidence: 0.95
   striking_strength:
-    text: Multi-Continent level | Low Complex Multiverse level
-    source_ids: *id003
+    text: Multi-Continent level
+    source_ids: *id002
     confidence: 0.95
   durability:
-    text: Multi-Continent level | Low Complex Multiverse level
+    text: Multi-Continent level
     source_ids:
     - vsbattles-zacian-pokemon
     confidence: 0.6
@@ -327,7 +295,7 @@ claims:
   section: power_scale
   axis: other
   text: '{{High 6-A}} | {{Low 1-C}}'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-4693444
   decisive: false
   status: unverified
@@ -340,7 +308,7 @@ claims:
     of the Legendary Birds) | Low Complex Multiverse level (Defeated the base form
     of Eternatus alongside Crowned Shield Zamazenta, and defeated its Eternamax form
     alongside Zamazenta, Hop, and Victor)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -351,7 +319,7 @@ claims:
   text: "At least FTL (Far superior to non-legendary Pok\xE9mon like Ash-Greninja),\
     \ higher with Quick Attack | At least Massively FTL+, likely Infinite (Able to\
     \ keep up with Eternatus), higher with Quick Attack"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -361,7 +329,7 @@ claims:
   axis: other
   text: Class M (Comparable to Brock's Happiny, who is comparable to final evolutions)
     | At least Class Z (Far superior to Regice)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -370,7 +338,7 @@ claims:
   section: power_scale
   axis: other
   text: Multi-Continent level | Low Complex Multiverse level
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -379,7 +347,7 @@ claims:
   section: power_scale
   axis: durability
   text: Multi-Continent level | Low Complex Multiverse level
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -391,7 +359,7 @@ claims:
     for battle and can go on fighting for lots of time despite being injured. They
     are also capable of spending a day on foot while fighting hordes of enemies in
     mystery dungeons with little to no breaks)
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -400,7 +368,7 @@ claims:
   section: power_scale
   axis: range
   text: Standard melee range normally, Hundreds of kilometers with certain moves
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -409,7 +377,7 @@ claims:
   section: equipment
   axis: equipment
   text: The Rusted Sword
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -422,7 +390,7 @@ claims:
     \ minor puzzles, though still mostly driven by instinct), Gifted in battle (Should\
     \ be far superior to 3rd stage Pok\xE9mon who are able to consistently fight the\
     \ likes of Machamp which have mastered all martial arts, as well as Alakazam)"
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -439,7 +407,7 @@ claims:
     attacks with metallic claws. It may rise the user''s attack. *Howl: The user howls
     loudly to raise its spirit, which raises its Attack. *Bite: The target is bitten
     with viciously sharp fangs. This may also make the target flinch. *Quick'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -467,16 +435,16 @@ claims:
     \ Psychic (includes Mind Manipulation, Telepathy, Energy Manipulation, Sleep Manipulation\
     \ and Telekinesis) Type moves, higher Resistance to Bug Type moves and Immunity\
     \ (within reason) to Poison Type moves"
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
   - fan_wiki_single_source
 abilities:
-- id: powers-and-abilities-zacian-superhuman-physical-characteristics
-  name: Zacian=Superhuman Physical Characteristics
-  description: Zacian=Superhuman Physical Characteristics
-  source_ids: &id005
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id004
   - vsbattles-zacian-pokemon
   source_claim_ids: []
   confidence: 0.85
@@ -492,7 +460,7 @@ abilities:
 - id: powers-and-abilities-magic
   name: Magic
   description: Magic
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -509,7 +477,7 @@ abilities:
     state)'
   description: 'Limited Purification (Type 1: Can restore the Rusted Sword to its
     original state)'
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -524,7 +492,7 @@ abilities:
 - id: powers-and-abilities-immortality-type-1
   name: Immortality (Type 1)
   description: Immortality (Type 1)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -541,7 +509,7 @@ abilities:
     to the original state at will)
   description: Body Control (Can turn itself in a statue made of stone and return
     its body to the original state at will)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -558,7 +526,7 @@ abilities:
 - id: powers-and-abilities-metal-manipulation
   name: Metal Manipulation
   description: Metal Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -573,7 +541,7 @@ abilities:
 - id: powers-and-abilities-acrobatics
   name: Acrobatics
   description: Acrobatics
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -588,7 +556,7 @@ abilities:
 - id: powers-and-abilities-durability-negation
   name: Durability Negation
   description: Durability Negation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -603,7 +571,7 @@ abilities:
 - id: powers-and-abilities-enhanced-senses
   name: Enhanced Senses
   description: Enhanced Senses
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -618,7 +586,7 @@ abilities:
 - id: powers-and-abilities-statistics-amplification
   name: Statistics Amplification
   description: Statistics Amplification
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -633,7 +601,7 @@ abilities:
 - id: powers-and-abilities-darkness-manipulation
   name: Darkness Manipulation
   description: Darkness Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -648,7 +616,7 @@ abilities:
 - id: powers-and-abilities-energy-projection
   name: Energy Projection
   description: Energy Projection
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -663,7 +631,7 @@ abilities:
 - id: powers-and-abilities-weapon-mastery
   name: Weapon Mastery
   description: Weapon Mastery
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -678,7 +646,7 @@ abilities:
 - id: powers-and-abilities-metal-absorption
   name: Metal Absorption
   description: Metal Absorption
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -693,7 +661,7 @@ abilities:
 - id: powers-and-abilities-natural-weaponry
   name: Natural Weaponry
   description: Natural Weaponry
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -708,7 +676,7 @@ abilities:
 - id: powers-and-abilities-air-manipulation
   name: Air Manipulation
   description: Air Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -726,7 +694,7 @@ abilities:
   description: Illusion Creation and Sleep Manipulation (Can create illusion versions
     of itself and send them in its place. However these illusions can't attack, but
     just emit fog which puts the foes to sleep)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -741,7 +709,7 @@ abilities:
 - id: powers-and-abilities-transformation
   name: Transformation
   description: Transformation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -756,7 +724,7 @@ abilities:
 - id: powers-and-abilities-forcefield-creation
   name: Forcefield Creation
   description: Forcefield Creation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -771,7 +739,7 @@ abilities:
 - id: powers-and-abilities-non-physical-interaction
   name: Non-Physical Interaction
   description: Non-Physical Interaction
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -786,7 +754,7 @@ abilities:
 - id: powers-and-abilities-martial-arts
   name: Martial Arts
   description: Martial Arts
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -801,7 +769,7 @@ abilities:
 - id: powers-and-abilities-statistics-reduction
   name: Statistics Reduction
   description: Statistics Reduction
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -815,18 +783,18 @@ abilities:
     metadata_only: true
 - id: powers-and-abilities-resistance-to-fighting-dark-and-bug-type-moves-and-immunity
   name: Resistance to Fighting, Dark and Bug Type moves and Immunity (within reason)
-    to Dragon Type moves |-|Crowned Sword Zacia
+    to Dragon Type moves Same as before minus R
   description: "Resistance to Fighting, Dark and Bug Type moves and Immunity (within\
-    \ reason) to Dragon Type moves |-|Crowned Sword Zacian=Same as before minus Resistance\
-    \ to Fighting Type moves, but including Power Nullification (It was able to counter\
-    \ Eternamax Eternatus' aura that prevented Pok\xE9mon from using their moves),\
-    \ Damage Boost (Behemoth Blade doubles the damage against any kind of Dynamaxed\
-    \ Pok\xE9mon), Resistance to Power Nullification (It was able to able to act despite\
-    \ Eternamax Eternatus' aura preventing Pok\xE9mon from using their moves), Petrification,\
-    \ Flying, Rock, Grass, Ice, Fairy, and Psychic (includes Mind Manipulation, Telepathy,\
-    \ Energy Manipulation, Sleep Manipulation and Telekinesis) Type moves, higher\
-    \ Resistance to Bug Type moves and Immunity (within reason) to Poison Type moves"
-  source_ids: *id005
+    \ reason) to Dragon Type moves Same as before minus Resistance to Fighting Type\
+    \ moves, but including Power Nullification (It was able to counter Eternamax Eternatus'\
+    \ aura that prevented Pok\xE9mon from using their moves), Damage Boost (Behemoth\
+    \ Blade doubles the damage against any kind of Dynamaxed Pok\xE9mon), Resistance\
+    \ to Power Nullification (It was able to able to act despite Eternamax Eternatus'\
+    \ aura preventing Pok\xE9mon from using their moves), Petrification, Flying, Rock,\
+    \ Grass, Ice, Fairy, and Psychic (includes Mind Manipulation, Telepathy, Energy\
+    \ Manipulation, Sleep Manipulation and Telekinesis) Type moves, higher Resistance\
+    \ to Bug Type moves and Immunity (within reason) to Poison Type moves"
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -843,7 +811,7 @@ equipment:
 - id: standard-equipment-the-rusted-sword
   name: The Rusted Sword
   description: The Rusted Sword
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -870,7 +838,7 @@ resistances:
     \ Flying, Rock, Grass, Ice, Fairy, and Psychic (includes Mind Manipulation, Telepathy,\
     \ Energy Manipulation, Sleep Manipulation and Telekinesis) Type moves, higher\
     \ Resistance to Bug Type moves and Immunity (within reason) to Poison Type moves"
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -887,7 +855,7 @@ weaknesses:
 - id: weaknesses-poison-and-steel-type-moves-can-t-use-any-form-of-dynamax
   name: Poison and Steel Type moves. Can't use any form of Dynamax
   description: Poison and Steel Type moves. Can't use any form of Dynamax
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-zacian-pokemon
   source_claim_ids: []
   confidence: 0.85
@@ -904,7 +872,7 @@ weaknesses:
   name: 'Ground and Fire Type moves. Can''t use any form of Dynamax Notable Attacks/Techniques:'
   description: 'Ground and Fire Type moves. Can''t use any form of Dynamax Notable
     Attacks/Techniques:'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -921,7 +889,7 @@ weaknesses:
 - id: weaknesses-interpid-sword-when-the-fight-starts
   name: 'Interpid Sword: When the fight starts'
   description: 'Interpid Sword: When the fight starts'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -936,7 +904,7 @@ weaknesses:
 - id: weaknesses-zacian-s-attack-increases
   name: Zacian's Attack increases.
   description: Zacian's Attack increases.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -953,7 +921,7 @@ weaknesses:
     The target''s stat changes don''t affect this at'
   description: 'Sacred Sword: The user attacks the opponent using a sword-like technique.
     The target''s stat changes don''t affect this attack''s damage.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -970,7 +938,7 @@ weaknesses:
     from priority moves.'
   description: 'Quick Guard: The user created a barrier which protects itself and
     its allies from priority moves.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -987,7 +955,7 @@ weaknesses:
     attack.'
   description: 'Metal Claw: The user attacks with metallic claws. It may rise the
     user''s attack.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1002,7 +970,7 @@ weaknesses:
 - id: weaknesses-howl-the-user-howls-loudly-to-raise-its-spirit
   name: 'Howl: The user howls loudly to raise its spirit'
   description: 'Howl: The user howls loudly to raise its spirit'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1018,7 +986,7 @@ weaknesses:
 - id: weaknesses-which-raises-its-attack
   name: which raises its Attack.
   description: which raises its Attack.
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1035,7 +1003,7 @@ weaknesses:
     the target flinch.'
   description: 'Bite: The target is bitten with viciously sharp fangs. This may also
     make the target flinch.'
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1050,7 +1018,7 @@ weaknesses:
 - id: weaknesses-quick
   name: Quick
   description: Quick
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1094,7 +1062,7 @@ review:
   secondary_disagreement_policy: warning_only
 profile_hash: 2b076f6bcbaaf0e23bafd6ef5902bba8d937d038d9e63362d480540263107fa5
 repair:
-  attempted_at: '2026-10-11T02:36:20Z'
+  attempted_at: '2026-10-21T21:28:09Z'
   repaired_fields:
   - abilities
   - attack_potency
@@ -1111,7 +1079,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Zacian
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
     - intelligence
@@ -1154,7 +1122,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -1166,34 +1134,28 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{High 6-A}} | {{Low 1-C}}'
-      source_id: mediawiki-4693444
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: "Zacian=Superhuman Physical Characteristics, Magic, Limited Purification\
-        \ (Type 1: Can restore the Rusted Sword to its original state), Immortality\
-        \ (Type 1), Body Control (Can turn itself in a statue made of stone and return\
-        \ its body to the original state at will), Metal Manipulation, Acrobatics,\
-        \ Durability Negation, Enhanced Senses, Statistics Amplification, Darkness\
-        \ Manipulation, Energy Projection, Weapon Mastery, Metal Absorption, Natural\
-        \ Weaponry, Air Manipulation, Illusion Creation and Sleep Manipulation (Can\
-        \ create illusion versions of itself and send them in its place. However these\
-        \ illusions can't attack, but just emit fog which puts the foes to sleep),\
-        \ Transformation, Forcefield Creation, Non-Physical Interaction, Martial Arts,\
-        \ Statistics Reduction, Resistance to Fighting, Dark and Bug Type moves and\
-        \ Immunity (within reason) to Dragon Type moves |-|Crowned Sword Zacian=Same\
-        \ as before minus Resistance to Fighting Type moves, but including Power Nullification\
-        \ (It was able to counter Eternamax Eternatus' aura that prevented Pok\xE9\
-        mon from using their moves), Damage Boost (Behemoth Blade doubles the damage\
-        \ against any kind of Dynamaxed Pok\xE9mon), Resistance to Power Nullification\
-        \ (It was able to able to act despite Eternamax Eternatus' aura preventing\
-        \ Pok\xE9mon from using their moves), Petrification, Flying, Rock, Grass,\
-        \ Ice, Fairy, and Psychic (includes Mind Manipulation, Telepathy, Energy Manipulation,\
-        \ Sleep Manipulation and Telekinesis) Type moves, higher Resistance to Bug\
-        \ Type moves and Immunity (within reason) to Poison Type moves"
+      value: "Superhuman Physical Characteristics, Magic, Limited Purification (Type\
+        \ 1: Can restore the Rusted Sword to its original state), Immortality (Type\
+        \ 1), Body Control (Can turn itself in a statue made of stone and return its\
+        \ body to the original state at will), Metal Manipulation, Acrobatics, Durability\
+        \ Negation, Enhanced Senses, Statistics Amplification, Darkness Manipulation,\
+        \ Energy Projection, Weapon Mastery, Metal Absorption, Natural Weaponry, Air\
+        \ Manipulation, Illusion Creation and Sleep Manipulation (Can create illusion\
+        \ versions of itself and send them in its place. However these illusions can't\
+        \ attack, but just emit fog which puts the foes to sleep), Transformation,\
+        \ Forcefield Creation, Non-Physical Interaction, Martial Arts, Statistics\
+        \ Reduction, Resistance to Fighting, Dark and Bug Type moves and Immunity\
+        \ (within reason) to Dragon Type moves Same as before minus Resistance to\
+        \ Fighting Type moves, but including Power Nullification (It was able to counter\
+        \ Eternamax Eternatus' aura that prevented Pok\xE9mon from using their moves),\
+        \ Damage Boost (Behemoth Blade doubles the damage against any kind of Dynamaxed\
+        \ Pok\xE9mon), Resistance to Power Nullification (It was able to able to act\
+        \ despite Eternamax Eternatus' aura preventing Pok\xE9mon from using their\
+        \ moves), Petrification, Flying, Rock, Grass, Ice, Fairy, and Psychic (includes\
+        \ Mind Manipulation, Telepathy, Energy Manipulation, Sleep Manipulation and\
+        \ Telekinesis) Type moves, higher Resistance to Bug Type moves and Immunity\
+        \ (within reason) to Poison Type moves"
       source_id: mediawiki-4693444
       provider_id: vsbattles
       authority: high
@@ -1264,6 +1226,14 @@ repair:
         *Howl: The user howls loudly to raise its spirit, which raises its Attack.
         *Bite: The target is bitten with viciously sharp fangs. This may also make
         the target flinch. *Quick'
+      source_id: mediawiki-4693444
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: "Key: Hero of Many Battles | Crowned Sword Name: Zacian Origin: Pok\xE9\
+        mon Gender: Genderless Age: At least thousands years old Classification: Legendary\
+        \ Pok\xE9mon, Warrior Pok\xE9mon, The Fairy King's Sword, Hero of Many Battles"
       source_id: mediawiki-4693444
       provider_id: vsbattles
       authority: high
@@ -1281,11 +1251,164 @@ repair:
     duplicate_key: vsbattles.fandom.com|zacian|9550397
     retryable: false
     exception_class: ''
+  - source_id: character-stats-profiles-zacian-pokemon
+    url: https://character-stats-and-profiles.fandom.com/wiki/Zacian_%28Pokemon%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: Arceus (Canon)/Yellowz Jay
+    source_type: mediawiki
+    revision_id: '248995'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 16783
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 2-A | Low 1-C
+      source_id: character-stats-profiles-zacian-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "Superhuman Physical Characteristics, Immortality (Types 1, 2, 3, 7,\
+        \ 8 and 9), Dimensional Travel, Self-Sustenance (Types 1, 2 and 3), Social\
+        \ Influencing, Acrobatics, Cosmic Awareness, Nigh-Omniscience, Accelerated\
+        \ Development, Energy Manipulation, Energy Projection, Incorporeality, Empowerment,\
+        \ Enhanced Senses, Extrasensory Perception, Reality Warping, Elemental Manipulation\
+        \ (Can use all the powers of the 18 Pok\xE9mon Types throught its Plates,\
+        \ which include Fire, Water, Dark, Flying, Normal, Fighting, Grass, Dragon,\
+        \ Ground, Rock, Steel, Ghost, Fairy, Poison, Psychic, Electric, Ice and Bug),\
+        \ Creation (Can create things out of nothing, such as creating one of the\
+        \ members of the Creation Trio), Life Manipulation (Created the Jewel of Life\
+        \ from its Plates), Radiation Manipulation, Duplication and Afterimage Creation\
+        \ (Upscales from the move Double Team), Invulnerability and Forcefield Creation\
+        \ (Protected by a constant shield that protects it from invasive abilities\
+        \ such as Mind Attacks as well as ordinary attacks, can actively create them\
+        \ itself. Upscaled from Protect), Acausality (Types 1, 3 and possibly 4),\
+        \ Non-Physical Interaction (Attacks Incorporeals: His Omnipotent ability lets\
+        \ him hit all types, including Ghost), Body Control (Can separate the Plates\
+        \ from its body and re-absorb them back), Power Bestowal (Its Plates are the\
+        \ origin of all the Pok\xE9mon powers), Power Nullification (Can nullify virtually\
+        \ any attack, power and ability that falls under a Plate. Its Metal Barrier\
+        \ can negate any effect [within reason] period), Power Absorption (Can take\
+        \ the powers of its enemies and infuse them with the Plates), Photographic\
+        \ Memory, Natural Weaponry, Precognition (Its Pok\xE9mon Conquest ability,\
+        \ Omnipotent, allows it to foresee and dodge incoming attacks), Can hit Selectibly\
+        \ intangible entities (Due to the aforementioned Omnipotent ability), Sound\
+        \ Manipulation (Via Hyper Voice), Vector Manipulation, Pocket Reality Manipulation,\
+        \ True Flight, Spaceflight, Organic Manipulation (Upscales from Snorlax),\
+        \ Natural Weaponry, Statistics Amplification (Upscaled from Cosmic Power,\
+        \ Darkness Manipulation (Via Punishment), Danmaku (Judgment is depicted as\
+        \ a rapid downpour of dozens of bolts of energy in the games, and most of\
+        \ its attacks in Guardian Signs fall under this), Durability Negation (Upscaled\
+        \ from Perish Song), Gravity Manipulation, Earth Manipulation, Healing (Via\
+        \ Recover), Martial Arts (Via Seismic Toss), Time Manipulation (Future Sight\
+        \ allows the user to observe and attack the target in the future, bypassing\
+        \ Force fields and Precognition in the process), Purification (Type 3 via\
+        \ Refresh) Plates'"
+      source_id: character-stats-profiles-zacian-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multiverse Level+ (Stated that Arceus shaped the universe with over 1000+
+        Arms and Created the creation trio) Low Complex Multiverse Level (As a mare
+        of it's true being Arceus is stated to be the origin of the pokemon multiverse,
+        this includes the realms, This include Giratina's Space where time doesn't
+        work, Arceus is stated to across time and space and one heart, and hoopa capable
+        of summoning the creation trio out of their rings, And has infinite Power
+        of his rings, and is the only one that can seal the power)
+      source_id: character-stats-profiles-zacian-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Massively FTL+, Mostly Infinite (Arceus was faster than necrozma)
+        | Omnipresent (Arceus exists beyond traditional time and space )
+      source_id: character-stats-profiles-zacian-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multiverse level+ (Able to tank attacks from the creation trio) | At
+        least Low Complex Multiverse level (Due to the pokemon reality being an aspect
+        of being, killing arceus is impossible)
+      source_id: character-stats-profiles-zacian-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Depends on their missing plate Notable Attacks/Techniques: *Judgement:
+        Arceus can fire powerful beams of energy and light at the sky that fall down
+        and hit its opponents. This attack changes type depending on what type Arceus
+        currently is and is powerful enough to cause the likes of Dialga and Palkia
+        to stagger with a single direct hit. *Flamethrower: Arceus can shoot a stream
+        of pure flames from its face. *Blizzard: Arceus can shoot ice storms of very
+        low temperatures at its targets. *Twister: Arceus can blow one or two powerful
+        Dragon-type twisters from its face at opponents. *Time Stop: Arceus can stop
+        time itself. *Extreme'
+      source_id: character-stats-profiles-zacian-pokemon
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|arceus canon yellowz jay|248995
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-zacian-pokemon
     url: https://vsbattles.fandom.com/wiki/Zacian_Pokemon
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id009
+    extracted_fields: &id008
     - attack_potency
     - durability
     - intelligence
@@ -1328,7 +1451,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id010
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -1338,34 +1461,28 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{High 6-A}} | {{Low 1-C}}'
-      source_id: vsbattles-zacian-pokemon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: "Zacian=Superhuman Physical Characteristics, Magic, Limited Purification\
-        \ (Type 1: Can restore the Rusted Sword to its original state), Immortality\
-        \ (Type 1), Body Control (Can turn itself in a statue made of stone and return\
-        \ its body to the original state at will), Metal Manipulation, Acrobatics,\
-        \ Durability Negation, Enhanced Senses, Statistics Amplification, Darkness\
-        \ Manipulation, Energy Projection, Weapon Mastery, Metal Absorption, Natural\
-        \ Weaponry, Air Manipulation, Illusion Creation and Sleep Manipulation (Can\
-        \ create illusion versions of itself and send them in its place. However these\
-        \ illusions can't attack, but just emit fog which puts the foes to sleep),\
-        \ Transformation, Forcefield Creation, Non-Physical Interaction, Martial Arts,\
-        \ Statistics Reduction, Resistance to Fighting, Dark and Bug Type moves and\
-        \ Immunity (within reason) to Dragon Type moves |-|Crowned Sword Zacian=Same\
-        \ as before minus Resistance to Fighting Type moves, but including Power Nullification\
-        \ (It was able to counter Eternamax Eternatus' aura that prevented Pok\xE9\
-        mon from using their moves), Damage Boost (Behemoth Blade doubles the damage\
-        \ against any kind of Dynamaxed Pok\xE9mon), Resistance to Power Nullification\
-        \ (It was able to able to act despite Eternamax Eternatus' aura preventing\
-        \ Pok\xE9mon from using their moves), Petrification, Flying, Rock, Grass,\
-        \ Ice, Fairy, and Psychic (includes Mind Manipulation, Telepathy, Energy Manipulation,\
-        \ Sleep Manipulation and Telekinesis) Type moves, higher Resistance to Bug\
-        \ Type moves and Immunity (within reason) to Poison Type moves"
+      value: "Superhuman Physical Characteristics, Magic, Limited Purification (Type\
+        \ 1: Can restore the Rusted Sword to its original state), Immortality (Type\
+        \ 1), Body Control (Can turn itself in a statue made of stone and return its\
+        \ body to the original state at will), Metal Manipulation, Acrobatics, Durability\
+        \ Negation, Enhanced Senses, Statistics Amplification, Darkness Manipulation,\
+        \ Energy Projection, Weapon Mastery, Metal Absorption, Natural Weaponry, Air\
+        \ Manipulation, Illusion Creation and Sleep Manipulation (Can create illusion\
+        \ versions of itself and send them in its place. However these illusions can't\
+        \ attack, but just emit fog which puts the foes to sleep), Transformation,\
+        \ Forcefield Creation, Non-Physical Interaction, Martial Arts, Statistics\
+        \ Reduction, Resistance to Fighting, Dark and Bug Type moves and Immunity\
+        \ (within reason) to Dragon Type moves Same as before minus Resistance to\
+        \ Fighting Type moves, but including Power Nullification (It was able to counter\
+        \ Eternamax Eternatus' aura that prevented Pok\xE9mon from using their moves),\
+        \ Damage Boost (Behemoth Blade doubles the damage against any kind of Dynamaxed\
+        \ Pok\xE9mon), Resistance to Power Nullification (It was able to able to act\
+        \ despite Eternamax Eternatus' aura preventing Pok\xE9mon from using their\
+        \ moves), Petrification, Flying, Rock, Grass, Ice, Fairy, and Psychic (includes\
+        \ Mind Manipulation, Telepathy, Energy Manipulation, Sleep Manipulation and\
+        \ Telekinesis) Type moves, higher Resistance to Bug Type moves and Immunity\
+        \ (within reason) to Poison Type moves"
       source_id: vsbattles-zacian-pokemon
       provider_id: vsbattles
       authority: high
@@ -1436,6 +1553,14 @@ repair:
         *Howl: The user howls loudly to raise its spirit, which raises its Attack.
         *Bite: The target is bitten with viciously sharp fangs. This may also make
         the target flinch. *Quick'
+      source_id: vsbattles-zacian-pokemon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: "Key: Hero of Many Battles | Crowned Sword Name: Zacian Origin: Pok\xE9\
+        mon Gender: Genderless Age: At least thousands years old Classification: Legendary\
+        \ Pok\xE9mon, Warrior Pok\xE9mon, The Fairy King's Sword, Hero of Many Battles"
       source_id: vsbattles-zacian-pokemon
       provider_id: vsbattles
       authority: high
@@ -1512,9 +1637,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "Avatars= Superhuman Physical Characteristics, Immortality (Types 1,\
-        \ 2, 3, 7, 8 and 9), Dimensional Travel, Self-Sustenance (Types 1, 2 and 3),\
-        \ Social Influencing, Acrobatics, Cosmic Awareness, Nigh-Omniscience, Accelerated\
+      value: "Superhuman Physical Characteristics, Immortality (Types 1, 2, 3, 7,\
+        \ 8 and 9), Dimensional Travel, Self-Sustenance (Types 1, 2 and 3), Social\
+        \ Influencing, Acrobatics, Cosmic Awareness, Nigh-Omniscience, Accelerated\
         \ Development, Energy Manipulation, Energy Projection, Incorporeality, Empowerment,\
         \ Enhanced Senses, Extrasensory Perception, Reality Warping, Elemental Manipulation\
         \ (Can use all the powers of the 18 Pok\xE9mon Types throught its Plates,\
@@ -1547,7 +1672,7 @@ repair:
         \ Recover), Martial Arts (Via Seismic Toss), Time Manipulation (Future Sight\
         \ allows the user to observe and attack the target in the future, bypassing\
         \ Force fields and Precognition in the process), Purification (Type 3 via\
-        \ Refresh) |-| Plates'"
+        \ Refresh) Plates'"
       source_id: character-stats-profiles-zacian-pokemon
       provider_id: character_stats_profiles
       authority: high
@@ -1610,7 +1735,7 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Zacian_%28Pokemon%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id010
     - attack_potency
     - durability
     - intelligence
@@ -1653,7 +1778,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id011
     - attack_potency
     - speed
     - durability
@@ -1663,34 +1788,28 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{High 6-A}} | {{Low 1-C}}'
-      source_id: vsbattles-zacian-pokemon
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
-      value: "Zacian=Superhuman Physical Characteristics, Magic, Limited Purification\
-        \ (Type 1: Can restore the Rusted Sword to its original state), Immortality\
-        \ (Type 1), Body Control (Can turn itself in a statue made of stone and return\
-        \ its body to the original state at will), Metal Manipulation, Acrobatics,\
-        \ Durability Negation, Enhanced Senses, Statistics Amplification, Darkness\
-        \ Manipulation, Energy Projection, Weapon Mastery, Metal Absorption, Natural\
-        \ Weaponry, Air Manipulation, Illusion Creation and Sleep Manipulation (Can\
-        \ create illusion versions of itself and send them in its place. However these\
-        \ illusions can't attack, but just emit fog which puts the foes to sleep),\
-        \ Transformation, Forcefield Creation, Non-Physical Interaction, Martial Arts,\
-        \ Statistics Reduction, Resistance to Fighting, Dark and Bug Type moves and\
-        \ Immunity (within reason) to Dragon Type moves |-|Crowned Sword Zacian=Same\
-        \ as before minus Resistance to Fighting Type moves, but including Power Nullification\
-        \ (It was able to counter Eternamax Eternatus' aura that prevented Pok\xE9\
-        mon from using their moves), Damage Boost (Behemoth Blade doubles the damage\
-        \ against any kind of Dynamaxed Pok\xE9mon), Resistance to Power Nullification\
-        \ (It was able to able to act despite Eternamax Eternatus' aura preventing\
-        \ Pok\xE9mon from using their moves), Petrification, Flying, Rock, Grass,\
-        \ Ice, Fairy, and Psychic (includes Mind Manipulation, Telepathy, Energy Manipulation,\
-        \ Sleep Manipulation and Telekinesis) Type moves, higher Resistance to Bug\
-        \ Type moves and Immunity (within reason) to Poison Type moves"
+      value: "Superhuman Physical Characteristics, Magic, Limited Purification (Type\
+        \ 1: Can restore the Rusted Sword to its original state), Immortality (Type\
+        \ 1), Body Control (Can turn itself in a statue made of stone and return its\
+        \ body to the original state at will), Metal Manipulation, Acrobatics, Durability\
+        \ Negation, Enhanced Senses, Statistics Amplification, Darkness Manipulation,\
+        \ Energy Projection, Weapon Mastery, Metal Absorption, Natural Weaponry, Air\
+        \ Manipulation, Illusion Creation and Sleep Manipulation (Can create illusion\
+        \ versions of itself and send them in its place. However these illusions can't\
+        \ attack, but just emit fog which puts the foes to sleep), Transformation,\
+        \ Forcefield Creation, Non-Physical Interaction, Martial Arts, Statistics\
+        \ Reduction, Resistance to Fighting, Dark and Bug Type moves and Immunity\
+        \ (within reason) to Dragon Type moves Same as before minus Resistance to\
+        \ Fighting Type moves, but including Power Nullification (It was able to counter\
+        \ Eternamax Eternatus' aura that prevented Pok\xE9mon from using their moves),\
+        \ Damage Boost (Behemoth Blade doubles the damage against any kind of Dynamaxed\
+        \ Pok\xE9mon), Resistance to Power Nullification (It was able to able to act\
+        \ despite Eternamax Eternatus' aura preventing Pok\xE9mon from using their\
+        \ moves), Petrification, Flying, Rock, Grass, Ice, Fairy, and Psychic (includes\
+        \ Mind Manipulation, Telepathy, Energy Manipulation, Sleep Manipulation and\
+        \ Telekinesis) Type moves, higher Resistance to Bug Type moves and Immunity\
+        \ (within reason) to Poison Type moves"
       source_id: vsbattles-zacian-pokemon
       provider_id: vsbattles
       authority: high
@@ -1765,6 +1884,14 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
+    - field: tier
+      value: "Key: Hero of Many Battles | Crowned Sword Name: Zacian Origin: Pok\xE9\
+        mon Gender: Genderless Age: At least thousands years old Classification: Legendary\
+        \ Pok\xE9mon, Warrior Pok\xE9mon, The Fairy King's Sword, Hero of Many Battles"
+      source_id: vsbattles-zacian-pokemon
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
     identity_match: true
     identity_score: 120
     variant_score: 0
@@ -1776,159 +1903,6 @@ repair:
     franchise_match: true
     variant_match: true
     duplicate_key: vsbattles.fandom.com|zacian|9550397
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-zacian-pokemon
-    url: https://character-stats-and-profiles.fandom.com/wiki/Zacian_%28Pokemon%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: Arceus (Canon)/Yellowz Jay
-    source_type: mediawiki
-    revision_id: '248995'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 16783
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: 2-A | Low 1-C
-      source_id: character-stats-profiles-zacian-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Avatars= Superhuman Physical Characteristics, Immortality (Types 1,\
-        \ 2, 3, 7, 8 and 9), Dimensional Travel, Self-Sustenance (Types 1, 2 and 3),\
-        \ Social Influencing, Acrobatics, Cosmic Awareness, Nigh-Omniscience, Accelerated\
-        \ Development, Energy Manipulation, Energy Projection, Incorporeality, Empowerment,\
-        \ Enhanced Senses, Extrasensory Perception, Reality Warping, Elemental Manipulation\
-        \ (Can use all the powers of the 18 Pok\xE9mon Types throught its Plates,\
-        \ which include Fire, Water, Dark, Flying, Normal, Fighting, Grass, Dragon,\
-        \ Ground, Rock, Steel, Ghost, Fairy, Poison, Psychic, Electric, Ice and Bug),\
-        \ Creation (Can create things out of nothing, such as creating one of the\
-        \ members of the Creation Trio), Life Manipulation (Created the Jewel of Life\
-        \ from its Plates), Radiation Manipulation, Duplication and Afterimage Creation\
-        \ (Upscales from the move Double Team), Invulnerability and Forcefield Creation\
-        \ (Protected by a constant shield that protects it from invasive abilities\
-        \ such as Mind Attacks as well as ordinary attacks, can actively create them\
-        \ itself. Upscaled from Protect), Acausality (Types 1, 3 and possibly 4),\
-        \ Non-Physical Interaction (Attacks Incorporeals: His Omnipotent ability lets\
-        \ him hit all types, including Ghost), Body Control (Can separate the Plates\
-        \ from its body and re-absorb them back), Power Bestowal (Its Plates are the\
-        \ origin of all the Pok\xE9mon powers), Power Nullification (Can nullify virtually\
-        \ any attack, power and ability that falls under a Plate. Its Metal Barrier\
-        \ can negate any effect [within reason] period), Power Absorption (Can take\
-        \ the powers of its enemies and infuse them with the Plates), Photographic\
-        \ Memory, Natural Weaponry, Precognition (Its Pok\xE9mon Conquest ability,\
-        \ Omnipotent, allows it to foresee and dodge incoming attacks), Can hit Selectibly\
-        \ intangible entities (Due to the aforementioned Omnipotent ability), Sound\
-        \ Manipulation (Via Hyper Voice), Vector Manipulation, Pocket Reality Manipulation,\
-        \ True Flight, Spaceflight, Organic Manipulation (Upscales from Snorlax),\
-        \ Natural Weaponry, Statistics Amplification (Upscaled from Cosmic Power,\
-        \ Darkness Manipulation (Via Punishment), Danmaku (Judgment is depicted as\
-        \ a rapid downpour of dozens of bolts of energy in the games, and most of\
-        \ its attacks in Guardian Signs fall under this), Durability Negation (Upscaled\
-        \ from Perish Song), Gravity Manipulation, Earth Manipulation, Healing (Via\
-        \ Recover), Martial Arts (Via Seismic Toss), Time Manipulation (Future Sight\
-        \ allows the user to observe and attack the target in the future, bypassing\
-        \ Force fields and Precognition in the process), Purification (Type 3 via\
-        \ Refresh) |-| Plates'"
-      source_id: character-stats-profiles-zacian-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse Level+ (Stated that Arceus shaped the universe with over 1000+
-        Arms and Created the creation trio) Low Complex Multiverse Level (As a mare
-        of it's true being Arceus is stated to be the origin of the pokemon multiverse,
-        this includes the realms, This include Giratina's Space where time doesn't
-        work, Arceus is stated to across time and space and one heart, and hoopa capable
-        of summoning the creation trio out of their rings, And has infinite Power
-        of his rings, and is the only one that can seal the power)
-      source_id: character-stats-profiles-zacian-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Massively FTL+, Mostly Infinite (Arceus was faster than necrozma)
-        | Omnipresent (Arceus exists beyond traditional time and space )
-      source_id: character-stats-profiles-zacian-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level+ (Able to tank attacks from the creation trio) | At
-        least Low Complex Multiverse level (Due to the pokemon reality being an aspect
-        of being, killing arceus is impossible)
-      source_id: character-stats-profiles-zacian-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Depends on their missing plate Notable Attacks/Techniques: *Judgement:
-        Arceus can fire powerful beams of energy and light at the sky that fall down
-        and hit its opponents. This attack changes type depending on what type Arceus
-        currently is and is powerful enough to cause the likes of Dialga and Palkia
-        to stagger with a single direct hit. *Flamethrower: Arceus can shoot a stream
-        of pure flames from its face. *Blizzard: Arceus can shoot ice storms of very
-        low temperatures at its targets. *Twister: Arceus can blow one or two powerful
-        Dragon-type twisters from its face at opponents. *Time Stop: Arceus can stop
-        time itself. *Extreme'
-      source_id: character-stats-profiles-zacian-pokemon
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|arceus canon yellowz jay|248995
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-zacian
@@ -1990,9 +1964,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "Avatars= Superhuman Physical Characteristics, Immortality (Types 1,\
-        \ 2, 3, 7, 8 and 9), Dimensional Travel, Self-Sustenance (Types 1, 2 and 3),\
-        \ Social Influencing, Acrobatics, Cosmic Awareness, Nigh-Omniscience, Accelerated\
+      value: "Superhuman Physical Characteristics, Immortality (Types 1, 2, 3, 7,\
+        \ 8 and 9), Dimensional Travel, Self-Sustenance (Types 1, 2 and 3), Social\
+        \ Influencing, Acrobatics, Cosmic Awareness, Nigh-Omniscience, Accelerated\
         \ Development, Energy Manipulation, Energy Projection, Incorporeality, Empowerment,\
         \ Enhanced Senses, Extrasensory Perception, Reality Warping, Elemental Manipulation\
         \ (Can use all the powers of the 18 Pok\xE9mon Types throught its Plates,\
@@ -2025,7 +1999,7 @@ repair:
         \ Recover), Martial Arts (Via Seismic Toss), Time Manipulation (Future Sight\
         \ allows the user to observe and attack the target in the future, bypassing\
         \ Force fields and Precognition in the process), Purification (Type 3 via\
-        \ Refresh) |-| Plates'"
+        \ Refresh) Plates'"
       source_id: character-stats-profiles-zacian
       provider_id: character_stats_profiles
       authority: high
@@ -2142,32 +2116,32 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: "{{9-B}} | At least {{8-A}}, higher with a Dynamax Pok\xE9mon | {{High\
-        \ 7-C}}, higher with a Dynamax Pok\xE9mon | {{Low 1-C}}, higher with a Dynamax\
-        \ Pok\xE9mon | {{Low 1-C}}, higher with a Gigantamax Pok\xE9mon"
+      value: "At least , higher with a Dynamax Pok\xE9mon | , higher with a Dynamax\
+        \ Pok\xE9mon | , higher with a Dynamax Pok\xE9mon | , higher with a Gigantamax\
+        \ Pok\xE9mon"
       source_id: vsbattles-zacian-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "By himself=Superhuman Physical Characteristics, Sealing (Via Pok\xE9\
-        balls), Can Dynamax his Pok\xE9mon, Can give to his Pok\xE9mon: Healing and\
-        \ Purification (Type 3; Via Recovery Items) |-|With his Pok\xE9mon (Early\
-        \ Game)=Superhuman Physical Characteristics, Dynamax, Small Size (Type 1),\
-        \ Plant Manipulation (If using Grookey), Water Manipulation (If using Sobble),\
-        \ Fire Manipulation (If using Scorbunny), Flight, Air Manipulation (With Rookidee),\
-        \ Kicking Skills (With Wooloo) |-|With his Pok\xE9mon (Mid Game)=All previous\
-        \ abilities except Small Size (Type 1), plus additional Water Manipulation\
-        \ (With Cramorant), additional Plant Manipulation, Shadow Manipulation (With\
-        \ Trevenant), additional Fire Manipulation (With Heatmor), Status Effect Inducement,\
-        \ Earth Manipulation (With Silicobra), Electricity Manipulation (With Boltund\
-        \ and Toxel), Acid Manipulation and Poison Manipulation (With Toxel), Statistics\
-        \ Amplification (With Dubwool), Statistics Reduction (With Corviknight and\
-        \ Dubwool) |-|With his Pok\xE9mon (Late Game/Beginning of Post Game)=All previous\
-        \ abilities except Cramorant's, Toxel's, Silicobra's, Heatmor's, Trevenant's,\
-        \ and Boltund's, plus Metal Manipulation (With Corviknight), Electricity Manipulation,\
-        \ Poison Manipulation, Water Manipulation (With Pincurchin) and Darkness Manipulation\
-        \ (If using Inteleon or Rillaboom) |-|With his Pok\xE9mon (End of Post Game/Galarian\
+      value: "Superhuman Physical Characteristics, Sealing (Via Pok\xE9balls), Can\
+        \ Dynamax his Pok\xE9mon, Can give to his Pok\xE9mon: Healing and Purification\
+        \ (Type 3; Via Recovery Items) With his Pok\xE9mon (Early Game)=Superhuman\
+        \ Physical Characteristics, Dynamax, Small Size (Type 1), Plant Manipulation\
+        \ (If using Grookey), Water Manipulation (If using Sobble), Fire Manipulation\
+        \ (If using Scorbunny), Flight, Air Manipulation (With Rookidee), Kicking\
+        \ Skills (With Wooloo) With his Pok\xE9mon (Mid Game)=All previous abilities\
+        \ except Small Size (Type 1), plus additional Water Manipulation (With Cramorant),\
+        \ additional Plant Manipulation, Shadow Manipulation (With Trevenant), additional\
+        \ Fire Manipulation (With Heatmor), Status Effect Inducement, Earth Manipulation\
+        \ (With Silicobra), Electricity Manipulation (With Boltund and Toxel), Acid\
+        \ Manipulation and Poison Manipulation (With Toxel), Statistics Amplification\
+        \ (With Dubwool), Statistics Reduction (With Corviknight and Dubwool) With\
+        \ his Pok\xE9mon (Late Game/Beginning of Post Game)=All previous abilities\
+        \ except Cramorant's, Toxel's, Silicobra's, Heatmor's, Trevenant's, and Boltund's,\
+        \ plus Metal Manipulation (With Corviknight), Electricity Manipulation, Poison\
+        \ Manipulation, Water Manipulation (With Pincurchin) and Darkness Manipulation\
+        \ (If using Inteleon or Rillaboom) With his Pok\xE9mon (End of Post Game/Galarian\
         \ Star Tournament)=All previous abilities, plus Gigantamax, Statistics Amplification,\
         \ Non-Physical Interaction, Damage Boost (With Zacian or Zamazenta), and Forcefield\
         \ Creation (With Zamazenta)"
@@ -2327,9 +2301,9 @@ repair:
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: "Avatars= Superhuman Physical Characteristics, Immortality (Types 1,\
-        \ 2, 3, 7, 8 and 9), Dimensional Travel, Self-Sustenance (Types 1, 2 and 3),\
-        \ Social Influencing, Acrobatics, Cosmic Awareness, Nigh-Omniscience, Accelerated\
+      value: "Superhuman Physical Characteristics, Immortality (Types 1, 2, 3, 7,\
+        \ 8 and 9), Dimensional Travel, Self-Sustenance (Types 1, 2 and 3), Social\
+        \ Influencing, Acrobatics, Cosmic Awareness, Nigh-Omniscience, Accelerated\
         \ Development, Energy Manipulation, Energy Projection, Incorporeality, Empowerment,\
         \ Enhanced Senses, Extrasensory Perception, Reality Warping, Elemental Manipulation\
         \ (Can use all the powers of the 18 Pok\xE9mon Types throught its Plates,\
@@ -2362,7 +2336,7 @@ repair:
         \ Recover), Martial Arts (Via Seismic Toss), Time Manipulation (Future Sight\
         \ allows the user to observe and attack the target in the future, bypassing\
         \ Force fields and Precognition in the process), Purification (Type 3 via\
-        \ Refresh) |-| Plates'"
+        \ Refresh) Plates'"
       source_id: character-stats-profiles-zacian-game
       provider_id: character_stats_profiles
       authority: high
@@ -2427,11 +2401,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Zacian
     title: Zacian
     rank: 120
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2448,11 +2422,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Zacian_Pokemon
     title: Zacian
     rank: 120
-    extracted_fields: *id009
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id010
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2469,11 +2443,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Zacian_%28Pokemon%29
     title: Zacian
     rank: 120
-    extracted_fields: *id011
+    extracted_fields: *id010
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id011
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2490,3 +2464,23 @@ repair:
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: true
+  scoped_key: Hero of Many Battles
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-21T21:28:09Z'
+  key_origin: primary_form_position
+  axes:
+    tier:
+      method: positional
+      segments: 2
+    attack_potency:
+      method: positional
+      segments: 2
+    speed:
+      method: positional
+      segments: 2
+    durability:
+      method: positional
+      segments: 2
+  remaining_piped_axes: []

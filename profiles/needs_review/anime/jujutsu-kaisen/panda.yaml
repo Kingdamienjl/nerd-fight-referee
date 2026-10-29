@@ -10,18 +10,9 @@ battle_eligible: false
 generation:
   generated_at: '2026-10-04T03:10:29Z'
   generator: battlebot.harvest.auto_profile_harvester
-  confidence: 0.1
-  ineligible_reasons: &id002
-  - confidence_below_0_55
-  - missing_attack_potency
-  - missing_clean_linked_ability
-  - missing_durability
-  - missing_powers_and_abilities
-  - missing_source_revision_metadata
-  - missing_speed
-  - unlinked_stat:attack_potency
-  - unlinked_stat:durability
-  - unlinked_stat:speed
+  confidence: 0.6
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Panda
   franchise: Jujutsu Kaisen
@@ -97,42 +88,6 @@ sources:
 - id: vsbattles-panda-jujutsu-kaisen
   provider_id: vsbattles
   source_type: mediawiki
-  title: Panda Jujutsu Kaisen
-  url: https://vsbattles.fandom.com/wiki/Panda_Jujutsu_Kaisen
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-panda-jujutsu-kaisen
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Panda Jujutsu Kaisen
-  url: https://character-stats-and-profiles.fandom.com/wiki/Panda_Jujutsu_Kaisen
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-panda-jujutsu-kaisen
-  provider_id: vsbattles
-  source_type: mediawiki
   title: Panda (Jujutsu Kaisen)
   url: https://vsbattles.fandom.com/wiki/Panda_%28Jujutsu_Kaisen%29
   authority: high
@@ -168,17 +123,27 @@ sources:
   promotion_allowed: true
 power_scale:
   tier:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: ', higher with Gorilla Core, higher with Triceratops Core.'
+    source_ids:
+    - vsbattles-panda-jujutsu-kaisen
+    confidence: 0.9
+    notes: auto_repair source extraction
   attack_potency:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: City Block level (Comparable to his Durability, staggered Mechamaru with
+      consecutive hits), higher with Gorilla Core (ripped off Mechamaru's arm and
+      sent him flying), even higher with Triceratops Core (She is Pandas strongest
+      form, he stated she would kill anyone she sees), Can negate durability with
+      Unblockable Drumming Beat.
+    source_ids:
+    - vsbattles-panda-jujutsu-kaisen
+    confidence: 0.9
+    notes: auto_repair source extraction
   speed:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Subsonic (Comparable to Mechamaru), higher with Gorilla Mode.
+    source_ids:
+    - vsbattles-panda-jujutsu-kaisen
+    confidence: 0.9
+    notes: auto_repair source extraction
   lifting_strength:
     text: null
     source_ids: []
@@ -188,27 +153,225 @@ power_scale:
     source_ids: []
     confidence: 0.0
   durability:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: City Block level (Took several hits from Mechamaru although is still inferior
+      to him and survived Mechamarus Ultimate Cannon which is this strong, albeit
+      with major damage), higher with Gorilla Core, even higher with Triceratops Core.
+    source_ids:
+    - vsbattles-panda-jujutsu-kaisen
+    confidence: 0.9
+    notes: auto_repair source extraction
   stamina:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: at least Superhuman.
+    source_ids:
+    - vsbattles-panda-jujutsu-kaisen
+    confidence: 0.9
+    notes: auto_repair source extraction
   range:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: Standard Melee Range.
+    source_ids:
+    - vsbattles-panda-jujutsu-kaisen
+    confidence: 0.9
+    notes: auto_repair source extraction
   intelligence:
-    text: null
-    source_ids: []
-    confidence: 0.0
+    text: 'Average. Standard Tactics: Panda''s standard tactics in Jujutsu Kaisen
+      involve leveraging his immense physical strength and durability as an Abrupt-Mutated
+      Cursed Corpse. His core strategy relies on intelligent, close-quarters combat
+      and surprising opponents with his ability to switch between his unique cores
+      to change his form and abilities.'
+    source_ids:
+    - vsbattles-panda-jujutsu-kaisen
+    confidence: 0.9
+    notes: auto_repair source extraction
 claims: []
 abilities: []
 equipment: []
 summons: []
 resistances: []
-weaknesses: []
+weaknesses:
+- id: weaknesses-panda-s-main-weakness-is-his-slow-speed
+  name: Panda's main weakness is his slow speed
+  description: Panda's main weakness is his slow speed
+  source_ids: &id002
+  - vsbattles-panda-jujutsu-kaisen
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-which-makes-him-easy-to-zone-out-and-struggle-against-faster-opponent
+  name: which makes him easy to zone out and struggle against faster opponents
+  description: which makes him easy to zone out and struggle against faster opponents
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-and-he-can-be-defeated-by-destroying-his-three-cores-notable-attacks-
+  name: 'and he can be defeated by destroying his three cores. Notable Attacks/Techniques:'
+  description: 'and he can be defeated by destroying his three cores. Notable Attacks/Techniques:'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-gorilla-mode-by-switching-to-his-brother-s-core
+  name: 'Gorilla Mode: By switching to his "brother''s" core'
+  description: 'Gorilla Mode: By switching to his "brother''s" core'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-panda-can-transform-into-a-muscular-gorilla-that-retains-his-normal-c
+  name: Panda can transform into a muscular gorilla that retains his normal color
+    scheme. Panda is much stronger and faster in t
+  description: Panda can transform into a muscular gorilla that retains his normal
+    color scheme. Panda is much stronger and faster in this form but at the cost of
+    rapidly draining his cursed energy.
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-while-in-gorilla-mode
+  name: While in Gorilla Mode
+  description: While in Gorilla Mode
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-any-strike-panda-lands-will-resonate-through-the-targets-body-using-t
+  name: any strike Panda lands will resonate through the targets body using the "Unblockable
+    Drumming Beat". The impact of the h
+  description: any strike Panda lands will resonate through the targets body using
+    the "Unblockable Drumming Beat". The impact of the hit sends a shockwave through
+    the user's guard
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-so-they-feel-the-damage-even-if-they-defend
+  name: so they feel the damage even if they defend.
+  description: so they feel the damage even if they defend.
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-triceratops-mode-by-switching-to-his-sister-s-core
+  name: 'Triceratops Mode: By switching to his "sister''s" core'
+  description: 'Triceratops Mode: By switching to his "sister''s" core'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-panda-can-transform-into-a-bipedal-triceratops-form-the-appearance-of
+  name: Panda can transform into a bipedal Triceratops form. The appearance of Panda's
+    body becomes more slender and feminine wh
+  description: Panda can transform into a bipedal Triceratops form. The appearance
+    of Panda's body becomes more slender and feminine while his head takes on a wide
+    Triceratops shape. Panda claims his sister's form destroys everyone who looks
+    at her because of her shyness
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags: []
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
+- id: weaknesses-but-this-form-s-abilities-have-not-been-displayed-and-its-capabilitie
+  name: 'but this form''s abilities have not been displayed and its capabilities are
+    unknown. == Notable Matchups == Victories: Lo'
+  description: 'but this form''s abilities have not been displayed and its capabilities
+    are unknown. == Notable Matchups == Victories: Losses: Inconclusive: == Notes/Explanations
+    == Category:Jujutsu Kaisen Category:Characters Category:Bears Category:Curse Users
+    Category:Animals Category:Mammals Category:Male Characters Category:Anime Characters
+    Category:Manga Characters Category:Sorcerers Category:Durability Negation Users
+    Category:Vibration Users Category:Shockwave Users Category:Martial Artists Category:Boxers
+    Category:Energy Users Category:Non-Physical Interaction Users'
+  source_ids: *id002
+  source_claim_ids: []
+  confidence: 0.85
+  tags:
+  - sonic_attack
+  targets: []
+  activation_requirements: []
+  counters: []
+  resource_dependencies: []
+  scope_limitations: []
+  enrichment:
+    method: deterministic_keyword_rules
+    metadata_only: true
 win_conditions: []
 loss_conditions: []
 battlefield_dependencies: []
@@ -220,280 +383,30 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id002
+  ineligible_reasons:
+  - confidence_below_0_55
+  - missing_attack_potency
+  - missing_clean_linked_ability
+  - missing_durability
+  - missing_powers_and_abilities
+  - missing_source_revision_metadata
+  - missing_speed
+  - unlinked_stat:attack_potency
+  - unlinked_stat:durability
+  - unlinked_stat:speed
   source_errors: []
   notes: []
   readiness_state: needs_review
+  profile_state: auto_evidence_profile
+  primary_source_id: vsbattles-panda-jujutsu-kaisen
+  secondary_disagreement_policy: warning_only
 profile_hash: 4ef1f81e82cd4896f9f5b2f6fc61b75a78fa89938ba782fd24371c49a0076643
 repair:
-  attempted_at: '2026-10-04T14:20:54Z'
+  attempted_at: '2026-10-25T09:48:56Z'
   repaired_fields: []
   unresolved_fields:
-  - attack_potency
-  - speed
-  - durability
   - abilities
   source_attempts:
-  - source_id: vsbattles-panda-jujutsu-kaisen
-    url: https://vsbattles.fandom.com/wiki/Panda_Jujutsu_Kaisen
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Panda (Jujutsu Kaisen)
-    source_type: mediawiki
-    revision_id: '9548099'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 5705
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    - Notes/Explanations
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 130
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{8-B}}, higher with Gorilla Core, higher with Triceratops Core.'
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Panda Core= *
-        Superhuman Physical Characteristics * Cursed Energy Manipulation (Basic Sorcerer
-        - He is a Semi-Grade 2 Sorcerer) *Martial Arts (Was trained by principle Yagi
-        in boxing) Resistance to: * Mind Manipulation and Biological Manipulation
-        due to being a Cursed Corpse |-|Gorilla Core= All Previous abilities enhanced
-        plus: * Vibration Manipulation and Durability Negation with Unblockable Drumming
-        Beat (Creates a shockwave that travels throughout the opponents body) }}'
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: City Block level (Comparable to his Durability, staggered Mechamaru with
-        consecutive hits), higher with Gorilla Core (ripped off Mechamaru's arm and
-        sent him flying), even higher with Triceratops Core (She is Pandas strongest
-        form, he stated she would kill anyone she sees), Can negate durability with
-        Unblockable Drumming Beat.
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Subsonic (Comparable to Mechamaru), higher with Gorilla Mode.
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: City Block level (Took several hits from Mechamaru although is still
-        inferior to him and survived Mechamarus Ultimate Cannon which is this strong,
-        albeit with major damage), higher with Gorilla Core, even higher with Triceratops
-        Core.
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: at least Superhuman.
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range.
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: None.
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: 'Average. Standard Tactics: Panda''s standard tactics in Jujutsu Kaisen
-        involve leveraging his immense physical strength and durability as an Abrupt-Mutated
-        Cursed Corpse. His core strategy relies on intelligent, close-quarters combat
-        and surprising opponents with his ability to switch between his unique cores
-        to change his form and abilities.'
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Panda''s main weakness is his slow speed, which makes him easy to zone
-        out and struggle against faster opponents, and he can be defeated by destroying
-        his three cores. Notable Attacks/Techniques: *Gorilla Mode: By switching to
-        his "brother''s" core, Panda can transform into a muscular gorilla that retains
-        his normal color scheme. Panda is much stronger and faster in this form but
-        at the cost of rapidly draining his cursed energy. **While in Gorilla Mode,
-        any strike Panda lands will resonate through the targets body using the "Unblockable
-        Drumming Beat". The impact of the hit sends a shockwave through the user''s
-        guard, so they feel the damage even if they defend. *Triceratops Mode: By
-        switching to his "sister''s" core, Panda can transform into a bipedal Triceratops
-        form. The appearance of Panda''s body becomes more slender and feminine while
-        his head takes on a wide Triceratops shape. Panda claims his sister''s form
-        destroys everyone who looks at her because of her shyness, but this form''s
-        abilities have not been displayed and its capabilities are unknown. == Notable
-        Matchups == Victories: Losses: Inconclusive: == Notes/Explanations == {{Discussions}}
-        Category:Jujutsu Kaisen Category:Characters Category:Bears Category:Curse
-        Users Category:Animals Category:Mammals Category:Male Characters Category:Anime
-        Characters Category:Manga Characters Category:Sorcerers Category:Durability
-        Negation Users Category:Vibration Users Category:Shockwave Users Category:Martial
-        Artists Category:Boxers Category:Energy Users Category:Non-Physical Interaction
-        Users'
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|panda jujutsu kaisen|9548099
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-panda-jujutsu-kaisen
-    url: https://character-stats-and-profiles.fandom.com/wiki/Panda_Jujutsu_Kaisen
-    ok: true
-    note: fetched_no_core_fields
-    extracted_fields:
-    - attack_potency
-    - speed
-    - tier
-    normalized_page_title: Jujutsu Kaisen (Canon)/KaaydoManic
-    source_type: mediawiki
-    revision_id: '608061'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 101312
-    content_kind: api_json
-    headings_detected:
-    - Power of the Verse
-    - Calculations
-    - Characters
-    stat_labels_detected:
-    - attack_potency
-    - keys
-    - lifting_strength
-    - origin
-    - range
-    - speed
-    - striking_strength
-    - tier
-    extraction_failure_reason: ''
-    rank: 75
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: attack_potency
-      value: '* Low'
-      source_id: character-stats-profiles-panda-jujutsu-kaisen
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: tier
-      value: Every Sorcerers ranging from Grade 3 to 1 are within the ranges of City
-        Block level to Multi-City Block level due to various feats ranging toward
-        those levels. Some even reach the Large Town level of power, mostly upper
-        Grade 1 Sorcerers. * Mid
-      source_id: character-stats-profiles-panda-jujutsu-kaisen
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: '* Low Tiers: Pretty much most of the cast are rated with Subsonic to
-        some being rated as Subsonic+ speed due to various bullet dodging feats. They
-        are however below the benchmark of Mach 0.80 as it is the speed of an attack,
-        namely "Piercing Blood", that most of these characters are not capable of
-        reacting fully. * Mid Tiers: A few characters reach those sonic to supersonic
-        speeds. The most notable one being Human Naoya Zenin who has a top speed of
-        Mach 1 or Transonic. A few characters are capable of reacting and firing attacks
-        at Supersonic speeds, namely the "Piercing Blood" attack from Choso which
-        consistantly exceeds the speed of sound. The absolute peak of this category
-        is Supersonic+ with Curse Noya''s top speed of Mach 3. There are however two
-        outsiders within that category, being [[Satoru Gojo (Canon)/KaaydoManic|[Teenager]
-        Satoru Gojo]] and [[Suguru Geto (Canon)/KaaydoManic|[Teenager] Suguru Geto]]
-        with the latter having a Hypersonic feat. * Top Tiers: The top tiers consistenly
-        range within the Massively Hypersonic and Massively Hypersonic+ rating due
-        to having various lightning dodging and reactions feats mainly from Hajime
-        Kashimo, Jacpot Kinji Hakari, and [[Maki Zenin (Canon)/KaaydoManic|[Fully
-        Realized] Maki Zenin]] & Toji Fushiguro. === Calculations ==='
-      source_id: character-stats-profiles-panda-jujutsu-kaisen
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 2
-    ability_count: 0
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|jujutsu kaisen canon kaaydomanic|608061
-    retryable: false
-    exception_class: ''
   - source_id: vsbattles-panda-jujutsu-kaisen
     url: https://vsbattles.fandom.com/wiki/Panda_%28Jujutsu_Kaisen%29
     ok: true
@@ -502,11 +415,9 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Panda (Jujutsu Kaisen)
@@ -537,7 +448,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -552,19 +463,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{8-B}}, higher with Gorilla Core, higher with Triceratops Core.'
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Panda Core= *
-        Superhuman Physical Characteristics * Cursed Energy Manipulation (Basic Sorcerer
-        - He is a Semi-Grade 2 Sorcerer) *Martial Arts (Was trained by principle Yagi
-        in boxing) Resistance to: * Mind Manipulation and Biological Manipulation
-        due to being a Cursed Corpse |-|Gorilla Core= All Previous abilities enhanced
-        plus: * Vibration Manipulation and Durability Negation with Unblockable Drumming
-        Beat (Creates a shockwave that travels throughout the opponents body) }}'
+      value: 8-B, higher with Gorilla Core, higher with Triceratops Core.
       source_id: vsbattles-panda-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -606,12 +505,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None.
-      source_id: vsbattles-panda-jujutsu-kaisen
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: 'Average. Standard Tactics: Panda''s standard tactics in Jujutsu Kaisen
         involve leveraging his immense physical strength and durability as an Abrupt-Mutated
@@ -623,27 +516,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Panda''s main weakness is his slow speed, which makes him easy to zone
-        out and struggle against faster opponents, and he can be defeated by destroying
-        his three cores. Notable Attacks/Techniques: *Gorilla Mode: By switching to
-        his "brother''s" core, Panda can transform into a muscular gorilla that retains
-        his normal color scheme. Panda is much stronger and faster in this form but
-        at the cost of rapidly draining his cursed energy. **While in Gorilla Mode,
-        any strike Panda lands will resonate through the targets body using the "Unblockable
-        Drumming Beat". The impact of the hit sends a shockwave through the user''s
-        guard, so they feel the damage even if they defend. *Triceratops Mode: By
-        switching to his "sister''s" core, Panda can transform into a bipedal Triceratops
-        form. The appearance of Panda''s body becomes more slender and feminine while
-        his head takes on a wide Triceratops shape. Panda claims his sister''s form
-        destroys everyone who looks at her because of her shyness, but this form''s
-        abilities have not been displayed and its capabilities are unknown. == Notable
-        Matchups == Victories: Losses: Inconclusive: == Notes/Explanations == {{Discussions}}
-        Category:Jujutsu Kaisen Category:Characters Category:Bears Category:Curse
-        Users Category:Animals Category:Mammals Category:Male Characters Category:Anime
-        Characters Category:Manga Characters Category:Sorcerers Category:Durability
-        Negation Users Category:Vibration Users Category:Shockwave Users Category:Martial
-        Artists Category:Boxers Category:Energy Users Category:Non-Physical Interaction
-        Users'
+      value: Panda's main weakness is his slow speed, and he can be defeated by destroying
+        his three cores.
       source_id: vsbattles-panda-jujutsu-kaisen
       provider_id: vsbattles
       authority: high
@@ -653,7 +527,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -732,70 +606,15 @@ repair:
       confidence: 0.75
     - field: powers_and_abilities
       value: Memory Manipulation (Via the Fluttering Finger Mindslip), Flight (Via
-        Wings of Light), Telepathy & Limited Analytical Prediction (Via Nao Yuedu)
-        |-|KFP4= All previous powers plus Limited Air Manipulation and Vibration Manipulation
+        Wings of Light), Telepathy & Limited Analytical Prediction (Via Nao Yuedu),
+        KFP4= All previous powers plus Limited Air Manipulation and Vibration Manipulation
         (Able to create gusts of wind and ground tremors with his physical attacks,
         which have noticeable effects on villagers near his demonstrations), Clairvoyance
         (Saw the Chameleon's plan through his dreams, which she confirmed was what
         actually happened), Power Bestowal and Enhanced Absorption (With chi, Po is
-        able to take the stolen powers and return it to the other masters), limited
+        able to take the stolen powers and return it to the other masters), limited,
         Resistance to Magic (Able to break magically enchanted cages, which were believed
-        by the Chameleon to be unbreakable) 500px ==703px== City Block level (Comparable
-        to Tai Lung and was able to harm him, who punched Po so hard he made a large
-        crater, collapsed a large building with a single kick, and defeated the Furious
-        5, who defeated Boar when they were younger, who destroyed a land full of
-        trees) | City Block level (Got far stronger throughout Legends of Awesomeness.
-        During season 1 he was able to hold his own against Fenghuang. He is able
-        to somewhat harm himself, as shown in Bad Po. Capable of defeating the entire
-        Furious Five at once, like he did in Fluttering Finger Mindslip, in some cases
-        being capable of knocking out a somewhat weakened Furious Five and Shifu with
-        a single body slam. Easily defeated LoA Tigress in battle dozens of times
-        with little effort. By the end of Legends of Awesomeness, Po is capable of
-        defeating three of the first Furious Five + Fenghuang by himself, each of
-        whom are far superior to Tigress. Harmed a weakened Kim the Invincible. Somewhat
-        comparable to his own durability as he could harm himself in Bad Po. Lei Kung
-        referred to him as a "main course", whereas the combined efforts of the Furious
-        Five and Shifu were an "appetizer"), City level to Planet level with Hero's
-        Chi (Killed Ke-Pa in two hits, who was superior to Oogway when he didn't possess
-        the Hero's Chi) | City Block level (Far superior to his Kung Fu Panda 1 self,
-        overpowered Shen) | City Block level, City level to Planet Level (Much stronger
-        than before. Scales to his durability. Harmed Amped Alfred several times,
-        who could survive his own power (the power of all four Tianshang Weapons at
-        once) and should be comparable to Wandering Blade, who harmed Amped Alfred
-        too. The Ancient Masters wouldn't have destroyed The Tianshang Weapons, Earth
-        would've was destroyed) | Large Town level+, likely Multi Continent level
-        to Small Planet level (Should be far superior to his Hero's Chi. Casually
-        stomped Kai, who had absorbed the chi of countless masters since fighting
-        Oogway. A portion of Po's Mastered Chi was described by Kai as being "too
-        much", implying that he couldn't absorb it all, making it immensely superior
-        to the combined chi of the Furious Five, Master Shifu, Master Oogway, all
-        of the other Kung Fu Masters from both the Spirit Realm and the entirety of
-        China, and likely the chi of Tigress and the Panda Villagers as well, whose
-        chi he was planning on absorbing as well), Low Multiverse level to possibly
-        Low Complex Multiverse Level in the Spirit Realm (His chi was enough to restore
-        the entire spirit realm which is an alternate reality. Noted his chi keeps
-        the Spirit Realm stable versus Kai's destructive chi. Stated by Master White
-        Tiger to have "no true borders", possibly implying it is infinite in size.
-        The Wellspring was described as "the source of all light in the universe"
-        by Sun Wukong. Master Blue Dragon stated that it would take an even greater
-        power than the Spirit Realm to find a way out, with Master Black Tortoise
-        confirming that Jindiao had that power after absorbing the Wellspring. The
-        Wellspring's power is described as limitless and endless. The Wellspring gives
-        all living creatures their strength and ability to live by granting chi, including
-        the Shuyong Tree, which can create time with its seeds and fruit) | City Block
-        level, City level to Planet Level (Po can harm Chameleon, who is equal in
-        power to Po and at least superior to Kai before he started stealing chi. Should
-        be superior to his KFP3 self), likely Higher (Chameleon was stated to be Po's
-        strongest opponent, and his greatest villain, and should therefore be stronger
-        than the Kai that Po fought), Higher with Mastery of Chi (Po's chi usage is
-        likely stronger than before. He ko'd Chameleon in a single chi strike) ==703px==
-        At least Transonic (Kept pace with Tai Lung, who appeared in front of Shifu
-        soon as lightning struck, blocked attacks from Shifu) with Supersonic reactions
-        (Comparable to Furious Five members such as Tigress, who reacted to supersonic
-        cannonballs) | Massively Hypersonic+ (Dodged a magic lightning on several
-        occasions. Faster than before, comparable to Crane, in movement speed, who
-        flew to the Northern Mountains in a short period of time. Blitzed Temutai
-        on several occasions later in the Legends of Awesomeness series. Blitzed t
+        by the Chameleon to be unbreakable) 500px
       source_id: character-stats-profiles-panda-jujutsu-kaisen
       provider_id: character_stats_profiles
       authority: high
@@ -814,6 +633,220 @@ repair:
       memelordgamer trap|459827
     retryable: false
     exception_class: ''
+  - source_id: vsbattles-panda-jujutsu-kaisen
+    url: https://vsbattles.fandom.com/wiki/Panda_Jujutsu_Kaisen
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - range
+    - speed
+    - stamina
+    - tier
+    - weaknesses
+    normalized_page_title: Panda (Jujutsu Kaisen)
+    source_type: mediawiki
+    revision_id: '9548099'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 5705
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    - Notes/Explanations
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 115
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 8-B, higher with Gorilla Core, higher with Triceratops Core.
+      source_id: vsbattles-panda-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: City Block level (Comparable to his Durability, staggered Mechamaru with
+        consecutive hits), higher with Gorilla Core (ripped off Mechamaru's arm and
+        sent him flying), even higher with Triceratops Core (She is Pandas strongest
+        form, he stated she would kill anyone she sees), Can negate durability with
+        Unblockable Drumming Beat.
+      source_id: vsbattles-panda-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Subsonic (Comparable to Mechamaru), higher with Gorilla Mode.
+      source_id: vsbattles-panda-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: City Block level (Took several hits from Mechamaru although is still
+        inferior to him and survived Mechamarus Ultimate Cannon which is this strong,
+        albeit with major damage), higher with Gorilla Core, even higher with Triceratops
+        Core.
+      source_id: vsbattles-panda-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: at least Superhuman.
+      source_id: vsbattles-panda-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range.
+      source_id: vsbattles-panda-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: 'Average. Standard Tactics: Panda''s standard tactics in Jujutsu Kaisen
+        involve leveraging his immense physical strength and durability as an Abrupt-Mutated
+        Cursed Corpse. His core strategy relies on intelligent, close-quarters combat
+        and surprising opponents with his ability to switch between his unique cores
+        to change his form and abilities.'
+      source_id: vsbattles-panda-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Panda's main weakness is his slow speed, and he can be defeated by destroying
+        his three cores.
+      source_id: vsbattles-panda-jujutsu-kaisen
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|panda jujutsu kaisen|9548099
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-panda-jujutsu-kaisen
+    url: https://character-stats-and-profiles.fandom.com/wiki/Panda_Jujutsu_Kaisen
+    ok: true
+    note: fetched_no_core_fields
+    extracted_fields:
+    - speed
+    - tier
+    normalized_page_title: Jujutsu Kaisen (Canon)/KaaydoManic
+    source_type: mediawiki
+    revision_id: '622448'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 102942
+    content_kind: api_json
+    headings_detected:
+    - Power of the Verse
+    - Calculations
+    - Characters
+    stat_labels_detected:
+    - attack_potency
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - striking_strength
+    - tier
+    extraction_failure_reason: ''
+    rank: 60
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Every Sorcerers ranging from Grade 3 to 1 are within the ranges of City
+        Block level to Multi-City Block level due to various feats ranging toward
+        those levels. Some even reach the Large Town level of power, mostly upper
+        Grade 1 Sorcerers. * Mid
+      source_id: character-stats-profiles-panda-jujutsu-kaisen
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: '* Low Tiers: Pretty much most of the cast are rated with Subsonic to
+        some being rated as Subsonic+ speed due to various bullet dodging feats. They
+        are however below the benchmark of Mach 0.80 as it is the speed of an attack,
+        namely "Piercing Blood", that most of these characters are not capable of
+        reacting fully. * Mid Tiers: A few characters reach those sonic to supersonic
+        speeds. The most notable one being Human Naoya Zenin who has a top speed of
+        Mach 1 or Transonic. A few characters are capable of reacting and firing attacks
+        at Supersonic speeds, namely the "Piercing Blood" attack from Choso which
+        consistently exceeds the speed of sound. The absolute peak of this category
+        is Supersonic+ with Curse Noya''s top speed of Mach 3. There are however two
+        outsiders within that category, being [[Satoru Gojo (Canon)/KaaydoManic|[Teenager]
+        Satoru Gojo]] and [[Suguru Geto (Canon)/KaaydoManic|[Hidden Inventory] Suguru
+        Geto]] with the latter having a Hypersonic feat. * Top Tiers: The top tiers
+        consistenly range within the Massively Hypersonic and Massively Hypersonic+
+        rating due to having various lightning dodging and reactions feats mainly
+        from Hajime Kashimo, Jackpot Kinji Hakari, and [[Maki Zenin (Canon)/KaaydoManic|[Fully
+        Realized] Maki Zenin]] & Toji Fushiguro.'
+      source_id: character-stats-profiles-panda-jujutsu-kaisen
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 1
+    ability_count: 0
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|jujutsu kaisen canon kaaydomanic|622448
+    retryable: false
+    exception_class: ''
   - source_id: vsbattles-panda
     url: https://vsbattles.fandom.com/wiki/Panda
     ok: true
@@ -825,7 +858,6 @@ repair:
     - powers_and_abilities
     - range
     - speed
-    - stamina
     - standard_equipment
     - tier
     - weaknesses
@@ -871,7 +903,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-C}}, higher via piercing damage'
+      value: 9-C, higher via piercing damage
       source_id: vsbattles-panda
       provider_id: vsbattles
       authority: high
@@ -912,12 +944,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-panda
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: range
       value: Standard Melee Range
       source_id: vsbattles-panda
@@ -937,14 +963,7 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Giant pandas, despite being meant for a carnivorous diet, consumes bamboo,
-        a low-energy food source. This forces them to consume 9 to 14 kg of bamboo
-        shoots each day. ==Notable Matchups== Victories: Losses: * Snow Leopard (The
-        Real World) Snow Leopard''s Profile (Speed was equalized, fight took place
-        in bamboo forest, and starting distance was 10 meters) Inconclusive: ==References==
-        {{Discussions}} Category:Real World Category:Animals Category:Species Category:Bears
-        Category:Enhanced Senses Users Category:Claw Users Category:Bodily Weaponry
-        Users Category:Characters'
+      value: Giant pandas, despite being meant for a carnivorous diet, consumes bamboo
       source_id: vsbattles-panda
       provider_id: vsbattles
       authority: high
@@ -1029,7 +1048,7 @@ repair:
         Enhanced Senses (Smell - Can smell other pandas), Stealth Mastery via Environment,
         Life Creation (A female and male can create a child. For males new sperm is
         created every 3 months and for Females the fetus grows in the womb), Fast
-        Metabolism (Spend most of the day eating), Limited Resistance to Cold and
+        Metabolism (Spend most of the day eating), Limited, Resistance to Cold and
         Heat via Fur
       source_id: character-stats-profiles-panda
       provider_id: character_stats_profiles
@@ -1065,9 +1084,8 @@ repair:
       confidence: 0.75
     - field: weaknesses
       value: Regular Panda Weaknesses. Giant pandas, despite being meant for a carnivorous
-        diet, consumes bamboo, a low-energy food source, This forces them to consume
-        9 to 14 kg of bamboo shoots each day. ==Battles== ====Wins ():==== ====Loses
-        ():==== Category:Maskboiperson Category:Animals
+        diet, consumes bamboo, This forces them to consume 9 to 14 kg of bamboo shoots
+        each day.
       source_id: character-stats-profiles-panda
       provider_id: character_stats_profiles
       authority: high
@@ -1093,11 +1111,9 @@ repair:
     - attack_potency
     - durability
     - intelligence
-    - powers_and_abilities
     - range
     - speed
     - stamina
-    - standard_equipment
     - tier
     - weaknesses
     normalized_page_title: Panda (Jujutsu Kaisen)
@@ -1128,7 +1144,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 130
+    rank: 115
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
@@ -1145,19 +1161,7 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{8-B}}, higher with Gorilla Core, higher with Triceratops Core.'
-      source_id: vsbattles-panda-anime
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: '{{Border|Scroll=No|Visible=Yes|Padding=Yes|Content= |-|Panda Core= *
-        Superhuman Physical Characteristics * Cursed Energy Manipulation (Basic Sorcerer
-        - He is a Semi-Grade 2 Sorcerer) *Martial Arts (Was trained by principle Yagi
-        in boxing) Resistance to: * Mind Manipulation and Biological Manipulation
-        due to being a Cursed Corpse |-|Gorilla Core= All Previous abilities enhanced
-        plus: * Vibration Manipulation and Durability Negation with Unblockable Drumming
-        Beat (Creates a shockwave that travels throughout the opponents body) }}'
+      value: 8-B, higher with Gorilla Core, higher with Triceratops Core.
       source_id: vsbattles-panda-anime
       provider_id: vsbattles
       authority: high
@@ -1199,12 +1203,6 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: standard_equipment
-      value: None.
-      source_id: vsbattles-panda-anime
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: intelligence
       value: 'Average. Standard Tactics: Panda''s standard tactics in Jujutsu Kaisen
         involve leveraging his immense physical strength and durability as an Abrupt-Mutated
@@ -1216,27 +1214,8 @@ repair:
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Panda''s main weakness is his slow speed, which makes him easy to zone
-        out and struggle against faster opponents, and he can be defeated by destroying
-        his three cores. Notable Attacks/Techniques: *Gorilla Mode: By switching to
-        his "brother''s" core, Panda can transform into a muscular gorilla that retains
-        his normal color scheme. Panda is much stronger and faster in this form but
-        at the cost of rapidly draining his cursed energy. **While in Gorilla Mode,
-        any strike Panda lands will resonate through the targets body using the "Unblockable
-        Drumming Beat". The impact of the hit sends a shockwave through the user''s
-        guard, so they feel the damage even if they defend. *Triceratops Mode: By
-        switching to his "sister''s" core, Panda can transform into a bipedal Triceratops
-        form. The appearance of Panda''s body becomes more slender and feminine while
-        his head takes on a wide Triceratops shape. Panda claims his sister''s form
-        destroys everyone who looks at her because of her shyness, but this form''s
-        abilities have not been displayed and its capabilities are unknown. == Notable
-        Matchups == Victories: Losses: Inconclusive: == Notes/Explanations == {{Discussions}}
-        Category:Jujutsu Kaisen Category:Characters Category:Bears Category:Curse
-        Users Category:Animals Category:Mammals Category:Male Characters Category:Anime
-        Characters Category:Manga Characters Category:Sorcerers Category:Durability
-        Negation Users Category:Vibration Users Category:Shockwave Users Category:Martial
-        Artists Category:Boxers Category:Energy Users Category:Non-Physical Interaction
-        Users'
+      value: Panda's main weakness is his slow speed, and he can be defeated by destroying
+        his three cores.
       source_id: vsbattles-panda-anime
       provider_id: vsbattles
       authority: high
@@ -1246,7 +1225,7 @@ repair:
     variant_score: 25
     provider_priority: 120
     core_field_count: 3
-    ability_count: 1
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: true
@@ -1259,32 +1238,23 @@ repair:
     ok: true
     note: extracted_core_fields
     extracted_fields:
-    - powers_and_abilities
+    - attack_potency
+    - durability
+    - speed
     - tier
-    normalized_page_title: Po (Canon, Kung Fu Panda)/MemeLordGamer Trap
+    - weaknesses
+    normalized_page_title: Suguru Geto (Canon)/KaaydoManic
     source_type: mediawiki
-    revision_id: '459827'
+    revision_id: '622370'
     fetch_status: fetched
     http_status: 200
-    content_length: 129267
+    content_length: 6472
     content_kind: api_json
     headings_detected:
-    - '[[File:Summary_SU.png|215px]]'
-    - '[[File:Notable_Powers_SU_Text.png|703px]]'
-    - '[[File:Attack_Potency.png|703px]]'
-    - '[[File:Speed.png|703px]]'
-    - '[[File:Lifting_Strength.png|703px]]'
-    - '[[File:Striking_Strength.png|703px]]'
-    - '[[File:Durability.png|703px]]'
-    - '[[File:Mariostamina.png]]'
-    - '[[File:Range.png|703px]]'
-    - '[[File:Mariostandardequip.png]]'
-    - '[[File:Intelligence.png|703px]]'
-    - '[[File:Weaknesses.png|703px]]'
-    - '[[File:Notable_Attacks_and_Techniques.png|703px]]'
-    - '''''''Key:'''''''
-    - '''''''Notes:'''''''
-    - Others
+    - Summary
+    - Powers and Stats
+    - Notes and Explanations
+    - Categories
     stat_labels_detected:
     - attack_potency
     - durability
@@ -1301,7 +1271,7 @@ repair:
     - tier
     - weaknesses
     extraction_failure_reason: ''
-    rank: 60
+    rank: 65
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
@@ -1314,79 +1284,48 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: 8-B | 8-B, 7-B to 5-B with Hero's Chi | 8-B | 8-B, 7-B to 5-B | High
-        7-C, likely High 6-A to Low 5-B, 2-C to possibly Low 1-C in the Spirit Realm
-        | 8-B, 7-B to 5-B, likely Higher, Higher with Mastery of Chi
+      value: '6-C | 6-C, far higher with Maximum: Uzumaki'
       source_id: character-stats-profiles-panda-anime
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: powers_and_abilities
-      value: Memory Manipulation (Via the Fluttering Finger Mindslip), Flight (Via
-        Wings of Light), Telepathy & Limited Analytical Prediction (Via Nao Yuedu)
-        |-|KFP4= All previous powers plus Limited Air Manipulation and Vibration Manipulation
-        (Able to create gusts of wind and ground tremors with his physical attacks,
-        which have noticeable effects on villagers near his demonstrations), Clairvoyance
-        (Saw the Chameleon's plan through his dreams, which she confirmed was what
-        actually happened), Power Bestowal and Enhanced Absorption (With chi, Po is
-        able to take the stolen powers and return it to the other masters), limited
-        Resistance to Magic (Able to break magically enchanted cages, which were believed
-        by the Chameleon to be unbreakable) 500px ==703px== City Block level (Comparable
-        to Tai Lung and was able to harm him, who punched Po so hard he made a large
-        crater, collapsed a large building with a single kick, and defeated the Furious
-        5, who defeated Boar when they were younger, who destroyed a land full of
-        trees) | City Block level (Got far stronger throughout Legends of Awesomeness.
-        During season 1 he was able to hold his own against Fenghuang. He is able
-        to somewhat harm himself, as shown in Bad Po. Capable of defeating the entire
-        Furious Five at once, like he did in Fluttering Finger Mindslip, in some cases
-        being capable of knocking out a somewhat weakened Furious Five and Shifu with
-        a single body slam. Easily defeated LoA Tigress in battle dozens of times
-        with little effort. By the end of Legends of Awesomeness, Po is capable of
-        defeating three of the first Furious Five + Fenghuang by himself, each of
-        whom are far superior to Tigress. Harmed a weakened Kim the Invincible. Somewhat
-        comparable to his own durability as he could harm himself in Bad Po. Lei Kung
-        referred to him as a "main course", whereas the combined efforts of the Furious
-        Five and Shifu were an "appetizer"), City level to Planet level with Hero's
-        Chi (Killed Ke-Pa in two hits, who was superior to Oogway when he didn't possess
-        the Hero's Chi) | City Block level (Far superior to his Kung Fu Panda 1 self,
-        overpowered Shen) | City Block level, City level to Planet Level (Much stronger
-        than before. Scales to his durability. Harmed Amped Alfred several times,
-        who could survive his own power (the power of all four Tianshang Weapons at
-        once) and should be comparable to Wandering Blade, who harmed Amped Alfred
-        too. The Ancient Masters wouldn't have destroyed The Tianshang Weapons, Earth
-        would've was destroyed) | Large Town level+, likely Multi Continent level
-        to Small Planet level (Should be far superior to his Hero's Chi. Casually
-        stomped Kai, who had absorbed the chi of countless masters since fighting
-        Oogway. A portion of Po's Mastered Chi was described by Kai as being "too
-        much", implying that he couldn't absorb it all, making it immensely superior
-        to the combined chi of the Furious Five, Master Shifu, Master Oogway, all
-        of the other Kung Fu Masters from both the Spirit Realm and the entirety of
-        China, and likely the chi of Tigress and the Panda Villagers as well, whose
-        chi he was planning on absorbing as well), Low Multiverse level to possibly
-        Low Complex Multiverse Level in the Spirit Realm (His chi was enough to restore
-        the entire spirit realm which is an alternate reality. Noted his chi keeps
-        the Spirit Realm stable versus Kai's destructive chi. Stated by Master White
-        Tiger to have "no true borders", possibly implying it is infinite in size.
-        The Wellspring was described as "the source of all light in the universe"
-        by Sun Wukong. Master Blue Dragon stated that it would take an even greater
-        power than the Spirit Realm to find a way out, with Master Black Tortoise
-        confirming that Jindiao had that power after absorbing the Wellspring. The
-        Wellspring's power is described as limitless and endless. The Wellspring gives
-        all living creatures their strength and ability to live by granting chi, including
-        the Shuyong Tree, which can create time with its seeds and fruit) | City Block
-        level, City level to Planet Level (Po can harm Chameleon, who is equal in
-        power to Po and at least superior to Kai before he started stealing chi. Should
-        be superior to his KFP3 self), likely Higher (Chameleon was stated to be Po's
-        strongest opponent, and his greatest villain, and should therefore be stronger
-        than the Kai that Po fought), Higher with Mastery of Chi (Po's chi usage is
-        likely stronger than before. He ko'd Chameleon in a single chi strike) ==703px==
-        At least Transonic (Kept pace with Tai Lung, who appeared in front of Shifu
-        soon as lightning struck, blocked attacks from Shifu) with Supersonic reactions
-        (Comparable to Furious Five members such as Tigress, who reacted to supersonic
-        cannonballs) | Massively Hypersonic+ (Dodged a magic lightning on several
-        occasions. Faster than before, comparable to Crane, in movement speed, who
-        flew to the Northern Mountains in a short period of time. Blitzed Temutai
-        on several occasions later in the Legends of Awesomeness series. Blitzed t
+    - field: attack_potency
+      value: 'Island level+83.4 Gigatons (Comparable to Satoru Gojo who stated he
+        can destroy Mount Yari, they were both the strongest Jujutsu Sorcerer of 2006
+        putting them above Grade 1 Sorcerers like Masamichi Yaga and Mei Mei with
+        Grade 1 being the minimal level to exorcise Special Grade Cursed Spirits like
+        the Finger Bearers which are stronger than Semi-Grade 1 Sorcerer Mechamaru
+        who can vaporize a forest and can evaporates chunks of rocks their domain,
+        Special Grade Sorcerer Yuki Tsukumo who was a known Jujutsu Sorcerer at that
+        period of time making her comparable to the energy output of 1 Year Charge
+        Absolute Mechamaru) | Island level+ (Is a Special Grade Sorcerer. Stronger
+        than Fully Manifested Rika and [[Yuta Okkotsu (Canon)/KaaydoManic|[Volume
+        0] Yuta Okkotsu]]. Has equal Cursed Energy than Kenjaku), far higher with
+        Maximum: Uzumaki (Is an attack with the output of his the full power of Suguru
+        and the combination of of all his Cursed Spirits)'
+      source_id: character-stats-profiles-panda-anime
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: HypersonicMach 5 (Grabbed Riko falling before Kokun could perceive it)
+        | Massively Hypersonic+Mach 2637 (Should be comparable if not faster than
+        before. Blitzed [[Maki Zenin (Canon)/KaaydoManic|[Incomplete] Maki Zenin]]
+        and can keep up with [[Yuta Okkotsu (Canon)/KaaydoManic|[Volume 0] Yuka Okkotsu]].
+        Comparable to Kenjaku who is stated by Maki that a conventional attack on
+        him wouldn't work, with surprise sneak attacks being conventional)
+      source_id: character-stats-profiles-panda-anime
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Island level+ | Island level+
+      source_id: character-stats-profiles-panda-anime
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: Notes and Explanations
       source_id: character-stats-profiles-panda-anime
       provider_id: character_stats_profiles
       authority: high
@@ -1395,14 +1334,13 @@ repair:
     identity_score: 0
     variant_score: 0
     provider_priority: 120
-    core_field_count: 0
-    ability_count: 1
+    core_field_count: 3
+    ability_count: 0
     exact_name_match: false
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|po canon kung fu panda
-      memelordgamer trap|459827
+    duplicate_key: character-stats-and-profiles.fandom.com|suguru geto canon kaaydomanic|622370
     retryable: false
     exception_class: ''
   needs_human_source_choice: false

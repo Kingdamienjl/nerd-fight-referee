@@ -11,13 +11,15 @@ generation:
   generated_at: '2026-06-10T03:33:03Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.1
-  ineligible_reasons: &id006
-  - missing_source_revision_metadata
+  ineligible_reasons:
+  - confidence_below_0_55
+  - invalid_evidence_entries:abilities
+  - invalid_evidence_entries:weaknesses
   - missing_attack_potency
-  - missing_speed
   - missing_durability
   - missing_powers_and_abilities
-  - confidence_below_0_55
+  - missing_source_revision_metadata
+  - missing_speed
 identity:
   canonical_name: Namine (Game)
   franchise: Kingdom Hearts
@@ -177,42 +179,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-namine-game
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Namine Game
-  url: https://vsbattles.fandom.com/wiki/Namine_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-namine-game
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Namine Game
-  url: https://character-stats-and-profiles.fandom.com/wiki/Namine_Game
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-namine-game-kingdom-hearts
   provider_id: vsbattles
   source_type: mediawiki
@@ -220,7 +186,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Demyx
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -266,7 +232,7 @@ sources:
   url: https://character-stats-and-profiles.fandom.com/wiki/Namin%C3%A9_(Canon)/Unbacked0
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id003
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -303,62 +269,6 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-namine-game-kingdom-hearts
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Namine (Game) Kingdom Hearts
-  url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29_Kingdom_Hearts
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-namine-game-kingdom-hearts
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Namine (Game) Kingdom Hearts
-  url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29_Kingdom_Hearts
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-namine-game-kingdom-hearts
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Namine (Game) (Kingdom Hearts)
-  url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29_%28Kingdom_Hearts%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: character-stats-profiles-namine-game-kingdom-hearts
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Namine (Game) (Kingdom Hearts)
-  url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29_%28Kingdom_Hearts%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id003
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
 - id: vsbattles-namine-game-game
   provider_id: vsbattles
   source_type: mediawiki
@@ -504,7 +414,7 @@ abilities:
 - id: powers-and-abilities-nobody-physiology
   name: Nobody Physiology
   description: Nobody Physiology
-  source_ids: &id004
+  source_ids: &id002
   - vsbattles-namine-game-kingdom-hearts
   source_claim_ids: []
   confidence: 0.85
@@ -523,7 +433,7 @@ abilities:
   description: Summoning (Can summon his main weapon. Can summon hordes Nobodies of
     and Heartless. The Nobodies specifically commanded by him hold standard Nobody
     Physiology plus Hand-to-Hand Combat Mastery
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -540,7 +450,7 @@ abilities:
 - id: powers-and-abilities-acrobatics-and-elasticity-his-heartless-hold-standard-heart
   name: Acrobatics and Elasticity. His Heartless hold standard Heartless Physiology)
   description: Acrobatics and Elasticity. His Heartless hold standard Heartless Physiology)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -555,7 +465,7 @@ abilities:
 - id: powers-and-abilities-self-sustenance-type-1
   name: Self-Sustenance (Type 1
   description: Self-Sustenance (Type 1
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -570,7 +480,7 @@ abilities:
 - id: powers-and-abilities-can-breathe-in-space
   name: Can breathe in space)
   description: Can breathe in space)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -585,7 +495,7 @@ abilities:
 - id: powers-and-abilities-immortality-negation-type-5
   name: Immortality Negation (Type 5
   description: Immortality Negation (Type 5
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -602,7 +512,7 @@ abilities:
     nor dead)
   description: Can destroy the skeletal forms of the pirates despite them being neither
     alive nor dead)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -617,7 +527,7 @@ abilities:
 - id: powers-and-abilities-water-manipulation
   name: Water Manipulation
   description: Water Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -632,7 +542,7 @@ abilities:
 - id: powers-and-abilities-life-absorption
   name: Life Absorption
   description: Life Absorption
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -647,7 +557,7 @@ abilities:
 - id: powers-and-abilities-darkness-manipulation
   name: Darkness Manipulation
   description: Darkness Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -662,7 +572,7 @@ abilities:
 - id: powers-and-abilities-light-manipulation
   name: Light Manipulation
   description: Light Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -677,7 +587,7 @@ abilities:
 - id: powers-and-abilities-flight
   name: Flight
   description: Flight
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -692,7 +602,7 @@ abilities:
 - id: powers-and-abilities
   name: '-'
   description: '-'
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -707,7 +617,7 @@ abilities:
 - id: powers-and-abilities-resistances-ice-manipulation
   name: Resistances=Ice Manipulation
   description: Resistances=Ice Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -722,7 +632,7 @@ abilities:
 - id: powers-and-abilities-cosmic-radiations
   name: Cosmic Radiations
   description: Cosmic Radiations
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -737,7 +647,7 @@ abilities:
 - id: powers-and-abilities-darkness-manipulation
   name: Darkness Manipulation
   description: Darkness Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -754,7 +664,7 @@ abilities:
     of the darkness of the lanes between and '
   description: Corruption (Type 2) (His Black Coat protects him from the corrupting
     influence of the darkness of the lanes between and the Realm of Darkness)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -770,7 +680,7 @@ abilities:
 - id: powers-and-abilities-time-stop-can-move-inside-of-the-realm-of-darkness
   name: Time Stop (Can move inside of the Realm of Darkness)
   description: Time Stop (Can move inside of the Realm of Darkness)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -789,7 +699,7 @@ abilities:
     by Namine's powers)
   description: Information Manipulation (Should scale to his fellow Nobodies who were
     unaffected by Namine's powers)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -804,7 +714,7 @@ abilities:
 - id: powers-and-abilities-madness-manipulation-type-3
   name: Madness Manipulation (Type 3)
   description: Madness Manipulation (Type 3)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -819,7 +729,7 @@ abilities:
 - id: powers-and-abilities-mind-manipulation
   name: Mind Manipulation
   description: Mind Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -834,7 +744,7 @@ abilities:
 - id: powers-and-abilities-memory-manipulation
   name: Memory Manipulation
   description: Memory Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -849,7 +759,7 @@ abilities:
 - id: powers-and-abilities-soul-manipulation
   name: Soul Manipulation
   description: Soul Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -867,7 +777,7 @@ abilities:
     existence itself within it
   description: Willpower Manipulation (The Realm of Darkness has been stated to eradicate
     existence itself within it
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -885,7 +795,7 @@ abilities:
     in the Realm of Darkness was losing his sen
   description: and anyone who's traveled there have never returned. Ansem the Wise
     by being in the Realm of Darkness was losing his sense of self and memories
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -903,7 +813,7 @@ abilities:
     Realm of Darkness lost the will to continue
   description: having to give into his hatred to survive. Aqua not long after being
     in the Realm of Darkness lost the will to continue
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -919,7 +829,7 @@ abilities:
 - id: powers-and-abilities-and-needed-to-stay-true-to-her-friends-to-fight-it
   name: and needed to stay true to her friends to fight it)
   description: and needed to stay true to her friends to fight it)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -934,7 +844,7 @@ abilities:
 - id: powers-and-abilities-water-manipulation
   name: Water Manipulation
   description: Water Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -949,7 +859,7 @@ abilities:
 - id: powers-and-abilities-life-absorption-unaffected-by-his-own-power
   name: Life Absorption (Unaffected by his own power)
   description: Life Absorption (Unaffected by his own power)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -964,7 +874,7 @@ abilities:
 - id: powers-and-abilities-possible-resistances-to-void-manipulation
   name: Possible Resistances to Void Manipulation
   description: Possible Resistances to Void Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -979,7 +889,7 @@ abilities:
 - id: powers-and-abilities-attack-nullification
   name: Attack Nullification
   description: Attack Nullification
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -994,7 +904,7 @@ abilities:
 - id: powers-and-abilities-power-nullification
   name: Power Nullification
   description: Power Nullification
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1009,7 +919,7 @@ abilities:
 - id: powers-and-abilities-perception-manipulation
   name: Perception Manipulation
   description: Perception Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1024,7 +934,7 @@ abilities:
 - id: powers-and-abilities-attack-reflection-via-nothing-to-fear
   name: Attack Reflection (Via Nothing to Fear)
   description: Attack Reflection (Via Nothing to Fear)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1039,7 +949,7 @@ abilities:
 - id: powers-and-abilities-spatial-manipulation
   name: Spatial Manipulation
   description: Spatial Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1054,7 +964,7 @@ abilities:
 - id: powers-and-abilities-gravity-manipulation-via-space-in-its-place
   name: Gravity Manipulation (Via Space in Its Place)
   description: Gravity Manipulation (Via Space in Its Place)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1069,7 +979,7 @@ abilities:
 - id: powers-and-abilities-wind-manipulation
   name: Wind Manipulation
   description: Wind Manipulation
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1084,7 +994,7 @@ abilities:
 - id: powers-and-abilities-paralysis-inducement-via-flagging-winds
   name: Paralysis Inducement (Via Flagging Winds)
   description: Paralysis Inducement (Via Flagging Winds)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1099,7 +1009,7 @@ abilities:
 - id: powers-and-abilities-ice-manipulation-via-ice-breaker
   name: Ice Manipulation (Via Ice Breaker)
   description: Ice Manipulation (Via Ice Breaker)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1114,7 +1024,7 @@ abilities:
 - id: powers-and-abilities-earth-manipulation-via-down-to-earth
   name: Earth Manipulation (Via Down to Earth)
   description: Earth Manipulation (Via Down to Earth)
-  source_ids: *id004
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1133,7 +1043,7 @@ weaknesses:
 - id: weaknesses-cowardly-and-generally-unwilling-to-fight-directly
   name: Cowardly and generally unwilling to fight directly
   description: Cowardly and generally unwilling to fight directly
-  source_ids: &id005
+  source_ids: &id003
   - vsbattles-namine-game-kingdom-hearts
   source_claim_ids: []
   confidence: 0.85
@@ -1149,7 +1059,7 @@ weaknesses:
 - id: weaknesses-relying-more-on-the-use-of-his-water-clones-to-fight-for-him-instead
   name: relying more on the use of his water clones to fight for him instead
   description: relying more on the use of his water clones to fight for him instead
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1164,7 +1074,7 @@ weaknesses:
 - id: weaknesses-his-water-constructs-are-vulnerable-to-intense-heat-and-fire-attacks
   name: His water constructs are vulnerable to intense heat and fire attacks
   description: His water constructs are vulnerable to intense heat and fire attacks
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1183,7 +1093,7 @@ weaknesses:
     music-note shaped Forms to bludgeon the other
   description: Savvy opponents can wipe out entire scores of Water Forms by snatching
     the music-note shaped Forms to bludgeon the others with
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1201,7 +1111,7 @@ weaknesses:
   description: 'Must be hard-pressed to use his Limit Break Notable Attacks/Techniques:
     *Bubble Blaster: Demyx fires a stream of bubbles from his sitar as projectiles
     that deliver heavy knockback. **Bubble Drop: A variation of the above'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1221,7 +1131,7 @@ weaknesses:
   description: 'having bubbles descend on targets to knocks targets backward. *Form
     Creation: Demyx summons water clones of himself (referred to as Water Forms) that
     float and dance around. While fragile'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1240,7 +1150,7 @@ weaknesses:
     Demyx fires off a line of water eruptions that '
   description: 'they can slow down enemies and absorb projectile attacks. *Geyser
     Trail: Demyx fires off a line of water eruptions that chase the opponent'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1260,7 +1170,7 @@ weaknesses:
   description: 'knocking them into the air should it connect. *Show Stealer: Demyx
     angrily whips the butt of his Sitar into the face of anyone who attempts to interrupt
     his playing'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1278,7 +1188,7 @@ weaknesses:
   description: 'sending them flying. *Water Dash: Dashes forward leaving pillars of
     water behind and ending with a circle of pillars around him. *Water Wall: Demyx
     saunters around while strumming his Sitar'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1295,7 +1205,7 @@ weaknesses:
     approach him. *Wave Dance: After yelling'
   description: 'causing pillars of water to shoot up and knock aside any foolish enough
     to approach him. *Wave Dance: After yelling'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1310,7 +1220,7 @@ weaknesses:
 - id: weaknesses-come-on
   name: '"Come on'
   description: '"Come on'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1325,7 +1235,7 @@ weaknesses:
 - id: weaknesses-keep-to-the-beat
   name: keep to the beat!"
   description: keep to the beat!"
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1340,7 +1250,7 @@ weaknesses:
 - id: weaknesses-demyx-twirls-around-while-approaching-his-foe
   name: Demyx twirls around while approaching his foe
   description: Demyx twirls around while approaching his foe
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1358,7 +1268,7 @@ weaknesses:
   description: 'striking them with his Sitar a couple times. He then sends out pillars
     to knock them into the air before ending with a collective barrage of water pillars.
     *Wave Gigs: Demyx''s Limit Break. Demyx''s furiously plays his Sitar'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1376,7 +1286,7 @@ weaknesses:
   description: 'unleashing columns of water to erupt from the ground that deal water
     damage to enemies at random intervals. ** Final Gig: Demyx''s Final Limit. His
     attacks are powered up in this state'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1393,7 +1303,7 @@ weaknesses:
     Arpeggio.png
   description: releasing large balls of water that explode and knock enemies away.
     ==Gallery== Arpeggio.png
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1408,7 +1318,7 @@ weaknesses:
 - id: weaknesses-arpeggio
   name: Arpeggio
   description: Arpeggio
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1423,7 +1333,7 @@ weaknesses:
 - id: weaknesses-link-http-www-khwiki-com-arpeggio-bubble-blaster-gif
   name: link=http://www.khwiki.com/Arpeggio Bubble Blaster.gif
   description: link=http://www.khwiki.com/Arpeggio Bubble Blaster.gif
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1438,7 +1348,7 @@ weaknesses:
 - id: weaknesses-bubble-blaster-bubble-drop-gif
   name: Bubble Blaster Bubble Drop.gif
   description: Bubble Blaster Bubble Drop.gif
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1453,7 +1363,7 @@ weaknesses:
 - id: weaknesses-bubble-drop-form-creation-gif
   name: Bubble Drop Form Creation.gif
   description: Bubble Drop Form Creation.gif
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1468,7 +1378,7 @@ weaknesses:
 - id: weaknesses-form-creation-geyser-trail-gif
   name: Form Creation Geyser Trail.gif
   description: Form Creation Geyser Trail.gif
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1483,7 +1393,7 @@ weaknesses:
 - id: weaknesses-geyser-trail-water-dash-gif
   name: Geyser Trail Water Dash.gif
   description: Geyser Trail Water Dash.gif
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1498,7 +1408,7 @@ weaknesses:
 - id: weaknesses-water-dash-water-wall-gif
   name: Water Dash Water Wall.gif
   description: Water Dash Water Wall.gif
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1513,7 +1423,7 @@ weaknesses:
 - id: weaknesses-water-wall-show-stealer-gif
   name: Water Wall Show Stealer.gif
   description: Water Wall Show Stealer.gif
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1528,7 +1438,7 @@ weaknesses:
 - id: weaknesses-show-stealer-wave-gigs-gif
   name: Show Stealer Wave Gigs.gif
   description: Show Stealer Wave Gigs.gif
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1543,7 +1453,7 @@ weaknesses:
 - id: weaknesses-wave-gigs-wave-dance-gif
   name: Wave Gigs Wave Dance.gif
   description: Wave Gigs Wave Dance.gif
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -1567,7 +1477,7 @@ weaknesses:
     Category:Non-Physical Interaction Users Category:Concept Users Category:Data Users
     Category:Existence Erasure Users Category:Possession Users Category:Guitar Users
     Category:Musicians'
-  source_ids: *id005
+  source_ids: *id003
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -1596,708 +1506,27 @@ scope_limitations:
   dimensional_scope: false
   range_limit: false
 review:
-  ineligible_reasons: *id006
+  ineligible_reasons:
+  - missing_source_revision_metadata
+  - missing_attack_potency
+  - missing_speed
+  - missing_durability
+  - missing_powers_and_abilities
+  - confidence_below_0_55
   source_errors: []
   notes: []
   readiness_state: needs_review
 profile_hash: 4bb5381891bf28242aa6eb13a77581a450c074f6c0812541de9ad96e825135bf
 repair:
-  attempted_at: '2026-06-19T12:02:24Z'
-  repaired_fields:
-  - abilities
-  - attack_potency
-  - durability
-  - intelligence
-  - range
-  - speed
-  - stamina
-  - tier
-  - weaknesses
+  attempted_at: '2026-10-21T19:08:51Z'
+  repaired_fields: []
   unresolved_fields: []
   source_attempts:
-  - source_id: vsbattles-namine-game-kingdom-hearts
-    url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29_Kingdom_Hearts
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id007
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Demyx
-    source_type: mediawiki
-    revision_id: '8654636'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 10450
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id008
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-B}} Name: Demyx, "Number lX: The Melodious Nocturne" Origin: Kingdom
-        Hearts Gender: Male Age: Unknown Classification: Nobody, Number IX of the
-        Original Organization III, Reserve of the True Organization XIII'
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Nobody Physiology, Summoning (Can summon his main weapon. Can summon
-        hordes Nobodies of and Heartless. The Nobodies specifically commanded by him
-        hold standard Nobody Physiology plus Hand-to-Hand Combat Mastery, Acrobatics
-        and Elasticity. His Heartless hold standard Heartless Physiology), Self-Sustenance
-        (Type 1; Can breathe in space), Immortality Negation (Type 5; Can destroy
-        the skeletal forms of the pirates despite them being neither alive nor dead),
-        Water Manipulation, Life Absorption, Darkness Manipulation, Light Manipulation,
-        Flight |-|Resistances=Ice Manipulation, Cosmic Radiations, Darkness Manipulation,
-        Corruption (Type 2) (His Black Coat protects him from the corrupting influence
-        of the darkness of the lanes between and the Realm of Darkness), Time Stop
-        (Can move inside of the Realm of Darkness), Information Manipulation (Should
-        scale to his fellow Nobodies who were unaffected by Namine's powers), Madness
-        Manipulation (Type 3), Mind Manipulation, Memory Manipulation, Soul Manipulation,
-        Willpower Manipulation (The Realm of Darkness has been stated to eradicate
-        existence itself within it, and anyone who's traveled there have never returned.
-        Ansem the Wise by being in the Realm of Darkness was losing his sense of self
-        and memories, having to give into his hatred to survive. Aqua not long after
-        being in the Realm of Darkness lost the will to continue, and needed to stay
-        true to her friends to fight it), Water Manipulation, Life Absorption (Unaffected
-        by his own power), Possible Resistances to Void Manipulation, Attack Nullification,
-        Power Nullification, Perception Manipulation, Attack Reflection (Via Nothing
-        to Fear), Spatial Manipulation, Gravity Manipulation (Via Space in Its Place),
-        Wind Manipulation, Paralysis Inducement (Via Flagging Winds), Ice Manipulation
-        (Via Ice Breaker), Earth Manipulation (Via Down to Earth), Mind Manipulation/Illusion
-        Creation, Pocket Reality Manipulation, Sealing, BFR, Power Mimicry, (Via Lose
-        Your Illusion), Power Nullification (Via Sighing of the Moon), Fire Manipulation
-        (Via Tears of Flame), Life Manipulation (Via Parting of Waters), Time Manipulation,
-        Transmutation (Via Test of Time), Blindness, Death Manipulation, Curse Manipulation
-        (Via Flowers Athirst), Electricity Manipulation (Via Stolen Thunder), Light
-        Manipulation (Via Dying of the Light), and Resistances to all of the above
-        via Master's Circle
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level (Though one of the weaker members of the original Organization
-        alongside Vexen and Zexion, he was capable enough to take on a Mid-Game KHII
-        Sora, who later on goes to fight against the rest of Organization XIII)
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Infinite (Not far behind Sora, who reacted to a Keyblade beam from Xehanort
-        of a similar nature as this one)
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level (Was able to take numerous hits from Sora)
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range. Tens of Meters with water attacks. Low Multiversal
-        with the Corridors of Darkness.
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Arpeggio, his "Sitar" weapon
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Demyx is easily the most laid-back, slothful, cowardly, and self-centered
-        member of the Organization. Blowing off missions whenever possible, he has
-        very little actual combat experience compared to members such as Lexaeus,
-        Axel, or Roxas. Nevertheless, he remains formidable in combat, specializing
-        in stalling tactics that prevent the opponent from ever reaching him during
-        their fights, constantly knocking back foes with torrents of water and absorbing
-        incoming attacks with Water Forms. In addition, he is shown to have some skill
-        in melee combat, stunning foes by bludgeoning them with his Sitar, but this
-        more of a last resort than anything. In addition, Axel's comments indicate
-        that Demyx is reconnaissance specialist, implying that he's skilled at tracking,
-        studying, and following opponents without being seen, but the validity of
-        this is somewhat questionable due to Saix's complaints about his terrible
-        mission reports.
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Cowardly and generally unwilling to fight directly, relying more on
-        the use of his water clones to fight for him instead, His water constructs
-        are vulnerable to intense heat and fire attacks, Savvy opponents can wipe
-        out entire scores of Water Forms by snatching the music-note shaped Forms
-        to bludgeon the others with, Must be hard-pressed to use his Limit Break Notable
-        Attacks/Techniques: *Bubble Blaster: Demyx fires a stream of bubbles from
-        his sitar as projectiles that deliver heavy knockback. **Bubble Drop: A variation
-        of the above, having bubbles descend on targets to knocks targets backward.
-        *Form Creation: Demyx summons water clones of himself (referred to as Water
-        Forms) that float and dance around. While fragile, they can slow down enemies
-        and absorb projectile attacks. *Geyser Trail: Demyx fires off a line of water
-        eruptions that chase the opponent, knocking them into the air should it connect.
-        *Show Stealer: Demyx angrily whips the butt of his Sitar into the face of
-        anyone who attempts to interrupt his playing, sending them flying. *Water
-        Dash: Dashes forward leaving pillars of water behind and ending with a circle
-        of pillars around him. *Water Wall: Demyx saunters around while strumming
-        his Sitar, causing pillars of water to shoot up and knock aside any foolish
-        enough to approach him. *Wave Dance: After yelling, "Come on, keep to the
-        beat!", Demyx twirls around while approaching his foe, striking them with
-        his Sitar a couple times. He then sends out pillars to knock them into the
-        air before ending with a collective barrage of water pillars. *Wave Gigs:
-        Demyx''s Limit Break. Demyx''s furiously plays his Sitar, unleashing columns
-        of water to erupt from the ground that deal water damage to enemies at random
-        intervals. ** Final Gig: Demyx''s Final Limit. His attacks are powered up
-        in this state, releasing large balls of water that explode and knock enemies
-        away. ==Gallery== Arpeggio.png|Arpeggio|link=http://www.khwiki.com/Arpeggio
-        Bubble Blaster.gif|Bubble Blaster Bubble Drop.gif|Bubble Drop Form Creation.gif|Form
-        Creation Geyser Trail.gif|Geyser Trail Water Dash.gif|Water Dash Water Wall.gif|Water
-        Wall Show Stealer.gif|Show Stealer Wave Gigs.gif|Wave Gigs Wave Dance.gif|Wave
-        Dance ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions}}
-        Category:Characters Category:Male Characters Category:Kingdom Hearts Category:Antagonists
-        Category:Villains Category:Water Users Category:Darkness Users Category:Flight
-        Users Category:Light Users Category:Portal Users Category:Dimensional Travel
-        Users Category:Resurrection Users Category:Self-Sustenance Users Category:Summoners
-        Category:Game Characters Category:Organization XIII Category:Playable Characters
-        Category:Non-Physical Interaction Users Category:Concept Users Category:Data
-        Users Category:Existence Erasure Users Category:Possession Users Category:Guitar
-        Users Category:Musicians'
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|demyx|8654636
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-namine-game-kingdom-hearts
-    url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29_Kingdom_Hearts
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: "Namin\xE9 (Canon)/Unbacked0"
-    source_type: mediawiki
-    revision_id: '178993'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3620
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: "Low 2-C Name: Namin\xE9 Origin: Kingdom Hearts Gender: Female Age: Unknown\
-        \ Classification: Nobody"
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Namin\xE9=Superhuman Physical Characteristics, Self-Sustenance (Type\
-        \ 1, 2 & 3), Nonexistent Physiology (Type 1), Non-Physical Interaction (Can\
-        \ directly harm Heartless, which don't have physical forms, and Nobodies,\
-        \ which don't even exist), Conceptual Manipulation (Can steal the concepts\
-        \ of words to the point that no one can say the words), Data Manipulation,\
-        \ Possession (Can interact with beings made of Data and possess them), Memory\
-        \ Manipulation |-|Resistances=Resistance to Existence Erasure, Soul Manipulation,\
-        \ Emotional Manipulation, Memory Manipulation, Corruption (Type 3), Madness\
-        \ Manipulation (Type 3) (Can resist the negative effects of the Dark Corridors\
-        \ and the Realm of Darkness where all existence is nullified and staying their\
-        \ can erase a person's memories and their sense of self with being stranded\
-        \ their eventually corrupting someone and driving them insane), Limited Law\
-        \ Manipulation (People from other Worlds are immune to the laws of different\
-        \ Worlds) Attack Potency Universe Level+ (Should be comparable to other Heartless)"
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Inaccessible (Even weaker Heartless can move in the Realm of Darkness
-        which has been stated to have no time)
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Universe Level+ (Can take hits from Roxas)
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None Notable Note: Worlds in Kingdom Hearts are universes rather than
-        planets like people think. Proof of this is how it''s been stated that you
-        naturally can''t travel to different Worlds without. It has also been shown
-        that Worlds are seen as stars in Traverse Town which is considered a "World
-        between Worlds" which means they can''t be just planets. It has also been
-        stated that a normal person can''t leave a World even if said World has advanced
-        spaceships which are capable of travelling through space. Riku has stated
-        that any two Worlds have different Axis of time and that every World has its
-        own flow of time. The Grand Councilwoman who has been stated "oversee the
-        universe" didn''t know what Terra was. ==Others== Notable Victories: Notable
-        Losses: Inconclusive Matches: Category:Unbacked0 Category:Tier 2'
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Universe Level+ (Should be comparable to other Heartless)
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|namine canon unbacked0|178993
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-namine-game-kingdom-hearts
-    url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29_%28Kingdom_Hearts%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id011
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Demyx
-    source_type: mediawiki
-    revision_id: '8654636'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 10450
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id012
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{2-B}} Name: Demyx, "Number lX: The Melodious Nocturne" Origin: Kingdom
-        Hearts Gender: Male Age: Unknown Classification: Nobody, Number IX of the
-        Original Organization III, Reserve of the True Organization XIII'
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Nobody Physiology, Summoning (Can summon his main weapon. Can summon
-        hordes Nobodies of and Heartless. The Nobodies specifically commanded by him
-        hold standard Nobody Physiology plus Hand-to-Hand Combat Mastery, Acrobatics
-        and Elasticity. His Heartless hold standard Heartless Physiology), Self-Sustenance
-        (Type 1; Can breathe in space), Immortality Negation (Type 5; Can destroy
-        the skeletal forms of the pirates despite them being neither alive nor dead),
-        Water Manipulation, Life Absorption, Darkness Manipulation, Light Manipulation,
-        Flight |-|Resistances=Ice Manipulation, Cosmic Radiations, Darkness Manipulation,
-        Corruption (Type 2) (His Black Coat protects him from the corrupting influence
-        of the darkness of the lanes between and the Realm of Darkness), Time Stop
-        (Can move inside of the Realm of Darkness), Information Manipulation (Should
-        scale to his fellow Nobodies who were unaffected by Namine's powers), Madness
-        Manipulation (Type 3), Mind Manipulation, Memory Manipulation, Soul Manipulation,
-        Willpower Manipulation (The Realm of Darkness has been stated to eradicate
-        existence itself within it, and anyone who's traveled there have never returned.
-        Ansem the Wise by being in the Realm of Darkness was losing his sense of self
-        and memories, having to give into his hatred to survive. Aqua not long after
-        being in the Realm of Darkness lost the will to continue, and needed to stay
-        true to her friends to fight it), Water Manipulation, Life Absorption (Unaffected
-        by his own power), Possible Resistances to Void Manipulation, Attack Nullification,
-        Power Nullification, Perception Manipulation, Attack Reflection (Via Nothing
-        to Fear), Spatial Manipulation, Gravity Manipulation (Via Space in Its Place),
-        Wind Manipulation, Paralysis Inducement (Via Flagging Winds), Ice Manipulation
-        (Via Ice Breaker), Earth Manipulation (Via Down to Earth), Mind Manipulation/Illusion
-        Creation, Pocket Reality Manipulation, Sealing, BFR, Power Mimicry, (Via Lose
-        Your Illusion), Power Nullification (Via Sighing of the Moon), Fire Manipulation
-        (Via Tears of Flame), Life Manipulation (Via Parting of Waters), Time Manipulation,
-        Transmutation (Via Test of Time), Blindness, Death Manipulation, Curse Manipulation
-        (Via Flowers Athirst), Electricity Manipulation (Via Stolen Thunder), Light
-        Manipulation (Via Dying of the Light), and Resistances to all of the above
-        via Master's Circle
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level (Though one of the weaker members of the original Organization
-        alongside Vexen and Zexion, he was capable enough to take on a Mid-Game KHII
-        Sora, who later on goes to fight against the rest of Organization XIII)
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Infinite (Not far behind Sora, who reacted to a Keyblade beam from Xehanort
-        of a similar nature as this one)
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level (Was able to take numerous hits from Sora)
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Superhuman
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range. Tens of Meters with water attacks. Low Multiversal
-        with the Corridors of Darkness.
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Arpeggio, his "Sitar" weapon
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Demyx is easily the most laid-back, slothful, cowardly, and self-centered
-        member of the Organization. Blowing off missions whenever possible, he has
-        very little actual combat experience compared to members such as Lexaeus,
-        Axel, or Roxas. Nevertheless, he remains formidable in combat, specializing
-        in stalling tactics that prevent the opponent from ever reaching him during
-        their fights, constantly knocking back foes with torrents of water and absorbing
-        incoming attacks with Water Forms. In addition, he is shown to have some skill
-        in melee combat, stunning foes by bludgeoning them with his Sitar, but this
-        more of a last resort than anything. In addition, Axel's comments indicate
-        that Demyx is reconnaissance specialist, implying that he's skilled at tracking,
-        studying, and following opponents without being seen, but the validity of
-        this is somewhat questionable due to Saix's complaints about his terrible
-        mission reports.
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Cowardly and generally unwilling to fight directly, relying more on
-        the use of his water clones to fight for him instead, His water constructs
-        are vulnerable to intense heat and fire attacks, Savvy opponents can wipe
-        out entire scores of Water Forms by snatching the music-note shaped Forms
-        to bludgeon the others with, Must be hard-pressed to use his Limit Break Notable
-        Attacks/Techniques: *Bubble Blaster: Demyx fires a stream of bubbles from
-        his sitar as projectiles that deliver heavy knockback. **Bubble Drop: A variation
-        of the above, having bubbles descend on targets to knocks targets backward.
-        *Form Creation: Demyx summons water clones of himself (referred to as Water
-        Forms) that float and dance around. While fragile, they can slow down enemies
-        and absorb projectile attacks. *Geyser Trail: Demyx fires off a line of water
-        eruptions that chase the opponent, knocking them into the air should it connect.
-        *Show Stealer: Demyx angrily whips the butt of his Sitar into the face of
-        anyone who attempts to interrupt his playing, sending them flying. *Water
-        Dash: Dashes forward leaving pillars of water behind and ending with a circle
-        of pillars around him. *Water Wall: Demyx saunters around while strumming
-        his Sitar, causing pillars of water to shoot up and knock aside any foolish
-        enough to approach him. *Wave Dance: After yelling, "Come on, keep to the
-        beat!", Demyx twirls around while approaching his foe, striking them with
-        his Sitar a couple times. He then sends out pillars to knock them into the
-        air before ending with a collective barrage of water pillars. *Wave Gigs:
-        Demyx''s Limit Break. Demyx''s furiously plays his Sitar, unleashing columns
-        of water to erupt from the ground that deal water damage to enemies at random
-        intervals. ** Final Gig: Demyx''s Final Limit. His attacks are powered up
-        in this state, releasing large balls of water that explode and knock enemies
-        away. ==Gallery== Arpeggio.png|Arpeggio|link=http://www.khwiki.com/Arpeggio
-        Bubble Blaster.gif|Bubble Blaster Bubble Drop.gif|Bubble Drop Form Creation.gif|Form
-        Creation Geyser Trail.gif|Geyser Trail Water Dash.gif|Water Dash Water Wall.gif|Water
-        Wall Show Stealer.gif|Show Stealer Wave Gigs.gif|Wave Gigs Wave Dance.gif|Wave
-        Dance ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions}}
-        Category:Characters Category:Male Characters Category:Kingdom Hearts Category:Antagonists
-        Category:Villains Category:Water Users Category:Darkness Users Category:Flight
-        Users Category:Light Users Category:Portal Users Category:Dimensional Travel
-        Users Category:Resurrection Users Category:Self-Sustenance Users Category:Summoners
-        Category:Game Characters Category:Organization XIII Category:Playable Characters
-        Category:Non-Physical Interaction Users Category:Concept Users Category:Data
-        Users Category:Existence Erasure Users Category:Possession Users Category:Guitar
-        Users Category:Musicians'
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|demyx|8654636
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-namine-game-kingdom-hearts
-    url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29_%28Kingdom_Hearts%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id013
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - speed
-    - tier
-    - weaknesses
-    normalized_page_title: "Namin\xE9 (Canon)/Unbacked0"
-    source_type: mediawiki
-    revision_id: '178993'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 3620
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Others
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id014
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: "Low 2-C Name: Namin\xE9 Origin: Kingdom Hearts Gender: Female Age: Unknown\
-        \ Classification: Nobody"
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: "Namin\xE9=Superhuman Physical Characteristics, Self-Sustenance (Type\
-        \ 1, 2 & 3), Nonexistent Physiology (Type 1), Non-Physical Interaction (Can\
-        \ directly harm Heartless, which don't have physical forms, and Nobodies,\
-        \ which don't even exist), Conceptual Manipulation (Can steal the concepts\
-        \ of words to the point that no one can say the words), Data Manipulation,\
-        \ Possession (Can interact with beings made of Data and possess them), Memory\
-        \ Manipulation |-|Resistances=Resistance to Existence Erasure, Soul Manipulation,\
-        \ Emotional Manipulation, Memory Manipulation, Corruption (Type 3), Madness\
-        \ Manipulation (Type 3) (Can resist the negative effects of the Dark Corridors\
-        \ and the Realm of Darkness where all existence is nullified and staying their\
-        \ can erase a person's memories and their sense of self with being stranded\
-        \ their eventually corrupting someone and driving them insane), Limited Law\
-        \ Manipulation (People from other Worlds are immune to the laws of different\
-        \ Worlds) Attack Potency Universe Level+ (Should be comparable to other Heartless)"
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Inaccessible (Even weaker Heartless can move in the Realm of Darkness
-        which has been stated to have no time)
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Universe Level+ (Can take hits from Roxas)
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'None Notable Note: Worlds in Kingdom Hearts are universes rather than
-        planets like people think. Proof of this is how it''s been stated that you
-        naturally can''t travel to different Worlds without. It has also been shown
-        that Worlds are seen as stars in Traverse Town which is considered a "World
-        between Worlds" which means they can''t be just planets. It has also been
-        stated that a normal person can''t leave a World even if said World has advanced
-        spaceships which are capable of travelling through space. Riku has stated
-        that any two Worlds have different Axis of time and that every World has its
-        own flow of time. The Grand Councilwoman who has been stated "oversee the
-        universe" didn''t know what Terra was. ==Others== Notable Victories: Notable
-        Losses: Inconclusive Matches: Category:Unbacked0 Category:Tier 2'
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Universe Level+ (Should be comparable to other Heartless)
-      source_id: character-stats-profiles-namine-game-kingdom-hearts
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|namine canon unbacked0|178993
-    retryable: false
-    exception_class: ''
   - source_id: mediawiki-namine-game
-    url: https://vsbattles.fandom.com/wiki/Namine_(Game)
+    url: https://vsbattles.fandom.com/wiki/Luxord
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id015
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2326,6 +1555,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2339,7 +1569,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id016
+    allowed_fields:
     - tier
     - attack_potency
     - speed
@@ -2351,12 +1581,6 @@ repair:
     - equipment
     - weaknesses
     field_candidates:
-    - field: tier
-      value: '{{2-B}} | {{1-C}}'
-      source_id: mediawiki-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Nobody Physiology, Summoning (Can summon his main weapon. Can summon
         hordes Nobodies of and Heartless. The Nobodies specifically commanded by him
@@ -2374,10 +1598,10 @@ repair:
         into a card to hide among his other cards), Darkness Manipulation, Teleportation,
         Reality Warping (Littered the field with his cards as well several other effects),
         Energy Blasts, Forcefield Creation (Can create defensive barriers via his
-        cards), BFR, Sealing (Can seal people into his cards) |-|Resistances=Ice Manipulation,
-        Cosmic Radiations, Darkness Manipulation, Corruption (Type 2) (His Black Coat
-        protects him from the corrupting influence of the darkness of the lanes between
-        and the Realm of Darkness), Time Stop (Can move inside of the Realm of Darkness),
+        cards), BFR, Sealing (Can seal people into his cards) Ice Manipulation, Cosmic
+        Radiations, Darkness Manipulation, Corruption (Type 2) (His Black Coat protects
+        him from the corrupting influence of the darkness of the lanes between and
+        the Realm of Darkness), Time Stop (Can move inside of the Realm of Darkness),
         Information Manipulation (Should scale to his fellow Nobodies who were unaffected
         by Namine's powers), Madness Manipulation (Type 3), Mind Manipulation, Memory
         Manipulation, Soul Manipulation, Willpower Manipulation (The Realm of Darkness
@@ -2530,273 +1754,22 @@ repair:
         than making "timed battles". ==Gallery== Fair Game KHII.png|Fair Game|link=http://www.khwiki.com/Fair_Game
         Jackpot KHD.gif|Jackpot|link=http://www.khwiki.com/Jackpot_(Limit_Break) Sleight
         of Hand.gif|Sleight of Hand ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{discussions}} Category:Characters Category:Male Characters Category:Game
-        Characters Category:Kingdom Hearts Category:Antagonists Category:Villains
-        Category:Evil Characters Category:Organization XIII Category:Magic Users Category:Time
-        Users Category:Summoners Category:Darkness Users Category:Teleportation Users
-        Category:Matter Users Category:Card Users Category:Telekinesis Users Category:Transmutation
-        Users Category:Resurrection Users Category:Dimensional Travel Users Category:Energy
-        Users Category:Por'
+        Category:Characters Category:Male Characters Category:Game Characters Category:Kingdom
+        Hearts Category:Antagonists Category:Villains Category:Evil Characters Category:Organization
+        XIII Category:Magic Users Category:Time Users Category:Summoners Category:Darkness
+        Users Category:Teleportation Users Category:Matter Users Category:Card Users
+        Category:Telekinesis Users Category:Transmutation Users Category:Resurrection
+        Users Category:Dimensional Travel Users Category:Energy Users Category:Portal
+        Users Catego'
       source_id: mediawiki-namine-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|luxord|9489161
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-namine-game
-    url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id017
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Luxord
-    source_type: mediawiki
-    revision_id: '9489161'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 14415
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Gallery
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 80
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id018
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
     - field: tier
-      value: '{{2-B}} | {{1-C}}'
-      source_id: vsbattles-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Nobody Physiology, Summoning (Can summon his main weapon. Can summon
-        hordes Nobodies of and Heartless. The Nobodies specifically commanded by him
-        hold standard Nobody Physiology plus Summoning, Telekinesis, Transmutation
-        and Elasticity. His Heartless hold standard Heartless Physiology), Immortality
-        Negation (Type 5, Can destroy the skeletal forms of the pirates despite them
-        being neither alive nor dead), Self-Sustenance (Type 1. Can breathe in space),
-        Magic, Law Manipulation (When Luxord initiates his game, Sora immediately
-        has to follow the "rules" of it, such as the timer for the fight, having to
-        stop and pick the right command, getting turned into a die or card, etc),
-        Time Manipulation (Uses this to make "timed battles", is able to steal some
-        of his opponent's "time gauge" through the use of card games), Statistics
-        Reduction (Can rewind someone's defenses back to 1), Telekinesis, Transmutation
-        (Capable of transforming beings into cards and dice as well as turn himself
-        into a card to hide among his other cards), Darkness Manipulation, Teleportation,
-        Reality Warping (Littered the field with his cards as well several other effects),
-        Energy Blasts, Forcefield Creation (Can create defensive barriers via his
-        cards), BFR, Sealing (Can seal people into his cards) |-|Resistances=Ice Manipulation,
-        Cosmic Radiations, Darkness Manipulation, Corruption (Type 2) (His Black Coat
-        protects him from the corrupting influence of the darkness of the lanes between
-        and the Realm of Darkness), Time Stop (Can move inside of the Realm of Darkness),
-        Information Manipulation (Should scale to his fellow Nobodies who were unaffected
-        by Namine's powers), Madness Manipulation (Type 3), Mind Manipulation, Memory
-        Manipulation, Soul Manipulation, Willpower Manipulation (The Realm of Darkness
-        has been stated to eradicate existence itself within it, and anyone who's
-        traveled there have never returned. Ansem the Wise by being in the Realm of
-        Darkness was losing his sense of self and memories, having to give into his
-        hatred to survive. Aqua not long after being in the Realm of Darkness lost
-        the will to continue, and needed to stay true to her friends to fight it),
-        Time Manipulation, Statistics Reduction, BFR, Transmutation, Sealing (Unaffected
-        by his own power), Possible Resistances to Void Manipulation, Attack Nullification,
-        Power Nullification, Perception Manipulation, Attack Reflection (Via Nothing
-        to Fear), Spatial Manipulation, Gravity Manipulation (Via Space in Its Place),
-        Wind Manipulation, Paralysis Inducement (Via Flagging Winds), Ice Manipulation
-        (Via Ice Breaker), Earth Manipulation (Via Down to Earth), Mind Manipulation/
-        Illusion Creation, Pocket Reality Manipulation, Sealing, BFR, Power Mimicry,
-        (Via Lose Your Illusion), Power Nullification (Via Sighing of the Moon), Fire
-        Manipulation (Via Tears of Flame), Water Manipulation, Life Manipulation (Via
-        Parting of Waters), Blindness, Death Manipulation, Curse Manipulation (Via
-        Flowers Athirst), Electricity Manipulation (Via Stolen Thunder), Light Manipulation
-        (Via Dying of the Light), and Resistances to all of the above via Master's
-        Circle
-      source_id: vsbattles-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Multiverse level (Able to pose a threat to end-game Sora, who shortly
-        after their fight, goes on to fight and defeat Saix and Xemnas) | Complex
-        Multiverse level (Comparable to the other Seekers of Darkness)
-      source_id: vsbattles-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: Infinite (Comparable to others that can travel across the worlds with
-        a Keyblade Glider, which has been shown to also relate to direct physical
-        movements and is comparable to the Gummi Ship based on Aqua and Ventus getting
-        to the Keyblade Graveyard within a day just like it while also including the
-        threat of Gummi Heartless, comparable to Xemnas, who reacted to Roxas going
-        from Radiant Garden to the Keyblade Graveyard in seconds, not far behind Sora,
-        who reacted to a Keyblade beam from Xehanort of a similar nature as this one)
-      source_id: vsbattles-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Multiverse level (Took many attacks from Sora and managed to temporarily
-        hold out despite the fact that he lost his own timed battle) | Complex Multiverse
-        level
-      source_id: vsbattles-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: stamina
-      value: Unknown
-      source_id: vsbattles-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Standard Melee Range. Tens of Meters with his cards. Low Multiversal
-        with the Corridors of Darkness
-      source_id: vsbattles-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: Fair Game (His deck of cards). His cards also contain a set of traps
-        such as ones that explode after being flipped or another that takes away a
-        portion of the target's "time gauge"
-      source_id: vsbattles-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Luxord is arguably the most genteel member of Organization XIII. He proved
-        himself to be level-headed and pragmatic in combat, facing Sora one-on-one
-        by teleporting his friends away with his cards and turning Sora into a defenseless
-        die at the very start of the fight. While he tends to treat life as if it
-        were a game (even calling himself a mere pawn in the Organization's plan),
-        he is possesses a sharp mind and a keen eye for strategy, stalling out Sora
-        with various minigames that force the latter to take massive risks to even
-        land a hit on him. True to his epithet, Luxord is also an exceedingly skilled
-        card game player, with Xigbar noting that Roxas would be "eaten alive" in
-        a game of strip poker, utilizing this trait in combat to make his various
-        stall tactics even more difficult. In addition to his gambling prowess, he
-        is also proficient in direct combat, shooting energy projectiles from giant
-        versions of his cards and using the cards themselves as projectiles and as
-        melee weapons
-      source_id: vsbattles-namine-game
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'His obsession with playing games can backfire on him, his "timed battle"
-        mechanic also works on himself as well as his enemy, Luxord needs to be hard
-        pressed to use his Final Limit Notable Attacks and Techniques: BeginGame.gif|Begin
-        Game BeginGameEX.gif|Begin Game Part II *Timed Battles: The central mechanic
-        behind Luxord''s battles. Luxord manipulates time so that he does not take
-        damage from attacks and instead the damage is directed to a "Time Gauge",
-        referring to his own time. He does the same for his opponent, except for the
-        fact that they will take damage from Luxord''s attacks. The Time Gauges whittle
-        down over time, much like a timer or an hourglass. If Luxord is struck, his
-        time is depleted, while the same rules apply to his opponent. Running out
-        of time will cause the victim to instantly "lose", draining them of all their
-        stamina and rendering them virtually helpless, leaving them open to being
-        finished by their opponent''s next attack. *Begin Game: Luxord challenges
-        his foe to what amounts to a game of slots, forcing them to snatch just the
-        right card from him (an "O") from a set that includes three duds ("X"s). If
-        they succeed, Luxord will be temporarily left wide open to follow up attacks.
-        However, failing this game will temporarily transform his target into a card
-        or a die, sealing all of their abilities and hindering their movement temporarily.
-        When hard-pressed he will instead trap his opponent in a stack of his giant
-        cards, forcing them to seize four correct cards lest they be transformed into
-        a die in additional to draining large portion of their Time Gauge in order
-        to restore Luxord''s own. However, winning the battle here instead will allow
-        his targets to restore their Time Gauge by draining Luxord''s, leaving him
-        next to no time left in his. *Card Shield: Luxord constantly protects himself
-        from incoming attacks with giant versions of his normal cards. They can be
-        destroyed with sufficiently powerful attacks or by simply flipping them around.
-        Luxord is fully aware of this, and thus booby-trapped several of his cards
-        with fireball sigils to set them to detonate should they be flipped around.
-        His opponent is thus forced to choose whether or not they''re willing to whittle
-        down his cards and take projectile attacks from him or close in for the kill
-        by trying to flip his cards over. In addition, he can send these cards out
-        as projectiles to attack and spin them around to knock away approaching enemies.
-        *Card Shuffle: Luxord transforms himself into a card that he shuffles amongst
-        the other cards. The cards are virtually indestructible, forcing the opponent
-        to watch carefully and flip up the card Luxord is hiding in to bring him back
-        to a state where he can be damaged in addition to stunning him. Flipping the
-        wrong one will trigger a booby trap that explodes in the opponent''s face
-        to deal damage. Luxord becomes warier if he''s continually found, summoning
-        more trap cards to hide among and making it more difficult for his opponent
-        to find him. *Sleight of Hand: Luxord covers the area with cards and hiding
-        among them similarly to his Card Shuffle technique. He then goes on the offensive,
-        appearing from various locations and throwing giant cards at his opponents
-        and flipping nearby cards around to knock his opponents into the air. *Jackpot:
-        Luxord''s Limit Break in which he is the one gambling, being forced to snatch
-        a rapidly shifting card to achieve the best effects. Should he happen to select
-        the wrong one, the card simply detonates as Luxord winces. However, should
-        he choose the right one (which he frequently does), the cards fire off several
-        powerful energy projectiles at his targets. **Final Jackpot: Luxord''s Final
-        Limit, he ups the ante by including, even more, cards to sift through and
-        requiring that he snatch two of the right card at the right time. Selecting
-        just one correct card will cause the other to detonate while replicating the
-        effects of his regular Jackpot. Selecting two correct cards will fire off
-        two powerful energy blasts before unleashing a mighty burst that dwarfs his
-        regular attacks in power. Note: Despite his power over time, it is unknown
-        if Luxord is able to control or manipulate other aspects of time itself other
-        than making "timed battles". ==Gallery== Fair Game KHII.png|Fair Game|link=http://www.khwiki.com/Fair_Game
-        Jackpot KHD.gif|Jackpot|link=http://www.khwiki.com/Jackpot_(Limit_Break) Sleight
-        of Hand.gif|Sleight of Hand ==Notable Matchups== Victories: Losses: Inconclusive:
-        {{discussions}} Category:Characters Category:Male Characters Category:Game
-        Characters Category:Kingdom Hearts Category:Antagonists Category:Villains
-        Category:Evil Characters Category:Organization XIII Category:Magic Users Category:Time
-        Users Category:Summoners Category:Darkness Users Category:Teleportation Users
-        Category:Matter Users Category:Card Users Category:Telekinesis Users Category:Transmutation
-        Users Category:Resurrection Users Category:Dimensional Travel Users Category:Energy
-        Users Category:Por'
-      source_id: vsbattles-namine-game
+      value: 'Key: Up to KH3D | KHIII Name: Luxord, "Number X: The Gambler of Fate"
+        Origin: Kingdom Hearts Gender: Male Age: Unknown Classification: Nobody, Member
+        of Organization XIII, Number X, One of the Thirteen Seekers of Darkness'
+      source_id: mediawiki-namine-game
       provider_id: vsbattles
       authority: high
       confidence: 0.75
@@ -2814,10 +1787,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-namine-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29
+    url: https://character-stats-and-profiles.fandom.com/wiki/Namin%C3%A9_(Canon)/Unbacked0
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id019
+    extracted_fields:
     - attack_potency
     - durability
     - powers_and_abilities
@@ -2841,6 +1814,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2854,7 +1828,7 @@ repair:
     provider_id: character_stats_profiles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id020
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2865,8 +1839,7 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: "Low 2-C Name: Namin\xE9 Origin: Kingdom Hearts Gender: Female Age: Unknown\
-        \ Classification: Nobody"
+      value: Low 2-C
       source_id: character-stats-profiles-namine-game
       provider_id: character_stats_profiles
       authority: high
@@ -2878,14 +1851,14 @@ repair:
         \ which don't even exist), Conceptual Manipulation (Can steal the concepts\
         \ of words to the point that no one can say the words), Data Manipulation,\
         \ Possession (Can interact with beings made of Data and possess them), Memory\
-        \ Manipulation |-|Resistances=Resistance to Existence Erasure, Soul Manipulation,\
-        \ Emotional Manipulation, Memory Manipulation, Corruption (Type 3), Madness\
-        \ Manipulation (Type 3) (Can resist the negative effects of the Dark Corridors\
-        \ and the Realm of Darkness where all existence is nullified and staying their\
-        \ can erase a person's memories and their sense of self with being stranded\
-        \ their eventually corrupting someone and driving them insane), Limited Law\
-        \ Manipulation (People from other Worlds are immune to the laws of different\
-        \ Worlds) Attack Potency Universe Level+ (Should be comparable to other Heartless)"
+        \ Manipulation Resistance to Existence Erasure, Soul Manipulation, Emotional\
+        \ Manipulation, Memory Manipulation, Corruption (Type 3), Madness Manipulation\
+        \ (Type 3) (Can resist the negative effects of the Dark Corridors and the\
+        \ Realm of Darkness where all existence is nullified and staying their can\
+        \ erase a person's memories and their sense of self with being stranded their\
+        \ eventually corrupting someone and driving them insane), Limited Law Manipulation\
+        \ (People from other Worlds are immune to the laws of different Worlds) Attack\
+        \ Potency Universe Level+ (Should be comparable to other Heartless)"
       source_id: character-stats-profiles-namine-game
       provider_id: character_stats_profiles
       authority: high
@@ -2939,10 +1912,10 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: vsbattles-namine-game-kingdom-hearts
-    url: https://vsbattles.fandom.com/wiki/Namine_Game_Kingdom_Hearts
+    url: https://vsbattles.fandom.com/wiki/Demyx
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id021
+    extracted_fields:
     - attack_potency
     - durability
     - intelligence
@@ -2971,6 +1944,7 @@ repair:
     - intelligence
     - keys
     - lifting_strength
+    - origin
     - powers_and_abilities
     - range
     - speed
@@ -2984,7 +1958,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id022
+    allowed_fields:
     - attack_potency
     - speed
     - durability
@@ -2994,14 +1968,6 @@ repair:
     - stamina
     - intelligence
     field_candidates:
-    - field: tier
-      value: '{{2-B}} Name: Demyx, "Number lX: The Melodious Nocturne" Origin: Kingdom
-        Hearts Gender: Male Age: Unknown Classification: Nobody, Number IX of the
-        Original Organization III, Reserve of the True Organization XIII'
-      source_id: vsbattles-namine-game-kingdom-hearts
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: powers_and_abilities
       value: Nobody Physiology, Summoning (Can summon his main weapon. Can summon
         hordes Nobodies of and Heartless. The Nobodies specifically commanded by him
@@ -3010,18 +1976,18 @@ repair:
         (Type 1; Can breathe in space), Immortality Negation (Type 5; Can destroy
         the skeletal forms of the pirates despite them being neither alive nor dead),
         Water Manipulation, Life Absorption, Darkness Manipulation, Light Manipulation,
-        Flight |-|Resistances=Ice Manipulation, Cosmic Radiations, Darkness Manipulation,
-        Corruption (Type 2) (His Black Coat protects him from the corrupting influence
-        of the darkness of the lanes between and the Realm of Darkness), Time Stop
-        (Can move inside of the Realm of Darkness), Information Manipulation (Should
-        scale to his fellow Nobodies who were unaffected by Namine's powers), Madness
-        Manipulation (Type 3), Mind Manipulation, Memory Manipulation, Soul Manipulation,
-        Willpower Manipulation (The Realm of Darkness has been stated to eradicate
-        existence itself within it, and anyone who's traveled there have never returned.
-        Ansem the Wise by being in the Realm of Darkness was losing his sense of self
-        and memories, having to give into his hatred to survive. Aqua not long after
-        being in the Realm of Darkness lost the will to continue, and needed to stay
-        true to her friends to fight it), Water Manipulation, Life Absorption (Unaffected
+        Flight Ice Manipulation, Cosmic Radiations, Darkness Manipulation, Corruption
+        (Type 2) (His Black Coat protects him from the corrupting influence of the
+        darkness of the lanes between and the Realm of Darkness), Time Stop (Can move
+        inside of the Realm of Darkness), Information Manipulation (Should scale to
+        his fellow Nobodies who were unaffected by Namine's powers), Madness Manipulation
+        (Type 3), Mind Manipulation, Memory Manipulation, Soul Manipulation, Willpower
+        Manipulation (The Realm of Darkness has been stated to eradicate existence
+        itself within it, and anyone who's traveled there have never returned. Ansem
+        the Wise by being in the Realm of Darkness was losing his sense of self and
+        memories, having to give into his hatred to survive. Aqua not long after being
+        in the Realm of Darkness lost the will to continue, and needed to stay true
+        to her friends to fight it), Water Manipulation, Life Absorption (Unaffected
         by his own power), Possible Resistances to Void Manipulation, Attack Nullification,
         Power Nullification, Perception Manipulation, Attack Reflection (Via Nothing
         to Fear), Spatial Manipulation, Gravity Manipulation (Via Space in Its Place),
@@ -3126,17 +2092,506 @@ repair:
         Bubble Blaster.gif|Bubble Blaster Bubble Drop.gif|Bubble Drop Form Creation.gif|Form
         Creation Geyser Trail.gif|Geyser Trail Water Dash.gif|Water Dash Water Wall.gif|Water
         Wall Show Stealer.gif|Show Stealer Wave Gigs.gif|Wave Gigs Wave Dance.gif|Wave
-        Dance ==Notable Matchups== Victories: Losses: Inconclusive: {{discussions}}
-        Category:Characters Category:Male Characters Category:Kingdom Hearts Category:Antagonists
-        Category:Villains Category:Water Users Category:Darkness Users Category:Flight
-        Users Category:Light Users Category:Portal Users Category:Dimensional Travel
-        Users Category:Resurrection Users Category:Self-Sustenance Users Category:Summoners
-        Category:Game Characters Category:Organization XIII Category:Playable Characters
-        Category:Non-Physical Interaction Users Category:Concept Users Category:Data
-        Users Category:Existence Erasure Users Category:Possession Users Category:Guitar
-        Users Category:Musicians'
+        Dance ==Notable Matchups== Victories: Losses: Inconclusive: Category:Characters
+        Category:Male Characters Category:Kingdom Hearts Category:Antagonists Category:Villains
+        Category:Water Users Category:Darkness Users Category:Flight Users Category:Light
+        Users Category:Portal Users Category:Dimensional Travel Users Category:Resurrection
+        Users Category:Self-Sustenance Users Category:Summoners Category:Game Characters
+        Category:Organization XIII Category:Playable Characters Category:Non-Physical
+        Interaction Users Category:Concept Users Category:Data Users Category:Existence
+        Erasure Users Category:Possession Users Category:Guitar Users Category:Musicians'
       source_id: vsbattles-namine-game-kingdom-hearts
       provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Name: Demyx, "Number lX: The Melodious Nocturne" Origin: Kingdom Hearts
+        Gender: Male Age: Unknown Classification: Nobody, Number IX of the Original
+        Organization III, Reserve of the True Organization XIII'
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|demyx|8654636
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-namine-game-kingdom-hearts
+    url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29_Kingdom_Hearts
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Sora (Kingdom Hearts)
+    source_type: mediawiki
+    revision_id: '9710935'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 208422
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: '| | in base, , eventually with summons, Drive Forms and Trinity Limit
+        | | , higher with Formchanges'
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Pre-Keyblade= {{#tag:tabber
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Wall level+ (Can bust crates at this level) | Multiverse level (Sora's\
+        \ strength of heart, which directly correlates to the one of his Keyblade,\
+        \ significantly affected the KH of Worlds by making it unleash its true power\
+        \ and cause it to vanish shortly after, which sustained an infinite space\
+        \ with its own time axis. The existence of all worlds are tied to the KH of\
+        \ Worlds, which are universes and there's as many as stars) | Multiverse level\
+        \ (Fought Riku Replica, and so should be on the level of Dark Mode Riku) |\
+        \ Multiverse level in base (At the start of KHII, he merged back with Roxas,\
+        \ who [https://youtu.be/uwFfXH_fkBk?t=6278 had half of his power], and so\
+        \ should be twice as strong than Final Form Xion, can directly damage Genie\
+        \ Jafar unlike in KHI and KHCoM, Genie remarks that Data-Sora (Who's comparable\
+        \ to KHI Sora at the time) [https://youtu.be/qWO5Sn2ZFKQ couldn't damage Genie\
+        \ Jafar], who was comparable to the real deal out of the manner Jiminy's Journal\
+        \ Datascape parallels the main universe), Multiverse level, eventually Complex\
+        \ Multiverse level with summons, Drive Forms and Trinity Limit (They rely\
+        \ on Drive Orbs, [https://youtu.be/l6Tz7KyLCfQ?t=87 a power source], which\
+        \ becomes upgraded as Sora practices with them, which when combined with Stitch\
+        \ and Peter Pan scaling to Lingering Will at around the end of KHII results\
+        \ into them being consistently on this level) | Complex Multiverse level (KH3D\
+        \ Sora starts off on the level of Drive Form KHII Sora, comparable to Riku,\
+        \ who could fight Young Xehanort) | Complex Multiverse level (Sora became\
+        \ even stronger, could overpower a complete \u03A7-Blade-wielding Xehanort\
+        \ alongside Donald and Goofy, could wield the \u03A7-Blade [https://youtu.be/2LFf5svArRM?si=am9lo4wvxrfFQosk&t=591\
+        \ to cancel out] its [https://youtu.be/2LFf5svArRM?si=1pNyB_P8PAIcDsBT&t=58\
+        \ cosmological erasure] at a 6-D scale with the help of others), higher with\
+        \ Formchanges (Formchanges are considered as a more advanced and superior\
+        \ technique compared to Drive Forms)"
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Athletic Human (Sora is an athletic teenager) | Infinite (The Realm of
+        Darkness [https://imgur.com/a/kzItztV parallels] the Realm of Light, which
+        in itself alongside the Realm Between make up the Ocean Between, an infinite
+        5-D structure. Is comparable to Aqua, who has [https://imgur.com/a/pHDSleY
+        endlessly wandered in it], and could reach [https://imgur.com/a/WgUyxFk by
+        movement] the [https://www.khwiki.com/End_of_Sea#Blank_Points furthest area
+        of it in a finite timeframe])
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Wall level+ (Can take hits from Riku) | Multiverse level (Has taken hits
+        from the likes of Ansem and Riku), Complex Multiverse level with Second Chance
+        (Such ability has displayed to still work even at this level) | Multiverse
+        level, Complex Multiverse level with Second Chance | Multiverse level in base,
+        Multiverse level, eventually Complex Multiverse level with Drive Forms, Complex
+        Multiverse level with Second Chance and Once More | Complex Multiverse level
+        | Complex Multiverse level
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Athletic (Sora is an athletic teenager that plays sports all day with
+        his friends) | Very high, can completely bulldoze through 1,000 Heartless
+        and have long fights with equally powerful enemies, has been going from world
+        to world for years doing pretty much nothing but fighting. Fought against
+        Ansem and Xemnas in several battles in each of their final fights respectively.
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: "Standard Melee Range, Extended Melee Range with the wood sword | Extended\
+        \ Melee Range, Tens of Meters with Keyblade telepathy and with regular melee,\
+        \ [http://web.archive.org/web/20160505020454/http://www.narutoforums.com/xfa-blog-entry/shoot-the-moon-kingdom-hearts.22354/\
+        \ Planetary with magic], Interdimensional with Keyholes (Sora can open portals\
+        \ to travel from reaching other worlds (universes), to reaching the other\
+        \ Complex Multiversal structure that is the Realm of Darkness), Complex Multiversal\
+        \ with the \u03A7-Blade."
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: 'Note: Pre-Keyblade, Sora only holds as Standard Equipment his wood sword,
+        Potions and the Protect Chain accessory, KHIII Sora also has the X-Blade as
+        Standard Equipment. |-|Keyblade=right|100px (Kingdom Key): Through channeling
+        one''s strength of heart, the user can summon a Keyblade to use in battle.
+        Sora''s Keyblade is the Kingdom Key, a weapon from the realm of light. Through
+        the use of the Keyblade, the user is granted increased strength, speed, durability,
+        and increased magical power, as well as access to special abilities, like
+        turning your Keyblade into a bike or whip. Thus far, Sora has not demonstrated
+        such special abilities as of KHII but has finally obtained such in KHIII,
+        implying his mastery of the ability after training under Yen Sid. |-|Keychains=right|100px
+        Found among all Keyblades, Keychains allow the user''s Keyblade to change
+        shape and abilities, which vary a lot depending on the user and the Keychain
+        itself. Sora can quickly change the Keychain of his Keyblade by resummoning
+        his own Keyblade with another Keychain, which is by default in its true form,
+        the Kingdom Key. The following are all the forms Sora''s Keyblade can take
+        from the respective Keychain: KHI KHII KH3D KHIII |-|Potion=right|100px A
+        one-use item that allows to recover health by a decent amount quickly by casting
+        it on himself or an ally. |-|Hi-Potion=right|100px A one-use item that allows
+        to recover health by a noticeable amount quickly by casting it on himself
+        or an ally. |-|Mega Potion=right|100px A one-use item that allows Sora and
+        allies to recover health by a decent amount quickly by casting it on himself
+        and allies. |-|Ether=right|100px A one-use item that allows to recover magic
+        by a noticeable amount quickly by casting it on himself or an ally. |-|Hi-Ether=right|100px
+        A one-use item that allows to recover magic back to peak quickly by casting
+        it on himself or an ally. |-|Mega Ether=right|100px A one-use item that allows
+        Sora and allies to recover magic back to peak quickly by casting it on himself
+        and allies. |-|Refocuser=right|100px A one-use item that allows Sora to refill
+        his focus a noticeable amount to be able to use Shotlocks by casting it on
+        himself. |-|Hi-Refocuser=right|100px A one-use item that allows Sora to refill
+        his focus back to peak to be able to use Shotlocks by casting it on himself.
+        |-|Elixir=right|100px A one-use item that allows to recover health and magic
+        back to peak quickly by casting it on himself or an ally, also rendering the
+        one cast to with a resistance to multiple status effects for a while. |-|Megalixir=right|100px
+        A one-use item that allows Sora and allies to recover health and magic back
+        to peak quickly by casting it on himself and allies, also rendering the ones
+        cast to with a resistance to multiple status effects for a while. |-|Panacea=A
+        one-use item that allows Sora to undo any negative status effects he is inflicted
+        with. |-|Armor=As a wide variety of chains, belts, ribbons, bandannas, and
+        armlets, among others, they grant Sora with a minor but still usable increase
+        in stats, with some of the most noteworthy ones boosting his Resistances to
+        most elemental attacks, with others like the Shock Charm+ boosting the power
+        of his Thunder spell. |-|Accesories=As rings, bands, belts, armlets, and badges,
+        among others, they grant Sora with useful abilities for a fight, from boosting
+        the power of his elemental attacks, increasing his Resistance to attacks and
+        many others, also granting a minor but still usable increase in stats. |-|Gummi
+        Ship=right|100px The Gummi Ship is the main way Sora travels across the Realm
+        of Light, holding a wide variety of weapons, Sora can do many techniques with
+        it when fighting in the middle of space.'
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: "Pre-Keyblade= Average, while Sora has played with a wood sword to pass\
+        \ time with his friends for a while, he's still remarked on mainly swinging\
+        \ it like a toy, and lacks experience in general, but has still been able\
+        \ to keep pace with Riku (both in combat and on a race), somebody slightly\
+        \ older, at the time, and [https://youtu.be/LRN23v4TQAs three kids of his\
+        \ age at once]. Besides combat, while Sora has only been in Destiny Islands,\
+        \ and so is quite unaware of much else, the fact Kairi was confirmed to go\
+        \ to school a bit after the start of KHII implies Sora was subject to an educative\
+        \ system previously, Sora was also clever enough to find the items Kairi requested\
+        \ for the trip in the raft they were going to have, notably including swimming\
+        \ for fish and pushing a boulder for a mushroom. |-|KHI= {{#tag:tabber|-Combat=\
+        \ Gifted, Sora has taught himself a variety of Keyblade techniques, magical\
+        \ spells, and supporting abilities that have served him well on his journeys\
+        \ in just a few months, even being compared to Keyblade Masters, which when\
+        \ trained formally normally take years to even be considered as such, while\
+        \ also having fought countless foes on a wide variety of environments such\
+        \ as while airbone, grounded and underwater, even having fought as a merman\
+        \ on the last one without much issue, and could make the most of his own abilities\
+        \ to counteract the Phantom's intangibility. -Everything else= Above Average,\
+        \ likely Gifted, Sora could also eventually grasp how to drive the Gummi Ship,\
+        \ an inter-universal travel device to travel between the Worlds in the Ocean\
+        \ Between, while also dodging hostile ships and attacking back with proper\
+        \ aim of his own. Sora has also traveled across several Worlds alongside Donald\
+        \ Duck and Goofy, and so is experienced with several kinds of cultures and\
+        \ ways to blend in them without disrupting their order, although he forgets\
+        \ to do so at times regardless, and has a good memory on patterns as he can\
+        \ follow up the original [https://www.khwiki.com/Black_Ballade Black Ballade]\
+        \ from its clones, and [https://www.khwiki.com/Tigger%27s_Giant_Pot repeat\
+        \ the jumping patterns] of Tigger and Roo. Sora also managed to keep track\
+        \ of the ways [https://www.khwiki.com/Block_Tigger Tigger was headed to] to\
+        \ block him from stomping the carrots, and quickly learned how to [https://www.khwiki.com/Vine_Swinging\
+        \ swing himself on vines] and [https://www.khwiki.com/Jungle_Slider slide\
+        \ on trees]. }} |-|KHCoM= {{#tag:tabber|-Combat= Gifted, even when Sora lost\
+        \ most of his memories as a side effect of Namin\xE9 messing with them at\
+        \ nearly the start, Sora managed to regain most of his former abilities by\
+        \ reinventing them from the start, even discovering more advanced techniques\
+        \ such as Lethal Frame and Ultimate-Class magic spells like Mega Flare, all\
+        \ while also mastering the unique card system all attacks are bound to in\
+        \ Castle Oblivion to his advantage, and learning to use large waves of homing\
+        \ attacks like Firaga Burst. Sora also managed to defeat some of the stronger\
+        \ members of Organization XIII like Marluxia and Larxene, the latter of which\
+        \ is regarded as one of the fastest characters in the series. -Everything\
+        \ else= Above Average, likely Gifted, Sora retained his previous mental skills,\
+        \ and has displayed a quick grasp of [https://www.khwiki.com/Whirlwind_Plunge\
+        \ sky-diving] and [https://www.khwiki.com/Veggie_Panic sorting off vegetables]\
+        \ while also keeping Pooh safe as well, Sora also redisplayed the capability\
+        \ to memorize the [https://www.khwiki.com/Tigger%27s_Jump-a-Thon jumping patterns]\
+        \ of Tigger. }} |-|KHII= {{#tag:tabber|-Combat=Genius, Sora is remarked as\
+        \ a master swordman not long after the start of this journey even when he\
+        \ lost once again most of his powers at the start. Sora has also shown the\
+        \ ability to perfectly replicate attacks after seeing them a single time,\
+        \ showing heightened combat awareness and dynamic thinking skills, which is\
+        \ denoted in his capability to dual-wield Keyblades. He has even proven himself\
+        \ capable of using his opponent's weapons against them, utilizing Sa\xEFx's\
+        \ Claymore and copying his Berserk state, throwing Marluxia's own scythe at\
+        \ him while dealing with a death timer, backfiring Luxord's Law Manipulation-based\
+        \ \"games\", copying Xaldin's [https://youtu.be/j0cD4VjKqY0?t=2096 jumping\
+        \ attacks], using Demyx's clones [https://youtu.be/j0cD4VjKqY0?t=2040 against\
+        \ them], and stealing Roxas' Keyblades, notably [https://youtu.be/j0cD4VjKqY0?t=1851\
+        \ triple-wielding Keyblades] in the process. Sora has also shown a solid capability\
+        \ of teamwork, being able to consistently combine his strength with that of\
+        \ allies like Tron, Simba, Auron and Riku, most notably [https://youtu.be/CDpm5aaritQ?t=924\
+        \ deflecting countless lasers at once from all directions] alongside Riku.\
+        \ Sora could also keep up with Lingering Will, who had power directly comparable\
+        \ to Keyblade Masters and could defeat Braig, who had several generations\
+        \ of experience as formerly Luxu, and is stated to [https://www.khwiki.com/Lingering_Wi"
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Sora''s supply of magic is not infinite, forcing Sora to use his supply
+        sparingly and thoughtfully (But it can recharge over time, he can also use
+        an Ether or Elixir-family item to immediately refill it, summon Bambi (KHI),
+        get himself hit so that it is recharged (KHII, KHIII), or by using a Drive
+        Form (KHII)). Has not shown any skill in unarmed combat. Could be defenseless
+        if one manages to disarm him (But this weakness is mitigated by the fact that
+        Sora could either summon back his Keyblade to his hand right away, use his
+        Anti-Form (KHII), or using his magic spells to fight (Possibly, Sora could
+        only perform defensive actions to Yozora when he absorbed his Keyblade)).
+        It''s to be noted that magical spells do use the magic supply, while moves
+        that are just magical in nature (Such as Ripple Drive and Stun Impact (KHI),
+        Explosion and Magnet Burst (KHII), Magic Flash and Last Charge (KHIII)) don''t,
+        and so those can be used indefinitely just like regular physical techniques
+        regardless of if there''s enough magical supply or not, Sora''s Resurrection
+        takes place within the Final World until he time travels, rendering him vulnerable
+        to those that can trace him to such place Feats: Show/Hide *Became the Kingdom
+        Key''s chosen wielder. *Took on and defeated Sephiroth twice. *Fought Xemnas
+        along with Donald, Goofy, and The Beast in KH: Final Mix when he only had
+        half a heart (This means that, from a story and power standpoint, he was incomplete
+        when he didn''t have Roxas with him, meaning Sora was "half as powerful" at
+        the time of said fight) *Overpowered a giant, solid stone heartless while
+        nerfed as a small lion (Lifting Strength) *Fought and taken several god-like
+        beings such as Genie Jafar, Hades, Sephiroth, Ansem, Xemnas, etc. *Responsible
+        for the destruction of most of the Original Organization XIII. *Along with
+        Riku, defeated Xemnas who had absorbed an incomplete Kingdom Hearts. A complete
+        one being capable of restoring hundreds of worlds to normal. *Contended with
+        and defeated/stalemated the Lingering Will, a being with power and mastery
+        over the Keyblade far above that of Sora and even Terra himself (even though
+        the Lingering Will is a suit of armor that contains Terra''s mind within).
+        *Took on an army of 1,000 Heartless by himself and without rest. *Has traveled
+        to many worlds doing nothing but primarily fighting. Notable Attacks/Techniques:
+        |-|Keyblade Techniques= {{#tag:tabber|-KHI= Note: For Trinity Limit, see the
+        "Limits and Team Attacks" section. *Block: Sora puts the Keyblade in front
+        of himself, blocking frontal attacks. *Ars Arcanum: One of his most powerful
+        attacks, Sora charges the Keyblade with energy before unleashing a powerful
+        flurry of up to thirteen strikes. He opens with Arcanum, stunning the target
+        in preparation for Bash, two sets of five blows that are quickly chained into
+        each other. He finishes the target with Finis, two overhead swings that knock
+        the target away. *Sonic Blade/Rave: Sora unleashes seven powerful thrust attacks
+        at the enemy, with the final attack being more powerful and damaging. *Ragnarok:
+        Alternatively called Infinity. After finishing an aerial combo, Sora can charge
+        energy in his Keyblade to unleash a powerful fusillade of homing beams of
+        light, the number and power of it is directly proportional to the amount of
+        time he spends charging. *Strike Raid: Also translated as Strike Judgement
+        in KHII. Sora throws his Keyblade at the enemy four times, with a fifth and
+        final throw being more powerful to the point of sending the target flying
+        into the air. *Ripple Drive: A powerful finisher attacks that envelop Sora''s
+        surroundings with a pink lattice that deals damage to all foes nearby. *Stun
+        Impact: Sora quickly gathers energy and then emits it from himself at all
+        directions, forming a sphere that stuns foes caught in it. *Zantetsuken: A
+        combo finisher that has Sora bring back his blade before dashing past his
+        foes for an impossibly fast thrust, dealing massive damage to all unfortunate
+        to be caught in the line of fire. *Sliding Dash: Sora quickly slides to attack
+        a grounded target and follow up with other moves. *Blitz: A combo finisher
+        in which Sora slams his keyblade downwards. *Hurricane Blast: An aerial combo
+        finisher where Sora performs three moonsaults with his Keyblade while quickly
+        falling downwards, striking enemies below him as well as his target. *Aerial
+        Swing: If there''s a target above Sora, he jumps and spins with the Keyblade.
+        *Vortex: Sora performs a large horizontal swing with the Keyblade, can be
+        done on the ground and on the air. *Gravity Break: Sora enhances his Keyblade
+        with Gravity magic and slams it at the opponent multiple times. *Slapshot:
+        Sora performs a quick uppercut with the Keyblade, generally used if the target
+        is right next to him. -KHCoM= Note: Moves not mentioned from the previous
+        list haven''t changed at all, however, the following are the moves no longer
+        available: Slapshot, Gravity Break, Aerial Sweep, Ripple Drive and Hurricane
+        Blast. *Sliding'
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|sora kingdom hearts|9710935
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-namine-game-kingdom-hearts
+    url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29_Kingdom_Hearts
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: "Namin\xE9 (Canon)/Unbacked0"
+    source_type: mediawiki
+    revision_id: '178993'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3620
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Low 2-C
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "Namin\xE9=Superhuman Physical Characteristics, Self-Sustenance (Type\
+        \ 1, 2 & 3), Nonexistent Physiology (Type 1), Non-Physical Interaction (Can\
+        \ directly harm Heartless, which don't have physical forms, and Nobodies,\
+        \ which don't even exist), Conceptual Manipulation (Can steal the concepts\
+        \ of words to the point that no one can say the words), Data Manipulation,\
+        \ Possession (Can interact with beings made of Data and possess them), Memory\
+        \ Manipulation Resistance to Existence Erasure, Soul Manipulation, Emotional\
+        \ Manipulation, Memory Manipulation, Corruption (Type 3), Madness Manipulation\
+        \ (Type 3) (Can resist the negative effects of the Dark Corridors and the\
+        \ Realm of Darkness where all existence is nullified and staying their can\
+        \ erase a person's memories and their sense of self with being stranded their\
+        \ eventually corrupting someone and driving them insane), Limited Law Manipulation\
+        \ (People from other Worlds are immune to the laws of different Worlds) Attack\
+        \ Potency Universe Level+ (Should be comparable to other Heartless)"
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Inaccessible (Even weaker Heartless can move in the Realm of Darkness
+        which has been stated to have no time)
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Universe Level+ (Can take hits from Roxas)
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None Notable Note: Worlds in Kingdom Hearts are universes rather than
+        planets like people think. Proof of this is how it''s been stated that you
+        naturally can''t travel to different Worlds without. It has also been shown
+        that Worlds are seen as stars in Traverse Town which is considered a "World
+        between Worlds" which means they can''t be just planets. It has also been
+        stated that a normal person can''t leave a World even if said World has advanced
+        spaceships which are capable of travelling through space. Riku has stated
+        that any two Worlds have different Axis of time and that every World has its
+        own flow of time. The Grand Councilwoman who has been stated "oversee the
+        universe" didn''t know what Terra was. ==Others== Notable Victories: Notable
+        Losses: Inconclusive Matches: Category:Unbacked0 Category:Tier 2'
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Universe Level+ (Should be comparable to other Heartless)
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
     identity_match: false
@@ -3149,180 +2604,756 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|demyx|8654636
+    duplicate_key: character-stats-and-profiles.fandom.com|namine canon unbacked0|178993
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-namine-game-kingdom-hearts
+    url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29_%28Kingdom_Hearts%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Sora (Kingdom Hearts)
+    source_type: mediawiki
+    revision_id: '9710935'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 208422
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    - References
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 105
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: '| | in base, , eventually with summons, Drive Forms and Trinity Limit
+        | | , higher with Formchanges'
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Pre-Keyblade= {{#tag:tabber
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: "Wall level+ (Can bust crates at this level) | Multiverse level (Sora's\
+        \ strength of heart, which directly correlates to the one of his Keyblade,\
+        \ significantly affected the KH of Worlds by making it unleash its true power\
+        \ and cause it to vanish shortly after, which sustained an infinite space\
+        \ with its own time axis. The existence of all worlds are tied to the KH of\
+        \ Worlds, which are universes and there's as many as stars) | Multiverse level\
+        \ (Fought Riku Replica, and so should be on the level of Dark Mode Riku) |\
+        \ Multiverse level in base (At the start of KHII, he merged back with Roxas,\
+        \ who [https://youtu.be/uwFfXH_fkBk?t=6278 had half of his power], and so\
+        \ should be twice as strong than Final Form Xion, can directly damage Genie\
+        \ Jafar unlike in KHI and KHCoM, Genie remarks that Data-Sora (Who's comparable\
+        \ to KHI Sora at the time) [https://youtu.be/qWO5Sn2ZFKQ couldn't damage Genie\
+        \ Jafar], who was comparable to the real deal out of the manner Jiminy's Journal\
+        \ Datascape parallels the main universe), Multiverse level, eventually Complex\
+        \ Multiverse level with summons, Drive Forms and Trinity Limit (They rely\
+        \ on Drive Orbs, [https://youtu.be/l6Tz7KyLCfQ?t=87 a power source], which\
+        \ becomes upgraded as Sora practices with them, which when combined with Stitch\
+        \ and Peter Pan scaling to Lingering Will at around the end of KHII results\
+        \ into them being consistently on this level) | Complex Multiverse level (KH3D\
+        \ Sora starts off on the level of Drive Form KHII Sora, comparable to Riku,\
+        \ who could fight Young Xehanort) | Complex Multiverse level (Sora became\
+        \ even stronger, could overpower a complete \u03A7-Blade-wielding Xehanort\
+        \ alongside Donald and Goofy, could wield the \u03A7-Blade [https://youtu.be/2LFf5svArRM?si=am9lo4wvxrfFQosk&t=591\
+        \ to cancel out] its [https://youtu.be/2LFf5svArRM?si=1pNyB_P8PAIcDsBT&t=58\
+        \ cosmological erasure] at a 6-D scale with the help of others), higher with\
+        \ Formchanges (Formchanges are considered as a more advanced and superior\
+        \ technique compared to Drive Forms)"
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Athletic Human (Sora is an athletic teenager) | Infinite (The Realm of
+        Darkness [https://imgur.com/a/kzItztV parallels] the Realm of Light, which
+        in itself alongside the Realm Between make up the Ocean Between, an infinite
+        5-D structure. Is comparable to Aqua, who has [https://imgur.com/a/pHDSleY
+        endlessly wandered in it], and could reach [https://imgur.com/a/WgUyxFk by
+        movement] the [https://www.khwiki.com/End_of_Sea#Blank_Points furthest area
+        of it in a finite timeframe])
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Wall level+ (Can take hits from Riku) | Multiverse level (Has taken hits
+        from the likes of Ansem and Riku), Complex Multiverse level with Second Chance
+        (Such ability has displayed to still work even at this level) | Multiverse
+        level, Complex Multiverse level with Second Chance | Multiverse level in base,
+        Multiverse level, eventually Complex Multiverse level with Drive Forms, Complex
+        Multiverse level with Second Chance and Once More | Complex Multiverse level
+        | Complex Multiverse level
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Athletic (Sora is an athletic teenager that plays sports all day with
+        his friends) | Very high, can completely bulldoze through 1,000 Heartless
+        and have long fights with equally powerful enemies, has been going from world
+        to world for years doing pretty much nothing but fighting. Fought against
+        Ansem and Xemnas in several battles in each of their final fights respectively.
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: "Standard Melee Range, Extended Melee Range with the wood sword | Extended\
+        \ Melee Range, Tens of Meters with Keyblade telepathy and with regular melee,\
+        \ [http://web.archive.org/web/20160505020454/http://www.narutoforums.com/xfa-blog-entry/shoot-the-moon-kingdom-hearts.22354/\
+        \ Planetary with magic], Interdimensional with Keyholes (Sora can open portals\
+        \ to travel from reaching other worlds (universes), to reaching the other\
+        \ Complex Multiversal structure that is the Realm of Darkness), Complex Multiversal\
+        \ with the \u03A7-Blade."
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: 'Note: Pre-Keyblade, Sora only holds as Standard Equipment his wood sword,
+        Potions and the Protect Chain accessory, KHIII Sora also has the X-Blade as
+        Standard Equipment. |-|Keyblade=right|100px (Kingdom Key): Through channeling
+        one''s strength of heart, the user can summon a Keyblade to use in battle.
+        Sora''s Keyblade is the Kingdom Key, a weapon from the realm of light. Through
+        the use of the Keyblade, the user is granted increased strength, speed, durability,
+        and increased magical power, as well as access to special abilities, like
+        turning your Keyblade into a bike or whip. Thus far, Sora has not demonstrated
+        such special abilities as of KHII but has finally obtained such in KHIII,
+        implying his mastery of the ability after training under Yen Sid. |-|Keychains=right|100px
+        Found among all Keyblades, Keychains allow the user''s Keyblade to change
+        shape and abilities, which vary a lot depending on the user and the Keychain
+        itself. Sora can quickly change the Keychain of his Keyblade by resummoning
+        his own Keyblade with another Keychain, which is by default in its true form,
+        the Kingdom Key. The following are all the forms Sora''s Keyblade can take
+        from the respective Keychain: KHI KHII KH3D KHIII |-|Potion=right|100px A
+        one-use item that allows to recover health by a decent amount quickly by casting
+        it on himself or an ally. |-|Hi-Potion=right|100px A one-use item that allows
+        to recover health by a noticeable amount quickly by casting it on himself
+        or an ally. |-|Mega Potion=right|100px A one-use item that allows Sora and
+        allies to recover health by a decent amount quickly by casting it on himself
+        and allies. |-|Ether=right|100px A one-use item that allows to recover magic
+        by a noticeable amount quickly by casting it on himself or an ally. |-|Hi-Ether=right|100px
+        A one-use item that allows to recover magic back to peak quickly by casting
+        it on himself or an ally. |-|Mega Ether=right|100px A one-use item that allows
+        Sora and allies to recover magic back to peak quickly by casting it on himself
+        and allies. |-|Refocuser=right|100px A one-use item that allows Sora to refill
+        his focus a noticeable amount to be able to use Shotlocks by casting it on
+        himself. |-|Hi-Refocuser=right|100px A one-use item that allows Sora to refill
+        his focus back to peak to be able to use Shotlocks by casting it on himself.
+        |-|Elixir=right|100px A one-use item that allows to recover health and magic
+        back to peak quickly by casting it on himself or an ally, also rendering the
+        one cast to with a resistance to multiple status effects for a while. |-|Megalixir=right|100px
+        A one-use item that allows Sora and allies to recover health and magic back
+        to peak quickly by casting it on himself and allies, also rendering the ones
+        cast to with a resistance to multiple status effects for a while. |-|Panacea=A
+        one-use item that allows Sora to undo any negative status effects he is inflicted
+        with. |-|Armor=As a wide variety of chains, belts, ribbons, bandannas, and
+        armlets, among others, they grant Sora with a minor but still usable increase
+        in stats, with some of the most noteworthy ones boosting his Resistances to
+        most elemental attacks, with others like the Shock Charm+ boosting the power
+        of his Thunder spell. |-|Accesories=As rings, bands, belts, armlets, and badges,
+        among others, they grant Sora with useful abilities for a fight, from boosting
+        the power of his elemental attacks, increasing his Resistance to attacks and
+        many others, also granting a minor but still usable increase in stats. |-|Gummi
+        Ship=right|100px The Gummi Ship is the main way Sora travels across the Realm
+        of Light, holding a wide variety of weapons, Sora can do many techniques with
+        it when fighting in the middle of space.'
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: "Pre-Keyblade= Average, while Sora has played with a wood sword to pass\
+        \ time with his friends for a while, he's still remarked on mainly swinging\
+        \ it like a toy, and lacks experience in general, but has still been able\
+        \ to keep pace with Riku (both in combat and on a race), somebody slightly\
+        \ older, at the time, and [https://youtu.be/LRN23v4TQAs three kids of his\
+        \ age at once]. Besides combat, while Sora has only been in Destiny Islands,\
+        \ and so is quite unaware of much else, the fact Kairi was confirmed to go\
+        \ to school a bit after the start of KHII implies Sora was subject to an educative\
+        \ system previously, Sora was also clever enough to find the items Kairi requested\
+        \ for the trip in the raft they were going to have, notably including swimming\
+        \ for fish and pushing a boulder for a mushroom. |-|KHI= {{#tag:tabber|-Combat=\
+        \ Gifted, Sora has taught himself a variety of Keyblade techniques, magical\
+        \ spells, and supporting abilities that have served him well on his journeys\
+        \ in just a few months, even being compared to Keyblade Masters, which when\
+        \ trained formally normally take years to even be considered as such, while\
+        \ also having fought countless foes on a wide variety of environments such\
+        \ as while airbone, grounded and underwater, even having fought as a merman\
+        \ on the last one without much issue, and could make the most of his own abilities\
+        \ to counteract the Phantom's intangibility. -Everything else= Above Average,\
+        \ likely Gifted, Sora could also eventually grasp how to drive the Gummi Ship,\
+        \ an inter-universal travel device to travel between the Worlds in the Ocean\
+        \ Between, while also dodging hostile ships and attacking back with proper\
+        \ aim of his own. Sora has also traveled across several Worlds alongside Donald\
+        \ Duck and Goofy, and so is experienced with several kinds of cultures and\
+        \ ways to blend in them without disrupting their order, although he forgets\
+        \ to do so at times regardless, and has a good memory on patterns as he can\
+        \ follow up the original [https://www.khwiki.com/Black_Ballade Black Ballade]\
+        \ from its clones, and [https://www.khwiki.com/Tigger%27s_Giant_Pot repeat\
+        \ the jumping patterns] of Tigger and Roo. Sora also managed to keep track\
+        \ of the ways [https://www.khwiki.com/Block_Tigger Tigger was headed to] to\
+        \ block him from stomping the carrots, and quickly learned how to [https://www.khwiki.com/Vine_Swinging\
+        \ swing himself on vines] and [https://www.khwiki.com/Jungle_Slider slide\
+        \ on trees]. }} |-|KHCoM= {{#tag:tabber|-Combat= Gifted, even when Sora lost\
+        \ most of his memories as a side effect of Namin\xE9 messing with them at\
+        \ nearly the start, Sora managed to regain most of his former abilities by\
+        \ reinventing them from the start, even discovering more advanced techniques\
+        \ such as Lethal Frame and Ultimate-Class magic spells like Mega Flare, all\
+        \ while also mastering the unique card system all attacks are bound to in\
+        \ Castle Oblivion to his advantage, and learning to use large waves of homing\
+        \ attacks like Firaga Burst. Sora also managed to defeat some of the stronger\
+        \ members of Organization XIII like Marluxia and Larxene, the latter of which\
+        \ is regarded as one of the fastest characters in the series. -Everything\
+        \ else= Above Average, likely Gifted, Sora retained his previous mental skills,\
+        \ and has displayed a quick grasp of [https://www.khwiki.com/Whirlwind_Plunge\
+        \ sky-diving] and [https://www.khwiki.com/Veggie_Panic sorting off vegetables]\
+        \ while also keeping Pooh safe as well, Sora also redisplayed the capability\
+        \ to memorize the [https://www.khwiki.com/Tigger%27s_Jump-a-Thon jumping patterns]\
+        \ of Tigger. }} |-|KHII= {{#tag:tabber|-Combat=Genius, Sora is remarked as\
+        \ a master swordman not long after the start of this journey even when he\
+        \ lost once again most of his powers at the start. Sora has also shown the\
+        \ ability to perfectly replicate attacks after seeing them a single time,\
+        \ showing heightened combat awareness and dynamic thinking skills, which is\
+        \ denoted in his capability to dual-wield Keyblades. He has even proven himself\
+        \ capable of using his opponent's weapons against them, utilizing Sa\xEFx's\
+        \ Claymore and copying his Berserk state, throwing Marluxia's own scythe at\
+        \ him while dealing with a death timer, backfiring Luxord's Law Manipulation-based\
+        \ \"games\", copying Xaldin's [https://youtu.be/j0cD4VjKqY0?t=2096 jumping\
+        \ attacks], using Demyx's clones [https://youtu.be/j0cD4VjKqY0?t=2040 against\
+        \ them], and stealing Roxas' Keyblades, notably [https://youtu.be/j0cD4VjKqY0?t=1851\
+        \ triple-wielding Keyblades] in the process. Sora has also shown a solid capability\
+        \ of teamwork, being able to consistently combine his strength with that of\
+        \ allies like Tron, Simba, Auron and Riku, most notably [https://youtu.be/CDpm5aaritQ?t=924\
+        \ deflecting countless lasers at once from all directions] alongside Riku.\
+        \ Sora could also keep up with Lingering Will, who had power directly comparable\
+        \ to Keyblade Masters and could defeat Braig, who had several generations\
+        \ of experience as formerly Luxu, and is stated to [https://www.khwiki.com/Lingering_Wi"
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'Sora''s supply of magic is not infinite, forcing Sora to use his supply
+        sparingly and thoughtfully (But it can recharge over time, he can also use
+        an Ether or Elixir-family item to immediately refill it, summon Bambi (KHI),
+        get himself hit so that it is recharged (KHII, KHIII), or by using a Drive
+        Form (KHII)). Has not shown any skill in unarmed combat. Could be defenseless
+        if one manages to disarm him (But this weakness is mitigated by the fact that
+        Sora could either summon back his Keyblade to his hand right away, use his
+        Anti-Form (KHII), or using his magic spells to fight (Possibly, Sora could
+        only perform defensive actions to Yozora when he absorbed his Keyblade)).
+        It''s to be noted that magical spells do use the magic supply, while moves
+        that are just magical in nature (Such as Ripple Drive and Stun Impact (KHI),
+        Explosion and Magnet Burst (KHII), Magic Flash and Last Charge (KHIII)) don''t,
+        and so those can be used indefinitely just like regular physical techniques
+        regardless of if there''s enough magical supply or not, Sora''s Resurrection
+        takes place within the Final World until he time travels, rendering him vulnerable
+        to those that can trace him to such place Feats: Show/Hide *Became the Kingdom
+        Key''s chosen wielder. *Took on and defeated Sephiroth twice. *Fought Xemnas
+        along with Donald, Goofy, and The Beast in KH: Final Mix when he only had
+        half a heart (This means that, from a story and power standpoint, he was incomplete
+        when he didn''t have Roxas with him, meaning Sora was "half as powerful" at
+        the time of said fight) *Overpowered a giant, solid stone heartless while
+        nerfed as a small lion (Lifting Strength) *Fought and taken several god-like
+        beings such as Genie Jafar, Hades, Sephiroth, Ansem, Xemnas, etc. *Responsible
+        for the destruction of most of the Original Organization XIII. *Along with
+        Riku, defeated Xemnas who had absorbed an incomplete Kingdom Hearts. A complete
+        one being capable of restoring hundreds of worlds to normal. *Contended with
+        and defeated/stalemated the Lingering Will, a being with power and mastery
+        over the Keyblade far above that of Sora and even Terra himself (even though
+        the Lingering Will is a suit of armor that contains Terra''s mind within).
+        *Took on an army of 1,000 Heartless by himself and without rest. *Has traveled
+        to many worlds doing nothing but primarily fighting. Notable Attacks/Techniques:
+        |-|Keyblade Techniques= {{#tag:tabber|-KHI= Note: For Trinity Limit, see the
+        "Limits and Team Attacks" section. *Block: Sora puts the Keyblade in front
+        of himself, blocking frontal attacks. *Ars Arcanum: One of his most powerful
+        attacks, Sora charges the Keyblade with energy before unleashing a powerful
+        flurry of up to thirteen strikes. He opens with Arcanum, stunning the target
+        in preparation for Bash, two sets of five blows that are quickly chained into
+        each other. He finishes the target with Finis, two overhead swings that knock
+        the target away. *Sonic Blade/Rave: Sora unleashes seven powerful thrust attacks
+        at the enemy, with the final attack being more powerful and damaging. *Ragnarok:
+        Alternatively called Infinity. After finishing an aerial combo, Sora can charge
+        energy in his Keyblade to unleash a powerful fusillade of homing beams of
+        light, the number and power of it is directly proportional to the amount of
+        time he spends charging. *Strike Raid: Also translated as Strike Judgement
+        in KHII. Sora throws his Keyblade at the enemy four times, with a fifth and
+        final throw being more powerful to the point of sending the target flying
+        into the air. *Ripple Drive: A powerful finisher attacks that envelop Sora''s
+        surroundings with a pink lattice that deals damage to all foes nearby. *Stun
+        Impact: Sora quickly gathers energy and then emits it from himself at all
+        directions, forming a sphere that stuns foes caught in it. *Zantetsuken: A
+        combo finisher that has Sora bring back his blade before dashing past his
+        foes for an impossibly fast thrust, dealing massive damage to all unfortunate
+        to be caught in the line of fire. *Sliding Dash: Sora quickly slides to attack
+        a grounded target and follow up with other moves. *Blitz: A combo finisher
+        in which Sora slams his keyblade downwards. *Hurricane Blast: An aerial combo
+        finisher where Sora performs three moonsaults with his Keyblade while quickly
+        falling downwards, striking enemies below him as well as his target. *Aerial
+        Swing: If there''s a target above Sora, he jumps and spins with the Keyblade.
+        *Vortex: Sora performs a large horizontal swing with the Keyblade, can be
+        done on the ground and on the air. *Gravity Break: Sora enhances his Keyblade
+        with Gravity magic and slams it at the opponent multiple times. *Slapshot:
+        Sora performs a quick uppercut with the Keyblade, generally used if the target
+        is right next to him. -KHCoM= Note: Moves not mentioned from the previous
+        list haven''t changed at all, however, the following are the moves no longer
+        available: Slapshot, Gravity Break, Aerial Sweep, Ripple Drive and Hurricane
+        Blast. *Sliding'
+      source_id: vsbattles-namine-game-kingdom-hearts
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|sora kingdom hearts|9710935
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-namine-game-kingdom-hearts
+    url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29_%28Kingdom_Hearts%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - speed
+    - tier
+    - weaknesses
+    normalized_page_title: "Namin\xE9 (Canon)/Unbacked0"
+    source_type: mediawiki
+    revision_id: '178993'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 3620
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Others
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Low 2-C
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: "Namin\xE9=Superhuman Physical Characteristics, Self-Sustenance (Type\
+        \ 1, 2 & 3), Nonexistent Physiology (Type 1), Non-Physical Interaction (Can\
+        \ directly harm Heartless, which don't have physical forms, and Nobodies,\
+        \ which don't even exist), Conceptual Manipulation (Can steal the concepts\
+        \ of words to the point that no one can say the words), Data Manipulation,\
+        \ Possession (Can interact with beings made of Data and possess them), Memory\
+        \ Manipulation Resistance to Existence Erasure, Soul Manipulation, Emotional\
+        \ Manipulation, Memory Manipulation, Corruption (Type 3), Madness Manipulation\
+        \ (Type 3) (Can resist the negative effects of the Dark Corridors and the\
+        \ Realm of Darkness where all existence is nullified and staying their can\
+        \ erase a person's memories and their sense of self with being stranded their\
+        \ eventually corrupting someone and driving them insane), Limited Law Manipulation\
+        \ (People from other Worlds are immune to the laws of different Worlds) Attack\
+        \ Potency Universe Level+ (Should be comparable to other Heartless)"
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Inaccessible (Even weaker Heartless can move in the Realm of Darkness
+        which has been stated to have no time)
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Universe Level+ (Can take hits from Roxas)
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'None Notable Note: Worlds in Kingdom Hearts are universes rather than
+        planets like people think. Proof of this is how it''s been stated that you
+        naturally can''t travel to different Worlds without. It has also been shown
+        that Worlds are seen as stars in Traverse Town which is considered a "World
+        between Worlds" which means they can''t be just planets. It has also been
+        stated that a normal person can''t leave a World even if said World has advanced
+        spaceships which are capable of travelling through space. Riku has stated
+        that any two Worlds have different Axis of time and that every World has its
+        own flow of time. The Grand Councilwoman who has been stated "oversee the
+        universe" didn''t know what Terra was. ==Others== Notable Victories: Notable
+        Losses: Inconclusive Matches: Category:Unbacked0 Category:Tier 2'
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Universe Level+ (Should be comparable to other Heartless)
+      source_id: character-stats-profiles-namine-game-kingdom-hearts
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|namine canon unbacked0|178993
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-namine-game
+    url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - intelligence
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Luxord
+    source_type: mediawiki
+    revision_id: '9489161'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 14415
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Gallery
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 80
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: powers_and_abilities
+      value: Nobody Physiology, Summoning (Can summon his main weapon. Can summon
+        hordes Nobodies of and Heartless. The Nobodies specifically commanded by him
+        hold standard Nobody Physiology plus Summoning, Telekinesis, Transmutation
+        and Elasticity. His Heartless hold standard Heartless Physiology), Immortality
+        Negation (Type 5, Can destroy the skeletal forms of the pirates despite them
+        being neither alive nor dead), Self-Sustenance (Type 1. Can breathe in space),
+        Magic, Law Manipulation (When Luxord initiates his game, Sora immediately
+        has to follow the "rules" of it, such as the timer for the fight, having to
+        stop and pick the right command, getting turned into a die or card, etc),
+        Time Manipulation (Uses this to make "timed battles", is able to steal some
+        of his opponent's "time gauge" through the use of card games), Statistics
+        Reduction (Can rewind someone's defenses back to 1), Telekinesis, Transmutation
+        (Capable of transforming beings into cards and dice as well as turn himself
+        into a card to hide among his other cards), Darkness Manipulation, Teleportation,
+        Reality Warping (Littered the field with his cards as well several other effects),
+        Energy Blasts, Forcefield Creation (Can create defensive barriers via his
+        cards), BFR, Sealing (Can seal people into his cards) Ice Manipulation, Cosmic
+        Radiations, Darkness Manipulation, Corruption (Type 2) (His Black Coat protects
+        him from the corrupting influence of the darkness of the lanes between and
+        the Realm of Darkness), Time Stop (Can move inside of the Realm of Darkness),
+        Information Manipulation (Should scale to his fellow Nobodies who were unaffected
+        by Namine's powers), Madness Manipulation (Type 3), Mind Manipulation, Memory
+        Manipulation, Soul Manipulation, Willpower Manipulation (The Realm of Darkness
+        has been stated to eradicate existence itself within it, and anyone who's
+        traveled there have never returned. Ansem the Wise by being in the Realm of
+        Darkness was losing his sense of self and memories, having to give into his
+        hatred to survive. Aqua not long after being in the Realm of Darkness lost
+        the will to continue, and needed to stay true to her friends to fight it),
+        Time Manipulation, Statistics Reduction, BFR, Transmutation, Sealing (Unaffected
+        by his own power), Possible Resistances to Void Manipulation, Attack Nullification,
+        Power Nullification, Perception Manipulation, Attack Reflection (Via Nothing
+        to Fear), Spatial Manipulation, Gravity Manipulation (Via Space in Its Place),
+        Wind Manipulation, Paralysis Inducement (Via Flagging Winds), Ice Manipulation
+        (Via Ice Breaker), Earth Manipulation (Via Down to Earth), Mind Manipulation/
+        Illusion Creation, Pocket Reality Manipulation, Sealing, BFR, Power Mimicry,
+        (Via Lose Your Illusion), Power Nullification (Via Sighing of the Moon), Fire
+        Manipulation (Via Tears of Flame), Water Manipulation, Life Manipulation (Via
+        Parting of Waters), Blindness, Death Manipulation, Curse Manipulation (Via
+        Flowers Athirst), Electricity Manipulation (Via Stolen Thunder), Light Manipulation
+        (Via Dying of the Light), and Resistances to all of the above via Master's
+        Circle
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Multiverse level (Able to pose a threat to end-game Sora, who shortly
+        after their fight, goes on to fight and defeat Saix and Xemnas) | Complex
+        Multiverse level (Comparable to the other Seekers of Darkness)
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: Infinite (Comparable to others that can travel across the worlds with
+        a Keyblade Glider, which has been shown to also relate to direct physical
+        movements and is comparable to the Gummi Ship based on Aqua and Ventus getting
+        to the Keyblade Graveyard within a day just like it while also including the
+        threat of Gummi Heartless, comparable to Xemnas, who reacted to Roxas going
+        from Radiant Garden to the Keyblade Graveyard in seconds, not far behind Sora,
+        who reacted to a Keyblade beam from Xehanort of a similar nature as this one)
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Multiverse level (Took many attacks from Sora and managed to temporarily
+        hold out despite the fact that he lost his own timed battle) | Complex Multiverse
+        level
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: stamina
+      value: Unknown
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Standard Melee Range. Tens of Meters with his cards. Low Multiversal
+        with the Corridors of Darkness
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: Fair Game (His deck of cards). His cards also contain a set of traps
+        such as ones that explode after being flipped or another that takes away a
+        portion of the target's "time gauge"
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: intelligence
+      value: Luxord is arguably the most genteel member of Organization XIII. He proved
+        himself to be level-headed and pragmatic in combat, facing Sora one-on-one
+        by teleporting his friends away with his cards and turning Sora into a defenseless
+        die at the very start of the fight. While he tends to treat life as if it
+        were a game (even calling himself a mere pawn in the Organization's plan),
+        he is possesses a sharp mind and a keen eye for strategy, stalling out Sora
+        with various minigames that force the latter to take massive risks to even
+        land a hit on him. True to his epithet, Luxord is also an exceedingly skilled
+        card game player, with Xigbar noting that Roxas would be "eaten alive" in
+        a game of strip poker, utilizing this trait in combat to make his various
+        stall tactics even more difficult. In addition to his gambling prowess, he
+        is also proficient in direct combat, shooting energy projectiles from giant
+        versions of his cards and using the cards themselves as projectiles and as
+        melee weapons
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: weaknesses
+      value: 'His obsession with playing games can backfire on him, his "timed battle"
+        mechanic also works on himself as well as his enemy, Luxord needs to be hard
+        pressed to use his Final Limit Notable Attacks and Techniques: BeginGame.gif|Begin
+        Game BeginGameEX.gif|Begin Game Part II *Timed Battles: The central mechanic
+        behind Luxord''s battles. Luxord manipulates time so that he does not take
+        damage from attacks and instead the damage is directed to a "Time Gauge",
+        referring to his own time. He does the same for his opponent, except for the
+        fact that they will take damage from Luxord''s attacks. The Time Gauges whittle
+        down over time, much like a timer or an hourglass. If Luxord is struck, his
+        time is depleted, while the same rules apply to his opponent. Running out
+        of time will cause the victim to instantly "lose", draining them of all their
+        stamina and rendering them virtually helpless, leaving them open to being
+        finished by their opponent''s next attack. *Begin Game: Luxord challenges
+        his foe to what amounts to a game of slots, forcing them to snatch just the
+        right card from him (an "O") from a set that includes three duds ("X"s). If
+        they succeed, Luxord will be temporarily left wide open to follow up attacks.
+        However, failing this game will temporarily transform his target into a card
+        or a die, sealing all of their abilities and hindering their movement temporarily.
+        When hard-pressed he will instead trap his opponent in a stack of his giant
+        cards, forcing them to seize four correct cards lest they be transformed into
+        a die in additional to draining large portion of their Time Gauge in order
+        to restore Luxord''s own. However, winning the battle here instead will allow
+        his targets to restore their Time Gauge by draining Luxord''s, leaving him
+        next to no time left in his. *Card Shield: Luxord constantly protects himself
+        from incoming attacks with giant versions of his normal cards. They can be
+        destroyed with sufficiently powerful attacks or by simply flipping them around.
+        Luxord is fully aware of this, and thus booby-trapped several of his cards
+        with fireball sigils to set them to detonate should they be flipped around.
+        His opponent is thus forced to choose whether or not they''re willing to whittle
+        down his cards and take projectile attacks from him or close in for the kill
+        by trying to flip his cards over. In addition, he can send these cards out
+        as projectiles to attack and spin them around to knock away approaching enemies.
+        *Card Shuffle: Luxord transforms himself into a card that he shuffles amongst
+        the other cards. The cards are virtually indestructible, forcing the opponent
+        to watch carefully and flip up the card Luxord is hiding in to bring him back
+        to a state where he can be damaged in addition to stunning him. Flipping the
+        wrong one will trigger a booby trap that explodes in the opponent''s face
+        to deal damage. Luxord becomes warier if he''s continually found, summoning
+        more trap cards to hide among and making it more difficult for his opponent
+        to find him. *Sleight of Hand: Luxord covers the area with cards and hiding
+        among them similarly to his Card Shuffle technique. He then goes on the offensive,
+        appearing from various locations and throwing giant cards at his opponents
+        and flipping nearby cards around to knock his opponents into the air. *Jackpot:
+        Luxord''s Limit Break in which he is the one gambling, being forced to snatch
+        a rapidly shifting card to achieve the best effects. Should he happen to select
+        the wrong one, the card simply detonates as Luxord winces. However, should
+        he choose the right one (which he frequently does), the cards fire off several
+        powerful energy projectiles at his targets. **Final Jackpot: Luxord''s Final
+        Limit, he ups the ante by including, even more, cards to sift through and
+        requiring that he snatch two of the right card at the right time. Selecting
+        just one correct card will cause the other to detonate while replicating the
+        effects of his regular Jackpot. Selecting two correct cards will fire off
+        two powerful energy blasts before unleashing a mighty burst that dwarfs his
+        regular attacks in power. Note: Despite his power over time, it is unknown
+        if Luxord is able to control or manipulate other aspects of time itself other
+        than making "timed battles". ==Gallery== Fair Game KHII.png|Fair Game|link=http://www.khwiki.com/Fair_Game
+        Jackpot KHD.gif|Jackpot|link=http://www.khwiki.com/Jackpot_(Limit_Break) Sleight
+        of Hand.gif|Sleight of Hand ==Notable Matchups== Victories: Losses: Inconclusive:
+        Category:Characters Category:Male Characters Category:Game Characters Category:Kingdom
+        Hearts Category:Antagonists Category:Villains Category:Evil Characters Category:Organization
+        XIII Category:Magic Users Category:Time Users Category:Summoners Category:Darkness
+        Users Category:Teleportation Users Category:Matter Users Category:Card Users
+        Category:Telekinesis Users Category:Transmutation Users Category:Resurrection
+        Users Category:Dimensional Travel Users Category:Energy Users Category:Portal
+        Users Catego'
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: tier
+      value: 'Key: Up to KH3D | KHIII Name: Luxord, "Number X: The Gambler of Fate"
+        Origin: Kingdom Hearts Gender: Male Age: Unknown Classification: Nobody, Member
+        of Organization XIII, Number X, One of the Thirteen Seekers of Darkness'
+      source_id: vsbattles-namine-game
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 0
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: false
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|luxord|9489161
     retryable: false
     exception_class: ''
   needs_human_source_choice: false
-  candidate_sources:
-  - source_id: vsbattles-namine-game-kingdom-hearts
-    url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29_Kingdom_Hearts
-    title: Demyx
-    rank: 80
-    extracted_fields: *id007
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id008
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|demyx|8654636
-  - source_id: character-stats-profiles-namine-game-kingdom-hearts
-    url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29_Kingdom_Hearts
-    title: "Namin\xE9 (Canon)/Unbacked0"
-    rank: 80
-    extracted_fields: *id009
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|namine canon unbacked0|178993
-  - source_id: vsbattles-namine-game-kingdom-hearts
-    url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29_%28Kingdom_Hearts%29
-    title: Demyx
-    rank: 80
-    extracted_fields: *id011
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id012
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|demyx|8654636
-  - source_id: character-stats-profiles-namine-game-kingdom-hearts
-    url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29_%28Kingdom_Hearts%29
-    title: "Namin\xE9 (Canon)/Unbacked0"
-    rank: 80
-    extracted_fields: *id013
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id014
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|namine canon unbacked0|178993
-  - source_id: mediawiki-namine-game
-    url: https://vsbattles.fandom.com/wiki/Namine_(Game)
-    title: Luxord
-    rank: 80
-    extracted_fields: *id015
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id016
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|luxord|9489161
-  - source_id: vsbattles-namine-game
-    url: https://vsbattles.fandom.com/wiki/Namine_%28Game%29
-    title: Luxord
-    rank: 80
-    extracted_fields: *id017
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id018
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|luxord|9489161
-  - source_id: character-stats-profiles-namine-game
-    url: https://character-stats-and-profiles.fandom.com/wiki/Namine_%28Game%29
-    title: "Namin\xE9 (Canon)/Unbacked0"
-    rank: 80
-    extracted_fields: *id019
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id020
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 0
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: false
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|namine canon unbacked0|178993
-  - source_id: vsbattles-namine-game-kingdom-hearts
-    url: https://vsbattles.fandom.com/wiki/Namine_Game_Kingdom_Hearts
-    title: Demyx
-    rank: 80
-    extracted_fields: *id021
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id022
-    rejection_reason: ''
-    identity_match: false
-    identity_score: 20
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|demyx|8654636
+  candidate_sources: []
   chosen_source_id: null
   failure_reasons:
     fetched: 8
-  confidence: 0.75
+  confidence: 0.0

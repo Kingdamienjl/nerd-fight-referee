@@ -4,14 +4,15 @@ name: Hakuryuu Ren
 franchise: Magi
 category: anime
 aliases: &id001 []
-profile_type: auto_evidence_profile
-status: provisional
-battle_eligible: true
+profile_type: needs_review
+status: needs_review
+battle_eligible: false
 generation:
   generated_at: '2026-09-22T21:33:39Z'
   generator: battlebot.harvest.auto_profile_harvester
   confidence: 0.95
-  ineligible_reasons: []
+  ineligible_reasons:
+  - needs_review
 identity:
   canonical_name: Hakuryuu Ren
   franchise: Magi
@@ -103,6 +104,9 @@ sources:
   - abilities
   - equipment
   - weaknesses
+  dropped_scalar_fields:
+    intelligence:
+    - insubstantive
 - id: vsbattles-hakuryuu-ren
   provider_id: vsbattles
   source_type: mediawiki
@@ -146,7 +150,7 @@ sources:
   url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren
   authority: high
   notes: enrich_sources_candidate
-  allowed_fields: &id002
+  allowed_fields:
   - attack_potency
   - speed
   - durability
@@ -183,42 +187,9 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: character-stats-profiles-hakuryuu-ren-magi
-  provider_id: character_stats_profiles
-  source_type: mediawiki
-  title: Hakuryuu Ren Magi
-  url: https://character-stats-and-profiles.fandom.com/wiki/Hakuryuu_Ren_Magi
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
-- id: vsbattles-hakuryuu-ren-magi
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Hakuryuu Ren (Magi)
-  url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_%28Magi%29
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields:
-  - attack_potency
-  - speed
-  - durability
-  - powers_and_abilities
-  - weaknesses
-  - range
-  - stamina
-  - intelligence
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
+  dropped_scalar_fields:
+    intelligence:
+    - insubstantive
 - id: character-stats-profiles-hakuryuu-ren-magi
   provider_id: character_stats_profiles
   source_type: mediawiki
@@ -284,20 +255,12 @@ sources:
   - striking_strength
   - tier
   - weaknesses
-- id: vsbattles-hakuryuu-ren-magi
-  provider_id: vsbattles
-  source_type: mediawiki
-  title: Hakuryuu Ren Magi
-  url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_Magi
-  authority: high
-  notes: enrich_sources_candidate
-  allowed_fields: *id002
-  parser: mediawiki_battle_stats
-  promotion_allowed: true
+  dropped_scalar_fields:
+    intelligence:
+    - insubstantive
 power_scale:
   tier:
-    text: '{{9-B}} normally, {{8-A}} with Magoi Manipulation | {{Low 6-B}}, {{6-B}}
-      with Extreme Magic | {{9-B}} normally, {{8-A}} with Magoi Manipulation'
+    text: 9-B normally, 8-A with Magoi Manipulation
     source_ids:
     - vsbattles-hakuryuu-ren-magi
     confidence: 0.6
@@ -305,37 +268,29 @@ power_scale:
   attack_potency:
     text: Wall level normally, Multi-City Block level with Magoi manipulation (This
       technique can be used to damage something which even Morgiana's kicks couldn't
-      damage) | Small Country level, Country level with Extreme Magic (Fought evenly
-      with Alibaba using Zagan), can ignore durability with Belial | Wall level normally,
-      Multi-City Block level with Magoi manipulation (This technique can be used to
-      damage something which even Morgiana's kicks couldn't damage)
+      damage)
     source_ids:
     - vsbattles-hakuryuu-ren-magi
     confidence: 0.6
     notes: auto_repair source extraction
   speed:
     text: At least Sub-Relativistic reactions and combat speed (Comparable to Alibaba)
-      | FTL reactions and combat speed (Could keep up with Judar, Aladdin and Alibaba,
-      who dodge his roots at point blank range) | At least Sub-Relativistic
     source_ids:
     - vsbattles-hakuryuu-ren-magi
     confidence: 0.6
     notes: auto_repair source extraction
   lifting_strength:
     text: Unknown
-    source_ids: &id003
+    source_ids: &id002
     - mediawiki-12716
     confidence: 0.95
   striking_strength:
-    text: Wall level normally, Multi-City Block level with Magoi manipulation | Small
-      Country level (Can match Alibaba) | Wall level normally, Multi-City Block level
-      with Magoi manipulation
-    source_ids: *id003
+    text: Wall level normally, Multi-City Block level with Magoi manipulation
+    source_ids: *id002
     confidence: 0.95
   durability:
     text: Wall level normally, Multi-City Block level only on the area covered by
-      his Magoi | Small Country level | Wall level normally, Multi-City Block level
-      only on the area covered by his Magoi
+      his Magoi
     source_ids:
     - vsbattles-hakuryuu-ren-magi
     confidence: 0.6
@@ -362,7 +317,7 @@ claims:
   axis: other
   text: '{{9-B}} normally, {{8-A}} with Magoi Manipulation | {{Low 6-B}}, {{6-B}}
     with Extreme Magic | {{9-B}} normally, {{8-A}} with Magoi Manipulation'
-  source_ids: &id004
+  source_ids: &id003
   - mediawiki-12716
   decisive: false
   status: unverified
@@ -377,7 +332,7 @@ claims:
     with Alibaba using Zagan), can ignore durability with Belial | Wall level normally,
     Multi-City Block level with Magoi manipulation (This technique can be used to
     damage something which even Morgiana's kicks couldn't damage)
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -388,7 +343,7 @@ claims:
   text: At least Sub-Relativistic reactions and combat speed (Comparable to Alibaba)
     | FTL reactions and combat speed (Could keep up with Judar, Aladdin and Alibaba,
     who dodge his roots at point blank range) | At least Sub-Relativistic
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -397,7 +352,7 @@ claims:
   section: power_scale
   axis: other
   text: Unknown
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -408,7 +363,7 @@ claims:
   text: Wall level normally, Multi-City Block level with Magoi manipulation | Small
     Country level (Can match Alibaba) | Wall level normally, Multi-City Block level
     with Magoi manipulation
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -419,7 +374,7 @@ claims:
   text: Wall level normally, Multi-City Block level only on the area covered by his
     Magoi | Small Country level | Wall level normally, Multi-City Block level only
     on the area covered by his Magoi
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
@@ -428,7 +383,7 @@ claims:
   section: power_scale
   axis: range
   text: Extended Melee Range normally. At least Tens of Meters with Extreme Magic
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -437,7 +392,7 @@ claims:
   section: equipment
   axis: equipment
   text: His spear, swords
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -446,7 +401,7 @@ claims:
   section: power_scale
   axis: battle_iq
   text: Unknown
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -456,7 +411,7 @@ claims:
   axis: weakness
   text: 'Low self-esteem, weak to mind based attacks (Overcame this), Wooden Prosthesis
     (no longer applicable). Notable Attacks/Techniques: *Physical'
-  source_ids: *id004
+  source_ids: *id003
   decisive: false
   status: unverified
   policy_flags:
@@ -494,16 +449,16 @@ claims:
     cut off by Hakuryuu''s weapon are not damaged, but the person who owns those limbs
     can never use the severed limb again. We see this in Alibaba vs Hakuryuu. It is
     confirmed by Hakuryuu that Alibaba cannot move his cut leg again.)'
-  source_ids: *id004
+  source_ids: *id003
   decisive: true
   status: unverified
   policy_flags:
   - fan_wiki_single_source
 abilities:
-- id: powers-and-abilities-base-superhuman-physical-characteristics
-  name: Base= Superhuman Physical Characteristics
-  description: Base= Superhuman Physical Characteristics
-  source_ids: &id005
+- id: powers-and-abilities-superhuman-physical-characteristics
+  name: Superhuman Physical Characteristics
+  description: Superhuman Physical Characteristics
+  source_ids: &id004
   - vsbattles-hakuryuu-ren-magi
   source_claim_ids: []
   confidence: 0.85
@@ -519,7 +474,7 @@ abilities:
 - id: powers-and-abilities-skilled-spear-user
   name: Skilled Spear User
   description: Skilled Spear User
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -534,7 +489,7 @@ abilities:
 - id: powers-and-abilities-magoi-manipulation
   name: Magoi Manipulation
   description: Magoi Manipulation
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -549,7 +504,7 @@ abilities:
 - id: powers-and-abilities-non-physical-interaction-only-in-spirit-form
   name: Non-Physical Interaction (only in Spirit Form)
   description: Non-Physical Interaction (only in Spirit Form)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -565,7 +520,7 @@ abilities:
 - id: powers-and-abilities-acausality-type-4-is-fallen
   name: Acausality (Type 4; Is Fallen)
   description: Acausality (Type 4; Is Fallen)
-  source_ids: *id005
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -586,30 +541,29 @@ abilities:
     the minds of the planet''s population), Earth Manipulation and Life Manipulation
     (Due to wielding metal vessels of Life and Earth, he should have resistance to
     attacks of that nature, similar to how Alibaba was resistant to fire and heat
-    based attacks). |-|Djinn Equip: Zagan= All prior in addition to Magic, Empathic
-    Manipulation (He can plant seeds in people''s brains which increase their anger
-    and hatred and remove their fear), Plant Manipulation (Controls plants and their
-    growth), Life Manipulation (Zagan has the power to manipulate plants and living
-    organisms. In the wake of his white blade living organisms submit to his will.),
-    Fungus Manipulation, Biological Manipulation (Alters the biology of living things,
-    such as turning microscopic bacteria into giant monsters or arrows), Earth Manipulation
-    (It has been stated by Zagan that he controls earth), Matter Manipulation (Controls
-    bacteria to decompose organic matter), Absorption (His metal vessels allow him
-    to absorb Magoi from the phenomena of life and earth), Healing (Zagan can be used
-    for healing wounds.) |-|Djinn Equip: Belial= Life Manipulation (Belial''s magic
-    is life magic), Illusion Creation (He can create illusions), Memory Manipulation
-    (He can implant false memories and erase existing ones), Perception Manipulation
-    (He can destroy the five senses of those who hear the roar of Belior Zauto. His
-    attacks with Belial''s Scythe do not physically damage the body, but instead permanently
-    sever the senses connected to the damaged body part by sending the senses to another
-    dimension, making it impossible to use the damaged limbs and body parts), BFR,
-    Soul Manipulation (Should his scythe strike the head it sends the victim''s soul
-    to another dimension and leaves their body comatose and dying). Paralysis Inducement(The
-    parts or limbs cut off by Hakuryuu''s weapon are not damaged, but the person who
-    owns those limbs can never use the severed limb again. We see this in Alibaba
-    vs Hakuryuu. It is confirmed by Hakuryuu that Alibaba cannot move his cut leg
-    again.)'
-  source_ids: *id005
+    based attacks). Djinn Equip: Zagan= All prior in addition to Magic, Empathic Manipulation
+    (He can plant seeds in people''s brains which increase their anger and hatred
+    and remove their fear), Plant Manipulation (Controls plants and their growth),
+    Life Manipulation (Zagan has the power to manipulate plants and living organisms.
+    In the wake of his white blade living organisms submit to his will.), Fungus Manipulation,
+    Biological Manipulation (Alters the biology of living things, such as turning
+    microscopic bacteria into giant monsters or arrows), Earth Manipulation (It has
+    been stated by Zagan that he controls earth), Matter Manipulation (Controls bacteria
+    to decompose organic matter), Absorption (His metal vessels allow him to absorb
+    Magoi from the phenomena of life and earth), Healing (Zagan can be used for healing
+    wounds.) Djinn Equip: Belial= Life Manipulation (Belial''s magic is life magic),
+    Illusion Creation (He can create illusions), Memory Manipulation (He can implant
+    false memories and erase existing ones), Perception Manipulation (He can destroy
+    the five senses of those who hear the roar of Belior Zauto. His attacks with Belial''s
+    Scythe do not physically damage the body, but instead permanently sever the senses
+    connected to the damaged body part by sending the senses to another dimension,
+    making it impossible to use the damaged limbs and body parts), BFR, Soul Manipulation
+    (Should his scythe strike the head it sends the victim''s soul to another dimension
+    and leaves their body comatose and dying). Paralysis Inducement(The parts or limbs
+    cut off by Hakuryuu''s weapon are not damaged, but the person who owns those limbs
+    can never use the severed limb again. We see this in Alibaba vs Hakuryuu. It is
+    confirmed by Hakuryuu that Alibaba cannot move his cut leg again.)'
+  source_ids: *id004
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -630,7 +584,7 @@ equipment:
 - id: standard-equipment-his-spear
   name: His spear
   description: His spear
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -645,7 +599,7 @@ equipment:
 - id: standard-equipment-swords
   name: swords
   description: swords
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -691,7 +645,7 @@ resistances:
     owns those limbs can never use the severed limb again. We see this in Alibaba
     vs Hakuryuu. It is confirmed by Hakuryuu that Alibaba cannot move his cut leg
     again.)'
-  source_ids: *id003
+  source_ids: *id002
   source_claim_ids: []
   confidence: 0.85
   tags:
@@ -709,7 +663,7 @@ weaknesses:
 - id: weaknesses-low-self-esteem
   name: Low self-esteem
   description: Low self-esteem
-  source_ids: &id006
+  source_ids: &id005
   - vsbattles-hakuryuu-ren-magi
   source_claim_ids: []
   confidence: 0.85
@@ -725,7 +679,7 @@ weaknesses:
 - id: weaknesses-weak-to-mind-based-attacks-overcame-this
   name: weak to mind based attacks (Overcame this)
   description: weak to mind based attacks (Overcame this)
-  source_ids: *id006
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -737,25 +691,10 @@ weaknesses:
   enrichment:
     method: deterministic_keyword_rules
     metadata_only: true
-- id: weaknesses-wooden-prosthesis-no-longer-applicable-notable-attacks-techniques
-  name: 'Wooden Prosthesis (no longer applicable). Notable Attacks/Techniques:'
-  description: 'Wooden Prosthesis (no longer applicable). Notable Attacks/Techniques:'
-  source_ids: *id006
-  source_claim_ids: []
-  confidence: 0.85
-  tags: []
-  targets: []
-  activation_requirements: []
-  counters: []
-  resource_dependencies: []
-  scope_limitations: []
-  enrichment:
-    method: deterministic_keyword_rules
-    metadata_only: true
-- id: weaknesses-physical
-  name: Physical
-  description: Physical
-  source_ids: *id006
+- id: weaknesses-wooden-prosthesis-no-longer-applicable
+  name: Wooden Prosthesis (no longer applicable).
+  description: Wooden Prosthesis (no longer applicable).
+  source_ids: *id005
   source_claim_ids: []
   confidence: 0.85
   tags: []
@@ -791,18 +730,17 @@ review:
   - unresolved_version_scope:speed
   source_errors: []
   notes: []
-  readiness_state: provisional
+  readiness_state: needs_review
   profile_state: auto_evidence_profile
   primary_source_id: vsbattles-hakuryuu-ren-magi
   secondary_disagreement_policy: warning_only
 profile_hash: 731cf5ac1f78edea143b96dea66b7b423f021ebc49a7406e6f2f9fa208f37507
 repair:
-  attempted_at: '2026-09-25T14:00:42Z'
+  attempted_at: '2026-10-25T17:48:31Z'
   repaired_fields:
   - abilities
   - attack_potency
   - durability
-  - intelligence
   - range
   - speed
   - tier
@@ -813,10 +751,9 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id007
+    extracted_fields: &id006
     - attack_potency
     - durability
-    - intelligence
     - powers_and_abilities
     - range
     - speed
@@ -853,7 +790,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id008
+    allowed_fields: &id007
     - tier
     - attack_potency
     - speed
@@ -866,45 +803,45 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} normally, {{8-A}} with Magoi Manipulation | {{Low 6-B}}, {{6-B}}
-        with Extreme Magic | {{9-B}} normally, {{8-A}} with Magoi Manipulation'
+      value: 9-B normally, 8-A with Magoi Manipulation | Low 6-B, 6-B with Extreme
+        Magic | 9-B normally, 8-A with Magoi Manipulation
       source_id: mediawiki-12716
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Skilled Spear User, Magoi
-        Manipulation, Non-Physical Interaction (only in Spirit Form), Acausality (Type
-        4; Is Fallen), Resistance to Mind Manipulation, Soul Manipulation (Due to
-        falling into depravity, Hakuryuu is separated from the Great Flow, and was
-        thus unaffected by Sacred Palace Sinbad rewriting the Ruhk which governs souls
-        and fate and altered the minds of the planet''s population), Earth Manipulation
-        and Life Manipulation (Due to wielding metal vessels of Life and Earth, he
-        should have resistance to attacks of that nature, similar to how Alibaba was
-        resistant to fire and heat based attacks). |-|Djinn Equip: Zagan= All prior
-        in addition to Magic, Empathic Manipulation (He can plant seeds in people''s
-        brains which increase their anger and hatred and remove their fear), Plant
-        Manipulation (Controls plants and their growth), Life Manipulation (Zagan
-        has the power to manipulate plants and living organisms. In the wake of his
-        white blade living organisms submit to his will.), Fungus Manipulation, Biological
-        Manipulation (Alters the biology of living things, such as turning microscopic
-        bacteria into giant monsters or arrows), Earth Manipulation (It has been stated
-        by Zagan that he controls earth), Matter Manipulation (Controls bacteria to
-        decompose organic matter), Absorption (His metal vessels allow him to absorb
-        Magoi from the phenomena of life and earth), Healing (Zagan can be used for
-        healing wounds.) |-|Djinn Equip: Belial= Life Manipulation (Belial''s magic
-        is life magic), Illusion Creation (He can create illusions), Memory Manipulation
-        (He can implant false memories and erase existing ones), Perception Manipulation
-        (He can destroy the five senses of those who hear the roar of Belior Zauto.
-        His attacks with Belial''s Scythe do not physically damage the body, but instead
-        permanently sever the senses connected to the damaged body part by sending
-        the senses to another dimension, making it impossible to use the damaged limbs
-        and body parts), BFR, Soul Manipulation (Should his scythe strike the head
-        it sends the victim''s soul to another dimension and leaves their body comatose
-        and dying). Paralysis Inducement(The parts or limbs cut off by Hakuryuu''s
-        weapon are not damaged, but the person who owns those limbs can never use
-        the severed limb again. We see this in Alibaba vs Hakuryuu. It is confirmed
-        by Hakuryuu that Alibaba cannot move his cut leg again.)'
+      value: 'Superhuman Physical Characteristics, Skilled Spear User, Magoi Manipulation,
+        Non-Physical Interaction (only in Spirit Form), Acausality (Type 4; Is Fallen),
+        Resistance to Mind Manipulation, Soul Manipulation (Due to falling into depravity,
+        Hakuryuu is separated from the Great Flow, and was thus unaffected by Sacred
+        Palace Sinbad rewriting the Ruhk which governs souls and fate and altered
+        the minds of the planet''s population), Earth Manipulation and Life Manipulation
+        (Due to wielding metal vessels of Life and Earth, he should have resistance
+        to attacks of that nature, similar to how Alibaba was resistant to fire and
+        heat based attacks). Djinn Equip: Zagan= All prior in addition to Magic, Empathic
+        Manipulation (He can plant seeds in people''s brains which increase their
+        anger and hatred and remove their fear), Plant Manipulation (Controls plants
+        and their growth), Life Manipulation (Zagan has the power to manipulate plants
+        and living organisms. In the wake of his white blade living organisms submit
+        to his will.), Fungus Manipulation, Biological Manipulation (Alters the biology
+        of living things, such as turning microscopic bacteria into giant monsters
+        or arrows), Earth Manipulation (It has been stated by Zagan that he controls
+        earth), Matter Manipulation (Controls bacteria to decompose organic matter),
+        Absorption (His metal vessels allow him to absorb Magoi from the phenomena
+        of life and earth), Healing (Zagan can be used for healing wounds.) Djinn
+        Equip: Belial= Life Manipulation (Belial''s magic is life magic), Illusion
+        Creation (He can create illusions), Memory Manipulation (He can implant false
+        memories and erase existing ones), Perception Manipulation (He can destroy
+        the five senses of those who hear the roar of Belior Zauto. His attacks with
+        Belial''s Scythe do not physically damage the body, but instead permanently
+        sever the senses connected to the damaged body part by sending the senses
+        to another dimension, making it impossible to use the damaged limbs and body
+        parts), BFR, Soul Manipulation (Should his scythe strike the head it sends
+        the victim''s soul to another dimension and leaves their body comatose and
+        dying). Paralysis Inducement(The parts or limbs cut off by Hakuryuu''s weapon
+        are not damaged, but the person who owns those limbs can never use the severed
+        limb again. We see this in Alibaba vs Hakuryuu. It is confirmed by Hakuryuu
+        that Alibaba cannot move his cut leg again.)'
       source_id: mediawiki-12716
       provider_id: vsbattles
       authority: high
@@ -948,15 +885,9 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: intelligence
-      value: Unknown
-      source_id: mediawiki-12716
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: weaknesses
-      value: 'Low self-esteem, weak to mind based attacks (Overcame this), Wooden
-        Prosthesis (no longer applicable). Notable Attacks/Techniques: *Physical'
+      value: Low self-esteem, weak to mind based attacks (Overcame this), Wooden Prosthesis
+        (no longer applicable).
       source_id: mediawiki-12716
       provider_id: vsbattles
       authority: high
@@ -975,301 +906,6 @@ repair:
     retryable: false
     exception_class: ''
   - source_id: character-stats-profiles-hakuryuu-ren-magi
-    url: https://character-stats-and-profiles.fandom.com/wiki/Hakuryuu_Ren_Magi
-    ok: true
-    note: extracted_core_fields
-    extracted_fields:
-    - attack_potency
-    - durability
-    - powers_and_abilities
-    - tier
-    - weaknesses
-    normalized_page_title: Alibaba Saluja (Canon, Magi)/Ndpeeler
-    source_type: mediawiki
-    revision_id: '356624'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 25956
-    content_kind: api_json
-    headings_detected: []
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - stamina
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 90
-    provider_id: character_stats_profiles
-    authority: high
-    promotion_allowed: true
-    allowed_fields:
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: Low 1-C, likely 1-B thumb|Alibaba in Djinn Equip; Amon
-      source_id: character-stats-profiles-hakuryuu-ren-magi
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: Magoi Manipulation, Transformation (Can Djinn equip), Magic, Fire Manipulation,
-        Absorption (Is able to absorb fire to repair and/or strengthen his metal vessel),
-        Statistics Amplification and Durability Negation (Magoi Manipulation can reinforce
-        and strengthen weapons and do internal damage), Social Influencing (He used
-        his knowledge of trading to save a country on the verge of bankruptcy because
-        of his skill in politics, trading and way of communication), Resistance to
-        Fire, Curse Manipulation (Showed abnormal resilience to the Curse of Death),
-        Empathic Manipulation (Broke free from the Holy Mother Halo Fan), Minor Resistance
-        to Water (He can use Amon's Sword underwater), Flight, Self-Time Manipulation
-        (Alibaba can control his perception of time to make any moment seem like an
-        eternity, allowing him to read his enemy's movements in combat and easily
-        dodge attacks), Resistance to Soul Manipulation and Mind Manipulation (Unaffected
-        by Sacred Palace Sinbad rewriting the system of the Rukh, which governs souls
-        and fate and altered the minds of the entire planet).
-      source_id: character-stats-profiles-hakuryuu-ren-magi
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Street-Wall level (can send people flying with mere punches and kicks),
-        Multi-City Block level+ (with Magoi Manipulation, can damage something that
-        even Morgiana's kicks couldn't damage), Large Island level+ (with Amon's Sword,
-        can block attacks from Muu who can do this, can also neutralize his vessel
-        and absorb his Magoi), Multi-Continent level, likely Planetary level with
-        Amon, Paimon, Baal, and Astaroth's Extreme Magic (creates an explosion that
-        scales to this), Low Complex Multiverse level, likely Hyperverse Level (forced
-        David to regenerate and damaged him severly, David being stronger than Sinbad.
-        Ugo states that he is aware higher dimensions of the standard 3, which he
-        refers to as "worlds". It is stated by Sinbad that there are countless worlds
-        and each God occupies one world and it is possible to rearrange them, so 1
-        God per dimension/world. Another statement and demonstration explains that
-        the hierarchy of Gods is stacked vertically and each God transcends the world
-        below. Here the existence of at least 20 gods are shown. This is important
-        because as previous stated there is only 1 god per world and each world is
-        stacked on top each other in a vertical hierarchy, this would imply that there
-        at least 20 worlds therefore 20 dimensions. Sinbad can change this hierarchy,
-        but lost to David.) Massively Hypersonic (in base, scales to Morgiana, who
-        at the beginning of the series could save Aladdin from Judar's lightning).
-        Sub-Relativistic (in base, scales above Teen Sinbad, who could dodge a lightning
-        gun), FTL (in base, faster than Yam, who can perform Relativistic speed feats
-        while weakened), FTL-Djinn Equip (scales above Muu who can blitz Aladdin,
-        Infinity Speed ( change the perception of time to make a moment seem eternal
-        while everything seems to stop time, Alibaba moves freely) who was born and
-        can freely move in the Sacred Palace which has no flow of timeand is an Omniscient)
-      source_id: character-stats-profiles-hakuryuu-ren-magi
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Street-Wall Level, Multi-City Block+ Level, Large Island Level+ Level,
-        Multi Continent Level, likely Planetary Level, Low Complex Multiverse Level,
-        likely Hyperverse Level.
-      source_id: character-stats-profiles-hakuryuu-ren-magi
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Alibaba gains weight easily. Category:Ndpeeler Category:Tier 9 Category:Tier
-        8 Category:Tier 6 Category:Tier 5 Category:Tier 1
-      source_id: character-stats-profiles-hakuryuu-ren-magi
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    identity_match: false
-    identity_score: 20
-    variant_score: 25
-    provider_priority: 120
-    core_field_count: 2
-    ability_count: 1
-    exact_name_match: false
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: character-stats-and-profiles.fandom.com|alibaba saluja canon magi
-      ndpeeler|356624
-    retryable: false
-    exception_class: ''
-  - source_id: vsbattles-hakuryuu-ren-magi
-    url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_%28Magi%29
-    ok: true
-    note: extracted_core_fields
-    extracted_fields: &id009
-    - attack_potency
-    - durability
-    - intelligence
-    - powers_and_abilities
-    - range
-    - speed
-    - standard_equipment
-    - tier
-    - weaknesses
-    normalized_page_title: Hakuryuu Ren
-    source_type: mediawiki
-    revision_id: '9241292'
-    fetch_status: fetched
-    http_status: 200
-    content_length: 11398
-    content_kind: api_json
-    headings_detected:
-    - Summary
-    - Powers and Stats
-    - Notable Matchups
-    stat_labels_detected:
-    - attack_potency
-    - durability
-    - intelligence
-    - keys
-    - lifting_strength
-    - origin
-    - powers_and_abilities
-    - range
-    - speed
-    - standard_equipment
-    - striking_strength
-    - tier
-    - weaknesses
-    extraction_failure_reason: ''
-    rank: 120
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: &id010
-    - attack_potency
-    - speed
-    - durability
-    - powers_and_abilities
-    - weaknesses
-    - range
-    - stamina
-    - intelligence
-    field_candidates:
-    - field: tier
-      value: '{{9-B}} normally, {{8-A}} with Magoi Manipulation | {{Low 6-B}}, {{6-B}}
-        with Extreme Magic | {{9-B}} normally, {{8-A}} with Magoi Manipulation'
-      source_id: vsbattles-hakuryuu-ren-magi
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Skilled Spear User, Magoi
-        Manipulation, Non-Physical Interaction (only in Spirit Form), Acausality (Type
-        4; Is Fallen), Resistance to Mind Manipulation, Soul Manipulation (Due to
-        falling into depravity, Hakuryuu is separated from the Great Flow, and was
-        thus unaffected by Sacred Palace Sinbad rewriting the Ruhk which governs souls
-        and fate and altered the minds of the planet''s population), Earth Manipulation
-        and Life Manipulation (Due to wielding metal vessels of Life and Earth, he
-        should have resistance to attacks of that nature, similar to how Alibaba was
-        resistant to fire and heat based attacks). |-|Djinn Equip: Zagan= All prior
-        in addition to Magic, Empathic Manipulation (He can plant seeds in people''s
-        brains which increase their anger and hatred and remove their fear), Plant
-        Manipulation (Controls plants and their growth), Life Manipulation (Zagan
-        has the power to manipulate plants and living organisms. In the wake of his
-        white blade living organisms submit to his will.), Fungus Manipulation, Biological
-        Manipulation (Alters the biology of living things, such as turning microscopic
-        bacteria into giant monsters or arrows), Earth Manipulation (It has been stated
-        by Zagan that he controls earth), Matter Manipulation (Controls bacteria to
-        decompose organic matter), Absorption (His metal vessels allow him to absorb
-        Magoi from the phenomena of life and earth), Healing (Zagan can be used for
-        healing wounds.) |-|Djinn Equip: Belial= Life Manipulation (Belial''s magic
-        is life magic), Illusion Creation (He can create illusions), Memory Manipulation
-        (He can implant false memories and erase existing ones), Perception Manipulation
-        (He can destroy the five senses of those who hear the roar of Belior Zauto.
-        His attacks with Belial''s Scythe do not physically damage the body, but instead
-        permanently sever the senses connected to the damaged body part by sending
-        the senses to another dimension, making it impossible to use the damaged limbs
-        and body parts), BFR, Soul Manipulation (Should his scythe strike the head
-        it sends the victim''s soul to another dimension and leaves their body comatose
-        and dying). Paralysis Inducement(The parts or limbs cut off by Hakuryuu''s
-        weapon are not damaged, but the person who owns those limbs can never use
-        the severed limb again. We see this in Alibaba vs Hakuryuu. It is confirmed
-        by Hakuryuu that Alibaba cannot move his cut leg again.)'
-      source_id: vsbattles-hakuryuu-ren-magi
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: attack_potency
-      value: Wall level normally, Multi-City Block level with Magoi manipulation (This
-        technique can be used to damage something which even Morgiana's kicks couldn't
-        damage) | Small Country level, Country level with Extreme Magic (Fought evenly
-        with Alibaba using Zagan), can ignore durability with Belial | Wall level
-        normally, Multi-City Block level with Magoi manipulation (This technique can
-        be used to damage something which even Morgiana's kicks couldn't damage)
-      source_id: vsbattles-hakuryuu-ren-magi
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: speed
-      value: At least Sub-Relativistic reactions and combat speed (Comparable to Alibaba)
-        | FTL reactions and combat speed (Could keep up with Judar, Aladdin and Alibaba,
-        who dodge his roots at point blank range) | At least Sub-Relativistic
-      source_id: vsbattles-hakuryuu-ren-magi
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: durability
-      value: Wall level normally, Multi-City Block level only on the area covered
-        by his Magoi | Small Country level | Wall level normally, Multi-City Block
-        level only on the area covered by his Magoi
-      source_id: vsbattles-hakuryuu-ren-magi
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: range
-      value: Extended Melee Range normally. At least Tens of Meters with Extreme Magic
-      source_id: vsbattles-hakuryuu-ren-magi
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: standard_equipment
-      value: His spear, swords
-      source_id: vsbattles-hakuryuu-ren-magi
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: intelligence
-      value: Unknown
-      source_id: vsbattles-hakuryuu-ren-magi
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: 'Low self-esteem, weak to mind based attacks (Overcame this), Wooden
-        Prosthesis (no longer applicable). Notable Attacks/Techniques: *Physical'
-      source_id: vsbattles-hakuryuu-ren-magi
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
-    identity_match: true
-    identity_score: 120
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: true
-    alias_match: false
-    franchise_match: true
-    variant_match: true
-    duplicate_key: vsbattles.fandom.com|hakuryuu ren|9241292
-    retryable: false
-    exception_class: ''
-  - source_id: character-stats-profiles-hakuryuu-ren-magi
     url: https://character-stats-and-profiles.fandom.com/wiki/Hakuryuu_Ren_%28Magi%29
     ok: true
     note: extracted_core_fields
@@ -1278,7 +914,6 @@ repair:
     - durability
     - powers_and_abilities
     - tier
-    - weaknesses
     normalized_page_title: Alibaba Saluja (Canon, Magi)/Ndpeeler
     source_type: mediawiki
     revision_id: '356624'
@@ -1376,13 +1011,6 @@ repair:
       value: Street-Wall Level, Multi-City Block+ Level, Large Island Level+ Level,
         Multi Continent Level, likely Planetary Level, Low Complex Multiverse Level,
         likely Hyperverse Level.
-      source_id: character-stats-profiles-hakuryuu-ren-magi
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
-    - field: weaknesses
-      value: Alibaba gains weight easily. Category:Ndpeeler Category:Tier 9 Category:Tier
-        8 Category:Tier 6 Category:Tier 5 Category:Tier 1
       source_id: character-stats-profiles-hakuryuu-ren-magi
       provider_id: character_stats_profiles
       authority: high
@@ -1405,10 +1033,9 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_Magi
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id011
+    extracted_fields: &id008
     - attack_potency
     - durability
-    - intelligence
     - powers_and_abilities
     - range
     - speed
@@ -1445,7 +1072,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id012
+    allowed_fields: &id009
     - attack_potency
     - speed
     - durability
@@ -1456,45 +1083,45 @@ repair:
     - intelligence
     field_candidates:
     - field: tier
-      value: '{{9-B}} normally, {{8-A}} with Magoi Manipulation | {{Low 6-B}}, {{6-B}}
-        with Extreme Magic | {{9-B}} normally, {{8-A}} with Magoi Manipulation'
+      value: 9-B normally, 8-A with Magoi Manipulation | Low 6-B, 6-B with Extreme
+        Magic | 9-B normally, 8-A with Magoi Manipulation
       source_id: vsbattles-hakuryuu-ren-magi
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Skilled Spear User, Magoi
-        Manipulation, Non-Physical Interaction (only in Spirit Form), Acausality (Type
-        4; Is Fallen), Resistance to Mind Manipulation, Soul Manipulation (Due to
-        falling into depravity, Hakuryuu is separated from the Great Flow, and was
-        thus unaffected by Sacred Palace Sinbad rewriting the Ruhk which governs souls
-        and fate and altered the minds of the planet''s population), Earth Manipulation
-        and Life Manipulation (Due to wielding metal vessels of Life and Earth, he
-        should have resistance to attacks of that nature, similar to how Alibaba was
-        resistant to fire and heat based attacks). |-|Djinn Equip: Zagan= All prior
-        in addition to Magic, Empathic Manipulation (He can plant seeds in people''s
-        brains which increase their anger and hatred and remove their fear), Plant
-        Manipulation (Controls plants and their growth), Life Manipulation (Zagan
-        has the power to manipulate plants and living organisms. In the wake of his
-        white blade living organisms submit to his will.), Fungus Manipulation, Biological
-        Manipulation (Alters the biology of living things, such as turning microscopic
-        bacteria into giant monsters or arrows), Earth Manipulation (It has been stated
-        by Zagan that he controls earth), Matter Manipulation (Controls bacteria to
-        decompose organic matter), Absorption (His metal vessels allow him to absorb
-        Magoi from the phenomena of life and earth), Healing (Zagan can be used for
-        healing wounds.) |-|Djinn Equip: Belial= Life Manipulation (Belial''s magic
-        is life magic), Illusion Creation (He can create illusions), Memory Manipulation
-        (He can implant false memories and erase existing ones), Perception Manipulation
-        (He can destroy the five senses of those who hear the roar of Belior Zauto.
-        His attacks with Belial''s Scythe do not physically damage the body, but instead
-        permanently sever the senses connected to the damaged body part by sending
-        the senses to another dimension, making it impossible to use the damaged limbs
-        and body parts), BFR, Soul Manipulation (Should his scythe strike the head
-        it sends the victim''s soul to another dimension and leaves their body comatose
-        and dying). Paralysis Inducement(The parts or limbs cut off by Hakuryuu''s
-        weapon are not damaged, but the person who owns those limbs can never use
-        the severed limb again. We see this in Alibaba vs Hakuryuu. It is confirmed
-        by Hakuryuu that Alibaba cannot move his cut leg again.)'
+      value: 'Superhuman Physical Characteristics, Skilled Spear User, Magoi Manipulation,
+        Non-Physical Interaction (only in Spirit Form), Acausality (Type 4; Is Fallen),
+        Resistance to Mind Manipulation, Soul Manipulation (Due to falling into depravity,
+        Hakuryuu is separated from the Great Flow, and was thus unaffected by Sacred
+        Palace Sinbad rewriting the Ruhk which governs souls and fate and altered
+        the minds of the planet''s population), Earth Manipulation and Life Manipulation
+        (Due to wielding metal vessels of Life and Earth, he should have resistance
+        to attacks of that nature, similar to how Alibaba was resistant to fire and
+        heat based attacks). Djinn Equip: Zagan= All prior in addition to Magic, Empathic
+        Manipulation (He can plant seeds in people''s brains which increase their
+        anger and hatred and remove their fear), Plant Manipulation (Controls plants
+        and their growth), Life Manipulation (Zagan has the power to manipulate plants
+        and living organisms. In the wake of his white blade living organisms submit
+        to his will.), Fungus Manipulation, Biological Manipulation (Alters the biology
+        of living things, such as turning microscopic bacteria into giant monsters
+        or arrows), Earth Manipulation (It has been stated by Zagan that he controls
+        earth), Matter Manipulation (Controls bacteria to decompose organic matter),
+        Absorption (His metal vessels allow him to absorb Magoi from the phenomena
+        of life and earth), Healing (Zagan can be used for healing wounds.) Djinn
+        Equip: Belial= Life Manipulation (Belial''s magic is life magic), Illusion
+        Creation (He can create illusions), Memory Manipulation (He can implant false
+        memories and erase existing ones), Perception Manipulation (He can destroy
+        the five senses of those who hear the roar of Belior Zauto. His attacks with
+        Belial''s Scythe do not physically damage the body, but instead permanently
+        sever the senses connected to the damaged body part by sending the senses
+        to another dimension, making it impossible to use the damaged limbs and body
+        parts), BFR, Soul Manipulation (Should his scythe strike the head it sends
+        the victim''s soul to another dimension and leaves their body comatose and
+        dying). Paralysis Inducement(The parts or limbs cut off by Hakuryuu''s weapon
+        are not damaged, but the person who owns those limbs can never use the severed
+        limb again. We see this in Alibaba vs Hakuryuu. It is confirmed by Hakuryuu
+        that Alibaba cannot move his cut leg again.)'
       source_id: vsbattles-hakuryuu-ren-magi
       provider_id: vsbattles
       authority: high
@@ -1538,15 +1165,289 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: intelligence
-      value: Unknown
+    - field: weaknesses
+      value: Low self-esteem, weak to mind based attacks (Overcame this), Wooden Prosthesis
+        (no longer applicable).
+      source_id: vsbattles-hakuryuu-ren-magi
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    identity_match: true
+    identity_score: 120
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: true
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: vsbattles.fandom.com|hakuryuu ren|9241292
+    retryable: false
+    exception_class: ''
+  - source_id: character-stats-profiles-hakuryuu-ren-magi
+    url: https://character-stats-and-profiles.fandom.com/wiki/Hakuryuu_Ren_Magi
+    ok: true
+    note: extracted_core_fields
+    extracted_fields:
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - tier
+    normalized_page_title: Alibaba Saluja (Canon, Magi)/Ndpeeler
+    source_type: mediawiki
+    revision_id: '356624'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 25956
+    content_kind: api_json
+    headings_detected: []
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - stamina
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 90
+    provider_id: character_stats_profiles
+    authority: high
+    promotion_allowed: true
+    allowed_fields:
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: Low 1-C, likely 1-B thumb|Alibaba in Djinn Equip; Amon
+      source_id: character-stats-profiles-hakuryuu-ren-magi
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: Magoi Manipulation, Transformation (Can Djinn equip), Magic, Fire Manipulation,
+        Absorption (Is able to absorb fire to repair and/or strengthen his metal vessel),
+        Statistics Amplification and Durability Negation (Magoi Manipulation can reinforce
+        and strengthen weapons and do internal damage), Social Influencing (He used
+        his knowledge of trading to save a country on the verge of bankruptcy because
+        of his skill in politics, trading and way of communication), Resistance to
+        Fire, Curse Manipulation (Showed abnormal resilience to the Curse of Death),
+        Empathic Manipulation (Broke free from the Holy Mother Halo Fan), Minor Resistance
+        to Water (He can use Amon's Sword underwater), Flight, Self-Time Manipulation
+        (Alibaba can control his perception of time to make any moment seem like an
+        eternity, allowing him to read his enemy's movements in combat and easily
+        dodge attacks), Resistance to Soul Manipulation and Mind Manipulation (Unaffected
+        by Sacred Palace Sinbad rewriting the system of the Rukh, which governs souls
+        and fate and altered the minds of the entire planet).
+      source_id: character-stats-profiles-hakuryuu-ren-magi
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Street-Wall level (can send people flying with mere punches and kicks),
+        Multi-City Block level+ (with Magoi Manipulation, can damage something that
+        even Morgiana's kicks couldn't damage), Large Island level+ (with Amon's Sword,
+        can block attacks from Muu who can do this, can also neutralize his vessel
+        and absorb his Magoi), Multi-Continent level, likely Planetary level with
+        Amon, Paimon, Baal, and Astaroth's Extreme Magic (creates an explosion that
+        scales to this), Low Complex Multiverse level, likely Hyperverse Level (forced
+        David to regenerate and damaged him severly, David being stronger than Sinbad.
+        Ugo states that he is aware higher dimensions of the standard 3, which he
+        refers to as "worlds". It is stated by Sinbad that there are countless worlds
+        and each God occupies one world and it is possible to rearrange them, so 1
+        God per dimension/world. Another statement and demonstration explains that
+        the hierarchy of Gods is stacked vertically and each God transcends the world
+        below. Here the existence of at least 20 gods are shown. This is important
+        because as previous stated there is only 1 god per world and each world is
+        stacked on top each other in a vertical hierarchy, this would imply that there
+        at least 20 worlds therefore 20 dimensions. Sinbad can change this hierarchy,
+        but lost to David.) Massively Hypersonic (in base, scales to Morgiana, who
+        at the beginning of the series could save Aladdin from Judar's lightning).
+        Sub-Relativistic (in base, scales above Teen Sinbad, who could dodge a lightning
+        gun), FTL (in base, faster than Yam, who can perform Relativistic speed feats
+        while weakened), FTL-Djinn Equip (scales above Muu who can blitz Aladdin,
+        Infinity Speed ( change the perception of time to make a moment seem eternal
+        while everything seems to stop time, Alibaba moves freely) who was born and
+        can freely move in the Sacred Palace which has no flow of timeand is an Omniscient)
+      source_id: character-stats-profiles-hakuryuu-ren-magi
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Street-Wall Level, Multi-City Block+ Level, Large Island Level+ Level,
+        Multi Continent Level, likely Planetary Level, Low Complex Multiverse Level,
+        likely Hyperverse Level.
+      source_id: character-stats-profiles-hakuryuu-ren-magi
+      provider_id: character_stats_profiles
+      authority: high
+      confidence: 0.75
+    identity_match: false
+    identity_score: 20
+    variant_score: 25
+    provider_priority: 120
+    core_field_count: 2
+    ability_count: 1
+    exact_name_match: false
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    duplicate_key: character-stats-and-profiles.fandom.com|alibaba saluja canon magi
+      ndpeeler|356624
+    retryable: false
+    exception_class: ''
+  - source_id: vsbattles-hakuryuu-ren-magi
+    url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_%28Magi%29
+    ok: true
+    note: extracted_core_fields
+    extracted_fields: &id010
+    - attack_potency
+    - durability
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - tier
+    - weaknesses
+    normalized_page_title: Hakuryuu Ren
+    source_type: mediawiki
+    revision_id: '9241292'
+    fetch_status: fetched
+    http_status: 200
+    content_length: 11398
+    content_kind: api_json
+    headings_detected:
+    - Summary
+    - Powers and Stats
+    - Notable Matchups
+    stat_labels_detected:
+    - attack_potency
+    - durability
+    - intelligence
+    - keys
+    - lifting_strength
+    - origin
+    - powers_and_abilities
+    - range
+    - speed
+    - standard_equipment
+    - striking_strength
+    - tier
+    - weaknesses
+    extraction_failure_reason: ''
+    rank: 120
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: &id011
+    - attack_potency
+    - speed
+    - durability
+    - powers_and_abilities
+    - weaknesses
+    - range
+    - stamina
+    - intelligence
+    field_candidates:
+    - field: tier
+      value: 9-B normally, 8-A with Magoi Manipulation | Low 6-B, 6-B with Extreme
+        Magic | 9-B normally, 8-A with Magoi Manipulation
+      source_id: vsbattles-hakuryuu-ren-magi
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: powers_and_abilities
+      value: 'Superhuman Physical Characteristics, Skilled Spear User, Magoi Manipulation,
+        Non-Physical Interaction (only in Spirit Form), Acausality (Type 4; Is Fallen),
+        Resistance to Mind Manipulation, Soul Manipulation (Due to falling into depravity,
+        Hakuryuu is separated from the Great Flow, and was thus unaffected by Sacred
+        Palace Sinbad rewriting the Ruhk which governs souls and fate and altered
+        the minds of the planet''s population), Earth Manipulation and Life Manipulation
+        (Due to wielding metal vessels of Life and Earth, he should have resistance
+        to attacks of that nature, similar to how Alibaba was resistant to fire and
+        heat based attacks). Djinn Equip: Zagan= All prior in addition to Magic, Empathic
+        Manipulation (He can plant seeds in people''s brains which increase their
+        anger and hatred and remove their fear), Plant Manipulation (Controls plants
+        and their growth), Life Manipulation (Zagan has the power to manipulate plants
+        and living organisms. In the wake of his white blade living organisms submit
+        to his will.), Fungus Manipulation, Biological Manipulation (Alters the biology
+        of living things, such as turning microscopic bacteria into giant monsters
+        or arrows), Earth Manipulation (It has been stated by Zagan that he controls
+        earth), Matter Manipulation (Controls bacteria to decompose organic matter),
+        Absorption (His metal vessels allow him to absorb Magoi from the phenomena
+        of life and earth), Healing (Zagan can be used for healing wounds.) Djinn
+        Equip: Belial= Life Manipulation (Belial''s magic is life magic), Illusion
+        Creation (He can create illusions), Memory Manipulation (He can implant false
+        memories and erase existing ones), Perception Manipulation (He can destroy
+        the five senses of those who hear the roar of Belior Zauto. His attacks with
+        Belial''s Scythe do not physically damage the body, but instead permanently
+        sever the senses connected to the damaged body part by sending the senses
+        to another dimension, making it impossible to use the damaged limbs and body
+        parts), BFR, Soul Manipulation (Should his scythe strike the head it sends
+        the victim''s soul to another dimension and leaves their body comatose and
+        dying). Paralysis Inducement(The parts or limbs cut off by Hakuryuu''s weapon
+        are not damaged, but the person who owns those limbs can never use the severed
+        limb again. We see this in Alibaba vs Hakuryuu. It is confirmed by Hakuryuu
+        that Alibaba cannot move his cut leg again.)'
+      source_id: vsbattles-hakuryuu-ren-magi
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: attack_potency
+      value: Wall level normally, Multi-City Block level with Magoi manipulation (This
+        technique can be used to damage something which even Morgiana's kicks couldn't
+        damage) | Small Country level, Country level with Extreme Magic (Fought evenly
+        with Alibaba using Zagan), can ignore durability with Belial | Wall level
+        normally, Multi-City Block level with Magoi manipulation (This technique can
+        be used to damage something which even Morgiana's kicks couldn't damage)
+      source_id: vsbattles-hakuryuu-ren-magi
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: speed
+      value: At least Sub-Relativistic reactions and combat speed (Comparable to Alibaba)
+        | FTL reactions and combat speed (Could keep up with Judar, Aladdin and Alibaba,
+        who dodge his roots at point blank range) | At least Sub-Relativistic
+      source_id: vsbattles-hakuryuu-ren-magi
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: durability
+      value: Wall level normally, Multi-City Block level only on the area covered
+        by his Magoi | Small Country level | Wall level normally, Multi-City Block
+        level only on the area covered by his Magoi
+      source_id: vsbattles-hakuryuu-ren-magi
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: range
+      value: Extended Melee Range normally. At least Tens of Meters with Extreme Magic
+      source_id: vsbattles-hakuryuu-ren-magi
+      provider_id: vsbattles
+      authority: high
+      confidence: 0.75
+    - field: standard_equipment
+      value: His spear, swords
       source_id: vsbattles-hakuryuu-ren-magi
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: weaknesses
-      value: 'Low self-esteem, weak to mind based attacks (Overcame this), Wooden
-        Prosthesis (no longer applicable). Notable Attacks/Techniques: *Physical'
+      value: Low self-esteem, weak to mind based attacks (Overcame this), Wooden Prosthesis
+        (no longer applicable).
       source_id: vsbattles-hakuryuu-ren-magi
       provider_id: vsbattles
       authority: high
@@ -1573,7 +1474,6 @@ repair:
     - durability
     - powers_and_abilities
     - tier
-    - weaknesses
     normalized_page_title: Alibaba Saluja (Canon, Magi)/Ndpeeler
     source_type: mediawiki
     revision_id: '356624'
@@ -1675,13 +1575,6 @@ repair:
       provider_id: character_stats_profiles
       authority: high
       confidence: 0.75
-    - field: weaknesses
-      value: Alibaba gains weight easily. Category:Ndpeeler Category:Tier 9 Category:Tier
-        8 Category:Tier 6 Category:Tier 5 Category:Tier 1
-      source_id: character-stats-profiles-hakuryuu-ren
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     identity_match: false
     identity_score: 20
     variant_score: 25
@@ -1700,10 +1593,9 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_%28anime%29
     ok: true
     note: extracted_core_fields
-    extracted_fields: &id013
+    extracted_fields: &id012
     - attack_potency
     - durability
-    - intelligence
     - powers_and_abilities
     - range
     - speed
@@ -1740,7 +1632,7 @@ repair:
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: &id014
+    allowed_fields: &id013
     - tier
     - attack_potency
     - speed
@@ -1753,45 +1645,45 @@ repair:
     - weaknesses
     field_candidates:
     - field: tier
-      value: '{{9-B}} normally, {{8-A}} with Magoi Manipulation | {{Low 6-B}}, {{6-B}}
-        with Extreme Magic | {{9-B}} normally, {{8-A}} with Magoi Manipulation'
+      value: 9-B normally, 8-A with Magoi Manipulation | Low 6-B, 6-B with Extreme
+        Magic | 9-B normally, 8-A with Magoi Manipulation
       source_id: vsbattles-hakuryuu-ren-anime
       provider_id: vsbattles
       authority: high
       confidence: 0.75
     - field: powers_and_abilities
-      value: 'Base= Superhuman Physical Characteristics, Skilled Spear User, Magoi
-        Manipulation, Non-Physical Interaction (only in Spirit Form), Acausality (Type
-        4; Is Fallen), Resistance to Mind Manipulation, Soul Manipulation (Due to
-        falling into depravity, Hakuryuu is separated from the Great Flow, and was
-        thus unaffected by Sacred Palace Sinbad rewriting the Ruhk which governs souls
-        and fate and altered the minds of the planet''s population), Earth Manipulation
-        and Life Manipulation (Due to wielding metal vessels of Life and Earth, he
-        should have resistance to attacks of that nature, similar to how Alibaba was
-        resistant to fire and heat based attacks). |-|Djinn Equip: Zagan= All prior
-        in addition to Magic, Empathic Manipulation (He can plant seeds in people''s
-        brains which increase their anger and hatred and remove their fear), Plant
-        Manipulation (Controls plants and their growth), Life Manipulation (Zagan
-        has the power to manipulate plants and living organisms. In the wake of his
-        white blade living organisms submit to his will.), Fungus Manipulation, Biological
-        Manipulation (Alters the biology of living things, such as turning microscopic
-        bacteria into giant monsters or arrows), Earth Manipulation (It has been stated
-        by Zagan that he controls earth), Matter Manipulation (Controls bacteria to
-        decompose organic matter), Absorption (His metal vessels allow him to absorb
-        Magoi from the phenomena of life and earth), Healing (Zagan can be used for
-        healing wounds.) |-|Djinn Equip: Belial= Life Manipulation (Belial''s magic
-        is life magic), Illusion Creation (He can create illusions), Memory Manipulation
-        (He can implant false memories and erase existing ones), Perception Manipulation
-        (He can destroy the five senses of those who hear the roar of Belior Zauto.
-        His attacks with Belial''s Scythe do not physically damage the body, but instead
-        permanently sever the senses connected to the damaged body part by sending
-        the senses to another dimension, making it impossible to use the damaged limbs
-        and body parts), BFR, Soul Manipulation (Should his scythe strike the head
-        it sends the victim''s soul to another dimension and leaves their body comatose
-        and dying). Paralysis Inducement(The parts or limbs cut off by Hakuryuu''s
-        weapon are not damaged, but the person who owns those limbs can never use
-        the severed limb again. We see this in Alibaba vs Hakuryuu. It is confirmed
-        by Hakuryuu that Alibaba cannot move his cut leg again.)'
+      value: 'Superhuman Physical Characteristics, Skilled Spear User, Magoi Manipulation,
+        Non-Physical Interaction (only in Spirit Form), Acausality (Type 4; Is Fallen),
+        Resistance to Mind Manipulation, Soul Manipulation (Due to falling into depravity,
+        Hakuryuu is separated from the Great Flow, and was thus unaffected by Sacred
+        Palace Sinbad rewriting the Ruhk which governs souls and fate and altered
+        the minds of the planet''s population), Earth Manipulation and Life Manipulation
+        (Due to wielding metal vessels of Life and Earth, he should have resistance
+        to attacks of that nature, similar to how Alibaba was resistant to fire and
+        heat based attacks). Djinn Equip: Zagan= All prior in addition to Magic, Empathic
+        Manipulation (He can plant seeds in people''s brains which increase their
+        anger and hatred and remove their fear), Plant Manipulation (Controls plants
+        and their growth), Life Manipulation (Zagan has the power to manipulate plants
+        and living organisms. In the wake of his white blade living organisms submit
+        to his will.), Fungus Manipulation, Biological Manipulation (Alters the biology
+        of living things, such as turning microscopic bacteria into giant monsters
+        or arrows), Earth Manipulation (It has been stated by Zagan that he controls
+        earth), Matter Manipulation (Controls bacteria to decompose organic matter),
+        Absorption (His metal vessels allow him to absorb Magoi from the phenomena
+        of life and earth), Healing (Zagan can be used for healing wounds.) Djinn
+        Equip: Belial= Life Manipulation (Belial''s magic is life magic), Illusion
+        Creation (He can create illusions), Memory Manipulation (He can implant false
+        memories and erase existing ones), Perception Manipulation (He can destroy
+        the five senses of those who hear the roar of Belior Zauto. His attacks with
+        Belial''s Scythe do not physically damage the body, but instead permanently
+        sever the senses connected to the damaged body part by sending the senses
+        to another dimension, making it impossible to use the damaged limbs and body
+        parts), BFR, Soul Manipulation (Should his scythe strike the head it sends
+        the victim''s soul to another dimension and leaves their body comatose and
+        dying). Paralysis Inducement(The parts or limbs cut off by Hakuryuu''s weapon
+        are not damaged, but the person who owns those limbs can never use the severed
+        limb again. We see this in Alibaba vs Hakuryuu. It is confirmed by Hakuryuu
+        that Alibaba cannot move his cut leg again.)'
       source_id: vsbattles-hakuryuu-ren-anime
       provider_id: vsbattles
       authority: high
@@ -1835,15 +1727,9 @@ repair:
       provider_id: vsbattles
       authority: high
       confidence: 0.75
-    - field: intelligence
-      value: Unknown
-      source_id: vsbattles-hakuryuu-ren-anime
-      provider_id: vsbattles
-      authority: high
-      confidence: 0.75
     - field: weaknesses
-      value: 'Low self-esteem, weak to mind based attacks (Overcame this), Wooden
-        Prosthesis (no longer applicable). Notable Attacks/Techniques: *Physical'
+      value: Low self-esteem, weak to mind based attacks (Overcame this), Wooden Prosthesis
+        (no longer applicable).
       source_id: vsbattles-hakuryuu-ren-anime
       provider_id: vsbattles
       authority: high
@@ -1869,7 +1755,6 @@ repair:
     - attack_potency
     - durability
     - speed
-    - tier
     normalized_page_title: "Ren Yamashiro (Canon, Mato Seihei no Slave)/Sleepy\xA9"
     source_type: mediawiki
     revision_id: '416597'
@@ -1904,13 +1789,6 @@ repair:
     - abilities
     - weaknesses
     field_candidates:
-    - field: tier
-      value: The tier(s) of the character (with the individual tier ratings themselves
-        enclosed within curly brackets, for example {{7-A}}, {{3-C}} or {{Unknown}}).
-      source_id: character-stats-profiles-hakuryuu-ren-anime
-      provider_id: character_stats_profiles
-      authority: high
-      confidence: 0.75
     - field: attack_potency
       value: Star Level (As The Commander of The Demon Defense Force should be drastically
         superior to all of the Chiefs whom are stated to be on the same level of power
@@ -1964,11 +1842,11 @@ repair:
     url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren
     title: Hakuryuu Ren
     rank: 120
-    extracted_fields: *id007
+    extracted_fields: *id006
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id008
+    allowed_fields: *id007
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -1980,37 +1858,18 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
-    duplicate_key: vsbattles.fandom.com|hakuryuu ren|9241292
-  - source_id: vsbattles-hakuryuu-ren-magi
-    url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_%28Magi%29
-    title: Hakuryuu Ren
-    rank: 120
-    extracted_fields: *id009
-    provider_id: vsbattles
-    authority: high
-    promotion_allowed: true
-    allowed_fields: *id010
-    rejection_reason: ''
-    identity_match: true
-    identity_score: 120
-    variant_score: 0
-    provider_priority: 120
-    core_field_count: 3
-    ability_count: 1
-    exact_name_match: true
-    alias_match: false
-    franchise_match: true
-    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|hakuryuu ren|9241292
   - source_id: vsbattles-hakuryuu-ren-magi
     url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_Magi
     title: Hakuryuu Ren
     rank: 120
-    extracted_fields: *id011
+    extracted_fields: *id008
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id012
+    allowed_fields: *id009
     rejection_reason: ''
     identity_match: true
     identity_score: 120
@@ -2022,16 +1881,41 @@ repair:
     alias_match: false
     franchise_match: true
     variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
+    duplicate_key: vsbattles.fandom.com|hakuryuu ren|9241292
+  - source_id: vsbattles-hakuryuu-ren-magi
+    url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_%28Magi%29
+    title: Hakuryuu Ren
+    rank: 120
+    extracted_fields: *id010
+    provider_id: vsbattles
+    authority: high
+    promotion_allowed: true
+    allowed_fields: *id011
+    rejection_reason: ''
+    identity_match: true
+    identity_score: 120
+    variant_score: 0
+    provider_priority: 120
+    core_field_count: 3
+    ability_count: 1
+    exact_name_match: true
+    alias_match: false
+    franchise_match: true
+    variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|hakuryuu ren|9241292
   - source_id: vsbattles-hakuryuu-ren-anime
     url: https://vsbattles.fandom.com/wiki/Hakuryuu_Ren_%28anime%29
     title: Hakuryuu Ren
     rank: 120
-    extracted_fields: *id013
+    extracted_fields: *id012
     provider_id: vsbattles
     authority: high
     promotion_allowed: true
-    allowed_fields: *id014
+    allowed_fields: *id013
     rejection_reason: ''
     identity_match: true
     identity_score: 100
@@ -2043,8 +1927,30 @@ repair:
     alias_match: false
     franchise_match: false
     variant_match: true
+    continuity_mismatch: false
+    continuity_detail: ''
     duplicate_key: vsbattles.fandom.com|hakuryuu ren|9241292
   chosen_source_id: null
   failure_reasons:
     fetched: 8
   confidence: 0.75
+version_scope:
+  evidence_scoped: true
+  scoped_key: Base
+  scoped_by: repair_rule:version_scope_default_v1
+  scoped_at: '2026-10-25T17:48:31Z'
+  key_origin: primary_form_position
+  axes:
+    tier:
+      method: positional
+      segments: 3
+    attack_potency:
+      method: positional
+      segments: 3
+    speed:
+      method: positional
+      segments: 3
+    durability:
+      method: positional
+      segments: 3
+  remaining_piped_axes: []
