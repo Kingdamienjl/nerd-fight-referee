@@ -63,7 +63,7 @@ def find_profile_paths(root: Path) -> list[Path]:
 def load_profile_yaml(path: Path) -> dict[str, Any]:
     data = yaml.load(path.read_text(encoding="utf-8"), Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))
     if not isinstance(data, dict):
-        raise ValueError("profile YAML root must be an object")
+        raise ValueError("profile YAML root must be an object")  # noqa: TRY004 -- ValueError is caught as invalid-profile by build_import_plan
     return data
 
 
@@ -592,7 +592,7 @@ def parse_timestamp(value: Any) -> datetime | None:
         return None
     if not isinstance(value, str):
         return None
-    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return datetime.fromisoformat(value)
 
 
 def print_summary(summary: ImportSummary, *, dry_run: bool) -> None:

@@ -132,7 +132,7 @@ def variant_metadata(name: str, character_id: str = "") -> dict[str, Any]:
             "default_variant": False,
             "battle_notes": seed.battle_notes,
         }
-    parent, variant = split_variant_name(name)
+    _parent, variant = split_variant_name(name)
     if variant:
         return {
             "parent_character_id": "",

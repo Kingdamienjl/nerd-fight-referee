@@ -14,7 +14,6 @@ from battlebot.profiles.aliases import resolve_alias
 from battlebot.profiles.variants import variant_search_queries
 from battlebot.review import service
 
-
 DEFAULT_REGISTRY_PATH = Path("profiles/overrides/source_registry.yaml")
 
 

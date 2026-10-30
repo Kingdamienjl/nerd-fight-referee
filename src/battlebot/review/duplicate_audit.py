@@ -15,7 +15,6 @@ import yaml
 
 from battlebot.common.db import connect_database
 
-
 DEFAULT_REPORT_PATH = Path("data/reports/duplicate_character_audit.json")
 DEFAULT_PLAN_PATH = Path("data/reports/duplicate_character_apply_plan.json")
 CONTINUITY_SUFFIXES = (
@@ -564,7 +563,7 @@ SELECT
 FROM review_profiles
 """
             )
-        except Exception:  # noqa: BLE001 - optional table may not exist in older installs.
+        except Exception:
             review_rows = []
         for row in review_rows:
             data = dict(row)

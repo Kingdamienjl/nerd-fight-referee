@@ -4,11 +4,11 @@ import argparse
 import fcntl
 import json
 import os
-from pathlib import Path
 import shutil
 import subprocess
 import time
 import urllib.request
+from pathlib import Path
 
 SERVICES = ('postgres', 'redis', 'litellm', 'bot', 'web', 'worker', 'harvester', 'mock-duels')
 
@@ -27,7 +27,7 @@ def recovery_action(state, last_attempt, now):
 
 def inspect_service(service):
     result = subprocess.run(['docker', 'inspect', f'referee-{service}-1'],
-                            capture_output=True, text=True, timeout=15)
+                            capture_output=True, text=True, timeout=15, check=False)
     if result.returncode:
         # Distinguish a missing container from an unavailable daemon.
         subprocess.run(['docker', 'info', '--format', '{{.ServerVersion}}'],
@@ -42,7 +42,7 @@ def recover(root, service, action):
                '--no-deps', '--no-build', '--pull', 'never', service]
     else:
         cmd = ['docker', action, f'referee-{service}-1']
-    result = subprocess.run(cmd, cwd=root, capture_output=True, text=True, timeout=25)
+    result = subprocess.run(cmd, cwd=root, capture_output=True, text=True, timeout=25, check=False)
     # Do not echo compose output: a configuration error can include credentials.
     return result.returncode == 0
 

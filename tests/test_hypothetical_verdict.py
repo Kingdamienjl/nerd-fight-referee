@@ -1,6 +1,8 @@
 import unittest
-from battlebot.fight.llm_judge import llm_explained_decision
+
 from battlebot.fight.evidence_verdict_guard import assumes_decisive_power
+from battlebot.fight.llm_judge import llm_explained_decision
+
 
 class HypotheticalVerdictTests(unittest.TestCase):
     def test_reported_goku_result_cannot_award_win(self):

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import os
 import logging
+import os
 
 import discord
 from discord import app_commands
@@ -11,7 +11,6 @@ from discord import app_commands
 from battlebot.bot.commands.catalog import register_catalog_commands
 from battlebot.bot.commands.fight import register_fight_command
 from battlebot.common.db import apply_schema, connect_database
-
 
 BOT_PUBLIC_NAME = "Nerd Fight Referee"
 LOGGER = logging.getLogger(__name__)
@@ -46,7 +45,7 @@ class BattleBotClient(discord.Client):
             try:
                 async with connect_database(database_url) as connection:
                     await apply_schema(connection)
-            except Exception as exc:  # noqa: BLE001 - audit schema creation must not block Discord startup.
+            except Exception as exc:
                 LOGGER.warning("Database schema setup failed; audit JSONL fallback remains available: %s", exc)
         LOGGER.info("Local command names before sync: %s", ", ".join(command_names(self.tree)))
 

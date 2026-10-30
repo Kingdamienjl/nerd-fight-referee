@@ -9,7 +9,6 @@ from typing import Any
 from battlebot.profiles.aliases import resolve_alias
 from battlebot.profiles.canonical import row_display_name
 
-
 CORE_PROFILE_SELECT = """
 SELECT DISTINCT ON (c.id)
     c.id AS character_id,

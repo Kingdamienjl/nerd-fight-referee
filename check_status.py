@@ -1,7 +1,10 @@
 import asyncio
 from pathlib import Path
+
 import yaml
+
 from battlebot.common.db import connect_database
+
 
 async def check():
     async with connect_database("postgresql://battlebot:change_me@postgres:5432/battlebot") as conn:

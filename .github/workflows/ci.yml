@@ -22,8 +22,14 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev]"
 
+      # Lint the maintained tree only. data/ holds one-off probe and
+      # analysis scripts, battlebot/ is a divergent pre-src copy, and the
+      # loose src/*.py files are working scripts; none of those are
+      # linted. The scope lives here (not in pyproject exclude) because
+      # ruff's exclude patterns also match nested paths, so excluding
+      # battlebot/ would silently exclude src/battlebot too.
       - name: Ruff
-        run: ruff check .
+        run: ruff check src/battlebot services tests scripts check_status.py container_healer.py test_qdrant_isolation.py
 
       - name: Pytest
         run: pytest -q

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import logging
-import os
 from typing import Any
 
 import httpx
@@ -36,7 +35,7 @@ def build_discord_webhook_payload(
     """Assemble a rich, beautifully structured Discord embed payload for webhook delivery."""
     title = decision.get("display_title") or f"⚔️ {contender_a_name.upper()} VS {contender_b_name.upper()}"
     winner = decision.get("winner") or "Undetermined"
-    loser = decision.get("loser") or ""
+    decision.get("loser") or ""
     confidence = decision.get("confidence") or "Moderate"
     color = build_confidence_color(confidence)
     odds = decision.get("battle_odds_text") or "Even odds"

@@ -1,5 +1,6 @@
-from pathlib import Path 
-import re, json 
+import json
+import re
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] 
 HINTS = ROOT / "config" / "proactive_franchise_hints.json" 

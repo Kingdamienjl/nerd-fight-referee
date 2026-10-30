@@ -14,7 +14,6 @@ from battlebot.profiles.aliases import resolve_alias
 from battlebot.profiles.variants import split_variant_name, variant_search_queries
 from battlebot.review import auto_repair, service
 
-
 ALLOWED_FIELDS = [
     "attack_potency",
     "speed",

@@ -16,15 +16,15 @@ def clean_html_text(value: str) -> str:
 def parse_superherodb_html(content: str) -> dict[str, str]:
     text = clean_html_text(content)
     fields: dict[str, str] = {}
-    alias_match = re.search(r"Aliases?\s*[:\-]\s*([^|]+?)(?:Place of Birth|First Appearance|Publisher|$)", text, re.I)
+    alias_match = re.search(r"Aliases?\s*[:\-]\s*([^|]+?)(?:Place of Birth|First Appearance|Publisher|$)", text, re.IGNORECASE)
     if alias_match:
         fields["aliases"] = alias_match.group(1).strip()
-    powers_match = re.search(r"(?:Powers?|Abilities)\s*[:\-]\s*(.+?)(?:Power Grid|Stats|$)", text, re.I)
+    powers_match = re.search(r"(?:Powers?|Abilities)\s*[:\-]\s*(.+?)(?:Power Grid|Stats|$)", text, re.IGNORECASE)
     if powers_match:
         fields["powers_and_abilities"] = powers_match.group(1).strip()
     stat_parts = []
     for label in ("Intelligence", "Strength", "Speed", "Durability", "Power", "Combat"):
-        match = re.search(rf"{label}\s*[:\-]?\s*(\d{{1,3}})", text, re.I)
+        match = re.search(rf"{label}\s*[:\-]?\s*(\d{{1,3}})", text, re.IGNORECASE)
         if match:
             stat_parts.append(f"{label}: {match.group(1)}")
     if stat_parts:

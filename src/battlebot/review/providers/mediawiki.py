@@ -12,7 +12,6 @@ from battlebot.harvest.auto_profile_harvester import (
     title_from_wiki_url,
 )
 
-
 CORE_FIELDS = ("attack_potency", "speed", "durability")
 
 

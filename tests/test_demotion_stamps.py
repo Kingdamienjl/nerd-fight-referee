@@ -1,3 +1,4 @@
+
 """Tests for the demotion-stamp placement (frag-4 Part 2).
 
 Through frag-3 the demote tooling wrote stamps as top-level
@@ -9,6 +10,8 @@ and a migration for the 19 already-stamped files.
 """
 
 import unittest
+
+from pydantic import ValidationError
 
 from battlebot.profiles.demotion import (
     DEMOTION_STAMP_KEYS,
@@ -143,7 +146,7 @@ class DemotionStampPlacementTests(unittest.TestCase):
         profile = minimal_profile(
             generation={"confidence": 0.4, "ineligible_reasons": []}
         )
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValidationError):
             CharacterProfile.model_validate(profile)
         profile = apply_demotion_stamp(
             profile, "continuity_demotion", dict(STAMP)
@@ -170,7 +173,7 @@ class DemotionStampPlacementTests(unittest.TestCase):
         # The frag-3 failure mode: a top-level stamp fails
         # validation; the migrated placement must pass.
         legacy = minimal_profile(continuity_demotion=dict(STAMP))
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValidationError):
             CharacterProfile.model_validate(legacy)
         migrate_demotion_stamps(legacy)
         validated = CharacterProfile.model_validate(legacy)

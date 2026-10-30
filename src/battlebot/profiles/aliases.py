@@ -10,7 +10,6 @@ from typing import Any
 
 import yaml
 
-
 DEFAULT_ALIAS_PATH = Path("profiles/overrides/character_aliases.yaml")
 
 

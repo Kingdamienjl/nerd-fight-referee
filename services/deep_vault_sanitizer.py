@@ -8,15 +8,15 @@ and non-combat metadata across:
   2. PostgreSQL database `battlebot` (character_profiles and relational tables)
 """
 
-import os
-import sys
-import re
+import asyncio
 import json
 import logging
+import os
+import re
 from pathlib import Path
-import yaml
+
 import asyncpg
-import asyncio
+import yaml
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 LOGGER = logging.getLogger("DeepVaultSanitizer")
@@ -24,17 +24,17 @@ LOGGER = logging.getLogger("DeepVaultSanitizer")
 PROFILES_DIR = Path("/opt/referee/profiles/generated")
 
 PURE_SLUDGE_PATTERNS = [
-    re.compile(r"^\s*category:\s*[a-zA-Z]", re.I),
-    re.compile(r"^\s*\{\{\s*(?:border|scroll|#tag|reflist|discussions|!)", re.I),
-    re.compile(r"^\s*\{\{", re.I),
-    re.compile(r"\}\}\s*$", re.I),
-    re.compile(r"^\s*(?:content|padding|visible|scroll)\s*=", re.I),
-    re.compile(r"^\s*==\s*(?:notable matchups|notes/explanations|references|sources|statistics values)\s*==", re.I),
-    re.compile(r"^\s*\b(?:victories|losses|inconclusive)\s*[:=]", re.I),
-    re.compile(r"power-scaling rules for", re.I),
-    re.compile(r"before making any changes to this page", re.I),
-    re.compile(r"feats timeline project note", re.I),
-    re.compile(r"^[\s\d\}\{\:\=\-\|]+$", re.I),
+    re.compile(r"^\s*category:\s*[a-zA-Z]", re.IGNORECASE),
+    re.compile(r"^\s*\{\{\s*(?:border|scroll|#tag|reflist|discussions|!)", re.IGNORECASE),
+    re.compile(r"^\s*\{\{", re.IGNORECASE),
+    re.compile(r"\}\}\s*$", re.IGNORECASE),
+    re.compile(r"^\s*(?:content|padding|visible|scroll)\s*=", re.IGNORECASE),
+    re.compile(r"^\s*==\s*(?:notable matchups|notes/explanations|references|sources|statistics values)\s*==", re.IGNORECASE),
+    re.compile(r"^\s*\b(?:victories|losses|inconclusive)\s*[:=]", re.IGNORECASE),
+    re.compile(r"power-scaling rules for", re.IGNORECASE),
+    re.compile(r"before making any changes to this page", re.IGNORECASE),
+    re.compile(r"feats timeline project note", re.IGNORECASE),
+    re.compile(r"^[\s\d\}\{\:\=\-\|]+$", re.IGNORECASE),
 ]
 
 CUTOFF_PATTERNS = re.compile(
@@ -45,8 +45,8 @@ TEMPLATE_STRIP_PATTERNS = [
     (re.compile(r"(?i)\{\{Border\s*\|(?:[^{}]*?\|)?Content\s*=\s*"), ""),
     (re.compile(r"(?i)\{\{#tag:tabber\s*\|\s*[^=|]+=\s*"), ""),
     (re.compile(r"(?i)\{\{Scroll box[^}]*\}\}"), ""),
-    (re.compile(r"<ref[^>]*>.*?</ref>", re.DOTALL | re.I), ""),
-    (re.compile(r"<ref[^/>]*/>", re.I), ""),
+    (re.compile(r"<ref[^>]*>.*?</ref>", re.DOTALL | re.IGNORECASE), ""),
+    (re.compile(r"<ref[^/>]*/>", re.IGNORECASE), ""),
     (re.compile(r"<[^>]+>"), ""),
     (re.compile(r"\[\[(?:[^|\]]*\|)?([^\]]+)\]\]"), r"\1"),
     (re.compile(r"[\{\}]+"), ""),
@@ -77,16 +77,12 @@ def is_pure_sludge(name: str, desc: str) -> bool:
     
     # Check against pure sludge regexes
     for pat in PURE_SLUDGE_PATTERNS:
-        if pat.search(name) or pat.search(combined):
             # If name is a sludge trigger (e.g. Category: or {{Border), it's sludge
-            if pat.search(name):
-                return True
+        if (pat.search(name) or pat.search(combined)) and (pat.search(name)):
+            return True
     
     # If more than 3 'Category:' in the text, it is a category dump
-    if len(re.findall(r"(?i)category:", combined)) >= 2:
-        return True
-        
-    return False
+    return len(re.findall(r"(?i)category:", combined)) >= 2
 
 def sanitize_enriched_items(items: list[dict]) -> tuple[list[dict], int]:
     """Sanitizes a list of EnrichedItem dicts (abilities, weaknesses, equipment, etc.)."""
@@ -209,7 +205,7 @@ def main():
     LOGGER.info("==================================================")
     LOGGER.info(" Nerd Referee Deep Vault Sanitizer Starting")
     LOGGER.info("==================================================")
-    yaml_results = sanitize_all_yamls()
+    sanitize_all_yamls()
     asyncio.run(sanitize_postgres_db())
     LOGGER.info("Deep Vault Sanitization Finished Successfully.")
 

@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
+import re
 from datetime import UTC, datetime
 from typing import Any
-import re
 
 from battlebot.profiles.locate import locate_character
 from battlebot.profiles.quality import profile_warning_flags
 from battlebot.profiles.store import resolve_character
-
 
 CORE_POWER_AXES = (
     "tier",

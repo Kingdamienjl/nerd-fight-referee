@@ -1,5 +1,5 @@
-import unittest
 import json
+import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
@@ -7,7 +7,6 @@ from unittest.mock import patch
 import yaml
 
 from battlebot.review import auto_repair, service
-
 
 FIXTURE = Path("tests/fixtures/review_repair/batman_table.wikitext")
 PARSE_FIXTURE = Path("tests/fixtures/review_repair/mediawiki_parse_superman.json")
@@ -771,15 +770,14 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
             path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "marvel" / "professor-x-composite.yaml"
             write_profile(path, professor_x_profile())
 
-            with patch("battlebot.review.auto_repair.profile_source_candidates", return_value=wrong_sources):
-                with patch("battlebot.review.auto_repair.fetch_source_fields", fetch_as_page_title):
-                    result = await auto_repair.repair_profile(
-                        path,
-                        debug_dir=Path(temp_dir) / "debug",
-                        notes_path=Path(temp_dir) / "review_notes.yaml",
-                        provider_ids=["vsbattles"],
-                        max_source_candidates=2,
-                    )
+            with patch("battlebot.review.auto_repair.profile_source_candidates", return_value=wrong_sources), patch("battlebot.review.auto_repair.fetch_source_fields", fetch_as_page_title):
+                result = await auto_repair.repair_profile(
+                    path,
+                    debug_dir=Path(temp_dir) / "debug",
+                    notes_path=Path(temp_dir) / "review_notes.yaml",
+                    provider_ids=["vsbattles"],
+                    max_source_candidates=2,
+                )
             repaired_profile = service.load_yaml(path)
 
         self.assertFalse(result.changed)
@@ -805,15 +803,14 @@ class AutoRepairTests(unittest.IsolatedAsyncioTestCase):
             path = Path(temp_dir) / "profiles" / "needs_review" / "comic" / "marvel" / "professor-x-composite.yaml"
             write_profile(path, professor_x_profile())
 
-            with patch("battlebot.review.auto_repair.profile_source_candidates", return_value=sources):
-                with patch("battlebot.review.auto_repair.fetch_source_fields", fetch_as_page_title):
-                    result = await auto_repair.repair_profile(
-                        path,
-                        debug_dir=Path(temp_dir) / "debug",
-                        notes_path=Path(temp_dir) / "review_notes.yaml",
-                        provider_ids=["vsbattles"],
-                        max_source_candidates=1,
-                    )
+            with patch("battlebot.review.auto_repair.profile_source_candidates", return_value=sources), patch("battlebot.review.auto_repair.fetch_source_fields", fetch_as_page_title):
+                result = await auto_repair.repair_profile(
+                    path,
+                    debug_dir=Path(temp_dir) / "debug",
+                    notes_path=Path(temp_dir) / "review_notes.yaml",
+                    provider_ids=["vsbattles"],
+                    max_source_candidates=1,
+                )
             repaired_profile = service.load_yaml(path)
 
         self.assertTrue(result.changed)

@@ -6,8 +6,7 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
-
-TIER_PATTERN = re.compile(r"\b(?:(?:Low|High)\s+)?(?:10-[ABC]|9-[ABC]|8-[ABC]|7-[ABC]|6-[ABC]|5-[ABC]|4-[ABC]|3-[ABC]|2-[ABC]|1-[ABC]|0)\b", re.I)
+TIER_PATTERN = re.compile(r"\b(?:(?:Low|High)\s+)?(?:10-[ABC]|9-[ABC]|8-[ABC]|7-[ABC]|6-[ABC]|5-[ABC]|4-[ABC]|3-[ABC]|2-[ABC]|1-[ABC]|0)\b", re.IGNORECASE)
 
 TIER_DAMAGE_CLASS = {
     "10-C": "Human-Level",

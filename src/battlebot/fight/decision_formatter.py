@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 from typing import Any
 
-
 PUBLIC_LIMIT = 1800
 DISCORD_FIELD_LIMIT = 1024
 RAW_TEMPLATE_RE = re.compile(r"\{\{[^{}\n]*(?:\n[^{}]*)?\}\}")
@@ -357,10 +356,7 @@ def is_public_junk(value: Any) -> bool:
     if word_count >= 8:
         return True
 
-    if text.count(",") >= 3:
-        return True
-
-    return False
+    return text.count(",") >= 3
 
 
 def public_safe_text(value: Any, fallback: str, *, limit: int = 120) -> str:
@@ -582,7 +578,7 @@ def is_dirty_fight_card_item(value: str) -> bool:
     words = stripped.split()
     if len(words) > 3 and stripped[:1].islower():
         return True
-    if re.match(r"^(?:without|which|he\b|she\b|they\b|but\b|and\b|can\b|could\b|just\b|due to\b|with the\b|to the\b|in almost\b)", stripped, re.I):
+    if re.match(r"^(?:without|which|he\b|she\b|they\b|but\b|and\b|can\b|could\b|just\b|due to\b|with the\b|to the\b|in almost\b)", stripped, re.IGNORECASE):
         return True
     if BAD_ENDING_RE.search(stripped):
         return True
@@ -750,8 +746,8 @@ def probability_pair(decision: dict[str, Any]) -> tuple[int, int]:
     if loser_probability is None:
         loser_probability = overall.get("loser")
     if winner_probability is not None and loser_probability is not None:
-        winner_pct = int(round(float(winner_probability) * 100)) if float(winner_probability) <= 1 else int(round(float(winner_probability)))
-        loser_pct = int(round(float(loser_probability) * 100)) if float(loser_probability) <= 1 else int(round(float(loser_probability)))
+        winner_pct = round(float(winner_probability) * 100) if float(winner_probability) <= 1 else round(float(winner_probability))
+        loser_pct = round(float(loser_probability) * 100) if float(loser_probability) <= 1 else round(float(loser_probability))
         return winner_pct, loser_pct
     confidence = str(decision.get("confidence") or "").casefold()
     if confidence in {"strong", "high"}:
@@ -1198,7 +1194,6 @@ def format_decision(
 
 import re as _ai_nerd_re
 
-
 _AI_NERD_ORIGINAL_STRUCTURED_DECISION_OUTPUT = structured_decision_output
 
 
@@ -1214,10 +1209,7 @@ def _ai_nerd_bool_residue(text: str) -> bool:
     if _ai_nerd_re.fullmatch(r"(?i)(yes|no|true|false|none|null|n/a|unknown|,|\s)+", cleaned):
         return True
 
-    if _ai_nerd_re.fullmatch(r"(?i)(yes|no|true|false)(\s*,\s*(yes|no|true|false))*", cleaned):
-        return True
-
-    return False
+    return bool(_ai_nerd_re.fullmatch(r"(?i)(yes|no|true|false)(\s*,\s*(yes|no|true|false))*", cleaned))
 
 
 def _ai_nerd_clean_factor_evidence(label: str, evidence: str) -> str:
@@ -1431,6 +1423,7 @@ def format_decision(d):
 
 # AI_NERD_FIX3_PATCH
 import re as _fix3_re
+
 
 def _fix3_clean(x):
  x=str(x or "")

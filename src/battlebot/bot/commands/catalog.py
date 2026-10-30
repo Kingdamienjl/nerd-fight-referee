@@ -8,12 +8,16 @@ import discord
 from discord import app_commands
 
 from battlebot.bot.audit import run_audited_command
+from battlebot.bot.commands.fight import enqueue_missing_fighter
 from battlebot.common.db import connect_database
-from battlebot.profiles.search import browse_character_catalog, format_character_catalog, format_search_results, search_characters
+from battlebot.profiles.search import (
+    browse_character_catalog,
+    format_character_catalog,
+    format_search_results,
+    search_characters,
+)
 from battlebot.profiles.sheet import profile_sheet
 from battlebot.review import service
-from battlebot.bot.commands.fight import enqueue_missing_fighter
-
 
 REGISTERED_CATALOG_COMMANDS = ("search", "characters", "profile", "needs_review", "repair_queue")
 

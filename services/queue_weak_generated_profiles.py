@@ -1,6 +1,8 @@
-from pathlib import Path
+import json
 from datetime import datetime
-import json, yaml
+from pathlib import Path
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 GEN = ROOT / "profiles" / "generated"

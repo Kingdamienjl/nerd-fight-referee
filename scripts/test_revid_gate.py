@@ -125,14 +125,14 @@ async def test_gate_decisions() -> None:
           f"live={live_revid} stored={stored_revid}")
 
     # case A: stored == live -> skip
-    gate, to_harvest, d = await decide_with(
+    _gate, to_harvest, d = await decide_with(
         {(host, title): StoredRevid(profile_id, live_revid, None)}
     )
     check("sim: unchanged revid -> skip", d.decision == "skip" and not to_harvest,
           f"decision={d.decision} reason={d.reason}")
 
     # case B: stored revid differs -> harvest
-    gate2, to_harvest2, d2 = await decide_with(
+    _gate2, to_harvest2, d2 = await decide_with(
         {(host, title): StoredRevid(profile_id, 1, None)}
     )
     check("sim: changed revid -> harvest", d2.decision == "harvest" and to_harvest2 == [roster_row]
@@ -140,7 +140,7 @@ async def test_gate_decisions() -> None:
           f"decision={d2.decision} reason={d2.reason}")
 
     # case C: no stored revid -> harvest
-    gate3, to_harvest3, d3 = await decide_with({})
+    _gate3, _to_harvest3, d3 = await decide_with({})
     check("sim: no stored revid -> harvest", d3.decision == "harvest"
           and d3.reason == "no_stored_revid",
           f"decision={d3.decision} reason={d3.reason}")

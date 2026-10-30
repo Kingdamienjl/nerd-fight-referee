@@ -1,6 +1,7 @@
 """Evidence-first presentation for the Nerd Referee's three-phase commentary."""
 import re
-from battlebot.fight.citations import source_catalog, reference_numbers
+
+from battlebot.fight.citations import reference_numbers, source_catalog
 
 PHASES = ("Neutral & Probing Exchange", "Escalation & Tool Deployment", "The Climax & Finishing Blow")
 DIFFICULTIES = ("Neg/No Diff", "Low Diff", "Mid Diff", "High Diff", "Extreme Diff")
@@ -59,7 +60,7 @@ def generate_fallback_phases(decision, packet=None):
     speed_b = str(ps_b.get("speed") or "baseline speed")[:60]
     ap_a = str(ps_a.get("attack_potency") or "baseline AP")[:60]
     ap_b = str(ps_b.get("attack_potency") or "baseline AP")[:60]
-    dur_a = str(ps_a.get("durability") or "baseline durability")[:60]
+    str(ps_a.get("durability") or "baseline durability")[:60]
     dur_b = str(ps_b.get("durability") or "baseline durability")[:60]
 
     tools_a = [str(x.get("name") or "") for x in ca.get("abilities", [])[:2] if x.get("name")]

@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 import yaml
-
 
 DEFAULT_MALFORMED_QUARANTINE_DIR = Path("profiles/quarantined/malformed_yaml")
 PROFILE_ROOT_MARKERS = ("generated", "needs_review")

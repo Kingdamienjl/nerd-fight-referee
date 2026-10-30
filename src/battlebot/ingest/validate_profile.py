@@ -15,7 +15,7 @@ from battlebot.schemas.profile import CharacterProfile
 def load_yaml(path: Path) -> dict[str, Any]:
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(data, dict):
-        raise ValueError("profile YAML root must be an object")
+        raise TypeError("profile YAML root must be an object")
     return data
 
 

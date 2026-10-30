@@ -4,25 +4,26 @@ from __future__ import annotations
 
 import logging
 import os
+from contextlib import suppress
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, Query, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from battlebot.common.db import connect_database
+from battlebot.fight.decision_formatter import structured_decision_output
+from battlebot.fight.llm_judge import judge_fight_packet
+from battlebot.fight.smoke_judge import smoke_judge_packet
+from battlebot.fight.tier_utils import maybe_stomp_decision
+from battlebot.profiles.fight_packet import build_fight_packet
 from battlebot.profiles.search import search_characters
 from battlebot.profiles.variants import CURATED_VARIANTS, split_variant_name
-from battlebot.profiles.fight_packet import build_fight_packet
-from battlebot.fight.smoke_judge import smoke_judge_packet
-from battlebot.fight.llm_judge import judge_fight_packet
-from battlebot.fight.tier_utils import maybe_stomp_decision
-from battlebot.fight.decision_formatter import structured_decision_output
-from battlebot.web.webhook import build_discord_webhook_payload, dispatch_discord_webhook
 from battlebot.web.image_finder import find_character_image
+from battlebot.web.webhook import build_discord_webhook_payload, dispatch_discord_webhook
 
 LOGGER = logging.getLogger("battlebot.web")
 STATIC_DIR = Path(__file__).resolve().parent / "static"
@@ -40,9 +41,8 @@ def available_forms_for_query(query: str) -> list[str]:
             seed.parent_name.casefold() == target
             or seed.name.casefold() == target
             or any(target == a.casefold() for a in seed.aliases.split("|") if a)
-        ):
-            if seed.variant_name and seed.variant_name not in forms:
-                forms.append(seed.variant_name)
+        ) and seed.variant_name and seed.variant_name not in forms:
+            forms.append(seed.variant_name)
     return forms
 
 
@@ -184,11 +184,9 @@ def create_app() -> FastAPI:
         structured = structured_decision_output(decision)
         structured["narrative_phases"] = decision.get("narrative_phases") or []
         structured["quick_verdict"] = decision.get("quick_verdict") or structured.get("public_summary")
-        try:
+        with suppress(Exception):
             from battlebot.fight.fight import fight_detail_payload
             structured["sections"] = fight_detail_payload(decision)
-        except Exception:
-            pass
 
 
         webhook_result: dict[str, Any] | None = None

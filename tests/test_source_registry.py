@@ -9,7 +9,6 @@ from battlebot.review import auto_repair, source_registry
 from battlebot.review.providers import comicvine, kaggle_superherodb, powerlisting, superherodb
 from tests.test_auto_repair import fake_fetch_source_fields, profile_data, write_profile
 
-
 FIXTURE_DIR = Path("tests/fixtures/providers")
 
 

@@ -388,7 +388,8 @@ FRANCHISE_HINTS.update(EXTRA_FRANCHISE_HINTS)
 # AI_NERD_DYNAMIC_FRANCHISE_HINTS
 def _ai_nerd_load_dynamic_franchise_hints():
     try:
-        import json, re
+        import json
+        import re
         from pathlib import Path
         root = Path(__file__).resolve().parents[1]
         hint_path = root / "config" / "proactive_franchise_hints.json"
@@ -497,7 +498,7 @@ def extract_promoted_names_from_log(path: Path) -> list[str]:
     ]
 
     for pat in patterns:
-        for m in re.finditer(pat, text, flags=re.I):
+        for m in re.finditer(pat, text, flags=re.IGNORECASE):
             name = m.group(1).strip()
             if name and len(name) <= 100:
                 names.append(name)

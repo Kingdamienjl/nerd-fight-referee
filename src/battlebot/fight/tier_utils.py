@@ -272,8 +272,8 @@ def build_stomp_decision(
         "narrative_phases": [],
         "presentation_packet": packet,
         "judge_notes": [
-            f"Deterministic tier pre-filter: stomp declared at a {gap_label} "
-            f"(threshold {threshold:g}); zero LLM calls spent."
+            (f"Deterministic tier pre-filter: stomp declared at a {gap_label} "
+            f"(threshold {threshold:g}); zero LLM calls spent.")
         ],
         "diagnostics": {
             "fallback": False,
@@ -322,6 +322,6 @@ def maybe_stomp_decision(
             threshold,
         )
         return decision
-    except Exception as exc:  # noqa: BLE001 - pre-filter must never break judging.
+    except Exception as exc:
         LOGGER.warning("tier_prefilter: skipped due to error: %s", exc)
         return None

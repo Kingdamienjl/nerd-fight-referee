@@ -13,7 +13,7 @@ def check_and_heal():
             status = subprocess.check_output(f"docker inspect -f '{{{{.State.Status}}}}' {CONTAINER_NAME}", shell=True).decode().strip()
             if status in ["restarting", "exited"]:
                 print(f"[ALERT] Container {CONTAINER_NAME} is failing! Restarting worker...")
-                subprocess.run("docker compose restart worker", shell=True)
+                subprocess.run("docker compose restart worker", shell=True, check=False)
                 attempt += 1
                 if attempt > MAX_HEALS:
                     print("[FATAL] Auto-heal threshold exhausted.")

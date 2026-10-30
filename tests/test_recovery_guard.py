@@ -1,3 +1,4 @@
+
 """Unit tests for the Fix A evidence-recovery guard.
 
 Cases are calibrated on the four merges that went wrong in the first
@@ -6,6 +7,7 @@ shapes that recovered correctly (Korosensei, Shinobu Kocho).
 """
 
 import unittest
+from typing import ClassVar
 
 from battlebot.review.auto_repair import (
     _guard_name_match,
@@ -870,10 +872,10 @@ class ProseShardContinuationTests(unittest.TestCase):
     def test_complete_clauses_with_auxiliaries_pass(self):
         for item in (
             "She can be killed by removing her heart",
-            "He has been weakened by the loss of his powers and can no "
-            "longer fight at full strength",
-            "Loses her powers when she is exposed to red sunlight for "
-            "too long",
+            ("He has been weakened by the loss of his powers and can no "
+            "longer fight at full strength"),
+            ("Loses her powers when she is exposed to red sunlight for "
+            "too long"),
             "Can be harmed by silver weapons",
         ):
             self.assertEqual(
@@ -888,8 +890,8 @@ class ProseShardContinuationTests(unittest.TestCase):
         # spares both shapes.
         for item in (
             "he learned how to utilize his curse to his advantage",
-            "which allowed Denji to successfully ambush her in their "
-            "final confrontation",
+            ("which allowed Denji to successfully ambush her in their "
+            "final confrontation"),
         ):
             self.assertEqual(
                 fragment_item_reasons(item, section="weaknesses"),
@@ -939,7 +941,7 @@ class ContinuityGuardTests(unittest.TestCase):
     rejects them.
     """
 
-    DCAU_CATEGORIES = ["DC Animated Universe", "Characters", "Tier 9"]
+    DCAU_CATEGORIES: ClassVar[list[str]] = ["DC Animated Universe", "Characters", "Tier 9"]
 
     def test_waller_post_crisis_rejects_dcau(self):
         result = verdict(
@@ -1146,7 +1148,7 @@ class RepairPathContinuityTests(unittest.TestCase):
     (attempt_from_result / eligible_primary_attempts) -- the path that
     re-promoted Apollo (Post-Crisis) from Post-Flashpoint evidence."""
 
-    FIELDS = {
+    FIELDS: ClassVar[dict[str, str]] = {
         "attack_potency": "Wall level (Can shatter reinforced concrete with a casual strike)",
         "speed": "Supersonic (Can outpace fighter jets in sustained flight)",
         "durability": "Wall level (Shrugged off anti-tank fire at close range)",
@@ -1214,7 +1216,7 @@ class RepairPathItemScreenTests(unittest.TestCase):
     choke point, with drops/strips recorded on the attempt metadata.
     """
 
-    FIELDS = {
+    FIELDS: ClassVar[dict[str, str]] = {
         "attack_potency": "Wall level (Can shatter reinforced concrete with a casual strike)",
         "speed": "Supersonic (Can outpace fighter jets in sustained flight)",
         "durability": "Wall level (Shrugged off anti-tank fire at close range)",
@@ -1389,8 +1391,8 @@ class TemplateScreenTests(unittest.TestCase):
             "8-C",
             "Massively Hypersonic+",
             "Standard melee range",
-            "Several meters with energy blasts (Can snipe targets "
-            "from rooftops across the city)",
+            ("Several meters with energy blasts (Can snipe targets "
+            "from rooftops across the city)"),
             "Building level (Destroyed a warehouse with a single strike)",
             "The character's armor plating shrugs off anti-tank fire",
         ):
@@ -1400,8 +1402,8 @@ class TemplateScreenTests(unittest.TestCase):
         for value in (
             "Massively Hypersonic+",
             "Standard melee range",
-            "Several meters with energy blasts (Can snipe targets "
-            "from rooftops across the city)",
+            ("Several meters with energy blasts (Can snipe targets "
+            "from rooftops across the city)"),
             "Building level (Destroyed a warehouse with a single strike)",
             "The character's armor plating shrugs off anti-tank fire",
         ):
@@ -1456,7 +1458,7 @@ class TemplateRepairPathTests(unittest.TestCase):
     the harley template artifacts either.
     """
 
-    FIELDS = {
+    FIELDS: ClassVar[dict[str, str]] = {
         "attack_potency": "Wall level (Can shatter reinforced concrete "
         "with a casual strike)",
         "speed": "Supersonic (Can outpace fighter jets in sustained flight)",
@@ -1611,8 +1613,8 @@ class BareQualifierTests(unittest.TestCase):
 
     def test_qualified_real_values_survive(self):
         for value in (
-            "At least Small Building level (Destroyed a warehouse "
-            "with a single strike)",
+            ("At least Small Building level (Destroyed a warehouse "
+            "with a single strike)"),
             "At least 8-C, likely higher",
             "8-C",
             "Massively Hypersonic+",
@@ -1623,8 +1625,8 @@ class BareQualifierTests(unittest.TestCase):
         # insubstantive check has always required fuller tier text
         # at the repair choke point.
         for value in (
-            "At least Small Building level (Destroyed a warehouse "
-            "with a single strike)",
+            ("At least Small Building level (Destroyed a warehouse "
+            "with a single strike)"),
             "At least 8-C, likely higher",
             "Massively Hypersonic+",
             "Standard melee range",
@@ -1635,7 +1637,7 @@ class BareQualifierTests(unittest.TestCase):
 class FourthGenRepairPathTests(unittest.TestCase):
     """Both fourth-generation screens at the repair choke point."""
 
-    FIELDS = {
+    FIELDS: ClassVar[dict[str, str]] = {
         "tier": "Building level (8-C)",
         "attack_potency": "Wall level (Can shatter reinforced concrete "
         "with a casual strike)",
@@ -1780,8 +1782,8 @@ class EditorialEssayTests(unittest.TestCase):
 
     def test_character_prose_passes(self):
         for item in (
-            "Salem was cursed with immortality by the God of Light, "
-            "ensuring she is unable to die so long as Remnant exists",
+            ("Salem was cursed with immortality by the God of Light, "
+            "ensuring she is unable to die so long as Remnant exists"),
             "Weak to Dragon",
             "Flight",
         ):
@@ -1955,8 +1957,8 @@ class ConcessiveShardTests(unittest.TestCase):
     def test_content_bearing_qualifiers_pass(self):
         for item in (
             "although this drains her spiritual energy quickly",
-            "though his transformations fix his eyesight for as long "
-            "as he uses them",
+            ("though his transformations fix his eyesight for as long "
+            "as he uses them"),
             "Although unharmed by virtually any form of damage",
             "although weaker without her helmet",
             "though rage can override these",
@@ -1972,7 +1974,7 @@ class ConcessiveShardTests(unittest.TestCase):
 class SixthGenRepairPathTests(unittest.TestCase):
     """The sixth-generation item screens at the repair choke point."""
 
-    FIELDS = {
+    FIELDS: ClassVar[dict[str, str]] = {
         "tier": "Building level (8-C)",
         "attack_potency": "Wall level (Can shatter reinforced concrete "
         "with a casual strike)",
@@ -2248,13 +2250,13 @@ class EighthGenFrag8Tests(unittest.TestCase):
         # first-person voice is a dependency statement, not a
         # disclaimer.
         for text in (
-            "The Post-Flashpoint emanation of Darkseid was stated to be "
-            "a fragment of Godhead Darkseid that resulted from his death i",
-            "requiring a certain amount of consumption of food based on "
-            "how she'll use it.My Hero Academia Volume 9 Chapter 72",
+            ("The Post-Flashpoint emanation of Darkseid was stated to be "
+            "a fragment of Godhead Darkseid that resulted from his death i"),
+            ("requiring a certain amount of consumption of food based on "
+            "how she'll use it.My Hero Academia Volume 9 Chapter 72"),
             "His power is solely based on his ring",
-            "According to Morgana, the entire world is a product of "
-            "Cognition",
+            ("According to Morgana, the entire world is a product of "
+            "Cognition"),
         ):
             self.assertNotIn(
                 "page_disclaimer",
@@ -2302,8 +2304,8 @@ class EighthGenFrag8Tests(unittest.TestCase):
         # irregular past), comma-fronted phrases, limitation markers,
         # and "without" + a noun phrase (a conditional weakness).
         for text in (
-            "however this can be negated by just using an even bigger "
-            "shield.",
+            ("however this can be negated by just using an even bigger "
+            "shield."),
             "but he cannot fly without his cape",
             "Using his powers drains him quickly",
             "Without his armor",
@@ -2313,19 +2315,19 @@ class EighthGenFrag8Tests(unittest.TestCase):
             "Lacking in battle experience on his own",
             "suffering from paranoia and extreme anger",
             "leaving it vulnerable after its use",
-            "leaving him incapable of moving without causing himself "
-            "further pain",
-            "increasing their strength and agility at the cost of their "
-            "rational thinking",
+            ("leaving him incapable of moving without causing himself "
+            "further pain"),
+            ("increasing their strength and agility at the cost of their "
+            "rational thinking"),
             "though he eventually recovered",
             "though he won't die because he's half-human",
             "but they'll even break on contact",
-            "meaning he'll occasionally slide along the ground for a "
-            "second",
+            ("meaning he'll occasionally slide along the ground for a "
+            "second"),
             "During full moons, he loses control",
             "With his sword he cuts through anything",
-            "His belief in his superior hunting abilities may cause him "
-            "to underestimate opponents",
+            ("His belief in his superior hunting abilities may cause him "
+            "to underestimate opponents"),
         ):
             self.assertNotIn(
                 "prose_sentence_shard",
@@ -2401,8 +2403,8 @@ class NinthGenFrag9Tests(unittest.TestCase):
             "which he fears, so he avoids it",
             "which broke his arm. He never recovered.",
             "that he cannot control, and it burns him",
-            "which allowed Denji to successfully ambush her in their "
-            "final confrontation",
+            ("which allowed Denji to successfully ambush her in their "
+            "final confrontation"),
         ):
             self.assertNotIn(
                 "relative_pronoun_opener",
@@ -2421,8 +2423,8 @@ class NinthGenFrag9Tests(unittest.TestCase):
 
     def test_verbatim_or_even_like_flagged(self):
         for text in (
-            "or by anything that can pass through the symbiote in "
-            "large amounts of energy.",
+            ("or by anything that can pass through the symbiote in "
+            "large amounts of energy."),
             "even in the eminence of a battle.",
             "like all others of its kind",
         ):
@@ -2570,8 +2572,8 @@ class TenthGenFrag10Tests(unittest.TestCase):
 
     def test_verbatim_subordinate_openers_flagged(self):
         for text in (
-            "as he passes up a chance to kill Wheeljack in order to "
-            "save Laserbeak.",
+            ("as he passes up a chance to kill Wheeljack in order to "
+            "save Laserbeak."),
             "As Ironhide ages",
             "especially when anything related to the Kraang is brought up",
         ):
@@ -2589,13 +2591,13 @@ class TenthGenFrag10Tests(unittest.TestCase):
         # (the frag-8 pinned concessive controls).
         for text in (
             "after Noon his power will begin to decline.",
-            "when the incantation is uttered its effect is the "
-            "equivalent of a wish.",
+            ("when the incantation is uttered its effect is the "
+            "equivalent of a wish."),
             "Before Crisis, normally Sephiroth lacks a true weakness.",
             "Once per day, he must rest to recover his strength.",
             "If his ring is destroyed, he loses all of his power.",
-            "though he manages to gain some control over this as time "
-            "goes on.",
+            ("though he manages to gain some control over this as time "
+            "goes on."),
             "though this weakness was overcome, he still fears fire.",
         ):
             self.assertEqual(
@@ -2605,8 +2607,8 @@ class TenthGenFrag10Tests(unittest.TestCase):
     def test_verbatim_yet_rather_to_flagged(self):
         for text, reason in (
             (
-                "yet believes himself to be and thus can be overwhelmed "
-                "by the stronger mutants they may face. In general",
+                ("yet believes himself to be and thus can be overwhelmed "
+                "by the stronger mutants they may face. In general"),
                 "prose_sentence_shard",
             ),
             (
@@ -2614,8 +2616,8 @@ class TenthGenFrag10Tests(unittest.TestCase):
                 "prose_sentence_shard",
             ),
             (
-                "rather easy to outmaneuver. His lacking intelligence "
-                "offers little combat adaptability. As the Constructicons'",
+                ("rather easy to outmaneuver. His lacking intelligence "
+                "offers little combat adaptability. As the Constructicons'"),
                 "trailing_fragment",
             ),
         ):
@@ -2636,9 +2638,9 @@ class TenthGenFrag10Tests(unittest.TestCase):
     def test_verbatim_lowercase_predicates_flagged(self):
         for text in (
             "insane and is very self loathing.",
-            "very short tempered (If something doesn't go his way he "
+            ("very short tempered (If something doesn't go his way he "
             "will throw a tantrum). If the allspark shard in his head "
-            "is removed",
+            "is removed"),
         ):
             self.assertIn(
                 "lowercase_predicate",
@@ -2661,11 +2663,11 @@ class TenthGenFrag10Tests(unittest.TestCase):
     def test_verbatim_trailing_fragments_flagged(self):
         for text in (
             "Devastator is hardly slow. He is",
-            "rather easy to outmaneuver. His lacking intelligence "
-            "offers little combat adaptability. As the Constructicons'",
-            "very short tempered (If something doesn't go his way he "
+            ("rather easy to outmaneuver. His lacking intelligence "
+            "offers little combat adaptability. As the Constructicons'"),
+            ("very short tempered (If something doesn't go his way he "
             "will throw a tantrum). If the allspark shard in his head "
-            "is removed",
+            "is removed"),
         ):
             self.assertIn(
                 "trailing_fragment",
@@ -2732,8 +2734,8 @@ class TenthGenFrag10Tests(unittest.TestCase):
             "likely higher. with swords",
             "At most, possibly far higher",
             "At least, higher with the Heart of Darkness",
-            "At most. higher with Stealth Force, even higher with "
-            "Heavy Iron 2.0",
+            ("At most. higher with Stealth Force, even higher with "
+            "Heavy Iron 2.0"),
             "At least, likely higher, even higher with Beast Mode",
         ):
             self.assertIn(
@@ -2789,12 +2791,12 @@ class TenthGenFrag10Tests(unittest.TestCase):
         # Citation links legitimately contain ".jpg" inside their
         # URLs; only bare filenames fire.
         for text in (
-            "City level+ ([https://imgur.com/a/54gVkly Considered one "
+            ("City level+ ([https://imgur.com/a/54gVkly Considered one "
             "of the most powerful Jedi by the beginning of the Clone "
-            "Wars].",
-            "City level ([https://gallery.missdream.org/albums/"
+            "Wars]."),
+            ("City level ([https://gallery.missdream.org/albums/"
             "scanlation_smoon/smoon_act01/038.jpg Did not seem "
-            "impressed by Sailor Moon's Ultimate Attack].",
+            "impressed by Sailor Moon's Ultimate Attack]."),
             "Hundreds of Meters to Kilometres with guns",
         ):
             self.assertNotIn(
@@ -2988,10 +2990,10 @@ class EleventhGenFrag11ScreenTests(unittest.TestCase):
         # Calib1b: 5 of 6 stored >=2-label values carry real content
         # before the first label; only the label-led shape is debris.
         for value in (
-            "Massively Hypersonic+ (Blitzed a Level 4 Akuma) "
-            "Lifting Strength: Class M",
-            "Extended Melee Range via sword; Tens of Meters via sword "
-            "beams Standard Equipment: The Crissword",
+            ("Massively Hypersonic+ (Blitzed a Level 4 Akuma) "
+            "Lifting Strength: Class M"),
+            ("Extended Melee Range via sword; Tens of Meters via sword "
+            "beams Standard Equipment: The Crissword"),
             "Lifting Strength: Class M",
         ):
             self.assertNotIn(
@@ -3027,9 +3029,9 @@ class EleventhGenFrag11ScreenTests(unittest.TestCase):
         for item in (
             "Dark Lord abilities (4-D - Baseline)",
             "Creatures of Chaos (4-D - Baseline)",
-            "Dark Lord abilities (4-D - Baseline Has access to "
+            ("Dark Lord abilities (4-D - Baseline Has access to "
             "Dracula's magic due to his powers being a part of the "
-            "castle)",
+            "castle)"),
         ):
             self.assertIn(
                 "section_header", fragment_item_reasons(item), item
@@ -3145,14 +3147,14 @@ class EleventhGenFrag11ScreenTests(unittest.TestCase):
 
     def test_glued_composite_controls(self):
         for item in (
-            "Soul Manipulation & Energy Manipulation (With the Grand "
-            "Wave and Glow Soul)",
-            "Sound Manipulation Maliketh's roars can damage and knock "
-            "down the player.",
-            "Soul Manipulation Even a small fragment of Destined Death "
-            "destroyed Godwyn's soul.",
-            "Energy Manipulation Can fire red energy out of his Black "
-            "Blade.",
+            ("Soul Manipulation & Energy Manipulation (With the Grand "
+            "Wave and Glow Soul)"),
+            ("Sound Manipulation Maliketh's roars can damage and knock "
+            "down the player."),
+            ("Soul Manipulation Even a small fragment of Destined Death "
+            "destroyed Godwyn's soul."),
+            ("Energy Manipulation Can fire red energy out of his Black "
+            "Blade."),
         ):
             self.assertNotIn(
                 "glued_composite", fragment_item_reasons(item), item
@@ -3161,11 +3163,11 @@ class EleventhGenFrag11ScreenTests(unittest.TestCase):
     # -- (6iv) description bleed -------------------------------------
     def test_section_header_bleed(self):
         for item in (
-            "Frost Damage and the Blasphemous Claw Feats: Can utilize "
-            "Destined Death to kill Immortals",
-            "Forcefield Creation (Via Protective FieldCastlevania: "
+            ("Frost Damage and the Blasphemous Claw Feats: Can utilize "
+            "Destined Death to kill Immortals"),
+            ("Forcefield Creation (Via Protective FieldCastlevania: "
             "Curse of Darkness Bradygames official strategy guide "
-            "page 102) Dark Lord resistances (4-D - Baseline)",
+            "page 102) Dark Lord resistances (4-D - Baseline)"),
         ):
             self.assertIn(
                 "section_header", fragment_item_reasons(item), item
@@ -3183,7 +3185,7 @@ class EleventhGenFrag11ScreenTests(unittest.TestCase):
 
     # -- verbatim families end-to-end at the merge choke point -------
     def test_maliketh_pieces_filtered(self):
-        kept, dropped, _ = filter_list_field_items_detailed(
+        kept, _dropped, _ = filter_list_field_items_detailed(
             "Immortality Negation Can kill immortals such as Marika, "
             "Radagon, and Elden Beast (Via Destined Death) | Sound "
             "Manipulation Maliketh's roars can damage and knock down "
@@ -3202,7 +3204,7 @@ class EleventhGenFrag11ScreenTests(unittest.TestCase):
         self.assertIn("Soul Manipulation", kept)
 
     def test_isaac_pieces_filtered(self):
-        kept, dropped, _ = filter_list_field_items_detailed(
+        kept, _dropped, _ = filter_list_field_items_detailed(
             "Dark Lord abilities (4-D - Baseline), Extrasensory "
             "Perception (Can sense Demonic Energy), Immortality, "
             "Absorption (With Healing Drop and Deadly Absorp), "
@@ -3249,14 +3251,14 @@ class TwelfthGenFrag12ScreenTests(unittest.TestCase):
         # noise, the content is real (grievous Episode 9, jiji Ch. 40,
         # nanami Ch. 120, sauron Ch. 19).
         for item in (
-            'Episode 9 "Grievous Intrigue" likely helped by the '
-            "unpredictability of this contortion.",
+            ('Episode 9 "Grievous Intrigue" likely helped by the '
+            "unpredictability of this contortion."),
             "Chapter 40 When he uses The Evil Gun technique",
             "Chapter 120 after his body was stabbed several times",
-            "Chapter 19: OF BEREN AND LÚTHIEN It is even described "
-            "that Sauron eventually achieved Morgoth's feat",
-            "he is highly susceptible to the Scourge Virus."
-            "Invincible Season 4",
+            ("Chapter 19: OF BEREN AND LÚTHIEN It is even described "
+            "that Sauron eventually achieved Morgoth's feat"),
+            ("he is highly susceptible to the Scourge Virus."
+            "Invincible Season 4"),
         ):
             self.assertNotIn(
                 "label_fragment",
@@ -3327,15 +3329,15 @@ class TwelfthGenFrag12ScreenTests(unittest.TestCase):
     # -- G4a ability headers in weaknesses -----------------------------
     def test_ability_header_verbatim(self):
         for item in (
-            "Rugal can create a ball of electricity around his body "
+            ("Rugal can create a ball of electricity around his body "
             "and then fires it. *Dark Barrier: Rugal can create a "
-            "barrier that",
-            "Vega is able to adhere on a wall for a brief moment and "
+            "barrier that"),
+            ("Vega is able to adhere on a wall for a brief moment and "
             "gain an additional jump. *Back Slash: Vega somersaults "
-            "backwards",
-            "she can use multiple shards to revolve around herself. "
+            "backwards"),
+            ("she can use multiple shards to revolve around herself. "
             "*Thundaga: Celes calls down contracting Lightning Bolts "
-            "around her",
+            "around her"),
         ):
             self.assertIn(
                 "ability_header_in_weaknesses",
@@ -3363,14 +3365,14 @@ class TwelfthGenFrag12ScreenTests(unittest.TestCase):
     # -- G4b capability without limitation -------------------------------
     def test_capability_verbatim(self):
         for item in (
-            "Iori can control fire. He can create a bright purple "
-            "fire from thin air",
-            "Dialga can control time. Examples include causing time "
-            "loops",
-            "he's able to take their form and use any of their "
-            "abilities. For example",
-            "Steven can summon Rose's shield and can expand his "
-            "bubble to protect others",
+            ("Iori can control fire. He can create a bright purple "
+            "fire from thin air"),
+            ("Dialga can control time. Examples include causing time "
+            "loops"),
+            ("he's able to take their form and use any of their "
+            "abilities. For example"),
+            ("Steven can summon Rose's shield and can expand his "
+            "bubble to protect others"),
         ):
             self.assertIn(
                 "capability_in_weaknesses",
@@ -3385,11 +3387,11 @@ class TwelfthGenFrag12ScreenTests(unittest.TestCase):
         for item in (
             "Steven had little control over his powers",
             "causing his abilities to not work properly",
-            "his half-human nature means he cannot use his gem "
-            "powers fully",
-            "he can only do this for a certain amount of time and "
+            ("his half-human nature means he cannot use his gem "
+            "powers fully"),
+            ("he can only do this for a certain amount of time and "
             "his half-human nature puts more of a strain on his "
-            "body than it would a Gem",
+            "body than it would a Gem"),
             "He can regenerate, but the process is slow and painful",
             "He is bound to the Underworld",
             "and will die if he stays in the mortal realm for long",
@@ -3460,7 +3462,7 @@ class TwelfthGenFrag12ScreenTests(unittest.TestCase):
         )
 
     def test_filter_drops_frag12_debris_keeps_real_weakness(self):
-        kept, dropped, _ = filter_list_field_items_detailed(
+        kept, _dropped, _ = filter_list_field_items_detailed(
             "Season 1 | Black Noir has the following | Amethyst's "
             "upgraded whip. | None noted. | Iori can control fire. "
             "He can create a bright purple fire from thin air | "
@@ -3492,9 +3494,9 @@ class ThirteenthGenFrag13ScreenTests(unittest.TestCase):
     def test_footer_instruction_verbatim(self):
         for item in (
             "etc. You can judge a person's power by their feats.",
-            "etc. You can judge a person's power by their feats. "
+            ("etc. You can judge a person's power by their feats. "
             "Notable Attacks/Techniques: A list of some abilities "
-            "the character has",
+            "the character has"),
         ):
             self.assertIn(
                 "footer_instruction",
@@ -3517,11 +3519,11 @@ class ThirteenthGenFrag13ScreenTests(unittest.TestCase):
     # -- H2 unfinished-profile editor note ------------------------------
     def test_editor_note_unfinished_verbatim(self):
         for item in (
-            "This profile is so far from done but i am sleepy "
-            "(Last issue recorded Issue #14 of Animal Man 1988)",
-            "A powerful mage whom in his regular form could combat "
+            ("This profile is so far from done but i am sleepy "
+            "(Last issue recorded Issue #14 of Animal Man 1988)"),
+            ("A powerful mage whom in his regular form could combat "
             "Nezha) This is so far from done but i am sleepy "
-            "(Last issue recorded Issue #14 of Animal Man 1988)",
+            "(Last issue recorded Issue #14 of Animal Man 1988)"),
         ):
             self.assertIn(
                 "editor_note_unfinished",

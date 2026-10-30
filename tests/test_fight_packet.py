@@ -2,8 +2,8 @@ import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from battlebot.profiles.fight_packet import build_fight_packet, compact_profile
 from battlebot.fight.debug import human_summary
+from battlebot.profiles.fight_packet import build_fight_packet, compact_profile
 from battlebot.profiles.locate import find_yaml_matches
 from battlebot.profiles.quality import profile_warning_flags
 

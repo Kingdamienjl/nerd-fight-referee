@@ -32,6 +32,7 @@ def run_script(script: str) -> dict:
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         timeout=900,
+        check=False,
     )
     return {
         "script": script,

@@ -19,7 +19,6 @@ from battlebot.profiles.quality import profile_key
 from battlebot.profiles.variants import variant_metadata
 from battlebot.review import service
 
-
 DEFAULT_CHARACTER_CATALOG_LIMIT = 20
 MAX_CHARACTER_CATALOG_LIMIT = 25
 
@@ -249,7 +248,7 @@ def row_matches_canonical_target(row: dict[str, Any], target: str) -> bool:
     target_key = normalize_text(target)
     target_tokens = set(target_key.split())
     canonical, display = row_names(row)
-    candidate_text = normalize_text(" ".join([canonical, display]))
+    candidate_text = normalize_text(f"{canonical} {display}")
     candidate_tokens = set(candidate_text.split())
     return target_key in {normalize_text(canonical), normalize_text(display)} or target_tokens <= candidate_tokens
 

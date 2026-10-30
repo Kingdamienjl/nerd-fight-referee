@@ -1,7 +1,7 @@
 """Apply explicit simulation prerequisites before deterministic scoring."""
-from copy import deepcopy
 import json
 import re
+from copy import deepcopy
 
 
 def has_chakra(profile):
@@ -24,7 +24,7 @@ def apply_literal_rules(first, second, rules):
                 continue
             usable, blocked = [], []
             for ability in attacker.get("abilities") or []:
-                if re.search(r"\bgenjutsu\b", json.dumps(ability), re.I):
+                if re.search(r"\bgenjutsu\b", json.dumps(ability), re.IGNORECASE):
                     blocked.append(ability)
                 else:
                     usable.append(ability)

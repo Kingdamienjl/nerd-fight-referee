@@ -61,10 +61,9 @@ def check_sources(profile: dict) -> list[str]:
             continue
         title = str(src.get("title") or "").lower()
         title_words = set(re.findall(r"\w+", title)) - {"the", "a", "an", "of", "canon"}
-        if title and char_words and not (char_words & title_words):
             # No word overlap - likely wrong character
-            if char_name not in title and title not in char_name:
-                blockers.append(f"contaminated_source:{src.get('title', '')[:40]}")
+        if (title and char_words and not (char_words & title_words)) and (char_name not in title and title not in char_name):
+            blockers.append(f"contaminated_source:{src.get('title', '')[:40]}")
     return blockers
 
 

@@ -12,11 +12,10 @@ from pathlib import Path
 from typing import Any
 
 from battlebot.common.db import apply_schema, connect_database
-from battlebot.profiles import yaml_io
 from battlebot.ingest import import_profiles
+from battlebot.profiles import yaml_io
 from battlebot.review import batch_promote, service
 from battlebot.review.queue import claim_jobs, mark_job, mark_retry
-
 
 IMPORT_LOCK_ID = 73190602
 
@@ -239,7 +238,7 @@ async def process_job(connection: Any, job: dict[str, Any], args: argparse.Names
             return await mark_retry(connection, job, summary=data, error=job_error(data))
         await mark_job(connection, int(job["id"]), status="needs_review", summary=data)
         return "needs_review"
-    except Exception as exc:  # noqa: BLE001 - one job must not kill the worker batch.
+    except Exception as exc:
         data = {"exception": type(exc).__name__, "error": str(exc)}
         if batch_promote.is_malformed_yaml_exception(exc):
             if Path(job["profile_path"]).exists():
@@ -265,8 +264,8 @@ async def run_worker(connection: Any, args: argparse.Namespace) -> WorkerSummary
     politeness = ProviderPoliteness(args.sleep_seconds)
     promotions_since_import = 0
     for job in jobs:
-        async def callback():
-            return await process_job(connection, job, args)
+        async def callback(_job=job):
+            return await process_job(connection, _job, args)
 
         status = await politeness.run(job["providers"], callback)
         if status == "promoted":
@@ -284,7 +283,7 @@ async def run_worker(connection: Any, args: argparse.Namespace) -> WorkerSummary
         if args.import_every > 0 and promotions_since_import >= args.import_every:
             try:
                 summary.imported += await import_generated_profiles(args.generated_dir, database_url=args.database_url)
-            except Exception as exc:  # noqa: BLE001 - import failure should not kill claimed jobs.
+            except Exception as exc:
                 summary.errors.append(f"import_generated_profiles: {exc}")
             promotions_since_import = 0
     return summary

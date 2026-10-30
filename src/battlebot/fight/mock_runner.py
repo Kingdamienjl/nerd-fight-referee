@@ -1,16 +1,16 @@
 """Proactive automated production duels with Discord Webhook broadcasting."""
 import argparse
 import asyncio
-from datetime import datetime, timezone
 import json
 import logging
 import os
+from datetime import UTC, datetime
 from pathlib import Path
 
 from battlebot.common.db import connect_database
-from battlebot.profiles.fight_packet import build_fight_packet
 from battlebot.fight.llm_judge import judge_fight_packet
 from battlebot.fight.personality import details
+from battlebot.profiles.fight_packet import build_fight_packet
 from battlebot.web.webhook import build_discord_webhook_payload, dispatch_discord_webhook
 
 LOGGER = logging.getLogger(__name__)
@@ -81,7 +81,7 @@ async def run(args):
 
         output = Path("data/mock_duels")
         output.mkdir(parents=True, exist_ok=True)
-        path = output / (datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + ".json")
+        path = output / (datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ") + ".json")
         path.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
         print(json.dumps({"report": str(path), "pairs": len(report), "results": [
             {"pair": r["pair"], "profile_errors": bool(r.get("profile_errors")),

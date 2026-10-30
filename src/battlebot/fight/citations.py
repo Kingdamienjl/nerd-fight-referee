@@ -2,7 +2,7 @@
 import re
 from urllib.parse import urlsplit
 
-WIKI_LAYOUT = re.compile(r"\{\{|\}\}|#tag:|\b(?:scroll|visible|padding|content|border)\s*=|\btabber\b", re.I)
+WIKI_LAYOUT = re.compile(r"\{\{|\}\}|#tag:|\b(?:scroll|visible|padding|content|border)\s*=|\btabber\b", re.IGNORECASE)
 
 def clean_profile_text(value, limit=None):
     """Reject broken harvested fragments without rewriting substantive claims."""
@@ -17,8 +17,8 @@ def clean_profile_text(value, limit=None):
 
 def power_summary(value, limit=260):
     raw = str(value or "")
-    if WIKI_LAYOUT.search(raw) or re.search(r"(?:Chapter|Issue)\s*\d+\s*>", raw, re.I):
-        raw = re.sub(r"\{\{Tabber\|?", "", raw, flags=re.I)
+    if WIKI_LAYOUT.search(raw) or re.search(r"(?:Chapter|Issue)\s*\d+\s*>", raw, re.IGNORECASE):
+        raw = re.sub(r"\{\{Tabber\|?", "", raw, flags=re.IGNORECASE)
         raw = re.sub(r"\}\}", "", raw)
     if "|" in raw:
         parts = [p.strip() for p in raw.split("|") if p.strip() and not p.strip().startswith("{{")]

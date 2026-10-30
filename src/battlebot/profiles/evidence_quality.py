@@ -5,8 +5,7 @@ They prevent known extraction debris from satisfying evidence requirements.
 """
 import re
 
-
-_LAYOUT = re.compile(r"\{\{|\}\}|#tag:|\btabber\b|\b(?:scroll|visible|padding|content|border)\s*=", re.I)
+_LAYOUT = re.compile(r"\{\{|\}\}|#tag:|\btabber\b|\b(?:scroll|visible|padding|content|border)\s*=", re.IGNORECASE)
 
 
 def usable_text(value):

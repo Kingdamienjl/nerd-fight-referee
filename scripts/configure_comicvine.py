@@ -13,7 +13,6 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SECRETS_DIR = PROJECT_ROOT / "secrets"
 KEY_FILE = SECRETS_DIR / "comicvine_api_key.txt"
@@ -101,8 +100,8 @@ def main() -> int:
         "\n".join(
             [
                 f"export COMICVINE_API_KEY_FILE={quoted_key_file}",
-                'export COMICVINE_API_KEY="$(tr -d \'\\r\\n\' '
-                '"< \\"$COMICVINE_API_KEY_FILE\\")"',
+                ('export COMICVINE_API_KEY="$(tr -d \'\\r\\n\' '
+                '"< \\"$COMICVINE_API_KEY_FILE\\")"'),
                 f"export COMICVINE_API_BASE_URL={API_BASE_URL}",
                 f"export COMICVINE_CACHE_DIR={quoted_cache_dir}",
                 "export COMICVINE_MAX_REQUESTS_PER_HOUR=180",

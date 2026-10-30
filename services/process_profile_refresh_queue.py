@@ -1,6 +1,10 @@
-from pathlib import Path 
-from datetime import datetime 
-import json, yaml, shutil, re 
+import json
+import re
+import shutil
+from datetime import datetime
+from pathlib import Path
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1] 
 QUEUE = ROOT / "harvest" / "profile_refresh_queue" 
@@ -81,7 +85,6 @@ def refresh_profile(profile_path, reason, hints):
         return False, "empty_or_bad_yaml" 
 
     raw_before = p.read_text(errors="ignore") 
-    changed = False 
 
     name = data.get("name") or p.stem.replace("-", " ").title() 
     franchise = infer_franchise(data, p, hints) 
@@ -90,19 +93,15 @@ def refresh_profile(profile_path, reason, hints):
         cleaned = clean_value(v) 
         if cleaned != v: 
             data[k] = cleaned 
-            changed = True 
 
     if not data.get("name"): 
         data["name"] = name 
-        changed = True 
 
     if not data.get("franchise") or str(data.get("franchise")).lower() in {"unknown", "mixed", "none", "null"}: 
         data["franchise"] = franchise 
-        changed = True 
 
     if not data.get("weapon_power") or "pending" in str(data.get("weapon_power")).lower(): 
         data["weapon_power"] = f"{name}'s signature abilities and core combat kit" 
-        changed = True 
 
     if not data.get("key_tools") or any("basic combat" in str(x).lower() for x in (data.get("key_tools") if isinstance(data.get("key_tools"), list) else [data.get("key_tools")])):
         data["key_tools"] = [ 
@@ -110,15 +109,12 @@ def refresh_profile(profile_path, reason, hints):
             f"{franchise} matchup experience", 
             "profile-specific win condition pending deeper source enrichment", 
         ] 
-        changed = True 
 
     if not data.get("risk") or "pending" in str(data.get("risk")).lower(): 
         data["risk"] = "Needs deeper source enrichment before being treated as fully battle-certified." 
-        changed = True 
 
     if not data.get("best_route") and not data.get("win_path"): 
         data["best_route"] = f"{name} needs to force their most reliable signature-tool route while denying the opponent's strongest opening." 
-        changed = True 
 
     data.setdefault("qa_status", {}) 
     if not isinstance(data["qa_status"], dict): 
@@ -128,7 +124,6 @@ def refresh_profile(profile_path, reason, hints):
         "refresh_reason": reason, 
         "refreshed_at": datetime.now().isoformat(timespec="seconds"), 
     }) 
-    changed = True 
 
     raw_after = yaml.safe_dump(data, sort_keys=False, allow_unicode=True) 
     if raw_after == raw_before: 

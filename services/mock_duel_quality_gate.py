@@ -1,8 +1,13 @@
-from pathlib import Path 
-from datetime import datetime 
-import random, json, re, sys, yaml 
+import json
+import random
+import re
+import sys
+from datetime import datetime
+from pathlib import Path
 
-from battlebot.fight.decision_formatter import format_decision 
+import yaml
+
+from battlebot.fight.decision_formatter import format_decision
 
 ROOT = Path(__file__).resolve().parents[1] 
 GEN = ROOT / "profiles" / "generated" 
@@ -126,7 +131,7 @@ def make_decision(a_prof, b_prof):
             { 
                 "factor": "Counterplay", 
                 "evidence": f"{loser} needed a cleaner matchup-specific answer than the profile currently proves.", 
-                "tactical_effect": f"The loser route is possible, but less reliable from the available profile data.", 
+                "tactical_effect": "The loser route is possible, but less reliable from the available profile data.", 
             }, 
         ], 
         "warnings": [], 

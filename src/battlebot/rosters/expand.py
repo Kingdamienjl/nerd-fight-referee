@@ -9,7 +9,6 @@ from pathlib import Path
 
 from battlebot.profiles.variants import CURATED_VARIANTS
 
-
 ROSTER_HEADER = ["category", "franchise", "name", "aliases", "wiki_title", "wiki_url"]
 DEFAULT_ROSTER_DIR = Path("profiles/rosters")
 OUTPUT_FILES = {

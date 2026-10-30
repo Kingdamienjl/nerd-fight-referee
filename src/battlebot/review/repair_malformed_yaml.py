@@ -41,13 +41,13 @@ def repair_malformed_yaml(
         try:
             yaml_io.load_yaml(path)
             report["ok"].append(str(path))
-        except Exception as exc:  # noqa: BLE001 - keep scanning and report every bad file.
+        except Exception as exc:
             if not yaml_io.is_yaml_parse_error(exc):
                 report["errors"].append({"path": str(path), "error": str(exc), "error_type": type(exc).__name__})
                 continue
             try:
                 result = yaml_io.quarantine_file(path, error=exc, quarantine_dir=quarantine_dir)
-            except Exception as quarantine_exc:  # noqa: BLE001 - keep scanning.
+            except Exception as quarantine_exc:
                 report["errors"].append(
                     {
                         "path": str(path),

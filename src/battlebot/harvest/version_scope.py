@@ -1,12 +1,10 @@
 """Extract explicitly labelled source versions; never infer ability inheritance."""
-import copy
 import re
-from battlebot.profiles.readiness import assess_readiness
 
 
 def labelled_section(text, selected, labels):
     """Return only a block headed with the selected source key and an equals sign."""
-    pattern = re.compile(r'(?:^|\|)\s*(' + '|'.join(re.escape(x) for x in sorted(labels, key=len, reverse=True)) + r')\s*=\s*', re.I)
+    pattern = re.compile(r'(?:^|\|)\s*(' + '|'.join(re.escape(x) for x in sorted(labels, key=len, reverse=True)) + r')\s*=\s*', re.IGNORECASE)
     matches = list(pattern.finditer(text or ''))
     found=[]
     for i,match in enumerate(matches):

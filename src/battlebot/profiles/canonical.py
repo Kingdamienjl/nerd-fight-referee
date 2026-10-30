@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 from typing import Any
 
-
 TRUE_VARIANT_MARKERS = {
     "base",
     "super saiyan",

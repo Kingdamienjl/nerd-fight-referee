@@ -14,9 +14,8 @@ from typing import Any
 from pydantic import ValidationError
 
 from battlebot.profiles import yaml_io
-from battlebot.schemas.profile import CharacterProfile
 from battlebot.review import auto_repair, enrich_sources, service
-
+from battlebot.schemas.profile import CharacterProfile
 
 DEFAULT_PROVIDERS = "vsbattles,character_stats_profiles,superherodb,kaggle_superherodb"
 
@@ -177,7 +176,7 @@ def update_attempt_stats(summary: BatchSummary, result: auto_repair.RepairResult
     try:
         profile = service.load_yaml(result.path)
         warnings = ((profile.get("review") or {}).get("warnings") or [])
-    except Exception:  # noqa: BLE001 - stats should not mask the result.
+    except Exception:
         warnings = []
     summary.disagreement_warnings += len(
         [warning for warning in warnings if str(warning).startswith("secondary_core_disagreement_warning")]
@@ -210,7 +209,7 @@ async def batch_promote(args: argparse.Namespace) -> BatchSummary:
                 max_source_candidates=args.max_source_candidates,
                 provider_ids=provider_ids,
             )
-        except Exception as exc:  # noqa: BLE001 - batch mode must continue across bad profiles.
+        except Exception as exc:
             summary.failed += 1
             summary.parser_crashes += 1
             if is_malformed_yaml_exception(exc):
@@ -219,7 +218,7 @@ async def batch_promote(args: argparse.Namespace) -> BatchSummary:
                 try:
                     quarantine_malformed_profile(path, exc=exc, args=args)
                     summary.quarantined += 1
-                except Exception as quarantine_exc:  # noqa: BLE001 - preserve the parse failure.
+                except Exception as quarantine_exc:
                     summary.failures.append(f"{path}: failed_to_quarantine_malformed_yaml: {quarantine_exc}")
                 continue
             if is_transient_exception(exc):
@@ -229,7 +228,7 @@ async def batch_promote(args: argparse.Namespace) -> BatchSummary:
             summary.failures.append(f"{path}: {exc}")
             try:
                 status = record_retry_or_quarantine(path, exc=exc, args=args)
-            except Exception as record_exc:  # noqa: BLE001 - preserve the original failure too.
+            except Exception as record_exc:
                 summary.failures.append(f"{path}: failed_to_record_failure: {record_exc}")
                 continue
             if status == "quarantined":

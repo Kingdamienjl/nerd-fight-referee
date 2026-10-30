@@ -8,7 +8,6 @@ from typing import Any
 
 import yaml
 
-
 DEFAULT_PREFERRED_PROFILES_PATH = Path("profiles/overrides/preferred_profiles.yaml")
 
 

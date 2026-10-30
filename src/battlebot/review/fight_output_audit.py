@@ -15,7 +15,6 @@ from battlebot.fight.decision_formatter import format_fight_card, structured_dec
 from battlebot.fight.llm_judge import llm_output_violates_entity_grounding
 from battlebot.fight.smoke_judge import smoke_judge_packet
 
-
 DEFAULT_REPORT_PATH = Path("data/reports/fight_output_audit.json")
 HIGH_PROFILE_NAMES = (
     "Usagi Tsukino",

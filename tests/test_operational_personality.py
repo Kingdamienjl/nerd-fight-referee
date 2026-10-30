@@ -1,8 +1,9 @@
 import unittest
-from battlebot.fight.personality import parse_phases, details, PHASES
+
+from battlebot.bot.commands.fight import FightDetailsView
 from battlebot.fight.literal_rules import apply_literal_rules
 from battlebot.fight.llm_judge import build_prompt
-from battlebot.bot.commands.fight import FightDetailsView
+from battlebot.fight.personality import PHASES, details, parse_phases
 
 
 class PersonalityTests(unittest.TestCase):

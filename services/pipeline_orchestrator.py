@@ -66,6 +66,7 @@ def run_subcommand(cmd: list[str], *, cwd: Path = ROOT, timeout: int = 600) -> d
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             timeout=timeout,
+            check=False,
         )
         elapsed = round(time.time() - start, 2)
         success = (proc.returncode == 0)

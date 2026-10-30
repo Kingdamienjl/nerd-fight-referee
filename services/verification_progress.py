@@ -5,11 +5,12 @@ from __future__ import annotations
 
 import argparse
 import asyncio
-from collections import Counter
-from datetime import datetime, timezone
 import json
+from collections import Counter
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
+
 
 def load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
@@ -102,7 +103,7 @@ def main() -> int:
     promoted = apply_statuses.get("promoted", 0)
 
     report: dict[str, Any] = {
-        "recorded_at": datetime.now(timezone.utc).isoformat(),
+        "recorded_at": datetime.now(UTC).isoformat(),
         "target_profiles": args.target,
         "generated_profiles": generated_total,
         "stored_battle_eligible_yaml": generated_eligible,

@@ -1,10 +1,11 @@
 import asyncio
-import asyncpg
-import aiohttp
 import json
-import re
 import os
-import sys
+import re
+from contextlib import suppress
+
+import aiohttp
+import asyncpg
 
 LAYOUT_REGEX = re.compile(
     r'(?i)^\s*(\{\{Border|Scroll\s*=|Visible\s*=|Padding\s*=|Content\s*=|-|\{\{#tag:tabber|\{\{!|\{\{)', 
@@ -38,7 +39,7 @@ def unpack_mediawiki_templates(text: str) -> list[dict]:
     return abilities
 
 async def fetch_wiki_abilities(session: aiohttp.ClientSession, wiki_url: str) -> list[dict]:
-    try:
+    with suppress(Exception):
         page_title = wiki_url.split('/wiki/')[-1]
         api_url = 'https://vsbattles.fandom.com/api.php'
         params = {
@@ -55,13 +56,11 @@ async def fetch_wiki_abilities(session: aiohttp.ClientSession, wiki_url: str) ->
                 return []
             data = await resp.json()
             pages = data.get('query', {}).get('pages', {})
-            for pid, page in pages.items():
+            for page in pages.values():
                 content = page.get('revisions', [{}])[0].get('slots', {}).get('main', {}).get('*', '')
                 m = re.search(r'Powers and Abilities.*?(?=\n==|\n\|[A-Z]|\Z)', content, re.DOTALL | re.IGNORECASE)
                 if m:
                     return unpack_mediawiki_templates(m.group(0))
-    except Exception as e:
-        pass
     return []
 
 async def main():
@@ -136,4 +135,3 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
-EOF

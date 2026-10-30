@@ -1,7 +1,9 @@
 import unittest
 from types import SimpleNamespace
 from unittest.mock import patch
+
 from battlebot.harvest.loop import import_if_changed
+
 
 class ImportSnapshotTests(unittest.TestCase):
     def test_unchanged_profiles_import_only_once(self):

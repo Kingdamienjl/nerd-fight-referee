@@ -1,8 +1,8 @@
 """Export legacy expansion seeds for evidence harvesting, without promoting them."""
 import argparse
 import csv
-from pathlib import Path
 import unicodedata
+from pathlib import Path
 
 import yaml
 

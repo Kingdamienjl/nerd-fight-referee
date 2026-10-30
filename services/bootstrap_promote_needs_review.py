@@ -2,15 +2,11 @@ from __future__ import annotations
 
 import argparse
 import shutil
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 import yaml
-from pydantic import ValidationError
-
-from battlebot.schemas.profile import CharacterProfile
-
 
 SAFE_DEFAULTS = {
     "attack_potency": "Unknown; provisional battle profile pending source verification.",
@@ -30,7 +26,7 @@ BLOCK_PATH_PARTS = {
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def load_yaml(path: Path) -> dict[str, Any]:

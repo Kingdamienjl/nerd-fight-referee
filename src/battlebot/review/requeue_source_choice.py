@@ -11,7 +11,6 @@ from typing import Any
 from battlebot.common.db import apply_schema, connect_database
 from battlebot.review import batch_promote
 
-
 SOURCE_CHOICE_FILTER_SQL = """
 status = 'needs_review'
 AND (

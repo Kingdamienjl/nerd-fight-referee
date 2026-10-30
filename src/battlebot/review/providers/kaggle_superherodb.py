@@ -7,7 +7,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-
 DEFAULT_DATASET_PATH = Path("data/external/superherodb")
 
 

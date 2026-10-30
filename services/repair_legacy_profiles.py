@@ -6,20 +6,29 @@ identity, schema and structural evidence must all pass before replacement.
 import argparse
 import asyncio
 import csv
-from collections import Counter
-from datetime import datetime, timezone
 import hashlib
 import json
-from pathlib import Path
 import re
 import time
+from collections import Counter
+from datetime import UTC, datetime
+from pathlib import Path
 from urllib.parse import quote, urlsplit
+
 import yaml
+
 from battlebot.common.db import connect_database
-from battlebot.harvest.auto_profile_harvester import (RosterRow, RawCache, HttpClient, ProfileHarvester, build_profile, stable_hash_without_profile_hash)
+from battlebot.harvest.auto_profile_harvester import (
+    HttpClient,
+    ProfileHarvester,
+    RawCache,
+    RosterRow,
+    build_profile,
+    stable_hash_without_profile_hash,
+)
+from battlebot.ingest.import_profiles import compile_profile, upsert_compiled_profile
 from battlebot.profiles.readiness import assess_readiness
 from battlebot.schemas.profile import CharacterProfile
-from battlebot.ingest.import_profiles import compile_profile, upsert_compiled_profile
 
 POLICY = 'legacy-repair-20260922-v3'
 PROTECTED = {'verified', 'approved_override', 'approved'}
@@ -136,22 +145,21 @@ async def promote(candidate, path, original, args, archive):
     candidate_bytes=yaml.safe_dump(candidate, sort_keys=False, allow_unicode=True).encode('utf-8')
     installed=False
     try:
-        async with connect_database(None) as db:
-            async with db.transaction():
-                existing = await db.fetchrow('SELECT profile_hash,profile_json,status FROM character_profiles WHERE profile_id=$1 FOR UPDATE', candidate['id'])
-                if existing and existing['status'] in PROTECTED:
-                    raise ValueError('Database profile has protected review status')
-                old = yaml.load(original, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))
-                if existing and existing['profile_hash'] != old.get('profile_hash'):
-                    raise ValueError('Database and file differ; refusing to overwrite newer work')
-                if path.read_bytes() != original:
-                    raise ValueError('Profile changed during extraction')
-                write_json(archive / 'database-before.json', dict(existing) if existing else {})
-                await upsert_compiled_profile(db, compiled)
-                temporary = path.with_suffix('.repair.tmp')
-                temporary.write_bytes(candidate_bytes)
-                temporary.replace(path)
-                installed=True
+        async with connect_database(None) as db, db.transaction():
+            existing = await db.fetchrow('SELECT profile_hash,profile_json,status FROM character_profiles WHERE profile_id=$1 FOR UPDATE', candidate['id'])
+            if existing and existing['status'] in PROTECTED:
+                raise ValueError('Database profile has protected review status')
+            old = yaml.load(original, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader))
+            if existing and existing['profile_hash'] != old.get('profile_hash'):
+                raise ValueError('Database and file differ; refusing to overwrite newer work')
+            if path.read_bytes() != original:
+                raise ValueError('Profile changed during extraction')
+            write_json(archive / 'database-before.json', dict(existing) if existing else {})
+            await upsert_compiled_profile(db, compiled)
+            temporary = path.with_suffix('.repair.tmp')
+            temporary.write_bytes(candidate_bytes)
+            temporary.replace(path)
+            installed=True
     except BaseException:
         if installed and path.read_bytes()==candidate_bytes:
             temporary=path.with_suffix('.rollback.tmp')
@@ -198,7 +206,7 @@ async def run(args):
             summary['invalid_yaml']+=1
     selected.sort(key=lambda entry:(entry[0],entry[1]))
     for _,key,path,original,old,source,fingerprint in selected[:args.limit]:
-        result={'fingerprint':fingerprint,'name':old.get('name'),'timestamp':datetime.now(timezone.utc).isoformat()}
+        result={'fingerprint':fingerprint,'name':old.get('name'),'timestamp':datetime.now(UTC).isoformat()}
         archive=args.output/'attempts'/digest(original)
         try:
             row=RosterRow(category=old['category'],franchise=old['franchise'],name=old['name'],aliases=old.get('aliases') or [],wiki_title=source['title'],wiki_url=source['url'],wiki_page_id=str(source['page_id']) if re.fullmatch(r'[1-9][0-9]*',str(source.get('page_id') or '')) else None)

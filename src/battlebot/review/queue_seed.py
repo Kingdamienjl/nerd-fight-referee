@@ -58,7 +58,7 @@ def assessed_priority(path: Path, *, default: int) -> int:
     try:
         profile = service.load_yaml(path)
         blockers = service.approval_blockers(profile)
-    except Exception:  # noqa: BLE001 - seeding must not die on one bad file
+    except Exception:
         return default
     return priority_for_blocker_count(len(blockers))
 

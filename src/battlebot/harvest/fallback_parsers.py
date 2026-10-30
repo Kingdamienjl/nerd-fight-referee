@@ -28,7 +28,8 @@ from __future__ import annotations
 import logging
 import os
 import re
-from typing import Any, Awaitable, Callable
+from collections.abc import Awaitable, Callable
+from typing import Any
 
 log = logging.getLogger(__name__)
 
@@ -387,7 +388,7 @@ def extract_with_llm(
     model: str = DEFAULT_OLLAMA_MODEL,
     max_chars: int = LLM_MAX_WIKITEXT_CHARS,
     timeout: float | None = None,
-) -> "CharacterStats | None":
+) -> CharacterStats | None:
     """Extract CharacterStats from page text via instructor + Ollama.
 
     Last-resort path: only called when every wikitext/HTML parser failed.
@@ -401,8 +402,8 @@ def extract_with_llm(
     if timeout is None:
         timeout = LLM_TIMEOUT_SECONDS
     try:
-        from openai import OpenAI
         import instructor
+        from openai import OpenAI
     except ImportError as exc:
         log.warning("llm fallback unavailable: %s", exc)
         return None

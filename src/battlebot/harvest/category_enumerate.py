@@ -90,9 +90,7 @@ def is_candidate_title(title: str, exclude: tuple[str, ...] = ()) -> bool:
         return False
     if title.startswith(_REJECTED_PREFIXES):
         return False
-    if title.casefold() in {item.casefold() for item in exclude}:
-        return False
-    return True
+    return title.casefold() not in {item.casefold() for item in exclude}
 
 
 def filter_members(titles: list[str], exclude: tuple[str, ...] = ()) -> list[str]:

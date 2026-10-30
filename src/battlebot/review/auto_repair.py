@@ -23,14 +23,15 @@ from battlebot.harvest.auto_profile_harvester import (
     extract_vsbattles_fields,
     field_alias,
     list_items_from_text,
-    rendered_text_from_parse as _rendered_text_from_parse,
     title_from_wiki_url,
+)
+from battlebot.harvest.auto_profile_harvester import (
+    rendered_text_from_parse as _rendered_text_from_parse,
 )
 from battlebot.profiles.aliases import resolve_alias
 from battlebot.profiles.variants import variant_search_queries
-from battlebot.review.providers import comicvine, kaggle_superherodb, mediawiki, powerlisting
 from battlebot.review import service, source_registry
-
+from battlebot.review.providers import comicvine, kaggle_superherodb, mediawiki, powerlisting
 
 POWER_FIELDS = (
     "tier",
@@ -1210,9 +1211,7 @@ def continuity_check(
     if not page_label:
         return result
     if scope_label:
-        if scope_kind != page_kind:
-            result["mismatch"] = True
-        elif (
+        if scope_kind != page_kind or (
             scope_label not in _GENERIC_PRINT_LABELS
             and page_label not in _GENERIC_PRINT_LABELS
             and _continuity_group(scope_label) != _continuity_group(page_label)
@@ -2938,7 +2937,7 @@ def _qualifier_only_stat(value: str) -> bool:
 # stat values match a naive extension test, nearly all of them URL
 # citations that the strip-then-test rule spares.
 _MEDIA_FILENAME_RE = re.compile(
-    r"\b[\w\-.]+\.(?:png|jpe?g|gif|webp|svg|bmp|tiff)\b", re.I
+    r"\b[\w\-.]+\.(?:png|jpe?g|gif|webp|svg|bmp|tiff)\b", re.IGNORECASE
 )
 _MEDIA_URL_RE = re.compile(r"https?://[^\s\]\)]+")
 
@@ -2981,7 +2980,7 @@ def _label_bleed_stat(value: str) -> bool:
         return False
     lowered = re.sub(r"^[\s|,;]+", "", text.casefold())
     if not any(
-        lowered.startswith(f"{label}:") or lowered.startswith(f"{label} :")
+        lowered.startswith((f"{label}:", f"{label} :"))
         for label in _STAT_FIELD_LABELS
     ):
         return False
@@ -3134,9 +3133,8 @@ def placeholder_item_reasons(item: Any) -> list[str]:
         reasons.append("placeholder_instruction")
     if any(re.search(pattern, lowered) for pattern in _BOILERPLATE_INSTRUCTION_PATTERNS):
         reasons.append("template_instruction")
-    if any(re.search(pattern, lowered) for pattern in _TEMPLATE_ITEM_PATTERNS):
-        if "template_instruction" not in reasons:
-            reasons.append("template_instruction")
+    if (any(re.search(pattern, lowered) for pattern in _TEMPLATE_ITEM_PATTERNS)) and ("template_instruction" not in reasons):
+        reasons.append("template_instruction")
     if _feats_label_item(lowered):
         reasons.append("feats_label")
     for reason in editorial_item_reasons(value):
@@ -3470,9 +3468,7 @@ _PROSE_SHARD_AUX = frozenset(
 
 
 def _looks_like_finite_verb(token: str) -> bool:
-    if token.endswith("'s"):
-        # Possessive, not a verb ("Kent's wife").
-        token = token[:-2]
+    token = token.removesuffix("'s")
     return (
         len(token) >= 4
         and token.endswith("s")
@@ -3585,23 +3581,7 @@ def _prose_shard_continuation(item: str, lowered: str, words: int) -> bool:
             and not any(token in _PROSE_CONT_SUBJECTS for token in tokens)
         ):
             return True
-    if (
-        item.strip()[:1].islower()
-        and tokens[0] != "it"
-        and words > _PROSE_SHARD_MAX_WORDS
-        and not any(token in _PROSE_SHARD_AUX for token in tokens)
-        and not any(_looks_like_finite_verb(token) for token in tokens)
-        and not any(token in _PROSE_CONT_SUBJECTS for token in tokens)
-        and not any(
-            token[:1].isupper() for token in item.split()[1:]
-        )
-        and (
-            any(token in {"it", "him", "her", "them"} for token in tokens[:-1])
-            or " to " in lowered
-        )
-    ):
-        return True
-    return False
+    return bool(item.strip()[:1].islower() and tokens[0] != "it" and words > _PROSE_SHARD_MAX_WORDS and not any(token in _PROSE_SHARD_AUX for token in tokens) and not any(_looks_like_finite_verb(token) for token in tokens) and not any(token in _PROSE_CONT_SUBJECTS for token in tokens) and not any(token[:1].isupper() for token in item.split()[1:]) and (any(token in {"it", "him", "her", "them"} for token in tokens[:-1]) or " to " in lowered))
 
 
 # Glued tab-key composites (fourth debris generation, items). The
@@ -3721,11 +3701,11 @@ _CONCESSIVE_SUBJECT_HEADS = frozenset(
     }
 )
 _CONCESSIVE_CONTENT_MARKERS = (
-    r"\b(?:energy|strength|stamina|endurance|body|health|damage|"
+    (r"\b(?:energy|strength|stamina|endurance|body|health|damage|"
     r"sight|eyesight|form|forms|power|powers|weakness|weaknesses|"
-    r"cost|claim|magic|blood|life|mind|soul|durability)\b",
-    r"\b(?:circumvent\w*|mitigat\w*|contradict\w*|unaffected|immune|"
-    r"negat\w*|nullif\w*|counter\w*|ignor\w*|curb\w*|work-arounds?)\b",
+    r"cost|claim|magic|blood|life|mind|soul|durability)\b"),
+    (r"\b(?:circumvent\w*|mitigat\w*|contradict\w*|unaffected|immune|"
+    r"negat\w*|nullif\w*|counter\w*|ignor\w*|curb\w*|work-arounds?)\b"),
     r"\b(?:will not|won't|does not|doesn't|did not|no longer)\b",
     # A verbless limitation with its condition stated ("although
     # weaker without her helmet") conveys the whole weakness; a
@@ -3758,8 +3738,7 @@ def _tail_has_main_clause(tail: str) -> bool:
 
 def _concessive_shard(item: str, lowered: str, words: int) -> bool:
     stripped = lowered.strip().lstrip("([{\"'* ")
-    if stripped.startswith("and "):
-        stripped = stripped[len("and "):]
+    stripped = stripped.removeprefix("and ")
     opener = next(
         (op for op in _CONCESSIVE_OPENERS if stripped.startswith(op)), None
     )
@@ -3787,9 +3766,7 @@ def _concessive_shard(item: str, lowered: str, words: int) -> bool:
         for idx, token in enumerate(rest_tokens[:3])
     ):
         return False
-    if any(re.search(p, lowered) for p in _CONCESSIVE_CONTENT_MARKERS):
-        return False
-    return True
+    return not any(re.search(p, lowered) for p in _CONCESSIVE_CONTENT_MARKERS)
 
 
 # Section-integrity screen (sixth debris generation, weaknesses
@@ -3860,7 +3837,7 @@ def _technique_label_body(value: str) -> str | None:
     capitalized, every other token capitalized or a small connector
     -- sentence-like heads ("She is weak to...") are not labels.
     """
-    match = re.match(r"^\s*(?P<label>[^:]{1,45}?):\s+(?P<body>\S.*)$", value.strip(), re.S)
+    match = re.match(r"^\s*(?P<label>[^:]{1,45}?):\s+(?P<body>\S.*)$", value.strip(), re.DOTALL)
     if not match:
         return None
     label = match.group("label").strip()
@@ -4146,10 +4123,9 @@ _SHARD_IRREGULAR_PAST = frozenset({
     "stank", "strove", "stuck", "swept", "swung", "threw", "thrust",
     "understood", "undertook", "underwent", "upheld", "upset",
     "wept", "withdrew", "withstood", "wrung", "wrote", "swam",
-    "rang", "stung", "struck", "swept", "arose", "awoke", "bore",
+    "rang", "stung", "struck", "arose", "awoke", "bore",
     "borne", "beat", "beaten", "bent", "bound", "burst", "chosen",
-    "clung", "crept", "dealt", "driven", "eaten", "fallen", "fed",
-    "flown", "forbidden", "forgotten", "frozen", "given", "grown",
+    "crept", "driven", "eaten", "fallen", "flown", "forbidden", "forgotten", "frozen", "given", "grown",
     "hidden", "known", "proven", "risen", "rung", "seen", "shaken",
     "shown", "sung", "sunk", "taken", "torn", "woken", "worn",
     "written",
@@ -4168,7 +4144,7 @@ _SHARD_LIMITATION_RE = re.compile(
     # kill Wheeljack...").
     r"lower\w*|"
     r"suffer\w* from|open to (?:attack|harm|damage))\b",
-    re.I,
+    re.IGNORECASE,
 )
 _SHARD_CONTRACTIONS = {
     "it's": ("it", "is"), "he's": ("he", "is"), "she's": ("she", "is"),
@@ -4265,11 +4241,6 @@ def _subject_is_clause_internal(tokens: list[str], idx: int) -> bool:
     # agreement guard in _shard_headed / _shard_subject_led, which
     # refuses "do" after "he". Treating gerund-led subjects as
     # internal would drop the control.
-    if (
-        idx >= 2
-        and not prev.endswith("ly")
-        and not _shard_is_verb(prev)
-    ):
         # prev is a content noun, not a verb: the subject opens a
         # that-less relative clause ("the dog they saw", "his power
         # they stole") rather than a main clause. The -ly guard keeps
@@ -4282,14 +4253,12 @@ def _subject_is_clause_internal(tokens: list[str], idx: int) -> bool:
         # inside a prepositional phrase is the phrase's object, not a
         # relative-clause head: "with his sword he cuts through
         # anything" (frag-8 control) is a main clause after the PP.
-        if not any(t in _SHARD_PREPS for t in tokens[max(0, idx - 4): idx - 1]):
-            return True
     if (
         idx >= 2
-        and tokens[idx - 2] not in _SHARD_SUBJECTS
-        and tokens[idx - 2] not in _SHARD_DETERMINERS
-        and not _shard_is_verb(tokens[idx - 2])
-    ):
+        and not prev.endswith("ly")
+        and not _shard_is_verb(prev)
+    ) and not any(t in _SHARD_PREPS for t in tokens[max(0, idx - 4): idx - 1]):
+        return True
         # The word before the noun is another content word, not a
         # verb, a subject, or a determiner: a noun phrase ("stronger
         # mutants they", "the dog they" via the noun branch), not
@@ -4297,8 +4266,12 @@ def _subject_is_clause_internal(tokens: list[str], idx: int) -> bool:
         # "with his sword he cuts" (frag-8 control) has "his" before
         # "sword", and the subject after the noun phrase is the main
         # clause's subject, not a relative-clause subject.
-        return True
-    return False
+    return (
+        idx >= 2
+        and tokens[idx - 2] not in _SHARD_SUBJECTS
+        and tokens[idx - 2] not in _SHARD_DETERMINERS
+        and not _shard_is_verb(tokens[idx - 2])
+    )
 
 
 _SINGULAR_SUBJECTS = frozenset({"he", "she", "it", "this", "that"})
@@ -4318,13 +4291,7 @@ def _subject_verb_agrees(subject: str, verb: str) -> bool:
         return False
     if verb == "does" and subject in _PLURAL_SUBJECTS:
         return False
-    if (
-        verb not in _SHARD_AUX
-        and _looks_like_finite_verb(verb)
-        and subject in _PLURAL_SUBJECTS
-    ):
-        return False
-    return True
+    return not (verb not in _SHARD_AUX and _looks_like_finite_verb(verb) and subject in _PLURAL_SUBJECTS)
 
 
 def _shard_expand_contractions(tokens: list[str]) -> list[str]:
@@ -4464,9 +4431,7 @@ def _prose_sentence_shard(value: str, lowered: str) -> bool:
         return False
     if _shard_subject_led(expanded):
         return False
-    if _shard_comma_main_clause(text):
-        return False
-    return True
+    return not _shard_comma_main_clause(text)
 
 
 # Relative-pronoun opener screen (ninth debris generation, weaknesses
@@ -4546,9 +4511,7 @@ def _relative_pronoun_opener(value: str, lowered: str) -> bool:
     if _rel_has_main_clause(text):
         return False
     toks = re.findall(r"[a-z]+(?:'[a-z]+)?", lowered)
-    if _rel_clause_is_past(toks):
-        return False
-    return True
+    return not _rel_clause_is_past(toks)
 
 
 # Numeric-split fragment screen (ninth debris generation, weaknesses
@@ -4579,9 +4542,7 @@ def _numeric_split_fragment(value: str, lowered: str) -> bool:
     expanded = _shard_expand_contractions(toks)
     if _shard_headed(expanded) or _shard_subject_led(expanded):
         return False
-    if _shard_comma_main_clause(text):
-        return False
-    return True
+    return not _shard_comma_main_clause(text)
 
 
 # Header + cut-off clause screen (ninth debris generation, weaknesses
@@ -4624,9 +4585,7 @@ def _header_rest_complete(rest: str) -> bool:
         return True
     if _shard_comma_main_clause(rest):
         return True
-    if toks and (toks[0] in _SHARD_AUX or _looks_like_finite_verb(toks[0])):
-        return True
-    return False
+    return bool(toks and (toks[0] in _SHARD_AUX or _looks_like_finite_verb(toks[0])))
 
 
 def _header_cutoff(value: str, lowered: str) -> bool:
@@ -4643,17 +4602,13 @@ def _header_cutoff(value: str, lowered: str) -> bool:
     if any(rest_low.startswith(op) for op in _HEADER_SUBORD_OPENERS):
         if _shard_comma_main_clause(rest):
             return False
-        if _SHARD_LIMITATION_RE.search(rest):
-            return False
-        return True
+        return not _SHARD_LIMITATION_RE.search(rest)
     if _header_rest_complete(rest):
         return False
     if _prose_sentence_shard(rest, rest_low):
         return True
     words = rest.split()
-    if rest_low.startswith("the ") and 2 <= len(words) <= 4:
-        return True
-    return False
+    return bool(rest_low.startswith("the ") and 2 <= len(words) <= 4)
 
 
 # ---------------------------------------------------------------------------
@@ -4858,17 +4813,13 @@ def _trailing_fragment(value: str, lowered: str) -> bool:
     if _SHARD_LIMITATION_RE.search(final):
         return False
     final_low = final.casefold()
-    if any(final_low.startswith(op) for op in _SUBORD_CLAUSE_OPENERS):
-        if not _main_clause_present(final):
-            return True
-    if final_low.startswith("to "):
-        if not _main_clause_present(final):
-            return True
+    if (any(final_low.startswith(op) for op in _SUBORD_CLAUSE_OPENERS)) and (not _main_clause_present(final)):
+        return True
+    if final_low.startswith("to ") and not _main_clause_present(final):
+        return True
     toks = re.findall(r"[a-z]+(?:'[a-z]+)?", final_low)
     toks = _shard_expand_contractions(toks)
-    if len(toks) == 2 and toks[0] in _SHARD_SUBJECTS and toks[1] in _SHARD_AUX:
-        return True
-    return False
+    return bool(len(toks) == 2 and toks[0] in _SHARD_SUBJECTS and toks[1] in _SHARD_AUX)
 
 
 # Bare "<X> ID Types" tab keys (eleventh debris generation, items).
@@ -4899,9 +4850,9 @@ _ID_TYPES_BARE_RE = re.compile(r"(?i)^\s*[a-z][\w '\-]*\bid types?\s*\.?\s*$")
 # utilize Destined Death..." is feats content filed as a weakness
 # (476 stored items carry "Feats:", all the same glue shape).
 _TIER_BASELINE_RE = re.compile(
-    r"\(\s*\d+\s*-?\s*[A-D]?\s*-\s*Baseline\b", re.I
+    r"\(\s*\d+\s*-?\s*[A-D]?\s*-\s*Baseline\b", re.IGNORECASE
 )
-_FEATS_MARKER_RE = re.compile(r"\bfeats\s*:", re.I)
+_FEATS_MARKER_RE = re.compile(r"\bfeats\s*:", re.IGNORECASE)
 
 # Orphaned-tail clauses (eleventh debris generation, items). The
 # comma-splitter cut "Maliketh could manipulate Death, but after the
@@ -5733,9 +5684,7 @@ def fragment_scalar_reasons(text: Any) -> list[str]:
     if not value:
         return []
     reasons: list[str] = []
-    if value[0] in ",;:)]}":
-        reasons.append("scalar_tail_fragment")
-    elif re.match(r"(?i)(?:far\s+)?(?:higher|lower)\b", value) and not re.search(
+    if value[0] in ",;:)]}" or re.match(r"(?i)(?:far\s+)?(?:higher|lower)\b", value) and not re.search(
         r"\d", value
     ):
         reasons.append("scalar_tail_fragment")
@@ -5769,7 +5718,7 @@ async def _fetch_page_categories(session: Any, api_url: str, title: str) -> list
     try:
         async with session.get(api_url, params=params) as response:
             body = await response.json(content_type=None)
-    except Exception:  # noqa: BLE001 - categories are one evidence channel
+    except Exception:
         return []
     pages = ((body or {}).get("query") or {}).get("pages") or []
     if not pages:
@@ -5980,7 +5929,7 @@ async def recover_profile_evidence(
                     )
                 else:
                     fields0, meta = await fetch_source_fields(source)
-            except Exception as exc:  # noqa: BLE001 - per-source isolation
+            except Exception as exc:
                 tried["error"] = f"{type(exc).__name__}: {exc}"
                 continue
             tried["fetch_status"] = meta.get("fetch_status")
@@ -6008,7 +5957,7 @@ async def recover_profile_evidence(
                         retry_fields, retry_meta = await mediawiki.fetch_title_fields(
                             session, api_url, recorded_title, source, parse_fn
                         )
-                    except Exception as exc:  # noqa: BLE001 - retry is best-effort
+                    except Exception as exc:
                         retry_fields, retry_meta = {}, {"error": f"{type(exc).__name__}: {exc}"}
                     if retry_meta.get("fetch_status") == "fetched" and retry_meta.get("title"):
                         retry_categories = await _fetch_page_categories(
@@ -6075,15 +6024,15 @@ async def recover_profile_evidence(
             wikitext = str(meta.get("raw_content") or "")
             fields = fields0
             if wikitext:
-                async def _fetch_rendered_html() -> str:
+                async def _fetch_rendered_html(_fetched_title=fetched_title, _api_url=api_url) -> str:
                     params = {
                         "action": "parse",
-                        "page": fetched_title,
+                        "page": _fetched_title,
                         "prop": "text",
                         "format": "json",
                         "formatversion": "2",
                     }
-                    async with session.get(api_url, params=params) as response:
+                    async with session.get(_api_url, params=params) as response:
                         body = await response.json(content_type=None)
                     parse = (body or {}).get("parse") or {}
                     text = parse.get("text")

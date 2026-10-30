@@ -18,6 +18,7 @@ import json
 import os
 import re
 import time
+from contextlib import suppress
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
@@ -310,34 +311,27 @@ class HttpClient:
 
         request_headers = {"User-Agent": self.user_agent, **(headers or {})}
         timeout = aiohttp.ClientTimeout(total=8, connect=3, sock_connect=3, sock_read=5)
-        async with aiohttp.ClientSession(headers=request_headers, timeout=timeout) as session:
-            async with session.request(
-                method,
-                url,
-                params=params,
-                json=json_body,
-                data=data_body,
-            ) as response:
-                text = await response.text()
-                if response.status == 429:
-                    retry_after = parse_retry_after(response.headers.get("Retry-After"))
-                    self.cache.set_cooldown(host, time.time() + retry_after)
-                try:
-                    body = json.loads(text)
-                except json.JSONDecodeError:
-                    body = {"text": text}
-                record = self.cache.write(
-                    cache_key,
-                    method=method,
-                    url=str(response.url),
-                    status=response.status,
-                    headers=dict(response.headers),
-                    body=body,
-                    source_type=source_type,
-                )
-                if response.status >= 400:
-                    raise RuntimeError(f"{source_type} request failed: HTTP {response.status}")
-                return record
+        async with aiohttp.ClientSession(headers=request_headers, timeout=timeout) as session, session.request( method, url, params=params, json=json_body, data=data_body, ) as response:
+            text = await response.text()
+            if response.status == 429:
+                retry_after = parse_retry_after(response.headers.get("Retry-After"))
+                self.cache.set_cooldown(host, time.time() + retry_after)
+            try:
+                body = json.loads(text)
+            except json.JSONDecodeError:
+                body = {"text": text}
+            record = self.cache.write(
+                cache_key,
+                method=method,
+                url=str(response.url),
+                status=response.status,
+                headers=dict(response.headers),
+                body=body,
+                source_type=source_type,
+            )
+            if response.status >= 400:
+                raise RuntimeError(f"{source_type} request failed: HTTP {response.status}")
+            return record
 
 
 def _mediawiki_error_retryable(exc: BaseException) -> bool:
@@ -353,11 +347,9 @@ def _mediawiki_error_retryable(exc: BaseException) -> bool:
         response = exc.response
         status = response.status_code if response is not None else 0
         return 500 <= status < 600
-    if isinstance(exc, mwclient.errors.MaximumRetriesExceeded):
-        # mwclient already retried internally; still transient, worth another
-        # attempt under the tenacity backoff.
-        return True
-    return False
+    # mwclient already retried internally; still transient, worth another
+    # attempt under the tenacity backoff.
+    return isinstance(exc, mwclient.errors.MaximumRetriesExceeded)
 
 
 mediawiki_retry = retry(
@@ -398,8 +390,7 @@ class MediaWikiClient:
     def _site_for(self, api_url: str) -> mwclient.Site:
         parsed = urlparse(api_url)
         path = parsed.path
-        if path.endswith("api.php"):
-            path = path[: -len("api.php")]
+        path = path.removesuffix("api.php")
         if not path.endswith("/"):
             path += "/"
         site_key = f"{parsed.scheme}://{parsed.netloc}{path}"
@@ -430,7 +421,7 @@ class MediaWikiClient:
                 f"mediawiki request failed: API error {exc.code}: {exc.info}"
             ) from exc
         if not isinstance(result, dict):
-            raise RuntimeError("mediawiki request failed: unexpected API response")
+            raise RuntimeError("mediawiki request failed: unexpected API response")  # noqa: TRY004 -- _api_get reports failures as RuntimeError by contract
         return result
 
     async def request_json(
@@ -528,8 +519,9 @@ class ProfileHarvester:
         )
         # Export only versions whose source supplies explicit ability blocks and aligned stats.
         if wiki_source and not (profile.get("variant") or {}).get("variant_name"):
-            from battlebot.harvest.version_scope import scope_extracted_fields
             from dataclasses import replace
+
+            from battlebot.harvest.version_scope import scope_extracted_fields
             for form in (profile.get("forms") or [])[:16]:
                 key = form.get("name") or ""
                 scoped_fields = scope_extracted_fields(wiki_source.get("fields") or {}, key)
@@ -673,8 +665,11 @@ class ProfileHarvester:
             _chain_holder["record"] = record  # [fallback-chain]
             return raw_html_from_parse(record["body"])  # [fallback-chain]
 
-        try:  # [fallback-chain]
-            from battlebot.harvest import fallback_parsers as _fp  # [fallback-chain] deferred: avoids import cycle
+        # step-1 fields and defaults stand  # [fallback-chain]
+        with suppress(Exception):  # [fallback-chain]
+            from battlebot.harvest import (
+                fallback_parsers as _fp,  # [fallback-chain] deferred: avoids import cycle
+            )
             _chain = await _fp.run_parse_fallback_chain(  # [fallback-chain]
                 wikitext=content,  # [fallback-chain]
                 title=title,  # [fallback-chain]
@@ -687,8 +682,6 @@ class ProfileHarvester:
             if _chain["used_rendered_html"]:  # [fallback-chain]
                 parse_record = _chain_holder.get("record")  # [fallback-chain]
                 parse_text = rendered_text_from_parse(parse_record["body"]) if parse_record else ""  # [fallback-chain]
-        except Exception:  # [fallback-chain]
-            pass  # step-1 fields and defaults stand  # [fallback-chain]
         return {
             "source_id": source_id("mediawiki", page.get("pageid"), title),
             "title": page.get("title") or title,
@@ -1280,7 +1273,7 @@ def _expand_tabber_mwparse(code) -> str:
                 if pname.lower() in ("border", "scroll", "visible", "padding", "header", "title", "width", "content"):
                     # Content param holds the actual tabber body
                     if pname.lower() == "content":
-                        pval = pval  # process below
+                        pass  # process below
                     else:
                         continue
                 # Recursively expand nested templates in tab content
@@ -1365,7 +1358,7 @@ def unpack_mediawiki_templates(text: str) -> str:
                 except ValueError:
                     pass
             text = str(code)
-        except Exception:
+        except Exception:  # noqa: S110 -- fall through to regex approach on parse failure
             # Fall through to regex approach on parse failure
             pass
         else:
@@ -1571,9 +1564,7 @@ def _is_thousands_comma(text: str, index: int) -> bool:
     after = text[index + 1:index + 4]
     if len(after) != 3 or not after.isdigit():
         return False
-    if index + 4 < len(text) and text[index + 4].isdigit():
-        return False
-    return True
+    return not (index + 4 < len(text) and text[index + 4].isdigit())
 
 
 def split_listish(text: str | None) -> list[str]:
@@ -1581,7 +1572,7 @@ def split_listish(text: str | None) -> list[str]:
         return []
     # A partially parsed tabber has lost its form/era boundaries. Do not promote
     # layout parameters or assign its surviving clauses to canonical base form.
-    if re.search(r"\{\{|\}\}|#tag:|\btabber\b|\b(?:Border|Scroll|Visible|Padding|Content)\s*=", text, re.I):
+    if re.search(r"\{\{|\}\}|#tag:|\btabber\b|\b(?:Border|Scroll|Visible|Padding|Content)\s*=", text, re.IGNORECASE):
         return []
     # Keep the complete resistance clause together: splitting its commas would
     # turn subsequent defensive properties into offensive abilities.
@@ -1737,7 +1728,7 @@ def title_from_wiki_url(url: str | None) -> str | None:
         return None
     parsed = urlparse(url)
     params = parse_qs(parsed.query)
-    if "title" in params and params["title"]:
+    if params.get("title"):
         return params["title"][0].replace("_", " ")
     last = parsed.path.rstrip("/").split("/")[-1]
     if not last or last == "api.php":
@@ -2150,10 +2141,16 @@ def drain_recentchanges_feed(selected, max_per_cycle):
         return [], 0
     try:
         from battlebot.harvest.recentchanges_feed import (
-            poll_once as _rc_poll_once,
-            load_queue as _rc_load_queue,
-            save_queue as _rc_save_queue,
             default_queue_path as _rc_default_queue_path,
+        )
+        from battlebot.harvest.recentchanges_feed import (
+            load_queue as _rc_load_queue,
+        )
+        from battlebot.harvest.recentchanges_feed import (
+            poll_once as _rc_poll_once,
+        )
+        from battlebot.harvest.recentchanges_feed import (
+            save_queue as _rc_save_queue,
         )
         _rc_poll_once()  # incremental poll; updates watermark + queue file
         _rc_queue_path = _rc_default_queue_path()

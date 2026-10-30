@@ -15,7 +15,6 @@ from fastapi.templating import Jinja2Templates
 
 from battlebot.review import service
 
-
 PACKAGE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(PACKAGE_DIR / "templates"))
 

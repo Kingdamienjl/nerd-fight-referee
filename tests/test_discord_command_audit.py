@@ -263,16 +263,15 @@ class DiscordCommandAuditTests(unittest.IsolatedAsyncioTestCase):
         async def fake_record(entry, **kwargs):
             recorded.append(entry)
 
-        with patch("battlebot.bot.audit.record_discord_command_audit", fake_record):
-            with self.assertRaises(RuntimeError):
-                await audit.run_audited_command(
-                    FakeInteraction(),
-                    command_name="profile",
-                    options={"character": "Batman"},
-                    response_is_private=True,
-                    database_url=None,
-                    handler=handler,
-                )
+        with patch("battlebot.bot.audit.record_discord_command_audit", fake_record), self.assertRaises(RuntimeError):
+            await audit.run_audited_command(
+                FakeInteraction(),
+                command_name="profile",
+                options={"character": "Batman"},
+                response_is_private=True,
+                database_url=None,
+                handler=handler,
+            )
 
         self.assertEqual(len(recorded), 1)
         self.assertFalse(recorded[0].success)

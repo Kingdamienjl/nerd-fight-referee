@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 import yaml
+from pydantic import ValidationError
 
 from battlebot.ingest.import_profiles import (
     ImportOptions,
@@ -12,12 +13,11 @@ from battlebot.ingest.import_profiles import (
     compile_items,
     compile_profile,
     find_profile_paths,
-    profile_file_fingerprint,
     import_compiled_profiles,
+    profile_file_fingerprint,
     update_import_state_for_compiled,
     validate_profile_path,
 )
-
 
 GENERATED_DIR = Path("profiles/generated")
 GOKU_PATH = Path("profiles/generated/anime/dragon-ball/son-goku.yaml")
@@ -127,7 +127,7 @@ class ProfileImportCompileTests(unittest.TestCase):
             self.assertEqual(summary.scanned, 1)
             self.assertEqual(summary.skipped_invalid, 1)
 
-            with self.assertRaises(Exception):
+            with self.assertRaises(ValidationError):
                 build_import_plan(Path(tmpdir), ImportOptions(fail_fast=True))
 
     def test_importer_validation_accepts_approved_profile_without_repair_metadata(self):

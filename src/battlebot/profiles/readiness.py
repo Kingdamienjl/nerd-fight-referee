@@ -1,6 +1,7 @@
 """Structural readiness, distinct from independent factual/source verification."""
 import re
 from urllib.parse import urlsplit
+
 from battlebot.profiles.evidence_quality import evidence_quality_blockers, usable_item
 
 

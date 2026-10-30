@@ -9,9 +9,12 @@ import yaml
 
 from battlebot.review import batch_promote
 from battlebot.review.queue import CLAIM_JOBS_SQL
-from battlebot.review.requeue_source_choice import SOURCE_CHOICE_FILTER_SQL, requeue_needs_human_source_choice
 from battlebot.review.queue_seed import seed_queue
 from battlebot.review.queue_worker import process_job, run_worker
+from battlebot.review.requeue_source_choice import (
+    SOURCE_CHOICE_FILTER_SQL,
+    requeue_needs_human_source_choice,
+)
 
 
 class FakeConnection:

@@ -28,9 +28,7 @@ def is_stub(profile: dict) -> bool:
     if isinstance(gen, dict) and gen.get("bootstrap_promoted"):
         return True
     ap = str(profile.get("attack_potency") or "")
-    if "provisional" in ap.lower() and "unknown" in ap.lower():
-        return True
-    return False
+    return bool("provisional" in ap.lower() and "unknown" in ap.lower())
 
 
 def main():

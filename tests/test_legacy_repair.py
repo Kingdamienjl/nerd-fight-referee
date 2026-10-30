@@ -1,5 +1,7 @@
 import unittest
+
 from services.repair_legacy_profiles import identity_matches, pinned_source
+
 
 class RepairIdentityTests(unittest.TestCase):
     def test_publisher_label_preserves_identity(self):
@@ -31,6 +33,7 @@ class PromotionRollbackTests(unittest.IsolatedAsyncioTestCase):
         from tempfile import TemporaryDirectory
         from types import SimpleNamespace
         from unittest.mock import AsyncMock, patch
+
         from services import repair_legacy_profiles as repair
         class Transaction:
             async def __aenter__(self): return self
@@ -42,9 +45,8 @@ class PromotionRollbackTests(unittest.IsolatedAsyncioTestCase):
             root=Path(folder); path=root/'profile.yaml'; original=b'id: example\nprofile_hash: old\n'
             path.write_bytes(original)
             compiled=SimpleNamespace(profile={'battle_eligible':True})
-            with patch.object(repair.CharacterProfile,'model_validate',return_value=object()),patch.object(repair,'compile_profile',return_value=compiled),patch.object(repair,'connect_database',connection),patch.object(repair,'upsert_compiled_profile',AsyncMock()):
-                with self.assertRaisesRegex(RuntimeError,'Commit failed'):
-                    await repair.promote({'id':'example'},path,original,SimpleNamespace(root=root),root/'archive')
+            with patch.object(repair.CharacterProfile,'model_validate',return_value=object()),patch.object(repair,'compile_profile',return_value=compiled),patch.object(repair,'connect_database',connection),patch.object(repair,'upsert_compiled_profile',AsyncMock()), self.assertRaisesRegex(RuntimeError,'Commit failed'):
+                await repair.promote({'id':'example'},path,original,SimpleNamespace(root=root),root/'archive')
             self.assertEqual(path.read_bytes(),original)
             self.assertEqual((root/'archive'/'original.yaml').read_bytes(),original)
 
@@ -61,6 +63,7 @@ class CuratedRosterRecoveryTests(unittest.TestCase):
     def test_unique_curated_roster_mapping_is_repairable_and_fingerprinted(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
+
         from services.repair_legacy_profiles import roster_source, source_identity_fingerprint
         with TemporaryDirectory() as folder:
             roster_dir = Path(folder)
@@ -80,6 +83,7 @@ class CuratedRosterRecoveryTests(unittest.TestCase):
     def test_conflicting_curated_titles_still_require_review(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
+
         from services.repair_legacy_profiles import roster_source
         with TemporaryDirectory() as folder:
             roster_dir = Path(folder)

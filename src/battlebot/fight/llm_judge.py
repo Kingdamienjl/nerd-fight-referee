@@ -12,6 +12,7 @@ from typing import Any
 
 import httpx
 from pydantic import ValidationError
+
 from battlebot.common.db import connect_database
 from battlebot.fight.decision_formatter import (
     format_decision,
@@ -214,8 +215,8 @@ def build_verdict_prompt(
         f'Contender A (emit "a" as winner if this fighter wins): {name_a}',
         f'Contender B (emit "b" as winner if this fighter wins): {name_b}',
         "",
-        "Deterministic engine lean (context only - you are the final arbitrator and may disagree "
-        "if the evidence supports it):",
+        ("Deterministic engine lean (context only - you are the final arbitrator and may disagree "
+        "if the evidence supports it):"),
         f"Engine winner: {smoke_baseline.get('winner')}",
         f"Engine confidence: {smoke_baseline.get('confidence')}",
         f"Engine difficulty: {det_diff}",
@@ -242,10 +243,10 @@ def build_verdict_prompt(
         "",
         BATTLE_RULES,
         "",
-        "Task: reason step by step through each rubric axis (feat_quality, stat_differential, "
+        ("Task: reason step by step through each rubric axis (feat_quality, stat_differential, "
         "hax_counterplay, win_condition_count, speed_advantage), then output your verdict as JSON "
         "matching the provided schema. "
-        f'Set "winner" to "a" if {name_a} wins, "b" if {name_b} wins.',
+        f'Set "winner" to "a" if {name_a} wins, "b" if {name_b} wins.'),
     ]
     return [
         {"role": "system", "content": JUDGE_SYSTEM_PROMPT},
@@ -835,13 +836,13 @@ def parse_referee_json(raw):
         text = "\n".join(lines).strip()
     try:
         data = _json.loads(text)
-    except Exception:  # noqa: BLE001
+    except Exception:
         m = _re.search(r"\{.*\}", text, _re.DOTALL)
         if not m:
             return None
         try:
             data = _json.loads(m.group(0))
-        except Exception:  # noqa: BLE001
+        except Exception:
             return None
     return data if isinstance(data, dict) else None
 
@@ -1608,7 +1609,7 @@ async def request_fight_verdict(
         return None
     try:
         schema = fight_verdict_json_schema()
-    except Exception:  # noqa: BLE001 - schema build failure -> regex fallback
+    except Exception:
         return None
     model = str(values.get("REFEREE_VERDICT_MODEL") or "referee-judge")
     if _llm_provider(values) == "ollama" and model.startswith("referee-"):
@@ -1638,7 +1639,7 @@ async def request_fight_verdict(
                 timeout=timeout,
                 request_info=call_info,
             )
-        except Exception as exc:  # noqa: BLE001 - transport failure -> regex fallback
+        except Exception as exc:
             last_error = exc
             break
         try:
@@ -1679,7 +1680,7 @@ async def judge_fight_packet(
             analyst_messages = build_analyst_prompt(packet, smoke)
             try:
                 analyst_raw = await _invoke_caller(caller, analyst_messages, model=analyst_model, env=env)
-            except Exception as analyst_exc:  # noqa: BLE001
+            except Exception as analyst_exc:
                 analyst_raw = f"Tactical analysis unavailable: {analyst_exc}"
 
             # Primary judge path: schema-constrained G-Eval verdict. Engages only
@@ -1739,7 +1740,7 @@ async def judge_fight_packet(
             decision = llm_explained_decision(smoke, raw, packet=packet)
             decision["presentation_packet"] = packet
             return decision
-    except Exception as exc:  # noqa: BLE001 - judge must degrade cleanly.
+    except Exception as exc:
         return fallback_decision(
             smoke,
             fallback_reason_for_exception(exc),

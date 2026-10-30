@@ -1,5 +1,7 @@
 import unittest
-from services.repair_legacy_profiles import failed_attempt, SourceIdentityReview
+
+from services.repair_legacy_profiles import SourceIdentityReview, failed_attempt
+
 
 class FailureClassificationTests(unittest.TestCase):
     def test_identity_failure_waits_for_evidence_review(self):

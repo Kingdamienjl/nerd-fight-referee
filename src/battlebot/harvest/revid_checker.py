@@ -32,8 +32,8 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -61,11 +61,11 @@ PRIMARY_SOURCE_TYPE = "mediawiki"
 def parse_rev_timestamp(value: Any) -> datetime | None:
     """Parse a MediaWiki revision timestamp into an aware datetime."""
     if isinstance(value, datetime):
-        return value if value.tzinfo else value.replace(tzinfo=timezone.utc)
+        return value if value.tzinfo else value.replace(tzinfo=UTC)
     if not value or not isinstance(value, str):
         return None
     try:
-        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+        return datetime.fromisoformat(value)
     except ValueError:
         return None
 
@@ -228,7 +228,7 @@ async def batch_fetch_revids(
         chunk = ordered[start : start + batch_size]
         try:
             out.update(await _fetch_revid_batch(mw, api_url, chunk))
-        except Exception as exc:  # noqa: BLE001 - one bad batch must not kill the cycle
+        except Exception as exc:
             log.warning("revid batch failed for %d titles @ %s: %s", len(chunk), api_url, exc)
     return out
 

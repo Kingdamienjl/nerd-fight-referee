@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import os
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import AsyncIterator
 
 import asyncpg
-
 
 DEFAULT_DATABASE_URL = "postgresql://battlebot:change_me@localhost:5432/battlebot"
 

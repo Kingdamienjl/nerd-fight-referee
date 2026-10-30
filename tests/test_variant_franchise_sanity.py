@@ -1,10 +1,6 @@
 
 from pathlib import Path
 
-
-
-
-
 DC_TOKENS = {
 
     "dc-comics",

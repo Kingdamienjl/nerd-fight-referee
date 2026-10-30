@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from typing import Iterable
+from collections.abc import Iterable
 
 _BAD_EXACT = {
     "",
@@ -15,26 +15,26 @@ _BAD_EXACT = {
 }
 
 _BAD_PATTERNS = [
-    re.compile(r"\bpadding\s*=\s*yes\b", re.I),
-    re.compile(r"\bcategory\s*:\s*characters\b", re.I),
-    re.compile(r"\bch\s*=\s*\d+\b", re.I),
-    re.compile(r"\b\d+\s*&\s*\d+\b", re.I),
-    re.compile(r"\b\d+\s+category\b", re.I),
-    re.compile(r"^[=\-\s]*victories[=\-\s]*$", re.I),
-    re.compile(r"^[a-z ]*▼$", re.I),
-    re.compile(r"^base\s*▼$", re.I),
-    re.compile(r"^pre\s*/?\s*during training\s*▼$", re.I),
-    re.compile(r"^powers\s*&$", re.I),
+    re.compile(r"\bpadding\s*=\s*yes\b", re.IGNORECASE),
+    re.compile(r"\bcategory\s*:\s*characters\b", re.IGNORECASE),
+    re.compile(r"\bch\s*=\s*\d+\b", re.IGNORECASE),
+    re.compile(r"\b\d+\s*&\s*\d+\b", re.IGNORECASE),
+    re.compile(r"\b\d+\s+category\b", re.IGNORECASE),
+    re.compile(r"^[=\-\s]*victories[=\-\s]*$", re.IGNORECASE),
+    re.compile(r"^[a-z ]*▼$", re.IGNORECASE),
+    re.compile(r"^base\s*▼$", re.IGNORECASE),
+    re.compile(r"^pre\s*/?\s*during training\s*▼$", re.IGNORECASE),
+    re.compile(r"^powers\s*&$", re.IGNORECASE),
 ]
 
 _SOURCE_NOISE = [
-    re.compile(r"\bchapter\s*\d+\b", re.I),
-    re.compile(r"\bvol\.?\s*\d+\b", re.I),
-    re.compile(r"\bissue\s*#?\d+\b", re.I),
-    re.compile(r"\bpage\s*\d+\b", re.I),
-    re.compile(r"\b\d+(\.\d+)?\s*(tons|kilotons|megatons|gigatons|teratons|petatons|zettatons|yottatons)\b", re.I),
-    re.compile(r"\bmach\s*\d+(\.\d+)?\b", re.I),
-    re.compile(r"\b\d+(\.\d+)?\s*c\b", re.I),
+    re.compile(r"\bchapter\s*\d+\b", re.IGNORECASE),
+    re.compile(r"\bvol\.?\s*\d+\b", re.IGNORECASE),
+    re.compile(r"\bissue\s*#?\d+\b", re.IGNORECASE),
+    re.compile(r"\bpage\s*\d+\b", re.IGNORECASE),
+    re.compile(r"\b\d+(\.\d+)?\s*(tons|kilotons|megatons|gigatons|teratons|petatons|zettatons|yottatons)\b", re.IGNORECASE),
+    re.compile(r"\bmach\s*\d+(\.\d+)?\b", re.IGNORECASE),
+    re.compile(r"\b\d+(\.\d+)?\s*c\b", re.IGNORECASE),
 ]
 
 def clean_public_text(value: object, *, max_len: int = 120) -> str:
@@ -56,7 +56,7 @@ def clean_public_text(value: object, *, max_len: int = 120) -> str:
     # Remove obvious wiki/category/source fragments.
     text = re.sub(r"\bCategory:[A-Za-z0-9_ /-]+", "", text)
     text = re.sub(r"\b\d+\s*Category:[^,.;]+", "", text)
-    text = re.sub(r"\bch\s*=\s*\d+\b", "", text, flags=re.I)
+    text = re.sub(r"\bch\s*=\s*\d+\b", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\s+", " ", text).strip(" ,.;:-")
 
     if not text:

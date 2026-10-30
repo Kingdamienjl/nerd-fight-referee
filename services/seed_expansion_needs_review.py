@@ -1,6 +1,6 @@
-from pathlib import Path 
-from datetime import datetime 
-import re 
+import re
+from datetime import datetime
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] 
 GEN = ROOT / "profiles" / "generated" 

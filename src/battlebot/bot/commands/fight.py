@@ -7,6 +7,8 @@ import re
 from typing import Any
 
 import discord
+from discord import app_commands
+
 from battlebot.bot.audit import run_audited_command
 from battlebot.common.db import connect_database
 from battlebot.fight.citations import evidence_brief, linked_citations, source_panel
@@ -20,14 +22,13 @@ from battlebot.fight.decision_formatter import (
     structured_decision_output,
 )
 from battlebot.fight.llm_judge import judge_fight_packet
-from battlebot.fight.tier_utils import maybe_stomp_decision
 from battlebot.fight.personality import details as personality_details
 from battlebot.fight.smoke_judge import smoke_judge_packet
+from battlebot.fight.tier_utils import maybe_stomp_decision
 from battlebot.profiles.fight_packet import build_fight_packet
 from battlebot.profiles.search import format_search_results, search_characters
 from battlebot.profiles.variants import CURATED_VARIANTS, split_variant_name
 from battlebot.review.queue import enqueue_job
-from discord import app_commands
 
 
 def available_forms_for_query(query: str) -> list[str]:
@@ -414,7 +415,7 @@ async def send_deferred_fight_result(
     final_view = FightDetailsView(fight_detail_payload(decision))
     try:
         await message.edit(embed=final_embed, view=final_view)
-    except Exception:  # noqa: BLE001 - fallback to a follow-up if webhook edit is unavailable.
+    except Exception:
         await interaction.followup.send(embed=final_embed, view=final_view, ephemeral=ephemeral)
     return text
 
@@ -523,7 +524,7 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
                         choices.append(app_commands.Choice(name=name[:100], value=name[:100]))
                     if len(choices) >= 25:
                         break
-        except Exception:  # noqa: BLE001, S110
+        except Exception:  # noqa: S110
             pass
 
         return choices[:25]

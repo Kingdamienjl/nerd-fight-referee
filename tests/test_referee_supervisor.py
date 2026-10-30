@@ -1,6 +1,6 @@
 import importlib.util
-from pathlib import Path
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('referee_supervisor', Path(__file__).resolve().parents[1] / 'services' / 'referee_supervisor.py')

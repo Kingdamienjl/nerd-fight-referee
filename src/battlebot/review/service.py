@@ -5,8 +5,11 @@ from __future__ import annotations
 import argparse
 import fcntl
 import json
+import os
 import re
 import shutil
+import tempfile
+from contextlib import suppress
 from copy import deepcopy
 from datetime import UTC, datetime
 from pathlib import Path
@@ -14,13 +17,10 @@ from typing import Any
 
 import yaml
 from pydantic import ValidationError
-import os
-import tempfile
 
 from battlebot.profiles import yaml_io
 from battlebot.profiles.quality import profile_warning_flags
 from battlebot.schemas.profile import CharacterProfile
-
 
 DEFAULT_GENERATED_DIR = Path("profiles/generated")
 DEFAULT_NEEDS_REVIEW_DIR = Path("profiles/needs_review")
@@ -393,11 +393,9 @@ def _write_full_notes_file(notes_path: Path, notes: list[dict[str, Any]]) -> Non
             os.fsync(handle.fileno())
         os.replace(str(tmp_file), str(notes_path))
     except Exception:
-        try:
+        with suppress(Exception):
             if tmp_file and tmp_file.exists():
                 tmp_file.unlink(missing_ok=True)
-        except Exception:
-            pass
         raise
 
 

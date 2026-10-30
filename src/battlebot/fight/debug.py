@@ -59,8 +59,8 @@ def human_summary(packet: dict[str, Any]) -> str:
         lines.extend(
             [
                 "",
-                f"{label}: {contender['canonical_name']} "
-                f"({contender['franchise']}, {contender['category']})",
+                (f"{label}: {contender['canonical_name']} "
+                f"({contender['franchise']}, {contender['category']})"),
                 f"profile: {contender['profile_id']} hash={contender['profile_hash']}",
                 f"abilities: {contender['ability_count']} weaknesses: {contender['weakness_count']}",
                 f"attack: {truncate(power.get('attack_potency'))}",

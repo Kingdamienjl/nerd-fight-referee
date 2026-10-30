@@ -1,10 +1,11 @@
 import unittest
+
 import httpx
 
 from battlebot.fight.decision_formatter import format_decision
 from battlebot.fight.llm_judge import (
-    build_prompt,
     build_analyst_prompt,
+    build_prompt,
     build_referee_stage2_prompt,
     judge_fight_packet,
     llm_output_violates_entity_grounding,

@@ -40,7 +40,7 @@ def main():
             scanned += 1
             try:
                 s = p.read_text(errors="ignore")
-            except Exception:
+            except Exception:  # noqa: S112 -- unreadable file must skip rest of loop body
                 continue
 
             old = s

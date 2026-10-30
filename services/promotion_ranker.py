@@ -1,6 +1,7 @@
-from pathlib import Path
+import json
+import re
 from datetime import datetime
-import json, re
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_JSON = ROOT / "harvest" / "promotion_ranked_today.json"

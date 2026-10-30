@@ -42,6 +42,7 @@ class ProfileSearchTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_needs_review_search_can_find_missing_profiles(self):
         from pathlib import Path
+
         import yaml
 
         needs_review_paths = sorted(Path("profiles/needs_review").rglob("*.yaml"))
@@ -52,7 +53,7 @@ class ProfileSearchTests(unittest.IsolatedAsyncioTestCase):
         for profile_path in needs_review_paths[:200]:
             try:
                 data = yaml.safe_load(profile_path.read_text(encoding="utf-8")) or {}
-            except Exception:
+            except Exception:  # noqa: S112 -- unparsable profile must skip rest of loop body
                 continue
 
             candidates = [

@@ -108,7 +108,7 @@ def audit_duplicate_rows(rows: list[dict[str, Any]], *, names: list[str] | None 
         ]
         if not canonical_buckets:
             continue
-        target_key, target_rows = sorted(canonical_buckets, key=lambda item: max(default_sort_key(row) for row in item[1]), reverse=True)[0]
+        target_key, target_rows = max(canonical_buckets, key=lambda item: max(default_sort_key(row) for row in item[1]))
         crossover_rows = [row for row in name_rows if is_crossover_row(row)]
         if crossover_rows:
             duplicate_buckets[target_key] = target_rows + [row for row in crossover_rows if row not in target_rows]

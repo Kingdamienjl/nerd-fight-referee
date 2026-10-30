@@ -6,12 +6,13 @@ import json
 import os
 import re
 import time
+from collections.abc import Awaitable, Callable
+from contextlib import suppress
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Awaitable, Callable
+from typing import Any
 
 from battlebot.common.db import apply_schema, connect_database
-
 
 FALLBACK_AUDIT_LOG = Path("logs/discord_command_audit.jsonl")
 SECRET_ENV_KEYS = ("DISCORD_TOKEN", "DATABASE_URL")
@@ -168,18 +169,14 @@ async def record_discord_command_audit(
     database_url: str | None = None,
     fallback_path: Path = FALLBACK_AUDIT_LOG,
 ) -> None:
-    try:
+    with suppress(Exception):
         if database_url or os.getenv("DATABASE_URL"):
             async with connect_database(database_url) as connection:
                 await apply_schema(connection)
                 await insert_audit_row(connection, entry)
             return
-    except Exception:
-        pass
-    try:
+    with suppress(Exception):
         write_jsonl_fallback(entry, path=fallback_path)
-    except Exception:
-        pass
 
 
 async def run_audited_command(
@@ -206,7 +203,7 @@ async def run_audited_command(
         raise
     finally:
         duration_ms = int((time.perf_counter() - started) * 1000)
-        try:
+        with suppress(Exception):
             await record_discord_command_audit(
                 DiscordCommandAuditEntry(
                     command_name=command_name,
@@ -226,5 +223,3 @@ async def run_audited_command(
                 ),
                 database_url=database_url,
             )
-        except Exception:
-            pass

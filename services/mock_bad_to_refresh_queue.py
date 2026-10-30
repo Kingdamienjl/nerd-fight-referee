@@ -1,6 +1,6 @@
-from pathlib import Path
+import json
 from datetime import datetime
-import json, re
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / "logs" / "mock_duel_quality"

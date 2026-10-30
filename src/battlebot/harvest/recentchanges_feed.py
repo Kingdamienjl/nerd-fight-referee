@@ -45,7 +45,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 DEFAULT_API_URL = "https://vsbattles.fandom.com/api.php"
@@ -102,7 +102,7 @@ def api_url() -> str:
 
 
 def utcnow_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 # ---------------------------------------------------------------------------
@@ -330,13 +330,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--max-queue", type=int, default=int(os.environ.get("HARVEST_RC_MAX_QUEUE", str(MAX_QUEUE_DEFAULT))))
     args = parser.parse_args(argv)
 
-    poll_kwargs = dict(
-        url=args.api_url or api_url(),
-        state_path=Path(args.state_file) if args.state_file else None,
-        queue_path=Path(args.queue_file) if args.queue_file else None,
-        bootstrap_limit=args.bootstrap_limit,
-        max_queue=args.max_queue,
-    )
+    poll_kwargs = {
+        "url": args.api_url or api_url(),
+        "state_path": Path(args.state_file) if args.state_file else None,
+        "queue_path": Path(args.queue_file) if args.queue_file else None,
+        "bootstrap_limit": args.bootstrap_limit,
+        "max_queue": args.max_queue,
+    }
 
     if args.loop:
         if not feed_enabled():

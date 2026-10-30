@@ -5,8 +5,8 @@ ASSUMED_POWER = re.compile(
     r'\b(?:if|assuming(?: that)?|provided(?: that)?)\s+[^.!?\n]{0,90}?\b'
     r'(?:possesses?|has|had|were to have|could have)\s+'
     r'(?!enough\b|sufficient\b)[^.!?\n]{0,90}?\b'
-    r'(?:resistance|immunity|immunities|ability|abilities|power|powers)\b', re.I)
-WIN_CLAIM = re.compile(r'\b(?:win|wins|victory|secure a win|defeat|prevail|winner)\b', re.I)
+    r'(?:resistance|immunity|immunities|ability|abilities|power|powers)\b', re.IGNORECASE)
+WIN_CLAIM = re.compile(r'\b(?:win|wins|victory|secure a win|defeat|prevail|winner)\b', re.IGNORECASE)
 
 
 def assumes_decisive_power(text):

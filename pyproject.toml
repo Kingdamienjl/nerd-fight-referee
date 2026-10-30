@@ -48,3 +48,16 @@ asyncio_mode = "auto"
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+
+[tool.ruff.lint]
+# BLE001 (blind except) is the established pattern in this codebase:
+# harvesters, workers and the bot log-and-continue per item instead of
+# crashing on one bad profile. Narrowing all 66 sites by hand risks
+# production crashes, so broad except is a documented project choice.
+ignore = ["BLE001"]
+# NOTE: no `exclude` here on purpose. Ruff's exclude patterns also match
+# nested paths, so excluding the legacy top-level battlebot/ copy would
+# silently exclude src/battlebot too. Lint scope is set explicitly in
+# .github/workflows/ci.yml instead (maintained code only; the data/
+# probe scripts, the divergent battlebot/ copy and the loose src/*.py
+# working scripts are out of scope).
