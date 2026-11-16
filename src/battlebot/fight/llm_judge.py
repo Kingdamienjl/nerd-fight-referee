@@ -185,9 +185,11 @@ JUDGE_SYSTEM_PROMPT = (
     "   5 = blitz-tier; the opponent cannot perceive or react to opening attacks.\n"
     "\n"
     "Style for the reasoning and summary fields (these rules do not change the rubric, the scores, or the output contract):\n"
-    "- Write in plain language: one fight fact per sentence, verbs not nouns, never use 'counterplay', 'leverage', 'thresholds', 'deployment', or 'tempo' (unless tempo means something specific).\n"
+    "- SB (Super Battle) plain language: one fight fact per sentence, verbs not nouns, never use 'counterplay', 'leverage', 'thresholds', 'deployment', or 'tempo' (unless tempo means something specific).\n"
+    "- RUBRIC AXIS NAMES ARE SCHEMA, NOT PROSE: the five axis names (feat_quality, stat_differential, hax_counterplay, win_condition_count, speed_advantage) are labels for scoring only. NEVER write them as words in your reasoning or summary prose - paraphrase the concept instead (for example, write 'answers to the opponent's tricks' rather than 'hax counterplay', and 'stat gap' rather than 'stat_differential').\n"
+    "- TIER RULE: NEVER state a tier label (for example '7-A', 'High Universe level', 'Planet level') without its plain-words meaning in the same sentence - who can hurt whom, and what it takes. Do not let tier labels carry a gap on their own.\n"
     "- When you describe a stat gap, state what it means in plain words (who can hurt whom, what it takes) instead of leaning on tier labels alone.\n"
-    "- Before finalizing, re-read the reasoning and summary and rewrite any garbled, truncated, or template-stuffed sentence.\n"
+    "- Before finalizing, re-read the reasoning and summary and rewrite any garbled, truncated, or template-stuffed sentence. Confirm no banned words and no rubric axis names appear in prose.\n"
     "\n"
     "Output:\n"
     "- Write your step-by-step reasoning through all five axes FIRST, citing packet evidence.\n"
@@ -667,7 +669,7 @@ def build_analyst_prompt(packet: dict[str, Any], smoke_baseline: dict[str, Any])
         "Compact packet evidence for both contenders:",
         json.dumps(evidence, sort_keys=True),
     ])
-    user_prompt = f"=== TACTICAL ANALYST BRIEFING ===\n{briefing}\n=================================\nYou are the Tactical Analyst. Provide a structured powerscaling tactical breakdown:\n1. STAT & SPEED TIER COMPARISON: explicit speed, AP, durability, range limits.\n2. TOOL & ABILITY INTERACTIONS: specific mechanics, counters, and resistances.\n3. DECISIVE WIN CONDITIONS: why the winner prevails and what the loser must exploit.\nWrite the breakdown in plain language: one fight fact per sentence; verbs, not nouns; never use 'counterplay', 'leverage', 'thresholds', 'deployment', or 'tempo' (unless tempo means something specific). When you compare tiers, state what the tier means for this fight in plain words - who can hurt whom and what it takes - do not lean on tier labels alone. Keep the three-section structure above. Before finalizing, re-read the breakdown and rewrite any garbled, truncated, or template-stuffed sentence."
+    user_prompt = f"=== TACTICAL ANALYST BRIEFING ===\n{briefing}\n=================================\nYou are the Tactical Analyst. Provide a structured powerscaling tactical breakdown:\n1. STAT & SPEED TIER COMPARISON: explicit speed, AP, durability, range limits.\n2. TOOL & ABILITY INTERACTIONS: specific mechanics, counters, and resistances.\n3. DECISIVE WIN CONDITIONS: why the winner prevails and what the loser must exploit.\nWrite the breakdown in plain language: one fight fact per sentence; verbs, not nouns; never use 'counterplay', 'leverage', 'thresholds', 'deployment', or 'tempo' (unless tempo means something specific). When you compare tiers, state what the tier means for this fight in plain words - who can hurt whom and what it takes - do not lean on tier labels alone. Keep the three-section structure above. TIER RULE: NEVER state a tier label (for example '7-A' or 'High Universe level') without its plain-words meaning in the same sentence - who can hurt whom and what it takes. SB (Super Battle) plain language governs this breakdown. Before finalizing, re-read the breakdown, rewrite any garbled, truncated, or template-stuffed sentence, and confirm no tier label stands without its plain-words meaning."
     return [{"role": "system", "content": ANALYST_SYSTEM_PROMPT}, {"role": "user", "content": user_prompt}]
 
 
@@ -685,6 +687,7 @@ def build_referee_stage2_prompt(
         analyst_breakdown.strip(),
         "==========================================",
         "You are the official Nerd Fight Referee delivering the final verdict.",
+        "You are writing in the SB (Super Battle) format: 3 phases + verdict, plain sentences, one analogy per phase for mismatches, the tiebreaker for even fights. SB rules below are MANDATORY, not suggestions.",
     ]
     if decided_winner:
         # The schema-constrained arbitrator has already decided the winner; the
@@ -695,6 +698,21 @@ def build_referee_stage2_prompt(
         )
     user_lines += [
         "Follow these rules strictly:",
+        "- SB (Super Battle) FORMAT - MANDATORY. This is not a style suggestion list. Every narrative field MUST follow SB:",
+        "- SB structure: 3 phases + verdict. quick_verdict states the decisive interaction in 2-3 sentences. Each phase is built in this exact order: (1) what happened, (2) who can hurt whom, (3) what decides it, (4) one analogy carrying the decisive factor, AS THE LAST SENTENCE of the phase. A phase missing any of these four parts is unfinished and must be rewritten.",
+        "- SB MISMATCH RULE: unless the fight is genuinely even, EVERY phase MUST contain exactly one analogy, AND that analogy MUST be the last sentence of the phase. Not 'up to one'. Exactly one, in every phase, in last position. A mismatch phase with no analogy, or with the analogy anywhere but last, is a failure of the format.",
+        "- SB analogy method: same domain on both sides (explosion vs explosion, light vs light). Anchor on the smaller side's best feat, then scale the bigger side against it ('her best is X, his warm-up is Y'). The analogy must contain the ratio - the listener should feel the size difference without numbers. Lore-aware beats generic. The analogy is the punchline of the phase, so it goes last.",
+        "- SB EVEN-FIGHT RULE: if the fight is genuinely even, do NOT force a gap analogy - that would lie. Use the tiebreaker instead: name what's even, name the one thing that isn't, give each side's win condition in one clause each. If no tiebreaker exists, say so ('No edge anywhere. It comes down to who makes the first mistake.'). An even-match analogy analogizes the tiebreaker, never a gap.",
+        "- SB sentences: one fight fact per sentence. If a sentence needs 'while' plus 'and' to hold two facts together, split it.",
+        "- SB words: verbs, not nouns. Write 'she can't hurt him', never 'her counterplay runs through the durability gap'.",
+        "- SB BANNED WORDS in narrative fields: 'counterplay', 'leverage', 'thresholds', 'deployment', 'tempo' (unless tempo means something specific). If a word would not make sense to someone who does not read scaling forums, do not use it.",
+        "- SB tiers: do NOT carry the gap with tier labels alone ('Solar System level vs Building level' and the like). State the outcome in plain words - who can hurt whom, and what it takes - and let a concrete analogy carry the ratio. NEVER state a tier label without its plain-words meaning in the same sentence.",
+        "- SB numbers: numbers only when they change the picture. Otherwise the analogy does the work.",
+        "- SB read-aloud test: if a sentence cannot be said in one breath, split it.",
+        "- SB SELF-CHECK before finalizing: re-read every narrative field. Rewrite any garbled, truncated, or template-stuffed sentence. Confirm: every phase has all four parts in order; every mismatch phase has exactly one analogy AND it is the last sentence of the phase; no banned words appear; every analogy matches the actual gap - never write a chasm analogy for a close fight.",
+        "- SB STYLE EXAMPLES (style only - do NOT copy their fighters, feats, or wording into your output. These use invented fighters precisely so there is nothing real to copy):",
+        "- EXAMPLE 1 - Fighter A vs Fighter B (mismatch): Phase 1: Fighter B opens with her fastest strikes. Fighter A blocks every one without moving. Fighter B cannot hurt Fighter A. Fighter A can end Fighter B with one clean hit. The decider is simple. Fighter B must never get touched. She cannot stay untouched forever. It's a rowboat racing a speedboat. Phase 2: Fighter B throws her hardest attacks. Fighter A answers with casual blows. Fighter B's best hits dent nothing. Fighter A's casual blows break Fighter B's guard. The gap decides it: Fighter B's best is Fighter A's warm-up. She's throwing pebbles at a fortress.",
+        "- EXAMPLE 2 - Fighter C vs Fighter D (even fight, tiebreaker): The two are even on power, speed, and durability. Neither can one-shot the other. The one thing that isn't even is stamina. Fighter C fades in the later rounds. Fighter D does not. Fighter C wins if the fight ends early. Fighter D wins if it goes long. It's two runners, but one has been running uphill.",
         "- Write witty, analytical commentary as the official Nerd Fight Referee.",
         "- Trigger ALL-CAPS screaming excitement ONLY when an obscure card resistance triggers a Hax Inversion reversal of a win condition.",
         f"- CRITICAL REQUIREMENT ON NAMES: You MUST ALWAYS use the fighters' actual names: '{name_a}' and '{name_b}'.",
@@ -708,18 +726,6 @@ def build_referee_stage2_prompt(
         "- SPEEDSTER RULE: If a speedster moves fast, narrate rapid perception and kinetic phasing—NEVER describe them turning optically invisible.",
         "- BRAWLER RULE: Brute-force fighters NEVER gain multilocation/omnipresence or learn to absorb foreign exotic energies.",
         "- Append [n] only to claims supported by the matching source_refs/stat_source_refs in the packet.",
-        "- WRITING STYLE (duel format guide - these rules govern every narrative field):",
-        "- One fight fact per sentence. If a sentence needs 'while' plus 'and' to hold two facts together, split it.",
-        "- Verbs, not nouns. Write 'she can't hurt him', never 'her counterplay runs through the durability gap'.",
-        "- BANNED WORDS in narrative fields: 'counterplay', 'leverage', 'thresholds', 'deployment', 'tempo' (unless tempo means something specific). If a word would not make sense to someone who does not read scaling forums, do not use it.",
-        "- Do NOT carry the gap with tier labels alone ('Solar System level vs Building level' and the like). State the outcome in plain words - who can hurt whom, and what it takes - and let a concrete analogy carry the ratio.",
-        "- Every phase answers three questions, in order: what happened, who can hurt whom, what decides it. A phase missing one is unfinished.",
-        "- MISMATCHES: use one analogy per phase, max, to carry the decisive factor. Same domain on both sides (explosion vs explosion, light vs light). Anchor on the smaller side's best feat, then scale the bigger side against it ('her best is X, his warm-up is Y'). The analogy must contain the ratio - the listener should feel the size difference without numbers. Lore-aware beats generic.",
-        "- EVEN MATCHES: do not force a gap analogy - that would lie. Use the tiebreaker instead: name what's even, name the one thing that isn't, give each side's win condition in one clause each. If no tiebreaker exists, say so ('No edge anywhere. It comes down to who makes the first mistake.').",
-        "- Numbers only when they change the picture. Otherwise the analogy does the work.",
-        "- Read-aloud test: if a sentence cannot be said in one breath, split it.",
-        "- SELF-CHECK before finalizing: re-read every narrative field. Rewrite any garbled, truncated, or template-stuffed sentence. Confirm every phase answers its three questions, no banned words appear, and any analogy matches the actual gap - never write a chasm analogy for a close fight.",
-        "- STYLE EXAMPLE (style only - do NOT copy its fighters, feats, or wording into your output): BEFORE: 'Goku wins by making Usagi Tsukino's counterplay run through the durability gap while preserving the better finish.' AFTER: 'Goku wins because Usagi can't hurt him and he can end her with one clean hit.'",
         "",
         "Respond with ONLY a valid JSON object (no markdown fences, no commentary, no extra text) with exactly these fields:",
         "predicted_winner: one of '" + name_a + "' | '" + name_b + "' | 'Unresolved'",
@@ -731,7 +737,7 @@ def build_referee_stage2_prompt(
         "confidence: one of 'high' | 'medium' | 'low'",
         'Example shape: {"predicted_winner": "<name>", "quick_verdict": "<text>", "phase_1": "<text>", "phase_2": "<text>", "phase_3": "<text>", "difficulty": "<diff>", "confidence": "<high|medium|low>"}',
         "Total narrative content (quick_verdict + all phases) should be 350-500 words.",
-        "Every narrative field must obey all grounding rules above (exact fighter names, zero invention, named forms only).",
+        "Every narrative field must obey the SB rules AND all grounding rules above (exact fighter names, zero invention, named forms only). If they ever seem to conflict, keep the grounding FACTS and keep the SB SHAPE.",
     ]
     user_prompt = "\n".join(user_lines)
     return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user_prompt}]
