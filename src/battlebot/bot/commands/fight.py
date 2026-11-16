@@ -11,6 +11,7 @@ from discord import app_commands
 
 from battlebot.bot.audit import run_audited_command
 from battlebot.common.db import connect_database
+from battlebot.fight.cached_judge import judge_fight_packet_cached
 from battlebot.fight.citations import evidence_brief, linked_citations, source_panel
 from battlebot.fight.decision_formatter import (
     clamp_text,
@@ -163,7 +164,7 @@ async def discord_message_from_packet(
         decision = (
             stomp_decision
             if stomp_decision is not None
-            else await judge_fight_packet(packet, smoke_result)
+            else await judge_fight_packet_cached(packet, smoke_result, judge_fn=judge_fight_packet)
         )
         text = format_decision(decision, include_diagnostics=include_diagnostics)
     if len(text) <= 1800:
@@ -403,7 +404,7 @@ async def send_deferred_fight_result(
     decision = (
         stomp_decision
         if stomp_decision is not None
-        else await judge_fight_packet(packet, smoke_result)
+        else await judge_fight_packet_cached(packet, smoke_result, judge_fn=judge_fight_packet)
     )
     decision["presentation_packet"] = packet
     text = format_decision(decision, include_diagnostics=ephemeral)

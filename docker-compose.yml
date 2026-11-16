@@ -34,6 +34,8 @@ services:
       - "127.0.0.1:4000:4000"
     environment:
       LITELLM_MASTER_KEY: ${LITELLM_API_KEY:-sk-local-dev}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      TOGETHER_API_KEY: ${TOGETHER_API_KEY:-}
     volumes:
       - ./config/litellm_config.yaml:/app/config.yaml:ro
     command: ["--config", "/app/config.yaml", "--port", "4000", "--host", "0.0.0.0"]

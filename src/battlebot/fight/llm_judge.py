@@ -1365,6 +1365,10 @@ LITELLM_KNOWN_MODELS = frozenset(
         "referee-default-fallback",
         "referee-reasoning",
         "referee-reasoning-fallback",
+        # SB rewrite groups: only the -fallback twins need listing;
+        # the primaries pass through _litellm_model_name unchanged.
+        "referee-rewrite-gemini-fallback",
+        "referee-rewrite-together-fallback",
     }
 )
 LITELLM_MODEL_ALIASES = {
@@ -1449,15 +1453,20 @@ async def call_ollama(
         if fallback_group in LITELLM_KNOWN_MODELS and fallback_group != litellm_model:
             groups.append(fallback_group)
         for grp in groups:
+            # Cloud rewrite groups (Gemini/Together) get a clean OpenAI
+            # body: Gemini 400s on the Ollama-only "options" extra_body
+            # (Unknown name "options") and "think" is qwen3-only.
+            is_cloud_rewrite = grp.startswith("referee-rewrite-")
             body: dict[str, Any] = {
                 "model": grp,
                 "messages": messages,
                 "stream": False,
                 "temperature": temperature,
                 "max_tokens": num_predict,
-                "think": False,  # qwen3 thinks by default; keep parity with direct path
-                "extra_body": {"options": {"num_ctx": num_ctx}},
             }
+            if not is_cloud_rewrite:
+                body["think"] = False  # qwen3 thinks by default; keep parity with direct path
+                body["extra_body"] = {"options": {"num_ctx": num_ctx}}
             if json_schema is not None:
                 body["response_format"] = {
                     "type": "json_schema",

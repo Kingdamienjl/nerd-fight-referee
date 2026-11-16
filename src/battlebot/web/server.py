@@ -15,6 +15,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from battlebot.common.db import connect_database
+from battlebot.fight.cached_judge import judge_fight_packet_cached
 from battlebot.fight.decision_formatter import structured_decision_output
 from battlebot.fight.llm_judge import judge_fight_packet
 from battlebot.fight.smoke_judge import smoke_judge_packet
@@ -179,7 +180,7 @@ def create_app() -> FastAPI:
         decision = (
             stomp_decision
             if stomp_decision is not None
-            else await judge_fight_packet(packet, smoke_result)
+            else await judge_fight_packet_cached(packet, smoke_result, judge_fn=judge_fight_packet)
         )
         structured = structured_decision_output(decision)
         structured["narrative_phases"] = decision.get("narrative_phases") or []

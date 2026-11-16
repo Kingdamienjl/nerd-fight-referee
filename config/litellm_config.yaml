@@ -66,12 +66,33 @@ model_list:
       model: ollama_chat/qwen2.5:3b
       api_base: http://192.168.1.207:11434
 
+  # SB rewrite groups (Gemini first, DeepSeek overflow). Provider keys
+  # come from the litellm container environment (see docker-compose.yml).
+  - model_name: referee-rewrite-gemini
+    litellm_params:
+      model: gemini/gemini-3.8-flash
+      api_key: os.environ/GEMINI_API_KEY
+  - model_name: referee-rewrite-gemini-fallback
+    litellm_params:
+      model: gemini/gemini-3.8-flash
+      api_key: os.environ/GEMINI_API_KEY
+  - model_name: referee-rewrite-together
+    litellm_params:
+      model: together_ai/deepseek-ai/DeepSeek-V4.1-Flash-1017
+      api_key: os.environ/TOGETHER_API_KEY
+  - model_name: referee-rewrite-together-fallback
+    litellm_params:
+      model: together_ai/deepseek-ai/DeepSeek-V4.1-Flash-1017
+      api_key: os.environ/TOGETHER_API_KEY
+
 fallbacks:
   - referee-judge: ["referee-judge-fallback"]
   - referee-analyst: ["referee-analyst-fallback"]
   - referee-voice: ["referee-voice-fallback"]
   - referee-default: ["referee-default-fallback"]
   - referee-reasoning: ["referee-reasoning-fallback"]
+  - referee-rewrite-gemini: ["referee-rewrite-gemini-fallback"]
+  - referee-rewrite-together: ["referee-rewrite-together-fallback"]
 
 router_settings:
   num_retries: 2
