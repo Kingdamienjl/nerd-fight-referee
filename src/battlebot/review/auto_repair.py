@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import copy
 import csv
 import json
 import re
@@ -1896,6 +1897,18 @@ async def repair_profile(
     if "sources" in missing_targets(profile):
         profile.setdefault("sources", [])
 
+    # Collapse duplicate source ids before the fast-path check: enrich
+    # records title-spelling variants that slugify to the same source id
+    # (e.g. "Name Series" and "Name (Series)"), and readiness flags that
+    # as ambiguous_source_identity. The full path collapses the same
+    # duplicates later, but the fast-path check runs first, so without
+    # collapsing here it can never fire on enriched content. Evaluate
+    # on a copy so the full path still sees the profile exactly as
+    # loaded, and persist the collapsed profile only when the fast
+    # path fires, because approve_profile re-reads the file from disk.
+    fast_path_profile = copy.deepcopy(profile)
+    fast_path_collapsed = _collapse_duplicate_source_ids(fast_path_profile)
+
     # Fast path: a profile an earlier repair pass already brought to a
     # battle-ready state (provisional/verified + battle_eligible) whose
     # approval blockers are now empty can be promoted through the normal
@@ -1907,8 +1920,10 @@ async def repair_profile(
         and not choose_source_id
         and profile.get("battle_eligible")
         and profile.get("status") in {"provisional", "verified"}
-        and not service.approval_blockers(profile)
+        and not service.approval_blockers(fast_path_profile)
     ):
+        if fast_path_collapsed:
+            service.write_yaml(profile_path, fast_path_profile)
         approval = service.approve_profile(
             profile_path,
             needs_review_dir=needs_review_dir,
