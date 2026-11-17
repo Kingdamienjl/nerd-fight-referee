@@ -5,7 +5,7 @@ import logging
 import os
 
 from battlebot.common.db import apply_schema, connect_database
-from battlebot.review import queue_seed, queue_worker
+from battlebot.review import identity_adjudication, queue_seed, queue_worker
 
 LOCK_ID = 73190601
 LOG = logging.getLogger(__name__)
@@ -34,6 +34,9 @@ async def run() -> None:
               AND locked_at < now() - interval '30 minutes'
         """)
         while True:
+            # Reset the identity-adjudication call budget each cycle; no-op
+            # unless IDENTITY_ADJUDICATION_ENABLED=1.
+            identity_adjudication.reset_cycle_budget()
             summary = await queue_seed.seed_queue(
                 connection, target=seed.target, providers=seed.providers,
                 priority=seed.priority, needs_review_dir=seed.needs_review_dir,

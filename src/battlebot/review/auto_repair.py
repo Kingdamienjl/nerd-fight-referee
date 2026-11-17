@@ -30,7 +30,7 @@ from battlebot.harvest.auto_profile_harvester import (
 )
 from battlebot.profiles.aliases import resolve_alias
 from battlebot.profiles.variants import variant_search_queries
-from battlebot.review import service, source_registry
+from battlebot.review import identity_adjudication, service, source_registry
 from battlebot.review.providers import comicvine, kaggle_superherodb, mediawiki, powerlisting
 
 POWER_FIELDS = (
@@ -124,6 +124,11 @@ class SourceAttempt:
     exception_class: str = ""
     source_payload: dict[str, Any] = field(default_factory=dict)
     metadata: dict[str, Any] = field(default_factory=dict)
+    adjudication_verdict: str = ""
+    adjudication_reason: str = ""
+    adjudication_backend: str = ""
+    adjudication_cached: bool = False
+    adjudication_original_score: int | None = None
 
 
 @dataclass
@@ -262,6 +267,10 @@ def candidate_row_from_attempt(attempt: SourceAttempt) -> dict[str, Any]:
         "variant_match": attempt.variant_match,
         "continuity_mismatch": attempt.continuity_mismatch,
         "continuity_detail": attempt.continuity_detail,
+        "adjudication_verdict": attempt.adjudication_verdict,
+        "adjudication_reason": attempt.adjudication_reason,
+        "adjudication_backend": attempt.adjudication_backend,
+        "adjudication_original_score": attempt.adjudication_original_score,
         "duplicate_key": attempt.duplicate_key,
     }
 
@@ -1510,6 +1519,10 @@ def update_repair_metadata(
                 "duplicate_key": attempt.duplicate_key,
                 "retryable": attempt.retryable,
                 "exception_class": attempt.exception_class,
+                "adjudication_verdict": attempt.adjudication_verdict,
+                "adjudication_reason": attempt.adjudication_reason,
+                "adjudication_backend": attempt.adjudication_backend,
+                "adjudication_original_score": attempt.adjudication_original_score,
             }
             for attempt in attempts
         ],
@@ -2088,6 +2101,13 @@ async def repair_profile(
             note=metadata.get("note") or ("ok" if fields else "no_fields_extracted"),
         )
         attempts.append(attempt)
+
+    # Gated rescue: LLM identity adjudication (IDENTITY_ADJUDICATION_ENABLED).
+    # Inert unless enabled; YES verdicts rescue attempts into the normal
+    # eligibility/approval pipeline below. The scorer is untouched.
+    attempts = await identity_adjudication.maybe_adjudicate_attempts(
+        profile, attempts, profile_path=profile_path
+    )
 
     eligible_attempts = eligible_primary_attempts(attempts)
     primary = eligible_attempts[0] if eligible_attempts else None
