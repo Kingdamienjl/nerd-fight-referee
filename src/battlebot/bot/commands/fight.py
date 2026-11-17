@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import re
+import time
 from typing import Any
 
 import discord
@@ -389,6 +390,64 @@ def build_fight_embed(decision: dict[str, Any], *, status: str | None = None) ->
     return embed, structured["full_analysis"]
 
 
+# Discord interaction ids seen recently, for replay dedupe. Gateway
+# resumes can redeliver the same interaction CREATE; the redelivery
+# carries a fresh Interaction object (is_done() False) for an
+# interaction Discord already considers acknowledged, so the defer
+# fails with 40060. A replay must be skipped, not re-judged.
+# Legitimate re-runs always carry fresh interaction ids.
+_SEEN_INTERACTION_IDS: dict[int, float] = {}
+_SEEN_INTERACTION_IDS_MAX = 1000
+_SEEN_INTERACTION_IDS_TTL_SECONDS = 900.0  # Discord's 15-minute followup window
+
+
+def _prune_seen_interaction_ids(now: float) -> None:
+    expired = [
+        interaction_id
+        for interaction_id, seen_at in _SEEN_INTERACTION_IDS.items()
+        if now - seen_at > _SEEN_INTERACTION_IDS_TTL_SECONDS
+    ]
+    for interaction_id in expired:
+        del _SEEN_INTERACTION_IDS[interaction_id]
+    while len(_SEEN_INTERACTION_IDS) > _SEEN_INTERACTION_IDS_MAX:
+        # Dicts preserve insertion order: the first key is the oldest.
+        del _SEEN_INTERACTION_IDS[next(iter(_SEEN_INTERACTION_IDS))]
+
+
+def _interaction_already_seen(interaction_id: int) -> bool:
+    """True if this interaction id was already processed (a replay).
+
+    First-seen ids are recorded; expired and oldest entries are pruned
+    so the set stays bounded.
+    """
+    now = time.monotonic()
+    seen_at = _SEEN_INTERACTION_IDS.get(interaction_id)
+    if seen_at is not None and now - seen_at <= _SEEN_INTERACTION_IDS_TTL_SECONDS:
+        return True
+    _SEEN_INTERACTION_IDS[interaction_id] = now
+    _prune_seen_interaction_ids(now)
+    return False
+
+
+async def defer_fight_response(inter: discord.Interaction, *, ephemeral: bool) -> None:
+    """Defer a fight interaction, tolerating an already-acknowledged one.
+
+    A replayed dispatch (gateway resume) can reach the defer with
+    is_done() False while Discord already holds an acknowledgement;
+    the API answers 40060. That case is safe to continue past: the
+    interaction IS acknowledged, so followup.send still works. Any
+    other defer failure is re-raised.
+    """
+    if inter.response.is_done():
+        return
+    try:
+        await inter.response.defer(thinking=True, ephemeral=ephemeral)
+    except discord.HTTPException as exc:
+        if exc.code != 40060:
+            raise
+        print("[fight] defer answered 40060 (already acknowledged); continuing", flush=True)
+
+
 async def send_deferred_fight_result(
     interaction: discord.Interaction,
     packet: dict[str, Any],
@@ -438,6 +497,13 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
         form_b: str | None = None,
         private: bool = False,
     ) -> None:
+        # Replay dedupe: a redelivered interaction CREATE must not
+        # re-judge. Recorded before any work so a replay arriving
+        # while the first run is still judging is also skipped.
+        interaction_id = getattr(interaction, "id", None)
+        if interaction_id is not None and _interaction_already_seen(interaction_id):
+            print(f"[fight] duplicate interaction {interaction_id}; skipping replay", flush=True)
+            return
         ephemeral = fight_response_ephemeral(private)
 
         target_a = f"{contender_a} ({form_a})" if form_a and f"({form_a})" not in contender_a else contender_a
@@ -450,8 +516,7 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
             resolved_a = f"{contender_a} ({picked_a})" if picked_a else target_a
             resolved_b = f"{contender_b} ({picked_b})" if picked_b else target_b
 
-            if not inter.response.is_done():
-                await inter.response.defer(thinking=True, ephemeral=ephemeral)
+            await defer_fight_response(inter, ephemeral=ephemeral)
 
             async with connect_database(database_url) as connection:
                 packet = await build_fight_packet(

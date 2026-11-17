@@ -1510,19 +1510,40 @@ async def call_ollama(
     _last_exc: Exception | None = None
     _served_by: str | None = None
     _served_provider: str | None = None
+    # Per-call wait budget: one call_ollama invocation never waits more
+    # than ~2x its configured per-attempt timeout across all attempts
+    # and targets. Against a wedged backend (TCP connects, never
+    # responds) every attempt burns the full timeout, so unbounded
+    # retries stacked into ~38-minute judge runs; the budget caps one
+    # call at two attempts' worth of waiting, matching the LiteLLM
+    # path's existing 2-attempt policy. Fast failures still fail over
+    # to the fallback group with budget to spare. Env-tunable via
+    # BATTLEBOT_LLM_CALL_BUDGET_SECONDS; 0/negative falls back to the
+    # 2x default.
+    _budget = float(values.get("BATTLEBOT_LLM_CALL_BUDGET_SECONDS") or 0)
+    if _budget <= 0:
+        _budget = 2 * timeout
+    _budget = max(_budget, 1.0)  # never zero: a degenerate zero timeout must still attempt once
+    _loop = asyncio.get_running_loop()
+    _deadline = _loop.time() + _budget
     for target_url, target_body, target_headers, target_is_litellm, target_label in targets:
         # The proxy already retries internally (router_settings.num_retries),
         # so fewer client-side attempts are needed on the LiteLLM path.
         _attempts = 2 if target_is_litellm else 3
+        _succeeded = False
         for _attempt in range(_attempts):
+            _remaining = _deadline - _loop.time()
+            if _remaining <= 0:
+                break
             try:
-                async with httpx.AsyncClient(timeout=timeout) as client:
+                async with httpx.AsyncClient(timeout=min(timeout, _remaining)) as client:
                     response = await client.post(
                         target_url, json=target_body, headers=target_headers or None
                     )
                     response.raise_for_status()
                 _served_by = target_label
                 _served_provider = "litellm" if target_is_litellm else "ollama"
+                _succeeded = True
                 break
             except httpx.HTTPStatusError as _exc:
                 _status = _exc.response.status_code if _exc.response is not None else 0
@@ -1531,17 +1552,19 @@ async def call_ollama(
                 _last_exc = _exc
             except _retryable as _exc:
                 _last_exc = _exc
-            if _attempt < 2:
-                await asyncio.sleep(_backoffs[_attempt])
-        else:
-            # Retries exhausted for this target; move to the fallback group if any.
-            LOGGER.warning(
-                "LLM target %s failed after retries (%r); trying fallback",
-                target_label,
-                _last_exc,
-            )
-            continue
-        break
+            if _attempt < _attempts - 1:
+                _sleep = min(_backoffs[_attempt], max(0.0, _deadline - _loop.time()))
+                if _sleep > 0:
+                    await asyncio.sleep(_sleep)
+        if _succeeded:
+            break
+        # Retries exhausted (or budget spent) for this target; move to the
+        # fallback group if any.
+        LOGGER.warning(
+            "LLM target %s failed after retries (%r); trying fallback",
+            target_label,
+            _last_exc,
+        )
     else:
         raise _last_exc  # type: ignore[misc]
     if request_info is not None:
@@ -1669,6 +1692,49 @@ async def request_fight_verdict(
 
 
 async def judge_fight_packet(
+    packet: dict[str, Any],
+    smoke_baseline: dict[str, Any] | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    ollama_caller: Any | None = None,
+) -> dict[str, Any]:
+    """Judge a fight with a bounded total LLM wait.
+
+    The inner pipeline makes up to three sequential LLM calls (analyst,
+    schema verdict, voice), each with its own retries; against a wedged
+    backend the stacked waits reached ~38 minutes, past Discord's
+    15-minute followup window, so the fight answered nothing at all.
+    The total budget bounds the whole sequence; on expiry the existing
+    deterministic fallback (reason "timeout") is returned, so the fight
+    always answers. Default 600s: the live single-attempt per-call
+    timeouts (120 analyst + 300 verdict + 120 voice) plus headroom.
+    Env-tunable via BATTLEBOT_JUDGE_TOTAL_TIMEOUT_SECONDS; non-positive
+    values fall back to the default.
+    """
+    values = env or os.environ
+    total_timeout = float(values.get("BATTLEBOT_JUDGE_TOTAL_TIMEOUT_SECONDS") or 600)
+    if total_timeout <= 0:
+        total_timeout = 600
+    try:
+        return await asyncio.wait_for(
+            _judge_fight_packet_inner(
+                packet, smoke_baseline, env=env, ollama_caller=ollama_caller
+            ),
+            timeout=total_timeout,
+        )
+    except TimeoutError:
+        smoke = smoke_baseline or smoke_judge_packet(packet)
+        if "powerscaling_metrics" not in smoke:
+            smoke["powerscaling_metrics"] = compute_deterministic_powerscaling_metrics(packet)
+        smoke["presentation_packet"] = packet
+        return fallback_decision(
+            smoke,
+            FALLBACK_TIMEOUT,
+            "LLM judge exceeded the total wait budget; using deterministic explanation.",
+        )
+
+
+async def _judge_fight_packet_inner(
     packet: dict[str, Any],
     smoke_baseline: dict[str, Any] | None = None,
     *,
