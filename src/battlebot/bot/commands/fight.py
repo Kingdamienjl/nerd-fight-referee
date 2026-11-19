@@ -29,7 +29,7 @@ from battlebot.fight.personality import details as personality_details
 from battlebot.fight.smoke_judge import smoke_judge_packet
 from battlebot.fight.tier_utils import maybe_stomp_decision
 from battlebot.profiles.fight_packet import build_fight_packet
-from battlebot.profiles.search import format_search_results, search_characters
+from battlebot.profiles.search import db_search_rows, format_search_results, search_characters
 from battlebot.profiles.variants import CURATED_VARIANTS, split_variant_name
 from battlebot.review.queue import enqueue_job
 
@@ -585,7 +585,11 @@ def register_fight_command(tree: app_commands.CommandTree, *, database_url: str 
 
         try:
             async with connect_database(database_url) as connection:
-                rows = await search_characters(current or "a", connection=connection, limit=12)
+                # DB-only lookup: search_characters() also scans ~11.6k YAML
+                # files synchronously (5-7s), which always exceeds Discord's
+                # 3s autocomplete window (10062). db_search_rows returns the
+                # same canonical_name rows from Postgres in ~0.03s.
+                rows = await db_search_rows(connection, current or "a", limit=12)
                 for row in rows:
                     name = row.get("canonical_name") or ""
                     if name and name.casefold() not in seen:
