@@ -279,7 +279,7 @@ def clean_detail_text(value: Any, *, limit: int = 8000) -> str:
 
 
 
-def is_public_junk(value: Any) -> bool:
+def is_public_junk(value: Any, *, sentence_ok: bool = False) -> bool:
     text = str(value or "").strip()
     if not text:
         return True
@@ -352,16 +352,19 @@ def is_public_junk(value: Any) -> bool:
         return True
 
     # Long sentence-like fragments are usually scraped prose, not tool names.
+    # That rule is for tool names only: callers handling full sentences
+    # (fight-card risk lines) pass sentence_ok=True so real sentences
+    # are judged on content, not length.
     word_count = len(re.findall(r"[A-Za-z]+", text))
-    if word_count >= 8:
+    if word_count >= 8 and not sentence_ok:
         return True
 
     return text.count(",") >= 3
 
 
-def public_safe_text(value: Any, fallback: str, *, limit: int = 120) -> str:
+def public_safe_text(value: Any, fallback: str, *, limit: int = 120, sentence_ok: bool = False) -> str:
     cleaned = clean_text(value, limit=limit)
-    if is_public_junk(cleaned):
+    if is_public_junk(cleaned, sentence_ok=sentence_ok):
         return fallback
     return cleaned
 
@@ -395,7 +398,57 @@ def public_safe_route(value: Any, fallback: str, *, limit: int = 170) -> str:
     return cleaned
 
 
-def public_safe_list(values: Any, fallback: str, *, limit: int = 3) -> list[str]:
+# Clause starters that mark a harvested tool name as a sentence fragment
+# rather than a name ("Acrobatics, without them being able to recover").
+_FRAGMENT_CLAUSE_STARTERS = (
+    "without ", "with ", "when ", "if ", "after ", "before ", "while ",
+    "because ", "until ", "unless ", "and ", "but ", "so ", "then ", "as ",
+    "since ", "though ", "although ", "where ", "who ", "which ", "that ",
+    "during ", "upon ", "by ", "for ", "from ", "in ", "on ", "at ", "to ",
+    "of ", "he ", "she ", "they ", "it ", "his ", "her ", "their ",
+    "this ", "these ", "those ",
+)
+
+
+def trim_fragment_clause(text: str) -> str:
+    """Drop sentence-fragment clauses from a harvested tool name.
+
+    Wiki-split ability names leak prose after a comma: keep the head
+    ("Acrobatics") and drop the clause. A name that IS a fragment (starts
+    lowercase, or starts with a clause starter) is dropped entirely.
+    Segments that start with a capital letter are kept as real names.
+    """
+    text = str(text or "").strip()
+    if not text:
+        return ""
+    if _is_fragment_clause(text):
+        return ""
+    kept: list[str] = []
+    for part in text.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        if _is_fragment_clause(part):
+            break
+        kept.append(part)
+    return ", ".join(kept)
+
+
+def _is_fragment_clause(text: str) -> bool:
+    """True if a tool-name segment is a prose clause, not a name.
+
+    A segment is a clause when it starts with a clause starter (a
+    subordinating word or pronoun) AND has more than two words. Short
+    names ("Without Mercy", "superhuman speed") are kept.
+    """
+    words = text.split()
+    if len(words) <= 2:
+        return False
+    low = text.casefold()
+    return any(low.startswith(starter) for starter in _FRAGMENT_CLAUSE_STARTERS)
+
+
+def public_safe_list(values: Any, *, limit: int = 3) -> list[str]:
     if isinstance(values, str):
         raw = [v.strip() for v in re.split(r",|;|\n|•", values) if v.strip()]
     elif isinstance(values, list):
@@ -418,7 +471,13 @@ def public_safe_list(values: Any, fallback: str, *, limit: int = 3) -> list[str]
         text = re.sub(r"\([^)]{8,}\)", "", text).strip()
         text = re.sub(r"\s+", " ", text).strip(" ,.;:-")
 
-        cleaned = clean_text(text, limit=80).strip(" ,")
+        cleaned = clean_text(text, limit=80)
+        # Markdown bullet residue inside harvested names ("*Superhuman
+        # Physical Characteristics *Martial Arts'): strip the markers the
+        # same way sanitize_fight_card_item does, so the name reads clean.
+        cleaned = re.sub(r"[*•_#>]+", " ", cleaned)
+        cleaned = re.sub(r"\s+", " ", cleaned).strip(" *,;")
+        cleaned = trim_fragment_clause(cleaned)
         key = cleaned.casefold()
 
         if not cleaned or key in seen or is_public_junk(cleaned):
@@ -438,7 +497,9 @@ def public_safe_list(values: Any, fallback: str, *, limit: int = 3) -> list[str]
     out.sort(key=lambda item: (priority.get(item[1].casefold(), 100), item[0]))
 
     clean = [name for _, name in out[:limit]]
-    return clean or [fallback]
+    # No surviving names: return none and let the caller drop the line,
+    # instead of printing a fallback phrase as if it were a tool.
+    return clean
 
 
 def compress_route_text(decision: dict[str, Any], route: str) -> str:
@@ -645,6 +706,7 @@ def sanitize_fight_card_item(value: str) -> str:
     if text.count("(") != text.count(")"):
         text = text.replace("(", " ").replace(")", " ")
     text = re.sub(r"\s+", " ", text).strip(" -,:;.")
+    text = trim_fragment_clause(text)
     if is_dirty_fight_card_item(text):
         return ""
     return bullet_text(clamp_text(text, 60))
@@ -789,6 +851,22 @@ def public_safe_evidence_line(value: Any) -> str:
     return text
 
 
+_PLAIN_DIFFICULTY = {
+    "neg/no diff": "No contest",
+    "low diff": "Low difficulty",
+    "mid diff": "Mid difficulty",
+    "high diff": "High difficulty",
+    "extreme diff": "Extreme difficulty",
+}
+
+
+def plain_difficulty_text(difficulty: str | None) -> str:
+    """Difficulty in plain words ("Neg/No Diff" -> "No contest")."""
+    if not difficulty:
+        return ""
+    return _PLAIN_DIFFICULTY.get(str(difficulty).strip().casefold(), str(difficulty).strip())
+
+
 def matchup_title(decision: dict[str, Any]) -> str:
     cards = decision.get("matchup_card") if isinstance(decision.get("matchup_card"), list) else []
     names = [clean_text(card.get("name"), limit=80) for card in cards[:2] if isinstance(card, dict) and card.get("name")]
@@ -825,19 +903,25 @@ def fight_card_blocks(decision: dict[str, Any]) -> list[dict[str, str]]:
             lines.append(f"Height/Weight: {height_weight}")
         weapon_power = join_tools(card.get("weapon_power") or card.get("weapon_of_choice") or card.get("power_of_choice"), limit=2)
         if weapon_power != "No named tools supplied.":
-            lines.append(f"Weapon/Power: {public_safe_text(weapon_power, 'profile-backed abilities', limit=90)}")
+            weapon_power_safe = public_safe_text(weapon_power, "profile-backed abilities", limit=90)
+            # Never print an internal fallback sentinel as if it were content.
+            if weapon_power_safe != "profile-backed abilities":
+                lines.append(f"Weapon/Power: {weapon_power_safe}")
         style = clean_text(card.get("style") or (card.get("combat_identity") or {}).get("combat_style"), limit=90)
         if style:
             lines.append(f"Style: {style}")
-        lines.extend(
-            [
-                f"Key tools: {', '.join(public_safe_list(card.get('key_tools'), 'profile-backed abilities', limit=3))}",
-                f"Win path: {public_safe_route(card.get('best_route') or 'Needs a clearer profile-backed win route.', 'Needs a clearer profile-backed win route.', limit=170)}",
-            ]
+        tools = public_safe_list(card.get("key_tools"), limit=3)
+        if tools:
+            lines.append(f"Key tools: {', '.join(tools)}")
+        lines.append(
+            f"Win path: {public_safe_route(card.get('best_route') or 'Needs a clearer profile-backed win route.', 'Needs a clearer profile-backed win route.', limit=170)}"
         )
         risk = clean_text(card.get("risk"), limit=130)
         if risk:
-            lines.append(f"Risk: {public_safe_text(risk, 'source-cleanup pending', limit=90)}")
+            risk_safe = public_safe_text(risk, "source-cleanup pending", limit=90, sentence_ok=True)
+            # Never print an internal fallback sentinel as if it were content.
+            if risk_safe != "source-cleanup pending":
+                lines.append(f"Risk: {risk_safe}")
         blocks.append({"name": name, "value": clamp_text("\n".join(lines), DISCORD_FIELD_LIMIT)})
     return blocks
 
@@ -1161,6 +1245,10 @@ def format_decision(
         f"winner: {structured['winner']}",
         f"confidence: {structured['confidence']}",
     ]
+    # Stomps state their difficulty in plain words; every other verdict
+    # keeps its existing rendering byte-identical.
+    if str(decision.get("verdict_type") or "").casefold() == "stomp_tier_gap":
+        lines.append(f"difficulty: {plain_difficulty_text(decision.get('difficulty'))}")
     fight_card = format_fight_card(decision)
     if fight_card:
         lines.extend(["", "fight card:", *fight_card])

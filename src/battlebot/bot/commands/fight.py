@@ -19,6 +19,7 @@ from battlebot.fight.decision_formatter import (
     compact_field,
     format_decision,
     is_dirty_fight_card_item,
+    plain_difficulty_text,
     sanitize_fight_card_item,
     split_text_for_discord,
     structured_decision_output,
@@ -318,6 +319,8 @@ def fight_detail_payload(decision: dict[str, Any]) -> dict[str, str]:
     content = personality_details(decision, packet)
     winner = decision.get("winner") or "Unresolved"
     difficulty = decision.get("difficulty") or "Unresolved"
+    if str(decision.get("verdict_type") or "").casefold() == "stomp_tier_gap":
+        difficulty = plain_difficulty_text(difficulty)
     verdict = decision.get("quick_verdict") or "A matchup-specific verdict is not available yet. Review the evidence before relying on the provisional result."
     return {
         **{key: linked_citations(value, packet) for key, value in content.items()},

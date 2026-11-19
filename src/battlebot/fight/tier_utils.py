@@ -29,6 +29,27 @@ LOGGER = logging.getLogger(__name__)
 DEFAULT_STOMP_TIER_GAP = 2.0
 STOMP_CONFIDENCE_SCORE = 0.95
 
+# Deterministic SB analogy ladder for stomps, keyed on the whole-tier gap.
+# Same fire/light domain on both sides; the pairing carries the ratio so
+# the verdict never needs a tier number. Lore-aware analogies are not
+# possible deterministically, so the ladder is deliberately generic.
+_STOMP_ANALOGY_BY_GAP = {
+    2: ("a spark", "a campfire"),
+    3: ("a sparkler", "a bonfire"),
+    4: ("a firecracker", "a volcano"),
+    5: ("a firecracker", "a supernova"),
+}
+
+
+def stomp_gap_analogy(main_gap: int) -> tuple[str, str]:
+    """SB analogy pair for a stomp, keyed on the whole-tier gap.
+
+    Gaps below 2 clamp to the smallest pairing, gaps above 5 to the
+    largest. The pair is (small side, big side).
+    """
+    key = min(max(int(main_gap), 2), 5)
+    return _STOMP_ANALOGY_BY_GAP[key]
+
 # Numeric strength scale: HIGHER = STRONGER.
 # score = (11 - tier_number) + sub_tier_fraction + modifier_fraction
 # e.g. Tier 4-B -> 7.5, Tier 7-C -> 4.25 (gap 3.25 -> "3 tier gap").
@@ -134,7 +155,7 @@ def stomp_tier_gap(env: dict[str, str] | None = None) -> float:
         return DEFAULT_STOMP_TIER_GAP
 
 
-def _fighter_tools(compact: dict[str, Any], tier_display: str) -> list[str]:
+def _fighter_tools(compact: dict[str, Any]) -> list[str]:
     """Real profile-backed tool names for the fight card (never placeholders)."""
     tools: list[str] = []
     for item in list(compact.get("equipment") or []) + list(compact.get("abilities") or []):
@@ -145,9 +166,11 @@ def _fighter_tools(compact: dict[str, Any], tier_display: str) -> list[str]:
         if len(tools) >= 3:
             break
     if not tools:
-        # Factual, profile-derived fallback -- never the "Standard combat
-        # capabilities" webhook placeholder.
-        tools.append(f"Tier {tier_display} combat scale")
+        # No profile-backed tool names at all: return none and let the
+        # formatter drop the tools line, instead of inventing a
+        # tier-coded placeholder ("Tier X combat scale") or a generic
+        # phrase ("listed signature tools").
+        return []
     return tools
 
 
@@ -184,28 +207,31 @@ def build_stomp_decision(
 
     winner_is_a = token_a.score >= token_b.score
     winner, loser = (name_a, name_b) if winner_is_a else (name_b, name_a)
-    winner_token, loser_token = (token_a, token_b) if winner_is_a else (token_b, token_a)
 
     tier_math = f"Tier {token_a.display} vs Tier {token_b.display}: {gap_label}"
+    # Plain-language stomp rendering (SB shape): three short sentences, one
+    # fight fact each, and the gap is carried by an analogy as the LAST
+    # sentence -- never by tier codes or numbers. The tier math stays in
+    # the machine fields (tier_math / diagnostics) only.
+    small, big = stomp_gap_analogy(main_gap)
     explanation = (
-        f"\U0001f4a5 Stomp verdict \u2014 no LLM debate needed. {winner} is Tier "
-        f"{winner_token.display}; {loser} caps at Tier {loser_token.display} "
-        f"({tier_math}, threshold {threshold:g}). Per VS Battles Wiki versus-thread "
-        f"rules, a gap of {threshold:g}+ tiers is a decided stomp: {loser} has no "
-        f"profile-backed win path against an opponent {gap_label} above their scale."
+        f"{loser} cannot hurt {winner}. "
+        f"{winner} only needs one clean hit to end it. "
+        f"It is {small} against {big}."
     )
     quick_verdict = (
-        f"Stomp \u2014 tier gap: {winner} (Tier {winner_token.display}) over "
-        f"{loser} (Tier {loser_token.display}), {gap_label}."
+        f"{winner} wins with no contest. {loser} cannot hurt {winner}."
     )
 
     # Cards stay in contender (a, b) order like smoke_judge.matchup_card --
     # downstream labels them with contender_a/b names.
     winner_route = (
-        f"Overwhelm {loser} through raw tier superiority \u2014 a {gap_label} "
-        "leaves no defensive answer."
+        f"Overwhelm {loser} and end it early. {loser} has no answer."
     )
-    loser_route = f"No viable win route: outscaled by {gap_label} against {winner}."
+    loser_route = (
+        f"{loser} has no way through. "
+        f"Nothing {loser} throws can hurt {winner}."
+    )
     matchup_card = []
     for contender, token, is_winner in (
         (contender_a, token_a, winner_is_a),
@@ -215,12 +241,12 @@ def build_stomp_decision(
         matchup_card.append(
             {
                 "name": cname,
-                "key_tools": _fighter_tools(contender, token.display),
+                "key_tools": _fighter_tools(contender),
                 "best_route": winner_route if is_winner else loser_route,
                 "risk": (
-                    "Negligible: the tier gap removes credible upset routes."
+                    "Almost nothing can go wrong."
                     if is_winner
-                    else f"Outclassed across the stat board by Tier {winner_token.display}."
+                    else f"Every trade costs {loser} more than it costs {winner}."
                 ),
                 "style": _fighter_style(contender),
             }
@@ -231,7 +257,7 @@ def build_stomp_decision(
         "winner": winner,
         "loser": loser,
         "verdict_type": "stomp_tier_gap",
-        "verdict_label": "Stomp \u2014 tier gap",
+        "verdict_label": "Stomp",
         "tier_math": tier_math,
         "tier_gap": gap,
         "tier_gap_main_tiers": main_gap,
@@ -248,24 +274,17 @@ def build_stomp_decision(
         "winner_probability": STOMP_CONFIDENCE_SCORE,
         "loser_probability": round(1.0 - STOMP_CONFIDENCE_SCORE, 2),
         "loser_best_path": (
-            f"{loser} needed a matchup-specific counter to survive {winner}, but a "
-            f"{gap_label} (Tier {loser_token.display} vs Tier {winner_token.display}) "
-            "leaves no credible upset route."
+            f"{loser} has no way through. "
+            f"Nothing {loser} throws can hurt {winner}."
         ),
         "deciding_factors": [
             {
-                "factor": "Tier gap (VS Battles Wiki)",
-                "evidence": (
-                    f"{winner} is Tier {winner_token.display}; {loser} is Tier "
-                    f"{loser_token.display} \u2014 a {gap_label}."
-                ),
+                "factor": "Who can hurt whom",
+                "evidence": f"{loser} cannot hurt {winner}.",
             },
             {
-                "factor": "Versus-thread stomp rule",
-                "evidence": (
-                    f"A gap of {threshold:g}+ tiers is a decided stomp, so no LLM "
-                    "debate was run."
-                ),
+                "factor": "What decides it",
+                "evidence": f"{winner} only needs one clean hit.",
             },
         ],
         "difficulty": "Neg/No Diff",
