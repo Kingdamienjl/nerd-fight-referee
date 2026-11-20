@@ -1736,12 +1736,37 @@ def title_from_wiki_url(url: str | None) -> str | None:
     return unquote(last).replace("_", " ")
 
 
+# Filesystem filename components cap at 255 bytes. Scoped-form names can
+# carry whole paragraphs of page text (e.g. a form key that is a section
+# summary), so an unguarded slug blows past the limit and the write dies
+# with OSError [Errno 36]. Cap the target at 250 bytes, not 255: the YAML
+# writer stages through a ".<name>.tmp" sibling (5 bytes longer), so a
+# 255-byte target would still blow up on the temp file. Truncate
+# deterministically with a hash suffix: the same input always maps to the
+# same filename, and two different long names never collide into one file.
+MAX_PROFILE_FILENAME_BYTES = 250
+
+
+def safe_profile_filename(name: str) -> str:
+    """Slug ``name`` into a ``.yaml`` filename that always fits 250 bytes
+    (255 minus the 5-byte ``.<name>.tmp`` staging sibling the YAML writer
+    creates next to it)."""
+    slug = slugify(name)
+    filename = f"{slug}.yaml"
+    if len(filename.encode("utf-8")) <= MAX_PROFILE_FILENAME_BYTES:
+        return filename
+    digest = hashlib.sha256(slug.encode("utf-8")).hexdigest()[:8]
+    keep = MAX_PROFILE_FILENAME_BYTES - len(".yaml") - len(digest) - 1
+    stem = slug[:keep].rstrip("-")
+    return f"{stem}-{digest}.yaml"
+
+
 def profile_output_path(base_dir: Path, row: RosterRow) -> Path:
     return (
         base_dir
         / slugify(row.category)
         / slugify(row.franchise)
-        / f"{slugify(row.name)}.yaml"
+        / safe_profile_filename(row.name)
     )
 
 
@@ -2117,7 +2142,15 @@ async def run_once(args: argparse.Namespace) -> list[HarvestResult]:
     )
     results = []
     for row in rows:
-        result = await harvester.harvest_row(row)
+        try:
+            result = await harvester.harvest_row(row)
+        except Exception as exc:  # one poison row must not kill the batch
+            result = HarvestResult(
+                row=row,
+                output_path=None,
+                status="failed",
+                errors=[f"harvest_row failed for {row.name}: {exc}"],
+            )
         results.append(result)
         where = result.output_path.as_posix() if result.output_path else "-"
         if not (args.quiet_skips and result.status == "skipped_existing"):
@@ -2278,7 +2311,15 @@ async def run_queue_once(args: argparse.Namespace, processed_total: int) -> tupl
 
     results = []
     for _index, row in selected:
-        result = await harvester.harvest_row(row)
+        try:
+            result = await harvester.harvest_row(row)
+        except Exception as exc:  # one poison row must not kill the run
+            result = HarvestResult(
+                row=row,
+                output_path=None,
+                status="failed",
+                errors=[f"harvest_row failed for {row.name}: {exc}"],
+            )
         results.append(result)
         mark_queue_result(roster_state, row, result)
         summary.processed_this_cycle += 1
